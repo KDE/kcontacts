@@ -27,7 +27,7 @@ int main(int argc,char **argv)
   KCmdLineArgs::addCmdLineOptions(options);
 
   KApplication app;
-  KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+//   KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
   kDebug() << "Creating a" << endl;
   Addressee a;

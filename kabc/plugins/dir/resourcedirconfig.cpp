@@ -100,7 +100,7 @@ void ResourceDirConfig::saveSettings( KRES::Resource *res )
   if ( mInEditMode )
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
 
-  resource->setPath( mFileNameEdit->url() );
+  resource->setPath( mFileNameEdit->url().toString() );
 }
 
 #include "resourcedirconfig.moc"
