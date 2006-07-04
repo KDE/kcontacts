@@ -120,8 +120,8 @@ void readKMailEntry( const QString &kmailEntry, KABC::AddressBook *ab )
 
 void importKMailAddressBook( KABC::AddressBook *ab )
 {
-  QString fileName = locateLocal( "data", "kmail/addressbook" );
-  QString kmailConfigName = locate( "config", "kmailrc" );
+  QString fileName = KStandardDirs::locateLocal( "data", "kmail/addressbook" );
+  QString kmailConfigName = KStandardDirs::locate( "config", "kmailrc" );
   if ( !kmailConfigName.isEmpty() ) {
     KConfig cfg( kmailConfigName );
     cfg.setGroup( "Addressbook" );

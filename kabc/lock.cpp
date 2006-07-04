@@ -51,7 +51,7 @@ Lock::~Lock()
 
 QString Lock::locksDir()
 {
-  return locateLocal( "data", "kabc/lock/" );
+  return KStandardDirs::locateLocal( "data", "kabc/lock/" );
 }
 
 bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
@@ -113,7 +113,7 @@ bool Lock::lock()
 
   QString lockUniqueName;
   lockUniqueName = mIdentifier + KRandom::randomString( 8 );
-  mLockUniqueName = locateLocal( "data", "kabc/lock/" + lockUniqueName );
+  mLockUniqueName = KStandardDirs::locateLocal( "data", "kabc/lock/" + lockUniqueName );
   kDebug(5700) << "-- lock unique name: " << mLockUniqueName << endl;
 
   // Create unique file

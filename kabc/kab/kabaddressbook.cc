@@ -426,10 +426,10 @@ AddressBook::AddressBook(QWidget* parent, const char* name, bool loadit)
   connect(config, SIGNAL(fileChanged()), SLOT(configFileChanged()));
   // ----- set style:
 
-  filename = locate( "data", STD_CONFIGFILENAME);
+  filename = KStandardDirs::locate( "data", STD_CONFIGFILENAME);
   if (filename.isEmpty())
   {
-     filename = locateLocal( "data", STD_CONFIGFILENAME );
+     filename = KStandardDirs::locateLocal( "data", STD_CONFIGFILENAME );
      // config does not exist yet
       if (createConfigFile()!=NoError)
 	{
@@ -450,11 +450,11 @@ AddressBook::AddressBook(QWidget* parent, const char* name, bool loadit)
       keys->get("CreateBackupOnStartup", createBackup);
     }
   // ----- check and possibly create user standard file:
-  filename = locate( "data", STD_USERFILENAME );
+  filename = KStandardDirs::locate( "data", STD_USERFILENAME );
 
   if (filename.isEmpty()) // if it does not exist
     {
-      filename = locateLocal( "data", STD_USERFILENAME);
+      filename = KStandardDirs::locateLocal( "data", STD_USERFILENAME);
       if (createNew(filename)!=NoError) // ...and we cannot create it
 	{
 	  KMessageBox::sorry(this,
@@ -1586,7 +1586,7 @@ AddressBook::ErrorCode
 AddressBook::createNew(const QString& filename)
 {
   // ###########################################################################
-  const QString KabTemplateFile=locate("data", "kab/template.kab");
+  const QString KabTemplateFile=KStandardDirs::locate("data", "kab/template.kab");
   kDebug(KAB_KDEBUG_AREA) 
     << "AddressBook::createNew: template file is \"" 
     << (const char*)KabTemplateFile.toUtf8() << "\"." << endl;
@@ -1637,11 +1637,11 @@ AddressBook::ErrorCode
 AddressBook::createConfigFile()
 {
   // ###########################################################################
-  const QString ConfigTemplateFile=locate("data", "kab/template.config");
+  const QString ConfigTemplateFile=KStandardDirs::locate("data", "kab/template.config");
   kDebug(KAB_KDEBUG_AREA) 
     << "AddressBook::createConfigFile: config template file is \"" 
     << (const char*)ConfigTemplateFile.toUtf8() << "\"." << endl;
-  const QString filename= locateLocal( "data", STD_CONFIGFILENAME);
+  const QString filename= KStandardDirs::locateLocal( "data", STD_CONFIGFILENAME);
   QConfigDB db;
   // -----
   if (ConfigTemplateFile.isEmpty()
@@ -1689,7 +1689,7 @@ AddressBook::ErrorCode
 AddressBook::loadConfigFile()
 {
   // ###########################################################################
-  QString file = locateLocal( "data", STD_CONFIGFILENAME);
+  QString file = KStandardDirs::locateLocal( "data", STD_CONFIGFILENAME);
   if (config->setFileName(file, true, true))
     {
       if (config->load())
@@ -1733,7 +1733,7 @@ QString
 AddressBook::getStandardFileName()
 {
   // ###########################################################################
-  return locateLocal( "data", STD_USERFILENAME);
+  return KStandardDirs::locateLocal( "data", STD_USERFILENAME);
   // ###########################################################################
 }
 

@@ -42,12 +42,12 @@ static KStaticDeleter<StdAddressBook> addressBookDeleter;
 
 QString StdAddressBook::fileName()
 {
-  return locateLocal( "data", "kabc/std.vcf" );
+  return KStandardDirs::locateLocal( "data", "kabc/std.vcf" );
 }
 
 QString StdAddressBook::directoryName()
 {
-  return locateLocal( "data", "kabc/stdvcf" );
+  return KStandardDirs::locateLocal( "data", "kabc/stdvcf" );
 }
 
 void StdAddressBook::handleCrash()

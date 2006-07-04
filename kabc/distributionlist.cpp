@@ -198,7 +198,7 @@ QStringList DistributionListManager::listNames()
 
 bool DistributionListManager::load()
 {
-  KSimpleConfig cfg( locateLocal( "data", "kabc/distlists" ) );
+  KSimpleConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   QMap<QString,QString> entryMap = cfg.entryMap( "DistributionLists" );
   cfg.setGroup( "DistributionLists" );
@@ -247,7 +247,7 @@ bool DistributionListManager::save()
 {
   kDebug(5700) << "DistListManager::save()" << endl;
 
-  KSimpleConfig cfg( locateLocal( "data", "kabc/distlists" ) );
+  KSimpleConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   cfg.deleteGroup( "DistributionLists" );
   cfg.setGroup( "DistributionLists" );
@@ -289,7 +289,7 @@ DistributionListWatcher::DistributionListWatcher()
 {
     setObjectName( "DistributionListWatcher" );
   mDirWatch = new KDirWatch;
-  mDirWatch->addFile( locateLocal( "data", "kabc/distlists" ) );
+  mDirWatch->addFile( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   connect( mDirWatch, SIGNAL( dirty( const QString& ) ), SIGNAL( changed() ) );
   mDirWatch->startScan();

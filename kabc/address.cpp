@@ -342,7 +342,7 @@ QString Address::formattedAddress( const QString &realName,
     // fall back to our own country
     ciso = KGlobal::locale()->country();
   }
-  KSimpleConfig entry( locate( "locale",
+  KSimpleConfig entry( KStandardDirs::locate( "locale",
         QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ) );
   entry.setGroup( "KCM Locale" );
 
@@ -370,7 +370,7 @@ QString Address::formattedAddress( const QString &realName,
   // now add the country line if needed (formatting this time according to
   // the rules of our own system country )
   if ( !country().isEmpty() ) {
-    KSimpleConfig entry( locate( "locale", QString( "l10n/" )
+    KSimpleConfig entry( KStandardDirs::locate( "locale", QString( "l10n/" )
           + KGlobal::locale()->country() + QString( "/entry.desktop" ) ) );
     entry.setGroup( "KCM Locale" );
     QString cpos = entry.readEntry( "AddressCountryPosition" );
