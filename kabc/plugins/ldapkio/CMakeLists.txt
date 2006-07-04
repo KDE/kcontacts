@@ -14,12 +14,12 @@ target_link_libraries(kabc_ldapkio  ${KDE4_KDECORE_LIBS} kabc kio )
 
 kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_ldapkio )
 
-install_targets(${PLUGIN_INSTALL_DIR} kabc_ldapkio )
+install(TARGETS kabc_ldapkio  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR}/kresources/kabc FILES ldapkio.desktop )
+install( FILES ldapkio.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
 install_files( /include/kabc FILES resourceldapkio.h )
 
 

@@ -16,12 +16,12 @@ kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_dir )
 
 set_target_properties(kabc_dir PROPERTIES OUTPUT_NAME kabc_directory )
 
-install_targets(${PLUGIN_INSTALL_DIR} kabc_dir )
+install(TARGETS kabc_dir  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR}/kresources/kabc FILES dir.desktop )
+install( FILES dir.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
 install_files( /include/kabc FILES resourcedir.h )
 
 

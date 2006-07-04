@@ -14,12 +14,12 @@ target_link_libraries(kabc_net  ${KDE4_KDECORE_LIBS} kabc kio)
 
 kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_net )
 
-install_targets(${PLUGIN_INSTALL_DIR} kabc_net )
+install(TARGETS kabc_net  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR}/kresources/kabc FILES net.desktop )
+install( FILES net.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
 install_files( /include/kabc FILES resourcenet.h )
 
 

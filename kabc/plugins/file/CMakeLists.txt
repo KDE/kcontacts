@@ -14,7 +14,7 @@ target_link_libraries(kabc_file_core ${KDE4_KDECORE_LIBS} kabc)
 
 set_target_properties(kabc_file_core PROPERTIES VERSION 4.0.0 SOVERSION 4 )
 
-install_targets(${LIB_INSTALL_DIR} kabc_file_core )
+install(TARGETS kabc_file_core  DESTINATION ${LIB_INSTALL_DIR} )
 
 
 ########### kabc_file plugin ###############
@@ -29,12 +29,12 @@ target_link_libraries(kabc_file ${KDE4_KDECORE_LIBS} kabc_file_core)
 
 kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_file )
 
-install_targets(${PLUGIN_INSTALL_DIR} kabc_file )
+install(TARGETS kabc_file  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR}/kresources/kabc FILES file.desktop )
+install( FILES file.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
 install_files( /include/kabc FILES resourcefile.h )
 
 
