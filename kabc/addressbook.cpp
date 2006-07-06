@@ -796,10 +796,6 @@ KRES::Manager<Resource> *AddressBook::resourceManager()
   return d->mManager;
 }
 
-void AddressBook::cleanUp()
-{
-}
-
 bool AddressBook::loadingHasFinished() const
 {
   return d->mPendingLoadResources.isEmpty();

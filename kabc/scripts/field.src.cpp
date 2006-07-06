@@ -35,7 +35,7 @@ class Field::FieldImpl
                const QString &app = QString() )
       : mFieldId( fieldId ), mCategory( category ), mLabel( label ),
         mKey( key ), mApp( app ) {}
-  
+
     enum FieldId
     {
       CustomField,
@@ -44,11 +44,11 @@ class Field::FieldImpl
 
     int fieldId() { return mFieldId; }
     int category() { return mCategory; }
-    
+
     QString label() { return mLabel; }
     QString key() { return mKey; }
     QString app() { return mApp; }
-    
+
   private:
     int mFieldId;
     int mCategory;
@@ -304,7 +304,7 @@ void Field::saveFields( KConfigBase *cfg, const QString &identifier,
                         const Field::List &fields )
 {
   QList<int> fieldIds;
-  
+
   int custom = 0;
   Field::List::ConstIterator it;
   for ( it = fields.begin(); it != fields.end(); ++it ) {
@@ -314,18 +314,18 @@ void Field::saveFields( KConfigBase *cfg, const QString &identifier,
       customEntry << (*it)->mImpl->label();
       customEntry << (*it)->mImpl->key();
       customEntry << (*it)->mImpl->app();
-      cfg->writeEntry( "KABC_CustomEntry_" + identifier + "_" +
+      cfg->writeEntry( "KABC_CustomEntry_" + identifier + '_' +
                        QString::number( custom++ ), customEntry );
     }
   }
-  
+
   cfg->writeEntry( identifier, fieldIds );
 }
 
 Field::List Field::restoreFields( const QString &identifier )
 {
   KConfigGroup cg( KGlobal::config(), "KABCFields" );
- 
+
   return restoreFields( &cg, identifier );
 }
 
@@ -341,7 +341,7 @@ Field::List Field::restoreFields( KConfigBase *cfg, const QString &identifier )
     FieldImpl *f = 0;
     if ( (*it) == FieldImpl::CustomField ) {
       QStringList customEntry = cfg->readEntry( "KABC_CustomEntry_" +
-                                                 identifier + "_" +
+                                                 identifier + '_' +
                                                  QString::number( custom++ ),QStringList() );
       f = new FieldImpl( *it, CustomCategory, customEntry[ 0 ],
                          customEntry[ 1 ], customEntry[ 2 ] );
@@ -350,7 +350,7 @@ Field::List Field::restoreFields( KConfigBase *cfg, const QString &identifier )
     }
     fields.append( new Field( f ) );
   }
-  
+
   return fields;
 }
 
@@ -361,7 +361,7 @@ bool Field::equals( Field *field )
   if ( !sameId ) return false;
 
   if ( mImpl->fieldId() != FieldImpl::CustomField ) return true;
-  
+
   return mImpl->key() == field->mImpl->key();
 }
 

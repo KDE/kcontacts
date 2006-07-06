@@ -368,7 +368,7 @@ class KABC_EXPORT AddressBook : public QObject
       @param addr The addresee you are looking for.
      */
     Iterator find( const Addressee &addr ); // KDE4: const
-	
+
     /**
       Searches an addressee with the specified unique identifier.
 
@@ -376,7 +376,7 @@ class KABC_EXPORT AddressBook : public QObject
       @return The addressee with the specified unique identifier or an
               empty addressee.
      */
-    Addressee findByUid( const QString &uid ) const; 
+    Addressee findByUid( const QString &uid ) const;
     /**
       Returns a list of all addressees in the address book.
      */
@@ -410,7 +410,7 @@ class KABC_EXPORT AddressBook : public QObject
       Returns a string identifying this addressbook. The identifier is
       created by concatenation of the resource identifiers.
      */
-    virtual QString identifier() const; 
+    virtual QString identifier() const;
 
     /**
       Returns a list of all Fields known to the address book which are associated
@@ -466,11 +466,6 @@ class KABC_EXPORT AddressBook : public QObject
       @param msg The error message that shall be displayed.
      */
     void error( const QString &msg );
-
-    /**
-      @deprecated There is no need to call this function anymore.
-     */
-    KDE_DEPRECATED void cleanUp();
 
     /**
       Used for debug output. This function prints out the list

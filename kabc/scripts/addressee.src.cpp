@@ -347,8 +347,8 @@ QString Addressee::realName() const
 
 QString Addressee::assembledName() const
 {
-  QString name = prefix() + " " + givenName() + " " + additionalName() + " " +
-              familyName() + " " + suffix();
+  QString name = prefix() + ' ' + givenName() + ' ' + additionalName() + ' ' +
+              familyName() + ' ' + suffix();
 
   return name.simplified();
 }
@@ -369,9 +369,9 @@ QString Addressee::fullEmail( const QString &email ) const
   else {
     QRegExp needQuotes( "[^ 0-9A-Za-z\\x0080-\\xFFFF]" );
     if ( realName().indexOf( needQuotes ) != -1 )
-      text = "\"" + realName() + "\" <" + e + ">";
+      text = "\"" + realName() + "\" <" + e + '>';
     else
-      text = realName() + " <" + e + ">";
+      text = realName() + " <" + e + '>';
   }
 
   return text;
@@ -761,7 +761,7 @@ void Addressee::insertCustom( const QString &app, const QString &name,
   detach();
   mData->empty = false;
 
-  QString qualifiedName = app + "-" + name + ":";
+  QString qualifiedName = app + '-' + name + ':';
 
   QStringList::Iterator it;
   for ( it = mData->custom.begin(); it != mData->custom.end(); ++it ) {
@@ -776,7 +776,7 @@ void Addressee::insertCustom( const QString &app, const QString &name,
 
 void Addressee::removeCustom( const QString &app, const QString &name )
 {
-  const QString qualifiedName = app + "-" + name + ":";
+  const QString qualifiedName = app + '-' + name + ':';
 
   QStringList::Iterator it;
   for ( it = mData->custom.begin(); it != mData->custom.end(); ++it ) {
@@ -790,7 +790,7 @@ void Addressee::removeCustom( const QString &app, const QString &name )
 
 QString Addressee::custom( const QString &app, const QString &name ) const
 {
-  QString qualifiedName = app + "-" + name + ":";
+  QString qualifiedName = app + '-' + name + ':';
   QString value;
 
   QStringList::ConstIterator it;

@@ -93,7 +93,7 @@ QString Geo::asString() const
   if ( !isValid() )
     return QString();
   else
-    return "(" + QString::number(mLatitude) + "," + QString::number(mLongitude) + ")";
+    return '(' + QString::number(mLatitude) + ',' + QString::number(mLongitude) + ')';
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const Geo &geo )

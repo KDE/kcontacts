@@ -106,8 +106,8 @@ ResourceLDAPKIO::ResourceLDAPKIO( const KConfig *config )
     d->mCachePolicy = Cache_No;
     d->mAutoCache = true;
   }
-  d->mCacheDst = KGlobal::dirs()->saveLocation("cache", "ldapkio") + "/" +
-    type() + "_" + identifier();
+  d->mCacheDst = KGlobal::dirs()->saveLocation("cache", "ldapkio") + '/' +
+    type() + '_' + identifier();
   init();
 }
 
@@ -158,7 +158,7 @@ QString ResourceLDAPKIO::findUid( const QString &uid )
   mErrorMsg = d->mResultDn = "";
 
   url.setAttributes(QStringList( "dn" ));
-  url.setFilter( "(" + mAttributes[ "uid" ] + "=" + uid + ")" + mFilter );
+  url.setFilter( '(' + mAttributes[ "uid" ] + '=' + uid + ')' + mFilter );
   url.setExtension( "x-dir", "one" );
 
   kDebug(7125) << "ResourceLDAPKIO::findUid() uid: " << uid << " url " <<
@@ -179,8 +179,8 @@ QByteArray ResourceLDAPKIO::addEntry( const QString &attr, const QString &value,
 {
   QByteArray tmp;
   if ( !attr.isEmpty() ) {
-    if ( mod ) tmp += LDIF::assembleLine( "replace", attr ) + "\n";
-    tmp += LDIF::assembleLine( attr, value ) + "\n";
+    if ( mod ) tmp += LDIF::assembleLine( "replace", attr ) + '\n';
+    tmp += LDIF::assembleLine( attr, value ) + '\n';
     if ( mod ) tmp += "-\n";
   }
   return ( tmp );
@@ -198,41 +198,41 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
     //insert new entry
     switch ( d->mRDNPrefix ) {
       case 1:
-        dn = mAttributes[ "uid" ] + "=" + addr.uid() + "," +mDn;
+        dn = mAttributes[ "uid" ] + '=' + addr.uid() + ',' +mDn;
         break;
       case 0:
       default:
-        dn = mAttributes[ "commonName" ] + "=" + addr.assembledName() + "," +mDn;
+        dn = mAttributes[ "commonName" ] + '=' + addr.assembledName() + ',' +mDn;
         break;
     }
   } else {
     //modify existing entry
     mod = true;
     if ( olddn.startsWith( mAttributes[ "uid" ] ) ) {
-      dn = mAttributes[ "uid" ] + "=" + addr.uid() + "," + olddn.section( ',', 1 );
+      dn = mAttributes[ "uid" ] + '=' + addr.uid() + ',' + olddn.section( ',', 1 );
     } else if ( olddn.startsWith( mAttributes[ "commonName" ] ) ) {
-      dn = mAttributes[ "commonName" ] + "=" + addr.assembledName() + "," +
+      dn = mAttributes[ "commonName" ] + '=' + addr.assembledName() + ',' +
         olddn.section( ',', 1 );
     } else {
       dn = olddn;
     }
 
     if ( olddn.toLower() != dn.toLower() ) {
-      tmp = LDIF::assembleLine( "dn", olddn ) + "\n";
+      tmp = LDIF::assembleLine( "dn", olddn ) + '\n';
       tmp += "changetype: modrdn\n";
-      tmp += LDIF::assembleLine( "newrdn", dn.section( ',', 0, 0 ) ) + "\n";
+      tmp += LDIF::assembleLine( "newrdn", dn.section( ',', 0, 0 ) ) + '\n';
       tmp += "deleteoldrdn: 1\n\n";
     }
   }
 
 
-  tmp += LDIF::assembleLine( "dn", dn ) + "\n";
+  tmp += LDIF::assembleLine( "dn", dn ) + '\n';
   if ( mod ) tmp += "changetype: modify\n";
   if ( !mod ) {
     tmp += "objectClass: top\n";
     QStringList obclass = mAttributes[ "objectClass" ].split(',', QString::SkipEmptyParts);
     for ( QStringList::const_iterator it = obclass.constBegin(); it != obclass.constEnd(); ++it ) {
-      tmp += LDIF::assembleLine( "objectClass", *it ) + "\n";
+      tmp += LDIF::assembleLine( "objectClass", *it ) + '\n';
     }
   }
 
@@ -271,9 +271,9 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
 
   if ( !mAttributes[ "mail" ].isEmpty() ) {
     if ( mod ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "mail" ] ) + "\n";
+      LDIF::assembleLine( "replace", mAttributes[ "mail" ] ) + '\n';
     if ( mailIt != emails.end() ) {
-      tmp += LDIF::assembleLine( mAttributes[ "mail" ], *mailIt ) + "\n";
+      tmp += LDIF::assembleLine( mAttributes[ "mail" ], *mailIt ) + '\n';
       mailIt ++;
     }
     if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) tmp += "-\n";
@@ -281,9 +281,9 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
 
   if ( !mAttributes[ "mailAlias" ].isEmpty() ) {
     if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + "\n";
+      LDIF::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
     for ( ; mailIt != emails.end(); ++mailIt ) {
-      tmp += LDIF::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + "\n" ;
+      tmp += LDIF::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n' ;
     }
     if ( mod ) tmp += "-\n";
   }
@@ -295,12 +295,12 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
     addr.photo().data().save( &buffer, "JPEG" );
 
     if ( mod ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "jpegPhoto" ] ) + "\n";
-    tmp += LDIF::assembleLine( mAttributes[ "jpegPhoto" ], pic, 76 ) + "\n";
+      LDIF::assembleLine( "replace", mAttributes[ "jpegPhoto" ] ) + '\n';
+    tmp += LDIF::assembleLine( mAttributes[ "jpegPhoto" ], pic, 76 ) + '\n';
     if ( mod ) tmp += "-\n";
   }
 
-  tmp += "\n";
+  tmp += '\n';
   kDebug(7125) << "ldif: " << QString::fromUtf8(tmp) << endl;
   ldif = tmp;
   return true;
@@ -805,7 +805,7 @@ void ResourceLDAPKIO::removeAddressee( const Addressee& addr )
   if ( !dn.isEmpty() ) {
     kDebug(7125) << "ResourceLDAPKIO: found uid: " << dn << endl;
     LDAPUrl url( d->mLDAPUrl );
-    url.setPath( "/" + dn );
+    url.setPath( '/' + dn );
     url.setExtension( "x-dir", "base" );
     url.setScope( LDAPUrl::Base );
     if ( KIO::NetAccess::del( url, NULL ) ) mAddrMap.remove( addr.uid() );

@@ -86,11 +86,6 @@ class KABC_EXPORT StdAddressBook : public AddressBook
     static KDE_DEPRECATED bool save();
 
     /**
-      @deprecated There is no need to call this function anymore.
-    */
-    static KDE_DEPRECATED void handleCrash();
-
-    /**
       Returns the default file name for vcard-based addressbook
      */
     static QString fileName();

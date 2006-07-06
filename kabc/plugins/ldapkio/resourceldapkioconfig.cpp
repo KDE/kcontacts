@@ -45,7 +45,7 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget* parent )
     : KRES::ConfigWidget( parent )
 {
   QBoxLayout *mainLayout = new QVBoxLayout( this );
-  cfg = new LdapConfigWidget( 
+  cfg = new LdapConfigWidget(
         LdapConfigWidget::W_USER |
         LdapConfigWidget::W_PASS |
         LdapConfigWidget::W_BINDDN |
@@ -287,7 +287,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
       j = 2;
     }
     kDebug(7125) << "itkey: " << it.key() << " i: " << i << endl;
-    label = new QLabel( mNameDict[ it.key() ] + ":", page );
+    label = new QLabel( mNameDict[ it.key() ] + ':', page );
     KLineEdit *lineedit = new KLineEdit( page );
     mLineEditDict.insert( it.key(), lineedit );
     lineedit->setText( it.value() );

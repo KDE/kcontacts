@@ -116,7 +116,7 @@ void LDAPUrl::updateQuery()
   if ( m_attributes.count() > 0 ) q += m_attributes.join(",");
 
   // set the scope
-  q += "?";
+  q += '?';
   switch( m_scope ) {
     case Sub:
       q += "sub";
@@ -130,18 +130,18 @@ void LDAPUrl::updateQuery()
   }
 
   // set the filter
-  q += "?";
+  q += '?';
   if ( m_filter != "(objectClass=*)" && !m_filter.isEmpty() )
     q += m_filter;
 
   // set the extensions
-  q += "?";
+  q += '?';
   for ( it = m_extensions.constBegin(); it != m_extensions.constEnd(); ++it ) {
-    if ( it.value().critical ) q += "!";
+    if ( it.value().critical ) q += '!';
     q += it.key();
-    if ( !it.value().value.isEmpty() ) 
-      q += "=" + it.value().value;
-    q += ",";
+    if ( !it.value().value.isEmpty() )
+      q += '=' + it.value().value;
+    q += ',';
   }
   while  ( q.endsWith("?") || q.endsWith(",") )
     q.remove( q.length() - 1, 1 );

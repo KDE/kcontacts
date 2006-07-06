@@ -21,7 +21,6 @@
 #include <stdlib.h>
 
 #include <kapplication.h>
-#include <kcrash.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kresources/manager.h>
@@ -48,10 +47,6 @@ QString StdAddressBook::fileName()
 QString StdAddressBook::directoryName()
 {
   return KStandardDirs::locateLocal( "data", "kabc/stdvcf" );
-}
-
-void StdAddressBook::handleCrash()
-{
 }
 
 StdAddressBook *StdAddressBook::self()
@@ -168,10 +163,10 @@ bool StdAddressBook::save()
 {
   kDebug(5700) << "StdAddressBook::save()" << endl;
 
-  if ( mSelf ) 
+  if ( mSelf )
     return mSelf->saveAll();
   else
-    return true;  
+    return true;
 }
 
 void StdAddressBook::close()

@@ -209,7 +209,7 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
         QVariant val = (*lineIt).value();
         if ( val.isValid() && !val.toString().isEmpty() ) {
           if ( (*lineIt).hasGroup() )
-            textLine = (*lineIt).group().toLatin1() + "." + (*lineIt).identifier().toLatin1();
+            textLine = (*lineIt).group().toLatin1() + '.' + (*lineIt).identifier().toLatin1();
           else
             textLine = (*lineIt).identifier().toLatin1();
 
@@ -224,9 +224,9 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
 
               values = (*lineIt).parameters( *paramIt );
               for ( valueIt = values.constBegin(); valueIt != values.constEnd(); ++valueIt ) {
-                textLine.append( ";" + (*paramIt).toLatin1().toUpper() );
+                textLine.append( ';' + (*paramIt).toLatin1().toUpper() );
                 if ( !(*valueIt).isEmpty() )
-                  textLine.append( "=" + (*valueIt).toLatin1() );
+                  textLine.append( '=' + (*valueIt).toLatin1() );
               }
             }
           }
@@ -258,7 +258,7 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
             output = input;
 
           addEscapes( output );
-          textLine.append( ":" + output );
+          textLine.append( ':' + output );
 
           if ( textLine.length() > FOLD_WIDTH ) { // we have to fold the line
             for ( int i = 0; i <= ( textLine.length() / FOLD_WIDTH ); ++i )

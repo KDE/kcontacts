@@ -558,7 +558,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
   QFile file( mapfile );
   if ( file.open( QIODevice::ReadOnly ) ) {
     QTextStream s( &file );
-    QString searchStr = "\t" + ISOname.simplified().toLower();
+    QString searchStr = '\t' + ISOname.simplified().toLower();
     QString strbuf = s.readLine();
     int pos;
     while ( !strbuf.isEmpty() ) {

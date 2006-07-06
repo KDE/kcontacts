@@ -231,7 +231,7 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   if ( fieldname.isEmpty() && !a.note().isEmpty() ) {
     // some LDIF export filters are borken and add additional
     // comments on stand-alone lines. Just add them to the notes for now.
-    a.setNote( a.note() + "\n" + value );
+    a.setNote( a.note() + '\n' + value );
     return true;
   }
 
@@ -287,7 +287,7 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   if ( fieldname == QLatin1String( "description" ) ) {
 addComment:
     if ( !a.note().isEmpty() )
-      a.setNote( a.note() + "\n" );
+      a.setNote( a.note() + '\n' );
     a.setNote( a.note() + value );
     return true;
   }
@@ -456,7 +456,7 @@ addComment:
         email = (*it).mid( 5 ).trimmed();
     }
     if ( !name.isEmpty() && !email.isEmpty() )
-      email = " <" + email + ">";
+      email = " <" + email + '>';
     a.insertEmail( name + email );
     a.insertCategory( i18n( "List of Emails" ) );
     return true;

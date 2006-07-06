@@ -93,7 +93,7 @@ void readKMailEntry( const QString &kmailEntry, KABC::AddressBook *ab )
   if ( name.at( name.length() -1 ) == ')' ) {
     int br = name.lastIndexOf( '(' );
     if ( br >= 0 ) {
-      comment = name.mid( br + 1, name.length() - br - 2 ) + " " + comment;
+      comment = name.mid( br + 1, name.length() - br - 2 ) + ' ' + comment;
       name.truncate( br );
       if ( name.at( name.length() - 1 ).isSpace() ) {
         name.truncate( br - 1 );
@@ -391,12 +391,12 @@ void importKab( KABC::AddressBook *ab, bool override, bool quiet )
       adr.setRegion( kabAddress.state );
 
       QString label;
-      if ( !kabAddress.headline.isEmpty() ) label += kabAddress.headline + "\n";
-      if ( !kabAddress.position.isEmpty() ) label += kabAddress.position + "\n";
-      if ( !kabAddress.org.isEmpty() ) label += kabAddress.org + "\n";
-      if ( !kabAddress.orgUnit.isEmpty() ) label += kabAddress.orgUnit + "\n";
-      if ( !kabAddress.orgSubUnit.isEmpty() ) label += kabAddress.orgSubUnit + "\n";
-      if ( !kabAddress.deliveryLabel.isEmpty() ) label += kabAddress.deliveryLabel + "\n";
+      if ( !kabAddress.headline.isEmpty() ) label += kabAddress.headline + '\n';
+      if ( !kabAddress.position.isEmpty() ) label += kabAddress.position + '\n';
+      if ( !kabAddress.org.isEmpty() ) label += kabAddress.org + '\n';
+      if ( !kabAddress.orgUnit.isEmpty() ) label += kabAddress.orgUnit + '\n';
+      if ( !kabAddress.orgSubUnit.isEmpty() ) label += kabAddress.orgSubUnit + '\n';
+      if ( !kabAddress.deliveryLabel.isEmpty() ) label += kabAddress.deliveryLabel + '\n';
       adr.setLabel( label );
 
       a.insertAddress( adr );

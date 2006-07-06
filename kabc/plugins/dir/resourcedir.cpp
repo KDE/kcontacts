@@ -124,7 +124,7 @@ Ticket *ResourceDir::requestSaveTicket()
 void ResourceDir::releaseSaveTicket( Ticket *ticket )
 {
   delete ticket;
-  
+
   delete mLock;
   mLock = 0;
 }
@@ -139,7 +139,7 @@ bool ResourceDir::doOpen()
     if ( testName.isNull() || testName.isEmpty() ) // no file in directory
       return true;
 
-    QFile file( mPath + "/" + testName );
+    QFile file( mPath + '/' + testName );
     if ( file.open( QIODevice::ReadOnly ) )
       return true;
 
@@ -168,7 +168,7 @@ bool ResourceDir::load()
   QStringList::Iterator it;
   bool ok = true;
   for ( it = files.begin(); it != files.end(); ++it ) {
-    QFile file( mPath + "/" + (*it) );
+    QFile file( mPath + '/' + (*it) );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for reading" ,  file.fileName() ) );
@@ -212,7 +212,7 @@ bool ResourceDir::save( Ticket * )
     if ( !it.value().changed() )
       continue;
 
-    QFile file( mPath + "/" + (*it).uid() );
+    QFile file( mPath + '/' + (*it).uid() );
     if ( !file.open( QIODevice::WriteOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for writing" ,  file.fileName() ) );
       continue;
@@ -291,7 +291,7 @@ void ResourceDir::pathChanged()
 
 void ResourceDir::removeAddressee( const Addressee& addr )
 {
-  QFile::remove( mPath + "/" + addr.uid() );
+  QFile::remove( mPath + '/' + addr.uid() );
   mAddrMap.remove( addr.uid() );
 }
 
