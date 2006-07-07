@@ -306,7 +306,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
       }
 	  ++it2;
     }
-    if ( !it2 ) {
+    if ( it2 != mLineEditDict.constEnd() ) {
       mMapCombo->setCurrentIndex( i );
       break;
     }
