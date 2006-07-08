@@ -31,14 +31,12 @@
 
 using namespace std;
 
-KabAPI::KabAPI(QWidget* parent, const char* name)
+KabAPI::KabAPI(QWidget* parent)
   : KDialog(parent),
     book(0),
     listbox(new KListBox(this)),
     selection(-1)
 {
-  setObjectName(name);
-
   Q_CHECK_PTR(listbox);
   setMainWidget(listbox);
   showButton(KDialog::Apply, false);

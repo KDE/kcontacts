@@ -75,9 +75,8 @@ public:
    * without failures. Thus you have to call init before you can
    * use the database.
    * @param parent The QWidget pointer to the parent widget.
-   * @param name   The name of the object (deprecated).
    */
-  KabAPI(QWidget* parent=0, const char* name=0);
+  KabAPI(QWidget* parent=0);
   /**
    * You must call init before accessing the database. init opens the
    * database file (usually $HOME/.kde/share/apps/kab/addressbook.database)
