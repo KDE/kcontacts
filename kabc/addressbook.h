@@ -26,8 +26,8 @@
 
 #include <kresources/manager.h>
 
-#include "addressee.h"
-#include "field.h"
+#include <kabc/addressee.h>
+#include <kabc/field.h>
 
 namespace KABC {
 

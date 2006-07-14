@@ -23,7 +23,7 @@
 
 #include <QString>
 
-#include "addressee.h"
+#include <kabc/addressee.h>
 
 namespace KABC {
 
@@ -73,7 +73,7 @@ class KABC_EXPORT VCardConverter
       Destructor.
      */
     ~VCardConverter();
-  
+
     /**
       Creates a string in vCard format which contains the given
       contact.
@@ -119,14 +119,14 @@ class KABC_EXPORT VCardConverter
 /**
   * Converts a QDateTime to a date string as it is used in VCard and LDIF files.
   * The return value is in the form "yyyyMMddThhmmssZ" (e.g. "20031201T120000Z")
-  * @param dateTime date and time to be converted 
+  * @param dateTime date and time to be converted
   */
 KABC_EXPORT QString dateToVCardString( const QDateTime &dateTime );
 
 /**
   * Converts a QDate to a short date string as it is used in VCard and LDIF files.
   * The return value is in the form "yyyyMMdd" (e.g. "20031201")
-  * @param date date to be converted 
+  * @param date date to be converted
   */
 KABC_EXPORT QString dateToVCardString( const QDate &date );
 

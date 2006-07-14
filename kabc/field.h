@@ -23,7 +23,7 @@
 
 #include <QString>
 
-#include "addressee.h"
+#include <kabc/addressee.h>
 
 class KConfigBase;
 
