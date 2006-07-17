@@ -30,5 +30,5 @@ KPilot etc. It is meant as replacement for libkab (in kdebase/kab).
 
 <b>LICENCE: LGPL</b>
 */
-// DOXYGEN_REFERENCES = kdecore kdeui
+// DOXYGEN_REFERENCES = kdecore kdeui kresources
 // DOXYGEN_EXCLUDE = scripts
