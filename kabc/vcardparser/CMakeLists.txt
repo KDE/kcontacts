@@ -40,7 +40,7 @@ if(KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 ########### install files ###############
-install_files( /include/kabc FILES vcard.h vcardline.h vcardparser.h )
+install( FILES vcard.h vcardline.h vcardparser.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc )
 
 
 

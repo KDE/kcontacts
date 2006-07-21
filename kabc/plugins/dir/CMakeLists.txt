@@ -22,7 +22,7 @@ install(TARGETS kabc_dir  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ########### install files ###############
 
 install( FILES dir.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
-install_files( /include/kabc FILES resourcedir.h )
+install( FILES resourcedir.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc )
 
 
 

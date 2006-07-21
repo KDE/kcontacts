@@ -20,7 +20,7 @@ install(TARGETS kabc_net  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ########### install files ###############
 
 install( FILES net.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources/kabc )
-install_files( /include/kabc FILES resourcenet.h )
+install( FILES resourcenet.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc )
 
 
 
