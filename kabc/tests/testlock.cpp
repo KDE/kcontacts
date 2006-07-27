@@ -19,19 +19,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "testlock.h"
-
-#include "stdaddressbook.h"
-
-#include <kaboutdata.h>
-#include <kapplication.h>
-#include <kdebug.h>
-#include <klocale.h>
-#include <kcmdlineargs.h>
-#include <kdirwatch.h>
-
-#include <kmessagebox.h>
-#include <kdialog.h>
+#include <sys/types.h>
+#include <iostream>
+#include <unistd.h>
 
 #include <qwidget.h>
 #include <qlabel.h>
@@ -39,14 +29,21 @@
 #include <qpushbutton.h>
 #include <q3listview.h>
 #include <qdir.h>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-#include <iostream>
+#include <kaboutdata.h>
+#include <kapplication.h>
+#include <kdebug.h>
+#include <klocale.h>
+#include <kcmdlineargs.h>
+#include <kdirwatch.h>
+#include <kmessagebox.h>
+#include <kdialog.h>
 
-#include <sys/types.h>
-#include <unistd.h>
+#include "stdaddressbook.h"
+
+#include "testlock.h"
 
 using namespace KABC;
 
@@ -100,7 +97,7 @@ LockWidget::LockWidget( const QString &identifier )
   QPushButton *quitButton = new QPushButton( "Quit", this );
   topLayout->addWidget( quitButton );
   connect( quitButton, SIGNAL( clicked() ), SLOT( close() ) );
-  
+
   KDirWatch *watch = KDirWatch::self();
   connect( watch, SIGNAL( dirty( const QString & ) ),
            SLOT( updateLockView() ) );
@@ -120,19 +117,19 @@ LockWidget::~LockWidget()
 void LockWidget::updateLockView()
 {
   mLockView->clear();
-  
+
   QDir dir( Lock::locksDir() );
-  
+
   QStringList files = dir.entryList( QStringList( "*.lock" ) );
-  
+
   QStringList::ConstIterator it;
   for( it = files.begin(); it != files.end(); ++it ) {
     if ( *it == "." || *it == ".." ) continue;
-    
+
     QString app;
     int pid;
     if ( !Lock::readLockFile( dir.filePath( *it ), pid, app ) ) {
-      kWarning() << "Unable to open lock file '" << *it << "'" << endl; 
+      kWarning() << "Unable to open lock file '" << *it << "'" << endl;
     } else {
       new Q3ListViewItem( mLockView, *it, QString::number( pid ), app );
     }
@@ -190,21 +187,21 @@ int main(int argc,char **argv)
     if ( args->count() == 1 ) {
       std::cerr << "Ignoring resource identifier" << std::endl;
     }
-    identifier = StdAddressBook::fileName(); 
+    identifier = StdAddressBook::fileName();
   }
 
   if ( args->isSet( "diraddressbook" ) ) {
     if ( args->count() == 1 ) {
       std::cerr << "Ignoring resource identifier" << std::endl;
     }
-    identifier = StdAddressBook::directoryName(); 
+    identifier = StdAddressBook::directoryName();
   }
 
   LockWidget mainWidget( identifier );
 
   mainWidget.show();
 
-  return app.exec();  
+  return app.exec();
 }
 
 #include "testlock.moc"
