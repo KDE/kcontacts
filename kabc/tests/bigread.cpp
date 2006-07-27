@@ -6,12 +6,9 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include "addressbook.h"
-#include "vcardformat.h"
-#include "plugins/file/resourcefile.h"
-#if 0
-#include "resourcesql.h"
-#endif
+#include "kabc/addressbook.h"
+#include "kabc/vcardformat.h"
+#include "kabc/plugins/file/resourcefile.h"
 
 using namespace KABC;
 
@@ -21,13 +18,13 @@ int main(int argc,char **argv)
   KCmdLineArgs::init(argc,argv,&aboutData);
 
   KApplication app( false);
-  
-  AddressBook ab; 
-   
+
+  AddressBook ab;
+
   ResourceFile r( "my.kabc", "vcard2" );
   ab.addResource( &r );
 
-#if 0  
+#if 0
   ResourceSql rsql( &ab, "root", "kde4ever", "localhost" );
   ab.addResource( &rsql );
 #endif
@@ -42,7 +39,7 @@ int main(int argc,char **argv)
   kDebug() << "cutime: " << int( start.tms_cutime ) << endl;
   kDebug() << "cstime: " << int( start.tms_cstime ) << endl;
 #endif
-	    
+
   kDebug() << "Start load" << endl;
   ab.load();
   kDebug() << "Finished load" << endl;
@@ -58,8 +55,8 @@ int main(int argc,char **argv)
   kDebug() << "cstime: " << int( end.tms_cstime ) << endl;
 #endif
 
-  kDebug() << "UTime: " << int( end.tms_utime ) - int( start.tms_utime ) << endl; 
-  kDebug() << "STime: " << int( end.tms_stime ) - int( start.tms_stime ) << endl; 
+  kDebug() << "UTime: " << int( end.tms_utime ) - int( start.tms_utime ) << endl;
+  kDebug() << "STime: " << int( end.tms_stime ) - int( start.tms_stime ) << endl;
 
 //  ab.dump();
 }

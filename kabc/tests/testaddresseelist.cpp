@@ -5,8 +5,8 @@
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.h"
-#include "addresseelist.h"
+#include "kabc/addressbook.h"
+#include "kabc/addresseelist.h"
 
 using namespace KABC;
 
@@ -156,7 +156,7 @@ int main(int /*argc*/,char /* **argv*/)
       kDebug() << "Reverse sorting by Uid correct." << endl;
   }
 
-  // zero, one or two entries might give errors in a poor sorting 
+  // zero, one or two entries might give errors in a poor sorting
   // implementation
   kDebug() << "sorting empty list" << endl;
   AddresseeList list2;

@@ -1,7 +1,8 @@
 #include <QFile>
 
-#include <vcardparser.h>
 #include <kabc/addressee.h>
+
+#include "vcardparser.h"
 
 using namespace KABC;
 

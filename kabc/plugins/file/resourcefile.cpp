@@ -36,11 +36,11 @@
 #include <kstandarddirs.h>
 #include <ktempfile.h>
 
-#include "formatfactory.h"
-#include "resourcefileconfig.h"
-#include "stdaddressbook.h"
-#include "lock.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/lock.h"
 
+#include "resourcefileconfig.h"
 #include "resourcefile.h"
 
 using namespace KABC;

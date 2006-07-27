@@ -21,11 +21,11 @@
 #ifndef KABC_RESOURCENET_H
 #define KABC_RESOURCENET_H
 
-#include <kconfig.h>
-
 #include <sys/types.h>
 
-#include <kabc/resource.h>
+#include <kconfig.h>
+
+#include "kabc/resource.h"
 
 class QFile;
 class QTimer;

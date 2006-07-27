@@ -18,8 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <kabc/field.h>
-
+#include "field.h"
 #include "sortmode.h"
 
 using namespace KABC;

@@ -1,7 +1,6 @@
-#include "qtest_kde.h"
-
+#include <qtest_kde.h>
 #include "geotest.h"
-#include "geo.h"
+#include "kabc/geo.h"
 
 QTEST_KDEMAIN(GeoTest, NoGUI)
 

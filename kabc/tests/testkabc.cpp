@@ -8,12 +8,12 @@
 #include <qfile.h>
 #include <qimage.h>
 
-#include "geo.h"
-#include "secrecy.h"
-#include "stdaddressbook.h"
-#include "timezone.h"
-#include "key.h"
-#include "vcardconverter.h"
+#include "kabc/geo.h"
+#include "kabc/secrecy.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/timezone.h"
+#include "kabc/key.h"
+#include "kabc/vcardconverter.h"
 
 using namespace KABC;
 

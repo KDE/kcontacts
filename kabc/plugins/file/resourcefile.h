@@ -21,12 +21,12 @@
 #ifndef KABC_RESOURCEFILE_H
 #define KABC_RESOURCEFILE_H
 
+#include <sys/types.h>
+
 #include <kconfig.h>
 #include <kdirwatch.h>
 
-#include <sys/types.h>
-
-#include <kabc/resource.h>
+#include "kabc/resource.h"
 
 class QFile;
 class QTimer;

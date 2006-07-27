@@ -27,10 +27,11 @@
 #include <QHash>
 #include <QMap>
 
-#include <kabc/ldapconfigwidget.h>
-#include <kabc/ldif.h>
 #include <kdialog.h>
-#include <kresources/configwidget.h>
+
+#include "kresources/configwidget.h"
+#include "kabc/ldapconfigwidget.h"
+#include "kabc/ldif.h"
 
 class QCheckBox;
 class QPushButton;

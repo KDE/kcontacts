@@ -25,10 +25,10 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.h"
-#include "addressee.h"
-#include "picture.h"
-#include "sound.h"
+#include "kabc/addressbook.h"
+#include "kabc/addressee.h"
+#include "kabc/picture.h"
+#include "kabc/sound.h"
 
 #include "binaryformat.h"
 
@@ -129,7 +129,7 @@ bool BinaryFormat::checkFormat( QFile *file ) const
 bool BinaryFormat::checkHeader( QDataStream &stream ) const
 {
   quint32 magic, version;
-    
+
   stream >> magic >> version;
 
   QFile *file = dynamic_cast<QFile*>( stream.device() );
@@ -155,7 +155,7 @@ bool BinaryFormat::checkHeader( QDataStream &stream ) const
 void BinaryFormat::writeHeader( QDataStream &stream )
 {
   quint32 magic, version;
-    
+
   magic = 0x2e93e;
   version = BINARY_FORMAT_VERSION;
 

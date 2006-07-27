@@ -20,7 +20,7 @@
 #ifndef KABC_BINARYFORMAT_H
 #define KABC_BINARYFORMAT_H
 
-#include "format.h"
+#include "kabc/format.h"
 
 namespace KABC {
 

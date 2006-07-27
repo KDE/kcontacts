@@ -21,12 +21,12 @@
 #ifndef KABC_RESOURCEDIR_H
 #define KABC_RESOURCEDIR_H
 
+#include <sys/types.h>
+
 #include <kconfig.h>
 #include <kdirwatch.h>
 
-#include <sys/types.h>
-
-#include <kabc/resource.h>
+#include "kabc/resource.h"
 
 class QTimer;
 
@@ -51,7 +51,7 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
 
     virtual bool doOpen();
     virtual void doClose();
-  
+
     virtual Ticket *requestSaveTicket();
     virtual void releaseSaveTicket( Ticket* );
 
@@ -79,7 +79,7 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
       Returns the format name.
      */
     QString format() const;
-  
+
     /**
       Remove a addressee from its source.
       This method is mainly called by KABC::AddressBook.

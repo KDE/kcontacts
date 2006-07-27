@@ -5,11 +5,11 @@
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.h"
-#include "plugins/file/resourcefile.h"
-#include "formats/binaryformat.h"
-#include "vcardformat.h"
-#include "phonenumber.h"
+#include "kabc/addressbook.h"
+#include "kabc/vcardformat.h"
+#include "kabc/phonenumber.h"
+#include "kabc/plugins/file/resourcefile.h"
+#include "kabc/formats/binaryformat.h"
 
 using namespace KABC;
 
@@ -31,7 +31,7 @@ int main(int argc,char **argv)
 
   kDebug() << "Creating a" << endl;
   Addressee a;
-  
+
   kDebug() << "tick1" << endl;
   a.setGivenName("Hans");
   kDebug() << "tick2" << endl;
@@ -39,7 +39,7 @@ int main(int argc,char **argv)
 
   kDebug() << "Creating b" << endl;
   Addressee b( a );
-  
+
   kDebug() << "tack1" << endl;
   a.setFamilyName("Wurst");
   kDebug() << "tack2" << endl;
@@ -47,11 +47,11 @@ int main(int argc,char **argv)
 
   kDebug() << "Creating c" << endl;
   Addressee c = a;
-  
+
   kDebug() << "tock1" << endl;
   c.setGivenName("Eberhard");
-  
-  a.dump();  
+
+  a.dump();
   b.dump();
   c.dump();
 }

@@ -22,9 +22,9 @@
 #ifndef KABC_RESOURCELDAP_H
 #define KABC_RESOURCELDAP_H
 
-#include <kabc/resource.h>
-#include <kabc/ldif.h>
 #include <kio/job.h>
+#include "kabc/resource.h"
+#include "kabc/ldif.h"
 
 class KConfig;
 

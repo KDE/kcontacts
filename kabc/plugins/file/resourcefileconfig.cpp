@@ -18,6 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <unistd.h>
+
 #include <QLabel>
 #include <QLayout>
 
@@ -26,12 +28,10 @@
 #include <kstandarddirs.h>
 #include <kdialog.h>
 
-#include <unistd.h>
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
-#include "formatfactory.h"
 #include "resourcefile.h"
-#include "stdaddressbook.h"
-
 #include "resourcefileconfig.h"
 
 using namespace KABC;

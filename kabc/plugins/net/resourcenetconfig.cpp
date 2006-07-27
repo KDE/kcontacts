@@ -25,10 +25,10 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-#include "formatfactory.h"
-#include "resourcenet.h"
-#include "stdaddressbook.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
+#include "resourcenet.h"
 #include "resourcenetconfig.h"
 
 using namespace KABC;

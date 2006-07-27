@@ -5,8 +5,8 @@
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.h"
-#include "address.h"
+#include "kabc/addressbook.h"
+#include "kabc/address.h"
 
 using namespace KABC;
 

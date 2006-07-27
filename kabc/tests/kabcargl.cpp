@@ -29,7 +29,7 @@
 #include <kglobal.h>
 #include <kstandarddirs.h>
 
-#include "stdaddressbook.h"
+#include "kabc/stdaddressbook.h"
 
 using namespace KABC;
 
@@ -43,26 +43,26 @@ int main(int argc,char **argv)
   KApplication app;
 
   QString filename = StdAddressBook::fileName();
-  
+
   QFile f( filename );
   if ( !f.open( QIODevice::ReadOnly ) ) {
     kDebug() << "Error opening file '" << filename << "' for reading." << endl;
     return 1;
   }
-  
+
   QTextStream t( &f );
   t.setCodec(QTextCodec::codecForName("UTF-8"));
   QString text = t.readAll();
   f.close();
-  
+
   text = QString::fromUtf8( text.toLocal8Bit() );
   text.replace( "\n", "\r\n" );
-  
+
   if ( !f.open( QIODevice::WriteOnly ) ) {
     kDebug() << "Error opening file '" << filename << "' for writing." << endl;
     return 1;
   }
-  
+
   QTextStream t2( &f );
   t2.setCodec(QTextCodec::codecForName("UTF-8"));
   t2 << text;

@@ -28,11 +28,11 @@
 #include <ktempfile.h>
 #include <kurlrequester.h>
 
-#include "addressbook.h"
-#include "formatfactory.h"
-#include "resourcenetconfig.h"
-#include "stdaddressbook.h"
+#include "kabc/addressbook.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
+#include "resourcenetconfig.h"
 #include "resourcenet.h"
 
 using namespace KABC;

@@ -6,7 +6,7 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include "addresseedialog.h"
+#include "kabc/addresseedialog.h"
 
 using namespace KABC;
 
@@ -34,7 +34,7 @@ int main(int argc,char **argv)
     }
   } else {
     Addressee a = AddresseeDialog::getAddressee( 0 );
-  
+
     if ( !a.isEmpty() ) {
       kDebug() << "Selected Addressee:" << endl;
       a.dump();

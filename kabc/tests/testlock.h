@@ -21,10 +21,10 @@
 #ifndef KABC_TESTLOCK_H
 #define KABC_TESTLOCK_H
 
-#include "lock.h"
-
 #include <qwidget.h>
 #include <QLabel>
+
+#include "kabc/lock.h"
 
 class QLabel;
 class Q3ListView;
@@ -41,7 +41,7 @@ class LockWidget : public QWidget
     void unlock();
 
     void updateLockView();
-    
+
   private:
     KABC::Lock *mLock;
 

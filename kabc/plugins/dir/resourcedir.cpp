@@ -33,12 +33,12 @@
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
 
-#include "addressbook.h"
-#include "formatfactory.h"
-#include "resourcedirconfig.h"
-#include "stdaddressbook.h"
-#include "lock.h"
+#include "kabc/addressbook.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/lock.h"
 
+#include "resourcedirconfig.h"
 #include "resourcedir.h"
 
 using namespace KABC;

@@ -41,7 +41,7 @@
 #include <kmessagebox.h>
 #include <kdialog.h>
 
-#include "stdaddressbook.h"
+#include "kabc/stdaddressbook.h"
 
 #include "testlock.h"
 

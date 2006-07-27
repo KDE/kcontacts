@@ -32,8 +32,8 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.h"
-#include "stdaddressbook.h"
+#include "kabc/addressbook.h"
+#include "kabc/stdaddressbook.h"
 
 using namespace KABC;
 

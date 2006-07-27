@@ -21,7 +21,7 @@
 #ifndef KABC_STDADDRESSBOOK_H
 #define KABC_STDADDRESSBOOK_H
 
-#include <kabc/addressbook.h>
+#include "addressbook.h"
 
 namespace KABC {
 

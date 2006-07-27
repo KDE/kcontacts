@@ -19,6 +19,7 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
+#include <stdlib.h>
 
 #include <QBuffer>
 #include <QEventLoop>
@@ -32,11 +33,10 @@
 #include <kconfig.h>
 #include <kstringhandler.h>
 #include <ktempfile.h>
-
-#include <stdlib.h>
 #include <kio/netaccess.h>
-#include <kabc/ldif.h>
-#include <kabc/ldapurl.h>
+
+#include "kabc/ldif.h"
+#include "kabc/ldapurl.h"
 
 #include "resourceldapkio.h"
 #include "resourceldapkioconfig.h"

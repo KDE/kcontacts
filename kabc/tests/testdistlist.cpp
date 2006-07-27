@@ -6,10 +6,9 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include "stdaddressbook.h"
-
-#include "distributionlisteditor.h"
-#include "distributionlist.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/distributionlisteditor.h"
+#include "kabc/distributionlist.h"
 
 using namespace KABC;
 
@@ -41,7 +40,7 @@ int main(int argc,char **argv)
       return 1;
     } else {
       kDebug() << "RESULT: " << list->emails().join(", ") << endl;
-      return 0; 
+      return 0;
     }
   }
 
