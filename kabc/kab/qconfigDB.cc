@@ -11,9 +11,6 @@
          from Troll Tech, Norway. $
 */
 
-#include "qconfigDB.h"
-// #include "debug.h"
-
 extern "C" {
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -23,14 +20,16 @@ extern "C" {
 }
 
 // #include <qstring.h>
-#include <qtextstream.h>
-#include <qfile.h>
-#include <qtimer.h>
-#include <qdatetime.h>
-#include <qfileinfo.h>
+#include <QTextStream>
+#include <QFile>
+#include <QTimer>
+#include <QDateTime>
+#include <QFileInfo>
 
-#include "qconfigDB.moc"
 #include <kdebug.h>
+
+#include "qconfigDB.h"
+#include "qconfigDB.moc"
 
 #ifdef KAB_KDEBUG_AREA
 #undef KAB_KDEBUG_AREA

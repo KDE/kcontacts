@@ -1,12 +1,12 @@
+#include <QFile>
+#include <QImage>
+
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
-
-#include <qfile.h>
-#include <qimage.h>
 
 #include "kabc/geo.h"
 #include "kabc/secrecy.h"

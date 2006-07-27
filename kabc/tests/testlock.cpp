@@ -23,14 +23,14 @@
 #include <iostream>
 #include <unistd.h>
 
-#include <qwidget.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <q3listview.h>
-#include <qdir.h>
+#include <QWidget>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
+#include <QDir>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <q3listview.h>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

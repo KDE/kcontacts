@@ -1,7 +1,7 @@
 #ifndef GEOTEST_H
 #define GEOTEST_H
 
-#include <qobject.h>
+#include <QObject>
 
 class GeoTest : public QObject
 {
