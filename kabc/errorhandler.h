@@ -24,7 +24,7 @@
 
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 class QWidget;
 
@@ -66,16 +66,16 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
   public:
     /**
       Create error handler.
-      
+
       \param parent Widget which is used as parent for the error dialogs.
-    */      
+    */
     GuiErrorHandler( QWidget *parent = 0 );
-	virtual ~GuiErrorHandler(){}  
+	virtual ~GuiErrorHandler(){}
     virtual void error( const QString &msg );
 
   private:
     QWidget *mParent;
-    
+
     class Private;
     Private *d;
 };

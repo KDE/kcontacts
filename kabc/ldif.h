@@ -24,19 +24,19 @@
 #include <QString>
 #include <QByteArray>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
   /**
    * LDIF
- 
+
    * LDIF implements an RFC 2849 compliant LDIF parser. LDIF files are used to
    * represent directory information on LDAP-based servers, or to describe a set
-   * of changes which are to be applied to a directory. 
+   * of changes which are to be applied to a directory.
    */
 
-  class KABC_EXPORT LDIF 
+  class KABC_EXPORT LDIF
   {
   public:
 
@@ -45,24 +45,24 @@ namespace KABC {
     typedef enum ModType{ Mod_None, Mod_Add, Mod_Replace, Mod_Del };
     LDIF();
     virtual ~LDIF();
-    
+
     /**
-     * Assembles fieldname and value into a valid LDIF line, BASE64 encodes the 
+     * Assembles fieldname and value into a valid LDIF line, BASE64 encodes the
      * value if necessary and optionally splits into more lines.
      * @param fieldname The name of the entry.
      * @param value The value of the entry.
      * @param linelen Maximum length of the lines in the result.
      * @param url If true, encode value as url ( use :< ).
      */
-    static QByteArray assembleLine( const QString &fieldname, 
+    static QByteArray assembleLine( const QString &fieldname,
       const QByteArray &value, uint linelen=0, bool url=false );
     /**
-     * This is the same as the above function, the only difference that 
+     * This is the same as the above function, the only difference that
      * this accepts QString as the value.
      */
-    static QByteArray assembleLine( const QString &fieldname, 
+    static QByteArray assembleLine( const QString &fieldname,
       const QString &value, uint linelen=0, bool url=false );
-      
+
     /**
      * Splits one line from an LDIF file to attribute and value components.
      * @returns true if value is an URL, false otherwise
@@ -87,13 +87,13 @@ namespace KABC {
     ParseValue processLine();
     /**
      * Process the LDIF until a complete item can be returned
-     * @returns NewEntry if a new DN encountered, 
-     * Item if a new item returned, 
+     * @returns NewEntry if a new DN encountered,
+     * Item if a new item returned,
      * Err if the LDIF contains error,
      * EndEntry if the parser reached the end of the current entry
-     * and MoreData if the parser encountered the end of the current chunk of 
-     * the LDIF. If you want to finish the parsing after receiving 
-     * MoreData, then call endLDIF(), so the parser can safely flush 
+     * and MoreData if the parser encountered the end of the current chunk of
+     * the LDIF. If you want to finish the parsing after receiving
+     * MoreData, then call endLDIF(), so the parser can safely flush
      * the current entry.
      */
     ParseValue nextItem();
@@ -161,12 +161,12 @@ namespace KABC {
     QString mDn,mAttr,mNewRdn,mNewSuperior, mOid;
     QByteArray mLdif, mValue;
     EntryType mEntryType;
-    
+
     bool mIsNewLine, mIsComment,mCritical;
     ParseValue mLastParseValue;
     uint mPos,mLineNumber;
     QByteArray line;
-        
+
     class LDIFPrivate;
     LDIFPrivate *d;
   };

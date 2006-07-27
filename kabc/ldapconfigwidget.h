@@ -26,8 +26,8 @@
 
 #include <kio/job.h>
 
-#include <kabc/ldapurl.h>
-#include <kabc/ldif.h>
+#include "kabc/ldapurl.h"
+#include "kabc/ldif.h"
 
 class QGridLayout;
 class QSpinBox;

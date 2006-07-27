@@ -24,10 +24,10 @@
 #include <QObject>
 #include <QList>
 
-#include <kresources/manager.h>
+#include "kresources/manager.h"
 
-#include <kabc/addressee.h>
-#include <kabc/field.h>
+#include "addressee.h"
+#include "field.h"
 
 namespace KABC {
 

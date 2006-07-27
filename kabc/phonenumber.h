@@ -23,7 +23,7 @@
 
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
@@ -65,12 +65,12 @@ class KABC_EXPORT PhoneNumber
 
     /**
       Create an empty phone number object.
-    */  
+    */
     PhoneNumber();
 
     /**
       Create a phonenumber object.
-     
+
       @param number Number
       @param type   Type as defined in enum. Multiple types can be
                     specified by combining them by a logical or.
@@ -81,10 +81,10 @@ class KABC_EXPORT PhoneNumber
       Destructor.
     */
     ~PhoneNumber();
-    
+
     bool operator==( const PhoneNumber & ) const;
     bool operator!=( const PhoneNumber & ) const;
-    
+
     /**
       Sets the unique identifier.
     */
@@ -94,7 +94,7 @@ class KABC_EXPORT PhoneNumber
       Returns the unique identifier.
     */
     QString id() const;
-    
+
     /**
       Sets the number.
     */
@@ -104,7 +104,7 @@ class KABC_EXPORT PhoneNumber
       Returns the number.
     */
     QString number() const;
-    
+
     /**
       Sets the type. Multiple types can be specified by combining them by
       a logical or.
@@ -147,7 +147,7 @@ class KABC_EXPORT PhoneNumber
     void validateNumber( const QString& );
 
     QString mId;
-  
+
     int mType;
     QString mNumber;
 };

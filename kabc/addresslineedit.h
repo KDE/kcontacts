@@ -24,8 +24,8 @@
 
 #include <QObject>
 
-#include "kcompletion.h"
-#include "klineedit.h"
+#include <kcompletion.h>
+#include <klineedit.h>
 
 class QTimer;
 class KConfig;

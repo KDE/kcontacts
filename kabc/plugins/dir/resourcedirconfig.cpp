@@ -26,10 +26,10 @@
 #include <kstandarddirs.h>
 #include <kdialog.h>
 
-#include "formatfactory.h"
-#include "resourcedir.h"
-#include "stdaddressbook.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
+#include "resourcedir.h"
 #include "resourcedirconfig.h"
 
 using namespace KABC;

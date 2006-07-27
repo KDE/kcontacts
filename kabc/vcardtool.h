@@ -21,8 +21,9 @@
 #ifndef KABC_VCARDTOOL_H
 #define KABC_VCARDTOOL_H
 
+#include "vcardparser/vcardparser.h"
 #include "addressee.h"
-#include "vcardparser.h"
+#include "kabc.h"
 
 class QDateTime;
 

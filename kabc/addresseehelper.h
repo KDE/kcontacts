@@ -24,7 +24,7 @@
 #include <QStringList>
 #include <QSet>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 

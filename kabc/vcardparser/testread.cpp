@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kaboutdata.h>
 
-#include "vcardconverter.h"
+#include "kabc/vcardconverter.h"
 #include "vcard.h"
 
 static const KCmdLineOptions options[] =

@@ -21,7 +21,7 @@
 #ifndef KABC_KEY_H
 #define KABC_KEY_H
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 

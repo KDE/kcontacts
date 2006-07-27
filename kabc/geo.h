@@ -23,13 +23,13 @@
 
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
 /**
   @short Geographic position
-  
+
   This class represents a geographic position.
 */
 class KABC_EXPORT Geo
@@ -45,12 +45,12 @@ class KABC_EXPORT Geo
 
     /**
       Construct geographics position object.
-      
+
       @param latitude  Geographical latitude
       @param longitude Geographical longitude
     */
     Geo( float latitude, float longitude );
-    
+
     /**
       Sets the latitude.
     */
@@ -60,7 +60,7 @@ class KABC_EXPORT Geo
       Returns the latitude.
     */
     float latitude() const;
-    
+
     /**
       Sets the longitude.
     */
@@ -70,12 +70,12 @@ class KABC_EXPORT Geo
       Returns the longitude.
     */
     float longitude() const;
-  
+
     /**
       Returns, if this object contains a valid geographical position.
     */
     bool isValid() const;
-    
+
     bool operator==( const Geo & ) const;
     bool operator!=( const Geo & ) const;
 
@@ -83,11 +83,11 @@ class KABC_EXPORT Geo
       Returns string representation of geographical position.
     */
     QString asString() const;
-      
+
   private:
     float mLatitude;
     float mLongitude;
-    
+
     bool mValid;
     bool mValidLat;
     bool mValidLong;

@@ -21,7 +21,6 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <kabapi.h>
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
@@ -34,6 +33,8 @@
 
 #include "kabc/addressbook.h"
 #include "kabc/stdaddressbook.h"
+
+#include "kabapi.h"
 
 using namespace KABC;
 

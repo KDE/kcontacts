@@ -38,8 +38,8 @@
 #include <kstaticdeleter.h>
 #include <kstdaccel.h>
 
-#include <kabc/distributionlist.h>
-#include <kabc/stdaddressbook.h>
+#include "distributionlist.h"
+#include "stdaddressbook.h"
 
 
 //=============================================================================

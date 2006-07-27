@@ -24,7 +24,7 @@
 #include <QString>
 #include <QObject>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
@@ -53,7 +53,7 @@ class KABC_EXPORT Lock : public QObject
       Lock resource.
     */
     virtual bool lock();
-    
+
     /**
       Unlock resource.
     */
@@ -74,7 +74,7 @@ class KABC_EXPORT Lock : public QObject
 
   private:
     QString mIdentifier;
-    
+
     QString mLockUniqueName;
 
     QString mError;

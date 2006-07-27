@@ -23,7 +23,7 @@
 
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
@@ -48,10 +48,10 @@ namespace KABC {
  *                          );
  *        return;
  *      }
- *      KAudioPlayer::play( tmpFile ); 
+ *      KAudioPlayer::play( tmpFile );
  *    }
  *  \code
- *       
+ *
  *  Unfortunetly KAudioPlayer::play is ASync, so to delete the temporary file, the best you can really do is set a timer.
  *
  */
@@ -104,7 +104,7 @@ public:
    * Just does:  !isIntern() && url.isEmpty()
    */
   bool isEmpty() const;
-  
+
   /**
    * Sets the raw data of the sound. When using this function,
    * isIntern() will return 'true' until you use setUrl().

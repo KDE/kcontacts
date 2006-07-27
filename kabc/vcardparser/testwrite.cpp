@@ -17,20 +17,20 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <kabc/addressee.h>
-#include <kabc/phonenumber.h>
-#include <kabc/address.h>
-#include <kabc/key.h>
-#include <kabc/picture.h>
-#include <kabc/sound.h>
-#include <kabc/secrecy.h>
+#include <QFile>
+
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 
-#include <QFile>
-
-#include "vcardconverter.h"
+#include "kabc/addressee.h"
+#include "kabc/phonenumber.h"
+#include "kabc/address.h"
+#include "kabc/key.h"
+#include "kabc/picture.h"
+#include "kabc/sound.h"
+#include "kabc/secrecy.h"
+#include "kabc/vcardconverter.h"
 
 int main( int argc, char **argv )
 {

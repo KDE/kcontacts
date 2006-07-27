@@ -23,7 +23,7 @@
 
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 

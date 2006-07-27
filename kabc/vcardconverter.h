@@ -23,7 +23,8 @@
 
 #include <QString>
 
-#include <kabc/addressee.h>
+#include "addressee.h"
+#include "kabc.h"
 
 namespace KABC {
 

@@ -23,7 +23,7 @@
 
 #include <QList>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 namespace KABC {
 
@@ -78,7 +78,7 @@ public:
    * Returns a list of all available secrecy types.
    */
   static TypeList typeList();
-  
+
   /**
    * Returns a translated label for a given secrecy type.
    */

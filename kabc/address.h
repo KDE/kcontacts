@@ -24,7 +24,7 @@
 #include <QMap>
 #include <QString>
 
-#include <kdelibs_export.h>
+#include "kabc.h"
 
 // template tags for address formatting localization
 #define KABC_FMTTAG_realname   QString("%n")
@@ -48,7 +48,7 @@ namespace KABC {
 
 /**
   @short Postal address information.
-  
+
   This class represents information about a postal address.
 */
 class KABC_EXPORT Address
@@ -62,10 +62,10 @@ class KABC_EXPORT Address
     */
     typedef QList<Address> List;
     typedef QList<int> TypeList;
-  
+
     /**
       Address types:
-     
+
       @li @p Dom -    domestic
       @li @p Intl -   international
       @li @p Postal - postal
@@ -82,7 +82,7 @@ class KABC_EXPORT Address
       with a unique id (see id()).
     */
     Address();
-  
+
     /**
       This is like Address() just above, with the difference
       that you can specify the type.
@@ -91,7 +91,7 @@ class KABC_EXPORT Address
 
     bool operator==( const Address & ) const;
     bool operator!=( const Address & ) const;
-  
+
     /**
       Returns true, if the address is empty.
     */
@@ -113,8 +113,8 @@ class KABC_EXPORT Address
     QString id() const;
 
     /**
-      Sets the type of address. See enum for definiton of types. 
-     
+      Sets the type of address. See enum for definiton of types.
+
       @param type type, can be a bitwise or of multiple types.
     */
     void setType( int type );
@@ -158,7 +158,7 @@ class KABC_EXPORT Address
       Returns the translated label for extended field.
     */
     static QString extendedLabel();
-    
+
     /**
       Sets the street (including number).
     */
@@ -203,7 +203,7 @@ class KABC_EXPORT Address
       Returns the translated label for region field.
     */
     static QString regionLabel();
- 
+
     /**
       Sets the postal code.
     */
@@ -264,13 +264,13 @@ class KABC_EXPORT Address
     */
     void dump() const;
 
-    /** 
+    /**
       Returns this address formatted according to the country-specific
-      address formatting rules. The formatting rules applied depend on 
-      either the addresses {@link #country country} field, or (if the 
+      address formatting rules. The formatting rules applied depend on
+      either the addresses {@link #country country} field, or (if the
       latter is empty) on the system country setting. If companyName is
       provided, an available business address format will be preferred.
-      
+
       @param realName   the formatted name of the contact
       @param orgaName   the name of the organization or company
       @return           the formatted address (containing newline characters)
@@ -288,7 +288,7 @@ class KABC_EXPORT Address
     static QString countryToISO( const QString &cname );
 
     /**
-      Returns a localized country name for a ISO code. 
+      Returns a localized country name for a ISO code.
       This might be replaced by a KLocale method in the future.
       @param ISOname two digit ISO code
       @return        localized name of the country
@@ -296,7 +296,7 @@ class KABC_EXPORT Address
     static QString ISOtoCountry( const QString &ISOname );
 
   private:
-    /** 
+    /**
       Parses a snippet of an address template
       @param tsection   the template string to be parsed
       @param result     QString reference in which the result will be stored
@@ -307,18 +307,18 @@ class KABC_EXPORT Address
                                     , const QString &realName
                                     , const QString &orgaName ) const;
 
-    /** 
-      Finds the balanced closing bracket starting from the opening bracket at 
+    /**
+      Finds the balanced closing bracket starting from the opening bracket at
       pos in tsection.
       @return  position of closing bracket, -1 for unbalanced brackets
     */
     int  findBalancedBracket( const QString &tsection, int pos ) const;
 
     bool mEmpty;
-  
+
     QString mId;
     int mType;
-  
+
     QString mPostOfficeBox;
     QString mExtended;
     QString mStreet;

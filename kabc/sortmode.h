@@ -21,9 +21,8 @@
 #ifndef KABC_SORTMODE_H
 #define KABC_SORTMODE_H
 
-#include <kdelibs_export.h>
-
-#include <kabc/addressee.h>
+#include "addressee.h"
+#include "kabc.h"
 
 namespace KABC {
 
