@@ -62,7 +62,8 @@ bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, QString &str
 
 
 
-static void ldif_out( QTextStream &t, QString formatStr, QString value )
+static void ldif_out( QTextStream &t, const QString &formatStr,
+                      const QString &value )
 {
   if ( value.isEmpty() )
     return;

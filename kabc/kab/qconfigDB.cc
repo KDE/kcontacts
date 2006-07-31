@@ -37,16 +37,15 @@ extern "C" {
 
 #define KAB_KDEBUG_AREA 800
 
-static bool isComment(QByteArray line)
+static bool isComment(const QByteArray &line)
 {
   // ############################################################################
-  line=line.trimmed();
-  if (line.isEmpty())
-    {
-      return false; // line is empty but not a comment
-    } else  {
-      return(line[0]=='#');
-    }
+  QByteArray tline = line.trimmed();
+  if (tline.isEmpty()) {
+    return false; // line is empty but not a comment
+  } else  {
+    return(tline[0]=='#');
+  }
   // ############################################################################
 }
 
