@@ -29,8 +29,8 @@
 namespace KABC {
 
   /**
-   * A set of functions to convert a string with LDIF information to addressees 
-   * and vice versa. It is useful for addressbook import- and exportfilters 
+   * A set of functions to convert a string with LDIF information to addressees
+   * and vice versa. It is useful for addressbook import- and exportfilters
    * and might be used to read and write Mozilla and Netscape addresssbooks.
    */
 
@@ -43,7 +43,8 @@ namespace KABC {
    * @param addrList    The addresseelist.
    * @param dt          The date & time value of the last modification (e.g. file modification time).
    */
-  KABC_EXPORT bool LDIFToAddressee( const QString &str, AddresseeList &addrList, QDateTime dt = QDateTime::currentDateTime() );
+  KABC_EXPORT bool LDIFToAddressee( const QString &str, AddresseeList &addrList,
+                                    const QDateTime &dt = QDateTime::currentDateTime() );
 
   /**
    * Converts a list of addressees to a LDIF string.

@@ -159,7 +159,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
 
 /* convert from LDIF stream */
 
-bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList, QDateTime dt )
+bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList, const QDateTime &dt )
 {
   if (str.isEmpty())
      return true;
@@ -171,9 +171,10 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   Address homeAddr, workAddr;
 
   ldif.setLDIF( str.toLatin1() );
-  if (!dt.isValid())
-    dt = QDateTime::currentDateTime();
-  a.setRevision(dt);
+  QDateTime qdt = dt;
+  if (!qdt.isValid())
+    qdt = QDateTime::currentDateTime();
+  a.setRevision(qdt);
   homeAddr = Address( Address::Home );
   workAddr = Address( Address::Work );
 
@@ -197,7 +198,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
           addrList.append( a );
         }
         a = Addressee();
-        a.setRevision(dt);
+        a.setRevision(qdt);
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
         break;
