@@ -26,7 +26,6 @@ add_subdirectory( kab )
 add_subdirectory( vcardparser )
 add_subdirectory( formats )
 add_subdirectory( plugins )
-add_subdirectory( scripts )
 add_subdirectory( tests )
 
 
