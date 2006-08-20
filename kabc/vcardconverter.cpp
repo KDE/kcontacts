@@ -51,7 +51,7 @@ Addressee VCardConverter::parseVCard( const QByteArray& vcard )
 {
   Addressee::List list = parseVCards( vcard );
 
-  return list[ 0 ];
+  return list.isEmpty() ? Addressee() : list[ 0 ];
 }
 
 Addressee::List VCardConverter::parseVCards( const QByteArray& vcard )
