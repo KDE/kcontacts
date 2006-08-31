@@ -83,9 +83,9 @@ void ResourceDirConfig::loadSettings( KRES::Resource *res )
 
   mFormatBox->setCurrentIndex( mFormatTypes.indexOf( resource->format() ) );
 
-  mFileNameEdit->setUrl( KUrl::fromPath(resource->path()) );
+  mFileNameEdit->setPath( resource->path() );
   if ( mFileNameEdit->url().isEmpty() )
-    mFileNameEdit->setUrl( KUrl::fromPath(KABC::StdAddressBook::directoryName()) );
+    mFileNameEdit->setPath( KABC::StdAddressBook::directoryName() );
 }
 
 void ResourceDirConfig::saveSettings( KRES::Resource *res )
@@ -100,7 +100,7 @@ void ResourceDirConfig::saveSettings( KRES::Resource *res )
   if ( mInEditMode )
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
 
-  resource->setPath( mFileNameEdit->url().toString() );
+  resource->setPath( mFileNameEdit->url().path() );
 }
 
 #include "resourcedirconfig.moc"
