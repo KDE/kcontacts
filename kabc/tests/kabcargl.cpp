@@ -20,6 +20,7 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QRegExp>
 
 #include <kaboutdata.h>

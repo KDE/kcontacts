@@ -23,6 +23,9 @@
 #include <iostream>
 #include <unistd.h>
 
+#define QT3_SUPPORT
+#include <q3listview.h>
+
 #include <QWidget>
 #include <QLabel>
 #include <QLayout>
@@ -30,7 +33,6 @@
 #include <QDir>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <q3listview.h>
 
 #include <kaboutdata.h>
 #include <kapplication.h>
