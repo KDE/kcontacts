@@ -45,20 +45,20 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget* parent )
     : KRES::ConfigWidget( parent )
 {
   QBoxLayout *mainLayout = new QVBoxLayout( this );
-  cfg = new LdapConfigWidget(
-        LdapConfigWidget::W_USER |
-        LdapConfigWidget::W_PASS |
-        LdapConfigWidget::W_BINDDN |
-        LdapConfigWidget::W_REALM |
-        LdapConfigWidget::W_HOST |
-        LdapConfigWidget::W_PORT |
-        LdapConfigWidget::W_VER |
-        LdapConfigWidget::W_DN |
-        LdapConfigWidget::W_FILTER |
-        LdapConfigWidget::W_SECBOX |
-        LdapConfigWidget::W_AUTHBOX |
-        LdapConfigWidget::W_TIMELIMIT |
-        LdapConfigWidget::W_SIZELIMIT,
+  cfg = new KLDAP::LdapConfigWidget(
+        KLDAP::LdapConfigWidget::W_USER |
+        KLDAP::LdapConfigWidget::W_PASS |
+        KLDAP::LdapConfigWidget::W_BINDDN |
+        KLDAP::LdapConfigWidget::W_REALM |
+        KLDAP::LdapConfigWidget::W_HOST |
+        KLDAP::LdapConfigWidget::W_PORT |
+        KLDAP::LdapConfigWidget::W_VER |
+        KLDAP::LdapConfigWidget::W_DN |
+        KLDAP::LdapConfigWidget::W_FILTER |
+        KLDAP::LdapConfigWidget::W_SECBOX |
+        KLDAP::LdapConfigWidget::W_AUTHBOX |
+        KLDAP::LdapConfigWidget::W_TIMELIMIT |
+        KLDAP::LdapConfigWidget::W_SIZELIMIT,
         this );
 
   mSubTree = new QCheckBox( i18n( "Sub-tree query" ), this );
@@ -87,21 +87,21 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
   cfg->setUser( resource->user() );
   cfg->setPassword( resource->password() );
   cfg->setRealm( resource->realm() );
-  cfg->setBindDN( resource->bindDN() );
+  cfg->setBindDn( resource->bindDN() );
   cfg->setHost( resource->host() );
-  cfg->setPort(  resource->port() );
-  cfg->setVer(  resource->ver() );
+  cfg->setPort( resource->port() );
+  cfg->setVersion( resource->ver() );
   cfg->setTimeLimit( resource->timeLimit() );
   cfg->setSizeLimit( resource->sizeLimit() );
   cfg->setDn( resource->dn() );
   cfg->setFilter( resource->filter() );
   cfg->setMech( resource->mech() );
-  if ( resource->isTLS() ) cfg->setSecTLS();
-  else if ( resource->isSSL() ) cfg->setSecSSL();
-  else cfg->setSecNO();
-  if ( resource->isAnonymous() ) cfg->setAuthAnon();
-  else if ( resource->isSASL() ) cfg->setAuthSASL();
-  else cfg->setAuthSimple();
+  if ( resource->isTLS() ) cfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
+  else if ( resource->isSSL() ) cfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
+  else cfg->setSecurity( KLDAP::LdapConfigWidget::None );
+  if ( resource->isAnonymous() ) cfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
+  else if ( resource->isSASL() ) cfg->setAuth( KLDAP::LdapConfigWidget::SASL );
+  else cfg->setAuth( KLDAP::LdapConfigWidget::Simple );
 
   mSubTree->setChecked( resource->isSubTree() );
   mAttributes = resource->attributes();
@@ -123,19 +123,19 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
   resource->setUser( cfg->user() );
   resource->setPassword( cfg->password() );
   resource->setRealm( cfg->realm() );
-  resource->setBindDN( cfg->bindDN() );
+  resource->setBindDN( cfg->bindDn() );
   resource->setHost( cfg->host() );
   resource->setPort( cfg->port() );
-  resource->setVer( cfg->ver() );
+  resource->setVer( cfg->version() );
   resource->setTimeLimit( cfg->timeLimit() );
   resource->setSizeLimit( cfg->sizeLimit() );
   resource->setDn( cfg->dn() );
   resource->setFilter( cfg->filter() );
-  resource->setIsAnonymous( cfg->isAuthAnon() );
-  resource->setIsSASL( cfg->isAuthSASL() );
+  resource->setIsAnonymous( cfg->auth() == KLDAP::LdapConfigWidget::Anonymous );
+  resource->setIsSASL(  cfg->auth() == KLDAP::LdapConfigWidget::SASL );
   resource->setMech( cfg->mech() );
-  resource->setIsTLS( cfg->isSecTLS() );
-  resource->setIsSSL( cfg->isSecSSL() );
+  resource->setIsTLS( cfg->security() == KLDAP::LdapConfigWidget::TLS );
+  resource->setIsSSL( cfg->security() == KLDAP::LdapConfigWidget::SSL );
   resource->setIsSubTree( mSubTree->isChecked() );
   resource->setAttributes( mAttributes );
   resource->setRDNPrefix( mRDNPrefix );
@@ -155,11 +155,11 @@ void ResourceLDAPKIOConfig::editAttributes()
 
 void ResourceLDAPKIOConfig::editCache()
 {
-  LDAPUrl src;
+  KLDAP::LdapUrl src;
   QStringList attr;
 
   src = cfg->url();
-  src.setScope( mSubTree->isChecked() ? LDAPUrl::Sub : LDAPUrl::One );
+  src.setScope( mSubTree->isChecked() ? KLDAP::LdapUrl::Sub : KLDAP::LdapUrl::One );
   if (!mAttributes.empty()) {
     QMap<QString,QString>::Iterator it;
     QStringList attr;

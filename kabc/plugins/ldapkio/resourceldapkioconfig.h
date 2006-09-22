@@ -30,8 +30,8 @@
 #include <kdialog.h>
 
 #include "kresources/configwidget.h"
-#include "kabc/ldapconfigwidget.h"
-#include "kabc/ldif.h"
+#include "kldap/ldapconfigwidget.h"
+#include "kldap/ldif.h"
 
 class QCheckBox;
 class QPushButton;
@@ -59,7 +59,7 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIOConfig : public KRES::ConfigWidget
     void editCache();
   private:
     QPushButton *mEditButton, *mCacheButton;
-    LdapConfigWidget *cfg;
+    KLDAP::LdapConfigWidget *cfg;
     QCheckBox *mSubTree;
     QMap<QString, QString> mAttributes;
     int mRDNPrefix, mCachePolicy;

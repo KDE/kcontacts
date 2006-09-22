@@ -36,7 +36,8 @@
 #include <kio/netaccess.h>
 
 #include "kldap/ldif.h"
-#include "kabc/ldapurl.h"
+#include "kldap/ldif.h"
+#include "kldap/ldapurl.h"
 
 #include "resourceldapkio.h"
 #include "resourceldapkioconfig.h"
@@ -55,7 +56,7 @@ class ResourceLDAPKIO::ResourceLDAPKIOPrivate
     bool mSASL;
     QString mMech;
     QString mRealm, mBindDN;
-    LDAPUrl mLDAPUrl;
+    KLDAP::LdapUrl mLDAPUrl;
     int mVer, mSizeLimit, mTimeLimit, mRDNPrefix;
     int mError;
     int mCachePolicy;
@@ -152,7 +153,7 @@ void ResourceLDAPKIO::listResult( KJob *job)
 
 QString ResourceLDAPKIO::findUid( const QString &uid )
 {
-  LDAPUrl url( d->mLDAPUrl );
+  KLDAP::LdapUrl url( d->mLDAPUrl );
   KIO::UDSEntry entry;
 
   mErrorMsg = d->mResultDn = "";
@@ -388,7 +389,7 @@ void ResourceLDAPKIO::init()
     d->mLDAPUrl.setAttributes( attr );
   }
 
-  d->mLDAPUrl.setScope( d->mSubTree ? LDAPUrl::Sub : LDAPUrl::One );
+  d->mLDAPUrl.setScope( d->mSubTree ? KLDAP::LdapUrl::Sub : KLDAP::LdapUrl::One );
   if ( !mFilter.isEmpty() && mFilter != "(objectClass=*)" )
     d->mLDAPUrl.setFilter( mFilter );
   d->mLDAPUrl.setExtension( "x-dir", "base" );
@@ -804,10 +805,10 @@ void ResourceLDAPKIO::removeAddressee( const Addressee& addr )
   }
   if ( !dn.isEmpty() ) {
     kDebug(7125) << "ResourceLDAPKIO: found uid: " << dn << endl;
-    LDAPUrl url( d->mLDAPUrl );
+    KLDAP::LdapUrl url( d->mLDAPUrl );
     url.setPath( '/' + dn );
     url.setExtension( "x-dir", "base" );
-    url.setScope( LDAPUrl::Base );
+    url.setScope( KLDAP::LdapUrl::Base );
     if ( KIO::NetAccess::del( url, NULL ) ) mAddrMap.remove( addr.uid() );
   } else {
     //maybe it's not saved yet
