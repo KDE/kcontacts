@@ -76,9 +76,6 @@ set(kabc_LIB_SRCS
    addresseehelper.cpp
    lock.cpp
    locknull.cpp
-   ldif.cpp
-   ldapurl.cpp
-   ldapconfigwidget.cpp
    sortmode.cpp
    ${vcards_STAT_SRCS}
 )
@@ -97,7 +94,7 @@ install(TARGETS kabc  DESTINATION ${LIB_INSTALL_DIR} )
 install( FILES kab2kabc.desktop DESTINATION ${AUTOSTART_INSTALL_DIR} )
 install( FILES countrytransl.map  DESTINATION  ${DATA_INSTALL_DIR}/kabc )
 install( FILES kabc_manager.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources )
-install( FILES kabc.h address.h addressbook.h ${CMAKE_CURRENT_BINARY_DIR}/addressee.h addresseedialog.h    distributionlist.h distributionlistdialog.h distributionlisteditor.h    errorhandler.h field.h format.h formatfactory.h format.h geo.h key.h    phonenumber.h picture.h plugin.h resource.h    secrecy.h sound.h stdaddressbook.h timezone.h    vcardformat.h vcardconverter.h ldifconverter.h    addresslineedit.h addresseelist.h lock.h locknull.h ldif.h    ldapurl.h ldapconfigwidget.h sortmode.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc)
+install( FILES kabc.h address.h addressbook.h ${CMAKE_CURRENT_BINARY_DIR}/addressee.h addresseedialog.h    distributionlist.h distributionlistdialog.h distributionlisteditor.h    errorhandler.h field.h format.h formatfactory.h format.h geo.h key.h    phonenumber.h picture.h plugin.h resource.h    secrecy.h sound.h stdaddressbook.h timezone.h    vcardformat.h vcardconverter.h ldifconverter.h    addresslineedit.h addresseelist.h lock.h locknull.h sortmode.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc)
 
 
 
