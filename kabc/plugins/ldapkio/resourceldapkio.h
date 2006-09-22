@@ -24,7 +24,6 @@
 
 #include <kio/job.h>
 #include "kabc/resource.h"
-#include "kabc/ldif.h"
 
 class KConfig;
 

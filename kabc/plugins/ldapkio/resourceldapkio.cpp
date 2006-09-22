@@ -35,7 +35,7 @@
 #include <ktempfile.h>
 #include <kio/netaccess.h>
 
-#include "kabc/ldif.h"
+#include "kldap/ldif.h"
 #include "kabc/ldapurl.h"
 
 #include "resourceldapkio.h"
@@ -46,7 +46,7 @@ using namespace KABC;
 class ResourceLDAPKIO::ResourceLDAPKIOPrivate
 {
   public:
-    LDIF mLdif;
+    KLDAP::Ldif mLdif;
     bool mTLS,mSSL,mSubTree;
     QString mResultDn;
     Addressee mAddr;
@@ -179,8 +179,8 @@ QByteArray ResourceLDAPKIO::addEntry( const QString &attr, const QString &value,
 {
   QByteArray tmp;
   if ( !attr.isEmpty() ) {
-    if ( mod ) tmp += LDIF::assembleLine( "replace", attr ) + '\n';
-    tmp += LDIF::assembleLine( attr, value ) + '\n';
+    if ( mod ) tmp += KLDAP::Ldif::assembleLine( "replace", attr ) + '\n';
+    tmp += KLDAP::Ldif::assembleLine( attr, value ) + '\n';
     if ( mod ) tmp += "-\n";
   }
   return ( tmp );
@@ -218,21 +218,21 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
     }
 
     if ( olddn.toLower() != dn.toLower() ) {
-      tmp = LDIF::assembleLine( "dn", olddn ) + '\n';
+      tmp = KLDAP::Ldif::assembleLine( "dn", olddn ) + '\n';
       tmp += "changetype: modrdn\n";
-      tmp += LDIF::assembleLine( "newrdn", dn.section( ',', 0, 0 ) ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( "newrdn", dn.section( ',', 0, 0 ) ) + '\n';
       tmp += "deleteoldrdn: 1\n\n";
     }
   }
 
 
-  tmp += LDIF::assembleLine( "dn", dn ) + '\n';
+  tmp += KLDAP::Ldif::assembleLine( "dn", dn ) + '\n';
   if ( mod ) tmp += "changetype: modify\n";
   if ( !mod ) {
     tmp += "objectClass: top\n";
     QStringList obclass = mAttributes[ "objectClass" ].split(',', QString::SkipEmptyParts);
     for ( QStringList::const_iterator it = obclass.constBegin(); it != obclass.constEnd(); ++it ) {
-      tmp += LDIF::assembleLine( "objectClass", *it ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( "objectClass", *it ) + '\n';
     }
   }
 
@@ -271,9 +271,9 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
 
   if ( !mAttributes[ "mail" ].isEmpty() ) {
     if ( mod ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "mail" ] ) + '\n';
+      KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mail" ] ) + '\n';
     if ( mailIt != emails.end() ) {
-      tmp += LDIF::assembleLine( mAttributes[ "mail" ], *mailIt ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mail" ], *mailIt ) + '\n';
       mailIt ++;
     }
     if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) tmp += "-\n";
@@ -281,9 +281,9 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
 
   if ( !mAttributes[ "mailAlias" ].isEmpty() ) {
     if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
+      KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
     for ( ; mailIt != emails.end(); ++mailIt ) {
-      tmp += LDIF::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n' ;
+      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n' ;
     }
     if ( mod ) tmp += "-\n";
   }
@@ -295,8 +295,8 @@ bool ResourceLDAPKIO::AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
     addr.photo().data().save( &buffer, "JPEG" );
 
     if ( mod ) tmp +=
-      LDIF::assembleLine( "replace", mAttributes[ "jpegPhoto" ] ) + '\n';
-    tmp += LDIF::assembleLine( mAttributes[ "jpegPhoto" ], pic, 76 ) + '\n';
+      KLDAP::Ldif::assembleLine( "replace", mAttributes[ "jpegPhoto" ] ) + '\n';
+    tmp += KLDAP::Ldif::assembleLine( mAttributes[ "jpegPhoto" ], pic, 76 ) + '\n';
     if ( mod ) tmp += "-\n";
   }
 
@@ -578,24 +578,24 @@ bool ResourceLDAPKIO::asyncLoad()
 void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
 {
   if ( data.size() ) {
-    d->mLdif.setLDIF( data );
+    d->mLdif.setLdif( data );
     if ( d->mTmp ) {
       d->mTmp->file()->write( data );
     }
   } else {
-    d->mLdif.endLDIF();
+    d->mLdif.endLdif();
   }
 
-  LDIF::ParseValue ret;
+  KLDAP::Ldif::ParseValue ret;
   QString name;
   QByteArray value;
   do {
     ret = d->mLdif.nextItem();
     switch ( ret ) {
-      case LDIF::NewEntry:
+      case KLDAP::Ldif::NewEntry:
         kDebug(7125) << "new entry: " << d->mLdif.dn() << endl;
         break;
-      case LDIF::Item:
+      case KLDAP::Ldif::Item:
         name = d->mLdif.attr().toLower();
         value = d->mLdif.value();
         if ( name == mAttributes[ "commonName" ].toLower() ) {
@@ -662,7 +662,7 @@ void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
         }
 
         break;
-      case LDIF::EndEntry: {
+      case KLDAP::Ldif::EndEntry: {
         d->mAddr.setResource( this );
         d->mAddr.insertAddress( d->mAd );
         d->mAddr.setChanged( false );
@@ -675,7 +675,7 @@ void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
       default:
         break;
     }
-  } while ( ret != LDIF::MoreData );
+  } while ( ret != KLDAP::Ldif::MoreData );
 }
 
 void ResourceLDAPKIO::loadCacheResult( KJob *job )

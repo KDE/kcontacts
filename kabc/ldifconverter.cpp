@@ -40,10 +40,11 @@
 #include <kdebug.h>
 #include <klocale.h>
 
+#include "kldap/ldif.h"
+
 #include "address.h"
 #include "addressee.h"
 
-#include "ldif.h"
 #include "ldifconverter.h"
 #include "vcardconverter.h"
 
@@ -68,7 +69,7 @@ static void ldif_out( QTextStream &t, const QString &formatStr,
   if ( value.isEmpty() )
     return;
 
-  QByteArray txt = LDIF::assembleLine( formatStr, value, 72 );
+  QByteArray txt = KLDAP::Ldif::assembleLine( formatStr, value, 72 );
 
   // write the string
   t << QString::fromUtf8(txt) << "\n";
@@ -165,12 +166,12 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
      return true;
 
   bool endldif = false, end = false;
-  LDIF ldif;
-  LDIF::ParseValue ret;
+  KLDAP::Ldif ldif;
+  KLDAP::Ldif::ParseValue ret;
   Addressee a;
   Address homeAddr, workAddr;
 
-  ldif.setLDIF( str.toLatin1() );
+  ldif.setLdif( str.toLatin1() );
   QDateTime qdt = dt;
   if (!qdt.isValid())
     qdt = QDateTime::currentDateTime();
@@ -181,13 +182,13 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   do {
     ret = ldif.nextItem();
     switch ( ret ) {
-      case LDIF::Item: {
+      case KLDAP::Ldif::Item: {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
         evaluatePair( a, homeAddr, workAddr, fieldname, value );
         break;
       }
-      case LDIF::EndEntry:
+      case KLDAP::Ldif::EndEntry:
       // if the new address is not empty, append it
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
           !a.familyName().isEmpty() ) {
@@ -202,11 +203,11 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
         break;
-      case LDIF::MoreData: {
+      case KLDAP::Ldif::MoreData: {
         if ( endldif )
           end = true;
         else {
-          ldif.endLDIF();
+          ldif.endLdif();
           endldif = true;
           break;
         }
