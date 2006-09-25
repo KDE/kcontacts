@@ -26,7 +26,7 @@ KPilot etc. It is meant as replacement for libkab (in kdebase/kab).
 - Tool for converting data, written with libkab, to libkabc format.
 - Multiple backends (resources) for storing entries e.g. LDAP
 
-@author Cornelius Schumacher \<schumacher@kde.org\>
+@authors Cornelius Schumacher \<schumacher@kde.org\>
 
 <b>LICENCE: LGPL</b>
 */
