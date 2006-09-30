@@ -67,7 +67,7 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
       continue;
 
     if ( (*it).startsWith( ' ' ) || (*it).startsWith( '\t' ) ) { // folded line => append to previous
-      currentLine.append( (*it).mid( 1 ) );
+      currentLine.append( (*it).mid( 1 ).trimmed() );
       continue;
     } else {
       if ( inVCard && !currentLine.isEmpty() ) { // now parse the line
@@ -79,7 +79,7 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
 
         VCardLine vCardLine;
         const QByteArray key = currentLine.left( colon ).trimmed();
-        QByteArray value = currentLine.mid( colon + 1 );
+        QByteArray value = currentLine.mid( colon + 1 ).trimmed();
 
         QList<QByteArray> params = key.split( ';' );
 
