@@ -29,7 +29,7 @@
 
 class QFile;
 class QTimer;
-class KTempFile;
+class KTemporaryFile;
 
 class KJob;
 
@@ -103,7 +103,7 @@ class KABC_NET_EXPORT ResourceNet : public Resource
     QString mFormatName;
 
     KUrl mUrl;
-    KTempFile *mTempFile;
+    KTemporaryFile *mTempFile;
 
     class ResourceNetPrivate;
     ResourceNetPrivate *d;

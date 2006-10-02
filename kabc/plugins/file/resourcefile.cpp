@@ -34,7 +34,7 @@
 #include <klocale.h>
 #include <ksavefile.h>
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 
 #include "kabc/formatfactory.h"
 #include "kabc/stdaddressbook.h"
@@ -245,17 +245,15 @@ bool ResourceFile::asyncLoad()
   mAsynchronous = true;
 
   bool ok = createLocalTempFile();
-  if ( ok )
-    ok = mTempFile->close(); // we only need the filename
 
   if ( !ok ) {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->name() ) );
+    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
 
   KUrl dest, src;
-  dest.setPath( mTempFile->name() );
+  dest.setPath( mTempFile->fileName() );
   src.setPath( mFileName );
 
   KIO::Scheduler::checkSlaveOnHold( true );
@@ -342,18 +340,17 @@ bool ResourceFile::asyncSave( Ticket * )
 
   bool ok = createLocalTempFile();
   if ( ok ) {
-    saveToFile( mTempFile->file() );
-    ok = mTempFile->close();
+    saveToFile( mTempFile );
   }
 
   if ( !ok ) {
-    emit savingError( this, i18n( "Unable to save file '%1'." ,  mTempFile->name() ) );
+    emit savingError( this, i18n( "Unable to save file '%1'." ,  mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
 
   KUrl src, dest;
-  src.setPath( mTempFile->name() );
+  src.setPath( mTempFile->fileName() );
   dest.setPath( mFileName );
 
   KIO::Scheduler::checkSlaveOnHold( true );
@@ -369,15 +366,14 @@ bool ResourceFile::asyncSave( Ticket * )
 bool ResourceFile::createLocalTempFile()
 {
   deleteStaleTempFile();
-  mTempFile = new KTempFile();
-  mTempFile->setAutoDelete( true );
-  return mTempFile->status() == 0;
+  mTempFile = new KTemporaryFile();
+  return mTempFile->open();
 }
 
 void ResourceFile::deleteStaleTempFile()
 {
   if ( hasTempFile() ) {
-    kDebug(5700) << "stale temp file detected " << mTempFile->name() << endl;
+    kDebug(5700) << "stale temp file detected " << mTempFile->fileName() << endl;
     deleteLocalTempFile();
   }
 }
@@ -456,20 +452,20 @@ void ResourceFile::downloadFinished( KJob* )
 
   d->mIsLoading = false;
 
-  if ( !hasTempFile() || mTempFile->status() != 0 ) {
+  if ( !hasTempFile() ) {
     emit loadingError( this, i18n( "Download failed, could not create temporary file" ) );
     return;
   }
 
-  QFile file( mTempFile->name() );
+  QFile file( mTempFile->fileName() );
   if ( file.open( QIODevice::ReadOnly ) ) {
     if ( clearAndLoad( &file ) )
       emit loadingFinished( this );
     else
-      emit loadingError( this, i18n( "Problems during parsing file '%1'." ,  mTempFile->name() ) );
+      emit loadingError( this, i18n( "Problems during parsing file '%1'." ,  mTempFile->fileName() ) );
   }
   else {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->name() ) );
+    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
   }
 
   deleteLocalTempFile();

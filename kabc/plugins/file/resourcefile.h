@@ -30,7 +30,7 @@
 
 class QFile;
 class QTimer;
-class KTempFile;
+class KTemporaryFile;
 
 class KJob;
 
@@ -164,7 +164,7 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
 
     KDirWatch mDirWatch;
 
-    KTempFile *mTempFile;
+    KTemporaryFile *mTempFile;
 
     bool mAsynchronous;
 

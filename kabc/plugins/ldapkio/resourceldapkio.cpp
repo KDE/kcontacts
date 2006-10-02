@@ -32,7 +32,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstringhandler.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kio/netaccess.h>
 
 #include "kldap/ldif.h"
@@ -63,7 +63,7 @@ class ResourceLDAPKIO::ResourceLDAPKIOPrivate
     bool mReadOnly;
     bool mAutoCache;
     QString mCacheDst;
-    KTempFile *mTmp;
+    KTemporaryFile *mTmp;
 };
 
 ResourceLDAPKIO::ResourceLDAPKIO( const KConfig *config )
@@ -472,20 +472,20 @@ void ResourceLDAPKIO::createCache()
 {
   d->mTmp = NULL;
   if ( d->mCachePolicy == Cache_NoConnection && d->mAutoCache ) {
-    d->mTmp = new KTempFile( d->mCacheDst, "tmp" );
-    d->mTmp->setAutoDelete( true );
+    d->mTmp = new KTemporaryFile;
+    d->mTmp->setPrefix(d->mCacheDst);
+    d->mTmp->setSuffix("tmp");
+    d->mTmp->open();
   }
 }
 
 void ResourceLDAPKIO::activateCache()
 {
   if ( d->mTmp && d->mError == 0 ) {
-    d->mTmp->close();
-    rename( QFile::encodeName( d->mTmp->name() ), QFile::encodeName( d->mCacheDst ) );
-  }
-  if ( d->mTmp ) {
+    QString filename = d->mTmp->fileName();
     delete d->mTmp;
     d->mTmp = 0;
+    rename( QFile::encodeName( filename ), QFile::encodeName( d->mCacheDst ) );
   }
 }
 
@@ -581,7 +581,7 @@ void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
   if ( data.size() ) {
     d->mLdif.setLdif( data );
     if ( d->mTmp ) {
-      d->mTmp->file()->write( data );
+      d->mTmp->write( data );
     }
   } else {
     d->mLdif.endLdif();
