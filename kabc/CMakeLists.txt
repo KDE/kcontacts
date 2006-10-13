@@ -27,7 +27,8 @@ add_subdirectory( vcardparser )
 add_subdirectory( formats )
 add_subdirectory( plugins )
 add_subdirectory( tests )
-add_subdirectory( scripts )
+#add_subdirectory( scripts )
+FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
 
 
 
