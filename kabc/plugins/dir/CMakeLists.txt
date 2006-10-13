@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 set(kabc_directory_SRCS resourcedirplugin.cpp resourcedir.cpp resourcedirconfig.cpp )
 
-kde4_automoc(${kabc_directory_SRCS})
+kde4_automoc(kabc_directory ${kabc_directory_SRCS})
 
 kde4_add_plugin(kabc_directory ${kabc_directory_SRCS})
 

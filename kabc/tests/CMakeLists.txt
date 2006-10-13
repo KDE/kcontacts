@@ -10,7 +10,7 @@ set(testlock_SRCS
 testlock.cpp
 )
 
-kde4_automoc(${testlock_SRCS})
+kde4_automoc(testlock ${testlock_SRCS})
 
 kde4_add_executable(testlock RUN_UNINSTALLED ${testlock_SRCS})
 
@@ -21,7 +21,7 @@ target_link_libraries(testlock  ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 
 set(geotest_SRCS geotest.cpp)
 
-kde4_automoc(${geotest_SRCS})
+kde4_automoc(geotest ${geotest_SRCS})
 
 kde4_add_executable(geotest RUN_UNINSTALLED ${geotest_SRCS})
 
@@ -33,7 +33,7 @@ set(testkabc_SRCS
 testkabc.cpp
 )
 
-kde4_automoc(${testkabc_SRCS})
+kde4_automoc(testkabc ${testkabc_SRCS})
 
 kde4_add_executable(testkabc RUN_UNINSTALLED ${testkabc_SRCS})
 
@@ -46,7 +46,7 @@ set(testkabcdlg_SRCS
 testkabcdlg.cpp
 )
 
-kde4_automoc(${testkabcdlg_SRCS})
+kde4_automoc(testkabcdlg ${testkabcdlg_SRCS})
 
 kde4_add_executable(testkabcdlg RUN_UNINSTALLED ${testkabcdlg_SRCS})
 
@@ -59,7 +59,7 @@ set(testdistlist_SRCS
 testdistlist.cpp
 )
 
-kde4_automoc(${testdistlist_SRCS})
+kde4_automoc(testdistlist ${testdistlist_SRCS})
 
 kde4_add_executable(testdistlist RUN_UNINSTALLED ${testdistlist_SRCS})
 
@@ -74,7 +74,7 @@ if (UNIX)
    bigread.cpp
    )
 
-   kde4_automoc(${bigread_SRCS})
+   kde4_automoc(bigread ${bigread_SRCS})
 
 
    kde4_add_executable(bigread RUN_UNINSTALLED ${bigread_SRCS})
@@ -92,7 +92,7 @@ if (UNIX)
    bigwrite.cpp
    )
 
-   kde4_automoc(${bigwrite_SRCS})
+   kde4_automoc(bigwrite ${bigwrite_SRCS})
 
 
    kde4_add_executable(bigwrite RUN_UNINSTALLED ${bigwrite_SRCS})
@@ -108,7 +108,7 @@ set(testdb_SRCS
 testdb.cpp
 )
 
-kde4_automoc(${testdb_SRCS})
+kde4_automoc(testdb ${testdb_SRCS})
 
 
 message(STATUS "skipping kabc/tests testdb, mysql check missing")
@@ -124,7 +124,7 @@ set(testaddressee_SRCS
 testaddressee.cpp
 )
 
-kde4_automoc(${testaddressee_SRCS})
+kde4_automoc(testaddressee ${testaddressee_SRCS})
 
 
 kde4_add_executable(testaddressee RUN_UNINSTALLED ${testaddressee_SRCS})
@@ -138,7 +138,7 @@ set(testaddresseelist_SRCS
 testaddresseelist.cpp
 )
 
-kde4_automoc(${testaddresseelist_SRCS})
+kde4_automoc(testaddresseelist ${testaddresseelist_SRCS})
 
 
 message(STATUS "skipping kabc/tests testaddresseelist")
@@ -154,7 +154,7 @@ set(testaddressfmt_SRCS
 testaddressfmt.cpp
 )
 
-kde4_automoc(${testaddressfmt_SRCS})
+kde4_automoc(testaddressfmt ${testaddressfmt_SRCS})
 
 kde4_add_executable(testaddressfmt RUN_UNINSTALLED ${testaddressfmt_SRCS})
 
@@ -167,7 +167,7 @@ set(kabcargl_SRCS
 kabcargl.cpp
 )
 
-kde4_automoc(${kabcargl_SRCS})
+kde4_automoc(kabcargl ${kabcargl_SRCS})
 
 kde4_add_executable(kabcargl RUN_UNINSTALLED ${kabcargl_SRCS})
 
@@ -180,7 +180,7 @@ set(testaddresslineedit_SRCS
 testaddresslineedit.cpp
 )
 
-kde4_automoc(${testaddresslineedit_SRCS})
+kde4_automoc(testaddresslineedit ${testaddresslineedit_SRCS})
 
 kde4_add_executable(testaddresslineedit RUN_UNINSTALLED ${testaddresslineedit_SRCS})
 
