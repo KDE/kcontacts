@@ -309,14 +309,13 @@ bool ResourceFile::save( Ticket * )
   KSaveFile saveFile( mFileName );
   bool ok = false;
 
-  if ( saveFile.status() == 0 && saveFile.file() )
+  if ( saveFile.open() )
   {
-    mFormat->saveAll( addressBook(), this, saveFile.file() );
-    ok = saveFile.close();
+    mFormat->saveAll( addressBook(), this, &saveFile );
+    ok = saveFile.finalize();
   }
 
   if ( !ok ) {
-    saveFile.abort();
     addressBook()->error( i18n( "Unable to save file '%1'." ,  mFileName ) );
   }
 
