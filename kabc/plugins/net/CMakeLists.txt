@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 set(kabc_net_SRCS resourcenetplugin.cpp resourcenet.cpp resourcenetconfig.cpp )
 
-kde4_automoc(kabc_net ${kabc_net_SRCS})
+kde4_automoc(${kabc_net_SRCS})
 
 kde4_add_plugin(kabc_net ${kabc_net_SRCS})
 

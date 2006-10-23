@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc ${CMAKE_BINARY_DIR}/kabc )
 
 set(kabcformat_binary_PART_SRCS binaryformat.cpp )
 
-kde4_automoc(kabcformat_binary ${kabcformat_binary_PART_SRCS})
+kde4_automoc(${kabcformat_binary_PART_SRCS})
 
 kde4_add_plugin(kabcformat_binary ${kabcformat_binary_PART_SRCS})
 

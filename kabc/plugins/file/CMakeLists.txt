@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 set(kabc_file_core_SRCS resourcefile.cpp resourcefileconfig.cpp )
 
-kde4_automoc(kabc_file_core ${kabc_file_core_SRCS})
+kde4_automoc(${kabc_file_core_SRCS})
 
 kde4_add_library(kabc_file_core SHARED ${kabc_file_core_SRCS})
 
@@ -21,7 +21,7 @@ install(TARGETS kabc_file_core  DESTINATION ${LIB_INSTALL_DIR} )
 
 set(kabc_file_SRCS resourcefileplugin.cpp)
 
-kde4_automoc(kabc_file ${kabc_file_SRCS})
+kde4_automoc(${kabc_file_SRCS})
 
 kde4_add_plugin(kabc_file ${kabc_file_SRCS})
 

@@ -81,7 +81,7 @@ set(kabc_LIB_SRCS
    ${vcards_STAT_SRCS}
 )
 
-kde4_automoc(kabc ${kabc_LIB_SRCS})
+kde4_automoc(${kabc_LIB_SRCS})
 
 kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
 
