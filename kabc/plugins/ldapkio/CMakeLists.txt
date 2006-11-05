@@ -12,7 +12,6 @@ kde4_add_plugin(kabc_ldapkio ${kabc_ldapkio_SRCS})
 
 target_link_libraries(kabc_ldapkio  ${KDE4_KDEIO_LIBS} kabc kldap)
 
-kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_ldapkio )
 
 install(TARGETS kabc_ldapkio  DESTINATION ${PLUGIN_INSTALL_DIR} )
 

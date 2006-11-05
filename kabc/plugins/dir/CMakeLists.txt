@@ -13,7 +13,6 @@ kde4_add_plugin(kabc_directory ${kabc_directory_SRCS})
 target_link_libraries(kabc_directory ${KDE4_KDECORE_LIBS} kabc )
 
 
-kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kabc_directory )
 
 
 install(TARGETS kabc_directory  DESTINATION ${PLUGIN_INSTALL_DIR} )
