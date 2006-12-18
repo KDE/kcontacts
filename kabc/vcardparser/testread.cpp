@@ -24,7 +24,7 @@
 
 #include <kprocess.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <kinstance.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -41,15 +41,14 @@ static const KCmdLineOptions options[] =
 
 int main( int argc, char **argv )
 {
-  //KApplication::disableAutoDcopRegistration(); // nice thought, but KUrl -> ksycoca -> DCOP attach() anyway
-
   KAboutData aboutData( "testread", "vCard test reader", "0.1" );
   aboutData.addAuthor( "Cornelius Schumacher", 0, "schumacher@kde.org" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options );
 
-  KApplication app( false );
+  KInstance instance( &aboutData );
+  // QCoreApp not needed
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
