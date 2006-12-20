@@ -213,6 +213,12 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
     //KDE 4.0 - add a d-pointer here!
 };
 
+// needed for msvc, 
+inline uint qHash(const Addressee &adr)
+{
+    return qHash(adr.uid());
+}
+
 }
 
 #endif
