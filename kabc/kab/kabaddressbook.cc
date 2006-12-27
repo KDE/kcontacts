@@ -577,7 +577,7 @@ AddressBook::ErrorCode AddressBook::load(const QString& filename)
 	           "Your file will be closed by default.",
 		  oldfile.absoluteFilePath()),
 	      i18n("File Error"),
-	      KStdGuiItem::close(), KStdGuiItem::save()))
+	      KStandardGuiItem::close(), KStandardGuiItem::save()))
 	    {
 	    case KMessageBox::No: // save
 	      if (!data->save(i18n("(Safety copy on file error)").toAscii(), true))
@@ -622,7 +622,7 @@ AddressBook::ErrorCode AddressBook::load(const QString& filename)
 	      i18n("The file \"%1\" cannot be found. "
 	           "Create a new one?", fname),
 	      i18n("No Such File"),
-	      KGuiItem(i18n("Create")), KStdGuiItem::cancel())==KMessageBox::Yes)
+	      KGuiItem(i18n("Create")), KStandardGuiItem::cancel())==KMessageBox::Yes)
 	    {
 	      if (createNew(fname)==NoError)
 		{

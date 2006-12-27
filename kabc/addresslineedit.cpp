@@ -36,7 +36,7 @@
 #include <kdebug.h>
 #include <kstandarddirs.h>
 #include <kstaticdeleter.h>
-#include <kstdaccel.h>
+#include <kstandardshortcut.h>
 
 #include "distributionlist.h"
 #include "stdaddressbook.h"
@@ -123,12 +123,12 @@ void AddressLineEdit::keyPressEvent(QKeyEvent *e)
 {
     bool accept = false;
 
-    if (KStdAccel::shortcut(KStdAccel::SubstringCompletion).contains(e->key() | e->modifiers()))
+    if (KStandardShortcut::shortcut(KStandardShortcut::SubstringCompletion).contains(e->key() | e->modifiers()))
     {
         doCompletion(true);
         accept = true;
     }
-    else if (KStdAccel::shortcut(KStdAccel::TextCompletion).contains(e->key() | e->modifiers()))
+    else if (KStandardShortcut::shortcut(KStandardShortcut::TextCompletion).contains(e->key() | e->modifiers()))
     {
         int len = text().length();
 
