@@ -76,7 +76,7 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple ) :
   mAddresseeList->setHeaderItem( new QTreeWidgetItem( headerTitles ) );
   listLayout->addWidget( mAddresseeList );
   connect( mAddresseeList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
-           SLOT( slotOk() ) );
+           SLOT( accept() ) );
   connect( mAddresseeList, SIGNAL( itemSelectionChanged() ),
            SLOT( updateEdit() ) );
 
