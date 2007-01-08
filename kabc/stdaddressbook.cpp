@@ -20,7 +20,6 @@
 
 #include <stdlib.h>
 
-#include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <ksimpleconfig.h>

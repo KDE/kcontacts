@@ -20,7 +20,6 @@
 
 #include <QDataStream>
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <krandom.h>
 

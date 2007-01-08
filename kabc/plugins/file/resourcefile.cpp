@@ -27,7 +27,6 @@
 #include <QFile>
 #include <QFileInfo>
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kio/scheduler.h>

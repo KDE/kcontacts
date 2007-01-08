@@ -21,8 +21,8 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <kaboutdata.h>
 #include <kapplication.h>
+#include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kdebug.h>
