@@ -369,7 +369,7 @@ void ResourceLDAPKIO::init()
   if ( !mAttributes.contains("jpegPhoto") )
     mAttributes.insert( "jpegPhoto", "jpegPhoto" );
 
-  d->mLDAPUrl = KUrl();
+  d->mLDAPUrl = KLDAP::LdapUrl( KUrl() );
   if ( !mAnonymous ) {
     d->mLDAPUrl.setUser( mUser );
     d->mLDAPUrl.setPass( mPassword );
