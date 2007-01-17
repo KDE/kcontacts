@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Directory
+Name[el]=Κατάλογος
 X-KDE-Library=kabc_directory
 Type=Service
 ServiceTypes=KResources/Plugin

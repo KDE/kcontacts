@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Network
+Name[el]=Δίκτυο
 X-KDE-Library=kabc_net
 Type=Service
 ServiceTypes=KResources/Plugin

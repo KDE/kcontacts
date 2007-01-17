@@ -6,6 +6,7 @@ Exec=kab2kabc --disable-autostart --quiet
 Icon=misc
 Type=Application
 Comment=libkab to libkabc conversion tool.
+Comment[el]=Εργαλείο μετατροπής libkab σε libkabc.
 Terminal=false
 NoDisplay=true
 X-KDE-autostart-condition=kab2kabcrc:Startup:EnableAutostart:true

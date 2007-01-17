@@ -1,6 +1,7 @@
 [Misc]
 Encoding=UTF-8
 Name=Binary
+Name[el]=Δυαδικό
 
 [Plugin]
 Type=binary
