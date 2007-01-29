@@ -24,7 +24,7 @@
 
 #include <kprocess.h>
 #include <kdebug.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -47,7 +47,7 @@ int main( int argc, char **argv )
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options );
 
-  KInstance instance( &aboutData );
+  KComponentData componentData( &aboutData );
   // QCoreApp not needed
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

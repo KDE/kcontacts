@@ -21,7 +21,7 @@
 #include "lock.h"
 
 #include <krandom.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -69,7 +69,7 @@ bool Lock::writeLockFile( const QString &filename )
   QFile file( filename );
   if ( !file.open( QIODevice::WriteOnly ) ) return false;
   QTextStream t( &file );
-  t << ::getpid() << endl << QString( KGlobal::instance()->instanceName() );
+  t << ::getpid() << endl << QString( KGlobal::mainComponent().componentName() );
 
   return true;
 }

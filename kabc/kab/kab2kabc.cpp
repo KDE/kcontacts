@@ -35,6 +35,7 @@
 #include "kabc/stdaddressbook.h"
 
 #include "kabapi.h"
+#include <kconfiggroup.h>
 
 using namespace KABC;
 

@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 
@@ -668,7 +668,7 @@ bool AddressBook::addCustomField( const QString &label, int category,
     d->mAllFields = Field::allFields();
   }
 
-  QString a = app.isNull() ? KGlobal::instance()->instanceName() : app;
+  QString a = app.isNull() ? KGlobal::mainComponent().componentName() : app;
   QString k = key.isNull() ? label : key;
 
   Field *field = Field::createCustomField( label, category, k, a );
