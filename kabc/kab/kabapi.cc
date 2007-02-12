@@ -15,7 +15,6 @@
 */
 
 #include "kabapi.h"
-#include <klistbox.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kdebug.h>
