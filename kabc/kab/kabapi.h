@@ -20,9 +20,8 @@
 #include <kdialog.h>
 
 class QPushButton;
-class KListBox;
+class KListWidget;
 class Q3ListBoxItem;
-
 /**
   * The class KabAPI provides a public interface to access the
   * users address database created using kab. The complete
@@ -186,7 +185,7 @@ protected:
   /**
    * This displays the overview over the addresses in the dialog.
    */
-  KListBox* listbox;
+  KListWidget* listbox;
   /**
    * The index of the selected entry. This value is only valid after the
    * KabAPI dialog has been executed and accepted by the user.
