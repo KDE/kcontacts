@@ -18,7 +18,7 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kdebug.h>
-#include <klistwidget.h>
+#include <k3listbox.h>
 
 #include "kabapi.moc"
 
@@ -33,7 +33,7 @@ using namespace std;
 KabAPI::KabAPI(QWidget* parent)
   : KDialog(parent),
     book(0),
-    listbox(new KListWidget(this)),
+    listbox(new K3ListBox(this)),
     selection(-1)
 {
   Q_CHECK_PTR(listbox);
@@ -65,7 +65,7 @@ int KabAPI::exec()
 	{
 	  listbox->clear();
 
-	  listbox->addItems(names);
+	  listbox->insertStringList(names);
 	  if (names.count()>0)
 	    {
 	      listbox->setCurrentItem(0);

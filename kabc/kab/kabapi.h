@@ -20,7 +20,7 @@
 #include <kdialog.h>
 
 class QPushButton;
-class KListWidget;
+class K3ListBox;
 class Q3ListBoxItem;
 /**
   * The class KabAPI provides a public interface to access the
@@ -185,7 +185,7 @@ protected:
   /**
    * This displays the overview over the addresses in the dialog.
    */
-  KListWidget* listbox;
+  K3ListBox* listbox;
   /**
    * The index of the selected entry. This value is only valid after the
    * KabAPI dialog has been executed and accepted by the user.
