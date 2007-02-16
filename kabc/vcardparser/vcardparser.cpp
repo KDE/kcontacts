@@ -251,8 +251,10 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
             } else {
               input = value.toUtf8();
             }
-          } else
+          } else if ( (*lineIt).value().type() == QVariant::ByteArray ) {
             input = (*lineIt).value().toByteArray();
+          } else
+            input = (*lineIt).value().toString().toUtf8();
 
           // handle encoding
           if ( hasEncoding ) { // have to encode the data
