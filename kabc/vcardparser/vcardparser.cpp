@@ -57,19 +57,22 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
   VCard::List vCardList;
   QByteArray currentLine;
 
-  const QList<QByteArray> lines = text.split( '\n' );
+  QList<QByteArray> lines = text.split( '\n' );
 
   bool inVCard = false;
-  QList<QByteArray>::ConstIterator it( lines.begin() );
-  QList<QByteArray>::ConstIterator linesEnd( lines.end() );
+  QList<QByteArray>::Iterator it( lines.begin() );
+  QList<QByteArray>::Iterator linesEnd( lines.end() );
   for ( ; it != linesEnd; ++it ) {
-    if ( (*it).trimmed().isEmpty() ) // empty line
-      continue;
+    // remove the trailing \r, left from \r\n
+    if ( (*it).endsWith( '\r' ) )
+        (*it).chop( 1 );
 
     if ( (*it).startsWith( ' ' ) || (*it).startsWith( '\t' ) ) { // folded line => append to previous
-      currentLine.append( (*it).mid( 1 ).trimmed() );
+      currentLine.append( (*it).mid( 1 ) );
       continue;
     } else {
+      if ( (*it).trimmed().isEmpty() ) // empty line
+        continue;
       if ( inVCard && !currentLine.isEmpty() ) { // now parse the line
         int colon = currentLine.indexOf( ':' );
         if ( colon == -1 ) { // invalid line
@@ -79,7 +82,7 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
 
         VCardLine vCardLine;
         const QByteArray key = currentLine.left( colon ).trimmed();
-        QByteArray value = currentLine.mid( colon + 1 ).trimmed();
+        QByteArray value = currentLine.mid( colon + 1 );
 
         QList<QByteArray> params = key.split( ';' );
 
@@ -120,11 +123,14 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
         removeEscapes( value );
 
         QByteArray output;
+        bool wasBase64Encoded = false;
 
         if ( vCardLine.parameterList().contains( "encoding" ) ) { // have to decode the data
           if ( vCardLine.parameter( "encoding" ).toLower() == "b" ||
-               vCardLine.parameter( "encoding" ).toLower() == "base64" )
+               vCardLine.parameter( "encoding" ).toLower() == "base64" ) {
             KCodecs::base64Decode( value, output );
+            wasBase64Encoded = true;
+          }
           else if ( vCardLine.parameter( "encoding" ).toLower() == "quoted-printable" ) {
             // join any qp-folded lines
             while ( value.endsWith( '=' ) && it != linesEnd ) {
@@ -146,8 +152,10 @@ VCard::List VCardParser::parseVCards( const QByteArray& text )
           } else {
             vCardLine.setValue( QString::fromUtf8( output ) );
           }
+        } else if ( wasBase64Encoded ) {
+            vCardLine.setValue( output );
         } else
-          vCardLine.setValue( QString::fromUtf8( output ) );
+            vCardLine.setValue( QString::fromUtf8( output ) );
 
         currentVCard.addLine( vCardLine );
       }
@@ -207,7 +215,7 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
       // iterate over the lines
       for ( lineIt = lines.constBegin(); lineIt != lines.constEnd(); ++lineIt ) {
         QVariant val = (*lineIt).value();
-        if ( val.isValid() && !val.toString().isEmpty() ) {
+        if ( val.isValid() ) {
           if ( (*lineIt).hasGroup() )
             textLine = (*lineIt).group().toLatin1() + '.' + (*lineIt).identifier().toLatin1();
           else
@@ -232,12 +240,11 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
           }
 
 
-
-          QString value = (*lineIt).value().toString();
           QByteArray input, output;
 
           // handle charset
           if ( (*lineIt).parameterList().contains( "charset" ) ) { // have to convert the data
+            const QString value = (*lineIt).value().toString();
             QTextCodec *codec = QTextCodec::codecForName( (*lineIt).parameter( "charset" ).toLatin1() );
             if ( codec ) {
               input = codec->fromUnicode( value );
@@ -245,7 +252,7 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
               input = value.toUtf8();
             }
           } else
-            input = value.toUtf8();
+            input = (*lineIt).value().toByteArray();
 
           // handle encoding
           if ( hasEncoding ) { // have to encode the data
