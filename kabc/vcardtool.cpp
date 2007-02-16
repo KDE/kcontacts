@@ -310,9 +310,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
 
     // VERSION
     if ( version == VCard::v2_1 )
-      card.addLine( VCardLine( "VERSION", "2.1" ) );
+      card.addLine( VCardLine( "VERSION", QString::fromLatin1("2.1") ) );
     if ( version == VCard::v3_0 )
-      card.addLine( VCardLine( "VERSION", "3.0" ) );
+      card.addLine( VCardLine( "VERSION", QString::fromLatin1("3.0") ) );
 
     // X-
     const QStringList customs = (*addrIt).customs();
@@ -748,11 +748,12 @@ Secrecy VCardTool::parseSecrecy( const VCardLine &line )
 {
   Secrecy secrecy;
 
-  if ( line.value().toString().toLower() == "public" )
+  const QString value = line.value().toString().toLower();
+  if ( value == "public" )
     secrecy.setType( Secrecy::Public );
-  if ( line.value().toString().toLower() == "private" )
+  else if ( value == "private" )
     secrecy.setType( Secrecy::Private );
-  if ( line.value().toString().toLower() == "confidential" )
+  else if ( value == "confidential" )
     secrecy.setType( Secrecy::Confidential );
 
   return secrecy;
@@ -765,11 +766,11 @@ VCardLine VCardTool::createSecrecy( const Secrecy &secrecy )
   int type = secrecy.type();
 
   if ( type == Secrecy::Public )
-    line.setValue( "PUBLIC" );
+    line.setValue( QString::fromLatin1("PUBLIC") );
   else if ( type == Secrecy::Private )
-    line.setValue( "PRIVATE" );
+    line.setValue( QString::fromLatin1("PRIVATE") );
   else if ( type == Secrecy::Confidential )
-    line.setValue( "CONFIDENTIAL" );
+    line.setValue( QString::fromLatin1("CONFIDENTIAL") );
 
   return line;
 }
