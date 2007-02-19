@@ -187,7 +187,7 @@ bool AddressBook::Entry::Address::nameOfField(const char* key, QString& value)
 	 ||
 	 !fields->insert
 	 (map<const char*, const QString, less<const char*> >::value_type
-	 (Fields[counter++], i18n("Address"))).second
+	 (Fields[counter++], i18nc("street/postal","Address"))).second
 	 ||
 	 !fields->insert
 	 (map<const char*, const QString, less<const char*> >::value_type
