@@ -25,7 +25,7 @@
 
 #include "addressee.h"
 
-class KConfigBase;
+class KConfigGroup;
 
 namespace KABC {
 
@@ -180,7 +180,7 @@ public:
    * @param identifier The unique identifier
    * @param fields     The list of the fields
    */
-  static void saveFields( KConfigBase *cfg, const QString &identifier,
+  static void saveFields( KConfigGroup &cfg, const QString &identifier,
                           const Field::List &fields );
   /**
    * @overload
@@ -199,7 +199,7 @@ public:
    * @param cfg        The config file object
    * @param identifier The unique identifier
    */
-  static Field::List restoreFields( KConfigBase *cfg, const QString &identifier );
+  static Field::List restoreFields( const KConfigGroup &cfg, const QString &identifier );
 
   /**
    * @overload

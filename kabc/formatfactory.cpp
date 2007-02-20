@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kstaticdeleter.h>
 
@@ -59,7 +59,7 @@ FormatFactory::FormatFactory()
                                                               KStandardDirs::NoDuplicates );
   for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it )
   {
-    KSimpleConfig config( *it, true );
+    KConfig config( *it, KConfig::OnlyLocal);
 
     if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) )
 	    continue;

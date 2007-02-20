@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kstaticdeleter.h>
 
@@ -186,16 +186,16 @@ bool StdAddressBook::automaticSave()
 // should get const for 4.X
 Addressee StdAddressBook::whoAmI()
 {
-  KConfig config( "kabcrc" );
-  config.setGroup( "General" );
+  KConfig _config( "kabcrc" );
+  KConfigGroup config(&_config, "General" );
 
   return findByUid( config.readEntry( "WhoAmI" ) );
 }
 
 void StdAddressBook::setWhoAmI( const Addressee &addr )
 {
-  KConfig config( "kabcrc" );
-  config.setGroup( "General" );
+  KConfig _config( "kabcrc" );
+  KConfigGroup config(&_config, "General" );
 
   config.writeEntry( "WhoAmI", addr.uid() );
 }

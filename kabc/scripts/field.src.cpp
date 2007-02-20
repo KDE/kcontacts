@@ -298,10 +298,10 @@ void Field::saveFields( const QString &identifier,
 {
   KConfigGroup cg( KGlobal::config(), "KABCFields" );
 
-  saveFields( &cg, identifier, fields );
+  saveFields( cg, identifier, fields );
 }
 
-void Field::saveFields( KConfigBase *cfg, const QString &identifier,
+void Field::saveFields( KConfigGroup &cfg, const QString &identifier,
                         const Field::List &fields )
 {
   QList<int> fieldIds;
@@ -315,24 +315,24 @@ void Field::saveFields( KConfigBase *cfg, const QString &identifier,
       customEntry << (*it)->mImpl->label();
       customEntry << (*it)->mImpl->key();
       customEntry << (*it)->mImpl->app();
-      cfg->writeEntry( "KABC_CustomEntry_" + identifier + '_' +
+      cfg.writeEntry( "KABC_CustomEntry_" + identifier + '_' +
                        QString::number( custom++ ), customEntry );
     }
   }
 
-  cfg->writeEntry( identifier, fieldIds );
+  cfg.writeEntry( identifier, fieldIds );
 }
 
 Field::List Field::restoreFields( const QString &identifier )
 {
   KConfigGroup cg( KGlobal::config(), "KABCFields" );
 
-  return restoreFields( &cg, identifier );
+  return restoreFields( cg, identifier );
 }
 
-Field::List Field::restoreFields( KConfigBase *cfg, const QString &identifier )
+Field::List Field::restoreFields( const KConfigGroup &cfg, const QString &identifier )
 {
-  const QList<int> fieldIds = cfg->readEntry( identifier,QList<int>() );
+  const QList<int> fieldIds = cfg.readEntry( identifier,QList<int>() );
 
   Field::List fields;
 
@@ -341,7 +341,7 @@ Field::List Field::restoreFields( KConfigBase *cfg, const QString &identifier )
   for ( it = fieldIds.begin(); it != fieldIds.end(); ++it ) {
     FieldImpl *f = 0;
     if ( (*it) == FieldImpl::CustomField ) {
-      QStringList customEntry = cfg->readEntry( "KABC_CustomEntry_" +
+      QStringList customEntry = cfg.readEntry( "KABC_CustomEntry_" +
                                                  identifier + '_' +
                                                  QString::number( custom++ ),QStringList() );
       f = new FieldImpl( *it, CustomCategory, customEntry[ 0 ],

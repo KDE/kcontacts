@@ -125,8 +125,8 @@ void importKMailAddressBook( KABC::AddressBook *ab )
   QString fileName = KStandardDirs::locateLocal( "data", "kmail/addressbook" );
   QString kmailConfigName = KStandardDirs::locate( "config", "kmailrc" );
   if ( !kmailConfigName.isEmpty() ) {
-    KConfig cfg( kmailConfigName );
-    cfg.setGroup( "Addressbook" );
+    KConfig _cfg( kmailConfigName  );
+    KConfigGroup cfg(&_cfg, "Addressbook" );
     fileName = cfg.readPathEntry( "default", fileName );
   }
   if ( !KStandardDirs::exists( fileName ) ) {

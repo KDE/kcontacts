@@ -21,7 +21,7 @@
 #include <QApplication>
 #include <QPair>
 
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
@@ -198,10 +198,10 @@ QStringList DistributionListManager::listNames()
 
 bool DistributionListManager::load()
 {
-  KSimpleConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
-  QMap<QString,QString> entryMap = cfg.entryMap( "DistributionLists" );
-  cfg.setGroup( "DistributionLists" );
+  KConfigGroup cg( &cfg, "DistributionLists" );
+  QMap<QString,QString> entryMap = cg.entryMap();
 
   // clear old lists
   qDeleteAll( mLists );
@@ -211,7 +211,7 @@ bool DistributionListManager::load()
   QMap<QString,QString>::ConstIterator it;
   for ( it = entryMap.constBegin(); it != entryMap.constEnd(); ++it ) {
     QString name = it.key();
-    QStringList value = cfg.readEntry( name, QStringList() );
+    QStringList value = cg.readEntry( name, QStringList() );
 
     kDebug(5700) << "DLM::load(): " << name << ": " << value.join(",") << endl;
 
@@ -247,10 +247,9 @@ bool DistributionListManager::save()
 {
   kDebug(5700) << "DistListManager::save()" << endl;
 
-  KSimpleConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
-
-  cfg.deleteGroup( "DistributionLists" );
-  cfg.setGroup( "DistributionLists" );
+  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  KConfigGroup cg( &cfg, "DistributionLists" );
+  cg.deleteGroup();
 
   QListIterator<DistributionList*> it( mLists );
   while ( it.hasNext() ) {
@@ -274,10 +273,10 @@ bool DistributionListManager::save()
       }
     }
 
-    cfg.writeEntry( list->name(), value );
+    cg.writeEntry( list->name(), value );
   }
 
-  cfg.sync();
+  cg.sync();
 
   return true;
 }
