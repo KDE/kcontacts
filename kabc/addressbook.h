@@ -21,8 +21,8 @@
 #ifndef KABC_ADDRESSBOOK_H
 #define KABC_ADDRESSBOOK_H
 
-#include <QObject>
-#include <QList>
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 #include "kresources/manager.h"
 
@@ -475,9 +475,9 @@ class KABC_EXPORT AddressBook : public QObject
 
     /**
       */
-    void emitAddressBookLocked() { emit addressBookLocked( this ); }
-    void emitAddressBookUnlocked() { emit addressBookUnlocked( this ); }
-    void emitAddressBookChanged() { emit addressBookChanged( this ); }
+    void emitAddressBookLocked() { addressBookLocked( this ); }
+    void emitAddressBookUnlocked() { addressBookUnlocked( this ); }
+    void emitAddressBookChanged() { addressBookChanged( this ); }
 
     /**
       Returns true when the loading of the addressbook has finished,

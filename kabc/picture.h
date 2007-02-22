@@ -21,9 +21,9 @@
 #ifndef KABC_PICTURE_H
 #define KABC_PICTURE_H
 
-#include <QDataStream>
-#include <QImage>
-#include <QString>
+#include <QtCore/QDataStream>
+#include <QtGui/QImage>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

@@ -23,6 +23,8 @@
 
 #include "kabc.h"
 
+#include <QtCore/QDataStream>
+
 namespace KABC {
 
 /**

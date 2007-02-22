@@ -28,6 +28,7 @@
 class QTreeWidget;
 class QComboBox;
 class QButtonGroup;
+class QLabel;
 
 namespace KABC {
 

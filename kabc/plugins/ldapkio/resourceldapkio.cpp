@@ -36,7 +36,6 @@
 #include <kio/netaccess.h>
 
 #include "kldap/ldif.h"
-#include "kldap/ldif.h"
 #include "kldap/ldapurl.h"
 
 #include "resourceldapkio.h"
