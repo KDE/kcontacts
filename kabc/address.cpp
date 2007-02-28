@@ -342,16 +342,16 @@ QString Address::formattedAddress( const QString &realName,
     ciso = KGlobal::locale()->country();
   } 
   KConfig entry( KStandardDirs::locate( "locale",
-        QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ) );
-  entry.setGroup( "KCM Locale" );
+        QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ));
 
+  KConfigGroup group = entry.group("KCM Locale");
   // decide whether this needs special business address formatting
   if ( orgaName.isEmpty() ) {
-    addrTemplate = entry.readEntry( "AddressFormat" );
+    addrTemplate = group.readEntry( "AddressFormat" );
   } else {
-    addrTemplate = entry.readEntry( "BusinessAddressFormat" );
+    addrTemplate = group.readEntry( "BusinessAddressFormat" );
     if ( addrTemplate.isEmpty() )
-      addrTemplate = entry.readEntry( "AddressFormat" );
+      addrTemplate = group.readEntry( "AddressFormat" );
   }
 
   // in the case there's no format found at all, default to what we've always
@@ -371,8 +371,8 @@ QString Address::formattedAddress( const QString &realName,
   if ( !country().isEmpty() ) {
     KConfig entry( KStandardDirs::locate( "locale", QString( "l10n/" )
           + KGlobal::locale()->country() + QString( "/entry.desktop" ) ) );
-    entry.setGroup( "KCM Locale" );
-    QString cpos = entry.readEntry( "AddressCountryPosition" );
+    KConfigGroup group = entry.group("KCM Locale" );
+    QString cpos = group.readEntry( "AddressCountryPosition" );
     if ( "BELOW" == cpos || cpos.isEmpty() ) {
       ret = ret + "\n\n" + country().toUpper();
     } else if ( "below" == cpos ) {

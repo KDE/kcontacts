@@ -64,13 +64,13 @@ FormatFactory::FormatFactory()
     if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) )
 	    continue;
 
-    config.setGroup( "Plugin" );
-    QString type = config.readEntry( "Type" );
-    info.library = config.readEntry( "X-KDE-Library" );
+    KConfigGroup group = config.group( "Plugin" );
+    QString type = group.readEntry( "Type" );
+    info.library = group.readEntry( "X-KDE-Library" );
 
-    config.setGroup( "Misc" );
-    info.nameLabel = config.readEntry( "Name" );
-    info.descriptionLabel = config.readEntry( "Comment", i18n( "No description available." ) );
+    group = config.group( "Misc" );
+    info.nameLabel = group.readEntry( "Name" );
+    info.descriptionLabel = group.readEntry( "Comment", i18n( "No description available." ) );
 
     mFormatList.insert( type, info );
   }
