@@ -33,12 +33,14 @@ static void addEscapes( QByteArray &str )
 {
   str.replace( '\\', (char*)"\\\\" );
   str.replace( ',', (char*)"\\," );
+  str.replace( '\r', (char*)"\\r" );
   str.replace( '\n', (char*)"\\n" );
 }
 
 static void removeEscapes( QByteArray &str )
 {
   str.replace( (char*)"\\n", "\n" );
+  str.replace( (char*)"\\r", "\r" );
   str.replace( (char*)"\\,", "," );
   str.replace( (char*)"\\\\", "\\" );
 }
@@ -267,13 +269,16 @@ QByteArray VCardParser::createVCards( const VCard::List& list )
             output = input;
 
           addEscapes( output );
-          textLine.append( ':' + output );
 
-          if ( textLine.length() > FOLD_WIDTH ) { // we have to fold the line
-            for ( int i = 0; i <= ( textLine.length() / FOLD_WIDTH ); ++i )
-              text.append( ( i == 0 ? "" : " " ) + textLine.mid( i * FOLD_WIDTH, FOLD_WIDTH ) + "\r\n" );
-          } else
-            text.append( textLine + "\r\n" );
+          if ( !output.isEmpty() ) {
+            textLine.append( ':' + output );
+
+            if ( textLine.length() > FOLD_WIDTH ) { // we have to fold the line
+              for ( int i = 0; i <= ( textLine.length() / FOLD_WIDTH ); ++i )
+                text.append( ( i == 0 ? "" : " " ) + textLine.mid( i * FOLD_WIDTH, FOLD_WIDTH ) + "\r\n" );
+            } else
+              text.append( textLine + "\r\n" );
+          }
         }
       }
     }
