@@ -3,6 +3,7 @@
 Encoding=UTF-8
 Name=Contacts
 Name[el]=Επαφές
+Name[pa]=ਸੰਪਰਕ
 Name[x-test]=xxContactsxx
 Type=Service
 ServiceTypes=KResources/Manager

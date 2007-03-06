@@ -2,6 +2,8 @@
 Encoding=UTF-8
 Name=Binary
 Name[el]=Δυαδικό
+Name[pa]=ਬਾਈਨਰੀ
+Name[x-test]=xxBinaryxx
 
 [Plugin]
 Type=binary

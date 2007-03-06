@@ -2,6 +2,8 @@
 Encoding=UTF-8
 Name=File
 Name[el]=Αρχείο
+Name[pa]=ਫਾਇਲ
+Name[x-test]=xxFilexx
 X-KDE-Library=kabc_file
 Type=Service
 ServiceTypes=KResources/Plugin
