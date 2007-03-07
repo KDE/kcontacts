@@ -8,6 +8,7 @@ Icon=misc
 Type=Application
 Comment=libkab to libkabc conversion tool.
 Comment[el]=Εργαλείο μετατροπής libkab σε libkabc.
+Comment[ja]=libkab から libkabc への変換ツール
 Comment[x-test]=xxlibkab to libkabc conversion tool.xx
 Terminal=false
 NoDisplay=true
