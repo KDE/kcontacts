@@ -466,11 +466,18 @@ int main( int argc, char **argv )
 
   KABC::AddressBook *kabcBook = StdAddressBook::self();
 
+  Ticket *ticket = kabcBook->requestSaveTicket();
+  
+  if (ticket == NULL) {
+    kDebug(5700) << "Failed converting addressbook to '" << kabcBook->identifier() << "': no ticket" << endl;
+    return 1;
+  }
+
   importKMailAddressBook( kabcBook );
 
   importKab( kabcBook, override, quiet );
 
-  StdAddressBook::save();
+  kabcBook->save(ticket);
 
   kDebug(5700) << "Saved kabc addressbook to '" << kabcBook->identifier() << "'" << endl;
 }
