@@ -22,7 +22,6 @@ set(vcards_STAT_SRCS
   vcardparser/vcardparser.cpp
 )
 
-add_subdirectory( kab )
 add_subdirectory( vcardparser )
 add_subdirectory( formats )
 add_subdirectory( plugins )
