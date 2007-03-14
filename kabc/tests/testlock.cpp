@@ -23,7 +23,6 @@
 #include <iostream>
 #include <unistd.h>
 
-#define QT3_SUPPORT
 #include <q3listview.h>
 
 #include <QWidget>
