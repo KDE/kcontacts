@@ -121,11 +121,6 @@ QString PhoneNumber::typeLabel() const
   return label;
 }
 
-QString PhoneNumber::label() const
-{
-  return typeLabel( type() );
-}
-
 PhoneNumber::TypeList PhoneNumber::typeList()
 {
   static TypeList list;
@@ -136,11 +131,6 @@ PhoneNumber::TypeList PhoneNumber::typeList()
   }
 
   return list;
-}
-
-QString PhoneNumber::label( int type )
-{
-  return typeLabel( type );
 }
 
 QString PhoneNumber::typeLabel( int type )
@@ -157,19 +147,19 @@ QString PhoneNumber::typeLabel( int type )
       break;
     case Msg:
       return i18n("Messenger");
-      break;  
+      break;
     case Pref:
       return i18n("Preferred Number");
       break;
     case Voice:
       return i18n("Voice");
-      break;  
+      break;
     case Fax:
       return i18n("Fax");
-      break;  
+      break;
     case Cell:
       return i18nc("Mobile Phone", "Mobile" );
-      break;  
+      break;
     case Video:
       return i18n("Video");
       break;

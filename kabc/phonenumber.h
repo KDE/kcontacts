@@ -75,7 +75,7 @@ class KABC_EXPORT PhoneNumber
       @param type   Type as defined in enum. Multiple types can be
                     specified by combining them by a logical or.
     */
-    PhoneNumber( const QString &number, int type = Home );
+    PhoneNumber( const QString &number, int type = Home ); //krazy:exclude=explicit
 
     /**
       Destructor.
@@ -122,11 +122,6 @@ class KABC_EXPORT PhoneNumber
     QString typeLabel() const;
 
     /**
-      Returns the translated label for phone number depending on its type.
-    */
-    QString label() const;
-
-    /**
       Returns a list of all available types
     */
     static TypeList typeList();
@@ -136,15 +131,9 @@ class KABC_EXPORT PhoneNumber
     */
     static QString typeLabel( int type );
 
-    /**
-      Returns the translated label for phone number type.
-      @obsolete
-    */
-    static QString label( int type );
-
   private:
     void init();
-    void validateNumber( const QString& );
+    void validateNumber( const QString &number );
 
     QString mId;
 
@@ -152,8 +141,8 @@ class KABC_EXPORT PhoneNumber
     QString mNumber;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const PhoneNumber & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, PhoneNumber & );
+KABC_EXPORT QDataStream &operator<<( QDataStream &lhs, const PhoneNumber &rhs );
+KABC_EXPORT QDataStream &operator>>( QDataStream &lhs, const PhoneNumber &rhs );
 
 }
 
