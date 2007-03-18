@@ -49,11 +49,15 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
 
   public:
     /**
+      Default constructor.
+     */
+    ResourceFile();
+    /**
       Constructor.
 
-      @param cfg The config object where custom resource settings are stored.
+      @param group The configuration group where custom resource settings are stored.
      */
-    explicit ResourceFile( const KConfig *cfg );
+    explicit ResourceFile( const KConfigGroup &group );
 
     /**
       Construct file resource on file @arg fileName using format @arg formatName.
@@ -68,7 +72,7 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     /**
       Writes the config back.
      */
-    virtual void writeConfig( KConfig *cfg );
+    virtual void writeConfig( KConfigGroup &group );
 
     /**
       Tries to open the file and checks for the proper format.

@@ -47,20 +47,24 @@ class ResourceNet::ResourceNetPrivate
     bool mIsSaving;
 };
 
-ResourceNet::ResourceNet( const KConfig *config )
-  : Resource( config ), mFormat( 0 ),
+ResourceNet::ResourceNet()
+  : Resource(), mFormat( 0 ),
     mTempFile( 0 ),
     d( new ResourceNetPrivate )
 {
-  if ( config ) {
-    init( KUrl( config->readPathEntry( "NetUrl" ) ), config->readEntry( "NetFormat" ) );
-  } else {
-    init( KUrl(), "vcard" );
-  }
+  init( KUrl(), "vcard" );
+}
+
+ResourceNet::ResourceNet( const KConfigGroup &group )
+  : Resource( group ), mFormat( 0 ),
+    mTempFile( 0 ),
+    d( new ResourceNetPrivate )
+{
+  init( KUrl( group.readPathEntry( "NetUrl" ) ), group.readEntry( "NetFormat" ) );
 }
 
 ResourceNet::ResourceNet( const KUrl &url, const QString &format )
-  : Resource( 0 ), mFormat( 0 ),
+  : Resource(), mFormat( 0 ),
     mTempFile( 0 ),
     d( new ResourceNetPrivate )
 {
@@ -102,12 +106,12 @@ ResourceNet::~ResourceNet()
   deleteLocalTempFile();
 }
 
-void ResourceNet::writeConfig( KConfig *config )
+void ResourceNet::writeConfig( KConfigGroup &group )
 {
-  Resource::writeConfig( config );
+  Resource::writeConfig( group );
 
-  config->writePathEntry( "NetUrl", mUrl.url() );
-  config->writeEntry( "NetFormat", mFormatName );
+  group.writePathEntry( "NetUrl", mUrl.url() );
+  group.writeEntry( "NetFormat", mFormatName );
 }
 
 Ticket *ResourceNet::requestSaveTicket()

@@ -233,12 +233,17 @@ class KABC_EXPORT Resource : public KRES::Resource
     };
 
     /**
+      Default constructor.
+     */
+    Resource();
+
+    /**
       Constructor.
 
-      @param config The config object where the derived classes can
+      @param group The configuration group where the derived classes can
                     read out their settings.
      */
-    Resource( const KConfig *config );
+    Resource( const KConfigGroup &group );
 
     /**
       Destructor.
@@ -277,7 +282,7 @@ class KABC_EXPORT Resource : public KRES::Resource
     /**
       Writes the resource specific config to file.
      */
-    virtual void writeConfig( KConfig *config );
+    virtual void writeConfig( KConfigGroup &group );
 
     /**
       Request a ticket, you have to pass through save() to

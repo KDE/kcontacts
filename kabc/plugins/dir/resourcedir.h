@@ -23,7 +23,6 @@
 
 #include <sys/types.h>
 
-#include <kconfig.h>
 #include <kdirwatch.h>
 
 #include "kabc/resource.h"
@@ -43,11 +42,12 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
   Q_OBJECT
 
   public:
-    explicit ResourceDir( const KConfig* );
+    ResourceDir();
+    explicit ResourceDir( const KConfigGroup &group );
     explicit ResourceDir( const QString &path, const QString &type = QLatin1String( "vcard" ) );
     ~ResourceDir();
 
-    virtual void writeConfig( KConfig* );
+    virtual void writeConfig( KConfigGroup &group );
 
     virtual bool doOpen();
     virtual void doClose();

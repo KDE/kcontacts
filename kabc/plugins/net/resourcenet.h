@@ -23,8 +23,6 @@
 
 #include <sys/types.h>
 
-#include <kconfig.h>
-
 #include "kabc/resource.h"
 
 class QFile;
@@ -45,11 +43,12 @@ class KABC_NET_EXPORT ResourceNet : public Resource
   Q_OBJECT
 
   public:
-    ResourceNet( const KConfig* );
+    ResourceNet();
+    explicit ResourceNet( const KConfigGroup &group );
     ResourceNet( const KUrl &url, const QString &format );
     ~ResourceNet();
 
-    virtual void writeConfig( KConfig* );
+    virtual void writeConfig( KConfigGroup &group );
 
     virtual bool doOpen();
     virtual void doClose();

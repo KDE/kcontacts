@@ -25,8 +25,6 @@
 #include <kio/job.h>
 #include "kabc/resource.h"
 
-class KConfig;
-
 namespace KABC {
 
 class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
@@ -36,14 +34,15 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
   public:
     enum CachePolicy{ Cache_No, Cache_NoConnection, Cache_Always };
 
-    ResourceLDAPKIO( const KConfig* );
+    ResourceLDAPKIO();
+    explicit ResourceLDAPKIO( const KConfigGroup &group );
     virtual ~ResourceLDAPKIO();
     /**
      *  Call this after you used one of the set... methods
      */
     virtual void init();
 
-    virtual void writeConfig( KConfig* );
+    virtual void writeConfig( KConfigGroup &group );
 
     virtual bool doOpen();
     virtual void doClose();

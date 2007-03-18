@@ -33,13 +33,14 @@ class KABC_EXPORT ResourceCached : public Resource
   Q_OBJECT
 
   public:
-    ResourceCached( const KConfig* );
+    ResourceCached();
+    ResourceCached( const KConfigGroup& );
     ~ResourceCached();
 
     /**
       Writes the resource specific config to file.
      */
-    virtual void writeConfig( KConfig *config );
+    virtual void writeConfig( KConfigGroup &group );
 
     /**
       Insert an addressee into the resource.

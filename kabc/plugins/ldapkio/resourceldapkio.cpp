@@ -65,47 +65,53 @@ class ResourceLDAPKIO::ResourceLDAPKIOPrivate
     KTemporaryFile *mTmp;
 };
 
-ResourceLDAPKIO::ResourceLDAPKIO( const KConfig *config )
-  : Resource( config )
+ResourceLDAPKIO::ResourceLDAPKIO()
+  : Resource()
 {
   d = new ResourceLDAPKIOPrivate;
-  if ( config ) {
-    QMap<QString, QString> attrList;
-    QStringList attributes = config->readEntry( "LdapAttributes", QStringList() );
-    for ( int pos = 0; pos < attributes.count(); pos += 2 )
-      mAttributes.insert( attributes[ pos ], attributes[ pos + 1 ] );
+  mPort = 389;
+  mAnonymous = true;
+  mUser = mPassword = mHost =  mFilter =  mDn = "";
+  d->mMech = d->mRealm = d->mBindDN = "";
+  d->mTLS = d->mSSL = d->mSubTree = d->mSASL = false;
+  d->mVer = 3; d->mRDNPrefix = 0;
+  d->mTimeLimit = d->mSizeLimit = 0;
+  d->mCachePolicy = Cache_No;
+  d->mAutoCache = true;
+  d->mCacheDst = KGlobal::dirs()->saveLocation("cache", "ldapkio") + '/' +
+    type() + '_' + identifier();
+  init();
+}
 
-    mUser = config->readEntry( "LdapUser" );
-    mPassword = KStringHandler::obscure( config->readEntry( "LdapPassword" ) );
-    mDn = config->readEntry( "LdapDn" );
-    mHost = config->readEntry( "LdapHost" );
-    mPort = config->readEntry( "LdapPort", 389 );
-    mFilter = config->readEntry( "LdapFilter" );
-    mAnonymous = config->readEntry( "LdapAnonymous" , false );
-    d->mTLS = config->readEntry( "LdapTLS" , false );
-    d->mSSL = config->readEntry( "LdapSSL" , false );
-    d->mSubTree = config->readEntry( "LdapSubTree" , false );
-    d->mSASL = config->readEntry( "LdapSASL" , false );
-    d->mMech = config->readEntry( "LdapMech" );
-    d->mRealm = config->readEntry( "LdapRealm" );
-    d->mBindDN = config->readEntry( "LdapBindDN" );
-    d->mVer = config->readEntry( "LdapVer", 3 );
-    d->mTimeLimit = config->readEntry( "LdapTimeLimit", 0 );
-    d->mSizeLimit = config->readEntry( "LdapSizeLimit", 0 );
-    d->mRDNPrefix = config->readEntry( "LdapRDNPrefix", 0 );
-    d->mCachePolicy = config->readEntry( "LdapCachePolicy", 0 );
-    d->mAutoCache = config->readEntry("LdapAutoCache", true );
-  } else {
-    mPort = 389;
-    mAnonymous = true;
-    mUser = mPassword = mHost =  mFilter =  mDn = "";
-    d->mMech = d->mRealm = d->mBindDN = "";
-    d->mTLS = d->mSSL = d->mSubTree = d->mSASL = false;
-    d->mVer = 3; d->mRDNPrefix = 0;
-    d->mTimeLimit = d->mSizeLimit = 0;
-    d->mCachePolicy = Cache_No;
-    d->mAutoCache = true;
-  }
+ResourceLDAPKIO::ResourceLDAPKIO( const KConfigGroup &group )
+  : Resource( group )
+{
+  d = new ResourceLDAPKIOPrivate;
+  QMap<QString, QString> attrList;
+  QStringList attributes = group.readEntry( "LdapAttributes", QStringList() );
+  for ( int pos = 0; pos < attributes.count(); pos += 2 )
+    mAttributes.insert( attributes[ pos ], attributes[ pos + 1 ] );
+
+  mUser = group.readEntry( "LdapUser" );
+  mPassword = KStringHandler::obscure( group.readEntry( "LdapPassword" ) );
+  mDn = group.readEntry( "LdapDn" );
+  mHost = group.readEntry( "LdapHost" );
+  mPort = group.readEntry( "LdapPort", 389 );
+  mFilter = group.readEntry( "LdapFilter" );
+  mAnonymous = group.readEntry( "LdapAnonymous" , false );
+  d->mTLS = group.readEntry( "LdapTLS" , false );
+  d->mSSL = group.readEntry( "LdapSSL" , false );
+  d->mSubTree = group.readEntry( "LdapSubTree" , false );
+  d->mSASL = group.readEntry( "LdapSASL" , false );
+  d->mMech = group.readEntry( "LdapMech" );
+  d->mRealm = group.readEntry( "LdapRealm" );
+  d->mBindDN = group.readEntry( "LdapBindDN" );
+  d->mVer = group.readEntry( "LdapVer", 3 );
+  d->mTimeLimit = group.readEntry( "LdapTimeLimit", 0 );
+  d->mSizeLimit = group.readEntry( "LdapSizeLimit", 0 );
+  d->mRDNPrefix = group.readEntry( "LdapRDNPrefix", 0 );
+  d->mCachePolicy = group.readEntry( "LdapCachePolicy", 0 );
+  d->mAutoCache = group.readEntry("LdapAutoCache", true );
   d->mCacheDst = KGlobal::dirs()->saveLocation("cache", "ldapkio") + '/' +
     type() + '_' + identifier();
   init();
@@ -410,37 +416,37 @@ void ResourceLDAPKIO::init()
   kDebug(7125) << "resource_ldapkio url: " << d->mLDAPUrl.prettyUrl() << endl;
 }
 
-void ResourceLDAPKIO::writeConfig( KConfig *config )
+void ResourceLDAPKIO::writeConfig( KConfigGroup &group )
 {
-  Resource::writeConfig( config );
+  Resource::writeConfig( group );
 
-  config->writeEntry( "LdapUser", mUser );
-  config->writeEntry( "LdapPassword", KStringHandler::obscure( mPassword ) );
-  config->writeEntry( "LdapDn", mDn );
-  config->writeEntry( "LdapHost", mHost );
-  config->writeEntry( "LdapPort", mPort );
-  config->writeEntry( "LdapFilter", mFilter );
-  config->writeEntry( "LdapAnonymous", mAnonymous );
-  config->writeEntry( "LdapTLS", d->mTLS );
-  config->writeEntry( "LdapSSL", d->mSSL );
-  config->writeEntry( "LdapSubTree", d->mSubTree );
-  config->writeEntry( "LdapSASL", d->mSASL );
-  config->writeEntry( "LdapMech", d->mMech );
-  config->writeEntry( "LdapVer", d->mVer );
-  config->writeEntry( "LdapTimeLimit", d->mTimeLimit );
-  config->writeEntry( "LdapSizeLimit", d->mSizeLimit );
-  config->writeEntry( "LdapRDNPrefix", d->mRDNPrefix );
-  config->writeEntry( "LdapRealm", d->mRealm );
-  config->writeEntry( "LdapBindDN", d->mBindDN );
-  config->writeEntry( "LdapCachePolicy", d->mCachePolicy );
-  config->writeEntry( "LdapAutoCache", d->mAutoCache );
+  group.writeEntry( "LdapUser", mUser );
+  group.writeEntry( "LdapPassword", KStringHandler::obscure( mPassword ) );
+  group.writeEntry( "LdapDn", mDn );
+  group.writeEntry( "LdapHost", mHost );
+  group.writeEntry( "LdapPort", mPort );
+  group.writeEntry( "LdapFilter", mFilter );
+  group.writeEntry( "LdapAnonymous", mAnonymous );
+  group.writeEntry( "LdapTLS", d->mTLS );
+  group.writeEntry( "LdapSSL", d->mSSL );
+  group.writeEntry( "LdapSubTree", d->mSubTree );
+  group.writeEntry( "LdapSASL", d->mSASL );
+  group.writeEntry( "LdapMech", d->mMech );
+  group.writeEntry( "LdapVer", d->mVer );
+  group.writeEntry( "LdapTimeLimit", d->mTimeLimit );
+  group.writeEntry( "LdapSizeLimit", d->mSizeLimit );
+  group.writeEntry( "LdapRDNPrefix", d->mRDNPrefix );
+  group.writeEntry( "LdapRealm", d->mRealm );
+  group.writeEntry( "LdapBindDN", d->mBindDN );
+  group.writeEntry( "LdapCachePolicy", d->mCachePolicy );
+  group.writeEntry( "LdapAutoCache", d->mAutoCache );
 
   QStringList attributes;
   QMap<QString, QString>::const_iterator it;
   for ( it = mAttributes.constBegin(); it != mAttributes.constEnd(); ++it )
     attributes << it.key() << it.value();
 
-  config->writeEntry( "LdapAttributes", attributes );
+  group.writeEntry( "LdapAttributes", attributes );
 }
 
 Ticket *ResourceLDAPKIO::requestSaveTicket()

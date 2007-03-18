@@ -24,7 +24,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kdebug.h>
 #include <kgenericfactory.h>
 #include <kglobal.h>
@@ -43,19 +43,21 @@
 using namespace KABC;
 
 
-ResourceDir::ResourceDir( const KConfig *config )
-  : Resource( config ), mAsynchronous( false )
+ResourceDir::ResourceDir()
+  : Resource(), mAsynchronous( false )
 {
-  if ( config ) {
-    init( config->readPathEntry( "FilePath", StdAddressBook::directoryName() ),
-          config->readEntry( "FileFormat", "vcard" ) );
-  } else {
-    init( StdAddressBook::directoryName(), "vcard" );
-  }
+  init( StdAddressBook::directoryName(), "vcard" );
+}
+
+ResourceDir::ResourceDir( const KConfigGroup &group )
+  : Resource( group ), mAsynchronous( false )
+{
+  init( group.readPathEntry( "FilePath", StdAddressBook::directoryName() ),
+        group.readEntry( "FileFormat", "vcard" ) );
 }
 
 ResourceDir::ResourceDir( const QString &path, const QString &format )
-  : Resource( 0 ), mAsynchronous( false )
+  : Resource(), mAsynchronous( false )
 {
   init( path, format );
 }
@@ -87,16 +89,16 @@ ResourceDir::~ResourceDir()
   mFormat = 0;
 }
 
-void ResourceDir::writeConfig( KConfig *config )
+void ResourceDir::writeConfig( KConfigGroup &group )
 {
-  Resource::writeConfig( config );
+  Resource::writeConfig( group );
 
   if ( mPath == StdAddressBook::directoryName() )
-    config->deleteEntry( "FilePath" );
+    group.deleteEntry( "FilePath" );
   else
-    config->writePathEntry( "FilePath", mPath );
+    group.writePathEntry( "FilePath", mPath );
 
-  config->writeEntry( "FileFormat", mFormatName );
+  group.writeEntry( "FileFormat", mFormatName );
 }
 
 Ticket *ResourceDir::requestSaveTicket()

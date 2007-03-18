@@ -27,7 +27,7 @@
 #include <QFile>
 #include <QFileInfo>
 
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kdebug.h>
 #include <kio/scheduler.h>
 #include <klocale.h>
@@ -54,26 +54,33 @@ class ResourceFile::ResourceFilePrivate
     bool mIsSaving;
 };
 
-ResourceFile::ResourceFile( const KConfig *config )
-  : Resource( config ), mFormat( 0 ), mTempFile( 0 ),
+ResourceFile::ResourceFile()
+  : Resource(), mFormat( 0 ), mTempFile( 0 ),
     mAsynchronous( false ), d( new ResourceFilePrivate )
 {
   QString fileName, formatName;
 
-  if ( config ) {
-    fileName = config->readPathEntry( "FileName", StdAddressBook::fileName() );
-    formatName = config->readEntry( "FileFormat", "vcard" );
-  } else {
-    fileName = StdAddressBook::fileName();
-    formatName = "vcard";
-  }
+  fileName = StdAddressBook::fileName();
+  formatName = "vcard";
+
+  init( fileName, formatName );
+}
+
+ResourceFile::ResourceFile( const KConfigGroup &group )
+  : Resource( group ), mFormat( 0 ), mTempFile( 0 ),
+    mAsynchronous( false ), d( new ResourceFilePrivate )
+{
+  QString fileName, formatName;
+
+  fileName = group.readPathEntry( "FileName", StdAddressBook::fileName() );
+  formatName = group.readEntry( "FileFormat", "vcard" );
 
   init( fileName, formatName );
 }
 
 ResourceFile::ResourceFile( const QString &fileName,
                             const QString &formatName )
-  : Resource( 0 ), mFormat( 0 ), mTempFile( 0 ),
+  : Resource(), mFormat( 0 ), mTempFile( 0 ),
     mAsynchronous( false ), d( new ResourceFilePrivate )
 {
   init( fileName, formatName );
@@ -120,16 +127,16 @@ ResourceFile::~ResourceFile()
   deleteLocalTempFile();
 }
 
-void ResourceFile::writeConfig( KConfig *config )
+void ResourceFile::writeConfig( KConfigGroup &group )
 {
-  Resource::writeConfig( config );
+  Resource::writeConfig( group );
 
   if ( mFileName == StdAddressBook::fileName() )
-    config->deleteEntry( "FileName" );
+    group.deleteEntry( "FileName" );
   else
-    config->writePathEntry( "FileName", mFileName );
+    group.writePathEntry( "FileName", mFileName );
 
-  config->writeEntry( "FileFormat", mFormatName );
+  group.writeEntry( "FileFormat", mFormatName );
 }
 
 Ticket *ResourceFile::requestSaveTicket()

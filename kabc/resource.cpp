@@ -197,8 +197,13 @@ bool Resource::ConstIterator::operator!=( const ConstIterator &it ) const
 }
 
 
-Resource::Resource( const KConfig *config )
-  : KRES::Resource( config ), mAddressBook( 0 )
+Resource::Resource()
+  : KRES::Resource(), mAddressBook( 0 )
+{
+}
+
+Resource::Resource( const KConfigGroup &group )
+  : KRES::Resource( group ), mAddressBook( 0 )
 {
 }
 
@@ -236,9 +241,9 @@ Resource::ConstIterator Resource::end() const
   return it;
 }
 
-void Resource::writeConfig( KConfig *config )
+void Resource::writeConfig( KConfigGroup &group )
 {
-  KRES::Resource::writeConfig( config );
+  KRES::Resource::writeConfig( group );
 }
 
 void Resource::setAddressBook( AddressBook *ab )

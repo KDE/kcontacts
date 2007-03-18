@@ -29,8 +29,13 @@
 
 using namespace KABC;
 
-ResourceCached::ResourceCached( const KConfig *config )
-  : KABC::Resource( config ), mIdMapper( "kabc/uidmaps/" )
+ResourceCached::ResourceCached()
+  : KABC::Resource(), mIdMapper( "kabc/uidmaps/" )
+{
+}
+
+ResourceCached::ResourceCached( const KConfigGroup &group )
+  : KABC::Resource( group ), mIdMapper( "kabc/uidmaps/" )
 {
 }
 
@@ -38,9 +43,9 @@ ResourceCached::~ResourceCached()
 {
 }
 
-void ResourceCached::writeConfig( KConfig *config )
+void ResourceCached::writeConfig( KConfigGroup &group )
 {
-  KABC::Resource::writeConfig( config );
+  KABC::Resource::writeConfig( group );
 }
 
 void ResourceCached::insertAddressee( const Addressee &addr )
