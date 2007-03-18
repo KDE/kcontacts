@@ -47,7 +47,7 @@ class KABC_EXPORT AddressLineEdit : public KLineEdit
 {
   Q_OBJECT
 public:
-  AddressLineEdit(QWidget* parent, bool useCompletion = true);
+  explicit AddressLineEdit(QWidget* parent, bool useCompletion = true);
   virtual ~AddressLineEdit();
 
   /**

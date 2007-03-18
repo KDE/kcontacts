@@ -78,7 +78,7 @@ class KABC_EXPORT NameSortMode : public SortMode
              ascending order; if @c false, objects are sorted in
              descending order
      */
-    NameSortMode( NameType type, bool ascending = true );
+    explicit NameSortMode( NameType type, bool ascending = true );
 
     /**
       Returns whether the first contact is 'smaller' then the second.
@@ -112,8 +112,8 @@ class KABC_EXPORT FieldSortMode : public SortMode
              ascending order; if @c false, objects are sorted in
              descending order
      */
-    FieldSortMode( KABC::Field *field, bool ascending = true );
-	virtual ~FieldSortMode(){}
+    explicit FieldSortMode( KABC::Field *field, bool ascending = true );
+    virtual ~FieldSortMode(){}
     /**
       Returns whether the first contact is 'smaller' then the second.
      */

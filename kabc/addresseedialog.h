@@ -93,7 +93,7 @@ class KABC_EXPORT AddresseeDialog : public KDialog
       @param parent parent widget
       @param multiple if true, indicates a multiple selection.
     */
-    AddresseeDialog( QWidget *parent=0, bool multiple=false );
+    explicit AddresseeDialog( QWidget *parent=0, bool multiple=false );
 
     /**
       Destructor.
