@@ -27,8 +27,8 @@
 
 #include "addresseedialog.h"
 
-#include "distributionlisteditor.h"
-#include "distributionlisteditor.moc"
+#include "emailselectdialog.h"
+#include "emailselectdialog.moc"
 
 using namespace KABC;
 

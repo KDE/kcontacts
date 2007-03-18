@@ -17,8 +17,8 @@
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
   Boston, MA 02110-1301, USA.
 */
-#ifndef KABC_DISTRIBUTIONLISTEDITOR_H
-#define KABC_DISTRIBUTIONLISTEDITOR_H
+#ifndef KABC_EMAILSELECTDIALOG_H
+#define KABC_EMAILSELECTDIALOG_H
 
 #include <kdialog.h>
 
