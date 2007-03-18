@@ -103,7 +103,7 @@ install( FILES
    addresseedialog.h
    distributionlist.h
    distributionlistdialog.h
-   distributionlisteditor.h
+   emailselectdialog.h
    errorhandler.h
    field.h
    format.h
