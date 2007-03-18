@@ -55,19 +55,6 @@ target_link_libraries(testkabcdlg  ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY
 
 ########### next target ###############
 
-set(testdistlist_SRCS
-testdistlist.cpp
-)
-
-kde4_automoc(${testdistlist_SRCS})
-
-kde4_add_executable(testdistlist RUN_UNINSTALLED ${testdistlist_SRCS})
-
-target_link_libraries(testdistlist  ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
-
-
-########### next target ###############
-
 if (UNIX)
 
    set(bigread_SRCS
