@@ -44,8 +44,10 @@ class KABC_EXPORT AddressBook : public QObject
 {
   Q_OBJECT
 
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const AddressBook & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, AddressBook & );
+  friend KABC_EXPORT QDataStream &operator<<( QDataStream &lhs,
+                                              const AddressBook &rhs );
+  friend KABC_EXPORT QDataStream &operator>>( QDataStream &lhs,
+                                              AddressBook &rhs );
   friend class StdAddressBook;
 
   public:
@@ -58,84 +60,93 @@ class KABC_EXPORT AddressBook : public QObject
     {
       public:
         /**
-         * Default constructor
-         */
+          Default constructor
+        */
         Iterator();
+
         /**
-         * Copy constructor
-         */
+          Copy constructor
+        */
         Iterator( const Iterator & );
         ~Iterator();
 
         /**
-         * Assignment operator. Assignes the given iterator to
-         * @c *this.
-         *
-         * @return this iterator, @c *this
-         */
+          Assignment operator. Assignes the given iterator to @c *this.
+
+          @return this iterator, @c *this
+        */
         Iterator &operator=( const Iterator & );
+
         /**
-         * Constant Dereference operator.
-         * @note For invalid iterators, the result is undefined.
-         *
-         * @return the @c const Addressee object the iterator points to.
-         */
+          Constant Dereference operator.
+          @note For invalid iterators, the result is undefined.
+
+          @return the @c const Addressee object the iterator points to.
+        */
         const Addressee &operator*() const;
+
         /**
-         * Dereference operator.
-         * @note For invalid iterators, the result is undefined.
-         *
-         * @return the Addressee object the iterator points to.
-         */
+          Dereference operator.
+          @note For invalid iterators, the result is undefined.
+
+          @return the Addressee object the iterator points to.
+        */
         Addressee &operator*();
+
         /**
-         * Arrow Dereference operator, provided for convenience.
-         * @note For invalid iterators, the result is undefined.
-         *
-         * @return the Addressee object the iterator points to.
-         */
-        Addressee* operator->();
+          Arrow Dereference operator, provided for convenience.
+          @note For invalid iterators, the result is undefined.
+
+          @return the Addressee object the iterator points to.
+        */
+        Addressee *operator->();
+
         /**
-         * Preincrement operator. Advances the iterator by one.
-         *
-         * @return this iterator, @c *this
-         */
+          Preincrement operator. Advances the iterator by one.
+
+          @return this iterator, @c *this
+        */
         Iterator &operator++();
+
         /**
-         * Postincrement operator. Advances the iterator by one.
-         * @note This function does not copy the iterator object.
-         *
-         * @return this iterator, @c *this
-         */
+          Postincrement operator. Advances the iterator by one.
+          @note This function does not copy the iterator object.
+
+          @return this iterator, @c *this
+        */
         Iterator &operator++(int);
+
         /**
-         * Predecrement operator. Decreases the iterator by one.
-         *
-         * @return this iterator, @c *this
-         */
+          Predecrement operator. Decreases the iterator by one.
+
+          @return this iterator, @c *this
+        */
         Iterator &operator--();
+
         /**
-         * Postdecrement operator. Decreases the iterator by one.
-         * @note This function does not copy the iterator object.
-         *
-         * @return this iterator, @c *this
-         */
+          Postdecrement operator. Decreases the iterator by one.
+          @note This function does not copy the iterator object.
+
+          @return this iterator, @c *this
+        */
         Iterator &operator--(int);
+
         /**
-         * Equality operator. Compares this iterator to @p it
-         *
-         * @param it the iterator to compare this iterator to
-         * @return @c true if both iterators are equal,
-         *         @c false otherwise
-         */
+          Equality operator. Compares this iterator to @p it
+
+          @param it the iterator to compare this iterator to
+          @return @c true if both iterators are equal,
+                  @c false otherwise
+        */
         bool operator==( const Iterator &it ) const;
+
         /**
-         * Inequality operator. Compares this iterator to @p it
-         *
-         * @param it the iterator to compare this iterator to
-         * @return @c true if the iterators are not equal,
-         *         @c false otherwise
-         */
+          Inequality operator. Compares this iterator to @p it
+
+          @param it the iterator to compare this iterator to
+          @return @c true if the iterators are not equal,
+                  @c false otherwise
+        */
         bool operator!=( const Iterator &it ) const;
 
         struct IteratorData;
@@ -154,81 +165,90 @@ class KABC_EXPORT AddressBook : public QObject
          * Default constructor
          */
         ConstIterator();
+
         /**
-         * Copy constructor
-         */
+          Copy constructor
+        */
         ConstIterator( const ConstIterator & );
+
         /**
-         * Copy constructor. Constructs a ConstIterator from
-         * an non-@c const Iterator
-         */
+          Copy constructor. Constructs a ConstIterator from
+          an non-@c const Iterator
+        */
         ConstIterator( const Iterator & );
         ~ConstIterator();
 
         /**
-         * Assignment operator. Assignes the given iterator to
-         * @c *this.
-         *
-         * @return this iterator, @c *this
-         */
+          Assignment operator. Assignes the given iterator to @c *this.
+
+          @return this iterator, @c *this
+        */
         ConstIterator &operator=( const ConstIterator & );
+
         /**
-         * Constant Dereference operator.
-         * @note For invalid iterators, the result is undefined.
-         * @note Unlike in Iterator, there is no non-constant
-         *       dereference operator.
-         *
-         * @return the @c const Addressee object the iterator points to.
-         */
+          Constant Dereference operator.
+          @note For invalid iterators, the result is undefined.
+          @note Unlike in Iterator, there is no non-constant
+                dereference operator.
+
+          @return the @c const Addressee object the iterator points to.
+        */
         const Addressee &operator*() const;
+
         /**
-         * Arrow Dereference operator, provided for convenience.
-         * @note For invalid iterators, the result is undefined.
-         *
-         * @return the Addressee object the iterator points to.
-         */
-        const Addressee* operator->() const;
+          Arrow Dereference operator, provided for convenience.
+          @note For invalid iterators, the result is undefined.
+
+          @return the Addressee object the iterator points to.
+        */
+        const Addressee *operator->() const;
+
         /**
-         * Preincrement operator. Advances the iterator by one.
-         *
-         * @return this iterator, @c *this
-         */
+          Preincrement operator. Advances the iterator by one.
+
+          @return this iterator, @c *this
+        */
         ConstIterator &operator++();
+
         /**
-         * Postincrement operator. Advances the iterator by one.
-         * @note This function does not copy the iterator object.
-         *
-         * @return this iterator, @c *this
-         */
+          Postincrement operator. Advances the iterator by one.
+          @note This function does not copy the iterator object.
+
+          @return this iterator, @c *this
+        */
         ConstIterator &operator++(int);
+
         /**
-         * Predecrement operator. Decreases the iterator by one.
-         *
-         * @return this iterator, @c *this
-         */
+          Predecrement operator. Decreases the iterator by one.
+
+          @return this iterator, @c *this
+        */
         ConstIterator &operator--();
+
         /**
-         * Postdecrement operator. Decreases the iterator by one.
-         * @note This function does not copy the iterator object.
-         *
-         * @return this iterator, @c *this
-         */
+          Postdecrement operator. Decreases the iterator by one.
+          @note This function does not copy the iterator object.
+
+          @return this iterator, @c *this
+        */
         ConstIterator &operator--(int);
+
         /**
-         * Equality operator. Compares this iterator to @p it
-         *
-         * @param it the iterator to compare this iterator to
-         * @return @c true if both iterators are equal,
-         *         @c false otherwise
-         */
+          Equality operator. Compares this iterator to @p it
+
+          @param it the iterator to compare this iterator to
+          @return @c true if both iterators are equal,
+                  @c false otherwise
+        */
         bool operator==( const ConstIterator &it ) const;
+
         /**
-         * Inequality operator. Compares this iterator to @p it
-         *
-         * @param it the iterator to compare this iterator to
-         * @return @c true if the iterators are not equal,
-         *         @c false otherwise
-         */
+          Inequality operator. Compares this iterator to @p it
+
+          @param it the iterator to compare this iterator to
+          @return @c true if the iterators are not equal,
+                  @c false otherwise
+        */
         bool operator!=( const ConstIterator &it ) const;
 
         struct ConstIteratorData;
@@ -331,7 +351,6 @@ class KABC_EXPORT AddressBook : public QObject
      */
     Iterator end();
 
-
     /**
       Removes all addressees from the address book.
      */
@@ -377,6 +396,7 @@ class KABC_EXPORT AddressBook : public QObject
               empty addressee.
      */
     Addressee findByUid( const QString &uid ) const;
+
     /**
       Returns a list of all addressees in the address book.
      */
@@ -413,8 +433,8 @@ class KABC_EXPORT AddressBook : public QObject
     virtual QString identifier() const;
 
     /**
-      Returns a list of all Fields known to the address book which are associated
-      with the given field category.
+      Returns a list of all Fields known to the address book which are
+      associated with the given field category.
      */
     Field::List fields( int category = Field::All ) const;
 
@@ -429,7 +449,7 @@ class KABC_EXPORT AddressBook : public QObject
      */
     bool addCustomField( const QString &label, int category = Field::All,
                          const QString &key = QString(),
-                         const QString &app = QString() );
+                         const QString &app = QString() ) const;
 
     /**
       Adds a resource to the address book.
@@ -530,14 +550,14 @@ class KABC_EXPORT AddressBook : public QObject
     void savingFinished( Resource *resource );
 
   protected Q_SLOTS:
-    void resourceLoadingFinished( Resource* );
-    void resourceSavingFinished( Resource* );
-    void resourceLoadingError( Resource*, const QString& );
-    void resourceSavingError( Resource*, const QString& );
+    void resourceLoadingFinished( Resource *resource );
+    void resourceSavingFinished( Resource *resource );
+    void resourceLoadingError( Resource *resource, const QString &errMsg );
+    void resourceSavingError( Resource *resource, const QString &errMsg );
 
   protected:
     void deleteRemovedAddressees();
-    void setStandardResource( Resource* );
+    void setStandardResource( Resource *resource );
     Resource *standardResource();
     KRES::Manager<Resource> *resourceManager();
 
@@ -546,8 +566,8 @@ class KABC_EXPORT AddressBook : public QObject
     AddressBookData *d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const AddressBook & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, AddressBook & );
+KABC_EXPORT QDataStream &operator<<( QDataStream &lhs, const AddressBook &rhs );
+KABC_EXPORT QDataStream &operator>>( QDataStream &lhs, AddressBook &rhs );
 
 }
 
