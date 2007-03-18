@@ -54,7 +54,7 @@ set(kabc_LIB_SRCS
    addresseedialog.cpp
    distributionlist.cpp
    distributionlistdialog.cpp
-   distributionlisteditor.cpp
+   emailselectdialog.cpp
    errorhandler.cpp
    formatfactory.cpp
    geo.cpp
