@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

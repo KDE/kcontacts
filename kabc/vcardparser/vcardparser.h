@@ -21,7 +21,7 @@
 #ifndef VCARDPARSER_H
 #define VCARDPARSER_H
 
-#include <QByteArray>
+#include <QtCore/QByteArray>
 
 #include "vcard.h"
 

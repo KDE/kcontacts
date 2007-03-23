@@ -22,7 +22,7 @@
 #ifndef KABC_ERRORHANDLER_H
 #define KABC_ERRORHANDLER_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

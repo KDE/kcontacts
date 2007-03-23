@@ -21,9 +21,9 @@
 */
 #include <stdlib.h>
 
-#include <QBuffer>
-#include <QEventLoop>
-#include <QFile>
+#include <QtCore/QBuffer>
+#include <QtCore/QEventLoop>
+#include <QtCore/QFile>
 
 #include <kdebug.h>
 #include <kglobal.h>

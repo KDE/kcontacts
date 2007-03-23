@@ -21,7 +21,7 @@
 #ifndef KABC_PHONENUMBER_H
 #define KABC_PHONENUMBER_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

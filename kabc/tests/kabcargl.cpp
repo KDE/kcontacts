@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
-#include <QTextStream>
-#include <QTextCodec>
-#include <QRegExp>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QTextCodec>
+#include <QtCore/QRegExp>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

@@ -1,8 +1,8 @@
 #ifndef TESTUTILS_H
 #define TESTUTILS_H
 
-#include <QByteArray>
-#include <QString>
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
 
 #include <kabc/addressee.h>
 

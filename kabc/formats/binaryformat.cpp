@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDataStream>
-#include <QImage>
+#include <QtCore/QDataStream>
+#include <QtGui/QImage>
 
 #include <kdebug.h>
 #include <klocale.h>

@@ -1,4 +1,4 @@
-#include <QWidget>
+#include <QtGui/QWidget>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

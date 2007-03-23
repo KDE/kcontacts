@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QApplication>
-#include <QPair>
+#include <QtGui/QApplication>
+#include <QtCore/QPair>
 
 #include <kconfig.h>
 #include <kstandarddirs.h>

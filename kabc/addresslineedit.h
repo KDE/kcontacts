@@ -22,7 +22,7 @@
 #ifndef KABC_ADDRESSLINEEDIT_H
 #define KABC_ADDRESSLINEEDIT_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 #include <kcompletion.h>
 #include <klineedit.h>

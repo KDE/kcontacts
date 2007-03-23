@@ -27,8 +27,8 @@
 #include <kstandarddirs.h>
 #include <kstaticdeleter.h>
 
-#include <QFile>
-#include <QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 
 using namespace KABC;
 

@@ -18,12 +18,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QCheckBox>
-#include <QLabel>
-#include <QLayout>
-#include <QPushButton>
-#include <QSpinBox>
-#include <QRadioButton>
+#include <QtGui/QCheckBox>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QPushButton>
+#include <QtGui/QSpinBox>
+#include <QtGui/QRadioButton>
 
 #include <kacceleratormanager.h>
 #include <kcombobox.h>

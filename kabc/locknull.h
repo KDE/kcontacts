@@ -21,7 +21,7 @@
 #ifndef KABC_LOCKNULL_H
 #define KABC_LOCKNULL_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "lock.h"
 

@@ -23,12 +23,12 @@
 
 #include "addresslineedit.h"
 
-#include <QApplication>
-#include <QKeyEvent>
-#include <QMouseEvent>
-#include <QObject>
-#include <QRegExp>
-#include <QTimer>
+#include <QtGui/QApplication>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QMouseEvent>
+#include <QtCore/QObject>
+#include <QtCore/QRegExp>
+#include <QtCore/QTimer>
 
 #include <kcompletionbox.h>
 #include <kconfig.h>

@@ -21,7 +21,7 @@
 #ifndef KABC_SOUND_H
 #define KABC_SOUND_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

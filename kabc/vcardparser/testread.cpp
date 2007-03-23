@@ -20,7 +20,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <kprocess.h>
 #include <kdebug.h>

@@ -32,10 +32,10 @@
                 - physicaldeliveryofficename,
 */
 
-#include <QRegExp>
-#include <QStringList>
-#include <QTextCodec>
-#include <QTextStream>
+#include <QtCore/QRegExp>
+#include <QtCore/QStringList>
+#include <QtCore/QTextCodec>
+#include <QtCore/QTextStream>
 
 #include <kdebug.h>
 #include <klocale.h>

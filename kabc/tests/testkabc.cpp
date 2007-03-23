@@ -1,5 +1,5 @@
-#include <QFile>
-#include <QImage>
+#include <QtCore/QFile>
+#include <QtGui/QImage>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

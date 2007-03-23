@@ -21,8 +21,8 @@
 #ifndef VCARDPARSER_VCARD_H
 #define VCARDPARSER_VCARD_H
 
-#include <QMap>
-#include <QStringList>
+#include <QtCore/QMap>
+#include <QtCore/QStringList>
 
 #include "vcardline.h"
 

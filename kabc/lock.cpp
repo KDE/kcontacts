@@ -26,8 +26,8 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include <QFile>
-#include <QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 
 #include <errno.h>
 #include <signal.h>

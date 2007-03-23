@@ -21,11 +21,11 @@
 #ifndef RESOURCELDAPCONFIG_H
 #define RESOURCELDAPCONFIG_H
 
-#include <QButtonGroup>
-#include <QComboBox>
-#include <QGroupBox>
-#include <QHash>
-#include <QMap>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
+#include <QtGui/QGroupBox>
+#include <QtCore/QHash>
+#include <QtCore/QMap>
 
 #include <kdialog.h>
 

@@ -20,8 +20,8 @@
 
 #include <unistd.h>
 
-#include <QLabel>
-#include <QLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
 
 #include <kdebug.h>
 #include <klocale.h>

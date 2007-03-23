@@ -25,13 +25,13 @@
 
 #include <q3listview.h>
 
-#include <QWidget>
-#include <QLabel>
-#include <QLayout>
-#include <QPushButton>
-#include <QDir>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QtGui/QWidget>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QPushButton>
+#include <QtCore/QDir>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
 
 #include <kaboutdata.h>
 #include <kapplication.h>

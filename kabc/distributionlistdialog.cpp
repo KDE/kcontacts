@@ -18,15 +18,15 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QTreeWidget>
-#include <QLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QComboBox>
+#include <QtGui/QTreeWidget>
+#include <QtGui/QLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QPushButton>
+#include <QtGui/QComboBox>
 #include <kinputdialog.h>
-#include <QGroupBox>
-#include <QButtonGroup>
-#include <QRadioButton>
+#include <QtGui/QGroupBox>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QRadioButton>
 
 #include <klocale.h>
 #include <kdebug.h>

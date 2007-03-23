@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <kabc/vcardconverter.h>
 #include <kdebug.h>

@@ -21,8 +21,8 @@
 #ifndef KABC_ADDRESSEE_H
 #define KABC_ADDRESSEE_H
 
-#include <QDateTime>
-#include <QStringList>
+#include <QtCore/QDateTime>
+#include <QtCore/QStringList>
 
 #include <ksharedptr.h>
 #include <kurl.h>

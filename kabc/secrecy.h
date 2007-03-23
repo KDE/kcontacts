@@ -21,7 +21,7 @@
 #ifndef KABC_SECRECY_H
 #define KABC_SECRECY_H
 
-#include <QList>
+#include <QtCore/QList>
 
 #include "kabc.h"
 

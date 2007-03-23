@@ -24,8 +24,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <QFile>
-#include <QFileInfo>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 #include <kconfiggroup.h>
 #include <kdebug.h>

@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QList>
-#include <QRegExp>
+#include <QtCore/QList>
+#include <QtCore/QRegExp>
 
 #include <kdebug.h>
 #include <klocale.h>

@@ -20,7 +20,7 @@
 
 #include "sound.h"
 
-#include <QDataStream>
+#include <QtCore/QDataStream>
 
 using namespace KABC;
 

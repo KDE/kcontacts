@@ -21,8 +21,8 @@
 #ifndef KABC_FORMATFACTORY_H
 #define KABC_FORMATFACTORY_H
 
-#include <QHash>
-#include <QString>
+#include <QtCore/QHash>
+#include <QtCore/QString>
 
 #include <kconfig.h>
 #include <klibloader.h>

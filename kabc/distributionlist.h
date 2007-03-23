@@ -21,7 +21,7 @@
 #ifndef KABC_DISTRIBUTIONLIST_H
 #define KABC_DISTRIBUTIONLIST_H
 
-#include <QList>
+#include <QtCore/QList>
 #include <kdirwatch.h>
 
 #include "addressbook.h"

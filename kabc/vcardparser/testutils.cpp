@@ -1,4 +1,4 @@
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <kabc/addressee.h>
 

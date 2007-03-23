@@ -21,7 +21,7 @@
 #ifndef KABC_PLUGIN_H
 #define KABC_PLUGIN_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

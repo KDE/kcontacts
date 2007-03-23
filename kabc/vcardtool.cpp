@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <QBuffer>
+#include <QtCore/QString>
+#include <QtCore/QBuffer>
 
 #include "key.h"
 #include "picture.h"

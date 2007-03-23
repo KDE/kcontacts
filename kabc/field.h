@@ -21,7 +21,7 @@
 #ifndef KABC_FIELD_H
 #define KABC_FIELD_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "addressee.h"
 

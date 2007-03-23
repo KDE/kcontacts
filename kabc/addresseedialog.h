@@ -21,9 +21,9 @@
 #ifndef KABC_ADDRESSEEDIALOG_H
 #define KABC_ADDRESSEEDIALOG_H
 
-#include <QHash>
-#include <QString>
-#include <QTreeWidgetItem>
+#include <QtCore/QHash>
+#include <QtCore/QString>
+#include <QtGui/QTreeWidgetItem>
 
 #include <kdialog.h>
 #include <klineedit.h>

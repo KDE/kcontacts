@@ -20,9 +20,9 @@
 #ifndef KABC_ADDRESSEEHELPER_H
 #define KABC_ADDRESSEEHELPER_H
 
-#include <QObject>
-#include <QStringList>
-#include <QSet>
+#include <QtCore/QObject>
+#include <QtCore/QStringList>
+#include <QtCore/QSet>
 
 #include "kabc.h"
 

@@ -21,8 +21,8 @@
 #ifndef KABC_LOCK_H
 #define KABC_LOCK_H
 
-#include <QString>
-#include <QObject>
+#include <QtCore/QString>
+#include <QtCore/QObject>
 
 #include "kabc.h"
 

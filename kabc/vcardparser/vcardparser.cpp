@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QTextCodec>
+#include <QtCore/QTextCodec>
 
 #include <kcodecs.h>
 #include <kdebug.h>

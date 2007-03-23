@@ -21,8 +21,8 @@
 #ifndef KABC_ADDRESS_H
 #define KABC_ADDRESS_H
 
-#include <QMap>
-#include <QString>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

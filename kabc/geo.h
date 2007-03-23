@@ -21,7 +21,7 @@
 #ifndef KABC_GEO_H
 #define KABC_GEO_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kabc.h"
 

@@ -18,10 +18,10 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QButtonGroup>
-#include <QGroupBox>
-#include <QLayout>
-#include <QRadioButton>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QGroupBox>
+#include <QtGui/QLayout>
+#include <QtGui/QRadioButton>
 
 #include <klocale.h>
 
