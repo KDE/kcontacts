@@ -33,4 +33,44 @@
 #define KABC_EXPORT KDE_EXPORT
 #endif
 
+#if defined(_WIN32) || defined(_WIN64)
+#ifdef MAKE_KABC_FILE_CORE_LIB
+#define KABC_FILE_CORE_EXPORT KDE_EXPORT
+#else
+#define KABC_FILE_CORE_EXPORT KDE_IMPORT
+#endif
+#else
+#define KABC_FILE_CORE_EXPORT KDE_EXPORT
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+#ifdef MAKE_KABC_DIR_LIB
+#define KABC_DIR_EXPORT KDE_EXPORT
+#else
+#define KABC_DIR_EXPORT KDE_IMPORT
+#endif
+#else
+#define KABC_DIR_EXPORT KDE_EXPORT
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+#ifdef MAKE_KABC_NET_LIB
+#define KABC_NET_EXPORT KDE_EXPORT
+#else
+#define KABC_NET_EXPORT KDE_IMPORT
+#endif
+#else
+#define KABC_NET_EXPORT KDE_EXPORT
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+#ifdef MAKE_KABC_LDAPKIO_LIB
+#define KABC_LDAPKIO_EXPORT KDE_EXPORT
+#else
+#define KABC_LDAPKIO_EXPORT KDE_IMPORT
+#endif
+#else
+#define KABC_LDAPKIO_EXPORT KDE_EXPORT
+#endif
+
 #endif

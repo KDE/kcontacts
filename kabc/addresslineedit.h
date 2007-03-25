@@ -22,6 +22,8 @@
 #ifndef KABC_ADDRESSLINEEDIT_H
 #define KABC_ADDRESSLINEEDIT_H
 
+#include "kabc.h"
+
 #include <QtCore/QObject>
 
 #include <kcompletion.h>

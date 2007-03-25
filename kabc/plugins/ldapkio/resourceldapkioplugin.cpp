@@ -18,6 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kabc/kabc.h"
 #include "resourceldapkio.h"
 #include "resourceldapkioconfig.h"
 
