@@ -24,6 +24,7 @@
 #include <QtGui/QWidget>
 
 #include <kdialog.h>
+#include "kabc.h"
 
 class QTreeWidget;
 class QComboBox;
