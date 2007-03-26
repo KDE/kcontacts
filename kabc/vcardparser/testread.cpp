@@ -22,7 +22,7 @@
 
 #include <QtCore/QFile>
 
-#include <kprocess.h>
+#include <k3process.h>
 #include <kdebug.h>
 #include <kcomponentdata.h>
 #include <kcmdlineargs.h>
