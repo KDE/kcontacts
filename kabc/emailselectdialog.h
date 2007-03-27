@@ -21,6 +21,7 @@
 #define KABC_EMAILSELECTDIALOG_H
 
 #include <kdialog.h>
+#include <kabc/kabc.h>
 
 class QButtonGroup;
 
