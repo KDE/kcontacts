@@ -4,6 +4,7 @@ Name=Network
 Name[el]=Δίκτυο
 Name[ja]=ネットワーク
 Name[pa]=ਨੈੱਟਵਰ
+Name[sv]=Nätverk
 Name[x-test]=xxNetworkxx
 X-KDE-Library=kabc_net
 Type=Service

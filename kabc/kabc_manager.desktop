@@ -5,6 +5,7 @@ Name=Contacts
 Name[el]=Επαφές
 Name[ja]=コンタクト
 Name[pa]=ਸੰਪਰਕ
+Name[sv]=Kontakter
 Name[x-test]=xxContactsxx
 Type=Service
 ServiceTypes=KResources/Manager
