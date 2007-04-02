@@ -129,7 +129,7 @@ Format *FormatFactory::format( const QString& type )
   if ( !library )
     return 0;
 
-  void *format_func = library->resolveSymbol( "format" );
+  KLibrary::void_function_ptr format_func = library->resolveFunction( "format" );
 
   if ( format_func ) {
     format = ((Format* (*)())format_func)();
