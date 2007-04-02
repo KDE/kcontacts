@@ -450,7 +450,7 @@ void AddressLineEdit::dropEvent(QDropEvent *e)
 
 QStringList AddressLineEdit::addresses()
 {
-  QApplication::setOverrideCursor( KCursor::waitCursor() ); // loading might take a while
+  QApplication::setOverrideCursor( Qt::waitCursor ); // loading might take a while
 
   QStringList result;
   QString space(" ");
