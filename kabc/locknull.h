@@ -43,10 +43,8 @@ class KABC_EXPORT LockNull : public Lock
     QString error() const;
 
   private:
-    bool mAllowAccess;
-
     class Private;
-    Private *d;
+    Private* const d;
 };
 
 }

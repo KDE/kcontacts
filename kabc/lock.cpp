@@ -37,15 +37,30 @@
 
 using namespace KABC;
 
-Lock::Lock( const QString &identifier )
-  : mIdentifier( identifier )
+class Lock::Private
 {
-  mIdentifier.replace( "/", "_" );
+  public:
+    Private( const QString &identifier )
+      : mIdentifier( identifier )
+    {
+      mIdentifier.replace( "/", "_" );
+    }
+
+    QString mIdentifier;
+    QString mLockUniqueName;
+    QString mError;
+};
+
+Lock::Lock( const QString &identifier )
+  : d( new Private( identifier ) )
+{
 }
 
 Lock::~Lock()
 {
   unlock();
+
+  delete d;
 }
 
 QString Lock::locksDir()
@@ -56,8 +71,9 @@ QString Lock::locksDir()
 bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
 {
   QFile file( filename );
-  if ( !file.open( QIODevice::ReadOnly ) ) return false;
-  
+  if ( !file.open( QIODevice::ReadOnly ) )
+    return false;
+
   QTextStream t( &file );
   t >> pid >> ws >> app;
 
@@ -67,7 +83,9 @@ bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
 bool Lock::writeLockFile( const QString &filename )
 {
   QFile file( filename );
-  if ( !file.open( QIODevice::WriteOnly ) ) return false;
+  if ( !file.open( QIODevice::WriteOnly ) )
+    return false;
+
   QTextStream t( &file );
   t << ::getpid() << endl << QString( KGlobal::mainComponent().componentName() );
 
@@ -76,7 +94,7 @@ bool Lock::writeLockFile( const QString &filename )
 
 QString Lock::lockFileName() const
 {
-  return locksDir() + mIdentifier + ".lock";
+  return locksDir() + d->mIdentifier + ".lock";
 }
 
 bool Lock::lock()
@@ -91,7 +109,7 @@ bool Lock::lock()
     QString app;
 
     if ( !readLockFile( lockFileName(), pid, app ) ) {
-      mError = i18n("Unable to open lock file.");
+      d->mError = i18n( "Unable to open lock file." );
       return false;
     }
 
@@ -101,36 +119,35 @@ bool Lock::lock()
       kWarning(5700) << "Removed stale lock file from process '" << app << "'"
                       << endl;
     } else {
-      QString identifier( mIdentifier );
+      QString identifier( d->mIdentifier );
       identifier.replace( '_', '/' );
 
-      mError = i18n("The resource '%1' is locked by application '%2'.",
-                 identifier ,  app );
+      d->mError = i18n( "The resource '%1' is locked by application '%2'.", identifier, app );
       return false;
     }
   }
 
   QString lockUniqueName;
-  lockUniqueName = mIdentifier + KRandom::randomString( 8 );
-  mLockUniqueName = KStandardDirs::locateLocal( "data", "kabc/lock/" + lockUniqueName );
-  kDebug(5700) << "-- lock unique name: " << mLockUniqueName << endl;
+  lockUniqueName = d->mIdentifier + KRandom::randomString( 8 );
+  d->mLockUniqueName = KStandardDirs::locateLocal( "data", "kabc/lock/" + lockUniqueName );
+  kDebug(5700) << "-- lock unique name: " << d->mLockUniqueName << endl;
 
   // Create unique file
-  writeLockFile( mLockUniqueName );
+  writeLockFile( d->mLockUniqueName );
 
   // Create lock file
-  int result = ::link( QFile::encodeName( mLockUniqueName ),
+  int result = ::link( QFile::encodeName( d->mLockUniqueName ),
                        QFile::encodeName( lockName ) );
 
   if ( result == 0 ) {
-    mError = "";
+    d->mError.clear();
     emit locked();
     return true;
   }
 
   // TODO: check stat
 
-  mError = i18n("Error");
+  d->mError = i18n( "Error" );
   return false;
 }
 
@@ -141,23 +158,23 @@ bool Lock::unlock()
   if ( readLockFile( lockFileName(), pid, app ) ) {
     if ( pid == getpid() ) {
       QFile::remove( lockFileName() );
-      QFile::remove( mLockUniqueName );
+      QFile::remove( d->mLockUniqueName );
       emit unlocked();
     } else {
-      mError = i18n("Unlock failed. Lock file is owned by other process: %1 (%2)",
-                    app, pid );
-      kDebug() << "Lock::unlock(): " << mError << endl;
+      d->mError = i18n( "Unlock failed. Lock file is owned by other process: %1 (%2)", app, pid );
+      kDebug() << "Lock::unlock(): " << d->mError << endl;
       return false;
     }
   }
 
-  mError = "";
+  d->mError.clear();
+
   return true;
 }
 
 QString Lock::error() const
 {
-  return mError;
+  return d->mError;
 }
 
 #include "lock.moc"

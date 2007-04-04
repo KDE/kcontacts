@@ -23,22 +23,41 @@
 
 using namespace KABC;
 
-NameSortMode::NameSortMode()
- : mNameType( FormattedName ), mAscendingOrder( true ), d( 0 )
+SortMode::~SortMode()
 {
-  mNameType = FormattedName;
+}
+
+class NameSortMode::Private
+{
+  public:
+    NameType mNameType;
+    bool mAscendingOrder;
+};
+
+NameSortMode::NameSortMode()
+ : d( new Private )
+{
+  d->mNameType = FormattedName;
+  d->mAscendingOrder = true;
 }
 
 NameSortMode::NameSortMode( NameType type, bool ascending )
-  : mNameType( type ), mAscendingOrder( ascending ), d( 0 )
+  : d( new Private )
 {
+  d->mNameType = type;
+  d->mAscendingOrder = ascending;
+}
+
+NameSortMode::~NameSortMode()
+{
+  delete d;
 }
 
 bool NameSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const
 {
   bool lesser = false;
 
-  switch ( mNameType ) {
+  switch ( d->mNameType ) {
     case FormattedName:
       lesser = QString::localeAwareCompare( first.formattedName(), second.formattedName() ) < 0;
       break;
@@ -53,24 +72,38 @@ bool NameSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &
       break;
   }
 
-  if ( !mAscendingOrder )
+  if ( !d->mAscendingOrder )
     lesser = !lesser;
 
   return lesser;
 }
 
-FieldSortMode::FieldSortMode( KABC::Field *field, bool ascending )
-  : mField( field ), mAscendingOrder( ascending ), d( 0 )
+class FieldSortMode::Private
 {
+  public:
+    KABC::Field *mField;
+    bool mAscendingOrder;
+};
+
+FieldSortMode::FieldSortMode( KABC::Field *field, bool ascending )
+  : d( new Private )
+{
+  d->mField = field;
+  d->mAscendingOrder = ascending;
+}
+
+FieldSortMode::~FieldSortMode()
+{
+  delete d;
 }
 
 bool FieldSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const
 {
-  if ( !mField )
+  if ( !d->mField )
     return false;
   else {
-    bool lesser = QString::localeAwareCompare( mField->value( first ), mField->value( second ) ) < 0;
-    if ( !mAscendingOrder )
+    bool lesser = QString::localeAwareCompare( d->mField->value( first ), d->mField->value( second ) ) < 0;
+    if ( !d->mAscendingOrder )
       lesser = !lesser;
 
     return lesser;

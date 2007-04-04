@@ -134,12 +134,9 @@ class KABC_EXPORT StdAddressBook : public AddressBook
     StdAddressBook();
     StdAddressBook( bool asynchronous );
 
-    void init( bool asynchronous );
-    bool saveAll();
-
   private:
-    static StdAddressBook *mSelf;
-    static bool mAutomaticSave;
+    class Private;
+    Private* const d;
 };
 
 }

@@ -21,21 +21,52 @@
 #include "sound.h"
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 using namespace KABC;
 
+class Sound::Private : public QSharedData
+{
+  public:
+    Private()
+      : mIntern( false )
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mUrl = other.mUrl;
+      mData = other.mData;
+      mIntern = other.mIntern;
+    }
+
+    QString mUrl;
+    QByteArray mData;
+
+    int mIntern;
+};
+
 Sound::Sound()
-  : mIntern( false )
+  : d( new Private )
 {
 }
 
 Sound::Sound( const QString &url )
-  : mUrl( url ), mIntern( false )
+  : d( new Private )
 {
+  d->mUrl = url;
 }
 
 Sound::Sound( const QByteArray &data )
-  : mData( data ), mIntern( true )
+  : d( new Private )
+{
+  d->mIntern = true;
+  d->mData = data;
+}
+
+Sound::Sound( const Sound &other )
+  : d( other.d )
 {
 }
 
@@ -43,15 +74,23 @@ Sound::~Sound()
 {
 }
 
+Sound& Sound::operator=( const Sound &other )
+{
+  if ( this != &other )
+    d = other.d;
+
+  return *this;
+}
+
 bool Sound::operator==( const Sound &s ) const
 {
-  if ( mIntern != s.mIntern ) return false;
+  if ( d->mIntern != s.d->mIntern ) return false;
 
-  if ( mIntern ) {
-    if ( mData != s.mData )
+  if ( d->mIntern ) {
+    if ( d->mData != s.d->mData )
       return false;
   } else {
-    if ( mUrl != s.mUrl )
+    if ( d->mUrl != s.d->mUrl )
       return false;
   }
 
@@ -65,54 +104,53 @@ bool Sound::operator!=( const Sound &s ) const
 
 void Sound::setUrl( const QString &url )
 {
-  mUrl = url;
-  mIntern = false;
+  d->mIntern = false;
+  d->mUrl = url;
 }
 
 void Sound::setData( const QByteArray &data )
 {
-  mData = data;
-  mIntern = true;
+  d->mIntern = true;
+  d->mData = data;
 }
 
 bool Sound::isIntern() const
 {
-  return mIntern;
+  return d->mIntern;
 }
 
 bool Sound::isEmpty() const
 {
-  return (!mIntern) && mUrl.isEmpty();
+  return (!d->mIntern) && d->mUrl.isEmpty();
 
 }
 
 QString Sound::url() const
 {
-  return mUrl;
+  return d->mUrl;
 }
 
 QByteArray Sound::data() const
 {
-  return mData;
+  return d->mData;
 }
 
 QString Sound::asString() const
 {
-  if ( mIntern )
+  if ( d->mIntern )
     return "intern sound";
   else
-    return mUrl;
+    return d->mUrl;
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const Sound &sound )
 {
-  return s << sound.mIntern << sound.mUrl;
-//  return s << sound.mIntern << sound.mUrl << sound.mData;
+  return s << sound.d->mIntern << sound.d->mUrl << sound.d->mData;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Sound &sound )
 {
-  s >> sound.mIntern >> sound.mUrl;
-//  s >> sound.mIntern >> sound.mUrl >> sound.mData;
+  s >> sound.d->mIntern >> sound.d->mUrl >> sound.d->mData;
+
   return s;
 }

@@ -19,6 +19,7 @@
 */
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 #include <klocale.h>
 
@@ -26,14 +27,49 @@
 
 using namespace KABC;
 
-Secrecy::Secrecy( int type )
-  : mType( type )
+class Secrecy::PrivateData : public QSharedData
 {
+  public:
+    PrivateData()
+      : mType( Secrecy::Invalid )
+    {
+    }
+
+    PrivateData( const PrivateData &other )
+      : QSharedData( other )
+    {
+      mType = other.mType;
+    }
+
+    int mType;
+};
+
+Secrecy::Secrecy( int type )
+  : d( new PrivateData )
+{
+  d->mType = type;
+}
+
+Secrecy::Secrecy( const Secrecy &other )
+  : d( other.d )
+{
+}
+
+Secrecy::~Secrecy()
+{
+}
+
+Secrecy& Secrecy::operator=( const Secrecy &other )
+{
+  if ( this != &other )
+    d = other.d;
+
+  return *this;
 }
 
 bool Secrecy::operator==( const Secrecy &s ) const
 {
-  return ( mType == s.mType );
+  return ( d->mType == s.d->mType );
 }
 
 bool Secrecy::operator!=( const Secrecy &s ) const
@@ -43,17 +79,17 @@ bool Secrecy::operator!=( const Secrecy &s ) const
 
 bool Secrecy::isValid() const
 {
-  return mType != Invalid;
+  return d->mType != Invalid;
 }
 
 void Secrecy::setType( int type )
 {
-  mType = type;
+  d->mType = type;
 }
 
 int Secrecy::type() const
 {
-  return mType;
+  return d->mType;
 }
 
 Secrecy::TypeList Secrecy::typeList()
@@ -84,19 +120,19 @@ QString Secrecy::typeLabel( int type )
   }
 }
 
-QString Secrecy::asString() const
+QString Secrecy::toString() const
 {
-  return typeLabel( mType );
+  return QString( "Secrecy: %1" ).arg( typeLabel( d->mType ) );
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const Secrecy &secrecy )
 {
-    return s << secrecy.mType;
+    return s << secrecy.d->mType;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Secrecy &secrecy )
 {
-    s >> secrecy.mType;
+    s >> secrecy.d->mType;
 
     return s;
 }

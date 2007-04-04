@@ -32,120 +32,24 @@
 
 using namespace KABC;
 
-FormatFactory *FormatFactory::mSelf = 0;
 static KStaticDeleter<FormatFactory> factoryDeleter;
 
-FormatFactory *FormatFactory::self()
+class FormatFactory::Private
 {
-  kDebug(5700) << "FormatFactory::self()" << endl;
+  public:
+    ~Private()
+    {
+      mFormatList.clear();
+    }
 
-  if ( !mSelf )
-    factoryDeleter.setObject( mSelf, new FormatFactory );
+    KLibrary *openLibrary( const QString& libName );
 
-  return mSelf;
-}
+    static FormatFactory *mSelf;
 
-FormatFactory::FormatFactory()
-{
-  // dummy entry for default format
-  FormatInfo info;
-  info.library = "<NoLibrary>";
-  info.nameLabel = i18n( "vCard" );
-  info.descriptionLabel = i18n( "vCard Format" );
-  mFormatList.insert( "vcard", info );
+    QHash<QString, FormatInfo> mFormatList;
+};
 
-  const QStringList list = KGlobal::dirs()->findAllResources( "data" ,"kabc/formats/*.desktop",
-                                                              KStandardDirs::Recursive |
-                                                              KStandardDirs::NoDuplicates );
-  for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it )
-  {
-    KConfig config( *it, KConfig::OnlyLocal);
-
-    if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) )
-	    continue;
-
-    KConfigGroup group = config.group( "Plugin" );
-    QString type = group.readEntry( "Type" );
-    info.library = group.readEntry( "X-KDE-Library" );
-
-    group = config.group( "Misc" );
-    info.nameLabel = group.readEntry( "Name" );
-    info.descriptionLabel = group.readEntry( "Comment", i18n( "No description available." ) );
-
-    mFormatList.insert( type, info );
-  }
-}
-
-FormatFactory::~FormatFactory()
-{
-  mFormatList.clear();
-}
-
-QStringList FormatFactory::formats()
-{
-  QStringList retval;
-
-  // make sure 'vcard' is the first entry
-  retval << "vcard";
-
-  QHashIterator<QString, FormatInfo> it( mFormatList );
-  while ( it.hasNext() ) {
-    it.next();
-    if ( it.key() != "vcard" )
-      retval << it.key();
-  }
-  return retval;
-}
-
-FormatInfo FormatFactory::info( const QString &type )
-{
-  if ( type.isEmpty() || !mFormatList.contains( type ) )
-    return FormatInfo();
-  else
-    return mFormatList[ type ];
-}
-
-Format *FormatFactory::format( const QString& type )
-{
-  Format *format = 0;
-
-  if ( type.isEmpty() )
-    return 0;
-
-  if ( type == "vcard" ) {
-    format = new VCardFormat;
-    format->setType( type );
-    format->setNameLabel( i18n( "vCard" ) );
-    format->setDescriptionLabel( i18n( "vCard Format" ) );
-    return format;
-  }
-
-  if ( !mFormatList.contains( type ) )
-    return 0;
-  FormatInfo fi = mFormatList[ type ];
-  QString libName = fi.library;
-
-  KLibrary *library = openLibrary( libName );
-  if ( !library )
-    return 0;
-
-  KLibrary::void_function_ptr format_func = library->resolveFunction( "format" );
-
-  if ( format_func ) {
-    format = ((Format* (*)())format_func)();
-    format->setType( type );
-    format->setNameLabel( fi.nameLabel );
-    format->setDescriptionLabel( fi.descriptionLabel );
-  } else {
-    kDebug( 5700 ) << "'" << libName << "' is not a format plugin." << endl;
-    return 0;
-  }
-
-  return format;
-}
-
-
-KLibrary *FormatFactory::openLibrary( const QString& libName )
+KLibrary *FormatFactory::Private::openLibrary( const QString& libName )
 {
   KLibrary *library = 0;
 
@@ -164,4 +68,117 @@ KLibrary *FormatFactory::openLibrary( const QString& libName )
   }
 
   return library;
+}
+
+FormatFactory *FormatFactory::Private::mSelf = 0;
+
+FormatFactory *FormatFactory::self()
+{
+  kDebug(5700) << "FormatFactory::self()" << endl;
+
+  if ( !Private::mSelf )
+    factoryDeleter.setObject( Private::mSelf, new FormatFactory );
+
+  return Private::mSelf;
+}
+
+FormatFactory::FormatFactory()
+  : d( new Private )
+{
+  // dummy entry for default format
+  FormatInfo info;
+  info.library = "<NoLibrary>";
+  info.nameLabel = i18n( "vCard" );
+  info.descriptionLabel = i18n( "vCard Format" );
+  d->mFormatList.insert( "vcard", info );
+
+  const QStringList list = KGlobal::dirs()->findAllResources( "data" ,"kabc/formats/*.desktop",
+                                                              KStandardDirs::Recursive |
+                                                              KStandardDirs::NoDuplicates );
+  for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+    KConfig config( *it, KConfig::OnlyLocal);
+
+    if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) )
+      continue;
+
+    KConfigGroup group = config.group( "Plugin" );
+    QString type = group.readEntry( "Type" );
+    info.library = group.readEntry( "X-KDE-Library" );
+
+    group = config.group( "Misc" );
+    info.nameLabel = group.readEntry( "Name" );
+    info.descriptionLabel = group.readEntry( "Comment", i18n( "No description available." ) );
+
+    d->mFormatList.insert( type, info );
+  }
+}
+
+FormatFactory::~FormatFactory()
+{
+  delete d;
+}
+
+QStringList FormatFactory::formats()
+{
+  QStringList retval;
+
+  // make sure 'vcard' is the first entry
+  retval << "vcard";
+
+  QHashIterator<QString, FormatInfo> it( d->mFormatList );
+  while ( it.hasNext() ) {
+    it.next();
+    if ( it.key() != "vcard" )
+      retval << it.key();
+  }
+
+  return retval;
+}
+
+FormatInfo FormatFactory::info( const QString &type )
+{
+  if ( type.isEmpty() || !d->mFormatList.contains( type ) )
+    return FormatInfo();
+  else
+    return d->mFormatList[ type ];
+}
+
+Format *FormatFactory::format( const QString& type )
+{
+  Format *format = 0;
+
+  if ( type.isEmpty() )
+    return 0;
+
+  if ( type == "vcard" ) {
+    format = new VCardFormat;
+    format->setType( type );
+    format->setNameLabel( i18n( "vCard" ) );
+    format->setDescriptionLabel( i18n( "vCard Format" ) );
+    return format;
+  }
+
+  if ( !d->mFormatList.contains( type ) )
+    return 0;
+
+  FormatInfo fi = d->mFormatList[ type ];
+  QString libName = fi.library;
+
+  KLibrary *library = d->openLibrary( libName );
+  if ( !library )
+    return 0;
+
+  KLibrary::void_function_ptr format_func = library->resolveFunction( "format" );
+
+  if ( format_func ) {
+    format = ((Format* (*)())format_func)();
+    format->setType( type );
+    format->setNameLabel( fi.nameLabel );
+    format->setDescriptionLabel( fi.descriptionLabel );
+  } else {
+    kDebug( 5700 ) << "'" << libName << "' is not a format plugin." << endl;
+    return 0;
+  }
+
+  return format;
 }

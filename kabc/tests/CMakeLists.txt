@@ -91,22 +91,6 @@ endif (UNIX)
 
 ########### next target ###############
 
-set(testdb_SRCS
-testdb.cpp
-)
-
-kde4_automoc(${testdb_SRCS})
-
-
-message(STATUS "skipping kabc/tests testdb, mysql check missing")
-
-#kde4_add_executable(testdb RUN_UNINSTALLED ${testdb_SRCS})
-#
-#target_link_libraries(testdb  ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
-
-
-########### next target ###############
-
 set(testaddressee_SRCS
 testaddressee.cpp
 )

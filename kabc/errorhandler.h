@@ -40,7 +40,8 @@ namespace KABC {
 class KABC_EXPORT ErrorHandler
 {
   public:
-	virtual ~ErrorHandler(){}
+    virtual ~ErrorHandler();
+
     /**
       Show error message.
     */
@@ -53,8 +54,16 @@ class KABC_EXPORT ErrorHandler
 class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
 {
   public:
-	virtual ~ConsoleErrorHandler(){}
+    ConsoleErrorHandler();
+    virtual ~ConsoleErrorHandler();
+
     virtual void error( const QString &msg );
+
+  private:
+    class Private;
+    Private* const d;
+
+    Q_DISABLE_COPY( ConsoleErrorHandler )
 };
 
 /**
@@ -70,14 +79,16 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
       \param parent Widget which is used as parent for the error dialogs.
     */
     GuiErrorHandler( QWidget *parent = 0 );
-	virtual ~GuiErrorHandler(){}
+
+    virtual ~GuiErrorHandler();
+
     virtual void error( const QString &msg );
 
   private:
-    QWidget *mParent;
-
     class Private;
-    Private *d;
+    Private* const d;
+
+    Q_DISABLE_COPY( GuiErrorHandler )
 };
 
 }

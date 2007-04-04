@@ -22,40 +22,50 @@
 
 using namespace KABC;
 
+class Plugin::Private
+{
+  public:
+    QString mType;
+    QString mNameLabel;
+    QString mDescriptionLabel;
+};
+
 Plugin::Plugin()
+  : d( new Private )
 {
 }
 
 Plugin::~Plugin()
 {
+  delete d;
 }
 
 void Plugin::setType( const QString& type )
 {
-  mType = type;
+  d->mType = type;
 }
 
 QString Plugin::type() const
 {
-  return mType;
+  return d->mType;
 }
 
 void Plugin::setNameLabel( const QString& label )
 {
-  mNameLabel = label;
+  d->mNameLabel = label;
 }
 
 QString Plugin::nameLabel() const
 {
-  return mNameLabel;
+  return d->mNameLabel;
 }
 
 void Plugin::setDescriptionLabel( const QString& label )
 {
-  mDescriptionLabel = label;
+  d->mDescriptionLabel = label;
 }
 
 QString Plugin::descriptionLabel() const
 {
-  return mDescriptionLabel;
+  return d->mDescriptionLabel;
 }

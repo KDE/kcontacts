@@ -58,7 +58,6 @@ struct FormatInfo
 class KABC_EXPORT FormatFactory
 {
   public:
-    
     /**
       Destructor.
      */
@@ -91,11 +90,8 @@ class KABC_EXPORT FormatFactory
     FormatFactory();
 
   private:
-    KLibrary *openLibrary( const QString& libName );
-
-    static FormatFactory *mSelf;
-
-    QHash<QString, FormatInfo> mFormatList;
+    class Private;
+    Private* const d;
 };
 
 }

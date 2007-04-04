@@ -84,19 +84,23 @@ if (!open( CPP_OUT, ">$builddir/../addressee.cpp" ) ) {
     if (/--VARIABLES--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] !~ /A/ ) { next; }
-        print CPP_OUT "  $entryTypes[$i] $entryNames[$i];\n";
+        print CPP_OUT "    $entryTypes[$i] m".ucfirst($entryNames[$i]).";\n";
+      }
+    } elsif (/--VARIABLES_ASSIGNMENT--/) {
+      for( $i=0; $i<@entryNames; ++$i ) {
+        if ( $entryCtrl[$i] !~ /A/ ) { next; }
+        print CPP_OUT "      m".ucfirst($entryNames[$i])." = other.m".ucfirst($entryNames[$i]).";\n";
       }
     } elsif (/--DEFINITIONS--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] =~ /A/ ) {
           print CPP_OUT "void Addressee::set" . ucfirst($entryNames[$i]);
-          print CPP_OUT "( const $entryTypes[$i] &$entryNames[$i] )\n{\n";        
-          print CPP_OUT "  if ( $entryNames[$i] == mData->$entryNames[$i] ) return;\n";
-          print CPP_OUT "  detach();\n  mData->empty = false;\n";
-          print CPP_OUT "  mData->$entryNames[$i] = $entryNames[$i];\n}\n\n";
-        
+          print CPP_OUT "( const $entryTypes[$i] &$entryNames[$i] )\n{\n";
+          print CPP_OUT "  if ( $entryNames[$i] == d->m".ucfirst($entryNames[$i])." ) return;\n";
+          print CPP_OUT "  d->mEmpty = false;\n";
+          print CPP_OUT "  d->m".ucfirst($entryNames[$i])." = $entryNames[$i];\n}\n\n";
           print CPP_OUT "$entryTypes[$i] Addressee::$entryNames[$i]() const\n{\n";
-          print CPP_OUT "  return mData->$entryNames[$i];\n}\n\n";
+          print CPP_OUT "  return d->m".ucfirst($entryNames[$i]).";\n}\n\n";
         }
 
         if ( $entryCtrl[$i] !~ /L/ ) { next; }
@@ -118,32 +122,32 @@ if (!open( CPP_OUT, ">$builddir/../addressee.cpp" ) ) {
         if ( $entryCtrl[$i] =~ /E/ ) {
           if ( $entryNames[$i] !~ "revision" ) {
             if ( $entryTypes[$i] =~ "QString" ) {
-              print CPP_OUT "  if ( mData->$entryNames[$i] != a.mData->$entryNames[$i] &&\n";
-              print CPP_OUT "     !( mData->$entryNames[$i].isEmpty() && a.mData->$entryNames[$i].isEmpty() ) ) {\n";
+              print CPP_OUT "  if ( d->m".ucfirst($entryNames[$i])." != a.d->m".ucfirst($entryNames[$i])." &&\n";
+              print CPP_OUT "     !( d->m".ucfirst($entryNames[$i]).".isEmpty() && a.d->m".ucfirst($entryNames[$i]).".isEmpty() ) ) {\n";
               print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\" << endl;\n";
               print CPP_OUT "    return false;\n";
               print CPP_OUT "  }\n";
             } else {
-              print CPP_OUT "  if ( mData->$entryNames[$i] != a.mData->$entryNames[$i] ) {\n";
+              print CPP_OUT "  if ( d->m".ucfirst($entryNames[$i])." != a.d->m".ucfirst($entryNames[$i])." ) {\n";
               print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\" << endl;\n";
               print CPP_OUT "    return false;\n";
               print CPP_OUT "  }\n";
             }
           }
         }
-      }        
+      }
     } elsif (/--STREAMOUT--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] =~ /A/ ) {
-          print CPP_OUT "  s << a.mData->$entryNames[$i];\n";
+          print CPP_OUT "  s << a.d->m".ucfirst($entryNames[$i]).";\n";
         }
-      }        
+      }
     } elsif (/--STREAMIN--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] =~ /A/ ) {
-          print CPP_OUT "  s >> a.mData->$entryNames[$i];\n";
+          print CPP_OUT "  s >> a.d->m".ucfirst($entryNames[$i]).";\n";
         }
-      }        
+      }
     } elsif (/--DEBUG--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] !~ /A/ ) { next; }

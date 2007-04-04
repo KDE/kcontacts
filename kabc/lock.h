@@ -73,14 +73,8 @@ class KABC_EXPORT Lock : public QObject
     void unlocked();
 
   private:
-    QString mIdentifier;
-
-    QString mLockUniqueName;
-
-    QString mError;
-
     class Private;
-    Private *d;
+    Private* const d;
 };
 
 }

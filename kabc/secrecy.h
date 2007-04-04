@@ -22,6 +22,7 @@
 #define KABC_SECRECY_H
 
 #include <QtCore/QList>
+#include <QtCore/QSharedDataPointer>
 
 #include "kabc.h"
 
@@ -32,65 +33,78 @@ class KABC_EXPORT Secrecy
     friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Secrecy & );
     friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Secrecy & );
 
-public:
-  typedef QList<int> TypeList;
+  public:
+    typedef QList<int> TypeList;
 
-  /**
-   * Secrecy types
-   *
-   * @li Public       - for public access
-   * @li Private      - only private access
-   * @li Confidential - access for confidential persons
-   */
-  enum Types {
-    Public,
-    Private,
-    Confidential,
-    Invalid
-  };
+    /**
+     * Secrecy types
+     *
+     * @li Public       - for public access
+     * @li Private      - only private access
+     * @li Confidential - access for confidential persons
+     */
+    enum Types {
+      Public,
+      Private,
+      Confidential,
+      Invalid
+    };
 
-  /**
-   * Constructor.
-   *
-   * @param type  The secrecy type, see Types.
-   */
-  Secrecy( int type = Invalid );
+    /**
+     * Constructor.
+     *
+     * @param type  The secrecy type, see Types.
+     */
+    Secrecy( int type = Invalid );
 
-  bool operator==( const Secrecy & ) const;
-  bool operator!=( const Secrecy & ) const;
+    /**
+     * Copy constructor.
+     */
+    Secrecy( const Secrecy &other );
 
-  /**
-    Returns if the Secrecy object has a valid value.
-  */
-  bool isValid() const;
+    /**
+     * Destroys the secrecy.
+     */
+    ~Secrecy();
 
-  /**
-   * Sets the type, see Types.
-   */
-  void setType( int type );
+    Secrecy& operator=( const Secrecy& );
 
-  /**
-   * Returns the type, see Types.
-   */
-  int type() const;
+    bool operator==( const Secrecy & ) const;
+    bool operator!=( const Secrecy & ) const;
 
-  /**
-   * Returns a list of all available secrecy types.
-   */
-  static TypeList typeList();
+    /**
+      Returns if the Secrecy object has a valid value.
+    */
+    bool isValid() const;
 
-  /**
-   * Returns a translated label for a given secrecy type.
-   */
-  static QString typeLabel( int type );
+    /**
+     * Sets the type, see Types.
+     */
+    void setType( int type );
 
-  /**
-   * For debug.
-   */
-  QString asString() const;
+    /**
+     * Returns the type, see Types.
+     */
+    int type() const;
 
-private:
-  int mType;
+    /**
+     * Returns a list of all available secrecy types.
+     */
+    static TypeList typeList();
+
+    /**
+     * Returns a translated label for a given secrecy type.
+     */
+    static QString typeLabel( int type );
+
+    /**
+     * Returns a string representation of the secrecy.
+     */
+    QString toString() const;
+
+  private:
+    class PrivateData;
+    QSharedDataPointer<PrivateData> d;
 };
 
 KABC_EXPORT QDataStream& operator<<( QDataStream &s, const Secrecy &secrecy );

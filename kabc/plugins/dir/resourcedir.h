@@ -86,26 +86,11 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
      */
     virtual void removeAddressee( const Addressee& addr );
 
-  protected Q_SLOTS:
-    void pathChanged();
-
-  protected:
-    void init( const QString &path, const QString &format );
-
   private:
-    Format *mFormat;
+    class Private;
+    Private* const d;
 
-    KDirWatch mDirWatch;
-
-    QString mPath;
-    QString mFormatName;
-
-    Lock *mLock;
-
-    bool mAsynchronous;
-
-    class ResourceDirPrivate;
-    ResourceDirPrivate *d;
+    Q_PRIVATE_SLOT( d, void pathChanged() )
 };
 
 }

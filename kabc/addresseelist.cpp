@@ -19,6 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <QtCore/QSharedData>
+
 #include <kdebug.h>
 
 #include "addresseelist.h"
@@ -34,6 +36,15 @@ using namespace KABC;
 //
 //
 
+SortingTraits::Uid::Uid()
+  : d( 0 )
+{
+}
+
+SortingTraits::Uid::~Uid()
+{
+}
+
 bool SortingTraits::Uid::eq( const Addressee &a1, const Addressee &a2 )
 {
   // locale awareness doesn't make sense sorting ids
@@ -46,6 +57,15 @@ bool SortingTraits::Uid::lt( const Addressee &a1, const Addressee &a2 )
   return ( QString::compare( a1.uid(), a2.uid() ) < 0 );
 }
 
+SortingTraits::Name::Name()
+  : d( 0 )
+{
+}
+
+SortingTraits::Name::~Name()
+{
+}
+
 bool SortingTraits::Name::eq( const Addressee &a1, const Addressee &a2 )
 {
   return ( QString::localeAwareCompare( a1.name(), a2.name() ) == 0 );
@@ -56,6 +76,15 @@ bool SortingTraits::Name::lt( const Addressee &a1, const Addressee &a2 )
   return ( QString::localeAwareCompare( a1.name(), a2.name() ) < 0 );
 }
 
+SortingTraits::FormattedName::FormattedName()
+  : d( 0 )
+{
+}
+
+SortingTraits::FormattedName::~FormattedName()
+{
+}
+
 bool SortingTraits::FormattedName::eq( const Addressee &a1, const Addressee &a2 )
 {
   return ( QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) == 0 );
@@ -64,6 +93,15 @@ bool SortingTraits::FormattedName::eq( const Addressee &a1, const Addressee &a2 
 bool SortingTraits::FormattedName::lt( const Addressee &a1, const Addressee &a2 )
 {
   return ( QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) < 0 );
+}
+
+SortingTraits::FamilyName::FamilyName()
+  : d( 0 )
+{
+}
+
+SortingTraits::FamilyName::~FamilyName()
+{
 }
 
 bool SortingTraits::FamilyName::eq( const Addressee &a1, const Addressee &a2 )
@@ -80,6 +118,15 @@ bool SortingTraits::FamilyName::lt( const Addressee &a1, const Addressee &a2 )
   } else {
     return family < 0;
   }
+}
+
+SortingTraits::GivenName::GivenName()
+  : d( 0 )
+{
+}
+
+SortingTraits::GivenName::~GivenName()
+{
 }
 
 bool SortingTraits::GivenName::eq( const Addressee &a1, const Addressee &a2 )
@@ -106,62 +153,100 @@ bool SortingTraits::GivenName::lt( const Addressee &a1, const Addressee &a2 )
 
 static Field *sActiveField=0;
 
-AddresseeList::AddresseeList()
-  : QList<Addressee>()
+class AddresseeList::Private : public QSharedData
 {
-  mReverseSorting = false;
-  mActiveSortingCriterion = FormattedName;
+  public:
+    Private()
+      : mReverseSorting( false ), mActiveSortingCriterion( FormattedName )
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mReverseSorting = other.mReverseSorting;
+      mActiveSortingCriterion = other.mActiveSortingCriterion;
+    }
+
+    bool mReverseSorting;
+    SortingCriterion mActiveSortingCriterion;
+};
+
+AddresseeList::AddresseeList()
+  : QList<Addressee>(), d( new Private )
+{
 }
 
 AddresseeList::~AddresseeList()
 {
 }
 
-AddresseeList::AddresseeList( const AddresseeList &l )
-  : QList<Addressee>( l )
+AddresseeList::AddresseeList( const AddresseeList &other )
+  : QList<Addressee>( other ), d( other.d )
 {
-  mReverseSorting = l.reverseSorting();
-  mActiveSortingCriterion = l.sortingCriterion();
 }
 
 AddresseeList::AddresseeList( const QList<Addressee> &l )
-  : QList<Addressee>( l )
+  : QList<Addressee>( l ), d( new Private )
 {
-  mReverseSorting = false;
 }
 
-void AddresseeList::dump() const
+AddresseeList& AddresseeList::operator=( const AddresseeList &other )
 {
-  kDebug(5700) << "AddresseeList {" << endl;
-  kDebug(5700) << "reverse order: " << ( mReverseSorting ? "true" : "false" ) << endl;
+  if ( this != &other ) {
+    QList<Addressee>::operator=( other );
+    d = other.d;
+  }
+
+  return *this;
+}
+
+QString AddresseeList::toString() const
+{
+  QString str;
+
+  str += QString( "AddresseeList {\n" );
+  str += QString( "   Reverse Order: %1\n" ).arg( d->mReverseSorting ? "true" : "false" );
 
   QString crit;
-  if ( Uid == mActiveSortingCriterion ) {
+  if ( Uid == d->mActiveSortingCriterion ) {
     crit = "Uid";
-  } else if ( Name == mActiveSortingCriterion ) {
+  } else if ( Name == d->mActiveSortingCriterion ) {
     crit = "Name";
-  } else if ( FormattedName == mActiveSortingCriterion ) {
+  } else if ( FormattedName == d->mActiveSortingCriterion ) {
     crit = "FormattedName";
-  } else if ( FamilyName == mActiveSortingCriterion ) {
+  } else if ( FamilyName == d->mActiveSortingCriterion ) {
     crit = "FamilyName";
-  } else if ( GivenName == mActiveSortingCriterion ) {
+  } else if ( GivenName == d->mActiveSortingCriterion ) {
     crit = "GivenName";
   } else {
     crit = "unknown -- update dump method";
   }
 
-  kDebug(5700) << "sorting criterion: " << crit << endl;
+  str += QString( "   Sorting criterion: %1\n" ).arg( crit );
 
   for ( const_iterator it = begin(); it != end(); ++it ) {
-    (*it).dump();
+//    str += (*it).toString();
   }
 
-  kDebug(5700) << "}" << endl;
+  str += QString( "}\n" );
+
+  return str;
+}
+
+void AddresseeList::setReverseSorting( bool reverseSorting )
+{
+  d->mReverseSorting = reverseSorting;
+}
+
+bool AddresseeList::reverseSorting() const
+{
+  return d->mReverseSorting;
 }
 
 void AddresseeList::sortBy( SortingCriterion c )
 {
-  mActiveSortingCriterion = c;
+  d->mActiveSortingCriterion = c;
   if ( Uid == c ) {
     sortByTrait<SortingTraits::Uid>();
   } else if ( Name == c ) {
@@ -179,7 +264,7 @@ void AddresseeList::sortBy( SortingCriterion c )
 
 void AddresseeList::sort()
 {
-  sortBy( mActiveSortingCriterion );
+  sortBy( d->mActiveSortingCriterion );
 }
 
 template<class Trait>
@@ -206,8 +291,8 @@ void AddresseeList::sortByTrait()
     iterator j2 = j1;
     ++j2;
     while ( j1 != i2 ) {
-      if ( !mReverseSorting && Trait::lt( *j2, *j1 )
-           || mReverseSorting && Trait::lt( *j1, *j2 ) ) {
+      if ( !d->mReverseSorting && Trait::lt( *j2, *j1 )
+           || d->mReverseSorting && Trait::lt( *j1, *j2 ) ) {
         qSwap( *j1, *j2 );
       }
       ++j1;
@@ -230,7 +315,7 @@ void AddresseeList::sortByField( Field *field )
   if ( count() == 0 )
     return;
 
-  KABC::FieldSortMode *mode = new KABC::FieldSortMode( sActiveField, !mReverseSorting );
+  KABC::FieldSortMode *mode = new KABC::FieldSortMode( sActiveField, !d->mReverseSorting );
 
   KABC::Addressee::setSortMode( mode );
   qSort( *this );
@@ -249,8 +334,12 @@ void AddresseeList::sortByMode( SortMode *mode )
   KABC::Addressee::setSortMode( 0 );
 }
 
-Field*
-AddresseeList::sortingField() const
+SortingCriterion AddresseeList::sortingCriterion() const
+{
+  return d->mActiveSortingCriterion;
+}
+
+Field* AddresseeList::sortingField() const
 {
   return sActiveField;
 }

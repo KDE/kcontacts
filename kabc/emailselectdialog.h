@@ -32,8 +32,8 @@ class KABC_EXPORT EmailSelectDialog : public KDialog
   Q_OBJECT
 
   public:
-    EmailSelectDialog( const QStringList &emails, const QString &current,
-                       QWidget *parent );
+    EmailSelectDialog( const QStringList &emails, const QString &current, QWidget *parent );
+    ~EmailSelectDialog();
 
     QString selected();
 
@@ -41,7 +41,8 @@ class KABC_EXPORT EmailSelectDialog : public KDialog
                              QWidget *parent );
 
   private:
-    QButtonGroup *mButtonGroup;
+    class Private;
+    Private* const d;
 };
 
 }

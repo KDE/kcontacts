@@ -43,35 +43,34 @@ Resource *Ticket::resource()
   return mResource;
 }
 
-struct Resource::Iterator::IteratorData
+class Resource::Iterator::Private
 {
-  Addressee::Map::Iterator mIt;
+  public:
+    Addressee::Map::Iterator mIt;
 };
 
-struct Resource::ConstIterator::ConstIteratorData
+class Resource::ConstIterator::Private
 {
-  Addressee::Map::ConstIterator mIt;
+  public:
+    Addressee::Map::ConstIterator mIt;
 };
 
 Resource::Iterator::Iterator()
+  : d( new Private )
 {
-  d = new IteratorData;
 }
 
-Resource::Iterator::Iterator( const Resource::Iterator &i )
+Resource::Iterator::Iterator( const Resource::Iterator &other )
+  : d( new Private )
 {
-  d = new IteratorData;
-  d->mIt = i.d->mIt;
+  d->mIt = other.d->mIt;
 }
 
-Resource::Iterator &Resource::Iterator::operator=( const Resource::Iterator &i )
+Resource::Iterator &Resource::Iterator::operator=( const Resource::Iterator &other )
 {
-  if ( this == &i )
-    return *this;
-  delete d;
+  if ( this != &other )
+    d->mIt = other.d->mIt;
 
-  d = new IteratorData;
-  d->mIt = i.d->mIt;
   return *this;
 }
 
@@ -125,30 +124,27 @@ bool Resource::Iterator::operator!=( const Iterator &it ) const
 }
 
 Resource::ConstIterator::ConstIterator()
+  : d( new Private )
 {
-  d = new ConstIteratorData;
 }
 
-Resource::ConstIterator::ConstIterator( const Resource::ConstIterator &i )
+Resource::ConstIterator::ConstIterator( const Resource::ConstIterator &other )
+  : d( new Private )
 {
-  d = new ConstIteratorData;
-  d->mIt = i.d->mIt;
+  d->mIt = other.d->mIt;
 }
 
-Resource::ConstIterator::ConstIterator( const Resource::Iterator &i )
+Resource::ConstIterator::ConstIterator( const Resource::Iterator &other )
+  : d( new Private )
 {
-  d = new ConstIteratorData;
-  d->mIt = i.d->mIt;
+  d->mIt = other.d->mIt;
 }
 
-Resource::ConstIterator &Resource::ConstIterator::operator=( const Resource::ConstIterator &i )
+Resource::ConstIterator &Resource::ConstIterator::operator=( const Resource::ConstIterator &other )
 {
-  if ( this  == &i )
-    return *this;
-  delete d;
+  if ( this != &other )
+    d->mIt = other.d->mIt;
 
-  d = new ConstIteratorData;
-  d->mIt = i.d->mIt;
   return *this;
 }
 
@@ -196,19 +192,30 @@ bool Resource::ConstIterator::operator!=( const ConstIterator &it ) const
   return ( d->mIt != it.d->mIt );
 }
 
+class Resource::Private
+{
+  public:
+    Private()
+      : mAddressBook( 0 )
+    {
+    }
+
+    AddressBook *mAddressBook;
+};
 
 Resource::Resource()
-  : KRES::Resource(), mAddressBook( 0 )
+  : KRES::Resource(), d( new Private )
 {
 }
 
 Resource::Resource( const KConfigGroup &group )
-  : KRES::Resource( group ), mAddressBook( 0 )
+  : KRES::Resource( group ), d( new Private )
 {
 }
 
 Resource::~Resource()
 {
+  delete d;
 }
 
 Resource::Iterator Resource::begin()
@@ -248,12 +255,12 @@ void Resource::writeConfig( KConfigGroup &group )
 
 void Resource::setAddressBook( AddressBook *ab )
 {
-  mAddressBook = ab;
+  d->mAddressBook = ab;
 }
 
 AddressBook *Resource::addressBook()
 {
-  return mAddressBook;
+  return d->mAddressBook;
 }
 
 Ticket *Resource::createTicket( Resource *resource )

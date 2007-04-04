@@ -29,7 +29,6 @@
 #include <kcompletion.h>
 #include <klineedit.h>
 
-class QTimer;
 class KConfig;
 
 namespace KABC {
@@ -48,64 +47,52 @@ namespace KABC {
 class KABC_EXPORT AddressLineEdit : public KLineEdit
 {
   Q_OBJECT
-public:
-  explicit AddressLineEdit(QWidget* parent, bool useCompletion = true);
-  virtual ~AddressLineEdit();
 
-  /**
-   * Reimplented for internal reasons.
-   * @ see KLineEdit::setFont()
-   */
-  virtual void setFont( const QFont& );
+  public:
+    explicit AddressLineEdit(QWidget* parent, bool useCompletion = true);
+    virtual ~AddressLineEdit();
 
-  static KConfig *config();
+    /**
+     * Reimplented for internal reasons.
+     * @ see KLineEdit::setFont()
+     */
+    virtual void setFont( const QFont& );
 
-public Q_SLOTS:
-  /**
-   * Set cursor to end of line.
-   */
-  void cursorAtEnd();
-  /**
-   * Toggle completion.
-   */
-  void enableCompletion( bool enable );
+    static KConfig *config();
 
-protected:
-  /**
-   * Always call AddressLineEdit::loadAddresses() as the first thing.
-   * Use addAddress() to add addresses.
-   */
-  virtual void loadAddresses();
-  void addAddress( const QString& );
-  virtual void keyPressEvent(QKeyEvent*);
-  virtual void dropEvent(QDropEvent *e);
-  virtual void paste();
-  virtual void insert(const QString &t);
-  virtual void mouseReleaseEvent( QMouseEvent * e );
-  void doCompletion(bool ctrlT);
+  public Q_SLOTS:
+    /**
+     * Set cursor to end of line.
+     */
+    void cursorAtEnd();
 
-private Q_SLOTS:
-  void slotCompletion() { doCompletion(false); }
-  void slotPopupCompletion( const QString& );
+    /**
+     * Toggle completion.
+     */
+    void enableCompletion( bool enable );
 
-private:
-  void init();
-  QStringList addresses();
-  QStringList removeMailDupes( const QStringList& adrs );
+  protected:
+    /**
+     * Always call AddressLineEdit::loadAddresses() as the first thing.
+     * Use addAddress() to add addresses.
+     */
+    virtual void loadAddresses();
+    void addAddress( const QString& );
+    virtual void keyPressEvent( QKeyEvent* );
+    virtual void dropEvent( QDropEvent* );
+    virtual void paste();
+    virtual void insert( const QString& );
+    virtual void mouseReleaseEvent( QMouseEvent* );
+    void doCompletion( bool );
 
-  QString m_previousAddresses;
-  bool m_useCompletion;
-  bool m_completionInitialized;
-  bool m_smartPaste;
-  QString m_typedText; // unused
+  private:
+    class Private;
+    Private* const d;
 
-  static bool s_addressesDirty;
-  static KCompletion *s_completion;
-
-private:
-  class AddressLineEditPrivate* d;
+    Q_PRIVATE_SLOT( d, void slotCompletion() )
+    Q_PRIVATE_SLOT( d, void slotPopupCompletion( const QString& ) )
 };
 
 }
 
-#endif		/* KABC_ADDRESSLINEEDIT_H */
+#endif

@@ -35,7 +35,8 @@ namespace KABC {
 class KABC_EXPORT SortMode
 {
   public:
-	virtual ~SortMode(){}
+    virtual ~SortMode();
+
     /**
       Reimplement this method and return whether the first contact is 'smaller'
       than the second.
@@ -67,7 +68,7 @@ class KABC_EXPORT NameSortMode : public SortMode
       Creates a NameSortMethod with FormattedName as name type set.
      */
     NameSortMode();
-	virtual ~NameSortMode(){}
+
     /**
       Constructor.
 
@@ -80,17 +81,18 @@ class KABC_EXPORT NameSortMode : public SortMode
      */
     explicit NameSortMode( NameType type, bool ascending = true );
 
+    virtual ~NameSortMode();
+
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
     virtual bool lesser( const KABC::Addressee&, const KABC::Addressee& ) const;
 
   private:
-    NameType mNameType;
-    bool mAscendingOrder;
+    class Private;
+    Private* const d;
 
-    class NameSortModePrivate;
-    NameSortModePrivate *d;
+    Q_DISABLE_COPY( NameSortMode )
 };
 
 /**
@@ -113,18 +115,19 @@ class KABC_EXPORT FieldSortMode : public SortMode
              descending order
      */
     explicit FieldSortMode( KABC::Field *field, bool ascending = true );
-    virtual ~FieldSortMode(){}
+
+    virtual ~FieldSortMode();
+
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
     virtual bool lesser( const KABC::Addressee&, const KABC::Addressee& ) const;
 
   private:
-    KABC::Field *mField;
-    bool mAscendingOrder;
+    class Private;
+    Private* const d;
 
-    class FieldSortModePrivate;
-    FieldSortModePrivate *d;
+    Q_DISABLE_COPY( FieldSortMode )
 };
 
 }

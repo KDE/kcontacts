@@ -29,26 +29,40 @@
 
 using namespace KABC;
 
-DistributionList::DistributionList( DistributionListManager *manager,
-                                    const QString &name )
-  : mManager( manager ), mName( name )
+class DistributionList::Private
 {
-  mManager->insert( this );
+  public:
+    Private( DistributionListManager *manager, const QString &name )
+      : mManager( manager ), mName( name )
+    {
+    }
+
+    DistributionListManager *mManager;
+    QString mName;
+    Entry::List mEntries;
+};
+
+DistributionList::DistributionList( DistributionListManager *manager, const QString &name )
+  : d( new Private( manager, name ) )
+{
+  d->mManager->insert( this );
 }
 
 DistributionList::~DistributionList()
 {
-  mManager->remove( this );
+  d->mManager->remove( this );
+
+  delete d;
 }
 
 void DistributionList::setName( const QString &name )
 {
-  mName = name;
+  d->mName = name;
 }
 
 QString DistributionList::name() const
 {
-  return mName;
+  return d->mName;
 }
 
 void DistributionList::insertEntry( const Addressee &a, const QString &email )
@@ -56,7 +70,7 @@ void DistributionList::insertEntry( const Addressee &a, const QString &email )
   Entry e( a, email );
 
   QList<Entry>::Iterator it;
-  for ( it = mEntries.begin(); it != mEntries.end(); ++it ) {
+  for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
     if ( (*it).addressee.uid() == a.uid() ) {
       /**
         We have to check if both email addresses contains no data,
@@ -70,15 +84,15 @@ void DistributionList::insertEntry( const Addressee &a, const QString &email )
       }
     }
   }
-  mEntries.append( e );
+  d->mEntries.append( e );
 }
 
 void DistributionList::removeEntry( const Addressee &a, const QString &email )
 {
   QList<Entry>::Iterator it;
-  for ( it = mEntries.begin(); it != mEntries.end(); ++it ) {
+  for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
     if ( (*it).addressee.uid() == a.uid() && (*it).email == email ) {
-      mEntries.erase( it );
+      d->mEntries.erase( it );
       return;
     }
   }
@@ -89,14 +103,13 @@ QStringList DistributionList::emails() const
   QStringList emails;
 
   Entry::List::ConstIterator it;
-  for ( it = mEntries.begin(); it != mEntries.end(); ++it ) {
-    Addressee a = (*it).addressee;
+  for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
+    const Addressee a = (*it).addressee;
     QString email = (*it).email.isEmpty() ? a.fullEmail() :
                                             a.fullEmail( (*it).email );
 
-    if ( !email.isEmpty() ) {
+    if ( !email.isEmpty() )
       emails.append( email );
-    }
   }
 
   return emails;
@@ -104,36 +117,43 @@ QStringList DistributionList::emails() const
 
 DistributionList::Entry::List DistributionList::entries() const
 {
-  return mEntries;
+  return d->mEntries;
 }
 
 typedef QList< QPair<QString, QString> > MissingEntryList;
 
-class DistributionListManager::DistributionListManagerPrivate
+class DistributionListManager::Private
 {
   public:
+    Private( AddressBook *addressBook )
+      : mAddressBook( addressBook )
+    {
+    }
+
+    ~Private()
+    {
+      qDeleteAll( mLists );
+      mLists.clear();
+    }
+
     AddressBook *mAddressBook;
     QMap< QString, MissingEntryList > mMissingEntries;
+    QList<DistributionList*> mLists;
 };
 
 DistributionListManager::DistributionListManager( AddressBook *ab )
-  : d( new DistributionListManagerPrivate )
+  : d( new Private( ab ) )
 {
-  d->mAddressBook = ab;
 }
 
 DistributionListManager::~DistributionListManager()
 {
-  qDeleteAll( mLists );
-  mLists.clear();
-
   delete d;
-  d = 0;
 }
 
 DistributionList *DistributionListManager::list( const QString &name, Qt::CaseSensitivity _caseSensitivity )
 {
-  QListIterator<DistributionList*> it( mLists );
+  QListIterator<DistributionList*> it( d->mLists );
   bool caseSensitive = ( _caseSensitivity == Qt::CaseSensitive );
   QString newName = caseSensitive ?  name : name.toLower();
   while ( it.hasNext() ) {
@@ -156,16 +176,16 @@ void DistributionListManager::insert( DistributionList *l )
   if ( !l )
     return;
 
-  QMutableListIterator<DistributionList*> it( mLists );
+  QMutableListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
     DistributionList *list = it.next();
     if ( list->name() == l->name() ) {
-      mLists.removeAll( list );
+      d->mLists.removeAll( list );
       break;
     }
   }
 
-  mLists.append( l );
+  d->mLists.append( l );
 }
 
 void DistributionListManager::remove( DistributionList *l )
@@ -173,11 +193,11 @@ void DistributionListManager::remove( DistributionList *l )
   if ( !l )
     return;
 
-  QMutableListIterator<DistributionList*> it( mLists );
+  QMutableListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
     DistributionList *list = it.next();
     if ( list->name() == l->name() ) {
-      mLists.removeAll( list );
+      d->mLists.removeAll( list );
       break;
     }
   }
@@ -187,9 +207,9 @@ QStringList DistributionListManager::listNames()
 {
   QStringList names;
 
-  QListIterator<DistributionList*> it( mLists );
+  QListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
-    DistributionList *list = it.next();
+    const DistributionList *list = it.next();
     names.append( list->name() );
   }
 
@@ -204,8 +224,8 @@ bool DistributionListManager::load()
   QMap<QString,QString> entryMap = cg.entryMap();
 
   // clear old lists
-  qDeleteAll( mLists );
-  mLists.clear();
+  qDeleteAll( d->mLists );
+  d->mLists.clear();
   d->mMissingEntries.clear();
 
   QMap<QString,QString>::ConstIterator it;
@@ -251,7 +271,7 @@ bool DistributionListManager::save()
   KConfigGroup cg( &cfg, "DistributionLists" );
   cg.deleteGroup();
 
-  QListIterator<DistributionList*> it( mLists );
+  QListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
     DistributionList *list = it.next();
     kDebug(5700) << "  Saving '" << list->name() << "'" << endl;
@@ -281,33 +301,49 @@ bool DistributionListManager::save()
   return true;
 }
 
-DistributionListWatcher* DistributionListWatcher::mSelf = 0;
+class DistributionListWatcher::Private
+{
+  public:
+    Private()
+      : mDirWatch( new KDirWatch )
+    {
+      mDirWatch->addFile( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+    }
+
+    ~Private()
+    {
+      delete mDirWatch;
+      mDirWatch = 0;
+    }
+
+    static DistributionListWatcher* mSelf;
+    KDirWatch *mDirWatch;
+};
+
+DistributionListWatcher* DistributionListWatcher::Private::mSelf = 0;
 
 DistributionListWatcher::DistributionListWatcher()
- : QObject( qApp )
+ : QObject( qApp ), d( new Private )
 {
-    setObjectName( "DistributionListWatcher" );
-  mDirWatch = new KDirWatch;
-  mDirWatch->addFile( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  setObjectName( "DistributionListWatcher" );
 
-  connect( mDirWatch, SIGNAL( dirty( const QString& ) ), SIGNAL( changed() ) );
-  mDirWatch->startScan();
+  connect( d->mDirWatch, SIGNAL( dirty( const QString& ) ), SIGNAL( changed() ) );
+  d->mDirWatch->startScan();
 }
 
 DistributionListWatcher::~DistributionListWatcher()
 {
-  delete mDirWatch;
-  mDirWatch = 0;
+  delete d;
 }
 
 DistributionListWatcher *DistributionListWatcher::self()
 {
   kWarning( !qApp ) << "No QApplication object available, you'll get a memleak!" << endl;
 
-  if ( !mSelf )
-    mSelf = new DistributionListWatcher();
+  if ( !Private::mSelf )
+    Private::mSelf = new DistributionListWatcher();
 
-  return mSelf;
+  return Private::mSelf;
 }
 
 #include "distributionlist.moc"

@@ -817,7 +817,7 @@ void AddressBook::error( const QString &msg )
 {
   if ( !d->mErrorHandler ) {
     // create default error handler
-    d->mErrorHandler = new ConsoleErrorHandler;
+    d->mErrorHandler = new ConsoleErrorHandler();
   }
 
   if ( d->mErrorHandler ) {

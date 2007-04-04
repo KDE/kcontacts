@@ -22,8 +22,9 @@
 #define KABC_PICTURE_H
 
 #include <QtCore/QDataStream>
-#include <QtGui/QImage>
 #include <QtCore/QString>
+#include <QtCore/QSharedDataPointer>
+#include <QtGui/QImage>
 
 #include "kabc.h"
 
@@ -31,96 +32,98 @@ namespace KABC {
 
 class KABC_EXPORT Picture
 {
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Picture & );
+    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );
+    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Picture & );
 
-public:
+  public:
+    /**
+     * Consturctor. Creates an empty object.
+     */
+    Picture();
 
-  /**
-   * Consturctor. Creates an empty object.
-   */
-  Picture();
+    /**
+     * Consturctor.
+     *
+     * @param url  A URL that describes the position of the picture file.
+     */
+    Picture( const QString &url );
 
-  /**
-   * Consturctor.
-   *
-   * @param url  A URL that describes the position of the picture file.
-   */
-  Picture( const QString &url );
+    /**
+     * Consturctor.
+     *
+     * @param data  The raw data of the picture.
+     */
+    Picture( const QImage &data );
 
-  /**
-   * Consturctor.
-   *
-   * @param data  The raw data of the picture.
-   */
-  Picture( const QImage &data );
+    /**
+     * Copy constructor.
+     */
+    Picture( const Picture &picture );
 
-  /**
-   * Destructor.
-   */
-  ~Picture();
+    /**
+     * Destructor.
+     */
+    ~Picture();
 
+    Picture& operator=( const Picture &other );
 
-  bool operator==( const Picture & ) const;
-  bool operator!=( const Picture & ) const;
+    bool operator==( const Picture & ) const;
+    bool operator!=( const Picture & ) const;
 
-  /**
-   * Sets a URL for the location of the picture file. When using this
-   * function, isIntern() will return 'false' until you use
-   * setData().
-   *
-   * @param url  The location URL of the picture file.
-   */
-  void setUrl( const QString &url );
+    /**
+     * Sets a URL for the location of the picture file. When using this
+     * function, isIntern() will return 'false' until you use
+     * setData().
+     *
+     * @param url  The location URL of the picture file.
+     */
+    void setUrl( const QString &url );
 
-  /**
-   * Sets the raw data of the picture. When using this function,
-   * isIntern() will return 'true' until you use setUrl().
-   *
-   * @param data  The raw data of the picture.
-   */
-  void setData( const QImage &data );
+    /**
+     * Sets the raw data of the picture. When using this function,
+     * isIntern() will return 'true' until you use setUrl().
+     *
+     * @param data  The raw data of the picture.
+     */
+    void setData( const QImage &data );
 
-  /**
-   * Sets the type of the picture.
-   */
-  void setType( const QString &type );
+    /**
+     * Sets the type of the picture.
+     */
+    void setType( const QString &type );
 
-  /**
-   * Returns whether the picture is described by a URL (extern) or
-   * by the raw data (intern).
-   * When this method returns 'true' you can use data() to
-   * get the raw data. Otherwise you can request the URL of this
-   * picture by url() and load the raw data from that location.
-   */
-  bool isIntern() const;
+    /**
+     * Returns whether the picture is described by a URL (extern) or
+     * by the raw data (intern).
+     * When this method returns 'true' you can use data() to
+     * get the raw data. Otherwise you can request the URL of this
+     * picture by url() and load the raw data from that location.
+     */
+    bool isIntern() const;
 
-  /**
-   * Returns the location URL of this picture.
-   */
-  QString url() const;
+    /**
+     * Returns the location URL of this picture.
+     */
+    QString url() const;
 
-  /**
-   * Returns the raw data of this picture.
-   */
-  QImage data() const;
+    /**
+     * Returns the raw data of this picture.
+     */
+    QImage data() const;
 
-  /**
-   * Returns the type of this picture.
-   */
-  QString type() const;
+    /**
+     * Returns the type of this picture.
+     */
+    QString type() const;
 
-  /**
-   * Returns string representation of the picture.
-   */
-  QString asString() const;
+    /**
+     * Returns string representation of the picture.
+     */
+    QString toString() const;
 
-private:
-  QString mUrl;
-  QString mType;
-  QImage mData;
-
-  int mIntern;
+  private:
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );

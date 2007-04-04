@@ -32,10 +32,16 @@
 
 using namespace KABC;
 
+class EmailSelectDialog::Private
+{
+  public:
+    QButtonGroup *mButtonGroup;
+};
+
 EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
                                       const QString &current,
-                                      QWidget *parent ) :
-  KDialog( parent )
+                                      QWidget *parent )
+  : KDialog( parent ), d( new Private )
 {
   setCaption( i18n("Select Email Address") );
   setButtons( Ok );
@@ -46,23 +52,28 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
 
   QBoxLayout *topLayout = new QVBoxLayout( topFrame );
   QGroupBox *box = new QGroupBox( i18n("Email Addresses") );
-  mButtonGroup = new QButtonGroup( box );
-  mButtonGroup->setExclusive( true );
+  d->mButtonGroup = new QButtonGroup( box );
+  d->mButtonGroup->setExclusive( true );
   topLayout->addWidget( box );
 
   QStringList::ConstIterator it;
   for ( it = emails.begin(); it != emails.end(); ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
-    mButtonGroup->addButton( button );
+    d->mButtonGroup->addButton( button );
     if ( (*it) == current ) {
       button->setChecked( true );
     }
   }
 }
 
+EmailSelectDialog::~EmailSelectDialog()
+{
+  delete d;
+}
+
 QString EmailSelectDialog::selected()
 {
-  QAbstractButton *button = mButtonGroup->checkedButton();
+  QAbstractButton *button = d->mButtonGroup->checkedButton();
   if ( button ) return button->text();
   return QString();
 }

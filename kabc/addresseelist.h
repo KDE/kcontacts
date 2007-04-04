@@ -22,6 +22,8 @@
 #ifndef KABC_ADDRESSEELIST_H
 #define KABC_ADDRESSEELIST_H
 
+#include <QtCore/QSharedDataPointer>
+
 #include "addressee.h"
 
 namespace KABC {
@@ -45,36 +47,71 @@ namespace SortingTraits
 class KABC_EXPORT Uid
 {
   public:
+    Uid();
+    ~Uid();
+
     static bool eq( const Addressee &, const Addressee & );
     static bool lt( const Addressee &, const Addressee & );
+
+  private:
+    class Private;
+    Private* const d;
 };
 
 class KABC_EXPORT Name
 {
   public:
+    Name();
+    ~Name();
+
     static bool eq( const Addressee &, const Addressee & );
     static bool lt( const Addressee &, const Addressee & );
+
+  private:
+    class Private;
+    Private* const d;
 };
 
 class KABC_EXPORT FormattedName
 {
   public:
+    FormattedName();
+    ~FormattedName();
+
     static bool eq( const Addressee &, const Addressee & );
     static bool lt( const Addressee &, const Addressee & );
+
+  private:
+    class Private;
+    Private* const d;
 };
 
 class KABC_EXPORT FamilyName // fallback to given name
 {
   public:
+    FamilyName();
+    ~FamilyName();
+
     static bool eq( const Addressee &, const Addressee & );
     static bool lt( const Addressee &, const Addressee & );
+
+  private:
+    class Private;
+    Private* const d;
 };
 
 class KABC_EXPORT GivenName  // fallback to family name
 {
   public:
+    GivenName();
+    ~GivenName();
+
     static bool eq( const Addressee &, const Addressee & );
     static bool lt( const Addressee &, const Addressee & );
+
+  private:
+    class Private;
+    Private* const d;
 };
 
 }
@@ -110,28 +147,40 @@ typedef enum { Uid, Name, FormattedName, FamilyName, GivenName } SortingCriterio
 class KABC_EXPORT AddresseeList : public QList<Addressee>
 {
   public:
+    /**
+     * Creates a new addressee list.
+     */
     AddresseeList();
-    ~AddresseeList();
+
+    /**
+     * Creates a new addressee list.
+     */
     AddresseeList( const AddresseeList & );
+
+    /**
+     * Creates a new addressee list.
+     */
     AddresseeList( const QList<Addressee> & );
 
     /**
-     * Debug output.
+     * Destroys the addressee list.
      */
-    void dump() const;
+    ~AddresseeList();
+
+    AddresseeList& operator=( const AddresseeList &other );
 
     /**
      * Determines the direction of sorting. On change, the list
      * will <em>not</em> automatically be resorted.
      * @param r   <tt>true</tt> if sorting should be done reverse, <tt>false</tt> otherwise
      */
-    void setReverseSorting( bool r = true ) { mReverseSorting = r; }
+    void setReverseSorting( bool reverseSorting = true );
 
     /**
      * Returns the direction of sorting.
      * @return    <tt>true</tt> if sorting is done reverse, <tt>false</tt> otherwise
      */
-    bool reverseSorting() const { return mReverseSorting; }
+    bool reverseSorting() const;
 
     /**
      * Sorts this list by a specific criterion.
@@ -196,7 +245,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      * Returns the active sorting criterion, ie the sorting criterion that
      * will be used by a {@link #sort} call.
      */
-    SortingCriterion sortingCriterion() const { return mActiveSortingCriterion; }
+    SortingCriterion sortingCriterion() const;
 
     /**
      * Returns the active sorting field, ie a pointer to the Field object
@@ -207,10 +256,14 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      */
     Field* sortingField() const;
 
+    /**
+     * Returns a string representation of the addressee list.
+     */
+    QString toString() const;
+
   private:
-    bool mReverseSorting;
-    SortingCriterion mActiveSortingCriterion;
-    //KDE 4.0 - add a d-pointer here!
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 // needed for msvc, 

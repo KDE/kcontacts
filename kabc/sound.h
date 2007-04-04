@@ -22,6 +22,7 @@
 #define KABC_SOUND_H
 
 #include <QtCore/QString>
+#include <QtCore/QSharedDataPointer>
 
 #include "kabc.h"
 
@@ -57,91 +58,95 @@ namespace KABC {
  */
 class KABC_EXPORT Sound
 {
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Sound & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Sound & );
+    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Sound & );
+    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Sound & );
 
-public:
+  public:
 
-  /**
-   * Consturctor. Creates an empty object.
-   */
-  Sound();
+    /**
+     * Consturctor. Creates an empty object.
+     */
+    Sound();
 
-  /**
-   * Consturctor.
-   *
-   * @param url  A URL that describes the position of the sound file.
-   */
-  Sound( const QString &url );
+    /**
+     * Consturctor.
+     *
+     * @param url  A URL that describes the position of the sound file.
+     */
+    Sound( const QString &url );
 
-  /**
-   * Consturctor.
-   *
-   * @param data  The raw data of the sound.
-   */
-  Sound( const QByteArray &data );
+    /**
+     * Consturctor.
+     *
+     * @param data  The raw data of the sound.
+     */
+    Sound( const QByteArray &data );
 
-  /**
-   * Destructor.
-   */
-  ~Sound();
+    /**
+     * Copy constructor.
+     */
+    Sound( const Sound &other );
 
+    /**
+     * Destructor.
+     */
+    ~Sound();
 
-  bool operator==( const Sound & ) const;
-  bool operator!=( const Sound & ) const;
+    Sound& operator=( const Sound &other );
 
-  /**
-   * Sets a URL for the location of the sound file. When using this
-   * function, isIntern() will return 'false' until you use
-   * setData().
-   *
-   * @param url  The location URL of the sound file.
-   */
-  void setUrl( const QString &url );
+    bool operator==( const Sound & ) const;
+    bool operator!=( const Sound & ) const;
 
-  /**
-   * Test if this sound file has been set.
-   * Just does:  !isIntern() && url.isEmpty()
-   */
-  bool isEmpty() const;
+    /**
+     * Sets a URL for the location of the sound file. When using this
+     * function, isIntern() will return 'false' until you use
+     * setData().
+     *
+     * @param url  The location URL of the sound file.
+     */
+    void setUrl( const QString &url );
 
-  /**
-   * Sets the raw data of the sound. When using this function,
-   * isIntern() will return 'true' until you use setUrl().
-   *
-   * @param data  The raw data of the sound.
-   */
-  void setData( const QByteArray &data );
+    /**
+     * Test if this sound file has been set.
+     * Just does:  !isIntern() && url.isEmpty()
+     */
+    bool isEmpty() const;
 
-  /**
-   * Returns whether the sound is described by a URL (extern) or
-   * by the raw data (intern).
-   * When this method returns 'true' you can use data() to
-   * get the raw data. Otherwise you can request the URL of this
-   * sound by url() and load the raw data from that location.
-   */
-  bool isIntern() const;
+    /**
+     * Sets the raw data of the sound. When using this function,
+     * isIntern() will return 'true' until you use setUrl().
+     *
+     * @param data  The raw data of the sound.
+     */
+    void setData( const QByteArray &data );
 
-  /**
-   * Returns the location URL of this sound.
-   */
-  QString url() const;
+    /**
+     * Returns whether the sound is described by a URL (extern) or
+     * by the raw data (intern).
+     * When this method returns 'true' you can use data() to
+     * get the raw data. Otherwise you can request the URL of this
+     * sound by url() and load the raw data from that location.
+     */
+    bool isIntern() const;
 
-  /**
-   * Returns the raw data of this sound.
-   */
-  QByteArray data() const;
+    /**
+     * Returns the location URL of this sound.
+     */
+    QString url() const;
 
-  /**
-   * Returns string representation of the sound.
-   */
-  QString asString() const;
+    /**
+     * Returns the raw data of this sound.
+     */
+    QByteArray data() const;
 
-private:
-  QString mUrl;
-  QByteArray mData;
+    /**
+     * Returns string representation of the sound.
+     */
+    QString asString() const;
 
-  int mIntern;
+  private:
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &, const Sound & );

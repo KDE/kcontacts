@@ -139,29 +139,8 @@ Q_SIGNALS:
     void leaveModality();
 
   private:
-    QString mUser;
-    QString mPassword;
-    QString mDn;
-    QString mHost;
-    QString mFilter;
-    int mPort;
-    bool mAnonymous;
-    QMap<QString, QString> mAttributes;
-
-    KUrl mLDAPUrl;
-    QString mErrorMsg;
-
-    KIO::Job *loadFromCache();
-    void createCache();
-    void activateCache();
-    void enter_loop();
-    QByteArray addEntry( const QString &attr, const QString &value, bool mod );
-    QString findUid( const QString &uid );
-    bool AddresseeToLDIF( QByteArray &ldif, const Addressee &addr,
-      const QString &olddn );
-
-    class ResourceLDAPKIOPrivate;
-    ResourceLDAPKIOPrivate *d;
+    class Private;
+    Private* const d;
 };
 
 }

@@ -30,20 +30,48 @@
 
 using namespace KABC;
 
+ErrorHandler::~ErrorHandler()
+{
+}
+
+ConsoleErrorHandler::ConsoleErrorHandler()
+  : d( 0 )
+{
+}
+
+ConsoleErrorHandler::~ConsoleErrorHandler()
+{
+}
+
 void ConsoleErrorHandler::error( const QString &msg )
 {
   // no debug area is ok here
   kError() << msg << endl;
 }
 
-
-GuiErrorHandler::GuiErrorHandler( QWidget *parent )
-  : mParent( parent )
+class GuiErrorHandler::Private
 {
+  public:
+    Private( QWidget *widget )
+      : mWidget( widget )
+    {
+    }
+
+    QWidget *mWidget;
+};
+
+GuiErrorHandler::GuiErrorHandler( QWidget *widget )
+  : d( new Private( widget ) )
+{
+}
+
+GuiErrorHandler::~GuiErrorHandler()
+{
+  delete d;
 }
 
 void GuiErrorHandler::error( const QString &msg )
 {
-  if (qApp)
-    KMessageBox::error( mParent, msg );
+  if ( qApp )
+    KMessageBox::error( d->mWidget, msg );
 }

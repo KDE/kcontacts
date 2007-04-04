@@ -67,6 +67,8 @@ class KABC_EXPORT Resource : public KRES::Resource
     */
     class KABC_EXPORT Iterator
     {
+      friend class ConstIterator;
+      friend class Resource;
       public:
         /**
          * Default constructor
@@ -142,8 +144,9 @@ class KABC_EXPORT Resource : public KRES::Resource
          */
         virtual bool operator!=( const Iterator &it ) const;
 
-        struct IteratorData;
-        IteratorData *d;
+      private:
+        class Private;
+        Private* const d;
     };
 
     /**
@@ -153,6 +156,8 @@ class KABC_EXPORT Resource : public KRES::Resource
     */
     class KABC_EXPORT ConstIterator
     {
+      friend class Resource;
+
       public:
         /**
          * Default constructor
@@ -228,8 +233,9 @@ class KABC_EXPORT Resource : public KRES::Resource
          */
         virtual bool operator!=( const ConstIterator &it ) const;
 
-        struct ConstIteratorData;
-        ConstIteratorData *d;
+      private:
+        class Private;
+        Private* const d;
     };
 
     /**
@@ -294,7 +300,7 @@ class KABC_EXPORT Resource : public KRES::Resource
     /**
       Releases the ticket previousely requested with requestSaveTicket().
       The resource has to remove its locks in this function.
-	  This function is also responsible for deleting the ticket.
+      This function is also responsible for deleting the ticket.
      */
     virtual void releaseSaveTicket( Ticket* ) = 0;
 
@@ -433,10 +439,8 @@ class KABC_EXPORT Resource : public KRES::Resource
     Addressee::Map mAddrMap;
 
   private:
-    AddressBook *mAddressBook;
-
-    class ResourcePrivate;
-    ResourcePrivate *d;
+    class Private;
+    Private* const d;
 };
 
 }

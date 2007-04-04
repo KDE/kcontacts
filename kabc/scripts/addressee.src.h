@@ -23,8 +23,8 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QStringList>
+#include <QtCore/QSharedDataPointer>
 
-#include <ksharedptr.h>
 #include <kurl.h>
 
 #include "address.h"
@@ -372,15 +372,8 @@ class KABC_EXPORT Addressee
     bool operator< ( const Addressee &addr ) const;
 
   private:
-    void detach();
-
-    struct AddresseeData;
-    mutable KSharedPtr<AddresseeData> mData;
-
-  private:
-    static AddresseeData* shared_null;
-    static AddresseeData* makeSharedNull();
-    static KABC::SortMode *mSortMode;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &, const Addressee & );

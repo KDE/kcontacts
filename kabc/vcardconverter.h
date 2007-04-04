@@ -109,7 +109,7 @@ class KABC_EXPORT VCardConverter
 
   private:
     class VCardConverterPrivate;
-    VCardConverterPrivate *d;
+    VCardConverterPrivate* const d;
 };
 
 

@@ -32,7 +32,7 @@ class DistributionListManager;
 
 /**
   @short Distribution list of email addresses
- 
+
   This class represents a list of email addresses. Each email address is
   associated with an address book entry. If the address book entry changes, the
   entry in the distribution list is automatically updated.
@@ -51,9 +51,14 @@ class KABC_EXPORT DistributionList
     {
       typedef QList<Entry> List;
 
-      Entry() {}
-      Entry( const Addressee &_addressee, const QString &_email ) :
-          addressee( _addressee ), email( _email ) {}
+      Entry()
+      {
+      }
+
+      Entry( const Addressee &_addressee, const QString &_email )
+        : addressee( _addressee ), email( _email )
+      {
+      }
 
       Addressee addressee;
       QString email;
@@ -108,15 +113,15 @@ class KABC_EXPORT DistributionList
     Entry::List entries() const;
 
   private:
-    DistributionListManager *mManager;
-    QString mName;
+    class Private;
+    Private* const d;
 
-    Entry::List mEntries;
+    Q_DISABLE_COPY( DistributionList )
 };
 
 /**
   @short Manager of distribution lists
- 
+
   This class represents a collection of distribution lists, which are associated
   with a given address book.
 */
@@ -166,10 +171,10 @@ class KABC_EXPORT DistributionListManager
     bool save();
 
   private:
-    class DistributionListManagerPrivate;
-    DistributionListManagerPrivate *d;
+    class Private;
+    Private* const d;
 
-    QList<DistributionList*> mLists;
+    Q_DISABLE_COPY( DistributionListManager )
 };
 
 /**
@@ -210,8 +215,8 @@ class KABC_EXPORT DistributionListWatcher : public QObject
     ~DistributionListWatcher();
 
   private:
-    static DistributionListWatcher* mSelf;
-    KDirWatch *mDirWatch;
+    class Private;
+    Private* const d;
 };
 
 }

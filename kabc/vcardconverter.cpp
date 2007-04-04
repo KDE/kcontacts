@@ -25,6 +25,7 @@
 using namespace KABC;
 
 VCardConverter::VCardConverter()
+  : d( 0 )
 {
 }
 

@@ -73,8 +73,8 @@ ALE,sort string,,QString,sortString
 
 ALF,homepage,,KUrl,url,,.url()
 
-ALE,security class,,Secrecy,secrecy,,.asString()
+ALE,security class,,Secrecy,secrecy,,.toString()
 
-ALE,logo,,Picture,logo,,.asString()
-ALE,photo,,Picture,photo,,.asString()
+ALE,logo,,Picture,logo,,.toString()
+ALE,photo,,Picture,photo,,.toString()
 ALE,sound,,Sound,sound,,.asString()

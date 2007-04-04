@@ -42,27 +42,36 @@
 
 using namespace KABC;
 
-
-ResourceDir::ResourceDir()
-  : Resource(), mAsynchronous( false )
+class ResourceDir::Private
 {
-  init( StdAddressBook::directoryName(), "vcard" );
-}
+  public:
+    Private( ResourceDir *parent )
+      : mParent( parent ), mFormat( 0 ), mAsynchronous( false )
+    {
+    }
 
-ResourceDir::ResourceDir( const KConfigGroup &group )
-  : Resource( group ), mAsynchronous( false )
-{
-  init( group.readPathEntry( "FilePath", StdAddressBook::directoryName() ),
-        group.readEntry( "FileFormat", "vcard" ) );
-}
+    ~Private()
+    {
+      delete mFormat;
+      mFormat = 0;
+    }
 
-ResourceDir::ResourceDir( const QString &path, const QString &format )
-  : Resource(), mAsynchronous( false )
-{
-  init( path, format );
-}
+    void pathChanged();
+    void init( const QString &path, const QString &format );
 
-void ResourceDir::init( const QString &path, const QString &format )
+    ResourceDir *mParent;
+    Format *mFormat;
+    KDirWatch mDirWatch;
+
+    QString mPath;
+    QString mFormatName;
+
+    Lock *mLock;
+
+    bool mAsynchronous;
+};
+
+void ResourceDir::Private::init( const QString &path, const QString &format )
 {
   mFormatName = format;
 
@@ -76,29 +85,61 @@ void ResourceDir::init( const QString &path, const QString &format )
 
   mLock = 0;
 
-  connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( pathChanged() ) );
-  connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( pathChanged() ) );
-  connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( pathChanged() ) );
+  mParent->connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( pathChanged() ) );
+  mParent->connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( pathChanged() ) );
+  mParent->connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( pathChanged() ) );
 
-  setPath( path );
+  mParent->setPath( path );
+}
+
+void ResourceDir::Private::pathChanged()
+{
+  if ( !mParent->addressBook() )
+    return;
+
+  mParent->clear();
+  if ( mAsynchronous )
+    mParent->asyncLoad();
+  else {
+    mParent->load();
+    mParent->addressBook()->emitAddressBookChanged();
+  }
+}
+
+ResourceDir::ResourceDir()
+  : Resource(), d( new Private( this ) )
+{
+  d->init( StdAddressBook::directoryName(), "vcard" );
+}
+
+ResourceDir::ResourceDir( const KConfigGroup &group )
+  : Resource( group ), d( new Private( this ) )
+{
+  d->init( group.readPathEntry( "FilePath", StdAddressBook::directoryName() ),
+           group.readEntry( "FileFormat", "vcard" ) );
+}
+
+ResourceDir::ResourceDir( const QString &path, const QString &format )
+  : Resource(), d( new Private(  this ) )
+{
+  d->init( path, format );
 }
 
 ResourceDir::~ResourceDir()
 {
-  delete mFormat;
-  mFormat = 0;
+  delete d;
 }
 
 void ResourceDir::writeConfig( KConfigGroup &group )
 {
   Resource::writeConfig( group );
 
-  if ( mPath == StdAddressBook::directoryName() )
+  if ( d->mPath == StdAddressBook::directoryName() )
     group.deleteEntry( "FilePath" );
   else
-    group.writePathEntry( "FilePath", mPath );
+    group.writePathEntry( "FilePath", d->mPath );
 
-  group.writeEntry( "FileFormat", mFormatName );
+  group.writeEntry( "FileFormat", d->mFormatName );
 }
 
 Ticket *ResourceDir::requestSaveTicket()
@@ -107,15 +148,15 @@ Ticket *ResourceDir::requestSaveTicket()
 
   if ( !addressBook() ) return 0;
 
-  delete mLock;
-  mLock = new Lock( mPath );
+  delete d->mLock;
+  d->mLock = new Lock( d->mPath );
 
-  if ( mLock->lock() ) {
+  if ( d->mLock->lock() ) {
     addressBook()->emitAddressBookLocked();
   } else {
-    addressBook()->error( mLock->error() );
+    addressBook()->error( d->mLock->error() );
     kDebug(5700) << "ResourceFile::requestSaveTicket(): Unable to lock path '"
-                  << mPath << "': " << mLock->error() << endl;
+                  << d->mPath << "': " << d->mLock->error() << endl;
     return 0;
   }
 
@@ -126,13 +167,13 @@ void ResourceDir::releaseSaveTicket( Ticket *ticket )
 {
   delete ticket;
 
-  delete mLock;
-  mLock = 0;
+  delete d->mLock;
+  d->mLock = 0;
 }
 
 bool ResourceDir::doOpen()
 {
-  QDir dir( mPath );
+  QDir dir( d->mPath );
   if ( !dir.exists() ) { // no directory available
     return dir.mkdir( dir.path() );
   } else {
@@ -140,14 +181,14 @@ bool ResourceDir::doOpen()
     if ( testName.isNull() || testName.isEmpty() ) // no file in directory
       return true;
 
-    QFile file( mPath + '/' + testName );
+    QFile file( d->mPath + '/' + testName );
     if ( file.open( QIODevice::ReadOnly ) )
       return true;
 
     if ( file.size() == 0 )
       return true;
 
-    bool ok = mFormat->checkFormat( &file );
+    bool ok = d->mFormat->checkFormat( &file );
     file.close();
     return ok;
   }
@@ -159,17 +200,17 @@ void ResourceDir::doClose()
 
 bool ResourceDir::load()
 {
-  kDebug(5700) << "ResourceDir::load(): '" << mPath << "'" << endl;
+  kDebug(5700) << "ResourceDir::load(): '" << d->mPath << "'" << endl;
 
-  mAsynchronous = false;
+  d->mAsynchronous = false;
 
-  QDir dir( mPath );
+  QDir dir( d->mPath );
   QStringList files = dir.entryList( QDir::Files );
 
   QStringList::Iterator it;
   bool ok = true;
   for ( it = files.begin(); it != files.end(); ++it ) {
-    QFile file( mPath + '/' + (*it) );
+    QFile file( d->mPath + '/' + (*it) );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for reading" ,  file.fileName() ) );
@@ -177,7 +218,7 @@ bool ResourceDir::load()
       continue;
     }
 
-    if ( !mFormat->loadAll( addressBook(), this, &file ) )
+    if ( !d->mFormat->loadAll( addressBook(), this, &file ) )
       ok = false;
 
     file.close();
@@ -188,12 +229,11 @@ bool ResourceDir::load()
 
 bool ResourceDir::asyncLoad()
 {
-  mAsynchronous = true;
+  d->mAsynchronous = true;
 
   bool ok = load();
   if ( !ok )
-    emit loadingError( this, i18n( "Loading resource '%1' failed!" ,
-                         resourceName() ) );
+    emit loadingError( this, i18n( "Loading resource '%1' failed!", resourceName() ) );
   else
     emit loadingFinished( this );
 
@@ -202,24 +242,24 @@ bool ResourceDir::asyncLoad()
 
 bool ResourceDir::save( Ticket * )
 {
-  kDebug(5700) << "ResourceDir::save(): '" << mPath << "'" << endl;
+  kDebug(5700) << "ResourceDir::save(): '" << d->mPath << "'" << endl;
 
   Addressee::Map::Iterator it;
   bool ok = true;
 
-  mDirWatch.stopScan();
+  d->mDirWatch.stopScan();
 
   for ( it = mAddrMap.begin(); it != mAddrMap.end(); ++it ) {
     if ( !it.value().changed() )
       continue;
 
-    QFile file( mPath + '/' + (*it).uid() );
+    QFile file( d->mPath + '/' + (*it).uid() );
     if ( !file.open( QIODevice::WriteOnly ) ) {
-      addressBook()->error( i18n( "Unable to open file '%1' for writing" ,  file.fileName() ) );
+      addressBook()->error( i18n( "Unable to open file '%1' for writing", file.fileName() ) );
       continue;
     }
 
-    mFormat->save( *it, &file );
+    d->mFormat->save( *it, &file );
 
     // mark as unchanged
     (*it).setChanged( false );
@@ -227,7 +267,7 @@ bool ResourceDir::save( Ticket * )
     file.close();
   }
 
-  mDirWatch.startScan();
+  d->mDirWatch.startScan();
 
   return ok;
 }
@@ -236,8 +276,7 @@ bool ResourceDir::asyncSave( Ticket *ticket )
 {
   bool ok = save( ticket );
   if ( !ok )
-    emit savingError( this, i18n( "Saving resource '%1' failed!" ,
-                        resourceName() ) );
+    emit savingError( this, i18n( "Saving resource '%1' failed!", resourceName() ) );
   else
     emit savingFinished( this );
 
@@ -246,53 +285,38 @@ bool ResourceDir::asyncSave( Ticket *ticket )
 
 void ResourceDir::setPath( const QString &path )
 {
-  mDirWatch.stopScan();
-  if ( mDirWatch.contains( mPath ) )
-    mDirWatch.removeDir( mPath );
+  d->mDirWatch.stopScan();
+  if ( d->mDirWatch.contains( d->mPath ) )
+    d->mDirWatch.removeDir( d->mPath );
 
-  mPath = path;
-  mDirWatch.addDir( mPath, true );
-  mDirWatch.startScan();
+  d->mPath = path;
+  d->mDirWatch.addDir( d->mPath, true );
+  d->mDirWatch.startScan();
 }
 
 QString ResourceDir::path() const
 {
-  return mPath;
+  return d->mPath;
 }
 
 void ResourceDir::setFormat( const QString &format )
 {
-  mFormatName = format;
+  d->mFormatName = format;
 
-  if ( mFormat )
-    delete mFormat;
+  delete d->mFormat;
 
   FormatFactory *factory = FormatFactory::self();
-  mFormat = factory->format( mFormatName );
+  d->mFormat = factory->format( d->mFormatName );
 }
 
 QString ResourceDir::format() const
 {
-  return mFormatName;
-}
-
-void ResourceDir::pathChanged()
-{
-  if ( !addressBook() )
-    return;
-
-  clear();
-  if ( mAsynchronous )
-    asyncLoad();
-  else {
-    load();
-    addressBook()->emitAddressBookChanged();
-  }
+  return d->mFormatName;
 }
 
 void ResourceDir::removeAddressee( const Addressee& addr )
 {
-  QFile::remove( mPath + '/' + addr.uid() );
+  QFile::remove( d->mPath + '/' + addr.uid() );
   mAddrMap.remove( addr.uid() );
 }
 
