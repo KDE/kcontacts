@@ -65,10 +65,11 @@ class KABC_EXPORT Resource : public KRES::Resource
       By default it points to a QValueList<Addressee>::Iterator,
       but you can reimplement this class to fit your own needs.
     */
+    class ConstIterator;
     class KABC_EXPORT Iterator
     {
-      friend class ConstIterator;
-      friend class Resource;
+      friend class KABC::Resource::ConstIterator;
+      friend class KABC::Resource;
       public:
         /**
          * Default constructor
@@ -156,7 +157,7 @@ class KABC_EXPORT Resource : public KRES::Resource
     */
     class KABC_EXPORT ConstIterator
     {
-      friend class Resource;
+      friend class KABC::Resource;
 
       public:
         /**
