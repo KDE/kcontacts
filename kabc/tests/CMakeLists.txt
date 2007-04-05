@@ -3,6 +3,7 @@ if(KDE4_BUILD_TESTS)
 
 include_directories( ${CMAKE_SOURCE_DIR}/kabc ${CMAKE_SOURCE_DIR}/kab )
 
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 ########### next target ###############
 
