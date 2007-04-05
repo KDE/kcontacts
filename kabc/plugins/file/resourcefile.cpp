@@ -437,7 +437,7 @@ void ResourceFile::fileChanged()
     asyncLoad();
   else {
     load();
-    kDebug() << "addressBookChanged() " << endl;
+    kDebug(5700) << "addressBookChanged() " << endl;
     addressBook()->emitAddressBookChanged();
   }
 }

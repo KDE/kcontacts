@@ -162,7 +162,7 @@ bool Lock::unlock()
       emit unlocked();
     } else {
       d->mError = i18n( "Unlock failed. Lock file is owned by other process: %1 (%2)", app, pid );
-      kDebug() << "Lock::unlock(): " << d->mError << endl;
+      kDebug(5700) << "Lock::unlock(): " << d->mError << endl;
       return false;
     }
   }
