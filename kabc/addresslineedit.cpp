@@ -108,7 +108,7 @@ void AddressLineEdit::Private::init()
 
 QStringList AddressLineEdit::Private::addresses()
 {
-  QApplication::setOverrideCursor( QCursor( Qt::waitCursor ) ); // loading might take a while
+  QApplication::setOverrideCursor( QCursor( Qt::WaitCursor ) ); // loading might take a while
 
   QStringList result;
   QString space( " " );
