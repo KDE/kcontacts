@@ -49,6 +49,7 @@ class Picture::Private : public QSharedData
 };
 
 Picture::Picture()
+  : d( new Private )
 {
 }
 
