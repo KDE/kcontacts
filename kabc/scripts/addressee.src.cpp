@@ -48,12 +48,12 @@ class Addressee::Private : public QSharedData
 {
   public:
     Private()
-      : mUid( KRandom::randomString( 10 ) )
+      : mUid( KRandom::randomString( 10 ) ), mResource( 0 )
     {
     }
 
     Private( const Private &other )
-      : QSharedData( other )
+      : QSharedData( other ), mResource( 0 )
     {
       mUid = other.mUid;
       --VARIABLES_ASSIGNMENT--
