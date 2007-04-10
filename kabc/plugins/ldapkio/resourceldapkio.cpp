@@ -36,6 +36,7 @@
 #include <kio/netaccess.h>
 
 #include "kldap/ldif.h"
+#include "kldap/ldapdn.h"
 #include "kldap/ldapurl.h"
 
 #include "resourceldapkio.h"
@@ -399,7 +400,7 @@ void ResourceLDAPKIO::init()
   d->mLDAPUrl.setProtocol( d->mSSL ? "ldaps" : "ldap");
   d->mLDAPUrl.setHost( d->mHost );
   d->mLDAPUrl.setPort( d->mPort );
-  d->mLDAPUrl.setDn( d->mDn );
+  d->mLDAPUrl.setDn( KLDAP::LdapDN( d->mDn ) );
 
   if (!d->mAttributes.empty()) {
     QMap<QString,QString>::Iterator it;

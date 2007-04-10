@@ -93,7 +93,7 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
   cfg->setVersion( resource->ver() );
   cfg->setTimeLimit( resource->timeLimit() );
   cfg->setSizeLimit( resource->sizeLimit() );
-  cfg->setDn( resource->dn() );
+  cfg->setDn( KLDAP::LdapDN( resource->dn() ) );
   cfg->setFilter( resource->filter() );
   cfg->setMech( resource->mech() );
   if ( resource->isTLS() ) cfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
@@ -129,7 +129,7 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
   resource->setVer( cfg->version() );
   resource->setTimeLimit( cfg->timeLimit() );
   resource->setSizeLimit( cfg->sizeLimit() );
-  resource->setDn( cfg->dn() );
+  resource->setDn( cfg->dn().toString() );
   resource->setFilter( cfg->filter() );
   resource->setIsAnonymous( cfg->auth() == KLDAP::LdapConfigWidget::Anonymous );
   resource->setIsSASL(  cfg->auth() == KLDAP::LdapConfigWidget::SASL );
