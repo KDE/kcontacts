@@ -618,7 +618,7 @@ void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
     ret = d->mLdif.nextItem();
     switch ( ret ) {
       case KLDAP::Ldif::NewEntry:
-        kDebug(7125) << "new entry: " << d->mLdif.dn() << endl;
+        kDebug(7125) << "new entry: " << d->mLdif.dn().toString() << endl;
         break;
       case KLDAP::Ldif::Item:
         name = d->mLdif.attr().toLower();
