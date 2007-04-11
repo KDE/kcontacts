@@ -57,6 +57,13 @@ class Addressee::Private : public QSharedData
     {
       mUid = other.mUid;
       --VARIABLES_ASSIGNMENT--
+          
+      mPhoneNumbers = other.mPhoneNumbers;
+      mAddresses = other.mAddresses;
+      mKeys = other.mKeys;
+      mEmails = other.mEmails;
+      mCategories = other.mCategories;
+      mCustom = other.mCustom;
     }
 
     ~Private()
