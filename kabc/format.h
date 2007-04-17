@@ -57,12 +57,12 @@ public:
    * Save a single Addressee to file.
    */
   virtual void save( const Addressee &, QFile *file ) = 0;
-    
+
   /**
    * Save whole addressbook to file.
    */
   virtual void saveAll( AddressBook *, Resource *, QFile *file ) = 0;
-    
+
   /**
    * Checks if given file contains the right format
    */

@@ -57,8 +57,8 @@ LF,email address,,QString,email,Email|Frequent
 
 ALFE,mail client,,QString,mailer,Email
 
-ALE,time zone,,TimeZone,timeZone,,.asString()
-ALE,geographic position,,Geo,geo,,.asString()
+ALE,time zone,,TimeZone,timeZone,,.toString()
+ALE,geographic position,,Geo,geo,,.toString()
 
 ALFE,title,a person's title,QString,title,Organization
 ALFE,role,of a person in an organization,QString,role,Organization
@@ -77,4 +77,4 @@ ALE,security class,,Secrecy,secrecy,,.toString()
 
 ALE,logo,,Picture,logo,,.toString()
 ALE,photo,,Picture,photo,,.toString()
-ALE,sound,,Sound,sound,,.asString()
+ALE,sound,,Sound,sound,,.toString()

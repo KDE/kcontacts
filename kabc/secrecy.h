@@ -34,8 +34,6 @@ class KABC_EXPORT Secrecy
     friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Secrecy & );
 
   public:
-    typedef QList<int> TypeList;
-
     /**
      * Secrecy types
      *
@@ -43,7 +41,7 @@ class KABC_EXPORT Secrecy
      * @li Private      - only private access
      * @li Confidential - access for confidential persons
      */
-    enum Types {
+    enum Type {
       Public,
       Private,
       Confidential,
@@ -51,11 +49,16 @@ class KABC_EXPORT Secrecy
     };
 
     /**
-     * Constructor.
-     *
-     * @param type  The secrecy type, see Types.
+     * List of secrecy types.
      */
-    Secrecy( int type = Invalid );
+    typedef QList<Type> TypeList;
+
+    /**
+     * Creates a new secrecy of the given type.
+     *
+     * @param type  The secrecy type. @see Type
+     */
+    Secrecy( Type type = Invalid );
 
     /**
      * Copy constructor.
@@ -73,19 +76,20 @@ class KABC_EXPORT Secrecy
     bool operator!=( const Secrecy & ) const;
 
     /**
-      Returns if the Secrecy object has a valid value.
-    */
+     * Returns if the Secrecy object has a valid value.
+     */
     bool isValid() const;
 
     /**
-     * Sets the type, see Types.
+     * Sets the @p type.
+     * @see Type
      */
-    void setType( int type );
+    void setType( Type type );
 
     /**
-     * Returns the type, see Types.
+     * Returns the type.
      */
-    int type() const;
+    Type type() const;
 
     /**
      * Returns a list of all available secrecy types.
@@ -93,9 +97,9 @@ class KABC_EXPORT Secrecy
     static TypeList typeList();
 
     /**
-     * Returns a translated label for a given secrecy type.
+     * Returns a translated label for a given secrecy @p type.
      */
-    static QString typeLabel( int type );
+    static QString typeLabel( Type type );
 
     /**
      * Returns a string representation of the secrecy.
@@ -107,8 +111,15 @@ class KABC_EXPORT Secrecy
     QSharedDataPointer<PrivateData> d;
 };
 
-KABC_EXPORT QDataStream& operator<<( QDataStream &s, const Secrecy &secrecy );
-KABC_EXPORT QDataStream& operator>>( QDataStream &s, Secrecy &secrecy );
+/**
+ * Serializes the @p secrecy object into the @p stream.
+ */
+KABC_EXPORT QDataStream& operator<<( QDataStream &stream, const Secrecy &secrecy );
+
+/**
+ * Initializes the @p secrecy object from the @p stream.
+ */
+KABC_EXPORT QDataStream& operator>>( QDataStream &stream, Secrecy &secrecy );
 
 }
 #endif

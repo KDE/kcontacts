@@ -212,7 +212,7 @@ class Address::Private : public QSharedData
 
     bool mEmpty;
     QString mId;
-    int mType;
+    Type mType;
 
     QString mPostOfficeBox;
     QString mExtended;
@@ -234,7 +234,7 @@ Address::Address()
 {
 }
 
-Address::Address( int type )
+Address::Address( Type type )
   : d( new Private )
 {
   d->mType = type;
@@ -257,16 +257,18 @@ Address& Address::operator=( const Address &other )
   return *this;
 }
 
-bool Address::operator==( const Address &a ) const
+bool Address::operator==( const Address &other ) const
 {
-  if ( d->mPostOfficeBox != a.d->mPostOfficeBox ) return false;
-  if ( d->mExtended != a.d->mExtended ) return false;
-  if ( d->mStreet != a.d->mStreet ) return false;
-  if ( d->mLocality != a.d->mLocality ) return false;
-  if ( d->mRegion != a.d->mRegion ) return false;
-  if ( d->mPostalCode != a.d->mPostalCode ) return false;
-  if ( d->mCountry != a.d->mCountry ) return false;
-  if ( d->mLabel != a.d->mLabel ) return false;
+  if ( d->mId != other.d->mId ) return false;
+  if ( d->mType != other.d->mType ) return false;
+  if ( d->mPostOfficeBox != other.d->mPostOfficeBox ) return false;
+  if ( d->mExtended != other.d->mExtended ) return false;
+  if ( d->mStreet != other.d->mStreet ) return false;
+  if ( d->mLocality != other.d->mLocality ) return false;
+  if ( d->mRegion != other.d->mRegion ) return false;
+  if ( d->mPostalCode != other.d->mPostalCode ) return false;
+  if ( d->mCountry != other.d->mCountry ) return false;
+  if ( d->mLabel != other.d->mLabel ) return false;
 
   return true;
 }
@@ -297,13 +299,13 @@ QString Address::id() const
   return d->mId;
 }
 
-void Address::setType( int type )
+void Address::setType( Type type )
 {
   d->mEmpty = false;
   d->mType = type;
 }
 
-int Address::type() const
+Address::Type Address::type() const
 {
   return d->mType;
 }
@@ -472,7 +474,7 @@ Address::TypeList Address::typeList()
   return list;
 }
 
-QString Address::typeLabel( int type )
+QString Address::typeLabel( Type type )
 {
   if ( type & Pref )
     return i18nc( "Preferred address", "Preferred" );
@@ -509,19 +511,19 @@ QString Address::toString() const
 {
   QString str;
 
-  str += QString( "  Address {\n" );
-  str += QString( "    IsEmpty: %1\n" ).arg( d->mEmpty ? "true" : "false" );
-  str += QString( "    Id: %1\n" ).arg( d->mId );
-  str += QString( "    Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString( "    Post Office Box: %1\n" ).arg( d->mPostOfficeBox );
-  str += QString( "    Extended: %1\n" ).arg( d->mExtended );
-  str += QString( "    Street: %1\n" ).arg( d->mStreet );
-  str += QString( "    Locality: %1\n" ).arg( d->mLocality );
-  str += QString( "    Region: %1\n" ).arg( d->mRegion );
-  str += QString( "    Postal Code: %1\n" ).arg( d->mPostalCode );
-  str += QString( "    Country: %1\n" ).arg( d->mCountry );
-  str += QString( "    Label: %1\n" ).arg( d->mLabel );
-  str += QString( "  }\n" );
+  str += QString( "Address {\n" );
+  str += QString( "  IsEmpty: %1\n" ).arg( d->mEmpty ? "true" : "false" );
+  str += QString( "  Id: %1\n" ).arg( d->mId );
+  str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QString( "  Post Office Box: %1\n" ).arg( d->mPostOfficeBox );
+  str += QString( "  Extended: %1\n" ).arg( d->mExtended );
+  str += QString( "  Street: %1\n" ).arg( d->mStreet );
+  str += QString( "  Locality: %1\n" ).arg( d->mLocality );
+  str += QString( "  Region: %1\n" ).arg( d->mRegion );
+  str += QString( "  Postal Code: %1\n" ).arg( d->mPostalCode );
+  str += QString( "  Country: %1\n" ).arg( d->mCountry );
+  str += QString( "  Label: %1\n" ).arg( d->mLabel );
+  str += QString( "}\n" );
 
   return str;
 }
@@ -654,19 +656,20 @@ QString Address::ISOtoCountry( const QString &ISOname )
 
 QDataStream &KABC::operator<<( QDataStream &s, const Address &addr )
 {
-  return s << addr.d->mId << addr.d->mType << addr.d->mPostOfficeBox <<
+  return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox <<
               addr.d->mExtended << addr.d->mStreet << addr.d->mLocality <<
               addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry <<
-              addr.d->mLabel;
+              addr.d->mLabel << addr.d->mEmpty;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Address &addr )
 {
-  s >> addr.d->mId >> addr.d->mType >> addr.d->mPostOfficeBox >> addr.d->mExtended >>
+  uint type;
+  s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended >>
        addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion >>
-       addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel;
+       addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel >> addr.d->mEmpty;
 
-  addr.d->mEmpty = false;
+  addr.d->mType = Address::Type( type );
 
   return s;
 }

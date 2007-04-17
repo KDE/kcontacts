@@ -182,7 +182,7 @@ class KABC_EXPORT Addressee
     /**
       Return phone number, which matches the given type.
      */
-    PhoneNumber phoneNumber( int type ) const;
+    PhoneNumber phoneNumber( PhoneNumber::Type type ) const;
 
     /**
       Return list of all phone numbers.
@@ -192,7 +192,7 @@ class KABC_EXPORT Addressee
     /**
       Return list of phone numbers with a special type.
      */
-    PhoneNumber::List phoneNumbers( int type ) const;
+    PhoneNumber::List phoneNumbers( PhoneNumber::Type type ) const;
 
     /**
       Return phone number with the given id.
@@ -217,7 +217,7 @@ class KABC_EXPORT Addressee
       that should match. If you leave the string empty, the first
       key with a custom value is returned.
      */
-    Key key( int type, QString customTypeString = QString() ) const;
+    Key key( Key::Type type, QString customTypeString = QString() ) const;
 
     /**
       Return list of all keys.
@@ -236,7 +236,7 @@ class KABC_EXPORT Addressee
       that should match. If you leave the string empty, all custom
       keys will be returned.
      */
-    Key::List keys( int type, QString customTypeString = QString()  ) const;
+    Key::List keys( Key::Type type, QString customTypeString = QString()  ) const;
 
     /**
       Return key with the given id.
@@ -258,7 +258,7 @@ class KABC_EXPORT Addressee
     /**
       Return address, which matches the given type.
      */
-    Address address( int type ) const;
+    Address address( Address::Type type ) const;
 
     /**
       Return list of all addresses.
@@ -268,7 +268,7 @@ class KABC_EXPORT Addressee
     /**
       Return list of addresses with a special type.
      */
-    Address::List addresses( int type ) const;
+    Address::List addresses( Address::Type type ) const;
 
     /**
       Return address with the given id.
@@ -338,14 +338,9 @@ class KABC_EXPORT Addressee
                                    QString &email );
 
     /**
-      Debug output.
-     */
-    void dump() const;
-
-    /**
       Returns string representation of the addressee.
      */
-    QString asString() const;
+    QString toString() const;
 
     /**
       Set resource where the addressee is from.

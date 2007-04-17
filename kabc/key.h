@@ -24,6 +24,7 @@
 #include "kabc.h"
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedDataPointer>
 
 namespace KABC {
 
@@ -35,116 +36,137 @@ class KABC_EXPORT Key
   friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Key & );
   friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Key & );
 
-public:
-  typedef QList<Key> List;
-  typedef QList<int> TypeList;
+  public:
+    /**
+     * List of keys.
+     */
+    typedef QList<Key> List;
 
-  /**
-   * Key types
-   *
-   * @li X509   - X509 key
-   * @li PGP    - Pretty Good Privacy key
-   * @li Custom - Custom or IANA conform key
-   */
-  enum Types {
-    X509,
-    PGP,
-    Custom
-  };
+    /**
+     * Key types
+     *
+     * @li X509   - X509 key
+     * @li PGP    - Pretty Good Privacy key
+     * @li Custom - Custom or IANA conform key
+     */
+    enum Type {
+      X509,
+      PGP,
+      Custom
+    };
 
-  /**
-   * Constructor.
-   *
-   * @param text  The text data.
-   * @param type  The key type, see Types.
-   */
-  explicit Key( const QString &text = QString(), int type = PGP );
+    /**
+     * List of key types.
+     */
+    typedef QList<Type> TypeList;
 
-  /**
-   * Destructor.
-   */
-  ~Key();
+    /**
+     * Creates a new key.
+     *
+     * @param text  The text data.
+     * @param type  The key type, see Types.
+     */
+    explicit Key( const QString &text = QString(), Type type = PGP );
 
-  bool operator==( const Key & ) const;
-  bool operator!=( const Key & ) const;
+    /**
+     * Copy constructor.
+     */
+    Key( const Key &other );
 
-  /**
-   * Sets the unique identifier.
-   */
-  void setId( const QString &id );
+    /**
+     * Destroys the key.
+     */
+    ~Key();
 
-  /**
-   * Returns the unique identifier.
-   */
-  QString id() const;
+    bool operator==( const Key & ) const;
+    bool operator!=( const Key & ) const;
+    Key& operator=( const Key &other );
 
-  /**
-   * Sets binary data.
-   */
-  void setBinaryData( const QByteArray &binary );
+    /**
+     * Sets the unique @p identifier.
+     */
+    void setId( const QString &identifier );
 
-  /**
-   * Returns the binary data.
-   */
-  QByteArray binaryData() const;
+    /**
+     * Returns the unique identifier.
+     */
+    QString id() const;
 
-  /**
-   * Sets text data.
-   */
-  void setTextData( const QString &text );
+    /**
+     * Sets binary @p data.
+     */
+    void setBinaryData( const QByteArray &data );
 
-  /**
-   * Returns the text data.
-   */
-  QString textData() const;
+    /**
+     * Returns the binary data.
+     */
+    QByteArray binaryData() const;
 
-  /**
-   * Returns whether the key contains binary or text data.
-   */
-  bool isBinary() const;
+    /**
+     * Sets text @p data.
+     */
+    void setTextData( const QString &data );
 
-  /**
-   * Sets the type, see Type.
-   */
-  void setType( int type );
+    /**
+     * Returns the text data.
+     */
+    QString textData() const;
 
-  /**
-   * Sets custom type string.
-   */
-  void setCustomTypeString( const QString &custom );
+    /**
+     * Returns whether the key contains binary or text data.
+     */
+    bool isBinary() const;
 
-  /**
-   * Returns the type, see Type.
-   */
-  int type() const;
+    /**
+     * Sets the @p type.
+     * @see Type
+     */
+    void setType( Type type );
 
-  /**
-   * Returns the custom type string.
-   */
-  QString customTypeString() const;
+    /**
+     * Sets custom @p type string.
+     */
+    void setCustomTypeString( const QString &type );
 
-  /**
-   * Returns a list of all available key types.
-   */
-  static TypeList typeList();
+    /**
+     * Returns the type, see Type.
+     */
+    Type type() const;
 
-  /**
-   * Returns a translated label for a given key type.
-   */
-  static QString typeLabel( int type );
+    /**
+     * Returns the custom type string.
+     */
+    QString customTypeString() const;
 
-private:
-  QByteArray mBinaryData;
-  QString mId;
-  QString mTextData;
-  QString mCustomTypeString;
+    /**
+     * Returns a string representation of the key.
+     */
+    QString toString() const;
 
-  bool mIsBinary;
-  int mType;
+    /**
+     * Returns a list of all available key types.
+     */
+    static TypeList typeList();
+
+    /**
+     * Returns a translated label for a given key @p type.
+     */
+    static QString typeLabel( Type type );
+
+  private:
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const Key & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, Key & );
+/**
+ * Serializes the @p key object into the @p stream.
+ */
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Key &key );
+
+/**
+ * Initializes the @p key object from the @p stream.
+ */
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Key &key );
 
 }
 #endif

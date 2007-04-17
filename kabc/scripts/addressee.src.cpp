@@ -48,7 +48,8 @@ class Addressee::Private : public QSharedData
 {
   public:
     Private()
-      : mUid( KRandom::randomString( 10 ) ), mResource( 0 )
+      : mUid( KRandom::randomString( 10 ) ), mResource( 0 ),
+        mEmpty( true ), mChanged( false )
     {
     }
 
@@ -57,13 +58,17 @@ class Addressee::Private : public QSharedData
     {
       mUid = other.mUid;
       --VARIABLES_ASSIGNMENT--
-          
+
       mPhoneNumbers = other.mPhoneNumbers;
       mAddresses = other.mAddresses;
       mKeys = other.mKeys;
       mEmails = other.mEmails;
       mCategories = other.mCategories;
       mCustom = other.mCustom;
+
+      mResource = other.mResource;
+      mEmpty = other.mEmpty;
+      mChanged = other.mChanged;
     }
 
     ~Private()
@@ -449,7 +454,7 @@ void Addressee::removePhoneNumber( const PhoneNumber &phoneNumber )
   }
 }
 
-PhoneNumber Addressee::phoneNumber( int type ) const
+PhoneNumber Addressee::phoneNumber( PhoneNumber::Type type ) const
 {
   PhoneNumber phoneNumber( "", type );
   PhoneNumber::List::ConstIterator it;
@@ -470,7 +475,7 @@ PhoneNumber::List Addressee::phoneNumbers() const
   return d->mPhoneNumbers;
 }
 
-PhoneNumber::List Addressee::phoneNumbers( int type ) const
+PhoneNumber::List Addressee::phoneNumbers( PhoneNumber::Type type ) const
 {
   PhoneNumber::List list;
 
@@ -519,7 +524,7 @@ void Addressee::removeKey( const Key &key )
   }
 }
 
-Key Addressee::key( int type, QString customTypeString ) const
+Key Addressee::key( Key::Type type, QString customTypeString ) const
 {
   Key::List::ConstIterator it;
   for ( it = d->mKeys.constBegin(); it != d->mKeys.constEnd(); ++it ) {
@@ -549,7 +554,7 @@ Key::List Addressee::keys() const
   return d->mKeys;
 }
 
-Key::List Addressee::keys( int type, QString customTypeString ) const
+Key::List Addressee::keys( Key::Type type, QString customTypeString ) const
 {
   Key::List list;
 
@@ -582,52 +587,50 @@ Key Addressee::findKey( const QString &id ) const
   return Key();
 }
 
-QString Addressee::asString() const
+QString Addressee::toString() const
 {
-  return "Smith, agent Smith...";
-}
+  QString str;
 
-void Addressee::dump() const
-{
-  kDebug(5700) << "Addressee {" << endl;
-
-  kDebug(5700) << "  Uid: '" << uid() << "'" << endl;
+  str += QString( "Addressee {\n" );
+  str += QString( "  Uid: %1\n" ).arg( uid() );
 
   --DEBUG--
 
-  kDebug(5700) << "  Emails {" << endl;
+  str += QString( "  Emails {\n" );
   const QStringList e = emails();
   QStringList::ConstIterator it;
   for ( it = e.begin(); it != e.end(); ++it ) {
-    kDebug(5700) << "    " << (*it) << endl;
+    str += QString( "    %1\n" ).arg( *it );
   }
-  kDebug(5700) << "  }" << endl;
+  str += QString( "  }\n" );
 
-  kDebug(5700) << "  PhoneNumbers {" << endl;
+  str += QString( "  PhoneNumbers {\n" );
   const PhoneNumber::List p = phoneNumbers();
   PhoneNumber::List::ConstIterator it2;
   for ( it2 = p.begin(); it2 != p.end(); ++it2 ) {
-    kDebug(5700) << "    Type: " << int((*it2).type()) << " Number: " << (*it2).number() << endl;
+    str += (*it2).toString();
   }
-  kDebug(5700) << "  }" << endl;
+  str += QString( "  }\n" );
 
+  str += QString( "  Addresses {\n" );
   const Address::List a = addresses();
   Address::List::ConstIterator it3;
   for ( it3 = a.begin(); it3 != a.end(); ++it3 ) {
-    kDebug(5700) << (*it3).toString();
+    str += (*it3).toString();
   }
+  str += QString( "  }\n" );
 
-  kDebug(5700) << "  Keys {" << endl;
+  str += QString( "  Keys {\n" );
   const Key::List k = keys();
   Key::List::ConstIterator it4;
   for ( it4 = k.begin(); it4 != k.end(); ++it4 ) {
-    kDebug(5700) << "    Type: " << int((*it4).type()) <<
-                     " Key: " << (*it4).textData() <<
-                     " CustomString: " << (*it4).customTypeString() << endl;
+    str += (*it4).toString();
   }
-  kDebug(5700) << "  }" << endl;
+  str += QString( "  }\n" );
 
-  kDebug(5700) << "}" << endl;
+  str += QString( "}\n" );
+
+  return str;
 }
 
 
@@ -660,7 +663,7 @@ void Addressee::removeAddress( const Address &address )
   }
 }
 
-Address Addressee::address( int type ) const
+Address Addressee::address( Address::Type type ) const
 {
   Address address( type );
   Address::List::ConstIterator it;
@@ -681,7 +684,7 @@ Address::List Addressee::addresses() const
   return d->mAddresses;
 }
 
-Address::List Addressee::addresses( int type ) const
+Address::List Addressee::addresses( Address::Type type ) const
 {
   Address::List list;
 

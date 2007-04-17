@@ -57,7 +57,7 @@ int main(int argc,char **argv)
 
     if ( !a.isEmpty() ) {
       kDebug() << "Selected Addressee:" << endl;
-      a.dump();
+      kDebug() << a.toString() << endl;
     } else {
       kDebug() << "No Addressee selected." << endl;
     }

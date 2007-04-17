@@ -34,18 +34,17 @@ namespace KABC {
  *
  *  \code
  *    KTempFile tmp;
- *    if(sound.isIntern()) {
+ *    if ( sound.isIntern() ) {
  *      tmp.file()->writeBlock( sound.data() );
  *      tmp.close();
  *      KAudioPlayer::play( tmp.name() );
- *    } else if(!sound.url().isEmpty()) {
+ *    } else if( !sound.url().isEmpty() ) {
  *      QString tmpFile;
- *      if(!KIO::NetAccess::download(KUrl(themeURL.url()), tmpFile, NULL))
- *      {
- *        KMessageBox::error(0L,
- *                           KIO::NetAccess::lastErrorString(),
- *                           i18n("Failed to download sound file"),
- *                           KMessageBox::Notify
+ *      if ( !KIO::NetAccess::download( KUrl( themeURL.url() ), tmpFile, 0 ) ) {
+ *        KMessageBox::error( 0,
+ *                            KIO::NetAccess::lastErrorString(),
+ *                            i18n( "Failed to download sound file" ),
+ *                            KMessageBox::Notify
  *                          );
  *        return;
  *      }
@@ -64,21 +63,21 @@ class KABC_EXPORT Sound
   public:
 
     /**
-     * Consturctor. Creates an empty object.
+     * Creates an empty sound object.
      */
     Sound();
 
     /**
-     * Consturctor.
+     * Creates a sound object for the given url.
      *
-     * @param url  A URL that describes the position of the sound file.
+     * @param url A url that describes the position of the sound file.
      */
     Sound( const QString &url );
 
     /**
-     * Consturctor.
+     * Creates a sound object for the given data.
      *
-     * @param data  The raw data of the sound.
+     * @param data The raw data of the sound.
      */
     Sound( const QByteArray &data );
 
@@ -88,7 +87,7 @@ class KABC_EXPORT Sound
     Sound( const Sound &other );
 
     /**
-     * Destructor.
+     * Destroys the sound object.
      */
     ~Sound();
 
@@ -107,8 +106,7 @@ class KABC_EXPORT Sound
     void setUrl( const QString &url );
 
     /**
-     * Test if this sound file has been set.
-     * Just does:  !isIntern() && url.isEmpty()
+     * Returns true, if the sound object is empty.
      */
     bool isEmpty() const;
 
@@ -142,15 +140,23 @@ class KABC_EXPORT Sound
     /**
      * Returns string representation of the sound.
      */
-    QString asString() const;
+    QString toString() const;
 
   private:
     class Private;
     QSharedDataPointer<Private> d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const Sound & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, Sound & );
+/**
+ * Serializes the @p sound object into the @p stream.
+ */
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Sound &sound );
+
+/**
+ * Initializes the @p sound object from the @p stream.
+ */
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Sound &sound );
 
 }
+
 #endif

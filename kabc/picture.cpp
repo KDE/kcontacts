@@ -18,6 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <QtCore/QBuffer>
 #include <QtCore/QSharedData>
 
 #include "picture.h"
@@ -103,6 +104,12 @@ bool Picture::operator!=( const Picture &p ) const
   return !( p == *this );
 }
 
+bool Picture::isEmpty() const
+{
+  return (d->mIntern == false && d->mUrl.isEmpty() ||
+          d->mIntern == true && d->mData.isNull() );
+}
+
 void Picture::setUrl( const QString &url )
 {
   d->mUrl = url;
@@ -142,10 +149,23 @@ QString Picture::type() const
 
 QString Picture::toString() const
 {
-  if ( d->mIntern )
-    return "intern picture";
-  else
-    return d->mUrl;
+  QString str;
+
+  str += QString( "Picture {\n" );
+  str += QString( "  Type: %1\n" ).arg( d->mType );
+  str += QString( "  IsIntern: %1\n" ).arg( d->mIntern ? "true" : "false" );
+  if ( d->mIntern ) {
+    QByteArray data;
+    QBuffer buffer( &data );
+    buffer.open( QIODevice::WriteOnly );
+    d->mData.save( &buffer, "PNG" );
+    str += QString( "  Data: %1\n" ).arg( QString( data.toBase64() ) );
+  } else {
+    str += QString( "  Url: %1\n" ).arg( d->mUrl );
+  }
+  str += QString( "}\n" );
+
+  return str;
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const Picture &picture )

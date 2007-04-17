@@ -37,21 +37,21 @@ class KABC_EXPORT Picture
 
   public:
     /**
-     * Consturctor. Creates an empty object.
+     * Creates an empty picture.
      */
     Picture();
 
     /**
-     * Consturctor.
+     * Creates a picture which points to the given url.
      *
-     * @param url  A URL that describes the position of the picture file.
+     * @param url A URL that describes the location of the picture file.
      */
     Picture( const QString &url );
 
     /**
-     * Consturctor.
+     * Creates a picture with the given data.
      *
-     * @param data  The raw data of the picture.
+     * @param data The raw data of the picture.
      */
     Picture( const QImage &data );
 
@@ -69,6 +69,11 @@ class KABC_EXPORT Picture
 
     bool operator==( const Picture & ) const;
     bool operator!=( const Picture & ) const;
+
+    /**
+     * Returns true, if the picture is empty.
+     */
+    bool isEmpty() const;
 
     /**
      * Sets a URL for the location of the picture file. When using this
@@ -126,8 +131,16 @@ class KABC_EXPORT Picture
     QSharedDataPointer<Private> d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, Picture & );
+/**
+ * Serializes the @p picture object into the @p stream.
+ */
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Picture &picture );
+
+/**
+ * Initializes the @p picture object from the @p stream.
+ */
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Picture &picture );
 
 }
+
 #endif

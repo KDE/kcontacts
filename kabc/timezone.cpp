@@ -19,67 +19,112 @@
 */
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 #include "timezone.h"
 
 using namespace KABC;
 
-TimeZone::TimeZone() :
-  mOffset( 0 ), mValid( false )
+class TimeZone::Private : public QSharedData
+{
+  public:
+    Private( int offset = 0, bool valid = false )
+      : mOffset( offset ), mValid( valid )
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mOffset = other.mOffset;
+      mValid = other.mValid;
+    }
+
+    int mOffset;
+    bool mValid;
+};
+
+TimeZone::TimeZone()
+  : d( new Private )
 {
 }
 
-TimeZone::TimeZone( int offset ) :
-  mOffset( offset ), mValid( true )
+TimeZone::TimeZone( int offset )
+  : d( new Private( offset, true ) )
+{
+}
+
+TimeZone::TimeZone( const TimeZone &other )
+  : d( other.d )
+{
+}
+
+TimeZone::~TimeZone()
 {
 }
 
 void TimeZone::setOffset( int offset )
 {
-  mOffset = offset;
-  mValid = true;
+  d->mOffset = offset;
+  d->mValid = true;
 }
 
 int TimeZone::offset() const
 {
-  return mOffset;
+  return d->mOffset;
 }
 
 bool TimeZone::isValid() const
 {
-  return mValid;
+  return d->mValid;
 }
 
 bool TimeZone::operator==( const TimeZone &t ) const
 {
-  if ( !t.isValid() && !isValid() ) return true;
-  if ( !t.isValid() || !isValid() ) return false;
-  if ( t.mOffset == mOffset ) return true;
+  if ( !t.isValid() && !isValid() )
+    return true;
+
+  if ( !t.isValid() || !isValid() )
+    return false;
+
+  if ( t.d->mOffset == d->mOffset )
+    return true;
+
   return false;
 }
 
 bool TimeZone::operator!=( const TimeZone &t ) const
 {
-  if ( !t.isValid() && !isValid() ) return false;
-  if ( !t.isValid() || !isValid() ) return true;
-  if ( t.mOffset != mOffset ) return true;
-  return false;
+  return !( *this == t );
 }
 
-QString TimeZone::asString() const
+TimeZone& TimeZone::operator=( const TimeZone &other )
 {
-  return QString::number( mOffset );
+  if ( this != &other )
+    d = other.d;
+
+  return *this;
+}
+
+QString TimeZone::toString() const
+{
+  QString str;
+
+  str += QString( "TimeZone {\n" );
+  str += QString( "  Offset: %1\n" ).arg( d->mOffset );
+  str += QString( "}\n" );
+
+  return str;
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const TimeZone &zone )
 {
-    return s << zone.mOffset;
+  return s << zone.d->mOffset << zone.d->mValid;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, TimeZone &zone )
 {
-    s >> zone.mOffset;
-    zone.mValid = true;
+  s >> zone.d->mOffset >> zone.d->mValid;
 
-    return s;
+  return s;
 }

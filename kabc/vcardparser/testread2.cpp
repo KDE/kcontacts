@@ -54,8 +54,8 @@ main()
             kDebug()<<"\t\t"<< (*itr1).fullEmail() << " VS. " << (*itr2).fullEmail()<<endl;
         } else {
             kDebug()<<"\tAddressee  - FAILED"<<endl;
-            (*itr1).dump();
-            (*itr2).dump();
+            kDebug()<<(*itr1).toString()<<endl;
+            kDebug()<<(*itr2).toString()<<endl;
             //kDebug()<<"\t\t"<< (*itr1).fullEmail() << " VS. " << (*itr2).fullEmail()<<endl;
         }
     }

@@ -27,13 +27,13 @@
 
 using namespace KABC;
 
-class Field::FieldImpl
+class Field::Private
 {
   public:
-    FieldImpl( int fieldId, int category = 0,
-               const QString &label = QString(),
-               const QString &key = QString(),
-               const QString &app = QString() )
+    Private( int fieldId, int category = 0,
+             const QString &label = QString(),
+             const QString &key = QString(),
+             const QString &app = QString() )
       : mFieldId( fieldId ), mCategory( category ), mLabel( label ),
         mKey( key ), mApp( app ) {}
 
@@ -50,6 +50,10 @@ class Field::FieldImpl
     QString key() { return mKey; }
     QString app() { return mApp; }
 
+    static Field::List mAllFields;
+    static Field::List mDefaultFields;
+    static Field::List mCustomFields;
+
   private:
     int mFieldId;
     int mCategory;
@@ -59,28 +63,26 @@ class Field::FieldImpl
     QString mApp;
 };
 
+Field::List Field::Private::mAllFields;
+Field::List Field::Private::mDefaultFields;
+Field::List Field::Private::mCustomFields;
 
-Field::List Field::mAllFields;
-Field::List Field::mDefaultFields;
-Field::List Field::mCustomFields;
-
-
-Field::Field( FieldImpl *impl )
+Field::Field( Private *p )
+  : d( p )
 {
-  mImpl = impl;
 }
 
 Field::~Field()
 {
-  delete mImpl;
+  delete d;
 }
 
 QString Field::label()
 {
-  switch ( mImpl->fieldId() ) {
+  switch ( d->fieldId() ) {
     --CASELABEL--
-    case FieldImpl::CustomField:
-      return mImpl->label();
+    case Private::CustomField:
+      return d->label();
     default:
       return i18n("Unknown Field");
   }
@@ -88,7 +90,7 @@ QString Field::label()
 
 int Field::category()
 {
-  return mImpl->category();
+  return d->category();
 }
 
 QString Field::categoryLabel( int category )
@@ -115,18 +117,18 @@ QString Field::categoryLabel( int category )
 
 QString Field::value( const KABC::Addressee &a )
 {
-  switch ( mImpl->fieldId() ) {
+  switch ( d->fieldId() ) {
     --CASEVALUE--
-    case FieldImpl::Email:
+    case Private::Email:
       return a.preferredEmail();
-    case FieldImpl::Birthday:
+    case Private::Birthday:
       if ( a.birthday().isValid() )
         return a.birthday().date().toString( Qt::ISODate );
       else
         return QString();
-    case FieldImpl::Url:
+    case Private::Url:
       return a.url().prettyUrl();
-    case FieldImpl::HomePhone:
+    case Private::HomePhone:
     {
       PhoneNumber::List::ConstIterator it;
 
@@ -148,7 +150,7 @@ QString Field::value( const KABC::Addressee &a )
 
       return QString();
     }
-    case FieldImpl::BusinessPhone:
+    case Private::BusinessPhone:
     {
       PhoneNumber::List::ConstIterator it;
 
@@ -170,40 +172,40 @@ QString Field::value( const KABC::Addressee &a )
 
       return QString();
     }
-    case FieldImpl::MobilePhone:
+    case Private::MobilePhone:
       return a.phoneNumber( PhoneNumber::Cell ).number();
-    case FieldImpl::HomeFax:
+    case Private::HomeFax:
       return a.phoneNumber( PhoneNumber::Home | PhoneNumber::Fax ).number();
-    case FieldImpl::BusinessFax:
+    case Private::BusinessFax:
       return a.phoneNumber( PhoneNumber::Work | PhoneNumber::Fax ).number();
-    case FieldImpl::CarPhone:
+    case Private::CarPhone:
       return a.phoneNumber( PhoneNumber::Car ).number();
-    case FieldImpl::Isdn:
+    case Private::Isdn:
       return a.phoneNumber( PhoneNumber::Isdn ).number();
-    case FieldImpl::Pager:
+    case Private::Pager:
       return a.phoneNumber( PhoneNumber::Pager ).number();
-    case FieldImpl::HomeAddressStreet:
+    case Private::HomeAddressStreet:
       return a.address( Address::Home ).street();
-    case FieldImpl::HomeAddressLocality:
+    case Private::HomeAddressLocality:
       return a.address( Address::Home ).locality();
-    case FieldImpl::HomeAddressRegion:
+    case Private::HomeAddressRegion:
       return a.address( Address::Home ).region();
-    case FieldImpl::HomeAddressPostalCode:
+    case Private::HomeAddressPostalCode:
       return a.address( Address::Home ).postalCode();
-    case FieldImpl::HomeAddressCountry:
+    case Private::HomeAddressCountry:
       return a.address( Address::Home ).country();
-    case FieldImpl::BusinessAddressStreet:
+    case Private::BusinessAddressStreet:
       return a.address( Address::Work ).street();
-    case FieldImpl::BusinessAddressLocality:
+    case Private::BusinessAddressLocality:
       return a.address( Address::Work ).locality();
-    case FieldImpl::BusinessAddressRegion:
+    case Private::BusinessAddressRegion:
       return a.address( Address::Work ).region();
-    case FieldImpl::BusinessAddressPostalCode:
+    case Private::BusinessAddressPostalCode:
       return a.address( Address::Work ).postalCode();
-    case FieldImpl::BusinessAddressCountry:
+    case Private::BusinessAddressCountry:
       return a.address( Address::Work ).country();
-    case FieldImpl::CustomField:
-      return a.custom( mImpl->app(), mImpl->key() );
+    case Private::CustomField:
+      return a.custom( d->app(), d->key() );
     default:
       return QString();
   }
@@ -211,12 +213,12 @@ QString Field::value( const KABC::Addressee &a )
 
 bool Field::setValue( KABC::Addressee &a, const QString &value )
 {
-  switch ( mImpl->fieldId() ) {
+  switch ( d->fieldId() ) {
     --CASESETVALUE--
-    case FieldImpl::Birthday:
+    case Private::Birthday:
       a.setBirthday( QDateTime::fromString( value, Qt::ISODate ) );
-    case FieldImpl::CustomField:
-      a.insertCustom( mImpl->app(), mImpl->key(), value );
+    case Private::CustomField:
+      a.insertCustom( d->app(), d->key(), value );
     default:
       return false;
   }
@@ -224,9 +226,9 @@ bool Field::setValue( KABC::Addressee &a, const QString &value )
 
 QString Field::sortKey( const KABC::Addressee &a )
 {
-  switch ( mImpl->fieldId() ) {
+  switch ( d->fieldId() ) {
     --CASEVALUE--
-    case FieldImpl::Birthday:
+    case Private::Birthday:
       if ( a.birthday().isValid() ) {
         QDate date = a.birthday().date();
         QString key;
@@ -241,56 +243,56 @@ QString Field::sortKey( const KABC::Addressee &a )
 
 bool Field::isCustom()
 {
-  return mImpl->fieldId() == FieldImpl::CustomField;
+  return d->fieldId() == Private::CustomField;
 }
 
 Field::List Field::allFields()
 {
-  if ( mAllFields.isEmpty() ) {
+  if ( Private::mAllFields.isEmpty() ) {
     --CREATEFIELDS--
   }
 
-  return mAllFields;
+  return Private::mAllFields;
 }
 
 Field::List Field::defaultFields()
 {
-  if ( mDefaultFields.isEmpty() ) {
-    createDefaultField( FieldImpl::FormattedName );
-    createDefaultField( FieldImpl::Email );
+  if ( Private::mDefaultFields.isEmpty() ) {
+    createDefaultField( Private::FormattedName );
+    createDefaultField( Private::Email );
   }
 
-  return mDefaultFields;
+  return Private::mDefaultFields;
 }
 
 void Field::createField( int id, int category )
 {
-  mAllFields.append( new Field( new FieldImpl( id, category ) ) );
+  Private::mAllFields.append( new Field( new Private( id, category ) ) );
 }
 
 void Field::createDefaultField( int id, int category )
 {
-  mDefaultFields.append( new Field( new FieldImpl( id, category ) ) );
+  Private::mDefaultFields.append( new Field( new Private( id, category ) ) );
 }
 
 void Field::deleteFields()
 {
   Field::List::ConstIterator it;
 
-  for ( it = mAllFields.constBegin(); it != mAllFields.constEnd(); ++it ) {
+  for ( it = Private::mAllFields.constBegin(); it != Private::mAllFields.constEnd(); ++it ) {
     delete (*it);
   }
-  mAllFields.clear();
+  Private::mAllFields.clear();
 
-  for ( it = mDefaultFields.constBegin(); it != mDefaultFields.constEnd(); ++it ) {
+  for ( it = Private::mDefaultFields.constBegin(); it != Private::mDefaultFields.constEnd(); ++it ) {
     delete (*it);
   }
-  mDefaultFields.clear();
+  Private::mDefaultFields.clear();
 
-  for ( it = mCustomFields.constBegin(); it != mCustomFields.constEnd(); ++it ) {
+  for ( it = Private::mCustomFields.constBegin(); it != Private::mCustomFields.constEnd(); ++it ) {
     delete (*it);
   }
-  mCustomFields.clear();
+  Private::mCustomFields.clear();
 }
 
 void Field::saveFields( const QString &identifier,
@@ -309,12 +311,12 @@ void Field::saveFields( KConfigGroup &cfg, const QString &identifier,
   int custom = 0;
   Field::List::ConstIterator it;
   for ( it = fields.begin(); it != fields.end(); ++it ) {
-    fieldIds.append( (*it)->mImpl->fieldId() );
+    fieldIds.append( (*it)->d->fieldId() );
     if ( (*it)->isCustom() ) {
       QStringList customEntry;
-      customEntry << (*it)->mImpl->label();
-      customEntry << (*it)->mImpl->key();
-      customEntry << (*it)->mImpl->app();
+      customEntry << (*it)->d->label();
+      customEntry << (*it)->d->key();
+      customEntry << (*it)->d->app();
       cfg.writeEntry( "KABC_CustomEntry_" + identifier + '_' +
                        QString::number( custom++ ), customEntry );
     }
@@ -339,15 +341,15 @@ Field::List Field::restoreFields( const KConfigGroup &cfg, const QString &identi
   int custom = 0;
   QList<int>::ConstIterator it;
   for ( it = fieldIds.begin(); it != fieldIds.end(); ++it ) {
-    FieldImpl *f = 0;
-    if ( (*it) == FieldImpl::CustomField ) {
+    Private *f = 0;
+    if ( (*it) == Private::CustomField ) {
       QStringList customEntry = cfg.readEntry( "KABC_CustomEntry_" +
                                                  identifier + '_' +
                                                  QString::number( custom++ ),QStringList() );
-      f = new FieldImpl( *it, CustomCategory, customEntry[ 0 ],
+      f = new Private( *it, CustomCategory, customEntry[ 0 ],
                          customEntry[ 1 ], customEntry[ 2 ] );
     } else {
-      f = new FieldImpl( *it );
+      f = new Private( *it );
     }
     fields.append( new Field( f ) );
   }
@@ -357,22 +359,22 @@ Field::List Field::restoreFields( const KConfigGroup &cfg, const QString &identi
 
 bool Field::equals( Field *field )
 {
-  bool sameId = ( mImpl->fieldId() == field->mImpl->fieldId() );
+  bool sameId = ( d->fieldId() == field->d->fieldId() );
 
   if ( !sameId ) return false;
 
-  if ( mImpl->fieldId() != FieldImpl::CustomField ) return true;
+  if ( d->fieldId() != Private::CustomField ) return true;
 
-  return mImpl->key() == field->mImpl->key();
+  return d->key() == field->d->key();
 }
 
 Field *Field::createCustomField( const QString &label, int category,
                                  const QString &key, const QString &app )
 {
-  Field *field = new Field( new FieldImpl( FieldImpl::CustomField,
+  Field *field = new Field( new Private( Private::CustomField,
                                            category | CustomCategory,
                                            label, key, app ) );
-  mCustomFields.append( field );
+  Private::mCustomFields.append( field );
 
   return field;
 }

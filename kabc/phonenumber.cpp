@@ -19,6 +19,7 @@
 */
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 #include <klocale.h>
 #include <krandom.h>
@@ -27,79 +28,112 @@
 
 using namespace KABC;
 
-PhoneNumber::PhoneNumber() :
-  mType( Home )
+static QString cleanupNumber( const QString &input )
 {
-  init();
+  return input.simplified();
 }
 
-PhoneNumber::PhoneNumber( const QString &number, int type ) :
-  mType( type )
+class PhoneNumber::Private : public QSharedData
 {
-  init();
+  public:
+    Private( Type type )
+      : mId( KRandom::randomString( 8 ) ), mType( type )
+    {
+    }
 
-  validateNumber( number );
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mId = other.mId;
+      mType = other.mType;
+      mNumber = other.mNumber;
+    }
+
+    QString mId;
+    Type mType;
+    QString mNumber;
+};
+
+PhoneNumber::PhoneNumber()
+  : d( new Private( Home ) )
+{
+}
+
+PhoneNumber::PhoneNumber( const QString &number, Type type )
+  : d( new Private( type ) )
+{
+  d->mNumber = cleanupNumber( number );
+}
+
+PhoneNumber::PhoneNumber( const PhoneNumber &other )
+  : d( other.d )
+{
 }
 
 PhoneNumber::~PhoneNumber()
 {
 }
 
-void PhoneNumber::init()
+bool PhoneNumber::operator==( const PhoneNumber &other ) const
 {
-  mId = KRandom::randomString( 8 );
-}
+  if ( d->mId != other.d->mId )
+    return false;
 
-void PhoneNumber::validateNumber( const QString &number )
-{
-  mNumber = number;
+  if ( d->mNumber != other.d->mNumber )
+    return false;
 
-  // remove line breaks
-  mNumber = mNumber.replace( '\n', "" );
-  mNumber = mNumber.replace( '\r', "" );
-}
-
-bool PhoneNumber::operator==( const PhoneNumber &p ) const
-{
-  if ( mNumber != p.mNumber ) return false;
-  if ( mType != p.mType ) return false;
+  if ( d->mType != other.d->mType )
+    return false;
 
   return true;
 }
 
-bool PhoneNumber::operator!=( const PhoneNumber &p ) const
+bool PhoneNumber::operator!=( const PhoneNumber &other ) const
 {
-  return !( p == *this );
+  return !( other == *this );
+}
+
+PhoneNumber& PhoneNumber::operator=( const PhoneNumber &other )
+{
+  if ( this != &other )
+    d = other.d;
+
+  return *this;
+}
+
+bool PhoneNumber::isEmpty() const
+{
+  return d->mNumber.isEmpty();
 }
 
 void PhoneNumber::setId( const QString &id )
 {
-  mId = id;
+  d->mId = id;
 }
 
 QString PhoneNumber::id() const
 {
-  return mId;
+  return d->mId;
 }
 
 void PhoneNumber::setNumber( const QString &number )
 {
-  validateNumber( number );
+  d->mNumber = cleanupNumber( number );
 }
 
 QString PhoneNumber::number() const
 {
-  return mNumber;
+  return d->mNumber;
 }
 
-void PhoneNumber::setType( int type )
+void PhoneNumber::setType( Type type )
 {
-  mType = type;
+  d->mType = type;
 }
 
-int PhoneNumber::type() const
+PhoneNumber::Type PhoneNumber::type() const
 {
-  return mType;
+  return d->mType;
 }
 
 QString PhoneNumber::typeLabel() const
@@ -133,7 +167,7 @@ PhoneNumber::TypeList PhoneNumber::typeList()
   return list;
 }
 
-QString PhoneNumber::typeLabel( int type )
+QString PhoneNumber::typeLabel( Type type )
 {
   if ( type & Pref )
     return i18nc( "Preferred phone", "Preferred" );
@@ -181,10 +215,10 @@ QString PhoneNumber::typeLabel( int type )
     case Pager:
       return i18n("Pager");
       break;
-    case Home | Fax:
+    case Home + Fax:
       return i18n("Home Fax");
       break;
-    case Work | Fax:
+    case Work + Fax:
       return i18n("Work Fax");
       break;
     default:
@@ -192,14 +226,29 @@ QString PhoneNumber::typeLabel( int type )
   }
 }
 
+QString PhoneNumber::toString() const
+{
+  QString str;
+
+  str += QString( "PhoneNumber {\n" );
+  str += QString( "    Id: %1\n" ).arg( d->mId );
+  str += QString( "    Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QString( "    Number: %1\n" ).arg( d->mNumber );
+  str += QString( "}\n" );
+
+  return str;
+}
+
 QDataStream &KABC::operator<<( QDataStream &s, const PhoneNumber &phone )
 {
-  return s << phone.mId << phone.mType << phone.mNumber;
+  return s << phone.d->mId << (uint)phone.d->mType << phone.d->mNumber;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, PhoneNumber &phone )
 {
-  s >> phone.mId >> phone.mType >> phone.mNumber;
+  uint type;
+  s >> phone.d->mId >> type >> phone.d->mNumber;
+  phone.d->mType = PhoneNumber::Type( type );
 
   return s;
 }

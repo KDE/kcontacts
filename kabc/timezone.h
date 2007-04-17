@@ -21,6 +21,7 @@
 #ifndef KABC_TIMEZONE_H
 #define KABC_TIMEZONE_H
 
+#include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
 #include "kabc.h"
@@ -37,53 +38,70 @@ class KABC_EXPORT TimeZone
   friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const TimeZone & );
   friend KABC_EXPORT QDataStream &operator>>( QDataStream &, TimeZone & );
 
-public:
+  public:
+    /**
+     * Construct invalid time zone.
+     */
+    TimeZone();
 
-  /**
-   * Construct invalid time zone.
-   */
-  TimeZone();
+    /**
+     * Construct time zone.
+     *
+     * @param offset Offset in minutes relative to UTC.
+     */
+    TimeZone( int offset );
 
-  /**
-   * Construct time zone.
-   *
-   * @param offset Offset in minutes relative to UTC.
-   */
-  TimeZone( int offset );
+    /**
+     * Copy constructor.
+     */
+    TimeZone( const TimeZone &other );
 
-  /**
-   * Set time zone offset relative to UTC.
-   *
-   * @param offset Offset in minutes.
-   */
-  void setOffset( int offset );
+    /**
+     * Destroys the time zone.
+     */
+    ~TimeZone();
 
-  /**
-   * Return offset in minutes relative to UTC.
-   */
-  int offset() const;
+    /**
+     * Set time zone offset relative to UTC.
+     *
+     * @param offset Offset in minutes.
+     */
+    void setOffset( int offset );
 
-  /**
-   * Return, if this time zone object is valid.
-   */
-  bool isValid() const;
+    /**
+     * Return offset in minutes relative to UTC.
+     */
+    int offset() const;
 
-  bool operator==( const TimeZone & ) const;
-  bool operator!=( const TimeZone & ) const;
+    /**
+     * Return, if this time zone object is valid.
+     */
+    bool isValid() const;
 
-  /**
-   * Return string representation of time zone offset.
-   */
-  QString asString() const;
+    bool operator==( const TimeZone & ) const;
+    bool operator!=( const TimeZone & ) const;
+    TimeZone& operator=( const TimeZone &other );
 
-private:
-  int mOffset;  // Offset in minutes
+    /**
+     * Return string representation of time zone offset.
+     */
+    QString toString() const;
 
-  bool mValid;
+  private:
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const TimeZone & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, TimeZone & );
+/**
+ * Serializes the @p timezone object into the @p stream.
+ */
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const TimeZone &timezone );
+
+/**
+ * Initializes the @p timezone object from the @p stream.
+ */
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, TimeZone &timezone );
 
 }
+
 #endif

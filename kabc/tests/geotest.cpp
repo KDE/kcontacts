@@ -24,13 +24,6 @@
 
 QTEST_KDEMAIN(GeoTest, NoGUI)
 
-void GeoTest::emptyConstructor()
-{
-  KABC::Geo geo;
-
-  QCOMPARE( geo.asString(), QString() );
-}
-
 void GeoTest::constructor()
 {
   KABC::Geo geo( 1.2, 3.4 );

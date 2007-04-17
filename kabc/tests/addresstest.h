@@ -1,6 +1,6 @@
 /*
     This file is part of libkabc.
-    Copyright (c) 2007 KDE-PIM team <kde-pim@kde.org>
+    Copyright (c) 2007 Tobias Koenig <tokoe@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,22 +18,23 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOTEST_H
-#define GEOTEST_H
+#ifndef ADDRESS_TEST_H
+#define ADDRESS_TEST_H
 
 #include <QtCore/QObject>
 
-class GeoTest : public QObject
+class AddressTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS:
-    void constructor();
-    void isValid();
-    void setData();
-    void equals();
-    void differs();
-    void serialization();
+    void emptyTest();
+    void storeTest();
+    void equalsTest();
+    void differsTest();
+    void assignmentTest();
+    void serializeTest();
+    void formatTest();
 };
 
 #endif

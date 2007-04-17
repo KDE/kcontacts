@@ -74,8 +74,8 @@ class KABC_EXPORT VCardTool
     VCardLine createSecrecy( const Secrecy &secrecy );
 
 
-    QMap<QString, int> mAddressTypeMap;
-    QMap<QString, int> mPhoneTypeMap;
+    QMap<QString, Address::TypeFlag> mAddressTypeMap;
+    QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;
 
     class VCardToolPrivate;
     VCardToolPrivate *d;

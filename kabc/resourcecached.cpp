@@ -29,18 +29,73 @@
 
 using namespace KABC;
 
+class ResourceCached::Private
+{
+  public:
+    Private( ResourceCached *parent )
+      : mParent( parent ), mIdMapper( "kabc/uidmaps/" )
+    {
+    }
+
+    void loadChangesCache( QMap<QString, KABC::Addressee>&, const QString& );
+    void saveChangesCache( const QMap<QString, KABC::Addressee>&, const QString& );
+
+    ResourceCached *mParent;
+    KRES::IdMapper mIdMapper;
+
+    QMap<QString, KABC::Addressee> mAddedAddressees;
+    QMap<QString, KABC::Addressee> mChangedAddressees;
+    QMap<QString, KABC::Addressee> mDeletedAddressees;
+};
+
+void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addressee> &map, const QString &type )
+{
+  QFile file( mParent->changesCacheFile( type ) );
+
+  const KABC::Addressee::List list = map.values();
+  if ( list.isEmpty() ) {
+    file.remove();
+  } else {
+    if ( !file.open( QIODevice::WriteOnly ) ) {
+      kError() << "Can't open changes cache file '" << file.fileName() << "' for saving." << endl;
+      return;
+    }
+
+    KABC::VCardConverter converter;
+    const QByteArray vCards = converter.createVCards( list );
+    file.write( vCards );
+  }
+}
+
+void ResourceCached::Private::loadChangesCache( QMap<QString, KABC::Addressee> &map, const QString &type )
+{
+  QFile file( mParent->changesCacheFile( type ) );
+  if ( !file.open( QIODevice::ReadOnly ) )
+    return;
+
+  KABC::VCardConverter converter;
+
+  const KABC::Addressee::List list = converter.parseVCards( file.readAll() );
+  KABC::Addressee::List::ConstIterator it;
+  for ( it = list.begin(); it != list.end(); ++it )
+    map.insert( (*it).uid(), *it );
+
+  file.close();
+}
+
 ResourceCached::ResourceCached()
-  : KABC::Resource(), mIdMapper( "kabc/uidmaps/" )
+  : KABC::Resource(), d( new Private( this ) )
 {
 }
 
 ResourceCached::ResourceCached( const KConfigGroup &group )
-  : KABC::Resource( group ), mIdMapper( "kabc/uidmaps/" )
+  : KABC::Resource( group ), d( new Private( this ) )
 {
 }
 
 ResourceCached::~ResourceCached()
 {
+  delete d;
 }
 
 void ResourceCached::writeConfig( KConfigGroup &group )
@@ -51,36 +106,36 @@ void ResourceCached::writeConfig( KConfigGroup &group )
 void ResourceCached::insertAddressee( const Addressee &addr )
 {
   if ( !mAddrMap.contains( addr.uid() ) ) { // new contact
-    if ( mDeletedAddressees.contains( addr.uid() ) ) {
+    if ( d->mDeletedAddressees.contains( addr.uid() ) ) {
       // it was first removed, then added, so it's an update...
-      mDeletedAddressees.remove( addr.uid() );
+      d->mDeletedAddressees.remove( addr.uid() );
 
       mAddrMap.insert( addr.uid(), addr );
-      mChangedAddressees.insert( addr.uid(), addr );
+      d->mChangedAddressees.insert( addr.uid(), addr );
       return;
     }
 
     mAddrMap.insert( addr.uid(), addr );
-    mAddedAddressees.insert( addr.uid(), addr );
+    d->mAddedAddressees.insert( addr.uid(), addr );
   } else {
     KABC::Addressee oldAddressee = mAddrMap.find( addr.uid() ).value();
     if ( oldAddressee != addr ) {
       mAddrMap.remove( addr.uid() );
       mAddrMap.insert( addr.uid(), addr );
-      mChangedAddressees.insert( addr.uid(), addr );
+      d->mChangedAddressees.insert( addr.uid(), addr );
     }
   }
 }
 
 void ResourceCached::removeAddressee( const Addressee &addr )
 {
-  if ( mAddedAddressees.contains( addr.uid() ) ) {
-    mAddedAddressees.remove( addr.uid() );
+  if ( d->mAddedAddressees.contains( addr.uid() ) ) {
+    d->mAddedAddressees.remove( addr.uid() );
     return;
   }
 
-  if ( mDeletedAddressees.find( addr.uid() ) == mDeletedAddressees.end() )
-    mDeletedAddressees.insert( addr.uid(), addr );
+  if ( d->mDeletedAddressees.find( addr.uid() ) == d->mDeletedAddressees.end() )
+    d->mDeletedAddressees.insert( addr.uid(), addr );
 
   mAddrMap.remove( addr.uid() );
 }
@@ -90,7 +145,7 @@ bool ResourceCached::loadFromCache()
   mAddrMap.clear();
 
   setIdMapperIdentifier();
-  mIdMapper.load();
+  d->mIdMapper.load();
 
   // load cache
   QFile file( cacheFile() );
@@ -115,7 +170,7 @@ bool ResourceCached::loadFromCache()
 void ResourceCached::saveToCache()
 {
   setIdMapperIdentifier();
-  mIdMapper.save();
+  d->mIdMapper.save();
 
   // save cache
   QFile file( cacheFile() );
@@ -151,7 +206,7 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
     }
 
     if ( !found ) {
-      mIdMapper.removeRemoteId( mIdMapper.remoteId( (*cacheIt).uid() ) );
+      d->mIdMapper.removeRemoteId( d->mIdMapper.remoteId( (*cacheIt).uid() ) );
       mAddrMap.remove( (*cacheIt).uid() );
     }
   }
@@ -161,50 +216,50 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
 
 KRES::IdMapper& ResourceCached::idMapper()
 {
-  return mIdMapper;
+  return d->mIdMapper;
 }
 
 bool ResourceCached::hasChanges() const
 {
-  return !( mAddedAddressees.isEmpty() &&
-            mChangedAddressees.isEmpty() &&
-            mDeletedAddressees.isEmpty() );
+  return !( d->mAddedAddressees.isEmpty() &&
+            d->mChangedAddressees.isEmpty() &&
+            d->mDeletedAddressees.isEmpty() );
 }
 
 void ResourceCached::clearChanges()
 {
-  mAddedAddressees.clear();
-  mChangedAddressees.clear();
-  mDeletedAddressees.clear();
+  d->mAddedAddressees.clear();
+  d->mChangedAddressees.clear();
+  d->mDeletedAddressees.clear();
 }
 
 void ResourceCached::clearChange( const KABC::Addressee &addr )
 {
-  mAddedAddressees.remove( addr.uid() );
-  mChangedAddressees.remove( addr.uid() );
-  mDeletedAddressees.remove( addr.uid() );
+  d->mAddedAddressees.remove( addr.uid() );
+  d->mChangedAddressees.remove( addr.uid() );
+  d->mDeletedAddressees.remove( addr.uid() );
 }
 
 void ResourceCached::clearChange( const QString &uid )
 {
-  mAddedAddressees.remove( uid );
-  mChangedAddressees.remove( uid );
-  mDeletedAddressees.remove( uid );
+  d->mAddedAddressees.remove( uid );
+  d->mChangedAddressees.remove( uid );
+  d->mDeletedAddressees.remove( uid );
 }
 
 KABC::Addressee::List ResourceCached::addedAddressees() const
 {
-  return mAddedAddressees.values();
+  return d->mAddedAddressees.values();
 }
 
 KABC::Addressee::List ResourceCached::changedAddressees() const
 {
-  return mChangedAddressees.values();
+  return d->mChangedAddressees.values();
 }
 
 KABC::Addressee::List ResourceCached::deletedAddressees() const
 {
-  return mDeletedAddressees.values();
+  return d->mDeletedAddressees.values();
 }
 
 QString ResourceCached::cacheFile() const
@@ -217,58 +272,23 @@ QString ResourceCached::changesCacheFile( const QString &type ) const
   return KStandardDirs::locateLocal( "cache", "kabc/changescache/" + identifier() + '_' + type );
 }
 
-void ResourceCached::saveChangesCache( const QMap<QString, KABC::Addressee> &map, const QString &type )
-{
-  QFile file( changesCacheFile( type ) );
-
-  const KABC::Addressee::List list = map.values();
-  if ( list.isEmpty() ) {
-    file.remove();
-  } else {
-    if ( !file.open( QIODevice::WriteOnly ) ) {
-      kError() << "Can't open changes cache file '" << file.fileName() << "' for saving." << endl;
-      return;
-    }
-
-    KABC::VCardConverter converter;
-    const QByteArray vCards = converter.createVCards( list );
-    file.write( vCards );
-  }
-}
-
 void ResourceCached::saveChangesCache()
 {
-  saveChangesCache( mAddedAddressees, "added" );
-  saveChangesCache( mDeletedAddressees, "deleted" );
-  saveChangesCache( mChangedAddressees, "changed" );
-}
-
-void ResourceCached::loadChangesCache( QMap<QString, KABC::Addressee> &map, const QString &type )
-{
-  QFile file( changesCacheFile( type ) );
-  if ( !file.open( QIODevice::ReadOnly ) )
-    return;
-
-  KABC::VCardConverter converter;
-
-  const KABC::Addressee::List list = converter.parseVCards( file.readAll() );
-  KABC::Addressee::List::ConstIterator it;
-  for ( it = list.begin(); it != list.end(); ++it )
-    map.insert( (*it).uid(), *it );
-
-  file.close();
+  d->saveChangesCache( d->mAddedAddressees, "added" );
+  d->saveChangesCache( d->mDeletedAddressees, "deleted" );
+  d->saveChangesCache( d->mChangedAddressees, "changed" );
 }
 
 void ResourceCached::loadChangesCache()
 {
-  loadChangesCache( mAddedAddressees, "added" );
-  loadChangesCache( mDeletedAddressees, "deleted" );
-  loadChangesCache( mChangedAddressees, "changed" );
+  d->loadChangesCache( d->mAddedAddressees, "added" );
+  d->loadChangesCache( d->mDeletedAddressees, "deleted" );
+  d->loadChangesCache( d->mChangedAddressees, "changed" );
 }
 
 void ResourceCached::setIdMapperIdentifier()
 {
-  mIdMapper.setIdentifier( type() + '_' + identifier() );
+  d->mIdMapper.setIdentifier( type() + '_' + identifier() );
 }
 
 #include "resourcecached.moc"

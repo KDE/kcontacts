@@ -19,6 +19,7 @@
 */
 
 #include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 #include <klocale.h>
 #include <krandom.h>
@@ -27,110 +28,175 @@
 
 using namespace KABC;
 
-Key::Key( const QString &text, int type )
-  : mTextData( text ), mIsBinary( false ), mType( type )
+class Key::Private : public QSharedData
 {
-  mId = KRandom::randomString(8);
+  public:
+    Private()
+      : mId( KRandom::randomString( 8 ) )
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mId = other.mId;
+      mBinaryData = other.mBinaryData;
+      mTextData = other.mTextData;
+      mCustomTypeString = other.mCustomTypeString;
+      mIsBinary = other.mIsBinary;
+      mType = other.mType;
+    }
+
+    QString mId;
+    QByteArray mBinaryData;
+    QString mTextData;
+    QString mCustomTypeString;
+
+    bool mIsBinary;
+    Type mType;
+};
+
+Key::Key( const QString &text, Type type )
+  : d( new Private )
+{
+  d->mTextData = text;
+  d->mIsBinary = false;
+  d->mType = type;
+}
+
+Key::Key( const Key &other )
+  : d( other.d )
+{
 }
 
 Key::~Key()
 {
 }
 
-bool Key::operator==( const Key &k ) const
+bool Key::operator==( const Key &other ) const
 {
-  if ( mIsBinary != k.mIsBinary )
+  if ( d->mId != other.d->mId )
     return false;
 
-  if ( mIsBinary )
-    if ( mBinaryData != k.mBinaryData )
+  if ( d->mType != other.d->mType )
+    return false;
+
+  if ( d->mIsBinary != other.d->mIsBinary )
+    return false;
+
+  if ( d->mIsBinary )
+    if ( d->mBinaryData != other.d->mBinaryData )
       return false;
   else
-    if ( mTextData != k.mTextData )
+    if ( d->mTextData != other.d->mTextData )
       return false;
 
-  if ( mType != k.mType )
-    return false;
-
-  if ( mCustomTypeString != k.mCustomTypeString )
+  if ( d->mCustomTypeString != other.d->mCustomTypeString )
     return false;
 
   return true;
 }
 
-bool Key::operator!=( const Key &k ) const
+bool Key::operator!=( const Key &other ) const
 {
-  return !( k == *this );
+  return !( *this == other );
+}
+
+Key& Key::operator=( const Key &other )
+{
+  if ( this != &other )
+    d = other.d;
+
+  return *this;
 }
 
 void Key::setId( const QString &id )
 {
-  mId = id;
+  d->mId = id;
 }
 
 QString Key::id() const
 {
-  return mId;
+  return d->mId;
 }
 
 void Key::setBinaryData( const QByteArray &binary )
 {
-  mBinaryData = binary;
-  mIsBinary = true;
+  d->mBinaryData = binary;
+  d->mIsBinary = true;
 }
 
 QByteArray Key::binaryData() const
 {
-  return mBinaryData;
+  return d->mBinaryData;
 }
 
 void Key::setTextData( const QString &text )
 {
-  mTextData = text;
-  mIsBinary = false;
+  d->mTextData = text;
+  d->mIsBinary = false;
 }
 
 QString Key::textData() const
 {
-  return mTextData;
+  return d->mTextData;
 }
 
 bool Key::isBinary() const
 {
-  return mIsBinary;
+  return d->mIsBinary;
 }
 
-void Key::setType( int type )
+void Key::setType( Type type )
 {
-  mType = type;
+  d->mType = type;
 }
 
 void Key::setCustomTypeString( const QString &custom )
 {
-  mCustomTypeString = custom;
+  d->mCustomTypeString = custom;
 }
 
-int Key::type() const
+Key::Type Key::type() const
 {
-  return mType;
+  return d->mType;
 }
 
 QString Key::customTypeString() const
 {
-  return mCustomTypeString;
+  return d->mCustomTypeString;
+}
+
+QString Key::toString() const
+{
+  QString str;
+
+  str += QString( "Key {\n" );
+  str += QString( "  Id: %1\n" ).arg( d->mId );
+  str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
+  if ( d->mType == Custom )
+    str += QString( "  CustomType: %1\n" ).arg( d->mCustomTypeString );
+  str += QString( "  IsBinary: %1\n" ).arg( d->mIsBinary ? "true" : "false" );
+  if ( d->mIsBinary )
+    str += QString( "  Binary: %1\n" ).arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
+  else
+    str += QString( "  Text: %1\n" ).arg( d->mTextData );
+  str += QString( "}\n" );
+
+  return str;
 }
 
 Key::TypeList Key::typeList()
 {
-  TypeList list;
-  list << X509;
-  list << PGP;
-  list << Custom;
+  static TypeList list;
+
+  if ( list.isEmpty() )
+    list << X509 << PGP << Custom;
 
   return list;
 }
 
-QString Key::typeLabel( int type )
+QString Key::typeLabel( Type type )
 {
   switch ( type ) {
     case X509:
@@ -150,14 +216,17 @@ QString Key::typeLabel( int type )
 
 QDataStream &KABC::operator<<( QDataStream &s, const Key &key )
 {
-  return s << key.mId << key.mIsBinary << key.mTextData << key.mBinaryData <<
-              key.mCustomTypeString << key.mType;
+  return s << key.d->mId << key.d->mType << key.d->mIsBinary << key.d->mBinaryData
+           << key.d->mTextData << key.d->mCustomTypeString ;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Key &key )
 {
-  s >> key.mId >> key.mIsBinary >> key.mTextData >> key.mBinaryData >>
-       key.mCustomTypeString >> key.mType;
+  uint type;
+  s >> key.d->mId >> type >> key.d->mIsBinary >> key.d->mBinaryData >> key.d->mTextData
+    >> key.d->mCustomTypeString;
+
+  key.d->mType = Key::Type( type );
 
   return s;
 }

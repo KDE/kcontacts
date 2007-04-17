@@ -77,22 +77,14 @@ class KABC_EXPORT ResourceCached : public Resource
       Functions for keeping the changes persistent.
      */
     virtual QString changesCacheFile( const QString& ) const;
-    void loadChangesCache( QMap<QString, KABC::Addressee>&, const QString& );
     void loadChangesCache();
-    void saveChangesCache( const QMap<QString, KABC::Addressee>&, const QString& );
     void saveChangesCache();
 
     void setIdMapperIdentifier();
 
   private:
-    KRES::IdMapper mIdMapper;
-
-    QMap<QString, KABC::Addressee> mAddedAddressees;
-    QMap<QString, KABC::Addressee> mChangedAddressees;
-    QMap<QString, KABC::Addressee> mDeletedAddressees;
-
-    class ResourceCachedPrivate;
-    ResourceCachedPrivate *d;
+    class Private;
+    Private* const d;
 };
 
 }

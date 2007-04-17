@@ -21,6 +21,7 @@
 #ifndef KABC_GEO_H
 #define KABC_GEO_H
 
+#include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
 #include "kabc.h"
@@ -28,10 +29,10 @@
 namespace KABC {
 
 /**
-  @short Geographic position
-
-  This class represents a geographic position.
-*/
+ * @short Geographic position
+ *
+ * This class represents a geographic position.
+ */
 class KABC_EXPORT Geo
 {
     friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Geo & );
@@ -39,62 +40,76 @@ class KABC_EXPORT Geo
 
   public:
     /**
-      Construct invalid geographics position object.
-    */
+     * Creates an invalid geographics position object.
+     */
     Geo();
 
     /**
-      Construct geographics position object.
-
-      @param latitude  Geographical latitude
-      @param longitude Geographical longitude
-    */
+     * Creates a geographics position object.
+     *
+     * @param latitude  Geographical latitude
+     * @param longitude Geographical longitude
+     */
     Geo( float latitude, float longitude );
 
     /**
-      Sets the latitude.
-    */
-    void setLatitude( float );
+     * Copy constructor.
+     */
+    Geo( const Geo &other );
 
     /**
-      Returns the latitude.
-    */
+     * Destroys the geographics position object.
+     */
+    ~Geo();
+
+    /**
+     * Sets the @p latitude.
+     */
+    void setLatitude( float latitude );
+
+    /**
+     * Returns the latitude.
+     */
     float latitude() const;
 
     /**
-      Sets the longitude.
-    */
-    void setLongitude( float );
+     * Sets the @p longitude.
+     */
+    void setLongitude( float longitude );
 
     /**
-      Returns the longitude.
-    */
+     * Returns the longitude.
+     */
     float longitude() const;
 
     /**
-      Returns, if this object contains a valid geographical position.
-    */
+     * Returns, whether this object contains a valid geographical position.
+     */
     bool isValid() const;
 
     bool operator==( const Geo & ) const;
     bool operator!=( const Geo & ) const;
+    Geo& operator=( const Geo &other );
 
     /**
-      Returns string representation of geographical position.
-    */
-    QString asString() const;
+     * Returns string representation of geographical position.
+     */
+    QString toString() const;
 
   private:
-    float mLatitude;
-    float mLongitude;
-
-    bool mValid;
-    bool mValidLat;
-    bool mValidLong;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const Geo & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, Geo & );
+/**
+ * Serializes the geographical position @p object into the @p stream.
+ */
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Geo &object );
+
+/**
+ * Initializes the geographical position @p object from the @p stream.
+ */
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Geo &object );
 
 }
 

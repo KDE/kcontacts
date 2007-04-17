@@ -661,7 +661,7 @@ void AddressBook::dump() const
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    (*it).dump();
+    kDebug(5700) << (*it).toString();
   }
 
   kDebug(5700) << "AddressBook::dump() ---  end  ---" << endl;

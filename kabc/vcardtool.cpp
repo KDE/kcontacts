@@ -116,7 +116,7 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
       }
 
       bool hasLabel = !(*it).label().isEmpty();
-      QMap<QString, int>::ConstIterator typeIt;
+      QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
       for ( typeIt = mAddressTypeMap.constBegin(); typeIt != mAddressTypeMap.constEnd(); ++typeIt ) {
         if ( typeIt.value() & (*it).type() ) {
           adrLine.addParameter( "TYPE", typeIt.key() );
@@ -269,7 +269,7 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     for ( phoneIt = phoneNumbers.begin(); phoneIt != phoneNumbers.end(); ++phoneIt ) {
       VCardLine line( "TEL", (*phoneIt).number() );
 
-      QMap<QString, int>::ConstIterator typeIt;
+      QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
       for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != mPhoneTypeMap.constEnd(); ++typeIt ) {
         if ( typeIt.value() & (*phoneIt).type() )
           line.addParameter( "TYPE", typeIt.key() );
@@ -379,11 +379,11 @@ Addressee::List VCardTool::parseVCards( const QByteArray& vcard )
           if ( addrParts.count() > 6 )
             address.setCountry( addrParts[ 6 ] );
 
-          int type = 0;
+          Address::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
           for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
-            type += mAddressTypeMap[ (*it).toLower() ];
+            type |= mAddressTypeMap[ (*it).toLower() ];
 
           address.setType( type );
           addr.insertAddress( address );
@@ -430,11 +430,11 @@ Addressee::List VCardTool::parseVCards( const QByteArray& vcard )
 
         // LABEL
         else if ( identifier == "label" ) {
-          int type = 0;
+          Address::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
           for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
-            type += mAddressTypeMap[ (*it).toLower() ];
+            type |= mAddressTypeMap[ (*it).toLower() ];
 
           bool available = false;
           KABC::Address::List addressList = addr.addresses();
@@ -523,11 +523,11 @@ Addressee::List VCardTool::parseVCards( const QByteArray& vcard )
           PhoneNumber phone;
           phone.setNumber( (*lineIt).value().toString() );
 
-          int type = 0;
+          PhoneNumber::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
           for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
-            type += mPhoneTypeMap[(*it).toUpper()];
+            type |= mPhoneTypeMap[(*it).toUpper()];
 
           phone.setType( type );
 

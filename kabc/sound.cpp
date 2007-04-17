@@ -44,7 +44,7 @@ class Sound::Private : public QSharedData
     QString mUrl;
     QByteArray mData;
 
-    int mIntern;
+    bool mIntern;
 };
 
 Sound::Sound()
@@ -82,24 +82,24 @@ Sound& Sound::operator=( const Sound &other )
   return *this;
 }
 
-bool Sound::operator==( const Sound &s ) const
+bool Sound::operator==( const Sound &other ) const
 {
-  if ( d->mIntern != s.d->mIntern ) return false;
+  if ( d->mIntern != other.d->mIntern ) return false;
 
   if ( d->mIntern ) {
-    if ( d->mData != s.d->mData )
+    if ( d->mData != other.d->mData )
       return false;
   } else {
-    if ( d->mUrl != s.d->mUrl )
+    if ( d->mUrl != other.d->mUrl )
       return false;
   }
 
   return true;
 }
 
-bool Sound::operator!=( const Sound &s ) const
+bool Sound::operator!=( const Sound &other ) const
 {
-  return !( s == *this );
+  return !( other == *this );
 }
 
 void Sound::setUrl( const QString &url )
@@ -121,8 +121,8 @@ bool Sound::isIntern() const
 
 bool Sound::isEmpty() const
 {
-  return (!d->mIntern) && d->mUrl.isEmpty();
-
+  return ( d->mIntern && d->mData.isEmpty() ||
+           !d->mIntern && d->mUrl.isEmpty() );
 }
 
 QString Sound::url() const
@@ -135,12 +135,20 @@ QByteArray Sound::data() const
   return d->mData;
 }
 
-QString Sound::asString() const
+QString Sound::toString() const
 {
-  if ( d->mIntern )
-    return "intern sound";
-  else
-    return d->mUrl;
+  QString str;
+
+  str += QString( "Sound {\n" );
+  str += QString( "  IsIntern: %1\n" ).arg( d->mIntern ? "true" : "false" );
+  if ( d->mIntern ) {
+    str += QString( "  Data: %1\n" ).arg( QString( d->mData.toBase64() ) );
+  } else {
+    str += QString( "  Url: %1\n" ).arg( d->mUrl );
+  }
+  str += QString( "}\n" );
+
+  return str;
 }
 
 QDataStream &KABC::operator<<( QDataStream &s, const Sound &sound )
