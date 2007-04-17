@@ -95,12 +95,12 @@ class KABC_EXPORT TimeZone
 /**
  * Serializes the @p timezone object into the @p stream.
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const TimeZone &timezone );
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const TimeZone &timeZone );
 
 /**
  * Initializes the @p timezone object from the @p stream.
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, TimeZone &timezone );
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, TimeZone &timeZone );
 
 }
 
