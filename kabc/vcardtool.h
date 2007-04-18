@@ -44,12 +44,12 @@ class KABC_EXPORT VCardTool
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards( const Addressee::List& list, VCard::Version version = VCard::v3_0 );
+    QByteArray createVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 );
 
     /**
       Parses the string and returns a list of addressee objects.
      */
-    Addressee::List parseVCards( const QByteArray& vcard );
+    Addressee::List parseVCards( const QByteArray &vcard );
 
   private:
     /**

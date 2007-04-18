@@ -77,8 +77,6 @@ AddressBook::Iterator &AddressBook::Iterator::operator=
     return *this; // guard against self assignment
   }
 
-  delete d; // delete the old data the Iterator was completely constructed before
-  d = new IteratorData;
   d->mIt = i.d->mIt;
   d->mResources = i.d->mResources;
   d->mCurrRes = i.d->mCurrRes;
@@ -89,7 +87,6 @@ AddressBook::Iterator &AddressBook::Iterator::operator=
 AddressBook::Iterator::~Iterator()
 {
   delete d;
-  d = 0;
 }
 
 const Addressee &AddressBook::Iterator::operator*() const
@@ -195,8 +192,8 @@ AddressBook::ConstIterator::ConstIterator( const AddressBook::ConstIterator &i )
 }
 
 AddressBook::ConstIterator::ConstIterator( const AddressBook::Iterator &i )
+  :d( new ConstIteratorData )
 {
-  d = new ConstIteratorData;
   d->mIt = i.d->mIt;
   d->mResources = i.d->mResources;
   d->mCurrRes = i.d->mCurrRes;
@@ -209,8 +206,6 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator=
     return *this; // guard for self assignment
   }
 
-  delete d; // delete the old data because the Iterator was constructed before
-  d = new ConstIteratorData;
   d->mIt = i.d->mIt;
   d->mResources = i.d->mResources;
   d->mCurrRes = i.d->mCurrRes;
@@ -221,7 +216,6 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator=
 AddressBook::ConstIterator::~ConstIterator()
 {
   delete d;
-  d = 0;
 }
 
 const Addressee &AddressBook::ConstIterator::operator*() const
@@ -336,7 +330,7 @@ AddressBook::~AddressBook()
   delete d->mManager; d->mManager = 0;
   delete d->mConfig; d->mConfig = 0;
   delete d->mErrorHandler; d->mErrorHandler = 0;
-  delete d; d = 0;
+  delete d;
 }
 
 bool AddressBook::load()

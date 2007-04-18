@@ -150,7 +150,7 @@ class KABC_EXPORT AddressBook : public QObject
         bool operator!=( const Iterator &it ) const;
 
         struct IteratorData;
-        IteratorData *d;
+        IteratorData *const d;
     };
 
     /**
@@ -252,7 +252,7 @@ class KABC_EXPORT AddressBook : public QObject
         bool operator!=( const ConstIterator &it ) const;
 
         struct ConstIteratorData;
-        ConstIteratorData *d;
+        ConstIteratorData *const d;
     };
 
     /**
@@ -563,7 +563,7 @@ class KABC_EXPORT AddressBook : public QObject
 
   private:
     struct AddressBookData;
-    AddressBookData *d;
+    AddressBookData *const d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &lhs, const AddressBook &rhs );

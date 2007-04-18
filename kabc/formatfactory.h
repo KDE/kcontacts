@@ -84,14 +84,14 @@ class KABC_EXPORT FormatFactory
     /**
      * Returns the info structure for a special type.
      */
-    FormatInfo info( const QString &type );
+    FormatInfo info( const QString &type ) const;
 
   protected:
     FormatFactory();
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

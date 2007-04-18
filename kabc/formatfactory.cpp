@@ -135,7 +135,7 @@ QStringList FormatFactory::formats()
   return retval;
 }
 
-FormatInfo FormatFactory::info( const QString &type )
+FormatInfo FormatFactory::info( const QString &type ) const
 {
   if ( type.isEmpty() || !d->mFormatList.contains( type ) )
     return FormatInfo();

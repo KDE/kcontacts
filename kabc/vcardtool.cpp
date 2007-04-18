@@ -336,7 +336,7 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
   return VCardParser::createVCards( vCardList );
 }
 
-Addressee::List VCardTool::parseVCards( const QByteArray& vcard )
+Addressee::List VCardTool::parseVCards( const QByteArray &vcard )
 {
   static const QChar semicolonSep( ';' );
   static const QChar commaSep( ',' );

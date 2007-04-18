@@ -114,7 +114,7 @@ class KABC_EXPORT DistributionList
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( DistributionList )
 };
@@ -141,7 +141,7 @@ class KABC_EXPORT DistributionListManager
     /**
       Return distribution list with given name.
     */
-    DistributionList *list( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive ); 
+    DistributionList *list( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
 
     /**
       Insert distribution list. If a list with this name already exists, nothing
