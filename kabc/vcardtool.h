@@ -44,34 +44,34 @@ class KABC_EXPORT VCardTool
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 );
+    QByteArray createVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 ) const;
 
     /**
       Parses the string and returns a list of addressee objects.
      */
-    Addressee::List parseVCards( const QByteArray &vcard );
+    Addressee::List parseVCards( const QByteArray &vcard ) const;
 
   private:
     /**
       Split a string and replaces escaped separators on the fly with
       unescaped ones.
      */
-    QStringList splitString( const QChar &sep, const QString &value );
+    QStringList splitString( const QChar &sep, const QString &value ) const;
 
-    QDateTime parseDateTime( const QString &str );
-    QString createDateTime( const QDateTime &dateTime );
+    QDateTime parseDateTime( const QString &str ) const;
+    QString createDateTime( const QDateTime &dateTime ) const;
 
-    Picture parsePicture( const VCardLine &line );
-    VCardLine createPicture( const QString &identifier, const Picture &pic );
+    Picture parsePicture( const VCardLine &line ) const;
+    VCardLine createPicture( const QString &identifier, const Picture &pic ) const;
 
-    Sound parseSound( const VCardLine &line );
-    VCardLine createSound( const Sound &snd );
+    Sound parseSound( const VCardLine &line ) const;
+    VCardLine createSound( const Sound &snd ) const;
 
-    Key parseKey( const VCardLine &line );
-    VCardLine createKey( const Key &key );
+    Key parseKey( const VCardLine &line ) const;
+    VCardLine createKey( const Key &key ) const;
 
-    Secrecy parseSecrecy( const VCardLine &line );
-    VCardLine createSecrecy( const Secrecy &secrecy );
+    Secrecy parseSecrecy( const VCardLine &line ) const;
+    VCardLine createSecrecy( const Secrecy &secrecy ) const;
 
 
     QMap<QString, Address::TypeFlag> mAddressTypeMap;

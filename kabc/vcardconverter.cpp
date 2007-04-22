@@ -48,14 +48,14 @@ QByteArray VCardConverter::createVCards( Addressee::List list, Version version )
   return tool.createVCards( list, ( version == v3_0 ? VCard::v3_0 : VCard::v2_1 ) );
 }
 
-Addressee VCardConverter::parseVCard( const QByteArray &vcard )
+Addressee VCardConverter::parseVCard( const QByteArray &vcard ) const
 {
   Addressee::List list = parseVCards( vcard );
 
   return list.isEmpty() ? Addressee() : list[ 0 ];
 }
 
-Addressee::List VCardConverter::parseVCards( const QByteArray& vcard )
+Addressee::List VCardConverter::parseVCards( const QByteArray& vcard ) const
 {
   VCardTool tool;
 

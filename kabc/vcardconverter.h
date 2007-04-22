@@ -99,13 +99,13 @@ class KABC_EXPORT VCardConverter
     /**
       Parses a string in vCard format and returns the first contact.
      */
-    Addressee parseVCard( const QByteArray &vcard );
+    Addressee parseVCard( const QByteArray &vcard ) const;
 
     /**
       Parses a string in vCard format and returns a list of contact objects.
      */
     // FIXME: Add error handling
-    Addressee::List parseVCards( const QByteArray &vcard );
+    Addressee::List parseVCards( const QByteArray &vcard ) const;
 
   private:
     class VCardConverterPrivate;

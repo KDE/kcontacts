@@ -72,7 +72,7 @@ VCardTool::~VCardTool()
 {
 }
 
-QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version version )
+QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version version ) const
 {
   VCard::List vCardList;
 
@@ -336,7 +336,7 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
   return VCardParser::createVCards( vCardList );
 }
 
-Addressee::List VCardTool::parseVCards( const QByteArray &vcard )
+Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 {
   static const QChar semicolonSep( ';' );
   static const QChar commaSep( ',' );
@@ -575,7 +575,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard )
   return addrList;
 }
 
-QDateTime VCardTool::parseDateTime( const QString &str )
+QDateTime VCardTool::parseDateTime( const QString &str ) const
 {
   QDateTime dateTime;
 
@@ -599,7 +599,7 @@ QDateTime VCardTool::parseDateTime( const QString &str )
   return dateTime;
 }
 
-QString VCardTool::createDateTime( const QDateTime &dateTime )
+QString VCardTool::createDateTime( const QDateTime &dateTime ) const
 {
   QString str;
 
@@ -617,7 +617,7 @@ QString VCardTool::createDateTime( const QDateTime &dateTime )
   return str;
 }
 
-Picture VCardTool::parsePicture( const VCardLine &line )
+Picture VCardTool::parsePicture( const VCardLine &line ) const
 {
   Picture pic;
 
@@ -637,7 +637,7 @@ Picture VCardTool::parsePicture( const VCardLine &line )
   return pic;
 }
 
-VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pic )
+VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pic ) const
 {
   VCardLine line( identifier );
 
@@ -660,7 +660,7 @@ VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pi
   return line;
 }
 
-Sound VCardTool::parseSound( const VCardLine &line )
+Sound VCardTool::parseSound( const VCardLine &line ) const
 {
   Sound snd;
 
@@ -680,7 +680,7 @@ Sound VCardTool::parseSound( const VCardLine &line )
   return snd;
 }
 
-VCardLine VCardTool::createSound( const Sound &snd )
+VCardLine VCardTool::createSound( const Sound &snd ) const
 {
   VCardLine line( "SOUND" );
 
@@ -698,7 +698,7 @@ VCardLine VCardTool::createSound( const Sound &snd )
   return line;
 }
 
-Key VCardTool::parseKey( const VCardLine &line )
+Key VCardTool::parseKey( const VCardLine &line ) const
 {
   Key key;
 
@@ -722,7 +722,7 @@ Key VCardTool::parseKey( const VCardLine &line )
   return key;
 }
 
-VCardLine VCardTool::createKey( const Key &key )
+VCardLine VCardTool::createKey( const Key &key ) const
 {
   VCardLine line( "KEY" );
 
@@ -744,7 +744,7 @@ VCardLine VCardTool::createKey( const Key &key )
   return line;
 }
 
-Secrecy VCardTool::parseSecrecy( const VCardLine &line )
+Secrecy VCardTool::parseSecrecy( const VCardLine &line ) const
 {
   Secrecy secrecy;
 
@@ -759,7 +759,7 @@ Secrecy VCardTool::parseSecrecy( const VCardLine &line )
   return secrecy;
 }
 
-VCardLine VCardTool::createSecrecy( const Secrecy &secrecy )
+VCardLine VCardTool::createSecrecy( const Secrecy &secrecy ) const
 {
   VCardLine line( "CLASS" );
 
@@ -775,7 +775,7 @@ VCardLine VCardTool::createSecrecy( const Secrecy &secrecy )
   return line;
 }
 
-QStringList VCardTool::splitString( const QChar &sep, const QString &str )
+QStringList VCardTool::splitString( const QChar &sep, const QString &str ) const
 {
   QStringList list;
   QString value( str );
