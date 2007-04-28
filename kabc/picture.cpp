@@ -46,7 +46,7 @@ class Picture::Private : public QSharedData
     QString mType;
     QImage mData;
 
-    int mIntern;
+    bool mIntern;
 };
 
 Picture::Picture()
