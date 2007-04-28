@@ -25,7 +25,6 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <kstaticdeleter.h>
 
 #include <QtCore/QFile>
 #include <QtCore/QMap>
@@ -222,12 +221,7 @@ class Address::Private : public QSharedData
     QString mPostalCode;
     QString mCountry;
     QString mLabel;
-
-    static QMap<QString, QString> *mISOMap;
 };
-
-QMap<QString, QString>* Address::Private::mISOMap = 0;
-static KStaticDeleter< QMap<QString, QString> > isoMapDeleter;
 
 Address::Address()
   : d( new Private )
@@ -594,12 +588,12 @@ QString Address::countryToISO( const QString &cname )
   // we search a map file for translations from country names to
   // iso codes, storing caching things in a QMap for faster future
   // access.
-  if ( !Private::mISOMap )
-    isoMapDeleter.setObject( Private::mISOMap, new QMap<QString, QString>() );
+  typedef QMap<QString, QString> stringMap;
+  K_GLOBAL_STATIC(stringMap, sISOMap)
 
   QMap<QString, QString>::ConstIterator it;
-  it = Private::mISOMap->find( cname );
-  if ( it != Private::mISOMap->end() )
+  it = sISOMap->find( cname );
+  if ( it != sISOMap->end() )
     return it.value();
 
   QString mapfile = KGlobal::dirs()->findResource( "data",
@@ -613,7 +607,7 @@ QString Address::countryToISO( const QString &cname )
       QStringList countryInfo = strbuf.split( '\t', QString::KeepEmptyParts );
       if ( countryInfo[ 0 ] == cname ) {
         file.close();
-        Private::mISOMap->insert( cname, countryInfo[ 1 ] );
+        sISOMap->insert( cname, countryInfo[ 1 ] );
         return countryInfo[ 1 ];
       }
       strbuf = s.readLine();
@@ -622,7 +616,7 @@ QString Address::countryToISO( const QString &cname )
   }
 
   // fall back to system country
-  Private::mISOMap->insert( cname, KGlobal::locale()->country() );
+  sISOMap->insert( cname, KGlobal::locale()->country() );
   return KGlobal::locale()->country();
 }
 

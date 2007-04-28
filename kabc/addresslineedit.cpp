@@ -34,7 +34,6 @@
 #include <kcursor.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
-#include <kstaticdeleter.h>
 #include <kstandardshortcut.h>
 
 #include "distributionlist.h"
@@ -48,8 +47,6 @@
 //=============================================================================
 
 using namespace KABC;
-
-static KStaticDeleter<KCompletion> completionDeleter;
 
 class AddressLineEdit::Private
 {
@@ -76,13 +73,12 @@ class AddressLineEdit::Private
     bool mSmartPaste;
 
     static bool sAddressesDirty;
-    static KCompletion *sCompletion;
 };
+K_GLOBAL_STATIC(KCompletion, sCompletion)
 
 void AddressLineEdit::Private::init()
 {
   if ( !sCompletion ) {
-      completionDeleter.setObject( sCompletion, new KCompletion() );
       sCompletion->setOrder( KCompletion::Sorted );
       sCompletion->setIgnoreCase( true );
   }
@@ -189,7 +185,6 @@ void AddressLineEdit::Private::slotPopupCompletion( const QString& completion )
   mParent->cursorAtEnd();
 }
 
-KCompletion * AddressLineEdit::Private::sCompletion = 0L;
 bool AddressLineEdit::Private::sAddressesDirty = false;
 
 AddressLineEdit::AddressLineEdit( QWidget* parent, bool useCompletion )
@@ -359,7 +354,7 @@ void AddressLineEdit::doCompletion(bool ctrlT)
     loadAddresses();
 
   if ( ctrlT ) {
-    QStringList completions = d->sCompletion->substringCompletion( s );
+    QStringList completions = sCompletion->substringCompletion( s );
     if ( completions.count() > 1 ) {
         d->mPreviousAddresses = prevAddr;
         setCompletedItems( completions );
@@ -381,13 +376,13 @@ void AddressLineEdit::doCompletion(bool ctrlT)
     case KGlobalSettings::CompletionPopup:
     {
       d->mPreviousAddresses = prevAddr;
-      QStringList items = d->sCompletion->allMatches( s );
-      items += d->sCompletion->allMatches( "\"" + s );
-      items += d->sCompletion->substringCompletion( '<' + s );
+      QStringList items = sCompletion->allMatches( s );
+      items += sCompletion->allMatches( "\"" + s );
+      items += sCompletion->substringCompletion( '<' + s );
       int beforeDollarCompletionCount = items.count();
 
       if ( s.indexOf( ' ' ) == -1 ) // one word, possibly given name
-          items += d->sCompletion->allMatches( "$$" + s );
+          items += sCompletion->allMatches( "$$" + s );
 
       if ( !items.isEmpty() ) {
         if ( items.count() > beforeDollarCompletionCount ) {
@@ -427,7 +422,7 @@ void AddressLineEdit::doCompletion(bool ctrlT)
 
     case KGlobalSettings::CompletionShell:
     {
-      QString match = d->sCompletion->makeCompletion( s );
+      QString match = sCompletion->makeCompletion( s );
       if ( !match.isNull() && match != s ) {
         setText( prevAddr + match );
         cursorAtEnd();
@@ -439,7 +434,7 @@ void AddressLineEdit::doCompletion(bool ctrlT)
     case KGlobalSettings::CompletionAuto:
     {
       if ( !s.isEmpty() ) {
-        QString match = d->sCompletion->makeCompletion( s );
+        QString match = sCompletion->makeCompletion( s );
         if ( !match.isNull() && match != s )
           setCompletedText( prevAddr + match );
 
@@ -455,7 +450,7 @@ void AddressLineEdit::doCompletion(bool ctrlT)
 //-----------------------------------------------------------------------------
 void AddressLineEdit::loadAddresses()
 {
-  d->sCompletion->clear();
+  sCompletion->clear();
   d->sAddressesDirty = false;
 
   const QStringList addrs = d->addresses();
@@ -465,14 +460,14 @@ void AddressLineEdit::loadAddresses()
 
 void AddressLineEdit::addAddress( const QString &addr )
 {
-  d->sCompletion->addItem( addr );
+  sCompletion->addItem( addr );
 
   int pos = addr.indexOf( '<' );
   if ( pos >= 0 ) {
     ++pos;
     int pos2 = addr.indexOf( pos, '>' );
     if ( pos2 >= 0 )
-      d->sCompletion->addItem( addr.mid( pos, pos2 - pos ) );
+      sCompletion->addItem( addr.mid( pos, pos2 - pos ) );
   }
 }
 

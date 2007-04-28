@@ -24,15 +24,12 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <kstaticdeleter.h>
 
 #include "vcardformat.h"
 
 #include "formatfactory.h"
 
 using namespace KABC;
-
-static KStaticDeleter<FormatFactory> factoryDeleter;
 
 class FormatFactory::Private
 {
@@ -43,8 +40,6 @@ class FormatFactory::Private
     }
 
     KLibrary *openLibrary( const QString& libName );
-
-    static FormatFactory *mSelf;
 
     QHash<QString, FormatInfo> mFormatList;
 };
@@ -70,16 +65,13 @@ KLibrary *FormatFactory::Private::openLibrary( const QString& libName )
   return library;
 }
 
-FormatFactory *FormatFactory::Private::mSelf = 0;
-
 FormatFactory *FormatFactory::self()
 {
   kDebug(5700) << "FormatFactory::self()" << endl;
 
-  if ( !Private::mSelf )
-    factoryDeleter.setObject( Private::mSelf, new FormatFactory );
+  K_GLOBAL_STATIC(FormatFactory, sSelf)
 
-  return Private::mSelf;
+  return sSelf;
 }
 
 FormatFactory::FormatFactory()
