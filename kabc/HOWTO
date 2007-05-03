@@ -337,7 +337,7 @@ representation of one list.
 12:    QStringList emails = list->emails();
 13:    QStringList::Iterator eit;
 14:    for ( eit = emails.begin(); eit != emails.end(); ++eit )
-15:      kDebug() << QString( "\t%1" ).arg( (*eit).latin1() ) << endl;
+15:      kDebug() << QString( "\t%1" ).arg( (*eit).toLatin1() ) << endl;
 16:  }
 
 In the first line a KABC::DistributionListManager is created. The manager takes
