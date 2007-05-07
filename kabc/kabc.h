@@ -1,6 +1,6 @@
 /*
   This file is part of the kabc library.
-  Copyright (c) 2006 Allen Winter <winter@kde.org>
+  Copyright (c) 2006-2007 Allen Winter <winter@kde.org>
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General Public
@@ -18,59 +18,75 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KABC_H
-#define KABC_H
+#ifndef KABC_EXPORT_H
+#define KABC_EXPORT_H
 
 #include <kdemacros.h>
 
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KABC_LIB
-#define KABC_EXPORT KDE_EXPORT
-#else
-#define KABC_EXPORT KDE_IMPORT
-#endif
-#else
-#define KABC_EXPORT KDE_EXPORT
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KABC_FILE_CORE_LIB
-#define KABC_FILE_CORE_EXPORT KDE_EXPORT
-#else
-#define KABC_FILE_CORE_EXPORT KDE_IMPORT
-#endif
-#else
-#define KABC_FILE_CORE_EXPORT KDE_EXPORT
+#ifndef KABC_EXPORT
+# if defined(MAKE_KABC_LIB)
+   /* We are building this library */
+#  define KABC_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KABC_EXPORT KDE_IMPORT
+# endif
 #endif
 
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KABC_DIRECTORY_LIB
-#define KABC_DIR_EXPORT KDE_EXPORT
-#else
-#define KABC_DIR_EXPORT KDE_IMPORT
-#endif
-#else
-#define KABC_DIR_EXPORT KDE_EXPORT
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KABC_NET_LIB
-#define KABC_NET_EXPORT KDE_EXPORT
-#else
-#define KABC_NET_EXPORT KDE_IMPORT
-#endif
-#else
-#define KABC_NET_EXPORT KDE_EXPORT
+#ifndef KABC_FILE_CORE_EXPORT
+# if defined(MAKE_KABC_FILE_CORE_LIB)
+   /* We are building this library */
+#  define KABC_FILE_CORE_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KABC_FILE_CORE_EXPORT KDE_IMPORT
+# endif
 #endif
 
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KABC_LDAPKIO_LIB
-#define KABC_LDAPKIO_EXPORT KDE_EXPORT
-#else
-#define KABC_LDAPKIO_EXPORT KDE_IMPORT
+#ifndef KABC_DIR_EXPORT
+# if defined(MAKE_KABC_DIR_LIB)
+   /* We are building this library */
+#  define KABC_DIR_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KABC_DIR_EXPORT KDE_IMPORT
+# endif
 #endif
-#else
-#define KABC_LDAPKIO_EXPORT KDE_EXPORT
+
+#ifndef KABC_NET_EXPORT
+# if defined(MAKE_KABC_NET_LIB)
+   /* We are building this library */
+#  define KABC_NET_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KABC_NET_EXPORT KDE_IMPORT
+# endif
 #endif
+
+#ifndef KABC_LDAPKIO_EXPORT
+# if defined(MAKE_KABC_LDAPKIO_LIB)
+   /* We are building this library */
+#  define KABC_LDAPKIO_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KABC_LDAPKIO_EXPORT KDE_IMPORT
+# endif
+#endif
+
+# ifndef KABC_EXPORT_DEPRECATED
+#  define KABC_EXPORT_DEPRECATED KDE_DEPRECATED KABC_EXPORT
+# endif
+# ifndef KABC_FILE_CORE_EXPORT_DEPRECATED
+#  define KABC_FILE_CORE_EXPORT_DEPRECATED KDE_DEPRECATED KABC_FILE_CORE_EXPORT
+# endif
+# ifndef KABC_DIRECTORY_EXPORT_DEPRECATED
+#  define KABC_DIRECTORY_EXPORT_DEPRECATED KDE_DEPRECATED KABC_DIRECTORY_EXPORT
+# endif
+# ifndef KABC_NET_EXPORT_DEPRECATED
+#  define KABC_NET_EXPORT_DEPRECATED KDE_DEPRECATED KABC_NET_EXPORT
+# endif
+# ifndef KABC_LDAPKIO_EXPORT_DEPRECATED
+#  define KABC_LDAPKIO_EXPORT_DEPRECATED KDE_DEPRECATED KABC_LDAPKIO_EXPORT
+# endif
 
 #endif
