@@ -35,7 +35,7 @@ namespace KABC {
  *  \code
  *    KTempFile tmp;
  *    if ( sound.isIntern() ) {
- *      tmp.file()->writeBlock( sound.data() );
+ *      tmp.file()->write( sound.data() );
  *      tmp.close();
  *      KAudioPlayer::play( tmp.name() );
  *    } else if( !sound.url().isEmpty() ) {
