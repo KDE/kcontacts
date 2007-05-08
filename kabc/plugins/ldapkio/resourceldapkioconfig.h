@@ -73,7 +73,7 @@ class AttributesDialog : public KDialog
 
   public:
     AttributesDialog( const QMap<QString, QString> &attributes, int rdnprefix,
-                      QWidget *parent, const char *name = 0 );
+                      QWidget *parent );
     ~AttributesDialog();
 
     QMap<QString, QString> attributes() const;
@@ -98,7 +98,7 @@ class OfflineDialog : public KDialog
 
   public:
     OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
-      const QString &dst, QWidget *parent, const char *name = 0 );
+      const QString &dst, QWidget *parent );
     ~OfflineDialog();
 
     int cachePolicy() const;

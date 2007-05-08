@@ -325,8 +325,6 @@ DistributionListWatcher* DistributionListWatcher::Private::mSelf = 0;
 DistributionListWatcher::DistributionListWatcher()
  : QObject( qApp ), d( new Private )
 {
-  setObjectName( "DistributionListWatcher" );
-
   connect( d->mDirWatch, SIGNAL( dirty( const QString& ) ), SIGNAL( changed() ) );
   d->mDirWatch->startScan();
 }

@@ -180,13 +180,12 @@ void ResourceLDAPKIOConfig::editCache()
 
 AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
                                     int rdnprefix,
-                                    QWidget *parent, const char *name )
+                                    QWidget *parent )
   : KDialog( parent )
 {
   setCaption( i18n( "Attributes Configuration" ) );
   setButtons( Ok | Cancel );
   setDefaultButton( Ok );
-  setObjectName( name );
   setModal( true );
   showButtonSeparator( true );
 
@@ -355,13 +354,12 @@ void AttributesDialog::mapChanged( int pos )
 }
 
 OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
-  const QString &dst, QWidget *parent, const char *name )
+  const QString &dst, QWidget *parent )
   : KDialog( parent )
 {
   setCaption( i18n( "Offline Configuration" ) );
   setButtons( Ok | Cancel );
   setDefaultButton( Ok );
-  setObjectName( name );
   setModal( true );
   showButtonSeparator( true );
 
