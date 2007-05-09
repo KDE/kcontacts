@@ -44,7 +44,7 @@
 #endif
 
 #ifndef KABC_DIR_EXPORT
-# if defined(MAKE_KABC_DIR_LIB)
+# if defined(MAKE_KABC_DIRECTORY_LIB)
    /* We are building this library */
 #  define KABC_DIR_EXPORT KDE_EXPORT
 # else
