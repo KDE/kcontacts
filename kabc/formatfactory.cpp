@@ -18,6 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QFile>
 
 #include <kdebug.h>
@@ -42,7 +43,15 @@ class FormatFactory::Private
     KLibrary *openLibrary( const QString& libName );
 
     QHash<QString, FormatInfo> mFormatList;
+    
+    static FormatFactory *sSelf;
+    static void cleanupFormatFactory()
+    {
+        delete sSelf;
+        sSelf = 0;
+    }
 };
+FormatFactory *FormatFactory::Private::sSelf = 0;
 
 KLibrary *FormatFactory::Private::openLibrary( const QString& libName )
 {
@@ -69,9 +78,12 @@ FormatFactory *FormatFactory::self()
 {
   kDebug(5700) << "FormatFactory::self()" << endl;
 
-  K_GLOBAL_STATIC(FormatFactory, sSelf)
+  if(!FormatFactory::Private::sSelf) {
+    FormatFactory::Private::sSelf = new FormatFactory();
+    qAddPostRoutine(FormatFactory::Private::cleanupFormatFactory);
+  }
 
-  return sSelf;
+  return FormatFactory::Private::sSelf;
 }
 
 FormatFactory::FormatFactory()
