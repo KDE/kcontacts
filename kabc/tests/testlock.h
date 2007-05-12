@@ -27,7 +27,7 @@
 #include "kabc/lock.h"
 
 class QLabel;
-class Q3ListView;
+class QTreeWidget;
 
 class LockWidget : public QWidget
 {
@@ -46,7 +46,7 @@ class LockWidget : public QWidget
     KABC::Lock *mLock;
 
     QLabel *mStatus;
-    Q3ListView *mLockView;
+    QTreeWidget *mLockView;
 };
 
 #endif

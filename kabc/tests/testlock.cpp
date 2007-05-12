@@ -23,7 +23,7 @@
 #include <iostream>
 #include <unistd.h>
 
-#include <q3listview.h>
+#include <qtreewidget.h>
 
 #include <QtGui/QWidget>
 #include <QtGui/QLabel>
@@ -87,11 +87,13 @@ LockWidget::LockWidget( const QString &identifier )
     connect( button, SIGNAL( clicked() ), SLOT( unlock() ) );
   }
 
-  mLockView = new Q3ListView( this );
+  mLockView = new QTreeWidget( this );
   topLayout->addWidget( mLockView );
-  mLockView->addColumn( "Lock File" );
-  mLockView->addColumn( "PID" );
-  mLockView->addColumn( "Locking App" );
+  QStringList headers;
+  headers.append( "Lock File" );
+  headers.append( "PID" );
+  headers.append( "Locking App" );
+  mLockView->setHeaderLabels( headers );
 
   updateLockView();
 
@@ -132,7 +134,11 @@ void LockWidget::updateLockView()
     if ( !Lock::readLockFile( dir.filePath( *it ), pid, app ) ) {
       kWarning() << "Unable to open lock file '" << *it << "'" << endl;
     } else {
-      new Q3ListViewItem( mLockView, *it, QString::number( pid ), app );
+      QTreeWidgetItem *item = new QTreeWidgetItem();
+      item->setText( 0, *it );
+      item->setText( 1, QString::number( pid ) );
+      item->setText( 2, app );
+      mLockView->addTopLevelItem( item );
     }
   }
 }
