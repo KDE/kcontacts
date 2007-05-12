@@ -2,7 +2,6 @@
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 include_directories( ${CMAKE_SOURCE_DIR}/kabc )
-add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 if(KDE4_BUILD_TESTS)
 
