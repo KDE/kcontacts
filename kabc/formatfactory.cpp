@@ -35,9 +35,14 @@ using namespace KABC;
 class FormatFactory::Private
 {
   public:
-    ~Private()
-    {
+    Private() {
+      sSelf = new FormatFactory;
+      qAddPostRoutine(cleanupFormatFactory);
+    }
+    ~Private() {
       mFormatList.clear();
+      qRemovePostRoutine(cleanupFormatFactory);
+      cleanupFormatFactory();
     }
 
     KLibrary *openLibrary( const QString& libName );
@@ -47,8 +52,8 @@ class FormatFactory::Private
     static FormatFactory *sSelf;
     static void cleanupFormatFactory()
     {
-        delete sSelf;
-        sSelf = 0;
+      delete sSelf;
+      sSelf = 0;
     }
 };
 FormatFactory *FormatFactory::Private::sSelf = 0;
@@ -78,12 +83,8 @@ FormatFactory *FormatFactory::self()
 {
   kDebug(5700) << "FormatFactory::self()" << endl;
 
-  if(!FormatFactory::Private::sSelf) {
-    FormatFactory::Private::sSelf = new FormatFactory();
-    qAddPostRoutine(FormatFactory::Private::cleanupFormatFactory);
-  }
-
-  return FormatFactory::Private::sSelf;
+  static Private p;
+  return p.sSelf;
 }
 
 FormatFactory::FormatFactory()
