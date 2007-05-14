@@ -62,14 +62,14 @@ KLibrary *FormatFactory::Private::openLibrary( const QString& libName )
 {
   KLibrary *library = 0;
 
-  QString path = KLibLoader::findLibrary( QFile::encodeName( libName ) );
+  QString path = KLibLoader::findLibrary( libName );
 
   if ( path.isEmpty() ) {
     kDebug( 5700 ) << "No format plugin library was found!" << endl;
     return 0;
   }
 
-  library = KLibLoader::self()->library( QFile::encodeName( path ) );
+  library = KLibLoader::self()->library( path );
 
   if ( !library ) {
     kDebug( 5700 ) << "Could not load library '" << libName << "'" << endl;
