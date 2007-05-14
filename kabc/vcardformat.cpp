@@ -29,11 +29,13 @@
 using namespace KABC;
 
 VCardFormat::VCardFormat()
+  : d( 0 )
 {
 }
 
 VCardFormat::~VCardFormat()
 {
+  //delete d;
 }
 
 bool VCardFormat::load( Addressee &addressee, QFile *file )

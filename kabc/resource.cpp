@@ -25,22 +25,30 @@
 
 using namespace KABC;
 
+class Ticket::Private
+{
+  public:
+    Private( Resource *resource )
+      : mResource( resource )
+    {
+    }
+
+    Resource *mResource;
+};
+
 Ticket::Ticket( Resource *resource )
-  : mResource( resource )
+  : d( new Private( resource ) )
 {
 }
 
 Ticket::~Ticket()
 {
-/* FIXME: avoid cycle deletion
-  if ( mResource )
-    mResource->releaseSaveTicket( this );
-*/
+  delete d;
 }
 
 Resource *Ticket::resource()
 {
-  return mResource;
+  return d->mResource;
 }
 
 class Resource::Iterator::Private

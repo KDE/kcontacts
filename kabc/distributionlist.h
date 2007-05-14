@@ -47,21 +47,24 @@ class KABC_EXPORT DistributionList
       addressee and an email address. If the email address is null, the
       preferred email address of the addressee is used.
     */
-    struct Entry
+    class KABC_EXPORT Entry
     {
-      typedef QList<Entry> List;
+      public:
+        typedef QList<Entry> List;
 
-      Entry()
-      {
-      }
+        Entry();
+        Entry( const Entry &other );
+        Entry( const Addressee &addressee, const QString &email );
+        ~Entry();
 
-      Entry( const Addressee &_addressee, const QString &_email )
-        : addressee( _addressee ), email( _email )
-      {
-      }
+        Entry& operator=( const Entry &other );
 
-      Addressee addressee;
-      QString email;
+        Addressee addressee;
+        QString email;
+
+      private:
+        class Private;
+        Private* const d;
     };
 
     /**

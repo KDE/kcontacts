@@ -29,6 +29,33 @@
 
 using namespace KABC;
 
+DistributionList::Entry::Entry()
+  : d( 0 )
+{
+}
+
+DistributionList::Entry::Entry( const DistributionList::Entry& )
+  : d( 0 )
+{
+  //TODO: adapt for real private class
+}
+
+DistributionList::Entry::Entry( const Addressee &_addressee, const QString &_email )
+  : addressee( _addressee ), email( _email ), d( 0 )
+{
+}
+
+DistributionList::Entry::~Entry()
+{
+  //delete d;
+}
+
+DistributionList::Entry& DistributionList::Entry::operator=( const DistributionList::Entry& )
+{
+  //TODO: adapt for real private class
+  return *this;
+}
+
 class DistributionList::Private
 {
   public:

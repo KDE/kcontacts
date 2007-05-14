@@ -45,7 +45,7 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
       @li @p Name -  Name in Addressee
       @li @p Email - Email in Addressee
     */
-    enum columns { Name = 0, Email = 1 };
+    enum Columns { Name = 0, Email = 1 };
 
     /**
       Constructor.
@@ -56,9 +56,14 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
     AddresseeItem( QTreeWidget *parent, const Addressee &addressee );
 
     /**
+      Destroys the item.
+    */
+    ~AddresseeItem();
+
+    /**
       Returns the addressee.
     */
-    Addressee addressee() const { return mAddressee; }
+    Addressee addressee() const;
 
     /**
       Method used by QListView to sort the items.
@@ -66,7 +71,10 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
     virtual QString key( int column, bool ascending ) const;
 
   private:
-    Addressee mAddressee;
+    class Private;
+    Private* const d;
+
+    Q_DISABLE_COPY( AddresseeItem )
 };
 
 /**
@@ -93,7 +101,7 @@ class KABC_EXPORT AddresseeDialog : public KDialog
       @param parent parent widget
       @param multiple if true, indicates a multiple selection.
     */
-    explicit AddresseeDialog( QWidget *parent=0, bool multiple=false );
+    explicit AddresseeDialog( QWidget *parent = 0, bool multiple = false );
 
     /**
       Destructor.
@@ -105,12 +113,12 @@ class KABC_EXPORT AddresseeDialog : public KDialog
 
       If it is a multiple select, this will return only the first address chosen
     */
-    Addressee addressee();
+    Addressee addressee() const;
 
     /**
       Return the list of addresses chosen
     */
-    Addressee::List addressees();
+    Addressee::List addressees() const;
 
     /**
       Select a single address book entry.
@@ -130,33 +138,15 @@ class KABC_EXPORT AddresseeDialog : public KDialog
     */
     static Addressee::List getAddressees( QWidget *parent );
 
-  private Q_SLOTS:
-    void selectItem( const QString & );
-    void updateEdit();
-    void addSelected( QTreeWidgetItem *item );
-    void removeSelected();
-
-  protected Q_SLOTS:
-    void addressBookChanged();
-
   private:
-    void loadAddressBook();
-    void addCompletionItem( const QString &str, QTreeWidgetItem *item );
+    class Private;
+    Private* const d;
 
-    bool mMultiple;
-
-    QTreeWidget *mAddresseeList;
-    KLineEdit *mAddresseeEdit;
-
-    QTreeWidget *mSelectedList;
-
-    AddressBook *mAddressBook;
-
-    QHash<QString, QTreeWidgetItem*> mItemDict;
-    QHash<QString, QTreeWidgetItem*> mSelectedDict;
-
-    class AddresseeDialogPrivate;
-    AddresseeDialogPrivate *d;
+    Q_PRIVATE_SLOT( d, void addressBookChanged() )
+    Q_PRIVATE_SLOT( d, void selectItem( const QString& ) )
+    Q_PRIVATE_SLOT( d, void updateEdit() )
+    Q_PRIVATE_SLOT( d, void addSelected( QTreeWidgetItem* ) )
+    Q_PRIVATE_SLOT( d, void removeSelected() )
 };
 
 }

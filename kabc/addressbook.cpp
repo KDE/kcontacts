@@ -32,15 +32,16 @@
 
 using namespace KABC;
 
-struct AddressBook::AddressBookData
+class AddressBook::Private
 {
-  Field::List mAllFields;
-  ErrorHandler *mErrorHandler;
-  KConfig *mConfig;
-  KRES::Manager<Resource> *mManager;
-  QList<Resource*> mPendingLoadResources;
-  QList<Resource*> mPendingSaveResources;
-  Iterator end;
+  public:
+    Field::List mAllFields;
+    ErrorHandler *mErrorHandler;
+    KConfig *mConfig;
+    KRES::Manager<Resource> *mManager;
+    QList<Resource*> mPendingLoadResources;
+    QList<Resource*> mPendingSaveResources;
+    Iterator end;
 };
 
 struct AddressBook::Iterator::IteratorData
@@ -301,7 +302,7 @@ bool AddressBook::ConstIterator::operator!=( const ConstIterator &it ) const
 }
 
 AddressBook::AddressBook()
-  : d( new AddressBookData )
+  : d( new Private )
 {
   d->mErrorHandler = 0;
   d->mConfig = 0;
@@ -311,7 +312,7 @@ AddressBook::AddressBook()
 }
 
 AddressBook::AddressBook( const QString &config )
-  : d( new AddressBookData )
+  : d( new Private )
 {
   d->mErrorHandler = 0;
   if ( config.isEmpty() ) {

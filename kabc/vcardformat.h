@@ -30,7 +30,7 @@ class Addressee;
 
 /**
   @short Interface of vCard backend for address book.
- 
+
   This class implements the file format interface of address book entries for
   the vCard format.
 */
@@ -48,8 +48,8 @@ class KABC_EXPORT VCardFormat : public Format
     bool checkFormat( QFile *file ) const;
 
   private:
-    struct VCardFormatPrivate;
-    VCardFormatPrivate *d;
+    class Private;
+    Private* const d;
 };
 
 }

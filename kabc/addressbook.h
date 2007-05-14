@@ -562,8 +562,8 @@ class KABC_EXPORT AddressBook : public QObject
     KRES::Manager<Resource> *resourceManager();
 
   private:
-    struct AddressBookData;
-    AddressBookData *const d;
+    class Private;
+    Private* const d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &lhs, const AddressBook &rhs );

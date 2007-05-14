@@ -46,7 +46,8 @@ class KABC_EXPORT Ticket
   private:
     Ticket( Resource *resource );
 
-    Resource *mResource;
+    class Private;
+    Private* const d;
 };
 
 /**

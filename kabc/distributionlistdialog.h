@@ -39,18 +39,18 @@ class DistributionListManager;
 
 /**
   @short Frontend to create distribution lists
- 
+
   Creating a new DistributionListDialog does automatically
   load all addressees and distribution lists from the config
   files. The changes will be saved when clicking the 'OK'
   button.
- 
+
   Example:
- 
+
   \code
   KABC::DistributionListDialog *dlg = new
           KABC::DistributionListDialog( KABC::StdAddressBook::self(), this );
- 
+
   dlg->exec();
   \endcode
 */
@@ -65,7 +65,7 @@ class KABC_EXPORT DistributionListDialog : public KDialog
       @param ab     The addressbook, the addressees should be used from
       @param parent The parent widget
     */
-    DistributionListDialog( AddressBook *ab, QWidget *parent );
+    explicit DistributionListDialog( AddressBook *ab, QWidget *parent = 0 );
 
     /**
       Destructor.
@@ -73,10 +73,8 @@ class KABC_EXPORT DistributionListDialog : public KDialog
     virtual ~DistributionListDialog();
 
   private:
-    DistributionListEditorWidget *mEditor;
-
-    struct Data;
-    Data *d;
+    class Private;
+    Private* const d;
 };
 
 /**
@@ -85,16 +83,16 @@ class KABC_EXPORT DistributionListDialog : public KDialog
 class KABC_EXPORT EmailSelector : public KDialog
 {
   public:
-    EmailSelector( const QStringList &emails, const QString &current,
-        QWidget *parent );
+    EmailSelector( const QStringList &emails, const QString &current, QWidget *parent = 0 );
+    ~EmailSelector();
 
-    QString selected();
+    QString selected() const;
 
-    static QString getEmail( const QStringList &emails, const QString &current,
-        QWidget *parent );
+    static QString getEmail( const QStringList &emails, const QString &current, QWidget *parent = 0 );
 
   private:
-    QButtonGroup *mButtonGroup;
+    class Private;
+    Private* const d;
 };
 
 /**
@@ -105,36 +103,25 @@ class KABC_EXPORT DistributionListEditorWidget : public QWidget
     Q_OBJECT
 
   public:
-    DistributionListEditorWidget( AddressBook *, QWidget *parent );
+    explicit DistributionListEditorWidget( AddressBook *addressBook, QWidget *parent = 0 );
     virtual ~DistributionListEditorWidget();
 
-  private Q_SLOTS:
-    void newList();
-    void editList();
-    void removeList();
-    void addEntry();
-    void removeEntry();
-    void changeEmail();
-    void updateEntryView();
-    void updateAddresseeView();
-    void updateNameCombo();
-    void slotSelectionEntryViewChanged();
-    void slotSelectionAddresseeViewChanged();
-    void save();
-
   private:
-    QComboBox *mNameCombo;  
-    QLabel *mListLabel;
-    QTreeWidget *mEntryView;
-    QTreeWidget *mAddresseeView;
+    class Private;
+    Private* const d;
 
-    AddressBook *mAddressBook;
-    DistributionListManager *mManager;
-    QPushButton *mNewButton, *mEditButton, *mRemoveButton;
-    QPushButton *mChangeEmailButton, *mRemoveEntryButton, *mAddEntryButton;
-
-    struct Data;
-    Data *d;
+    Q_PRIVATE_SLOT( d, void newList() )
+    Q_PRIVATE_SLOT( d, void editList() )
+    Q_PRIVATE_SLOT( d, void removeList() )
+    Q_PRIVATE_SLOT( d, void addEntry() )
+    Q_PRIVATE_SLOT( d, void removeEntry() )
+    Q_PRIVATE_SLOT( d, void changeEmail() )
+    Q_PRIVATE_SLOT( d, void updateEntryView() )
+    Q_PRIVATE_SLOT( d, void updateAddresseeView() )
+    Q_PRIVATE_SLOT( d, void updateNameCombo() )
+    Q_PRIVATE_SLOT( d, void slotSelectionEntryViewChanged() )
+    Q_PRIVATE_SLOT( d, void slotSelectionAddresseeViewChanged() )
+    Q_PRIVATE_SLOT( d, void save() )
 };
 
 }
