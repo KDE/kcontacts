@@ -35,10 +35,6 @@ using namespace KABC;
 class FormatFactory::Private
 {
   public:
-    Private() {
-      sSelf = new FormatFactory;
-      qAddPostRoutine(cleanupFormatFactory);
-    }
     ~Private() {
       mFormatList.clear();
       qRemovePostRoutine(cleanupFormatFactory);
@@ -84,6 +80,10 @@ FormatFactory *FormatFactory::self()
   kDebug(5700) << "FormatFactory::self()" << endl;
 
   static Private p;
+  if(!p.sSelf) {
+     p.sSelf = new FormatFactory;
+     qAddPostRoutine(Private::cleanupFormatFactory);
+  }
   return p.sSelf;
 }
 
