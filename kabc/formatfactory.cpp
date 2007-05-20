@@ -38,7 +38,6 @@ class FormatFactory::Private
     ~Private() {
       mFormatList.clear();
       qRemovePostRoutine(cleanupFormatFactory);
-      cleanupFormatFactory();
     }
 
     KLibrary *openLibrary( const QString& libName );
