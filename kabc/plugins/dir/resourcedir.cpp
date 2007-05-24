@@ -177,7 +177,11 @@ bool ResourceDir::doOpen()
   if ( !dir.exists() ) { // no directory available
     return dir.mkdir( dir.path() );
   } else {
-    QString testName = dir.entryList( QDir::Files )[0];
+    kdDebug()<<" ir.entryList( QDir::Files ) :"<<dir.entryList( QDir::Files ).count()<<endl;
+    QStringList lst = dir.entryList( QDir::Files );
+    if( lst.isEmpty()) //path doesn't exist or list of file empty
+      return true; 
+    QString testName = lst[0];
     if ( testName.isNull() || testName.isEmpty() ) // no file in directory
       return true;
 
