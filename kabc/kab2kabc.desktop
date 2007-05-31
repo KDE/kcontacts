@@ -11,6 +11,7 @@ Comment[el]=Εργαλείο μετατροπής libkab σε libkabc.
 Comment[ja]=libkab から libkabc への変換ツール
 Comment[sv]=Konverteringsverktyg mellan libkab och libkabc
 Comment[x-test]=xxlibkab to libkabc conversion tool.xx
+Comment[zh_TW]=libkab 到 libkabc 轉換工具
 Terminal=false
 NoDisplay=true
 X-KDE-autostart-condition=kab2kabcrc:Startup:EnableAutostart:true

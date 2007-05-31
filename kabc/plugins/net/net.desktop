@@ -8,6 +8,7 @@ Name[ja]=ネットワーク
 Name[pa]=ਨੈੱਟਵਰ
 Name[sv]=Nätverk
 Name[x-test]=xxNetworkxx
+Name[zh_TW]=網路
 X-KDE-Library=kabc_net
 Type=Service
 ServiceTypes=KResources/Plugin

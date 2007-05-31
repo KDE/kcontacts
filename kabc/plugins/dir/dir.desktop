@@ -8,6 +8,7 @@ Name[ja]=ディレクトリ
 Name[pa]=ਡਾਇਰੈਕਟਰੀ
 Name[sv]=Katalog
 Name[x-test]=xxDirectoryxx
+Name[zh_TW]=目錄
 X-KDE-Library=kabc_directory
 Type=Service
 ServiceTypes=KResources/Plugin

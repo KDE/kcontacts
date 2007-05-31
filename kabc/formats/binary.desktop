@@ -7,6 +7,7 @@ Name[ja]=バイナリ
 Name[pa]=ਬਾਈਨਰੀ
 Name[sv]=Binär
 Name[x-test]=xxBinaryxx
+Name[zh_TW]=二進位
 
 [Plugin]
 Type=binary

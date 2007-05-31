@@ -8,6 +8,7 @@ Name[ja]=ファイル
 Name[pa]=ਫਾਇਲ
 Name[sv]=Fil
 Name[x-test]=xxFilexx
+Name[zh_TW]=檔案
 X-KDE-Library=kabc_file
 Type=Service
 ServiceTypes=KResources/Plugin
