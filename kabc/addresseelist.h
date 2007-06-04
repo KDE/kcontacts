@@ -29,7 +29,6 @@
 namespace KABC {
 
 class Field;
-class SortField;
 class SortMode;
 
 /**

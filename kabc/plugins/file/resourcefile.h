@@ -30,7 +30,6 @@
 #include "kabc/resource.h"
 
 class QFile;
-class QTimer;
 class KTemporaryFile;
 
 class KJob;
@@ -38,7 +37,6 @@ class KJob;
 namespace KABC {
 
 class Format;
-class ResourceConfigWidget;
 class Lock;
 
 /**

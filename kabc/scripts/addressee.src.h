@@ -39,7 +39,6 @@
 namespace KABC {
 
 class Resource;
-class Field;
 class SortMode;
 
 /**

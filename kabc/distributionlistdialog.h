@@ -26,16 +26,11 @@
 #include <kdialog.h>
 #include "kabc.h"
 
-class QTreeWidget;
-class QComboBox;
-class QButtonGroup;
-class QLabel;
 
 namespace KABC {
 
 class AddressBook;
 class DistributionListEditorWidget;
-class DistributionListManager;
 
 /**
   @short Frontend to create distribution lists

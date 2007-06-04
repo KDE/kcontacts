@@ -23,7 +23,6 @@
 #include <kdialog.h>
 #include <kabc/kabc.h>
 
-class QButtonGroup;
 
 namespace KABC {
 

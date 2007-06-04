@@ -35,7 +35,6 @@
 
 class QCheckBox;
 class QPushButton;
-class QSpinBox;
 class QString;
 
 class KComboBox;

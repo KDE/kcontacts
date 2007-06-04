@@ -27,12 +27,10 @@
 
 #include "kabc/resource.h"
 
-class QTimer;
 
 namespace KABC {
 
 class Format;
-class Lock;
 
 /**
   @internal
