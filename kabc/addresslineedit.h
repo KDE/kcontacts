@@ -22,7 +22,7 @@
 #ifndef KABC_ADDRESSLINEEDIT_H
 #define KABC_ADDRESSLINEEDIT_H
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 #include <QtCore/QObject>
 

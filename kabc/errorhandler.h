@@ -24,7 +24,7 @@
 
 #include <QtCore/QString>
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 class QWidget;
 

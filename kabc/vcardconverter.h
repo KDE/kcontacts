@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 
 #include "addressee.h"
-#include "kabc.h"
+#include "kabc_export.h"
 
 namespace KABC {
 

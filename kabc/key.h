@@ -21,7 +21,7 @@
 #ifndef KABC_KEY_H
 #define KABC_KEY_H
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedDataPointer>

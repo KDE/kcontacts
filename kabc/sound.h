@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 namespace KABC {
 

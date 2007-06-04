@@ -21,7 +21,7 @@
 #define KABC_EMAILSELECTDIALOG_H
 
 #include <kdialog.h>
-#include <kabc/kabc.h>
+#include <kabc/kabc_export.h>
 
 
 namespace KABC {

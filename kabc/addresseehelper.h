@@ -24,7 +24,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QSet>
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 namespace KABC {
 

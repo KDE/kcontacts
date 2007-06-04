@@ -24,7 +24,7 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 
-#include "kabc/kabc.h"
+#include "kabc/kabc_export.h"
 #include "kresources/configwidget.h"
 
 namespace KABC {

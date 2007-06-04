@@ -23,7 +23,7 @@
 
 #include "vcardparser/vcardparser.h"
 #include "addressee.h"
-#include "kabc.h"
+#include "kabc_export.h"
 
 class QDateTime;
 

@@ -22,7 +22,7 @@
 #define KABC_RESOURCECACHED_H
 
 #include <kabc/resource.h>
-#include <kabc/kabc.h>
+#include <kabc/kabc_export.h>
 
 #include <kresources/idmapper.h>
 

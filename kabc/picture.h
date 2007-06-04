@@ -26,7 +26,7 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtGui/QImage>
 
-#include "kabc.h"
+#include "kabc_export.h"
 
 namespace KABC {
 

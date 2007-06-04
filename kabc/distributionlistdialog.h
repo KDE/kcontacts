@@ -24,7 +24,7 @@
 #include <QtGui/QWidget>
 
 #include <kdialog.h>
-#include "kabc.h"
+#include "kabc_export.h"
 
 
 namespace KABC {

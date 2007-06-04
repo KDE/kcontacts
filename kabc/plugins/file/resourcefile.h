@@ -26,7 +26,7 @@
 #include <kconfig.h>
 #include <kdirwatch.h>
 
-#include "kabc/kabc.h"
+#include "kabc/kabc_export.h"
 #include "kabc/resource.h"
 
 class QFile;
