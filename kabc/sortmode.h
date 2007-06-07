@@ -26,6 +26,8 @@
 
 namespace KABC {
 
+class Field;
+
 /**
   @short Sort method for sorting an addressee list.
 
