@@ -92,7 +92,6 @@ install(TARGETS kabc  DESTINATION ${LIB_INSTALL_DIR} )
 
 ########### install files ###############
 
-install( FILES kab2kabc.desktop DESTINATION ${AUTOSTART_INSTALL_DIR} )
 install( FILES countrytransl.map  DESTINATION  ${DATA_INSTALL_DIR}/kabc )
 install( FILES kabc_manager.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources )
 install( FILES
