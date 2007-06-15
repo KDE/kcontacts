@@ -23,13 +23,15 @@
 #define KABC_ADDRESSEELIST_H
 
 #include <QtCore/QSharedDataPointer>
+#include <QtCore/QList>
 
-#include "addressee.h"
+#include "kabc_export.h"
 
 namespace KABC {
 
 class Field;
 class SortMode;
+class Addressee;
 
 /**
  * Each trait must implement one static function for equality, one for "less
@@ -264,12 +266,6 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
     class Private;
     QSharedDataPointer<Private> d;
 };
-
-// needed for msvc, 
-inline uint qHash(const Addressee &adr)
-{
-    return qHash(adr.uid());
-}
 
 }
 

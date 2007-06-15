@@ -35,6 +35,7 @@
 #include "secrecy.h"
 #include "sound.h"
 #include "timezone.h"
+#include "addresseelist.h"  // for typedef QList<Addressee> List;
 
 namespace KABC {
 
@@ -73,7 +74,7 @@ class KABC_EXPORT Addressee
   friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
 
   public:
-    typedef QList<Addressee> List;
+    typedef AddresseeList List;
     typedef QMap<QString, Addressee> Map;
 
     /**
@@ -369,6 +370,9 @@ class KABC_EXPORT Addressee
     class Private;
     QSharedDataPointer<Private> d;
 };
+#ifdef MAKE_KABC_LIB
+KDE_DUMMY_QHASH_FUNCTION(Addressee)
+#endif
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &, const Addressee & );
 KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );

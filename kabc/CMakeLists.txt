@@ -99,6 +99,7 @@ install( FILES
    address.h
    addressbook.h
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
+   addresseelist.h
    addresseedialog.h
    distributionlist.h
    distributionlistdialog.h
