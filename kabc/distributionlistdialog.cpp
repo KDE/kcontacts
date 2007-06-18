@@ -415,7 +415,7 @@ void DistributionListEditorWidget::Private::updateEntryView()
   DistributionList::Entry::List entries = list->entries();
   DistributionList::Entry::List::ConstIterator it;
   for ( it = entries.begin(); it != entries.end(); ++it ) {
-    new EntryItem( mEntryView, (*it).addressee, (*it).email );
+    new EntryItem( mEntryView, (*it).addressee(), (*it).email() );
   }
 
   QList<QTreeWidgetItem*> selected = mEntryView->selectedItems();

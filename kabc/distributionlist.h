@@ -59,8 +59,8 @@ class KABC_EXPORT DistributionList
 
         Entry& operator=( const Entry &other );
 
-        Addressee addressee;
-        QString email;
+        Addressee& addressee() const;
+        QString& email() const;
 
       private:
         class Private;
