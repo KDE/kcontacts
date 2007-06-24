@@ -227,7 +227,7 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   if ( fieldname == QLatin1String( "dn" ) ) // ignore & return false!
     return false;
 
-  if ( fieldname.startsWith("#") ) {
+  if ( fieldname.startsWith( '#' ) ) {
     return true;
   }
 

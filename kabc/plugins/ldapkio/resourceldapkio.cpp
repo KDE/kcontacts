@@ -159,7 +159,9 @@ void ResourceLDAPKIO::entries( KIO::Job*, const KIO::UDSEntryList & list )
       KUrl tmpurl( urlStr );
       d->mResultDn = tmpurl.path();
       kDebug(7125) << "findUid(): " << d->mResultDn << endl;
-      if ( d->mResultDn.startsWith("/") ) d->mResultDn.remove(0,1);
+      if ( d->mResultDn.startsWith( '/' ) ) {
+        d->mResultDn.remove( 0, 1 );
+      }
       return;
     }
   }
@@ -168,10 +170,11 @@ void ResourceLDAPKIO::entries( KIO::Job*, const KIO::UDSEntryList & list )
 void ResourceLDAPKIO::listResult( KJob *job)
 {
   d->mError = job->error();
-  if ( d->mError && d->mError != KIO::ERR_USER_CANCELED )
+  if ( d->mError && d->mError != KIO::ERR_USER_CANCELED ) {
     d->mErrorMsg = job->errorString();
-  else
+  } else {
     d->mErrorMsg = "";
+  }
   emit leaveModality();
 }
 
