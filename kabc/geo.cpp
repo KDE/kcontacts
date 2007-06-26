@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "geo.h"
+
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedData>
-
-#include "geo.h"
 
 using namespace KABC;
 
@@ -112,14 +112,17 @@ bool Geo::isValid() const
 
 bool Geo::operator==( const Geo &other ) const
 {
-  if ( !other.isValid() && !isValid() )
+  if ( !other.isValid() && !isValid() ) {
     return true;
+  }
 
-  if ( !other.isValid() || !isValid() )
+  if ( !other.isValid() || !isValid() ) {
     return false;
+  }
 
-  if ( other.d->mLatitude == d->mLatitude && other.d->mLongitude == d->mLongitude )
+  if ( other.d->mLatitude == d->mLatitude && other.d->mLongitude == d->mLongitude ) {
     return true;
+  }
 
   return false;
 }
@@ -129,10 +132,11 @@ bool Geo::operator!=( const Geo &other ) const
   return !( *this == other );
 }
 
-Geo& Geo::operator=( const Geo &other )
+Geo &Geo::operator=( const Geo &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }

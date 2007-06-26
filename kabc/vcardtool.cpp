@@ -18,15 +18,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QString>
-#include <QtCore/QBuffer>
-
+#include "vcardtool.h"
 #include "key.h"
 #include "picture.h"
 #include "secrecy.h"
 #include "sound.h"
 
-#include "vcardtool.h"
+#include <QtCore/QString>
+#include <QtCore/QBuffer>
 
 using namespace KABC;
 
@@ -35,8 +34,9 @@ static bool needsEncoding( const QString &value )
   uint length = value.length();
   for ( uint i = 0; i < length; ++i ) {
     char c = value.at( i ).toLatin1();
-    if ( (c < 33 || c > 126) && c != ' ' && c != '=' )
+    if ( (c < 33 || c > 126) && c != ' ' && c != '=' ) {
       return true;
+    }
   }
 
   return false;
@@ -72,7 +72,7 @@ VCardTool::~VCardTool()
 {
 }
 
-QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version version ) const
+QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version version ) const
 {
   VCard::List vCardList;
 
@@ -117,18 +117,22 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
 
       bool hasLabel = !(*it).label().isEmpty();
       QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
-      for ( typeIt = mAddressTypeMap.constBegin(); typeIt != mAddressTypeMap.constEnd(); ++typeIt ) {
+      for ( typeIt = mAddressTypeMap.constBegin();
+            typeIt != mAddressTypeMap.constEnd(); ++typeIt ) {
         if ( typeIt.value() & (*it).type() ) {
           adrLine.addParameter( "TYPE", typeIt.key() );
-          if ( hasLabel )
-            labelLine.addParameter( "TYPE",  typeIt.key() );
+          if ( hasLabel ) {
+            labelLine.addParameter( "TYPE", typeIt.key() );
+          }
         }
       }
 
-      if ( !isEmpty )
+      if ( !isEmpty ) {
         card.addLine( adrLine );
-      if ( hasLabel )
+      }
+      if ( hasLabel ) {
         card.addLine( labelLine );
+      }
     }
 
     // BDAY
@@ -138,8 +142,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     if ( version == VCard::v3_0 ) {
       QStringList categories = (*addrIt).categories();
       QStringList::Iterator catIt;
-      for ( catIt = categories.begin(); catIt != categories.end(); ++catIt )
+      for ( catIt = categories.begin(); catIt != categories.end(); ++catIt ) {
         (*catIt).replace( ',', "\\," );
+      }
 
       VCardLine catLine( "CATEGORIES", categories.join( "," ) );
       card.addLine( catLine );
@@ -181,8 +186,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     // KEY
     const Key::List keys = (*addrIt).keys();
     Key::List::ConstIterator keyIt;
-    for ( keyIt = keys.begin(); keyIt != keys.end(); ++keyIt )
+    for ( keyIt = keys.begin(); keyIt != keys.end(); ++keyIt ) {
       card.addLine( createKey( *keyIt ) );
+    }
 
     // LOGO
     card.addLine( createPicture( "LOGO", (*addrIt).logo() ) );
@@ -219,8 +225,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     card.addLine( nameLine );
 
     // NICKNAME
-    if ( version == VCard::v3_0 )
+    if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( "NICKNAME", (*addrIt).nickName() ) );
+    }
 
     // NOTE
     VCardLine noteLine( "NOTE", (*addrIt).note() );
@@ -242,8 +249,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     card.addLine( createPicture( "PHOTO", (*addrIt).photo() ) );
 
     // PROID
-    if ( version == VCard::v3_0 )
+    if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( "PRODID", (*addrIt).productId() ) );
+    }
 
     // REV
     card.addLine( VCardLine( "REV", createDateTime( (*addrIt).revision() ) ) );
@@ -257,8 +265,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     card.addLine( roleLine );
 
     // SORT-STRING
-    if ( version == VCard::v3_0 )
+    if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( "SORT-STRING", (*addrIt).sortString() ) );
+    }
 
     // SOUND
     card.addLine( createSound( (*addrIt).sound() ) );
@@ -271,8 +280,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
 
       QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
       for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != mPhoneTypeMap.constEnd(); ++typeIt ) {
-        if ( typeIt.value() & (*phoneIt).type() )
+        if ( typeIt.value() & (*phoneIt).type() ) {
           line.addParameter( "TYPE", typeIt.key() );
+        }
       }
 
       card.addLine( line );
@@ -292,8 +302,9 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
       QString str;
 
       int neg = 1;
-      if ( timeZone.offset() < 0 )
+      if ( timeZone.offset() < 0 ) {
         neg = -1;
+      }
 
       str.sprintf( "%c%02d:%02d", ( timeZone.offset() >= 0 ? '+' : '-' ),
                                   ( timeZone.offset() / 60 ) * neg,
@@ -309,18 +320,21 @@ QByteArray VCardTool::createVCards( const Addressee::List& list, VCard::Version 
     card.addLine( VCardLine( "URL", (*addrIt).url().url() ) );
 
     // VERSION
-    if ( version == VCard::v2_1 )
+    if ( version == VCard::v2_1 ) {
       card.addLine( VCardLine( "VERSION", QString::fromLatin1("2.1") ) );
-    if ( version == VCard::v3_0 )
+    }
+    if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( "VERSION", QString::fromLatin1("3.0") ) );
+    }
 
     // X-
     const QStringList customs = (*addrIt).customs();
     for ( strIt = customs.begin(); strIt != customs.end(); ++strIt ) {
       QString identifier = "X-" + (*strIt).left( (*strIt).indexOf( ":" ) );
       QString value = (*strIt).mid( (*strIt).indexOf( ":" ) + 1 );
-      if ( value.isEmpty() )
+      if ( value.isEmpty() ) {
         continue;
+      }
 
       VCardLine line( identifier, value );
       if ( version == VCard::v2_1 && needsEncoding( value ) ) {
@@ -364,34 +378,43 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         if ( identifier == "adr" ) {
           Address address;
           const QStringList addrParts = splitString( semicolonSep, (*lineIt).value().toString() );
-          if ( addrParts.count() > 0 )
+          if ( addrParts.count() > 0 ) {
             address.setPostOfficeBox( addrParts[ 0 ] );
-          if ( addrParts.count() > 1 )
+          }
+          if ( addrParts.count() > 1 ) {
             address.setExtended( addrParts[ 1 ] );
-          if ( addrParts.count() > 2 )
+          }
+          if ( addrParts.count() > 2 ) {
             address.setStreet( addrParts[ 2 ] );
-          if ( addrParts.count() > 3 )
+          }
+          if ( addrParts.count() > 3 ) {
             address.setLocality( addrParts[ 3 ] );
-          if ( addrParts.count() > 4 )
+          }
+          if ( addrParts.count() > 4 ) {
             address.setRegion( addrParts[ 4 ] );
-          if ( addrParts.count() > 5 )
+          }
+          if ( addrParts.count() > 5 ) {
             address.setPostalCode( addrParts[ 5 ] );
-          if ( addrParts.count() > 6 )
+          }
+          if ( addrParts.count() > 6 ) {
             address.setCountry( addrParts[ 6 ] );
+          }
 
           Address::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
+          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
             type |= mAddressTypeMap[ (*it).toLower() ];
+          }
 
           address.setType( type );
           addr.insertAddress( address );
         }
 
         // BDAY
-        else if ( identifier == "bday" )
+        else if ( identifier == "bday" ) {
           addr.setBirthday( parseDateTime( (*lineIt).value().toString() ) );
+        }
 
         // CATEGORIES
         else if ( identifier == "categories" ) {
@@ -400,8 +423,9 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // CLASS
-        else if ( identifier == "class" )
+        else if ( identifier == "class" ) {
           addr.setSecrecy( parseSecrecy( *lineIt ) );
+        }
 
         // EMAIL
         else if ( identifier == "email" ) {
@@ -410,14 +434,16 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // FN
-        else if ( identifier == "fn" )
+        else if ( identifier == "fn" ) {
           addr.setFormattedName( (*lineIt).value().toString() );
+        }
 
         // GEO
         else if ( identifier == "geo" ) {
           Geo geo;
 
-          const QStringList geoParts = (*lineIt).value().toString().split( ';', QString::KeepEmptyParts );
+          const QStringList geoParts =
+            (*lineIt).value().toString().split( ';', QString::KeepEmptyParts );
           geo.setLatitude( geoParts[ 0 ].toFloat() );
           geo.setLongitude( geoParts[ 1 ].toFloat() );
 
@@ -425,16 +451,18 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // KEY
-        else if ( identifier == "key" )
+        else if ( identifier == "key" ) {
           addr.insertKey( parseKey( *lineIt ) );
+        }
 
         // LABEL
         else if ( identifier == "label" ) {
           Address::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
+          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
             type |= mAddressTypeMap[ (*it).toLower() ];
+          }
 
           bool available = false;
           KABC::Address::List addressList = addr.addresses();
@@ -456,67 +484,84 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // LOGO
-        else if ( identifier == "logo" )
+        else if ( identifier == "logo" ) {
           addr.setLogo( parsePicture( *lineIt ) );
+        }
 
         // MAILER
-        else if ( identifier == "mailer" )
+        else if ( identifier == "mailer" ) {
           addr.setMailer( (*lineIt).value().toString() );
+        }
 
         // N
         else if ( identifier == "n" ) {
           const QStringList nameParts = splitString( semicolonSep, (*lineIt).value().toString() );
-          if ( nameParts.count() > 0 )
+          if ( nameParts.count() > 0 ) {
             addr.setFamilyName( nameParts[ 0 ] );
-          if ( nameParts.count() > 1 )
+          }
+          if ( nameParts.count() > 1 ) {
             addr.setGivenName( nameParts[ 1 ] );
-          if ( nameParts.count() > 2 )
+          }
+          if ( nameParts.count() > 2 ) {
             addr.setAdditionalName( nameParts[ 2 ] );
-          if ( nameParts.count() > 3 )
+          }
+          if ( nameParts.count() > 3 ) {
             addr.setPrefix( nameParts[ 3 ] );
-          if ( nameParts.count() > 4 )
+          }
+          if ( nameParts.count() > 4 ) {
             addr.setSuffix( nameParts[ 4 ] );
+          }
         }
 
         // NAME
-        else if ( identifier == "name" )
+        else if ( identifier == "name" ) {
           addr.setName( (*lineIt).value().toString() );
+        }
 
         // NICKNAME
-        else if ( identifier == "nickname" )
+        else if ( identifier == "nickname" ) {
           addr.setNickName( (*lineIt).value().toString() );
+        }
 
         // NOTE
-        else if ( identifier == "note" )
+        else if ( identifier == "note" ) {
           addr.setNote( (*lineIt).value().toString() );
+        }
 
         // ORGANIZATION
-        else if ( identifier == "org" )
+        else if ( identifier == "org" ) {
           addr.setOrganization( (*lineIt).value().toString() );
+        }
 
         // PHOTO
-        else if ( identifier == "photo" )
+        else if ( identifier == "photo" ) {
           addr.setPhoto( parsePicture( *lineIt ) );
+        }
 
         // PROID
-        else if ( identifier == "prodid" )
+        else if ( identifier == "prodid" ) {
           addr.setProductId( (*lineIt).value().toString() );
+        }
 
         // REV
-        else if ( identifier == "rev" )
+        else if ( identifier == "rev" ) {
           addr.setRevision( parseDateTime( (*lineIt).value().toString() ) );
+        }
 
         // ROLE
-        else if ( identifier == "role" )
+        else if ( identifier == "role" ) {
           addr.setRole( (*lineIt).value().toString() );
+        }
 
         // SORT-STRING
-        else if ( identifier == "sort-string" )
+        else if ( identifier == "sort-string" ) {
           addr.setSortString( (*lineIt).value().toString() );
+        }
 
         // SOUND
-        else if ( identifier == "sound" )
+        else if ( identifier == "sound" ) {
           addr.setSound( parseSound( *lineIt ) );
+        }
 
         // TEL
         else if ( identifier == "tel" ) {
@@ -526,8 +571,9 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           PhoneNumber::Type type;
 
           const QStringList types = (*lineIt).parameters( "type" );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it )
+          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
             type |= mPhoneTypeMap[(*it).toUpper()];
+          }
 
           phone.setType( type );
 
@@ -535,8 +581,9 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // TITLE
-        else if ( identifier == "title" )
+        else if ( identifier == "title" ) {
           addr.setTitle( (*lineIt).value().toString() );
+        }
 
         // TZ
         else if ( identifier == "tz" ) {
@@ -553,12 +600,14 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         }
 
         // UID
-        else if ( identifier == "uid" )
+        else if ( identifier == "uid" ) {
           addr.setUid( (*lineIt).value().toString() );
+        }
 
         // URL
-        else if ( identifier == "url" )
+        else if ( identifier == "url" ) {
           addr.setUrl( KUrl( (*lineIt).value().toString() ) );
+        }
 
         // X-
         else if ( identifier.startsWith( "x-" ) ) {
@@ -583,17 +632,18 @@ QDateTime VCardTool::parseDateTime( const QString &str ) const
     dateTime.setDate( QDate( str.left( 4 ).toInt(), str.mid( 4, 2 ).toInt(),
                              str.mid( 6, 2 ).toInt() ) );
 
-    if ( str.indexOf( 'T' ) ) // has time information yyyymmddThh:mm:ss
+    if ( str.indexOf( 'T' ) ) { // has time information yyyymmddThh:mm:ss
       dateTime.setTime( QTime( str.mid( 11, 2 ).toInt(), str.mid( 14, 2 ).toInt(),
                                str.mid( 17, 2 ).toInt() ) );
-
+    }
   } else { // is extended format yyyy-mm-dd
     dateTime.setDate( QDate( str.left( 4 ).toInt(), str.mid( 5, 2 ).toInt(),
                              str.mid( 8, 2 ).toInt() ) );
 
-    if ( str.indexOf( 'T' ) ) // has time information yyyy-mm-ddThh:mm:ss
+    if ( str.indexOf( 'T' ) ) { // has time information yyyy-mm-ddThh:mm:ss
       dateTime.setTime( QTime( str.mid( 11, 2 ).toInt(), str.mid( 14, 2 ).toInt(),
                                str.mid( 17, 2 ).toInt() ) );
+    }
   }
 
   return dateTime;
@@ -627,12 +677,14 @@ Picture VCardTool::parsePicture( const VCardLine &line ) const
     img.loadFromData( line.value().toByteArray() );
     pic.setData( img );
   } else if ( params.contains( "value" ) ) {
-    if ( line.parameter( "value" ).toLower() == "uri" )
+    if ( line.parameter( "value" ).toLower() == "uri" ) {
       pic.setUrl( line.value().toString() );
+    }
   }
 
-  if ( params.contains( "type" ) )
+  if ( params.contains( "type" ) ) {
     pic.setType( line.parameter( "type" ) );
+  }
 
   return pic;
 }
@@ -665,11 +717,12 @@ Sound VCardTool::parseSound( const VCardLine &line ) const
   Sound snd;
 
   const QStringList params = line.parameterList();
-  if ( params.contains( "encoding" ) )
+  if ( params.contains( "encoding" ) ) {
     snd.setData( line.value().toByteArray() );
-  else if ( params.contains( "value" ) ) {
-    if ( line.parameter( "value" ).toLower() == "uri" )
+  } else if ( params.contains( "value" ) ) {
+    if ( line.parameter( "value" ).toLower() == "uri" ) {
       snd.setUrl( line.value().toString() );
+    }
   }
 
 /* TODO: support sound types
@@ -703,17 +756,18 @@ Key VCardTool::parseKey( const VCardLine &line ) const
   Key key;
 
   const QStringList params = line.parameterList();
-  if ( params.contains( "encoding" ) )
+  if ( params.contains( "encoding" ) ) {
     key.setBinaryData( line.value().toByteArray() );
-  else
+  } else {
     key.setTextData( line.value().toString() );
+  }
 
   if ( params.contains( "type" ) ) {
-    if ( line.parameter( "type" ).toLower() == "x509" )
+    if ( line.parameter( "type" ).toLower() == "x509" ) {
       key.setType( Key::X509 );
-    else if ( line.parameter( "type" ).toLower() == "pgp" )
+    } else if ( line.parameter( "type" ).toLower() == "pgp" ) {
       key.setType( Key::PGP );
-    else {
+    } else {
       key.setType( Key::Custom );
       key.setCustomTypeString( line.parameter( "type" ) );
     }
@@ -731,15 +785,17 @@ VCardLine VCardTool::createKey( const Key &key ) const
       line.setValue( key.binaryData() );
       line.addParameter( "encoding", "b" );
     }
-  } else if ( !key.textData().isEmpty() )
+  } else if ( !key.textData().isEmpty() ) {
     line.setValue( key.textData() );
+  }
 
-  if ( key.type() == Key::X509 )
+  if ( key.type() == Key::X509 ) {
     line.addParameter( "type", "X509" );
-  else if ( key.type() == Key::PGP )
+  } else if ( key.type() == Key::PGP ) {
     line.addParameter( "type", "PGP" );
-  else if ( key.type() == Key::Custom )
+  } else if ( key.type() == Key::Custom ) {
     line.addParameter( "type", key.customTypeString() );
+  }
 
   return line;
 }
@@ -749,12 +805,13 @@ Secrecy VCardTool::parseSecrecy( const VCardLine &line ) const
   Secrecy secrecy;
 
   const QString value = line.value().toString().toLower();
-  if ( value == "public" )
+  if ( value == "public" ) {
     secrecy.setType( Secrecy::Public );
-  else if ( value == "private" )
+  } else if ( value == "private" ) {
     secrecy.setType( Secrecy::Private );
-  else if ( value == "confidential" )
+  } else if ( value == "confidential" ) {
     secrecy.setType( Secrecy::Confidential );
+  }
 
   return secrecy;
 }
@@ -765,12 +822,13 @@ VCardLine VCardTool::createSecrecy( const Secrecy &secrecy ) const
 
   int type = secrecy.type();
 
-  if ( type == Secrecy::Public )
+  if ( type == Secrecy::Public ) {
     line.setValue( QString::fromLatin1("PUBLIC") );
-  else if ( type == Secrecy::Private )
+  } else if ( type == Secrecy::Private ) {
     line.setValue( QString::fromLatin1("PRIVATE") );
-  else if ( type == Secrecy::Confidential )
+  } else if ( type == Secrecy::Confidential ) {
     line.setValue( QString::fromLatin1("CONFIDENTIAL") );
+  }
 
   return line;
 }
@@ -785,10 +843,11 @@ QStringList VCardTool::splitString( const QChar &sep, const QString &str ) const
 
   while ( pos != -1 ) {
     if ( pos == 0 || value[ pos - 1 ] != '\\' ) {
-      if ( pos > start && pos <= (int)value.length() )
+      if ( pos > start && pos <= (int)value.length() ) {
         list << value.mid( start, pos - start );
-      else
+      } else {
         list << QString();
+      }
 
       start = pos + 1;
       pos = value.indexOf( sep, start );
@@ -799,10 +858,11 @@ QStringList VCardTool::splitString( const QChar &sep, const QString &str ) const
   }
 
   int l = value.length() - 1;
-  if ( value.mid( start, l - start + 1 ).length() > 0 )
+  if ( value.mid( start, l - start + 1 ).length() > 0 ) {
     list << value.mid( start, l - start + 1 );
-  else
+  } else {
     list << QString();
+  }
 
   return list;
 }

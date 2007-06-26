@@ -20,13 +20,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QApplication>
+#include "errorhandler.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include "errorhandler.h"
+#include <QtGui/QApplication>
 
 using namespace KABC;
 
@@ -72,6 +72,7 @@ GuiErrorHandler::~GuiErrorHandler()
 
 void GuiErrorHandler::error( const QString &msg )
 {
-  if ( qApp )
+  if ( qApp ) {
     KMessageBox::error( d->mWidget, msg );
+  }
 }

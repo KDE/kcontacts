@@ -121,7 +121,7 @@ class KABC_EXPORT StdAddressBook : public AddressBook
       address book. This contact should be used by other programs
       to access user specific data.
      */
-    Addressee whoAmI();
+    Addressee whoAmI() const;
 
     /**
       Sets the users contact. See whoAmI() for more information.
@@ -136,7 +136,7 @@ class KABC_EXPORT StdAddressBook : public AddressBook
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

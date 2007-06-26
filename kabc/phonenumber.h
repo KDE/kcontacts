@@ -21,10 +21,10 @@
 #ifndef KABC_PHONENUMBER_H
 #define KABC_PHONENUMBER_H
 
+#include "kabc_export.h"
+
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
-
-#include "kabc_export.h"
 
 namespace KABC {
 
@@ -42,24 +42,24 @@ class KABC_EXPORT PhoneNumber
 
   public:
     /**
-     * @li @p Home -  Home number
-     * @li @p Work -  Office number
-     * @li @p Msg -   Messaging
-     * @li @p Pref -  Preferred number
-     * @li @p Voice - Voice
-     * @li @p Fax -   Fax machine
-     * @li @p Cell -  Cell phone
-     * @li @p Video - Video phone
-     * @li @p Bbs -   Mailbox
-     * @li @p Modem - Modem
-     * @li @p Car -   Car phone
-     * @li @p Isdn -  ISDN connection
-     * @li @p Pcs -   Personal Communication Service
-     * @li @p Pager - Pager
-     */
-    enum TypeFlag { Home = 1, Work = 2, Msg = 4, Pref = 8, Voice = 16, Fax = 32,
-           Cell = 64, Video = 128, Bbs = 256, Modem = 512, Car = 1024,
-           Isdn = 2048, Pcs = 4096, Pager = 8192 };
+      Phone number types.
+    */
+    enum TypeFlag {
+      Home = 1,     /**< Home number */
+      Work = 2,     /**< Office number */
+      Msg = 4,      /**< Messaging */
+      Pref = 8,     /**< Preferred number */
+      Voice = 16,   /**< Voice */
+      Fax = 32,     /**< Fax machine */
+      Cell = 64,    /**< Cell phone */
+      Video = 128,  /**< Video phone */
+      Bbs = 256,    /**< Mailbox */
+      Modem = 512,  /**< Modem */
+      Car = 1024,   /**< Car phone */
+      Isdn = 2048,  /**< ISDN connection */
+      Pcs = 4096,   /**< Personal Communication Service*/
+      Pager = 8192  /**< Pager */
+    };
 
     Q_DECLARE_FLAGS( Type, TypeFlag )
 
@@ -99,7 +99,7 @@ class KABC_EXPORT PhoneNumber
 
     bool operator==( const PhoneNumber & ) const;
     bool operator!=( const PhoneNumber & ) const;
-    PhoneNumber& operator=( const PhoneNumber &other );
+    PhoneNumber &operator=( const PhoneNumber &other );
 
     /**
      * Returns true, if the phone number is empty.

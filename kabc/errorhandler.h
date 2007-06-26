@@ -22,9 +22,8 @@
 #ifndef KABC_ERRORHANDLER_H
 #define KABC_ERRORHANDLER_H
 
-#include <QtCore/QString>
-
 #include "kabc_export.h"
+#include <QtCore/QString>
 
 class QWidget;
 
@@ -61,7 +60,7 @@ class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( ConsoleErrorHandler )
 };
@@ -76,7 +75,7 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
     /**
       Create error handler.
 
-      \param parent Widget which is used as parent for the error dialogs.
+      @param parent Widget which is used as parent for the error dialogs.
     */
     GuiErrorHandler( QWidget *parent = 0 );
 
@@ -86,7 +85,7 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( GuiErrorHandler )
 };

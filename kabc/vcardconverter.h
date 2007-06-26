@@ -55,12 +55,11 @@ class KABC_EXPORT VCardConverter
 {
   public:
 
-  /**
-    @li v2_1 - VCard format version 2.1
-    @li v3_0 - VCard format version 3.0
-   */
-   enum Version
-    {
+    /**
+      @li v2_1 - VCard format version 2.1
+      @li v3_0 - VCard format version 3.0
+     */
+    enum Version {
       v2_1,
       v3_0
     };
@@ -111,7 +110,6 @@ class KABC_EXPORT VCardConverter
     class VCardConverterPrivate;
     VCardConverterPrivate *const d;
 };
-
 
 /**
     Helper functions

@@ -56,7 +56,7 @@ class KABC_EXPORT Uid
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 class KABC_EXPORT Name
@@ -70,7 +70,7 @@ class KABC_EXPORT Name
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 class KABC_EXPORT FormattedName
@@ -84,7 +84,7 @@ class KABC_EXPORT FormattedName
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 class KABC_EXPORT FamilyName // fallback to given name
@@ -98,7 +98,7 @@ class KABC_EXPORT FamilyName // fallback to given name
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 class KABC_EXPORT GivenName  // fallback to family name
@@ -112,7 +112,7 @@ class KABC_EXPORT GivenName  // fallback to family name
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }
@@ -120,7 +120,13 @@ class KABC_EXPORT GivenName  // fallback to family name
 /**
  * Addressee attribute used for sorting.
  */
-typedef enum { Uid, Name, FormattedName, FamilyName, GivenName } SortingCriterion;
+typedef enum {
+  Uid,
+  Name,
+  FormattedName,
+  FamilyName,
+  GivenName
+} SortingCriterion;
 
 /**
  * @short  a QValueList of Addressee, with sorting functionality
@@ -168,7 +174,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      */
     ~AddresseeList();
 
-    AddresseeList& operator=( const AddresseeList &other );
+    AddresseeList &operator=( const AddresseeList &other );
 
     /**
      * Determines the direction of sorting. On change, the list
@@ -255,7 +261,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      * the class specific one.
      * You're a lot better off by keeping track of this locally.
      */
-    Field* sortingField() const;
+    Field *sortingField() const;
 
     /**
      * Returns a string representation of the addressee list.

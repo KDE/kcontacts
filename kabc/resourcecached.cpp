@@ -18,14 +18,15 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
+#include "resourcecached.h"
 
 #include <kabc/vcardconverter.h>
+
 #include <kdebug.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include "resourcecached.h"
+#include <QtCore/QFile>
 
 using namespace KABC;
 
@@ -37,8 +38,8 @@ class ResourceCached::Private
     {
     }
 
-    void loadChangesCache( QMap<QString, KABC::Addressee>&, const QString& );
-    void saveChangesCache( const QMap<QString, KABC::Addressee>&, const QString& );
+    void loadChangesCache( QMap<QString, KABC::Addressee> &map, const QString &type );
+    void saveChangesCache( const QMap<QString, KABC::Addressee> &map, const QString &type );
 
     ResourceCached *mParent;
     KRES::IdMapper mIdMapper;
@@ -48,7 +49,8 @@ class ResourceCached::Private
     QMap<QString, KABC::Addressee> mDeletedAddressees;
 };
 
-void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addressee> &map, const QString &type )
+void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addressee> &map,
+                                                const QString &type )
 {
   QFile file( mParent->changesCacheFile( type ) );
 
@@ -67,18 +69,21 @@ void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addres
   }
 }
 
-void ResourceCached::Private::loadChangesCache( QMap<QString, KABC::Addressee> &map, const QString &type )
+void ResourceCached::Private::loadChangesCache( QMap<QString, KABC::Addressee> &map,
+                                                const QString &type )
 {
   QFile file( mParent->changesCacheFile( type ) );
-  if ( !file.open( QIODevice::ReadOnly ) )
+  if ( !file.open( QIODevice::ReadOnly ) ) {
     return;
+  }
 
   KABC::VCardConverter converter;
 
   const KABC::Addressee::List list = converter.parseVCards( file.readAll() );
   KABC::Addressee::List::ConstIterator it;
-  for ( it = list.begin(); it != list.end(); ++it )
+  for ( it = list.begin(); it != list.end(); ++it ) {
     map.insert( (*it).uid(), *it );
+  }
 
   file.close();
 }
@@ -134,8 +139,9 @@ void ResourceCached::removeAddressee( const Addressee &addr )
     return;
   }
 
-  if ( d->mDeletedAddressees.find( addr.uid() ) == d->mDeletedAddressees.end() )
+  if ( d->mDeletedAddressees.find( addr.uid() ) == d->mDeletedAddressees.end() ) {
     d->mDeletedAddressees.insert( addr.uid(), addr );
+  }
 
   mAddrMap.remove( addr.uid() );
 }
@@ -149,9 +155,9 @@ bool ResourceCached::loadFromCache()
 
   // load cache
   QFile file( cacheFile() );
-  if ( !file.open( QIODevice::ReadOnly ) )
+  if ( !file.open( QIODevice::ReadOnly ) ) {
     return false;
-
+  }
 
   KABC::VCardConverter converter;
   KABC::Addressee::List list = converter.parseVCards( file.readAll() );
@@ -174,8 +180,9 @@ void ResourceCached::saveToCache()
 
   // save cache
   QFile file( cacheFile() );
-  if ( !file.open( QIODevice::WriteOnly ) )
+  if ( !file.open( QIODevice::WriteOnly ) ) {
     return;
+  }
 
   KABC::Addressee::List list = mAddrMap.values();
 
@@ -189,9 +196,9 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
 {
   // load cache
   QFile file( cacheFile() );
-  if ( !file.open( QIODevice::ReadOnly ) )
+  if ( !file.open( QIODevice::ReadOnly ) ) {
     return;
-
+  }
 
   KABC::VCardConverter converter;
   KABC::Addressee::List list = converter.parseVCards( file.readAll() );
@@ -201,8 +208,9 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
   for ( cacheIt = list.begin(); cacheIt != list.end(); ++cacheIt ) {
     bool found = false;
     for ( it = addrList.begin(); it != addrList.end(); ++it ) {
-      if ( (*it).uid() == (*cacheIt).uid() )
+      if ( (*it).uid() == (*cacheIt).uid() ) {
         found = true;
+      }
     }
 
     if ( !found ) {
@@ -214,7 +222,7 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
   file.close();
 }
 
-KRES::IdMapper& ResourceCached::idMapper()
+KRES::IdMapper &ResourceCached::idMapper()
 {
   return d->mIdMapper;
 }

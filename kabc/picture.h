@@ -65,7 +65,7 @@ class KABC_EXPORT Picture
      */
     ~Picture();
 
-    Picture& operator=( const Picture &other );
+    Picture &operator=( const Picture &other );
 
     bool operator==( const Picture & ) const;
     bool operator!=( const Picture & ) const;

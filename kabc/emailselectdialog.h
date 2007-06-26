@@ -23,7 +23,6 @@
 #include <kdialog.h>
 #include <kabc/kabc_export.h>
 
-
 namespace KABC {
 
 class KABC_EXPORT EmailSelectDialog : public KDialog
@@ -41,7 +40,7 @@ class KABC_EXPORT EmailSelectDialog : public KDialog
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

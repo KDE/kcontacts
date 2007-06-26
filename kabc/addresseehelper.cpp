@@ -17,24 +17,24 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QApplication>
+#include "addresseehelper.h"
 
 #include <kconfig.h>
 #include <klocale.h>
 
+#include <QtGui/QApplication>
 #include <QtDBus/QtDBus>
-
-#include "addresseehelper.h"
 
 using namespace KABC;
 
-AddresseeHelper * AddresseeHelper::s_self;
+AddresseeHelper *AddresseeHelper::s_self;
 
 // static
 AddresseeHelper *AddresseeHelper::self()
 {
-  if ( !s_self )
+  if ( !s_self ) {
     s_self = new AddresseeHelper();
+  }
 
   return s_self;
 }
@@ -44,18 +44,19 @@ AddresseeHelper::AddresseeHelper()
 {
   initSettings();
 
-  QDBusConnection::sessionBus().connect(QString(), QString(), "org.kde.kabc.AddressBookConfig", "changed",
-          this, SLOT(initSettings()));
+  QDBusConnection::sessionBus().connect(QString(), QString(),
+                                        "org.kde.kabc.AddressBookConfig", "changed",
+                                        this, SLOT(initSettings()));
 }
 
 // static
-void AddresseeHelper::addToSet( const QStringList& list,
-                                QSet<QString>& container )
+void AddresseeHelper::addToSet( const QStringList &list, QSet<QString> &container )
 {
   QStringList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
-    if ( !(*it).isEmpty() )
+    if ( !(*it).isEmpty() ) {
       container.insert( *it );
+    }
   }
 }
 
@@ -82,26 +83,26 @@ void AddresseeHelper::initSettings()
   mPrefixes.insert( "von" );
   mPrefixes.insert( "de" );
 
-  KConfig _config( "kabcrc", KConfig::NoGlobals  );
+  KConfig _config( "kabcrc", KConfig::NoGlobals );
   KConfigGroup config(&_config, "General" );
 
-  addToSet( config.readEntry( "Prefixes", QStringList() ),   mTitles );
+  addToSet( config.readEntry( "Prefixes", QStringList() ), mTitles );
   addToSet( config.readEntry( "Inclusions", QStringList() ), mPrefixes );
-  addToSet( config.readEntry( "Suffixes", QStringList() ),   mSuffixes );
-  mTradeAsFamilyName = config.readEntry("TradeAsFamilyName", true);
+  addToSet( config.readEntry( "Suffixes", QStringList() ), mSuffixes );
+  mTradeAsFamilyName = config.readEntry( "TradeAsFamilyName", true );
 }
 
-bool AddresseeHelper::containsTitle( const QString& title ) const
+bool AddresseeHelper::containsTitle( const QString &title ) const
 {
-  return mTitles.contains( title);
+  return mTitles.contains( title );
 }
 
-bool AddresseeHelper::containsPrefix( const QString& prefix ) const
+bool AddresseeHelper::containsPrefix( const QString &prefix ) const
 {
   return mPrefixes.contains( prefix );
 }
 
-bool AddresseeHelper::containsSuffix( const QString& suffix ) const
+bool AddresseeHelper::containsSuffix( const QString &suffix ) const
 {
   return mSuffixes.contains( suffix );
 }

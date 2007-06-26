@@ -18,17 +18,16 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QFile>
+#include "formatfactory.h"
+#include "vcardformat.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 
-#include "vcardformat.h"
-
-#include "formatfactory.h"
+#include <QtCore/QCoreApplication>
+#include <QtCore/QFile>
 
 using namespace KABC;
 
@@ -37,13 +36,13 @@ class FormatFactory::Private
   public:
     ~Private() {
       mFormatList.clear();
-      qRemovePostRoutine(cleanupFormatFactory);
+      qRemovePostRoutine( cleanupFormatFactory );
     }
 
-    KLibrary *openLibrary( const QString& libName );
+    KLibrary *openLibrary( const QString &libName );
 
     QHash<QString, FormatInfo> mFormatList;
-    
+
     static FormatFactory *sSelf;
     static void cleanupFormatFactory()
     {
@@ -53,7 +52,7 @@ class FormatFactory::Private
 };
 FormatFactory *FormatFactory::Private::sSelf = 0;
 
-KLibrary *FormatFactory::Private::openLibrary( const QString& libName )
+KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
 {
   KLibrary *library = 0;
 
@@ -79,9 +78,9 @@ FormatFactory *FormatFactory::self()
   kDebug(5700) << "FormatFactory::self()" << endl;
 
   static Private p;
-  if(!p.sSelf) {
+  if ( !p.sSelf ) {
      p.sSelf = new FormatFactory;
-     qAddPostRoutine(Private::cleanupFormatFactory);
+     qAddPostRoutine( Private::cleanupFormatFactory );
   }
   return p.sSelf;
 }
@@ -96,14 +95,16 @@ FormatFactory::FormatFactory()
   info.descriptionLabel = i18n( "vCard Format" );
   d->mFormatList.insert( "vcard", info );
 
-  const QStringList list = KGlobal::dirs()->findAllResources( "data" ,"kabc/formats/*.desktop",
-                                                              KStandardDirs::Recursive |
-                                                              KStandardDirs::NoDuplicates );
+  const QStringList list =
+    KGlobal::dirs()->findAllResources( "data" ,"kabc/formats/*.desktop",
+                                       KStandardDirs::Recursive |
+                                       KStandardDirs::NoDuplicates );
   for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
-    KConfig config( *it, KConfig::OnlyLocal);
+    KConfig config( *it, KConfig::OnlyLocal );
 
-    if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) )
+    if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) ) {
       continue;
+    }
 
     KConfigGroup group = config.group( "Plugin" );
     QString type = group.readEntry( "Type" );
@@ -132,8 +133,9 @@ QStringList FormatFactory::formats()
   QHashIterator<QString, FormatInfo> it( d->mFormatList );
   while ( it.hasNext() ) {
     it.next();
-    if ( it.key() != "vcard" )
+    if ( it.key() != "vcard" ) {
       retval << it.key();
+    }
   }
 
   return retval;
@@ -141,18 +143,20 @@ QStringList FormatFactory::formats()
 
 FormatInfo FormatFactory::info( const QString &type ) const
 {
-  if ( type.isEmpty() || !d->mFormatList.contains( type ) )
+  if ( type.isEmpty() || !d->mFormatList.contains( type ) ) {
     return FormatInfo();
-  else
+  } else {
     return d->mFormatList[ type ];
+  }
 }
 
-Format *FormatFactory::format( const QString& type )
+Format *FormatFactory::format( const QString &type )
 {
   Format *format = 0;
 
-  if ( type.isEmpty() )
+  if ( type.isEmpty() ) {
     return 0;
+  }
 
   if ( type == "vcard" ) {
     format = new VCardFormat;
@@ -162,20 +166,22 @@ Format *FormatFactory::format( const QString& type )
     return format;
   }
 
-  if ( !d->mFormatList.contains( type ) )
+  if ( !d->mFormatList.contains( type ) ) {
     return 0;
+  }
 
   FormatInfo fi = d->mFormatList[ type ];
   QString libName = fi.library;
 
   KLibrary *library = d->openLibrary( libName );
-  if ( !library )
+  if ( !library ) {
     return 0;
+  }
 
   KLibrary::void_function_ptr format_func = library->resolveFunction( "format" );
 
   if ( format_func ) {
-    format = ((Format* (*)())format_func)();
+    format = ( (Format *(*)())format_func )();
     format->setType( type );
     format->setNameLabel( fi.nameLabel );
     format->setDescriptionLabel( fi.descriptionLabel );

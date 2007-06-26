@@ -89,7 +89,7 @@ class KABC_EXPORT Geo
 
     bool operator==( const Geo & ) const;
     bool operator!=( const Geo & ) const;
-    Geo& operator=( const Geo &other );
+    Geo &operator=( const Geo &other );
 
     /**
      * Returns string representation of geographical position.

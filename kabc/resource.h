@@ -47,7 +47,7 @@ class KABC_EXPORT Ticket
     Ticket( Resource *resource );
 
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 /**
@@ -148,7 +148,7 @@ class KABC_EXPORT Resource : public KRES::Resource
 
       private:
         class Private;
-        Private* const d;
+        Private *const d;
     };
 
     /**
@@ -237,7 +237,7 @@ class KABC_EXPORT Resource : public KRES::Resource
 
       private:
         class Private;
-        Private* const d;
+        Private *const d;
     };
 
     /**
@@ -304,7 +304,7 @@ class KABC_EXPORT Resource : public KRES::Resource
       The resource has to remove its locks in this function.
       This function is also responsible for deleting the ticket.
      */
-    virtual void releaseSaveTicket( Ticket* ) = 0;
+    virtual void releaseSaveTicket( Ticket *ticket ) = 0;
 
     /**
       Loads all addressees synchronously.
@@ -327,12 +327,12 @@ class KABC_EXPORT Resource : public KRES::Resource
     /**
       Insert an addressee into the resource.
      */
-    virtual void insertAddressee( const Addressee& );
+    virtual void insertAddressee( const Addressee &addr );
 
     /**
       Removes an addressee from resource.
      */
-    virtual void removeAddressee( const Addressee& addr );
+    virtual void removeAddressee( const Addressee &addr );
 
     /**
       Saves all addressees synchronously.
@@ -399,7 +399,7 @@ class KABC_EXPORT Resource : public KRES::Resource
 
       Sets the address book of the resource.
      */
-    void setAddressBook( AddressBook* );
+    void setAddressBook( AddressBook *addr );
 
   Q_SIGNALS:
     /**
@@ -442,7 +442,7 @@ class KABC_EXPORT Resource : public KRES::Resource
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

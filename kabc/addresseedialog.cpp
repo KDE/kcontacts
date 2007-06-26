@@ -18,17 +18,16 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtCore/QRegExp>
+#include "addresseedialog.h"
+#include "stdaddressbook.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 
-#include "stdaddressbook.h"
-
-#include "addresseedialog.h"
+#include <QtGui/QGroupBox>
+#include <QtGui/QLayout>
+#include <QtGui/QPushButton>
+#include <QtCore/QRegExp>
 
 using namespace KABC;
 
@@ -63,8 +62,9 @@ QString AddresseeItem::key( int column, bool ) const
     QString value = text( Email );
     QRegExp emailRe("<\\S*>");
     int match = emailRe.indexIn( value );
-    if ( match > -1 )
+    if ( match > -1 ) {
       value = value.mid( match + 1, emailRe.matchedLength() - 2 );
+    }
 
     return value.toLower();
   }
@@ -185,15 +185,18 @@ Addressee AddresseeDialog::addressee() const
 {
   AddresseeItem *aItem = 0;
 
-  if ( d->mMultiple )
+  if ( d->mMultiple ) {
     aItem = dynamic_cast<AddresseeItem *>( d->mSelectedList->topLevelItem( 0 ) );
-  else {
+  } else {
     QList<QTreeWidgetItem*> selected = d->mAddresseeList->selectedItems();
-    if ( selected.count() != 0 )
+    if ( selected.count() != 0 ) {
       aItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
+    }
   }
 
-  if (aItem) return aItem->addressee();
+  if ( aItem ) {
+    return aItem->addressee();
+  }
   return Addressee();
 }
 
@@ -205,17 +208,18 @@ Addressee::List AddresseeDialog::addressees() const
   if ( d->mMultiple ) {
     for ( int i = 0; i < d->mSelectedList->topLevelItemCount(); i++ ) {
       aItem = dynamic_cast<AddresseeItem *>( d->mSelectedList->topLevelItem( i ) );
-      if ( aItem )
+      if ( aItem ) {
         al.append( aItem->addressee() );
+      }
     }
-  }
-  else
-  {
+  } else {
     QList<QTreeWidgetItem*> selected = d->mAddresseeList->selectedItems();
-    if ( selected.count() != 0 )
+    if ( selected.count() != 0 ) {
       aItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
-    if (aItem)
+    }
+    if ( aItem ) {
       al.append( aItem->addressee() );
+    }
   }
 
   return al;
@@ -224,8 +228,9 @@ Addressee::List AddresseeDialog::addressees() const
 Addressee AddresseeDialog::getAddressee( QWidget *parent )
 {
   AddresseeDialog dlg( parent );
-  if ( dlg.exec() )
+  if ( dlg.exec() ) {
     return dlg.addressee();
+  }
 
   return Addressee();
 }
@@ -233,8 +238,9 @@ Addressee AddresseeDialog::getAddressee( QWidget *parent )
 Addressee::List AddresseeDialog::getAddressees( QWidget *parent )
 {
   AddresseeDialog dlg( parent, true );
-  if ( dlg.exec() )
+  if ( dlg.exec() ) {
     return dlg.addressees();
+  }
 
   return Addressee::List();
 }
@@ -255,7 +261,9 @@ void AddresseeDialog::Private::loadAddressBook()
 
 void AddresseeDialog::Private::addCompletionItem( const QString &str, QTreeWidgetItem *item )
 {
-  if ( str.isEmpty() ) return;
+  if ( str.isEmpty() ) {
+    return;
+  }
 
   mItemDict.insert( str, item );
   mAddresseeEdit->completionObject()->addItem( str );
@@ -263,7 +271,9 @@ void AddresseeDialog::Private::addCompletionItem( const QString &str, QTreeWidge
 
 void AddresseeDialog::Private::selectItem( const QString &str )
 {
-  if ( str.isEmpty() ) return;
+  if ( str.isEmpty() ) {
+    return;
+  }
 
   QTreeWidgetItem *item = mItemDict.value( str, 0 );
   if ( item ) {
@@ -277,7 +287,9 @@ void AddresseeDialog::Private::selectItem( const QString &str )
 void AddresseeDialog::Private::updateEdit()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeList->selectedItems();
-  if ( selected.count() == 0 ) return;
+  if ( selected.count() == 0 ) {
+    return;
+  }
   QTreeWidgetItem *item = selected.at( 0 );
   mAddresseeEdit->setText( item->text( 0 ) );
   mAddresseeEdit->setSelection( 0, item->text( 0 ).length() );
@@ -286,7 +298,9 @@ void AddresseeDialog::Private::updateEdit()
 void AddresseeDialog::Private::addSelected( QTreeWidgetItem *item )
 {
   AddresseeItem *addrItem = dynamic_cast<AddresseeItem *>( item );
-  if ( !addrItem ) return;
+  if ( !addrItem ) {
+    return;
+  }
 
   Addressee a = addrItem->addressee();
 
@@ -300,9 +314,13 @@ void AddresseeDialog::Private::addSelected( QTreeWidgetItem *item )
 void AddresseeDialog::Private::removeSelected()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeList->selectedItems();
-  if ( selected.count() == 0 ) return;
+  if ( selected.count() == 0 ) {
+    return;
+  }
   AddresseeItem *addrItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
-  if ( !addrItem ) return;
+  if ( !addrItem ) {
+    return;
+  }
 
   mSelectedDict.remove( addrItem->addressee().uid() );
   delete addrItem;

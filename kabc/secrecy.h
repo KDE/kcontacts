@@ -70,7 +70,7 @@ class KABC_EXPORT Secrecy
      */
     ~Secrecy();
 
-    Secrecy& operator=( const Secrecy& );
+    Secrecy &operator=( const Secrecy & );
 
     bool operator==( const Secrecy & ) const;
     bool operator!=( const Secrecy & ) const;
@@ -114,12 +114,12 @@ class KABC_EXPORT Secrecy
 /**
  * Serializes the @p secrecy object into the @p stream.
  */
-KABC_EXPORT QDataStream& operator<<( QDataStream &stream, const Secrecy &secrecy );
+KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Secrecy &secrecy );
 
 /**
  * Initializes the @p secrecy object from the @p stream.
  */
-KABC_EXPORT QDataStream& operator>>( QDataStream &stream, Secrecy &secrecy );
+KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Secrecy &secrecy );
 
 }
 #endif

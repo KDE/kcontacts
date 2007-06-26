@@ -70,7 +70,7 @@ class KABC_EXPORT AddresseeHelper : public QObject
      * @return @c true, if @p title was found in the list,
      *         @c false otherwise
      */
-    bool containsTitle( const QString& title ) const;
+    bool containsTitle( const QString &title ) const;
 
     /**
      * Queries the list of inclusions.
@@ -79,7 +79,7 @@ class KABC_EXPORT AddresseeHelper : public QObject
      * @return @c true, if @p prefix was found in the list,
      *         @c false otherwise
      */
-    bool containsPrefix( const QString& prefix ) const;
+    bool containsPrefix( const QString &prefix ) const;
 
     /**
      * Queries the list of honoric suffixes.
@@ -88,7 +88,7 @@ class KABC_EXPORT AddresseeHelper : public QObject
      * @return @c true, if @p suffix was found in the list,
      *         @c false otherwise
      */
-    bool containsSuffix( const QString& suffix ) const;
+    bool containsSuffix( const QString &suffix ) const;
 
     /**
      * Returns whether or not a single name component should
@@ -108,8 +108,7 @@ class KABC_EXPORT AddresseeHelper : public QObject
   private:
     AddresseeHelper();
 
-    static void addToSet( const QStringList& list,
-                          QSet<QString>& container );
+    static void addToSet( const QStringList &list, QSet<QString> &container );
     QSet<QString> mTitles;
     QSet<QString> mPrefixes;
     QSet<QString> mSuffixes;

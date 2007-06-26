@@ -38,119 +38,115 @@ class KABC_EXPORT Key
 
   public:
     /**
-     * List of keys.
-     */
+      List of keys.
+    */
     typedef QList<Key> List;
 
     /**
-     * Key types
-     *
-     * @li X509   - X509 key
-     * @li PGP    - Pretty Good Privacy key
-     * @li Custom - Custom or IANA conform key
-     */
+      Key types
+    */
     enum Type {
-      X509,
-      PGP,
-      Custom
+      X509,   /**< X509 key */
+      PGP,    /**< Pretty Good Privacy key */
+      Custom  /**< Custom or IANA conform key */
     };
 
     /**
-     * List of key types.
-     */
+      List of key types.
+    */
     typedef QList<Type> TypeList;
 
     /**
-     * Creates a new key.
-     *
-     * @param text  The text data.
-     * @param type  The key type, see Types.
-     */
+      Creates a new key.
+
+      @param text  The text data.
+      @param type  The key type, see Types.
+    */
     explicit Key( const QString &text = QString(), Type type = PGP );
 
     /**
-     * Copy constructor.
-     */
+      Copy constructor.
+    */
     Key( const Key &other );
 
     /**
-     * Destroys the key.
-     */
+      Destroys the key.
+    */
     ~Key();
 
     bool operator==( const Key & ) const;
     bool operator!=( const Key & ) const;
-    Key& operator=( const Key &other );
+    Key &operator=( const Key &other );
 
     /**
-     * Sets the unique @p identifier.
-     */
+      Sets the unique @p identifier.
+    */
     void setId( const QString &identifier );
 
     /**
-     * Returns the unique identifier.
-     */
+      Returns the unique identifier.
+    */
     QString id() const;
 
     /**
-     * Sets binary @p data.
-     */
+      Sets binary @p data.
+    */
     void setBinaryData( const QByteArray &data );
 
     /**
-     * Returns the binary data.
-     */
+      Returns the binary data.
+    */
     QByteArray binaryData() const;
 
     /**
-     * Sets text @p data.
-     */
+      Sets text @p data.
+    */
     void setTextData( const QString &data );
 
     /**
-     * Returns the text data.
-     */
+      Returns the text data.
+    */
     QString textData() const;
 
     /**
-     * Returns whether the key contains binary or text data.
-     */
+      Returns whether the key contains binary or text data.
+    */
     bool isBinary() const;
 
     /**
-     * Sets the @p type.
-     * @see Type
-     */
+      Sets the @p type.
+      @see Type
+    */
     void setType( Type type );
 
     /**
-     * Sets custom @p type string.
-     */
+      Sets custom @p type string.
+    */
     void setCustomTypeString( const QString &type );
 
     /**
-     * Returns the type, see Type.
-     */
+      Returns the type, see Type.
+    */
     Type type() const;
 
     /**
-     * Returns the custom type string.
-     */
+      Returns the custom type string.
+    */
     QString customTypeString() const;
 
     /**
-     * Returns a string representation of the key.
-     */
+      Returns a string representation of the key.
+    */
     QString toString() const;
 
     /**
-     * Returns a list of all available key types.
-     */
+      Returns a list of all available key types.
+    */
     static TypeList typeList();
 
     /**
-     * Returns a translated label for a given key @p type.
-     */
+      Returns a translated label for a given key @p type.
+    */
     static QString typeLabel( Type type );
 
   private:
@@ -159,14 +155,15 @@ class KABC_EXPORT Key
 };
 
 /**
- * Serializes the @p key object into the @p stream.
- */
+  Serializes the @p key object into the @p stream.
+*/
 KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Key &key );
 
 /**
- * Initializes the @p key object from the @p stream.
- */
+  Initializes the @p key object from the @p stream.
+*/
 KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Key &key );
 
 }
+
 #endif

@@ -21,8 +21,8 @@
 #ifndef KABC_RESOURCECACHED_H
 #define KABC_RESOURCECACHED_H
 
-#include <kabc/resource.h>
 #include <kabc/kabc_export.h>
+#include <kabc/resource.h>
 
 #include <kresources/idmapper.h>
 
@@ -34,7 +34,7 @@ class KABC_EXPORT ResourceCached : public Resource
 
   public:
     ResourceCached();
-    ResourceCached( const KConfigGroup& );
+    ResourceCached( const KConfigGroup &group );
     ~ResourceCached();
 
     /**
@@ -45,12 +45,12 @@ class KABC_EXPORT ResourceCached : public Resource
     /**
       Insert an addressee into the resource.
      */
-    virtual void insertAddressee( const Addressee& );
+    virtual void insertAddressee( const Addressee &addr );
 
     /**
       Removes an addressee from resource.
      */
-    virtual void removeAddressee( const Addressee& addr );
+    virtual void removeAddressee( const Addressee &addr );
 
     bool loadFromCache();
     void saveToCache();
@@ -59,12 +59,12 @@ class KABC_EXPORT ResourceCached : public Resource
     /**
       Returns a reference to the id mapper.
      */
-    KRES::IdMapper& idMapper();
+    KRES::IdMapper &idMapper();
 
     bool hasChanges() const;
     void clearChanges();
-    void clearChange( const KABC::Addressee& );
-    void clearChange( const QString& );
+    void clearChange( const KABC::Addressee &addr );
+    void clearChange( const QString &uid );
 
     KABC::Addressee::List addedAddressees() const;
     KABC::Addressee::List changedAddressees() const;
@@ -76,7 +76,7 @@ class KABC_EXPORT ResourceCached : public Resource
     /**
       Functions for keeping the changes persistent.
      */
-    virtual QString changesCacheFile( const QString& ) const;
+    virtual QString changesCacheFile( const QString &type ) const;
     void loadChangesCache();
     void saveChangesCache();
 
@@ -84,7 +84,7 @@ class KABC_EXPORT ResourceCached : public Resource
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

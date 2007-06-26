@@ -80,7 +80,7 @@ class KABC_EXPORT TimeZone
 
     bool operator==( const TimeZone & ) const;
     bool operator!=( const TimeZone & ) const;
-    TimeZone& operator=( const TimeZone &other );
+    TimeZone &operator=( const TimeZone &other );
 
     /**
      * Return string representation of time zone offset.

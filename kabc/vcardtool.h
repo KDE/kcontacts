@@ -21,9 +21,9 @@
 #ifndef KABC_VCARDTOOL_H
 #define KABC_VCARDTOOL_H
 
-#include "vcardparser/vcardparser.h"
-#include "addressee.h"
 #include "kabc_export.h"
+#include "addressee.h"
+#include "vcardparser/vcardparser.h"
 
 class QDateTime;
 
@@ -44,7 +44,8 @@ class KABC_EXPORT VCardTool
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 ) const;
+    QByteArray createVCards( const Addressee::List &list,
+                             VCard::Version version = VCard::v3_0 ) const;
 
     /**
       Parses the string and returns a list of addressee objects.
@@ -72,7 +73,6 @@ class KABC_EXPORT VCardTool
 
     Secrecy parseSecrecy( const VCardLine &line ) const;
     VCardLine createSecrecy( const Secrecy &secrecy ) const;
-
 
     QMap<QString, Address::TypeFlag> mAddressTypeMap;
     QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;

@@ -18,13 +18,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSharedData>
+#include "phonenumber.h"
 
 #include <klocale.h>
 #include <krandom.h>
 
-#include "phonenumber.h"
+#include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 using namespace KABC;
 
@@ -76,14 +76,17 @@ PhoneNumber::~PhoneNumber()
 
 bool PhoneNumber::operator==( const PhoneNumber &other ) const
 {
-  if ( d->mId != other.d->mId )
+  if ( d->mId != other.d->mId ) {
     return false;
+  }
 
-  if ( d->mNumber != other.d->mNumber )
+  if ( d->mNumber != other.d->mNumber ) {
     return false;
+  }
 
-  if ( d->mType != other.d->mType )
+  if ( d->mType != other.d->mType ) {
     return false;
+  }
 
   return true;
 }
@@ -93,10 +96,11 @@ bool PhoneNumber::operator!=( const PhoneNumber &other ) const
   return !( other == *this );
 }
 
-PhoneNumber& PhoneNumber::operator=( const PhoneNumber &other )
+PhoneNumber &PhoneNumber::operator=( const PhoneNumber &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
@@ -147,8 +151,9 @@ QString PhoneNumber::typeLabel() const
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
       label.append( ( first ? "" : "/" ) + typeLabel( *it ) );
-      if ( first )
+      if ( first ) {
         first = false;
+      }
     }
   }
 
@@ -169,8 +174,9 @@ PhoneNumber::TypeList PhoneNumber::typeList()
 
 QString PhoneNumber::typeLabel( Type type )
 {
-  if ( type & Pref )
+  if ( type & Pref ) {
     return i18nc( "Preferred phone", "Preferred" );
+  }
 
   switch ( type ) {
     case Home:

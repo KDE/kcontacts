@@ -18,14 +18,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QApplication>
-#include <QtCore/QPair>
+#include "distributionlist.h"
 
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
-#include "distributionlist.h"
+#include <QtGui/QApplication>
+#include <QtCore/QPair>
 
 using namespace KABC;
 
@@ -43,7 +43,7 @@ DistributionList::Entry::Entry()
 {
 }
 
-DistributionList::Entry::Entry( const DistributionList::Entry& entry )
+DistributionList::Entry::Entry( const DistributionList::Entry &entry )
   : d( new Private( entry.d->addressee, entry.d->email ) )
 {
 }
@@ -58,7 +58,7 @@ DistributionList::Entry::~Entry()
   delete d;
 }
 
-DistributionList::Entry& DistributionList::Entry::operator=( const DistributionList::Entry& entry )
+DistributionList::Entry &DistributionList::Entry::operator=( const DistributionList::Entry &entry )
 {
   d->addressee = entry.d->addressee;
   d->email = entry.d->email;
@@ -66,12 +66,12 @@ DistributionList::Entry& DistributionList::Entry::operator=( const DistributionL
   return *this;
 }
 
-Addressee& DistributionList::Entry::addressee() const
+Addressee &DistributionList::Entry::addressee() const
 {
   return d->addressee;
 }
 
-QString& DistributionList::Entry::email() const
+QString &DistributionList::Entry::email() const
 {
   return d->email;
 }
@@ -155,8 +155,9 @@ QStringList DistributionList::emails() const
     QString email = (*it).email().isEmpty() ? a.fullEmail() :
                                               a.fullEmail( (*it).email() );
 
-    if ( !email.isEmpty() )
+    if ( !email.isEmpty() ) {
       emails.append( email );
+    }
   }
 
   return emails;
@@ -198,7 +199,8 @@ DistributionListManager::~DistributionListManager()
   delete d;
 }
 
-DistributionList *DistributionListManager::list( const QString &name, Qt::CaseSensitivity _caseSensitivity )
+DistributionList *DistributionListManager::list( const QString &name,
+                                                 Qt::CaseSensitivity _caseSensitivity )
 {
   QListIterator<DistributionList*> it( d->mLists );
   bool caseSensitive = ( _caseSensitivity == Qt::CaseSensitive );
@@ -210,8 +212,9 @@ DistributionList *DistributionListManager::list( const QString &name, Qt::CaseSe
         return list;
       }
     } else {
-      if ( list->name() == newName )
+      if ( list->name() == newName ) {
         return list;
+      }
     }
   }
 
@@ -220,8 +223,9 @@ DistributionList *DistributionListManager::list( const QString &name, Qt::CaseSe
 
 void DistributionListManager::insert( DistributionList *l )
 {
-  if ( !l )
+  if ( !l ) {
     return;
+  }
 
   QMutableListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
@@ -237,8 +241,9 @@ void DistributionListManager::insert( DistributionList *l )
 
 void DistributionListManager::remove( DistributionList *l )
 {
-  if ( !l )
+  if ( !l ) {
     return;
+  }
 
   QMutableListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
@@ -299,8 +304,9 @@ bool DistributionListManager::load()
         missingEntries.append( qMakePair( id, email ) );
       }
 
-      if ( entryIt == value.constEnd() )
+      if ( entryIt == value.constEnd() ) {
         break;
+      }
       ++entryIt;
     }
 
@@ -363,11 +369,11 @@ class DistributionListWatcher::Private
       mDirWatch = 0;
     }
 
-    static DistributionListWatcher* mSelf;
+    static DistributionListWatcher *mSelf;
     KDirWatch *mDirWatch;
 };
 
-DistributionListWatcher* DistributionListWatcher::Private::mSelf = 0;
+DistributionListWatcher *DistributionListWatcher::Private::mSelf = 0;
 
 DistributionListWatcher::DistributionListWatcher()
  : QObject( qApp ), d( new Private )
@@ -385,8 +391,9 @@ DistributionListWatcher *DistributionListWatcher::self()
 {
   kWarning( !qApp ) << "No QApplication object available, you'll get a memleak!" << endl;
 
-  if ( !Private::mSelf )
+  if ( !Private::mSelf ) {
     Private::mSelf = new DistributionListWatcher();
+  }
 
   return Private::mSelf;
 }

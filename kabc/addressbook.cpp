@@ -18,16 +18,16 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "addressbook.h"
+#include "errorhandler.h"
+#include "resource.h"
+
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kcomponentdata.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include "errorhandler.h"
-#include "resource.h"
-
-#include "addressbook.h"
 #include "addressbook.moc"
 
 using namespace KABC;
@@ -72,7 +72,7 @@ AddressBook::Iterator::Iterator( const AddressBook::Iterator &i )
 }
 
 AddressBook::Iterator &AddressBook::Iterator::operator=
-  (const AddressBook::Iterator &i )
+  ( const AddressBook::Iterator &i )
 {
   if ( this == &i ) {
     return *this; // guard against self assignment

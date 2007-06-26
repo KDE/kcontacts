@@ -563,7 +563,7 @@ class KABC_EXPORT AddressBook : public QObject
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &lhs, const AddressBook &rhs );

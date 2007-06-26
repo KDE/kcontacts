@@ -18,7 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
+#include "stdaddressbook.h"
+#include "resource.h"
+
+#include "kresources/manager.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -26,10 +29,7 @@
 #include <kstandarddirs.h>
 #include <kstaticdeleter.h>
 
-#include "kresources/manager.h"
-
-#include "resource.h"
-#include "stdaddressbook.h"
+#include <stdlib.h>
 
 using namespace KABC;
 
@@ -68,8 +68,9 @@ StdAddressBook *StdAddressBook::self()
 {
   kDebug(5700) << "StdAddressBook::self()" << endl;
 
-  if ( !Private::mSelf )
+  if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook );
+  }
 
   return Private::mSelf;
 }
@@ -78,8 +79,9 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
   kDebug(5700) << "StdAddressBook::self()" << endl;
 
-  if ( !Private::mSelf )
+  if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook( asynchronous ) );
+  }
 
   return Private::mSelf;
 }
@@ -102,8 +104,9 @@ StdAddressBook::StdAddressBook( bool asynchronous )
 
 StdAddressBook::~StdAddressBook()
 {
-  if ( Private::mAutomaticSave )
+  if ( Private::mAutomaticSave ) {
     d->saveAll();
+  }
 
   delete d;
 }
@@ -133,19 +136,21 @@ void StdAddressBook::Private::init( bool asynchronous )
   Resource *res = mParent->standardResource();
   if ( !res ) {
     res = manager->createResource( "file" );
-    if ( res )
+    if ( res ) {
       mParent->addResource( res );
-    else
+    } else {
       kDebug(5700) << "No resource available!!!" << endl;
+    }
   }
 
   mParent->setStandardResource( res );
   manager->writeConfig();
 
-  if ( asynchronous )
+  if ( asynchronous ) {
     mParent->asyncLoad();
-  else
+  } else {
     mParent->load();
+  }
 }
 
 bool StdAddressBook::Private::saveAll()
@@ -161,7 +166,8 @@ bool StdAddressBook::Private::saveAll()
     if ( !(*it)->readOnly() && (*it)->isOpen() ) {
       Ticket *ticket = mParent->requestSaveTicket( *it );
       if ( !ticket ) {
-        mParent->error( i18n( "Unable to save to resource '%1'. It is locked.", (*it)->resourceName() ) );
+        mParent->error( i18n( "Unable to save to resource '%1'. It is locked.",
+                              (*it)->resourceName() ) );
         return false;
       }
 
@@ -179,10 +185,11 @@ bool StdAddressBook::save()
 {
   kDebug(5700) << "StdAddressBook::save()" << endl;
 
-  if ( Private::mSelf )
+  if ( Private::mSelf ) {
     return Private::mSelf->d->saveAll();
-  else
+  } else {
     return true;
+  }
 }
 
 void StdAddressBook::close()
@@ -200,8 +207,7 @@ bool StdAddressBook::automaticSave()
   return Private::mAutomaticSave;
 }
 
-// should get const for 4.X
-Addressee StdAddressBook::whoAmI()
+Addressee StdAddressBook::whoAmI() const
 {
   KConfig _config( "kabcrc" );
   KConfigGroup config(&_config, "General" );

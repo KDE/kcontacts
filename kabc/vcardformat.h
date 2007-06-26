@@ -49,7 +49,7 @@ class KABC_EXPORT VCardFormat : public Format
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

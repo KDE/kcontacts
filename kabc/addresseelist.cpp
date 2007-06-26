@@ -19,14 +19,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QSharedData>
+#include "addresseelist.h"
+#include "field.h"
+#include "sortmode.h"
 
 #include <kdebug.h>
 
-#include "addresseelist.h"
-
-#include "field.h"
-#include "sortmode.h"
+#include <QtCore/QSharedData>
 
 using namespace KABC;
 
@@ -48,13 +47,13 @@ SortingTraits::Uid::~Uid()
 bool SortingTraits::Uid::eq( const Addressee &a1, const Addressee &a2 )
 {
   // locale awareness doesn't make sense sorting ids
-  return ( QString::compare( a1.uid(), a2.uid() ) == 0 );
+  return QString::compare( a1.uid(), a2.uid() ) == 0;
 }
 
 bool SortingTraits::Uid::lt( const Addressee &a1, const Addressee &a2 )
 {
   // locale awareness doesn't make sense sorting ids
-  return ( QString::compare( a1.uid(), a2.uid() ) < 0 );
+  return QString::compare( a1.uid(), a2.uid() ) < 0;
 }
 
 SortingTraits::Name::Name()
@@ -68,12 +67,12 @@ SortingTraits::Name::~Name()
 
 bool SortingTraits::Name::eq( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.name(), a2.name() ) == 0 );
+  return QString::localeAwareCompare( a1.name(), a2.name() ) == 0;
 }
 
 bool SortingTraits::Name::lt( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.name(), a2.name() ) < 0 );
+  return QString::localeAwareCompare( a1.name(), a2.name() ) < 0;
 }
 
 SortingTraits::FormattedName::FormattedName()
@@ -87,12 +86,12 @@ SortingTraits::FormattedName::~FormattedName()
 
 bool SortingTraits::FormattedName::eq( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) == 0 );
+  return QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) == 0;
 }
 
 bool SortingTraits::FormattedName::lt( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) < 0 );
+  return QString::localeAwareCompare( a1.formattedName(), a2.formattedName() ) < 0;
 }
 
 SortingTraits::FamilyName::FamilyName()
@@ -106,15 +105,16 @@ SortingTraits::FamilyName::~FamilyName()
 
 bool SortingTraits::FamilyName::eq( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.familyName(), a2.familyName() ) == 0
-           && QString::localeAwareCompare( a1.givenName(), a2.givenName() ) == 0 );
+  return
+    QString::localeAwareCompare( a1.familyName(), a2.familyName() ) == 0 &&
+    QString::localeAwareCompare( a1.givenName(), a2.givenName() ) == 0;
 }
 
 bool SortingTraits::FamilyName::lt( const Addressee &a1, const Addressee &a2 )
 {
   int family = QString::localeAwareCompare( a1.familyName(), a2.familyName() );
   if ( 0 == family ) {
-    return ( QString::localeAwareCompare( a1.givenName(), a2.givenName() ) < 0 );
+    return QString::localeAwareCompare( a1.givenName(), a2.givenName() ) < 0;
   } else {
     return family < 0;
   }
@@ -131,15 +131,16 @@ SortingTraits::GivenName::~GivenName()
 
 bool SortingTraits::GivenName::eq( const Addressee &a1, const Addressee &a2 )
 {
-  return ( QString::localeAwareCompare( a1.givenName(), a2.givenName() ) == 0
-           && QString::localeAwareCompare( a1.familyName(), a2.familyName() ) == 0 );
+  return
+    QString::localeAwareCompare( a1.givenName(), a2.givenName() ) == 0 &&
+    QString::localeAwareCompare( a1.familyName(), a2.familyName() ) == 0;
 }
 
 bool SortingTraits::GivenName::lt( const Addressee &a1, const Addressee &a2 )
 {
   int given = QString::localeAwareCompare( a1.givenName(), a2.givenName() );
   if ( 0 == given ) {
-    return ( QString::localeAwareCompare( a1.familyName(), a2.familyName() ) < 0 );
+    return QString::localeAwareCompare( a1.familyName(), a2.familyName() ) < 0;
   } else {
     return given < 0;
   }
@@ -191,7 +192,7 @@ AddresseeList::AddresseeList( const QList<Addressee> &l )
 {
 }
 
-AddresseeList& AddresseeList::operator=( const AddresseeList &other )
+AddresseeList &AddresseeList::operator=( const AddresseeList &other )
 {
   if ( this != &other ) {
     QList<Addressee>::operator=( other );
@@ -255,10 +256,11 @@ void AddresseeList::sortBy( SortingCriterion c )
     sortByTrait<SortingTraits::FormattedName>();
   } else if ( FamilyName == c ) {
     sortByTrait<SortingTraits::FamilyName>();
-  } else if ( GivenName==c ) {
+  } else if ( GivenName == c ) {
     sortByTrait<SortingTraits::GivenName>();
   } else {
-    kError(5700) << "AddresseeList sorting criterion passed for which a trait is not known. No sorting done." << endl;
+    kError(5700) << "AddresseeList sorting criterion passed for which a trait is not known. "
+                 << "No sorting done." << endl;
   }
 }
 
@@ -282,8 +284,9 @@ void AddresseeList::sortByTrait()
   iterator i1 = begin();
   iterator endIt = end();
   --endIt;
-  if ( i1 == endIt ) // don't need sorting
+  if ( i1 == endIt ) { // don't need sorting
     return;
+  }
 
   iterator i2 = endIt;
   while ( i1 != endIt ) {
@@ -291,8 +294,8 @@ void AddresseeList::sortByTrait()
     iterator j2 = j1;
     ++j2;
     while ( j1 != i2 ) {
-      if ( !d->mReverseSorting && Trait::lt( *j2, *j1 )
-           || d->mReverseSorting && Trait::lt( *j1, *j2 ) ) {
+      if ( !d->mReverseSorting && Trait::lt( *j2, *j1 ) ||
+           d->mReverseSorting && Trait::lt( *j1, *j2 ) ) {
         qSwap( *j1, *j2 );
       }
       ++j1;
@@ -312,8 +315,9 @@ void AddresseeList::sortByField( Field *field )
 
   sActiveField = field;
 
-  if ( count() == 0 )
+  if ( count() == 0 ) {
     return;
+  }
 
   KABC::FieldSortMode *mode = new KABC::FieldSortMode( sActiveField, !d->mReverseSorting );
 
@@ -326,8 +330,9 @@ void AddresseeList::sortByField( Field *field )
 
 void AddresseeList::sortByMode( SortMode *mode )
 {
-  if ( count() == 0 )
+  if ( count() == 0 ) {
     return;
+  }
 
   KABC::Addressee::setSortMode( mode );
   qSort( *this );
@@ -339,7 +344,7 @@ SortingCriterion AddresseeList::sortingCriterion() const
   return d->mActiveSortingCriterion;
 }
 
-Field* AddresseeList::sortingField() const
+Field *AddresseeList::sortingField() const
 {
   return sActiveField;
 }

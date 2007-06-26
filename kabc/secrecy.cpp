@@ -18,12 +18,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSharedData>
+#include "secrecy.h"
 
 #include <klocale.h>
 
-#include "secrecy.h"
+#include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 using namespace KABC;
 
@@ -59,17 +59,18 @@ Secrecy::~Secrecy()
 {
 }
 
-Secrecy& Secrecy::operator=( const Secrecy &other )
+Secrecy &Secrecy::operator=( const Secrecy &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
 
 bool Secrecy::operator==( const Secrecy &other ) const
 {
-  return ( d->mType == other.d->mType );
+  return d->mType == other.d->mType;
 }
 
 bool Secrecy::operator!=( const Secrecy &other ) const
@@ -96,8 +97,9 @@ Secrecy::TypeList Secrecy::typeList()
 {
   static TypeList list;
 
-  if ( list.isEmpty() )
+  if ( list.isEmpty() ) {
     list << Public << Private << Confidential;
+  }
 
   return list;
 }

@@ -18,16 +18,16 @@
   Boston, MA 02110-1301, USA.
 */
 
+#include "emailselectdialog.h"
+#include "addresseedialog.h"
+
+#include <klocale.h>
+
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
 #include <QtGui/QRadioButton>
 
-#include <klocale.h>
-
-#include "addresseedialog.h"
-
-#include "emailselectdialog.h"
 #include "emailselectdialog.moc"
 
 using namespace KABC;
@@ -74,7 +74,9 @@ EmailSelectDialog::~EmailSelectDialog()
 QString EmailSelectDialog::selected()
 {
   QAbstractButton *button = d->mButtonGroup->checkedButton();
-  if ( button ) return button->text();
+  if ( button ) {
+    return button->text();
+  }
   return QString();
 }
 

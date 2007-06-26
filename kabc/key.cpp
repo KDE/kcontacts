@@ -18,13 +18,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSharedData>
+#include "key.h"
 
 #include <klocale.h>
 #include <krandom.h>
 
-#include "key.h"
+#include <QtCore/QDataStream>
+#include <QtCore/QSharedData>
 
 using namespace KABC;
 
@@ -75,24 +75,31 @@ Key::~Key()
 
 bool Key::operator==( const Key &other ) const
 {
-  if ( d->mId != other.d->mId )
+  if ( d->mId != other.d->mId ) {
     return false;
+  }
 
-  if ( d->mType != other.d->mType )
+  if ( d->mType != other.d->mType ) {
     return false;
+  }
 
-  if ( d->mIsBinary != other.d->mIsBinary )
+  if ( d->mIsBinary != other.d->mIsBinary ) {
     return false;
+  }
 
-  if ( d->mIsBinary )
-    if ( d->mBinaryData != other.d->mBinaryData )
+  if ( d->mIsBinary ) {
+    if ( d->mBinaryData != other.d->mBinaryData ) {
       return false;
-  else
-    if ( d->mTextData != other.d->mTextData )
+    }
+  } else {
+    if ( d->mTextData != other.d->mTextData ) {
       return false;
+    }
+  }
 
-  if ( d->mCustomTypeString != other.d->mCustomTypeString )
+  if ( d->mCustomTypeString != other.d->mCustomTypeString ) {
     return false;
+  }
 
   return true;
 }
@@ -102,10 +109,11 @@ bool Key::operator!=( const Key &other ) const
   return !( *this == other );
 }
 
-Key& Key::operator=( const Key &other )
+Key &Key::operator=( const Key &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
@@ -174,13 +182,15 @@ QString Key::toString() const
   str += QString( "Key {\n" );
   str += QString( "  Id: %1\n" ).arg( d->mId );
   str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
-  if ( d->mType == Custom )
+  if ( d->mType == Custom ) {
     str += QString( "  CustomType: %1\n" ).arg( d->mCustomTypeString );
+  }
   str += QString( "  IsBinary: %1\n" ).arg( d->mIsBinary ? "true" : "false" );
-  if ( d->mIsBinary )
+  if ( d->mIsBinary ) {
     str += QString( "  Binary: %1\n" ).arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
-  else
+  } else {
     str += QString( "  Text: %1\n" ).arg( d->mTextData );
+  }
   str += QString( "}\n" );
 
   return str;
@@ -190,8 +200,9 @@ Key::TypeList Key::typeList()
 {
   static TypeList list;
 
-  if ( list.isEmpty() )
+  if ( list.isEmpty() ) {
     list << X509 << PGP << Custom;
+  }
 
   return list;
 }

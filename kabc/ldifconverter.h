@@ -29,43 +29,43 @@
 namespace KABC {
 
   /**
-   * A set of functions to convert a string with LDIF information to addressees
-   * and vice versa. It is useful for addressbook import- and exportfilters
-   * and might be used to read and write Mozilla and Netscape addresssbooks.
-   */
+    A set of functions to convert a string with LDIF information to addressees
+    and vice versa. It is useful for addressbook import- and exportfilters
+    and might be used to read and write Mozilla and Netscape addresssbooks.
+  */
 
   namespace LDIFConverter {
 
   /**
-   * Converts a LDIF string to a list of addressees.
-   *
-   * @param str         The vcard string.
-   * @param addrList    The addresseelist.
-   * @param dt          The date & time value of the last modification (e.g. file modification time).
-   */
+    Converts a LDIF string to a list of addressees.
+
+    @param str         The vcard string.
+    @param addrList    The addresseelist.
+    @param dt          The date & time value of the last modification (e.g. file modification time).
+  */
   KABC_EXPORT bool LDIFToAddressee( const QString &str, AddresseeList &addrList,
                                     const QDateTime &dt = QDateTime::currentDateTime() );
 
   /**
-   * Converts a list of addressees to a LDIF string.
-   *
-   * @param addrList    The addresseelist.
-   * @param str         The LDIF string.
-   */
+    Converts a list of addressees to a LDIF string.
+
+    @param addrList    The addresseelist.
+    @param str         The LDIF string.
+  */
   KABC_EXPORT bool addresseeToLDIF( const AddresseeList &addrList, QString &str );
 
   /**
-   * Converts an addressee to a LDIF string.
-   *
-   * @param addr    The addressee.
-   * @param str     The LDIF string.
-   */
+    Converts an addressee to a LDIF string.
+
+    @param addr    The addressee.
+    @param str     The LDIF string.
+  */
   KABC_EXPORT bool addresseeToLDIF( const Addressee &addr, QString &str );
 
   /* internal functions - do not use !! */
 
   KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr, Address &workAddr,
-	QString &fieldname, QString &value );
+                                 QString &fieldname, QString &value );
 
   }
 

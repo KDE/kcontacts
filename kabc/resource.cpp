@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "resource.h"
+
 #include <kdebug.h>
 #include <klocale.h>
-
-#include "resource.h"
 
 using namespace KABC;
 
@@ -76,8 +76,9 @@ Resource::Iterator::Iterator( const Resource::Iterator &other )
 
 Resource::Iterator &Resource::Iterator::operator=( const Resource::Iterator &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d->mIt = other.d->mIt;
+  }
 
   return *this;
 }
@@ -123,12 +124,12 @@ Resource::Iterator &Resource::Iterator::operator--( int )
 
 bool Resource::Iterator::operator==( const Iterator &it ) const
 {
-  return ( d->mIt == it.d->mIt );
+  return d->mIt == it.d->mIt;
 }
 
 bool Resource::Iterator::operator!=( const Iterator &it ) const
 {
-  return ( d->mIt != it.d->mIt );
+  return d->mIt != it.d->mIt;
 }
 
 Resource::ConstIterator::ConstIterator()
@@ -150,8 +151,9 @@ Resource::ConstIterator::ConstIterator( const Resource::Iterator &other )
 
 Resource::ConstIterator &Resource::ConstIterator::operator=( const Resource::ConstIterator &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d->mIt = other.d->mIt;
+  }
 
   return *this;
 }
@@ -192,12 +194,12 @@ Resource::ConstIterator &Resource::ConstIterator::operator--( int )
 
 bool Resource::ConstIterator::operator==( const ConstIterator &it ) const
 {
-  return ( d->mIt == it.d->mIt );
+  return d->mIt == it.d->mIt;
 }
 
 bool Resource::ConstIterator::operator!=( const ConstIterator &it ) const
 {
-  return ( d->mIt != it.d->mIt );
+  return d->mIt != it.d->mIt;
 }
 
 class Resource::Private
@@ -290,8 +292,9 @@ Addressee Resource::findByUid( const QString &uid )
 {
   Addressee::Map::ConstIterator it = mAddrMap.find( uid );
 
-  if ( it != mAddrMap.end() )
+  if ( it != mAddrMap.end() ) {
     return it.value();
+  }
 
   return Addressee();
 }
@@ -302,8 +305,9 @@ Addressee::List Resource::findByName( const QString &name )
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    if ( name == (*it).name() )
+    if ( name == (*it).name() ) {
       results.append( *it );
+    }
   }
 
   return results;
@@ -318,8 +322,9 @@ Addressee::List Resource::findByEmail( const QString &email )
   for ( it = begin(); it != end(); ++it ) {
     const QStringList mailList = (*it).emails();
     for ( QStringList::ConstIterator ite = mailList.begin(); ite != mailList.end(); ++ite ) {
-      if ( lowerEmail == (*ite).toLower() )
+      if ( lowerEmail == (*ite).toLower() ) {
         results.append( *it );
+      }
     }
   }
 
@@ -348,22 +353,23 @@ void Resource::clear()
 bool Resource::asyncLoad()
 {
   bool ok = load();
-  if ( !ok )
-    emit loadingError( this, i18n( "Loading resource '%1' failed." ,
-                         resourceName() ) );
-  else
+  if ( !ok ) {
+    emit loadingError( this, i18n( "Loading resource '%1' failed." , resourceName() ) );
+  } else {
     emit loadingFinished( this );
+  }
 
   return ok;
 }
 
-bool Resource::asyncSave( Ticket *ticket ) {
+bool Resource::asyncSave( Ticket *ticket )
+{
   bool ok = save( ticket );
-  if ( !ok )
-    emit savingError( this, i18n( "Saving resource '%1' failed." ,
-                        resourceName() ) );
-  else
+  if ( !ok ) {
+    emit savingError( this, i18n( "Saving resource '%1' failed." , resourceName() ) );
+  } else {
     emit savingFinished( this );
+  }
 
   return ok;
 }

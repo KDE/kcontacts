@@ -18,9 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "vcardtool.h"
-
 #include "vcardconverter.h"
+#include "vcardtool.h"
 
 using namespace KABC;
 
@@ -55,7 +54,7 @@ Addressee VCardConverter::parseVCard( const QByteArray &vcard ) const
   return list.isEmpty() ? Addressee() : list[ 0 ];
 }
 
-Addressee::List VCardConverter::parseVCards( const QByteArray& vcard ) const
+Addressee::List VCardConverter::parseVCards( const QByteArray &vcard ) const
 {
   VCardTool tool;
 
@@ -82,11 +81,13 @@ QDateTime KABC::VCardStringToDate( const QString &dateString )
 
   d = d.remove( '-' ).remove( ':' );
 
-  if ( d.length() >= 8 )
+  if ( d.length() >= 8 ) {
     date = QDate( d.mid( 0, 4 ).toUInt(), d.mid( 4, 2 ).toUInt(), d.mid( 6, 2 ).toUInt() );
+  }
 
-  if ( d.length() > 9 && d[ 8 ].toUpper() == 'T' )
+  if ( d.length() > 9 && d[ 8 ].toUpper() == 'T' ) {
     time = QTime( d.mid( 9, 2 ).toUInt(), d.mid( 11, 2 ).toUInt(), d.mid( 13, 2 ).toUInt() );
+  }
 
   return QDateTime( date, time );
 }

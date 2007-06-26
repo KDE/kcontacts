@@ -57,11 +57,10 @@ class KABC_EXPORT NameSortMode : public SortMode
     /**
       Specifies which parts of the name are used for comparison.
      */
-    enum NameType
-    {
-      FormattedName,    ///< use the formatted name, e.g. "John Doe"
-      FamilyName,       ///< use the last name, e.g. "Doe"
-      GivenName         ///< use the first name, e.g. "John"
+    enum NameType {
+      FormattedName,    /**< use the formatted name, e.g. "John Doe" */
+      FamilyName,       /**< use the last name, e.g. "Doe" */
+      GivenName         /**< use the first name, e.g. "John" */
     };
 
     /**
@@ -88,11 +87,11 @@ class KABC_EXPORT NameSortMode : public SortMode
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser( const KABC::Addressee&, const KABC::Addressee& ) const;
+    virtual bool lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const;
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( NameSortMode )
 };
@@ -123,11 +122,11 @@ class KABC_EXPORT FieldSortMode : public SortMode
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser( const KABC::Addressee&, const KABC::Addressee& ) const;
+    virtual bool lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const;
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( FieldSortMode )
 };

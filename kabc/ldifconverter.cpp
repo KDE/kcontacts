@@ -32,21 +32,20 @@
                 - physicaldeliveryofficename,
 */
 
-#include <QtCore/QRegExp>
-#include <QtCore/QStringList>
-#include <QtCore/QTextCodec>
-#include <QtCore/QTextStream>
+#include "ldifconverter.h"
+#include "vcardconverter.h"
+#include "address.h"
+#include "addressee.h"
+
+#include "kldap/ldif.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 
-#include "kldap/ldif.h"
-
-#include "address.h"
-#include "addressee.h"
-
-#include "ldifconverter.h"
-#include "vcardconverter.h"
+#include <QtCore/QRegExp>
+#include <QtCore/QStringList>
+#include <QtCore/QTextCodec>
+#include <QtCore/QTextStream>
 
 using namespace KABC;
 
@@ -61,24 +60,24 @@ bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, QString &str
   return true;
 }
 
-
-
 static void ldif_out( QTextStream &t, const QString &formatStr,
                       const QString &value )
 {
-  if ( value.isEmpty() )
+  if ( value.isEmpty() ) {
     return;
+  }
 
   QByteArray txt = KLDAP::Ldif::assembleLine( formatStr, value, 72 );
 
   // write the string
-  t << QString::fromUtf8(txt) << "\n";
+  t << QString::fromUtf8( txt ) << "\n";
 }
 
 bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
 {
-  if ( addr.isEmpty() )
-      return false;
+  if ( addr.isEmpty() ) {
+    return false;
+  }
 
   QTextStream t( &str, QIODevice::WriteOnly|QIODevice::Append );
   t.setCodec( QTextCodec::codecForName("UTF-8") );
@@ -97,8 +96,9 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "xmozillanickname", addr.nickName() );
 
   ldif_out( t, "mail", addr.preferredEmail() );
-  if ( addr.emails().count() > 1 )
+  if ( addr.emails().count() > 1 ) {
     ldif_out( t, "mozillasecondemail", addr.emails()[ 1 ] );
+  }
 //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
 
   ldif_out( t, "telephonenumber", addr.phoneNumber( PhoneNumber::Work ).number() );
@@ -114,10 +114,12 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "postofficebox", workAddr.postOfficeBox() );
 
   QStringList streets = homeAddr.street().split('\n');
-  if ( streets.count() > 0 )
+  if ( streets.count() > 0 ) {
     ldif_out( t, "homepostaladdress", streets[ 0 ] ); // Netscape 7
-  if ( streets.count() > 1 )
+  }
+  if ( streets.count() > 1 ) {
     ldif_out( t, "mozillahomepostaladdress2", streets[ 1 ] ); // Netscape 7
+  }
   ldif_out( t, "mozillahomelocalityname", homeAddr.locality() ); // Netscape 7
   ldif_out( t, "mozillahomestate", homeAddr.region() );
   ldif_out( t, "mozillahomepostalcode", homeAddr.postalCode() );
@@ -126,10 +128,12 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "streetaddress", workAddr.street() ); // Netscape 4.x
 
   streets = workAddr.street().split('\n');
-  if ( streets.count() > 0 )
+  if ( streets.count() > 0 ) {
     ldif_out( t, "postaladdress", streets[ 0 ] );
-  if ( streets.count() > 1 )
+  }
+  if ( streets.count() > 1 ) {
     ldif_out( t, "mozillapostaladdress2", streets[ 1 ] );
+  }
   ldif_out( t, "countryname", Address::ISOtoCountry(workAddr.country()) );
   ldif_out( t, "l", workAddr.locality() );
   ldif_out( t, "c", Address::ISOtoCountry(workAddr.country()) );
@@ -145,8 +149,9 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "workurl", addr.url().prettyUrl() );
   ldif_out( t, "homeurl", addr.url().prettyUrl() );
   ldif_out( t, "description", addr.note() );
-  if (addr.revision().isValid())
+  if ( addr.revision().isValid() ) {
     ldif_out(t, "modifytimestamp", dateToVCardString( addr.revision()) );
+  }
 
   t << "objectclass: top\n";
   t << "objectclass: person\n";
@@ -157,13 +162,14 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   return true;
 }
 
-
 /* convert from LDIF stream */
 
-bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList, const QDateTime &dt )
+bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList,
+                                     const QDateTime &dt )
 {
-  if (str.isEmpty())
-     return true;
+  if ( str.isEmpty() ) {
+    return true;
+  }
 
   bool endldif = false, end = false;
   KLDAP::Ldif ldif;
@@ -173,16 +179,18 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
 
   ldif.setLdif( str.toLatin1() );
   QDateTime qdt = dt;
-  if (!qdt.isValid())
+  if ( !qdt.isValid() ) {
     qdt = QDateTime::currentDateTime();
-  a.setRevision(qdt);
+  }
+  a.setRevision( qdt );
   homeAddr = Address( Address::Home );
   workAddr = Address( Address::Work );
 
   do {
     ret = ldif.nextItem();
     switch ( ret ) {
-      case KLDAP::Ldif::Item: {
+      case KLDAP::Ldif::Item:
+      {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
         evaluatePair( a, homeAddr, workAddr, fieldname, value );
@@ -192,21 +200,24 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
       // if the new address is not empty, append it
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
           !a.familyName().isEmpty() ) {
-          if ( !homeAddr.isEmpty() )
+          if ( !homeAddr.isEmpty() ) {
             a.insertAddress( homeAddr );
-          if ( !workAddr.isEmpty() )
+          }
+          if ( !workAddr.isEmpty() ) {
             a.insertAddress( workAddr );
+          }
           addrList.append( a );
         }
         a = Addressee();
-        a.setRevision(qdt);
+        a.setRevision( qdt );
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
         break;
-      case KLDAP::Ldif::MoreData: {
-        if ( endldif )
+      case KLDAP::Ldif::MoreData:
+      {
+        if ( endldif ) {
           end = true;
-        else {
+        } else {
           ldif.endLdif();
           endldif = true;
           break;
@@ -224,8 +235,9 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
                                   Address &workAddr,
                                   QString &fieldname, QString &value )
 {
-  if ( fieldname == QLatin1String( "dn" ) ) // ignore & return false!
+  if ( fieldname == QLatin1String( "dn" ) ) { // ignore & return false!
     return false;
+  }
 
   if ( fieldname.startsWith( '#' ) ) {
     return true;
@@ -260,8 +272,9 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   }
   if ( fieldname == QLatin1String( "mail" ) ||
        fieldname == QLatin1String( "mozillasecondemail" ) ) { // mozilla
-    if ( a.emails().indexOf( value ) == -1 )
+    if ( a.emails().indexOf( value ) == -1 ) {
       a.insertEmail( value );
+    }
     return true;
   }
 
@@ -289,8 +302,9 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
 
   if ( fieldname == QLatin1String( "description" ) ) {
 addComment:
-    if ( !a.note().isEmpty() )
+    if ( !a.note().isEmpty() ) {
       a.setNote( a.note() + '\n' );
+    }
     a.setNote( a.note() + value );
     return true;
   }
@@ -308,8 +322,9 @@ addComment:
       a.setUrl( KUrl( value ) );
       return true;
     }
-    if ( a.url().prettyUrl() == KUrl(value).prettyUrl() )
+    if ( a.url().prettyUrl() == KUrl(value).prettyUrl() ) {
       return true;
+    }
     // TODO: current version of kabc only supports one URL.
     // TODO: change this with KDE 4
   }
@@ -391,7 +406,7 @@ addComment:
     return true;
   }
 
-  if ( fieldname == QLatin1String( "mozillahomestate" )	) { // mozilla
+  if ( fieldname == QLatin1String( "mozillahomestate" ) ) { // mozilla
     homeAddr.setRegion( value );
     return true;
   }
@@ -402,8 +417,9 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "mozillahomecountryname" ) ) { // mozilla
-    if ( value.length() <= 2 )
-      value = Address::ISOtoCountry(value);
+    if ( value.length() <= 2 ) {
+      value = Address::ISOtoCountry( value );
+    }
     homeAddr.setCountry( value );
     return true;
   }
@@ -420,8 +436,9 @@ addComment:
 
   if ( fieldname == QLatin1String( "countryname" ) ||
        fieldname == QLatin1String( "c" ) ) {  // mozilla
-    if ( value.length() <= 2 )
-      value = Address::ISOtoCountry(value);
+    if ( value.length() <= 2 ) {
+      value = Address::ISOtoCountry( value );
+    }
     workAddr.setCountry( value );
     return true;
   }
@@ -453,33 +470,38 @@ addComment:
 
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-      if ( (*it).startsWith( "cn=" ) )
+      if ( (*it).startsWith( "cn=" ) ) {
         name = (*it).mid( 3 ).trimmed();
-      if ( (*it).startsWith( "mail=" ) )
+      }
+      if ( (*it).startsWith( "mail=" ) ) {
         email = (*it).mid( 5 ).trimmed();
+      }
     }
-    if ( !name.isEmpty() && !email.isEmpty() )
+    if ( !name.isEmpty() && !email.isEmpty() ) {
       email = " <" + email + '>';
+    }
     a.insertEmail( name + email );
     a.insertCategory( i18n( "List of Emails" ) );
     return true;
   }
 
   if ( fieldname == QLatin1String( "modifytimestamp" ) ) {
-    if (value == QLatin1String("0Z")) // ignore
+    if ( value == QLatin1String( "0Z" ) ) { // ignore
       return true;
+    }
     QDateTime dt = VCardStringToDate( value );
     if ( dt.isValid() ) {
-      a.setRevision(dt);
+      a.setRevision( dt );
       return true;
     }
   }
 
-  if ( fieldname == QLatin1String( "objectclass" ) ) // ignore
+  if ( fieldname == QLatin1String( "objectclass" ) ) { // ignore
     return true;
+  }
 
   kWarning() << QString("LDIFConverter: Unknown field for '%1': '%2=%3'\n")
-                             .arg(a.formattedName()).arg(fieldname).arg(value);
+    .arg(a.formattedName()).arg(fieldname).arg(value);
 
   return true;
 }

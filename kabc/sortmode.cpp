@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "field.h"
 #include "sortmode.h"
+#include "field.h"
 
 using namespace KABC;
 
@@ -72,8 +72,9 @@ bool NameSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &
       break;
   }
 
-  if ( !d->mAscendingOrder )
+  if ( !d->mAscendingOrder ) {
     lesser = !lesser;
+  }
 
   return lesser;
 }
@@ -99,12 +100,14 @@ FieldSortMode::~FieldSortMode()
 
 bool FieldSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const
 {
-  if ( !d->mField )
+  if ( !d->mField ) {
     return false;
-  else {
-    bool lesser = QString::localeAwareCompare( d->mField->value( first ), d->mField->value( second ) ) < 0;
-    if ( !d->mAscendingOrder )
+  } else {
+    bool lesser =
+      QString::localeAwareCompare( d->mField->value( first ), d->mField->value( second ) ) < 0;
+    if ( !d->mAscendingOrder ) {
       lesser = !lesser;
+    }
 
     return lesser;
   }

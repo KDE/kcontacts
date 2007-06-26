@@ -26,7 +26,6 @@
 #include <kdialog.h>
 #include "kabc_export.h"
 
-
 namespace KABC {
 
 class AddressBook;
@@ -69,7 +68,7 @@ class KABC_EXPORT DistributionListDialog : public KDialog
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 /**
@@ -83,11 +82,12 @@ class KABC_EXPORT EmailSelector : public KDialog
 
     QString selected() const;
 
-    static QString getEmail( const QStringList &emails, const QString &current, QWidget *parent = 0 );
+    static QString getEmail( const QStringList &emails, const QString &current,
+                             QWidget *parent = 0 );
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 /**
@@ -103,7 +103,7 @@ class KABC_EXPORT DistributionListEditorWidget : public QWidget
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_PRIVATE_SLOT( d, void newList() )
     Q_PRIVATE_SLOT( d, void editList() )

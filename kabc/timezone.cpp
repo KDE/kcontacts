@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "timezone.h"
+
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedData>
-
-#include "timezone.h"
 
 using namespace KABC;
 
@@ -81,14 +81,17 @@ bool TimeZone::isValid() const
 
 bool TimeZone::operator==( const TimeZone &t ) const
 {
-  if ( !t.isValid() && !isValid() )
+  if ( !t.isValid() && !isValid() ) {
     return true;
+  }
 
-  if ( !t.isValid() || !isValid() )
+  if ( !t.isValid() || !isValid() ) {
     return false;
+  }
 
-  if ( t.d->mOffset == d->mOffset )
+  if ( t.d->mOffset == d->mOffset ) {
     return true;
+  }
 
   return false;
 }
@@ -98,10 +101,11 @@ bool TimeZone::operator!=( const TimeZone &t ) const
   return !( *this == t );
 }
 
-TimeZone& TimeZone::operator=( const TimeZone &other )
+TimeZone &TimeZone::operator=( const TimeZone &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }

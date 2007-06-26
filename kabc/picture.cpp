@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "picture.h"
+
 #include <QtCore/QBuffer>
 #include <QtCore/QSharedData>
-
-#include "picture.h"
 
 using namespace KABC;
 
@@ -76,24 +76,29 @@ Picture::~Picture()
 {
 }
 
-Picture& Picture::operator=( const Picture &other )
+Picture &Picture::operator=( const Picture &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
 
 bool Picture::operator==( const Picture &p ) const
 {
-  if ( d->mIntern != p.d->mIntern ) return false;
+  if ( d->mIntern != p.d->mIntern ) {
+    return false;
+  }
 
   if ( d->mIntern ) {
-    if ( d->mData != p.d->mData )
+    if ( d->mData != p.d->mData ) {
       return false;
+    }
   } else {
-    if ( d->mUrl != p.d->mUrl )
+    if ( d->mUrl != p.d->mUrl ) {
       return false;
+    }
   }
 
   return true;
@@ -106,8 +111,9 @@ bool Picture::operator!=( const Picture &p ) const
 
 bool Picture::isEmpty() const
 {
-  return (d->mIntern == false && d->mUrl.isEmpty() ||
-          d->mIntern == true && d->mData.isNull() );
+  return
+    d->mIntern == false && d->mUrl.isEmpty() ||
+    d->mIntern == true && d->mData.isNull();
 }
 
 void Picture::setUrl( const QString &url )

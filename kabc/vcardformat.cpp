@@ -18,13 +18,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
-
+#include "vcardformat.h"
+#include "vcardconverter.h"
 #include "address.h"
 #include "addressee.h"
-#include "vcardconverter.h"
 
-#include "vcardformat.h"
+#include <QtCore/QFile>
 
 using namespace KABC;
 
@@ -81,7 +80,6 @@ void VCardFormat::save( const Addressee &addressee, QFile *file )
   VCardConverter converter ;
   Addressee::List vcardlist;
 
-
   vcardlist.append( addressee );
 
   QByteArray data = converter.createVCards( vcardlist );
@@ -109,8 +107,9 @@ bool VCardFormat::checkFormat( QFile *file ) const
 {
   QByteArray line = file->readLine();
   line = line.trimmed();
-  if ( line == "BEGIN:VCARD" )
+  if ( line == "BEGIN:VCARD" ) {
     return true;
-  else
+  } else {
     return false;
+  }
 }

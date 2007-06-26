@@ -30,7 +30,6 @@
 
 #include "addressbook.h"
 
-
 namespace KABC {
 
 /**
@@ -42,10 +41,11 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
 
     /**
       Type of column
-      @li @p Name -  Name in Addressee
-      @li @p Email - Email in Addressee
     */
-    enum Columns { Name = 0, Email = 1 };
+    enum Columns {
+      Name = 0, /**< Addressee name. */
+      Email = 1 /**< Addressee email */
+    };
 
     /**
       Constructor.
@@ -72,7 +72,7 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( AddresseeItem )
 };
@@ -140,12 +140,12 @@ class KABC_EXPORT AddresseeDialog : public KDialog
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_PRIVATE_SLOT( d, void addressBookChanged() )
-    Q_PRIVATE_SLOT( d, void selectItem( const QString& ) )
+    Q_PRIVATE_SLOT( d, void selectItem( const QString & ) )
     Q_PRIVATE_SLOT( d, void updateEdit() )
-    Q_PRIVATE_SLOT( d, void addSelected( QTreeWidgetItem* ) )
+    Q_PRIVATE_SLOT( d, void addSelected( QTreeWidgetItem * ) )
     Q_PRIVATE_SLOT( d, void removeSelected() )
 };
 

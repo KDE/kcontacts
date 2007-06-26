@@ -57,14 +57,14 @@ class KABC_EXPORT DistributionList
         Entry( const Addressee &addressee, const QString &email );
         ~Entry();
 
-        Entry& operator=( const Entry &other );
+        Entry &operator=( const Entry &other );
 
-        Addressee& addressee() const;
-        QString& email() const;
+        Addressee &addressee() const;
+        QString &email() const;
 
       private:
         class Private;
-        Private* const d;
+        Private *const d;
     };
 
     /**
@@ -144,7 +144,8 @@ class KABC_EXPORT DistributionListManager
     /**
       Return distribution list with given name.
     */
-    DistributionList *list( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
+    DistributionList *list( const QString &name,
+                            Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
 
     /**
       Insert distribution list. If a list with this name already exists, nothing
@@ -175,7 +176,7 @@ class KABC_EXPORT DistributionListManager
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( DistributionListManager )
 };
@@ -219,7 +220,7 @@ class KABC_EXPORT DistributionListWatcher : public QObject
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }
