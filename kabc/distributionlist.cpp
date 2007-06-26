@@ -32,7 +32,7 @@ using namespace KABC;
 class DistributionList::Entry::Private {
   public:
     Private() {}
-    Private( Addressee _addressee, QString _email ) : addressee( _addressee ), email( _email ) {}
+    Private( Addressee _addressee, const QString &_email ) : addressee( _addressee ), email( _email ) {}
 
     Addressee addressee;
     QString email;

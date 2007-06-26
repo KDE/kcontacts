@@ -547,7 +547,7 @@ void ResourceLDAPKIO::doClose()
 
 void ResourceLDAPKIO::Private::createCache()
 {
-  mTmp = NULL;
+  mTmp = 0;
   if ( mCachePolicy == Cache_NoConnection && mAutoCache ) {
     mTmp = new KTemporaryFile;
     mTmp->setPrefix( mCacheDst );
@@ -568,7 +568,7 @@ void ResourceLDAPKIO::Private::activateCache()
 
 KIO::Job *ResourceLDAPKIO::Private::loadFromCache()
 {
-  KIO::Job *job = NULL;
+  KIO::Job *job = 0;
   if ( mCachePolicy == Cache_Always ||
      ( mCachePolicy == Cache_NoConnection &&
       mError == KIO::ERR_COULD_NOT_CONNECT ) ) {
