@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "keytest.h"
 #include "kabc/key.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(KeyTest, NoGUI)
+QTEST_KDEMAIN( KeyTest, NoGUI )
 
 void KeyTest::storeTest()
 {

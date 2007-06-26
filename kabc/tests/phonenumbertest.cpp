@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "phonenumbertest.h"
 #include "kabc/phonenumber.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(PhoneNumberTest, NoGUI)
+QTEST_KDEMAIN( PhoneNumberTest, NoGUI )
 
 void PhoneNumberTest::emptyTest()
 {

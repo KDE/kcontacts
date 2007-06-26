@@ -18,7 +18,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <sys/times.h>
+#include "kabc/addressbook.h"
+#include "kabc/vcardformat.h"
+#include "kabc/plugins/file/resourcefile.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -26,16 +28,14 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include "kabc/addressbook.h"
-#include "kabc/vcardformat.h"
-#include "kabc/plugins/file/resourcefile.h"
+#include <sys/times.h>
 
 using namespace KABC;
 
-int main(int argc,char **argv)
+int main( int argc, char **argv )
 {
-  KAboutData aboutData("bigwrite","BigWriteKabc","0.1");
-  KCmdLineArgs::init(argc,argv,&aboutData);
+  KAboutData aboutData( "bigwrite", "BigWriteKabc", "0.1" );
+  KCmdLineArgs::init( argc, argv, &aboutData );
 
   KApplication app( false );
 
@@ -43,7 +43,7 @@ int main(int argc,char **argv)
   ResourceFile r( "my.kabc", "vcard" );
   ab.addResource( &r );
 
-  for( int i = 0; i < 5000; ++i ) {
+  for ( int i = 0; i < 5000; ++i ) {
     Addressee a;
     a.setGivenName( "number" + QString::number( i ) );
     a.setFamilyName( "Name" );

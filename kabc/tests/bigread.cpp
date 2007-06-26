@@ -18,7 +18,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <sys/times.h>
+#include "kabc/addressbook.h"
+#include "kabc/vcardformat.h"
+#include "kabc/plugins/file/resourcefile.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -26,18 +28,16 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include "kabc/addressbook.h"
-#include "kabc/vcardformat.h"
-#include "kabc/plugins/file/resourcefile.h"
+#include <sys/times.h>
 
 using namespace KABC;
 
-int main(int argc,char **argv)
+int main( int argc, char **argv )
 {
-  KAboutData aboutData("bigread","BigReadKabc","0.1");
-  KCmdLineArgs::init(argc,argv,&aboutData);
+  KAboutData aboutData( "bigread", "BigReadKabc", "0.1" );
+  KCmdLineArgs::init( argc, argv, &aboutData );
 
-  KApplication app( false);
+  KApplication app( false );
 
   AddressBook ab;
 

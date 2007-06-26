@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "timezonetest.h"
 #include "kabc/timezone.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(TimeZoneTest, NoGUI)
+QTEST_KDEMAIN( TimeZoneTest, NoGUI )
 
 void TimeZoneTest::emptyTest()
 {

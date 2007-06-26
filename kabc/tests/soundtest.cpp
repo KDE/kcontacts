@@ -18,19 +18,20 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "soundtest.h"
 #include "kabc/sound.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(SoundTest, NoGUI)
+QTEST_KDEMAIN( SoundTest, NoGUI )
 
 static QByteArray testData()
 {
   static QByteArray data;
 
   if ( data.isNull() ) {
-    for ( int i = 0; i < 20; ++i )
+    for ( int i = 0; i < 20; ++i ) {
       data.append( char( i ) );
+    }
   }
 
   return data;

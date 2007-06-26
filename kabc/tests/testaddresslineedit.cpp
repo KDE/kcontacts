@@ -28,7 +28,7 @@
 
 using namespace KABC;
 
-int main( int argc,char **argv )
+int main( int argc, char **argv )
 {
   KAboutData aboutData( "testaddresslineedit",
                         I18N_NOOP( "Test Address LineEdit" ), "0.1" );

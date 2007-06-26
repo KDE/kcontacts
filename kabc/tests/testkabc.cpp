@@ -18,8 +18,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
-#include <QtGui/QImage>
+#include "kabc/geo.h"
+#include "kabc/secrecy.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/timezone.h"
+#include "kabc/key.h"
+#include "kabc/vcardconverter.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -28,19 +32,15 @@
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 
-#include "kabc/geo.h"
-#include "kabc/secrecy.h"
-#include "kabc/stdaddressbook.h"
-#include "kabc/timezone.h"
-#include "kabc/key.h"
-#include "kabc/vcardconverter.h"
+#include <QtCore/QFile>
+#include <QtGui/QImage>
 
 using namespace KABC;
 
-int main(int argc,char **argv)
+int main( int argc, char **argv )
 {
-    KAboutData aboutData("testkabc",I18N_NOOP("TestKabc"),"0.1");
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    KAboutData aboutData( "testkabc", I18N_NOOP("TestKabc"), "0.1" );
+    KCmdLineArgs::init( argc, argv, &aboutData );
 
     KApplication app( false );
     AddressBook *ab = StdAddressBook::self();
@@ -59,7 +59,6 @@ int main(int argc,char **argv)
 
     addr.setGivenName("Tobias");
     addr.setFamilyName("Koenig");
-
 
     Picture pic;
     QImage img;

@@ -18,13 +18,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QPainter>
-
-#include <qtest_kde.h>
 #include "picturetest.h"
 #include "kabc/picture.h"
+#include <QtGui/QPainter>
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(PictureTest, NoGUI)
+QTEST_KDEMAIN( PictureTest, NoGUI )
 
 static QImage testImage()
 {

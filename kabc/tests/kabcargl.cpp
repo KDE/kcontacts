@@ -18,10 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
-#include <QtCore/QTextCodec>
-#include <QtCore/QRegExp>
+#include "kabc/stdaddressbook.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -30,16 +27,19 @@
 #include <kglobal.h>
 #include <kstandarddirs.h>
 
-#include "kabc/stdaddressbook.h"
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QTextCodec>
+#include <QtCore/QRegExp>
 
 using namespace KABC;
 
-int main(int argc,char **argv)
+int main( int argc, char **argv )
 {
-  KAboutData aboutData("kabcargl","Fix broken pre3.0rc3 format","0.1");
-  aboutData.addAuthor("Cornelius Schumacher", 0, "schumacher@kde.org");
+  KAboutData aboutData( "kabcargl", "Fix broken pre3.0rc3 format", "0.1" );
+  aboutData.addAuthor( "Cornelius Schumacher", 0, "schumacher@kde.org" );
 
-  KCmdLineArgs::init(argc,argv,&aboutData);
+  KCmdLineArgs::init( argc, argv, &aboutData );
 
   KApplication app;
 
@@ -52,7 +52,7 @@ int main(int argc,char **argv)
   }
 
   QTextStream t( &f );
-  t.setCodec(QTextCodec::codecForName("UTF-8"));
+  t.setCodec( QTextCodec::codecForName( "UTF-8" ) );
   QString text = t.readAll();
   f.close();
 
@@ -65,7 +65,7 @@ int main(int argc,char **argv)
   }
 
   QTextStream t2( &f );
-  t2.setCodec(QTextCodec::codecForName("UTF-8"));
+  t2.setCodec( QTextCodec::codecForName( "UTF-8" ) );
   t2 << text;
   f.close();
 }

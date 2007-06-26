@@ -19,19 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <sys/types.h>
-#include <iostream>
-#include <unistd.h>
-
-#include <qtreewidget.h>
-
-#include <QtGui/QWidget>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtCore/QDir>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QHBoxLayout>
+#include "testlock.h"
+#include "kabc/stdaddressbook.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -42,9 +31,18 @@
 #include <kmessagebox.h>
 #include <kdialog.h>
 
-#include "kabc/stdaddressbook.h"
+#include <qtreewidget.h>
+#include <QtGui/QWidget>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QPushButton>
+#include <QtCore/QDir>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
 
-#include "testlock.h"
+#include <sys/types.h>
+#include <iostream>
+#include <unistd.h>
 
 using namespace KABC;
 
@@ -66,7 +64,7 @@ LockWidget::LockWidget( const QString &identifier )
     topLayout->addWidget( pidLabel );
 
     QHBoxLayout *identifierLayout = new QHBoxLayout();
-	identifierLayout->setParent( topLayout );
+    identifierLayout->setParent( topLayout );
     topLayout->addItem( identifierLayout );
 
     QLabel *resourceLabel = new QLabel( "Identifier:", this );
@@ -126,8 +124,10 @@ void LockWidget::updateLockView()
   QStringList files = dir.entryList( QStringList( "*.lock" ) );
 
   QStringList::ConstIterator it;
-  for( it = files.begin(); it != files.end(); ++it ) {
-    if ( *it == "." || *it == ".." ) continue;
+  for ( it = files.begin(); it != files.end(); ++it ) {
+    if ( *it == "." || *it == ".." ) {
+      continue;
+    }
 
     QString app;
     int pid;
@@ -161,7 +161,6 @@ void LockWidget::unlock()
   }
 }
 
-
 static const KCmdLineOptions options[] =
 {
   { "a", 0, 0 },
@@ -172,10 +171,10 @@ static const KCmdLineOptions options[] =
   KCmdLineLastOption
 };
 
-int main(int argc,char **argv)
+int main( int argc, char **argv )
 {
-  KAboutData aboutData("testlock",I18N_NOOP("Test libkabc Lock"),"0.1");
-  KCmdLineArgs::init(argc,argv,&aboutData);
+  KAboutData aboutData( "testlock", I18N_NOOP("Test libkabc Lock"), "0.1" );
+  KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;

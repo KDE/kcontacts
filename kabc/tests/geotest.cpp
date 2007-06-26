@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "geotest.h"
 #include "kabc/geo.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(GeoTest, NoGUI)
+QTEST_KDEMAIN( GeoTest, NoGUI )
 
 void GeoTest::constructor()
 {

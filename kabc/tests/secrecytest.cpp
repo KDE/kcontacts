@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "secrecytest.h"
 #include "kabc/secrecy.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(SecrecyTest, NoGUI)
+QTEST_KDEMAIN( SecrecyTest, NoGUI )
 
 void SecrecyTest::emptyTest()
 {

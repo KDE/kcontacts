@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
 #include "addresstest.h"
 #include "kabc/address.h"
+#include <qtest_kde.h>
 
-QTEST_KDEMAIN(AddressTest, NoGUI)
+QTEST_KDEMAIN( AddressTest, NoGUI )
 
 void AddressTest::emptyTest()
 {
