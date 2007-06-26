@@ -21,13 +21,13 @@
 #ifndef KABC_RESOURCEFILE_H
 #define KABC_RESOURCEFILE_H
 
-#include <sys/types.h>
+#include "kabc/kabc_export.h"
+#include "kabc/resource.h"
 
 #include <kconfig.h>
 #include <kdirwatch.h>
 
-#include "kabc/kabc_export.h"
-#include "kabc/resource.h"
+#include <sys/types.h>
 
 class QFile;
 class KTemporaryFile;
@@ -59,9 +59,10 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     explicit ResourceFile( const KConfigGroup &group );
 
     /**
-      Construct file resource on file @arg fileName using format @arg formatName.
+      Constructs a file resource on file @arg fileName using format @arg formatName.
      */
-    explicit ResourceFile( const QString &fileName, const QString &formatName = QLatin1String( "vcard" ) );
+    explicit ResourceFile( const QString &fileName,
+                           const QString &formatName = QLatin1String( "vcard" ) );
 
     /**
       Destructor.
@@ -89,7 +90,7 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
      */
     virtual Ticket *requestSaveTicket();
 
-    virtual void releaseSaveTicket( Ticket* );
+    virtual void releaseSaveTicket( Ticket *ticket );
 
     /**
       Loads all addressees from file to the address book.
@@ -133,11 +134,11 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
       Remove a addressee from its source.
       This method is mainly called by KABC::AddressBook.
      */
-    virtual void removeAddressee( const Addressee& addr );
+    virtual void removeAddressee( const Addressee &addr );
 
   private Q_SLOTS:
-    void downloadFinished( KJob* );
-    void uploadFinished( KJob* );
+    void downloadFinished( KJob *job );
+    void uploadFinished( KJob *job );
 
   protected Q_SLOTS:
     void fileChanged();

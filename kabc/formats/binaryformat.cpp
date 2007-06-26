@@ -18,19 +18,18 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDataStream>
-#include <QtGui/QImage>
-
-#include <kdebug.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
-
+#include "binaryformat.h"
 #include "kabc/addressbook.h"
 #include "kabc/addressee.h"
 #include "kabc/picture.h"
 #include "kabc/sound.h"
 
-#include "binaryformat.h"
+#include <kdebug.h>
+#include <klocale.h>
+#include <kstandarddirs.h>
+
+#include <QtCore/QDataStream>
+#include <QtGui/QImage>
 
 #define BINARY_FORMAT_VERSION 1
 
@@ -49,8 +48,9 @@ bool BinaryFormat::load( Addressee &addressee, QFile *file )
   kDebug(5700) << "BinaryFormat::load()" << endl;
   QDataStream stream( file );
 
-  if ( !checkHeader( stream ) )
+  if ( !checkHeader( stream ) ) {
     return false;
+  }
 
   loadAddressee( addressee, stream );
 
@@ -63,8 +63,9 @@ bool BinaryFormat::loadAll( AddressBook*, Resource *resource, QFile *file )
 
   QDataStream stream( file );
 
-  if ( !checkHeader( stream ) )
+  if ( !checkHeader( stream ) ) {
     return false;
+  }
 
   quint32 entries;
 

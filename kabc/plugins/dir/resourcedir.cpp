@@ -18,11 +18,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <errno.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include "resourcedir.h"
+#include "resourcedirconfig.h"
+
+#include "kabc/addressbook.h"
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
+#include "kabc/lock.h"
 
 #include <kconfiggroup.h>
 #include <kdebug.h>
@@ -32,13 +34,11 @@
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
 
-#include "kabc/addressbook.h"
-#include "kabc/formatfactory.h"
-#include "kabc/stdaddressbook.h"
-#include "kabc/lock.h"
-
-#include "resourcedirconfig.h"
-#include "resourcedir.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <signal.h>
+#include <unistd.h>
 
 using namespace KABC;
 
@@ -94,13 +94,14 @@ void ResourceDir::Private::init( const QString &path, const QString &format )
 
 void ResourceDir::Private::pathChanged()
 {
-  if ( !mParent->addressBook() )
+  if ( !mParent->addressBook() ) {
     return;
+  }
 
   mParent->clear();
-  if ( mAsynchronous )
+  if ( mAsynchronous ) {
     mParent->asyncLoad();
-  else {
+  } else {
     mParent->load();
     mParent->addressBook()->emitAddressBookChanged();
   }
@@ -134,10 +135,11 @@ void ResourceDir::writeConfig( KConfigGroup &group )
 {
   Resource::writeConfig( group );
 
-  if ( d->mPath == StdAddressBook::directoryName() )
+  if ( d->mPath == StdAddressBook::directoryName() ) {
     group.deleteEntry( "FilePath" );
-  else
+  } else {
     group.writePathEntry( "FilePath", d->mPath );
+  }
 
   group.writeEntry( "FileFormat", d->mFormatName );
 }
@@ -146,7 +148,9 @@ Ticket *ResourceDir::requestSaveTicket()
 {
   kDebug(5700) << "ResourceDir::requestSaveTicket()" << endl;
 
-  if ( !addressBook() ) return 0;
+  if ( !addressBook() ) {
+    return 0;
+  }
 
   delete d->mLock;
   d->mLock = new Lock( d->mPath );
@@ -178,15 +182,17 @@ bool ResourceDir::doOpen()
     return dir.mkdir( dir.path() );
   } else {
     const QStringList lst = dir.entryList( QDir::Files );
-    if( lst.isEmpty()) //path doesn't exist or list of file empty
-      return true; 
+    if ( lst.isEmpty() ) { //path doesn't exist or list of file empty
+      return true;
+    }
     QString testName = lst.first();
     QFile file( d->mPath + '/' + testName );
-    if ( file.open( QIODevice::ReadOnly ) )
+    if ( file.open( QIODevice::ReadOnly ) ) {
       return true;
-
-    if ( file.size() == 0 )
+    }
+    if ( file.size() == 0 ) {
       return true;
+    }
 
     bool ok = d->mFormat->checkFormat( &file );
     file.close();
@@ -213,13 +219,14 @@ bool ResourceDir::load()
     QFile file( d->mPath + '/' + (*it) );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
-      addressBook()->error( i18n( "Unable to open file '%1' for reading" ,  file.fileName() ) );
+      addressBook()->error( i18n( "Unable to open file '%1' for reading", file.fileName() ) );
       ok = false;
       continue;
     }
 
-    if ( !d->mFormat->loadAll( addressBook(), this, &file ) )
+    if ( !d->mFormat->loadAll( addressBook(), this, &file ) ) {
       ok = false;
+    }
 
     file.close();
   }
@@ -232,10 +239,11 @@ bool ResourceDir::asyncLoad()
   d->mAsynchronous = true;
 
   bool ok = load();
-  if ( !ok )
+  if ( !ok ) {
     emit loadingError( this, i18n( "Loading resource '%1' failed!", resourceName() ) );
-  else
+  } else {
     emit loadingFinished( this );
+  }
 
   return ok;
 }
@@ -250,8 +258,9 @@ bool ResourceDir::save( Ticket * )
   d->mDirWatch.stopScan();
 
   for ( it = mAddrMap.begin(); it != mAddrMap.end(); ++it ) {
-    if ( !it.value().changed() )
+    if ( !it.value().changed() ) {
       continue;
+    }
 
     QFile file( d->mPath + '/' + (*it).uid() );
     if ( !file.open( QIODevice::WriteOnly ) ) {
@@ -275,19 +284,20 @@ bool ResourceDir::save( Ticket * )
 bool ResourceDir::asyncSave( Ticket *ticket )
 {
   bool ok = save( ticket );
-  if ( !ok )
+  if ( !ok ) {
     emit savingError( this, i18n( "Saving resource '%1' failed!", resourceName() ) );
-  else
+  } else {
     emit savingFinished( this );
-
+  }
   return ok;
 }
 
 void ResourceDir::setPath( const QString &path )
 {
   d->mDirWatch.stopScan();
-  if ( d->mDirWatch.contains( d->mPath ) )
+  if ( d->mDirWatch.contains( d->mPath ) ) {
     d->mDirWatch.removeDir( d->mPath );
+  }
 
   d->mPath = path;
   d->mDirWatch.addDir( d->mPath, true );
@@ -314,7 +324,7 @@ QString ResourceDir::format() const
   return d->mFormatName;
 }
 
-void ResourceDir::removeAddressee( const Addressee& addr )
+void ResourceDir::removeAddressee( const Addressee &addr )
 {
   QFile::remove( d->mPath + '/' + addr.uid() );
   mAddrMap.remove( addr.uid() );

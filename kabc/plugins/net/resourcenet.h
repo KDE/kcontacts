@@ -21,9 +21,8 @@
 #ifndef KABC_RESOURCENET_H
 #define KABC_RESOURCENET_H
 
-#include <sys/types.h>
-
 #include "kabc/resource.h"
+#include <sys/types.h>
 
 class QFile;
 class KTemporaryFile;
@@ -53,17 +52,17 @@ class KABC_NET_EXPORT ResourceNet : public Resource
     virtual void doClose();
 
     virtual Ticket *requestSaveTicket();
-    virtual void releaseSaveTicket( Ticket* );
+    virtual void releaseSaveTicket( Ticket *ticket );
 
     virtual bool load();
     virtual bool asyncLoad();
-    virtual bool save( Ticket* ticket );
-    virtual bool asyncSave( Ticket* ticket );
+    virtual bool save( Ticket *ticket );
+    virtual bool asyncSave( Ticket *ticket );
 
     /**
       Set url of directory to be used for saving.
      */
-    void setUrl( const KUrl & );
+    void setUrl( const KUrl &url );
 
     /**
       Return url of directory used for loading and saving the address book.
@@ -84,8 +83,8 @@ class KABC_NET_EXPORT ResourceNet : public Resource
     void init( const KUrl &url, const QString &format );
 
   private Q_SLOTS:
-    void downloadFinished( KJob* );
-    void uploadFinished( KJob* );
+    void downloadFinished( KJob *job );
+    void uploadFinished( KJob *job );
 
   private:
     bool clearAndLoad( QFile *file );

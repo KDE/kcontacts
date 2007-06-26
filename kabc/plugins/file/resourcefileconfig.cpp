@@ -18,25 +18,25 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <unistd.h>
+#include "resourcefileconfig.h"
+#include "resourcefile.h"
 
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kdialog.h>
 
-#include "kabc/formatfactory.h"
-#include "kabc/stdaddressbook.h"
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
 
-#include "resourcefile.h"
-#include "resourcefileconfig.h"
+#include <unistd.h>
 
 using namespace KABC;
 
-ResourceFileConfig::ResourceFileConfig( QWidget* parent )
+ResourceFileConfig::ResourceFileConfig( QWidget *parent )
     : ConfigWidget( parent )
 {
   QGridLayout *mainLayout = new QGridLayout( this );
@@ -76,7 +76,7 @@ void ResourceFileConfig::setEditMode( bool value )
   mInEditMode = value;
 }
 
-void ResourceFileConfig::loadSettings( KRES::Resource *res  )
+void ResourceFileConfig::loadSettings( KRES::Resource *res )
 {
   ResourceFile *resource = dynamic_cast<ResourceFile*>( res );
 
@@ -88,8 +88,9 @@ void ResourceFileConfig::loadSettings( KRES::Resource *res  )
   mFormatBox->setCurrentIndex( mFormatTypes.indexOf( resource->format() ) );
 
   mFileNameEdit->setUrl( KUrl::fromPath(resource->fileName()) );
-  if ( mFileNameEdit->url().isEmpty() )
+  if ( mFileNameEdit->url().isEmpty() ) {
     mFileNameEdit->setUrl( KUrl::fromPath(KABC::StdAddressBook::fileName()) );
+  }
 }
 
 void ResourceFileConfig::saveSettings( KRES::Resource *res )
@@ -101,17 +102,19 @@ void ResourceFileConfig::saveSettings( KRES::Resource *res )
     return;
   }
 
-  if ( !mInEditMode )
+  if ( !mInEditMode ) {
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
+  }
 
   resource->setFileName( mFileNameEdit->url().url() );
 }
 
-void ResourceFileConfig::checkFilePermissions( const QString& fileName )
+void ResourceFileConfig::checkFilePermissions( const QString &fileName )
 {
   // If file exist but is not writeable...
-  if ( access( QFile::encodeName( fileName ), F_OK ) == 0 )
-      emit setReadOnly( access( QFile::encodeName( fileName ), W_OK ) < 0 );
+  if ( access( QFile::encodeName( fileName ), F_OK ) == 0 ) {
+    emit setReadOnly( access( QFile::encodeName( fileName ), W_OK ) < 0 );
+  }
 }
 
 #include "resourcefileconfig.moc"

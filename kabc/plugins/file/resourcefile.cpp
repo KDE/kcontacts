@@ -19,28 +19,28 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-
-#include <kconfiggroup.h>
-#include <kdebug.h>
-#include <kio/scheduler.h>
-#include <klocale.h>
-#include <ksavefile.h>
-#include <kstandarddirs.h>
-#include <ktemporaryfile.h>
+#include "resourcefile.h"
+#include "resourcefileconfig.h"
 
 #include "kabc/formatfactory.h"
 #include "kabc/stdaddressbook.h"
 #include "kabc/lock.h"
 
-#include "resourcefileconfig.h"
-#include "resourcefile.h"
+#include <kio/scheduler.h>
+#include <kconfiggroup.h>
+#include <kdebug.h>
+#include <klocale.h>
+#include <ksavefile.h>
+#include <kstandarddirs.h>
+#include <ktemporaryfile.h>
+
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <signal.h>
+#include <unistd.h>
 
 using namespace KABC;
 
@@ -114,10 +114,12 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
 
 ResourceFile::~ResourceFile()
 {
-  if ( d->mIsLoading )
+  if ( d->mIsLoading ) {
     d->mLoadJob->kill();
-  if ( d->mIsSaving )
+  }
+  if ( d->mIsSaving ) {
     d->mSaveJob->kill();
+  }
 
   delete d;
   d = 0;
@@ -131,10 +133,11 @@ void ResourceFile::writeConfig( KConfigGroup &group )
 {
   Resource::writeConfig( group );
 
-  if ( mFileName == StdAddressBook::fileName() )
+  if ( mFileName == StdAddressBook::fileName() ) {
     group.deleteEntry( "FileName" );
-  else
+  } else {
     group.writePathEntry( "FileName", mFileName );
+  }
 
   group.writeEntry( "FileFormat", mFormatName );
 }
@@ -143,7 +146,9 @@ Ticket *ResourceFile::requestSaveTicket()
 {
   kDebug(5700) << "ResourceFile::requestSaveTicket()" << endl;
 
-  if ( !addressBook() ) return 0;
+  if ( !addressBook() ) {
+    return 0;
+  }
 
   delete mLock;
   mLock = new Lock( mFileName );
@@ -177,18 +182,20 @@ bool ResourceFile::doOpen()
   if ( !file.exists() ) {
     // try to create the file
     bool ok = file.open( QIODevice::WriteOnly );
-    if ( ok )
+    if ( ok ) {
       file.close();
-
+    }
     return ok;
   } else {
     QFileInfo fileInfo( mFileName );
     if ( readOnly() || !fileInfo.isWritable() ) {
-      if ( !file.open( QIODevice::ReadOnly ) )
+      if ( !file.open( QIODevice::ReadOnly ) ) {
         return false;
+      }
     } else {
-      if ( !file.open( QIODevice::ReadWrite ) )
+      if ( !file.open( QIODevice::ReadWrite ) ) {
         return false;
+      }
     }
 
     if ( file.size() == 0 ) {
@@ -219,12 +226,12 @@ bool ResourceFile::load()
 
   QFile file( mFileName );
   if ( !file.open( QIODevice::ReadOnly ) ) {
-    addressBook()->error( i18n( "Unable to open file '%1'." ,  mFileName ) );
+    addressBook()->error( i18n( "Unable to open file '%1'.", mFileName ) );
     return false;
   }
 
   if ( !clearAndLoad( &file ) ) {
-      addressBook()->error( i18n( "Problems during parsing file '%1'." ,  mFileName ) );
+      addressBook()->error( i18n( "Problems during parsing file '%1'.", mFileName ) );
     return false;
   }
 
@@ -243,7 +250,7 @@ bool ResourceFile::asyncLoad()
     abortAsyncLoading();
   }
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     kWarning(5700) << "Aborted asyncSave() because we're still asyncSave()ing!" << endl;
     return false;
   }
@@ -253,7 +260,7 @@ bool ResourceFile::asyncLoad()
   bool ok = createLocalTempFile();
 
   if ( !ok ) {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
+    emit loadingError( this, i18n( "Unable to open file '%1'.", mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
@@ -301,7 +308,7 @@ bool ResourceFile::save( Ticket * )
 {
   kDebug(5700) << "ResourceFile::save()" << endl;
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     abortAsyncSaving();
   }
 
@@ -315,14 +322,13 @@ bool ResourceFile::save( Ticket * )
   KSaveFile saveFile( mFileName );
   bool ok = false;
 
-  if ( saveFile.open() )
-  {
+  if ( saveFile.open() ) {
     mFormat->saveAll( addressBook(), this, &saveFile );
     ok = saveFile.finalize();
   }
 
   if ( !ok ) {
-    addressBook()->error( i18n( "Unable to save file '%1'." ,  mFileName ) );
+    addressBook()->error( i18n( "Unable to save file '%1'.", mFileName ) );
   }
 
   mDirWatch.startScan();
@@ -334,11 +340,11 @@ bool ResourceFile::asyncSave( Ticket * )
 {
   kDebug(5700) << "ResourceFile::asyncSave()" << endl;
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     abortAsyncSaving();
   }
 
-  if (d->mIsLoading) {
+  if ( d->mIsLoading ) {
     kWarning(5700) << "Aborted asyncSave() because we're still asyncLoad()ing!" << endl;
     return false;
   }
@@ -349,7 +355,7 @@ bool ResourceFile::asyncSave( Ticket * )
   }
 
   if ( !ok ) {
-    emit savingError( this, i18n( "Unable to save file '%1'." ,  mTempFile->fileName() ) );
+    emit savingError( this, i18n( "Unable to save file '%1'.", mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
@@ -397,8 +403,9 @@ void ResourceFile::saveToFile( QFile *file )
 void ResourceFile::setFileName( const QString &fileName )
 {
   mDirWatch.stopScan();
-  if ( mDirWatch.contains( mFileName ) )
+  if ( mDirWatch.contains( mFileName ) ) {
     mDirWatch.removeFile( mFileName );
+  }
 
   mFileName = fileName;
 
@@ -427,15 +434,16 @@ QString ResourceFile::format() const
 
 void ResourceFile::fileChanged()
 {
-    kDebug(5700) << "ResourceFile::fileChanged(): " << mFileName << endl;
+  kDebug(5700) << "ResourceFile::fileChanged(): " << mFileName << endl;
 
-  if ( !addressBook() )
+  if ( !addressBook() ) {
     return;
+  }
 
 //  clear(); // moved to clearAndLoad()
-  if ( mAsynchronous )
+  if ( mAsynchronous ) {
     asyncLoad();
-  else {
+  } else {
     load();
     kDebug(5700) << "addressBookChanged() " << endl;
     addressBook()->emitAddressBookChanged();
@@ -444,15 +452,21 @@ void ResourceFile::fileChanged()
 
 void ResourceFile::removeAddressee( const Addressee &addr )
 {
-  QFile::remove( QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/photos/" ) + addr.uid() ) );
-  QFile::remove( QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/logos/" ) + addr.uid() ) );
-  QFile::remove( QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/sounds/" ) + addr.uid() ) );
+  QFile::remove(
+    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/photos/" ) + addr.uid() ) );
+
+  QFile::remove(
+    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/logos/" ) + addr.uid() ) );
+
+  QFile::remove(
+    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/sounds/" ) + addr.uid() ) );
 
   mAddrMap.remove( addr.uid() );
 }
 
-void ResourceFile::downloadFinished( KJob* )
+void ResourceFile::downloadFinished( KJob *job )
 {
+  Q_UNUSED( job );
   kDebug(5700) << "ResourceFile::downloadFinished()" << endl;
 
   d->mIsLoading = false;
@@ -464,13 +478,15 @@ void ResourceFile::downloadFinished( KJob* )
 
   QFile file( mTempFile->fileName() );
   if ( file.open( QIODevice::ReadOnly ) ) {
-    if ( clearAndLoad( &file ) )
+    if ( clearAndLoad( &file ) ) {
       emit loadingFinished( this );
-    else
-      emit loadingError( this, i18n( "Problems during parsing file '%1'." ,  mTempFile->fileName() ) );
-  }
-  else {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
+    } else {
+      emit loadingError( this, i18n( "Problems during parsing file '%1'.",
+                                     mTempFile->fileName() ) );
+    }
+  } else {
+    emit loadingError( this, i18n( "Unable to open file '%1'.",
+                                   mTempFile->fileName() ) );
   }
 
   deleteLocalTempFile();
@@ -482,10 +498,11 @@ void ResourceFile::uploadFinished( KJob *job )
 
   d->mIsSaving = false;
 
-  if ( job->error() )
+  if ( job->error() ) {
     emit savingError( this, job->errorString() );
-  else
+  } else {
     emit savingFinished( this );
+  }
 
   deleteLocalTempFile();
   mDirWatch.startScan();

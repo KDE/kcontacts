@@ -18,22 +18,22 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
-
-#include <kdebug.h>
-#include <kio/netaccess.h>
-#include <kio/scheduler.h>
-#include <klocale.h>
-#include <ksavefile.h>
-#include <ktemporaryfile.h>
-#include <kurlrequester.h>
+#include "resourcenet.h"
+#include "resourcenetconfig.h"
 
 #include "kabc/addressbook.h"
 #include "kabc/formatfactory.h"
 #include "kabc/stdaddressbook.h"
 
-#include "resourcenetconfig.h"
-#include "resourcenet.h"
+#include <kio/netaccess.h>
+#include <kio/scheduler.h>
+#include <kdebug.h>
+#include <klocale.h>
+#include <ksavefile.h>
+#include <ktemporaryfile.h>
+#include <kurlrequester.h>
+
+#include <QtCore/QFile>
 
 using namespace KABC;
 
@@ -92,10 +92,12 @@ void ResourceNet::init( const KUrl &url, const QString &format )
 
 ResourceNet::~ResourceNet()
 {
-  if ( d->mIsLoading )
+  if ( d->mIsLoading ) {
     d->mLoadJob->kill();
-  if ( d->mIsSaving )
+  }
+  if ( d->mIsSaving ) {
     d->mSaveJob->kill();
+  }
 
   delete d;
   d = 0;
@@ -140,20 +142,21 @@ bool ResourceNet::load()
   QString tempFile;
 
   if ( !KIO::NetAccess::download( mUrl, tempFile, 0 ) ) {
-    addressBook()->error( i18n( "Unable to download file '%1'." ,  mUrl.prettyUrl() ) );
+    addressBook()->error( i18n( "Unable to download file '%1'.", mUrl.prettyUrl() ) );
     return false;
   }
 
   QFile file( tempFile );
   if ( !file.open( QIODevice::ReadOnly ) ) {
-    addressBook()->error( i18n( "Unable to open file '%1'." ,  tempFile ) );
+    addressBook()->error( i18n( "Unable to open file '%1'.", tempFile ) );
     KIO::NetAccess::removeTempFile( tempFile );
     return false;
   }
 
   bool result = clearAndLoad( &file );
-  if ( !result )
-      addressBook()->error( i18n( "Problems during parsing file '%1'." ,  tempFile ) );
+  if ( !result ) {
+    addressBook()->error( i18n( "Problems during parsing file '%1'.", tempFile ) );
+  }
 
   KIO::NetAccess::removeTempFile( tempFile );
 
@@ -172,7 +175,7 @@ bool ResourceNet::asyncLoad()
     abortAsyncLoading();
   }
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     kWarning(5700) << "Aborted asyncLoad() because we're still asyncSave()ing!" << endl;
     return false;
   }
@@ -180,7 +183,7 @@ bool ResourceNet::asyncLoad()
   bool ok = createLocalTempFile();
 
   if ( !ok ) {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
+    emit loadingError( this, i18n( "Unable to open file '%1'.", mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
@@ -223,11 +226,12 @@ void ResourceNet::abortAsyncSaving()
   d->mIsSaving = false;
 }
 
-bool ResourceNet::save( Ticket* )
+bool ResourceNet::save( Ticket *ticket )
 {
+  Q_UNUSED( ticket );
   kDebug(5700) << "ResourceNet::save()" << endl;
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     abortAsyncSaving();
   }
 
@@ -239,26 +243,28 @@ bool ResourceNet::save( Ticket* )
   }
 
   if ( !ok ) {
-    addressBook()->error( i18n( "Unable to save file '%1'." ,  tempFile.fileName() ) );
+    addressBook()->error( i18n( "Unable to save file '%1'.", tempFile.fileName() ) );
     return false;
   }
 
   ok = KIO::NetAccess::upload( tempFile.fileName(), mUrl, 0 );
-  if ( !ok )
-    addressBook()->error( i18n( "Unable to upload to '%1'." ,  mUrl.prettyUrl() ) );
+  if ( !ok ) {
+    addressBook()->error( i18n( "Unable to upload to '%1'.", mUrl.prettyUrl() ) );
+  }
 
   return ok;
 }
 
-bool ResourceNet::asyncSave( Ticket* )
+bool ResourceNet::asyncSave( Ticket *ticket )
 {
+  Q_UNUSED( ticket );
   kDebug(5700) << "ResourceNet::asyncSave()" << endl;
 
-  if (d->mIsSaving) {
+  if ( d->mIsSaving ) {
     abortAsyncSaving();
   }
 
-  if (d->mIsLoading) {
+  if ( d->mIsLoading ) {
     kWarning(5700) << "Aborted asyncSave() because we're still asyncLoad()ing!" << endl;
     return false;
   }
@@ -269,7 +275,7 @@ bool ResourceNet::asyncSave( Ticket* )
   }
 
   if ( !ok ) {
-    emit savingError( this, i18n( "Unable to save file '%1'." ,  mTempFile->fileName() ) );
+    emit savingError( this, i18n( "Unable to save file '%1'.", mTempFile->fileName() ) );
     deleteLocalTempFile();
     return false;
   }
@@ -325,8 +331,9 @@ KUrl ResourceNet::url() const
 void ResourceNet::setFormat( const QString &name )
 {
   mFormatName = name;
-  if ( mFormat )
+  if ( mFormat ) {
     delete mFormat;
+  }
 
   FormatFactory *factory = FormatFactory::self();
   mFormat = factory->format( mFormatName );
@@ -337,8 +344,9 @@ QString ResourceNet::format() const
   return mFormatName;
 }
 
-void ResourceNet::downloadFinished( KJob* )
+void ResourceNet::downloadFinished( KJob *job )
 {
+  Q_UNUSED( job );
   kDebug(5700) << "ResourceNet::downloadFinished()" << endl;
 
   d->mIsLoading = false;
@@ -350,13 +358,15 @@ void ResourceNet::downloadFinished( KJob* )
 
   QFile file( mTempFile->fileName() );
   if ( file.open( QIODevice::ReadOnly ) ) {
-    if ( clearAndLoad( &file ) )
+    if ( clearAndLoad( &file ) ) {
       emit loadingFinished( this );
-    else
-      emit loadingError( this, i18n( "Problems during parsing file '%1'." ,  mTempFile->fileName() ) );
-  }
-  else {
-    emit loadingError( this, i18n( "Unable to open file '%1'." ,  mTempFile->fileName() ) );
+    } else {
+      emit loadingError( this, i18n( "Problems during parsing file '%1'.",
+                                     mTempFile->fileName() ) );
+    }
+  } else {
+    emit loadingError( this, i18n( "Unable to open file '%1'.",
+                                   mTempFile->fileName() ) );
   }
 
   deleteLocalTempFile();
@@ -368,10 +378,11 @@ void ResourceNet::uploadFinished( KJob *job )
 
   d->mIsSaving = false;
 
-  if ( job->error() )
+  if ( job->error() ) {
     emit savingError( this, job->errorString() );
-  else
+  } else {
     emit savingFinished( this );
+  }
 
   deleteLocalTempFile();
 }

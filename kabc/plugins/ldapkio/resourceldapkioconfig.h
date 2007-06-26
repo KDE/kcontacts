@@ -21,17 +21,18 @@
 #ifndef RESOURCELDAPCONFIG_H
 #define RESOURCELDAPCONFIG_H
 
+#include "kabc/kabc_export.h"
+#include "kresources/configwidget.h"
+#include "kldap/ldapconfigwidget.h"
+#include "kldap/ldif.h"
+
+#include <kdialog.h>
+
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
 #include <QtGui/QGroupBox>
 #include <QtCore/QHash>
 #include <QtCore/QMap>
-
-#include <kdialog.h>
-
-#include "kresources/configwidget.h"
-#include "kldap/ldapconfigwidget.h"
-#include "kldap/ldif.h"
 
 class QCheckBox;
 class QPushButton;
@@ -47,11 +48,11 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIOConfig : public KRES::ConfigWidget
   Q_OBJECT
 
   public:
-    ResourceLDAPKIOConfig( QWidget* parent = 0 );
+    ResourceLDAPKIOConfig( QWidget *parent = 0 );
 
   public Q_SLOTS:
-    void loadSettings( KRES::Resource* );
-    void saveSettings( KRES::Resource* );
+    void loadSettings( KRES::Resource *resource );
+    void saveSettings( KRES::Resource *resource );
 
   private Q_SLOTS:
     void editAttributes();
@@ -82,7 +83,13 @@ class AttributesDialog : public KDialog
     void mapChanged( int pos );
 
   private:
-    enum { UserMap, KolabMap, NetscapeMap, EvolutionMap, OutlookMap };
+    enum {
+      UserMap,
+      KolabMap,
+      NetscapeMap,
+      EvolutionMap,
+      OutlookMap
+    };
 
     KComboBox *mMapCombo, *mRDNCombo;
     QList< QMap<QString, QString> > mMapList;

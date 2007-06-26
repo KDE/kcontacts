@@ -21,11 +21,10 @@
 #ifndef RESOURCEFILECONFIG_H
 #define RESOURCEFILECONFIG_H
 
-#include <kcombobox.h>
-#include <kurlrequester.h>
-
 #include "kabc/kabc_export.h"
 #include "kresources/configwidget.h"
+#include <kcombobox.h>
+#include <kurlrequester.h>
 
 namespace KABC {
 
@@ -34,7 +33,7 @@ class KABC_FILE_CORE_EXPORT ResourceFileConfig : public KRES::ConfigWidget
   Q_OBJECT
 
 public:
-  ResourceFileConfig( QWidget* parent = 0 );
+  ResourceFileConfig( QWidget *parent = 0 );
 
   void setEditMode( bool value );
 
@@ -43,11 +42,11 @@ public Q_SLOTS:
   void saveSettings( KRES::Resource *resource );
 
 protected Q_SLOTS:
-  void checkFilePermissions( const QString& fileName );
+  void checkFilePermissions( const QString &fileName );
 
 private:
-  KComboBox* mFormatBox;
-  KUrlRequester* mFileNameEdit;
+  KComboBox *mFormatBox;
+  KUrlRequester *mFileNameEdit;
   bool mInEditMode;
 
   QStringList mFormatTypes;

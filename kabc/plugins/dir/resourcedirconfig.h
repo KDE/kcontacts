@@ -21,11 +21,10 @@
 #ifndef RESOURCEDIRCONFIG_H
 #define RESOURCEDIRCONFIG_H
 
-#include <kcombobox.h>
-#include <kurlrequester.h>
-
 #include "kabc/kabc_export.h"
 #include "kresources/configwidget.h"
+#include <kcombobox.h>
+#include <kurlrequester.h>
 
 namespace KABC {
 
@@ -33,23 +32,21 @@ class KABC_DIR_EXPORT ResourceDirConfig : public KRES::ConfigWidget
 {
   Q_OBJECT
 
-public:
-  ResourceDirConfig( QWidget* parent = 0 );
+  public:
+    ResourceDirConfig( QWidget *parent = 0 );
+    void setEditMode( bool value );
 
-  void setEditMode( bool value );
+  public Q_SLOTS:
+    void loadSettings( KRES::Resource *resource );
+    void saveSettings( KRES::Resource *resource );
 
-public Q_SLOTS:
-  void loadSettings( KRES::Resource* );
-  void saveSettings( KRES::Resource* );
-
-private:
-  KComboBox* mFormatBox;
-  KUrlRequester* mFileNameEdit;
-
-  QStringList mFormatTypes;
-
-  bool mInEditMode;
+  private:
+    KComboBox *mFormatBox;
+    KUrlRequester *mFileNameEdit;
+    QStringList mFormatTypes;
+    bool mInEditMode;
 };
 
 }
+
 #endif

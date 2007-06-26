@@ -21,11 +21,10 @@
 #ifndef RESOURCENETCONFIG_H
 #define RESOURCENETCONFIG_H
 
-#include <kcombobox.h>
-#include <kurlrequester.h>
-
 #include "kabc/kabc_export.h"
 #include "kresources/configwidget.h"
+#include <kcombobox.h>
+#include <kurlrequester.h>
 
 namespace KABC {
 
@@ -34,7 +33,7 @@ class KABC_NET_EXPORT ResourceNetConfig : public KRES::ConfigWidget
   Q_OBJECT
 
   public:
-    ResourceNetConfig( QWidget* parent = 0 );
+    ResourceNetConfig( QWidget *parent = 0 );
 
     void setEditMode( bool value );
 
@@ -43,8 +42,8 @@ class KABC_NET_EXPORT ResourceNetConfig : public KRES::ConfigWidget
     void saveSettings( KRES::Resource *resource );
 
   private:
-    KComboBox* mFormatBox;
-    KUrlRequester* mUrlEdit;
+    KComboBox *mFormatBox;
+    KUrlRequester *mUrlEdit;
 
     QStringList mFormatTypes;
     bool mInEditMode;

@@ -18,23 +18,23 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include "resourcedirconfig.h"
+#include "resourcedir.h"
+
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kdialog.h>
 
-#include "kabc/formatfactory.h"
-#include "kabc/stdaddressbook.h"
-
-#include "resourcedir.h"
-#include "resourcedirconfig.h"
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
 
 using namespace KABC;
 
-ResourceDirConfig::ResourceDirConfig( QWidget* parent )
+ResourceDirConfig::ResourceDirConfig( QWidget *parent )
     : KRES::ConfigWidget( parent )
 {
   QGridLayout *mainLayout = new QGridLayout( this );
@@ -84,8 +84,9 @@ void ResourceDirConfig::loadSettings( KRES::Resource *res )
   mFormatBox->setCurrentIndex( mFormatTypes.indexOf( resource->format() ) );
 
   mFileNameEdit->setPath( resource->path() );
-  if ( mFileNameEdit->url().isEmpty() )
+  if ( mFileNameEdit->url().isEmpty() ) {
     mFileNameEdit->setPath( KABC::StdAddressBook::directoryName() );
+  }
 }
 
 void ResourceDirConfig::saveSettings( KRES::Resource *res )
@@ -97,8 +98,9 @@ void ResourceDirConfig::saveSettings( KRES::Resource *res )
     return;
   }
 
-  if ( mInEditMode )
+  if ( mInEditMode ) {
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
+  }
 
   resource->setPath( mFileNameEdit->url().path() );
 }

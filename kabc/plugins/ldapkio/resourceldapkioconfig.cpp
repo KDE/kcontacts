@@ -18,6 +18,18 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "resourceldapkioconfig.h"
+#include "resourceldapkio.h"
+
+#include <kio/netaccess.h>
+#include <kacceleratormanager.h>
+#include <kcombobox.h>
+#include <kdebug.h>
+#include <klocale.h>
+#include <klineedit.h>
+#include <kmessagebox.h>
+#include <kvbox.h>
+
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -25,24 +37,12 @@
 #include <QtGui/QSpinBox>
 #include <QtGui/QRadioButton>
 
-#include <kacceleratormanager.h>
-#include <kcombobox.h>
-#include <kdebug.h>
-#include <kio/netaccess.h>
-#include <klocale.h>
-#include <klineedit.h>
-#include <kmessagebox.h>
-#include <kvbox.h>
-
-#include "resourceldapkio.h"
-
-#include "resourceldapkioconfig.h"
 #include "resourceldapkioconfig.moc"
 
 using namespace KABC;
 
-ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget* parent )
-    : KRES::ConfigWidget( parent )
+ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
+  : KRES::ConfigWidget( parent )
 {
   QBoxLayout *mainLayout = new QVBoxLayout( this );
   cfg = new KLDAP::LdapConfigWidget(
@@ -96,13 +96,20 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
   cfg->setDn( KLDAP::LdapDN( resource->dn() ) );
   cfg->setFilter( resource->filter() );
   cfg->setMech( resource->mech() );
-  if ( resource->isTLS() ) cfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
-  else if ( resource->isSSL() ) cfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
-  else cfg->setSecurity( KLDAP::LdapConfigWidget::None );
-  if ( resource->isAnonymous() ) cfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
-  else if ( resource->isSASL() ) cfg->setAuth( KLDAP::LdapConfigWidget::SASL );
-  else cfg->setAuth( KLDAP::LdapConfigWidget::Simple );
-
+  if ( resource->isTLS() ) {
+    cfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
+  } else if ( resource->isSSL() ) {
+    cfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
+  } else {
+    cfg->setSecurity( KLDAP::LdapConfigWidget::None );
+  }
+  if ( resource->isAnonymous() ) {
+    cfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
+  } else if ( resource->isSASL() ) {
+    cfg->setAuth( KLDAP::LdapConfigWidget::SASL );
+  } else {
+    cfg->setAuth( KLDAP::LdapConfigWidget::Simple );
+  }
   mSubTree->setChecked( resource->isSubTree() );
   mAttributes = resource->attributes();
   mRDNPrefix = resource->RDNPrefix();
@@ -164,8 +171,9 @@ void ResourceLDAPKIOConfig::editCache()
     QMap<QString,QString>::Iterator it;
     QStringList attr;
     for ( it = mAttributes.begin(); it != mAttributes.end(); ++it ) {
-      if ( !it.value().isEmpty() && it.key() != "objectClass" )
+      if ( !it.value().isEmpty() && it.key() != "objectClass" ) {
         attr.append( it.value() );
+      }
     }
     src.setAttributes( attr );
   }
@@ -190,7 +198,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   showButtonSeparator( true );
 
   mNameDict.insert( "objectClass", i18n( "Object classes" ) );
-  mNameDict.insert( "commonName",  i18n( "Common name" ) );
+  mNameDict.insert( "commonName", i18n( "Common name" ) );
   mNameDict.insert( "formattedName", i18n( "Formatted name" ) );
   mNameDict.insert( "familyName", i18n( "Family name" ) );
   mNameDict.insert( "givenName", i18n( "Given name" ) );
@@ -296,14 +304,18 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   }
 
   for ( i = 1; i < mMapCombo->count(); i++ ) {
-	QHash<QString,KLineEdit*>::const_iterator it2 = mLineEditDict.constBegin();
-	while (it2 != mLineEditDict.constEnd()){
+    QHash<QString,KLineEdit*>::const_iterator it2 = mLineEditDict.constBegin();
+    while ( it2 != mLineEditDict.constEnd() ) {
       if ( mMapList[ i ].contains( it2.key() ) ) {
-        if ( mMapList[ i ][ it2.key() ] != it2.value()->text() ) break;
+        if ( mMapList[ i ][ it2.key() ] != it2.value()->text() ) {
+          break;
+        }
       } else {
-        if ( mDefaultMap[ it2.key() ] != it2.value()->text() ) break;
+        if ( mDefaultMap[ it2.key() ] != it2.value()->text() ) {
+          break;
+        }
       }
-	  ++it2;
+      ++it2;
     }
     if ( it2 != mLineEditDict.constEnd() ) {
       mMapCombo->setCurrentIndex( i );
@@ -316,7 +328,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
 
 AttributesDialog::~AttributesDialog()
 {
-	mNameDict.clear();
+  mNameDict.clear();
 }
 
 QMap<QString, QString> AttributesDialog::attributes() const
@@ -324,10 +336,9 @@ QMap<QString, QString> AttributesDialog::attributes() const
   QMap<QString, QString> map;
 
   QHash<QString,KLineEdit*>::const_iterator it = mLineEditDict.constBegin();
-  while (it != mLineEditDict.constEnd())
-  {
-	map.insert( it.key(), it.value()->text() );
-	++it;
+  while ( it != mLineEditDict.constEnd() ) {
+    map.insert( it.key(), it.value()->text() );
+    ++it;
   }
   return map;
 }
@@ -342,13 +353,16 @@ void AttributesDialog::mapChanged( int pos )
 
   // apply first the default and than the spezific changes
   QMap<QString, QString>::Iterator it;
-  for ( it = mDefaultMap.begin(); it != mDefaultMap.end(); ++it )
+  for ( it = mDefaultMap.begin(); it != mDefaultMap.end(); ++it ) {
     mLineEditDict[ it.key() ]->setText( it.value() );
+  }
 
   for ( it = mMapList[ pos ].begin(); it != mMapList[ pos ].end(); ++it ) {
     if ( !it.value().isEmpty() ) {
       KLineEdit *le = mLineEditDict[ it.key() ];
-      if ( le ) le->setText( it.value() );
+      if ( le ) {
+        le->setText( it.value() );
+      }
     }
   }
 }
@@ -386,8 +400,9 @@ OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
   cacheBoxLayout->addWidget( bt );
   mCacheGroup->addButton( bt );
 
-  if ( mCacheGroup->button( cachePolicy ) )
+  if ( mCacheGroup->button( cachePolicy ) ) {
     mCacheGroup->button( cachePolicy )->setDown( true );
+  }
 
   mAutoCache = new QCheckBox( i18n("Refresh offline cache automatically"),
     page );

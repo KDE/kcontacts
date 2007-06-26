@@ -21,12 +21,9 @@
 #ifndef KABC_RESOURCEDIR_H
 #define KABC_RESOURCEDIR_H
 
-#include <sys/types.h>
-
-#include <kdirwatch.h>
-
 #include "kabc/resource.h"
-
+#include <kdirwatch.h>
+#include <sys/types.h>
 
 namespace KABC {
 
@@ -51,12 +48,12 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
     virtual void doClose();
 
     virtual Ticket *requestSaveTicket();
-    virtual void releaseSaveTicket( Ticket* );
+    virtual void releaseSaveTicket( Ticket *ticket );
 
     virtual bool load();
     virtual bool asyncLoad();
-    virtual bool save( Ticket* ticket );
-    virtual bool asyncSave( Ticket* ticket );
+    virtual bool save( Ticket * ticket );
+    virtual bool asyncSave( Ticket * ticket );
 
     /**
       Set path to be used for saving.
@@ -82,11 +79,11 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
       Remove a addressee from its source.
       This method is mainly called by KABC::AddressBook.
      */
-    virtual void removeAddressee( const Addressee& addr );
+    virtual void removeAddressee( const Addressee &addr );
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_PRIVATE_SLOT( d, void pathChanged() )
 };

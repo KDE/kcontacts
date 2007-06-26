@@ -18,22 +18,22 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include "resourcenetconfig.h"
+#include "resourcenet.h"
+
+#include "kabc/formatfactory.h"
+#include "kabc/stdaddressbook.h"
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <kdialog.h>
 
-#include "kabc/formatfactory.h"
-#include "kabc/stdaddressbook.h"
-
-#include "resourcenet.h"
-#include "resourcenetconfig.h"
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
 
 using namespace KABC;
 
-ResourceNetConfig::ResourceNetConfig( QWidget* parent )
+ResourceNetConfig::ResourceNetConfig( QWidget *parent )
     : ConfigWidget( parent ), mInEditMode( false )
 {
   QGridLayout *mainLayout = new QGridLayout( this );
@@ -92,8 +92,9 @@ void ResourceNetConfig::saveSettings( KRES::Resource *res )
     return;
   }
 
-  if ( !mInEditMode )
+  if ( !mInEditMode ) {
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
+  }
 
   resource->setUrl( KUrl( mUrlEdit->url() ) );
 }
