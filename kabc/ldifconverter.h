@@ -20,11 +20,11 @@
 #ifndef KABC_LDIFCONVERTER_H
 #define KABC_LDIFCONVERTER_H
 
-#include <QtCore/QDateTime>
-#include <QtCore/QString>
-
 #include "addressee.h"
 #include "addresseelist.h"
+
+#include <QtCore/QDateTime>
+#include <QtCore/QString>
 
 namespace KABC {
 

@@ -21,14 +21,14 @@
 #ifndef KABC_ADDRESSEEDIALOG_H
 #define KABC_ADDRESSEEDIALOG_H
 
-#include <QtCore/QHash>
-#include <QtCore/QString>
-#include <QtGui/QTreeWidgetItem>
+#include "addressbook.h"
 
 #include <kdialog.h>
 #include <klineedit.h>
 
-#include "addressbook.h"
+#include <QtCore/QHash>
+#include <QtCore/QString>
+#include <QtGui/QTreeWidgetItem>
 
 namespace KABC {
 

@@ -21,12 +21,12 @@
 #ifndef KABC_PICTURE_H
 #define KABC_PICTURE_H
 
+#include "kabc_export.h"
+
 #include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
 #include <QtGui/QImage>
-
-#include "kabc_export.h"
 
 namespace KABC {
 

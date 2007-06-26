@@ -21,9 +21,8 @@
 #ifndef KABC_PLUGIN_H
 #define KABC_PLUGIN_H
 
-#include <QtCore/QString>
-
 #include "kabc_export.h"
+#include <QtCore/QString>
 
 namespace KABC {
 
@@ -33,18 +32,18 @@ class KABC_EXPORT Plugin
     Plugin();
     virtual ~Plugin();
 
-    virtual void setType( const QString& type );
+    virtual void setType( const QString &type );
     virtual QString type() const;
 
-    virtual void setNameLabel( const QString& label );
+    virtual void setNameLabel( const QString &label );
     virtual QString nameLabel() const;
 
-    virtual void setDescriptionLabel( const QString& label );
+    virtual void setDescriptionLabel( const QString &label );
     virtual QString descriptionLabel() const;
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_DISABLE_COPY( Plugin )
 };

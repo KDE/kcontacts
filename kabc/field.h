@@ -21,9 +21,8 @@
 #ifndef KABC_FIELD_H
 #define KABC_FIELD_H
 
-#include <QtCore/QString>
-
 #include "addressee.h"
+#include <QtCore/QString>
 
 class KConfigGroup;
 
@@ -55,8 +54,7 @@ class KABC_EXPORT Field
     /**
      * Represents the category a field belongs to.
      */
-    enum FieldCategory
-    {
+    enum FieldCategory {
       /**
        * All fields
        */
@@ -221,10 +219,10 @@ class KABC_EXPORT Field
   private:
     class Private;
 
-    Field( Private* );
+    Field( Private * );
     virtual ~Field();
 
-    Private* const d;
+    Private *const d;
 };
 
 }

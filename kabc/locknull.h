@@ -21,9 +21,8 @@
 #ifndef KABC_LOCKNULL_H
 #define KABC_LOCKNULL_H
 
-#include <QtCore/QString>
-
 #include "lock.h"
+#include <QtCore/QString>
 
 namespace KABC {
 
@@ -44,7 +43,7 @@ class KABC_EXPORT LockNull : public Lock
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

@@ -21,10 +21,9 @@
 #ifndef KABC_VCARDCONVERTER_H
 #define KABC_VCARDCONVERTER_H
 
-#include <QtCore/QString>
-
-#include "addressee.h"
 #include "kabc_export.h"
+#include "addressee.h"
+#include <QtCore/QString>
 
 namespace KABC {
 

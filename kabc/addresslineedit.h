@@ -23,11 +23,9 @@
 #define KABC_ADDRESSLINEEDIT_H
 
 #include "kabc_export.h"
-
-#include <QtCore/QObject>
-
 #include <kcompletion.h>
 #include <klineedit.h>
+#include <QtCore/QObject>
 
 class KConfig;
 
@@ -49,14 +47,14 @@ class KABC_EXPORT AddressLineEdit : public KLineEdit
   Q_OBJECT
 
   public:
-    explicit AddressLineEdit(QWidget* parent, bool useCompletion = true);
+    explicit AddressLineEdit( QWidget *parent, bool useCompletion = true );
     virtual ~AddressLineEdit();
 
     /**
      * Reimplented for internal reasons.
      * @ see KLineEdit::setFont()
      */
-    virtual void setFont( const QFont& );
+    virtual void setFont( const QFont &font );
 
     static KConfig *config();
 
@@ -77,20 +75,20 @@ class KABC_EXPORT AddressLineEdit : public KLineEdit
      * Use addAddress() to add addresses.
      */
     virtual void loadAddresses();
-    void addAddress( const QString& );
-    virtual void keyPressEvent( QKeyEvent* );
-    virtual void dropEvent( QDropEvent* );
+    void addAddress( const QString &addr );
+    virtual void keyPressEvent( QKeyEvent *e );
+    virtual void dropEvent( QDropEvent *e );
     virtual void paste();
-    virtual void insert( const QString& );
-    virtual void mouseReleaseEvent( QMouseEvent* );
+    virtual void insert( const QString &addr );
+    virtual void mouseReleaseEvent( QMouseEvent *e );
     void doCompletion( bool );
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 
     Q_PRIVATE_SLOT( d, void slotCompletion() )
-    Q_PRIVATE_SLOT( d, void slotPopupCompletion( const QString& ) )
+    Q_PRIVATE_SLOT( d, void slotPopupCompletion( const QString &completion ) )
 };
 
 }

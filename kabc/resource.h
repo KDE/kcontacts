@@ -21,10 +21,9 @@
 #ifndef KABC_RESOURCE_H
 #define KABC_RESOURCE_H
 
-#include "kresources/resource.h"
-
 #include "addressbook.h"
 #include "plugin.h"
+#include "kresources/resource.h"
 
 namespace KABC {
 

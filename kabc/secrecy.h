@@ -21,10 +21,9 @@
 #ifndef KABC_SECRECY_H
 #define KABC_SECRECY_H
 
+#include "kabc_export.h"
 #include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
-
-#include "kabc_export.h"
 
 namespace KABC {
 

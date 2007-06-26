@@ -21,10 +21,9 @@
 #ifndef KABC_LOCK_H
 #define KABC_LOCK_H
 
+#include "kabc_export.h"
 #include <QtCore/QString>
 #include <QtCore/QObject>
-
-#include "kabc_export.h"
 
 namespace KABC {
 
@@ -74,7 +73,7 @@ class KABC_EXPORT Lock : public QObject
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

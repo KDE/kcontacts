@@ -22,10 +22,9 @@
 #ifndef KABC_ADDRESSEELIST_H
 #define KABC_ADDRESSEELIST_H
 
+#include "kabc_export.h"
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QList>
-
-#include "kabc_export.h"
 
 namespace KABC {
 

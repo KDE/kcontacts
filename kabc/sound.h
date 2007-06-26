@@ -21,10 +21,9 @@
 #ifndef KABC_SOUND_H
 #define KABC_SOUND_H
 
+#include "kabc_export.h"
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
-
-#include "kabc_export.h"
 
 namespace KABC {
 
@@ -52,7 +51,8 @@ namespace KABC {
  *    }
  *  \code
  *
- *  Unfortunetly KAudioPlayer::play is ASync, so to delete the temporary file, the best you can really do is set a timer.
+ *  Unfortunately, KAudioPlayer::play is ASync, so to delete the temporary file
+ *  the best you can really do is set a timer.
  *
  */
 class KABC_EXPORT Sound
@@ -91,10 +91,10 @@ class KABC_EXPORT Sound
      */
     ~Sound();
 
-    Sound& operator=( const Sound &other );
+    Sound &operator=( const Sound &other );
 
-    bool operator==( const Sound & ) const;
-    bool operator!=( const Sound & ) const;
+    bool operator==( const Sound &other ) const;
+    bool operator!=( const Sound &other ) const;
 
     /**
      * Sets a URL for the location of the sound file. When using this

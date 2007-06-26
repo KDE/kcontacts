@@ -64,7 +64,7 @@ class AddressLineEdit::Private
     QStringList removeMailDupes( const QStringList& adrs );
 
     void slotCompletion() { mParent->doCompletion( false ); }
-    void slotPopupCompletion( const QString& );
+    void slotPopupCompletion( const QString &completion );
 
     AddressLineEdit *mParent;
     QString mPreviousAddresses;
@@ -179,7 +179,7 @@ QStringList AddressLineEdit::Private::removeMailDupes( const QStringList& addrs 
   return src;
 }
 
-void AddressLineEdit::Private::slotPopupCompletion( const QString& completion )
+void AddressLineEdit::Private::slotPopupCompletion( const QString &completion )
 {
   mParent->setText( mPreviousAddresses + completion );
   mParent->cursorAtEnd();

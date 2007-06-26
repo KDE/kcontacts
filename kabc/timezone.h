@@ -21,10 +21,9 @@
 #ifndef KABC_TIMEZONE_H
 #define KABC_TIMEZONE_H
 
+#include "kabc_export.h"
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
-
-#include "kabc_export.h"
 
 namespace KABC {
 

@@ -21,13 +21,13 @@
 #ifndef KABC_ADDRESSBOOK_H
 #define KABC_ADDRESSBOOK_H
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include "addressee.h"
+#include "field.h"
 
 #include "kresources/manager.h"
 
-#include "addressee.h"
-#include "field.h"
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 namespace KABC {
 
