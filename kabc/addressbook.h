@@ -56,7 +56,7 @@ class KABC_EXPORT AddressBook : public QObject
 
       This class provides an iterator for address book entries.
      */
-    class KABC_EXPORT Iterator
+    class KABC_EXPORT Iterator  //krazy:exclude=dpointer
     {
       public:
         /**
@@ -158,7 +158,7 @@ class KABC_EXPORT AddressBook : public QObject
 
       This class provides a const iterator for address book entries.
      */
-    class KABC_EXPORT ConstIterator
+    class KABC_EXPORT ConstIterator //krazy:exclude=dpointer
     {
       public:
         /**
