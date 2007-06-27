@@ -63,10 +63,11 @@ static int findBalancedBracket( const QString &tsection, int pos )
     if ( ')' == tsection[i] && 0 == balancecounter ) {
       // found end of brackets
       return i;
-    } else
-    if ( '(' == tsection[i] ) {
-      // nested brackets
-      balancecounter++;
+    } else {
+      if ( '(' == tsection[i] ) {
+        // nested brackets
+        balancecounter++;
+      }
     }
   }
   return -1;
@@ -79,7 +80,8 @@ static int findBalancedBracket( const QString &tsection, int pos )
   @return           true if at least one tag evaluated positively, else false
 */
 static bool parseAddressTemplateSection( const QString &tsection, QString &result,
-                                         const QString &realName, const QString &orgaName, const KABC::Address &address )
+                                         const QString &realName, const QString &orgaName,
+                                         const KABC::Address &address )
 {
   // This method first parses and substitutes any bracketed sections and
   // after that replaces any tags with their values. If a bracketed section
@@ -130,8 +132,8 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
   // The following macro needs QString for R_FIELD
   // It substitutes !_P_! for empty fields so conditional tags work later
 #define REPLTAG(R_TAG,R_FIELD) \
-  if ( result.indexOf(R_TAG, false) != -1 ) { \
-    QString rpl = R_FIELD.isEmpty() ? QString("!_P_!") : R_FIELD; \
+  if ( result.indexOf( R_TAG, false ) != -1 ) { \
+    QString rpl = R_FIELD.isEmpty() ? QString( "!_P_!" ) : R_FIELD; \
     result.replace( R_TAG, rpl ); \
     if ( !R_FIELD.isEmpty() ) { \
       ret = true; \
@@ -243,26 +245,47 @@ Address::~Address()
 {
 }
 
-Address& Address::operator=( const Address &other )
+Address &Address::operator=( const Address &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
 
 bool Address::operator==( const Address &other ) const
 {
-  if ( d->mId != other.d->mId ) return false;
-  if ( d->mType != other.d->mType ) return false;
-  if ( d->mPostOfficeBox != other.d->mPostOfficeBox ) return false;
-  if ( d->mExtended != other.d->mExtended ) return false;
-  if ( d->mStreet != other.d->mStreet ) return false;
-  if ( d->mLocality != other.d->mLocality ) return false;
-  if ( d->mRegion != other.d->mRegion ) return false;
-  if ( d->mPostalCode != other.d->mPostalCode ) return false;
-  if ( d->mCountry != other.d->mCountry ) return false;
-  if ( d->mLabel != other.d->mLabel ) return false;
+  if ( d->mId != other.d->mId ) {
+    return false;
+  }
+  if ( d->mType != other.d->mType ) {
+    return false;
+  }
+  if ( d->mPostOfficeBox != other.d->mPostOfficeBox ) {
+    return false;
+  }
+  if ( d->mExtended != other.d->mExtended ) {
+    return false;
+  }
+  if ( d->mStreet != other.d->mStreet ) {
+    return false;
+  }
+  if ( d->mLocality != other.d->mLocality ) {
+    return false;
+  }
+  if ( d->mRegion != other.d->mRegion ) {
+    return false;
+  }
+  if ( d->mPostalCode != other.d->mPostalCode ) {
+    return false;
+  }
+  if ( d->mCountry != other.d->mCountry ) {
+    return false;
+  }
+  if ( d->mLabel != other.d->mLabel ) {
+    return false;
+  }
 
   return true;
 }
@@ -315,8 +338,9 @@ QString Address::typeLabel() const
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
       label.append( ( first ? "" : "/" ) + typeLabel( *it ) );
-      if ( first )
+      if ( first ) {
         first = false;
+      }
     }
   }
 
@@ -336,9 +360,8 @@ QString Address::postOfficeBox() const
 
 QString Address::postOfficeBoxLabel()
 {
-  return i18n("Post Office Box");
+  return i18n( "Post Office Box" );
 }
-
 
 void Address::setExtended( const QString &extended )
 {
@@ -353,9 +376,8 @@ QString Address::extended() const
 
 QString Address::extendedLabel()
 {
-  return i18n("Extended Address Information");
+  return i18n( "Extended Address Information" );
 }
-
 
 void Address::setStreet( const QString &street )
 {
@@ -370,9 +392,8 @@ QString Address::street() const
 
 QString Address::streetLabel()
 {
-  return i18n("Street");
+  return i18n( "Street" );
 }
-
 
 void Address::setLocality( const QString &locality )
 {
@@ -387,9 +408,8 @@ QString Address::locality() const
 
 QString Address::localityLabel()
 {
-  return i18n("Locality");
+  return i18n( "Locality" );
 }
-
 
 void Address::setRegion( const QString &region )
 {
@@ -404,9 +424,8 @@ QString Address::region() const
 
 QString Address::regionLabel()
 {
-  return i18n("Region");
+  return i18n( "Region" );
 }
-
 
 void Address::setPostalCode( const QString &postalCode )
 {
@@ -421,9 +440,8 @@ QString Address::postalCode() const
 
 QString Address::postalCodeLabel()
 {
-  return i18n("Postal Code");
+  return i18n( "Postal Code" );
 }
-
 
 void Address::setCountry( const QString &country )
 {
@@ -438,9 +456,8 @@ QString Address::country() const
 
 QString Address::countryLabel()
 {
-  return i18n("Country");
+  return i18n( "Country" );
 }
-
 
 void Address::setLabel( const QString &label )
 {
@@ -455,48 +472,50 @@ QString Address::label() const
 
 QString Address::labelLabel()
 {
-  return i18n("Delivery Label");
+  return i18n( "Delivery Label" );
 }
 
 Address::TypeList Address::typeList()
 {
   static TypeList list;
 
-  if ( list.isEmpty() )
+  if ( list.isEmpty() ) {
     list << Dom << Intl << Postal << Parcel << Home << Work << Pref;
+  }
 
   return list;
 }
 
 QString Address::typeLabel( Type type )
 {
-  if ( type & Pref )
+  if ( type & Pref ) {
     return i18nc( "Preferred address", "Preferred" );
+  }
 
   switch ( type ) {
     case Dom:
-      return i18n("Domestic");
+      return i18n( "Domestic" );
       break;
     case Intl:
-      return i18n("International");
+      return i18n( "International" );
       break;
     case Postal:
-      return i18n("Postal");
+      return i18n( "Postal" );
       break;
     case Parcel:
-      return i18n("Parcel");
+      return i18n( "Parcel" );
       break;
     case Home:
-      return i18nc("Home Address", "Home");
+      return i18nc( "Home Address", "Home" );
       break;
     case Work:
-      return i18nc("Work Address", "Work");
+      return i18nc( "Work Address", "Work" );
       break;
     case Pref:
-      return i18n("Preferred Address");
+      return i18n( "Preferred Address" );
       break;
     default:
-      return i18n("Other");
+      return i18n( "Other" );
       break;
   }
 }
@@ -522,7 +541,6 @@ QString Address::toString() const
   return str;
 }
 
-
 QString Address::formattedAddress( const QString &realName,
                                    const QString &orgaName ) const
 {
@@ -538,16 +556,17 @@ QString Address::formattedAddress( const QString &realName,
     ciso = KGlobal::locale()->country();
   }
   KConfig entry( KStandardDirs::locate( "locale",
-        QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ));
+        QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ) );
 
-  KConfigGroup group = entry.group("KCM Locale");
+  KConfigGroup group = entry.group( "KCM Locale" );
   // decide whether this needs special business address formatting
   if ( orgaName.isEmpty() ) {
     addrTemplate = group.readEntry( "AddressFormat" );
   } else {
     addrTemplate = group.readEntry( "BusinessAddressFormat" );
-    if ( addrTemplate.isEmpty() )
+    if ( addrTemplate.isEmpty() ) {
       addrTemplate = group.readEntry( "AddressFormat" );
+    }
   }
 
   // in the case there's no format found at all, default to what we've always
@@ -565,9 +584,10 @@ QString Address::formattedAddress( const QString &realName,
   // now add the country line if needed (formatting this time according to
   // the rules of our own system country )
   if ( !country().isEmpty() ) {
-    KConfig entry( KStandardDirs::locate( "locale", QString( "l10n/" )
-          + KGlobal::locale()->country() + QString( "/entry.desktop" ) ) );
-    KConfigGroup group = entry.group("KCM Locale" );
+    KConfig entry( KStandardDirs::locate( "locale", QString( "l10n/" ) +
+                                          KGlobal::locale()->country() +
+                                          QString( "/entry.desktop" ) ) );
+    KConfigGroup group = entry.group( "KCM Locale" );
     QString cpos = group.readEntry( "AddressCountryPosition" );
     if ( "BELOW" == cpos || cpos.isEmpty() ) {
       ret = ret + "\n\n" + country().toUpper();
@@ -589,12 +609,13 @@ QString Address::countryToISO( const QString &cname )
   // iso codes, storing caching things in a QMap for faster future
   // access.
   typedef QMap<QString, QString> stringMap;
-  K_GLOBAL_STATIC(stringMap, sISOMap)
+  K_GLOBAL_STATIC( stringMap, sISOMap )
 
   QMap<QString, QString>::ConstIterator it;
   it = sISOMap->find( cname );
-  if ( it != sISOMap->end() )
+  if ( it != sISOMap->end() ) {
     return it.value();
+  }
 
   QString mapfile = KGlobal::dirs()->findResource( "data",
           QLatin1String( "kabc/countrytransl.map" ) );
@@ -623,8 +644,9 @@ QString Address::countryToISO( const QString &cname )
 QString Address::ISOtoCountry( const QString &ISOname )
 {
   // get country name from ISO country code (e.g. "no" -> i18n("Norway"))
-  if ( ISOname.simplified().isEmpty() )
+  if ( ISOname.simplified().isEmpty() ) {
     return QString();
+  }
 
   QString mapfile = KGlobal::dirs()->findResource( "data",
           QLatin1String( "kabc/countrytransl.map" ) );
@@ -636,7 +658,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
     QString strbuf = s.readLine();
     int pos;
     while ( !strbuf.isEmpty() ) {
-      if ( (pos = strbuf.indexOf( searchStr )) != -1 ) {
+      if ( ( pos = strbuf.indexOf( searchStr ) ) != -1 ) {
         file.close();
         return i18n( strbuf.left( pos ).toUtf8() );
       }
@@ -650,18 +672,19 @@ QString Address::ISOtoCountry( const QString &ISOname )
 
 QDataStream &KABC::operator<<( QDataStream &s, const Address &addr )
 {
-  return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox <<
-              addr.d->mExtended << addr.d->mStreet << addr.d->mLocality <<
-              addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry <<
-              addr.d->mLabel << addr.d->mEmpty;
+  return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox
+           << addr.d->mExtended << addr.d->mStreet << addr.d->mLocality
+           << addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry
+           << addr.d->mLabel << addr.d->mEmpty;
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Address &addr )
 {
   uint type;
-  s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended >>
-       addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion >>
-       addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel >> addr.d->mEmpty;
+  s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended
+    >> addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion
+    >> addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel
+    >> addr.d->mEmpty;
 
   addr.d->mType = Address::Type( type );
 

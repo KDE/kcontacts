@@ -31,7 +31,7 @@ extern "C"
 {
   KDE_EXPORT void *init_kabc_ldapkio()
   {
-    KGlobal::locale()->insertCatalog("kabc_ldapkio");
+    KGlobal::locale()->insertCatalog( "kabc_ldapkio" );
     return new KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>();
   }
 }

@@ -337,7 +337,7 @@ Addressee::List Resource::findByCategory( const QString &category )
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    if ( (*it).hasCategory( category) ) {
+    if ( (*it).hasCategory( category ) ) {
       results.append( *it );
     }
   }
@@ -354,7 +354,7 @@ bool Resource::asyncLoad()
 {
   bool ok = load();
   if ( !ok ) {
-    emit loadingError( this, i18n( "Loading resource '%1' failed." , resourceName() ) );
+    emit loadingError( this, i18n( "Loading resource '%1' failed.", resourceName() ) );
   } else {
     emit loadingFinished( this );
   }
@@ -366,7 +366,7 @@ bool Resource::asyncSave( Ticket *ticket )
 {
   bool ok = save( ticket );
   if ( !ok ) {
-    emit savingError( this, i18n( "Saving resource '%1' failed." , resourceName() ) );
+    emit savingError( this, i18n( "Saving resource '%1' failed.", resourceName() ) );
   } else {
     emit savingFinished( this );
   }

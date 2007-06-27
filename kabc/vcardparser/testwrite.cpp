@@ -62,7 +62,7 @@ int main( int argc, char **argv )
   addressee.setRevision( QDateTime::currentDateTime() );
   addressee.setSortString( "koenig" );
   addressee.setUrl( KUrl( "http://wgess16.dyndns.org") );
-  addressee.setSecrecy(  KABC::Secrecy( KABC::Secrecy::Confidential ) );
+  addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Confidential ) );
 
   addressee.insertEmail( "tokoe@kde.org", true );
   addressee.insertEmail( "tokoe82@yahoo.de", true );

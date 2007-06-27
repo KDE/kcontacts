@@ -35,9 +35,10 @@ Addressee vcard1()
   addr.setUrl( KUrl( "http://home.earthlink.net/~fdawson") );
   addr.insertEmail( "fdawson@earthlink.net" );
   addr.insertEmail( "Frank_Dawson@Lotus.com", true );
-  addr.insertPhoneNumber( PhoneNumber("+1-919-676-9515",PhoneNumber::Voice|PhoneNumber::Msg
-                                      |PhoneNumber::Work ) );
-  addr.insertPhoneNumber( PhoneNumber("+1-919-676-9564",PhoneNumber::Fax |PhoneNumber::Work ));
+  addr.insertPhoneNumber( PhoneNumber( "+1-919-676-9515",
+                                       PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
+  addr.insertPhoneNumber( PhoneNumber( "+1-919-676-9564",
+                                       PhoneNumber::Fax |PhoneNumber::Work ) );
   Address a( Address::Work | Address::Postal | Address::Parcel );
   a.setStreet( "6544 Battleford Drive" );
   a.setLocality( "Raleigh" );
@@ -55,9 +56,10 @@ Addressee vcard2()
   addr.setName( "Tim Howes" );
   addr.setOrganization( "Netscape Communications Corp." );
   addr.insertEmail( "howes@netscape.com" );
-  addr.insertPhoneNumber( PhoneNumber("+1-415-937-3419",PhoneNumber::Voice|PhoneNumber::Msg
-                                      |PhoneNumber::Work) );
-  addr.insertPhoneNumber( PhoneNumber("+1-415-528-4164",PhoneNumber::Fax |PhoneNumber::Work) );
+  addr.insertPhoneNumber( PhoneNumber( "+1-415-937-3419",
+                                       PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
+  addr.insertPhoneNumber( PhoneNumber( "+1-415-528-4164",
+                                       PhoneNumber::Fax|PhoneNumber::Work ) );
   Address a( Address::Work );
   a.setStreet( "501 E. Middlefield Rd." );
   a.setLocality( "Mountain View" );
@@ -79,8 +81,7 @@ Addressee vcard3()
   return addr;
 }
 
-
-QByteArray vcardAsText( const QString& location )
+QByteArray vcardAsText( const QString &location )
 {
   QByteArray text;
 

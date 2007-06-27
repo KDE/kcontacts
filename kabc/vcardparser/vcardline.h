@@ -37,16 +37,16 @@ class VCardLine
     VCardLine();
     VCardLine( const QString &identifier );
     VCardLine( const QString &identifier, const QVariant &value );
-    VCardLine( const VCardLine& );
+    VCardLine( const VCardLine &line );
 
     ~VCardLine();
 
-    VCardLine& operator=( const VCardLine& );
+    VCardLine &operator=( const VCardLine &line );
 
     /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
      */
-    void setIdentifier( const QString& identifier );
+    void setIdentifier( const QString &identifier );
 
     /**
      * Returns the identifier of this line.
@@ -56,7 +56,7 @@ class VCardLine
     /**
      * Sets the value of of this line.
      */
-    void setValue( const QVariant& value );
+    void setValue( const QVariant &value );
 
     /**
      * Returns the value of this line.
@@ -66,7 +66,7 @@ class VCardLine
     /**
      * Sets the group the line belongs to.
      */
-    void setGroup( const QString& group );
+    void setGroup( const QString &group );
 
     /**
      * Returns the group the line belongs to.
@@ -86,19 +86,19 @@ class VCardLine
     /**
      * Add a new parameter to the line.
      */
-    void addParameter( const QString& param, const QString& value );
+    void addParameter( const QString &param, const QString &value );
 
     /**
      * Returns the values of a special parameter.
      * You can get a list of all parameters with paramList().
      */
-    QStringList parameters( const QString& param ) const;
+    QStringList parameters( const QString &param ) const;
 
     /**
      * Returns only the first value of a special parameter.
      * You can get a list of all parameters with paramList().
      */
-    QString parameter( const QString& param ) const;
+    QString parameter( const QString &param ) const;
 
   private:
     ParamMap mParamMap;

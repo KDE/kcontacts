@@ -65,7 +65,7 @@ bool VCardFormat::loadAll( AddressBook*, Resource *resource, QFile *file )
   Addressee::List l = converter.parseVCards( data );
 
   Addressee::List::iterator itr;
-  for ( itr = l.begin(); itr != l.end(); ++itr) {
+  for ( itr = l.begin(); itr != l.end(); ++itr ) {
     Addressee addressee = *itr;
     addressee.setResource( resource );
     addressee.setChanged( false );
@@ -77,7 +77,7 @@ bool VCardFormat::loadAll( AddressBook*, Resource *resource, QFile *file )
 
 void VCardFormat::save( const Addressee &addressee, QFile *file )
 {
-  VCardConverter converter ;
+  VCardConverter converter;
   Addressee::List vcardlist;
 
   vcardlist.append( addressee );

@@ -40,7 +40,7 @@ Plugin::~Plugin()
   delete d;
 }
 
-void Plugin::setType( const QString& type )
+void Plugin::setType( const QString &type )
 {
   d->mType = type;
 }
@@ -50,7 +50,7 @@ QString Plugin::type() const
   return d->mType;
 }
 
-void Plugin::setNameLabel( const QString& label )
+void Plugin::setNameLabel( const QString &label )
 {
   d->mNameLabel = label;
 }
@@ -60,7 +60,7 @@ QString Plugin::nameLabel() const
   return d->mNameLabel;
 }
 
-void Plugin::setDescriptionLabel( const QString& label )
+void Plugin::setDescriptionLabel( const QString &label )
 {
   d->mDescriptionLabel = label;
 }

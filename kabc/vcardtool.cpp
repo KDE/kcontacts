@@ -34,7 +34,7 @@ static bool needsEncoding( const QString &value )
   uint length = value.length();
   for ( uint i = 0; i < length; ++i ) {
     char c = value.at( i ).toLatin1();
-    if ( (c < 33 || c > 126) && c != ' ' && c != '=' ) {
+    if ( ( c < 33 || c > 126 ) && c != ' ' && c != '=' ) {
       return true;
     }
   }
@@ -321,10 +321,10 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // VERSION
     if ( version == VCard::v2_1 ) {
-      card.addLine( VCardLine( "VERSION", QString::fromLatin1("2.1") ) );
+      card.addLine( VCardLine( "VERSION", QString::fromLatin1( "2.1" ) ) );
     }
     if ( version == VCard::v3_0 ) {
-      card.addLine( VCardLine( "VERSION", QString::fromLatin1("3.0") ) );
+      card.addLine( VCardLine( "VERSION", QString::fromLatin1( "3.0" ) ) );
     }
 
     // X-
@@ -590,7 +590,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           TimeZone tz;
           const QString date = (*lineIt).value().toString();
 
-          int hours = date.mid( 1, 2).toInt();
+          int hours = date.mid( 1, 2 ).toInt();
           int minutes = date.mid( 4, 2 ).toInt();
           int offset = ( hours * 60 ) + minutes;
           offset = offset * ( date[ 0 ] == '+' ? 1 : -1 );
@@ -823,11 +823,11 @@ VCardLine VCardTool::createSecrecy( const Secrecy &secrecy ) const
   int type = secrecy.type();
 
   if ( type == Secrecy::Public ) {
-    line.setValue( QString::fromLatin1("PUBLIC") );
+    line.setValue( QString::fromLatin1( "PUBLIC" ) );
   } else if ( type == Secrecy::Private ) {
-    line.setValue( QString::fromLatin1("PRIVATE") );
+    line.setValue( QString::fromLatin1( "PRIVATE" ) );
   } else if ( type == Secrecy::Confidential ) {
-    line.setValue( QString::fromLatin1("CONFIDENTIAL") );
+    line.setValue( QString::fromLatin1( "CONFIDENTIAL" ) );
   }
 
   return line;

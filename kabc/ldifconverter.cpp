@@ -80,14 +80,14 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   }
 
   QTextStream t( &str, QIODevice::WriteOnly|QIODevice::Append );
-  t.setCodec( QTextCodec::codecForName("UTF-8") );
+  t.setCodec( QTextCodec::codecForName( "UTF-8" ) );
 
   const Address homeAddr = addr.address( Address::Home );
   const Address workAddr = addr.address( Address::Work );
 
-  ldif_out( t, "dn", QString( "cn=%1,mail=%2" )
-            .arg( addr.formattedName().simplified() )
-            .arg( addr.preferredEmail() ) );
+  ldif_out( t, "dn", QString( "cn=%1,mail=%2" ).
+            arg( addr.formattedName().simplified() ).
+            arg( addr.preferredEmail() ) );
   ldif_out( t, "givenname", addr.givenName() );
   ldif_out( t, "sn", addr.familyName() );
   ldif_out( t, "cn", addr.formattedName().simplified() );
@@ -113,7 +113,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "postalcode", workAddr.postalCode() );
   ldif_out( t, "postofficebox", workAddr.postOfficeBox() );
 
-  QStringList streets = homeAddr.street().split('\n');
+  QStringList streets = homeAddr.street().split( '\n' );
   if ( streets.count() > 0 ) {
     ldif_out( t, "homepostaladdress", streets[ 0 ] ); // Netscape 7
   }
@@ -123,20 +123,20 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "mozillahomelocalityname", homeAddr.locality() ); // Netscape 7
   ldif_out( t, "mozillahomestate", homeAddr.region() );
   ldif_out( t, "mozillahomepostalcode", homeAddr.postalCode() );
-  ldif_out( t, "mozillahomecountryname", Address::ISOtoCountry(homeAddr.country()) );
+  ldif_out( t, "mozillahomecountryname", Address::ISOtoCountry( homeAddr.country() ) );
   ldif_out( t, "locality", workAddr.locality() );
   ldif_out( t, "streetaddress", workAddr.street() ); // Netscape 4.x
 
-  streets = workAddr.street().split('\n');
+  streets = workAddr.street().split( '\n' );
   if ( streets.count() > 0 ) {
     ldif_out( t, "postaladdress", streets[ 0 ] );
   }
   if ( streets.count() > 1 ) {
     ldif_out( t, "mozillapostaladdress2", streets[ 1 ] );
   }
-  ldif_out( t, "countryname", Address::ISOtoCountry(workAddr.country()) );
+  ldif_out( t, "countryname", Address::ISOtoCountry( workAddr.country() ) );
   ldif_out( t, "l", workAddr.locality() );
-  ldif_out( t, "c", Address::ISOtoCountry(workAddr.country()) );
+  ldif_out( t, "c", Address::ISOtoCountry( workAddr.country() ) );
   ldif_out( t, "st", workAddr.region() );
 
   ldif_out( t, "title", addr.title() );
@@ -145,12 +145,12 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "o", addr.organization() );
   ldif_out( t, "organization", addr.organization() );
   ldif_out( t, "organizationname", addr.organization() );
-  ldif_out( t, "department", addr.custom("KADDRESSBOOK", "X-Department") );
+  ldif_out( t, "department", addr.custom( "KADDRESSBOOK", "X-Department" ) );
   ldif_out( t, "workurl", addr.url().prettyUrl() );
   ldif_out( t, "homeurl", addr.url().prettyUrl() );
   ldif_out( t, "description", addr.note() );
   if ( addr.revision().isValid() ) {
-    ldif_out(t, "modifytimestamp", dateToVCardString( addr.revision()) );
+    ldif_out( t, "modifytimestamp", dateToVCardString( addr.revision() ) );
   }
 
   t << "objectclass: top\n";
@@ -255,8 +255,8 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
     return true;
   }
 
-  if ( fieldname == QLatin1String( "xmozillanickname") ||
-       fieldname == QLatin1String( "nickname") ) {
+  if ( fieldname == QLatin1String( "xmozillanickname" ) ||
+       fieldname == QLatin1String( "nickname" ) ) {
     a.setNickName( value );
     return true;
   }
@@ -318,11 +318,11 @@ addComment:
 
   if ( fieldname == QLatin1String( "homeurl" ) ||
        fieldname == QLatin1String( "workurl" ) ) {
-    if (a.url().isEmpty()) {
+    if ( a.url().isEmpty() ) {
       a.setUrl( KUrl( value ) );
       return true;
     }
-    if ( a.url().prettyUrl() == KUrl(value).prettyUrl() ) {
+    if ( a.url().prettyUrl() == KUrl( value ).prettyUrl() ) {
       return true;
     }
     // TODO: current version of kabc only supports one URL.
@@ -465,7 +465,7 @@ addComment:
 
   if ( fieldname == QLatin1String( "member" ) ) {
     // this is a mozilla list member (cn=xxx, mail=yyy)
-    QStringList list = value.split(',');
+    QStringList list = value.split( ',' );
     QString name, email;
 
     QStringList::Iterator it;
@@ -500,8 +500,8 @@ addComment:
     return true;
   }
 
-  kWarning() << QString("LDIFConverter: Unknown field for '%1': '%2=%3'\n")
-    .arg(a.formattedName()).arg(fieldname).arg(value);
+  kWarning() << QString( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
+    arg( a.formattedName() ).arg( fieldname ).arg( value );
 
   return true;
 }

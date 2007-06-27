@@ -43,7 +43,7 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
                                       QWidget *parent )
   : KDialog( parent ), d( new Private )
 {
-  setCaption( i18n("Select Email Address") );
+  setCaption( i18n( "Select Email Address" ) );
   setButtons( Ok );
   setDefaultButton( Ok );
 
@@ -51,7 +51,7 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
   setMainWidget( topFrame );
 
   QBoxLayout *topLayout = new QVBoxLayout( topFrame );
-  QGroupBox *box = new QGroupBox( i18n("Email Addresses") );
+  QGroupBox *box = new QGroupBox( i18n( "Email Addresses" ) );
   d->mButtonGroup = new QButtonGroup( box );
   d->mButtonGroup->setExclusive( true );
   topLayout->addWidget( box );
@@ -105,10 +105,10 @@ class EditEntryItem : public QTreeWidgetItem
       setText( 0, addressee.realName() );
       if ( email.isEmpty() ) {
         setText( 1, addressee.preferredEmail() );
-        setText( 2, i18n("Yes") );
+        setText( 2, i18n( "Yes" ) );
       } else {
         setText( 1, email );
-        setText( 2, i18n("No") );
+        setText( 2, i18n( "No" ) );
       }
     }
 

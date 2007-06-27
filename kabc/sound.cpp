@@ -74,24 +74,29 @@ Sound::~Sound()
 {
 }
 
-Sound& Sound::operator=( const Sound &other )
+Sound &Sound::operator=( const Sound &other )
 {
-  if ( this != &other )
+  if ( this != &other ) {
     d = other.d;
+  }
 
   return *this;
 }
 
 bool Sound::operator==( const Sound &other ) const
 {
-  if ( d->mIntern != other.d->mIntern ) return false;
+  if ( d->mIntern != other.d->mIntern ) {
+    return false;
+  }
 
   if ( d->mIntern ) {
-    if ( d->mData != other.d->mData )
+    if ( d->mData != other.d->mData ) {
       return false;
+    }
   } else {
-    if ( d->mUrl != other.d->mUrl )
+    if ( d->mUrl != other.d->mUrl ) {
       return false;
+    }
   }
 
   return true;
@@ -121,8 +126,9 @@ bool Sound::isIntern() const
 
 bool Sound::isEmpty() const
 {
-  return ( d->mIntern && d->mData.isEmpty() ||
-           !d->mIntern && d->mUrl.isEmpty() );
+  return
+    d->mIntern && d->mData.isEmpty() ||
+    !d->mIntern && d->mUrl.isEmpty();
 }
 
 QString Sound::url() const

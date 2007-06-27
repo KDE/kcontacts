@@ -180,55 +180,55 @@ QString PhoneNumber::typeLabel( Type type )
 
   switch ( type ) {
     case Home:
-      return i18nc("Home phone", "Home");
+      return i18nc( "Home phone", "Home" );
       break;
     case Work:
-      return i18nc("Work phone", "Work");
+      return i18nc( "Work phone", "Work" );
       break;
     case Msg:
-      return i18n("Messenger");
+      return i18n( "Messenger" );
       break;
     case Pref:
-      return i18n("Preferred Number");
+      return i18n( "Preferred Number" );
       break;
     case Voice:
-      return i18n("Voice");
+      return i18n( "Voice" );
       break;
     case Fax:
-      return i18n("Fax");
+      return i18n( "Fax" );
       break;
     case Cell:
-      return i18nc("Mobile Phone", "Mobile" );
+      return i18nc( "Mobile Phone", "Mobile" );
       break;
     case Video:
-      return i18n("Video");
+      return i18n( "Video" );
       break;
     case Bbs:
-      return i18n("Mailbox");
+      return i18n( "Mailbox" );
       break;
     case Modem:
-      return i18n("Modem");
+      return i18n( "Modem" );
       break;
     case Car:
-      return i18nc("Car Phone", "Car" );
+      return i18nc( "Car Phone", "Car" );
       break;
     case Isdn:
-      return i18n("ISDN");
+      return i18n( "ISDN" );
       break;
     case Pcs:
-      return i18n("PCS");
+      return i18n( "PCS" );
       break;
     case Pager:
-      return i18n("Pager");
+      return i18n( "Pager" );
       break;
     case Home + Fax:
-      return i18n("Home Fax");
+      return i18n( "Home Fax" );
       break;
     case Work + Fax:
-      return i18n("Work Fax");
+      return i18n( "Work Fax" );
       break;
     default:
-      return i18n("Other");
+      return i18n( "Other" );
   }
 }
 

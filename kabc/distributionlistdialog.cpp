@@ -43,7 +43,7 @@ DistributionListDialog::DistributionListDialog( AddressBook *addressBook, QWidge
   : KDialog( parent ), d( 0 )
 {
   setModal( true );
-  setCaption( i18n("Configure Distribution Lists") );
+  setCaption( i18n( "Configure Distribution Lists" ) );
   setButtons( Ok );
   setDefaultButton( Ok );
   showButtonSeparator( true );
@@ -68,7 +68,7 @@ class EmailSelector::Private
 EmailSelector::EmailSelector( const QStringList &emails, const QString &current, QWidget *parent )
   : KDialog( parent ), d( new Private )
 {
-  setCaption( i18n("Select Email Address") );
+  setCaption( i18n( "Select Email Address" ) );
   setButtons( Ok );
   setDefaultButton( Ok );
 
@@ -77,7 +77,7 @@ EmailSelector::EmailSelector( const QStringList &emails, const QString &current,
 
   QBoxLayout *topLayout = new QVBoxLayout( topFrame );
 
-  QGroupBox *box = new QGroupBox( i18n("Email Addresses") );
+  QGroupBox *box = new QGroupBox( i18n( "Email Addresses" ) );
   d->mButtonGroup = new QButtonGroup( box );
   topLayout->addWidget( box );
 
@@ -128,10 +128,10 @@ class EntryItem : public QTreeWidgetItem
       setText( 0, addressee.realName() );
       if ( email.isEmpty() ) {
         setText( 1, addressee.preferredEmail() );
-        setText( 2, i18n("Yes") );
+        setText( 2, i18n( "Yes" ) );
       } else {
         setText( 1, email );
-        setText( 2, i18n("No") );
+        setText( 2, i18n( "No" ) );
       }
     }
 
@@ -198,22 +198,22 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   QBoxLayout *topLayout = new QVBoxLayout( this );
   topLayout->setSpacing( KDialog::spacingHint() );
 
-  QBoxLayout *nameLayout = new QHBoxLayout() ;
+  QBoxLayout *nameLayout = new QHBoxLayout();
   topLayout->addLayout( topLayout );
 
   d->mNameCombo = new QComboBox( this );
   nameLayout->addWidget( d->mNameCombo );
   connect( d->mNameCombo, SIGNAL( activated( int ) ), SLOT( updateEntryView() ) );
 
-  d->mNewButton = new QPushButton( i18n("New List..."), this );
+  d->mNewButton = new QPushButton( i18n( "New List..." ), this );
   nameLayout->addWidget( d->mNewButton );
   connect( d->mNewButton, SIGNAL( clicked() ), SLOT( newList() ) );
 
-  d->mEditButton = new QPushButton( i18n("Rename List..."), this );
+  d->mEditButton = new QPushButton( i18n( "Rename List..." ), this );
   nameLayout->addWidget( d->mEditButton );
   connect( d->mEditButton, SIGNAL( clicked() ), SLOT( editList() ) );
 
-  d->mRemoveButton = new QPushButton( i18n("Remove List"), this );
+  d->mRemoveButton = new QPushButton( i18n( "Remove List" ), this );
   nameLayout->addWidget( d->mRemoveButton );
   connect( d->mRemoveButton, SIGNAL( clicked() ), SLOT( removeList() ) );
 
@@ -221,7 +221,7 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   topLayout->addLayout( gridLayout );
   gridLayout->setColumnStretch( 1, 1 );
 
-  QLabel *listLabel = new QLabel( i18n("Available addresses:"), this );
+  QLabel *listLabel = new QLabel( i18n( "Available addresses:" ), this );
   gridLayout->addWidget( listLabel, 0, 0 );
 
   d->mListLabel = new QLabel( this );
@@ -230,7 +230,7 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   d->mAddresseeView = new QTreeWidget( this );
   d->mAddresseeView->setColumnCount( 2 );
   QStringList labels;
-  labels << i18n("Name") << i18n("Preferred Email");
+  labels << i18n( "Name" ) << i18n( "Preferred Email" );
   d->mAddresseeView->setHeaderLabels( labels );
   gridLayout->addWidget( d->mAddresseeView, 1, 0 );
   connect( d->mAddresseeView, SIGNAL( itemSelectionChanged() ),
@@ -238,24 +238,24 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   connect( d->mAddresseeView, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
            SLOT( addEntry() ) );
 
-  d->mAddEntryButton = new QPushButton( i18n("Add Entry"), this );
+  d->mAddEntryButton = new QPushButton( i18n( "Add Entry" ), this );
   d->mAddEntryButton->setEnabled( false );
   gridLayout->addWidget( d->mAddEntryButton, 2, 0 );
   connect( d->mAddEntryButton, SIGNAL( clicked() ), SLOT( addEntry() ) );
 
   d->mEntryView = new QTreeWidget( this );
   QStringList entryLabels;
-  entryLabels << i18n("Name") << i18n("Email") << i18n("Use Preferred");
+  entryLabels << i18n( "Name" ) << i18n( "Email" ) << i18n( "Use Preferred" );
   d->mEntryView->setEnabled( false );
   gridLayout->addWidget( d->mEntryView, 1, 1, 1, 2 );
   connect( d->mEntryView, SIGNAL( itemSelectionChanged() ),
            SLOT( slotSelectionEntryViewChanged() ) );
 
-  d->mChangeEmailButton = new QPushButton( i18n("Change Email..."), this );
+  d->mChangeEmailButton = new QPushButton( i18n( "Change Email..." ), this );
   gridLayout->addWidget( d->mChangeEmailButton, 2, 1 );
   connect( d->mChangeEmailButton, SIGNAL( clicked() ), SLOT( changeEmail() ) );
 
-  d->mRemoveEntryButton = new QPushButton( i18n("Remove Entry"), this );
+  d->mRemoveEntryButton = new QPushButton( i18n( "Remove Entry" ), this );
   gridLayout->addWidget( d->mRemoveEntryButton, 2, 2 );
   connect( d->mRemoveEntryButton, SIGNAL( clicked() ), SLOT( removeEntry() ) );
 
@@ -326,7 +326,7 @@ void DistributionListEditorWidget::Private::editList()
 void DistributionListEditorWidget::Private::removeList()
 {
   int result = KMessageBox::warningContinueCancel( mParent,
-      i18n("Delete distribution list '%1'?" ,  mNameCombo->currentText() ),
+      i18n( "Delete distribution list '%1'?",  mNameCombo->currentText() ),
       QString(), KStandardGuiItem::del() );
 
   if ( result != KMessageBox::Continue ) {
@@ -406,9 +406,9 @@ void DistributionListEditorWidget::Private::changeEmail()
 void DistributionListEditorWidget::Private::updateEntryView()
 {
   if ( mNameCombo->currentText().isEmpty() ) {
-    mListLabel->setText( i18n("Selected addressees:") );
+    mListLabel->setText( i18n( "Selected addressees:" ) );
   } else {
-    mListLabel->setText( i18n("Selected addresses in '%1':",
+    mListLabel->setText( i18n( "Selected addresses in '%1':",
                            mNameCombo->currentText() ) );
   }
 
@@ -463,8 +463,8 @@ void DistributionListEditorWidget::Private::updateNameCombo()
 void DistributionListEditorWidget::Private::slotSelectionAddresseeViewChanged()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeView->selectedItems();
-  bool state = (selected.count() != 0 );
-  mAddEntryButton->setEnabled( state && !mNameCombo->currentText().isEmpty());
+  bool state = ( selected.count() != 0 );
+  mAddEntryButton->setEnabled( state && !mNameCombo->currentText().isEmpty() );
 }
 
 #include "distributionlistdialog.moc"

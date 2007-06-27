@@ -304,8 +304,9 @@ void ResourceFile::abortAsyncSaving()
   d->mIsSaving = false;
 }
 
-bool ResourceFile::save( Ticket * )
+bool ResourceFile::save( Ticket *ticket )
 {
+  Q_UNUSED( ticket );
   kDebug(5700) << "ResourceFile::save()" << endl;
 
   if ( d->mIsSaving ) {
@@ -314,8 +315,7 @@ bool ResourceFile::save( Ticket * )
 
   // create backup file
   QString extension = '_' + QString::number( QDate::currentDate().dayOfWeek() );
-  (void) KSaveFile::simpleBackupFile( mFileName, QString() /*directory*/,
-                                extension );
+  (void) KSaveFile::simpleBackupFile( mFileName, QString(), extension );
 
   mDirWatch.stopScan();
 

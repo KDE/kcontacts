@@ -39,7 +39,6 @@
 #include "distributionlist.h"
 #include "stdaddressbook.h"
 
-
 //=============================================================================
 //
 //   Class  AddressLineEdit
@@ -61,7 +60,7 @@ class AddressLineEdit::Private
 
     void init();
     QStringList addresses();
-    QStringList removeMailDupes( const QStringList& adrs );
+    QStringList removeMailDupes( const QStringList &adrs );
 
     void slotCompletion() { mParent->doCompletion( false ); }
     void slotPopupCompletion( const QString &completion );
@@ -74,7 +73,7 @@ class AddressLineEdit::Private
 
     static bool sAddressesDirty;
 };
-K_GLOBAL_STATIC(KCompletion, sCompletion)
+K_GLOBAL_STATIC( KCompletion, sCompletion )
 
 void AddressLineEdit::Private::init()
 {
@@ -130,21 +129,23 @@ QStringList AddressLineEdit::Private::addresses()
     for ( mit = emails.begin(); mit != emails.end(); ++mit ) {
       email = *mit;
       if ( !email.isEmpty() ) {
-        if ( n.isEmpty() || (email.indexOf( '<' ) != -1) )
+        if ( n.isEmpty() || ( email.indexOf( '<' ) != -1 ) ) {
           addr.clear();
-        else { /* do we really need quotes around this name ? */
-          if ( n.indexOf(needQuotes) != -1 )
+        } else { /* do we really need quotes around this name ? */
+          if ( n.indexOf( needQuotes ) != -1 ) {
             addr = '"' + n + endQuote;
-          else
+          } else {
             addr = n + space;
+          }
         }
 
-        if ( !addr.isEmpty() && (email.indexOf( '<' ) == -1)
-             && (email.indexOf( '>' ) == -1)
-             && (email.indexOf( ',' ) == -1) )
+        if ( !addr.isEmpty() && ( email.indexOf( '<' ) == -1 ) &&
+             ( email.indexOf( '>' ) == -1 ) &&
+             ( email.indexOf( ',' ) == -1 ) ) {
           addr += '<' + email + '>';
-        else
+        } else {
           addr += email;
+        }
         addr = addr.trimmed();
         result.append( addr );
       }
@@ -160,7 +161,7 @@ QStringList AddressLineEdit::Private::addresses()
   return result;
 }
 
-QStringList AddressLineEdit::Private::removeMailDupes( const QStringList& addrs )
+QStringList AddressLineEdit::Private::removeMailDupes( const QStringList &addrs )
 {
   QStringList src( addrs );
   qSort( src );
@@ -187,7 +188,7 @@ void AddressLineEdit::Private::slotPopupCompletion( const QString &completion )
 
 bool AddressLineEdit::Private::sAddressesDirty = false;
 
-AddressLineEdit::AddressLineEdit( QWidget* parent, bool useCompletion )
+AddressLineEdit::AddressLineEdit( QWidget *parent, bool useCompletion )
   : KLineEdit( parent ), d( new Private( this ) )
 {
   d->mUseCompletion = useCompletion;
@@ -196,10 +197,10 @@ AddressLineEdit::AddressLineEdit( QWidget* parent, bool useCompletion )
   // we set a dirty flag to reload the addresses upon the first completion.
   // The address completions are shared between all AddressLineEdits.
   // Is there a signal that tells us about addressbook updates?
-  if ( d->mUseCompletion)
+  if ( d->mUseCompletion ) {
     d->sAddressesDirty = true;
+  }
 }
-
 
 //-----------------------------------------------------------------------------
 AddressLineEdit::~AddressLineEdit()
@@ -209,11 +210,12 @@ AddressLineEdit::~AddressLineEdit()
 
 //-----------------------------------------------------------------------------
 
-void AddressLineEdit::setFont( const QFont& font )
+void AddressLineEdit::setFont( const QFont &font )
 {
   KLineEdit::setFont( font );
-  if ( d->mUseCompletion )
+  if ( d->mUseCompletion ) {
     completionBox()->setFont( font );
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -221,25 +223,28 @@ void AddressLineEdit::keyPressEvent( QKeyEvent *event )
 {
   bool accept = false;
 
-  if ( KStandardShortcut::shortcut( KStandardShortcut::SubstringCompletion ).contains( event->key() | event->modifiers() ) ) {
-    doCompletion(true);
+  if ( KStandardShortcut::shortcut( KStandardShortcut::SubstringCompletion ).
+       contains( event->key() | event->modifiers() ) ) {
+    doCompletion( true );
     accept = true;
-  } else if ( KStandardShortcut::shortcut( KStandardShortcut::TextCompletion ).contains( event->key() | event->modifiers() ) ) {
+  } else if ( KStandardShortcut::shortcut( KStandardShortcut::TextCompletion ).
+              contains( event->key() | event->modifiers() ) ) {
     int len = text().length();
 
     if ( len == cursorPosition() ) { // at End?
-      doCompletion(true);
+      doCompletion( true );
       accept = true;
     }
   }
 
-  if ( !accept )
+  if ( !accept ) {
     KLineEdit::keyPressEvent( event );
+  }
 }
 
 void AddressLineEdit::mouseReleaseEvent( QMouseEvent *event )
 {
-  if ( d->mUseCompletion && (event->button() == Qt::MidButton) ) {
+  if ( d->mUseCompletion && ( event->button() == Qt::MidButton ) ) {
     d->mSmartPaste = true;
     KLineEdit::mouseReleaseEvent( event );
     d->mSmartPaste = false;
@@ -257,12 +262,13 @@ void AddressLineEdit::insert( const QString &oldText )
   }
 
   QString newText = oldText.trimmed();
-  if ( newText.isEmpty() )
+  if ( newText.isEmpty() ) {
     return;
+  }
 
   // remove newlines in the to-be-pasted string as well as an eventual
   // mailto: protocol
-  newText.replace( QRegExp("\r?\n"), ", " );
+  newText.replace( QRegExp( "\r?\n" ), ", " );
   if ( newText.startsWith( "mailto:" ) ) {
     KUrl u( newText );
     newText = u.path();
@@ -271,7 +277,7 @@ void AddressLineEdit::insert( const QString &oldText )
     newText.replace( " at ", "@" );
     newText.replace( " dot ", "." );
   } else if ( newText.indexOf( "(at)" ) != -1 ) {
-    newText.replace( QRegExp("\\s*\\(at\\)\\s*"), "@" );
+    newText.replace( QRegExp( "\\s*\\(at\\)\\s*" ), "@" );
   }
 
   QString contents = text();
@@ -280,21 +286,25 @@ void AddressLineEdit::insert( const QString &oldText )
   int pos = cursorPosition();
   if ( !selectedText().isEmpty() ) {
     // Cut away the selection.
-    if ( pos > end_sel )
-      pos -= (end_sel - start_sel);
-    else if (pos > start_sel)
+    if ( pos > end_sel ) {
+      pos -= ( end_sel - start_sel );
+    } else if ( pos > start_sel ) {
       pos = start_sel;
+    }
     contents = contents.left( start_sel ) + contents.right( end_sel + 1 );
   }
 
   int eot = contents.length();
-  while ( (eot > 0) && contents[ eot - 1 ].isSpace() ) eot--;
+  while ( ( eot > 0 ) && contents[ eot - 1 ].isSpace() ) {
+    eot--;
+  }
 
-  if ( eot == 0 )
+  if ( eot == 0 ) {
     contents.clear();
-  else if ( pos >= eot ) {
-    if ( contents[ eot - 1 ] == ',' )
+  } else if ( pos >= eot ) {
+    if ( contents[ eot - 1 ] == ',' ) {
       eot--;
+    }
     contents.truncate( eot );
     contents += ", ";
     pos = eot+2;
@@ -307,8 +317,9 @@ void AddressLineEdit::insert( const QString &oldText )
 
 void AddressLineEdit::paste()
 {
-  if ( d->mUseCompletion )
+  if ( d->mUseCompletion ) {
     d->mSmartPaste = true;
+  }
 
   KLineEdit::paste();
   d->mSmartPaste = false;
@@ -321,16 +332,17 @@ void AddressLineEdit::cursorAtEnd()
 }
 
 //-----------------------------------------------------------------------------
-void AddressLineEdit::enableCompletion(bool enable)
+void AddressLineEdit::enableCompletion( bool enable )
 {
   d->mUseCompletion = enable;
 }
 
 //-----------------------------------------------------------------------------
-void AddressLineEdit::doCompletion(bool ctrlT)
+void AddressLineEdit::doCompletion( bool ctrlT )
 {
-  if ( !d->mUseCompletion )
+  if ( !d->mUseCompletion ) {
       return;
+  }
 
   QString prevAddr;
 
@@ -343,23 +355,26 @@ void AddressLineEdit::doCompletion(bool ctrlT)
     int len = s.length();
 
     // Increment past any whitespace...
-    while ( n < len && s[ n ].isSpace() )
+    while ( n < len && s[ n ].isSpace() ) {
       n++;
+    }
 
     prevAddr = s.left( n );
     s = s.mid( n, 255 ).trimmed();
   }
 
-  if ( d->sAddressesDirty )
+  if ( d->sAddressesDirty ) {
     loadAddresses();
+  }
 
   if ( ctrlT ) {
     QStringList completions = sCompletion->substringCompletion( s );
     if ( completions.count() > 1 ) {
-        d->mPreviousAddresses = prevAddr;
-        setCompletedItems( completions );
-    } else if ( completions.count() == 1 )
-        setText( prevAddr + completions.first() );
+      d->mPreviousAddresses = prevAddr;
+      setCompletedItems( completions );
+    } else if ( completions.count() == 1 ) {
+      setText( prevAddr + completions.first() );
+    }
 
     cursorAtEnd();
     return;
@@ -370,8 +385,9 @@ void AddressLineEdit::doCompletion(bool ctrlT)
   switch ( mode ) {
     case KGlobalSettings::CompletionPopupAuto:
     {
-      if ( s.isEmpty() )
+      if ( s.isEmpty() ) {
         break;
+      }
     }
     case KGlobalSettings::CompletionPopup:
     {
@@ -381,19 +397,19 @@ void AddressLineEdit::doCompletion(bool ctrlT)
       items += sCompletion->substringCompletion( '<' + s );
       int beforeDollarCompletionCount = items.count();
 
-      if ( s.indexOf( ' ' ) == -1 ) // one word, possibly given name
-          items += sCompletion->allMatches( "$$" + s );
+      if ( s.indexOf( ' ' ) == -1 ) { // one word, possibly given name
+        items += sCompletion->allMatches( "$$" + s );
+      }
 
       if ( !items.isEmpty() ) {
         if ( items.count() > beforeDollarCompletionCount ) {
           // remove the '$$whatever$' part
           for ( QStringList::Iterator it = items.begin();
-               it != items.end();
-               ++it )
-          {
+                it != items.end(); ++it ) {
             int pos = (*it).indexOf( '$', 2 );
-            if ( pos < 0 ) // ???
-                continue;
+            if ( pos < 0 ) { // ???
+              continue;
+            }
             (*it) = (*it).mid( pos + 1 );
           }
         }
@@ -404,7 +420,7 @@ void AddressLineEdit::doCompletion(bool ctrlT)
         // completion (suggestion) since it does not know how to deal
         // with providing proper completions for different items on the
         // same line, e.g. comma-separated list of email addresses.
-        bool autoSuggest = (mode != KGlobalSettings::CompletionPopupAuto);
+        bool autoSuggest = ( mode != KGlobalSettings::CompletionPopupAuto );
         setCompletedItems( items, autoSuggest );
 
         if ( !autoSuggest ) {
@@ -435,8 +451,9 @@ void AddressLineEdit::doCompletion(bool ctrlT)
     {
       if ( !s.isEmpty() ) {
         QString match = sCompletion->makeCompletion( s );
-        if ( !match.isNull() && match != s )
+        if ( !match.isNull() && match != s ) {
           setCompletedText( prevAddr + match );
+        }
 
         break;
       }
@@ -454,8 +471,9 @@ void AddressLineEdit::loadAddresses()
   d->sAddressesDirty = false;
 
   const QStringList addrs = d->addresses();
-  for ( QStringList::ConstIterator it = addrs.begin(); it != addrs.end(); ++it )
+  for ( QStringList::ConstIterator it = addrs.begin(); it != addrs.end(); ++it ) {
     addAddress( *it );
+  }
 }
 
 void AddressLineEdit::addAddress( const QString &addr )
@@ -466,8 +484,9 @@ void AddressLineEdit::addAddress( const QString &addr )
   if ( pos >= 0 ) {
     ++pos;
     int pos2 = addr.indexOf( pos, '>' );
-    if ( pos2 >= 0 )
+    if ( pos2 >= 0 ) {
       sCompletion->addItem( addr.mid( pos, pos2 - pos ) );
+    }
   }
 }
 
@@ -479,25 +498,27 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
     QString ct = text();
     KUrl::List::Iterator it = uriList.begin();
     for ( ; it != uriList.end(); ++it ) {
-      if ( !ct.isEmpty() )
-        ct.append(", ");
+      if ( !ct.isEmpty() ) {
+        ct.append( ", " );
+      }
 
       KUrl u( *it );
-      if ( (*it).protocol() == "mailto" )
+      if ( (*it).protocol() == "mailto" ) {
         ct.append( (*it).path() );
-      else
+      } else {
         ct.append( (*it).url() );
+      }
     }
     setText( ct );
     setModified( true );
   } else {
-    if ( d->mUseCompletion )
+    if ( d->mUseCompletion ) {
        d->mSmartPaste = true;
+    }
 
     QLineEdit::dropEvent( event );
     d->mSmartPaste = false;
   }
 }
-
 
 #include "addresslineedit.moc"

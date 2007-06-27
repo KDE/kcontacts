@@ -161,7 +161,8 @@ void AddressTest::formatTest()
     address.setRegion( "DC" );
     address.setCountry( "United States of America" );
 
-    const QString result( "Huck Finn\n457 Foobar Ave\nNervousbreaktown DC, 1A2B3C\n\nUNITED STATES OF AMERICA" );
+    const QString result(
+      "Huck Finn\n457 Foobar Ave\nNervousbreaktown DC, 1A2B3C\n\nUNITED STATES OF AMERICA" );
     QVERIFY( address.formattedAddress( "Huck Finn" ) == result );
   }
 

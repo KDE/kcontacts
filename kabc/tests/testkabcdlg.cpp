@@ -32,7 +32,7 @@ using namespace KABC;
 
 static const KCmdLineOptions options[] =
 {
-  {"multiple", I18N_NOOP("Allow selection of multiple addressees"), 0},
+  {"multiple", I18N_NOOP( "Allow selection of multiple addressees" ), 0},
   KCmdLineLastOption
 };
 
@@ -45,7 +45,7 @@ int main( int argc, char **argv )
   KApplication app;
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if ( args->isSet("multiple")) {
+  if ( args->isSet( "multiple" ) ) {
     Addressee::List al = AddresseeDialog::getAddressees( 0 );
     Addressee::List::ConstIterator it;
     kDebug() << "Selected Addressees:" << endl;

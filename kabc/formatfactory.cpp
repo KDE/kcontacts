@@ -96,7 +96,7 @@ FormatFactory::FormatFactory()
   d->mFormatList.insert( "vcard", info );
 
   const QStringList list =
-    KGlobal::dirs()->findAllResources( "data" ,"kabc/formats/*.desktop",
+    KGlobal::dirs()->findAllResources( "data","kabc/formats/*.desktop",
                                        KStandardDirs::Recursive |
                                        KStandardDirs::NoDuplicates );
   for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {

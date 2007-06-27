@@ -139,7 +139,7 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
   resource->setDn( cfg->dn().toString() );
   resource->setFilter( cfg->filter() );
   resource->setIsAnonymous( cfg->auth() == KLDAP::LdapConfigWidget::Anonymous );
-  resource->setIsSASL(  cfg->auth() == KLDAP::LdapConfigWidget::SASL );
+  resource->setIsSASL( cfg->auth() == KLDAP::LdapConfigWidget::SASL );
   resource->setMech( cfg->mech() );
   resource->setIsTLS( cfg->security() == KLDAP::LdapConfigWidget::TLS );
   resource->setIsSSL( cfg->security() == KLDAP::LdapConfigWidget::SSL );
@@ -167,7 +167,7 @@ void ResourceLDAPKIOConfig::editCache()
 
   src = cfg->url();
   src.setScope( mSubTree->isChecked() ? KLDAP::LdapUrl::Sub : KLDAP::LdapUrl::One );
-  if (!mAttributes.empty()) {
+  if ( !mAttributes.empty() ) {
     QMap<QString,QString>::Iterator it;
     QStringList attr;
     for ( it = mAttributes.begin(); it != mAttributes.end(); ++it ) {
@@ -289,7 +289,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
       i--;
       continue;
     }
-    if ( (i - 2) == ( mNameDict.count()  >> 1 ) ) {
+    if ( ( i - 2 ) == ( mNameDict.count() >> 1 ) ) {
       i = 0;
       j = 2;
     }
@@ -381,22 +381,23 @@ OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
   setMainWidget( page );
   QVBoxLayout *layout = new QVBoxLayout( page );
 
-  mSrc = src; mDst = dst;
-  mCacheBox = new QGroupBox( i18n("Offline Cache Policy"), page );
+  mSrc = src;
+  mDst = dst;
+  mCacheBox = new QGroupBox( i18n( "Offline Cache Policy" ), page );
   QVBoxLayout *cacheBoxLayout = new QVBoxLayout( mCacheBox );
 
   mCacheGroup = new QButtonGroup( this );
 
   QRadioButton *bt;
-  bt = new QRadioButton( i18n("Do not use offline cache"), mCacheBox );
+  bt = new QRadioButton( i18n( "Do not use offline cache" ), mCacheBox );
   cacheBoxLayout->addWidget( bt );
   mCacheGroup->addButton( bt );
 
-  bt = new QRadioButton( i18n("Use local copy if no connection"), mCacheBox );
+  bt = new QRadioButton( i18n( "Use local copy if no connection" ), mCacheBox );
   cacheBoxLayout->addWidget( bt );
   mCacheGroup->addButton( bt );
 
-  bt = new QRadioButton( i18n("Always use local copy"), mCacheBox );
+  bt = new QRadioButton( i18n( "Always use local copy" ), mCacheBox );
   cacheBoxLayout->addWidget( bt );
   mCacheGroup->addButton( bt );
 
@@ -404,14 +405,14 @@ OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
     mCacheGroup->button( cachePolicy )->setDown( true );
   }
 
-  mAutoCache = new QCheckBox( i18n("Refresh offline cache automatically"),
+  mAutoCache = new QCheckBox( i18n( "Refresh offline cache automatically" ),
     page );
   mAutoCache->setChecked( autoCache );
   mAutoCache->setEnabled( bt->isChecked() );
 
   connect( bt, SIGNAL(toggled(bool)), mAutoCache, SLOT(setEnabled(bool)) );
 
-  QPushButton *lcache = new QPushButton( i18n("Load into Cache"), page );
+  QPushButton *lcache = new QPushButton( i18n( "Load into Cache" ), page );
   connect( lcache, SIGNAL( clicked() ), SLOT( loadCache() ) );
 
   layout->addWidget( mCacheBox );
@@ -437,9 +438,9 @@ void OfflineDialog::loadCache()
 {
   if ( KIO::NetAccess::download( mSrc, mDst, this ) ) {
     KMessageBox::information( this,
-      i18n("Successfully downloaded directory server contents.") );
+      i18n( "Successfully downloaded directory server contents." ) );
   } else {
     KMessageBox::error( this,
-      i18n("An error occurred downloading directory server contents into file %1.", mDst) );
+      i18n( "An error occurred downloading directory server contents into file %1.", mDst ) );
   }
 }

@@ -32,7 +32,8 @@ using namespace KABC;
 class DistributionList::Entry::Private {
   public:
     Private() {}
-    Private( Addressee _addressee, const QString &_email ) : addressee( _addressee ), email( _email ) {}
+    Private( Addressee _addressee, const QString &_email )
+      : addressee( _addressee ), email( _email ) {}
 
     Addressee addressee;
     QString email;
@@ -285,7 +286,7 @@ bool DistributionListManager::load()
     QString name = it.key();
     QStringList value = cg.readEntry( name, QStringList() );
 
-    kDebug(5700) << "DLM::load(): " << name << ": " << value.join(",") << endl;
+    kDebug(5700) << "DLM::load(): " << name << ": " << value.join( "," ) << endl;
 
     DistributionList *list = new DistributionList( this, name );
 

@@ -34,14 +34,17 @@ class VCard
     typedef QList<VCard> List;
     typedef QMap<QString, VCardLine::List> LineMap;
 
-    enum Version { v2_1, v3_0 };
+    enum Version {
+      v2_1,
+      v3_0
+    };
 
     VCard();
-    VCard( const VCard& );
+    VCard( const VCard &card );
 
     ~VCard();
 
-    VCard& operator=( const VCard& );
+    VCard &operator=( const VCard &card );
 
     /**
      * Removes all lines from the vCard.
@@ -49,25 +52,24 @@ class VCard
     void clear();
 
     /**
-     * Returns a list of all identifiers that exists in the
-     * vCard.
+     * Returns a list of all identifiers that exists in the vCard.
      */
     QStringList identifiers() const;
 
     /**
      * Adds a VCardLine to the VCard
      */
-    void addLine( const VCardLine& line );
+    void addLine( const VCardLine &line );
 
     /**
      * Returns all lines of the vcard with a special identifier.
      */
-    VCardLine::List lines( const QString& identifier ) const;
+    VCardLine::List lines( const QString &identifier ) const;
 
     /**
      * Returns only the first line of the vcard with a special identifier.
      */
-    VCardLine line( const QString& identifier ) const;
+    VCardLine line( const QString &identifier ) const;
 
     /**
      * Set the version of the vCard.

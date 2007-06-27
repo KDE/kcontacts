@@ -35,8 +35,8 @@
 
 static const KCmdLineOptions options[] =
 {
-  {"vcard21", I18N_NOOP("vCard 2.1"), 0},
-  {"+inputfile", I18N_NOOP("Input file"), 0},
+  {"vcard21", I18N_NOOP( "vCard 2.1" ), 0},
+  {"+inputfile", I18N_NOOP( "Input file" ), 0},
   KCmdLineLastOption
 };
 

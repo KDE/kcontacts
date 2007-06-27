@@ -120,11 +120,11 @@ ResourceLDAPKIO::ResourceLDAPKIO( const KConfigGroup &group )
   d->mHost = group.readEntry( "LdapHost" );
   d->mPort = group.readEntry( "LdapPort", 389 );
   d->mFilter = group.readEntry( "LdapFilter" );
-  d->mAnonymous = group.readEntry( "LdapAnonymous" , false );
-  d->mTLS = group.readEntry( "LdapTLS" , false );
-  d->mSSL = group.readEntry( "LdapSSL" , false );
-  d->mSubTree = group.readEntry( "LdapSubTree" , false );
-  d->mSASL = group.readEntry( "LdapSASL" , false );
+  d->mAnonymous = group.readEntry( "LdapAnonymous", false );
+  d->mTLS = group.readEntry( "LdapTLS", false );
+  d->mSSL = group.readEntry( "LdapSSL", false );
+  d->mSubTree = group.readEntry( "LdapSubTree", false );
+  d->mSASL = group.readEntry( "LdapSASL", false );
   d->mMech = group.readEntry( "LdapMech" );
   d->mRealm = group.readEntry( "LdapRealm" );
   d->mBindDN = group.readEntry( "LdapBindDN" );
@@ -133,7 +133,7 @@ ResourceLDAPKIO::ResourceLDAPKIO( const KConfigGroup &group )
   d->mSizeLimit = group.readEntry( "LdapSizeLimit", 0 );
   d->mRDNPrefix = group.readEntry( "LdapRDNPrefix", 0 );
   d->mCachePolicy = group.readEntry( "LdapCachePolicy", 0 );
-  d->mAutoCache = group.readEntry("LdapAutoCache", true );
+  d->mAutoCache = group.readEntry( "LdapAutoCache", true );
   d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", "ldapkio" ) + '/' +
                  type() + '_' + identifier();
   init();
@@ -195,7 +195,7 @@ QString ResourceLDAPKIO::Private::findUid( const QString &uid )
   kDebug(7125) << "ResourceLDAPKIO::findUid() uid: " << uid << " url " <<
     url.prettyUrl() << endl;
 
-  KIO::ListJob *listJob = KIO::listDir( url, false /* no GUI */ );
+  KIO::ListJob *listJob = KIO::listDir( url, false /* no GUI */);
   mParent->connect( listJob, SIGNAL( entries( KIO::Job *, const KIO::UDSEntryList& ) ),
                     SLOT( entries( KIO::Job*, const KIO::UDSEntryList& ) ) );
   mParent->connect( listJob, SIGNAL( result( KJob* ) ),
@@ -322,7 +322,7 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
       tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
     }
     for ( ; mailIt != emails.end(); ++mailIt ) {
-      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n' ;
+      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n';
     }
     if ( mod ) {
       tmp += "-\n";
@@ -345,7 +345,7 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
   }
 
   tmp += '\n';
-  kDebug(7125) << "ldif: " << QString::fromUtf8(tmp) << endl;
+  kDebug(7125) << "ldif: " << QString::fromUtf8( tmp ) << endl;
   ldif = tmp;
   return true;
 }
@@ -369,67 +369,67 @@ void ResourceLDAPKIO::init()
     handle them in the load() method below.
     These are the default values
    */
-  if ( !d->mAttributes.contains("objectClass") ) {
+  if ( !d->mAttributes.contains( "objectClass" ) ) {
     d->mAttributes.insert( "objectClass", "inetOrgPerson" );
   }
-  if ( !d->mAttributes.contains("commonName") ) {
+  if ( !d->mAttributes.contains( "commonName" ) ) {
     d->mAttributes.insert( "commonName", "cn" );
   }
-  if ( !d->mAttributes.contains("formattedName") ) {
+  if ( !d->mAttributes.contains( "formattedName" ) ) {
     d->mAttributes.insert( "formattedName", "displayName" );
   }
-  if ( !d->mAttributes.contains("familyName") ) {
+  if ( !d->mAttributes.contains( "familyName" ) ) {
     d->mAttributes.insert( "familyName", "sn" );
   }
-  if ( !d->mAttributes.contains("givenName") ) {
+  if ( !d->mAttributes.contains( "givenName" ) ) {
     d->mAttributes.insert( "givenName", "givenName" );
   }
-  if ( !d->mAttributes.contains("mail") ) {
+  if ( !d->mAttributes.contains( "mail" ) ) {
     d->mAttributes.insert( "mail", "mail" );
   }
-  if ( !d->mAttributes.contains("mailAlias") ) {
+  if ( !d->mAttributes.contains( "mailAlias" ) ) {
     d->mAttributes.insert( "mailAlias", "" );
   }
-  if ( !d->mAttributes.contains("phoneNumber") ) {
+  if ( !d->mAttributes.contains( "phoneNumber" ) ) {
     d->mAttributes.insert( "phoneNumber", "homePhone" );
   }
-  if ( !d->mAttributes.contains("telephoneNumber") ) {
+  if ( !d->mAttributes.contains( "telephoneNumber" ) ) {
     d->mAttributes.insert( "telephoneNumber", "telephoneNumber" );
   }
-  if ( !d->mAttributes.contains("facsimileTelephoneNumber") ) {
+  if ( !d->mAttributes.contains( "facsimileTelephoneNumber" ) ) {
     d->mAttributes.insert( "facsimileTelephoneNumber", "facsimileTelephoneNumber" );
   }
-  if ( !d->mAttributes.contains("mobile") ) {
+  if ( !d->mAttributes.contains( "mobile" ) ) {
     d->mAttributes.insert( "mobile", "mobile" );
   }
-  if ( !d->mAttributes.contains("pager") ) {
+  if ( !d->mAttributes.contains( "pager" ) ) {
     d->mAttributes.insert( "pager", "pager" );
   }
-  if ( !d->mAttributes.contains("description") ) {
+  if ( !d->mAttributes.contains( "description" ) ) {
     d->mAttributes.insert( "description", "description" );
   }
-  if ( !d->mAttributes.contains("title") ) {
+  if ( !d->mAttributes.contains( "title" ) ) {
     d->mAttributes.insert( "title", "title" );
   }
-  if ( !d->mAttributes.contains("street") ) {
+  if ( !d->mAttributes.contains( "street" ) ) {
     d->mAttributes.insert( "street", "street" );
   }
-  if ( !d->mAttributes.contains("state") ) {
+  if ( !d->mAttributes.contains( "state" ) ) {
     d->mAttributes.insert( "state", "st" );
   }
-  if ( !d->mAttributes.contains("city") ) {
+  if ( !d->mAttributes.contains( "city" ) ) {
     d->mAttributes.insert( "city", "l" );
   }
-  if ( !d->mAttributes.contains("organization") ) {
+  if ( !d->mAttributes.contains( "organization" ) ) {
     d->mAttributes.insert( "organization", "o" );
   }
-  if ( !d->mAttributes.contains("postalcode") ) {
+  if ( !d->mAttributes.contains( "postalcode" ) ) {
     d->mAttributes.insert( "postalcode", "postalCode" );
   }
-  if ( !d->mAttributes.contains("uid") ) {
+  if ( !d->mAttributes.contains( "uid" ) ) {
     d->mAttributes.insert( "uid", "uid" );
   }
-  if ( !d->mAttributes.contains("jpegPhoto") ) {
+  if ( !d->mAttributes.contains( "jpegPhoto" ) ) {
     d->mAttributes.insert( "jpegPhoto", "jpegPhoto" );
   }
 
@@ -438,12 +438,12 @@ void ResourceLDAPKIO::init()
     d->mLDAPUrl.setUser( d->mUser );
     d->mLDAPUrl.setPass( d->mPassword );
   }
-  d->mLDAPUrl.setProtocol( d->mSSL ? "ldaps" : "ldap");
+  d->mLDAPUrl.setProtocol( d->mSSL ? "ldaps" : "ldap" );
   d->mLDAPUrl.setHost( d->mHost );
   d->mLDAPUrl.setPort( d->mPort );
   d->mLDAPUrl.setDn( KLDAP::LdapDN( d->mDn ) );
 
-  if (!d->mAttributes.empty()) {
+  if ( !d->mAttributes.empty() ) {
     QMap<QString,QString>::Iterator it;
     QStringList attr;
     for ( it = d->mAttributes.begin(); it != d->mAttributes.end(); ++it ) {
@@ -654,8 +654,9 @@ bool ResourceLDAPKIO::asyncLoad()
   return true;
 }
 
-void ResourceLDAPKIO::data( KIO::Job *, const QByteArray &data )
+void ResourceLDAPKIO::data( KIO::Job *job, const QByteArray &data )
 {
+  Q_UNUSED( job );
   if ( data.size() ) {
     d->mLdif.setLdif( data );
     if ( d->mTmp ) {
@@ -800,8 +801,9 @@ void ResourceLDAPKIO::result( KJob *job )
   }
 }
 
-bool ResourceLDAPKIO::save( Ticket* )
+bool ResourceLDAPKIO::save( Ticket *ticket )
 {
+  Q_UNUSED( ticket );
   kDebug(7125) << "ResourceLDAPKIO save" << endl;
 
   d->mSaveIt = begin();
@@ -821,8 +823,9 @@ bool ResourceLDAPKIO::save( Ticket* )
   }
 }
 
-bool ResourceLDAPKIO::asyncSave( Ticket* )
+bool ResourceLDAPKIO::asyncSave( Ticket *ticket )
 {
+  Q_UNUSED( ticket );
   kDebug(7125) << "ResourceLDAPKIO asyncSave" << endl;
   d->mSaveIt = begin();
   KIO::Job *job = KIO::put( d->mLDAPUrl, -1, true, false, false );
@@ -856,10 +859,12 @@ void ResourceLDAPKIO::saveResult( KJob *job )
   }
 }
 
-void ResourceLDAPKIO::saveData( KIO::Job*, QByteArray& data )
+void ResourceLDAPKIO::saveData( KIO::Job *job, QByteArray &data )
 {
-  while ( d->mSaveIt != end() &&
-       !(*d->mSaveIt).changed() ) d->mSaveIt++;
+  Q_UNUSED( job );
+  while ( d->mSaveIt != end() && !(*d->mSaveIt).changed() ) {
+    d->mSaveIt++;
+  }
 
   if ( d->mSaveIt == end() ) {
     kDebug(7125) << "ResourceLDAPKIO endData" << endl;
@@ -877,7 +882,7 @@ void ResourceLDAPKIO::saveData( KIO::Job*, QByteArray& data )
   d->mSaveIt++;
 }
 
-void ResourceLDAPKIO::removeAddressee( const Addressee& addr )
+void ResourceLDAPKIO::removeAddressee( const Addressee &addr )
 {
   QString dn = d->findUid( addr.uid() );
 

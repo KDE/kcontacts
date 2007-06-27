@@ -44,9 +44,9 @@ AddresseeHelper::AddresseeHelper()
 {
   initSettings();
 
-  QDBusConnection::sessionBus().connect(QString(), QString(),
-                                        "org.kde.kabc.AddressBookConfig", "changed",
-                                        this, SLOT(initSettings()));
+  QDBusConnection::sessionBus().connect( QString(), QString(),
+                                         "org.kde.kabc.AddressBookConfig", "changed",
+                                         this, SLOT(initSettings()));
 }
 
 // static

@@ -51,8 +51,9 @@ LockNull::~LockNull()
 
 bool LockNull::lock()
 {
-  if ( !d->mAllowAccess )
+  if ( !d->mAllowAccess ) {
     return false;
+  }
 
   kWarning() << "LockNull::lock() force success. Doesn't actually lock." << endl;
 
@@ -69,8 +70,9 @@ bool LockNull::unlock()
 
 QString LockNull::error() const
 {
-  if ( d->mAllowAccess )
+  if ( d->mAllowAccess ) {
     return i18n( "LockNull: All locks succeed but no actual locking is done." );
-  else
+  } else {
     return i18n( "LockNull: All locks fail." );
+  }
 }

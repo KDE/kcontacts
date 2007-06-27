@@ -144,10 +144,18 @@ QDataStream &KABC::operator>>( QDataStream &s, Secrecy &secrecy )
     s >> type;
 
     switch ( type ) {
-      case 0: secrecy.d->mType = Secrecy::Public; break;
-      case 1: secrecy.d->mType = Secrecy::Private; break;
-      case 2: secrecy.d->mType = Secrecy::Confidential; break;
-      default: secrecy.d->mType = Secrecy::Invalid; break;
+      case 0:
+        secrecy.d->mType = Secrecy::Public;
+        break;
+      case 1:
+        secrecy.d->mType = Secrecy::Private;
+        break;
+      case 2:
+        secrecy.d->mType = Secrecy::Confidential;
+        break;
+      default:
+        secrecy.d->mType = Secrecy::Invalid;
+        break;
     }
 
     return s;

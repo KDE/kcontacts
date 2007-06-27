@@ -32,7 +32,11 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
   Q_OBJECT
 
   public:
-    enum CachePolicy{ Cache_No, Cache_NoConnection, Cache_Always };
+    enum CachePolicy {
+      Cache_No,
+      Cache_NoConnection,
+      Cache_Always
+    };
 
     ResourceLDAPKIO();
     explicit ResourceLDAPKIO( const KConfigGroup &group );
@@ -48,17 +52,17 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
     virtual void doClose();
 
     virtual Ticket *requestSaveTicket();
-    virtual void releaseSaveTicket( Ticket* );
+    virtual void releaseSaveTicket( Ticket *ticket );
 
     virtual bool readOnly() const { return Resource::readOnly(); }
     virtual void setReadOnly( bool value );
 
     virtual bool load();
     virtual bool asyncLoad();
-    virtual bool save( Ticket * );
-    virtual bool asyncSave( Ticket * );
+    virtual bool save( Ticket *ticket );
+    virtual bool asyncSave( Ticket *ticket );
 
-    virtual void removeAddressee( const Addressee& addr );
+    virtual void removeAddressee( const Addressee &addr );
 
     void setUser( const QString &user );
     QString user() const;
@@ -103,16 +107,16 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
     int RDNPrefix() const;
 
     void setIsTLS( bool value );
-    bool isTLS() const ;
+    bool isTLS() const;
 
     void setIsSSL( bool value );
     bool isSSL() const;
 
     void setIsSubTree( bool value );
-    bool isSubTree() const ;
+    bool isSubTree() const;
 
     void setIsSASL( bool value );
-    bool isSASL() const ;
+    bool isSASL() const;
 
     void setMech( const QString &mech );
     QString mech() const;
@@ -126,21 +130,21 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
     QString cacheDst() const;
 
 protected Q_SLOTS:
-    void entries( KIO::Job*, const KIO::UDSEntryList& );
-    void data( KIO::Job*, const QByteArray& );
-    void result( KJob* );
-    void listResult( KJob* );
-    void syncLoadSaveResult( KJob* );
-    void saveResult( KJob* );
-    void saveData( KIO::Job*, QByteArray& );
-    void loadCacheResult( KJob* );
+    void entries( KIO::Job *job, const KIO::UDSEntryList &list );
+    void data( KIO::Job *job, const QByteArray &data );
+    void result( KJob *job );
+    void listResult( KJob *job );
+    void syncLoadSaveResult( KJob *job );
+    void saveResult( KJob *job );
+    void saveData( KIO::Job *job, QByteArray &data );
+    void loadCacheResult( KJob *job );
 
 Q_SIGNALS:
     void leaveModality();
 
   private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

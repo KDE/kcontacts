@@ -121,7 +121,7 @@ ResourceDir::ResourceDir( const KConfigGroup &group )
 }
 
 ResourceDir::ResourceDir( const QString &path, const QString &format )
-  : Resource(), d( new Private(  this ) )
+  : Resource(), d( new Private( this ) )
 {
   d->init( path, format );
 }

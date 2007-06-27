@@ -71,8 +71,9 @@ QString Lock::locksDir()
 bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
 {
   QFile file( filename );
-  if ( !file.open( QIODevice::ReadOnly ) )
+  if ( !file.open( QIODevice::ReadOnly ) ) {
     return false;
+  }
 
   QTextStream t( &file );
   t >> pid >> ws >> app;
@@ -83,8 +84,9 @@ bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
 bool Lock::writeLockFile( const QString &filename )
 {
   QFile file( filename );
-  if ( !file.open( QIODevice::WriteOnly ) )
+  if ( !file.open( QIODevice::WriteOnly ) ) {
     return false;
+  }
 
   QTextStream t( &file );
   t << ::getpid() << endl << QString( KGlobal::mainComponent().componentName() );

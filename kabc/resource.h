@@ -190,7 +190,7 @@ class KABC_EXPORT Resource : public KRES::Resource
          *
          * @return the @c const Addressee object the iterator points to.
          */
-        virtual const Addressee &operator*() const ;
+        virtual const Addressee &operator*() const;
         /**
          * Preincrement operator. Advances the iterator by one.
          *
