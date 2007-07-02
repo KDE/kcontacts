@@ -36,8 +36,8 @@ using namespace KABC;
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "kabcargl", "Fix broken pre3.0rc3 format", "0.1" );
-  aboutData.addAuthor( "Cornelius Schumacher", 0, "schumacher@kde.org" );
+  KAboutData aboutData( "kabcargl", 0, ki18n( "Fix broken pre3.0rc3 format" ), "0.1" );
+  aboutData.addAuthor( ki18n( "Cornelius Schumacher" ), KLocalizedString(), "schumacher@kde.org" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
 

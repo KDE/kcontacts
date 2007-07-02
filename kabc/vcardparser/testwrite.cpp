@@ -35,7 +35,7 @@
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "testwrite", "vCard test writer", "0.1" );
+  KAboutData aboutData( "testwrite", 0, ki18n("vCard test writer"), "0.1" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
 

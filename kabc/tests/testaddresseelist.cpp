@@ -29,17 +29,14 @@
 
 using namespace KABC;
 
-static const KCmdLineOptions options[] =
-{
-  { "save", "", 0 },
-  { "number", "", 0 },
-  KCmdLineLastOption
-};
-
 int main( int /*argc*/, char /* **argv*/)
 {
-/*  KAboutData aboutData("testaddresseelist","TestAddresseeList","0.1");
+/*  KAboutData aboutData("testaddresseelist", 0,ki18n("TestAddresseeList"),"0.1");
   KCmdLineArgs::init(argc, argv, &aboutData);
+
+  KCmdLineOptions options;
+  options.add("save");
+  options.add("number");
   KCmdLineArgs::addCmdLineOptions(options);
 
   KApplication app;

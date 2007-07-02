@@ -34,7 +34,7 @@ using namespace KABC;
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "bigread", "BigReadKabc", "0.1" );
+  KAboutData aboutData( "bigread", 0, ki18n( "BigReadKabc" ), "0.1" );
   KCmdLineArgs::init( argc, argv, &aboutData );
 
   KApplication app( false );

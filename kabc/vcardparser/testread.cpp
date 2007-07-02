@@ -33,19 +33,16 @@
 #include "kabc/vcardconverter.h"
 #include "vcard.h"
 
-static const KCmdLineOptions options[] =
-{
-  {"vcard21", I18N_NOOP( "vCard 2.1" ), 0},
-  {"+inputfile", I18N_NOOP( "Input file" ), 0},
-  KCmdLineLastOption
-};
-
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "testread", "vCard test reader", "0.1" );
-  aboutData.addAuthor( "Cornelius Schumacher", 0, "schumacher@kde.org" );
+  KAboutData aboutData( "testread", 0, ki18n( "vCard test reader" ), "0.1" );
+  aboutData.addAuthor( ki18n( "Cornelius Schumacher" ), KLocalizedString(), "schumacher@kde.org" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
+
+  KCmdLineOptions options;
+  options.add( "vcard21", ki18n( "vCard 2.1" ) );
+  options.add( "+inputfile", ki18n( "Input file" ) );
   KCmdLineArgs::addCmdLineOptions( options );
 
   KComponentData componentData( &aboutData );

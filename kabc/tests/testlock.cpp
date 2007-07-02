@@ -161,20 +161,17 @@ void LockWidget::unlock()
   }
 }
 
-static const KCmdLineOptions options[] =
-{
-  { "a", 0, 0 },
-  { "addressbook", "Standard address book", 0 },
-  { "d", 0, 0 },
-  { "diraddressbook", "Standard address book directory resource", 0 },
-  { "+identifier", "Identifier of resource to be locked, e.g. filename", 0 },
-  KCmdLineLastOption
-};
-
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "testlock", I18N_NOOP("Test libkabc Lock"), "0.1" );
+  KAboutData aboutData( "testlock", 0, ki18n( "Test libkabc Lock" ), "0.1" );
   KCmdLineArgs::init( argc, argv, &aboutData );
+
+  KCmdLineOptions options;
+  options.add("a");
+  options.add("addressbook", ki18n("Standard address book"));
+  options.add("d");
+  options.add("diraddressbook", ki18n("Standard address book directory resource"));
+  options.add("+identifier", ki18n("Identifier of resource to be locked, e.g. filename"));
   KCmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;

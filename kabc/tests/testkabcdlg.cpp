@@ -30,16 +30,13 @@
 
 using namespace KABC;
 
-static const KCmdLineOptions options[] =
-{
-  {"multiple", I18N_NOOP( "Allow selection of multiple addressees" ), 0},
-  KCmdLineLastOption
-};
-
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "testkabcdlg", I18N_NOOP("TestKabc"), "0.1" );
+  KAboutData aboutData( "testkabcdlg", 0, ki18n( "TestKabc" ), "0.1" );
   KCmdLineArgs::init( argc, argv, &aboutData );
+
+  KCmdLineOptions options;
+  options.add( "multiple", ki18n( "Allow selection of multiple addressees" ) );
   KCmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;
