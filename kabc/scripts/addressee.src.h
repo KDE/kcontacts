@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KABC_ADDRESSEE_H
-#define KABC_ADDRESSEE_H
+#ifndef KABC_ADDRESSEE_SRC_H
+#define KABC_ADDRESSEE_SRC_H
 
 #include <QtCore/QDateTime>
 #include <QtCore/QStringList>

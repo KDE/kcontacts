@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef RESOURCELDAPCONFIG_H
-#define RESOURCELDAPCONFIG_H
+#ifndef KABC_RESOURCELDAPKIOCONFIG_H
+#define KABC_RESOURCELDAPKIOCONFIG_H
 
 #include "kabc/kabc_export.h"
 #include "kresources/configwidget.h"

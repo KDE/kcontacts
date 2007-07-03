@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KABC_RESOURCELDAP_H
-#define KABC_RESOURCELDAP_H
+#ifndef KABC_RESOURCELDAPKIO_H
+#define KABC_RESOURCELDAPKIO_H
 
 #include <kio/job.h>
 #include "kabc/resource.h"
