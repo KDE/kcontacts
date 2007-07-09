@@ -9,7 +9,6 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 set(testread_SRCS testread.cpp )
 
-kde4_automoc(${testread_SRCS})
 
 kde4_add_test_executable(testread ${testread_SRCS})
 
@@ -19,7 +18,6 @@ target_link_libraries(testread  ${KDE4_KDECORE_LIBS} kabc )
 
 set(testwrite_SRCS testwrite.cpp )
 
-kde4_automoc(${testwrite_SRCS})
 
 kde4_add_test_executable(testwrite ${testwrite_SRCS})
 
@@ -29,7 +27,6 @@ target_link_libraries(testwrite  ${KDE4_KDECORE_LIBS} kabc )
 
 set(testread2_SRCS testread2.cpp testutils.cpp )
 
-kde4_automoc(${testread2_SRCS})
 
 kde4_add_test_executable(testread2 ${testread2_SRCS})
 

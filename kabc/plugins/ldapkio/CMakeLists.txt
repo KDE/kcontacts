@@ -6,7 +6,6 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 set(kabc_ldapkio_SRCS resourceldapkioplugin.cpp resourceldapkio.cpp resourceldapkioconfig.cpp )
 
-kde4_automoc(${kabc_ldapkio_SRCS})
 
 kde4_add_plugin(kabc_ldapkio ${kabc_ldapkio_SRCS})
 
