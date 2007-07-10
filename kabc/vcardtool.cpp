@@ -466,8 +466,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
           bool available = false;
           KABC::Address::List addressList = addr.addresses();
-          KABC::Address::List::Iterator it;
-          for ( it = addressList.begin(); it != addressList.end(); ++it ) {
+          for ( KABC::Address::List::Iterator it = addressList.begin(); it != addressList.end(); ++it ) {
             if ( (*it).type() == type ) {
               (*it).setLabel( (*lineIt).value().toString() );
               addr.insertAddress( *it );
