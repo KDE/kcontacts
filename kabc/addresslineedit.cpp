@@ -72,12 +72,15 @@ class AddressLineEdit::Private
     bool mSmartPaste;
 
     static bool sAddressesDirty;
+    static bool initialized;
 };
+bool AddressLineEdit::Private::initialized = false;
 K_GLOBAL_STATIC( KCompletion, sCompletion )
 
 void AddressLineEdit::Private::init()
 {
-  if ( !sCompletion ) {
+  if ( !Private::initialized ) {
+      Private::initialized = true;
       sCompletion->setOrder( KCompletion::Sorted );
       sCompletion->setIgnoreCase( true );
   }
