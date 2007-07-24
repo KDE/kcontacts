@@ -27,6 +27,7 @@
 #include "kldap/ldapurl.h"
 
 #include <kio/netaccess.h>
+#include <kio/udsentry.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
