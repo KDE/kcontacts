@@ -156,7 +156,7 @@ void ResourceLDAPKIO::entries( KIO::Job*, const KIO::UDSEntryList & list )
   KIO::UDSEntryList::ConstIterator it = list.begin();
   KIO::UDSEntryList::ConstIterator end = list.end();
   for ( ; it != end; ++it ) {
-    const QString urlStr = (*it).stringValue( KIO::UDS_URL );
+    const QString urlStr = (*it).stringValue( KIO::UDSEntry::UDS_URL );
     if ( !urlStr.isEmpty() ) {
       KUrl tmpurl( urlStr );
       d->mResultDn = tmpurl.path();
