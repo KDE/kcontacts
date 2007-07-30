@@ -300,7 +300,7 @@ void ResourceDir::setPath( const QString &path )
   }
 
   d->mPath = path;
-  d->mDirWatch.addDir( d->mPath, true );
+  d->mDirWatch.addDir( d->mPath, KDirWatch::WatchFiles );
   d->mDirWatch.startScan();
 }
 
