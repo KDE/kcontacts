@@ -40,7 +40,7 @@ void PhoneNumberTest::storeTest()
   number.setNumber( "2734826345" );
 
   QVERIFY( number.id() == QLatin1String( "My Id" ) );
-  QVERIFY( number.type() == KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
+  QVERIFY( number.type() == ( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell ) );
   QVERIFY( number.number() == QLatin1String( "2734826345" ) );
 }
 
