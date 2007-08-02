@@ -60,14 +60,14 @@ int main( int argc, char **argv )
     times( &start );
 
 #if 0
-    kDebug() << "utime : " << int( start.tms_utime ) << endl;
-    kDebug() << "stime : " << int( start.tms_stime ) << endl;
-    kDebug() << "cutime: " << int( start.tms_cutime ) << endl;
-    kDebug() << "cstime: " << int( start.tms_cstime ) << endl;
+    kDebug() << "utime :" << int( start.tms_utime );
+    kDebug() << "stime :" << int( start.tms_stime );
+    kDebug() << "cutime:" << int( start.tms_cutime );
+    kDebug() << "cstime:" << int( start.tms_cstime );
 #endif
 
     if ( !ab.save( t ) ) {
-      kDebug() << "Can't save." << endl;
+      kDebug() << "Can't save.";
     }
 
     struct tms end;
@@ -75,16 +75,16 @@ int main( int argc, char **argv )
     times( &end );
 
 #if 0
-    kDebug() << "utime : " << int( end.tms_utime ) << endl;
-    kDebug() << "stime : " << int( end.tms_stime ) << endl;
-    kDebug() << "cutime: " << int( end.tms_cutime ) << endl;
-    kDebug() << "cstime: " << int( end.tms_cstime ) << endl;
+    kDebug() << "utime :" << int( end.tms_utime );
+    kDebug() << "stime :" << int( end.tms_stime );
+    kDebug() << "cutime:" << int( end.tms_cutime );
+    kDebug() << "cstime:" << int( end.tms_cstime );
 #endif
 
-    kDebug() << "UTime: " << int( end.tms_utime ) - int( start.tms_utime ) << endl;
-    kDebug() << "STime: " << int( end.tms_stime ) - int( start.tms_stime ) << endl;
+    kDebug() << "UTime:" << int( end.tms_utime ) - int( start.tms_utime );
+    kDebug() << "STime:" << int( end.tms_stime ) - int( start.tms_stime );
 
   } else {
-    kDebug() << "No ticket for save." << endl;
+    kDebug() << "No ticket for save.";
   }
 }

@@ -144,7 +144,7 @@ void ResourceFile::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceFile::requestSaveTicket()
 {
-  kDebug(5700) << "ResourceFile::requestSaveTicket()" << endl;
+  kDebug(5700) << "ResourceFile::requestSaveTicket()";
 
   if ( !addressBook() ) {
     return 0;
@@ -158,7 +158,7 @@ Ticket *ResourceFile::requestSaveTicket()
   } else {
     addressBook()->error( mLock->error() );
     kDebug(5700) << "ResourceFile::requestSaveTicket(): Unable to lock file '"
-                  << mFileName << "': " << mLock->error() << endl;
+                  << mFileName << "':" << mLock->error();
     return 0;
   }
 
@@ -216,7 +216,7 @@ void ResourceFile::doClose()
 
 bool ResourceFile::load()
 {
-  kDebug(5700) << "ResourceFile::load(): '" << mFileName << "'" << endl;
+  kDebug(5700) << "ResourceFile::load(): '" << mFileName << "'";
 
   if ( d->mIsLoading ) {
     abortAsyncLoading();
@@ -280,7 +280,7 @@ bool ResourceFile::asyncLoad()
 
 void ResourceFile::abortAsyncLoading()
 {
-  kDebug(5700) << "ResourceFile::abortAsyncLoading()" << endl;
+  kDebug(5700) << "ResourceFile::abortAsyncLoading()";
 
   if ( d->mLoadJob ) {
     d->mLoadJob->kill(); // result not emitted
@@ -293,7 +293,7 @@ void ResourceFile::abortAsyncLoading()
 
 void ResourceFile::abortAsyncSaving()
 {
-  kDebug(5700) << "ResourceFile::abortAsyncSaving()" << endl;
+  kDebug(5700) << "ResourceFile::abortAsyncSaving()";
 
   if ( d->mSaveJob ) {
     d->mSaveJob->kill(); // result not emitted
@@ -307,7 +307,7 @@ void ResourceFile::abortAsyncSaving()
 bool ResourceFile::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceFile::save()" << endl;
+  kDebug(5700) << "ResourceFile::save()";
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -338,7 +338,7 @@ bool ResourceFile::save( Ticket *ticket )
 
 bool ResourceFile::asyncSave( Ticket * )
 {
-  kDebug(5700) << "ResourceFile::asyncSave()" << endl;
+  kDebug(5700) << "ResourceFile::asyncSave()";
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -384,7 +384,7 @@ bool ResourceFile::createLocalTempFile()
 void ResourceFile::deleteStaleTempFile()
 {
   if ( hasTempFile() ) {
-    kDebug(5700) << "stale temp file detected " << mTempFile->fileName() << endl;
+    kDebug(5700) << "stale temp file detected" << mTempFile->fileName();
     deleteLocalTempFile();
   }
 }
@@ -434,7 +434,7 @@ QString ResourceFile::format() const
 
 void ResourceFile::fileChanged()
 {
-  kDebug(5700) << "ResourceFile::fileChanged(): " << mFileName << endl;
+  kDebug(5700) << "ResourceFile::fileChanged():" << mFileName;
 
   if ( !addressBook() ) {
     return;
@@ -445,7 +445,7 @@ void ResourceFile::fileChanged()
     asyncLoad();
   } else {
     load();
-    kDebug(5700) << "addressBookChanged() " << endl;
+    kDebug(5700) << "addressBookChanged()";
     addressBook()->emitAddressBookChanged();
   }
 }
@@ -467,7 +467,7 @@ void ResourceFile::removeAddressee( const Addressee &addr )
 void ResourceFile::downloadFinished( KJob *job )
 {
   Q_UNUSED( job );
-  kDebug(5700) << "ResourceFile::downloadFinished()" << endl;
+  kDebug(5700) << "ResourceFile::downloadFinished()";
 
   d->mIsLoading = false;
 
@@ -494,7 +494,7 @@ void ResourceFile::downloadFinished( KJob *job )
 
 void ResourceFile::uploadFinished( KJob *job )
 {
-  kDebug(5700) << "ResourceFile::uploadFinished()" << endl;
+  kDebug(5700) << "ResourceFile::uploadFinished()";
 
   d->mIsSaving = false;
 

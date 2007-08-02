@@ -59,14 +59,14 @@ KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
   QString path = KLibLoader::findLibrary( libName );
 
   if ( path.isEmpty() ) {
-    kDebug( 5700 ) << "No format plugin library was found!" << endl;
+    kDebug( 5700 ) << "No format plugin library was found!";
     return 0;
   }
 
   library = KLibLoader::self()->library( path );
 
   if ( !library ) {
-    kDebug( 5700 ) << "Could not load library '" << libName << "'" << endl;
+    kDebug( 5700 ) << "Could not load library '" << libName << "'";
     return 0;
   }
 
@@ -75,7 +75,7 @@ KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
 
 FormatFactory *FormatFactory::self()
 {
-  kDebug(5700) << "FormatFactory::self()" << endl;
+  kDebug(5700) << "FormatFactory::self()";
 
   static Private p;
   if ( !p.sSelf ) {
@@ -186,7 +186,7 @@ Format *FormatFactory::format( const QString &type )
     format->setNameLabel( fi.nameLabel );
     format->setDescriptionLabel( fi.descriptionLabel );
   } else {
-    kDebug( 5700 ) << "'" << libName << "' is not a format plugin." << endl;
+    kDebug( 5700 ) << "'" << libName << "' is not a format plugin.";
     return 0;
   }
 

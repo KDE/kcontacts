@@ -339,7 +339,7 @@ AddressBook::~AddressBook()
 
 bool AddressBook::load()
 {
-  kDebug(5700) << "AddressBook::load()" << endl;
+  kDebug(5700) << "AddressBook::load()";
 
   clear();
 
@@ -357,7 +357,7 @@ bool AddressBook::load()
 
 bool AddressBook::asyncLoad()
 {
-  kDebug(5700) << "AddressBook::asyncLoad()" << endl;
+  kDebug(5700) << "AddressBook::asyncLoad()";
 
   clear();
 
@@ -376,7 +376,7 @@ bool AddressBook::asyncLoad()
 
 bool AddressBook::save( Ticket *ticket )
 {
-  kDebug(5700) << "AddressBook::save()"<< endl;
+  kDebug(5700) << "AddressBook::save()";
 
   if ( ticket->resource() ) {
     deleteRemovedAddressees();
@@ -392,7 +392,7 @@ bool AddressBook::save( Ticket *ticket )
 
 bool AddressBook::asyncSave( Ticket *ticket )
 {
-  kDebug(5700) << "AddressBook::asyncSave()"<< endl;
+  kDebug(5700) << "AddressBook::asyncSave()";
 
   if ( ticket->resource() ) {
     d->mPendingSaveResources.append( ticket->resource() );
@@ -506,7 +506,7 @@ void AddressBook::clear()
 
 Ticket *AddressBook::requestSaveTicket( Resource *resource )
 {
-  kDebug(5700) << "AddressBook::requestSaveTicket()" << endl;
+  kDebug(5700) << "AddressBook::requestSaveTicket()";
 
   if ( !resource ) {
     resource = standardResource();
@@ -655,14 +655,14 @@ Addressee::List AddressBook::findByCategory( const QString &category ) const
 
 void AddressBook::dump() const
 {
-  kDebug(5700) << "AddressBook::dump() --- begin ---" << endl;
+  kDebug(5700) << "AddressBook::dump() --- begin ---";
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
     kDebug(5700) << (*it).toString();
   }
 
-  kDebug(5700) << "AddressBook::dump() ---  end  ---" << endl;
+  kDebug(5700) << "AddressBook::dump() ---  end  ---";
 }
 
 QString AddressBook::identifier() const
@@ -744,7 +744,7 @@ QDataStream &KABC::operator>>( QDataStream &s, AddressBook &ab )
 bool AddressBook::addResource( Resource *resource )
 {
   if ( !resource->open() ) {
-    kDebug(5700) << "AddressBook::addResource(): can't add resource" << endl;
+    kDebug(5700) << "AddressBook::addResource(): can't add resource";
     return false;
   }
 

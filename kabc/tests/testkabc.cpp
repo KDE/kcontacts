@@ -52,7 +52,7 @@ int main( int argc, char **argv )
   for ( it = ab->begin(); it != ab->end(); ++it ) {
     VCardConverter converter;
     QString vcard = converter.createVCard( *it );
-    kDebug() << "card=" << vcard << endl;
+    kDebug() << "card=" << vcard;
   }
 #else
   Addressee addr;

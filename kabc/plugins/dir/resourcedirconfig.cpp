@@ -77,7 +77,7 @@ void ResourceDirConfig::loadSettings( KRES::Resource *res )
   ResourceDir *resource = dynamic_cast<ResourceDir*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "ResourceDirConfig::loadSettings(): cast failed" << endl;
+    kDebug(5700) << "ResourceDirConfig::loadSettings(): cast failed";
     return;
   }
 
@@ -94,7 +94,7 @@ void ResourceDirConfig::saveSettings( KRES::Resource *res )
   ResourceDir *resource = dynamic_cast<ResourceDir*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "ResourceDirConfig::loadSettings(): cast failed" << endl;
+    kDebug(5700) << "ResourceDirConfig::loadSettings(): cast failed";
     return;
   }
 

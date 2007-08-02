@@ -124,12 +124,12 @@ if (!open( CPP_OUT, ">$builddir/../addressee.cpp" ) ) {
             if ( $entryTypes[$i] =~ "QString" ) {
               print CPP_OUT "  if ( d->m".ucfirst($entryNames[$i])." != a.d->m".ucfirst($entryNames[$i])." &&\n";
               print CPP_OUT "     !( d->m".ucfirst($entryNames[$i]).".isEmpty() && a.d->m".ucfirst($entryNames[$i]).".isEmpty() ) ) {\n";
-              print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\" << endl;\n";
+              print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\";\n";
               print CPP_OUT "    return false;\n";
               print CPP_OUT "  }\n";
             } else {
               print CPP_OUT "  if ( d->m".ucfirst($entryNames[$i])." != a.d->m".ucfirst($entryNames[$i])." ) {\n";
-              print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\" << endl;\n";
+              print CPP_OUT "    kDebug(5700) << \"$entryNames[$i] differs\";\n";
               print CPP_OUT "    return false;\n";
               print CPP_OUT "  }\n";
             }

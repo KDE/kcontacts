@@ -118,7 +118,7 @@ void ResourceNet::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceNet::requestSaveTicket()
 {
-  kDebug(5700) << "ResourceNet::requestSaveTicket()" << endl;
+  kDebug(5700) << "ResourceNet::requestSaveTicket()";
 
   return createTicket( this );
 }
@@ -202,7 +202,7 @@ bool ResourceNet::asyncLoad()
 
 void ResourceNet::abortAsyncLoading()
 {
-  kDebug(5700) << "ResourceNet::abortAsyncLoading()" << endl;
+  kDebug(5700) << "ResourceNet::abortAsyncLoading()";
 
   if ( d->mLoadJob ) {
     d->mLoadJob->kill(); // result not emitted
@@ -215,7 +215,7 @@ void ResourceNet::abortAsyncLoading()
 
 void ResourceNet::abortAsyncSaving()
 {
-  kDebug(5700) << "ResourceNet::abortAsyncSaving()" << endl;
+  kDebug(5700) << "ResourceNet::abortAsyncSaving()";
 
   if ( d->mSaveJob ) {
     d->mSaveJob->kill(); // result not emitted
@@ -229,7 +229,7 @@ void ResourceNet::abortAsyncSaving()
 bool ResourceNet::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceNet::save()" << endl;
+  kDebug(5700) << "ResourceNet::save()";
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -258,7 +258,7 @@ bool ResourceNet::save( Ticket *ticket )
 bool ResourceNet::asyncSave( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceNet::asyncSave()" << endl;
+  kDebug(5700) << "ResourceNet::asyncSave()";
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -302,7 +302,7 @@ bool ResourceNet::createLocalTempFile()
 void ResourceNet::deleteStaleTempFile()
 {
   if ( hasTempFile() ) {
-    kDebug(5700) << "stale temp file detected " << mTempFile->fileName() << endl;
+    kDebug(5700) << "stale temp file detected" << mTempFile->fileName();
     deleteLocalTempFile();
   }
 }
@@ -347,7 +347,7 @@ QString ResourceNet::format() const
 void ResourceNet::downloadFinished( KJob *job )
 {
   Q_UNUSED( job );
-  kDebug(5700) << "ResourceNet::downloadFinished()" << endl;
+  kDebug(5700) << "ResourceNet::downloadFinished()";
 
   d->mIsLoading = false;
 
@@ -374,7 +374,7 @@ void ResourceNet::downloadFinished( KJob *job )
 
 void ResourceNet::uploadFinished( KJob *job )
 {
-  kDebug(5700) << "ResourceFile::uploadFinished()" << endl;
+  kDebug(5700) << "ResourceFile::uploadFinished()";
 
   d->mIsSaving = false;
 

@@ -120,37 +120,37 @@ Addressee& Addressee::operator=( const Addressee &other )
 bool Addressee::operator==( const Addressee &a ) const
 {
   if ( d->mUid != a.d->mUid ) {
-    kDebug(5700) << "uid differs" << endl;
+    kDebug(5700) << "uid differs";
     return false;
   }
   --EQUALSTEST--
   if ( ( d->mUrl.isValid() || a.d->mUrl.isValid() ) &&
        ( d->mUrl != a.d->mUrl ) ) {
-    kDebug(5700) << "url differs" << endl;
+    kDebug(5700) << "url differs";
     return false;
   }
   if ( !listEquals( d->mPhoneNumbers, a.d->mPhoneNumbers ) ) {
-    kDebug(5700) << "phoneNumbers differs" << endl;
+    kDebug(5700) << "phoneNumbers differs";
     return false;
   }
   if ( !listEquals( d->mAddresses, a.d->mAddresses ) ) {
-    kDebug(5700) << "addresses differs" << endl;
+    kDebug(5700) << "addresses differs";
     return false;
   }
   if ( !listEquals( d->mKeys, a.d->mKeys ) ) {
-    kDebug(5700) << "keys differs" << endl;
+    kDebug(5700) << "keys differs";
     return false;
   }
   if ( !emailsEquals( d->mEmails, a.d->mEmails ) ) {
-    kDebug(5700) << "emails differs" << endl;
+    kDebug(5700) << "emails differs";
     return false;
   }
   if ( !listEquals( d->mCategories, a.d->mCategories ) ) {
-    kDebug(5700) << "categories differs" << endl;
+    kDebug(5700) << "categories differs";
     return false;
   }
   if ( !listEquals( d->mCustom, a.d->mCustom ) ) {
-    kDebug(5700) << "custom differs" << endl;
+    kDebug(5700) << "custom differs";
     return false;
   }
 

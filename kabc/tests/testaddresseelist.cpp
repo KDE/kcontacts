@@ -42,7 +42,7 @@ int main( int /*argc*/, char /* **argv*/)
   KApplication app;
   KCmdLineArgs* args = KCmdLineArgs::parsedArgs(); */
 
-  kDebug() << "Creating addressees" << endl;
+  kDebug() << "Creating addressees";
   Addressee a, b, c, d, e, f;
   a.setGivenName( "Peter" );
   a.setFamilyName( "Pan" );
@@ -70,7 +70,7 @@ int main( int /*argc*/, char /* **argv*/)
   f.setFormattedName( "Dantes, Edmond" );
   f.setUid( "78ze" );
 
-  kDebug() << "Adding to list" << endl;
+  kDebug() << "Adding to list";
   AddresseeList list;
   list.append( a );
   list.append( b );
@@ -87,10 +87,10 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at( 4 ) ).uid() == "Asdf" &&
           ( *list.at( 5 ) ).uid() == "Z2hk" ) ) {
       kError() << "SORTING BY FAMILY NAME NOT CORRECT!" << endl;
-      kDebug() << "list sorted by family name:" << endl;
+      kDebug() << "list sorted by family name:";
       list.dump();
   } else {
-      kDebug() << "Sorting by family name correct." << endl;
+      kDebug() << "Sorting by family name correct.";
   }
   list.setReverseSorting( true );
   list.sort();
@@ -101,10 +101,10 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at( 1 ) ).uid() == "Asdf" &&
           ( *list.at( 0 ) ).uid() == "Z2hk" ) ) {
       kError() << "REVERSE SORTING BY FAMILY NAME NOT CORRECT!" << endl;
-      kDebug() << "list reverse sorted by family name:" << endl;
+      kDebug() << "list reverse sorted by family name:";
       list.dump();
   } else {
-      kDebug() << "Reverse sorting by family name correct." << endl;
+      kDebug() << "Reverse sorting by family name correct.";
   }
 
   list.setReverseSorting( false );
@@ -116,10 +116,10 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at( 4 ) ).uid() == "Z2hk" &&
           ( *list.at( 5 ) ).uid() == "Asdf" ) ) {
       kError() << "SORTING BY FORMATTED NAME NOT CORRECT!" << endl;
-      kDebug() << "list sorted by formatted name:" << endl;
+      kDebug() << "list sorted by formatted name:";
       list.dump();
   } else {
-      kDebug() << "Sorting by formatted name correct." << endl;
+      kDebug() << "Sorting by formatted name correct.";
   }
   list.setReverseSorting( true );
   list.sort();
@@ -130,10 +130,10 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at( 1 ) ).uid() == "Z2hk" &&
           ( *list.at( 0 ) ).uid() == "Asdf" ) ) {
       kError() << "REVERSE SORTING BY FORMATTED NAME NOT CORRECT!" << endl;
-      kDebug() << "list reverse sorted by formatted name:" << endl;
+      kDebug() << "list reverse sorted by formatted name:";
       list.dump();
   } else {
-      kDebug() << "Reverse sorting by formatted name correct." << endl;
+      kDebug() << "Reverse sorting by formatted name correct.";
   }
 
   list.setReverseSorting( false );
@@ -145,10 +145,10 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at( 4 ) ).uid() == "Z2hk" &&
           ( *list.at( 5 ) ).uid() == "kk45" ) ) {
       kError() << "SORTING BY UID NOT CORRECT!" << endl;
-      kDebug() << "list sorted by Uid:" << endl;
+      kDebug() << "list sorted by Uid:";
       list.dump();
   } else {
-      kDebug() << "Sorting by Uid correct." << endl;
+      kDebug() << "Sorting by Uid correct.";
   }
   list.setReverseSorting( true );
   list.sortBy( Uid );
@@ -159,43 +159,43 @@ int main( int /*argc*/, char /* **argv*/)
           ( *list.at(1) ).uid() == "Z2hk" &&
           ( *list.at(0) ).uid() == "kk45" ) ) {
       kError() << "REVERSE SORTING BY UID NOT CORRECT!" << endl;
-      kDebug() << "list sorted by Uid:" << endl;
+      kDebug() << "list sorted by Uid:";
       list.dump();
   } else {
-      kDebug() << "Reverse sorting by Uid correct." << endl;
+      kDebug() << "Reverse sorting by Uid correct.";
   }
 
   // zero, one or two entries might give errors in a poor sorting
   // implementation
-  kDebug() << "sorting empty list" << endl;
+  kDebug() << "sorting empty list";
   AddresseeList list2;
   list2.sort();
 
-  kDebug() << "sorting one entry list" << endl;
+  kDebug() << "sorting one entry list";
   list2.append( a );
   list2.sort();
 
-  kDebug() << "sorting two entry list" << endl;
+  kDebug() << "sorting two entry list";
   list2.append( f );
   list2.setReverseSorting( false );
   list2.sort();
   if ( !( ( *list2.at( 0 ) ).uid() == "78ze" &&
           ( *list2.at( 1 ) ).uid() == "Asdf" ) ) {
       kError() << "SORTING BY FORMATTED NAME IN A TWO ENTRY LIST NOT CORRECT!" << endl;
-      kDebug() << "list sorted by formatted name, two entries:" << endl;
+      kDebug() << "list sorted by formatted name, two entries:";
       list2.dump();
   } else {
-      kDebug() << "Sorting by FormattedName in a two entry list correct." << endl;
+      kDebug() << "Sorting by FormattedName in a two entry list correct.";
   }
   list2.setReverseSorting( true );
   list2.sort();
   if ( !( ( *list2.at( 1 ) ).uid() == "78ze" &&
           ( *list2.at( 0 ) ).uid() == "Asdf" ) ) {
       kError() << "REVERSE SORTING BY FORMATTED NAME IN A TWO ENTRY LIST NOT CORRECT!" << endl;
-      kDebug() << "list reverse sorted by formatted name, two entries:" << endl;
+      kDebug() << "list reverse sorted by formatted name, two entries:";
       list2.dump();
   } else {
-      kDebug() << "Reverse sorting by FormattedName in a two entry list correct." << endl;
+      kDebug() << "Reverse sorting by FormattedName in a two entry list correct.";
   }
 
 }

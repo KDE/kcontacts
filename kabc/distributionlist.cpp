@@ -286,7 +286,7 @@ bool DistributionListManager::load()
     QString name = it.key();
     QStringList value = cg.readEntry( name, QStringList() );
 
-    kDebug(5700) << "DLM::load(): " << name << ": " << value.join( "," ) << endl;
+    kDebug(5700) << "DLM::load():" << name << ":" << value.join( "," );
 
     DistributionList *list = new DistributionList( this, name );
 
@@ -296,7 +296,7 @@ bool DistributionListManager::load()
       QString id = *entryIt++;
       QString email = entryIt != value.constEnd() ? *entryIt : QString();
 
-      kDebug(5700) << "----- Entry " << id << endl;
+      kDebug(5700) << "----- Entry" << id;
 
       Addressee a = d->mAddressBook->findByUid( id );
       if ( !a.isEmpty() ) {
@@ -319,7 +319,7 @@ bool DistributionListManager::load()
 
 bool DistributionListManager::save()
 {
-  kDebug(5700) << "DistListManager::save()" << endl;
+  kDebug(5700) << "DistListManager::save()";
 
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
   KConfigGroup cg( &cfg, "DistributionLists" );
@@ -328,7 +328,7 @@ bool DistributionListManager::save()
   QListIterator<DistributionList*> it( d->mLists );
   while ( it.hasNext() ) {
     DistributionList *list = it.next();
-    kDebug(5700) << "  Saving '" << list->name() << "'" << endl;
+    kDebug(5700) << "  Saving '" << list->name() << "'";
 
     QStringList value;
     const DistributionList::Entry::List entries = list->entries();

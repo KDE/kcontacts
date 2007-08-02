@@ -66,7 +66,7 @@ QString StdAddressBook::directoryName()
 
 StdAddressBook *StdAddressBook::self()
 {
-  kDebug(5700) << "StdAddressBook::self()" << endl;
+  kDebug(5700) << "StdAddressBook::self()";
 
   if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook );
@@ -77,7 +77,7 @@ StdAddressBook *StdAddressBook::self()
 
 StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
-  kDebug(5700) << "StdAddressBook::self()" << endl;
+  kDebug(5700) << "StdAddressBook::self()";
 
   if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook( asynchronous ) );
@@ -89,7 +89,7 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
 StdAddressBook::StdAddressBook()
   : AddressBook( "" ), d( new Private( this ) )
 {
-  kDebug(5700) << "StdAddressBook::StdAddressBook()" << endl;
+  kDebug(5700) << "StdAddressBook::StdAddressBook()";
 
   d->init( false );
 }
@@ -97,7 +97,7 @@ StdAddressBook::StdAddressBook()
 StdAddressBook::StdAddressBook( bool asynchronous )
   : AddressBook( "" ), d( new Private( this ) )
 {
-  kDebug(5700) << "StdAddressBook::StdAddressBook( bool )" << endl;
+  kDebug(5700) << "StdAddressBook::StdAddressBook( bool )";
 
   d->init( asynchronous );
 }
@@ -139,7 +139,7 @@ void StdAddressBook::Private::init( bool asynchronous )
     if ( res ) {
       mParent->addResource( res );
     } else {
-      kDebug(5700) << "No resource available!!!" << endl;
+      kDebug(5700) << "No resource available!!!";
     }
   }
 
@@ -155,7 +155,7 @@ void StdAddressBook::Private::init( bool asynchronous )
 
 bool StdAddressBook::Private::saveAll()
 {
-  kDebug(5700) << "StdAddressBook::saveAll()" << endl;
+  kDebug(5700) << "StdAddressBook::saveAll()";
   bool ok = true;
 
   mParent->deleteRemovedAddressees();
@@ -183,7 +183,7 @@ bool StdAddressBook::Private::saveAll()
 
 bool StdAddressBook::save()
 {
-  kDebug(5700) << "StdAddressBook::save()" << endl;
+  kDebug(5700) << "StdAddressBook::save()";
 
   if ( Private::mSelf ) {
     return Private::mSelf->d->saveAll();
