@@ -251,7 +251,7 @@ bool ResourceFile::asyncLoad()
   }
 
   if ( d->mIsSaving ) {
-    kWarning(5700) << "Aborted asyncSave() because we're still asyncSave()ing!" << endl;
+    kWarning(5700) << "Aborted asyncSave() because we're still saving!";
     return false;
   }
 
@@ -345,7 +345,7 @@ bool ResourceFile::asyncSave( Ticket * )
   }
 
   if ( d->mIsLoading ) {
-    kWarning(5700) << "Aborted asyncSave() because we're still asyncLoad()ing!" << endl;
+    kWarning(5700) << "Aborted asyncSave() because we're still loading!";
     return false;
   }
 

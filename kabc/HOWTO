@@ -203,10 +203,10 @@ The following code will create a file resource and save a contact into it:
 73:
 74:  KABC::Ticket *ticket = ab.requestSaveTicket( res );
 75:  if ( !ticket ) {
-76:    kError() << "Resource is locked by other application!" << endl;
+76:    kError() << "Resource is locked by other application!";
 77:  } else {
 78:    if ( !ab.save( ticket ) ) {
-79:      kError() << "Saving failed!" << endl;
+79:      kError() << "Saving failed!";
 80:      ab.releaseSaveTicket( ticket );
 81:    }
 82:

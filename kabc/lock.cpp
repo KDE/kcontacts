@@ -118,8 +118,7 @@ bool Lock::lock()
     int retval = ::kill( pid, 0 );
     if ( retval == -1 && errno == ESRCH ) { // process doesn't exists anymore
       QFile::remove( lockName );
-      kWarning(5700) << "Removed stale lock file from process '" << app << "'"
-                      << endl;
+      kWarning(5700) << "Removed stale lock file from process '" << app << "'";
     } else {
       QString identifier( d->mIdentifier );
       identifier.replace( '_', '/' );

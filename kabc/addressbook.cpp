@@ -821,7 +821,7 @@ void AddressBook::error( const QString &msg )
   if ( d->mErrorHandler ) {
     d->mErrorHandler->error( msg );
   } else {
-    kError(5700) << "no error handler defined" << endl;
+    kError(5700) << "no error handler defined";
   }
 }
 

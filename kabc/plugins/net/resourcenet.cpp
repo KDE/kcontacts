@@ -176,7 +176,7 @@ bool ResourceNet::asyncLoad()
   }
 
   if ( d->mIsSaving ) {
-    kWarning(5700) << "Aborted asyncLoad() because we're still asyncSave()ing!" << endl;
+    kWarning(5700) << "Aborted asyncLoad() because we're still saving!";
     return false;
   }
 
@@ -265,7 +265,7 @@ bool ResourceNet::asyncSave( Ticket *ticket )
   }
 
   if ( d->mIsLoading ) {
-    kWarning(5700) << "Aborted asyncSave() because we're still asyncLoad()ing!" << endl;
+    kWarning(5700) << "Aborted asyncSave() because we're still loading!";
     return false;
   }
 

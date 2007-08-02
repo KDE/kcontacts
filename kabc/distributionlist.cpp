@@ -390,7 +390,7 @@ DistributionListWatcher::~DistributionListWatcher()
 
 DistributionListWatcher *DistributionListWatcher::self()
 {
-  kWarning( !qApp ) << "No QApplication object available, you'll get a memleak!" << endl;
+  kWarning( !qApp ) << "No QApplication object available, you'll get a memleak!";
 
   if ( !Private::mSelf ) {
     Private::mSelf = new DistributionListWatcher();

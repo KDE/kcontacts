@@ -259,8 +259,8 @@ void AddresseeList::sortBy( SortingCriterion c )
   } else if ( GivenName == c ) {
     sortByTrait<SortingTraits::GivenName>();
   } else {
-    kError(5700) << "AddresseeList sorting criterion passed for which a trait is not known. "
-                 << "No sorting done." << endl;
+    kError(5700) << "AddresseeList sorting criterion passed for which a trait is not known."
+                 << "No sorting done.";
   }
 }
 
@@ -309,7 +309,7 @@ void AddresseeList::sortByTrait()
 void AddresseeList::sortByField( Field *field )
 {
   if ( !field ) {
-    kWarning(5700) << "sortByField called with no active sort field" << endl;
+    kWarning(5700) << "sortByField called with no active sort field";
     return;
   }
 
