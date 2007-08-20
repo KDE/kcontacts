@@ -238,8 +238,12 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     card.addLine( noteLine );
 
     // ORG
-    VCardLine orgLine( "ORG", (*addrIt).organization() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).organization() ) ) {
+    QStringList organization;
+    organization.append( ( *addrIt ).organization().replace( ';', "\\;" ) );
+    if ( !( *addrIt ).department().isEmpty() )
+      organization.append( ( *addrIt ).department().replace( ';', "\\;" ) );
+    VCardLine orgLine( "ORG", organization.join( ";" ) );
+    if ( version == VCard::v2_1 && needsEncoding( organization.join( ";" ) ) ) {
       orgLine.addParameter( "charset", "UTF-8" );
       orgLine.addParameter( "encoding", "QUOTED-PRINTABLE" );
     }
@@ -529,9 +533,13 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // ORGANIZATION
         else if ( identifier == "org" ) {
-          addr.setOrganization( (*lineIt).value().toString() );
+          const QStringList orgParts = splitString( semicolonSep, (*lineIt).value().toString() );
+          if ( orgParts.count() > 0 )
+            addr.setOrganization( orgParts[ 0 ] );
+          if ( orgParts.count() > 1 )
+            addr.setDepartment( orgParts[ 1 ] );
         }
-
+ 
         // PHOTO
         else if ( identifier == "photo" ) {
           addr.setPhoto( parsePicture( *lineIt ) );
