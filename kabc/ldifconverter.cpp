@@ -147,7 +147,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "organizationname", addr.organization() );
 
   // Compatibility with older kabc versions.
-  if ( addr.department().isEmpty() )
+  if ( !addr.department().isEmpty() )
     ldif_out( t, "department", addr.department() );
   else
     ldif_out( t, "department", addr.custom("KADDRESSBOOK", "X-Department") );
