@@ -173,6 +173,8 @@ class KABC_EXPORT Address
 
     /**
       Sets the @p locality, e.g. city.
+
+      @param locality the locality of the address, e.g. city
     */
     void setLocality( const QString &locality );
 
@@ -188,6 +190,8 @@ class KABC_EXPORT Address
 
     /**
       Sets the @p region, e.g. state.
+
+      @param region the region the address falls into, e.g. state
     */
     void setRegion( const QString &region );
 
@@ -233,6 +237,8 @@ class KABC_EXPORT Address
 
     /**
       Sets the delivery @p label. This is the literal text to be used as label.
+
+      @param label the string to use for delivery labels
     */
     void setLabel( const QString &label );
 

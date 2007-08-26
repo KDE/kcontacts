@@ -126,6 +126,8 @@ class KABC_EXPORT AddresseeDialog : public KDialog
       Open addressee select dialog and return the entry selected by the user.
       If the user doesn't select an entry or presses cancel, the returned
       addressee is empty.
+
+      @param parent The QWidget parent for the dialog.
     */
     static Addressee getAddressee( QWidget *parent );
 
@@ -135,6 +137,8 @@ class KABC_EXPORT AddresseeDialog : public KDialog
       Open addressee select dialog and return the entries selected by the user.
       If the user doesn't select an entry or presses cancel, the returned
       addressee list is empty.
+
+      @param parent The QWidget parent for the dialog.
     */
     static Addressee::List getAddressees( QWidget *parent );
 

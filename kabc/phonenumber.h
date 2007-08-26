@@ -129,6 +129,8 @@ class KABC_EXPORT PhoneNumber
     /**
      * Sets the @p type.
      * Multiple types can be specified by combining them by a logical or.
+     *
+     * @param type The #Type of the phone number
      */
     void setType( Type type );
 

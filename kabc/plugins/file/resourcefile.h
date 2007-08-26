@@ -60,6 +60,9 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
 
     /**
       Constructs a file resource on file @arg fileName using format @arg formatName.
+
+      @param fileName The file to use for this resource
+      @param formatName The format of the data in the given file
      */
     explicit ResourceFile( const QString &fileName,
                            const QString &formatName = QLatin1String( "vcard" ) );
@@ -133,6 +136,10 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     /**
       Remove a addressee from its source.
       This method is mainly called by KABC::AddressBook.
+
+      @param addr The addressee to remove
+
+      @see KABC::AddressBook::removeAddressee()
      */
     virtual void removeAddressee( const Addressee &addr );
 

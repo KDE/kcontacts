@@ -45,6 +45,8 @@ class VCardLine
 
     /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
+     *
+     * @param identifier The VCard identifier of this line
      */
     void setIdentifier( const QString &identifier );
 
@@ -85,18 +87,25 @@ class VCardLine
 
     /**
      * Add a new parameter to the line.
+     *
+     * @param param Name of the parameter to insert
+     * @param value Value of the parameter to insert
      */
     void addParameter( const QString &param, const QString &value );
 
     /**
      * Returns the values of a special parameter.
      * You can get a list of all parameters with paramList().
+     *
+     * @param param Name of the parameter to look for
      */
     QStringList parameters( const QString &param ) const;
 
     /**
      * Returns only the first value of a special parameter.
      * You can get a list of all parameters with paramList().
+     *
+     * @param param Name of the parameter to look for
      */
     QString parameter( const QString &param ) const;
 

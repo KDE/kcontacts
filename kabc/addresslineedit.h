@@ -52,7 +52,8 @@ class KABC_EXPORT AddressLineEdit : public KLineEdit
 
     /**
      * Reimplented for internal reasons.
-     * @ see KLineEdit::setFont()
+     * @param font The font to use
+     * @see KLineEdit::setFont()
      */
     virtual void setFont( const QFont &font );
 

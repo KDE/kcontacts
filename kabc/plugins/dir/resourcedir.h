@@ -78,6 +78,10 @@ class KABC_DIR_EXPORT ResourceDir : public Resource
     /**
       Remove a addressee from its source.
       This method is mainly called by KABC::AddressBook.
+
+      @param addr The addressee to remove
+
+      @see KABC::AddressBook::removeAddressee()
      */
     virtual void removeAddressee( const Addressee &addr );
 

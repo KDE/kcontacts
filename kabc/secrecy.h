@@ -81,7 +81,8 @@ class KABC_EXPORT Secrecy
 
     /**
      * Sets the @p type.
-     * @see Type
+     *
+     * @param type The #Type of secrecy
      */
     void setType( Type type );
 

@@ -96,6 +96,8 @@ class KABC_EXPORT Addressee
 
     /**
       Set unique identifier.
+
+      @param uid the KABC unique identifier
      */
     void setUid( const QString &uid );
     /**
@@ -146,6 +148,8 @@ class KABC_EXPORT Addressee
 
     /**
       Remove email address. If the email address doesn't exist, nothing happens.
+
+      @param email Email address to remove
      */
     void removeEmail( const QString &email );
 
@@ -170,17 +174,23 @@ class KABC_EXPORT Addressee
     /**
       Insert a phone number. If a phone number with the same id already exists
       in this addressee it is not duplicated.
+
+      @param phoneNumber The telephone number to insert to the addressee
      */
     void insertPhoneNumber( const PhoneNumber &phoneNumber );
 
     /**
       Remove phone number. If no phone number with the given id exists for this
       addresse nothing happens.
+
+      @param phoneNumber The telephone number to remove from the addressee
      */
     void removePhoneNumber( const PhoneNumber &phoneNumber );
 
     /**
       Return phone number, which matches the given type.
+
+      @param type The type of phone number to get
      */
     PhoneNumber phoneNumber( PhoneNumber::Type type ) const;
 
@@ -191,23 +201,32 @@ class KABC_EXPORT Addressee
 
     /**
       Return list of phone numbers with a special type.
+
+      @param type The type of phone number to get
      */
     PhoneNumber::List phoneNumbers( PhoneNumber::Type type ) const;
 
     /**
       Return phone number with the given id.
+
+      @param id The identifier of the phone number to look for.
+                See PhoneNumber::id()
      */
     PhoneNumber findPhoneNumber( const QString &id ) const;
 
     /**
       Insert a key. If a key with the same id already exists
       in this addressee it is not duplicated.
+
+      @param key The key to insert
      */
     void insertKey( const Key &key );
 
     /**
       Remove a key. If no key with the given id exists for this
       addresse nothing happens.
+
+      @param key The key to remove
      */
     void removeKey( const Key &key );
 
@@ -216,6 +235,10 @@ class KABC_EXPORT Addressee
       If @p type == Key::Custom you can specify a string
       that should match. If you leave the string empty, the first
       key with a custom value is returned.
+
+      @param type The type of key to look for
+      @param customTypeString A string to match custom keys against when
+             @p type is @c Key::Custom
      */
     Key key( Key::Type type, QString customTypeString = QString() ) const;
 
@@ -235,28 +258,40 @@ class KABC_EXPORT Addressee
       If @p type == Key::Custom you can specify a string
       that should match. If you leave the string empty, all custom
       keys will be returned.
+
+      @param type The type of key to look for
+      @param customTypeString A string to match custom keys against when
+             @p type is @c Key::Custom
      */
     Key::List keys( Key::Type type, QString customTypeString = QString()  ) const;
 
     /**
       Return key with the given id.
+
+      @param id The identifier of the key to look for. See Key::id()
      */
     Key findKey( const QString &id ) const;
 
     /**
       Insert an address. If an address with the same id already exists
       in this addressee it is not duplicated.
+
+      @param address The address to insert
      */
     void insertAddress( const Address &address );
 
     /**
       Remove address. If no address with the given id exists for this
       addresse nothing happens.
+
+      @param address The address to remove
      */
     void removeAddress( const Address &address );
 
     /**
       Return address, which matches the given type.
+
+      @param type The type of address to look for
      */
     Address address( Address::Type type ) const;
 
@@ -267,11 +302,15 @@ class KABC_EXPORT Addressee
 
     /**
       Return list of addresses with a special type.
+
+      @param type The type of addresses to look for
      */
     Address::List addresses( Address::Type type ) const;
 
     /**
       Return address with the given id.
+
+      @param The identifier of the address to look for. See Address::id()
      */
     Address findAddress( const QString &id ) const;
 
@@ -307,17 +346,27 @@ class KABC_EXPORT Addressee
 
       An empty value isn't allowed (nothing happens if this is called with
       any of the three arguments being empty)
+
+      @param app Name of the application inserting this custom entry
+      @param name Name of this application specific custom entry
+      @param value Value of this application specific custom entry
      */
     void insertCustom( const QString &app, const QString &name,
                        const QString &value );
 
     /**
       Remove custom entry.
+
+      @param app Name of the application which has inserted this custom entry
+      @param name Name of this application specific custom entry
      */
     void removeCustom( const QString &app, const QString &name );
 
     /**
       Return value of custom entry, identified by app and entry name.
+
+      @param app Name of the application which has inserted this custom entry
+      @param name Name of this application specific custom entry
      */
     QString custom( const QString &app, const QString &name ) const;
 
@@ -333,6 +382,10 @@ class KABC_EXPORT Addressee
 
     /**
       Parse full email address. The result is given back in fullName and email.
+
+      @param rawEmail The input string to parse for name and email
+      @param fullName The name part of the @p rawEmail input, if it contained one
+      @param email The email part of the @p rawEmail input, if it contained one
      */
     static void parseEmailAddress( const QString &rawEmail, QString &fullName,
                                    QString &email );
@@ -344,6 +397,8 @@ class KABC_EXPORT Addressee
 
     /**
       Set resource where the addressee is from.
+
+      @param resource The Resource the addressee is from
      */
     void setResource( Resource *resource );
 
@@ -354,6 +409,8 @@ class KABC_EXPORT Addressee
 
     /**
       Mark addressee as changed.
+
+      @param value Sets the status indicating changed data
      */
     void setChanged( bool value );
 

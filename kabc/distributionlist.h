@@ -93,12 +93,21 @@ class KABC_EXPORT DistributionList
     /**
       Insert an entry into this distribution list. If the entry already exists
       nothing happens.
+
+      @param email Email address to use for comparison with already inserted
+                   entries. If the same addressee is already in the list but
+                   the @p email is not the same, insert it again, otherwise
+                   update the already existing entry
     */
     void insertEntry( const Addressee &, const QString &email=QString() );
 
     /**
       Remove an entry from this distribution list. If the entry doesn't exist
       nothing happens.
+
+      @param email Email address to use as an additional check, since the
+                   same addressee entry can be in the list multiple times
+                   but with different emails
     */
     void removeEntry( const Addressee &, const QString &email=QString() );
 

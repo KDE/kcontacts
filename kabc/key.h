@@ -115,6 +115,9 @@ class KABC_EXPORT Key
 
     /**
       Sets the @p type.
+
+      @param type The type of the key
+
       @see Type
     */
     void setType( Type type );

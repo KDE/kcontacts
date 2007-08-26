@@ -178,7 +178,8 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
     /**
      * Determines the direction of sorting. On change, the list
      * will <em>not</em> automatically be resorted.
-     * @param r   <tt>true</tt> if sorting should be done reverse, <tt>false</tt> otherwise
+     * @param reverseSorting <tt>true</tt> if sorting should be done reverse,
+     *                       <tt>false</tt> otherwise
      */
     void setReverseSorting( bool reverseSorting = true );
 
