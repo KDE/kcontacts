@@ -27,13 +27,13 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <kstaticdeleter.h>
+#include <k3staticdeleter.h>
 
 #include <stdlib.h>
 
 using namespace KABC;
 
-static KStaticDeleter<StdAddressBook> addressBookDeleter;
+static K3StaticDeleter<StdAddressBook> addressBookDeleter;
 
 class StdAddressBook::Private
 {
