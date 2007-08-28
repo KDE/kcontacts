@@ -496,9 +496,16 @@ class KABC_EXPORT AddressBook : public QObject
     void dump() const;
 
     /**
-      */
+      Emits the signal addressBookLocked() using @c this as the parameter
+     */
     void emitAddressBookLocked() { addressBookLocked( this ); }
+    /**
+      Emits the signal addressBookUnlocked() using @c this as the parameter
+     */
     void emitAddressBookUnlocked() { addressBookUnlocked( this ); }
+    /**
+      Emits the signal addressBookChanged() using @c this as the parameter
+     */
     void emitAddressBookChanged() { addressBookChanged( this ); }
 
     /**
@@ -552,15 +559,71 @@ class KABC_EXPORT AddressBook : public QObject
     void savingFinished( Resource *resource );
 
   protected Q_SLOTS:
+    /**
+      Handles loading success.
+
+      Resource will be removed from the list of those pending for loading
+      and signal loadingFinished() will be emitted.
+      It this has been the last one in this list, signal addressBookChanged()
+      is emitted as well.
+
+      @param resource The resource which has been saved successfully.
+     */
     void resourceLoadingFinished( Resource *resource );
+
+    /**
+      Handles saving success.
+
+      Resource will be removed from the list of those pending for saving.
+
+      @param resource The resource which has been saved successfully.
+     */
     void resourceSavingFinished( Resource *resource );
+
+    /**
+      Handles loading errors.
+
+      Resource will be removed from the list of those pending for loading.
+      If this has been the last one in this list, signal addressBookChanged()
+      is emitted.
+
+      @param resource The resource which could not be loaded.
+      @param errMsg The message describing the error. See error()
+     */
     void resourceLoadingError( Resource *resource, const QString &errMsg );
+
+    /**
+      Handles saving errors.
+
+      Resource will be removed from the list of those pending for saving.
+
+      @param resource The resource which could not be saved.
+      @param errMsg The message describing the error. See error()
+     */
     void resourceSavingError( Resource *resource, const QString &errMsg );
 
   protected:
-    void deleteRemovedAddressees();
+    /**
+      Sets the resource manager's standard resource.
+
+      Convenience method for resourceManager()->setStandardResource()
+
+      @see standardResource()
+     */
     void setStandardResource( Resource *resource );
+
+    /**
+      Returns the addressbook resource manager's standard resource.
+
+      Convenience method for resourceManager()->standardResource()
+
+      @see setStandardResource()
+     */
     Resource *standardResource();
+
+    /**
+      Returns the addressbook's resource manager.
+     */
     KRES::Manager<Resource> *resourceManager();
 
   private:

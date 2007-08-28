@@ -379,7 +379,6 @@ bool AddressBook::save( Ticket *ticket )
   kDebug(5700) << "AddressBook::save()";
 
   if ( ticket->resource() ) {
-    deleteRemovedAddressees();
     bool ok = ticket->resource()->save( ticket );
     if ( ok ) {
       ticket->resource()->releaseSaveTicket( ticket );
@@ -825,11 +824,6 @@ void AddressBook::error( const QString &msg )
   }
 }
 
-void AddressBook::deleteRemovedAddressees()
-{
-  // no any longer needed
-}
-
 void AddressBook::setStandardResource( Resource *resource )
 {
   d->mManager->setStandardResource( resource );
@@ -862,7 +856,7 @@ void AddressBook::resourceLoadingFinished( Resource *resource )
 
 void AddressBook::resourceSavingFinished( Resource *resource )
 {
-  d->mPendingLoadResources.removeAll( resource );
+  d->mPendingSaveResources.removeAll( resource );
 
   emit savingFinished( resource );
 }

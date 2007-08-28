@@ -158,8 +158,6 @@ bool StdAddressBook::Private::saveAll()
   kDebug(5700) << "StdAddressBook::saveAll()";
   bool ok = true;
 
-  mParent->deleteRemovedAddressees();
-
   KRES::Manager<Resource>::ActiveIterator it;
   KRES::Manager<Resource> *manager = mParent->resourceManager();
   for ( it = manager->activeBegin(); it != manager->activeEnd(); ++it ) {

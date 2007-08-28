@@ -47,10 +47,36 @@ namespace SortingTraits
 class KABC_EXPORT Uid
 {
   public:
+    /**
+     * Creates an instance.
+     */
     Uid();
+
+    /**
+     * Destroys the instance.
+     */
     ~Uid();
 
+    /**
+     * "Equal" compare method
+     *
+     * @return @c true if the first parameter is equal to the second
+     *         when comparing the uid attribute.
+     *
+     * @see Addressee::uid()
+     * @see QString::compare()
+     */
     static bool eq( const Addressee &, const Addressee & );
+
+    /**
+     * "Less-Than" compare method
+     *
+     * @return @c true if the first parameter is "less-than" the second
+     *         when comparing the uid attribute.
+     *
+     * @see Addressee::uid()
+     * @see QString::compare()
+     */
     static bool lt( const Addressee &, const Addressee & );
 
   private:
@@ -61,10 +87,36 @@ class KABC_EXPORT Uid
 class KABC_EXPORT Name
 {
   public:
+    /**
+     * Creates an instance.
+     */
     Name();
+
+    /**
+     * Destroys the instance.
+     */
     ~Name();
 
+    /**
+     * "Equal" compare method
+     *
+     * @return @c true if the first parameter is equal to the second
+     *         when comparing the name attribute.
+     *
+     * @see Addressee::name()
+     * @see QString::localeAwareCompare()
+     */
     static bool eq( const Addressee &, const Addressee & );
+
+    /**
+     * "Less-Than" compare method
+     *
+     * @return @c true if the first parameter is "less-than" the second
+     *         when comparing the name attribute.
+     *
+     * @see Addressee::name()
+     * @see QString::localeAwareCompare()
+     */
     static bool lt( const Addressee &, const Addressee & );
 
   private:
@@ -75,10 +127,36 @@ class KABC_EXPORT Name
 class KABC_EXPORT FormattedName
 {
   public:
+    /**
+     * Creates an instance.
+     */
     FormattedName();
+
+    /**
+     * Destroys the instance.
+     */
     ~FormattedName();
 
+    /**
+     * "Equal" compare method
+     *
+     * @return @c true if the first parameter is equal to the second
+     *         when comparing the formatted name attribute.
+     *
+     * @see Addressee::formattedName()
+     * @see QString::localeAwareCompare()
+     */
     static bool eq( const Addressee &, const Addressee & );
+
+    /**
+     * "Less-Than" compare method
+     *
+     * @return @c true if the first parameter is "less-than" the second
+     *         when comparing the formatted name attribute.
+     *
+     * @see Addressee::formattedName()
+     * @see QString::localeAwareCompare()
+     */
     static bool lt( const Addressee &, const Addressee & );
 
   private:
@@ -89,10 +167,39 @@ class KABC_EXPORT FormattedName
 class KABC_EXPORT FamilyName // fallback to given name
 {
   public:
+    /**
+     * Creates an instance.
+     */
     FamilyName();
+
+    /**
+     * Destroys the instance.
+     */
     ~FamilyName();
 
+    /**
+     * "Equal" compare method
+     *
+     * @return @c true if the first parameter is equal to the second
+     *         when comparing the family name and given name attributes.
+     *
+     * @see Addressee::familyName()
+     * @see Addressee::givenName()
+     * @see QString::localeAwareCompare()
+     */
     static bool eq( const Addressee &, const Addressee & );
+
+    /**
+     * "Less-Than" compare method
+     *
+     * Falls back to comparing given name if equal
+     *
+     * @return @c true if the first parameter is "less-than" the second
+     *         when comparing the family name attribute.
+     *
+     * @see Addressee::familyName()
+     * @see QString::localeAwareCompare()
+     */
     static bool lt( const Addressee &, const Addressee & );
 
   private:
@@ -103,10 +210,39 @@ class KABC_EXPORT FamilyName // fallback to given name
 class KABC_EXPORT GivenName  // fallback to family name
 {
   public:
+    /**
+     * Creates an instance.
+     */
     GivenName();
+
+    /**
+     * Destroys the instance.
+     */
     ~GivenName();
 
+    /**
+     * "Equal" compare method
+     *
+     * @return @c true if the first parameter is equal to the second
+     *         when comparing the given name and family name attributes.
+     *
+     * @see Addressee::givenName()
+     * @see Addressee::familyName()
+     * @see QString::localeAwareCompare()
+     */
     static bool eq( const Addressee &, const Addressee & );
+
+    /**
+     * "Less-Than" compare method
+     *
+     * Falls back to comparing family name if equal
+     *
+     * @return @c true if the first parameter is "less-than" the second
+     *         when comparing the given name attribute.
+     *
+     * @see Addressee::givenName()
+     * @see QString::localeAwareCompare()
+     */
     static bool lt( const Addressee &, const Addressee & );
 
   private:
@@ -173,6 +309,12 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      */
     ~AddresseeList();
 
+    /**
+     * Assignment operator.
+     *
+     * @param other the list to assign from
+     * @return a reference to @c this
+     */
     AddresseeList &operator=( const AddresseeList &other );
 
     /**

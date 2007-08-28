@@ -81,12 +81,38 @@ class KABC_EXPORT Addressee
       Construct an empty address book entry.
      */
     Addressee();
+
+    /**
+      Destroys the address book entry.
+     */
     ~Addressee();
 
+    /**
+      Copy constructor.
+     */
     Addressee( const Addressee & );
+
+    /**
+      Assignment operator.
+
+      @return a reference to @c this
+    */
     Addressee &operator=( const Addressee & );
 
+    /**
+      Equality operator.
+
+      @return @c true if @c this and the given addressee are equal,
+              otherwise @c false
+    */
     bool operator==( const Addressee & ) const;
+
+    /**
+      Not-equal operator.
+
+      @return @c true if @c this and the given addressee are not equal,
+              otherwise @c false
+    */
     bool operator!=( const Addressee & ) const;
 
     /**

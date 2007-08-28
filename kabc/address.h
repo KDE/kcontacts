@@ -85,8 +85,28 @@ class KABC_EXPORT Address
     */
     ~Address();
 
+    /**
+      Equality operator.
+
+      @param addr the address to compare to
+      @return @c true if @c this and @p addr are equal, otherwise @c false
+    */
     bool operator==( const Address &addr ) const;
+
+    /**
+      Not-equal operator.
+
+      @param addr the address to compare to
+      @return @c true if @c this and @p addr are not equal, otherwise @c false
+    */
     bool operator!=( const Address &addr ) const;
+
+    /**
+      Assignment operator.
+
+      @param addr the address data to assign to @c this
+      @return a reference to @c this
+    */
     Address &operator=( const Address &addr );
 
     /**
