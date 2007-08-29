@@ -58,6 +58,7 @@ class KABC_EXPORT AddressBook : public QObject
      */
     class KABC_EXPORT Iterator  //krazy:exclude=dpointer
     {
+      friend class AddressBook;
       public:
         /**
           Default constructor
@@ -149,6 +150,7 @@ class KABC_EXPORT AddressBook : public QObject
         */
         bool operator!=( const Iterator &it ) const;
 
+      private:
         struct IteratorData;
         IteratorData *const d;
     };
@@ -160,6 +162,7 @@ class KABC_EXPORT AddressBook : public QObject
      */
     class KABC_EXPORT ConstIterator //krazy:exclude=dpointer
     {
+      friend class AddressBook;
       public:
         /**
          * Default constructor
@@ -251,6 +254,7 @@ class KABC_EXPORT AddressBook : public QObject
         */
         bool operator!=( const ConstIterator &it ) const;
 
+      private:
         struct ConstIteratorData;
         ConstIteratorData *const d;
     };
@@ -607,6 +611,8 @@ class KABC_EXPORT AddressBook : public QObject
       Sets the resource manager's standard resource.
 
       Convenience method for resourceManager()->setStandardResource()
+
+      @param resource The resource to use as the standard
 
       @see standardResource()
      */
