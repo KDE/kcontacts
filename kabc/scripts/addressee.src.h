@@ -74,7 +74,15 @@ class KABC_EXPORT Addressee
   friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
 
   public:
+    /**
+      A list of addressee objects
+     */
     typedef AddresseeList List;
+    /**
+      A map from unique identifier to addressee.
+
+      @see uid()
+     */
     typedef QMap<QString, Addressee> Map;
 
     /**
@@ -336,7 +344,7 @@ class KABC_EXPORT Addressee
     /**
       Return address with the given id.
 
-      @param The identifier of the address to look for. See Address::id()
+      @param id The identifier of the address to look for. See Address::id()
      */
     Address findAddress( const QString &id ) const;
 
@@ -445,8 +453,23 @@ class KABC_EXPORT Addressee
      */
     bool changed() const;
 
+    /**
+      Sets the sort mode implementation.
+
+      Comparing to addressee objects is delegated to an instance
+      of a subclass of KABC::SortMode.
+
+      @param mode The sort mode implementator to use
+     */
     static void setSortMode( KABC::SortMode *mode );
 
+    /**
+      Return whether this addressee is "less-than" a given one
+
+      @param addr The addressee object to compare with
+
+      @see setSortMode()
+     */
     bool operator< ( const Addressee &addr ) const;
 
   private:

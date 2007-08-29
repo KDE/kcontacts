@@ -49,7 +49,7 @@ namespace KABC {
  *      }
  *      KAudioPlayer::play( tmpFile );
  *    }
- *  \code
+ *  \endcode
  *
  *  Unfortunately, KAudioPlayer::play is ASync, so to delete the temporary file
  *  the best you can really do is set a timer.
@@ -91,9 +91,29 @@ class KABC_EXPORT Sound
      */
     ~Sound();
 
+    /**
+     * Assignment operator.
+     *
+     * @param other The sound object to assign to @c this
+     */
     Sound &operator=( const Sound &other );
 
+    /**
+     * Equality operator.
+     *
+     * @param other The object to compare with
+     *
+     * @return @c true if the two objects are equal, otherwise @c false
+     */
     bool operator==( const Sound &other ) const;
+
+    /**
+     * Not-Equal operator.
+     *
+     * @param other The object to compare with
+     *
+     * @return @c true if the two objects are not equal, otherwise @c false
+     */
     bool operator!=( const Sound &other ) const;
 
     /**
