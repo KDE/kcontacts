@@ -74,8 +74,21 @@ class KABC_EXPORT Key
     */
     ~Key();
 
+    /**
+      Equality operator.
+    */
     bool operator==( const Key & ) const;
+
+    /**
+      Not-equal operator.
+    */
     bool operator!=( const Key & ) const;
+
+    /**
+      Assignment operator.
+
+      @param other The Key instance to assign to @c this
+    */
     Key &operator=( const Key &other );
 
     /**

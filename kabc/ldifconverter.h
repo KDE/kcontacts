@@ -64,6 +64,18 @@ namespace KABC {
 
   /* internal functions - do not use !! */
 
+  /**
+    @internal
+
+    Evaluates @p fieldname and sets the @p value at the addressee or the address
+    objects when appropriate.
+
+    @param a The addressee to store information into
+    @param homeAddr The home address to store respective information into
+    @param workAddr The work address to store respective information into
+    @param fieldname LDIF field name to evalute
+    @param value The value of the field addressed by @p fieldname
+  */
   KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr, Address &workAddr,
                                  QString &fieldname, QString &value );
 

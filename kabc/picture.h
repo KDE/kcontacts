@@ -57,6 +57,10 @@ class KABC_EXPORT Picture
 
     /**
      * Copy constructor.
+     *
+     * Fast operation, Picture's data is implicitly shared.
+     *
+     * @param picture The Picture instance to copy from
      */
     Picture( const Picture &picture );
 
@@ -65,9 +69,23 @@ class KABC_EXPORT Picture
      */
     ~Picture();
 
+    /**
+     * Assignment operator
+     *
+     * Fast operation, Picture's data is implicitly shared.
+     *
+     * @param other The Picture instance to assign to @c this
+     */
     Picture &operator=( const Picture &other );
 
+    /**
+     * Equality operator.
+     */
     bool operator==( const Picture & ) const;
+
+    /**
+     * Not-Equal operator.
+     */
     bool operator!=( const Picture & ) const;
 
     /**

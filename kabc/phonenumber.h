@@ -89,6 +89,10 @@ class KABC_EXPORT PhoneNumber
 
     /**
      * Copy constructor.
+     *
+     * Fast operation, PhoneNumber's data is implicitly shared.
+     *
+     * @param other The PhoneNumber object to copy from
      */
     PhoneNumber( const PhoneNumber &other );
 
@@ -97,8 +101,26 @@ class KABC_EXPORT PhoneNumber
      */
     ~PhoneNumber();
 
+    /**
+     * Equality operator.
+     *
+     * @return @c true if number, type and identifier are equal,
+     *         otherwise @c false
+     */
     bool operator==( const PhoneNumber & ) const;
+
+    /**
+     * Not-Equal operator.
+     */
     bool operator!=( const PhoneNumber & ) const;
+
+    /**
+     * Assignment operator.
+     *
+     * Fast operation, PhoneNumber's data is implicitly shared.
+     *
+     * @param other The PhoneNumber object to asssign to @c this
+     */
     PhoneNumber &operator=( const PhoneNumber &other );
 
     /**
@@ -136,6 +158,9 @@ class KABC_EXPORT PhoneNumber
 
     /**
      * Returns the type. Can be a multiple types combined by a logical or.
+     *
+     * @see #TypeFlag
+     * @see typeLabel()
      */
     Type type() const;
 
@@ -151,6 +176,10 @@ class KABC_EXPORT PhoneNumber
 
     /**
      * Returns the translated label for phone number @p type.
+     *
+     * @param type An OR'ed combination of #TypeFlag
+     *
+     * @see type()
      */
     static QString typeLabel( Type type );
 
@@ -168,11 +197,17 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( PhoneNumber::Type )
 
 /**
  * Serializes the phone @p number object into the @p stream.
+ *
+ * @param stream The stream to write into
+ * @param number The phone number object to serialize
  */
 KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const PhoneNumber &number );
 
 /**
  * Initializes the phone @p number object from the @p stream.
+ *
+ * @param stream The stream to read from
+ * @param number The phone number object to deserialize into
  */
 KABC_EXPORT QDataStream &operator>>( QDataStream &stream, const PhoneNumber &number );
 

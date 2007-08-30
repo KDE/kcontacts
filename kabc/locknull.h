@@ -33,6 +33,12 @@ namespace KABC {
 class KABC_EXPORT LockNull : public Lock
 {
   public:
+    /**
+      Creates an instance of the null lock.
+
+      @param allowAccess if @c true all calls to lock() will "succeed",
+                         if @c false all calls to lock() will "fail"
+    */
     LockNull( bool allowAccess );
     ~LockNull();
 

@@ -63,6 +63,8 @@ class KABC_EXPORT Geo
 
     /**
      * Sets the @p latitude.
+     *
+     * @param latitude The location's latitude coordinate
      */
     void setLatitude( float latitude );
 
@@ -73,6 +75,8 @@ class KABC_EXPORT Geo
 
     /**
      * Sets the @p longitude.
+     *
+     * @param longitude The location's longitude coordinate
      */
     void setLongitude( float longitude );
 
@@ -86,8 +90,23 @@ class KABC_EXPORT Geo
      */
     bool isValid() const;
 
+    /**
+     * Equality operator.
+     *
+     * @note Two invalid Geo instance will return @c true
+     */
     bool operator==( const Geo & ) const;
+
+    /**
+     * Not-Equal operator.
+     */
     bool operator!=( const Geo & ) const;
+
+    /**
+     * Assignment operator.
+     *
+     * @param other The Geo instance to assign to @c this
+     */
     Geo &operator=( const Geo &other );
 
     /**
