@@ -64,14 +64,14 @@ class KABC_EXPORT ResourceCached : public Resource
       @return @c false if the file cannot be opened for reading,
               otherwise @c true
 
-      @see changeFile()
+      @see cacheFile()
      */
     bool loadFromCache();
 
     /**
       Saves the change cache to a file.
 
-      @see changeFile()
+      @see cacheFile()
      */
     void saveToCache();
 
