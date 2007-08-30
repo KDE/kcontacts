@@ -76,9 +76,9 @@ class KABC_EXPORT ResourceCached : public Resource
     void saveToCache();
 
     /**
-      Removes all entries from the cache that are available in @p list
+      Removes all entries from the cache that are not available in @p list
 
-      @param list The list of addresses to remove from cache if cached
+      @param list The list of addressees to keep in the cache if cached
      */
     void cleanUpCache( const KABC::Addressee::List &list );
 
