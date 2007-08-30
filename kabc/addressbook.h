@@ -51,6 +51,8 @@ class KABC_EXPORT AddressBook : public QObject
   friend class StdAddressBook;
 
   public:
+    class KABC_EXPORT ConstIterator;
+
     /**
       @short Address Book Iterator
 
@@ -59,6 +61,7 @@ class KABC_EXPORT AddressBook : public QObject
     class KABC_EXPORT Iterator  //krazy:exclude=dpointer
     {
       friend class AddressBook;
+      friend class ConstIterator;
       public:
         /**
           Default constructor
