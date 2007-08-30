@@ -49,16 +49,54 @@ class KABC_EXPORT DistributionList
     class KABC_EXPORT Entry
     {
       public:
+        /**
+          A list of Entry instances
+        */
         typedef QList<Entry> List;
 
+        /**
+          Creates an empty Entry instance
+        */
         Entry();
+
+        /**
+          Copy constructor.
+
+          @param other The Entry to copy from
+        */
         Entry( const Entry &other );
+
+        /**
+          Creates an Entry instance.
+
+          @param addressee The addressee of the list entry.
+          @param email The email address. If @c QString() the preferred email
+                 of the @p addressee will be used instead
+        */
         Entry( const Addressee &addressee, const QString &email );
+
+        /**
+          Destroys the Entry instance.
+        */
         ~Entry();
 
+        /**
+          Assignment operator.
+
+          @param other The Entry to assign to @c this
+        */
         Entry &operator=( const Entry &other );
 
+        /**
+          Returns the addressee of the list entry.
+        */
         Addressee &addressee() const;
+
+        /**
+          Returns the email address of the list entry.
+
+          @return @c QString() if no specific email address has been set
+        */
         QString &email() const;
 
       private:

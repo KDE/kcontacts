@@ -208,11 +208,21 @@ class KABC_EXPORT Field
   protected:
     /**
      * @internal
+     *
+     * Creates a field and appends it to the general list of fields.
+     *
+     * @param id The identifier for the field
+     * @param category The optional category for the field
      */
     static void createField( int id, int category = 0 );
 
     /**
      * @internal
+     *
+     * Creates a field and appends it to the list of default fields.
+     *
+     * @param id The identifier for the field
+     * @param category The optional category for the field
      */
     static void createDefaultField( int id, int category = 0 );
 

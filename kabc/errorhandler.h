@@ -39,10 +39,15 @@ namespace KABC {
 class KABC_EXPORT ErrorHandler
 {
   public:
+    /**
+      Destroys the handler instance.
+    */
     virtual ~ErrorHandler();
 
     /**
       Show error message.
+
+      @param msg The error message to show
     */
     virtual void error( const QString &msg ) = 0;
 };
@@ -53,7 +58,16 @@ class KABC_EXPORT ErrorHandler
 class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
 {
   public:
+    /**
+      Create an error handler for console output.
+
+      Uses kError() to write the error messages.
+    */
     ConsoleErrorHandler();
+
+    /**
+      Destroys the handler instance.
+    */
     virtual ~ConsoleErrorHandler();
 
     virtual void error( const QString &msg );
@@ -75,10 +89,15 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
     /**
       Create error handler.
 
+      Uses KMessageBox::error() to display the error messages.
+
       @param parent Widget which is used as parent for the error dialogs.
     */
     GuiErrorHandler( QWidget *parent = 0 );
 
+    /**
+      Destroys the handler instance.
+    */
     virtual ~GuiErrorHandler();
 
     virtual void error( const QString &msg );

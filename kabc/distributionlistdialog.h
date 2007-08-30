@@ -77,11 +77,39 @@ class KABC_EXPORT DistributionListDialog : public KDialog
 class KABC_EXPORT EmailSelector : public KDialog
 {
   public:
+    /**
+      Creates a dialog for selecting an email address from a list.
+
+      It will usually be more convenient to use getEmail() instead.
+
+      @param emails The list of email addresses to choose from
+      @param current The email address to pre-select. Can be @c QString()
+      @param parent The QWidget parent for the dialog
+    */
     EmailSelector( const QStringList &emails, const QString &current, QWidget *parent = 0 );
+
+    /**
+      Destroys the dialog instance.
+    */
     ~EmailSelector();
 
+    /**
+      Returns the selected email address.
+     */
     QString selected() const;
 
+    /**
+      Returns the user's choice from a list of possible email addresses.
+
+      Convenience method that creates and executes the selection dialog
+      and returns the selected email address.
+
+      @param emails The list of email addresses to choose from
+      @param current The email address to pre-select. Can be @c QString()
+      @param parent The QWidget parent for the dialog
+
+      @return the selected email address or @c QString() if non was selected
+    */
     static QString getEmail( const QStringList &emails, const QString &current,
                              QWidget *parent = 0 );
 
@@ -98,7 +126,17 @@ class KABC_EXPORT DistributionListEditorWidget : public QWidget
     Q_OBJECT
 
   public:
+    /**
+      Creates an editor widget for distribution lists.
+
+      @param addressBook The address book to get addressees from
+      @param parent The QWidget parent
+    */
     explicit DistributionListEditorWidget( AddressBook *addressBook, QWidget *parent = 0 );
+
+    /**
+      Destroys the widget instance.
+    */
     virtual ~DistributionListEditorWidget();
 
   private:

@@ -31,11 +31,48 @@
 
 namespace KABC {
 
+/**
+ * Dataype to hold information on format plugins.
+ *
+ * @see FormatFactory::info()
+ */
 struct FormatInfo
 {
+  /**
+   * Returns whether this info object is null.
+   *
+   * An info object is considered null, when its #library string is empty.
+   */
   bool isNull() const { return library.isEmpty(); }
+
+  /**
+   * Name of a KDE plugin library, e.g.
+   * \code
+   * "kabcformat_vcard"
+   * \endcode
+   *
+   * Maps to the @c X-KDE-Library field of the format plugin's .desktop file
+   */
   QString library;
+
+  /**
+   * Localized string used as format's name, e.g.
+   * \code
+   * i18n( "vCard" )
+   * \endcode
+   *
+   * Maps to the @c Name field of the format plugin's .desktop file
+   */
   QString nameLabel;
+
+  /**
+   * Localized string to describe the format, e.g.
+   * \code
+   * i18n( "vCard format" )
+   * \endcode
+   *
+   * Maps to the @c Comment field of the format plugin's .desktop file
+   */
   QString descriptionLabel;
 };
 
@@ -73,6 +110,8 @@ class KABC_EXPORT FormatFactory
      * if format type doesn't exist.
      *
      * @param type   The type of the format, returned by formats()
+     *
+     * @see info()
      */
     Format *format( const QString &type );
 
@@ -83,6 +122,10 @@ class KABC_EXPORT FormatFactory
 
     /**
      * Returns the info structure for a special type.
+     *
+     * @param type The type of the format, returned by formats()
+     *
+     * @see format()
      */
     FormatInfo info( const QString &type ) const;
 
