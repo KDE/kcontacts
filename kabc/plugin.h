@@ -26,19 +26,59 @@
 
 namespace KABC {
 
+/**
+ * Base class for Plugins. Defines the interface for the basic
+ * plugin properties.
+ *
+ * @see FormatInfo
+ */
 class KABC_EXPORT Plugin
 {
   public:
+    /**
+     * Creates the Plugin instance.
+     */
     Plugin();
+
+    /**
+     * Destroys the plugin instance
+     */
     virtual ~Plugin();
 
+    /**
+     * Sets the plugin's type.
+     *
+     * @param type The type of the plugin
+     */
     virtual void setType( const QString &type );
+
+    /**
+     * Returns the plugin's type.
+     */
     virtual QString type() const;
 
+    /**
+     * Sets the plugin's name.
+     *
+     * @param label The localized string to display as the name
+     */
     virtual void setNameLabel( const QString &label );
+
+    /**
+     * Returns the plugin's name.
+     */
     virtual QString nameLabel() const;
 
+    /**
+     * Sets the plugin's description.
+     *
+     * @param label The localized string to display as a description
+     */
     virtual void setDescriptionLabel( const QString &label );
+
+    /**
+     * Returns the plugin's description.
+     */
     virtual QString descriptionLabel() const;
 
   private:

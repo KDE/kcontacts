@@ -38,8 +38,16 @@ class KABC_EXPORT Ticket
     friend class Resource;
 
   public:
+    /**
+      Destroys the Ticket instance.
+    */
     ~Ticket();
 
+    /**
+      Returns the resource for which this ticket has been created.
+
+      @see Resource::createTicket()
+    */
     Resource *resource();
 
   private:
@@ -288,6 +296,8 @@ class KABC_EXPORT Resource : public KRES::Resource
 
     /**
       Writes the resource specific config to file.
+
+      @param group The config section to write into
      */
     virtual void writeConfig( KConfigGroup &group );
 
@@ -327,11 +337,15 @@ class KABC_EXPORT Resource : public KRES::Resource
 
     /**
       Insert an addressee into the resource.
+
+      @param addr The addressee to add
      */
     virtual void insertAddressee( const Addressee &addr );
 
     /**
       Removes an addressee from resource.
+
+      @param addr The addressee to remove
      */
     virtual void removeAddressee( const Addressee &addr );
 
@@ -399,6 +413,8 @@ class KABC_EXPORT Resource : public KRES::Resource
       @internal
 
       Sets the address book of the resource.
+
+      @param addr The address book to use
      */
     void setAddressBook( AddressBook *addr );
 
@@ -438,7 +454,18 @@ class KABC_EXPORT Resource : public KRES::Resource
     void savingError( Resource *resource, const QString &msg );
 
   protected:
+    /**
+      Factory method, just creates and returns a new Ticket for the given resource.
+
+      Needed by subclasses since the constructor of Ticket is private and only
+      this base class is a friend, effectively limiting "new Ticket(this)" to
+      resource implementations.
+    */
     Ticket *createTicket( Resource * );
+
+    /**
+      A mapping from KABC UIDs to the respective addressee.
+    */
     Addressee::Map mAddrMap;
 
   private:
