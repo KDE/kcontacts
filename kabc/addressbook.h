@@ -51,7 +51,7 @@ class KABC_EXPORT AddressBook : public QObject
   friend class StdAddressBook;
 
   public:
-    class KABC_EXPORT ConstIterator;
+    class ConstIterator;
 
     /**
       @short Address Book Iterator
