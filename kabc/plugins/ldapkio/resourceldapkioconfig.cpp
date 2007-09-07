@@ -45,6 +45,9 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   : KRES::ConfigWidget( parent )
 {
   QBoxLayout *mainLayout = new QVBoxLayout( this );
+  mainLayout->setMargin( 0 );
+  mainLayout->setSpacing( KDialog::spacingHint() );
+
   cfg = new KLDAP::LdapConfigWidget(
         KLDAP::LdapConfigWidget::W_USER |
         KLDAP::LdapConfigWidget::W_PASS |

@@ -38,6 +38,8 @@ ResourceDirConfig::ResourceDirConfig( QWidget *parent )
     : KRES::ConfigWidget( parent )
 {
   QGridLayout *mainLayout = new QGridLayout( this );
+  mainLayout->setMargin( 0 );
+  mainLayout->setSpacing( KDialog::spacingHint() );
 
   QLabel *label = new QLabel( i18n( "Format:" ), this );
   mFormatBox = new KComboBox( this );
