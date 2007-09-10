@@ -37,4 +37,15 @@ ResourceABC::~ResourceABC()
 {
 }
 
+QStringList ResourceABC::subresources() const
+{
+  return QStringList();
+}
+
+bool ResourceABC::subresourceActive( const QString &subResource ) const
+{
+  Q_UNUSED( subResource );
+  return true;
+}
+
 #include "resourceabc.moc"

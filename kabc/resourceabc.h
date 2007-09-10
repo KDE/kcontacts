@@ -42,64 +42,64 @@ class KABC_EXPORT ResourceABC : public Resource
 {
   Q_OBJECT
 
-public:
-  ResourceABC();
-  ResourceABC( const KConfigGroup &group );
-  virtual ~ResourceABC();
+  public:
+    ResourceABC();
+    ResourceABC( const KConfigGroup &group );
+    virtual ~ResourceABC();
 
-  /**
-   * Get the UID to subresource map. This is necessary to implement
-   * the search order.
-   * The returned map has the UID as key and the resource it's in as
-   * the data.
-   */
-  virtual QMap<QString, QString> uidToResourceMap() const = 0;
+    /**
+     * Get the UID to subresource map. This is necessary to implement
+     * the search order.
+     * The returned map has the UID as key and the resource it's in as
+     * the data.
+     */
+    virtual QMap<QString, QString> uidToResourceMap() const = 0;
 
-  /**
-   * If this resource has subresources, return a QStringList of them.
-   * In most cases, resources do not have subresources, so this is
-   * by default just empty.
-   */
-  virtual QStringList subresources() const { return QStringList(); }
+    /**
+     * If this resource has subresources, return a QStringList of them.
+     * In most cases, resources do not have subresources, so this is
+     * by default just empty.
+     */
+    virtual QStringList subresources() const;
 
-  /**
-   * Is this subresource active or not?
-   */
-  virtual bool subresourceActive( const QString& ) const { return true; }
+    /**
+     * Is this subresource active or not?
+     */
+    virtual bool subresourceActive( const QString & ) const;
 
-  /**
-   * Completion weight for a given subresource
-   */
-  virtual int subresourceCompletionWeight( const QString& ) const = 0;
+    /**
+     * Completion weight for a given subresource
+     */
+    virtual int subresourceCompletionWeight( const QString &subResource ) const = 0;
 
-  /**
-   * Label for a given subresource
-   */
-  virtual QString subresourceLabel( const QString& ) const = 0;
+    /**
+     * Label for a given subresource
+     */
+    virtual QString subresourceLabel( const QString &subResource ) const = 0;
 
-public Q_SLOTS:
-  /**
-   * (De-)activate a subresource.
-   */
-  virtual void setSubresourceActive( const QString &, bool active ) = 0;
+  public Q_SLOTS:
+    /**
+     * (De-)activate a subresource.
+     */
+    virtual void setSubresourceActive( const QString &subResource, bool active ) = 0;
 
-  /**
-   * Set completion weight for a given subresource
-   */
-  virtual void setSubresourceCompletionWeight( const QString&, int weight ) = 0;
+    /**
+     * Set completion weight for a given subresource
+     */
+    virtual void setSubresourceCompletionWeight( const QString &subResource, int weight ) = 0;
 
-Q_SIGNALS:
-  /**
-   * This signal is emitted when a subresource is added.
-   */
-  void signalSubresourceAdded( ResourceABC *, const QString &type,
-                               const QString &subResource );
-
-  /**
-   * This signal is emitted when a subresource is removed.
-   */
-  void signalSubresourceRemoved( ResourceABC *, const QString &type,
+  Q_SIGNALS:
+    /**
+     * This signal is emitted when a subresource is added.
+     */
+    void signalSubresourceAdded( ResourceABC *, const QString &type,
                                  const QString &subResource );
+
+    /**
+     * This signal is emitted when a subresource is removed.
+     */
+    void signalSubresourceRemoved( ResourceABC *, const QString &type,
+                                   const QString &subResource );
 
 };
 
