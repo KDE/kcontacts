@@ -63,6 +63,7 @@ set(kabc_LIB_SRCS
    picture.cpp
    plugin.cpp
    resource.cpp
+   resourceabc.cpp
    resourcecached.cpp
    secrecy.cpp
    sound.cpp
@@ -114,6 +115,7 @@ install( FILES
    picture.h
    plugin.h
    resource.h
+   resourceabc.h
    resourcecached.h
    secrecy.h
    sound.h
