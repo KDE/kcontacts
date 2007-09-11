@@ -133,7 +133,7 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         if ( vCardLine.parameterList().contains( "encoding" ) ) { // have to decode the data
           if ( vCardLine.parameter( "encoding" ).toLower() == "b" ||
                vCardLine.parameter( "encoding" ).toLower() == "base64" ) {
-            KCodecs::base64Decode( value, output );
+            output = QByteArray::fromBase64( value );
             wasBase64Encoded = true;
           }
           else if ( vCardLine.parameter( "encoding" ).toLower() == "quoted-printable" ) {
@@ -270,7 +270,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           // handle encoding
           if ( hasEncoding ) { // have to encode the data
             if ( encodingType == "b" ) {
-              KCodecs::base64Encode( input, output );
+              output = input.toBase64();
             } else if ( encodingType == "quoted-printable" ) {
               KCodecs::quotedPrintableEncode( input, output, false );
             }
