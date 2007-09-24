@@ -1,3 +1,4 @@
+set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
@@ -10,7 +11,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 set(testread_SRCS testread.cpp )
 
 
-kde4_add_test_executable(testread ${testread_SRCS})
+kde4_add_executable(testread TEST ${testread_SRCS})
 
 target_link_libraries(testread  ${KDE4_KDECORE_LIBS} kabc )
 
@@ -19,7 +20,7 @@ target_link_libraries(testread  ${KDE4_KDECORE_LIBS} kabc )
 set(testwrite_SRCS testwrite.cpp )
 
 
-kde4_add_test_executable(testwrite ${testwrite_SRCS})
+kde4_add_executable(testwrite TEST ${testwrite_SRCS})
 
 target_link_libraries(testwrite  ${KDE4_KDECORE_LIBS} kabc )
 
@@ -28,7 +29,7 @@ target_link_libraries(testwrite  ${KDE4_KDECORE_LIBS} kabc )
 set(testread2_SRCS testread2.cpp testutils.cpp )
 
 
-kde4_add_test_executable(testread2 ${testread2_SRCS})
+kde4_add_executable(testread2 TEST ${testread2_SRCS})
 
 target_link_libraries(testread2  ${KDE4_KDECORE_LIBS} kabc )
 

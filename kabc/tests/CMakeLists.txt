@@ -1,3 +1,4 @@
+set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 include_directories( ${CMAKE_SOURCE_DIR}/kabc )
 
 ########### next target ###############
@@ -86,7 +87,7 @@ target_link_libraries(timezonetest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY
 set(testlock_SRCS testlock.cpp)
 
 
-kde4_add_test_executable(testlock ${testlock_SRCS})
+kde4_add_executable(testlock TEST ${testlock_SRCS})
 
 target_link_libraries(testlock ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 
@@ -95,7 +96,7 @@ target_link_libraries(testlock ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 set(testkabc_SRCS testkabc.cpp)
 
 
-kde4_add_test_executable(testkabc ${testkabc_SRCS})
+kde4_add_executable(testkabc TEST ${testkabc_SRCS})
 
 target_link_libraries(testkabc ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 
@@ -104,7 +105,7 @@ target_link_libraries(testkabc ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 set(testkabcdlg_SRCS testkabcdlg.cpp)
 
 
-kde4_add_test_executable(testkabcdlg ${testkabcdlg_SRCS})
+kde4_add_executable(testkabcdlg TEST ${testkabcdlg_SRCS})
 
 target_link_libraries(testkabcdlg ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 
@@ -116,7 +117,7 @@ if (UNIX)
 
 
 
-   kde4_add_test_executable(bigread ${bigread_SRCS})
+   kde4_add_executable(bigread TEST ${bigread_SRCS})
 
    target_link_libraries(bigread ${KDE4_KDECORE_LIBS} kabc kabc_file_core )
 
@@ -130,7 +131,7 @@ if (UNIX)
    set(bigwrite_SRCS bigwrite.cpp)
 
 
-   kde4_add_test_executable(bigwrite ${bigwrite_SRCS})
+   kde4_add_executable(bigwrite TEST ${bigwrite_SRCS})
 
    target_link_libraries(bigwrite ${KDE4_KDECORE_LIBS} kabc kabc_file_core )
 
@@ -151,7 +152,7 @@ endif (UNIX)
 set(kabcargl_SRCS kabcargl.cpp)
 
 
-kde4_add_test_executable(kabcargl ${kabcargl_SRCS})
+kde4_add_executable(kabcargl TEST ${kabcargl_SRCS})
 
 target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 
@@ -160,6 +161,6 @@ target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
 set(testaddresslineedit_SRCS testaddresslineedit.cpp)
 
 
-kde4_add_test_executable(testaddresslineedit ${testaddresslineedit_SRCS})
+kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
 target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
