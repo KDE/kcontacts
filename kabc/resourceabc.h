@@ -63,6 +63,11 @@ class KABC_EXPORT ResourceABC : public Resource
     virtual QStringList subresources() const;
 
     /**
+     * Is the given subresource writable?
+     */
+    virtual bool subresourceWritable( const QString& ) const = 0;
+
+    /**    
      * Is this subresource active or not?
      */
     virtual bool subresourceActive( const QString & ) const;
