@@ -156,12 +156,10 @@ class DistributionListEditorWidget::Private
     Private( AddressBook *addressBook, DistributionListEditorWidget *parent )
       : mParent( parent ), mAddressBook( addressBook )
     {
-      mManager = new DistributionListManager( mAddressBook );
     }
 
     ~Private()
     {
-      delete mManager;
     }
 
     void newList();
@@ -184,7 +182,6 @@ class DistributionListEditorWidget::Private
     QTreeWidget *mAddresseeView;
 
     AddressBook *mAddressBook;
-    DistributionListManager *mManager;
     QPushButton *mNewButton, *mEditButton, *mRemoveButton;
     QPushButton *mChangeEmailButton, *mRemoveEntryButton, *mAddEntryButton;
 };
@@ -259,8 +256,6 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   gridLayout->addWidget( d->mRemoveEntryButton, 2, 2 );
   connect( d->mRemoveEntryButton, SIGNAL( clicked() ), SLOT( removeEntry() ) );
 
-  d->mManager->load();
-
   d->updateAddresseeView();
   d->updateNameCombo();
 }
@@ -272,7 +267,9 @@ DistributionListEditorWidget::~DistributionListEditorWidget()
 
 void DistributionListEditorWidget::Private::save()
 {
-  mManager->save();
+  // FIXME new distribution list handling
+  // do we need extra save?
+  //mManager->save();
 }
 
 void DistributionListEditorWidget::Private::slotSelectionEntryViewChanged()
@@ -292,10 +289,10 @@ void DistributionListEditorWidget::Private::newList()
     return;
   }
 
-  new DistributionList( mManager, name );
+  mAddressBook->createDistributionList( name );
 
   mNameCombo->clear();
-  mNameCombo->addItems( mManager->listNames() );
+  mNameCombo->addItems( mAddressBook->allDistributionListNames() );
   mNameCombo->setCurrentIndex( mNameCombo->count() - 1 );
 
   updateEntryView();
@@ -312,11 +309,12 @@ void DistributionListEditorWidget::Private::editList()
     return;
   }
 
-  DistributionList *list = mManager->list( oldName );
-  list->setName( name );
+  DistributionList *list = mAddressBook->findDistributionListByName( oldName );
+  if ( list )
+    list->setName( name );
 
   mNameCombo->clear();
-  mNameCombo->addItems( mManager->listNames() );
+  mNameCombo->addItems( mAddressBook->allDistributionListNames() );
   mNameCombo->setCurrentIndex( mNameCombo->count() - 1 );
 
   updateEntryView();
@@ -333,8 +331,13 @@ void DistributionListEditorWidget::Private::removeList()
     return;
   }
 
-  mManager->remove( mManager->list( mNameCombo->currentText() ) );
-  mNameCombo->removeItem( mNameCombo->currentIndex() );
+  DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
+  if ( list ) {
+    // FIXME new distribution list handling
+    // list should be deleted, no?
+    mAddressBook->removeDistributionList( list );
+    mNameCombo->removeItem( mNameCombo->currentIndex() );
+  }
 
   updateEntryView();
   slotSelectionAddresseeViewChanged();
@@ -350,7 +353,7 @@ void DistributionListEditorWidget::Private::addEntry()
   AddresseeItem *addresseeItem =
     static_cast<AddresseeItem *>( selected.at( 0 ) );
 
-  DistributionList *list = mManager->list( mNameCombo->currentText() );
+  DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
     kDebug(5700) << "DLE::addEntry(): No dist list '" << mNameCombo->currentText() << "'";
     return;
@@ -363,7 +366,7 @@ void DistributionListEditorWidget::Private::addEntry()
 
 void DistributionListEditorWidget::Private::removeEntry()
 {
-  DistributionList *list = mManager->list( mNameCombo->currentText() );
+  DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
     return;
   }
@@ -382,7 +385,7 @@ void DistributionListEditorWidget::Private::removeEntry()
 
 void DistributionListEditorWidget::Private::changeEmail()
 {
-  DistributionList *list = mManager->list( mNameCombo->currentText() );
+  DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
     return;
   }
@@ -414,7 +417,7 @@ void DistributionListEditorWidget::Private::updateEntryView()
 
   mEntryView->clear();
 
-  DistributionList *list = mManager->list( mNameCombo->currentText() );
+  DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
     mEditButton->setEnabled( false );
     mRemoveButton->setEnabled( false );
@@ -455,7 +458,7 @@ void DistributionListEditorWidget::Private::updateAddresseeView()
 
 void DistributionListEditorWidget::Private::updateNameCombo()
 {
-  mNameCombo->addItems( mManager->listNames() );
+  mNameCombo->addItems( mAddressBook->allDistributionListNames() );
 
   updateEntryView();
 }

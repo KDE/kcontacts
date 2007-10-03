@@ -19,8 +19,10 @@
 */
 
 #include "distributionlist.h"
+#include "resource.h"
 
 #include <kconfig.h>
+#include <krandom.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
@@ -67,12 +69,12 @@ DistributionList::Entry &DistributionList::Entry::operator=( const DistributionL
   return *this;
 }
 
-Addressee &DistributionList::Entry::addressee() const
+Addressee DistributionList::Entry::addressee() const
 {
   return d->addressee;
 }
 
-QString &DistributionList::Entry::email() const
+QString DistributionList::Entry::email() const
 {
   return d->email;
 }
@@ -80,27 +82,45 @@ QString &DistributionList::Entry::email() const
 class DistributionList::Private
 {
   public:
-    Private( DistributionListManager *manager, const QString &name )
-      : mManager( manager ), mName( name )
+    Private( Resource *resource, const QString &identifier,
+             const QString &name )
+      : mResource( resource ), mIdentifier( identifier ), mName( name )
     {
     }
 
-    DistributionListManager *mManager;
+    Resource *mResource;
+    QString mIdentifier;
     QString mName;
     Entry::List mEntries;
 };
 
-DistributionList::DistributionList( DistributionListManager *manager, const QString &name )
-  : d( new Private( manager, name ) )
+DistributionList::DistributionList( Resource *resource, const QString &name )
+  : d( new Private( resource, KRandom::randomString(10), name ) )
 {
-  d->mManager->insert( this );
+  d->mResource->insertDistributionList( this );
+}
+
+DistributionList::DistributionList( Resource *resource, const QString &identifier, const QString &name )
+  : d( new Private( resource, identifier, name ) )
+{
+  d->mResource->insertDistributionList( this );
 }
 
 DistributionList::~DistributionList()
 {
-  d->mManager->remove( this );
+  d->mResource->removeDistributionList( this );
 
   delete d;
+}
+
+void DistributionList::setIdentifier( const QString &identifier )
+{
+  d->mIdentifier = identifier;
+}
+
+QString DistributionList::identifier() const
+{
+  return d->mIdentifier;
 }
 
 void DistributionList::setName( const QString &name )
@@ -169,8 +189,14 @@ DistributionList::Entry::List DistributionList::entries() const
   return d->mEntries;
 }
 
+Resource* DistributionList::resource() const
+{
+    return d->mResource;
+}
+
 typedef QList< QPair<QString, QString> > MissingEntryList;
 
+#if 0
 class DistributionListManager::Private
 {
   public:
@@ -288,7 +314,8 @@ bool DistributionListManager::load()
 
     kDebug(5700) << "DLM::load():" << name << ":" << value.join( "," );
 
-    DistributionList *list = new DistributionList( this, name );
+    // FIXME new distribution list handling
+    DistributionList *list = 0;//new DistributionList( this, name );
 
     MissingEntryList missingEntries;
     QStringList::ConstIterator entryIt = value.constBegin();
@@ -354,7 +381,7 @@ bool DistributionListManager::save()
 
   return true;
 }
-
+#endif
 class DistributionListWatcher::Private
 {
   public:

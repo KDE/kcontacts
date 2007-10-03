@@ -31,6 +31,7 @@
 
 namespace KABC {
 
+class DistributionList;
 class ErrorHandler;
 class Resource;
 class Ticket;
@@ -393,9 +394,17 @@ class KABC_EXPORT AddressBook : public QObject
       Returns an iterator pointing to the specified addressee. It will return
       end() if no addressee matched.
 
-      @param addr The addresee you are looking for.
+      @param addr The addressee you are looking for.
      */
-    Iterator find( const Addressee &addr ); // KDE4: const
+    Iterator find( const Addressee &addr );
+
+    /**
+      Returns an iterator pointing to the specified addressee. It will return
+      end() if no addressee matched.
+
+      @param addr The addressee you are looking for.
+     */
+    ConstIterator find( const Addressee &addr ) const;
 
     /**
       Searches an addressee with the specified unique identifier.
@@ -434,6 +443,59 @@ class KABC_EXPORT AddressBook : public QObject
       @return A list of all matching addressees.
      */
     Addressee::List findByCategory( const QString &category ) const;
+
+    /**
+      Creates a distribution list with a given @p name storing it in a
+      given @p resource
+
+      @note The newly created list will be added to the addressbook
+            automatically on creation.
+
+      @param name The localized name of the new distribution list.
+      @param resource The resource which should save the list. If @c 0
+            (default) the addressbook's standard resource will be used.
+
+      @see standardResource()
+     */
+    DistributionList* createDistributionList( const QString &name, Resource* resource = 0 );
+
+    /**
+      Removes a distribution @p list from its associated resource.
+
+      @param list The list to remove.
+     */
+    void removeDistributionList( DistributionList *list );
+
+    /**
+      Returns a distribution list for the given @p identifier or @c 0
+
+      @param identifier The ID of the list for look for.
+     */
+    DistributionList* findDistributionListByIdentifier( const QString &identifier );
+
+    /**
+      Returns a distribution list with the given @p name or @c 0
+
+      @param name The localized name of the list for look for.
+      @param caseSensitivity Whether to do string matching case sensitive or
+             case insensitive. Default is @c Qt::CaseSensitive
+     */
+    DistributionList* findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
+
+    /**
+      Returns a list of all distribution lists of all resources of this
+      address book
+     */
+    QList<DistributionList*> allDistributionLists();
+
+    /**
+      Returns a list of names of all distribution lists of all resources
+      of this address book.
+
+      Convenience function, equal to iterate over the list returned
+      by allDistributionLists()
+     */
+    QStringList allDistributionListNames() const;
 
     /**
       Returns a string identifying this addressbook. The identifier is
