@@ -22,7 +22,6 @@
 #define KABC_DISTRIBUTIONLIST_H
 
 #include "addressbook.h"
-#include <kdirwatch.h>
 #include <QtCore/QList>
 
 namespace KABC {
@@ -198,48 +197,6 @@ class KABC_EXPORT DistributionList
   Typedef for map from IDs to respective DistribtionList
 */
 typedef QMap<QString, DistributionList*> DistributionListMap;
-
-/**
-  @short Watchdog for distribution lists
-
-  This class provides a changed() signal that i emitted when the
-  distribution lists has changed in some way.
-
-  Exapmle:
-
-  \code
-  KABC::DistributionListWatcher *watchdog = KABC::DistributionListWatcher::self()
-
-  connect( watchdog, SIGNAL( changed() ), SLOT( doSomething() ) );
-  \endcode
-*/
-
-class KABC_EXPORT DistributionListWatcher : public QObject
-{
-  Q_OBJECT
-
-  public:
-    /**
-     * Returns the watcher object.
-     */
-    static DistributionListWatcher *self();
-
-  Q_SIGNALS:
-    /**
-     * This signal is emmitted whenever the distribution lists has
-     * changed (if a list was added or removed, when a list was
-     * renamed or the entries of the list changed).
-     */
-    void changed();
-
-  protected:
-    DistributionListWatcher();
-    ~DistributionListWatcher();
-
-  private:
-    class Private;
-    Private *const d;
-};
 
 }
 #endif
