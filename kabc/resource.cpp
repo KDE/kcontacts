@@ -391,10 +391,10 @@ DistributionList* Resource::findDistributionListByName( const QString &name, Qt:
   DistributionListMap::const_iterator endIt = mDistListMap.end();
   for ( ; it != endIt; ++it ) {
     if ( caseSensitivity == Qt::CaseSensitive ) {
-      if ( searchName == it.key() )
+      if ( searchName == it.value()->name() )
         return it.value();
     } else {
-      if ( searchName == it.key().toLower() )
+      if ( searchName == it.value()->name().toLower() )
         return it.value();
     }
   }
