@@ -44,6 +44,8 @@
 
 using namespace KABC;
 
+typedef QList< QPair<QString, QString> > MissingEntryList;
+
 class ResourceFile::ResourceFilePrivate
 {
   public:
@@ -52,6 +54,8 @@ class ResourceFile::ResourceFilePrivate
 
     KIO::Job *mSaveJob;
     bool mIsSaving;
+
+    QMap< QString, MissingEntryList > mMissingEntries;
 };
 
 ResourceFile::ResourceFile()
@@ -103,11 +107,13 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
     mFormat = factory->format( mFormatName );
   }
 
-  connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( fileChanged() ) );
-  connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( fileChanged() ) );
-  connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( fileChanged() ) );
+  connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( fileChanged(const QString&) ) );
+  connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( fileChanged(const QString&) ) );
+  connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( fileChanged(const QString&) ) );
 
   setFileName( fileName );
+
+  mDirWatch.addFile( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   mLock = 0;
 }
@@ -241,7 +247,12 @@ bool ResourceFile::load()
 bool ResourceFile::clearAndLoad( QFile *file )
 {
   clear();
-  return mFormat->loadAll( addressBook(), this, file );
+
+  bool addresseesOk = mFormat->loadAll( addressBook(), this, file );
+
+  bool listsOk = loadDistributionLists();
+
+  return addresseesOk && listsOk;
 }
 
 bool ResourceFile::asyncLoad()
@@ -323,7 +334,7 @@ bool ResourceFile::save( Ticket *ticket )
   bool ok = false;
 
   if ( saveFile.open() ) {
-    mFormat->saveAll( addressBook(), this, &saveFile );
+    saveToFile( &saveFile );
     ok = saveFile.finalize();
   }
 
@@ -395,9 +406,93 @@ void ResourceFile::deleteLocalTempFile()
   mTempFile = 0;
 }
 
+bool ResourceFile::loadDistributionLists()
+{
+  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+
+  KConfigGroup cg( &cfg, "DistributionLists" );
+  QMap<QString,QString> entryMap = cg.entryMap();
+
+  d->mMissingEntries.clear();
+
+  QMap<QString,QString>::ConstIterator it;
+  for ( it = entryMap.constBegin(); it != entryMap.constEnd(); ++it ) {
+    QString name = it.key();
+    QStringList value = cg.readEntry( name, QStringList() );
+
+    kDebug(5700) << "ResourceFile::loadDistributionLists():" << name
+                 << ":" << value.join( "," );
+
+    DistributionList *list = new DistributionList( this, name );
+
+    MissingEntryList missingEntries;
+    QStringList::ConstIterator entryIt = value.constBegin();
+    while ( entryIt != value.constEnd() ) {
+      QString id = *entryIt++;
+      QString email = entryIt != value.constEnd() ? *entryIt : QString();
+
+      kDebug(5700) << "----- Entry" << id;
+
+      Addressee a = addressBook()->findByUid( id );
+      if ( !a.isEmpty() ) {
+        list->insertEntry( a, email );
+      } else {
+        missingEntries.append( qMakePair( id, email ) );
+      }
+
+      if ( entryIt == value.constEnd() ) {
+        break;
+      }
+      ++entryIt;
+    }
+
+    d->mMissingEntries.insert( name, missingEntries );
+  }
+
+  return true;
+}
+
+void ResourceFile::saveDistributionLists()
+{
+  kDebug(5700) << "ResourceFile::saveDistributionLists()";
+
+  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  KConfigGroup cg( &cfg, "DistributionLists" );
+  cg.deleteGroup();
+
+  QMapIterator<QString, DistributionList*> it( mDistListMap );
+  while ( it.hasNext() ) {
+    DistributionList *list = it.next().value();
+    kDebug(5700) << "  Saving '" << list->name() << "'";
+
+    QStringList value;
+    const DistributionList::Entry::List entries = list->entries();
+    DistributionList::Entry::List::ConstIterator it;
+    for ( it = entries.begin(); it != entries.end(); ++it ) {
+      value.append( (*it).addressee().uid() );
+      value.append( (*it).email() );
+    }
+
+    if ( d->mMissingEntries.find( list->name() ) != d->mMissingEntries.end() ) {
+      const MissingEntryList missList = d->mMissingEntries[ list->name() ];
+      MissingEntryList::ConstIterator missIt;
+      for ( missIt = missList.begin(); missIt != missList.end(); ++missIt ) {
+        value.append( (*missIt).first );
+        value.append( (*missIt).second );
+      }
+    }
+
+    cg.writeEntry( list->name(), value );
+  }
+
+  cg.sync();
+}
+
 void ResourceFile::saveToFile( QFile *file )
 {
   mFormat->saveAll( addressBook(), this, file );
+
+  saveDistributionLists();
 }
 
 void ResourceFile::setFileName( const QString &fileName )
@@ -432,11 +527,23 @@ QString ResourceFile::format() const
   return mFormatName;
 }
 
-void ResourceFile::fileChanged()
+void ResourceFile::fileChanged( const QString &path)
 {
-  kDebug(5700) << "ResourceFile::fileChanged():" << mFileName;
+  kDebug(5700) << "ResourceFile::fileChanged():" << path;
 
   if ( !addressBook() ) {
+    return;
+  }
+
+  if ( path == KStandardDirs::locateLocal( "data", "kabc/distlists" ) ) {
+    // clear old distribution lists
+    qDeleteAll( mDistListMap );
+
+    loadDistributionLists();
+
+    kDebug(5700) << "addressBookChanged()";
+    addressBook()->emitAddressBookChanged();
+
     return;
   }
 

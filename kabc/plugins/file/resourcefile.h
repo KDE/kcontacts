@@ -148,7 +148,7 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     void uploadFinished( KJob *job );
 
   protected Q_SLOTS:
-    void fileChanged();
+    void fileChanged( const QString &path);
 
   protected:
     void init( const QString &fileName, const QString &format );
@@ -165,6 +165,8 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     void deleteLocalTempFile();
     void deleteStaleTempFile();
     bool hasTempFile() const { return mTempFile != 0; }
+    bool loadDistributionLists();
+    void saveDistributionLists();
 
     QString mFileName;
     QString mFormatName;
