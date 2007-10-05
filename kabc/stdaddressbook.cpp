@@ -28,6 +28,7 @@
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <k3staticdeleter.h>
+#include <kconfiggroup.h>
 
 #include <stdlib.h>
 

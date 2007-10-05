@@ -32,6 +32,7 @@
 #include <ksavefile.h>
 #include <ktemporaryfile.h>
 #include <kurlrequester.h>
+#include <kconfiggroup.h>
 
 #include <QtCore/QFile>
 
