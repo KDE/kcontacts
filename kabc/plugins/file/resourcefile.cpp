@@ -281,7 +281,7 @@ bool ResourceFile::asyncLoad()
   src.setPath( mFileName );
 
   KIO::Scheduler::checkSlaveOnHold( true );
-  d->mLoadJob = KIO::file_copy( src, dest, -1, true, false, false );
+  d->mLoadJob = KIO::file_copy( src, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
   d->mIsLoading = true;
   connect( d->mLoadJob, SIGNAL( result( KJob* ) ),
            this, SLOT( downloadFinished( KJob* ) ) );
@@ -378,7 +378,7 @@ bool ResourceFile::asyncSave( Ticket * )
   KIO::Scheduler::checkSlaveOnHold( true );
   d->mIsSaving = true;
   mDirWatch.stopScan(); // restarted in uploadFinished()
-  d->mSaveJob = KIO::file_copy( src, dest, -1, true, false, false );
+  d->mSaveJob = KIO::file_copy( src, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( d->mSaveJob, SIGNAL( result( KJob* ) ),
            this, SLOT( uploadFinished( KJob* ) ) );
 
