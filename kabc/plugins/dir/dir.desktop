@@ -17,6 +17,7 @@ Name[pt]=Pasta
 Name[sv]=Katalog
 Name[uk]=Каталог
 Name[x-test]=xxDirectoryxx
+Name[zh_CN]=目录
 Name[zh_TW]=目錄
 X-KDE-Library=kabc_directory
 Type=Service
