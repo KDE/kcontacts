@@ -27,11 +27,14 @@
 
 using namespace KABC;
 
-extern "C"
+class ResourceLDAPKIOFactory : public KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>
 {
-  KDE_EXPORT void *init_kabc_ldapkio()
-  {
-    KGlobal::locale()->insertCatalog( "kabc_ldapkio" );
-    return new KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>();
-  }
-}
+  public:
+    ResourceLDAPKIOFactory()
+      : KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>()
+    {
+      KGlobal::locale()->insertCatalog( "kabc_ldapkio" );
+    }
+};
+
+K_EXPORT_PLUGIN(ResourceLDAPKIOFactory)
