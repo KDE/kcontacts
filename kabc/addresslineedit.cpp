@@ -36,7 +36,6 @@
 #include <kstandarddirs.h>
 #include <kstandardshortcut.h>
 
-#include "distributionlist.h"
 #include "stdaddressbook.h"
 
 //=============================================================================
@@ -155,9 +154,7 @@ QStringList AddressLineEdit::Private::addresses()
     }
   }
 
-  KABC::DistributionListManager manager( addressBook );
-  manager.load();
-  result += manager.listNames();
+  result += addressBook->allDistributionListNames();
 
   QApplication::restoreOverrideCursor();
 

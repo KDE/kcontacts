@@ -22,12 +22,12 @@
 #define KABC_DISTRIBUTIONLIST_H
 
 #include "addressbook.h"
-#include <kdirwatch.h>
 #include <QtCore/QList>
 
 namespace KABC {
 
-class DistributionListManager;
+//class DistributionListManager;
+class Resource;
 
 /**
   @short Distribution list of email addresses
@@ -90,14 +90,14 @@ class KABC_EXPORT DistributionList
         /**
           Returns the addressee of the list entry.
         */
-        Addressee &addressee() const;
+        Addressee addressee() const;
 
         /**
           Returns the email address of the list entry.
 
           @return @c QString() if no specific email address has been set
         */
-        QString &email() const;
+        QString email() const;
 
       private:
         class Private;
@@ -110,7 +110,17 @@ class KABC_EXPORT DistributionList
       @param manager Managing object of this list.
       @param name    Name of this list.
     */
-    DistributionList( DistributionListManager *manager, const QString &name );
+    DistributionList( Resource *resource, const QString &name );
+
+    /**
+       Create distribution list object.
+
+      @param manager    Managing object of this list.
+      @param identifier Identifier of this list.
+      @param name       Name of this list.
+    */
+    DistributionList( Resource *resource, const QString &identifier,
+                      const QString &name );
 
     /**
       Destructor.
@@ -118,8 +128,21 @@ class KABC_EXPORT DistributionList
     ~DistributionList();
 
     /**
-      Set name of this list. The name is used as key by the
-      DistributinListManager.
+      Sets the @p identifier of this list which is used as key by resources
+
+      @param identifier A unique identifier of the distribution list
+    */
+    void setIdentifier( const QString &identifier );
+
+    /**
+      Returns the distribution list's identifier
+    */
+    QString identifier() const;
+
+    /**
+      Set name of this list.
+
+      This is a i18n string for display to the user
     */
     void setName( const QString & );
 
@@ -161,6 +184,8 @@ class KABC_EXPORT DistributionList
     */
     Entry::List entries() const;
 
+    Resource* resource() const;
+
   private:
     class Private;
     Private *const d;
@@ -169,105 +194,9 @@ class KABC_EXPORT DistributionList
 };
 
 /**
-  @short Manager of distribution lists
-
-  This class represents a collection of distribution lists, which are associated
-  with a given address book.
+  Typedef for map from IDs to respective DistribtionList
 */
-class KABC_EXPORT DistributionListManager
-{
-  public:
-    /**
-      Create manager for given address book.
-    */
-    DistributionListManager( AddressBook * );
-
-    /**
-      Destructor.
-    */
-    ~DistributionListManager();
-
-    /**
-      Return distribution list with given name.
-    */
-    DistributionList *list( const QString &name,
-                            Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
-
-    /**
-      Insert distribution list. If a list with this name already exists, nothing
-      happens. The passed object is deleted by the manager.
-    */
-    void insert( DistributionList * );
-
-    /**
-      Remove distribution list. If a list with this name doesn't exist, nothing
-      happens.
-    */
-    void remove( DistributionList * );
-
-    /**
-      Return names of all distribution lists managed by this manager.
-    */
-    QStringList listNames();
-
-    /**
-      Load distribution lists form disk.
-    */
-    bool load();
-
-    /**
-      Save distribution lists to disk.
-    */
-    bool save();
-
-  private:
-    class Private;
-    Private *const d;
-
-    Q_DISABLE_COPY( DistributionListManager )
-};
-
-/**
-  @short Watchdog for distribution lists
-
-  This class provides a changed() signal that i emitted when the
-  distribution lists has changed in some way.
-
-  Exapmle:
-
-  \code
-  KABC::DistributionListWatcher *watchdog = KABC::DistributionListWatcher::self()
-
-  connect( watchdog, SIGNAL( changed() ), SLOT( doSomething() ) );
-  \endcode
-*/
-
-class KABC_EXPORT DistributionListWatcher : public QObject
-{
-  Q_OBJECT
-
-  public:
-    /**
-     * Returns the watcher object.
-     */
-    static DistributionListWatcher *self();
-
-  Q_SIGNALS:
-    /**
-     * This signal is emmitted whenever the distribution lists has
-     * changed (if a list was added or removed, when a list was
-     * renamed or the entries of the list changed).
-     */
-    void changed();
-
-  protected:
-    DistributionListWatcher();
-    ~DistributionListWatcher();
-
-  private:
-    class Private;
-    Private *const d;
-};
+typedef QMap<QString, DistributionList*> DistributionListMap;
 
 }
 #endif

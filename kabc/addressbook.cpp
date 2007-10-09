@@ -19,6 +19,7 @@
 */
 
 #include "addressbook.h"
+#include "distributionlist.h"
 #include "errorhandler.h"
 #include "resource.h"
 
@@ -591,6 +592,18 @@ AddressBook::Iterator AddressBook::find( const Addressee &a )
   return end();
 }
 
+AddressBook::ConstIterator AddressBook::find( const Addressee &a ) const
+{
+  ConstIterator it;
+  for ( it = begin(); it != end(); ++it ) {
+    if ( a.uid() == (*it).uid() ) {
+      return it;
+    }
+  }
+
+  return end();
+}
+
 Addressee AddressBook::findByUid( const QString &uid ) const
 {
   KRES::Manager<Resource>::ActiveIterator it;
@@ -647,6 +660,70 @@ Addressee::List AddressBook::findByCategory( const QString &category ) const
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
     results += (*it)->findByCategory( category );
+  }
+
+  return results;
+}
+
+DistributionList* AddressBook::createDistributionList( const QString &name, Resource* resource )
+{
+  if ( resource == 0 )
+    resource = standardResource();
+
+  return new DistributionList( resource, name );
+}
+
+void AddressBook::removeDistributionList( DistributionList *list )
+{
+  if ( !list || !list->resource() )
+    return;
+
+  list->resource()->removeDistributionList( list );
+}
+
+DistributionList* AddressBook::findDistributionListByIdentifier( const QString &identifier )
+{
+  KRES::Manager<Resource>::ActiveIterator it;
+  for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
+    DistributionList* list = (*it)->findDistributionListByIdentifier( identifier );
+    if ( list )
+        return list;
+  }
+
+  return 0;
+}
+
+DistributionList* AddressBook::findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity )
+{
+  KRES::Manager<Resource>::ActiveIterator it;
+  for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
+    DistributionList* list = (*it)->findDistributionListByName( name, caseSensitivity );
+    if ( list )
+        return list;
+  }
+
+  return 0;
+}
+
+QList<DistributionList*> AddressBook::allDistributionLists()
+{
+  QList<DistributionList*> results;
+
+  KRES::Manager<Resource>::ActiveIterator it;
+  for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
+    results += (*it)->allDistributionLists();
+  }
+
+  return results;
+}
+
+QStringList AddressBook::allDistributionListNames() const
+{
+  QStringList results;
+
+  KRES::Manager<Resource>::ActiveIterator it;
+  for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
+    results += (*it)->allDistributionListNames();
   }
 
   return results;

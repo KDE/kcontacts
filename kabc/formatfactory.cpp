@@ -25,6 +25,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
+#include <kconfiggroup.h>
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFile>

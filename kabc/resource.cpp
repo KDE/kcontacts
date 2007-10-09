@@ -226,6 +226,7 @@ Resource::Resource( const KConfigGroup &group )
 Resource::~Resource()
 {
   delete d;
+  qDeleteAll( mDistListMap );
 }
 
 Resource::Iterator Resource::begin()
@@ -348,6 +349,83 @@ Addressee::List Resource::findByCategory( const QString &category )
 void Resource::clear()
 {
   mAddrMap.clear();
+
+  qDeleteAll( mDistListMap );
+}
+
+void Resource::insertDistributionList( DistributionList *list )
+{
+  Q_ASSERT( list );
+
+  mDistListMap.insert( list->identifier(), list );
+}
+
+void Resource::removeDistributionList( DistributionList *list )
+{
+  Q_ASSERT( list );
+
+  DistributionListMap::iterator it = mDistListMap.find( list->identifier() );
+  if ( it != mDistListMap.end() ) {
+    if ( it.value() == list ) {
+      mDistListMap.erase( it );
+    }
+  }
+}
+
+DistributionList* Resource::findDistributionListByIdentifier( const QString& identifier )
+{
+  DistributionListMap::const_iterator it = mDistListMap.find( identifier );
+  if ( it != mDistListMap.end() )
+    return it.value();
+
+  return 0;
+}
+
+DistributionList* Resource::findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity )
+{
+  QString searchName = name;
+  if ( caseSensitivity == Qt::CaseInsensitive )
+    searchName = name.toLower();
+
+  DistributionListMap::const_iterator it    = mDistListMap.begin();
+  DistributionListMap::const_iterator endIt = mDistListMap.end();
+  for ( ; it != endIt; ++it ) {
+    if ( caseSensitivity == Qt::CaseSensitive ) {
+      if ( searchName == it.value()->name() )
+        return it.value();
+    } else {
+      if ( searchName == it.value()->name().toLower() )
+        return it.value();
+    }
+  }
+
+  return 0;
+}
+
+QList<DistributionList*> Resource::allDistributionLists()
+{
+  QList<DistributionList*> results;
+
+  DistributionListMap::const_iterator it    = mDistListMap.begin();
+  DistributionListMap::const_iterator endIt = mDistListMap.end();
+  for ( ; it != endIt; ++it ) {
+    results += it.value();
+  }
+
+  return results;
+}
+
+QStringList Resource::allDistributionListNames() const
+{
+  QStringList results;
+
+  DistributionListMap::const_iterator it    = mDistListMap.begin();
+  DistributionListMap::const_iterator endIt = mDistListMap.end();
+  for ( ; it != endIt; ++it ) {
+    results += it.value()->name();
+  }
+
+  return results;
 }
 
 bool Resource::asyncLoad()

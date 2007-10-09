@@ -21,6 +21,7 @@
 
 #include <kconfig.h>
 #include <klocale.h>
+#include <kconfiggroup.h>
 
 #include <QtGui/QApplication>
 #include <QtDBus/QtDBus>

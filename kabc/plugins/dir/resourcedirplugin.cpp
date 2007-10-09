@@ -23,10 +23,7 @@
 
 using namespace KABC;
 
-extern "C"
-{
-  KDE_EXPORT void *init_kabc_directory()
-  {
-    return new KRES::PluginFactory<ResourceDir, ResourceDirConfig>();
-  }
-}
+typedef KRES::PluginFactory<ResourceDir, ResourceDirConfig> ResourceDirFactory;
+
+K_EXPORT_PLUGIN(ResourceDirFactory)
+

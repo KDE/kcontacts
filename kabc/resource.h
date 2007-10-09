@@ -22,6 +22,7 @@
 #define KABC_RESOURCE_H
 
 #include "addressbook.h"
+#include "distributionlist.h"
 #include "plugin.h"
 #include "kresources/resource.h"
 
@@ -405,9 +406,52 @@ class KABC_EXPORT Resource : public KRES::Resource
     virtual Addressee::List findByCategory( const QString &category );
 
     /**
-      Removes all addressees from the resource.
+      Removes all addressees and distribution lists from the resource.
      */
     virtual void clear();
+
+    /**
+      Adds a distribution @p list into this resource.
+
+      @param list The list to insert.
+     */
+    virtual void insertDistributionList( DistributionList *list );
+
+    /**
+      Removes a distribution @p list from this resource.
+
+      @param list The list to remove.
+     */
+    virtual void removeDistributionList( DistributionList *list );
+
+    /**
+      Returns a distribution list for the given @p identifier or @c 0
+
+      @param identifier The ID of the list for look for.
+     */
+    virtual DistributionList* findDistributionListByIdentifier( const QString& identifier );
+
+    /**
+      Returns a distribution list with the given @p name or @c 0
+
+      @param name The localized name of the list for look for.
+      @param caseSensitivity Whether to do string matching case sensitive or
+             case insensitive. Default is @c Qt::CaseSensitive
+     */
+    virtual DistributionList* findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
+
+    /**
+      Returns a list of all distribution lists of this resource.
+     */
+    virtual QList<DistributionList*> allDistributionLists();
+
+    /**
+      Returns a list of names of all distribution lists of this resource.
+
+      Convenience function, equal to iterate over the list returned
+      by allDistributionLists()
+     */
+    virtual QStringList allDistributionListNames() const;
 
     /**
       @internal
@@ -467,6 +511,11 @@ class KABC_EXPORT Resource : public KRES::Resource
       A mapping from KABC UIDs to the respective addressee.
     */
     Addressee::Map mAddrMap;
+
+    /**
+      A mapping from unique identifiers to the respective distribution list.
+    */
+    DistributionListMap mDistListMap;
 
   private:
     class Private;

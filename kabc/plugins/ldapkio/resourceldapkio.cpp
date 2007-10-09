@@ -196,7 +196,7 @@ QString ResourceLDAPKIO::Private::findUid( const QString &uid )
   kDebug(7125) << "ResourceLDAPKIO::findUid() uid:" << uid << "url" <<
     url.prettyUrl();
 
-  KIO::ListJob *listJob = KIO::listDir( url, false /* no GUI */);
+  KIO::ListJob *listJob = KIO::listDir( url, KIO::HideProgressInfo );
   mParent->connect( listJob, SIGNAL( entries( KIO::Job *, const KIO::UDSEntryList& ) ),
                     SLOT( entries( KIO::Job*, const KIO::UDSEntryList& ) ) );
   mParent->connect( listJob, SIGNAL( result( KJob* ) ),
@@ -582,7 +582,7 @@ KIO::Job *ResourceLDAPKIO::Private::loadFromCache()
     mParent->Resource::setReadOnly( true );
 
     KUrl url( mCacheDst );
-    job = KIO::get( url, true, false );
+    job = KIO::get( url, KIO::Reload, KIO::HideProgressInfo );
     mParent->connect( job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
                       mParent, SLOT( data( KIO::Job*, const QByteArray& ) ) );
   }
@@ -607,7 +607,7 @@ bool ResourceLDAPKIO::load()
 
   d->createCache();
   if ( d->mCachePolicy != Cache_Always ) {
-    job = KIO::get( d->mLDAPUrl, true, false );
+    job = KIO::get( d->mLDAPUrl, KIO::Reload, KIO::HideProgressInfo );
     connect( job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
       this, SLOT( data( KIO::Job*, const QByteArray& ) ) );
     connect( job, SIGNAL( result( KJob* ) ),
@@ -644,7 +644,7 @@ bool ResourceLDAPKIO::asyncLoad()
 
   d->createCache();
   if ( d->mCachePolicy != Cache_Always ) {
-    KIO::Job *job = KIO::get( d->mLDAPUrl, true, false );
+    KIO::Job *job = KIO::get( d->mLDAPUrl, KIO::Reload, KIO::HideProgressInfo );
     connect( job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
       this, SLOT( data( KIO::Job*, const QByteArray& ) ) );
     connect( job, SIGNAL( result( KJob* ) ),
@@ -808,7 +808,7 @@ bool ResourceLDAPKIO::save( Ticket *ticket )
   kDebug(7125) << "ResourceLDAPKIO save";
 
   d->mSaveIt = begin();
-  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, true, false, false );
+  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( job, SIGNAL( dataReq( KIO::Job*, QByteArray& ) ),
     this, SLOT( saveData( KIO::Job*, QByteArray& ) ) );
   connect( job, SIGNAL( result( KJob* ) ),
@@ -829,7 +829,7 @@ bool ResourceLDAPKIO::asyncSave( Ticket *ticket )
   Q_UNUSED( ticket );
   kDebug(7125) << "ResourceLDAPKIO asyncSave";
   d->mSaveIt = begin();
-  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, true, false, false );
+  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( job, SIGNAL( dataReq( KIO::Job*, QByteArray& ) ),
     this, SLOT( saveData( KIO::Job*, QByteArray& ) ) );
   connect( job, SIGNAL( result( KJob* ) ),

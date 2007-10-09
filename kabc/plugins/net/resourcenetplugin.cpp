@@ -23,10 +23,6 @@
 
 using namespace KABC;
 
-extern "C"
-{
-  KDE_EXPORT void *init_kabc_net()
-  {
-    return new KRES::PluginFactory<ResourceNet, ResourceNetConfig>();
-  }
-}
+typedef KRES::PluginFactory<ResourceNet, ResourceNetConfig> ResourceNetFactory;
+
+K_EXPORT_PLUGIN(ResourceNetFactory)
