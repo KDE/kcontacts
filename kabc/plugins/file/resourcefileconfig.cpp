@@ -51,6 +51,7 @@ ResourceFileConfig::ResourceFileConfig( QWidget *parent )
 
   label = new QLabel( i18n( "Location:" ), this );
   mFileNameEdit = new KUrlRequester( this );
+  mFileNameEdit->setMode( KFile::File | KFile::LocalOnly );
 
   connect( mFileNameEdit, SIGNAL( textChanged( const QString & ) ),
            SLOT( checkFilePermissions( const QString & ) ) );
@@ -108,7 +109,7 @@ void ResourceFileConfig::saveSettings( KRES::Resource *res )
     resource->setFormat( mFormatTypes[ mFormatBox->currentIndex() ] );
   }
 
-  resource->setFileName( mFileNameEdit->url().url() );
+  resource->setFileName( mFileNameEdit->url().path() );
 }
 
 void ResourceFileConfig::checkFilePermissions( const QString &fileName )
