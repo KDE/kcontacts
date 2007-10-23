@@ -49,12 +49,6 @@ typedef QList< QPair<QString, QString> > MissingEntryList;
 class ResourceFile::ResourceFilePrivate
 {
   public:
-    KIO::Job *mLoadJob;
-    bool mIsLoading;
-
-    KIO::Job *mSaveJob;
-    bool mIsSaving;
-
     QMap< QString, MissingEntryList > mMissingEntries;
 };
 
@@ -92,11 +86,6 @@ ResourceFile::ResourceFile( const QString &fileName,
 
 void ResourceFile::init( const QString &fileName, const QString &formatName )
 {
-  d->mLoadJob = 0;
-  d->mIsLoading = false;
-  d->mSaveJob = 0;
-  d->mIsSaving = false;
-
   mFormatName = formatName;
 
   FormatFactory *factory = FormatFactory::self();
@@ -120,19 +109,10 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
 
 ResourceFile::~ResourceFile()
 {
-  if ( d->mIsLoading ) {
-    d->mLoadJob->kill();
-  }
-  if ( d->mIsSaving ) {
-    d->mSaveJob->kill();
-  }
-
   delete d;
   d = 0;
   delete mFormat;
   mFormat = 0;
-
-  deleteLocalTempFile();
 }
 
 void ResourceFile::writeConfig( KConfigGroup &group )
@@ -224,10 +204,6 @@ bool ResourceFile::load()
 {
   kDebug(5700) << "ResourceFile::load(): '" << mFileName << "'";
 
-  if ( d->mIsLoading ) {
-    abortAsyncLoading();
-  }
-
   mAsynchronous = false;
 
   QFile file( mFileName );
@@ -257,72 +233,19 @@ bool ResourceFile::clearAndLoad( QFile *file )
 
 bool ResourceFile::asyncLoad()
 {
-  if ( d->mIsLoading ) {
-    abortAsyncLoading();
-  }
-
-  if ( d->mIsSaving ) {
-    kWarning(5700) << "Aborted asyncSave() because we're still saving!";
-    return false;
-  }
-
   mAsynchronous = true;
 
-  bool ok = createLocalTempFile();
+  load();
 
-  if ( !ok ) {
-    emit loadingError( this, i18n( "Unable to open file '%1'.", mTempFile->fileName() ) );
-    deleteLocalTempFile();
-    return false;
-  }
-
-  KUrl dest, src;
-  dest.setPath( mTempFile->fileName() );
-  src.setPath( mFileName );
-
-  KIO::Scheduler::checkSlaveOnHold( true );
-  d->mLoadJob = KIO::file_copy( src, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
-  d->mIsLoading = true;
-  connect( d->mLoadJob, SIGNAL( result( KJob* ) ),
-           this, SLOT( downloadFinished( KJob* ) ) );
+  QTimer::singleShot( 0, this, SLOT( emitLoadingFinished() ) );
 
   return true;
-}
-
-void ResourceFile::abortAsyncLoading()
-{
-  kDebug(5700) << "ResourceFile::abortAsyncLoading()";
-
-  if ( d->mLoadJob ) {
-    d->mLoadJob->kill(); // result not emitted
-    d->mLoadJob = 0;
-  }
-
-  deleteLocalTempFile();
-  d->mIsLoading = false;
-}
-
-void ResourceFile::abortAsyncSaving()
-{
-  kDebug(5700) << "ResourceFile::abortAsyncSaving()";
-
-  if ( d->mSaveJob ) {
-    d->mSaveJob->kill(); // result not emitted
-    d->mSaveJob = 0;
-  }
-
-  deleteLocalTempFile();
-  d->mIsSaving = false;
 }
 
 bool ResourceFile::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
   kDebug(5700) << "ResourceFile::save()";
-
-  if ( d->mIsSaving ) {
-    abortAsyncSaving();
-  }
 
   // create backup file
   QString extension = '_' + QString::number( QDate::currentDate().dayOfWeek() );
@@ -347,63 +270,25 @@ bool ResourceFile::save( Ticket *ticket )
   return ok;
 }
 
-bool ResourceFile::asyncSave( Ticket * )
+bool ResourceFile::asyncSave( Ticket *ticket )
 {
   kDebug(5700) << "ResourceFile::asyncSave()";
 
-  if ( d->mIsSaving ) {
-    abortAsyncSaving();
-  }
+  save( ticket );
 
-  if ( d->mIsLoading ) {
-    kWarning(5700) << "Aborted asyncSave() because we're still loading!";
-    return false;
-  }
-
-  bool ok = createLocalTempFile();
-  if ( ok ) {
-    saveToFile( mTempFile );
-  }
-
-  if ( !ok ) {
-    emit savingError( this, i18n( "Unable to save file '%1'.", mTempFile->fileName() ) );
-    deleteLocalTempFile();
-    return false;
-  }
-
-  KUrl src, dest;
-  src.setPath( mTempFile->fileName() );
-  dest.setPath( mFileName );
-
-  KIO::Scheduler::checkSlaveOnHold( true );
-  d->mIsSaving = true;
-  mDirWatch.stopScan(); // restarted in uploadFinished()
-  d->mSaveJob = KIO::file_copy( src, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
-  connect( d->mSaveJob, SIGNAL( result( KJob* ) ),
-           this, SLOT( uploadFinished( KJob* ) ) );
+  QTimer::singleShot( 0, this, SLOT( emitSavingFinished() ) );
 
   return true;
 }
 
-bool ResourceFile::createLocalTempFile()
+void ResourceFile::emitLoadingFinished()
 {
-  deleteStaleTempFile();
-  mTempFile = new KTemporaryFile();
-  return mTempFile->open();
+  emit loadingFinished( this );
 }
 
-void ResourceFile::deleteStaleTempFile()
+void ResourceFile::emitSavingFinished()
 {
-  if ( hasTempFile() ) {
-    kDebug(5700) << "stale temp file detected" << mTempFile->fileName();
-    deleteLocalTempFile();
-  }
-}
-
-void ResourceFile::deleteLocalTempFile()
-{
-  delete mTempFile;
-  mTempFile = 0;
+  emit savingFinished( this );
 }
 
 bool ResourceFile::loadDistributionLists()
@@ -569,50 +454,6 @@ void ResourceFile::removeAddressee( const Addressee &addr )
     QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/sounds/" ) + addr.uid() ) );
 
   mAddrMap.remove( addr.uid() );
-}
-
-void ResourceFile::downloadFinished( KJob *job )
-{
-  Q_UNUSED( job );
-  kDebug(5700) << "ResourceFile::downloadFinished()";
-
-  d->mIsLoading = false;
-
-  if ( !hasTempFile() ) {
-    emit loadingError( this, i18n( "Download failed, could not create temporary file" ) );
-    return;
-  }
-
-  QFile file( mTempFile->fileName() );
-  if ( file.open( QIODevice::ReadOnly ) ) {
-    if ( clearAndLoad( &file ) ) {
-      emit loadingFinished( this );
-    } else {
-      emit loadingError( this, i18n( "Problems during parsing file '%1'.",
-                                     mTempFile->fileName() ) );
-    }
-  } else {
-    emit loadingError( this, i18n( "Unable to open file '%1'.",
-                                   mTempFile->fileName() ) );
-  }
-
-  deleteLocalTempFile();
-}
-
-void ResourceFile::uploadFinished( KJob *job )
-{
-  kDebug(5700) << "ResourceFile::uploadFinished()";
-
-  d->mIsSaving = false;
-
-  if ( job->error() ) {
-    emit savingError( this, job->errorString() );
-  } else {
-    emit savingFinished( this );
-  }
-
-  deleteLocalTempFile();
-  mDirWatch.startScan();
 }
 
 #include "resourcefile.moc"

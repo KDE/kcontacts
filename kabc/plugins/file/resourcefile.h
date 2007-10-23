@@ -144,8 +144,8 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     virtual void removeAddressee( const Addressee &addr );
 
   private Q_SLOTS:
-    void downloadFinished( KJob *job );
-    void uploadFinished( KJob *job );
+    void emitLoadingFinished();
+    void emitSavingFinished();
 
   protected Q_SLOTS:
     void fileChanged( const QString &path);
@@ -159,8 +159,6 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
   private:
     bool clearAndLoad( QFile *file );
     void saveToFile( QFile *file );
-    void abortAsyncLoading();
-    void abortAsyncSaving();
     bool createLocalTempFile();
     void deleteLocalTempFile();
     void deleteStaleTempFile();
