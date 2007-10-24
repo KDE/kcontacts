@@ -101,7 +101,7 @@ FormatFactory::FormatFactory()
                                        KStandardDirs::Recursive |
                                        KStandardDirs::NoDuplicates );
   for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
-    KConfig config( *it, KConfig::OnlyLocal );
+    KConfig config( *it, KConfig::SimpleConfig );
 
     if ( !config.hasGroup( "Misc" ) || !config.hasGroup( "Plugin" ) ) {
       continue;

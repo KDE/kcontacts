@@ -61,7 +61,7 @@ ResourceNet::ResourceNet( const KConfigGroup &group )
     mTempFile( 0 ),
     d( new ResourceNetPrivate )
 {
-  init( KUrl( group.readPathEntry( "NetUrl" ) ), group.readEntry( "NetFormat" ) );
+  init( KUrl( group.readPathEntry( "NetUrl", QString() ) ), group.readEntry( "NetFormat" ) );
 }
 
 ResourceNet::ResourceNet( const KUrl &url, const QString &format )
