@@ -296,14 +296,14 @@ bool ResourceFile::loadDistributionLists()
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   KConfigGroup cg( &cfg, "DistributionLists" );
-  QMap<QString,QString> entryMap = cg.entryMap();
+  const QStringList entryList = cg.keyList();
 
   d->mMissingEntries.clear();
 
-  QMap<QString,QString>::ConstIterator it;
-  for ( it = entryMap.constBegin(); it != entryMap.constEnd(); ++it ) {
-    QString name = it.key();
-    QStringList value = cg.readEntry( name, QStringList() );
+  QStringList::ConstIterator it;
+  for ( it = entryList.constBegin(); it != entryList.constEnd(); ++it ) {
+    const QString name = *it;
+    const QStringList value = cg.readEntry( name, QStringList() );
 
     kDebug(5700) << "ResourceFile::loadDistributionLists():" << name
                  << ":" << value.join( "," );
