@@ -57,7 +57,7 @@ bool BinaryFormat::load( Addressee &addressee, QFile *file )
   return true;
 }
 
-bool BinaryFormat::loadAll( AddressBook*, Resource *resource, QFile *file )
+bool BinaryFormat::loadAll( AddressBook *, Resource *resource, QFile *file )
 {
   kDebug(5700) << "BinaryFormat::loadAll()";
 
@@ -95,7 +95,7 @@ void BinaryFormat::save( const Addressee &addressee, QFile *file )
   saveAddressee( addressee, stream );
 }
 
-void BinaryFormat::saveAll( AddressBook*, Resource *resource, QFile *file )
+void BinaryFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
 {
   kDebug(5700) << "BinaryFormat::saveAll()";
 
@@ -136,17 +136,17 @@ bool BinaryFormat::checkHeader( QDataStream &stream ) const
   QFile *file = dynamic_cast<QFile*>( stream.device() );
 
   if ( !file ) {
-    kError() << i18n( "Not a file?" );
+    kError(5700) << i18n( "Not a file?" );
     return false;
   }
 
   if ( magic != 0x2e93e ) {
-    kError() << i18n( "File '%1' is not binary format.", file->fileName() );
+    kError(5700) << i18n( "File '%1' is not binary format.", file->fileName() );
     return false;
   }
 
   if ( version != BINARY_FORMAT_VERSION ) {
-    kError() << i18n( "File '%1' is the wrong version.", file->fileName() );
+    kError(5700) << i18n( "File '%1' is the wrong version.", file->fileName() );
     return false;
   }
 

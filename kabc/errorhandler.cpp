@@ -46,7 +46,7 @@ ConsoleErrorHandler::~ConsoleErrorHandler()
 void ConsoleErrorHandler::error( const QString &msg )
 {
   // no debug area is ok here
-  kError() << msg;
+  kError(5700) << msg;
 }
 
 class GuiErrorHandler::Private
