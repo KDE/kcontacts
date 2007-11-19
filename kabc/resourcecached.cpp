@@ -59,7 +59,7 @@ void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addres
     file.remove();
   } else {
     if ( !file.open( QIODevice::WriteOnly ) ) {
-      kError() << "Can't open changes cache file '" << file.fileName() << "' for saving.";
+      kError(5700) << "Can't open changes cache file '" << file.fileName() << "' for saving.";
       return;
     }
 

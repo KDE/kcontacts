@@ -147,10 +147,11 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, "organizationname", addr.organization() );
 
   // Compatibility with older kabc versions.
-  if ( !addr.department().isEmpty() )
+  if ( !addr.department().isEmpty() ) {
     ldif_out( t, "department", addr.department() );
-  else
-    ldif_out( t, "department", addr.custom("KADDRESSBOOK", "X-Department") );
+  } else {
+    ldif_out( t, "department", addr.custom( "KADDRESSBOOK", "X-Department" ) );
+  }
 
   ldif_out( t, "workurl", addr.url().prettyUrl() );
   ldif_out( t, "homeurl", addr.url().prettyUrl() );
@@ -506,7 +507,7 @@ addComment:
     return true;
   }
 
-  kWarning() << QString( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
+  kWarning(5700) << QString( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
     arg( a.formattedName() ).arg( fieldname ).arg( value );
 
   return true;

@@ -296,7 +296,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
       i = 0;
       j = 2;
     }
-    kDebug(7125) << "itkey:" << it.key() << "i:" << i;
+    kDebug(5700) << "itkey:" << it.key() << "i:" << i;
     label = new QLabel( mNameDict[ it.key() ] + ':', page );
     KLineEdit *lineedit = new KLineEdit( page );
     mLineEditDict.insert( it.key(), lineedit );
