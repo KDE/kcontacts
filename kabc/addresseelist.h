@@ -276,7 +276,7 @@ typedef enum {
  * such operations you have to call {@link #sort} or {@link #sortBy} to
  * create a defined order again.
  *
- * Iterator usage is inherited by QValueList and extensively documented
+ * Iterator usage is inherited from QList and extensively documented
  * there. Please remember that the state of an iterator is undefined
  * after any sorting operation.
  *
