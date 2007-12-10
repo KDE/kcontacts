@@ -55,23 +55,13 @@ FormatFactory *FormatFactory::Private::sSelf = 0;
 
 KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
 {
-  KLibrary *library = 0;
-
-  QString path = KLibLoader::findLibrary( libName );
-
-  if ( path.isEmpty() ) {
-    kDebug(5700) << "No format plugin library was found!";
-    return 0;
+  KLibrary *library = new KLibrary( libName );
+  if (library->load()) {
+    return library;
   }
-
-  library = KLibLoader::self()->library( path );
-
-  if ( !library ) {
-    kDebug(5700) << "Could not load library '" << libName << "'";
-    return 0;
-  }
-
-  return library;
+  kDebug(5700) << library->errorString();
+  delete library;
+  return 0;
 }
 
 FormatFactory *FormatFactory::self()
