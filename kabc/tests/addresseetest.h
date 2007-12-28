@@ -34,6 +34,7 @@ class AddresseeTest : public QObject
     void differsTest();
     void assignmentTest();
     void serializeTest();
+    void fullEmailTest();
 };
 
 #endif

@@ -71,8 +71,6 @@ class KABC_EXPORT Resource : public KRES::Resource
       @short Resource Iterator
 
       This class provides an iterator for resource entries.
-      By default it points to a QValueList<Addressee>::Iterator,
-      but you can reimplement this class to fit your own needs.
     */
     class ConstIterator;
     class KABC_EXPORT Iterator
@@ -247,6 +245,16 @@ class KABC_EXPORT Resource : public KRES::Resource
         class Private;
         Private *const d;
     };
+
+    /**
+     * Typedef for STL style iterator
+     */
+    typedef Iterator iterator;
+
+    /**
+     * Typedef for STL style iterator
+     */
+    typedef ConstIterator const_iterator;
 
     /**
       Default constructor.

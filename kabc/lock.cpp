@@ -101,8 +101,6 @@ QString Lock::lockFileName() const
 
 bool Lock::lock()
 {
-  kDebug(5700) << "Lock::lock()";
-
   QString lockName = lockFileName();
   kDebug(5700) << "-- lock name:" << lockName;
 
@@ -163,7 +161,7 @@ bool Lock::unlock()
       emit unlocked();
     } else {
       d->mError = i18n( "Unlock failed. Lock file is owned by other process: %1 (%2)", app, pid );
-      kDebug(5700) << "Lock::unlock():" << d->mError;
+      kDebug(5700) << d->mError;
       return false;
     }
   }

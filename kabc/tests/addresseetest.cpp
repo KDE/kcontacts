@@ -332,4 +332,14 @@ void AddresseeTest::serializeTest()
   QVERIFY( addressee1 == addressee2 );
 }
 
+void AddresseeTest::fullEmailTest()
+{
+  KABC::Addressee a;
+  QStringList emails;
+  emails << "foo@bar.com";
+  a.setEmails( emails );
+  a.setFormattedName( "firstname \"nickname\" lastname" );
+  QCOMPARE( a.fullEmail(), QString( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
+}
+
 #include "addresseetest.moc"

@@ -264,6 +264,16 @@ class KABC_EXPORT AddressBook : public QObject
     };
 
     /**
+      Typedef for STL style iterator
+     */
+    typedef Iterator iterator;
+
+    /**
+      Typedef for STL style iterator
+     */
+    typedef ConstIterator const_iterator;
+
+    /**
       Constructs an address book object.
       You have to add the resources manually before calling load().
      */
