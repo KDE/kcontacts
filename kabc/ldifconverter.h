@@ -73,7 +73,7 @@ namespace KABC {
     @param a The addressee to store information into
     @param homeAddr The home address to store respective information into
     @param workAddr The work address to store respective information into
-    @param fieldname LDIF field name to evalute
+    @param fieldname LDIF field name to evaluate
     @param value The value of the field addressed by @p fieldname
   */
   KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr, Address &workAddr,

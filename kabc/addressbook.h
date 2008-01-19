@@ -309,7 +309,7 @@ class KABC_EXPORT AddressBook : public QObject
       Releases the ticket requested previously with requestSaveTicket().
       Call this function, if you want to release a ticket without saving.
 
-      @param ticket the save ticket aquired with requestSaveTicket()
+      @param ticket the save ticket acquired with requestSaveTicket()
      */
     void releaseSaveTicket( Ticket *ticket );
 

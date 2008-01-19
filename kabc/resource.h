@@ -322,7 +322,7 @@ class KABC_EXPORT Resource : public KRES::Resource
       The resource has to remove its locks in this function.
       This function is also responsible for deleting the ticket.
 
-      @param ticket the save ticket aquired with requestSaveTicket()
+      @param ticket the save ticket acquired with requestSaveTicket()
      */
     virtual void releaseSaveTicket( Ticket *ticket ) = 0;
 
