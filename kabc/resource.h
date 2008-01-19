@@ -437,7 +437,7 @@ class KABC_EXPORT Resource : public KRES::Resource
 
       @param identifier The ID of the list for look for.
      */
-    virtual DistributionList* findDistributionListByIdentifier( const QString& identifier );
+    virtual DistributionList *findDistributionListByIdentifier( const QString &identifier );
 
     /**
       Returns a distribution list with the given @p name or @c 0
@@ -446,7 +446,9 @@ class KABC_EXPORT Resource : public KRES::Resource
       @param caseSensitivity Whether to do string matching case sensitive or
              case insensitive. Default is @c Qt::CaseSensitive
      */
-    virtual DistributionList* findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
+    virtual DistributionList *findDistributionListByName(
+      const QString &name,
+      Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
 
     /**
       Returns a list of all distribution lists of this resource.

@@ -467,7 +467,7 @@ class KABC_EXPORT AddressBook : public QObject
 
       @see standardResource()
      */
-    DistributionList* createDistributionList( const QString &name, Resource* resource = 0 );
+    DistributionList *createDistributionList( const QString &name, Resource *resource = 0 );
 
     /**
       Removes a distribution @p list from its associated resource.
@@ -481,7 +481,7 @@ class KABC_EXPORT AddressBook : public QObject
 
       @param identifier The ID of the list for look for.
      */
-    DistributionList* findDistributionListByIdentifier( const QString &identifier );
+    DistributionList *findDistributionListByIdentifier( const QString &identifier );
 
     /**
       Returns a distribution list with the given @p name or @c 0
@@ -490,7 +490,9 @@ class KABC_EXPORT AddressBook : public QObject
       @param caseSensitivity Whether to do string matching case sensitive or
              case insensitive. Default is @c Qt::CaseSensitive
      */
-    DistributionList* findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
+    DistributionList *findDistributionListByName(
+      const QString &name,
+      Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive );
 
     /**
       Returns a list of all distribution lists of all resources of this

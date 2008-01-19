@@ -119,7 +119,7 @@ void ResourceNet::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceNet::requestSaveTicket()
 {
-  kDebug(5700) << "ResourceNet::requestSaveTicket()";
+  kDebug(5700);
 
   return createTicket( this );
 }
@@ -203,7 +203,7 @@ bool ResourceNet::asyncLoad()
 
 void ResourceNet::abortAsyncLoading()
 {
-  kDebug(5700) << "ResourceNet::abortAsyncLoading()";
+  kDebug(5700);
 
   if ( d->mLoadJob ) {
     d->mLoadJob->kill(); // result not emitted
@@ -216,7 +216,7 @@ void ResourceNet::abortAsyncLoading()
 
 void ResourceNet::abortAsyncSaving()
 {
-  kDebug(5700) << "ResourceNet::abortAsyncSaving()";
+  kDebug(5700);
 
   if ( d->mSaveJob ) {
     d->mSaveJob->kill(); // result not emitted
@@ -230,7 +230,7 @@ void ResourceNet::abortAsyncSaving()
 bool ResourceNet::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceNet::save()";
+  kDebug(5700);
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -259,7 +259,7 @@ bool ResourceNet::save( Ticket *ticket )
 bool ResourceNet::asyncSave( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceNet::asyncSave()";
+  kDebug(5700);
 
   if ( d->mIsSaving ) {
     abortAsyncSaving();
@@ -348,7 +348,7 @@ QString ResourceNet::format() const
 void ResourceNet::downloadFinished( KJob *job )
 {
   Q_UNUSED( job );
-  kDebug(5700) << "ResourceNet::downloadFinished()";
+  kDebug(5700);
 
   d->mIsLoading = false;
 
@@ -375,7 +375,7 @@ void ResourceNet::downloadFinished( KJob *job )
 
 void ResourceNet::uploadFinished( KJob *job )
 {
-  kDebug(5700) << "ResourceFile::uploadFinished()";
+  kDebug(5700);
 
   d->mIsSaving = false;
 

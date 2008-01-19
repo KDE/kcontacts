@@ -32,24 +32,22 @@ class KABC_FILE_CORE_EXPORT ResourceFileConfig : public KRES::ConfigWidget
 {
   Q_OBJECT
 
-public:
-  ResourceFileConfig( QWidget *parent = 0 );
+  public:
+    ResourceFileConfig( QWidget *parent = 0 );
+    void setEditMode( bool value );
 
-  void setEditMode( bool value );
+  public Q_SLOTS:
+    void loadSettings( KRES::Resource *resource );
+    void saveSettings( KRES::Resource *resource );
 
-public Q_SLOTS:
-  void loadSettings( KRES::Resource *resource );
-  void saveSettings( KRES::Resource *resource );
+  protected Q_SLOTS:
+    void checkFilePermissions( const QString &fileName );
 
-protected Q_SLOTS:
-  void checkFilePermissions( const QString &fileName );
-
-private:
-  KComboBox *mFormatBox;
-  KUrlRequester *mFileNameEdit;
-  bool mInEditMode;
-
-  QStringList mFormatTypes;
+  private:
+    KComboBox *mFormatBox;
+    KUrlRequester *mFileNameEdit;
+    bool mInEditMode;
+    QStringList mFormatTypes;
 };
 
 }

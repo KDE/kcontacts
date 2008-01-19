@@ -184,7 +184,7 @@ class KABC_EXPORT DistributionList
     */
     Entry::List entries() const;
 
-    Resource* resource() const;
+    Resource *resource() const;
 
   private:
     class Private;

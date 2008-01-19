@@ -45,7 +45,7 @@ extern "C"
 
 bool BinaryFormat::load( Addressee &addressee, QFile *file )
 {
-  kDebug(5700) << "BinaryFormat::load()";
+  kDebug(5700);
   QDataStream stream( file );
 
   if ( !checkHeader( stream ) ) {
@@ -59,7 +59,7 @@ bool BinaryFormat::load( Addressee &addressee, QFile *file )
 
 bool BinaryFormat::loadAll( AddressBook *, Resource *resource, QFile *file )
 {
-  kDebug(5700) << "BinaryFormat::loadAll()";
+  kDebug(5700);
 
   QDataStream stream( file );
 
@@ -84,7 +84,7 @@ bool BinaryFormat::loadAll( AddressBook *, Resource *resource, QFile *file )
 
 void BinaryFormat::save( const Addressee &addressee, QFile *file )
 {
-  kDebug(5700) << "BinaryFormat::save()";
+  kDebug(5700);
 
   QDataStream stream( file );
 
@@ -97,7 +97,7 @@ void BinaryFormat::save( const Addressee &addressee, QFile *file )
 
 void BinaryFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
 {
-  kDebug(5700) << "BinaryFormat::saveAll()";
+  kDebug(5700);
 
   quint32 counter = 0;
   QDataStream stream( file );
@@ -120,7 +120,7 @@ void BinaryFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
 
 bool BinaryFormat::checkFormat( QFile *file ) const
 {
-  kDebug(5700) << "BinaryFormat::checkFormat()";
+  kDebug(5700);
 
   QDataStream stream( file );
 

@@ -129,7 +129,7 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIO : public Resource
 
     QString cacheDst() const;
 
-protected Q_SLOTS:
+  protected Q_SLOTS:
     void entries( KIO::Job *job, const KIO::UDSEntryList &list );
     void data( KIO::Job *job, const QByteArray &data );
     void result( KJob *job );
@@ -139,7 +139,7 @@ protected Q_SLOTS:
     void saveData( KIO::Job *job, QByteArray &data );
     void loadCacheResult( KJob *job );
 
-Q_SIGNALS:
+  Q_SIGNALS:
     void leaveModality();
 
   private:

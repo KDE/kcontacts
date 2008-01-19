@@ -148,7 +148,7 @@ class KABC_FILE_CORE_EXPORT ResourceFile : public Resource
     void emitSavingFinished();
 
   protected Q_SLOTS:
-    void fileChanged( const QString &path);
+    void fileChanged( const QString &path );
 
   protected:
     void init( const QString &fileName, const QString &format );

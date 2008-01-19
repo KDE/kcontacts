@@ -31,7 +31,8 @@
 
 using namespace KABC;
 
-class DistributionList::Entry::Private {
+class DistributionList::Entry::Private
+{
   public:
     Private() {}
     Private( Addressee _addressee, const QString &_email )
@@ -100,7 +101,8 @@ DistributionList::DistributionList( Resource *resource, const QString &name )
   d->mResource->insertDistributionList( this );
 }
 
-DistributionList::DistributionList( Resource *resource, const QString &identifier, const QString &name )
+DistributionList::DistributionList( Resource *resource,
+                                    const QString &identifier, const QString &name )
   : d( new Private( resource, identifier, name ) )
 {
   d->mResource->insertDistributionList( this );
@@ -189,7 +191,7 @@ DistributionList::Entry::List DistributionList::entries() const
   return d->mEntries;
 }
 
-Resource* DistributionList::resource() const
+Resource *DistributionList::resource() const
 {
     return d->mResource;
 }

@@ -83,7 +83,7 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
   ResourceLDAPKIO *resource = dynamic_cast<ResourceLDAPKIO*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "ResourceLDAPKIOConfig::loadSettings(): cast failed";
+    kDebug(5700) << "cast failed";
     return;
   }
 
@@ -126,7 +126,7 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
   ResourceLDAPKIO *resource = dynamic_cast<ResourceLDAPKIO*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "ResourceLDAPKIOConfig::saveSettings(): cast failed";
+    kDebug(5700) << "cast failed";
     return;
   }
 

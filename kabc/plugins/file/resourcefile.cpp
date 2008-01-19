@@ -130,7 +130,7 @@ void ResourceFile::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceFile::requestSaveTicket()
 {
-  kDebug(5700) << "ResourceFile::requestSaveTicket()";
+  kDebug(5700);
 
   if ( !addressBook() ) {
     return 0;
@@ -143,8 +143,8 @@ Ticket *ResourceFile::requestSaveTicket()
     addressBook()->emitAddressBookLocked();
   } else {
     addressBook()->error( mLock->error() );
-    kDebug(5700) << "ResourceFile::requestSaveTicket(): Unable to lock file '"
-                  << mFileName << "':" << mLock->error();
+    kDebug(5700) << "Unable to lock file '" << mFileName
+                 << "':" << mLock->error();
     return 0;
   }
 
@@ -202,7 +202,7 @@ void ResourceFile::doClose()
 
 bool ResourceFile::load()
 {
-  kDebug(5700) << "ResourceFile::load(): '" << mFileName << "'";
+  kDebug(5700) << mFileName << "'";
 
   mAsynchronous = false;
 
@@ -245,7 +245,7 @@ bool ResourceFile::asyncLoad()
 bool ResourceFile::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceFile::save()";
+  kDebug(5700);
 
   // create backup file
   QString extension = '_' + QString::number( QDate::currentDate().dayOfWeek() );
@@ -272,7 +272,7 @@ bool ResourceFile::save( Ticket *ticket )
 
 bool ResourceFile::asyncSave( Ticket *ticket )
 {
-  kDebug(5700) << "ResourceFile::asyncSave()";
+  kDebug(5700);
 
   save( ticket );
 
@@ -305,8 +305,7 @@ bool ResourceFile::loadDistributionLists()
     const QString name = *it;
     const QStringList value = cg.readEntry( name, QStringList() );
 
-    kDebug(5700) << "ResourceFile::loadDistributionLists():" << name
-                 << ":" << value.join( "," );
+    kDebug(5700) << name << ":" << value.join( "," );
 
     DistributionList *list = new DistributionList( this, name );
 
@@ -339,7 +338,7 @@ bool ResourceFile::loadDistributionLists()
 
 void ResourceFile::saveDistributionLists()
 {
-  kDebug(5700) << "ResourceFile::saveDistributionLists()";
+  kDebug(5700);
 
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
   KConfigGroup cg( &cfg, "DistributionLists" );
@@ -412,9 +411,9 @@ QString ResourceFile::format() const
   return mFormatName;
 }
 
-void ResourceFile::fileChanged( const QString &path)
+void ResourceFile::fileChanged( const QString &path )
 {
-  kDebug(5700) << "ResourceFile::fileChanged():" << path;
+  kDebug(5700) << path;
 
   if ( !addressBook() ) {
     return;

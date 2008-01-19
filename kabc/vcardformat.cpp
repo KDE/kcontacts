@@ -54,7 +54,7 @@ bool VCardFormat::load( Addressee &addressee, QFile *file )
   return false;
 }
 
-bool VCardFormat::loadAll( AddressBook*, Resource *resource, QFile *file )
+bool VCardFormat::loadAll( AddressBook *, Resource *resource, QFile *file )
 {
   QByteArray data;
 
@@ -87,7 +87,7 @@ void VCardFormat::save( const Addressee &addressee, QFile *file )
   file->write( data );
 }
 
-void VCardFormat::saveAll( AddressBook*, Resource *resource, QFile *file )
+void VCardFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
 {
   VCardConverter converter;
   Addressee::List vcardlist;

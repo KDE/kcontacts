@@ -193,8 +193,7 @@ QString ResourceLDAPKIO::Private::findUid( const QString &uid )
   url.setFilter( '(' + mAttributes[ "uid" ] + '=' + uid + ')' + mFilter );
   url.setExtension( "x-dir", "one" );
 
-  kDebug(5700) << "ResourceLDAPKIO::findUid() uid:" << uid << "url" <<
-    url.prettyUrl();
+  kDebug(5700) << uid << "url" << url.prettyUrl();
 
   KIO::ListJob *listJob = KIO::listDir( url, KIO::HideProgressInfo );
   mParent->connect( listJob, SIGNAL( entries( KIO::Job *, const KIO::UDSEntryList& ) ),
@@ -592,7 +591,7 @@ KIO::Job *ResourceLDAPKIO::Private::loadFromCache()
 
 bool ResourceLDAPKIO::load()
 {
-  kDebug(5700) << "ResourceLDAPKIO::load()";
+  kDebug(5700);
   KIO::Job *job;
 
   clear();
@@ -805,7 +804,7 @@ void ResourceLDAPKIO::result( KJob *job )
 bool ResourceLDAPKIO::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceLDAPKIO save";
+  kDebug(5700);
 
   d->mSaveIt = begin();
   KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
@@ -827,7 +826,7 @@ bool ResourceLDAPKIO::save( Ticket *ticket )
 bool ResourceLDAPKIO::asyncSave( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700) << "ResourceLDAPKIO asyncSave";
+  kDebug(5700);
   d->mSaveIt = begin();
   KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( job, SIGNAL( dataReq( KIO::Job*, QByteArray& ) ),
@@ -887,7 +886,7 @@ void ResourceLDAPKIO::removeAddressee( const Addressee &addr )
 {
   QString dn = d->findUid( addr.uid() );
 
-  kDebug(5700) << "ResourceLDAPKIO: removeAddressee:" << dn;
+  kDebug(5700) << dn;
 
   if ( !d->mErrorMsg.isEmpty() ) {
     addressBook()->error( d->mErrorMsg );

@@ -340,7 +340,7 @@ AddressBook::~AddressBook()
 
 bool AddressBook::load()
 {
-  kDebug(5700) << "AddressBook::load()";
+  kDebug(5700);
 
   clear();
 
@@ -358,7 +358,7 @@ bool AddressBook::load()
 
 bool AddressBook::asyncLoad()
 {
-  kDebug(5700) << "AddressBook::asyncLoad()";
+  kDebug(5700);
 
   clear();
 
@@ -377,7 +377,7 @@ bool AddressBook::asyncLoad()
 
 bool AddressBook::save( Ticket *ticket )
 {
-  kDebug(5700) << "AddressBook::save()";
+  kDebug(5700);
 
   if ( ticket->resource() ) {
     bool ok = ticket->resource()->save( ticket );
@@ -392,7 +392,7 @@ bool AddressBook::save( Ticket *ticket )
 
 bool AddressBook::asyncSave( Ticket *ticket )
 {
-  kDebug(5700) << "AddressBook::asyncSave()";
+  kDebug(5700);
 
   if ( ticket->resource() ) {
     d->mPendingSaveResources.append( ticket->resource() );
@@ -506,7 +506,7 @@ void AddressBook::clear()
 
 Ticket *AddressBook::requestSaveTicket( Resource *resource )
 {
-  kDebug(5700) << "AddressBook::requestSaveTicket()";
+  kDebug(5700);
 
   if ( !resource ) {
     resource = standardResource();
@@ -665,41 +665,46 @@ Addressee::List AddressBook::findByCategory( const QString &category ) const
   return results;
 }
 
-DistributionList* AddressBook::createDistributionList( const QString &name, Resource* resource )
+DistributionList *AddressBook::createDistributionList( const QString &name, Resource *resource )
 {
-  if ( resource == 0 )
+  if ( resource == 0 ) {
     resource = standardResource();
+  }
 
   return new DistributionList( resource, name );
 }
 
 void AddressBook::removeDistributionList( DistributionList *list )
 {
-  if ( !list || !list->resource() )
+  if ( !list || !list->resource() ) {
     return;
+  }
 
   list->resource()->removeDistributionList( list );
 }
 
-DistributionList* AddressBook::findDistributionListByIdentifier( const QString &identifier )
+DistributionList *AddressBook::findDistributionListByIdentifier( const QString &identifier )
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    DistributionList* list = (*it)->findDistributionListByIdentifier( identifier );
-    if ( list )
-        return list;
+    DistributionList *list = (*it)->findDistributionListByIdentifier( identifier );
+    if ( list ) {
+      return list;
+    }
   }
 
   return 0;
 }
 
-DistributionList* AddressBook::findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity )
+DistributionList *AddressBook::findDistributionListByName( const QString &name,
+                                                           Qt::CaseSensitivity caseSensitivity )
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    DistributionList* list = (*it)->findDistributionListByName( name, caseSensitivity );
-    if ( list )
-        return list;
+    DistributionList *list = (*it)->findDistributionListByName( name, caseSensitivity );
+    if ( list ) {
+      return list;
+    }
   }
 
   return 0;
@@ -731,14 +736,14 @@ QStringList AddressBook::allDistributionListNames() const
 
 void AddressBook::dump() const
 {
-  kDebug(5700) << "AddressBook::dump() --- begin ---";
+  kDebug(5700) << "--- begin ---";
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
     kDebug(5700) << (*it).toString();
   }
 
-  kDebug(5700) << "AddressBook::dump() ---  end  ---";
+  kDebug(5700) << "---  end  ---";
 }
 
 QString AddressBook::identifier() const
@@ -820,7 +825,7 @@ QDataStream &KABC::operator>>( QDataStream &s, AddressBook &ab )
 bool AddressBook::addResource( Resource *resource )
 {
   if ( !resource->open() ) {
-    kDebug(5700) << "AddressBook::addResource(): can't add resource";
+    kDebug(5700) << "can't add resource";
     return false;
   }
 

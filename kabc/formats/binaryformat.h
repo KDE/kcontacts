@@ -32,37 +32,37 @@ class Addressee;
 */
 class BinaryFormat : public Format
 {
-public:
-  /**
-   * Load single addressee from file.
-   */
-  bool load( Addressee &, QFile *file );
+  public:
+    /**
+     * Load single addressee from file.
+     */
+    bool load( Addressee &, QFile *file );
 
-  /**
-   * Load whole addressee from file.
-   */
-  bool loadAll( AddressBook *, Resource *, QFile *file );
+    /**
+     * Load whole addressee from file.
+     */
+    bool loadAll( AddressBook *, Resource *, QFile *file );
 
-  /**
-   * Save single addressee to file.
-   */
-  void save( const Addressee &, QFile *file );
+    /**
+     * Save single addressee to file.
+     */
+    void save( const Addressee &, QFile *file );
 
-  /**
-   * Save all addressees to file.
-   */
-  void saveAll( AddressBook *, Resource *, QFile *file );
+    /**
+     * Save all addressees to file.
+     */
+    void saveAll( AddressBook *, Resource *, QFile *file );
 
-  /**
-   * Check for valid format of a file.
-   */
-  bool checkFormat( QFile *file ) const;
+    /**
+     * Check for valid format of a file.
+     */
+    bool checkFormat( QFile *file ) const;
 
-private:
-  void loadAddressee( Addressee &, QDataStream & );
-  void saveAddressee( const Addressee &, QDataStream & );
-  bool checkHeader( QDataStream & ) const;
-  void writeHeader( QDataStream & );
+  private:
+    void loadAddressee( Addressee &, QDataStream & );
+    void saveAddressee( const Addressee &, QDataStream & );
+    bool checkHeader( QDataStream & ) const;
+    void writeHeader( QDataStream & );
 };
 
 }

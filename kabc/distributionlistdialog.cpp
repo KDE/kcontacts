@@ -62,7 +62,7 @@ class EmailSelector::Private
 {
   public:
     QButtonGroup *mButtonGroup;
-    QMap<QWidget*, QString> mEmailMap;
+    QMap<QWidget *, QString> mEmailMap;
 };
 
 EmailSelector::EmailSelector( const QStringList &emails, const QString &current, QWidget *parent )
@@ -190,7 +190,7 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
                                                             QWidget *parent )
   : QWidget( parent ), d( new Private( addressBook, this ) )
 {
-  kDebug(5700) << "DistributionListEditor()";
+  kDebug(5700);
 
   QBoxLayout *topLayout = new QVBoxLayout( this );
   topLayout->setSpacing( KDialog::spacingHint() );
@@ -310,8 +310,9 @@ void DistributionListEditorWidget::Private::editList()
   }
 
   DistributionList *list = mAddressBook->findDistributionListByName( oldName );
-  if ( list )
+  if ( list ) {
     list->setName( name );
+  }
 
   mNameCombo->clear();
   mNameCombo->addItems( mAddressBook->allDistributionListNames() );
@@ -347,7 +348,7 @@ void DistributionListEditorWidget::Private::addEntry()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeView->selectedItems();
   if ( selected.count() == 0 ) {
-    kDebug(5700) << "DLE::addEntry(): No addressee selected.";
+    kDebug(5700) << "No addressee selected.";
     return;
   }
   AddresseeItem *addresseeItem =
@@ -355,7 +356,7 @@ void DistributionListEditorWidget::Private::addEntry()
 
   DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
-    kDebug(5700) << "DLE::addEntry(): No dist list '" << mNameCombo->currentText() << "'";
+    kDebug(5700) << "No dist list '" << mNameCombo->currentText() << "'";
     return;
   }
 

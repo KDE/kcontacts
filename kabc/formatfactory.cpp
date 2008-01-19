@@ -56,7 +56,7 @@ FormatFactory *FormatFactory::Private::sSelf = 0;
 KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
 {
   KLibrary *library = new KLibrary( libName );
-  if (library->load()) {
+  if ( library->load() ) {
     return library;
   }
   kDebug(5700) << library->errorString();
@@ -66,7 +66,7 @@ KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
 
 FormatFactory *FormatFactory::self()
 {
-  kDebug(5700) << "FormatFactory::self()";
+  kDebug(5700);
 
   static Private p;
   if ( !p.sSelf ) {

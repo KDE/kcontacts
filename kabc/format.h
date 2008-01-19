@@ -41,32 +41,32 @@ class Addressee;
  */
 class KABC_EXPORT Format : public Plugin
 {
-public:
+  public:
 
-  /**
-   * Load single addressee from file.
-   */
-  virtual bool load( Addressee &, QFile *file ) = 0;
+    /**
+     * Load single addressee from file.
+     */
+    virtual bool load( Addressee &, QFile *file ) = 0;
 
-  /**
-   * Load whole addressbook from file.
-   */
-  virtual bool loadAll( AddressBook *, Resource *, QFile *file ) = 0;
+    /**
+     * Load whole addressbook from file.
+     */
+    virtual bool loadAll( AddressBook *, Resource *, QFile *file ) = 0;
 
-  /**
-   * Save a single Addressee to file.
-   */
-  virtual void save( const Addressee &, QFile *file ) = 0;
+    /**
+     * Save a single Addressee to file.
+     */
+    virtual void save( const Addressee &, QFile *file ) = 0;
 
-  /**
-   * Save whole addressbook to file.
-   */
-  virtual void saveAll( AddressBook *, Resource *, QFile *file ) = 0;
+    /**
+     * Save whole addressbook to file.
+     */
+    virtual void saveAll( AddressBook *, Resource *, QFile *file ) = 0;
 
-  /**
-   * Checks if given file contains the right format
-   */
-  virtual bool checkFormat( QFile *file ) const = 0;
+    /**
+     * Checks if given file contains the right format
+     */
+    virtual bool checkFormat( QFile *file ) const = 0;
 };
 
 }

@@ -27,7 +27,6 @@
 #include <klineedit.h>
 #include <QtCore/QObject>
 
-
 namespace KABC {
 
 /**

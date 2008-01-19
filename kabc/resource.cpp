@@ -372,30 +372,35 @@ void Resource::removeDistributionList( DistributionList *list )
   }
 }
 
-DistributionList* Resource::findDistributionListByIdentifier( const QString& identifier )
+DistributionList *Resource::findDistributionListByIdentifier( const QString &identifier )
 {
   DistributionListMap::const_iterator it = mDistListMap.find( identifier );
-  if ( it != mDistListMap.end() )
+  if ( it != mDistListMap.end() ) {
     return it.value();
+  }
 
   return 0;
 }
 
-DistributionList* Resource::findDistributionListByName( const QString &name, Qt::CaseSensitivity caseSensitivity )
+DistributionList *Resource::findDistributionListByName( const QString &name,
+                                                        Qt::CaseSensitivity caseSensitivity )
 {
   QString searchName = name;
-  if ( caseSensitivity == Qt::CaseInsensitive )
+  if ( caseSensitivity == Qt::CaseInsensitive ) {
     searchName = name.toLower();
+  }
 
   DistributionListMap::const_iterator it    = mDistListMap.begin();
   DistributionListMap::const_iterator endIt = mDistListMap.end();
   for ( ; it != endIt; ++it ) {
     if ( caseSensitivity == Qt::CaseSensitive ) {
-      if ( searchName == it.value()->name() )
+      if ( searchName == it.value()->name() ) {
         return it.value();
+      }
     } else {
-      if ( searchName == it.value()->name().toLower() )
+      if ( searchName == it.value()->name().toLower() ) {
         return it.value();
+      }
     }
   }
 
