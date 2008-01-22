@@ -167,11 +167,11 @@ int main( int argc, char **argv )
   KCmdLineArgs::init( argc, argv, &aboutData );
 
   KCmdLineOptions options;
-  options.add("a");
-  options.add("addressbook", ki18n("Standard address book"));
-  options.add("d");
-  options.add("diraddressbook", ki18n("Standard address book directory resource"));
-  options.add("+identifier", ki18n("Identifier of resource to be locked, e.g. filename"));
+  options.add( "a" );
+  options.add( "addressbook", ki18n( "Standard address book" ) );
+  options.add( "d" );
+  options.add( "diraddressbook", ki18n( "Standard address book directory resource" ) );
+  options.add( "+identifier", ki18n( "Identifier of resource to be locked, e.g. filename" ) );
   KCmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;
