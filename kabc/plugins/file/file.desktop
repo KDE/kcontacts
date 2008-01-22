@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=File
 Name[be]=Файл
 Name[ca]=Fitxer
@@ -33,6 +32,6 @@ Name[zh_CN]=文件
 Name[zh_TW]=檔案
 X-KDE-Library=kabc_file
 Type=Service
-ServiceTypes=KResources/Plugin
+X-KDE-ServiceTypes=KResources/Plugin
 X-KDE-ResourceFamily=contact
 X-KDE-ResourceType=file
