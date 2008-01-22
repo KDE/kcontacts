@@ -1,6 +1,5 @@
 # KDE Config File
 [Desktop Entry]
-Encoding=UTF-8
 Name=Contacts
 Name[be]=Кантакты
 Name[ca]=Contactes
@@ -33,6 +32,5 @@ Name[x-test]=xxContactsxx
 Name[zh_CN]=联系人
 Name[zh_TW]=聯絡人
 Type=Service
-ServiceTypes=KResources/Manager
-
+X-KDE-ServiceTypes=KResources/Manager
 X-KDE-ResourceFamily=contact
