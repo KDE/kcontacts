@@ -206,12 +206,12 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   mNameDict.insert( "familyName", i18n( "Family name" ) );
   mNameDict.insert( "givenName", i18n( "Given name" ) );
   mNameDict.insert( "organization", i18n( "Organization" ) );
-  mNameDict.insert( "title", i18n( "Title" ) );
+  mNameDict.insert( "title", i18nc( "job title", "Title" ) );
   mNameDict.insert( "street", i18n( "Street" ) );
-  mNameDict.insert( "state", i18n( "State" ) );
+  mNameDict.insert( "state", i18nc( "state/province", "State" ) );
   mNameDict.insert( "city", i18n( "City" ) );
   mNameDict.insert( "postalcode", i18n( "Postal code" ) );
-  mNameDict.insert( "mail", i18n( "Email" ) );
+  mNameDict.insert( "mail", i18nc( "email address", "Email" ) );
   mNameDict.insert( "mailAlias", i18n( "Email alias" ) );
   mNameDict.insert( "phoneNumber", i18n( "Telephone number" ) );
   mNameDict.insert( "telephoneNumber", i18n( "Work telephone number" ) );
