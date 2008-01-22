@@ -108,16 +108,16 @@ QString Secrecy::typeLabel( Type type )
 {
   switch ( type ) {
     case Public:
-      return i18n( "Public" );
+      return i18nc( "access is for everyone", "Public" );
       break;
     case Private:
-      return i18n( "Private" );
+      return i18nc( "access is by owner only", "Private" );
       break;
     case Confidential:
-      return i18n( "Confidential" );
+      return i18nc( "access is by owner and a controlled group", "Confidential" );
       break;
     default:
-      return i18n( "Unknown type" );
+      return i18nc( "unknown secrecy type", "Unknown type" );
       break;
   }
 }

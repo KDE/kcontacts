@@ -495,16 +495,16 @@ QString Address::typeLabel( Type type )
 
   switch ( type ) {
     case Dom:
-      return i18n( "Domestic" );
+      return i18nc( "Address is in home country", "Domestic" );
       break;
     case Intl:
-      return i18n( "International" );
+      return i18nc( "Address is not in home country", "International" );
       break;
     case Postal:
-      return i18n( "Postal" );
+      return i18nc( "Address for delivering letters", "Postal" );
       break;
     case Parcel:
-      return i18n( "Parcel" );
+      return i18nc( "Address for delivering packages", "Parcel" );
       break;
     case Home:
       return i18nc( "Home Address", "Home" );
@@ -516,7 +516,7 @@ QString Address::typeLabel( Type type )
       return i18n( "Preferred Address" );
       break;
     default:
-      return i18n( "Other" );
+      return i18nc( "another type of address", "Other" );
       break;
   }
 }

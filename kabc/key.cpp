@@ -211,16 +211,16 @@ QString Key::typeLabel( Type type )
 {
   switch ( type ) {
     case X509:
-      return i18n( "X509" );
+      return i18nc( "X.509 public key", "X509" );
       break;
     case PGP:
-      return i18n( "PGP" );
+      return i18nc( "Pretty Good Privacy key", "PGP" );
       break;
     case Custom:
-      return i18n( "Custom" );
+      return i18nc( "A custom key", "Custom" );
       break;
     default:
-      return i18n( "Unknown type" );
+      return i18nc( "another type of encryption key", "Unknown type" );
       break;
   }
 }

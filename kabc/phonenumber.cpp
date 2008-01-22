@@ -201,7 +201,7 @@ QString PhoneNumber::typeLabel( Type type )
       return i18nc( "Mobile Phone", "Mobile" );
       break;
     case Video:
-      return i18n( "Video" );
+      return i18nc( "Video phone", "Video" );
       break;
     case Bbs:
       return i18n( "Mailbox" );
@@ -228,7 +228,7 @@ QString PhoneNumber::typeLabel( Type type )
       return i18n( "Work Fax" );
       break;
     default:
-      return i18n( "Other" );
+      return i18nc( "another type of phone", "Other" );
   }
 }
 

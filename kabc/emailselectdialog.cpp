@@ -105,10 +105,10 @@ class EditEntryItem : public QTreeWidgetItem
       setText( 0, addressee.realName() );
       if ( email.isEmpty() ) {
         setText( 1, addressee.preferredEmail() );
-        setText( 2, i18n( "Yes" ) );
+        setText( 2, i18nc( "this the preferred email address", "Yes" ) );
       } else {
         setText( 1, email );
-        setText( 2, i18n( "No" ) );
+        setText( 2, i18nc( "this is not preferred email address", "No" ) );
       }
     }
 

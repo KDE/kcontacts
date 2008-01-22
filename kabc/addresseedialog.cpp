@@ -105,7 +105,7 @@ class AddresseeDialog::Private
 AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
   : KDialog( parent ), d( new Private( multiple ) )
 {
-  setCaption( i18n( "Select Addressee" ) );
+  setCaption( i18nc( "@title:window", "Select Addressee" ) );
   setButtons( Ok | Cancel );
   setDefaultButton( Ok );
 
@@ -119,7 +119,8 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
   d->mAddresseeList = new QTreeWidget( topWidget );
   d->mAddresseeList->setColumnCount( 2 );
   QStringList headerTitles;
-  headerTitles << i18n( "Name" ) << i18n( "Email" );
+  headerTitles << i18nc( "@title:column addressee name", "Name" )
+               << i18nc( "@title:column addressee email", "Email" );
   d->mAddresseeList->setHeaderItem( new QTreeWidgetItem( headerTitles ) );
   listLayout->addWidget( d->mAddresseeList );
   connect( d->mAddresseeList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
@@ -142,7 +143,8 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
     topLayout->addLayout( selectedLayout );
     topLayout->setSpacing( spacingHint() );
 
-    QGroupBox *selectedGroup = new QGroupBox( i18n( "Selected" ), topWidget );
+    QGroupBox *selectedGroup =
+      new QGroupBox( i18nc( "@title:group selected addressees", "Selected" ), topWidget );
     QHBoxLayout *groupLayout = new QHBoxLayout;
     selectedGroup->setLayout( groupLayout );
     selectedLayout->addWidget( selectedGroup );
@@ -151,13 +153,15 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
     groupLayout->addWidget( d->mSelectedList );
     d->mSelectedList->setColumnCount( 2 );
     QStringList headerTitles;
-    headerTitles << i18n( "Name" ) << i18n( "Email" );
+    headerTitles << i18nc( "@title:column addressee name", "Name" )
+                 << i18nc( "@title:column addressee email", "Email" );
     d->mSelectedList->setHeaderItem( new QTreeWidgetItem( headerTitles ) );
 
     connect( d->mSelectedList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
              SLOT( removeSelected() ) );
 
-    QPushButton *unselectButton = new QPushButton( i18n( "Unselect" ), selectedGroup );
+    QPushButton *unselectButton =
+      new QPushButton( i18nc( "@action:button unselect addressee", "Unselect" ), selectedGroup );
     selectedLayout->addWidget( unselectButton );
     connect( unselectButton, SIGNAL( clicked() ), SLOT( removeSelected() ) );
 

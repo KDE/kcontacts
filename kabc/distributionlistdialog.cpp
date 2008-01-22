@@ -128,10 +128,10 @@ class EntryItem : public QTreeWidgetItem
       setText( 0, addressee.realName() );
       if ( email.isEmpty() ) {
         setText( 1, addressee.preferredEmail() );
-        setText( 2, i18n( "Yes" ) );
+        setText( 2, i18nc( "this the preferred email address", "Yes" ) );
       } else {
         setText( 1, email );
-        setText( 2, i18n( "No" ) );
+        setText( 2, i18nc( "this is not the preferred email address", "No" ) );
       }
     }
 
@@ -227,7 +227,8 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   d->mAddresseeView = new QTreeWidget( this );
   d->mAddresseeView->setColumnCount( 2 );
   QStringList labels;
-  labels << i18n( "Name" ) << i18n( "Preferred Email" );
+  labels << i18nc( "@title:column addressee name", "Name" )
+         << i18nc( "@title:column addressee preferred email", "Preferred Email" );
   d->mAddresseeView->setHeaderLabels( labels );
   gridLayout->addWidget( d->mAddresseeView, 1, 0 );
   connect( d->mAddresseeView, SIGNAL( itemSelectionChanged() ),
@@ -242,7 +243,9 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
 
   d->mEntryView = new QTreeWidget( this );
   QStringList entryLabels;
-  entryLabels << i18n( "Name" ) << i18n( "Email" ) << i18n( "Use Preferred" );
+  entryLabels << i18nc( "@title:column addressee name", "Name" )
+              << i18nc( "@title:column addressee preferred email", "Email" )
+              << i18nc( "@title:column use preferred email", "Use Preferred" );
   d->mEntryView->setEnabled( false );
   gridLayout->addWidget( d->mEntryView, 1, 1, 1, 2 );
   connect( d->mEntryView, SIGNAL( itemSelectionChanged() ),
