@@ -516,7 +516,7 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
        d->mSmartPaste = true;
     }
 
-    QLineEdit::dropEvent( event );
+    KLineEdit::dropEvent( event );
     d->mSmartPaste = false;
   }
 }
