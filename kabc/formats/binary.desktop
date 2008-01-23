@@ -1,5 +1,6 @@
+#not really a desktop file
+#krazy:excludeall=validate
 [Misc]
-Encoding=UTF-8
 Name=Binary
 Name[be]=Двойкавы
 Name[ca]=Binari
