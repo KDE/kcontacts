@@ -340,7 +340,7 @@ AddressBook::~AddressBook()
 
 bool AddressBook::load()
 {
-  kDebug(5700);
+  kDebug();
 
   clear();
 
@@ -358,7 +358,7 @@ bool AddressBook::load()
 
 bool AddressBook::asyncLoad()
 {
-  kDebug(5700);
+  kDebug();
 
   clear();
 
@@ -377,7 +377,7 @@ bool AddressBook::asyncLoad()
 
 bool AddressBook::save( Ticket *ticket )
 {
-  kDebug(5700);
+  kDebug();
 
   if ( ticket->resource() ) {
     bool ok = ticket->resource()->save( ticket );
@@ -392,7 +392,7 @@ bool AddressBook::save( Ticket *ticket )
 
 bool AddressBook::asyncSave( Ticket *ticket )
 {
-  kDebug(5700);
+  kDebug();
 
   if ( ticket->resource() ) {
     d->mPendingSaveResources.append( ticket->resource() );
@@ -506,7 +506,7 @@ void AddressBook::clear()
 
 Ticket *AddressBook::requestSaveTicket( Resource *resource )
 {
-  kDebug(5700);
+  kDebug();
 
   if ( !resource ) {
     resource = standardResource();
@@ -736,14 +736,14 @@ QStringList AddressBook::allDistributionListNames() const
 
 void AddressBook::dump() const
 {
-  kDebug(5700) << "--- begin ---";
+  kDebug() << "--- begin ---";
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    kDebug(5700) << (*it).toString();
+    kDebug() << (*it).toString();
   }
 
-  kDebug(5700) << "---  end  ---";
+  kDebug() << "---  end  ---";
 }
 
 QString AddressBook::identifier() const
@@ -825,7 +825,7 @@ QDataStream &KABC::operator>>( QDataStream &s, AddressBook &ab )
 bool AddressBook::addResource( Resource *resource )
 {
   if ( !resource->open() ) {
-    kDebug(5700) << "can't add resource";
+    kDebug() << "can't add resource";
     return false;
   }
 
@@ -902,7 +902,7 @@ void AddressBook::error( const QString &msg )
   if ( d->mErrorHandler ) {
     d->mErrorHandler->error( msg );
   } else {
-    kError(5700) << "no error handler defined";
+    kError() << "no error handler defined";
   }
 }
 

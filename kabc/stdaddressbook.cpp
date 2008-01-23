@@ -67,7 +67,7 @@ QString StdAddressBook::directoryName()
 
 StdAddressBook *StdAddressBook::self()
 {
-  kDebug(5700);
+  kDebug();
 
   if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook );
@@ -78,7 +78,7 @@ StdAddressBook *StdAddressBook::self()
 
 StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
-  kDebug(5700);
+  kDebug();
 
   if ( !Private::mSelf ) {
     addressBookDeleter.setObject( Private::mSelf, new StdAddressBook( asynchronous ) );
@@ -90,7 +90,7 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
 StdAddressBook::StdAddressBook()
   : AddressBook( "" ), d( new Private( this ) )
 {
-  kDebug(5700);
+  kDebug();
 
   d->init( false );
 }
@@ -98,7 +98,7 @@ StdAddressBook::StdAddressBook()
 StdAddressBook::StdAddressBook( bool asynchronous )
   : AddressBook( "" ), d( new Private( this ) )
 {
-  kDebug(5700);
+  kDebug();
 
   d->init( asynchronous );
 }
@@ -140,7 +140,7 @@ void StdAddressBook::Private::init( bool asynchronous )
     if ( res ) {
       mParent->addResource( res );
     } else {
-      kDebug(5700) << "No resource available!!!";
+      kDebug() << "No resource available!!!";
     }
   }
 
@@ -156,7 +156,7 @@ void StdAddressBook::Private::init( bool asynchronous )
 
 bool StdAddressBook::Private::saveAll()
 {
-  kDebug(5700);
+  kDebug();
   bool ok = true;
 
   KRES::Manager<Resource>::ActiveIterator it;
@@ -182,7 +182,7 @@ bool StdAddressBook::Private::saveAll()
 
 bool StdAddressBook::save()
 {
-  kDebug(5700);
+  kDebug();
 
   if ( Private::mSelf ) {
     return Private::mSelf->d->saveAll();

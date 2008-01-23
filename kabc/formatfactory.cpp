@@ -59,14 +59,14 @@ KLibrary *FormatFactory::Private::openLibrary( const QString &libName )
   if ( library->load() ) {
     return library;
   }
-  kDebug(5700) << library->errorString();
+  kDebug() << library->errorString();
   delete library;
   return 0;
 }
 
 FormatFactory *FormatFactory::self()
 {
-  kDebug(5700);
+  kDebug();
 
   static Private p;
   if ( !p.sSelf ) {
@@ -177,7 +177,7 @@ Format *FormatFactory::format( const QString &type )
     format->setNameLabel( fi.nameLabel );
     format->setDescriptionLabel( fi.descriptionLabel );
   } else {
-    kDebug(5700) << "'" << libName << "' is not a format plugin.";
+    kDebug() << "'" << libName << "' is not a format plugin.";
     return 0;
   }
 

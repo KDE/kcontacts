@@ -130,7 +130,7 @@ void ResourceFile::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceFile::requestSaveTicket()
 {
-  kDebug(5700);
+  kDebug();
 
   if ( !addressBook() ) {
     return 0;
@@ -143,8 +143,8 @@ Ticket *ResourceFile::requestSaveTicket()
     addressBook()->emitAddressBookLocked();
   } else {
     addressBook()->error( mLock->error() );
-    kDebug(5700) << "Unable to lock file '" << mFileName
-                 << "':" << mLock->error();
+    kDebug() << "Unable to lock file '" << mFileName
+             << "':" << mLock->error();
     return 0;
   }
 
@@ -202,7 +202,7 @@ void ResourceFile::doClose()
 
 bool ResourceFile::load()
 {
-  kDebug(5700) << mFileName << "'";
+  kDebug() << mFileName << "'";
 
   mAsynchronous = false;
 
@@ -245,7 +245,7 @@ bool ResourceFile::asyncLoad()
 bool ResourceFile::save( Ticket *ticket )
 {
   Q_UNUSED( ticket );
-  kDebug(5700);
+  kDebug();
 
   // create backup file
   QString extension = '_' + QString::number( QDate::currentDate().dayOfWeek() );
@@ -272,7 +272,7 @@ bool ResourceFile::save( Ticket *ticket )
 
 bool ResourceFile::asyncSave( Ticket *ticket )
 {
-  kDebug(5700);
+  kDebug();
 
   save( ticket );
 
@@ -305,7 +305,7 @@ bool ResourceFile::loadDistributionLists()
     const QString name = *it;
     const QStringList value = cg.readEntry( name, QStringList() );
 
-    kDebug(5700) << name << ":" << value.join( "," );
+    kDebug() << name << ":" << value.join( "," );
 
     DistributionList *list = new DistributionList( this, name );
 
@@ -315,7 +315,7 @@ bool ResourceFile::loadDistributionLists()
       QString id = *entryIt++;
       QString email = entryIt != value.constEnd() ? *entryIt : QString();
 
-      kDebug(5700) << "----- Entry" << id;
+      kDebug() << "----- Entry" << id;
 
       Addressee a = addressBook()->findByUid( id );
       if ( !a.isEmpty() ) {
@@ -338,7 +338,7 @@ bool ResourceFile::loadDistributionLists()
 
 void ResourceFile::saveDistributionLists()
 {
-  kDebug(5700);
+  kDebug();
 
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
   KConfigGroup cg( &cfg, "DistributionLists" );
@@ -347,7 +347,7 @@ void ResourceFile::saveDistributionLists()
   QMapIterator<QString, DistributionList*> it( mDistListMap );
   while ( it.hasNext() ) {
     DistributionList *list = it.next().value();
-    kDebug(5700) << "  Saving '" << list->name() << "'";
+    kDebug() << "  Saving '" << list->name() << "'";
 
     QStringList value;
     const DistributionList::Entry::List entries = list->entries();
@@ -413,7 +413,7 @@ QString ResourceFile::format() const
 
 void ResourceFile::fileChanged( const QString &path )
 {
-  kDebug(5700) << path;
+  kDebug() << path;
 
   if ( !addressBook() ) {
     return;
@@ -425,7 +425,7 @@ void ResourceFile::fileChanged( const QString &path )
 
     loadDistributionLists();
 
-    kDebug(5700) << "addressBookChanged()";
+    kDebug() << "addressBookChanged()";
     addressBook()->emitAddressBookChanged();
 
     return;
@@ -436,7 +436,7 @@ void ResourceFile::fileChanged( const QString &path )
     asyncLoad();
   } else {
     load();
-    kDebug(5700) << "addressBookChanged()";
+    kDebug() << "addressBookChanged()";
     addressBook()->emitAddressBookChanged();
   }
 }

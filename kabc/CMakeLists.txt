@@ -3,7 +3,7 @@ project(kabc)
 
 include_directories( ${KDE4_KIO_INCLUDES} )
 
-add_definitions(${QDBUS_DEFINITIONS})
+add_definitions(${QDBUS_DEFINITIONS} -DKDE_DEFAULT_DEBUG_AREA=5700 )
 
 # these apply also for all subdirs
 include_directories(

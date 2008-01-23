@@ -76,7 +76,7 @@ void ResourceNetConfig::loadSettings( KRES::Resource *res )
   ResourceNet *resource = dynamic_cast<ResourceNet*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "cast failed";
+    kDebug() << "cast failed";
     return;
   }
 
@@ -90,7 +90,7 @@ void ResourceNetConfig::saveSettings( KRES::Resource *res )
   ResourceNet *resource = dynamic_cast<ResourceNet*>( res );
 
   if ( !resource ) {
-    kDebug(5700) << "cast failed";
+    kDebug() << "cast failed";
     return;
   }
 
