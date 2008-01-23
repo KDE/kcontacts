@@ -27,12 +27,12 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
+#include <kcombobox.h>
 
 #include <QtGui/QTreeWidget>
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
-#include <QtGui/QComboBox>
 #include <QtGui/QGroupBox>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QRadioButton>
@@ -176,7 +176,7 @@ class DistributionListEditorWidget::Private
     void save();
 
     DistributionListEditorWidget *mParent;
-    QComboBox *mNameCombo;
+    KComboBox *mNameCombo;
     QLabel *mListLabel;
     QTreeWidget *mEntryView;
     QTreeWidget *mAddresseeView;
@@ -198,7 +198,7 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   QBoxLayout *nameLayout = new QHBoxLayout();
   topLayout->addLayout( topLayout );
 
-  d->mNameCombo = new QComboBox( this );
+  d->mNameCombo = new KComboBox( this );
   nameLayout->addWidget( d->mNameCombo );
   connect( d->mNameCombo, SIGNAL( activated( int ) ), SLOT( updateEntryView() ) );
 
