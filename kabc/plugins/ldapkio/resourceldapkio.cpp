@@ -649,7 +649,7 @@ bool ResourceLDAPKIO::asyncLoad()
     connect( job, SIGNAL( result( KJob* ) ),
       this, SLOT( result( KJob* ) ) );
   } else {
-    result( NULL );
+    result( 0 );
   }
   return true;
 }
@@ -898,7 +898,7 @@ void ResourceLDAPKIO::removeAddressee( const Addressee &addr )
     url.setPath( '/' + dn );
     url.setExtension( "x-dir", "base" );
     url.setScope( KLDAP::LdapUrl::Base );
-    if ( KIO::NetAccess::del( url, NULL ) ) {
+    if ( KIO::NetAccess::del( url, 0 ) ) {
       mAddrMap.remove( addr.uid() );
     }
   } else {
