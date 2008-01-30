@@ -26,7 +26,7 @@ QTEST_KDEMAIN( GeoTest, NoGUI )
 
 void GeoTest::constructor()
 {
-  KABC::Geo geo( 1.2, 3.4 );
+  KABC::Geo geo( 1.2f, 3.4f );
 
   QVERIFY( (float)geo.latitude() == (float)1.2 );
   QVERIFY( (float)geo.longitude() == (float)3.4 );
