@@ -29,6 +29,7 @@
 #include <kio/netaccess.h>
 #include <kio/udsentry.h>
 #include <kdebug.h>
+#include <kde_file.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <klineedit.h>
@@ -562,7 +563,7 @@ void ResourceLDAPKIO::Private::activateCache()
     QString filename = mTmp->fileName();
     delete mTmp;
     mTmp = 0;
-    rename( QFile::encodeName( filename ), QFile::encodeName( mCacheDst ) );
+    KDE_rename( QFile::encodeName( filename ), QFile::encodeName( mCacheDst ) );
   }
 }
 
