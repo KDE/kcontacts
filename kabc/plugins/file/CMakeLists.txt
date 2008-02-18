@@ -13,11 +13,7 @@ target_link_libraries(kabc_file_core ${KDE4_KDECORE_LIBS} kabc)
 
 set_target_properties(kabc_file_core PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install(TARGETS kabc_file_core  
-    RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-)
+install(TARGETS kabc_file_core DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### kabc_file plugin ###############
 

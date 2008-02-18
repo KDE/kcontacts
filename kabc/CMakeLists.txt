@@ -88,11 +88,7 @@ kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
 target_link_libraries(kabc kresources kldap ${KDE4_KDE3SUPPORT_LIBRARY})
 
 set_target_properties(kabc PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kabc  
-    RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-)
+install(TARGETS kabc DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
