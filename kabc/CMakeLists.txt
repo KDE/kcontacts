@@ -27,7 +27,7 @@ add_subdirectory( formats )
 add_subdirectory( plugins )
 add_subdirectory( tests )
 #add_subdirectory( scripts )
-FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
 
 
 
@@ -129,5 +129,5 @@ install( FILES
    lock.h
    locknull.h
    sortmode.h
-DESTINATION ${INCLUDE_INSTALL_DIR}/kabc)
+   DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel)
 
