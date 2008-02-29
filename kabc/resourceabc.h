@@ -97,13 +97,13 @@ class KABC_EXPORT ResourceABC : public Resource
     /**
      * This signal is emitted when a subresource is added.
      */
-    void signalSubresourceAdded( ResourceABC *, const QString &type,
+    void signalSubresourceAdded( KABC::ResourceABC *, const QString &type,
                                  const QString &subResource );
 
     /**
      * This signal is emitted when a subresource is removed.
      */
-    void signalSubresourceRemoved( ResourceABC *, const QString &type,
+    void signalSubresourceRemoved( KABC::ResourceABC *, const QString &type,
                                    const QString &subResource );
 
 };
