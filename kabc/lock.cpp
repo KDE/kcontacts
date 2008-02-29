@@ -42,11 +42,16 @@ class Lock::Private
   public:
     Private( const QString &identifier )
       : mIdentifier( identifier )
+      , mOrigIdentifier( identifier )
     {
       mIdentifier.replace( "/", "_" );
+#ifdef Q_WS_WIN
+      mIdentifier.replace( ":", "_" );
+#endif
     }
 
     QString mIdentifier;
+    QString mOrigIdentifier;
     QString mLockUniqueName;
     QString mError;
 };
@@ -118,10 +123,7 @@ bool Lock::lock()
       QFile::remove( lockName );
       kWarning() << "Removed stale lock file from process '" << app << "'";
     } else {
-      QString identifier( d->mIdentifier );
-      identifier.replace( '_', '/' );
-
-      d->mError = i18n( "The resource '%1' is locked by application '%2'.", identifier, app );
+      d->mError = i18n( "The resource '%1' is locked by application '%2'.", d->mOrigIdentifier, app );
       return false;
     }
   }
