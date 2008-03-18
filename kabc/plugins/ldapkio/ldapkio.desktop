@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=LDAP
 Name[sr]=ЛДАП
+Name[th]=ระบบ LDAP
 Name[x-test]=xxLDAPxx
 X-KDE-Library=kabc_ldapkio
 Type=Service
