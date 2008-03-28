@@ -51,8 +51,8 @@ void GeoTest::setData()
 {
   KABC::Geo geo;
 
-  geo.setLatitude( 22.5 );
-  geo.setLongitude( 45.1 );
+  geo.setLatitude( 22.5f );
+  geo.setLongitude( 45.1f );
 
   QVERIFY( (float)geo.latitude() == (float)22.5 );
   QVERIFY( (float)geo.longitude() == (float)45.1 );
@@ -60,23 +60,23 @@ void GeoTest::setData()
 
 void GeoTest::equals()
 {
-  KABC::Geo geo1( 22.5, 33.7 );
-  KABC::Geo geo2( 22.5, 33.7 );
+  KABC::Geo geo1( 22.5f, 33.7f );
+  KABC::Geo geo2( 22.5f, 33.7f );
 
   QVERIFY( geo1 == geo2 );
 }
 
 void GeoTest::differs()
 {
-  KABC::Geo geo1( 22.5, 33.7 );
-  KABC::Geo geo2( 22.5, 33.6 );
+  KABC::Geo geo1( 22.5f, 33.7f );
+  KABC::Geo geo2( 22.5f, 33.6f );
 
   QVERIFY( geo1 != geo2 );
 }
 
 void GeoTest::serialization()
 {
-  KABC::Geo geo1( 22.5, 33.7 );
+  KABC::Geo geo1( 22.5f, 33.7f );
   QByteArray data;
 
   QDataStream s( &data, QIODevice::WriteOnly );
