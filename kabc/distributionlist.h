@@ -107,7 +107,7 @@ class KABC_EXPORT DistributionList
     /**
        Create distribution list object.
 
-      @param manager Managing object of this list.
+      @param resource The resource the list belongs to.
       @param name    Name of this list.
     */
     DistributionList( Resource *resource, const QString &name );
@@ -115,7 +115,7 @@ class KABC_EXPORT DistributionList
     /**
        Create distribution list object.
 
-      @param manager    Managing object of this list.
+      @param resource    The resource the list belongs to.
       @param identifier Identifier of this list.
       @param name       Name of this list.
     */

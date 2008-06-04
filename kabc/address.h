@@ -120,7 +120,7 @@ class KABC_EXPORT Address
     void clear();
 
     /**
-      Sets the unique @identifier.
+      Sets the unique @p identifier.
     */
     void setId( const QString &identifier );
 
