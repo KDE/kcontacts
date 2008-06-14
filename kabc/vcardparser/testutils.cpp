@@ -32,7 +32,7 @@ Addressee vcard1()
 
   addr.setName( "Frank Dawson" );
   addr.setOrganization( "Lotus Development Corporation" );
-  addr.setUrl( KUrl( "http://home.earthlink.net/~fdawson") );
+  addr.setUrl( KUrl( "http://home.earthlink.net/~fdawson" ) );
   addr.insertEmail( "fdawson@earthlink.net" );
   addr.insertEmail( "Frank_Dawson@Lotus.com", true );
   addr.insertPhoneNumber( PhoneNumber( "+1-919-676-9515",
