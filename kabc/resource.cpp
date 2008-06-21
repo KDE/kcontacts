@@ -350,7 +350,12 @@ void Resource::clear()
 {
   mAddrMap.clear();
 
-  qDeleteAll( mDistListMap );
+  // take a copy of mDistListMap, then clear it and finally qDeleteAll
+  // the copy to avoid problems with removeDistributionList() called by
+  // ~DistributionList().
+  DistributionListMap tempDistListMap( mDistListMap );
+  mDistListMap.clear();
+  qDeleteAll( tempDistListMap );
 }
 
 void Resource::insertDistributionList( DistributionList *list )
@@ -374,12 +379,7 @@ void Resource::removeDistributionList( DistributionList *list )
 
 DistributionList *Resource::findDistributionListByIdentifier( const QString &identifier )
 {
-  DistributionListMap::const_iterator it = mDistListMap.find( identifier );
-  if ( it != mDistListMap.end() ) {
-    return it.value();
-  }
-
-  return 0;
+  return mDistListMap.value( identifier );
 }
 
 DistributionList *Resource::findDistributionListByName( const QString &name,
@@ -409,23 +409,15 @@ DistributionList *Resource::findDistributionListByName( const QString &name,
 
 QList<DistributionList*> Resource::allDistributionLists()
 {
-  QList<DistributionList*> results;
-
-  DistributionListMap::const_iterator it    = mDistListMap.begin();
-  DistributionListMap::const_iterator endIt = mDistListMap.end();
-  for ( ; it != endIt; ++it ) {
-    results += it.value();
-  }
-
-  return results;
+  return mDistListMap.values();
 }
 
 QStringList Resource::allDistributionListNames() const
 {
   QStringList results;
 
-  DistributionListMap::const_iterator it    = mDistListMap.begin();
-  DistributionListMap::const_iterator endIt = mDistListMap.end();
+  DistributionListMap::const_iterator it    = mDistListMap.constBegin();
+  DistributionListMap::const_iterator endIt = mDistListMap.constEnd();
   for ( ; it != endIt; ++it ) {
     results += it.value()->name();
   }
