@@ -35,4 +35,4 @@ target_link_libraries(testread2  ${KDE4_KDECORE_LIBS} kabc )
 
 
 ########### install files ###############
-install( FILES vcard.h vcardline.h vcardparser.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc )
+install( FILES vcard.h vcardline.h vcardparser.h DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel)
