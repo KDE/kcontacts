@@ -9,7 +9,7 @@ set(kabc_net_SRCS resourcenetplugin.cpp resourcenet.cpp resourcenetconfig.cpp )
 
 kde4_add_plugin(kabc_net ${kabc_net_SRCS})
 
-target_link_libraries(kabc_net  ${KDE4_KIO_LIBS} kabc)
+target_link_libraries(kabc_net  ${KDE4_KIO_LIBS} kabc kresources)
 
 
 install(TARGETS kabc_net  DESTINATION ${PLUGIN_INSTALL_DIR} )

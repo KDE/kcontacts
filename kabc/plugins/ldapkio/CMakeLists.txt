@@ -9,7 +9,7 @@ set(kabc_ldapkio_SRCS resourceldapkioplugin.cpp resourceldapkio.cpp resourceldap
 
 kde4_add_plugin(kabc_ldapkio ${kabc_ldapkio_SRCS})
 
-target_link_libraries(kabc_ldapkio  ${KDE4_KDEIO_LIBS} kabc kldap)
+target_link_libraries(kabc_ldapkio  ${KDE4_KIO_LIBS} kabc kldap kresources)
 
 
 install(TARGETS kabc_ldapkio  DESTINATION ${PLUGIN_INSTALL_DIR} )
