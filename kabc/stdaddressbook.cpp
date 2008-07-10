@@ -27,14 +27,13 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <k3staticdeleter.h>
 #include <kconfiggroup.h>
+
+ #include <QCoreApplication>
 
 #include <stdlib.h>
 
 using namespace KABC;
-
-static K3StaticDeleter<StdAddressBook> addressBookDeleter;
 
 class StdAddressBook::Private
 {
@@ -48,12 +47,19 @@ class StdAddressBook::Private
     bool saveAll();
 
     StdAddressBook *mParent;
-    static StdAddressBook *mSelf;
     static bool mAutomaticSave;
 };
 
-StdAddressBook *StdAddressBook::Private::mSelf = 0;
+static StdAddressBook *s_gStdAddressBook = 0;
 bool StdAddressBook::Private::mAutomaticSave = true;
+
+static void deleteGlobalStdAddressBook()
+{
+  if ( s_gStdAddressBook ) {
+    delete s_gStdAddressBook;
+    s_gStdAddressBook = 0;
+  }
+}
 
 QString StdAddressBook::fileName()
 {
@@ -69,22 +75,39 @@ StdAddressBook *StdAddressBook::self()
 {
   kDebug();
 
-  if ( !Private::mSelf ) {
-    addressBookDeleter.setObject( Private::mSelf, new StdAddressBook );
+  if ( !s_gStdAddressBook ) {
+    s_gStdAddressBook = new StdAddressBook();
+
+    // We don't use a global static here for two reasons:
+    //
+    // 1. The K_GLOBAL_STATIC does not allow two different constructor calls,
+    //    which we need because there are two self() methods
+    //
+    // 2. There are problems with the destruction order: The destructor of
+    //    StdAddressBook calls save(), which for LDAP address books, needs KIO
+    //    (more specific: KProtocolInfo) to be still alive. However, with a global
+    //    static, KProtocolInfo is already deleted, and the app will crash.
+    //
+    // qAddPostRoutine deletes the objects when the QApplication is destroyed,
+    // which is earlier than the global statics, so this will work.
+    qAddPostRoutine( deleteGlobalStdAddressBook );
   }
 
-  return Private::mSelf;
+  return s_gStdAddressBook;
 }
 
 StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
   kDebug();
 
-  if ( !Private::mSelf ) {
-    addressBookDeleter.setObject( Private::mSelf, new StdAddressBook( asynchronous ) );
+  if ( !s_gStdAddressBook ) {
+    s_gStdAddressBook = new StdAddressBook( asynchronous );
+
+    // See comment in the other self() method for this.
+    qAddPostRoutine( deleteGlobalStdAddressBook );
   }
 
-  return Private::mSelf;
+  return s_gStdAddressBook;
 }
 
 StdAddressBook::StdAddressBook()
@@ -184,8 +207,8 @@ bool StdAddressBook::save()
 {
   kDebug();
 
-  if ( Private::mSelf ) {
-    return Private::mSelf->d->saveAll();
+  if ( s_gStdAddressBook ) {
+    return s_gStdAddressBook->d->saveAll();
   } else {
     return true;
   }
@@ -193,7 +216,8 @@ bool StdAddressBook::save()
 
 void StdAddressBook::close()
 {
-  addressBookDeleter.destructObject();
+  delete s_gStdAddressBook;
+  s_gStdAddressBook = 0;
 }
 
 void StdAddressBook::setAutomaticSave( bool enable )
