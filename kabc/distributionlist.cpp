@@ -28,6 +28,7 @@
 
 #include <QtGui/QApplication>
 #include <QtCore/QPair>
+#include <QtCore/QPointer>
 
 using namespace KABC;
 
@@ -89,7 +90,7 @@ class DistributionList::Private
     {
     }
 
-    Resource *mResource;
+    QPointer<Resource> mResource;
     QString mIdentifier;
     QString mName;
     Entry::List mEntries;
@@ -110,7 +111,8 @@ DistributionList::DistributionList( Resource *resource,
 
 DistributionList::~DistributionList()
 {
-  d->mResource->removeDistributionList( this );
+  if ( d->mResource )
+    d->mResource->removeDistributionList( this );
 
   delete d;
 }
