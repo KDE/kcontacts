@@ -449,10 +449,11 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
           const QStringList geoParts =
             (*lineIt).value().toString().split( ';', QString::KeepEmptyParts );
-          geo.setLatitude( geoParts[ 0 ].toFloat() );
-          geo.setLongitude( geoParts[ 1 ].toFloat() );
-
-          addr.setGeo( geo );
+          if ( geoParts.size() >= 2 ) {
+            geo.setLatitude( geoParts[ 0 ].toFloat() );
+            geo.setLongitude( geoParts[ 1 ].toFloat() );
+            addr.setGeo( geo );
+          }
         }
 
         // KEY
