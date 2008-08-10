@@ -25,4 +25,4 @@ using namespace KABC;
 
 typedef KRES::PluginFactory<ResourceNet, ResourceNetConfig> ResourceNetFactory;
 
-K_EXPORT_PLUGIN(ResourceNetFactory)
+K_EXPORT_PLUGIN(ResourceNetFactory("kabc_net"))

@@ -27,14 +27,6 @@
 
 using namespace KABC;
 
-class ResourceLDAPKIOFactory : public KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>
-{
-  public:
-    ResourceLDAPKIOFactory()
-      : KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig>()
-    {
-      KGlobal::locale()->insertCatalog( "kabc_ldapkio" );
-    }
-};
+typedef KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig> ResourceLDAPKIOFactory;
 
-K_EXPORT_PLUGIN(ResourceLDAPKIOFactory)
+K_EXPORT_PLUGIN(ResourceLDAPKIOFactory("kabc_ldapkio"))
