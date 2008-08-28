@@ -28,6 +28,7 @@
 #include <klocale.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
+#include <kpagewidget.h>
 #include <kvbox.h>
 
 #include <QtGui/QCheckBox>
@@ -48,7 +49,10 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   mainLayout->setMargin( 0 );
   mainLayout->setSpacing( KDialog::spacingHint() );
 
-  cfg = new KLDAP::LdapConfigWidget(
+  KPageWidget *pageWidget = new KPageWidget( this );
+  pageWidget->setFaceType( KPageView::Tabbed );
+
+  mCfg = new KLDAP::LdapConfigWidget(
         KLDAP::LdapConfigWidget::W_USER |
         KLDAP::LdapConfigWidget::W_PASS |
         KLDAP::LdapConfigWidget::W_BINDDN |
@@ -58,11 +62,20 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
         KLDAP::LdapConfigWidget::W_VER |
         KLDAP::LdapConfigWidget::W_DN |
         KLDAP::LdapConfigWidget::W_FILTER |
-        KLDAP::LdapConfigWidget::W_SECBOX |
-        KLDAP::LdapConfigWidget::W_AUTHBOX |
         KLDAP::LdapConfigWidget::W_TIMELIMIT |
         KLDAP::LdapConfigWidget::W_SIZELIMIT,
         this );
+
+  mSecurityCfg = new KLDAP::LdapConfigWidget(
+        KLDAP::LdapConfigWidget::W_SECBOX |
+        KLDAP::LdapConfigWidget::W_AUTHBOX,
+        this );
+
+  pageWidget->addPage( mCfg,
+                       i18nc( "@title:tab general account settings", "General" ) );
+
+  pageWidget->addPage( mSecurityCfg,
+                       i18nc( "@title:tab account security settings", "Security" ) );
 
   mSubTree = new QCheckBox( i18n( "Sub-tree query" ), this );
   KHBox *box = new KHBox( this );
@@ -70,7 +83,7 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   mEditButton = new QPushButton( i18n( "Edit Attributes..." ), box );
   mCacheButton = new QPushButton( i18n( "Offline Use..." ), box );
 
-  mainLayout->addWidget( cfg );
+  mainLayout->addWidget( pageWidget );
   mainLayout->addWidget( mSubTree );
   mainLayout->addWidget( box );
 
@@ -87,31 +100,31 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
     return;
   }
 
-  cfg->setUser( resource->user() );
-  cfg->setPassword( resource->password() );
-  cfg->setRealm( resource->realm() );
-  cfg->setBindDn( resource->bindDN() );
-  cfg->setHost( resource->host() );
-  cfg->setPort( resource->port() );
-  cfg->setVersion( resource->ver() );
-  cfg->setTimeLimit( resource->timeLimit() );
-  cfg->setSizeLimit( resource->sizeLimit() );
-  cfg->setDn( KLDAP::LdapDN( resource->dn() ) );
-  cfg->setFilter( resource->filter() );
-  cfg->setMech( resource->mech() );
+  mCfg->setUser( resource->user() );
+  mCfg->setPassword( resource->password() );
+  mCfg->setRealm( resource->realm() );
+  mCfg->setBindDn( resource->bindDN() );
+  mCfg->setHost( resource->host() );
+  mCfg->setPort( resource->port() );
+  mCfg->setVersion( resource->ver() );
+  mCfg->setTimeLimit( resource->timeLimit() );
+  mCfg->setSizeLimit( resource->sizeLimit() );
+  mCfg->setDn( KLDAP::LdapDN( resource->dn() ) );
+  mCfg->setFilter( resource->filter() );
+  mSecurityCfg->setMech( resource->mech() );
   if ( resource->isTLS() ) {
-    cfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
+    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
   } else if ( resource->isSSL() ) {
-    cfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
+    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
   } else {
-    cfg->setSecurity( KLDAP::LdapConfigWidget::None );
+    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::None );
   }
   if ( resource->isAnonymous() ) {
-    cfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
+    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
   } else if ( resource->isSASL() ) {
-    cfg->setAuth( KLDAP::LdapConfigWidget::SASL );
+    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::SASL );
   } else {
-    cfg->setAuth( KLDAP::LdapConfigWidget::Simple );
+    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::Simple );
   }
   mSubTree->setChecked( resource->isSubTree() );
   mAttributes = resource->attributes();
@@ -130,22 +143,23 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
     return;
   }
 
-  resource->setUser( cfg->user() );
-  resource->setPassword( cfg->password() );
-  resource->setRealm( cfg->realm() );
-  resource->setBindDN( cfg->bindDn() );
-  resource->setHost( cfg->host() );
-  resource->setPort( cfg->port() );
-  resource->setVer( cfg->version() );
-  resource->setTimeLimit( cfg->timeLimit() );
-  resource->setSizeLimit( cfg->sizeLimit() );
-  resource->setDn( cfg->dn().toString() );
-  resource->setFilter( cfg->filter() );
-  resource->setIsAnonymous( cfg->auth() == KLDAP::LdapConfigWidget::Anonymous );
-  resource->setIsSASL( cfg->auth() == KLDAP::LdapConfigWidget::SASL );
-  resource->setMech( cfg->mech() );
-  resource->setIsTLS( cfg->security() == KLDAP::LdapConfigWidget::TLS );
-  resource->setIsSSL( cfg->security() == KLDAP::LdapConfigWidget::SSL );
+  resource->setUser( mCfg->user() );
+  resource->setPassword( mCfg->password() );
+  resource->setRealm( mCfg->realm() );
+  resource->setBindDN( mCfg->bindDn() );
+  resource->setHost( mCfg->host() );
+  resource->setPort( mCfg->port() );
+  resource->setVer( mCfg->version() );
+  resource->setTimeLimit( mCfg->timeLimit() );
+  resource->setSizeLimit( mCfg->sizeLimit() );
+  resource->setDn( mCfg->dn().toString() );
+  resource->setFilter( mCfg->filter() );
+  resource->setIsAnonymous( mSecurityCfg->auth() ==
+                            KLDAP::LdapConfigWidget::Anonymous );
+  resource->setIsSASL( mSecurityCfg->auth() == KLDAP::LdapConfigWidget::SASL );
+  resource->setMech( mSecurityCfg->mech() );
+  resource->setIsTLS( mSecurityCfg->security() == KLDAP::LdapConfigWidget::TLS );
+  resource->setIsSSL( mSecurityCfg->security() == KLDAP::LdapConfigWidget::SSL );
   resource->setIsSubTree( mSubTree->isChecked() );
   resource->setAttributes( mAttributes );
   resource->setRDNPrefix( mRDNPrefix );
@@ -168,7 +182,7 @@ void ResourceLDAPKIOConfig::editCache()
   KLDAP::LdapUrl src;
   QStringList attr;
 
-  src = cfg->url();
+  src = mCfg->url();
   src.setScope( mSubTree->isChecked() ? KLDAP::LdapUrl::Sub : KLDAP::LdapUrl::One );
   if ( !mAttributes.empty() ) {
     QMap<QString,QString>::Iterator it;
