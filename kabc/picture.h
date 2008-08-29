@@ -30,6 +30,10 @@
 
 namespace KABC {
 
+/**
+  A class to store a picture of an addressee. It can store the data directly or
+  an url reference to a picture.
+*/
 class KABC_EXPORT Picture
 {
     friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );
