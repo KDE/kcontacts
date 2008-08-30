@@ -106,6 +106,11 @@ class KABC_EXPORT ResourceABC : public Resource
     void signalSubresourceRemoved( KABC::ResourceABC *, const QString &type,
                                    const QString &subResource );
 
+    /**
+     * This signal is emitted when subresource properties have changed.
+     */
+    void signalSubresourceChanged( KABC::ResourceABC *, const QString &type,
+                                   const QString &subResource );
 };
 
 }
