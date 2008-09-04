@@ -710,11 +710,20 @@ VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pi
       QByteArray input;
       QBuffer buffer( &input );
       buffer.open( QIODevice::WriteOnly );
-      pic.data().save( &buffer, "JPEG" );
 
-      line.setValue( input );
-      line.addParameter( "encoding", "b" );
-      line.addParameter( "type", "image/jpeg" );
+      if ( !pic.data().hasAlphaChannel() ) {
+        pic.data().save( &buffer, "JPEG" );
+
+        line.setValue( input );
+        line.addParameter( "encoding", "b" );
+        line.addParameter( "type", "image/jpeg" );
+      } else {
+        pic.data().save( &buffer, "PNG" );
+
+        line.setValue( input );
+        line.addParameter( "encoding", "b" );
+        line.addParameter( "type", "image/png" );
+      }
     }
   } else if ( !pic.url().isEmpty() ) {
     line.setValue( pic.url() );
