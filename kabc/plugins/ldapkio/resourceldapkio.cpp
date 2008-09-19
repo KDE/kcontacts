@@ -267,7 +267,7 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
   }
   if ( !mod ) {
     tmp += "objectClass: top\n";
-    QStringList obclass = mAttributes[ "objectClass" ].split( ',', QString::SkipEmptyParts );
+    const QStringList obclass = mAttributes[ "objectClass" ].split( ',', QString::SkipEmptyParts );
     for ( QStringList::const_iterator it = obclass.constBegin(); it != obclass.constEnd(); ++it ) {
       tmp += KLDAP::Ldif::assembleLine( "objectClass", *it ) + '\n';
     }
