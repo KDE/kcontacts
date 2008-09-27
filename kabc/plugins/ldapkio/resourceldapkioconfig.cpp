@@ -320,7 +320,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
     layout->addWidget( lineedit, i, j+1 );
   }
 
-  for ( i = 1; i < mMapCombo->count(); i++ ) {
+  for ( i = 1; i < mMapCombo->count(); ++i ) {
     QHash<QString,KLineEdit*>::const_iterator it2 = mLineEditDict.constBegin();
     while ( it2 != mLineEditDict.constEnd() ) {
       if ( mMapList[ i ].contains( it2.key() ) ) {

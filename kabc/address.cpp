@@ -60,7 +60,7 @@ using namespace KABC;
 static int findBalancedBracket( const QString &tsection, int pos )
 {
   int balancecounter = 0;
-  for ( int i = pos + 1; i < tsection.length(); i++ ) {
+  for ( int i = pos + 1; i < tsection.length(); ++i ) {
     if ( ')' == tsection[i] && 0 == balancecounter ) {
       // found end of brackets
       return i;

@@ -210,7 +210,7 @@ Addressee::List AddresseeDialog::addressees() const
   AddresseeItem *aItem = 0;
 
   if ( d->mMultiple ) {
-    for ( int i = 0; i < d->mSelectedList->topLevelItemCount(); i++ ) {
+    for ( int i = 0; i < d->mSelectedList->topLevelItemCount(); ++i ) {
       aItem = dynamic_cast<AddresseeItem *>( d->mSelectedList->topLevelItem( i ) );
       if ( aItem ) {
         al.append( aItem->addressee() );
