@@ -44,9 +44,9 @@ class Lock::Private
       : mIdentifier( identifier ),
         mOrigIdentifier( identifier )
     {
-      mIdentifier.replace( "/", "_" );
+      mIdentifier.replace( '/', '_' );
 #ifdef Q_WS_WIN
-      mIdentifier.replace( ":", "_" );
+      mIdentifier.replace( ':', '_' );
 #endif
     }
 
