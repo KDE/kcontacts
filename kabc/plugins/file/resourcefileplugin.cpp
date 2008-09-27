@@ -25,4 +25,4 @@ using namespace KABC;
 
 typedef KRES::PluginFactory<ResourceFile, ResourceFileConfig> ResourceFileFactory;
 
-K_EXPORT_PLUGIN(ResourceFileFactory("kabc_file"))
+K_EXPORT_PLUGIN( ResourceFileFactory( "kabc_file" ) )

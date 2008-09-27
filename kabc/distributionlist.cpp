@@ -111,8 +111,9 @@ DistributionList::DistributionList( Resource *resource,
 
 DistributionList::~DistributionList()
 {
-  if ( d->mResource )
+  if ( d->mResource ) {
     d->mResource->removeDistributionList( this );
+  }
 
   delete d;
 }

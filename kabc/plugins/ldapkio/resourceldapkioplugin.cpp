@@ -29,4 +29,4 @@ using namespace KABC;
 
 typedef KRES::PluginFactory<ResourceLDAPKIO, ResourceLDAPKIOConfig> ResourceLDAPKIOFactory;
 
-K_EXPORT_PLUGIN(ResourceLDAPKIOFactory("kabc_ldapkio"))
+K_EXPORT_PLUGIN( ResourceLDAPKIOFactory( "kabc_ldapkio" ) )

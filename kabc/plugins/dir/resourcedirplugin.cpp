@@ -25,5 +25,5 @@ using namespace KABC;
 
 typedef KRES::PluginFactory<ResourceDir, ResourceDirConfig> ResourceDirFactory;
 
-K_EXPORT_PLUGIN(ResourceDirFactory("kabc_dir"))
+K_EXPORT_PLUGIN( ResourceDirFactory( "kabc_dir" ) )
 

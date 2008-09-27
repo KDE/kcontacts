@@ -55,7 +55,7 @@ class ResourceLDAPKIO::Private
         mRDNPrefix( 0 ), mTimeLimit( 0 ), mSizeLimit( 0 ),
         mCachePolicy( Cache_No ), mAutoCache( true )
     {
-	KGlobal::locale()->insertCatalog("libkldap");
+      KGlobal::locale()->insertCatalog( "libkldap" );
     }
 
     KIO::Job *loadFromCache();
