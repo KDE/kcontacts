@@ -493,10 +493,10 @@ void AddressLineEdit::addAddress( const QString &addr )
 //-----------------------------------------------------------------------------
 void AddressLineEdit::dropEvent( QDropEvent *event )
 {
-  KUrl::List uriList = KUrl::List::fromMimeData( event->mimeData() );
+  const KUrl::List uriList = KUrl::List::fromMimeData( event->mimeData() );
   if ( !uriList.isEmpty() ) {
     QString ct = text();
-    KUrl::List::Iterator it = uriList.begin();
+    KUrl::List::ConstIterator it = uriList.begin();
     for ( ; it != uriList.end(); ++it ) {
       if ( !ct.isEmpty() ) {
         ct.append( ", " );
