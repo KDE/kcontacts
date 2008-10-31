@@ -38,6 +38,7 @@ Name[uk]=Мережа
 Name[x-test]=xxNetworkxx
 Name[zh_CN]=网络
 Name[zh_TW]=網路
+Comment=Provides access to contacts in remote files using KDE's network framework KIO. Supports standard VCard files and other formats depending on available plugins
 X-KDE-Library=kabc_net
 Type=Service
 X-KDE-ServiceTypes=KResources/Plugin

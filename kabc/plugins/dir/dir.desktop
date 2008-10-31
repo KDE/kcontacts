@@ -38,6 +38,7 @@ Name[uk]=Каталог
 Name[x-test]=xxDirectoryxx
 Name[zh_CN]=目录
 Name[zh_TW]=目錄
+Comment=Provides access to contacts, each stored in a single file, in a given directory. Supports standard VCard file and other formats depending on availability of plugins
 X-KDE-Library=kabc_directory
 Type=Service
 X-KDE-ServiceTypes=KResources/Plugin
