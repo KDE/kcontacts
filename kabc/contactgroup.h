@@ -48,7 +48,7 @@ class KABC_EXPORT ContactGroup
         /**
          * This class represents a contact reference
          */
-        class Reference
+        class KABC_EXPORT Reference
         {
             public:
                 /**
@@ -136,7 +136,7 @@ class KABC_EXPORT ContactGroup
         /**
          * This class represents a contact data object
          */
-        class Data
+        class KABC_EXPORT Data
         {
             public:
                 /**
