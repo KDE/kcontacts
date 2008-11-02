@@ -34,7 +34,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
 add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/field.cpp ${CMAKE_CURRENT_BINARY_DIR}/addressee.h ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts
    COMMAND ${PERL_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/makeaddressee
-   DEPENDS  
+   DEPENDS
    scripts/makeaddressee
    scripts/addressee.src.cpp
    scripts/addressee.src.h
@@ -80,6 +80,8 @@ set(kabc_LIB_SRCS
    locknull.cpp
    sortmode.cpp
    ${vcards_STAT_SRCS}
+   contactgroup.cpp
+   contactgrouptool.cpp
 )
 
 
@@ -129,5 +131,7 @@ install( FILES
    lock.h
    locknull.h
    sortmode.h
+   contactgroup.h
+   contactgrouptool.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel)
 

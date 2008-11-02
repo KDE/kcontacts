@@ -20,7 +20,7 @@
 -->
 
   <!-- The root element of every ContactGroup document -->
-  <xsd:element name="contactgroup">
+  <xsd:element name="contactGroup">
     <xsd:complexType>
       <!-- A list of contacts or contact references -->
       <xsd:choice minOccurs="0" maxOccurs="unbound">
