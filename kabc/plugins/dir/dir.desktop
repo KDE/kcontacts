@@ -39,7 +39,9 @@ Name[x-test]=xxDirectoryxx
 Name[zh_CN]=目录
 Name[zh_TW]=目錄
 Comment=Provides access to contacts, each stored in a single file, in a given directory. Supports standard VCard file and other formats depending on availability of plugins
+Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ξεχωριστά αρχεία, σε ένα  δοσμένο κατάλογο. Υποστηρίζει τυπικά αρχεία VCard και άλλες μορφές αρχείων  ανάλογα με τη διαθεσιμότητα των πρόσθετων
 Comment[es]=Provee acceso a los contactos, cada uno almacenado en un archivo diferente, dentro de un directorio determinado. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los complementos
+Comment[nds]=Stellt Togriep op Kontakten praat, elkeen binnen een Datei binnen en angeven Orner. Ünnerstütt VCard-Dateien un anner Formaten na de verföögboren Modulen
 Comment[pt]=Oferece o acesso aos contactos, estando cada um guardado num único ficheiro de uma dada pasta. Suporta os ficheiros VCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'
 Comment[pt_BR]=Fornece acesso aos contatos, cada um armazenado em um único arquivo, em uma pasta informada. O suporte padrão de arquivo VCard e outros formatos dependem da disponibilidade dos plug-ins
 Comment[sv]=Ger tillgång till kontakter, var och en lagrad i en enstaka fil, i en given katalog. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram

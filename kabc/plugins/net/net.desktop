@@ -39,7 +39,9 @@ Name[x-test]=xxNetworkxx
 Name[zh_CN]=网络
 Name[zh_TW]=網路
 Comment=Provides access to contacts in remote files using KDE's network framework KIO. Supports standard VCard files and other formats depending on available plugins
+Comment[el]=Προσφέρει πρόσβαση σε επαφές σε απομακρυσμένα αρχεία με τη χρήση του συστήματος KIO  του KDE. Υποστηρίζει τυπικά αρχεία VCard και άλλες μορφές αρχείων ανάλογα με τη  διαθεσιμότητα των πρόσθετων
 Comment[es]=Provee acceso a los contactos en un archivo remoto utilizando la infraestructura de red KIO de KDE. Soporta archivos VCard estándar y otros formatos dependiendo en la disponibilidad de los complementos
+Comment[nds]=Stellt Togriep op Kontakten binnen feern Dateien praat, bruukt KDE sien Nettwark-Rahmenwark KIO. Ünnerstütt VCard-Dateien un anner Formaten na de verföögboren Modulen
 Comment[pt]=Oferece o acesso aos contactos em ficheiros remotos, disponíveis através de um KIO da plataforma de rede do KDE.  Suporta os ficheiros VCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'
 Comment[pt_BR]=Fornece acesso aos contatos em arquivos remotos usando o KIO framework da rede do KDE. O suporte à arquivos VCard padrão e outros formatos dependem de plug-ins disponíveis
 Comment[sv]=Ger tillgång till kontakter i fjärrfiler med användning av KDE:s I/O-ramverk. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram
