@@ -98,8 +98,8 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         }
 
         if ( params.count() > 1 ) { // find all parameters
-          QList<QByteArray>::ConstIterator paramIt( params.begin() );
-          for ( ++paramIt; paramIt != params.end(); ++paramIt ) {
+          QList<QByteArray>::ConstIterator paramIt( params.constBegin() );
+          for ( ++paramIt; paramIt != params.constEnd(); ++paramIt ) {
             QList<QByteArray> pair = (*paramIt).split( '=' );
             if ( pair.count() == 1 ) {
               // correct the fucking 2.1 'standard'
@@ -116,7 +116,7 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
             if ( pair[ 1 ].indexOf( ',' ) != -1 ) { // parameter in type=x,y,z format
               const QList<QByteArray> args = pair[ 1 ].split( ',' );
               QList<QByteArray>::ConstIterator argIt;
-              for ( argIt = args.begin(); argIt != args.end(); ++argIt ) {
+              for ( argIt = args.constBegin(); argIt != args.constEnd(); ++argIt ) {
                 vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ), *argIt );
               }
             } else {

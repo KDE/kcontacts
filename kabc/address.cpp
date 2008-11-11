@@ -613,8 +613,8 @@ QString Address::countryToISO( const QString &cname )
   K_GLOBAL_STATIC( stringMap, sISOMap )
 
   QMap<QString, QString>::ConstIterator it;
-  it = sISOMap->find( cname );
-  if ( it != sISOMap->end() ) {
+  it = sISOMap->constFind( cname );
+  if ( it != sISOMap->constEnd() ) {
     return it.value();
   }
 

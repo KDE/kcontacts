@@ -291,9 +291,9 @@ void Resource::removeAddressee( const Addressee &addr )
 
 Addressee Resource::findByUid( const QString &uid )
 {
-  Addressee::Map::ConstIterator it = mAddrMap.find( uid );
+  Addressee::Map::ConstIterator it = mAddrMap.constFind( uid );
 
-  if ( it != mAddrMap.end() ) {
+  if ( it != mAddrMap.constEnd() ) {
     return it.value();
   }
 
@@ -390,8 +390,8 @@ DistributionList *Resource::findDistributionListByName( const QString &name,
     searchName = name.toLower();
   }
 
-  DistributionListMap::const_iterator it    = mDistListMap.begin();
-  DistributionListMap::const_iterator endIt = mDistListMap.end();
+  DistributionListMap::const_iterator it    = mDistListMap.constBegin();
+  DistributionListMap::const_iterator endIt = mDistListMap.constEnd();
   for ( ; it != endIt; ++it ) {
     if ( caseSensitivity == Qt::CaseSensitive ) {
       if ( searchName == it.value()->name() ) {

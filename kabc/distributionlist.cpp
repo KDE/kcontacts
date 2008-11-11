@@ -176,7 +176,7 @@ QStringList DistributionList::emails() const
   QStringList emails;
 
   Entry::List::ConstIterator it;
-  for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
+  for ( it = d->mEntries.constBegin(); it != d->mEntries.constEnd(); ++it ) {
     const Addressee a = (*it).addressee();
     QString email = (*it).email().isEmpty() ? a.fullEmail() :
                                               a.fullEmail( (*it).email() );

@@ -304,13 +304,13 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
   }
 
   QStringList emails = addr.emails();
-  QStringList::ConstIterator mailIt = emails.begin();
+  QStringList::ConstIterator mailIt = emails.constBegin();
 
   if ( !mAttributes[ "mail" ].isEmpty() ) {
     if ( mod ) {
       tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mail" ] ) + '\n';
     }
-    if ( mailIt != emails.end() ) {
+    if ( mailIt != emails.constEnd() ) {
       tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mail" ], *mailIt ) + '\n';
       mailIt ++;
     }
@@ -323,7 +323,7 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
     if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) {
       tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
     }
-    for ( ; mailIt != emails.end(); ++mailIt ) {
+    for ( ; mailIt != emails.constEnd(); ++mailIt ) {
       tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n';
     }
     if ( mod ) {

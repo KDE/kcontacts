@@ -439,7 +439,7 @@ void DistributionListEditorWidget::Private::updateEntryView()
 
   DistributionList::Entry::List entries = list->entries();
   DistributionList::Entry::List::ConstIterator it;
-  for ( it = entries.begin(); it != entries.end(); ++it ) {
+  for ( it = entries.constBegin(); it != entries.constEnd(); ++it ) {
     new EntryItem( mEntryView, (*it).addressee(), (*it).email() );
   }
 

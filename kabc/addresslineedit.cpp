@@ -128,7 +128,7 @@ QStringList AddressLineEdit::Private::addresses()
 
     QStringList::ConstIterator mit;
 
-    for ( mit = emails.begin(); mit != emails.end(); ++mit ) {
+    for ( mit = emails.constBegin(); mit != emails.constEnd(); ++mit ) {
       email = *mit;
       if ( !email.isEmpty() ) {
         if ( n.isEmpty() || ( email.indexOf( '<' ) != -1 ) ) {
