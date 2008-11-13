@@ -314,6 +314,8 @@ bool ResourceFile::loadDistributionLists()
     while ( entryIt != value.constEnd() ) {
       QString id = *entryIt++;
       QString email = entryIt != value.constEnd() ? *entryIt : QString();
+      if ( email.isEmpty() && !email.isNull() )
+        email = QString();
 
       kDebug() << "----- Entry" << id;
 
