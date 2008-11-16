@@ -1,6 +1,7 @@
 /*
     This file is part of libkabc.
     Copyright (c) 2008 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2008 Kevin Krammer <kevin.krammer@gmx.at>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -26,6 +27,8 @@
 class QIODevice;
 class QString;
 
+template <class T> class QList;
+
 namespace KABC {
 
 class ContactGroup;
@@ -39,6 +42,9 @@ class KABC_EXPORT ContactGroupTool
     public:
         static bool convertFromXml( QIODevice *device, ContactGroup &group, QString *errorMessage = 0 );
         static bool convertToXml( const ContactGroup &group, QIODevice *device, QString *errorMessage = 0 );
+
+        static bool convertFromXml( QIODevice *device, QList<ContactGroup> &groupList, QString *errorMessage = 0 );
+        static bool convertToXml( const QList<ContactGroup> &groupList, QIODevice *device, QString *errorMessage = 0 );
 };
 
 }
