@@ -75,36 +75,31 @@ StdAddressBook *StdAddressBook::self()
 {
   kDebug();
 
-  if ( !s_gStdAddressBook ) {
-    s_gStdAddressBook = new StdAddressBook();
-
-    // We don't use a global static here for two reasons:
-    //
-    // 1. The K_GLOBAL_STATIC does not allow two different constructor calls,
-    //    which we need because there are two self() methods
-    //
-    // 2. There are problems with the destruction order: The destructor of
-    //    StdAddressBook calls save(), which for LDAP address books, needs KIO
-    //    (more specific: KProtocolInfo) to be still alive. However, with a global
-    //    static, KProtocolInfo is already deleted, and the app will crash.
-    //
-    // qAddPostRoutine deletes the objects when the QApplication is destroyed,
-    // which is earlier than the global statics, so this will work.
-    qAddPostRoutine( deleteGlobalStdAddressBook );
-  }
-
-  return s_gStdAddressBook;
+  // delegate to other self() method since the only difference
+  // was the constructor being used and their only difference is
+  // what they pass to Private::init()
+  return self( false );
 }
 
 StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
-  kDebug();
+  kDebug() << "asynchronous=" << asynchronous;
 
   if ( !s_gStdAddressBook ) {
-    s_gStdAddressBook = new StdAddressBook( asynchronous );
+    s_gStdAddressBook = new StdAddressBook( asynchronous, false );
 
-    // See comment in the other self() method for this.
+    // We don't use a global static here for this reason:
+    //
+    // There are problems with the destruction order: The destructor of
+    // StdAddressBook calls save(), which for LDAP address books, needs KIO
+    // (more specific: KProtocolInfo) to be still alive. However, with a global
+    // static, KProtocolInfo is already deleted, and the app will crash.
+    //
+    // qAddPostRoutine deletes the objects when the QApplication is destroyed,
+    // which is earlier than the global statics, so this will work.
     qAddPostRoutine( deleteGlobalStdAddressBook );
+
+    s_gStdAddressBook->d->init( asynchronous );
   }
 
   return s_gStdAddressBook;
@@ -124,6 +119,15 @@ StdAddressBook::StdAddressBook( bool asynchronous )
   kDebug();
 
   d->init( asynchronous );
+}
+
+StdAddressBook::StdAddressBook( bool asynchronous, bool doInit )
+  : AddressBook( "" ), d( new Private( this ) )
+{
+  kDebug();
+
+  if ( doInit )
+    d->init( asynchronous );
 }
 
 StdAddressBook::~StdAddressBook()
