@@ -88,9 +88,10 @@ set(kabc_LIB_SRCS
 kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
 
 target_link_libraries(kabc kresources kldap ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
+target_link_libraries(kabc LINK_INTERFACE_LIBRARIES kresources ${KDE4_KDEUI_LIBS})
 
 set_target_properties(kabc PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kabc ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
