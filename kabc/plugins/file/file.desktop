@@ -39,6 +39,7 @@ Name[zh_CN]=文件
 Name[zh_TW]=檔案
 Comment=Provides access to contacts stored in a single local file. Supports standard VCard files and other formats depending on available plugins
 Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un fitxer individual. Accepta els fitxers estàndard VCard i altres formats, depenent dels connectors disponibles
+Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einer einzigen Dateien lokal gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ένα τοπικό αρχείο. Υποστηρίζει  τυπικά αρχεία VCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων
 Comment[es]=Provee acceso a los contactos almacenados en un único archivo local. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los componentes
 Comment[fr]=Fourni l'accès aux contacts stockés dans un seul fichier local. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
@@ -46,6 +47,7 @@ Comment[gl]=Dá aceso a contactos gardados nun único ficheiro local. Admite fic
 Comment[it]=Fornisce accesso a contatti memorizzati in un singolo file locale. Gestisce file in standard VCard e altri formati in base ai plugin disponibili
 Comment[ja]=単一のローカルファイルに保存されている連絡先へのアクセスを提供します。標準の VCard ファイルと、利用可能なプラグインに応じたフォーマットをサポートします。
 Comment[km]=ផ្ដល់​កា​រចូលដំណើរការ​ទៅ​ទំនាក់ទំនង​នៅ​ក្នុង​ឯកសារ​មូលដ្ឋាន​តែ​មួយ ។ គាំទ្រ​ឯកសារ VCard ស្តង់ដារ និង​ទ្រង់ទ្រាយ​ផ្សេងៗ​ ដោយ​អាស្រ័យ​លើ​កម្មវិធី​ជំនួយ​ដែល​មាន
+Comment[lv]=Nodrošina piekļuvi kontaktiem, kas glabājas vienā lokālā failā. Atbalsta standarta VCard failus un citus formātus, atkarībā no pieejamajiem spraudņiem
 Comment[nb]=Gir tilgang til kontakter, lagret i en enkelt lokal fil. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg
 Comment[nds]=Stellt Togriep op Kontakten praat, de in een enkel lokaal Datei wohrt warrt. Ünnerstütt VCard-Dateien un anner Formaten na de 'verföögboren Modulen
 Comment[nl]=Geeft toegang tot in een enkel lokaal bestand opgeslagen contactpersonen. Ondersteunt standaard VCard-bestanden en andere van beschikbare plugins afhankelijke formaten

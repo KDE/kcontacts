@@ -40,6 +40,7 @@ Name[zh_CN]=目录
 Name[zh_TW]=目錄
 Comment=Provides access to contacts, each stored in a single file, in a given directory. Supports standard VCard file and other formats depending on availability of plugins
 Comment[ca]=Proporciona l'accés als contactes, cada un emmagatzemat en un fitxer individual, en un directori donat. Accepta els fitxers estàndard VCard i altres formats depenent de la disponibilitat dels connectors
+Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem vorgegebenen Ordner gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ξεχωριστά αρχεία, σε ένα  δοσμένο κατάλογο. Υποστηρίζει τυπικά αρχεία VCard και άλλες μορφές αρχείων  ανάλογα με τη διαθεσιμότητα των πρόσθετων
 Comment[es]=Provee acceso a los contactos, cada uno almacenado en un archivo diferente, dentro de un directorio determinado. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los complementos
 Comment[fr]=Fourni l'accès aux contacts stockés chacun dans un fichier dans le dossier indiqué. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
@@ -47,6 +48,7 @@ Comment[gl]=Dá aceso aos contactos, cada un gardado nun ficheiro nun cartafol d
 Comment[it]=Fornisce accesso a contatti, ciascuno dei quali memorizzato in un singolo file in una cartella data. Gestisce file in standard VCard e altri formati in base ai plugin disponibili
 Comment[ja]=それぞれが単一のファイルに保存されている任意のディレクトリ内の連絡先へのアクセスを提供します。標準の VCard ファイルと、利用可能なプラグインに応じたフォーマットをサポートします。
 Comment[km]=ផ្ដល់​ការ​ចូលដំណើរការ​ទៅ​កាន់​ទំនាក់ទំនង ទំនាក់ទំនង​នីមួយៗ​បានផ្ទុកនៅ​ក្នុង​ឯកសារ​តែ​មួយ នៅ​ក្នុង​ថត​ដែល​បានផ្ដល់​ឲ្យ ។ គាំទ្រ​ឯកសារ VCard និង​ទ្រង់ទ្រាយ​ផ្សេងៗ​ ដោយ​អាស្រ័យ​លើ​កម្មវិធី​ជំនួយ​ដែល​មាន
+Comment[lv]=Nodrošina pieeju kontaktiem, kas katrs saglabāts individuālā failā norādītajā mapē. Atbalsta standarta VCart failus un citus formātus, atkarībā no pieejamajiem spraudņiem
 Comment[nb]=Gir tilgang til kontakter, lagret hver for seg i en enkelt fil, i en gitt mappe. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg
 Comment[nds]=Stellt Togriep op Kontakten praat, elkeen binnen een Datei binnen en angeven Orner. Ünnerstütt VCard-Dateien un anner Formaten na de verföögboren Modulen
 Comment[nl]=Geeft toegang tot contactpersonen, elk opgeslagen in een enkel bestand in een opgegeven map. Ondersteunt standaard VCard-bestand en andere van beschikbare plugins afhankelijke formaten
