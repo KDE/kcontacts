@@ -135,6 +135,11 @@ class KABC_EXPORT StdAddressBook : public AddressBook
     StdAddressBook( bool asynchronous );
 
   private:
+    // needed another constructor for delaying Private::init() to right
+    // after the instance creation. Cannot change the other two since they
+    // are protected and might be called by subclasses
+    StdAddressBook( bool asynchronous, bool doInit );
+
     class Private;
     Private *const d;
 };
