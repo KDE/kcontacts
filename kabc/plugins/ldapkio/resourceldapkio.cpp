@@ -437,6 +437,7 @@ void ResourceLDAPKIO::init()
 
   d->mLDAPUrl = KLDAP::LdapUrl( KUrl() );
   if ( !d->mAnonymous ) {
+    d->mLDAPUrl.setExtension( "bindname", d->mBindDN );
     d->mLDAPUrl.setUser( d->mUser );
     d->mLDAPUrl.setPass( d->mPassword );
   }
@@ -473,9 +474,6 @@ void ResourceLDAPKIO::init()
   }
   if ( d->mSASL ) {
     d->mLDAPUrl.setExtension( "x-sasl", "" );
-    if ( !d->mBindDN.isEmpty() ) {
-      d->mLDAPUrl.setExtension( "bindname", d->mBindDN );
-    }
     if ( !d->mMech.isEmpty() ) {
       d->mLDAPUrl.setExtension( "x-mech", d->mMech );
     }
