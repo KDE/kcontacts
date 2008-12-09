@@ -42,6 +42,7 @@ Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un fitxer indivi
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einer einzigen Dateien lokal gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ένα τοπικό αρχείο. Υποστηρίζει  τυπικά αρχεία VCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων
 Comment[es]=Provee acceso a los contactos almacenados en un único archivo local. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los componentes
+Comment[et]=Võimaldab kasutada kohalikku faili salvestatud kontakte. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust
 Comment[fr]=Fourni l'accès aux contacts stockés dans un seul fichier local. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
 Comment[gl]=Dá aceso a contactos gardados nun único ficheiro local. Admite ficheiros VCard estándar e outros formatos en función das extensións disponíbeis
 Comment[it]=Fornisce accesso a contatti memorizzati in un singolo file locale. Gestisce file in standard VCard e altri formati in base ai plugin disponibili
