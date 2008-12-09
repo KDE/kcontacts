@@ -439,6 +439,7 @@ void ResourceLDAPKIO::init()
   if ( !d->mAnonymous ) {
     d->mLDAPUrl.setUser( d->mUser );
     d->mLDAPUrl.setPass( d->mPassword );
+    d->mLDAPUrl.setExtension( "bindname", d->mBindDN );
   }
   d->mLDAPUrl.setProtocol( d->mSSL ? "ldaps" : "ldap" );
   d->mLDAPUrl.setHost( d->mHost );
@@ -473,9 +474,6 @@ void ResourceLDAPKIO::init()
   }
   if ( d->mSASL ) {
     d->mLDAPUrl.setExtension( "x-sasl", "" );
-    if ( !d->mBindDN.isEmpty() ) {
-      d->mLDAPUrl.setExtension( "bindname", d->mBindDN );
-    }
     if ( !d->mMech.isEmpty() ) {
       d->mLDAPUrl.setExtension( "x-mech", d->mMech );
     }
