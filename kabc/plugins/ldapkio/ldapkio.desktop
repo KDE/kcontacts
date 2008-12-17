@@ -5,6 +5,7 @@ Name[th]=ระบบ LDAP
 Name[x-test]=xxLDAPxx
 Comment=Provides access to contacts stored on a LDAP directory server
 Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un servidor de directori LDAP
+Comment[da]=Giver adgang til kontakter lagret på en LDAP directory-server
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die auf einem LDAP-Server gespeichert sind.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε έναν εξυπηρετητή καταλόγου LDAP
 Comment[es]=Provee acceso a los contactos almacenados en un servidor de directorios LDAP
