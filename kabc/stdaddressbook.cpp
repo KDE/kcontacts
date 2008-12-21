@@ -88,6 +88,9 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
   if ( !s_gStdAddressBook ) {
     s_gStdAddressBook = new StdAddressBook( asynchronous, false );
 
+    kDebug() << "calling init after instance creation";
+    s_gStdAddressBook->d->init( asynchronous );
+
     // We don't use a global static here for this reason:
     //
     // There are problems with the destruction order: The destructor of
@@ -98,8 +101,6 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
     // qAddPostRoutine deletes the objects when the QApplication is destroyed,
     // which is earlier than the global statics, so this will work.
     qAddPostRoutine( deleteGlobalStdAddressBook );
-
-    s_gStdAddressBook->d->init( asynchronous );
   }
 
   return s_gStdAddressBook;
