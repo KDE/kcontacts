@@ -104,6 +104,9 @@ install( FILES
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    addresseelist.h
    addresseedialog.h
+   addresslineedit.h
+   contactgroup.h
+   contactgrouptool.h
    distributionlist.h
    distributionlistdialog.h
    emailselectdialog.h
@@ -111,9 +114,11 @@ install( FILES
    field.h
    format.h
    formatfactory.h
-   format.h
    geo.h
    key.h
+   ldifconverter.h
+   lock.h
+   locknull.h
    phonenumber.h
    picture.h
    plugin.h
@@ -121,18 +126,11 @@ install( FILES
    resourceabc.h
    resourcecached.h
    secrecy.h
+   sortmode.h
    sound.h
    stdaddressbook.h
    timezone.h
    vcardformat.h
    vcardconverter.h
-   ldifconverter.h
-   addresslineedit.h
-   addresseelist.h
-   lock.h
-   locknull.h
-   sortmode.h
-   contactgroup.h
-   contactgrouptool.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel)
 
