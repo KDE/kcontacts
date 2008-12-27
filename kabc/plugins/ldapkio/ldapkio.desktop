@@ -22,6 +22,7 @@ Comment[nl]=Geeft toegang tot contactpersonen, opgeslagen op een LDAP-directorys
 Comment[nn]=Gjev tilgang til kontaktar lagra på ein LDAP-katalogtenar
 Comment[pt]=Oferece o acesso aos contactos guardados num servidor de directório LDAP
 Comment[pt_BR]=Fornece acesso aos contatos armazenados em um servidor de pastas LDAP
+Comment[sl]=Nudi dostop do stikov, ki so shranjeni na imeniškem strežniku LDAP
 Comment[sv]=Ger tillgång till kontakter lagrade på en LDAP-katalogserver
 Comment[uk]=Надає доступ до контактів, які зберігаються на сервері каталогів LDAP
 Comment[x-test]=xxProvides access to contacts stored on a LDAP directory serverxx
