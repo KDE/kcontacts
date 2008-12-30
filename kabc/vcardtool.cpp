@@ -638,26 +638,57 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
 QDateTime VCardTool::parseDateTime( const QString &str ) const
 {
-  QDateTime dateTime;
+  QDate date;
+  QTime time;
 
   if ( str.indexOf( '-' ) == -1 ) { // is base format (yyyymmdd)
-    dateTime.setDate( QDate( str.left( 4 ).toInt(), str.mid( 4, 2 ).toInt(),
-                             str.mid( 6, 2 ).toInt() ) );
-
-    if ( str.indexOf( 'T' ) ) { // has time information yyyymmddThh:mm:ss
-      dateTime.setTime( QTime( str.mid( 11, 2 ).toInt(), str.mid( 14, 2 ).toInt(),
-                               str.mid( 17, 2 ).toInt() ) );
-    }
+    date = QDate( str.left( 4 ).toInt(), str.mid( 4, 2 ).toInt(),
+                  str.mid( 6, 2 ).toInt() );
   } else { // is extended format yyyy-mm-dd
-    dateTime.setDate( QDate( str.left( 4 ).toInt(), str.mid( 5, 2 ).toInt(),
-                             str.mid( 8, 2 ).toInt() ) );
-
-    if ( str.indexOf( 'T' ) ) { // has time information yyyy-mm-ddThh:mm:ss
-      dateTime.setTime( QTime( str.mid( 11, 2 ).toInt(), str.mid( 14, 2 ).toInt(),
-                               str.mid( 17, 2 ).toInt() ) );
-    }
+    date = QDate( str.left( 4 ).toInt(), str.mid( 5, 2 ).toInt(),
+                  str.mid( 8, 2 ).toInt() );
   }
 
+  // does it also contain a time ? (Note: mm, ss are optional according ISO-8601)
+  int timeStart = str.indexOf( 'T' );
+  if ( timeStart >= 0 ) {
+    int hour = 0, minute = 0, second = 0;
+
+    hour = str.mid( timeStart + 1, 2 ).toInt();  // hour must always be given
+
+    if ( str.indexOf( ':', timeStart + 1 ) > 0 ) {  // extended format (hh:mm:ss)
+      if ( str.length() >= (timeStart + 5) ) {
+        minute = str.mid( timeStart + 4, 2 ).toInt();
+        if ( str.length() >= (timeStart + 8) ) {
+          second = str.mid( timeStart + 7, 2 ).toInt();
+        }
+      }
+    }
+    else {  // basic format (hhmmss)
+      if ( str.length() >= (timeStart + 4) ) {
+        minute = str.mid( timeStart + 3, 2 ).toInt();
+        if ( str.length() >= (timeStart + 6) ) {
+          second = str.mid( timeStart + 5, 2 ).toInt();
+        }
+      }
+    }
+
+    time = QTime( hour, minute, second );
+  }
+
+  Qt::TimeSpec spec = (str.right( 1 ) == "Z") ? Qt::UTC : Qt::LocalTime;
+
+  QDateTime dateTime(date);
+
+  // explicitely set the time, which might be invalid, to keep the information
+  // that the time is invalid. In createDateTime() the time/invalid flag is
+  // checked which omits then to print the timestamp
+  // This is needed to reproduce the given string in input
+  // e.g. BDAY:2008-12-30
+  // without time shall also result in a string without a time
+  dateTime.setTime(time);
+
+  dateTime.setTimeSpec(spec);
   return dateTime;
 }
 
@@ -670,9 +701,12 @@ QString VCardTool::createDateTime( const QDateTime &dateTime ) const
                  dateTime.date().day() );
     if ( dateTime.time().isValid() ) {
       QString tmp;
-      tmp.sprintf( "T%02d:%02d:%02dZ", dateTime.time().hour(), dateTime.time().minute(),
+      tmp.sprintf( "T%02d:%02d:%02d", dateTime.time().hour(), dateTime.time().minute(),
                    dateTime.time().second() );
       str += tmp;
+
+      if ( dateTime.timeSpec() == Qt::UTC )
+        str += 'Z';
     }
   }
 
