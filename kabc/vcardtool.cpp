@@ -657,17 +657,16 @@ QDateTime VCardTool::parseDateTime( const QString &str ) const
     hour = str.mid( timeStart + 1, 2 ).toInt();  // hour must always be given
 
     if ( str.indexOf( ':', timeStart + 1 ) > 0 ) {  // extended format (hh:mm:ss)
-      if ( str.length() >= (timeStart + 5) ) {
+      if ( str.length() >= ( timeStart + 5 ) ) {
         minute = str.mid( timeStart + 4, 2 ).toInt();
-        if ( str.length() >= (timeStart + 8) ) {
+        if ( str.length() >= ( timeStart + 8 ) ) {
           second = str.mid( timeStart + 7, 2 ).toInt();
         }
       }
-    }
-    else {  // basic format (hhmmss)
-      if ( str.length() >= (timeStart + 4) ) {
+    } else {  // basic format (hhmmss)
+      if ( str.length() >= ( timeStart + 4 ) ) {
         minute = str.mid( timeStart + 3, 2 ).toInt();
-        if ( str.length() >= (timeStart + 6) ) {
+        if ( str.length() >= ( timeStart + 6 ) ) {
           second = str.mid( timeStart + 5, 2 ).toInt();
         }
       }
@@ -676,11 +675,11 @@ QDateTime VCardTool::parseDateTime( const QString &str ) const
     time = QTime( hour, minute, second );
   }
 
-  Qt::TimeSpec spec = (str.right( 1 ) == "Z") ? Qt::UTC : Qt::LocalTime;
+  Qt::TimeSpec spec = ( str.right( 1 ) == "Z" ) ? Qt::UTC : Qt::LocalTime;
 
   QDateTime dateTime(date);
 
-  // explicitely set the time, which might be invalid, to keep the information
+  // explicitly set the time, which might be invalid, to keep the information
   // that the time is invalid. In createDateTime() the time/invalid flag is
   // checked which omits then to print the timestamp
   // This is needed to reproduce the given string in input
@@ -705,8 +704,9 @@ QString VCardTool::createDateTime( const QDateTime &dateTime ) const
                    dateTime.time().second() );
       str += tmp;
 
-      if ( dateTime.timeSpec() == Qt::UTC )
+      if ( dateTime.timeSpec() == Qt::UTC ) {
         str += 'Z';
+      }
     }
   }
 

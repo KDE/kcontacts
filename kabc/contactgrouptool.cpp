@@ -1,26 +1,25 @@
 /*
-    This file is part of libkabc.
-    Copyright (c) 2008 Tobias Koenig <tokoe@kde.org>
-    Copyright (c) 2008 Kevin Krammer <kevin.krammer@gmx.at>
+  This file is part of libkabc.
+  Copyright (c) 2008 Tobias Koenig <tokoe@kde.org>
+  Copyright (c) 2008 Kevin Krammer <kevin.krammer@gmx.at>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Library General Public
+  License as published by the Free Software Foundation; either
+  version 2 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Library General Public License for more details.
 
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+  You should have received a copy of the GNU Library General Public License
+  along with this library; see the file COPYING.LIB.  If not, write to
+  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+  Boston, MA 02110-1301, USA.
 */
 
 #include "contactgrouptool.h"
-
 #include "contactgroup.h"
 
 #include <QtCore/QIODevice>
@@ -32,106 +31,106 @@
 
 using namespace KABC;
 
-
 class XmlContactGroupWriter : public QXmlStreamWriter
 {
-    public:
-        XmlContactGroupWriter();
+  public:
+    XmlContactGroupWriter();
 
-        void write( const ContactGroup &group, QIODevice *device );
-        void write( const QList<ContactGroup> &groupLis, QIODevice *device );
+    void write( const ContactGroup &group, QIODevice *device );
+    void write( const QList<ContactGroup> &groupLis, QIODevice *device );
 
-    private:
-        void writeGroup( const ContactGroup &group );
-        void writeReference( const ContactGroup::Reference& );
-        void writeData( const ContactGroup::Data& );
+  private:
+    void writeGroup( const ContactGroup &group );
+    void writeReference( const ContactGroup::Reference & );
+    void writeData( const ContactGroup::Data & );
 };
 
 XmlContactGroupWriter::XmlContactGroupWriter()
 {
-    setAutoFormatting( true );
+  setAutoFormatting( true );
 }
 
 void XmlContactGroupWriter::write( const ContactGroup &group, QIODevice *device )
 {
-    setDevice( device );
+  setDevice( device );
 
-    writeStartDocument();
+  writeStartDocument();
 
-    writeGroup( group );
+  writeGroup( group );
 
-    writeEndDocument();
+  writeEndDocument();
 }
 
 void XmlContactGroupWriter::write( const QList<ContactGroup> &groupList, QIODevice *device )
 {
-    setDevice( device );
+  setDevice( device );
 
-    writeStartDocument();
+  writeStartDocument();
 
-    writeStartElement( "contactGroupList" );
+  writeStartElement( "contactGroupList" );
 
-    foreach ( const ContactGroup & group, groupList ) {
-      writeGroup( group );
-    }
+  foreach ( const ContactGroup & group, groupList ) {
+    writeGroup( group );
+  }
 
-    writeEndElement();
+  writeEndElement();
 
-    writeEndDocument();
+  writeEndDocument();
 }
 
 void XmlContactGroupWriter::writeGroup( const ContactGroup &group )
 {
-    writeStartElement( "contactGroup" );
-    writeAttribute( "uid", group.id() );
-    writeAttribute( "name", group.name() );
+  writeStartElement( "contactGroup" );
+  writeAttribute( "uid", group.id() );
+  writeAttribute( "name", group.name() );
 
-    for ( uint i = 0; i < group.referencesCount(); ++i ) {
-        writeReference( group.reference( i ) );
-    }
+  for ( uint i = 0; i < group.referencesCount(); ++i ) {
+    writeReference( group.reference( i ) );
+  }
 
-    for ( uint i = 0; i < group.dataCount(); ++i ) {
-        writeData( group.data( i ) );
-    }
+  for ( uint i = 0; i < group.dataCount(); ++i ) {
+    writeData( group.data( i ) );
+  }
 
-    writeEndElement();
+  writeEndElement();
 }
 
 void XmlContactGroupWriter::writeReference( const ContactGroup::Reference &reference )
 {
-    writeStartElement( "contactReference" );
-    writeAttribute( "uid", reference.uid() );
-    if ( !reference.preferredEmail().isEmpty() )
-        writeAttribute( "preferredEmail", reference.preferredEmail() );
+  writeStartElement( "contactReference" );
+  writeAttribute( "uid", reference.uid() );
+  if ( !reference.preferredEmail().isEmpty() ) {
+    writeAttribute( "preferredEmail", reference.preferredEmail() );
+  }
 
-    // TODO: customs
+  // TODO: customs
 
-    writeEndElement();
+  writeEndElement();
 }
 
 void XmlContactGroupWriter::writeData( const ContactGroup::Data &data )
 {
-    writeStartElement( "contactData" );
-    writeAttribute( "name", data.name() );
-    writeAttribute( "email", data.email() );
+  writeStartElement( "contactData" );
+  writeAttribute( "name", data.name() );
+  writeAttribute( "email", data.email() );
 
-    // TODO: customs
+  // TODO: customs
 
-    writeEndElement();
+  writeEndElement();
 }
 
 class XmlContactGroupReader : public QXmlStreamReader
 {
-    public:
-        XmlContactGroupReader();
+  public:
+    XmlContactGroupReader();
 
-        bool read( QIODevice *device, ContactGroup &group );
-        bool read( QIODevice *device, QList<ContactGroup> &groupList );
+    bool read( QIODevice *device, ContactGroup &group );
+    bool read( QIODevice *device, QList<ContactGroup> &groupList );
 
-    private:
-        bool readGroup( ContactGroup &group );
-        bool readReference( ContactGroup::Reference &reference );
-        bool readData( ContactGroup::Data &data );
+  private:
+    bool readGroup( ContactGroup &group );
+    bool readReference( ContactGroup::Reference &reference );
+    bool readData( ContactGroup::Data &data );
 };
 
 XmlContactGroupReader::XmlContactGroupReader()
@@ -175,8 +174,9 @@ bool XmlContactGroupReader::read( QIODevice *device, QList<ContactGroup> &groupL
       } else if ( depth == 2 ) {
         if ( name() == QLatin1String( "contactGroup" ) ) {
           ContactGroup group;
-          if ( !readGroup( group ) )
+          if ( !readGroup( group ) ) {
             return false;
+          }
 
           groupList.append( group );
         } else {
@@ -216,24 +216,25 @@ bool XmlContactGroupReader::readGroup( ContactGroup &group )
     if ( isStartElement() ) {
       if ( name() == QLatin1String( "contactData" ) ) {
         ContactGroup::Data data;
-        if ( !readData( data ) )
+        if ( !readData( data ) ) {
           return false;
-
+        }
         group.append( data );
       } else if ( name() == QLatin1String( "contactReference" ) ) {
         ContactGroup::Reference reference;
-        if ( !readReference( reference ) )
+        if ( !readReference( reference ) ) {
           return false;
-
+        }
         group.append( reference );
       } else {
-          raiseError( "The document does not describe a ContactGroup" );
+        raiseError( "The document does not describe a ContactGroup" );
       }
     }
 
     if ( isEndElement() ) {
-      if ( name() == QLatin1String( "contactGroup" ) )
+      if ( name() == QLatin1String( "contactGroup" ) ) {
         return true;
+      }
     }
   }
 
@@ -275,50 +276,56 @@ bool XmlContactGroupReader::readReference( ContactGroup::Reference &reference )
   return true;
 }
 
-bool ContactGroupTool::convertFromXml( QIODevice *device, ContactGroup &group, QString *errorMessage )
+bool ContactGroupTool::convertFromXml( QIODevice *device, ContactGroup &group,
+                                       QString *errorMessage )
 {
-    Q_UNUSED( errorMessage )
+  Q_UNUSED( errorMessage );
 
-    XmlContactGroupReader reader;
+  XmlContactGroupReader reader;
 
-    bool ok = reader.read( device, group );
+  bool ok = reader.read( device, group );
 
-    if ( !ok && errorMessage != 0 )
-      *errorMessage = reader.errorString();
+  if ( !ok && errorMessage != 0 ) {
+    *errorMessage = reader.errorString();
+  }
 
-    return ok;
+  return ok;
 }
 
-bool ContactGroupTool::convertToXml( const ContactGroup &group, QIODevice *device, QString *errorMessage )
+bool ContactGroupTool::convertToXml( const ContactGroup &group, QIODevice *device,
+                                     QString *errorMessage )
 {
-    Q_UNUSED( errorMessage )
+  Q_UNUSED( errorMessage );
 
-    XmlContactGroupWriter writer;
-    writer.write( group, device );
+  XmlContactGroupWriter writer;
+  writer.write( group, device );
 
-    return true;
+  return true;
 }
 
-bool ContactGroupTool::convertFromXml( QIODevice *device, QList<ContactGroup> &groupList, QString *errorMessage )
+bool ContactGroupTool::convertFromXml( QIODevice *device, QList<ContactGroup> &groupList,
+                                       QString *errorMessage )
 {
-    Q_UNUSED( errorMessage )
+  Q_UNUSED( errorMessage );
 
-    XmlContactGroupReader reader;
+  XmlContactGroupReader reader;
 
-    bool ok = reader.read( device, groupList );
+  bool ok = reader.read( device, groupList );
 
-    if ( !ok && errorMessage != 0 )
-      *errorMessage = reader.errorString();
+  if ( !ok && errorMessage != 0 ) {
+    *errorMessage = reader.errorString();
+  }
 
-    return ok;
+  return ok;
 }
 
-bool ContactGroupTool::convertToXml( const QList<ContactGroup> &groupList, QIODevice *device, QString *errorMessage )
+bool ContactGroupTool::convertToXml( const QList<ContactGroup> &groupList,
+                                     QIODevice *device, QString *errorMessage )
 {
-    Q_UNUSED( errorMessage )
+  Q_UNUSED( errorMessage );
 
-    XmlContactGroupWriter writer;
-    writer.write( groupList, device );
+  XmlContactGroupWriter writer;
+  writer.write( groupList, device );
 
-    return true;
+  return true;
 }

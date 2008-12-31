@@ -127,8 +127,9 @@ StdAddressBook::StdAddressBook( bool asynchronous, bool doInit )
 {
   kDebug();
 
-  if ( doInit )
+  if ( doInit ) {
     d->init( asynchronous );
+  }
 }
 
 StdAddressBook::~StdAddressBook()
