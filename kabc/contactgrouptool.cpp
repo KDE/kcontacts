@@ -92,6 +92,10 @@ void XmlContactGroupWriter::writeGroup( const ContactGroup &group )
     writeData( group.data( i ) );
   }
 
+  for ( uint i = 0; i < group.subgroupCount(); ++i ) {
+    writeGroup( group.subgroup( i ) );
+  }
+
   writeEndElement();
 }
 
@@ -226,6 +230,12 @@ bool XmlContactGroupReader::readGroup( ContactGroup &group )
           return false;
         }
         group.append( reference );
+      } else if ( name() == QLatin1String( "contactGroup" ) ) {
+        ContactGroup subgroup;
+        if ( !readGroup( subgroup ) ) {
+          return false;
+        }
+        group.append( subgroup );
       } else {
         raiseError( "The document does not describe a ContactGroup" );
       }

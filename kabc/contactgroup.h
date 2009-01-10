@@ -282,6 +282,11 @@ class KABC_EXPORT ContactGroup
     unsigned int dataCount() const;
 
     /**
+     * Returns the number of subgroups in this group.
+     */
+    unsigned int subgroupCount() const;
+
+    /**
      * Returns the contact reference at the given @p index.
      */
     Reference &reference( unsigned int index );
@@ -302,6 +307,16 @@ class KABC_EXPORT ContactGroup
     const Data &data( unsigned int index ) const;
 
     /**
+     * Returns the subgroup at the given @p index.
+     */
+    ContactGroup &subgroup( unsigned int index );
+
+    /**
+     * Returns the subgroup at the given @p index.
+     */
+    const ContactGroup &subgroup( unsigned int index ) const;
+
+    /**
      * Appends a new contact @p reference to the contact group.
      */
     void append( const Reference &reference );
@@ -312,6 +327,11 @@ class KABC_EXPORT ContactGroup
     void append( const Data &data );
 
     /**
+     * Appends a new @p subgroup object to the contact group.
+     */
+    void append( const ContactGroup &subgroup );
+
+    /**
      * Removes the given contact @p reference from the contact group.
      */
     void remove( const Reference &reference );
@@ -320,6 +340,11 @@ class KABC_EXPORT ContactGroup
      * Removes the given contact @p data object from the contact group.
      */
     void remove( const Data &data );
+
+    /**
+     * Removes the given @p subgroup object from the contact group.
+     */
+    void remove( const ContactGroup &subgroup );
 
     /**
      * @internal

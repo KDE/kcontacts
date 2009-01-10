@@ -229,12 +229,14 @@ class ContactGroup::Private : public QSharedData
       mName = other.mName;
       mReferences = other.mReferences;
       mDataObjects = other.mDataObjects;
+      mSubgroups = other.mSubgroups;
     }
 
     QString mIdentifier;
     QString mName;
     ContactGroup::Reference::List mReferences;
     ContactGroup::Data::List mDataObjects;
+    ContactGroup::List mSubgroups;
 };
 
 ContactGroup::ContactGroup()
@@ -292,32 +294,51 @@ unsigned int ContactGroup::dataCount() const
   return d->mDataObjects.count();
 }
 
+unsigned int ContactGroup::subgroupCount() const
+{
+  return d->mSubgroups.count();
+}
+
 ContactGroup::Reference &ContactGroup::reference( unsigned int index )
 {
-  Q_ASSERT_X( index < d->mReferences.count(), "reference()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mReferences.count(), "reference()", "index out of range" );
 
   return d->mReferences[ index ];
 }
 
 const ContactGroup::Reference &ContactGroup::reference( unsigned int index ) const
 {
-  Q_ASSERT_X( index < d->mReferences.count(), "reference()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mReferences.count(), "reference()", "index out of range" );
 
   return d->mReferences[ index ];
 }
 
 ContactGroup::Data &ContactGroup::data( unsigned int index )
 {
-  Q_ASSERT_X( index < d->mDataObjects.count(), "data()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mDataObjects.count(), "data()", "index out of range" );
 
   return d->mDataObjects[ index ];
 }
 
 const ContactGroup::Data &ContactGroup::data( unsigned int index ) const
 {
-  Q_ASSERT_X( index < d->mDataObjects.count(), "data()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mDataObjects.count(), "data()", "index out of range" );
 
   return d->mDataObjects[ index ];
+}
+
+ContactGroup &ContactGroup::subgroup( unsigned int index )
+{
+  Q_ASSERT_X( index < (unsigned int)d->mSubgroups.count(), "subgroup()", "index out of range" );
+
+  return d->mSubgroups[ index ];
+}
+
+const ContactGroup &ContactGroup::subgroup( unsigned int index ) const
+{
+  Q_ASSERT_X( index < (unsigned int)d->mSubgroups.count(), "subgroup()", "index out of range" );
+
+  return d->mSubgroups[ index ];
 }
 
 void ContactGroup::append( const Reference &reference )
@@ -330,6 +351,11 @@ void ContactGroup::append( const Data &data )
   d->mDataObjects.append( data );
 }
 
+void ContactGroup::append( const ContactGroup &subgroup )
+{
+  d->mSubgroups.append( subgroup );
+}
+
 void ContactGroup::remove( const Reference &reference )
 {
   d->mReferences.removeOne( reference );
@@ -338,6 +364,11 @@ void ContactGroup::remove( const Reference &reference )
 void ContactGroup::remove( const Data &data )
 {
   d->mDataObjects.removeOne( data );
+}
+
+void ContactGroup::remove( const ContactGroup &subgroup )
+{
+  d->mSubgroups.removeOne( subgroup );
 }
 
 ContactGroup &ContactGroup::operator=( const ContactGroup &other )
@@ -354,7 +385,8 @@ bool ContactGroup::operator==( const ContactGroup &other ) const
   return d->mIdentifier == other.d->mIdentifier &&
     d->mName == other.d->mName &&
     d->mReferences == other.d->mReferences &&
-    d->mDataObjects == other.d->mDataObjects;
+    d->mDataObjects == other.d->mDataObjects &&
+    d->mSubgroups == other.d->mSubgroups;
 }
 
 QString ContactGroup::mimeType()

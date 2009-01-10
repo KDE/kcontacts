@@ -34,22 +34,41 @@ namespace KABC {
 class ContactGroup;
 
 /**
+ * A class for converting ContactGroup to XML format and vice versa.
+ *
+ * @author Kevin Krammer <kevin.krammer@gmx.at>
  * @since 4.2
  */
 class KABC_EXPORT ContactGroupTool
 {
   public:
+    /**
+     * Converts XML data coming from a @p device into a contact @p group.
+     * If an error occurs, @c false is returned and @p errorMessage is set.
+     */
     static bool convertFromXml( QIODevice *device, ContactGroup &group,
                                 QString *errorMessage = 0 );
 
+    /**
+     * Converts a contact @p group into XML data and writes them to a @p device.
+     * If an error occurs, @c false is returned and @p errorMessage is set.
+     */
     static bool convertToXml( const ContactGroup &group, QIODevice *device,
                               QString *errorMessage = 0 );
 
+    /**
+     * Converts XML data coming from a @p device into a @p list of contact groups.
+     * If an error occurs, @c false is returned and @p errorMessage is set.
+     */
     static bool convertFromXml( QIODevice *device,
-                                QList<ContactGroup> &groupList,
+                                QList<ContactGroup> &list,
                                 QString *errorMessage = 0 );
 
-    static bool convertToXml( const QList<ContactGroup> &groupList,
+    /**
+     * Converts a @p list of contact groups into XML data and writes them to a @p device.
+     * If an error occurs, @c false is returned and @p errorMessage is set.
+     */
+    static bool convertToXml( const QList<ContactGroup> &list,
                               QIODevice *device, QString *errorMessage = 0 );
 };
 

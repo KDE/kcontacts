@@ -35,6 +35,7 @@ class ContactGroupTest : public QObject
     void contactGroupReference();
     void contactGroupData();
     void contactGroup();
+    void subgroup();
     void testGroupRoundTrip();
     void testGroupListRoundTrip();
 };
@@ -229,14 +230,47 @@ void ContactGroupTest::contactGroup()
   }
 }
 
+void ContactGroupTest::subgroup()
+{
+  ContactGroup subGroup( "SubGroup" );
+  subGroup.append( ContactGroup::Reference( "334Fds" ) );
+  subGroup.append( ContactGroup::Data( "John Doe", "doe@kde.org" ) );
+
+  ContactGroup group( "Toplevel" );
+  QCOMPARE( group.referencesCount(), (unsigned int)0 );
+  QCOMPARE( group.dataCount(), (unsigned int)0 );
+  QCOMPARE( group.subgroupCount(), (unsigned int)0 );
+
+  group.append( ContactGroup::Reference( "Xggdjetw" ) );
+  group.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
+  group.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
+  group.append( subGroup );
+
+  QCOMPARE( group.referencesCount(), (unsigned int)1 );
+  QCOMPARE( group.dataCount(), (unsigned int)2 );
+  QCOMPARE( group.subgroupCount(), (unsigned int)1 );
+  QCOMPARE( group.count(), (unsigned int)3 );
+
+  const ContactGroup subGroup2 = group.subgroup( 0 );
+  QCOMPARE( subGroup, subGroup2 );
+
+  group.remove( subGroup );
+  QCOMPARE( group.subgroupCount(), (unsigned int)0 );
+}
+
 void ContactGroupTest::testGroupRoundTrip()
 {
   // TODO should also test empty group
+
+  ContactGroup subGroup( "SubGroup" );
+  subGroup.append( ContactGroup::Reference( "334Fds" ) );
+  subGroup.append( ContactGroup::Data( "John Doe", "doe@kde.org" ) );
 
   ContactGroup group( "TestGroup" );
   group.append( ContactGroup::Reference( "Xggdjetw" ) );
   group.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
   group.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
+  group.append( subGroup );
 
   QBuffer buffer;
   buffer.open( QIODevice::WriteOnly );
