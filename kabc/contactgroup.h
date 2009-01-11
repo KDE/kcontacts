@@ -48,33 +48,33 @@ class KABC_EXPORT ContactGroup
     /**
      * This class represents a contact reference
      */
-    class KABC_EXPORT Reference
+    class KABC_EXPORT ContactReference
     {
       public:
         /**
          * A list of contact references.
          */
-        typedef QList<Reference> List;
+        typedef QList<ContactReference> List;
 
         /**
          * Creates an empty contact reference.
          */
-        Reference();
+        ContactReference();
 
         /**
          * Creates a contact reference from an @p other reference.
          */
-        Reference( const Reference &other );
+        ContactReference( const ContactReference &other );
 
         /**
          * Creates a contact reference for the given contact @p uid.
          */
-        Reference( const QString &uid );
+        ContactReference( const QString &uid );
 
         /**
          * Destroys the contact reference.
          */
-        ~Reference();
+        ~ContactReference();
 
         /**
          * Sets the contact uid of the contact reference.
@@ -121,16 +121,93 @@ class KABC_EXPORT ContactGroup
         /**
          * @internal
          */
-        Reference &operator=( const Reference & );
+        ContactReference &operator=( const ContactReference & );
 
         /**
          * @internal
          */
-        bool operator==( const Reference & ) const;
+        bool operator==( const ContactReference & ) const;
 
       private:
-        class ReferencePrivate;
-        QSharedDataPointer<ReferencePrivate> d;
+        class ContactReferencePrivate;
+        QSharedDataPointer<ContactReferencePrivate> d;
+    };
+
+    /**
+     * This class represents a contact group reference
+     */
+    class KABC_EXPORT ContactGroupReference
+    {
+      public:
+        /**
+         * A list of contact group references.
+         */
+        typedef QList<ContactGroupReference> List;
+
+        /**
+         * Creates an empty contact group reference.
+         */
+        ContactGroupReference();
+
+        /**
+         * Creates a contact group reference from an @p other reference.
+         */
+        ContactGroupReference( const ContactGroupReference &other );
+
+        /**
+         * Creates a contact group reference for the given contact group @p uid.
+         */
+        ContactGroupReference( const QString &uid );
+
+        /**
+         * Destroys the contact group reference.
+         */
+        ~ContactGroupReference();
+
+        /**
+         * Sets the contact group uid of the contact group reference.
+         */
+        void setUid( const QString &uid );
+
+        /**
+         * Returns the contact group uid of the contact group reference.
+         */
+        QString uid() const;
+
+        /**
+         * Inserts a custom entry.
+         * If an entry with the same @p key already exists, it is
+         * overwritten.
+         *
+         * @param key The unique key.
+         * @param value The value.
+         */
+        void insertCustom( const QString &key, const QString &value );
+
+        /**
+         * Removes the custom entry with the given @p key.
+         */
+        void removeCustom( const QString &key );
+
+        /**
+         * Returns the value for the given @p key, or an empty string
+         * if the entry for that key does not exists.
+         */
+        QString custom( const QString &key ) const;
+
+        /**
+         * @internal
+         */
+        ContactGroupReference &operator=( const ContactGroupReference & );
+
+        /**
+         * @internal
+         */
+        bool operator==( const ContactGroupReference & ) const;
+
+      private:
+        class ContactGroupReferencePrivate;
+        QSharedDataPointer<ContactGroupReferencePrivate> d;
     };
 
     /**
@@ -274,7 +351,12 @@ class KABC_EXPORT ContactGroup
     /**
      * Returns the number of contact references in this group.
      */
-    unsigned int referencesCount() const;
+    unsigned int contactReferenceCount() const;
+
+    /**
+     * Returns the number of group references in this group.
+     */
+    unsigned int contactGroupReferenceCount() const;
 
     /**
      * Returns the number of contact data objects in this group.
@@ -282,19 +364,24 @@ class KABC_EXPORT ContactGroup
     unsigned int dataCount() const;
 
     /**
-     * Returns the number of subgroups in this group.
+     * Returns the contact reference at the given @p index.
      */
-    unsigned int subgroupCount() const;
+    ContactReference &contactReference( unsigned int index );
 
     /**
      * Returns the contact reference at the given @p index.
      */
-    Reference &reference( unsigned int index );
+    const ContactReference &contactReference( unsigned int index ) const;
 
     /**
-     * Returns the contact reference at the given @p index.
+     * Returns the contact group reference at the given @p index.
      */
-    const Reference &reference( unsigned int index ) const;
+    ContactGroupReference &contactGroupReference( unsigned int index );
+
+    /**
+     * Returns the contact group reference at the given @p index.
+     */
+    const ContactGroupReference &contactGroupReference( unsigned int index ) const;
 
     /**
      * Returns the contact data object at the given @p index.
@@ -307,19 +394,14 @@ class KABC_EXPORT ContactGroup
     const Data &data( unsigned int index ) const;
 
     /**
-     * Returns the subgroup at the given @p index.
-     */
-    ContactGroup &subgroup( unsigned int index );
-
-    /**
-     * Returns the subgroup at the given @p index.
-     */
-    const ContactGroup &subgroup( unsigned int index ) const;
-
-    /**
      * Appends a new contact @p reference to the contact group.
      */
-    void append( const Reference &reference );
+    void append( const ContactReference &reference );
+
+    /**
+     * Appends a new contact group @p reference to the contact group.
+     */
+    void append( const ContactGroupReference &reference );
 
     /**
      * Appends a new contact @p data object to the contact group.
@@ -327,24 +409,19 @@ class KABC_EXPORT ContactGroup
     void append( const Data &data );
 
     /**
-     * Appends a new @p subgroup object to the contact group.
-     */
-    void append( const ContactGroup &subgroup );
-
-    /**
      * Removes the given contact @p reference from the contact group.
      */
-    void remove( const Reference &reference );
+    void remove( const ContactReference &reference );
+
+    /**
+     * Removes the given contact group @p reference from the contact group.
+     */
+    void remove( const ContactGroupReference &reference );
 
     /**
      * Removes the given contact @p data object from the contact group.
      */
     void remove( const Data &data );
-
-    /**
-     * Removes the given @p subgroup object from the contact group.
-     */
-    void remove( const ContactGroup &subgroup );
 
     /**
      * @internal

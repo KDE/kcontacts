@@ -28,15 +28,15 @@
 
 using namespace KABC;
 
-class ContactGroup::Reference::ReferencePrivate : public QSharedData
+class ContactGroup::ContactReference::ContactReferencePrivate : public QSharedData
 {
   public:
-    ReferencePrivate()
+    ContactReferencePrivate()
       : QSharedData()
     {
     }
 
-    ReferencePrivate( const ReferencePrivate &other )
+    ContactReferencePrivate( const ContactReferencePrivate &other )
       : QSharedData( other )
     {
       mUid = other.mUid;
@@ -49,62 +49,62 @@ class ContactGroup::Reference::ReferencePrivate : public QSharedData
     QMap<QString, QString> mCustoms;
 };
 
-ContactGroup::Reference::Reference()
-  : d( new ReferencePrivate )
+ContactGroup::ContactReference::ContactReference()
+  : d( new ContactReferencePrivate )
 {
 }
 
-ContactGroup::Reference::Reference( const Reference &other )
+ContactGroup::ContactReference::ContactReference( const ContactReference &other )
   : d( other.d )
 {
 }
 
-ContactGroup::Reference::Reference( const QString &uid )
-  : d( new ReferencePrivate )
+ContactGroup::ContactReference::ContactReference( const QString &uid )
+  : d( new ContactReferencePrivate )
 {
   d->mUid = uid;
 }
 
-ContactGroup::Reference::~Reference()
+ContactGroup::ContactReference::~ContactReference()
 {
 }
 
-void ContactGroup::Reference::setUid( const QString &uid )
+void ContactGroup::ContactReference::setUid( const QString &uid )
 {
   d->mUid = uid;
 }
 
-QString ContactGroup::Reference::uid() const
+QString ContactGroup::ContactReference::uid() const
 {
   return d->mUid;
 }
 
-void ContactGroup::Reference::setPreferredEmail( const QString &email )
+void ContactGroup::ContactReference::setPreferredEmail( const QString &email )
 {
   d->mPreferredEmail = email;
 }
 
-QString ContactGroup::Reference::preferredEmail() const
+QString ContactGroup::ContactReference::preferredEmail() const
 {
   return d->mPreferredEmail;
 }
 
-void ContactGroup::Reference::insertCustom( const QString &key, const QString &value )
+void ContactGroup::ContactReference::insertCustom( const QString &key, const QString &value )
 {
   d->mCustoms.insert( key, value );
 }
 
-void ContactGroup::Reference::removeCustom( const QString &key )
+void ContactGroup::ContactReference::removeCustom( const QString &key )
 {
   d->mCustoms.remove( key );
 }
 
-QString ContactGroup::Reference::custom( const QString &key ) const
+QString ContactGroup::ContactReference::custom( const QString &key ) const
 {
   return d->mCustoms.value( key );
 }
 
-ContactGroup::Reference &ContactGroup::Reference::operator=( const ContactGroup::Reference &other )
+ContactGroup::ContactReference &ContactGroup::ContactReference::operator=( const ContactGroup::ContactReference &other )
 {
   if ( this != &other ) {
     d = other.d;
@@ -113,10 +113,89 @@ ContactGroup::Reference &ContactGroup::Reference::operator=( const ContactGroup:
   return *this;
 }
 
-bool ContactGroup::Reference::operator==( const Reference &other ) const
+bool ContactGroup::ContactReference::operator==( const ContactReference &other ) const
 {
   return d->mUid == other.d->mUid &&
     d->mPreferredEmail == other.d->mPreferredEmail &&
+    d->mCustoms == other.d->mCustoms;
+}
+
+class ContactGroup::ContactGroupReference::ContactGroupReferencePrivate : public QSharedData
+{
+  public:
+    ContactGroupReferencePrivate()
+      : QSharedData()
+    {
+    }
+
+    ContactGroupReferencePrivate( const ContactGroupReferencePrivate &other )
+      : QSharedData( other )
+    {
+      mUid = other.mUid;
+      mCustoms = other.mCustoms;
+    }
+
+    QString mUid;
+    QMap<QString, QString> mCustoms;
+};
+
+ContactGroup::ContactGroupReference::ContactGroupReference()
+  : d( new ContactGroupReferencePrivate )
+{
+}
+
+ContactGroup::ContactGroupReference::ContactGroupReference( const ContactGroupReference &other )
+  : d( other.d )
+{
+}
+
+ContactGroup::ContactGroupReference::ContactGroupReference( const QString &uid )
+  : d( new ContactGroupReferencePrivate )
+{
+  d->mUid = uid;
+}
+
+ContactGroup::ContactGroupReference::~ContactGroupReference()
+{
+}
+
+void ContactGroup::ContactGroupReference::setUid( const QString &uid )
+{
+  d->mUid = uid;
+}
+
+QString ContactGroup::ContactGroupReference::uid() const
+{
+  return d->mUid;
+}
+
+void ContactGroup::ContactGroupReference::insertCustom( const QString &key, const QString &value )
+{
+  d->mCustoms.insert( key, value );
+}
+
+void ContactGroup::ContactGroupReference::removeCustom( const QString &key )
+{
+  d->mCustoms.remove( key );
+}
+
+QString ContactGroup::ContactGroupReference::custom( const QString &key ) const
+{
+  return d->mCustoms.value( key );
+}
+
+ContactGroup::ContactGroupReference &ContactGroup::ContactGroupReference::operator=( const ContactGroup::ContactGroupReference &other )
+{
+  if ( this != &other ) {
+    d = other.d;
+  }
+
+  return *this;
+}
+
+bool ContactGroup::ContactGroupReference::operator==( const ContactGroupReference &other ) const
+{
+  return d->mUid == other.d->mUid &&
     d->mCustoms == other.d->mCustoms;
 }
 
@@ -227,16 +306,16 @@ class ContactGroup::Private : public QSharedData
     {
       mIdentifier = other.mIdentifier;
       mName = other.mName;
-      mReferences = other.mReferences;
+      mContactReferences = other.mContactReferences;
+      mContactGroupReferences = other.mContactGroupReferences;
       mDataObjects = other.mDataObjects;
-      mSubgroups = other.mSubgroups;
     }
 
     QString mIdentifier;
     QString mName;
-    ContactGroup::Reference::List mReferences;
+    ContactGroup::ContactReference::List mContactReferences;
+    ContactGroup::ContactGroupReference::List mContactGroupReferences;
     ContactGroup::Data::List mDataObjects;
-    ContactGroup::List mSubgroups;
 };
 
 ContactGroup::ContactGroup()
@@ -281,12 +360,17 @@ QString ContactGroup::id() const
 
 unsigned int ContactGroup::count() const
 {
-  return d->mReferences.count() + d->mDataObjects.count();
+  return d->mContactReferences.count() + d->mDataObjects.count();
 }
 
-unsigned int ContactGroup::referencesCount() const
+unsigned int ContactGroup::contactReferenceCount() const
 {
-  return d->mReferences.count();
+  return d->mContactReferences.count();
+}
+
+unsigned int ContactGroup::contactGroupReferenceCount() const
+{
+  return d->mContactGroupReferences.count();
 }
 
 unsigned int ContactGroup::dataCount() const
@@ -294,23 +378,32 @@ unsigned int ContactGroup::dataCount() const
   return d->mDataObjects.count();
 }
 
-unsigned int ContactGroup::subgroupCount() const
+ContactGroup::ContactReference &ContactGroup::contactReference( unsigned int index )
 {
-  return d->mSubgroups.count();
+  Q_ASSERT_X( index < (unsigned int)d->mContactReferences.count(), "contactReference()", "index out of range" );
+
+  return d->mContactReferences[ index ];
 }
 
-ContactGroup::Reference &ContactGroup::reference( unsigned int index )
+const ContactGroup::ContactReference &ContactGroup::contactReference( unsigned int index ) const
 {
-  Q_ASSERT_X( index < (unsigned int)d->mReferences.count(), "reference()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mContactReferences.count(), "contactReference()", "index out of range" );
 
-  return d->mReferences[ index ];
+  return d->mContactReferences[ index ];
 }
 
-const ContactGroup::Reference &ContactGroup::reference( unsigned int index ) const
+ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference( unsigned int index )
 {
-  Q_ASSERT_X( index < (unsigned int)d->mReferences.count(), "reference()", "index out of range" );
+  Q_ASSERT_X( index < (unsigned int)d->mContactGroupReferences.count(), "contactGroupReference()", "index out of range" );
 
-  return d->mReferences[ index ];
+  return d->mContactGroupReferences[ index ];
+}
+
+const ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference( unsigned int index ) const
+{
+  Q_ASSERT_X( index < (unsigned int)d->mContactGroupReferences.count(), "contactGroupReference()", "index out of range" );
+
+  return d->mContactGroupReferences[ index ];
 }
 
 ContactGroup::Data &ContactGroup::data( unsigned int index )
@@ -327,23 +420,14 @@ const ContactGroup::Data &ContactGroup::data( unsigned int index ) const
   return d->mDataObjects[ index ];
 }
 
-ContactGroup &ContactGroup::subgroup( unsigned int index )
+void ContactGroup::append( const ContactReference &reference )
 {
-  Q_ASSERT_X( index < (unsigned int)d->mSubgroups.count(), "subgroup()", "index out of range" );
-
-  return d->mSubgroups[ index ];
+  d->mContactReferences.append( reference );
 }
 
-const ContactGroup &ContactGroup::subgroup( unsigned int index ) const
+void ContactGroup::append( const ContactGroupReference &reference )
 {
-  Q_ASSERT_X( index < (unsigned int)d->mSubgroups.count(), "subgroup()", "index out of range" );
-
-  return d->mSubgroups[ index ];
-}
-
-void ContactGroup::append( const Reference &reference )
-{
-  d->mReferences.append( reference );
+  d->mContactGroupReferences.append( reference );
 }
 
 void ContactGroup::append( const Data &data )
@@ -351,24 +435,19 @@ void ContactGroup::append( const Data &data )
   d->mDataObjects.append( data );
 }
 
-void ContactGroup::append( const ContactGroup &subgroup )
+void ContactGroup::remove( const ContactReference &reference )
 {
-  d->mSubgroups.append( subgroup );
+  d->mContactReferences.removeOne( reference );
 }
 
-void ContactGroup::remove( const Reference &reference )
+void ContactGroup::remove( const ContactGroupReference &reference )
 {
-  d->mReferences.removeOne( reference );
+  d->mContactGroupReferences.removeOne( reference );
 }
 
 void ContactGroup::remove( const Data &data )
 {
   d->mDataObjects.removeOne( data );
-}
-
-void ContactGroup::remove( const ContactGroup &subgroup )
-{
-  d->mSubgroups.removeOne( subgroup );
 }
 
 ContactGroup &ContactGroup::operator=( const ContactGroup &other )
@@ -384,9 +463,9 @@ bool ContactGroup::operator==( const ContactGroup &other ) const
 {
   return d->mIdentifier == other.d->mIdentifier &&
     d->mName == other.d->mName &&
-    d->mReferences == other.d->mReferences &&
-    d->mDataObjects == other.d->mDataObjects &&
-    d->mSubgroups == other.d->mSubgroups;
+    d->mContactReferences == other.d->mContactReferences &&
+    d->mContactGroupReferences == other.d->mContactGroupReferences &&
+    d->mDataObjects == other.d->mDataObjects;
 }
 
 QString ContactGroup::mimeType()

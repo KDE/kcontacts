@@ -41,7 +41,8 @@ class XmlContactGroupWriter : public QXmlStreamWriter
 
   private:
     void writeGroup( const ContactGroup &group );
-    void writeReference( const ContactGroup::Reference & );
+    void writeContactReference( const ContactGroup::ContactReference & );
+    void writeContactGroupReference( const ContactGroup::ContactGroupReference & );
     void writeData( const ContactGroup::Data & );
 };
 
@@ -84,28 +85,38 @@ void XmlContactGroupWriter::writeGroup( const ContactGroup &group )
   writeAttribute( "uid", group.id() );
   writeAttribute( "name", group.name() );
 
-  for ( uint i = 0; i < group.referencesCount(); ++i ) {
-    writeReference( group.reference( i ) );
+  for ( uint i = 0; i < group.contactReferenceCount(); ++i ) {
+    writeContactReference( group.contactReference( i ) );
+  }
+
+  for ( uint i = 0; i < group.contactGroupReferenceCount(); ++i ) {
+    writeContactGroupReference( group.contactGroupReference( i ) );
   }
 
   for ( uint i = 0; i < group.dataCount(); ++i ) {
     writeData( group.data( i ) );
   }
 
-  for ( uint i = 0; i < group.subgroupCount(); ++i ) {
-    writeGroup( group.subgroup( i ) );
-  }
-
   writeEndElement();
 }
 
-void XmlContactGroupWriter::writeReference( const ContactGroup::Reference &reference )
+void XmlContactGroupWriter::writeContactReference( const ContactGroup::ContactReference &reference )
 {
   writeStartElement( "contactReference" );
   writeAttribute( "uid", reference.uid() );
   if ( !reference.preferredEmail().isEmpty() ) {
     writeAttribute( "preferredEmail", reference.preferredEmail() );
   }
+
+  // TODO: customs
+
+  writeEndElement();
+}
+
+void XmlContactGroupWriter::writeContactGroupReference( const ContactGroup::ContactGroupReference &reference )
+{
+  writeStartElement( "contactGroupReference" );
+  writeAttribute( "uid", reference.uid() );
 
   // TODO: customs
 
@@ -133,7 +144,8 @@ class XmlContactGroupReader : public QXmlStreamReader
 
   private:
     bool readGroup( ContactGroup &group );
-    bool readReference( ContactGroup::Reference &reference );
+    bool readContactReference( ContactGroup::ContactReference &reference );
+    bool readContactGroupReference( ContactGroup::ContactGroupReference &reference );
     bool readData( ContactGroup::Data &data );
 };
 
@@ -225,17 +237,17 @@ bool XmlContactGroupReader::readGroup( ContactGroup &group )
         }
         group.append( data );
       } else if ( name() == QLatin1String( "contactReference" ) ) {
-        ContactGroup::Reference reference;
-        if ( !readReference( reference ) ) {
+        ContactGroup::ContactReference reference;
+        if ( !readContactReference( reference ) ) {
           return false;
         }
         group.append( reference );
-      } else if ( name() == QLatin1String( "contactGroup" ) ) {
-        ContactGroup subgroup;
-        if ( !readGroup( subgroup ) ) {
+      } else if ( name() == QLatin1String( "contactGroupReference" ) ) {
+        ContactGroup::ContactGroupReference reference;
+        if ( !readContactGroupReference( reference ) ) {
           return false;
         }
-        group.append( subgroup );
+        group.append( reference );
       } else {
         raiseError( "The document does not describe a ContactGroup" );
       }
@@ -272,12 +284,26 @@ bool XmlContactGroupReader::readData( ContactGroup::Data &data )
   return true;
 }
 
-bool XmlContactGroupReader::readReference( ContactGroup::Reference &reference )
+bool XmlContactGroupReader::readContactReference( ContactGroup::ContactReference &reference )
 {
   const QXmlStreamAttributes elementAttributes = attributes();
   const QStringRef uid = elementAttributes.value( "uid" );
   if ( uid.isEmpty() ) {
     raiseError( "ContactReference is missing a uid" );
+    return false;
+  }
+
+  reference.setUid( uid.toString() );
+
+  return true;
+}
+
+bool XmlContactGroupReader::readContactGroupReference( ContactGroup::ContactGroupReference &reference )
+{
+  const QXmlStreamAttributes elementAttributes = attributes();
+  const QStringRef uid = elementAttributes.value( "uid" );
+  if ( uid.isEmpty() ) {
+    raiseError( "ContactGroupReference is missing a uid" );
     return false;
   }
 

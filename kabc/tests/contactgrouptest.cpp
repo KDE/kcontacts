@@ -32,17 +32,17 @@ class ContactGroupTest : public QObject
   Q_OBJECT
 
   private Q_SLOTS:
-    void contactGroupReference();
+    void contactGroupContactReference();
+    void contactGroupContactGroupReference();
     void contactGroupData();
     void contactGroup();
-    void subgroup();
     void testGroupRoundTrip();
     void testGroupListRoundTrip();
 };
 
 QTEST_KDEMAIN( ContactGroupTest, NoGUI )
 
-void ContactGroupTest::contactGroupReference()
+void ContactGroupTest::contactGroupContactReference()
 {
   const QString uid( "MyReferenceId" );
   const QString preferredEMail( "tokoe@kde.org" );
@@ -51,27 +51,27 @@ void ContactGroupTest::contactGroupReference()
 
   // uid test
   {
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     QCOMPARE( ref.uid(), uid );
   }
 
   // uid test
   {
-    ContactGroup::Reference ref;
+    ContactGroup::ContactReference ref;
     ref.setUid( uid );
     QCOMPARE( ref.uid(), uid );
   }
 
   // preferredEmail test
   {
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     ref.setPreferredEmail( preferredEMail );
     QCOMPARE( ref.preferredEmail(), preferredEMail );
   }
 
   // custom test
   {
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     ref.insertCustom( customKey, customValue );
     QCOMPARE( ref.custom( customKey ), customValue );
     ref.removeCustom( customKey );
@@ -80,11 +80,11 @@ void ContactGroupTest::contactGroupReference()
 
   // assignment test
   {
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     ref.setPreferredEmail( preferredEMail );
     ref.insertCustom( customKey, customValue );
 
-    ContactGroup::Reference ref2( ref );
+    ContactGroup::ContactReference ref2( ref );
     QCOMPARE( ref.uid(), ref2.uid() );
     QCOMPARE( ref.preferredEmail(), ref2.preferredEmail() );
     QCOMPARE( ref.custom( customKey ), ref2.custom( customKey ) );
@@ -94,13 +94,64 @@ void ContactGroupTest::contactGroupReference()
 
   // const test
   {
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     ref.setPreferredEmail( preferredEMail );
     ref.insertCustom( customKey, customValue );
 
-    const ContactGroup::Reference constRef( ref );
+    const ContactGroup::ContactReference constRef( ref );
     constRef.uid();
     constRef.preferredEmail();
+    constRef.custom( customKey );
+  }
+}
+
+void ContactGroupTest::contactGroupContactGroupReference()
+{
+  const QString uid( "MyReferenceId" );
+  const QString customKey( "MyCustomKey" );
+  const QString customValue( "MyCustomValue" );
+
+  // uid test
+  {
+    ContactGroup::ContactGroupReference ref( uid );
+    QCOMPARE( ref.uid(), uid );
+  }
+
+  // uid test
+  {
+    ContactGroup::ContactGroupReference ref;
+    ref.setUid( uid );
+    QCOMPARE( ref.uid(), uid );
+  }
+
+  // custom test
+  {
+    ContactGroup::ContactGroupReference ref( uid );
+    ref.insertCustom( customKey, customValue );
+    QCOMPARE( ref.custom( customKey ), customValue );
+    ref.removeCustom( customKey );
+    QCOMPARE( ref.custom( customKey ), QString() );
+  }
+
+  // assignment test
+  {
+    ContactGroup::ContactGroupReference ref( uid );
+    ref.insertCustom( customKey, customValue );
+
+    ContactGroup::ContactGroupReference ref2( ref );
+    QCOMPARE( ref.uid(), ref2.uid() );
+    QCOMPARE( ref.custom( customKey ), ref2.custom( customKey ) );
+
+    QVERIFY( ref == ref2 );
+  }
+
+  // const test
+  {
+    ContactGroup::ContactGroupReference ref( uid );
+    ref.insertCustom( customKey, customValue );
+
+    const ContactGroup::ContactGroupReference constRef( ref );
+    constRef.uid();
     constRef.custom( customKey );
   }
 }
@@ -188,22 +239,39 @@ void ContactGroupTest::contactGroup()
     QCOMPARE( group.id(), groupId );
   }
 
-  // reference test
+  // contact reference test
   {
     ContactGroup group( groupName );
-    QCOMPARE( group.referencesCount(), (unsigned int)0 );
+    QCOMPARE( group.contactReferenceCount(), (unsigned int)0 );
 
-    ContactGroup::Reference ref( uid );
+    ContactGroup::ContactReference ref( uid );
     ref.setPreferredEmail( email );
 
     group.append( ref );
-    QCOMPARE( group.referencesCount(), (unsigned int)1 );
+    QCOMPARE( group.contactReferenceCount(), (unsigned int)1 );
 
-    const ContactGroup::Reference ref2 = group.reference( 0 );
+    const ContactGroup::ContactReference ref2 = group.contactReference( 0 );
     QCOMPARE( ref, ref2 );
 
     group.remove( ref );
-    QCOMPARE( group.referencesCount(), (unsigned int)0 );
+    QCOMPARE( group.contactReferenceCount(), (unsigned int)0 );
+  }
+
+  // contact group reference test
+  {
+    ContactGroup group( groupName );
+    QCOMPARE( group.contactGroupReferenceCount(), (unsigned int)0 );
+
+    ContactGroup::ContactGroupReference ref( uid );
+
+    group.append( ref );
+    QCOMPARE( group.contactGroupReferenceCount(), (unsigned int)1 );
+
+    const ContactGroup::ContactGroupReference ref2 = group.contactGroupReference( 0 );
+    QCOMPARE( ref, ref2 );
+
+    group.remove( ref );
+    QCOMPARE( group.contactGroupReferenceCount(), (unsigned int)0 );
   }
 
   // data test
@@ -230,47 +298,15 @@ void ContactGroupTest::contactGroup()
   }
 }
 
-void ContactGroupTest::subgroup()
-{
-  ContactGroup subGroup( "SubGroup" );
-  subGroup.append( ContactGroup::Reference( "334Fds" ) );
-  subGroup.append( ContactGroup::Data( "John Doe", "doe@kde.org" ) );
-
-  ContactGroup group( "Toplevel" );
-  QCOMPARE( group.referencesCount(), (unsigned int)0 );
-  QCOMPARE( group.dataCount(), (unsigned int)0 );
-  QCOMPARE( group.subgroupCount(), (unsigned int)0 );
-
-  group.append( ContactGroup::Reference( "Xggdjetw" ) );
-  group.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
-  group.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
-  group.append( subGroup );
-
-  QCOMPARE( group.referencesCount(), (unsigned int)1 );
-  QCOMPARE( group.dataCount(), (unsigned int)2 );
-  QCOMPARE( group.subgroupCount(), (unsigned int)1 );
-  QCOMPARE( group.count(), (unsigned int)3 );
-
-  const ContactGroup subGroup2 = group.subgroup( 0 );
-  QCOMPARE( subGroup, subGroup2 );
-
-  group.remove( subGroup );
-  QCOMPARE( group.subgroupCount(), (unsigned int)0 );
-}
-
 void ContactGroupTest::testGroupRoundTrip()
 {
   // TODO should also test empty group
 
-  ContactGroup subGroup( "SubGroup" );
-  subGroup.append( ContactGroup::Reference( "334Fds" ) );
-  subGroup.append( ContactGroup::Data( "John Doe", "doe@kde.org" ) );
-
   ContactGroup group( "TestGroup" );
-  group.append( ContactGroup::Reference( "Xggdjetw" ) );
+  group.append( ContactGroup::ContactReference( "Xggdjetw" ) );
+  group.append( ContactGroup::ContactGroupReference( "aaXggdjetw" ) );
   group.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
   group.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
-  group.append( subGroup );
 
   QBuffer buffer;
   buffer.open( QIODevice::WriteOnly );
@@ -298,14 +334,14 @@ void ContactGroupTest::testGroupListRoundTrip()
   ContactGroup::List list;
 
   ContactGroup group1( "TestGroup1" );
-  group1.append( ContactGroup::Reference( "Xggdjetw" ) );
+  group1.append( ContactGroup::ContactReference( "Xggdjetw" ) );
   group1.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
   group1.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
 
   list.append( group1 );
 
   ContactGroup group2( "TestGroup2" );
-  group2.append( ContactGroup::Reference( "Xggdjetw" ) );
+  group2.append( ContactGroup::ContactReference( "Xggdjetw" ) );
   group2.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
   group2.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
 
