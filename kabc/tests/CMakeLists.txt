@@ -165,11 +165,3 @@ kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
 target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
 
-########### next target ###############
-
-set(contactgrouptest_SRCS contactgrouptest.cpp)
-
-
-kde4_add_unit_test(contactgrouptest TESTNAME kabc-contactgrouptest ${contactgrouptest_SRCS})
-
-target_link_libraries(contactgrouptest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})

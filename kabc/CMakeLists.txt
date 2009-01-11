@@ -80,8 +80,6 @@ set(kabc_LIB_SRCS
    locknull.cpp
    sortmode.cpp
    ${vcards_STAT_SRCS}
-   contactgroup.cpp
-   contactgrouptool.cpp
 )
 
 
@@ -105,8 +103,6 @@ install( FILES
    addresseelist.h
    addresseedialog.h
    addresslineedit.h
-   contactgroup.h
-   contactgrouptool.h
    distributionlist.h
    distributionlistdialog.h
    emailselectdialog.h
