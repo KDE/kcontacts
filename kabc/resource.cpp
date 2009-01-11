@@ -225,8 +225,8 @@ Resource::Resource( const KConfigGroup &group )
 
 Resource::~Resource()
 {
+  clear();
   delete d;
-  qDeleteAll( mDistListMap );
 }
 
 Resource::Iterator Resource::begin()
