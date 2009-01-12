@@ -34,10 +34,10 @@ namespace KABC {
 class ContactGroup;
 
 /**
- * A class for converting ContactGroup to XML format and vice versa.
+ * @short A class for converting ContactGroup to XML format and vice versa.
  *
  * @author Kevin Krammer <kevin.krammer@gmx.at>
- * @since 4.2
+ * @since 4.3
  */
 class KABC_EXPORT ContactGroupTool
 {

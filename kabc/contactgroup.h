@@ -31,7 +31,7 @@ class QString;
 namespace KABC {
 
 /**
- * This class represents a group of contacts.
+ * @short This class represents a group of contacts.
  *
  * It can contain two types of contacts, either a reference
  * or data.
@@ -39,7 +39,8 @@ namespace KABC {
  * identifies the real contact in the system.
  * The data entry contains a name and an email address.
  *
- * @since 4.2
+ * @author Tobias Koenig <tokoe@kde.org>
+ * @since 4.3
  */
 class KABC_EXPORT ContactGroup
 {
