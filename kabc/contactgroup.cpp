@@ -450,6 +450,21 @@ void ContactGroup::remove( const Data &data )
   d->mDataObjects.removeOne( data );
 }
 
+void ContactGroup::removeAllContactReferences()
+{
+  d->mContactReferences.clear();
+}
+
+void ContactGroup::removeAllContactGroupReferences()
+{
+  d->mContactGroupReferences.clear();
+}
+
+void ContactGroup::removeAllContactData()
+{
+  d->mDataObjects.clear();
+}
+
 ContactGroup &ContactGroup::operator=( const ContactGroup &other )
 {
   if ( this != &other ) {

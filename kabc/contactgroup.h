@@ -424,6 +424,21 @@ class KABC_EXPORT ContactGroup
     void remove( const Data &data );
 
     /**
+     * Removes all contact references from the contact group.
+     */
+    void removeAllContactReferences();
+
+    /**
+     * Removes all contact group references from the contact group.
+     */
+    void removeAllContactGroupReferences();
+
+    /**
+     * Removes all contact data from the contact group.
+     */
+    void removeAllContactData();
+
+    /**
      * @internal
      */
     ContactGroup &operator=( const ContactGroup & );
