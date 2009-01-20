@@ -81,15 +81,20 @@ EmailSelector::EmailSelector( const QStringList &emails, const QString &current,
   d->mButtonGroup = new QButtonGroup( box );
   topLayout->addWidget( box );
 
+  QVBoxLayout *layout = new QVBoxLayout; 
+
   QStringList::ConstIterator it;
   for ( it = emails.begin(); it != emails.end(); ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
     d->mButtonGroup->addButton( button );
     d->mEmailMap.insert( button, *it );
+    layout->addWidget( button );
     if ( (*it) == current ) {
       button->setChecked( true );
     }
   }
+  layout->addStretch( 1 );
+  box->setLayout( layout ); 
 }
 
 EmailSelector::~EmailSelector()

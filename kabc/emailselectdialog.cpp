@@ -55,15 +55,19 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
   d->mButtonGroup = new QButtonGroup( box );
   d->mButtonGroup->setExclusive( true );
   topLayout->addWidget( box );
+  QVBoxLayout *layout = new QVBoxLayout;
 
   QStringList::ConstIterator it;
   for ( it = emails.begin(); it != emails.end(); ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
     d->mButtonGroup->addButton( button );
+    layout->addWidget( button );
     if ( (*it) == current ) {
       button->setChecked( true );
     }
   }
+  layout->addStretch( 1 );
+  box->setLayout( layout );
 }
 
 EmailSelectDialog::~EmailSelectDialog()
