@@ -42,9 +42,98 @@
 #include <signal.h>
 #include <unistd.h>
 
+static const char *s_customFieldName = "DistributionList";
+
 using namespace KABC;
 
 typedef QList< QPair<QString, QString> > MissingEntryList;
+
+static bool isDistributionList( const Addressee &addr )
+{
+  const QString str = addr.custom( "KADDRESSBOOK", s_customFieldName );
+  return !str.isEmpty();
+}
+
+// Helper function, to parse the contents of the custom field
+// Returns a list of { uid, email }
+typedef QList<QPair<QString, QString> > ParseList;
+static ParseList parseCustom( const Addressee &addr )
+{
+  ParseList res;
+  const QStringList lst = addr.custom( "KADDRESSBOOK", s_customFieldName ).split( ';', QString::SkipEmptyParts );
+  for ( QStringList::ConstIterator it = lst.constBegin(); it != lst.constEnd(); ++it ) {
+    if ( (*it).isEmpty() ) {
+      continue;
+    }
+
+    // parse "uid,email"
+    QStringList helpList = (*it).split( ',', QString::SkipEmptyParts );
+    Q_ASSERT( !helpList.isEmpty() );
+    if ( helpList.isEmpty() ) {
+      continue;
+    }
+    const QString uid = helpList.first();
+    QString email;
+    Q_ASSERT( helpList.count() < 3 ); // 1 or 2 items, but not more
+    if ( helpList.count() == 2 ) {
+      email = helpList.last();
+    }
+    res.append( qMakePair( uid, email ) );
+  }
+  return res;
+}
+
+static KABC::Addressee::List findByFormattedName( KABC::AddressBook *book,
+                                                  const QString &name,
+                                                  bool caseSensitive = true )
+{
+  KABC::Addressee::List res;
+  KABC::AddressBook::Iterator abIt;
+  for ( abIt = book->begin(); abIt != book->end(); ++abIt ) {
+    if ( caseSensitive && (*abIt).formattedName() == name ) {
+      res.append( *abIt );
+    }
+    if ( !caseSensitive && (*abIt).formattedName().toLower() == name.toLower() ) {
+      res.append( *abIt );
+    }
+  }
+  return res;
+}
+
+static KABC::Addressee findByUidOrName( KABC::AddressBook *book,
+                                        const QString &uidOrName,
+                                        const QString &email )
+{
+  KABC::Addressee a = book->findByUid( uidOrName );
+  if ( a.isEmpty() ) {
+    // UID not found, maybe it is a name instead.
+    // If we have an email, let's use that for the lookup.
+    // [This is used by e.g. the Kolab resource]
+    if ( !email.isEmpty() ) {
+      KABC::Addressee::List lst = book->findByEmail( email );
+      KABC::Addressee::List::ConstIterator listit = lst.constBegin();
+      for ( ; listit != lst.constEnd(); ++listit ) {
+        if ( (*listit).formattedName() == uidOrName ) {
+          a = *listit;
+          break;
+        }
+      }
+      if ( !lst.isEmpty() && a.isEmpty() ) { // found that email, but no match on the fullname
+        a = lst.first(); // probably the last name changed
+      }
+    }
+
+    // If we don't have an email, or if we didn't find any match for it, look up by full name
+    if ( a.isEmpty() ) {
+      // (But this has to be done here, since when loading we might not have the entries yet)
+      KABC::Addressee::List lst = findByFormattedName( book, uidOrName );
+      if ( !lst.isEmpty() ) {
+        a = lst.first();
+      }
+    }
+  }
+  return a;
+}
 
 class ResourceFile::ResourceFilePrivate
 {
@@ -228,7 +317,73 @@ bool ResourceFile::clearAndLoad( QFile *file )
 
   bool listsOk = loadDistributionLists();
 
-  return addresseesOk && listsOk;
+  if ( !addresseesOk || !listsOk )
+    return false;
+
+  bool importedVCardDistLists = false;
+
+  // check if any of the loaded addressees is an old enterprise branch
+  // workaround distlists
+  Addressee::Map::Iterator addrIt    = mAddrMap.begin();
+  Addressee::Map::Iterator addrEndIt = mAddrMap.end();
+  while ( addrIt != addrEndIt) {
+    Addressee addr = addrIt.value();
+    if ( !isDistributionList( addr ) ) {
+      ++addrIt;
+      continue;
+    }
+
+    importedVCardDistLists = true;
+
+    kWarning(5700) << "Addressee uid=" << addr.uid() << "contains the distlist"
+                   << addr.formattedName();
+
+    // remove the addressee from the map
+    addrIt = mAddrMap.erase( addrIt );
+
+    // parse the distlist entries
+    const ParseList parseList = parseCustom( addr );
+    if ( parseList.isEmpty() )
+      continue;
+
+    DistributionList *list = mDistListMap.value( addr.uid(), 0 );
+    if ( list == 0 ) {
+        list = new DistributionList( this, addr.uid(), addr.formattedName() );
+        kDebug(5700) << "Created new distlist instance";
+    } else {
+        kDebug(5700) << "Adding entries to existing distlist instance";
+    }
+
+    MissingEntryList missingEntries;
+    ParseList::ConstIterator it    = parseList.constBegin();
+    ParseList::ConstIterator endIt = parseList.constEnd();
+    for ( ; it != endIt; ++it ) {
+      const QString uid = (*it).first;
+      const QString email = (*it).second;
+      // look up contact
+      KABC::Addressee a = findByUidOrName( addressBook(), uid, email );
+      if ( a.isEmpty() ) {
+        missingEntries.append( qMakePair( uid, email ) );
+      } else {
+        list->insertEntry( a, email );
+      }
+    }
+    d->mMissingEntries.insert( addr.formattedName(), missingEntries );
+  }
+
+  if ( importedVCardDistLists ) {
+    mDirWatch.stopScan();
+
+    KSaveFile saveFile( mFileName );
+    if ( saveFile.open() ) {
+        saveToFile( &saveFile );
+        saveFile.finalize();
+    }
+
+    mDirWatch.startScan();
+  }
+
+  return true;
 }
 
 bool ResourceFile::asyncLoad()
