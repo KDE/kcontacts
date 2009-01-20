@@ -421,7 +421,12 @@ void ResourceFile::fileChanged( const QString &path )
 
   if ( path == KStandardDirs::locateLocal( "data", "kabc/distlists" ) ) {
     // clear old distribution lists
-    qDeleteAll( mDistListMap );
+    // take a copy of mDistListMap, then clear it and finally qDeleteAll
+    // the copy to avoid problems with removeDistributionList() called by
+    // ~DistributionList().
+    DistributionListMap tempDistListMap( mDistListMap );
+    mDistListMap.clear();
+    qDeleteAll( tempDistListMap );
 
     loadDistributionLists();
 
