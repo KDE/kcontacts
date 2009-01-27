@@ -166,8 +166,8 @@ void StdAddressBook::Private::init( bool asynchronous )
   Resource *res = mParent->standardResource();
   if ( !res ) {
     res = manager->createResource( "file" );
-    res->setResourceName( i18n( "Default Addressbook" ) );
     if ( res ) {
+      res->setResourceName( i18n( "Default Addressbook" ) );
       mParent->addResource( res );
     } else {
       kDebug() << "No resource available!!!";
