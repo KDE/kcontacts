@@ -32,7 +32,7 @@ void AddresseeTest::emptyTest()
 
   KABC::Addressee addresseeWithMail;
   addresseeWithMail.insertEmail( "foo@bar.org" );
-  QVERIFY( !addressee.isEmpty() );
+  QVERIFY( !addresseeWithMail.isEmpty() );
 }
 
 void AddresseeTest::storeTest()
