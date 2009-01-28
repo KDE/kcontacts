@@ -28,8 +28,11 @@ QTEST_KDEMAIN( AddresseeTest, NoGUI )
 void AddresseeTest::emptyTest()
 {
   KABC::Addressee addressee;
-
   QVERIFY( addressee.isEmpty() );
+
+  KABC::Addressee addresseeWithMail;
+  addresseeWithMail.insertEmail( "foo@bar.org" );
+  QVERIFY( !addressee.isEmpty() );
 }
 
 void AddresseeTest::storeTest()
