@@ -398,6 +398,7 @@ void Addressee::insertEmail( const QString &email, bool preferred )
     d->mEmails.removeAll( email );
     d->mEmails.prepend( email );
   } else {
+    d->mEmpty = false;
     if ( preferred ) {
       d->mEmails.prepend( email );
     } else {
