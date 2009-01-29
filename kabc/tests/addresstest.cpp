@@ -148,7 +148,7 @@ void AddressTest::formatTest()
     address.setLocality( "Lummerstadt" );
     address.setCountry ( "Germany" );
 
-    const QString result( "Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345\n\nGERMANY" );
+    const QString result( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nGERMANY" );
 
     QVERIFY( address.formattedAddress( "Jim Knopf" ) == result );
   }
@@ -162,7 +162,7 @@ void AddressTest::formatTest()
     address.setCountry( "United States of America" );
 
     const QString result(
-      "Huck Finn\n457 Foobar Ave\nNervousbreaktown DC, 1A2B3C\n\nUNITED STATES OF AMERICA" );
+      "Huck Finn\n457 Foobar Ave\nNervousbreaktown,  DC 1A2B3C\n\nUNITED STATES OF AMERICA" );
     QVERIFY( address.formattedAddress( "Huck Finn" ) == result );
   }
 
@@ -173,7 +173,7 @@ void AddressTest::formatTest()
     address.setLocality( "Lummerstadt" );
     address.setCountry( "Deutschland" );
 
-    const QString result( "Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345\n\nDEUTSCHLAND" );
+    const QString result( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nDEUTSCHLAND" );
 
     QVERIFY( address.formattedAddress( "Jim Knopf" ) == result );
   }
