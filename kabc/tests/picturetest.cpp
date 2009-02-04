@@ -49,11 +49,11 @@ void PictureTest::storeTestIntern()
 {
   KABC::Picture picture;
 
-  picture.setType( "image/png" );
+  picture.setType( QLatin1String( "image/png" ) );
   picture.setData( testImage() );
 
   QVERIFY( picture.isIntern() == true );
-  QVERIFY( picture.type() == QLatin1String( "image/png" ) );
+  QVERIFY( picture.type() == QLatin1String( QLatin1String( "image/png" ) ) );
   QVERIFY( picture.data() == testImage() );
 }
 
@@ -61,22 +61,22 @@ void PictureTest::storeTestExtern()
 {
   KABC::Picture picture;
 
-  picture.setType( "image/png" );
-  picture.setUrl( "http://myhomepage.com/foto.png" );
+  picture.setType( QLatin1String( "image/png" ) );
+  picture.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
 
   QVERIFY( picture.isIntern() == false );
-  QVERIFY( picture.type() == QLatin1String( "image/png" ) );
-  QVERIFY( picture.url() == QLatin1String( "http://myhomepage.com/foto.png" ) );
+  QVERIFY( picture.type() == QLatin1String( QLatin1String( "image/png" ) ) );
+  QVERIFY( picture.url() == QLatin1String( QLatin1String( "http://myhomepage.com/foto.png" ) ) );
 }
 
 void PictureTest::equalsTestIntern()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
+  picture1.setType( QLatin1String( "image/png" ) );
   picture1.setData( testImage() );
 
-  picture2.setType( "image/png" );
+  picture2.setType( QLatin1String( "image/png" ) );
   picture2.setData( testImage() );
 
   QVERIFY( picture1 == picture2 );
@@ -86,11 +86,11 @@ void PictureTest::equalsTestExtern()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
-  picture1.setUrl( "http://myhomepage.com/foto.png" );
+  picture1.setType( QLatin1String( "image/png" ) );
+  picture1.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
 
-  picture2.setType( "image/png" );
-  picture2.setUrl( "http://myhomepage.com/foto.png" );
+  picture2.setType( QLatin1String( "image/png" ) );
+  picture2.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
 
   QVERIFY( picture1 == picture2 );
 }
@@ -99,10 +99,10 @@ void PictureTest::differsTest()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
-  picture1.setUrl( "http://myhomepage.com/foto.png" );
+  picture1.setType( QLatin1String( "image/png" ) );
+  picture1.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
 
-  picture2.setType( "image/png" );
+  picture2.setType( QLatin1String( "image/png" ) );
   picture2.setData( testImage() );
 
   QVERIFY( picture1 != picture2 );
@@ -112,7 +112,7 @@ void PictureTest::assignmentTestIntern()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
+  picture1.setType( QLatin1String( "image/png" ) );
   picture1.setData( testImage() );
 
   picture2 = picture1;
@@ -124,8 +124,8 @@ void PictureTest::assignmentTestExtern()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
-  picture1.setUrl( "http://myhomepage.com/foto.png" );
+  picture1.setType( QLatin1String( "image/png" ) );
+  picture1.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
 
   picture2 = picture1;
 
@@ -136,8 +136,8 @@ void PictureTest::serializeTest()
 {
   KABC::Picture picture1, picture2;
 
-  picture1.setType( "image/png" );
-  picture1.setUrl( "http://myhomepage.com/foto.png" );
+  picture1.setType( QLatin1String( "image/png" ) );
+  picture1.setUrl( QLatin1String( "http://myhomepage.com/foto.png" ) );
   picture1.setData( testImage() );
 
   QByteArray data;

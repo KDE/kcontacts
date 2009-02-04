@@ -206,31 +206,32 @@ QString AddresseeList::toString() const
 {
   QString str;
 
-  str += QString( "AddresseeList {\n" );
-  str += QString( "   Reverse Order: %1\n" ).arg( d->mReverseSorting ? "true" : "false" );
+  str += QLatin1String( "AddresseeList {\n" );
+  str += QString::fromLatin1( "   Reverse Order: %1\n" ).arg( d->mReverseSorting ?
+                                                              QLatin1String( "true" ) : QLatin1String( "false" ) );
 
   QString crit;
   if ( Uid == d->mActiveSortingCriterion ) {
-    crit = "Uid";
+    crit = QLatin1String( "Uid" );
   } else if ( Name == d->mActiveSortingCriterion ) {
-    crit = "Name";
+    crit = QLatin1String( "Name" );
   } else if ( FormattedName == d->mActiveSortingCriterion ) {
-    crit = "FormattedName";
+    crit = QLatin1String( "FormattedName" );
   } else if ( FamilyName == d->mActiveSortingCriterion ) {
-    crit = "FamilyName";
+    crit = QLatin1String( "FamilyName" );
   } else if ( GivenName == d->mActiveSortingCriterion ) {
-    crit = "GivenName";
+    crit = QLatin1String( "GivenName" );
   } else {
-    crit = "unknown -- update dump method";
+    crit = QLatin1String( "unknown -- update dump method" );
   }
 
-  str += QString( "   Sorting criterion: %1\n" ).arg( crit );
+  str += QString::fromLatin1( "   Sorting criterion: %1\n" ).arg( crit );
 
   for ( const_iterator it = begin(); it != end(); ++it ) {
 //    str += (*it).toString();
   }
 
-  str += QString( "}\n" );
+  str += QLatin1String( "}\n" );
 
   return str;
 }
@@ -294,8 +295,8 @@ void AddresseeList::sortByTrait()
     iterator j2 = j1;
     ++j2;
     while ( j1 != i2 ) {
-      if ( !d->mReverseSorting && Trait::lt( *j2, *j1 ) ||
-           d->mReverseSorting && Trait::lt( *j1, *j2 ) ) {
+      if ( (!d->mReverseSorting && Trait::lt( *j2, *j1 )) ||
+           (d->mReverseSorting && Trait::lt( *j1, *j2 )) ) {
         qSwap( *j1, *j2 );
       }
       ++j1;

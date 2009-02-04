@@ -179,19 +179,19 @@ QString Key::toString() const
 {
   QString str;
 
-  str += QString( "Key {\n" );
-  str += QString( "  Id: %1\n" ).arg( d->mId );
-  str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QLatin1String( "Key {\n" );
+  str += QString::fromLatin1( "  Id: %1\n" ).arg( d->mId );
+  str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
   if ( d->mType == Custom ) {
-    str += QString( "  CustomType: %1\n" ).arg( d->mCustomTypeString );
+    str += QString::fromLatin1( "  CustomType: %1\n" ).arg( d->mCustomTypeString );
   }
-  str += QString( "  IsBinary: %1\n" ).arg( d->mIsBinary ? "true" : "false" );
+  str += QString::fromLatin1( "  IsBinary: %1\n" ).arg( d->mIsBinary ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIsBinary ) {
-    str += QString( "  Binary: %1\n" ).arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
+    str += QString::fromLatin1( "  Binary: %1\n" ).arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
   } else {
-    str += QString( "  Text: %1\n" ).arg( d->mTextData );
+    str += QString::fromLatin1( "  Text: %1\n" ).arg( d->mTextData );
   }
-  str += QString( "}\n" );
+  str += QLatin1String( "}\n" );
 
   return str;
 }

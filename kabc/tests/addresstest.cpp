@@ -35,16 +35,16 @@ void AddressTest::storeTest()
 {
   KABC::Address address;
 
-  address.setId( "My Id" );
+  address.setId( QLatin1String( "My Id" ) );
   address.setType( KABC::Address::Home );
-  address.setPostOfficeBox( "1234" );
-  address.setExtended( "My Extended Label" );
-  address.setStreet( "My Street" );
-  address.setLocality( "My Locality" );
-  address.setRegion( "My Region" );
-  address.setPostalCode( "My PostalCode" );
-  address.setCountry( "My Country" );
-  address.setLabel( "My Label" );
+  address.setPostOfficeBox( QLatin1String( "1234" ) );
+  address.setExtended( QLatin1String( "My Extended Label" ) );
+  address.setStreet( QLatin1String( "My Street" ) );
+  address.setLocality( QLatin1String( "My Locality" ) );
+  address.setRegion( QLatin1String( "My Region" ) );
+  address.setPostalCode( QLatin1String( "My PostalCode" ) );
+  address.setCountry( QLatin1String( "My Country" ) );
+  address.setLabel( QLatin1String( "My Label" ) );
 
   QVERIFY( address.id() == QLatin1String( "My Id" ) );
   QVERIFY( address.type() == KABC::Address::Home );
@@ -62,27 +62,27 @@ void AddressTest::equalsTest()
 {
   KABC::Address address1, address2;
 
-  address1.setId( "My Id" );
+  address1.setId( QLatin1String( "My Id" ) );
   address1.setType( KABC::Address::Home );
-  address1.setPostOfficeBox( "1234" );
-  address1.setExtended( "My Extended Label" );
-  address1.setStreet( "My Street" );
-  address1.setLocality( "My Locality" );
-  address1.setRegion( "My Region" );
-  address1.setPostalCode( "My Postalcode" );
-  address1.setCountry( "My country" );
-  address1.setLabel( "My Label" );
+  address1.setPostOfficeBox( QLatin1String( "1234" ) );
+  address1.setExtended( QLatin1String( "My Extended Label" ) );
+  address1.setStreet( QLatin1String( "My Street" ) );
+  address1.setLocality( QLatin1String( "My Locality" ) );
+  address1.setRegion( QLatin1String( "My Region" ) );
+  address1.setPostalCode( QLatin1String( "My Postalcode" ) );
+  address1.setCountry( QLatin1String( "My country" ) );
+  address1.setLabel( QLatin1String( "My Label" ) );
 
-  address2.setId( "My Id" );
+  address2.setId( QLatin1String( "My Id" ) );
   address2.setType( KABC::Address::Home );
-  address2.setPostOfficeBox( "1234" );
-  address2.setExtended( "My Extended Label" );
-  address2.setStreet( "My Street" );
-  address2.setLocality( "My Locality" );
-  address2.setRegion( "My Region" );
-  address2.setPostalCode( "My Postalcode" );
-  address2.setCountry( "My country" );
-  address2.setLabel( "My Label" );
+  address2.setPostOfficeBox( QLatin1String( "1234" ) );
+  address2.setExtended( QLatin1String( "My Extended Label" ) );
+  address2.setStreet( QLatin1String( "My Street" ) );
+  address2.setLocality( QLatin1String( "My Locality" ) );
+  address2.setRegion( QLatin1String( "My Region" ) );
+  address2.setPostalCode( QLatin1String( "My Postalcode" ) );
+  address2.setCountry( QLatin1String( "My country" ) );
+  address2.setLabel( QLatin1String( "My Label" ) );
 
   QVERIFY( address1 == address2 );
 }
@@ -99,16 +99,16 @@ void AddressTest::assignmentTest()
 {
   KABC::Address address1, address2;
 
-  address1.setId( "My Id" );
+  address1.setId( QLatin1String( "My Id" ) );
   address1.setType( KABC::Address::Home );
-  address1.setPostOfficeBox( "1234" );
-  address1.setExtended( "My Extended Label" );
-  address1.setStreet( "My Street" );
-  address1.setLocality( "My Locality" );
-  address1.setRegion( "My Region" );
-  address1.setPostalCode( "My Postalcode" );
-  address1.setCountry( "My country" );
-  address1.setLabel( "My Label" );
+  address1.setPostOfficeBox( QLatin1String( "1234" ) );
+  address1.setExtended( QLatin1String( "My Extended Label" ) );
+  address1.setStreet( QLatin1String( "My Street" ) );
+  address1.setLocality( QLatin1String( "My Locality" ) );
+  address1.setRegion( QLatin1String( "My Region" ) );
+  address1.setPostalCode( QLatin1String( "My Postalcode" ) );
+  address1.setCountry( QLatin1String( "My country" ) );
+  address1.setLabel( QLatin1String( "My Label" ) );
 
   address2 = address1;
 
@@ -120,14 +120,14 @@ void AddressTest::serializeTest()
   KABC::Address address1, address2;
 
   address1.setType( KABC::Address::Work );
-  address1.setPostOfficeBox( "1234" );
-  address1.setExtended( "My Extended Label" );
-  address1.setStreet( "My Street" );
-  address1.setLocality( "My Locality" );
-  address1.setRegion( "My Region" );
-  address1.setPostalCode( "My Postalcode" );
-  address1.setCountry( "My country" );
-  address1.setLabel( "My Label" );
+  address1.setPostOfficeBox( QLatin1String( "1234" ) );
+  address1.setExtended( QLatin1String( "My Extended Label" ) );
+  address1.setStreet( QLatin1String( "My Street" ) );
+  address1.setLocality( QLatin1String( "My Locality" ) );
+  address1.setRegion( QLatin1String( "My Region" ) );
+  address1.setPostalCode( QLatin1String( "My Postalcode" ) );
+  address1.setCountry( QLatin1String( "My country" ) );
+  address1.setLabel( QLatin1String( "My Label" ) );
 
   QByteArray data;
   QDataStream s( &data, QIODevice::WriteOnly );
@@ -143,51 +143,51 @@ void AddressTest::formatTest()
 {
   {
     KABC::Address address;
-    address.setStreet( "Lummerlandstr. 1" );
-    address.setPostalCode( "12345" );
-    address.setLocality( "Lummerstadt" );
-    address.setCountry ( "Germany" );
+    address.setStreet( QLatin1String( "Lummerlandstr. 1" ) );
+    address.setPostalCode( QLatin1String( "12345" ) );
+    address.setLocality( QLatin1String( "Lummerstadt" ) );
+    address.setCountry ( QLatin1String( "Germany" ) );
 
-    const QString result( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nGERMANY" );
+    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nGERMANY" ) );
 
-    QVERIFY( address.formattedAddress( "Jim Knopf" ) == result );
+    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
   }
 
   {
     KABC::Address address;
-    address.setStreet( "457 Foobar Ave" );
-    address.setPostalCode( "1A2B3C" );
-    address.setLocality( "Nervousbreaktown" );
-    address.setRegion( "DC" );
-    address.setCountry( "United States of America" );
+    address.setStreet( QLatin1String( "457 Foobar Ave" ) );
+    address.setPostalCode( QLatin1String( "1A2B3C" ) );
+    address.setLocality( QLatin1String( "Nervousbreaktown" ) );
+    address.setRegion( QLatin1String( "DC" ) );
+    address.setCountry( QLatin1String( "United States of America" ) );
 
     const QString result(
-      "Huck Finn\n457 Foobar Ave\nNervousbreaktown,  DC 1A2B3C\n\nUNITED STATES OF AMERICA" );
-    QVERIFY( address.formattedAddress( "Huck Finn" ) == result );
+      QLatin1String( "Huck Finn\n457 Foobar Ave\nNervousbreaktown,  DC 1A2B3C\n\nUNITED STATES OF AMERICA" ) );
+    QVERIFY( address.formattedAddress( QLatin1String( "Huck Finn" ) ) == result );
   }
 
   {
     KABC::Address address;
-    address.setStreet( "Lummerlandstr. 1" );
-    address.setPostalCode( "12345" );
-    address.setLocality( "Lummerstadt" );
-    address.setCountry( "Deutschland" );
+    address.setStreet( QLatin1String( "Lummerlandstr. 1" ) );
+    address.setPostalCode( QLatin1String( "12345" ) );
+    address.setLocality( QLatin1String( "Lummerstadt" ) );
+    address.setCountry( QLatin1String( "Deutschland" ) );
 
-    const QString result( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nDEUTSCHLAND" );
+    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nDEUTSCHLAND" ) );
 
-    QVERIFY( address.formattedAddress( "Jim Knopf" ) == result );
+    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
   }
 
   {
     KABC::Address address;
-    address.setStreet( "Lummerlandstr. 1" );
-    address.setPostalCode( "12345" );
-    address.setLocality( "Lummerstadt" );
+    address.setStreet( QLatin1String( "Lummerlandstr. 1" ) );
+    address.setPostalCode( QLatin1String( "12345" ) );
+    address.setLocality( QLatin1String( "Lummerstadt" ) );
     address.setCountry( QString() );
 
-    const QString result( "Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345" );
+    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345" ) );
 
-    QVERIFY( address.formattedAddress( "Jim Knopf" ) == result );
+    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
   }
 }
 

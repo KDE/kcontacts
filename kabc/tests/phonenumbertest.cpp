@@ -35,9 +35,9 @@ void PhoneNumberTest::storeTest()
 {
   KABC::PhoneNumber number;
 
-  number.setId( "My Id" );
+  number.setId( QLatin1String( "My Id" ) );
   number.setType( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
-  number.setNumber( "2734826345" );
+  number.setNumber( QLatin1String( "2734826345" ) );
 
   QVERIFY( number.id() == QLatin1String( "My Id" ) );
   QVERIFY( number.type() == ( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell ) );
@@ -48,21 +48,21 @@ void PhoneNumberTest::equalsTest()
 {
   KABC::PhoneNumber number1, number2;
 
-  number1.setId( "My Id" );
+  number1.setId( QLatin1String( "My Id" ) );
   number1.setType( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
-  number1.setNumber( "2734826345" );
+  number1.setNumber( QLatin1String( "2734826345" ) );
 
-  number2.setId( "My Id" );
+  number2.setId( QLatin1String( "My Id" ) );
   number2.setType( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
-  number2.setNumber( "2734826345" );
+  number2.setNumber( QLatin1String( "2734826345" ) );
 
   QVERIFY( number1 == number2 );
 }
 
 void PhoneNumberTest::differsTest()
 {
-  KABC::PhoneNumber number1( "123", KABC::PhoneNumber::Home );
-  KABC::PhoneNumber number2( "123", KABC::PhoneNumber::Work );
+  KABC::PhoneNumber number1( QLatin1String( "123" ), KABC::PhoneNumber::Home );
+  KABC::PhoneNumber number2( QLatin1String( "123" ), KABC::PhoneNumber::Work );
 
   QVERIFY( number1 != number2 );
 }
@@ -71,9 +71,9 @@ void PhoneNumberTest::assignmentTest()
 {
   KABC::PhoneNumber number1, number2;
 
-  number1.setId( "My Id" );
+  number1.setId( QLatin1String( "My Id" ) );
   number1.setType( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
-  number1.setNumber( "2734826345" );
+  number1.setNumber( QLatin1String( "2734826345" ) );
 
   number1 = number2;
 
@@ -84,9 +84,9 @@ void PhoneNumberTest::serializeTest()
 {
   KABC::PhoneNumber number1, number2;
 
-  number1.setId( "My Id" );
+  number1.setId( QLatin1String( "My Id" ) );
   number1.setType( KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell );
-  number1.setNumber( "2734826345" );
+  number1.setNumber( QLatin1String( "2734826345" ) );
 
   QByteArray data;
   QDataStream s( &data, QIODevice::WriteOnly );

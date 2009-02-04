@@ -63,12 +63,12 @@ static void deleteGlobalStdAddressBook()
 
 QString StdAddressBook::fileName()
 {
-  return KStandardDirs::locateLocal( "data", "kabc/std.vcf" );
+  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/std.vcf" ) );
 }
 
 QString StdAddressBook::directoryName()
 {
-  return KStandardDirs::locateLocal( "data", "kabc/stdvcf" );
+  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/stdvcf" ) );
 }
 
 StdAddressBook *StdAddressBook::self()
@@ -107,7 +107,7 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
 }
 
 StdAddressBook::StdAddressBook()
-  : AddressBook( "" ), d( new Private( this ) )
+  : AddressBook( QString() ), d( new Private( this ) )
 {
   kDebug();
 
@@ -115,7 +115,7 @@ StdAddressBook::StdAddressBook()
 }
 
 StdAddressBook::StdAddressBook( bool asynchronous )
-  : AddressBook( "" ), d( new Private( this ) )
+  : AddressBook( QString() ), d( new Private( this ) )
 {
   kDebug();
 
@@ -123,7 +123,7 @@ StdAddressBook::StdAddressBook( bool asynchronous )
 }
 
 StdAddressBook::StdAddressBook( bool asynchronous, bool doInit )
-  : AddressBook( "" ), d( new Private( this ) )
+  : AddressBook( QString() ), d( new Private( this ) )
 {
   kDebug();
 
@@ -149,7 +149,7 @@ void StdAddressBook::Private::init( bool asynchronous )
   for ( it = manager->activeBegin(); it != manager->activeEnd(); ++it ) {
     (*it)->setAddressBook( mParent );
     if ( !(*it)->open() ) {
-      mParent->error( QString( "Unable to open resource '%1'!" ).arg( (*it)->resourceName() ) );
+      mParent->error( QString::fromLatin1( "Unable to open resource '%1'!" ).arg( (*it)->resourceName() ) );
       continue;
     }
     mParent->connect( *it, SIGNAL( loadingFinished( Resource* ) ),
@@ -165,7 +165,7 @@ void StdAddressBook::Private::init( bool asynchronous )
 
   Resource *res = mParent->standardResource();
   if ( !res ) {
-    res = manager->createResource( "file" );
+    res = manager->createResource( QLatin1String( "file" ) );
     if ( res ) {
       res->setResourceName( i18n( "Default Addressbook" ) );
       mParent->addResource( res );
@@ -239,7 +239,7 @@ bool StdAddressBook::automaticSave()
 
 Addressee StdAddressBook::whoAmI() const
 {
-  KConfig _config( "kabcrc" );
+  KConfig _config( QLatin1String( "kabcrc" ) );
   KConfigGroup config(&_config, "General" );
 
   return findByUid( config.readEntry( "WhoAmI" ) );
@@ -247,7 +247,7 @@ Addressee StdAddressBook::whoAmI() const
 
 void StdAddressBook::setWhoAmI( const Addressee &addr )
 {
-  KConfig _config( "kabcrc" );
+  KConfig _config( QLatin1String( "kabcrc" ) );
   KConfigGroup config(&_config, "General" );
 
   config.writeEntry( "WhoAmI", addr.uid() );

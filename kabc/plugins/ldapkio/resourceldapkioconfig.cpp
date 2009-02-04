@@ -188,13 +188,13 @@ void ResourceLDAPKIOConfig::editCache()
     QMap<QString,QString>::Iterator it;
     QStringList attr;
     for ( it = mAttributes.begin(); it != mAttributes.end(); ++it ) {
-      if ( !it.value().isEmpty() && it.key() != "objectClass" ) {
+      if ( !it.value().isEmpty() && it.key() != QLatin1String( "objectClass" ) ) {
         attr.append( it.value() );
       }
     }
     src.setAttributes( attr );
   }
-  src.setExtension( "x-dir", "base" );
+  src.setExtension( QLatin1String( "x-dir" ), QLatin1String( "base" ) );
   OfflineDialog dlg( mAutoCache, mCachePolicy, src, mCacheDst, this );
   if ( dlg.exec() ) {
     mCachePolicy = dlg.cachePolicy();
@@ -214,60 +214,60 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   setModal( true );
   showButtonSeparator( true );
 
-  mNameDict.insert( "objectClass", i18n( "Object classes" ) );
-  mNameDict.insert( "commonName", i18n( "Common name" ) );
-  mNameDict.insert( "formattedName", i18n( "Formatted name" ) );
-  mNameDict.insert( "familyName", i18n( "Family name" ) );
-  mNameDict.insert( "givenName", i18n( "Given name" ) );
-  mNameDict.insert( "organization", i18n( "Organization" ) );
-  mNameDict.insert( "title", i18nc( "job title", "Title" ) );
-  mNameDict.insert( "street", i18n( "Street" ) );
-  mNameDict.insert( "state", i18nc( "state/province", "State" ) );
-  mNameDict.insert( "city", i18n( "City" ) );
-  mNameDict.insert( "postalcode", i18n( "Postal code" ) );
-  mNameDict.insert( "mail", i18nc( "email address", "Email" ) );
-  mNameDict.insert( "mailAlias", i18n( "Email alias" ) );
-  mNameDict.insert( "phoneNumber", i18n( "Telephone number" ) );
-  mNameDict.insert( "telephoneNumber", i18n( "Work telephone number" ) );
-  mNameDict.insert( "facsimileTelephoneNumber", i18n( "Fax number" ) );
-  mNameDict.insert( "mobile", i18n( "Cell phone number" ) );
-  mNameDict.insert( "pager", i18n( "Pager" ) );
-  mNameDict.insert( "description", i18n( "Note" ) );
-  mNameDict.insert( "uid", i18n( "UID" ) );
-  mNameDict.insert( "jpegPhoto", i18n( "Photo" ) );
+  mNameDict.insert( QLatin1String( "objectClass" ), i18n( "Object classes" ) );
+  mNameDict.insert( QLatin1String( "commonName" ), i18n( "Common name" ) );
+  mNameDict.insert( QLatin1String( "formattedName" ), i18n( "Formatted name" ) );
+  mNameDict.insert( QLatin1String( "familyName" ), i18n( "Family name" ) );
+  mNameDict.insert( QLatin1String( "givenName" ), i18n( "Given name" ) );
+  mNameDict.insert( QLatin1String( "organization" ), i18n( "Organization" ) );
+  mNameDict.insert( QLatin1String( "title" ), i18nc( "job title", "Title" ) );
+  mNameDict.insert( QLatin1String( "street" ), i18n( "Street" ) );
+  mNameDict.insert( QLatin1String( "state" ), i18nc( "state/province", "State" ) );
+  mNameDict.insert( QLatin1String( "city" ), i18n( "City" ) );
+  mNameDict.insert( QLatin1String( "postalcode" ), i18n( "Postal code" ) );
+  mNameDict.insert( QLatin1String( "mail" ), i18nc( "email address", "Email" ) );
+  mNameDict.insert( QLatin1String( "mailAlias" ), i18n( "Email alias" ) );
+  mNameDict.insert( QLatin1String( "phoneNumber" ), i18n( "Telephone number" ) );
+  mNameDict.insert( QLatin1String( "telephoneNumber" ), i18n( "Work telephone number" ) );
+  mNameDict.insert( QLatin1String( "facsimileTelephoneNumber" ), i18n( "Fax number" ) );
+  mNameDict.insert( QLatin1String( "mobile" ), i18n( "Cell phone number" ) );
+  mNameDict.insert( QLatin1String( "pager" ), i18n( "Pager" ) );
+  mNameDict.insert( QLatin1String( "description" ), i18n( "Note" ) );
+  mNameDict.insert( QLatin1String( "uid" ), i18n( "UID" ) );
+  mNameDict.insert( QLatin1String( "jpegPhoto" ), i18n( "Photo" ) );
 
   // default map
-  mDefaultMap.insert( "objectClass", "inetOrgPerson" );
-  mDefaultMap.insert( "commonName", "cn" );
-  mDefaultMap.insert( "formattedName", "displayName" );
-  mDefaultMap.insert( "familyName", "sn" );
-  mDefaultMap.insert( "givenName", "givenName" );
-  mDefaultMap.insert( "title", "title" );
-  mDefaultMap.insert( "street", "street" );
-  mDefaultMap.insert( "state", "st" );
-  mDefaultMap.insert( "city", "l" );
-  mDefaultMap.insert( "organization", "o" );
-  mDefaultMap.insert( "postalcode", "postalCode" );
-  mDefaultMap.insert( "mail", "mail" );
-  mDefaultMap.insert( "mailAlias", "" );
-  mDefaultMap.insert( "phoneNumber", "homePhone" );
-  mDefaultMap.insert( "telephoneNumber", "telephoneNumber" );
-  mDefaultMap.insert( "facsimileTelephoneNumber", "facsimileTelephoneNumber" );
-  mDefaultMap.insert( "mobile", "mobile" );
-  mDefaultMap.insert( "pager", "pager" );
-  mDefaultMap.insert( "description", "description" );
-  mDefaultMap.insert( "uid", "uid" );
-  mDefaultMap.insert( "jpegPhoto", "jpegPhoto" );
+  mDefaultMap.insert( QLatin1String( "objectClass" ), QLatin1String( "inetOrgPerson" ) );
+  mDefaultMap.insert( QLatin1String( "commonName" ), QLatin1String( "cn" ) );
+  mDefaultMap.insert( QLatin1String( "formattedName" ), QLatin1String( "displayName" ) );
+  mDefaultMap.insert( QLatin1String( "familyName" ), QLatin1String( "sn" ) );
+  mDefaultMap.insert( QLatin1String( "givenName" ), QLatin1String( "givenName" ) );
+  mDefaultMap.insert( QLatin1String( "title" ), QLatin1String( "title" ) );
+  mDefaultMap.insert( QLatin1String( "street" ), QLatin1String( "street" ) );
+  mDefaultMap.insert( QLatin1String( "state" ), QLatin1String( "st" ) );
+  mDefaultMap.insert( QLatin1String( "city" ), QLatin1String( "l" ) );
+  mDefaultMap.insert( QLatin1String( "organization" ), QLatin1String( "o" ) );
+  mDefaultMap.insert( QLatin1String( "postalcode" ), QLatin1String( "postalCode" ) );
+  mDefaultMap.insert( QLatin1String( "mail" ), QLatin1String( "mail" ) );
+  mDefaultMap.insert( QLatin1String( "mailAlias" ), QString() );
+  mDefaultMap.insert( QLatin1String( "phoneNumber" ), QLatin1String( "homePhone" ) );
+  mDefaultMap.insert( QLatin1String( "telephoneNumber" ), QLatin1String( "telephoneNumber" ) );
+  mDefaultMap.insert( QLatin1String( "facsimileTelephoneNumber" ), QLatin1String( "facsimileTelephoneNumber" ) );
+  mDefaultMap.insert( QLatin1String( "mobile" ), QLatin1String( "mobile" ) );
+  mDefaultMap.insert( QLatin1String( "pager" ), QLatin1String( "pager" ) );
+  mDefaultMap.insert( QLatin1String( "description" ), QLatin1String( "description" ) );
+  mDefaultMap.insert( QLatin1String( "uid" ), QLatin1String( "uid" ) );
+  mDefaultMap.insert( QLatin1String( "jpegPhoto" ), QLatin1String( "jpegPhoto" ) );
 
   // overwrite the default values here
   QMap<QString, QString> kolabMap, netscapeMap, evolutionMap, outlookMap;
 
   // kolab
-  kolabMap.insert( "formattedName", "display-name" );
-  kolabMap.insert( "mailAlias", "mailalias" );
+  kolabMap.insert( QLatin1String( "formattedName" ), QLatin1String( "display-name" ) );
+  kolabMap.insert( QLatin1String( "mailAlias" ), QLatin1String( "mailalias" ) );
 
   // evolution
-  evolutionMap.insert( "formattedName", "fileAs" );
+  evolutionMap.insert( QLatin1String( "formattedName" ), QLatin1String( "fileAs" ) );
 
   mMapList.append( attributes );
   mMapList.append( kolabMap );
@@ -302,7 +302,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   QMap<QString, QString>::ConstIterator it;
   int i, j = 0;
   for ( i = 2, it = attributes.begin(); it != attributes.end(); ++it, ++i ) {
-    if ( mNameDict[ it.key() ] == 0 ) {
+    if ( mNameDict[ it.key() ].isEmpty() ) {
       i--;
       continue;
     }
@@ -311,7 +311,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
       j = 2;
     }
     kDebug() << "itkey:" << it.key() << "i:" << i;
-    label = new QLabel( mNameDict[ it.key() ] + ':', page );
+    label = new QLabel( mNameDict[ it.key() ] + QLatin1Char( ':' ), page );
     KLineEdit *lineedit = new KLineEdit( page );
     mLineEditDict.insert( it.key(), lineedit );
     lineedit->setText( it.value() );

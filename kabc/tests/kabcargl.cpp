@@ -57,7 +57,7 @@ int main( int argc, char **argv )
   f.close();
 
   text = QString::fromUtf8( text.toLocal8Bit() );
-  text.replace( "\n", "\r\n" );
+  text.replace( QLatin1String( "\n" ), QLatin1String( "\r\n" ) );
 
   if ( !f.open( QIODevice::WriteOnly ) ) {
     kDebug() << "Error opening file '" << filename << "' for writing.";

@@ -145,11 +145,11 @@ QString Geo::toString() const
 {
   QString str;
 
-  str += QString( "Geo {\n" );
-  str += QString( "  Valid: %1\n" ).arg( isValid() ? "true" : "false" );
-  str += QString( "  Latitude: %1\n" ).arg( d->mLatitude );
-  str += QString( "  Longitude: %1\n" ).arg( d->mLongitude );
-  str += QString( "}\n" );
+  str += QLatin1String( "Geo {\n" );
+  str += QString::fromLatin1( "  Valid: %1\n" ).arg( isValid() ? QLatin1String( "true" ) : QLatin1String( "false" ) );
+  str += QString::fromLatin1( "  Latitude: %1\n" ).arg( d->mLatitude );
+  str += QString::fromLatin1( "  Longitude: %1\n" ).arg( d->mLongitude );
+  str += QLatin1String( "}\n" );
 
   return str;
 }

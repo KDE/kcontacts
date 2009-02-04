@@ -58,10 +58,10 @@ void SoundTest::storeTestExtern()
 {
   KABC::Sound sound;
 
-  sound.setUrl( "http://myhomepage.com/sound.wav" );
+  sound.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
 
   QVERIFY( sound.isIntern() == false );
-  QVERIFY( sound.url() == QLatin1String( "http://myhomepage.com/sound.wav" ) );
+  QVERIFY( sound.url() == QLatin1String( QLatin1String( "http://myhomepage.com/sound.wav" ) ) );
 }
 
 void SoundTest::equalsTestIntern()
@@ -78,8 +78,8 @@ void SoundTest::equalsTestExtern()
 {
   KABC::Sound sound1, sound2;
 
-  sound1.setUrl( "http://myhomepage.com/sound.wav" );
-  sound2.setUrl( "http://myhomepage.com/sound.wav" );
+  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
+  sound2.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
 
   QVERIFY( sound1 == sound2 );
 }
@@ -88,7 +88,7 @@ void SoundTest::differsTest()
 {
   KABC::Sound sound1, sound2;
 
-  sound1.setUrl( "http://myhomepage.com/sound.wav" );
+  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
   sound2.setData( testData() );
 
   QVERIFY( sound1 != sound2 );
@@ -109,7 +109,7 @@ void SoundTest::assignmentTestExtern()
 {
   KABC::Sound sound1, sound2;
 
-  sound1.setUrl( "http://myhomepage.com/sound.wav" );
+  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
 
   sound2 = sound1;
 
@@ -120,7 +120,7 @@ void SoundTest::serializeTest()
 {
   KABC::Sound sound1, sound2;
 
-  sound1.setUrl( "http://myhomepage.com/sound.wav" );
+  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
   sound1.setData( testData() );
 
   QByteArray data;

@@ -40,14 +40,14 @@ int main( int argc, char **argv )
   KApplication app( false );
 
   AddressBook ab;
-  ResourceFile r( "my.kabc", "vcard" );
+  ResourceFile r( QLatin1String( "my.kabc" ), QLatin1String( "vcard" ) );
   ab.addResource( &r );
 
   for ( int i = 0; i < 5000; ++i ) {
     Addressee a;
-    a.setGivenName( "number" + QString::number( i ) );
-    a.setFamilyName( "Name" );
-    a.insertEmail( QString::number( i ) + "@domain" );
+    a.setGivenName( QLatin1String( "number" ) + QString::number( i ) );
+    a.setFamilyName( QLatin1String( "Name" ) );
+    a.insertEmail( QString::number( i ) + QLatin1String( "@domain" ) );
 
     ab.insertAddressee( a );
   }

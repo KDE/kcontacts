@@ -44,10 +44,10 @@ QTEST_KDEMAIN( ContactGroupTest, NoGUI )
 
 void ContactGroupTest::contactGroupContactReference()
 {
-  const QString uid( "MyReferenceId" );
-  const QString preferredEMail( "tokoe@kde.org" );
-  const QString customKey( "MyCustomKey" );
-  const QString customValue( "MyCustomValue" );
+  const QLatin1String uid( "MyReferenceId" );
+  const QLatin1String preferredEMail( "tokoe@kde.org" );
+  const QLatin1String customKey( "MyCustomKey" );
+  const QLatin1String customValue( "MyCustomValue" );
 
   // uid test
   {
@@ -107,9 +107,9 @@ void ContactGroupTest::contactGroupContactReference()
 
 void ContactGroupTest::contactGroupContactGroupReference()
 {
-  const QString uid( "MyReferenceId" );
-  const QString customKey( "MyCustomKey" );
-  const QString customValue( "MyCustomValue" );
+  const QLatin1String uid( "MyReferenceId" );
+  const QLatin1String customKey( "MyCustomKey" );
+  const QLatin1String customValue( "MyCustomValue" );
 
   // uid test
   {
@@ -158,10 +158,10 @@ void ContactGroupTest::contactGroupContactGroupReference()
 
 void ContactGroupTest::contactGroupData()
 {
-  const QString name( "Tobias Koenig" );
-  const QString email( "tokoe@kde.org" );
-  const QString customKey( "MyCustomKey" );
-  const QString customValue( "MyCustomValue" );
+  const QLatin1String name( "Tobias Koenig" );
+  const QLatin1String email( "tokoe@kde.org" );
+  const QLatin1String customKey( "MyCustomKey" );
+  const QLatin1String customValue( "MyCustomValue" );
 
   // name/email test
   {
@@ -220,11 +220,11 @@ void ContactGroupTest::contactGroupData()
 
 void ContactGroupTest::contactGroup()
 {
-  const QString groupName( "MyGroupName" );
-  const QString groupId( "MyGroupID" );
-  const QString name( "Tobias Koenig" );
-  const QString email( "tokoe@kde.org" );
-  const QString uid( "MyUid" );
+  const QLatin1String groupName( "MyGroupName" );
+  const QLatin1String groupId( "MyGroupID" );
+  const QLatin1String name( "Tobias Koenig" );
+  const QLatin1String email( "tokoe@kde.org" );
+  const QLatin1String uid( "MyUid" );
 
   // name test
   {
@@ -302,11 +302,11 @@ void ContactGroupTest::testGroupRoundTrip()
 {
   // TODO should also test empty group
 
-  ContactGroup group( "TestGroup" );
-  group.append( ContactGroup::ContactReference( "Xggdjetw" ) );
-  group.append( ContactGroup::ContactGroupReference( "aaXggdjetw" ) );
-  group.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
-  group.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
+  ContactGroup group( QLatin1String( "TestGroup" ) );
+  group.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
+  group.append( ContactGroup::ContactGroupReference( QLatin1String( "aaXggdjetw" ) ) );
+  group.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
+  group.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   QBuffer buffer;
   buffer.open( QIODevice::WriteOnly );
@@ -333,17 +333,17 @@ void ContactGroupTest::testGroupListRoundTrip()
 
   ContactGroup::List list;
 
-  ContactGroup group1( "TestGroup1" );
-  group1.append( ContactGroup::ContactReference( "Xggdjetw" ) );
-  group1.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
-  group1.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
+  ContactGroup group1( QLatin1String( "TestGroup1" ) );
+  group1.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
+  group1.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
+  group1.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   list.append( group1 );
 
-  ContactGroup group2( "TestGroup2" );
-  group2.append( ContactGroup::ContactReference( "Xggdjetw" ) );
-  group2.append( ContactGroup::Data( "Tobias Koenig", "tokoe@kde.org" ) );
-  group2.append( ContactGroup::Data( "Kevin Krammer", "kevin.krammer@gmx.at" ) );
+  ContactGroup group2( QLatin1String( "TestGroup2" ) );
+  group2.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
+  group2.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
+  group2.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   list.append( group2 );
 

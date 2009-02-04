@@ -59,7 +59,7 @@ LockWidget::LockWidget( const QString &identifier )
 
     int pid = getpid();
 
-    QLabel *pidLabel = new QLabel( "Process ID: " + QString::number( pid ),
+    QLabel *pidLabel = new QLabel( QLatin1String( "Process ID: " ) + QString::number( pid ),
                                    this );
     topLayout->addWidget( pidLabel );
 
@@ -67,20 +67,20 @@ LockWidget::LockWidget( const QString &identifier )
     identifierLayout->setParent( topLayout );
     topLayout->addItem( identifierLayout );
 
-    QLabel *resourceLabel = new QLabel( "Identifier:", this );
+    QLabel *resourceLabel = new QLabel( QLatin1String( "Identifier:" ), this );
     identifierLayout->addWidget( resourceLabel );
 
     QLabel *resourceIdentifier = new QLabel( identifier, this );
     identifierLayout->addWidget( resourceIdentifier );
 
-    mStatus = new QLabel( "Status: Unlocked", this );
+    mStatus = new QLabel( QLatin1String( "Status: Unlocked" ), this );
     topLayout->addWidget( mStatus );
 
-    QPushButton *button = new QPushButton( "Lock", this );
+    QPushButton *button = new QPushButton( QLatin1String( "Lock" ), this );
     topLayout->addWidget( button );
     connect( button, SIGNAL( clicked() ), SLOT( lock() ) );
 
-    button = new QPushButton( "Unlock", this );
+    button = new QPushButton( QLatin1String( "Unlock" ), this );
     topLayout->addWidget( button );
     connect( button, SIGNAL( clicked() ), SLOT( unlock() ) );
   }
@@ -88,14 +88,14 @@ LockWidget::LockWidget( const QString &identifier )
   mLockView = new QTreeWidget( this );
   topLayout->addWidget( mLockView );
   QStringList headers;
-  headers.append( "Lock File" );
-  headers.append( "PID" );
-  headers.append( "Locking App" );
+  headers.append( QLatin1String( "Lock File" ) );
+  headers.append( QLatin1String( "PID" ) );
+  headers.append( QLatin1String( "Locking App" ) );
   mLockView->setHeaderLabels( headers );
 
   updateLockView();
 
-  QPushButton *quitButton = new QPushButton( "Quit", this );
+  QPushButton *quitButton = new QPushButton( QLatin1String( "Quit" ), this );
   topLayout->addWidget( quitButton );
   connect( quitButton, SIGNAL( clicked() ), SLOT( close() ) );
 
@@ -121,11 +121,11 @@ void LockWidget::updateLockView()
 
   QDir dir( Lock::locksDir() );
 
-  QStringList files = dir.entryList( QStringList( "*.lock" ) );
+  QStringList files = dir.entryList( QStringList( QLatin1String( "*.lock" ) ) );
 
   QStringList::ConstIterator it;
   for ( it = files.begin(); it != files.end(); ++it ) {
-    if ( *it == "." || *it == ".." ) {
+    if ( *it == QLatin1String( "." ) || *it == QLatin1String( ".." ) ) {
       continue;
     }
 
@@ -148,7 +148,7 @@ void LockWidget::lock()
   if ( !mLock->lock() ) {
     KMessageBox::sorry( this, mLock->error() );
   } else {
-    mStatus->setText( "Status: Locked" );
+    mStatus->setText( QLatin1String( "Status: Locked" ) );
   }
 }
 
@@ -157,7 +157,7 @@ void LockWidget::unlock()
   if ( !mLock->unlock() ) {
     KMessageBox::sorry( this, mLock->error() );
   } else {
-    mStatus->setText( "Status: Unlocked" );
+    mStatus->setText( QLatin1String( "Status: Unlocked" ) );
   }
 }
 

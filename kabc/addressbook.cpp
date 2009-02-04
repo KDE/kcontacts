@@ -307,7 +307,7 @@ AddressBook::AddressBook()
 {
   d->mErrorHandler = 0;
   d->mConfig = 0;
-  d->mManager = new KRES::Manager<Resource>( "contact" );
+  d->mManager = new KRES::Manager<Resource>( QLatin1String( "contact" ) );
   d->end.d->mResources = QList<Resource*>();
   d->end.d->mCurrRes = -1;
 }
@@ -321,7 +321,7 @@ AddressBook::AddressBook( const QString &config )
   } else {
     d->mConfig = new KConfig( config );
   }
-  d->mManager = new KRES::Manager<Resource>( "contact" );
+  d->mManager = new KRES::Manager<Resource>( QLatin1String( "contact" ) );
   d->mManager->readConfig( d->mConfig );
   d->end.d->mResources = QList<Resource*>();
   d->end.d->mCurrRes = -1;
@@ -757,7 +757,7 @@ QString AddressBook::identifier() const
     }
   }
 
-  return identifier.join( ":" );
+  return identifier.join( QLatin1String( ":" ) );
 }
 
 Field::List AddressBook::fields( int category ) const

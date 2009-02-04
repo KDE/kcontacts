@@ -53,7 +53,7 @@ ResourceNet::ResourceNet()
     mTempFile( 0 ),
     d( new ResourceNetPrivate )
 {
-  init( KUrl(), "vcard" );
+  init( KUrl(), QLatin1String( "vcard" ) );
 }
 
 ResourceNet::ResourceNet( const KConfigGroup &group )
@@ -84,7 +84,7 @@ void ResourceNet::init( const KUrl &url, const QString &format )
   FormatFactory *factory = FormatFactory::self();
   mFormat = factory->format( mFormatName );
   if ( !mFormat ) {
-    mFormatName = "vcard";
+    mFormatName = QLatin1String( "vcard" );
     mFormat = factory->format( mFormatName );
   }
 

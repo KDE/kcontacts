@@ -81,13 +81,13 @@ FormatFactory::FormatFactory()
 {
   // dummy entry for default format
   FormatInfo info;
-  info.library = "<NoLibrary>";
+  info.library = QLatin1String( "<NoLibrary>" );
   info.nameLabel = i18n( "vCard" );
   info.descriptionLabel = i18n( "vCard Format" );
-  d->mFormatList.insert( "vcard", info );
+  d->mFormatList.insert( QLatin1String( "vcard" ), info );
 
   const QStringList list =
-    KGlobal::dirs()->findAllResources( "data","kabc/formats/*.desktop",
+    KGlobal::dirs()->findAllResources( "data", QLatin1String( "kabc/formats/*.desktop" ),
                                        KStandardDirs::Recursive |
                                        KStandardDirs::NoDuplicates );
   for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
@@ -119,12 +119,12 @@ QStringList FormatFactory::formats()
   QStringList retval;
 
   // make sure 'vcard' is the first entry
-  retval << "vcard";
+  retval << QLatin1String( "vcard" );
 
   QHashIterator<QString, FormatInfo> it( d->mFormatList );
   while ( it.hasNext() ) {
     it.next();
-    if ( it.key() != "vcard" ) {
+    if ( it.key() != QLatin1String( "vcard" ) ) {
       retval << it.key();
     }
   }
@@ -149,7 +149,7 @@ Format *FormatFactory::format( const QString &type )
     return 0;
   }
 
-  if ( type == "vcard" ) {
+  if ( type == QLatin1String( "vcard" ) ) {
     format = new VCardFormat;
     format->setType( type );
     format->setNameLabel( i18n( "vCard" ) );

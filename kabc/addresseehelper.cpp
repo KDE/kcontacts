@@ -45,8 +45,9 @@ AddresseeHelper::AddresseeHelper()
 {
   initSettings();
 
-  QDBusConnection::sessionBus().connect( QString(), "/KABC",
-                                         "org.kde.kabc.AddressBookConfig", "changed",
+  QDBusConnection::sessionBus().connect( QString(), QLatin1String( "/KABC" ),
+                                         QLatin1String( "org.kde.kabc.AddressBookConfig" ),
+                                         QLatin1String( "changed" ),
                                          this, SLOT(initSettings()));
 }
 
@@ -80,11 +81,11 @@ void AddresseeHelper::initSettings()
   mSuffixes.insert( i18n( "Jr." ) );
   mSuffixes.insert( i18n( "Sr." ) );
 
-  mPrefixes.insert( "van" );
-  mPrefixes.insert( "von" );
-  mPrefixes.insert( "de" );
+  mPrefixes.insert( QLatin1String( "van" ) );
+  mPrefixes.insert( QLatin1String( "von" ) );
+  mPrefixes.insert( QLatin1String( "de" ) );
 
-  KConfig _config( "kabcrc", KConfig::NoGlobals );
+  KConfig _config( QLatin1String( "kabcrc" ), KConfig::NoGlobals );
   KConfigGroup config(&_config, "General" );
 
   addToSet( config.readEntry( "Prefixes", QStringList() ), mTitles );

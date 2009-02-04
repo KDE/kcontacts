@@ -59,7 +59,7 @@ ResourceFile::ResourceFile()
   QString fileName, formatName;
 
   fileName = StdAddressBook::fileName();
-  formatName = "vcard";
+  formatName = QLatin1String( "vcard" );
 
   init( fileName, formatName );
 }
@@ -92,7 +92,7 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
   mFormat = factory->format( mFormatName );
 
   if ( !mFormat ) {
-    mFormatName = "vcard";
+    mFormatName = QLatin1String( "vcard" );
     mFormat = factory->format( mFormatName );
   }
 
@@ -102,7 +102,7 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
 
   setFileName( fileName );
 
-  mDirWatch.addFile( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  mDirWatch.addFile( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
 
   mLock = 0;
 }
@@ -248,7 +248,7 @@ bool ResourceFile::save( Ticket *ticket )
   kDebug();
 
   // create backup file
-  QString extension = '_' + QString::number( QDate::currentDate().dayOfWeek() );
+  QString extension = QLatin1Char( '_' ) + QString::number( QDate::currentDate().dayOfWeek() );
   (void) KSaveFile::simpleBackupFile( mFileName, QString(), extension );
 
   mDirWatch.stopScan();
@@ -293,7 +293,7 @@ void ResourceFile::emitSavingFinished()
 
 bool ResourceFile::loadDistributionLists()
 {
-  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  KConfig cfg( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
 
   KConfigGroup cg( &cfg, "DistributionLists" );
   KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
@@ -306,7 +306,7 @@ bool ResourceFile::loadDistributionLists()
     const QString name = *it;
     const QStringList value = cg.readEntry( name, QStringList() );
 
-    kDebug() << name << ":" << value.join( "," );
+    kDebug() << name << QLatin1Char( ':' ) << value.join( QLatin1String( "," ) );
 
     DistributionList *list = 0;
     if ( cgId.isValid() ) {
@@ -352,7 +352,7 @@ void ResourceFile::saveDistributionLists()
 {
   kDebug();
 
-  KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
+  KConfig cfg( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
   KConfigGroup cg( &cfg, "DistributionLists" );
   cg.deleteGroup();
   KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
@@ -434,7 +434,7 @@ void ResourceFile::fileChanged( const QString &path )
     return;
   }
 
-  if ( path == KStandardDirs::locateLocal( "data", "kabc/distlists" ) ) {
+  if ( path == KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) ) {
     // clear old distribution lists
     // take a copy of mDistListMap, then clear it and finally qDeleteAll
     // the copy to avoid problems with removeDistributionList() called by
@@ -463,14 +463,9 @@ void ResourceFile::fileChanged( const QString &path )
 
 void ResourceFile::removeAddressee( const Addressee &addr )
 {
-  QFile::remove(
-    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/photos/" ) + addr.uid() ) );
-
-  QFile::remove(
-    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/logos/" ) + addr.uid() ) );
-
-  QFile::remove(
-    QFile::encodeName( KStandardDirs::locateLocal( "data", "kabc/sounds/" ) + addr.uid() ) );
+  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/photos/" ) ) + addr.uid() );
+  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/logos/" ) ) + addr.uid() );
+  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/sounds/" ) ) + addr.uid() );
 
   mAddrMap.remove( addr.uid() );
 }

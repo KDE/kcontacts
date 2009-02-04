@@ -237,7 +237,7 @@ QString Field::sortKey( const KABC::Addressee &a )
         key.sprintf( "%02d-%02d", date.month(), date.day() );
         return key;
       } else
-        return QString( "00-00" );
+        return QLatin1String( "00-00" );
     default:
       return value( a ).toLower();
   }
@@ -319,8 +319,8 @@ void Field::saveFields( KConfigGroup &cfg, const QString &identifier,
       customEntry << (*it)->d->label();
       customEntry << (*it)->d->key();
       customEntry << (*it)->d->app();
-      cfg.writeEntry( "KABC_CustomEntry_" + identifier + '_' +
-                       QString::number( custom++ ), customEntry );
+      cfg.writeEntry( QLatin1String( "KABC_CustomEntry_" ) + identifier + QLatin1Char( '_' ) +
+                      QString::number( custom++ ), customEntry );
     }
   }
 
@@ -345,9 +345,9 @@ Field::List Field::restoreFields( const KConfigGroup &cfg, const QString &identi
   for ( it = fieldIds.begin(); it != fieldIds.end(); ++it ) {
     Private *f = 0;
     if ( (*it) == Private::CustomField ) {
-      QStringList customEntry = cfg.readEntry( "KABC_CustomEntry_" +
-                                                 identifier + '_' +
-                                                 QString::number( custom++ ),QStringList() );
+      QStringList customEntry = cfg.readEntry( QLatin1String( "KABC_CustomEntry_" ) +
+                                               identifier + QLatin1Char( '_' ) +
+                                               QString::number( custom++ ),QStringList() );
       f = new Private( *it, CustomCategory, customEntry[ 0 ],
                          customEntry[ 1 ], customEntry[ 2 ] );
     } else {

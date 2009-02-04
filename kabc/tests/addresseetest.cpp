@@ -31,7 +31,7 @@ void AddresseeTest::emptyTest()
   QVERIFY( addressee.isEmpty() );
 
   KABC::Addressee addresseeWithMail;
-  addresseeWithMail.insertEmail( "foo@bar.org" );
+  addresseeWithMail.insertEmail( QLatin1String( "foo@bar.org" ) );
   QVERIFY( !addresseeWithMail.isEmpty() );
 }
 
@@ -39,43 +39,43 @@ void AddresseeTest::storeTest()
 {
   KABC::Addressee addressee;
 
-  KABC::Picture logo( "http://scottlandyard.info/pics/logo.png" );
-  KABC::Picture photo( "http://scottlandyard.info/~sinclair/photo.png" );
-  KABC::Sound sound( QString( "http://scottlandyard.info/~sinclair/sound.wav" ) );
+  KABC::Picture logo( QLatin1String( "http://scottlandyard.info/pics/logo.png" ) );
+  KABC::Picture photo( QLatin1String( "http://scottlandyard.info/~sinclair/photo.png" ) );
+  KABC::Sound sound( QLatin1String( "http://scottlandyard.info/~sinclair/sound.wav" ) );
 
   QStringList emails;
-  emails << "john@sinclair.com" << "ghosthunter@sinclair.com";
+  emails << QLatin1String( "john@sinclair.com" ) << QLatin1String( "ghosthunter@sinclair.com" );
 
   KABC::Key::List keys;
-  keys << KABC::Key( "SecretKey" );
+  keys << KABC::Key( QLatin1String( "SecretKey" ) );
 
   QStringList categories;
-  categories << "Helper" << "Friend";
+  categories << QLatin1String( "Helper" ) << QLatin1String( "Friend" );
 
   QStringList customs;
-  customs << "X-Danger: high";
+  customs << QLatin1String( "X-Danger: high" );
 
-  addressee.setUid( "My uid" );
-  addressee.setName( "John Sinclair" );
-  addressee.setFormattedName( "Sinclair, John" );
-  addressee.setFamilyName( "Sinclair" );
-  addressee.setGivenName( "John" );
-  addressee.setAdditionalName( "Bob" );
-  addressee.setPrefix( "Sir" );
-  addressee.setSuffix( "II" );
-  addressee.setNickName( "ghosthunter" );
+  addressee.setUid( QLatin1String( "My uid" ) );
+  addressee.setName( QLatin1String( "John Sinclair" ) );
+  addressee.setFormattedName( QLatin1String( "Sinclair, John" ) );
+  addressee.setFamilyName( QLatin1String( "Sinclair" ) );
+  addressee.setGivenName( QLatin1String( "John" ) );
+  addressee.setAdditionalName( QLatin1String( "Bob" ) );
+  addressee.setPrefix( QLatin1String( "Sir" ) );
+  addressee.setSuffix( QLatin1String( "II" ) );
+  addressee.setNickName( QLatin1String( "ghosthunter" ) );
   addressee.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee.setMailer( "mutt" );
+  addressee.setMailer( QLatin1String( "mutt" ) );
   addressee.setTimeZone( KABC::TimeZone( 2 ) );
   addressee.setGeo( KABC::Geo( 42, 23 ) );
-  addressee.setTitle( "Ghost Hunter" );
-  addressee.setRole( "Leader" );
-  addressee.setOrganization( "Scottland Yard" );
-  addressee.setNote( "Don't cross black deads way..." );
-  addressee.setProductId( "ProductId45" );
+  addressee.setTitle( QLatin1String( "Ghost Hunter" ) );
+  addressee.setRole( QLatin1String( "Leader" ) );
+  addressee.setOrganization( QLatin1String( "Scottland Yard" ) );
+  addressee.setNote( QLatin1String( "Don't cross black deads way..." ) );
+  addressee.setProductId( QLatin1String( "ProductId45" ) );
   addressee.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
-  addressee.setSortString( "Name" );
-  addressee.setUrl( KUrl( "www.scottlandyard.info" ) );
+  addressee.setSortString( QLatin1String( "Name" ) );
+  addressee.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee.setLogo( logo );
   addressee.setPhoto( photo );
@@ -124,43 +124,43 @@ void AddresseeTest::equalsTest()
 {
   KABC::Addressee addressee1, addressee2;
 
-  KABC::Picture logo( "http://scottlandyard.info/pics/logo.png" );
-  KABC::Picture photo( "http://scottlandyard.info/~sinclair/photo.png" );
-  KABC::Sound sound( QString( "http://scottlandyard.info/~sinclair/sound.wav" ) );
+  KABC::Picture logo( QLatin1String( "http://scottlandyard.info/pics/logo.png" ) );
+  KABC::Picture photo( QLatin1String( "http://scottlandyard.info/~sinclair/photo.png" ) );
+  KABC::Sound sound( QLatin1String( "http://scottlandyard.info/~sinclair/sound.wav" ) );
 
   QStringList emails;
-  emails << "john@sinclair.com" << "ghosthunter@sinclair.com";
+  emails << QLatin1String( "john@sinclair.com" ) << QLatin1String( "ghosthunter@sinclair.com" );
 
   KABC::Key::List keys;
-  keys << KABC::Key( "SecretKey" );
+  keys << KABC::Key( QLatin1String( "SecretKey" ) );
 
   QStringList categories;
-  categories << "Helper" << "Friend";
+  categories << QLatin1String( "Helper" ) << QLatin1String( "Friend" );
 
   QStringList customs;
-  customs << "X-Danger: high";
+  customs << QLatin1String( "X-Danger: high" );
 
-  addressee1.setUid( "My uid" );
-  addressee1.setName( "John Sinclair" );
-  addressee1.setFormattedName( "Sinclair, John" );
-  addressee1.setFamilyName( "Sinclair" );
-  addressee1.setGivenName( "John" );
-  addressee1.setAdditionalName( "Bob" );
-  addressee1.setPrefix( "Sir" );
-  addressee1.setSuffix( "II" );
-  addressee1.setNickName( "ghosthunter" );
+  addressee1.setUid( QLatin1String( "My uid" ) );
+  addressee1.setName( QLatin1String( "John Sinclair" ) );
+  addressee1.setFormattedName( QLatin1String( "Sinclair, John" ) );
+  addressee1.setFamilyName( QLatin1String( "Sinclair" ) );
+  addressee1.setGivenName( QLatin1String( "John" ) );
+  addressee1.setAdditionalName( QLatin1String( "Bob" ) );
+  addressee1.setPrefix( QLatin1String( "Sir" ) );
+  addressee1.setSuffix( QLatin1String( "II" ) );
+  addressee1.setNickName( QLatin1String( "ghosthunter" ) );
   addressee1.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee1.setMailer( "mutt" );
+  addressee1.setMailer( QLatin1String( "mutt" ) );
   addressee1.setTimeZone( KABC::TimeZone( 2 ) );
   addressee1.setGeo( KABC::Geo( 42, 23 ) );
-  addressee1.setTitle( "Ghost Hunter" );
-  addressee1.setRole( "Leader" );
-  addressee1.setOrganization( "Scottland Yard" );
-  addressee1.setNote( "Don't cross black deads way..." );
-  addressee1.setProductId( "ProductId45" );
+  addressee1.setTitle( QLatin1String( "Ghost Hunter" ) );
+  addressee1.setRole( QLatin1String( "Leader" ) );
+  addressee1.setOrganization( QLatin1String( "Scottland Yard" ) );
+  addressee1.setNote( QLatin1String( "Don't cross black deads way..." ) );
+  addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
-  addressee1.setSortString( "Name" );
-  addressee1.setUrl( KUrl( "www.scottlandyard.info" ) );
+  addressee1.setSortString( QLatin1String( "Name" ) );
+  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
@@ -172,27 +172,27 @@ void AddresseeTest::equalsTest()
   addressee1.setResource( 0 );
   addressee1.setChanged( false );
 
-  addressee2.setUid( "My uid" );
-  addressee2.setName( "John Sinclair" );
-  addressee2.setFormattedName( "Sinclair, John" );
-  addressee2.setFamilyName( "Sinclair" );
-  addressee2.setGivenName( "John" );
-  addressee2.setAdditionalName( "Bob" );
-  addressee2.setPrefix( "Sir" );
-  addressee2.setSuffix( "II" );
-  addressee2.setNickName( "ghosthunter" );
+  addressee2.setUid( QLatin1String( "My uid" ) );
+  addressee2.setName( QLatin1String( "John Sinclair" ) );
+  addressee2.setFormattedName( QLatin1String( "Sinclair, John" ) );
+  addressee2.setFamilyName( QLatin1String( "Sinclair" ) );
+  addressee2.setGivenName( QLatin1String( "John" ) );
+  addressee2.setAdditionalName( QLatin1String( "Bob" ) );
+  addressee2.setPrefix( QLatin1String( "Sir" ) );
+  addressee2.setSuffix( QLatin1String( "II" ) );
+  addressee2.setNickName( QLatin1String( "ghosthunter" ) );
   addressee2.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee2.setMailer( "mutt" );
+  addressee2.setMailer( QLatin1String( "mutt" ) );
   addressee2.setTimeZone( KABC::TimeZone( 2 ) );
   addressee2.setGeo( KABC::Geo( 42, 23 ) );
-  addressee2.setTitle( "Ghost Hunter" );
-  addressee2.setRole( "Leader" );
-  addressee2.setOrganization( "Scottland Yard" );
-  addressee2.setNote( "Don't cross black deads way..." );
-  addressee2.setProductId( "ProductId45" );
+  addressee2.setTitle( QLatin1String( "Ghost Hunter" ) );
+  addressee2.setRole( QLatin1String( "Leader" ) );
+  addressee2.setOrganization( QLatin1String( "Scottland Yard" ) );
+  addressee2.setNote( QLatin1String( "Don't cross black deads way..." ) );
+  addressee2.setProductId( QLatin1String( "ProductId45" ) );
   addressee2.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
-  addressee2.setSortString( "Name" );
-  addressee2.setUrl( KUrl( "www.scottlandyard.info" ) );
+  addressee2.setSortString( QLatin1String( "Name" ) );
+  addressee2.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee2.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee2.setLogo( logo );
   addressee2.setPhoto( photo );
@@ -211,8 +211,8 @@ void AddresseeTest::differsTest()
 {
   KABC::Addressee addressee1, addressee2;
 
-  addressee1.setNameFromString( "John Sinclair" );
-  addressee2.setNameFromString( "Suko" );
+  addressee1.setNameFromString( QLatin1String( "John Sinclair" ) );
+  addressee2.setNameFromString( QLatin1String( "Suko" ) );
 
   QVERIFY( addressee1 != addressee2 );
 }
@@ -221,43 +221,43 @@ void AddresseeTest::assignmentTest()
 {
   KABC::Addressee addressee1, addressee2;
 
-  KABC::Picture logo( "http://scottlandyard.info/pics/logo.png" );
-  KABC::Picture photo( "http://scottlandyard.info/~sinclair/photo.png" );
-  KABC::Sound sound( QString( "http://scottlandyard.info/~sinclair/sound.wav" ) );
+  KABC::Picture logo( QLatin1String( "http://scottlandyard.info/pics/logo.png" ) );
+  KABC::Picture photo( QLatin1String( "http://scottlandyard.info/~sinclair/photo.png" ) );
+  KABC::Sound sound( QLatin1String( "http://scottlandyard.info/~sinclair/sound.wav" ) );
 
   QStringList emails;
-  emails << "john@sinclair.com" << "ghosthunter@sinclair.com";
+  emails << QLatin1String( "john@sinclair.com" ) << QLatin1String( "ghosthunter@sinclair.com" );
 
   KABC::Key::List keys;
-  keys << KABC::Key( "SecretKey" );
+  keys << KABC::Key( QLatin1String( "SecretKey" ) );
 
   QStringList categories;
-  categories << "Helper" << "Friend";
+  categories << QLatin1String( "Helper" ) << QLatin1String( "Friend" );
 
   QStringList customs;
-  customs << "X-Danger: high";
+  customs << QLatin1String( "X-Danger: high" );
 
-  addressee1.setUid( "My uid" );
-  addressee1.setName( "John Sinclair" );
-  addressee1.setFormattedName( "Sinclair, John" );
-  addressee1.setFamilyName( "Sinclair" );
-  addressee1.setGivenName( "John" );
-  addressee1.setAdditionalName( "Bob" );
-  addressee1.setPrefix( "Sir" );
-  addressee1.setSuffix( "II" );
-  addressee1.setNickName( "ghosthunter" );
+  addressee1.setUid( QLatin1String( "My uid" ) );
+  addressee1.setName( QLatin1String( "John Sinclair" ) );
+  addressee1.setFormattedName( QLatin1String( "Sinclair, John" ) );
+  addressee1.setFamilyName( QLatin1String( "Sinclair" ) );
+  addressee1.setGivenName( QLatin1String( "John" ) );
+  addressee1.setAdditionalName( QLatin1String( "Bob" ) );
+  addressee1.setPrefix( QLatin1String( "Sir" ) );
+  addressee1.setSuffix( QLatin1String( "II" ) );
+  addressee1.setNickName( QLatin1String( "ghosthunter" ) );
   addressee1.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee1.setMailer( "mutt" );
+  addressee1.setMailer( QLatin1String( "mutt" ) );
   addressee1.setTimeZone( KABC::TimeZone( 2 ) );
   addressee1.setGeo( KABC::Geo( 42, 23 ) );
-  addressee1.setTitle( "Ghost Hunter" );
-  addressee1.setRole( "Leader" );
-  addressee1.setOrganization( "Scottland Yard" );
-  addressee1.setNote( "Don't cross black deads way..." );
-  addressee1.setProductId( "ProductId45" );
+  addressee1.setTitle( QLatin1String( "Ghost Hunter" ) );
+  addressee1.setRole( QLatin1String( "Leader" ) );
+  addressee1.setOrganization( QLatin1String( "Scottland Yard" ) );
+  addressee1.setNote( QLatin1String( "Don't cross black deads way..." ) );
+  addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
-  addressee1.setSortString( "Name" );
-  addressee1.setUrl( KUrl( "www.scottlandyard.info" ) );
+  addressee1.setSortString( QLatin1String( "Name" ) );
+  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
@@ -278,43 +278,43 @@ void AddresseeTest::serializeTest()
 {
   KABC::Addressee addressee1, addressee2;
 
-  KABC::Picture logo( "http://scottlandyard.info/pics/logo.png" );
-  KABC::Picture photo( "http://scottlandyard.info/~sinclair/photo.png" );
-  KABC::Sound sound( QString( "http://scottlandyard.info/~sinclair/sound.wav" ) );
+  KABC::Picture logo( QLatin1String( "http://scottlandyard.info/pics/logo.png" ) );
+  KABC::Picture photo( QLatin1String( "http://scottlandyard.info/~sinclair/photo.png" ) );
+  KABC::Sound sound( QLatin1String( "http://scottlandyard.info/~sinclair/sound.wav" ) );
 
   QStringList emails;
-  emails << "john@sinclair.com" << "ghosthunter@sinclair.com";
+  emails << QLatin1String( "john@sinclair.com" ) << QLatin1String( "ghosthunter@sinclair.com" );
 
   KABC::Key::List keys;
-  keys << KABC::Key( "SecretKey" );
+  keys << KABC::Key( QLatin1String( "SecretKey" ) );
 
   QStringList categories;
-  categories << "Helper" << "Friend";
+  categories << QLatin1String( "Helper" ) << QLatin1String( "Friend" );
 
   QStringList customs;
-  customs << "X-Danger: high";
+  customs << QLatin1String( "X-Danger: high" );
 
-  addressee1.setUid( "My uid" );
-  addressee1.setName( "John Sinclair" );
-  addressee1.setFormattedName( "Sinclair, John" );
-  addressee1.setFamilyName( "Sinclair" );
-  addressee1.setGivenName( "John" );
-  addressee1.setAdditionalName( "Bob" );
-  addressee1.setPrefix( "Sir" );
-  addressee1.setSuffix( "II" );
-  addressee1.setNickName( "ghosthunter" );
+  addressee1.setUid( QLatin1String( "My uid" ) );
+  addressee1.setName( QLatin1String( "John Sinclair" ) );
+  addressee1.setFormattedName( QLatin1String( "Sinclair, John" ) );
+  addressee1.setFamilyName( QLatin1String( "Sinclair" ) );
+  addressee1.setGivenName( QLatin1String( "John" ) );
+  addressee1.setAdditionalName( QLatin1String( "Bob" ) );
+  addressee1.setPrefix( QLatin1String( "Sir" ) );
+  addressee1.setSuffix( QLatin1String( "II" ) );
+  addressee1.setNickName( QLatin1String( "ghosthunter" ) );
   addressee1.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee1.setMailer( "mutt" );
+  addressee1.setMailer( QLatin1String( "mutt" ) );
   addressee1.setTimeZone( KABC::TimeZone( 2 ) );
   addressee1.setGeo( KABC::Geo( 42, 23 ) );
-  addressee1.setTitle( "Ghost Hunter" );
-  addressee1.setRole( "Leader" );
-  addressee1.setOrganization( "Scottland Yard" );
-  addressee1.setNote( "Don't cross black deads way..." );
-  addressee1.setProductId( "ProductId45" );
+  addressee1.setTitle( QLatin1String( "Ghost Hunter" ) );
+  addressee1.setRole( QLatin1String( "Leader" ) );
+  addressee1.setOrganization( QLatin1String( "Scottland Yard" ) );
+  addressee1.setNote( QLatin1String( "Don't cross black deads way..." ) );
+  addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
-  addressee1.setSortString( "Name" );
-  addressee1.setUrl( KUrl( "www.scottlandyard.info" ) );
+  addressee1.setSortString( QLatin1String( "Name" ) );
+  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
@@ -340,10 +340,10 @@ void AddresseeTest::fullEmailTest()
 {
   KABC::Addressee a;
   QStringList emails;
-  emails << "foo@bar.com";
+  emails << QLatin1String( "foo@bar.com" );
   a.setEmails( emails );
-  a.setFormattedName( "firstname \"nickname\" lastname" );
-  QCOMPARE( a.fullEmail(), QString( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
+  a.setFormattedName( QLatin1String( "firstname \"nickname\" lastname" ) );
+  QCOMPARE( a.fullEmail(), QLatin1String( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
 }
 
 #include "addresseetest.moc"

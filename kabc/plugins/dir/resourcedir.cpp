@@ -79,7 +79,7 @@ void ResourceDir::Private::init( const QString &path, const QString &format )
   mFormat = factory->format( mFormatName );
 
   if ( !mFormat ) {
-    mFormatName = "vcard";
+    mFormatName = QLatin1String( "vcard" );
     mFormat = factory->format( mFormatName );
   }
 
@@ -110,7 +110,7 @@ void ResourceDir::Private::pathChanged()
 ResourceDir::ResourceDir()
   : Resource(), d( new Private( this ) )
 {
-  d->init( StdAddressBook::directoryName(), "vcard" );
+  d->init( StdAddressBook::directoryName(), QLatin1String( "vcard" ) );
 }
 
 ResourceDir::ResourceDir( const KConfigGroup &group )
@@ -186,7 +186,7 @@ bool ResourceDir::doOpen()
       return true;
     }
     QString testName = lst.first();
-    QFile file( d->mPath + '/' + testName );
+    QFile file( d->mPath + QDir::separator() + testName );
     if ( file.open( QIODevice::ReadOnly ) ) {
       return true;
     }
@@ -216,7 +216,7 @@ bool ResourceDir::load()
   QStringList::Iterator it;
   bool ok = true;
   for ( it = files.begin(); it != files.end(); ++it ) {
-    QFile file( d->mPath + '/' + (*it) );
+    QFile file( d->mPath + QDir::separator() + (*it) );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for reading", file.fileName() ) );
@@ -262,7 +262,7 @@ bool ResourceDir::save( Ticket * )
       continue;
     }
 
-    QFile file( d->mPath + '/' + (*it).uid() );
+    QFile file( d->mPath + QDir::separator() + (*it).uid() );
     if ( !file.open( QIODevice::WriteOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for writing", file.fileName() ) );
       continue;
@@ -326,7 +326,7 @@ QString ResourceDir::format() const
 
 void ResourceDir::removeAddressee( const Addressee &addr )
 {
-  QFile::remove( d->mPath + '/' + addr.uid() );
+  QFile::remove( d->mPath + QDir::separator() + addr.uid() );
   mAddrMap.remove( addr.uid() );
 }
 

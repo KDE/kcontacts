@@ -85,79 +85,80 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   const Address homeAddr = addr.address( Address::Home );
   const Address workAddr = addr.address( Address::Work );
 
-  ldif_out( t, "dn", QString( "cn=%1,mail=%2" ).
+  ldif_out( t, QLatin1String( "dn" ), QString::fromLatin1( "cn=%1,mail=%2" ).
             arg( addr.formattedName().simplified() ).
             arg( addr.preferredEmail() ) );
-  ldif_out( t, "givenname", addr.givenName() );
-  ldif_out( t, "sn", addr.familyName() );
-  ldif_out( t, "cn", addr.formattedName().simplified() );
-  ldif_out( t, "uid", addr.uid() );
-  ldif_out( t, "nickname", addr.nickName() );
-  ldif_out( t, "xmozillanickname", addr.nickName() );
+  ldif_out( t, QLatin1String( "givenname" ), addr.givenName() );
+  ldif_out( t, QLatin1String( "sn" ), addr.familyName() );
+  ldif_out( t, QLatin1String( "cn" ), addr.formattedName().simplified() );
+  ldif_out( t, QLatin1String( "uid" ), addr.uid() );
+  ldif_out( t, QLatin1String( "nickname" ), addr.nickName() );
+  ldif_out( t, QLatin1String( "xmozillanickname" ), addr.nickName() );
 
-  ldif_out( t, "mail", addr.preferredEmail() );
+  ldif_out( t, QLatin1String( "mail" ), addr.preferredEmail() );
   if ( addr.emails().count() > 1 ) {
-    ldif_out( t, "mozillasecondemail", addr.emails()[ 1 ] );
+    ldif_out( t, QLatin1String( "mozillasecondemail" ), addr.emails()[ 1 ] );
   }
 //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
 
-  ldif_out( t, "telephonenumber", addr.phoneNumber( PhoneNumber::Work ).number() );
-  ldif_out( t, "facsimiletelephonenumber", addr.phoneNumber( PhoneNumber::Fax ).number() );
-  ldif_out( t, "homephone", addr.phoneNumber( PhoneNumber::Home ).number() );
-  ldif_out( t, "mobile", addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 7
-  ldif_out( t, "cellphone", addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 4.x
-  ldif_out( t, "pager", addr.phoneNumber( PhoneNumber::Pager ).number() );
-  ldif_out( t, "pagerphone", addr.phoneNumber( PhoneNumber::Pager ).number() );
+  ldif_out( t, QLatin1String( "telephonenumber" ), addr.phoneNumber( PhoneNumber::Work ).number() );
+  ldif_out( t, QLatin1String( "facsimiletelephonenumber" ), addr.phoneNumber( PhoneNumber::Fax ).number() );
+  ldif_out( t, QLatin1String( "homephone" ), addr.phoneNumber( PhoneNumber::Home ).number() );
+  ldif_out( t, QLatin1String( "mobile" ), addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 7
+  ldif_out( t, QLatin1String( "cellphone" ), addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 4.x
+  ldif_out( t, QLatin1String( "pager" ), addr.phoneNumber( PhoneNumber::Pager ).number() );
+  ldif_out( t, QLatin1String( "pagerphone" ), addr.phoneNumber( PhoneNumber::Pager ).number() );
 
-  ldif_out( t, "streethomeaddress", homeAddr.street() );
-  ldif_out( t, "postalcode", workAddr.postalCode() );
-  ldif_out( t, "postofficebox", workAddr.postOfficeBox() );
+  ldif_out( t, QLatin1String( "streethomeaddress" ), homeAddr.street() );
+  ldif_out( t, QLatin1String( "postalcode" ), workAddr.postalCode() );
+  ldif_out( t, QLatin1String( "postofficebox" ), workAddr.postOfficeBox() );
 
-  QStringList streets = homeAddr.street().split( '\n' );
+  QStringList streets = homeAddr.street().split( QLatin1Char( '\n' ) );
   if ( streets.count() > 0 ) {
-    ldif_out( t, "homepostaladdress", streets[ 0 ] ); // Netscape 7
+    ldif_out( t, QLatin1String( "homepostaladdress" ), streets[ 0 ] ); // Netscape 7
   }
   if ( streets.count() > 1 ) {
-    ldif_out( t, "mozillahomepostaladdress2", streets[ 1 ] ); // Netscape 7
+    ldif_out( t, QLatin1String( "mozillahomepostaladdress2" ), streets[ 1 ] ); // Netscape 7
   }
-  ldif_out( t, "mozillahomelocalityname", homeAddr.locality() ); // Netscape 7
-  ldif_out( t, "mozillahomestate", homeAddr.region() );
-  ldif_out( t, "mozillahomepostalcode", homeAddr.postalCode() );
-  ldif_out( t, "mozillahomecountryname", Address::ISOtoCountry( homeAddr.country() ) );
-  ldif_out( t, "locality", workAddr.locality() );
-  ldif_out( t, "streetaddress", workAddr.street() ); // Netscape 4.x
+  ldif_out( t, QLatin1String( "mozillahomelocalityname" ), homeAddr.locality() ); // Netscape 7
+  ldif_out( t, QLatin1String( "mozillahomestate" ), homeAddr.region() );
+  ldif_out( t, QLatin1String( "mozillahomepostalcode" ), homeAddr.postalCode() );
+  ldif_out( t, QLatin1String( "mozillahomecountryname" ), Address::ISOtoCountry( homeAddr.country() ) );
+  ldif_out( t, QLatin1String( "locality" ), workAddr.locality() );
+  ldif_out( t, QLatin1String( "streetaddress" ), workAddr.street() ); // Netscape 4.x
 
-  streets = workAddr.street().split( '\n' );
+  streets = workAddr.street().split( QLatin1Char( '\n' ) );
   if ( streets.count() > 0 ) {
-    ldif_out( t, "postaladdress", streets[ 0 ] );
+    ldif_out( t, QLatin1String( "postaladdress" ), streets[ 0 ] );
   }
   if ( streets.count() > 1 ) {
-    ldif_out( t, "mozillapostaladdress2", streets[ 1 ] );
+    ldif_out( t, QLatin1String( "mozillapostaladdress2" ), streets[ 1 ] );
   }
-  ldif_out( t, "countryname", Address::ISOtoCountry( workAddr.country() ) );
-  ldif_out( t, "l", workAddr.locality() );
-  ldif_out( t, "c", Address::ISOtoCountry( workAddr.country() ) );
-  ldif_out( t, "st", workAddr.region() );
+  ldif_out( t, QLatin1String( "countryname" ), Address::ISOtoCountry( workAddr.country() ) );
+  ldif_out( t, QLatin1String( "l" ), workAddr.locality() );
+  ldif_out( t, QLatin1String( "c" ), Address::ISOtoCountry( workAddr.country() ) );
+  ldif_out( t, QLatin1String( "st" ), workAddr.region() );
 
-  ldif_out( t, "title", addr.title() );
-  ldif_out( t, "vocation", addr.prefix() );
-  ldif_out( t, "ou", addr.role() );
-  ldif_out( t, "o", addr.organization() );
-  ldif_out( t, "organization", addr.organization() );
-  ldif_out( t, "organizationname", addr.organization() );
+  ldif_out( t, QLatin1String( "title" ), addr.title() );
+  ldif_out( t, QLatin1String( "vocation" ), addr.prefix() );
+  ldif_out( t, QLatin1String( "ou" ), addr.role() );
+  ldif_out( t, QLatin1String( "o" ), addr.organization() );
+  ldif_out( t, QLatin1String( "organization" ), addr.organization() );
+  ldif_out( t, QLatin1String( "organizationname" ), addr.organization() );
 
   // Compatibility with older kabc versions.
   if ( !addr.department().isEmpty() ) {
-    ldif_out( t, "department", addr.department() );
+    ldif_out( t, QLatin1String( "department" ), addr.department() );
   } else {
-    ldif_out( t, "department", addr.custom( "KADDRESSBOOK", "X-Department" ) );
+    ldif_out( t, QLatin1String( "department" ), addr.custom( QLatin1String( "KADDRESSBOOK" ),
+                                                             QLatin1String( "X-Department" ) ) );
   }
 
-  ldif_out( t, "workurl", addr.url().prettyUrl() );
-  ldif_out( t, "homeurl", addr.url().prettyUrl() );
-  ldif_out( t, "description", addr.note() );
+  ldif_out( t, QLatin1String( "workurl" ), addr.url().prettyUrl() );
+  ldif_out( t, QLatin1String( "homeurl" ), addr.url().prettyUrl() );
+  ldif_out( t, QLatin1String( "description" ), addr.note() );
   if ( addr.revision().isValid() ) {
-    ldif_out( t, "modifytimestamp", dateToVCardString( addr.revision() ) );
+    ldif_out( t, QLatin1String( "modifytimestamp" ), dateToVCardString( addr.revision() ) );
   }
 
   t << "objectclass: top\n";
@@ -246,14 +247,14 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
     return false;
   }
 
-  if ( fieldname.startsWith( '#' ) ) {
+  if ( fieldname.startsWith( QLatin1Char( '#' ) ) ) {
     return true;
   }
 
   if ( fieldname.isEmpty() && !a.note().isEmpty() ) {
     // some LDIF export filters are borken and add additional
     // comments on stand-alone lines. Just add them to the notes for now.
-    a.setNote( a.note() + '\n' + value );
+    a.setNote( a.note() + QLatin1Char( '\n' ) + value );
     return true;
   }
 
@@ -310,7 +311,7 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   if ( fieldname == QLatin1String( "description" ) ) {
 addComment:
     if ( !a.note().isEmpty() ) {
-      a.setNote( a.note() + '\n' );
+      a.setNote( a.note() + QLatin1Char( '\n' ) );
     }
     a.setNote( a.note() + value );
     return true;
@@ -472,20 +473,20 @@ addComment:
 
   if ( fieldname == QLatin1String( "member" ) ) {
     // this is a mozilla list member (cn=xxx, mail=yyy)
-    QStringList list = value.split( ',' );
+    QStringList list = value.split( QLatin1Char( ',' ) );
     QString name, email;
 
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-      if ( (*it).startsWith( "cn=" ) ) {
+      if ( (*it).startsWith( QLatin1String( "cn=" ) ) ) {
         name = (*it).mid( 3 ).trimmed();
       }
-      if ( (*it).startsWith( "mail=" ) ) {
+      if ( (*it).startsWith( QLatin1String( "mail=" ) ) ) {
         email = (*it).mid( 5 ).trimmed();
       }
     }
     if ( !name.isEmpty() && !email.isEmpty() ) {
-      email = " <" + email + '>';
+      email = QLatin1String( " <" ) + email + QLatin1Char( '>' );
     }
     a.insertEmail( name + email );
     a.insertCategory( i18n( "List of Emails" ) );
@@ -507,7 +508,7 @@ addComment:
     return true;
   }
 
-  kWarning(5700) << QString( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
+  kWarning(5700) << QString::fromLatin1( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
     arg( a.formattedName() ).arg( fieldname ).arg( value );
 
   return true;

@@ -190,7 +190,7 @@ void Addressee::setNameFromString( const QString &s )
 {
   QString str = s;
   //remove enclosing quotes from string
-  if ( str.length() > 1  && s[ 0 ] == '"' && s[ s.length() - 1 ] == '"' )
+  if ( str.length() > 1  && s[ 0 ] == QLatin1Char( '"' ) && s[ s.length() - 1 ] == QLatin1Char( '"' ) )
     str = s.mid( 1, s.length() - 2 );
 
   setFormattedName( str );
@@ -206,11 +206,11 @@ void Addressee::setNameFromString( const QString &s )
   if ( str.isEmpty() )
     return;
 
-  static QString spaceStr = " ";
-  static QString emptyStr = "";
+  static QString spaceStr = QString::fromLatin1( " " );
+  static QString emptyStr = QString::fromLatin1( "" );
   AddresseeHelper *helper = AddresseeHelper::self();
 
-  int i = str.indexOf( ',' );
+  int i = str.indexOf( QLatin1Char( ',' ) );
   if ( i < 0 ) {
     QStringList parts = str.split( spaceStr );
     int leftOffset = 0;
@@ -295,9 +295,9 @@ void Addressee::setNameFromString( const QString &s )
           break;
       }
     } else {
-      setPrefix( "" );
-      setFamilyName( "" );
-      setSuffix( "" );
+      setPrefix( QString() );
+      setFamilyName( QString() );
+      setSuffix( QString() );
     }
 
     parts = part2.split( spaceStr );
@@ -329,8 +329,8 @@ void Addressee::setNameFromString( const QString &s )
       }
       setAdditionalName( additionalName );
     } else {
-      setGivenName( "" );
-      setAdditionalName( "" );
+      setGivenName( QString() );
+      setAdditionalName( QString() );
     }
   }
 }
@@ -354,8 +354,11 @@ QString Addressee::realName() const
 
 QString Addressee::assembledName() const
 {
-  QString name = prefix() + ' ' + givenName() + ' ' + additionalName() + ' ' +
-                 familyName() + ' ' + suffix();
+  const QString name = prefix() + QLatin1Char( ' ' ) +
+                       givenName() + QLatin1Char( ' ' ) +
+                       additionalName() + QLatin1Char( ' ' ) +
+                       familyName() + QLatin1Char( ' ' ) +
+                       suffix();
 
   return name.simplified();
 }
@@ -374,13 +377,13 @@ QString Addressee::fullEmail( const QString &email ) const
   if ( realName().isEmpty() )
     text = e;
   else {
-    QRegExp needQuotes( "[^ 0-9A-Za-z\\x0080-\\xFFFF]" );
+    QRegExp needQuotes( QLatin1String( "[^ 0-9A-Za-z\\x0080-\\xFFFF]" ) );
     if ( realName().indexOf( needQuotes ) != -1 ) {
       QString name = realName();
-      name.replace( "\"", "\\\"" );
-      text = "\"" + name + "\" <" + e + '>';
+      name.replace( QLatin1String( "\"" ), QLatin1String( "\\\"" ) );
+      text = QLatin1String( "\"" ) + name + QLatin1String( "\" <" ) + e + QLatin1Char( '>' );
     } else
-      text = realName() + " <" + e + '>';
+      text = realName() + QLatin1String( " <" ) + e + QLatin1Char( '>' );
   }
 
   return text;
@@ -459,7 +462,7 @@ void Addressee::removePhoneNumber( const PhoneNumber &phoneNumber )
 
 PhoneNumber Addressee::phoneNumber( PhoneNumber::Type type ) const
 {
-  PhoneNumber phoneNumber( "", type );
+  PhoneNumber phoneNumber( QString(), type );
   PhoneNumber::List::ConstIterator it;
   for ( it = d->mPhoneNumbers.constBegin(); it != d->mPhoneNumbers.constEnd(); ++it ) {
     if ( matchBinaryPattern( (*it).type(), type ) ) {
@@ -594,44 +597,44 @@ QString Addressee::toString() const
 {
   QString str;
 
-  str += QString( "Addressee {\n" );
-  str += QString( "  Uid: %1\n" ).arg( uid() );
+  str += QLatin1String( "Addressee {\n" );
+  str += QString::fromLatin1( "  Uid: %1\n" ).arg( uid() );
 
   --DEBUG--
 
-  str += QString( "  Emails {\n" );
+  str += QLatin1String( "  Emails {\n" );
   const QStringList e = emails();
   QStringList::ConstIterator it;
   for ( it = e.begin(); it != e.end(); ++it ) {
-    str += QString( "    %1\n" ).arg( *it );
+    str += QString::fromLatin1( "    %1\n" ).arg( *it );
   }
-  str += QString( "  }\n" );
+  str += QLatin1String( "  }\n" );
 
-  str += QString( "  PhoneNumbers {\n" );
+  str += QLatin1String( "  PhoneNumbers {\n" );
   const PhoneNumber::List p = phoneNumbers();
   PhoneNumber::List::ConstIterator it2;
   for ( it2 = p.begin(); it2 != p.end(); ++it2 ) {
     str += (*it2).toString();
   }
-  str += QString( "  }\n" );
+  str += QLatin1String( "  }\n" );
 
-  str += QString( "  Addresses {\n" );
+  str += QLatin1String( "  Addresses {\n" );
   const Address::List a = addresses();
   Address::List::ConstIterator it3;
   for ( it3 = a.begin(); it3 != a.end(); ++it3 ) {
     str += (*it3).toString();
   }
-  str += QString( "  }\n" );
+  str += QLatin1String( "  }\n" );
 
-  str += QString( "  Keys {\n" );
+  str += QLatin1String( "  Keys {\n" );
   const Key::List k = keys();
   Key::List::ConstIterator it4;
   for ( it4 = k.begin(); it4 != k.end(); ++it4 ) {
     str += (*it4).toString();
   }
-  str += QString( "  }\n" );
+  str += QLatin1String( "  }\n" );
 
-  str += QString( "}\n" );
+  str += QLatin1String( "}\n" );
 
   return str;
 }
@@ -753,7 +756,7 @@ void Addressee::insertCustom( const QString &app, const QString &name,
 
   d->mEmpty = false;
 
-  QString qualifiedName = app + '-' + name + ':';
+  QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
 
   QStringList::Iterator it;
   for ( it = d->mCustom.begin(); it != d->mCustom.end(); ++it ) {
@@ -768,7 +771,7 @@ void Addressee::insertCustom( const QString &app, const QString &name,
 
 void Addressee::removeCustom( const QString &app, const QString &name )
 {
-  const QString qualifiedName = app + '-' + name + ':';
+  const QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
 
   QStringList::Iterator it;
   for ( it = d->mCustom.begin(); it != d->mCustom.end(); ++it ) {
@@ -781,13 +784,13 @@ void Addressee::removeCustom( const QString &app, const QString &name )
 
 QString Addressee::custom( const QString &app, const QString &name ) const
 {
-  QString qualifiedName = app + '-' + name + ':';
+  QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
   QString value;
 
   QStringList::ConstIterator it;
   for ( it = d->mCustom.constBegin(); it != d->mCustom.constEnd(); ++it ) {
     if ( (*it).startsWith( qualifiedName ) ) {
-      value = (*it).mid( (*it).indexOf( ":" ) + 1 );
+      value = (*it).mid( (*it).indexOf( QLatin1Char( ':' ) ) + 1 );
       break;
     }
   }
@@ -811,8 +814,8 @@ void Addressee::parseEmailAddress( const QString &rawEmail, QString &fullName,
 {
   // This is a simplified version of KPIM::splitAddress().
 
-  fullName = "";
-  email = "";
+  fullName.clear();
+  email.clear();
   if ( rawEmail.isEmpty() )
     return; // KPIM::AddressEmpty;
 
@@ -959,7 +962,7 @@ ABORT_PARSING:
   // Check that we do not have any extra characters on the end of the
   // strings
   unsigned int len = fullName.length();
-  if ( fullName[ 0 ] == '"' && fullName[ len - 1 ] == '"' )
+  if ( fullName[ 0 ] == QLatin1Char( '"' ) && fullName[ len - 1 ] == QLatin1Char( '"' ) )
     fullName = fullName.mid( 1, len - 2 );
 }
 

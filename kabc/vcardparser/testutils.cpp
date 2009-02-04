@@ -30,21 +30,21 @@ Addressee vcard1()
 {
   Addressee addr;
 
-  addr.setName( "Frank Dawson" );
-  addr.setOrganization( "Lotus Development Corporation" );
-  addr.setUrl( KUrl( "http://home.earthlink.net/~fdawson" ) );
-  addr.insertEmail( "fdawson@earthlink.net" );
-  addr.insertEmail( "Frank_Dawson@Lotus.com", true );
-  addr.insertPhoneNumber( PhoneNumber( "+1-919-676-9515",
+  addr.setName( QLatin1String( "Frank Dawson" ) );
+  addr.setOrganization( QLatin1String( "Lotus Development Corporation" ) );
+  addr.setUrl( KUrl( QLatin1String( "http://home.earthlink.net/~fdawson") ) );
+  addr.insertEmail( QLatin1String( "fdawson@earthlink.net" ) );
+  addr.insertEmail( QLatin1String( "Frank_Dawson@Lotus.com" ), true );
+  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-919-676-9515" ),
                                        PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
-  addr.insertPhoneNumber( PhoneNumber( "+1-919-676-9564",
+  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-919-676-9564" ),
                                        PhoneNumber::Fax |PhoneNumber::Work ) );
   Address a( Address::Work | Address::Postal | Address::Parcel );
-  a.setStreet( "6544 Battleford Drive" );
-  a.setLocality( "Raleigh" );
-  a.setRegion( "NC" );
-  a.setPostalCode( "27613-3502" );
-  a.setCountry( "U.S.A." );
+  a.setStreet( QLatin1String( "6544 Battleford Drive" ) );
+  a.setLocality( QLatin1String( "Raleigh" ) );
+  a.setRegion( QLatin1String( "NC" ) );
+  a.setPostalCode( QLatin1String( "27613-3502" ) );
+  a.setCountry( QLatin1String( "U.S.A." ) );
   addr.insertAddress( a );
   return addr;
 }
@@ -53,19 +53,19 @@ Addressee vcard2()
 {
   Addressee addr;
 
-  addr.setName( "Tim Howes" );
-  addr.setOrganization( "Netscape Communications Corp." );
-  addr.insertEmail( "howes@netscape.com" );
-  addr.insertPhoneNumber( PhoneNumber( "+1-415-937-3419",
+  addr.setName( QLatin1String( "Tim Howes" ) );
+  addr.setOrganization( QLatin1String( "Netscape Communications Corp." ) );
+  addr.insertEmail( QLatin1String( "howes@netscape.com" ) );
+  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-415-937-3419" ),
                                        PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
-  addr.insertPhoneNumber( PhoneNumber( "+1-415-528-4164",
+  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-415-528-4164" ),
                                        PhoneNumber::Fax|PhoneNumber::Work ) );
   Address a( Address::Work );
-  a.setStreet( "501 E. Middlefield Rd." );
-  a.setLocality( "Mountain View" );
-  a.setRegion( "CA" );
-  a.setPostalCode( "94043" );
-  a.setCountry( "U.S.A." );
+  a.setStreet( QLatin1String( "501 E. Middlefield Rd." ) );
+  a.setLocality( QLatin1String( "Mountain View" ) );
+  a.setRegion( QLatin1String( "CA" ) );
+  a.setPostalCode( QLatin1String( "94043" ) );
+  a.setCountry( QLatin1String( "U.S.A." ) );
   addr.insertAddress( a );
   return addr;
 }
@@ -74,10 +74,10 @@ Addressee vcard3()
 {
   Addressee addr;
 
-  addr.setName( "ian geiser" );
-  addr.setOrganization( "Source eXtreme" );
-  addr.insertEmail( "geiseri@yahoo.com" );
-  addr.setTitle( "VP of Engineering" );
+  addr.setName( QLatin1String( "ian geiser" ) );
+  addr.setOrganization( QLatin1String( "Source eXtreme" ) );
+  addr.insertEmail( QLatin1String( "geiseri@yahoo.com" ) );
+  addr.setTitle( QLatin1String( "VP of Engineering" ) );
   return addr;
 }
 
@@ -107,9 +107,9 @@ Addressee::List vCardsAsAddresseeList()
 
 QByteArray vCardsAsText()
 {
-  QByteArray vcards = vcardAsText( "tests/vcard1.vcf" );
-  vcards += vcardAsText( "tests/vcard2.vcf" );
-  vcards += vcardAsText( "tests/vcard3.vcf" );
+  QByteArray vcards = vcardAsText( QLatin1String( "tests/vcard1.vcf" ) );
+  vcards += vcardAsText( QLatin1String( "tests/vcard2.vcf" ) );
+  vcards += vcardAsText( QLatin1String( "tests/vcard3.vcf" ) );
 
   return vcards;
 }

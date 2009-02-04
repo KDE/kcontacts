@@ -151,7 +151,7 @@ if (!open( CPP_OUT, ">$builddir/../addressee.cpp" ) ) {
     } elsif (/--DEBUG--/) {
       for( $i=0; $i<@entryNames; ++$i ) {
         if ( $entryCtrl[$i] !~ /A/ ) { next; }
-        print CPP_OUT "  str += QString( \"  " . ucfirst($entryNames[$i]);
+        print CPP_OUT "  str += QString::fromLatin1( \"  " . ucfirst($entryNames[$i]);
         print CPP_OUT ": %1\\n\" ).arg( $entryNames[$i]()$entryDebug[$i] );\n";
       }
     } else {

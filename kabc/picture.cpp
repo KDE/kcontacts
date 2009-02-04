@@ -112,8 +112,8 @@ bool Picture::operator!=( const Picture &p ) const
 bool Picture::isEmpty() const
 {
   return
-    d->mIntern == false && d->mUrl.isEmpty() ||
-    d->mIntern == true && d->mData.isNull();
+    ((d->mIntern == false && d->mUrl.isEmpty()) ||
+     (d->mIntern == true && d->mData.isNull()));
 }
 
 void Picture::setUrl( const QString &url )
@@ -157,19 +157,19 @@ QString Picture::toString() const
 {
   QString str;
 
-  str += QString( "Picture {\n" );
-  str += QString( "  Type: %1\n" ).arg( d->mType );
-  str += QString( "  IsIntern: %1\n" ).arg( d->mIntern ? "true" : "false" );
+  str += QLatin1String( "Picture {\n" );
+  str += QString::fromLatin1( "  Type: %1\n" ).arg( d->mType );
+  str += QString::fromLatin1( "  IsIntern: %1\n" ).arg( d->mIntern ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIntern ) {
     QByteArray data;
     QBuffer buffer( &data );
     buffer.open( QIODevice::WriteOnly );
     d->mData.save( &buffer, "PNG" );
-    str += QString( "  Data: %1\n" ).arg( QString( data.toBase64() ) );
+    str += QString::fromLatin1( "  Data: %1\n" ).arg( QString::fromLatin1( data.toBase64() ) );
   } else {
-    str += QString( "  Url: %1\n" ).arg( d->mUrl );
+    str += QString::fromLatin1( "  Url: %1\n" ).arg( d->mUrl );
   }
-  str += QString( "}\n" );
+  str += QLatin1String( "}\n" );
 
   return str;
 }

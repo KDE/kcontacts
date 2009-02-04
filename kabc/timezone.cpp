@@ -114,9 +114,9 @@ QString TimeZone::toString() const
 {
   QString str;
 
-  str += QString( "TimeZone {\n" );
-  str += QString( "  Offset: %1\n" ).arg( d->mOffset );
-  str += QString( "}\n" );
+  str += QString::fromLatin1( "TimeZone {\n" );
+  str += QString::fromLatin1( "  Offset: %1\n" ).arg( d->mOffset );
+  str += QString::fromLatin1( "}\n" );
 
   return str;
 }

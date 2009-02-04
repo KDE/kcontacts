@@ -35,22 +35,22 @@
 using namespace KABC;
 
 // template tags for address formatting localization
-#define KABC_FMTTAG_realname   QString("%n")
-#define KABC_FMTTAG_REALNAME   QString("%N")
-#define KABC_FMTTAG_company    QString("%cm")
-#define KABC_FMTTAG_COMPANY    QString("%CM")
-#define KABC_FMTTAG_pobox      QString("%p")
-#define KABC_FMTTAG_street     QString("%s")
-#define KABC_FMTTAG_STREET     QString("%S")
-#define KABC_FMTTAG_zipcode    QString("%z")
-#define KABC_FMTTAG_location   QString("%l")
-#define KABC_FMTTAG_LOCATION   QString("%L")
-#define KABC_FMTTAG_region     QString("%r")
-#define KABC_FMTTAG_REGION     QString("%R")
-#define KABC_FMTTAG_newline    QString("\\n")
-#define KABC_FMTTAG_condcomma  QString("%,")
-#define KABC_FMTTAG_condwhite  QString("%w")
-#define KABC_FMTTAG_purgeempty QString("%0")
+#define KABC_FMTTAG_realname   QString::fromLatin1("%n")
+#define KABC_FMTTAG_REALNAME   QString::fromLatin1("%N")
+#define KABC_FMTTAG_company    QString::fromLatin1("%cm")
+#define KABC_FMTTAG_COMPANY    QString::fromLatin1("%CM")
+#define KABC_FMTTAG_pobox      QString::fromLatin1("%p")
+#define KABC_FMTTAG_street     QString::fromLatin1("%s")
+#define KABC_FMTTAG_STREET     QString::fromLatin1("%S")
+#define KABC_FMTTAG_zipcode    QString::fromLatin1("%z")
+#define KABC_FMTTAG_location   QString::fromLatin1("%l")
+#define KABC_FMTTAG_LOCATION   QString::fromLatin1("%L")
+#define KABC_FMTTAG_region     QString::fromLatin1("%r")
+#define KABC_FMTTAG_REGION     QString::fromLatin1("%R")
+#define KABC_FMTTAG_newline    QString::fromLatin1("\\n")
+#define KABC_FMTTAG_condcomma  QString::fromLatin1("%,")
+#define KABC_FMTTAG_condwhite  QString::fromLatin1("%w")
+#define KABC_FMTTAG_purgeempty QString::fromLatin1("%0")
 
 /**
   Finds the balanced closing bracket starting from the opening bracket at
@@ -61,11 +61,11 @@ static int findBalancedBracket( const QString &tsection, int pos )
 {
   int balancecounter = 0;
   for ( int i = pos + 1; i < tsection.length(); ++i ) {
-    if ( ')' == tsection[i] && 0 == balancecounter ) {
+    if ( QLatin1Char( ')' ) == tsection[i] && 0 == balancecounter ) {
       // found end of brackets
       return i;
     } else {
-      if ( '(' == tsection[i] ) {
+      if ( QLatin1Char( '(' ) == tsection[i] ) {
         // nested brackets
         balancecounter++;
       }
@@ -100,7 +100,7 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
     int bpos2;
     // expect opening bracket and find next balanced closing bracket. If
     // next char is no opening bracket, continue parsing (no valid tag)
-    if ( '(' == result[bpos1] ) {
+    if ( QLatin1Char( '(' ) == result[bpos1] ) {
       bpos2 = findBalancedBracket( result, bpos1 );
       if ( -1 != bpos2 ) {
         // we have balanced brackets, recursively parse:
@@ -111,7 +111,7 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
         if ( purge ) {
           // purge -> remove all
           // replace with !_P_!, so conditional tags work later
-          result.replace( fpos, bpos2 - fpos + 1, "!_P_!" );
+          result.replace( fpos, bpos2 - fpos + 1, QLatin1String( "!_P_!" ) );
           // leave stpos as it is
         } else {
           // no purge -> replace with recursively parsed string
@@ -134,7 +134,7 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
   // It substitutes !_P_! for empty fields so conditional tags work later
 #define REPLTAG(R_TAG,R_FIELD) \
   if ( result.indexOf( R_TAG, false ) != -1 ) { \
-    QString rpl = R_FIELD.isEmpty() ? QString( "!_P_!" ) : R_FIELD; \
+    QString rpl = R_FIELD.isEmpty() ? QLatin1String( "!_P_!" ) : R_FIELD; \
     result.replace( R_TAG, rpl ); \
     if ( !R_FIELD.isEmpty() ) { \
       ret = true; \
@@ -152,16 +152,16 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
   REPLTAG( KABC_FMTTAG_LOCATION, address.locality().toUpper() );
   REPLTAG( KABC_FMTTAG_region, address.region() );
   REPLTAG( KABC_FMTTAG_REGION, address.region().toUpper() );
-  result.replace( KABC_FMTTAG_newline, "\n" );
+  result.replace( KABC_FMTTAG_newline, QLatin1String( "\n" ) );
 #undef REPLTAG
 
   // conditional comma
   fpos = result.indexOf( KABC_FMTTAG_condcomma, 0 );
   while ( -1 != fpos ) {
-    QString str1 = result.mid( fpos - 5, 5 );
-    QString str2 = result.mid( fpos + 2, 5 );
-    if ( str1 != "!_P_!" && str2 != "!_P_!" ) {
-      result.replace( fpos, 2, ", " );
+    const QString str1 = result.mid( fpos - 5, 5 );
+    const QString str2 = result.mid( fpos + 2, 5 );
+    if ( str1 != QLatin1String( "!_P_!" ) && str2 != QLatin1String( "!_P_!" ) ) {
+      result.replace( fpos, 2, QLatin1String( ", " ) );
     } else {
       result.remove( fpos, 2 );
     }
@@ -170,10 +170,10 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
   // conditional whitespace
   fpos = result.indexOf( KABC_FMTTAG_condwhite, 0 );
   while ( -1 != fpos ) {
-    QString str1 = result.mid( fpos - 5, 5 );
-    QString str2 = result.mid( fpos + 2, 5 );
-    if ( str1 != "!_P_!" && str2 != "!_P_!" ) {
-      result.replace( fpos, 2, " " );
+    const QString str1 = result.mid( fpos - 5, 5 );
+    const QString str2 = result.mid( fpos + 2, 5 );
+    if ( str1 != QLatin1String( "!_P_!" ) && str2 != QLatin1String( "!_P_!" ) ) {
+      result.replace( fpos, 2, QLatin1String( " " ) );
     } else {
       result.remove( fpos, 2 );
     }
@@ -181,7 +181,7 @@ static bool parseAddressTemplateSection( const QString &tsection, QString &resul
   }
 
   // remove purged:
-  result.remove( "!_P_!" );
+  result.remove( QLatin1String( "!_P_!" ) );
 
   return ret;
 }
@@ -338,7 +338,9 @@ QString Address::typeLabel() const
   TypeList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
-      label.append( ( first ? "" : "/" ) + typeLabel( *it ) );
+      if ( !first )
+        label.append( QLatin1Char( '/' ) );
+      label.append( typeLabel( *it ) );
       if ( first ) {
         first = false;
       }
@@ -525,19 +527,19 @@ QString Address::toString() const
 {
   QString str;
 
-  str += QString( "Address {\n" );
-  str += QString( "  IsEmpty: %1\n" ).arg( d->mEmpty ? "true" : "false" );
-  str += QString( "  Id: %1\n" ).arg( d->mId );
-  str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString( "  Post Office Box: %1\n" ).arg( d->mPostOfficeBox );
-  str += QString( "  Extended: %1\n" ).arg( d->mExtended );
-  str += QString( "  Street: %1\n" ).arg( d->mStreet );
-  str += QString( "  Locality: %1\n" ).arg( d->mLocality );
-  str += QString( "  Region: %1\n" ).arg( d->mRegion );
-  str += QString( "  Postal Code: %1\n" ).arg( d->mPostalCode );
-  str += QString( "  Country: %1\n" ).arg( d->mCountry );
-  str += QString( "  Label: %1\n" ).arg( d->mLabel );
-  str += QString( "}\n" );
+  str += QLatin1String( "Address {\n" );
+  str += QString::fromLatin1( "  IsEmpty: %1\n" ).arg( d->mEmpty ? QLatin1String( "true" ) : QLatin1String( "false" ) );
+  str += QString::fromLatin1( "  Id: %1\n" ).arg( d->mId );
+  str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QString::fromLatin1( "  Post Office Box: %1\n" ).arg( d->mPostOfficeBox );
+  str += QString::fromLatin1( "  Extended: %1\n" ).arg( d->mExtended );
+  str += QString::fromLatin1( "  Street: %1\n" ).arg( d->mStreet );
+  str += QString::fromLatin1( "  Locality: %1\n" ).arg( d->mLocality );
+  str += QString::fromLatin1( "  Region: %1\n" ).arg( d->mRegion );
+  str += QString::fromLatin1( "  Postal Code: %1\n" ).arg( d->mPostalCode );
+  str += QString::fromLatin1( "  Country: %1\n" ).arg( d->mCountry );
+  str += QString::fromLatin1( "  Label: %1\n" ).arg( d->mLabel );
+  str += QLatin1String( "}\n" );
 
   return str;
 }
@@ -557,7 +559,7 @@ QString Address::formattedAddress( const QString &realName,
     ciso = KGlobal::locale()->country();
   }
   KConfig entry( KStandardDirs::locate( "locale",
-        QString( "l10n/" ) + ciso + QString( "/entry.desktop" ) ) );
+        QLatin1String( "l10n/" ) + ciso + QLatin1String( "/entry.desktop" ) ) );
 
   KConfigGroup group = entry.group( "KCM Locale" );
   // decide whether this needs special business address formatting
@@ -576,7 +578,7 @@ QString Address::formattedAddress( const QString &realName,
     kWarning(5700) << "address format database incomplete"
         << "(no format for locale" << ciso
         << "found). Using default address formatting.";
-    addrTemplate = "%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z";
+    addrTemplate = QLatin1String( "%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z" );
   }
 
   // scan
@@ -585,19 +587,19 @@ QString Address::formattedAddress( const QString &realName,
   // now add the country line if needed (formatting this time according to
   // the rules of our own system country )
   if ( !country().isEmpty() ) {
-    KConfig entry( KStandardDirs::locate( "locale", QString( "l10n/" ) +
+    KConfig entry( KStandardDirs::locate( "locale", QLatin1String( "l10n/" ) +
                                           KGlobal::locale()->country() +
-                                          QString( "/entry.desktop" ) ) );
+                                          QLatin1String( "/entry.desktop" ) ) );
     KConfigGroup group = entry.group( "KCM Locale" );
     QString cpos = group.readEntry( "AddressCountryPosition" );
-    if ( "BELOW" == cpos || cpos.isEmpty() ) {
-      ret = ret + "\n\n" + country().toUpper();
-    } else if ( "below" == cpos ) {
-      ret = ret + "\n\n" + country();
-    } else if ( "ABOVE" == cpos ) {
-      ret = country().toUpper() + "\n\n" + ret;
-    } else if ( "above" == cpos ) {
-      ret = country() + "\n\n" + ret;
+    if ( QLatin1String( "BELOW" ) == cpos || cpos.isEmpty() ) {
+      ret = ret + QLatin1String( "\n\n" ) + country().toUpper();
+    } else if ( QLatin1String( "below" ) == cpos ) {
+      ret = ret + QLatin1String( "\n\n" ) + country();
+    } else if ( QLatin1String( "ABOVE" ) == cpos ) {
+      ret = country().toUpper() + QLatin1String( "\n\n" ) + ret;
+    } else if ( QLatin1String( "above" ) == cpos ) {
+      ret = country() + QLatin1String( "\n\n" ) + ret;
     }
   }
 
@@ -626,7 +628,7 @@ QString Address::countryToISO( const QString &cname )
     QTextStream s( &file );
     QString strbuf = s.readLine();
     while ( !strbuf.isEmpty() ) {
-      QStringList countryInfo = strbuf.split( '\t', QString::KeepEmptyParts );
+      QStringList countryInfo = strbuf.split( QLatin1Char( '\t' ), QString::KeepEmptyParts );
       if ( countryInfo[ 0 ] == cname ) {
         file.close();
         sISOMap->insert( cname, countryInfo[ 1 ] );
@@ -655,7 +657,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
   QFile file( mapfile );
   if ( file.open( QIODevice::ReadOnly ) ) {
     QTextStream s( &file );
-    QString searchStr = '\t' + ISOname.simplified().toLower();
+    QString searchStr = QLatin1Char( '\t' ) + ISOname.simplified().toLower();
     QString strbuf = s.readLine();
     int pos;
     while ( !strbuf.isEmpty() ) {

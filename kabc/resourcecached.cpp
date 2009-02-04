@@ -34,7 +34,7 @@ class ResourceCached::Private
 {
   public:
     Private( ResourceCached *parent )
-      : mParent( parent ), mIdMapper( "kabc/uidmaps/" )
+      : mParent( parent ), mIdMapper( QLatin1String( "kabc/uidmaps/" ) )
     {
     }
 
@@ -272,31 +272,32 @@ KABC::Addressee::List ResourceCached::deletedAddressees() const
 
 QString ResourceCached::cacheFile() const
 {
-  return KStandardDirs::locateLocal( "cache", "kabc/kresources/" + identifier() );
+  return KStandardDirs::locateLocal( "cache", QLatin1String( "kabc/kresources/" ) + identifier() );
 }
 
 QString ResourceCached::changesCacheFile( const QString &type ) const
 {
-  return KStandardDirs::locateLocal( "cache", "kabc/changescache/" + identifier() + '_' + type );
+  return KStandardDirs::locateLocal( "cache", QLatin1String( "kabc/changescache/" ) + identifier() +
+                                     QLatin1Char( '_' ) + type );
 }
 
 void ResourceCached::saveChangesCache()
 {
-  d->saveChangesCache( d->mAddedAddressees, "added" );
-  d->saveChangesCache( d->mDeletedAddressees, "deleted" );
-  d->saveChangesCache( d->mChangedAddressees, "changed" );
+  d->saveChangesCache( d->mAddedAddressees, QLatin1String( "added" ) );
+  d->saveChangesCache( d->mDeletedAddressees, QLatin1String( "deleted" ) );
+  d->saveChangesCache( d->mChangedAddressees, QLatin1String( "changed" ) );
 }
 
 void ResourceCached::loadChangesCache()
 {
-  d->loadChangesCache( d->mAddedAddressees, "added" );
-  d->loadChangesCache( d->mDeletedAddressees, "deleted" );
-  d->loadChangesCache( d->mChangedAddressees, "changed" );
+  d->loadChangesCache( d->mAddedAddressees, QLatin1String( "added" ) );
+  d->loadChangesCache( d->mDeletedAddressees, QLatin1String( "deleted" ) );
+  d->loadChangesCache( d->mChangedAddressees, QLatin1String( "changed" ) );
 }
 
 void ResourceCached::setIdMapperIdentifier()
 {
-  d->mIdMapper.setIdentifier( type() + '_' + identifier() );
+  d->mIdMapper.setIdentifier( type() + QLatin1Char( '_' ) + identifier() );
 }
 
 #include "resourcecached.moc"

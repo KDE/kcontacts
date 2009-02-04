@@ -51,7 +51,7 @@ int main( int argc, char **argv )
   AddressBook::Iterator it;
   for ( it = ab->begin(); it != ab->end(); ++it ) {
     VCardConverter converter;
-    QString vcard = converter.createVCard( *it );
+    const QByteArray vcard = converter.createVCard( *it );
     kDebug() << "card=" << vcard;
   }
 #else

@@ -44,9 +44,9 @@ class Lock::Private
       : mIdentifier( identifier ),
         mOrigIdentifier( identifier )
     {
-      mIdentifier.replace( '/', '_' );
+      mIdentifier.replace( QLatin1Char( '/' ), QLatin1Char( '_' ) );
 #ifdef Q_WS_WIN
-      mIdentifier.replace( ':', '_' );
+      mIdentifier.replace( QLatin1Char( ':' ), QLatin1Char( '_' ) );
 #endif
     }
 
@@ -70,7 +70,7 @@ Lock::~Lock()
 
 QString Lock::locksDir()
 {
-  return KStandardDirs::locateLocal( "data", "kabc/lock/" );
+  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/lock/" ) );
 }
 
 bool Lock::readLockFile( const QString &filename, int &pid, QString &app )
@@ -101,7 +101,7 @@ bool Lock::writeLockFile( const QString &filename )
 
 QString Lock::lockFileName() const
 {
-  return locksDir() + d->mIdentifier + ".lock";
+  return locksDir() + d->mIdentifier + QLatin1String( ".lock" );
 }
 
 bool Lock::lock()
@@ -131,7 +131,7 @@ bool Lock::lock()
 
   QString lockUniqueName;
   lockUniqueName = d->mIdentifier + KRandom::randomString( 8 );
-  d->mLockUniqueName = KStandardDirs::locateLocal( "data", "kabc/lock/" + lockUniqueName );
+  d->mLockUniqueName = KStandardDirs::locateLocal( "data", QLatin1String( "kabc/lock/" ) + lockUniqueName );
   kDebug() << "-- lock unique name:" << d->mLockUniqueName;
 
   // Create unique file

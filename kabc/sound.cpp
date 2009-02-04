@@ -127,8 +127,8 @@ bool Sound::isIntern() const
 bool Sound::isEmpty() const
 {
   return
-    d->mIntern && d->mData.isEmpty() ||
-    !d->mIntern && d->mUrl.isEmpty();
+    ((d->mIntern && d->mData.isEmpty()) ||
+     (!d->mIntern && d->mUrl.isEmpty()));
 }
 
 QString Sound::url() const
@@ -145,14 +145,14 @@ QString Sound::toString() const
 {
   QString str;
 
-  str += QString( "Sound {\n" );
-  str += QString( "  IsIntern: %1\n" ).arg( d->mIntern ? "true" : "false" );
+  str += QLatin1String( "Sound {\n" );
+  str += QString::fromLatin1( "  IsIntern: %1\n" ).arg( d->mIntern ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIntern ) {
-    str += QString( "  Data: %1\n" ).arg( QString( d->mData.toBase64() ) );
+    str += QString::fromLatin1( "  Data: %1\n" ).arg( QString::fromLatin1( d->mData.toBase64() ) );
   } else {
-    str += QString( "  Url: %1\n" ).arg( d->mUrl );
+    str += QString::fromLatin1( "  Url: %1\n" ).arg( d->mUrl );
   }
-  str += QString( "}\n" );
+  str += QLatin1String( "}\n" );
 
   return str;
 }

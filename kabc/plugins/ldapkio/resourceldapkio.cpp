@@ -55,7 +55,7 @@ class ResourceLDAPKIO::Private
         mRDNPrefix( 0 ), mTimeLimit( 0 ), mSizeLimit( 0 ),
         mCachePolicy( Cache_No ), mAutoCache( true )
     {
-      KGlobal::locale()->insertCatalog( "libkldap" );
+      KGlobal::locale()->insertCatalog( QLatin1String( "libkldap" ) );
     }
 
     KIO::Job *loadFromCache();
@@ -103,8 +103,8 @@ class ResourceLDAPKIO::Private
 ResourceLDAPKIO::ResourceLDAPKIO()
   : Resource(), d( new Private( this ) )
 {
-  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", "ldapkio" ) + '/' +
-                 type() + '_' + identifier();
+  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", QLatin1String( "ldapkio" ) ) +
+                 QLatin1Char( '/' ) + type() + QLatin1Char( '_' ) + identifier();
   init();
 }
 
@@ -137,8 +137,8 @@ ResourceLDAPKIO::ResourceLDAPKIO( const KConfigGroup &group )
   d->mRDNPrefix = group.readEntry( "LdapRDNPrefix", 0 );
   d->mCachePolicy = group.readEntry( "LdapCachePolicy", 0 );
   d->mAutoCache = group.readEntry( "LdapAutoCache", true );
-  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", "ldapkio" ) + '/' +
-                 type() + '_' + identifier();
+  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", QLatin1String( "ldapkio" ) ) + QLatin1Char( '/' ) +
+                 type() + QLatin1Char( '_' ) + identifier();
   init();
 }
 
@@ -164,7 +164,7 @@ void ResourceLDAPKIO::entries( KIO::Job *, const KIO::UDSEntryList &list )
       KUrl tmpurl( urlStr );
       d->mResultDn = tmpurl.path();
       kDebug() << "findUid():" << d->mResultDn;
-      if ( d->mResultDn.startsWith( '/' ) ) {
+      if ( d->mResultDn.startsWith( QLatin1Char( '/' ) ) ) {
         d->mResultDn.remove( 0, 1 );
       }
       return;
@@ -178,7 +178,7 @@ void ResourceLDAPKIO::listResult( KJob *job )
   if ( d->mError && d->mError != KIO::ERR_USER_CANCELED ) {
     d->mErrorMsg = job->errorString();
   } else {
-    d->mErrorMsg = "";
+    d->mErrorMsg.clear();
   }
   emit leaveModality();
 }
@@ -191,9 +191,10 @@ QString ResourceLDAPKIO::Private::findUid( const QString &uid )
   mErrorMsg.clear();
   mResultDn.clear();
 
-  url.setAttributes( QStringList( "dn" ) );
-  url.setFilter( '(' + mAttributes[ "uid" ] + '=' + uid + ')' + mFilter );
-  url.setExtension( "x-dir", "one" );
+  url.setAttributes( QStringList( QLatin1String( "dn" ) ) );
+  url.setFilter( QLatin1Char( '(' ) + mAttributes[ QLatin1String( "uid" ) ] +
+                 QLatin1Char( '=' ) + uid + QLatin1Char( ')' ) + mFilter );
+  url.setExtension( QLatin1String( "x-dir" ), QLatin1String( "one" ) );
 
   kDebug() << uid << "url" << url.prettyUrl();
 
@@ -212,7 +213,7 @@ QByteArray ResourceLDAPKIO::Private::addEntry( const QString &attr, const QStrin
   QByteArray tmp;
   if ( !attr.isEmpty() ) {
     if ( mod ) {
-      tmp += KLDAP::Ldif::assembleLine( "replace", attr ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), attr ) + '\n';
     }
     tmp += KLDAP::Ldif::assembleLine( attr, value ) + '\n';
     if ( mod ) {
@@ -234,113 +235,115 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
     //insert new entry
     switch ( mRDNPrefix ) {
       case 1:
-        dn = mAttributes[ "uid" ] + '=' + addr.uid() + ',' + mDn;
+        dn = mAttributes[ QLatin1String( "uid" ) ] + QLatin1Char( '=' ) + addr.uid() + QLatin1Char( ',' ) + mDn;
         break;
       case 0:
       default:
-        dn = mAttributes[ "commonName" ] + '=' + addr.assembledName() + ',' + mDn;
+        dn = mAttributes[ QLatin1String( "commonName" ) ] + QLatin1Char( '=' ) + addr.assembledName() + QLatin1Char( ',' ) + mDn;
         break;
     }
   } else {
     //modify existing entry
     mod = true;
-    if ( olddn.startsWith( mAttributes[ "uid" ] ) ) {
-      dn = mAttributes[ "uid" ] + '=' + addr.uid() + ',' + olddn.section( ',', 1 );
-    } else if ( olddn.startsWith( mAttributes[ "commonName" ] ) ) {
-      dn = mAttributes[ "commonName" ] + '=' + addr.assembledName() + ',' +
-           olddn.section( ',', 1 );
+    if ( olddn.startsWith( mAttributes[ QLatin1String( "uid" ) ] ) ) {
+      dn = mAttributes[ QLatin1String( "uid" ) ] + QLatin1Char( '=' ) + addr.uid() +
+           QLatin1Char( ',' ) + olddn.section( QLatin1Char( ',' ), 1 );
+    } else if ( olddn.startsWith( mAttributes[ QLatin1String( "commonName" ) ] ) ) {
+      dn = mAttributes[ QLatin1String( "commonName" ) ] + QLatin1Char( '=' ) + addr.assembledName()
+                                                        + QLatin1Char( ',' ) + olddn.section( QLatin1Char( ',' ), 1 );
     } else {
       dn = olddn;
     }
 
     if ( olddn.toLower() != dn.toLower() ) {
-      tmp = KLDAP::Ldif::assembleLine( "dn", olddn ) + '\n';
+      tmp = KLDAP::Ldif::assembleLine( QLatin1String( "dn" ), olddn ) + '\n';
       tmp += "changetype: modrdn\n";
-      tmp += KLDAP::Ldif::assembleLine( "newrdn", dn.section( ',', 0, 0 ) ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "newrdn" ), dn.section( QLatin1Char( ',' ), 0, 0 ) ) + '\n';
       tmp += "deleteoldrdn: 1\n\n";
     }
   }
 
-  tmp += KLDAP::Ldif::assembleLine( "dn", dn ) + '\n';
+  tmp += KLDAP::Ldif::assembleLine( QLatin1String( "dn" ), dn ) + '\n';
   if ( mod ) {
     tmp += "changetype: modify\n";
   }
   if ( !mod ) {
     tmp += "objectClass: top\n";
-    const QStringList obclass = mAttributes[ "objectClass" ].split( ',', QString::SkipEmptyParts );
+    const QStringList obclass = mAttributes[ QLatin1String( "objectClass" ) ].split( QLatin1Char( ',' ),
+                                                                                     QString::SkipEmptyParts );
     for ( QStringList::const_iterator it = obclass.constBegin(); it != obclass.constEnd(); ++it ) {
-      tmp += KLDAP::Ldif::assembleLine( "objectClass", *it ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "objectClass" ), *it ) + '\n';
     }
   }
 
-  tmp += addEntry( mAttributes[ "commonName" ], addr.assembledName(), mod );
-  tmp += addEntry( mAttributes[ "formattedName" ], addr.formattedName(), mod );
-  tmp += addEntry( mAttributes[ "givenName" ], addr.givenName(), mod );
-  tmp += addEntry( mAttributes[ "familyName" ], addr.familyName(), mod );
-  tmp += addEntry( mAttributes[ "uid" ], addr.uid(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "commonName" ) ], addr.assembledName(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "formattedName" ) ], addr.formattedName(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "givenName" ) ], addr.givenName(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "familyName" ) ], addr.familyName(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "uid" ) ], addr.uid(), mod );
 
   PhoneNumber number;
   number = addr.phoneNumber( PhoneNumber::Home );
-  tmp += addEntry( mAttributes[ "phoneNumber" ], number.number().toUtf8(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "phoneNumber" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Work );
-  tmp += addEntry( mAttributes[ "telephoneNumber" ], number.number().toUtf8(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "telephoneNumber" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Fax );
-  tmp += addEntry( mAttributes[ "facsimileTelephoneNumber" ], number.number().toUtf8(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Cell );
-  tmp += addEntry( mAttributes[ "mobile" ], number.number().toUtf8(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "mobile" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Pager );
-  tmp += addEntry( mAttributes[ "pager" ], number.number().toUtf8(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "pager" ) ], number.number(), mod );
 
-  tmp += addEntry( mAttributes[ "description" ], addr.note(), mod );
-  tmp += addEntry( mAttributes[ "title" ], addr.title(), mod );
-  tmp += addEntry( mAttributes[ "organization" ], addr.organization(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "description" ) ], addr.note(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "title" ) ], addr.title(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "organization" ) ], addr.organization(), mod );
 
   Address ad = addr.address( Address::Home );
   if ( !ad.isEmpty() ) {
-    tmp += addEntry( mAttributes[ "street" ], ad.street(), mod );
-    tmp += addEntry( mAttributes[ "state" ], ad.region(), mod );
-    tmp += addEntry( mAttributes[ "city" ], ad.locality(), mod );
-    tmp += addEntry( mAttributes[ "postalcode" ], ad.postalCode(), mod );
+    tmp += addEntry( mAttributes[ QLatin1String( "street" ) ], ad.street(), mod );
+    tmp += addEntry( mAttributes[ QLatin1String( "state" ) ], ad.region(), mod );
+    tmp += addEntry( mAttributes[ QLatin1String( "city" ) ], ad.locality(), mod );
+    tmp += addEntry( mAttributes[ QLatin1String( "postalcode" ) ], ad.postalCode(), mod );
   }
 
   QStringList emails = addr.emails();
   QStringList::ConstIterator mailIt = emails.constBegin();
 
-  if ( !mAttributes[ "mail" ].isEmpty() ) {
+  if ( !mAttributes[ QLatin1String( "mail" ) ].isEmpty() ) {
     if ( mod ) {
-      tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mail" ] ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "mail" ) ] ) + '\n';
     }
     if ( mailIt != emails.constEnd() ) {
-      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mail" ], *mailIt ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "mail" ) ], *mailIt ) + '\n';
       mailIt ++;
     }
-    if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) {
+    if ( mod && mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
       tmp += "-\n";
     }
   }
 
-  if ( !mAttributes[ "mailAlias" ].isEmpty() ) {
-    if ( mod && mAttributes[ "mail" ] != mAttributes[ "mailAlias" ] ) {
-      tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "mailAlias" ] ) + '\n';
+  if ( !mAttributes[ QLatin1String( "mailAlias" ) ].isEmpty() ) {
+    if ( mod && mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "mailAlias" ) ] ) + '\n';
     }
     for ( ; mailIt != emails.constEnd(); ++mailIt ) {
-      tmp += KLDAP::Ldif::assembleLine( mAttributes[ "mailAlias" ], *mailIt ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "mailAlias" ) ], *mailIt ) + '\n';
     }
     if ( mod ) {
       tmp += "-\n";
     }
   }
 
-  if ( !mAttributes[ "jpegPhoto" ].isEmpty() ) {
+  if ( !mAttributes[ QLatin1String( "jpegPhoto" ) ].isEmpty() ) {
     QByteArray pic;
     QBuffer buffer( &pic );
     buffer.open( QIODevice::WriteOnly );
     addr.photo().data().save( &buffer, "JPEG" );
 
     if ( mod ) {
-      tmp += KLDAP::Ldif::assembleLine( "replace", mAttributes[ "jpegPhoto" ] ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "jpegPhoto" ) ] ) + '\n';
     }
-    tmp += KLDAP::Ldif::assembleLine( mAttributes[ "jpegPhoto" ], pic, 76 ) + '\n';
+    tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "jpegPhoto" ) ], pic, 76 ) + '\n';
     if ( mod ) {
       tmp += "-\n";
     }
@@ -371,77 +374,77 @@ void ResourceLDAPKIO::init()
     handle them in the load() method below.
     These are the default values
    */
-  if ( !d->mAttributes.contains( "objectClass" ) ) {
-    d->mAttributes.insert( "objectClass", "inetOrgPerson" );
+  if ( !d->mAttributes.contains( QLatin1String( "objectClass" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "objectClass" ), QLatin1String( "inetOrgPerson" ) );
   }
-  if ( !d->mAttributes.contains( "commonName" ) ) {
-    d->mAttributes.insert( "commonName", "cn" );
+  if ( !d->mAttributes.contains( QLatin1String( "commonName" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "commonName" ), QLatin1String( "cn" ) );
   }
-  if ( !d->mAttributes.contains( "formattedName" ) ) {
-    d->mAttributes.insert( "formattedName", "displayName" );
+  if ( !d->mAttributes.contains( QLatin1String( "formattedName" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "formattedName" ), QLatin1String( "displayName" ) );
   }
-  if ( !d->mAttributes.contains( "familyName" ) ) {
-    d->mAttributes.insert( "familyName", "sn" );
+  if ( !d->mAttributes.contains( QLatin1String( "familyName" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "familyName" ), QLatin1String( "sn" ) );
   }
-  if ( !d->mAttributes.contains( "givenName" ) ) {
-    d->mAttributes.insert( "givenName", "givenName" );
+  if ( !d->mAttributes.contains( QLatin1String( "givenName" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "givenName" ), QLatin1String( "givenName" ) );
   }
-  if ( !d->mAttributes.contains( "mail" ) ) {
-    d->mAttributes.insert( "mail", "mail" );
+  if ( !d->mAttributes.contains( QLatin1String( "mail" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "mail" ), QLatin1String( "mail" ) );
   }
-  if ( !d->mAttributes.contains( "mailAlias" ) ) {
-    d->mAttributes.insert( "mailAlias", "" );
+  if ( !d->mAttributes.contains( QLatin1String( "mailAlias" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "mailAlias" ), QString() );
   }
-  if ( !d->mAttributes.contains( "phoneNumber" ) ) {
-    d->mAttributes.insert( "phoneNumber", "homePhone" );
+  if ( !d->mAttributes.contains( QLatin1String( "phoneNumber" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "phoneNumber" ), QLatin1String( "homePhone" ) );
   }
-  if ( !d->mAttributes.contains( "telephoneNumber" ) ) {
-    d->mAttributes.insert( "telephoneNumber", "telephoneNumber" );
+  if ( !d->mAttributes.contains( QLatin1String( "telephoneNumber" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "telephoneNumber" ), QLatin1String( "telephoneNumber" ) );
   }
-  if ( !d->mAttributes.contains( "facsimileTelephoneNumber" ) ) {
-    d->mAttributes.insert( "facsimileTelephoneNumber", "facsimileTelephoneNumber" );
+  if ( !d->mAttributes.contains( QLatin1String( "facsimileTelephoneNumber" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "facsimileTelephoneNumber" ), QLatin1String( "facsimileTelephoneNumber" ) );
   }
-  if ( !d->mAttributes.contains( "mobile" ) ) {
-    d->mAttributes.insert( "mobile", "mobile" );
+  if ( !d->mAttributes.contains( QLatin1String( "mobile" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "mobile" ), QLatin1String( "mobile" ) );
   }
-  if ( !d->mAttributes.contains( "pager" ) ) {
-    d->mAttributes.insert( "pager", "pager" );
+  if ( !d->mAttributes.contains( QLatin1String( "pager" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "pager" ), QLatin1String( "pager" ) );
   }
-  if ( !d->mAttributes.contains( "description" ) ) {
-    d->mAttributes.insert( "description", "description" );
+  if ( !d->mAttributes.contains( QLatin1String( "description" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "description" ), QLatin1String( "description" ) );
   }
-  if ( !d->mAttributes.contains( "title" ) ) {
-    d->mAttributes.insert( "title", "title" );
+  if ( !d->mAttributes.contains( QLatin1String( "title" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "title" ), QLatin1String( "title" ) );
   }
-  if ( !d->mAttributes.contains( "street" ) ) {
-    d->mAttributes.insert( "street", "street" );
+  if ( !d->mAttributes.contains( QLatin1String( "street" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "street" ), QLatin1String( "street" ) );
   }
-  if ( !d->mAttributes.contains( "state" ) ) {
-    d->mAttributes.insert( "state", "st" );
+  if ( !d->mAttributes.contains( QLatin1String( "state" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "state" ), QLatin1String( "st" ) );
   }
-  if ( !d->mAttributes.contains( "city" ) ) {
-    d->mAttributes.insert( "city", "l" );
+  if ( !d->mAttributes.contains( QLatin1String( "city" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "city" ), QLatin1String( "l" ) );
   }
-  if ( !d->mAttributes.contains( "organization" ) ) {
-    d->mAttributes.insert( "organization", "o" );
+  if ( !d->mAttributes.contains( QLatin1String( "organization" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "organization" ), QLatin1String( "o" ) );
   }
-  if ( !d->mAttributes.contains( "postalcode" ) ) {
-    d->mAttributes.insert( "postalcode", "postalCode" );
+  if ( !d->mAttributes.contains( QLatin1String( "postalcode" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "postalcode" ), QLatin1String( "postalCode" ) );
   }
-  if ( !d->mAttributes.contains( "uid" ) ) {
-    d->mAttributes.insert( "uid", "uid" );
+  if ( !d->mAttributes.contains( QLatin1String( "uid" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "uid" ), QLatin1String( "uid" ) );
   }
-  if ( !d->mAttributes.contains( "jpegPhoto" ) ) {
-    d->mAttributes.insert( "jpegPhoto", "jpegPhoto" );
+  if ( !d->mAttributes.contains( QLatin1String( "jpegPhoto" ) ) ) {
+    d->mAttributes.insert( QLatin1String( "jpegPhoto" ), QLatin1String( "jpegPhoto" ) );
   }
 
   d->mLDAPUrl = KLDAP::LdapUrl( KUrl() );
   if ( !d->mAnonymous ) {
-    d->mLDAPUrl.setExtension( "bindname", d->mBindDN );
+    d->mLDAPUrl.setExtension( QLatin1String( "bindname" ), d->mBindDN );
     d->mLDAPUrl.setUser( d->mUser );
     d->mLDAPUrl.setPass( d->mPassword );
   }
-  d->mLDAPUrl.setProtocol( d->mSSL ? "ldaps" : "ldap" );
+  d->mLDAPUrl.setProtocol( d->mSSL ? QLatin1String( "ldaps" ) : QLatin1String( "ldap" ) );
   d->mLDAPUrl.setHost( d->mHost );
   d->mLDAPUrl.setPort( d->mPort );
   d->mLDAPUrl.setDn( KLDAP::LdapDN( d->mDn ) );
@@ -450,7 +453,7 @@ void ResourceLDAPKIO::init()
     QMap<QString,QString>::Iterator it;
     QStringList attr;
     for ( it = d->mAttributes.begin(); it != d->mAttributes.end(); ++it ) {
-      if ( !it.value().isEmpty() && it.key() != "objectClass" ) {
+      if ( !it.value().isEmpty() && it.key() != QLatin1String( "objectClass" ) ) {
         attr.append( it.value() );
       }
     }
@@ -458,27 +461,27 @@ void ResourceLDAPKIO::init()
   }
 
   d->mLDAPUrl.setScope( d->mSubTree ? KLDAP::LdapUrl::Sub : KLDAP::LdapUrl::One );
-  if ( !d->mFilter.isEmpty() && d->mFilter != "(objectClass=*)" ) {
+  if ( !d->mFilter.isEmpty() && d->mFilter != QLatin1String( "(objectClass=*)" ) ) {
     d->mLDAPUrl.setFilter( d->mFilter );
   }
-  d->mLDAPUrl.setExtension( "x-dir", "base" );
+  d->mLDAPUrl.setExtension( QLatin1String( "x-dir" ), QLatin1String( "base" ) );
   if ( d->mTLS ) {
-    d->mLDAPUrl.setExtension( "x-tls", "" );
+    d->mLDAPUrl.setExtension( QLatin1String( "x-tls" ), QString() );
   }
-  d->mLDAPUrl.setExtension( "x-ver", QString::number( d->mVer ) );
+  d->mLDAPUrl.setExtension( QLatin1String( "x-ver" ), QString::number( d->mVer ) );
   if ( d->mSizeLimit ) {
-    d->mLDAPUrl.setExtension( "x-sizelimit", QString::number( d->mSizeLimit ) );
+    d->mLDAPUrl.setExtension( QLatin1String( "x-sizelimit" ), QString::number( d->mSizeLimit ) );
   }
   if ( d->mTimeLimit ) {
-    d->mLDAPUrl.setExtension( "x-timelimit", QString::number( d->mTimeLimit ) );
+    d->mLDAPUrl.setExtension( QLatin1String( "x-timelimit" ), QString::number( d->mTimeLimit ) );
   }
   if ( d->mSASL ) {
-    d->mLDAPUrl.setExtension( "x-sasl", "" );
+    d->mLDAPUrl.setExtension( QLatin1String( "x-sasl" ), QString() );
     if ( !d->mMech.isEmpty() ) {
-      d->mLDAPUrl.setExtension( "x-mech", d->mMech );
+      d->mLDAPUrl.setExtension( QLatin1String( "x-mech" ), d->mMech );
     }
     if ( !d->mRealm.isEmpty() ) {
-      d->mLDAPUrl.setExtension( "x-realm", d->mRealm );
+      d->mLDAPUrl.setExtension( QLatin1String( "x-realm" ), d->mRealm );
     }
   }
 
@@ -551,7 +554,7 @@ void ResourceLDAPKIO::Private::createCache()
   if ( mCachePolicy == Cache_NoConnection && mAutoCache ) {
     mTmp = new KTemporaryFile;
     mTmp->setPrefix( mCacheDst );
-    mTmp->setSuffix( "tmp" );
+    mTmp->setSuffix( QLatin1String( "tmp" ) );
     mTmp->open();
   }
 }
@@ -678,7 +681,7 @@ void ResourceLDAPKIO::data( KIO::Job *job, const QByteArray &data )
       case KLDAP::Ldif::Item:
         name = d->mLdif.attr().toLower();
         value = d->mLdif.value();
-        if ( name == d->mAttributes[ "commonName" ].toLower() ) {
+        if ( name == d->mAttributes[ QLatin1String( "commonName" ) ].toLower() ) {
           if ( !d->mAddr.formattedName().isEmpty() ) {
             QString fn = d->mAddr.formattedName();
             d->mAddr.setNameFromString( QString::fromUtf8( value, value.size() ) );
@@ -686,58 +689,58 @@ void ResourceLDAPKIO::data( KIO::Job *job, const QByteArray &data )
           } else {
             d->mAddr.setNameFromString( QString::fromUtf8( value, value.size() ) );
           }
-        } else if ( name == d->mAttributes[ "formattedName" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "formattedName" ) ].toLower() ) {
           d->mAddr.setFormattedName( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "givenName" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "givenName" ) ].toLower() ) {
           d->mAddr.setGivenName( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "mail" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "mail" ) ].toLower() ) {
           d->mAddr.insertEmail( QString::fromUtf8( value, value.size() ), true );
-        } else if ( name == d->mAttributes[ "mailAlias" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "mailAlias" ) ].toLower() ) {
           d->mAddr.insertEmail( QString::fromUtf8( value, value.size() ), false );
-        } else if ( name == d->mAttributes[ "phoneNumber" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "phoneNumber" ) ].toLower() ) {
           PhoneNumber phone;
           phone.setNumber( QString::fromUtf8( value, value.size() ) );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ "telephoneNumber" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "telephoneNumber" ) ].toLower() ) {
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Work );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ "facsimileTelephoneNumber" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ].toLower() ) {
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Fax );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ "mobile" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "mobile" ) ].toLower() ) {
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Cell );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ "pager" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "pager" ) ].toLower() ) {
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Pager );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ "description" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "description" ) ].toLower() ) {
           d->mAddr.setNote( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "title" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "title" ) ].toLower() ) {
           d->mAddr.setTitle( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "street" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "street" ) ].toLower() ) {
           d->mAd.setStreet( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "state" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "state" ) ].toLower() ) {
           d->mAd.setRegion( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "city" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "city" ) ].toLower() ) {
           d->mAd.setLocality( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "postalcode" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "postalcode" ) ].toLower() ) {
           d->mAd.setPostalCode( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "organization" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "organization" ) ].toLower() ) {
           d->mAddr.setOrganization( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "familyName" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "familyName" ) ].toLower() ) {
           d->mAddr.setFamilyName( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "uid" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "uid" ) ].toLower() ) {
           d->mAddr.setUid( QString::fromUtf8( value, value.size() ) );
-        } else if ( name == d->mAttributes[ "jpegPhoto" ].toLower() ) {
+        } else if ( name == d->mAttributes[ QLatin1String( "jpegPhoto" ) ].toLower() ) {
           KABC::Picture photo;
           QImage img = QImage::fromData( value );
           if ( !img.isNull() ) {
             photo.setData( img );
-            photo.setType( "image/jpeg" );
+            photo.setType( QLatin1String( "image/jpeg" ) );
             d->mAddr.setPhoto( photo );
           }
         }
@@ -895,8 +898,8 @@ void ResourceLDAPKIO::removeAddressee( const Addressee &addr )
   if ( !dn.isEmpty() ) {
     kDebug() << "ResourceLDAPKIO: found uid:" << dn;
     KLDAP::LdapUrl url( d->mLDAPUrl );
-    url.setPath( '/' + dn );
-    url.setExtension( "x-dir", "base" );
+    url.setPath( QLatin1Char( '/' ) + dn );
+    url.setExtension( QLatin1String( "x-dir" ), QLatin1String( "base" ) );
     url.setScope( KLDAP::LdapUrl::Base );
     if ( KIO::NetAccess::del( url, 0 ) ) {
       mAddrMap.remove( addr.uid() );

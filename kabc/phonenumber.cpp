@@ -150,7 +150,9 @@ QString PhoneNumber::typeLabel() const
   TypeList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
-      label.append( ( first ? "" : "/" ) + typeLabel( *it ) );
+      if ( !first )
+        label.append( QLatin1Char( '/' ) );
+      label.append( typeLabel( *it ) );
       if ( first ) {
         first = false;
       }
@@ -236,11 +238,11 @@ QString PhoneNumber::toString() const
 {
   QString str;
 
-  str += QString( "PhoneNumber {\n" );
-  str += QString( "    Id: %1\n" ).arg( d->mId );
-  str += QString( "    Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString( "    Number: %1\n" ).arg( d->mNumber );
-  str += QString( "}\n" );
+  str += QString::fromLatin1( "PhoneNumber {\n" );
+  str += QString::fromLatin1( "    Id: %1\n" ).arg( d->mId );
+  str += QString::fromLatin1( "    Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QString::fromLatin1( "    Number: %1\n" ).arg( d->mNumber );
+  str += QString::fromLatin1( "}\n" );
 
   return str;
 }

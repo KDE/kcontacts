@@ -41,7 +41,7 @@ int main( int argc, char **argv )
 
   AddressBook ab;
 
-  ResourceFile r( "my.kabc", "vcard2" );
+  ResourceFile r( QLatin1String( "my.kabc" ), QLatin1String( "vcard2" ) );
   ab.addResource( &r );
 
 #if 0

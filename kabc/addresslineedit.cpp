@@ -108,9 +108,9 @@ QStringList AddressLineEdit::Private::addresses()
   QApplication::setOverrideCursor( QCursor( Qt::WaitCursor ) ); // loading might take a while
 
   QStringList result;
-  QString space( " " );
-  QRegExp needQuotes( "[^ 0-9A-Za-z\\x0080-\\xFFFF]" );
-  QString endQuote( "\" " );
+  QLatin1String space( " " );
+  QRegExp needQuotes( QLatin1String( "[^ 0-9A-Za-z\\x0080-\\xFFFF]" ) );
+  QLatin1String endQuote( "\" " );
   QString addr, email;
 
   KABC::AddressBook *addressBook = KABC::StdAddressBook::self();
@@ -131,20 +131,20 @@ QStringList AddressLineEdit::Private::addresses()
     for ( mit = emails.constBegin(); mit != emails.constEnd(); ++mit ) {
       email = *mit;
       if ( !email.isEmpty() ) {
-        if ( n.isEmpty() || ( email.indexOf( '<' ) != -1 ) ) {
+        if ( n.isEmpty() || ( email.indexOf( QLatin1Char( '<' ) ) != -1 ) ) {
           addr.clear();
         } else { /* do we really need quotes around this name ? */
           if ( n.indexOf( needQuotes ) != -1 ) {
-            addr = '"' + n + endQuote;
+            addr = QLatin1Char( '"' ) + n + endQuote;
           } else {
             addr = n + space;
           }
         }
 
-        if ( !addr.isEmpty() && ( email.indexOf( '<' ) == -1 ) &&
-             ( email.indexOf( '>' ) == -1 ) &&
-             ( email.indexOf( ',' ) == -1 ) ) {
-          addr += '<' + email + '>';
+        if ( !addr.isEmpty() && ( email.indexOf( QLatin1Char( '<' ) ) == -1 ) &&
+             ( email.indexOf( QLatin1Char( '>' ) ) == -1 ) &&
+             ( email.indexOf( QLatin1Char( ',' ) ) == -1 ) ) {
+          addr += QLatin1Char( '<' ) + email + QLatin1Char( '>' );
         } else {
           addr += email;
         }
@@ -268,16 +268,16 @@ void AddressLineEdit::insert( const QString &oldText )
 
   // remove newlines in the to-be-pasted string as well as an eventual
   // mailto: protocol
-  newText.replace( QRegExp( "\r?\n" ), ", " );
-  if ( newText.startsWith( "mailto:" ) ) {
+  newText.replace( QRegExp( QLatin1String( "\r?\n" ) ), QLatin1String( ", " ) );
+  if ( newText.startsWith( QLatin1String( "mailto:" ) ) ) {
     KUrl u( newText );
     newText = u.path();
-  } else if ( newText.indexOf( " at " ) != -1 ) {
+  } else if ( newText.indexOf( QLatin1String( " at " ) ) != -1 ) {
     // Anti-spam stuff
-    newText.replace( " at ", "@" );
-    newText.replace( " dot ", "." );
-  } else if ( newText.indexOf( "(at)" ) != -1 ) {
-    newText.replace( QRegExp( "\\s*\\(at\\)\\s*" ), "@" );
+    newText.replace( QLatin1String( " at " ), QLatin1String( "@" ) );
+    newText.replace( QLatin1String( " dot " ), QLatin1String( "." ) );
+  } else if ( newText.indexOf( QLatin1String( "(at)" ) ) != -1 ) {
+    newText.replace( QRegExp( QLatin1String( "\\s*\\(at\\)\\s*" ) ), QLatin1String( "@" ) );
   }
 
   QString contents = text();
@@ -302,11 +302,11 @@ void AddressLineEdit::insert( const QString &oldText )
   if ( eot == 0 ) {
     contents.clear();
   } else if ( pos >= eot ) {
-    if ( contents[ eot - 1 ] == ',' ) {
+    if ( contents[ eot - 1 ] == QLatin1Char( ',' ) ) {
       eot--;
     }
     contents.truncate( eot );
-    contents += ", ";
+    contents += QLatin1String( ", " );
     pos = eot+2;
   }
 
@@ -347,7 +347,7 @@ void AddressLineEdit::doCompletion( bool ctrlT )
   QString prevAddr;
 
   QString s( text() );
-  int n = s.lastIndexOf( ',' );
+  int n = s.lastIndexOf( QLatin1Char( ',' ) );
 
   if ( n >= 0 ) {
     n++; // Go past the ","
@@ -393,12 +393,12 @@ void AddressLineEdit::doCompletion( bool ctrlT )
     {
       d->mPreviousAddresses = prevAddr;
       QStringList items = sCompletion->allMatches( s );
-      items += sCompletion->allMatches( "\"" + s );
-      items += sCompletion->substringCompletion( '<' + s );
+      items += sCompletion->allMatches( QLatin1String( "\"" ) + s );
+      items += sCompletion->substringCompletion( QLatin1Char( '<' ) + s );
       int beforeDollarCompletionCount = items.count();
 
-      if ( s.indexOf( ' ' ) == -1 ) { // one word, possibly given name
-        items += sCompletion->allMatches( "$$" + s );
+      if ( s.indexOf( QLatin1Char( ' ' ) ) == -1 ) { // one word, possibly given name
+        items += sCompletion->allMatches( QLatin1String( "$$" ) + s );
       }
 
       if ( !items.isEmpty() ) {
@@ -406,7 +406,7 @@ void AddressLineEdit::doCompletion( bool ctrlT )
           // remove the '$$whatever$' part
           for ( QStringList::Iterator it = items.begin();
                 it != items.end(); ++it ) {
-            int pos = (*it).indexOf( '$', 2 );
+            int pos = (*it).indexOf( QLatin1Char( '$' ), 2 );
             if ( pos < 0 ) { // ???
               continue;
             }
@@ -480,10 +480,10 @@ void AddressLineEdit::addAddress( const QString &addr )
 {
   sCompletion->addItem( addr );
 
-  int pos = addr.indexOf( '<' );
+  int pos = addr.indexOf( QLatin1Char( '<' ) );
   if ( pos >= 0 ) {
     ++pos;
-    int pos2 = addr.indexOf( pos, '>' );
+    int pos2 = addr.indexOf( QLatin1Char( '>' ), pos );
     if ( pos2 >= 0 ) {
       sCompletion->addItem( addr.mid( pos, pos2 - pos ) );
     }
@@ -499,11 +499,11 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
     KUrl::List::ConstIterator it = uriList.begin();
     for ( ; it != uriList.end(); ++it ) {
       if ( !ct.isEmpty() ) {
-        ct.append( ", " );
+        ct.append( QLatin1String( ", " ) );
       }
 
       KUrl u( *it );
-      if ( (*it).protocol() == "mailto" ) {
+      if ( (*it).protocol() == QLatin1String( "mailto" ) ) {
         ct.append( (*it).path() );
       } else {
         ct.append( (*it).url() );

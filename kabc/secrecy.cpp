@@ -126,9 +126,9 @@ QString Secrecy::toString() const
 {
   QString str;
 
-  str += QString( "Secrecy {\n" );
-  str += QString( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString( "}\n" );
+  str += QString::fromLatin1( "Secrecy {\n" );
+  str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
+  str += QString::fromLatin1( "}\n" );
 
   return str;
 }

@@ -28,10 +28,10 @@ void KeyTest::storeTest()
 {
   KABC::Key key;
 
-  key.setId( "My Id" );
+  key.setId( QLatin1String( "My Id" ) );
   key.setType( KABC::Key::Custom );
-  key.setCustomTypeString( "GnuPG" );
-  key.setTextData( "That's my super secret key" );
+  key.setCustomTypeString( QLatin1String( "GnuPG" ) );
+  key.setTextData( QLatin1String( "That's my super secret key" ) );
 
   QVERIFY( key.id() == QLatin1String( "My Id" ) );
   QVERIFY( key.type() == KABC::Key::Custom );
@@ -44,23 +44,23 @@ void KeyTest::equalsTest()
 {
   KABC::Key key1, key2;
 
-  key1.setId( "My Id" );
+  key1.setId( QLatin1String( "My Id" ) );
   key1.setType( KABC::Key::Custom );
-  key1.setCustomTypeString( "GnuPG" );
-  key1.setTextData( "That's my super secret key" );
+  key1.setCustomTypeString( QLatin1String( "GnuPG" ) );
+  key1.setTextData( QLatin1String( "That's my super secret key" ) );
 
-  key2.setId( "My Id" );
+  key2.setId( QLatin1String( "My Id" ) );
   key2.setType( KABC::Key::Custom );
-  key2.setCustomTypeString( "GnuPG" );
-  key2.setTextData( "That's my super secret key" );
+  key2.setCustomTypeString( QLatin1String( "GnuPG" ) );
+  key2.setTextData( QLatin1String( "That's my super secret key" ) );
 
   QVERIFY( key1 == key2 );
 }
 
 void KeyTest::differsTest()
 {
-  KABC::Key key1( "TextKey", KABC::Key::PGP );
-  KABC::Key key2( "TextKey", KABC::Key::Custom );
+  KABC::Key key1( QLatin1String( "TextKey" ), KABC::Key::PGP );
+  KABC::Key key2( QLatin1String( "TextKey" ), KABC::Key::Custom );
 
   QVERIFY( key1 != key2 );
 }
@@ -69,10 +69,10 @@ void KeyTest::assignmentTest()
 {
   KABC::Key key1, key2;
 
-  key1.setId( "My Id" );
+  key1.setId( QLatin1String( "My Id" ) );
   key1.setType( KABC::Key::Custom );
-  key1.setCustomTypeString( "GnuPG" );
-  key1.setTextData( "That's my super secret key" );
+  key1.setCustomTypeString( QLatin1String( "GnuPG" ) );
+  key1.setTextData( QLatin1String( "That's my super secret key" ) );
 
   key2 = key1;
 
@@ -83,10 +83,10 @@ void KeyTest::serializeTest()
 {
   KABC::Key key1, key2;
 
-  key1.setId( "My Id" );
+  key1.setId( QLatin1String( "My Id" ) );
   key1.setType( KABC::Key::Custom );
-  key1.setCustomTypeString( "GnuPG" );
-  key1.setTextData( "That's my super secret key" );
+  key1.setCustomTypeString( QLatin1String( "GnuPG" ) );
+  key1.setTextData( QLatin1String( "That's my super secret key" ) );
 
   QByteArray data;
   QDataStream s( &data, QIODevice::WriteOnly );
