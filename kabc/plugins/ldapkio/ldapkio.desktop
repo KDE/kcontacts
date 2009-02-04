@@ -28,6 +28,7 @@ Comment[sl]=Nudi dostop do stikov, ki so shranjeni na imeniškem strežniku LDAP
 Comment[sr]=Пружа приступ контактима складиштеним на серверу ЛДАП именика
 Comment[sr@latin]=Pruža pristup kontaktima skladištenim na serveru LDAP imenika
 Comment[sv]=Ger tillgång till kontakter lagrade på en LDAP-katalogserver
+Comment[tr]=Bir LDAP dizin sunucusunda depolanmış kişilere erişim sağlar
 Comment[uk]=Надає доступ до контактів, які зберігаються на сервері каталогів LDAP
 Comment[x-test]=xxProvides access to contacts stored on a LDAP directory serverxx
 Comment[zh_CN]=提供对被存储在 LDAP 目录服务器上的联系人的访问支持
