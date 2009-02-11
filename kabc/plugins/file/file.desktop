@@ -45,6 +45,7 @@ Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκ�
 Comment[es]=Provee acceso a los contactos almacenados en un único archivo local. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los componentes
 Comment[et]=Võimaldab kasutada kohalikku faili salvestatud kontakte. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust
 Comment[fr]=Fourni l'accès aux contacts stockés dans un seul fichier local. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
+Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha, stóráilte i gcomhad aonair. Tacaítear le comhaid v-Chárta agus formáidí eile, ag brath ar na breiseáin atá ar fáil
 Comment[gl]=Dá aceso a contactos gardados nun único ficheiro local. Admite ficheiros vCard estándar e outros formatos en función das extensións dispoñíbeis
 Comment[hu]=Névjegyek elérését biztosítja. Minden névjegy egy közös helyi fájlban található. Támogatja a standard vCard formátumot, bővítmények segítségével más formátumok is kezelhetők.
 Comment[it]=Fornisce accesso a contatti memorizzati in un singolo file locale. Gestisce file in standard VCard e altri formati in base ai plugin disponibili
