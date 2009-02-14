@@ -999,6 +999,11 @@ bool Addressee::operator< ( const Addressee &addr ) const
     return Private::mSortMode->lesser( *this, addr );
 }
 
+QString Addressee::mimeType()
+{
+  return QLatin1String( "text/directory" );
+}
+
 QDataStream &KABC::operator<<( QDataStream &s, const Addressee &a )
 {
   s << a.d->mUid;

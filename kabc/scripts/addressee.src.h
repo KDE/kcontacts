@@ -472,6 +472,11 @@ class KABC_EXPORT Addressee
      */
     bool operator< ( const Addressee &addr ) const;
 
+    /**
+      Returns the MIME type used for Addressees
+     */
+    static QString mimeType();
+
   private:
     class Private;
     QSharedDataPointer<Private> d;
