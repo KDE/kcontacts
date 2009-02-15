@@ -149,7 +149,8 @@ void StdAddressBook::Private::init( bool asynchronous )
   for ( it = manager->activeBegin(); it != manager->activeEnd(); ++it ) {
     (*it)->setAddressBook( mParent );
     if ( !(*it)->open() ) {
-      mParent->error( QString::fromLatin1( "Unable to open resource '%1'!" ).arg( (*it)->resourceName() ) );
+      mParent->error( QString::fromLatin1( "Unable to open resource '%1'!" ).
+                      arg( (*it)->resourceName() ) );
       continue;
     }
     mParent->connect( *it, SIGNAL( loadingFinished( Resource* ) ),

@@ -113,7 +113,8 @@ void XmlContactGroupWriter::writeContactReference( const ContactGroup::ContactRe
   writeEndElement();
 }
 
-void XmlContactGroupWriter::writeContactGroupReference( const ContactGroup::ContactGroupReference &reference )
+void XmlContactGroupWriter::writeContactGroupReference(
+  const ContactGroup::ContactGroupReference &reference )
 {
   writeStartElement( QLatin1String( "contactGroupReference" ) );
   writeAttribute( QLatin1String( "uid" ), reference.uid() );
@@ -298,7 +299,8 @@ bool XmlContactGroupReader::readContactReference( ContactGroup::ContactReference
   return true;
 }
 
-bool XmlContactGroupReader::readContactGroupReference( ContactGroup::ContactGroupReference &reference )
+bool XmlContactGroupReader::readContactGroupReference(
+  ContactGroup::ContactGroupReference &reference )
 {
   const QXmlStreamAttributes elementAttributes = attributes();
   const QStringRef uid = elementAttributes.value( QLatin1String( "uid" ) );

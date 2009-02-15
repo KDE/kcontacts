@@ -137,7 +137,8 @@ ResourceLDAPKIO::ResourceLDAPKIO( const KConfigGroup &group )
   d->mRDNPrefix = group.readEntry( "LdapRDNPrefix", 0 );
   d->mCachePolicy = group.readEntry( "LdapCachePolicy", 0 );
   d->mAutoCache = group.readEntry( "LdapAutoCache", true );
-  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", QLatin1String( "ldapkio" ) ) + QLatin1Char( '/' ) +
+  d->mCacheDst = KGlobal::dirs()->saveLocation(
+    "cache", QLatin1String( "ldapkio" ) ) + QLatin1Char( '/' ) +
                  type() + QLatin1Char( '_' ) + identifier();
   init();
 }
@@ -235,11 +236,13 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
     //insert new entry
     switch ( mRDNPrefix ) {
       case 1:
-        dn = mAttributes[ QLatin1String( "uid" ) ] + QLatin1Char( '=' ) + addr.uid() + QLatin1Char( ',' ) + mDn;
+        dn = mAttributes[ QLatin1String( "uid" ) ] +
+             QLatin1Char( '=' ) + addr.uid() + QLatin1Char( ',' ) + mDn;
         break;
       case 0:
       default:
-        dn = mAttributes[ QLatin1String( "commonName" ) ] + QLatin1Char( '=' ) + addr.assembledName() + QLatin1Char( ',' ) + mDn;
+        dn = mAttributes[ QLatin1String( "commonName" ) ] +
+             QLatin1Char( '=' ) + addr.assembledName() + QLatin1Char( ',' ) + mDn;
         break;
     }
   } else {
@@ -249,8 +252,9 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
       dn = mAttributes[ QLatin1String( "uid" ) ] + QLatin1Char( '=' ) + addr.uid() +
            QLatin1Char( ',' ) + olddn.section( QLatin1Char( ',' ), 1 );
     } else if ( olddn.startsWith( mAttributes[ QLatin1String( "commonName" ) ] ) ) {
-      dn = mAttributes[ QLatin1String( "commonName" ) ] + QLatin1Char( '=' ) + addr.assembledName()
-                                                        + QLatin1Char( ',' ) + olddn.section( QLatin1Char( ',' ), 1 );
+      dn = mAttributes[ QLatin1String( "commonName" ) ] +
+           QLatin1Char( '=' ) + addr.assembledName()
+           + QLatin1Char( ',' ) + olddn.section( QLatin1Char( ',' ), 1 );
     } else {
       dn = olddn;
     }
@@ -258,7 +262,8 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
     if ( olddn.toLower() != dn.toLower() ) {
       tmp = KLDAP::Ldif::assembleLine( QLatin1String( "dn" ), olddn ) + '\n';
       tmp += "changetype: modrdn\n";
-      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "newrdn" ), dn.section( QLatin1Char( ',' ), 0, 0 ) ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "newrdn" ),
+                                        dn.section( QLatin1Char( ',' ), 0, 0 ) ) + '\n';
       tmp += "deleteoldrdn: 1\n\n";
     }
   }
@@ -269,8 +274,9 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
   }
   if ( !mod ) {
     tmp += "objectClass: top\n";
-    const QStringList obclass = mAttributes[ QLatin1String( "objectClass" ) ].split( QLatin1Char( ',' ),
-                                                                                     QString::SkipEmptyParts );
+    const QStringList obclass =
+      mAttributes[ QLatin1String( "objectClass" ) ].split( QLatin1Char( ',' ),
+                                                           QString::SkipEmptyParts );
     for ( QStringList::const_iterator it = obclass.constBegin(); it != obclass.constEnd(); ++it ) {
       tmp += KLDAP::Ldif::assembleLine( QLatin1String( "objectClass" ), *it ) + '\n';
     }
@@ -288,7 +294,8 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
   number = addr.phoneNumber( PhoneNumber::Work );
   tmp += addEntry( mAttributes[ QLatin1String( "telephoneNumber" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Fax );
-  tmp += addEntry( mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ], number.number(), mod );
+  tmp += addEntry( mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ],
+                   number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Cell );
   tmp += addEntry( mAttributes[ QLatin1String( "mobile" ) ], number.number(), mod );
   number = addr.phoneNumber( PhoneNumber::Pager );
@@ -311,23 +318,28 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
 
   if ( !mAttributes[ QLatin1String( "mail" ) ].isEmpty() ) {
     if ( mod ) {
-      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "mail" ) ] ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ),
+                                        mAttributes[ QLatin1String( "mail" ) ] ) + '\n';
     }
     if ( mailIt != emails.constEnd() ) {
       tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "mail" ) ], *mailIt ) + '\n';
       mailIt ++;
     }
-    if ( mod && mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
+    if ( mod &&
+         mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
       tmp += "-\n";
     }
   }
 
   if ( !mAttributes[ QLatin1String( "mailAlias" ) ].isEmpty() ) {
-    if ( mod && mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
-      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "mailAlias" ) ] ) + '\n';
+    if ( mod &&
+         mAttributes[ QLatin1String( "mail" ) ] != mAttributes[ QLatin1String( "mailAlias" ) ] ) {
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ),
+                                        mAttributes[ QLatin1String( "mailAlias" ) ] ) + '\n';
     }
     for ( ; mailIt != emails.constEnd(); ++mailIt ) {
-      tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "mailAlias" ) ], *mailIt ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine(
+        mAttributes[ QLatin1String( "mailAlias" ) ], *mailIt ) + '\n';
     }
     if ( mod ) {
       tmp += "-\n";
@@ -341,7 +353,8 @@ bool ResourceLDAPKIO::Private::AddresseeToLDIF( QByteArray &ldif, const Addresse
     addr.photo().data().save( &buffer, "JPEG" );
 
     if ( mod ) {
-      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), mAttributes[ QLatin1String( "jpegPhoto" ) ] ) + '\n';
+      tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ),
+                                        mAttributes[ QLatin1String( "jpegPhoto" ) ] ) + '\n';
     }
     tmp += KLDAP::Ldif::assembleLine( mAttributes[ QLatin1String( "jpegPhoto" ) ], pic, 76 ) + '\n';
     if ( mod ) {
@@ -402,7 +415,8 @@ void ResourceLDAPKIO::init()
     d->mAttributes.insert( QLatin1String( "telephoneNumber" ), QLatin1String( "telephoneNumber" ) );
   }
   if ( !d->mAttributes.contains( QLatin1String( "facsimileTelephoneNumber" ) ) ) {
-    d->mAttributes.insert( QLatin1String( "facsimileTelephoneNumber" ), QLatin1String( "facsimileTelephoneNumber" ) );
+    d->mAttributes.insert( QLatin1String( "facsimileTelephoneNumber" ),
+                           QLatin1String( "facsimileTelephoneNumber" ) );
   }
   if ( !d->mAttributes.contains( QLatin1String( "mobile" ) ) ) {
     d->mAttributes.insert( QLatin1String( "mobile" ), QLatin1String( "mobile" ) );
@@ -705,7 +719,8 @@ void ResourceLDAPKIO::data( KIO::Job *job, const QByteArray &data )
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Work );
           d->mAddr.insertPhoneNumber( phone );
-        } else if ( name == d->mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ].toLower() ) {
+        } else if ( name ==
+                    d->mAttributes[ QLatin1String( "facsimileTelephoneNumber" ) ].toLower() ) {
           PhoneNumber phone( QString::fromUtf8( value, value.size() ),
             PhoneNumber::Fax );
           d->mAddr.insertPhoneNumber( phone );

@@ -112,8 +112,7 @@ bool Picture::operator!=( const Picture &p ) const
 bool Picture::isEmpty() const
 {
   return
-    ((d->mIntern == false && d->mUrl.isEmpty()) ||
-     (d->mIntern == true && d->mData.isNull()));
+    ( ( d->mIntern == false && d->mUrl.isEmpty() ) || ( d->mIntern == true && d->mData.isNull() ) );
 }
 
 void Picture::setUrl( const QString &url )
@@ -159,7 +158,8 @@ QString Picture::toString() const
 
   str += QLatin1String( "Picture {\n" );
   str += QString::fromLatin1( "  Type: %1\n" ).arg( d->mType );
-  str += QString::fromLatin1( "  IsIntern: %1\n" ).arg( d->mIntern ? QLatin1String( "true" ) : QLatin1String( "false" ) );
+  str += QString::fromLatin1( "  IsIntern: %1\n" ).
+         arg( d->mIntern ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIntern ) {
     QByteArray data;
     QBuffer buffer( &data );

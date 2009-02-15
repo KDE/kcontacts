@@ -208,7 +208,8 @@ QString AddresseeList::toString() const
 
   str += QLatin1String( "AddresseeList {\n" );
   str += QString::fromLatin1( "   Reverse Order: %1\n" ).arg( d->mReverseSorting ?
-                                                              QLatin1String( "true" ) : QLatin1String( "false" ) );
+                                                              QLatin1String( "true" ) :
+                                                              QLatin1String( "false" ) );
 
   QString crit;
   if ( Uid == d->mActiveSortingCriterion ) {
@@ -295,8 +296,8 @@ void AddresseeList::sortByTrait()
     iterator j2 = j1;
     ++j2;
     while ( j1 != i2 ) {
-      if ( (!d->mReverseSorting && Trait::lt( *j2, *j1 )) ||
-           (d->mReverseSorting && Trait::lt( *j1, *j2 )) ) {
+      if ( ( !d->mReverseSorting && Trait::lt( *j2, *j1 ) ) ||
+           ( d->mReverseSorting && Trait::lt( *j1, *j2 ) ) ) {
         qSwap( *j1, *j2 );
       }
       ++j1;

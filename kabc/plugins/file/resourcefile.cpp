@@ -311,12 +311,14 @@ bool ResourceFile::loadDistributionLists()
     DistributionList *list = 0;
     if ( cgId.isValid() ) {
       const QString identifier = cgId.readEntry( name, QString() );
-      if ( !identifier.isEmpty() )
+      if ( !identifier.isEmpty() ) {
         list = new DistributionList( this, identifier, name );
+      }
     }
 
-    if ( list == 0 )
-        list = new DistributionList( this, name );
+    if ( list == 0 ) {
+      list = new DistributionList( this, name );
+    }
 
     MissingEntryList missingEntries;
     QStringList::ConstIterator entryIt = value.constBegin();
@@ -463,9 +465,12 @@ void ResourceFile::fileChanged( const QString &path )
 
 void ResourceFile::removeAddressee( const Addressee &addr )
 {
-  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/photos/" ) ) + addr.uid() );
-  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/logos/" ) ) + addr.uid() );
-  QFile::remove( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/sounds/" ) ) + addr.uid() );
+  QFile::remove( KStandardDirs::locateLocal(
+                   "data", QLatin1String( "kabc/photos/" ) ) + addr.uid() );
+  QFile::remove( KStandardDirs::locateLocal(
+                   "data", QLatin1String( "kabc/logos/" ) ) + addr.uid() );
+  QFile::remove( KStandardDirs::locateLocal(
+                   "data", QLatin1String( "kabc/sounds/" ) ) + addr.uid() );
 
   mAddrMap.remove( addr.uid() );
 }

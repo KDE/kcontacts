@@ -117,10 +117,12 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
               const QList<QByteArray> args = pair[ 1 ].split( ',' );
               QList<QByteArray>::ConstIterator argIt;
               for ( argIt = args.constBegin(); argIt != args.constEnd(); ++argIt ) {
-                vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ), QString::fromLatin1( *argIt ) );
+                vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
+                                        QString::fromLatin1( *argIt ) );
               }
             } else {
-              vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ), QString::fromLatin1( pair[ 1 ] ) );
+              vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
+                                      QString::fromLatin1( pair[ 1 ] ) );
             }
           }
         }
@@ -130,13 +132,17 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         QByteArray output;
         bool wasBase64Encoded = false;
 
-        if ( vCardLine.parameterList().contains( QLatin1String( "encoding" ) ) ) { // have to decode the data
-          if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() == QLatin1String( "b" ) ||
-               vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() == QLatin1String( "base64" ) ) {
+        if ( vCardLine.parameterList().contains( QLatin1String( "encoding" ) ) ) {
+          // have to decode the data
+          if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
+               QLatin1String( "b" ) ||
+               vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
+               QLatin1String( "base64" ) ) {
             output = QByteArray::fromBase64( value );
             wasBase64Encoded = true;
           }
-          else if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() == QLatin1String( "quoted-printable" ) ) {
+          else if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
+                    QLatin1String( "quoted-printable" ) ) {
             // join any qp-folded lines
             while ( value.endsWith( '=' ) && it != linesEnd ) {
               value.chop( 1 ); // remove the '='
@@ -151,9 +157,10 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
           output = value;
         }
 
-        if ( vCardLine.parameterList().contains( QLatin1String( "charset" ) ) ) { // have to convert the data
-          QTextCodec *codec =
-            QTextCodec::codecForName( vCardLine.parameter( QLatin1String( "charset" ) ).toLatin1() );
+        if ( vCardLine.parameterList().contains( QLatin1String( "charset" ) ) ) {
+          // have to convert the data
+          QTextCodec *codec = QTextCodec::codecForName(
+            vCardLine.parameter( QLatin1String( "charset" ) ).toLatin1() );
           if ( codec ) {
             vCardLine.setValue( codec->toUnicode( output ) );
           } else {
@@ -252,10 +259,11 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           QByteArray input, output;
 
           // handle charset
-          if ( (*lineIt).parameterList().contains( QLatin1String( "charset" ) ) ) { // have to convert the data
+          if ( (*lineIt).parameterList().contains( QLatin1String( "charset" ) ) ) {
+            // have to convert the data
             const QString value = (*lineIt).value().toString();
-            QTextCodec *codec =
-              QTextCodec::codecForName( (*lineIt).parameter( QLatin1String( "charset" ) ).toLatin1() );
+            QTextCodec *codec = QTextCodec::codecForName(
+              (*lineIt).parameter( QLatin1String( "charset" ) ).toLatin1() );
             if ( codec ) {
               input = codec->fromUnicode( value );
             } else {

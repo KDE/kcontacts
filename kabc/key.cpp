@@ -185,9 +185,11 @@ QString Key::toString() const
   if ( d->mType == Custom ) {
     str += QString::fromLatin1( "  CustomType: %1\n" ).arg( d->mCustomTypeString );
   }
-  str += QString::fromLatin1( "  IsBinary: %1\n" ).arg( d->mIsBinary ? QLatin1String( "true" ) : QLatin1String( "false" ) );
+  str += QString::fromLatin1( "  IsBinary: %1\n" ).
+         arg( d->mIsBinary ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIsBinary ) {
-    str += QString::fromLatin1( "  Binary: %1\n" ).arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
+    str += QString::fromLatin1( "  Binary: %1\n" ).
+           arg( QString::fromLatin1( d->mBinaryData.toBase64() ) );
   } else {
     str += QString::fromLatin1( "  Text: %1\n" ).arg( d->mTextData );
   }

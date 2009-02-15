@@ -81,7 +81,7 @@ EmailSelector::EmailSelector( const QStringList &emails, const QString &current,
   d->mButtonGroup = new QButtonGroup( box );
   topLayout->addWidget( box );
 
-  QVBoxLayout *layout = new QVBoxLayout; 
+  QVBoxLayout *layout = new QVBoxLayout;
 
   QStringList::ConstIterator it;
   for ( it = emails.begin(); it != emails.end(); ++it ) {
@@ -94,7 +94,7 @@ EmailSelector::EmailSelector( const QStringList &emails, const QString &current,
     }
   }
   layout->addStretch( 1 );
-  box->setLayout( layout ); 
+  box->setLayout( layout );
 }
 
 EmailSelector::~EmailSelector()

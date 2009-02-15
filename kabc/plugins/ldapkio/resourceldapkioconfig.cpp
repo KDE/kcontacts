@@ -252,7 +252,8 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   mDefaultMap.insert( QLatin1String( "mailAlias" ), QString() );
   mDefaultMap.insert( QLatin1String( "phoneNumber" ), QLatin1String( "homePhone" ) );
   mDefaultMap.insert( QLatin1String( "telephoneNumber" ), QLatin1String( "telephoneNumber" ) );
-  mDefaultMap.insert( QLatin1String( "facsimileTelephoneNumber" ), QLatin1String( "facsimileTelephoneNumber" ) );
+  mDefaultMap.insert( QLatin1String( "facsimileTelephoneNumber" ),
+                      QLatin1String( "facsimileTelephoneNumber" ) );
   mDefaultMap.insert( QLatin1String( "mobile" ), QLatin1String( "mobile" ) );
   mDefaultMap.insert( QLatin1String( "pager" ), QLatin1String( "pager" ) );
   mDefaultMap.insert( QLatin1String( "description" ), QLatin1String( "description" ) );

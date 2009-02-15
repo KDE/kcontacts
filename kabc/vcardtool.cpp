@@ -239,9 +239,11 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // ORG
     QStringList organization;
-    organization.append( ( *addrIt ).organization().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    organization.append( ( *addrIt ).organization().replace( QLatin1Char( ';' ),
+                                                             QLatin1String( "\\;" ) ) );
     if ( !( *addrIt ).department().isEmpty() ) {
-      organization.append( ( *addrIt ).department().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      organization.append( ( *addrIt ).department().replace( QLatin1Char( ';' ),
+                                                             QLatin1String( "\\;" ) ) );
     }
     VCardLine orgLine( QLatin1String( "ORG" ), organization.join( QLatin1String( ";" ) ) );
     if ( version == VCard::v2_1 && needsEncoding( organization.join( QLatin1String( ";" ) ) ) ) {
@@ -326,7 +328,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // VERSION
     if ( version == VCard::v2_1 ) {
-      card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" )  ) );
+      card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" ) ) );
     }
     if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "3.0" ) ) );
@@ -335,7 +337,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // X-
     const QStringList customs = (*addrIt).customs();
     for ( strIt = customs.begin(); strIt != customs.end(); ++strIt ) {
-      const QString identifier = QLatin1String( "X-" ) + (*strIt).left( (*strIt).indexOf( QLatin1Char( ':' ) ) );
+      const QString identifier = QLatin1String( "X-" ) +
+                                 (*strIt).left( (*strIt).indexOf( QLatin1Char( ':' ) ) );
       const QString value = (*strIt).mid( (*strIt).indexOf( QLatin1Char( ':' ) ) + 1 );
       if ( value.isEmpty() ) {
         continue;
@@ -435,7 +438,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         // EMAIL
         else if ( identifier == QLatin1String( "email" ) ) {
           const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
-          addr.insertEmail( (*lineIt).value().toString(), types.contains( QLatin1String( "PREF" ) ) );
+          addr.insertEmail( (*lineIt).value().toString(),
+                            types.contains( QLatin1String( "PREF" ) ) );
         }
 
         // FN

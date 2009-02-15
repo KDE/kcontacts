@@ -101,13 +101,20 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   }
 //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
 
-  ldif_out( t, QLatin1String( "telephonenumber" ), addr.phoneNumber( PhoneNumber::Work ).number() );
-  ldif_out( t, QLatin1String( "facsimiletelephonenumber" ), addr.phoneNumber( PhoneNumber::Fax ).number() );
-  ldif_out( t, QLatin1String( "homephone" ), addr.phoneNumber( PhoneNumber::Home ).number() );
-  ldif_out( t, QLatin1String( "mobile" ), addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 7
-  ldif_out( t, QLatin1String( "cellphone" ), addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 4.x
-  ldif_out( t, QLatin1String( "pager" ), addr.phoneNumber( PhoneNumber::Pager ).number() );
-  ldif_out( t, QLatin1String( "pagerphone" ), addr.phoneNumber( PhoneNumber::Pager ).number() );
+  ldif_out( t, QLatin1String( "telephonenumber" ),
+            addr.phoneNumber( PhoneNumber::Work ).number() );
+  ldif_out( t, QLatin1String( "facsimiletelephonenumber" ),
+            addr.phoneNumber( PhoneNumber::Fax ).number() );
+  ldif_out( t, QLatin1String( "homephone" ),
+            addr.phoneNumber( PhoneNumber::Home ).number() );
+  ldif_out( t, QLatin1String( "mobile" ),
+            addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 7
+  ldif_out( t, QLatin1String( "cellphone" ),
+            addr.phoneNumber( PhoneNumber::Cell ).number() ); // Netscape 4.x
+  ldif_out( t, QLatin1String( "pager" ),
+            addr.phoneNumber( PhoneNumber::Pager ).number() );
+  ldif_out( t, QLatin1String( "pagerphone" ),
+            addr.phoneNumber( PhoneNumber::Pager ).number() );
 
   ldif_out( t, QLatin1String( "streethomeaddress" ), homeAddr.street() );
   ldif_out( t, QLatin1String( "postalcode" ), workAddr.postalCode() );
@@ -123,7 +130,8 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, QLatin1String( "mozillahomelocalityname" ), homeAddr.locality() ); // Netscape 7
   ldif_out( t, QLatin1String( "mozillahomestate" ), homeAddr.region() );
   ldif_out( t, QLatin1String( "mozillahomepostalcode" ), homeAddr.postalCode() );
-  ldif_out( t, QLatin1String( "mozillahomecountryname" ), Address::ISOtoCountry( homeAddr.country() ) );
+  ldif_out( t, QLatin1String( "mozillahomecountryname" ),
+            Address::ISOtoCountry( homeAddr.country() ) );
   ldif_out( t, QLatin1String( "locality" ), workAddr.locality() );
   ldif_out( t, QLatin1String( "streetaddress" ), workAddr.street() ); // Netscape 4.x
 

@@ -338,8 +338,9 @@ QString Address::typeLabel() const
   TypeList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
-      if ( !first )
+      if ( !first ) {
         label.append( QLatin1Char( '/' ) );
+      }
       label.append( typeLabel( *it ) );
       if ( first ) {
         first = false;
@@ -528,7 +529,8 @@ QString Address::toString() const
   QString str;
 
   str += QLatin1String( "Address {\n" );
-  str += QString::fromLatin1( "  IsEmpty: %1\n" ).arg( d->mEmpty ? QLatin1String( "true" ) : QLatin1String( "false" ) );
+  str += QString::fromLatin1( "  IsEmpty: %1\n" ).
+         arg( d->mEmpty ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   str += QString::fromLatin1( "  Id: %1\n" ).arg( d->mId );
   str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
   str += QString::fromLatin1( "  Post Office Box: %1\n" ).arg( d->mPostOfficeBox );

@@ -61,14 +61,16 @@ int main( int argc, char **argv )
   addressee.setProductId( QLatin1String( "testId" ) );
   addressee.setRevision( QDateTime::currentDateTime() );
   addressee.setSortString( QLatin1String( "koenig" ) );
-  addressee.setUrl( KUrl( QLatin1String( "http://wgess16.dyndns.org") ) );
+  addressee.setUrl( KUrl( QLatin1String( "http://wgess16.dyndns.org" ) ) );
   addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Confidential ) );
 
   addressee.insertEmail( QLatin1String( "tokoe@kde.org" ), true );
   addressee.insertEmail( QLatin1String( "tokoe82@yahoo.de" ), true );
 
-  KABC::PhoneNumber phone1( QLatin1String( "3541523475" ), KABC::PhoneNumber::Pref | KABC::PhoneNumber::Home );
-  KABC::PhoneNumber phone2( QLatin1String( "+46745673475" ), KABC::PhoneNumber::Work );
+  KABC::PhoneNumber phone1( QLatin1String( "3541523475" ),
+                            KABC::PhoneNumber::Pref | KABC::PhoneNumber::Home );
+  KABC::PhoneNumber phone2( QLatin1String( "+46745673475" ),
+                            KABC::PhoneNumber::Work );
   addressee.insertPhoneNumber( phone1 );
   addressee.insertPhoneNumber( phone2 );
 
@@ -87,9 +89,12 @@ int main( int argc, char **argv )
   a.setCountry( QLatin1String( "U.S.A." ) );
   addressee.insertAddress( a );
 
-  addressee.insertCustom( QLatin1String( "1hsdf" ), QLatin1String( "ertuer" ), QLatin1String( "iurt") );
-  addressee.insertCustom( QLatin1String( "2hsdf" ), QLatin1String( "ertuer" ), QLatin1String( "iurt") );
-  addressee.insertCustom( QLatin1String( "3hsdf" ), QLatin1String( "ertuer" ), QLatin1String( "iurt") );
+  addressee.insertCustom( QLatin1String( "1hsdf" ), QLatin1String( "ertuer" ),
+                          QLatin1String( "iurt" ) );
+  addressee.insertCustom( QLatin1String( "2hsdf" ), QLatin1String( "ertuer" ),
+                          QLatin1String( "iurt" ) );
+  addressee.insertCustom( QLatin1String( "3hsdf" ), QLatin1String( "ertuer" ),
+                          QLatin1String( "iurt" ) );
 
   KABC::Addressee::List list;
   for ( int i = 0; i < 1000; ++i ) {

@@ -131,7 +131,8 @@ bool Lock::lock()
 
   QString lockUniqueName;
   lockUniqueName = d->mIdentifier + KRandom::randomString( 8 );
-  d->mLockUniqueName = KStandardDirs::locateLocal( "data", QLatin1String( "kabc/lock/" ) + lockUniqueName );
+  d->mLockUniqueName = KStandardDirs::locateLocal(
+    "data", QLatin1String( "kabc/lock/" ) + lockUniqueName );
   kDebug() << "-- lock unique name:" << d->mLockUniqueName;
 
   // Create unique file
