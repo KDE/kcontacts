@@ -39,7 +39,7 @@ class ContactGroup;
  * @author Kevin Krammer <kevin.krammer@gmx.at>
  * @since 4.3
  */
-class KABC_EXPORT ContactGroupTool
+class KABC_EXPORT ContactGroupTool //krazy:exclude=dpointer only static functions
 {
   public:
     /**
