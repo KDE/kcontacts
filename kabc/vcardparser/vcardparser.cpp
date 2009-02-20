@@ -176,14 +176,14 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
       }
 
       // we do not save the start and end tag as vcardline
-      if ( (*it).toLower().startsWith( "begin:vcard" ) ) {
+      if ( (*it).toLower().startsWith( "begin:vcard" ) ) { //krazy:exclude=strings
         inVCard = true;
         currentLine.clear();
         currentVCard.clear(); // flush vcard
         continue;
       }
 
-      if ( (*it).toLower().startsWith( "end:vcard" ) ) {
+      if ( (*it).toLower().startsWith( "end:vcard" ) ) { //krazy:exclude=strings
         inVCard = false;
         vCardList.append( currentVCard );
         currentLine.clear();
