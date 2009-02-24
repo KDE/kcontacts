@@ -47,6 +47,7 @@ Comment[el]=Προσφέρει πρόσβαση σε επαφές σε απομ�
 Comment[es]=Provee acceso a los contactos en un archivo remoto utilizando la infraestructura de red KIO de KDE. Soporta archivos VCard estándar y otros formatos dependiendo en la disponibilidad de los complementos
 Comment[et]=Võimaldab kasutada võrgufaile KDE võrguraamistiku KIO abil. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust
 Comment[fr]=Fourni l'accès aux contacts stockés dans des fichiers distants en utilisant le mécanisme réseau KIO de KDE. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
+Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha i gcianchomhaid tríd an gcreatlach líonra KIO atá cuid de KDE. Tacaítear le comhaid v-Chárta agus formáidí eile, ag brath ar na breiseáin atá ar fáil
 Comment[gl]=Dá aceso a contactos gardados en ficheiros remotos mediante a infraestrutura de rede KIO, de KDE. Admite ficheiros vCard estándar e outros formatos en función das extensións dispoñíbeis
 Comment[hu]=Távoli fájlokban található névjegyek elérését biztosítja a KDE KIO keretrendszeren keresztül. Támogatja a standard vCard formátumot, bővítmények segítségével más formátumok is kezelhetők.
 Comment[it]=Fornisce accesso a contatti su file remoti usando KIO, l'infrastruttura di rete di KDE. Gestisce file in standard VCard e altri formati in base ai plugin disponibili
