@@ -168,7 +168,7 @@ void StdAddressBook::Private::init( bool asynchronous )
   if ( !res ) {
     res = manager->createResource( QLatin1String( "file" ) );
     if ( res ) {
-      res->setResourceName( i18n( "Default Addressbook" ) );
+      res->setResourceName( i18n( "Default Address Book" ) );
       mParent->addResource( res );
     } else {
       kDebug() << "No resource available!!!";
