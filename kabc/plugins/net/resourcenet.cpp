@@ -241,6 +241,7 @@ bool ResourceNet::save( Ticket *ticket )
 
   if ( ok ) {
     saveToFile( &tempFile );
+    tempFile.flush();
   }
 
   if ( !ok ) {
@@ -273,6 +274,7 @@ bool ResourceNet::asyncSave( Ticket *ticket )
   bool ok = createLocalTempFile();
   if ( ok ) {
     saveToFile( mTempFile );
+    mTempFile->flush();
   }
 
   if ( !ok ) {
