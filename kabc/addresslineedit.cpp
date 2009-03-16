@@ -90,7 +90,7 @@ void AddressLineEdit::Private::init()
                         mParent, SLOT( slotCompletion() ) );
 
       KCompletionBox *box = mParent->completionBox();
-      mParent->connect( box, SIGNAL( highlighted( const QString& ) ),
+      mParent->connect( box, SIGNAL( currentTextChanged( const QString& ) ),
                         mParent, SLOT( slotPopupCompletion( const QString& ) ) );
       mParent->connect( box, SIGNAL( userCancelled( const QString& ) ),
                         SLOT( userCancelled( const QString& ) ) );
