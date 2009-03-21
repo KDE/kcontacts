@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Directory
+Name=Folder
 Name[be]=Тэчка
 Name[ca]=Directori
 Name[cs]=Adresář
@@ -40,7 +40,7 @@ Name[uk]=Каталог
 Name[x-test]=xxDirectoryxx
 Name[zh_CN]=目录
 Name[zh_TW]=目錄
-Comment=Provides access to contacts, each stored in a single file, in a given directory. Supports standard VCard file and other formats depending on availability of plugins.
+Comment=Provides access to contacts, each stored in a single file, in a given folder. Supports standard VCard file and other formats depending on availability of plugins.
 Comment[et]=Võimaldab kasutada eraldi failidesse salvestatud kontakte määratud kataloogis. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust.
 Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha, gach ceann stóráilte i gcomhad aonair, i gcomhadlann sonraithe. Tacaítear le comhaid v-Chárta agus le formáidí eile, ag brath ar na breiseáin atá ar fáil.
 Comment[gl]=Dá acceso aos contactos, cada un gardado nun ficheiro nun cartafol dado. Admite ficheiros vCard estándar e outros formatos, en función da dispoñibilidade de extensións.
