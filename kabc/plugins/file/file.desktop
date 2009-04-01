@@ -40,6 +40,7 @@ Name[x-test]=xxFilexx
 Name[zh_CN]=文件
 Name[zh_TW]=檔案
 Comment=Provides access to contacts stored in a single local file. Supports standard VCard files and other formats depending on available plugins.
+Comment[es]=Provee acceso a los contactos almacenados en un único archivo local. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los componentes.
 Comment[et]=Võimaldab kasutada kohalikku faili salvestatud kontakte. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust.
 Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha, stóráilte i gcomhad aonair. Tacaítear le comhaid v-Chárta agus formáidí eile, ag brath ar na breiseáin atá ar fáil.
 Comment[gl]=Dá acceso a contactos gardados nun único ficheiro local. Admite ficheiros vCard estándar e outros formatos en función das extensións dispoñíbeis.
