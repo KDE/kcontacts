@@ -46,6 +46,7 @@ Comment[et]=Võimaldab kasutada võrgufaile KDE võrguraamistiku KIO abil. Toeta
 Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha i gcianchomhaid tríd an gcreatlach líonra KIO atá cuid de KDE. Tacaítear le comhaid v-Chárta agus formáidí eile, ag brath ar na breiseáin atá ar fáil.
 Comment[gl]=Dá acceso a contactos gardados en ficheiros remotos mediante a infraestrutura de rede KIO, de KDE. Admite ficheiros vCard estándar e outros formatos en función das extensións dispoñíbeis.
 Comment[ja]=KDE のネットワークフレームワーク KIO を使って、リモートファイルに保存されている連絡先へのアクセスを提供します。標準の VCard ファイルと、利用可能なプラグインに応じたフォーマットをサポートします。
+Comment[nb]=Gir tilgang til kontakter i nettverksfiler, ved bruk av KDEs rammeverk KIO for nettverk. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg.
 Comment[nds]=Stellt Togriep op Kontakten binnen feern Dateien praat, bruukt KDE sien Nettwark-Rahmenwark KIO. Ünnerstütt VCard-Dateien un anner Formaten na de verföögboren Modulen.
 Comment[pt]=Oferece o acesso aos contactos em ficheiros remotos, disponíveis através de um KIO da plataforma de rede do KDE.  Suporta os ficheiros VCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'.
 Comment[pt_BR]=Fornece acesso aos contatos em arquivos remotos usando o KIO framework da rede do KDE. O suporte à arquivos VCard padrão e outros formatos dependem da disponibilidade de plug-ins.
