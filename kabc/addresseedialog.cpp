@@ -317,7 +317,7 @@ void AddresseeDialog::Private::addSelected( QTreeWidgetItem *item )
 
 void AddresseeDialog::Private::removeSelected()
 {
-  QList<QTreeWidgetItem*> selected = mAddresseeList->selectedItems();
+  QList<QTreeWidgetItem*> selected = mSelectedList->selectedItems();
   if ( selected.count() == 0 ) {
     return;
   }
