@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Folder
+Name[de]=Ordner
 Name[es]=Carpeta
 Name[et]=Kataloog
 Name[ga]=Fillteán
@@ -11,6 +12,7 @@ Name[uk]=Тека
 Name[x-test]=xxFolderxx
 Name[zh_TW]=資料夾
 Comment=Provides access to contacts, each stored in a single file, in a given folder. Supports standard VCard file and other formats depending on availability of plugins.
+Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem vorgegebenen Ordner gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[es]=Provee acceso a los contactos, cada uno almacenado en un archivo diferente, dentro de un directorio determinado. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los complementos
 Comment[et]=Võimaldab kasutada eraldi failidesse salvestatud kontakte määratud kataloogis. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust.
 Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha, gach ceann stóráilte i gcomhad aonair, i bhfillteán sonraithe. Tacaítear le comhaid v-Chárta agus le formáidí eile, ag brath ar na breiseáin atá ar fáil.
