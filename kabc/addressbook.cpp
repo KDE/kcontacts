@@ -43,6 +43,7 @@ class AddressBook::Private
     QList<Resource*> mPendingLoadResources;
     QList<Resource*> mPendingSaveResources;
     Iterator end;
+    ConstIterator constEnd;
 };
 
 struct AddressBook::Iterator::IteratorData
@@ -193,6 +194,7 @@ AddressBook::ConstIterator::ConstIterator( const AddressBook::ConstIterator &i )
   d->mCurrRes = i.d->mCurrRes;
 }
 
+#ifndef QT_STRICT_ITERATORS
 AddressBook::ConstIterator::ConstIterator( const AddressBook::Iterator &i )
   :d( new ConstIteratorData )
 {
@@ -200,6 +202,7 @@ AddressBook::ConstIterator::ConstIterator( const AddressBook::Iterator &i )
   d->mResources = i.d->mResources;
   d->mCurrRes = i.d->mCurrRes;
 }
+#endif
 
 AddressBook::ConstIterator &AddressBook::ConstIterator::operator=
   ( const AddressBook::ConstIterator &i )
@@ -234,7 +237,7 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++()
 {
   do {
     bool jumped = false;
-    while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() ) {
+    while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() ) {
       // at end of addressee list of resource
       if ( d->mCurrRes == d->mResources.count() - 1 ) {
         return *this;
@@ -243,14 +246,14 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++()
       d->mCurrRes++; // jump to next resource
 
       jumped = true;
-      d->mIt = ( d->mResources[ d->mCurrRes ] )->begin();
+      d->mIt = ( d->mResources[ d->mCurrRes ] )->constBegin();
     }
 
     if ( !jumped ) {
       (d->mIt)++;
     }
 
-  } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() );
+  } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() );
 
   return *this;
 }
@@ -259,7 +262,7 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++(int)
 {
   do {
     bool jumped = false;
-    while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() ) {
+    while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() ) {
       // at end of addressee list of resource
       if ( d->mCurrRes == d->mResources.count() - 1 ) {
         return *this;
@@ -268,14 +271,14 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++(int)
       d->mCurrRes++; // jump to next resource
 
       jumped = true;
-      d->mIt = ( d->mResources[ d->mCurrRes ] )->begin();
+      d->mIt = ( d->mResources[ d->mCurrRes ] )->constBegin();
     }
 
     if ( !jumped ) {
       (d->mIt)++;
     }
 
-  } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() );
+  } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() );
 
   return *this;
 }
@@ -310,6 +313,8 @@ AddressBook::AddressBook()
   d->mManager = new KRES::Manager<Resource>( QLatin1String( "contact" ) );
   d->end.d->mResources = QList<Resource*>();
   d->end.d->mCurrRes = -1;
+  d->constEnd.d->mResources = QList<Resource*>();
+  d->constEnd.d->mCurrRes = -1;
 }
 
 AddressBook::AddressBook( const QString &config )
@@ -325,6 +330,8 @@ AddressBook::AddressBook( const QString &config )
   d->mManager->readConfig( d->mConfig );
   d->end.d->mResources = QList<Resource*>();
   d->end.d->mCurrRes = -1;
+  d->constEnd.d->mResources = QList<Resource*>();
+  d->constEnd.d->mCurrRes = -1;
 }
 
 AddressBook::~AddressBook()
@@ -450,19 +457,19 @@ AddressBook::ConstIterator AddressBook::begin() const
     return end();
   }
 
-  Iterator it = Iterator();
+  ConstIterator it = ConstIterator();
   it.d->mResources = list;
   it.d->mCurrRes = 0;
-  it.d->mIt = ( it.d->mResources[ it.d->mCurrRes ] )->begin();
+  it.d->mIt = ( it.d->mResources[ it.d->mCurrRes ] )->constBegin();
 
-  while ( it.d->mIt == ( it.d->mResources[ it.d->mCurrRes ] )->end() ) {
+  while ( it.d->mIt == ( it.d->mResources[ it.d->mCurrRes ] )->constEnd() ) {
     if ( it.d->mCurrRes == it.d->mResources.count() - 1 ) {
       return end();
     }
 
     it.d->mCurrRes++;
 
-    it.d->mIt = ( it.d->mResources[ it.d->mCurrRes ] )->begin();
+    it.d->mIt = ( it.d->mResources[ it.d->mCurrRes ] )->constBegin();
   }
 
   return it;
@@ -488,12 +495,12 @@ AddressBook::ConstIterator AddressBook::end() const
 
   if ( resIt == d->mManager->activeBegin() || ! *(--resIt) ) {
     // no resource available
-    d->end.d->mIt = Resource::Iterator();
+    d->constEnd.d->mIt = Resource::ConstIterator();
   } else {
-    d->end.d->mIt = (*resIt)->end();
+    d->constEnd.d->mIt = (*resIt)->constEnd();
   }
 
-  return d->end;
+  return d->constEnd;
 }
 
 void AddressBook::clear()

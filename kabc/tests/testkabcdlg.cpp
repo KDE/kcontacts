@@ -46,7 +46,7 @@ int main( int argc, char **argv )
     Addressee::List al = AddresseeDialog::getAddressees( 0 );
     Addressee::List::ConstIterator it;
     kDebug() << "Selected Addressees:";
-    for ( it = al.begin(); it != al.end(); ++it ) {
+    for ( it = al.constBegin(); it != al.constEnd(); ++it ) {
       kDebug() << "  " << (*it).fullEmail();
     }
   } else {

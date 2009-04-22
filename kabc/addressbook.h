@@ -178,11 +178,14 @@ class KABC_EXPORT AddressBook : public QObject
         */
         ConstIterator( const ConstIterator & );
 
+#ifndef QT_STRICT_ITERATORS
         /**
           Copy constructor. Constructs a ConstIterator from
           an non-@c const Iterator
         */
         ConstIterator( const Iterator & );
+#endif
+
         ~ConstIterator();
 
         /**
@@ -352,6 +355,7 @@ class KABC_EXPORT AddressBook : public QObject
       This iterator equals end() if the address book is empty.
      */
     ConstIterator begin() const;
+    ConstIterator constBegin() const { return begin(); }
 
     /**
       This is an overloaded member function, provided for convenience. It
@@ -364,6 +368,7 @@ class KABC_EXPORT AddressBook : public QObject
       This iterator equals begin() if the address book is empty.
      */
     ConstIterator end() const;
+    ConstIterator constEnd() const { return end(); }
 
     /**
       This is an overloaded member function, provided for convenience. It

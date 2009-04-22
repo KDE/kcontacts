@@ -124,7 +124,7 @@ void LockWidget::updateLockView()
   QStringList files = dir.entryList( QStringList( QLatin1String( "*.lock" ) ) );
 
   QStringList::ConstIterator it;
-  for ( it = files.begin(); it != files.end(); ++it ) {
+  for ( it = files.constBegin(); it != files.constEnd(); ++it ) {
     if ( *it == QLatin1String( "." ) || *it == QLatin1String( ".." ) ) {
       continue;
     }

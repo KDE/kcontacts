@@ -85,9 +85,9 @@ void ResourceDirConfig::loadSettings( KRES::Resource *res )
 
   mFormatBox->setCurrentIndex( mFormatTypes.indexOf( resource->format() ) );
 
-  mFileNameEdit->setPath( resource->path() );
+  mFileNameEdit->setUrl( resource->path() );
   if ( mFileNameEdit->url().isEmpty() ) {
-    mFileNameEdit->setPath( KABC::StdAddressBook::directoryName() );
+    mFileNameEdit->setUrl( KABC::StdAddressBook::directoryName() );
   }
 }
 

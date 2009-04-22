@@ -175,11 +175,13 @@ class KABC_EXPORT Resource : public KRES::Resource
          * Copy constructor
          */
         ConstIterator( const ConstIterator & );
+#ifndef QT_STRICT_ITERATORS
         /**
          * Copy constructor. Constructs a ConstIterator from
          * an non-@c const Iterator
          */
         ConstIterator( const Iterator & );
+#endif
         virtual ~ConstIterator();
 
         /**
@@ -279,6 +281,7 @@ class KABC_EXPORT Resource : public KRES::Resource
       This iterator equals end() if the resource is empty.
      */
     virtual ConstIterator begin() const;
+    ConstIterator constBegin() const { return begin(); }
 
     /**
       This is an overloaded member function, provided for convenience. It
@@ -291,6 +294,7 @@ class KABC_EXPORT Resource : public KRES::Resource
       This iterator equals begin() if the resource is empty.
      */
     virtual ConstIterator end() const;
+    ConstIterator constEnd() const { return end(); }
 
     /**
       This is an overloaded member function, provided for convenience. It

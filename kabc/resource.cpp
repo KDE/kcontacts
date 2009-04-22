@@ -143,11 +143,13 @@ Resource::ConstIterator::ConstIterator( const Resource::ConstIterator &other )
   d->mIt = other.d->mIt;
 }
 
+#ifndef QT_STRICT_ITERATORS
 Resource::ConstIterator::ConstIterator( const Resource::Iterator &other )
   : d( new Private )
 {
   d->mIt = other.d->mIt;
 }
+#endif
 
 Resource::ConstIterator &Resource::ConstIterator::operator=( const Resource::ConstIterator &other )
 {
@@ -300,12 +302,12 @@ Addressee Resource::findByUid( const QString &uid )
   return Addressee();
 }
 
-Addressee::List Resource::findByName( const QString &name )
+Addressee::List Resource::findByName( const QString &name ) // TODO: const
 {
   Addressee::List results;
 
   ConstIterator it;
-  for ( it = begin(); it != end(); ++it ) {
+  for ( it = constBegin(); it != constEnd(); ++it ) {
     if ( name == (*it).name() ) {
       results.append( *it );
     }
@@ -314,13 +316,13 @@ Addressee::List Resource::findByName( const QString &name )
   return results;
 }
 
-Addressee::List Resource::findByEmail( const QString &email )
+Addressee::List Resource::findByEmail( const QString &email ) // TODO: const
 {
   Addressee::List results;
   const QString lowerEmail = email.toLower();
 
   ConstIterator it;
-  for ( it = begin(); it != end(); ++it ) {
+  for ( it = constBegin(); it != constEnd(); ++it ) {
     const QStringList mailList = (*it).emails();
     for ( QStringList::ConstIterator ite = mailList.begin(); ite != mailList.end(); ++ite ) {
       if ( lowerEmail == (*ite).toLower() ) {
@@ -332,12 +334,12 @@ Addressee::List Resource::findByEmail( const QString &email )
   return results;
 }
 
-Addressee::List Resource::findByCategory( const QString &category )
+Addressee::List Resource::findByCategory( const QString &category ) // TODO: const
 {
   Addressee::List results;
 
   ConstIterator it;
-  for ( it = begin(); it != end(); ++it ) {
+  for ( it = constBegin(); it != constEnd(); ++it ) {
     if ( (*it).hasCategory( category ) ) {
       results.append( *it );
     }
