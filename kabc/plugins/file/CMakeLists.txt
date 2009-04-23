@@ -13,7 +13,7 @@ target_link_libraries(kabc_file_core ${KDE4_KIO_LIBS} kabc kcal kresources)
 
 set_target_properties(kabc_file_core PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install(TARGETS kabc_file_core ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kabc_file_core EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### kabc_file plugin ###############
 
