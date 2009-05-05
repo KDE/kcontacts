@@ -533,12 +533,12 @@ QString Address::toString() const
          arg( d->mEmpty ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   str += QString::fromLatin1( "  Id: %1\n" ).arg( d->mId );
   str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString::fromLatin1( "  Post Office Box: %1\n" ).arg( d->mPostOfficeBox );
+  str += QString::fromLatin1( "  Post office box: %1\n" ).arg( d->mPostOfficeBox );
   str += QString::fromLatin1( "  Extended: %1\n" ).arg( d->mExtended );
   str += QString::fromLatin1( "  Street: %1\n" ).arg( d->mStreet );
   str += QString::fromLatin1( "  Locality: %1\n" ).arg( d->mLocality );
   str += QString::fromLatin1( "  Region: %1\n" ).arg( d->mRegion );
-  str += QString::fromLatin1( "  Postal Code: %1\n" ).arg( d->mPostalCode );
+  str += QString::fromLatin1( "  Postal code: %1\n" ).arg( d->mPostalCode );
   str += QString::fromLatin1( "  Country: %1\n" ).arg( d->mCountry );
   str += QString::fromLatin1( "  Label: %1\n" ).arg( d->mLabel );
   str += QLatin1String( "}\n" );
