@@ -296,6 +296,7 @@ bool ResourceFile::loadDistributionLists()
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
 
   KConfigGroup cg( &cfg, "DistributionLists" );
+  KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
   const QStringList entryList = cg.keyList();
 
   d->mMissingEntries.clear();
@@ -307,7 +308,15 @@ bool ResourceFile::loadDistributionLists()
 
     kDebug() << name << ":" << value.join( "," );
 
-    DistributionList *list = new DistributionList( this, name );
+    DistributionList *list = 0;
+    if ( cgId.isValid() ) {
+      const QString identifier = cgId.readEntry( name, QString() );
+      if ( !identifier.isEmpty() )
+        list = new DistributionList( this, identifier, name );
+    }
+
+    if ( list == 0 )
+        list = new DistributionList( this, name );
 
     MissingEntryList missingEntries;
     QStringList::ConstIterator entryIt = value.constBegin();
@@ -345,6 +354,8 @@ void ResourceFile::saveDistributionLists()
   KConfig cfg( KStandardDirs::locateLocal( "data", "kabc/distlists" ) );
   KConfigGroup cg( &cfg, "DistributionLists" );
   cg.deleteGroup();
+  KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
+  cgId.deleteGroup();
 
   QMapIterator<QString, DistributionList*> it( mDistListMap );
   while ( it.hasNext() ) {
@@ -369,9 +380,10 @@ void ResourceFile::saveDistributionLists()
     }
 
     cg.writeEntry( list->name(), value );
+    cgId.writeEntry( list->name(), list->identifier() );
   }
 
-  cg.sync();
+  cfg.sync();
 }
 
 void ResourceFile::saveToFile( QFile *file )
