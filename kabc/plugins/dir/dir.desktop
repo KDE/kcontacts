@@ -6,6 +6,7 @@ Name[de]=Ordner
 Name[el]=Φάκελος
 Name[es]=Carpeta
 Name[et]=Kataloog
+Name[fr]=Dossier
 Name[ga]=Fillteán
 Name[gl]=Cartafol
 Name[it]=Cartella
@@ -29,6 +30,7 @@ Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem 
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ξεχωριστά αρχεία, σε ένα  δοσμένο φάκελο. Υποστηρίζει τυπικά αρχεία VCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων.
 Comment[es]=Provee acceso a los contactos, cada uno almacenado en un archivo diferente, dentro de un directorio determinado. Soporta archivos VCard estándar y otros formatos dependiendo de la disponibilidad de los complementos
 Comment[et]=Võimaldab kasutada eraldi failidesse salvestatud kontakte määratud kataloogis. Toetab standardseid VCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust.
+Comment[fr]=Fourni l'accès aux contacts stockés chacun dans un fichier dans le dossier indiqué. Le format VCard et d'autres formats sont pris en charge en fonction des modules externes disponibles
 Comment[ga]=Soláthraíonn sé seo rochtain ar theagmhálacha, gach ceann stóráilte i gcomhad aonair, i bhfillteán sonraithe. Tacaítear le comhaid v-Chárta agus le formáidí eile, ag brath ar na breiseáin atá ar fáil.
 Comment[gl]=Dá acceso aos contactos, cada un gardado nun ficheiro nun cartafol dado. Admite ficheiros vCard estándar e outros formatos, en función da dispoñibilidade de extensións.
 Comment[it]=Fornisce accesso a contatti, ciascuno dei quali memorizzato in un singolo file in una cartella data. Gestisce file in standard VCard e altri formati in base ai plugin disponibili.
