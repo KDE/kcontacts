@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Folder
 Name[ca]=Carpeta
+Name[cs]=Složka
 Name[da]=Mappe
 Name[de]=Ordner
 Name[el]=Φάκελος
@@ -19,6 +20,8 @@ Name[nds]=Orner
 Name[nn]=Mappe
 Name[pt]=Pasta
 Name[pt_BR]=Pasta
+Name[sr]=Фасцикла
+Name[sr@latin]=Fascikla
 Name[sv]=Katalog
 Name[tr]=Dizin
 Name[uk]=Тека
@@ -27,6 +30,7 @@ Name[zh_CN]=文件夹
 Name[zh_TW]=資料夾
 Comment=Provides access to contacts, each stored in a single file, in a given folder. Supports standard VCard file and other formats depending on availability of plugins.
 Comment[ca]=Proporciona l'accés als contactes, cada un emmagatzemat en un fitxer individual, en una carpeta donada. Accepta els fitxers estàndard VCard i altres formats depenent de la disponibilitat dels connectors.
+Comment[cs]=Poskytuje přístup ke kontaktům, každém uloženém v jednom souboru v daném adresáři. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[da]=Giver adgang til kontakter, hver lagret i en enkelt fil, i en given mappe. Understøtter standard VCard-fil og andre formater afhængigt af tilgængeligheden af plugins.
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem vorgegebenen Ordner gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ξεχωριστά αρχεία, σε ένα  δοσμένο φάκελο. Υποστηρίζει τυπικά αρχεία VCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων.
@@ -44,6 +48,8 @@ Comment[nds]=Stellt Togriep op Kontakten praat, elkeen binnen een Datei binnen e
 Comment[nn]=Gjev tilgang til kontaktar i ei viss mappe, der dei er lagra i kvar sine filer. Standard vCard-filer er støtta, i tillegg til andre format, avhengig av kva programtillegg som er i bruk.
 Comment[pt]=Oferece o acesso aos contactos, estando cada um guardado num único ficheiro de uma dada pasta. Suporta os ficheiros VCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'.
 Comment[pt_BR]=Fornece acesso aos contatos, cada um armazenado em um único arquivo, em uma pasta informada. Suporta o formato de arquivos VCard padrão e outros formatos, dependendo da disponibilidade de plug-ins.
+Comment[sr]=Пружа приступ контактима складиштеним у појединачним фајловима у датој фасцикли. Подржава стандардне в‑кард фајлове и друге формате, према расположивим прикључцима.
+Comment[sr@latin]=Pruža pristup kontaktima skladištenim u pojedinačnim fajlovima u datoj fascikli. Podržava standardne vCard fajlove i druge formate, prema raspoloživim priključcima.
 Comment[sv]=Ger tillgång till kontakter, var och en lagrad i en enstaka fil, i en given katalog. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram.
 Comment[uk]=Надає доступ до контактів, кожен з яких зберігається у окремому файлі у вказаній теці. Підтримує стандартні файли VCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[x-test]=xxProvides access to contacts, each stored in a single file, in a given folder. Supports standard VCard file and other formats depending on availability of plugins.xx
