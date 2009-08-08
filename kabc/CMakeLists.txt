@@ -11,8 +11,6 @@ add_definitions( -DQT_NO_CAST_TO_ASCII )
 include_directories(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${CMAKE_CURRENT_SOURCE_DIR}/kab
- ${CMAKE_CURRENT_BINARY_DIR}/kab
  ${CMAKE_CURRENT_SOURCE_DIR}/vcardparser
 )
 
