@@ -198,7 +198,6 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
   kDebug();
 
   QBoxLayout *topLayout = new QVBoxLayout( this );
-  topLayout->setSpacing( KDialog::spacingHint() );
 
   QBoxLayout *nameLayout = new QHBoxLayout();
   topLayout->addLayout( topLayout );

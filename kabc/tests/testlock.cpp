@@ -49,8 +49,6 @@ using namespace KABC;
 LockWidget::LockWidget( const QString &identifier )
 {
   QVBoxLayout *topLayout = new QVBoxLayout( this );
-  topLayout->setMargin( KDialog::marginHint() );
-  topLayout->setSpacing( KDialog::spacingHint() );
 
   if ( identifier.isEmpty() ) {
     mLock = 0;
@@ -65,7 +63,7 @@ LockWidget::LockWidget( const QString &identifier )
 
     QHBoxLayout *identifierLayout = new QHBoxLayout();
     identifierLayout->setParent( topLayout );
-    topLayout->addItem( identifierLayout );
+    topLayout->addLayout( identifierLayout );
 
     QLabel *resourceLabel = new QLabel( QLatin1String( "Identifier:" ), this );
     identifierLayout->addWidget( resourceLabel );
