@@ -28,30 +28,24 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include <QtGui/QFormLayout>
 
 using namespace KABC;
 
 ResourceNetConfig::ResourceNetConfig( QWidget *parent )
     : ConfigWidget( parent ), mInEditMode( false )
 {
-  QGridLayout *mainLayout = new QGridLayout( this );
+  QFormLayout *mainLayout = new QFormLayout( this );
   mainLayout->setMargin( 0 );
-  mainLayout->setSpacing( KDialog::spacingHint() );
 
-  QLabel *label = new QLabel( i18n( "Format:" ), this );
   mFormatBox = new KComboBox( this );
 
-  mainLayout->addWidget( label, 0, 0 );
-  mainLayout->addWidget( mFormatBox, 0, 1 );
+  mainLayout->addRow( i18n( "Format:" ), mFormatBox );
 
-  label = new QLabel( i18n( "Location:" ), this );
   mUrlEdit = new KUrlRequester( this );
   mUrlEdit->setMode( KFile::File );
 
-  mainLayout->addWidget( label, 1, 0 );
-  mainLayout->addWidget( mUrlEdit, 1, 1 );
+  mainLayout->addRow( i18n( "Location:" ), mUrlEdit );
 
   FormatFactory *factory = FormatFactory::self();
   QStringList formats = factory->formats();

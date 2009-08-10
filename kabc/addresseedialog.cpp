@@ -141,7 +141,6 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
   if ( d->mMultiple ) {
     QBoxLayout *selectedLayout = new QVBoxLayout;
     topLayout->addLayout( selectedLayout );
-    topLayout->setSpacing( spacingHint() );
 
     QGroupBox *selectedGroup =
       new QGroupBox( i18nc( "@title:group selected addressees", "Selected" ), topWidget );

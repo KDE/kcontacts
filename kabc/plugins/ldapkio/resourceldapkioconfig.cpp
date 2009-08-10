@@ -47,7 +47,6 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
 {
   QBoxLayout *mainLayout = new QVBoxLayout( this );
   mainLayout->setMargin( 0 );
-  mainLayout->setSpacing( KDialog::spacingHint() );
 
   KPageWidget *pageWidget = new KPageWidget( this );
   pageWidget->setFaceType( KPageView::Tabbed );
@@ -79,7 +78,7 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
 
   mSubTree = new QCheckBox( i18n( "Sub-tree query" ), this );
   KHBox *box = new KHBox( this );
-  box->setSpacing( KDialog::spacingHint() );
+  box->setSpacing( -1 );
   mEditButton = new QPushButton( i18n( "Edit Attributes..." ), box );
   mCacheButton = new QPushButton( i18n( "Offline Use..." ), box );
 
