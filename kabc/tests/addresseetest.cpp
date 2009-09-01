@@ -346,4 +346,13 @@ void AddresseeTest::fullEmailTest()
   QCOMPARE( a.fullEmail(), QLatin1String( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
 }
 
+void AddresseeTest::nameFromStringTest()
+{
+  KABC::Addressee a;
+  a.setNameFromString( QLatin1String( "Firstname Lastname" ) );
+  QCOMPARE( a.givenName(), QLatin1String( "Firstname" ) );
+  QCOMPARE( a.familyName(), QLatin1String( "Lastname" ) );
+  QCOMPARE( a.formattedName(), QLatin1String( "Firstname Lastname" ) );
+}
+
 #include "addresseetest.moc"
