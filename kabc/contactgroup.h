@@ -79,11 +79,17 @@ class KABC_EXPORT ContactGroup
 
         /**
          * Sets the contact uid of the contact reference.
+         *
+         * @note That is the Akonadi Item ID of the contact that
+         *       is referenced here.
          */
         void setUid( const QString &uid );
 
         /**
          * Returns the contact uid of the contact reference.
+         *
+         * @note That is the Akonadi Item ID of the contact that
+         *       is referenced here.
          */
         QString uid() const;
 
