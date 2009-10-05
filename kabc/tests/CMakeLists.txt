@@ -154,7 +154,7 @@ set(kabcargl_SRCS kabcargl.cpp)
 
 kde4_add_executable(kabcargl TEST ${kabcargl_SRCS})
 
-target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
 
 ########### next target ###############
 
@@ -163,4 +163,4 @@ set(testaddresslineedit_SRCS testaddresslineedit.cpp)
 
 kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
-target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
