@@ -98,7 +98,7 @@ set(testkabc_SRCS testkabc.cpp)
 
 kde4_add_executable(testkabc TEST ${testkabc_SRCS})
 
-target_link_libraries(testkabc ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+target_link_libraries(testkabc ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
 
 ########### next target ###############
 
@@ -107,7 +107,7 @@ set(testkabcdlg_SRCS testkabcdlg.cpp)
 
 kde4_add_executable(testkabcdlg TEST ${testkabcdlg_SRCS})
 
-target_link_libraries(testkabcdlg ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+target_link_libraries(testkabcdlg ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
 
 ########### next target ###############
 
@@ -119,7 +119,7 @@ if (UNIX)
 
    kde4_add_executable(bigread TEST ${bigread_SRCS})
 
-   target_link_libraries(bigread ${KDE4_KDECORE_LIBS} kabc kabc_file_core )
+   target_link_libraries(bigread ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc kabc_file_core )
 
 endif (UNIX)
 
@@ -133,7 +133,7 @@ if (UNIX)
 
    kde4_add_executable(bigwrite TEST ${bigwrite_SRCS})
 
-   target_link_libraries(bigwrite ${KDE4_KDECORE_LIBS} kabc kabc_file_core )
+   target_link_libraries(bigwrite ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc kabc_file_core )
 
 endif (UNIX)
 
@@ -154,7 +154,7 @@ set(kabcargl_SRCS kabcargl.cpp)
 
 kde4_add_executable(kabcargl TEST ${kabcargl_SRCS})
 
-target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+target_link_libraries(kabcargl ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS} )
 
 ########### next target ###############
 
@@ -163,4 +163,4 @@ set(testaddresslineedit_SRCS testaddresslineedit.cpp)
 
 kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
-target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
