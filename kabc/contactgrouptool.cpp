@@ -293,8 +293,10 @@ bool XmlContactGroupReader::readContactReference( ContactGroup::ContactReference
     raiseError( QLatin1String( "ContactReference is missing a uid" ) );
     return false;
   }
+  const QStringRef preferredEmail = elementAttributes.value( QLatin1String( "preferredEmail" ) );
 
   reference.setUid( uid.toString() );
+  reference.setPreferredEmail( preferredEmail.toString() );
 
   return true;
 }
