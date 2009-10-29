@@ -186,6 +186,8 @@ QString Field::value( const KABC::Addressee &a )
       return a.phoneNumber( PhoneNumber::Pager ).number();
     case Private::HomeAddressStreet:
       return a.address( Address::Home ).street();
+    case Private::HomeAddressPostOfficeBox:
+      return a.address( Address::Home ).postOfficeBox();
     case Private::HomeAddressLocality:
       return a.address( Address::Home ).locality();
     case Private::HomeAddressRegion:
@@ -196,6 +198,8 @@ QString Field::value( const KABC::Addressee &a )
       return a.address( Address::Home ).country();
     case Private::BusinessAddressStreet:
       return a.address( Address::Work ).street();
+    case Private::BusinessAddressPostOfficeBox:
+      return a.address( Address::Work ).postOfficeBox();
     case Private::BusinessAddressLocality:
       return a.address( Address::Work ).locality();
     case Private::BusinessAddressRegion:
