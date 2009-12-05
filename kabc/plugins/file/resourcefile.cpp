@@ -326,7 +326,7 @@ bool ResourceFile::loadDistributionLists()
       QString id = *entryIt++;
       QString email = entryIt != value.constEnd() ? *entryIt : QString();
       if ( email.isEmpty() && !email.isNull() ) {
-        email = QString();
+        email = QString(); //krazy:exclude=nullstrassign
       }
 
       kDebug() << "----- Entry" << id;
