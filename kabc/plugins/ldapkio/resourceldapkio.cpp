@@ -216,7 +216,9 @@ QByteArray ResourceLDAPKIO::Private::addEntry( const QString &attr, const QStrin
     if ( mod ) {
       tmp += KLDAP::Ldif::assembleLine( QLatin1String( "replace" ), attr ) + '\n';
     }
-    tmp += KLDAP::Ldif::assembleLine( attr, value ) + '\n';
+    if ( !value.isEmpty() ) {
+      tmp += KLDAP::Ldif::assembleLine( attr, value ) + '\n';
+    }
     if ( mod ) {
       tmp += "-\n";
     }
