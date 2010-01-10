@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Folder
 Name[ca]=Carpeta
+Name[ca@valencia]=Carpeta
 Name[cs]=Složka
 Name[da]=Mappe
 Name[de]=Ordner
@@ -37,6 +38,7 @@ Name[zh_CN]=文件夹
 Name[zh_TW]=資料夾
 Comment=Provides access to contacts, each stored in a single file, in a given folder. Supports standard VCard file and other formats depending on availability of plugins.
 Comment[ca]=Proporciona l'accés als contactes, cada un emmagatzemat en un fitxer individual, en una carpeta donada. Accepta els fitxers estàndard VCard i altres formats depenent de la disponibilitat dels connectors.
+Comment[ca@valencia]=Proporciona l'accés als contactes, cada un emmagatzemat en un fitxer individual, en una carpeta donada. Accepta els fitxers estàndard VCard i altres formats depenent de la disponibilitat dels connectors.
 Comment[cs]=Poskytuje přístup ke kontaktům, každém uloženém v jednom souboru v daném adresáři. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[da]=Giver adgang til kontakter, hver lagret i en enkelt fil, i en given mappe. Understøtter standard VCard-fil og andre formater afhængigt af tilgængeligheden af plugins.
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem vorgegebenen Ordner gespeichert sind. Unterstützt Standard-VCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
