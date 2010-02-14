@@ -142,25 +142,7 @@ PhoneNumber::Type PhoneNumber::type() const
 
 QString PhoneNumber::typeLabel() const
 {
-  QString label;
-  bool first = true;
-
-  const TypeList list = typeList();
-
-  TypeList::ConstIterator it;
-  for ( it = list.begin(); it != list.end(); ++it ) {
-    if ( ( type() & (*it) ) && ( (*it) != Pref ) ) {
-      if ( !first ) {
-        label.append( QLatin1Char( '/' ) );
-      }
-      label.append( typeLabel( *it ) );
-      if ( first ) {
-        first = false;
-      }
-    }
-  }
-
-  return label;
+  return fullTypeLabel( type() );
 }
 
 PhoneNumber::TypeList PhoneNumber::typeList()
@@ -233,6 +215,29 @@ QString PhoneNumber::typeLabel( Type type )
     default:
       return i18nc( "another type of phone", "Other" );
   }
+}
+
+QString PhoneNumber::fullTypeLabel( Type type )
+{
+  QString label;
+  bool first = true;
+
+  const TypeList list = typeList();
+
+  TypeList::ConstIterator it;
+  for ( it = list.begin(); it != list.end(); ++it ) {
+    if ( ( type & (*it) ) && ( (*it) != Pref ) ) {
+      if ( !first )
+        label.append( QLatin1Char( '/' ) );
+
+      label.append( typeLabel( *it ) );
+
+      if ( first )
+        first = false;
+    }
+  }
+
+  return label;
 }
 
 QString PhoneNumber::toString() const
