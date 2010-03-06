@@ -65,6 +65,7 @@ Comment[hu]=LDAP címtárkiszolgálókon tárolt névjegyek elérését biztosí
 Comment[it]=Fornisce accesso a contatti memorizzati su un server LDAP
 Comment[ja]=LDAP ディレクトリサーバに保存されている連絡先へのアクセスを提供します。
 Comment[km]=ផ្ដល់​ការ​ចូលដំណើរការ​ទៅ​ទំនាក់ទំនង​ដែល​បានផ្ទុក​នៅ​លើ​ម៉ាស៊ីន​បម្រើ​ថត LDAP
+Comment[lt]=Suteikia prieigą prie kontaktų, saugomų LDAP serveryje
 Comment[lv]=Nodrošina piekļuvi kontaktiem, kas glabājas LDAP direktorija serverī
 Comment[nb]=Gir tilgang til kontakter lagret på en LDAP-katalogtjener
 Comment[nds]=Stellt Togriep op Kontakten praat, de op en LDAP-Vertelenserver wohrt warrt
