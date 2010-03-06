@@ -23,8 +23,10 @@ set(vcards_STAT_SRCS
 )
 
 add_subdirectory( vcardparser )
-add_subdirectory( formats )
-add_subdirectory( plugins )
+if (NOT KDEPIM_NO_KRESOURCES)
+  add_subdirectory( formats )
+  add_subdirectory( plugins )
+endif (NOT KDEPIM_NO_KRESOURCES)
 add_subdirectory( tests )
 #add_subdirectory( scripts )
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
@@ -47,33 +49,23 @@ add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/field.cpp ${CMAKE_CURRENT
 
 set(kabc_LIB_SRCS
    address.cpp
-   addressbook.cpp
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
-   addresseedialog.cpp
    distributionlist.cpp
-   distributionlistdialog.cpp
    emailselectdialog.cpp
    errorhandler.cpp
-   formatfactory.cpp
    geo.cpp
    key.cpp
    phonenumber.cpp
    picture.cpp
    plugin.cpp
-   resource.cpp
-   resourceabc.cpp
-   resourcecached.cpp
    secrecy.cpp
    sound.cpp
-   stdaddressbook.cpp
-   vcardconverter.cpp
    timezone.cpp
-   vcardformat.cpp
    ldifconverter.cpp
-   addresslineedit.cpp
    addresseelist.cpp
+   vcardconverter.cpp
    vcardtool.cpp
    addresseehelper.cpp
    lock.cpp
@@ -84,11 +76,31 @@ set(kabc_LIB_SRCS
    contactgrouptool.cpp
 )
 
+if (NOT KDEPIM_NO_KRESOURCES)
+  set(kabc_LIB_SRCS
+    ${kabc_LIB_SRCS}
+    addressbook.cpp
+    addresseedialog.cpp
+    addresslineedit.cpp
+    distributionlistdialog.cpp
+    formatfactory.cpp
+    resource.cpp
+    resourceabc.cpp
+    resourcecached.cpp
+    stdaddressbook.cpp
+    vcardformat.cpp
+  )
+endif (NOT KDEPIM_NO_KRESOURCES)
+
 
 kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
 
-target_link_libraries(kabc kresources kldap ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
-target_link_libraries(kabc LINK_INTERFACE_LIBRARIES kresources ${KDE4_KDEUI_LIBS})
+target_link_libraries(kabc kldap ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
+target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
+if (NOT KDEPIM_NO_KRESOURCES)
+  target_link_libraries(kabc kresources)
+  target_link_libraries(kabc LINK_INTERFACE_LIBRARIES kresources)
+endif (NOT KDEPIM_NO_KRESOURCES)
 
 set_target_properties(kabc PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -96,24 +108,17 @@ install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_A
 ########### install files ###############
 
 install( FILES countrytransl.map  DESTINATION  ${DATA_INSTALL_DIR}/kabc )
-install( FILES kabc_manager.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources )
 install( FILES
    kabc_export.h
    address.h
-   addressbook.h
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    addresseelist.h
-   addresseedialog.h
-   addresslineedit.h
    contactgroup.h
    contactgrouptool.h
    distributionlist.h
-   distributionlistdialog.h
    emailselectdialog.h
    errorhandler.h
    field.h
-   format.h
-   formatfactory.h
    geo.h
    key.h
    ldifconverter.h
@@ -122,15 +127,28 @@ install( FILES
    phonenumber.h
    picture.h
    plugin.h
-   resource.h
-   resourceabc.h
-   resourcecached.h
    secrecy.h
    sortmode.h
    sound.h
-   stdaddressbook.h
    timezone.h
-   vcardformat.h
    vcardconverter.h
-   DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel)
+   DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
+)
 
+if (NOT KDEPIM_NO_KRESOURCES)
+  install( FILES kabc_manager.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources )
+  install( FILES
+    addressbook.h
+    addresseedialog.h
+    addresslineedit.h
+    distributionlistdialog.h
+    format.h
+    formatfactory.h
+    resource.h
+    resourceabc.h
+    resourcecached.h
+    stdaddressbook.h
+    vcardformat.h
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
+  )
+endif (NOT KDEPIM_NO_KRESOURCES)

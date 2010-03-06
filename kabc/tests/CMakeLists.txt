@@ -84,6 +84,7 @@ target_link_libraries(timezonetest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY
 
 ########### next target ###############
 
+if (NOT KDEPIM_NO_KRESOURCES)
 set(testlock_SRCS testlock.cpp)
 
 
@@ -136,6 +137,7 @@ if (UNIX)
    target_link_libraries(bigwrite ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc kabc_file_core )
 
 endif (UNIX)
+endif (NOT KDEPIM_NO_KRESOURCES)
 
 
 ########### next target ###############
@@ -149,6 +151,7 @@ endif (UNIX)
 
 ########### next target ###############
 
+if (NOT KDEPIM_NO_KRESOURCES)
 set(kabcargl_SRCS kabcargl.cpp)
 
 
@@ -164,6 +167,7 @@ set(testaddresslineedit_SRCS testaddresslineedit.cpp)
 kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
 target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
+endif (NOT KDEPIM_NO_KRESOURCES)
 
 ########### next target ###############
 
