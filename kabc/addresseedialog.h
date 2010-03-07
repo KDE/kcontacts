@@ -21,7 +21,12 @@
 #ifndef KABC_ADDRESSEEDIALOG_H
 #define KABC_ADDRESSEEDIALOG_H
 
+#include "kabc_export.h"
+#ifndef KDEPIM_NO_KRESOURCES
 #include "addressbook.h"
+#else
+#include "addressee.h"
+#endif
 
 #include <kdialog.h>
 #include <klineedit.h>

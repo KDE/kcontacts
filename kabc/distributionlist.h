@@ -21,7 +21,13 @@
 #ifndef KABC_DISTRIBUTIONLIST_H
 #define KABC_DISTRIBUTIONLIST_H
 
+#include "kabc_export.h"
+#ifndef KDEPIM_NO_KRESOURCES
 #include "addressbook.h"
+#else
+#include "addressee.h"
+#include <QtCore/QMap>
+#endif
 #include <QtCore/QList>
 
 namespace KABC {

@@ -52,6 +52,7 @@ set(kabc_LIB_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
+   addresseedialog.cpp
    distributionlist.cpp
    emailselectdialog.cpp
    errorhandler.cpp
@@ -80,7 +81,6 @@ if (NOT KDEPIM_NO_KRESOURCES)
   set(kabc_LIB_SRCS
     ${kabc_LIB_SRCS}
     addressbook.cpp
-    addresseedialog.cpp
     addresslineedit.cpp
     distributionlistdialog.cpp
     formatfactory.cpp
@@ -112,6 +112,7 @@ install( FILES
    kabc_export.h
    address.h
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
+   addresseedialog.h
    addresseelist.h
    contactgroup.h
    contactgrouptool.h
@@ -139,7 +140,6 @@ if (NOT KDEPIM_NO_KRESOURCES)
   install( FILES kabc_manager.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kresources )
   install( FILES
     addressbook.h
-    addresseedialog.h
     addresslineedit.h
     distributionlistdialog.h
     format.h

@@ -170,11 +170,13 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
     setInitialSize( QSize( 650, 350 ) );
   }
 
+#ifndef KDEPIM_NO_KRESOURCES
   d->mAddressBook = StdAddressBook::self( true );
   connect( d->mAddressBook, SIGNAL( addressBookChanged( AddressBook* ) ),
            SLOT( addressBookChanged() ) );
   connect( d->mAddressBook, SIGNAL( loadingFinished( Resource* ) ),
            SLOT( addressBookChanged() ) );
+#endif
 
   d->loadAddressBook();
 }
@@ -254,12 +256,14 @@ void AddresseeDialog::Private::loadAddressBook()
   mItemDict.clear();
   mAddresseeEdit->completionObject()->clear();
 
+#ifndef KDEPIM_NO_KRESOURCES
   AddressBook::Iterator it;
   for ( it = mAddressBook->begin(); it != mAddressBook->end(); ++it ) {
     AddresseeItem *item = new AddresseeItem( mAddresseeList, (*it) );
     addCompletionItem( (*it).realName(), item );
     addCompletionItem( (*it).preferredEmail(), item );
   }
+#endif
 }
 
 void AddresseeDialog::Private::addCompletionItem( const QString &str, QTreeWidgetItem *item )
