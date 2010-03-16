@@ -133,16 +133,14 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         bool wasBase64Encoded = false;
 
         if ( vCardLine.parameterList().contains( QLatin1String( "encoding" ) ) ) {
+          const QString encoding = vCardLine.parameter( QLatin1String( "encoding" ) ).toLower();
+
           // have to decode the data
-          if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
-               QLatin1String( "b" ) ||
-               vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
-               QLatin1String( "base64" ) ) {
+          if ( encoding == QLatin1String( "b" ) || encoding == QLatin1String( "base64" ) ) {
             output = QByteArray::fromBase64( value );
             wasBase64Encoded = true;
           }
-          else if ( vCardLine.parameter( QLatin1String( "encoding" ) ).toLower() ==
-                    QLatin1String( "quoted-printable" ) ) {
+          else if ( encoding == QLatin1String( "quoted-printable" ) ) {
             // join any qp-folded lines
             while ( value.endsWith( '=' ) && it != linesEnd ) {
               value.chop( 1 ); // remove the '='
@@ -150,6 +148,8 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
               ++it;
             }
             KCodecs::quotedPrintableDecode( value, output );
+          } else if ( encoding == QLatin1String( "8bit" ) ) {
+            output = value;
           } else {
             qDebug( "Unknown vcard encoding type!" );
           }
