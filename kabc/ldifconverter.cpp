@@ -37,7 +37,7 @@
 #include "address.h"
 #include "addressee.h"
 
-#include "kldap/ldif.h"
+#include "ldif_p.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -67,7 +67,7 @@ static void ldif_out( QTextStream &t, const QString &formatStr,
     return;
   }
 
-  QByteArray txt = KLDAP::Ldif::assembleLine( formatStr, value, 72 );
+  QByteArray txt = Ldif::assembleLine( formatStr, value, 72 );
 
   // write the string
   t << QString::fromUtf8( txt ) << "\n";
@@ -188,8 +188,8 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   }
 
   bool endldif = false, end = false;
-  KLDAP::Ldif ldif;
-  KLDAP::Ldif::ParseValue ret;
+  Ldif ldif;
+  Ldif::ParseValue ret;
   Addressee a;
   Address homeAddr, workAddr;
 
@@ -205,14 +205,14 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   do {
     ret = ldif.nextItem();
     switch ( ret ) {
-      case KLDAP::Ldif::Item:
+      case Ldif::Item:
       {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
         evaluatePair( a, homeAddr, workAddr, fieldname, value );
         break;
       }
-      case KLDAP::Ldif::EndEntry:
+      case Ldif::EndEntry:
       // if the new address is not empty, append it
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
           !a.familyName().isEmpty() ) {
@@ -229,7 +229,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
         break;
-      case KLDAP::Ldif::MoreData:
+      case Ldif::MoreData:
       {
         if ( endldif ) {
           end = true;

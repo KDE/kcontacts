@@ -53,11 +53,15 @@ set(kabc_LIB_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
    addresseedialog.cpp
+   contactgroup.cpp
+   contactgrouptool.cpp
    distributionlist.cpp
    emailselectdialog.cpp
    errorhandler.cpp
    geo.cpp
    key.cpp
+   ldapdn.cpp
+   ldif.cpp
    phonenumber.cpp
    picture.cpp
    plugin.cpp
@@ -73,8 +77,6 @@ set(kabc_LIB_SRCS
    locknull.cpp
    sortmode.cpp
    ${vcards_STAT_SRCS}
-   contactgroup.cpp
-   contactgrouptool.cpp
 )
 
 if (NOT KDEPIM_NO_KRESOURCES)
@@ -95,7 +97,7 @@ endif (NOT KDEPIM_NO_KRESOURCES)
 
 kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
 
-target_link_libraries(kabc kldap ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
+target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
 target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
 if (NOT KDEPIM_NO_KRESOURCES)
   target_link_libraries(kabc kresources)
