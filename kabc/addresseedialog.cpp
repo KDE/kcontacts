@@ -219,7 +219,7 @@ Addressee::List AddresseeDialog::addressees() const
     }
   } else {
     QList<QTreeWidgetItem*> selected = d->mAddresseeList->selectedItems();
-    if ( selected.count() != 0 ) {
+    if ( !selected.isEmpty() ) {
       aItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
     }
     if ( aItem ) {
