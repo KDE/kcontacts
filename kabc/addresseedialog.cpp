@@ -194,7 +194,7 @@ Addressee AddresseeDialog::addressee() const
     aItem = dynamic_cast<AddresseeItem *>( d->mSelectedList->topLevelItem( 0 ) );
   } else {
     QList<QTreeWidgetItem*> selected = d->mAddresseeList->selectedItems();
-    if ( selected.count() != 0 ) {
+    if ( !selected.isEmpty() ) {
       aItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
     }
   }
@@ -294,7 +294,7 @@ void AddresseeDialog::Private::selectItem( const QString &str )
 void AddresseeDialog::Private::updateEdit()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeList->selectedItems();
-  if ( selected.count() == 0 ) {
+  if ( selected.isEmpty() ) {
     return;
   }
   QTreeWidgetItem *item = selected.at( 0 );
@@ -321,7 +321,7 @@ void AddresseeDialog::Private::addSelected( QTreeWidgetItem *item )
 void AddresseeDialog::Private::removeSelected()
 {
   QList<QTreeWidgetItem*> selected = mSelectedList->selectedItems();
-  if ( selected.count() == 0 ) {
+  if ( selected.isEmpty() ) {
     return;
   }
   AddresseeItem *addrItem = dynamic_cast<AddresseeItem *>( selected.at( 0 ) );
