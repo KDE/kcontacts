@@ -23,6 +23,7 @@
 
 #include <klocale.h>
 
+#include <QtCore/QPointer>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
@@ -87,10 +88,12 @@ QString EmailSelectDialog::selected()
 QString EmailSelectDialog::getEmail( const QStringList &emails, const QString &current,
                                      QWidget *parent )
 {
-  EmailSelectDialog *dlg = new EmailSelectDialog( emails, current, parent );
-  dlg->exec();
+  QPointer<EmailSelectDialog> dlg = new EmailSelectDialog( emails, current, parent );
 
-  QString result = dlg->selected();
+  QString result;
+  if ( dlg->exec() && dlg ) {
+    result = dlg->selected();
+  }
 
   delete dlg;
 

@@ -227,13 +227,15 @@ QString PhoneNumber::fullTypeLabel( Type type )
   TypeList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
     if ( ( type & (*it) ) && ( (*it) != Pref ) ) {
-      if ( !first )
+      if ( !first ) {
         label.append( QLatin1Char( '/' ) );
+      }
 
       label.append( typeLabel( *it ) );
 
-      if ( first )
+      if ( first ) {
         first = false;
+      }
     }
   }
 

@@ -305,8 +305,10 @@ void ContactGroupTest::testGroupRoundTrip()
   ContactGroup group( QLatin1String( "TestGroup" ) );
   group.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
   group.append( ContactGroup::ContactGroupReference( QLatin1String( "aaXggdjetw" ) ) );
-  group.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
-  group.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
+  group.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ),
+                                    QLatin1String( "tokoe@kde.org" ) ) );
+  group.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ),
+                                    QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   QBuffer buffer;
   buffer.open( QIODevice::WriteOnly );
@@ -335,15 +337,19 @@ void ContactGroupTest::testGroupListRoundTrip()
 
   ContactGroup group1( QLatin1String( "TestGroup1" ) );
   group1.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
-  group1.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
-  group1.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
+  group1.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ),
+                                     QLatin1String( "tokoe@kde.org" ) ) );
+  group1.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ),
+                                     QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   list.append( group1 );
 
   ContactGroup group2( QLatin1String( "TestGroup2" ) );
   group2.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
-  group2.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ), QLatin1String( "tokoe@kde.org" ) ) );
-  group2.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ), QLatin1String( "kevin.krammer@gmx.at" ) ) );
+  group2.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ),
+                                     QLatin1String( "tokoe@kde.org" ) ) );
+  group2.append( ContactGroup::Data( QLatin1String( "Kevin Krammer" ),
+                                     QLatin1String( "kevin.krammer@gmx.at" ) ) );
 
   list.append( group2 );
 

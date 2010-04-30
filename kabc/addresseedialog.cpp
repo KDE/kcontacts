@@ -24,10 +24,11 @@
 #include <kdebug.h>
 #include <klocale.h>
 
+#include <QtCore/QPointer>
+#include <QtCore/QRegExp>
 #include <QtGui/QGroupBox>
 #include <QtGui/QLayout>
 #include <QtGui/QPushButton>
-#include <QtCore/QRegExp>
 
 using namespace KABC;
 
@@ -232,22 +233,30 @@ Addressee::List AddresseeDialog::addressees() const
 
 Addressee AddresseeDialog::getAddressee( QWidget *parent )
 {
-  AddresseeDialog dlg( parent );
-  if ( dlg.exec() ) {
-    return dlg.addressee();
+  Addressee contact;
+
+  QPointer<AddresseeDialog> dlg = new AddresseeDialog( parent );
+  if ( dlg->exec() && dlg ) {
+    contact = dlg->addressee();
   }
 
-  return Addressee();
+  delete dlg;
+
+  return contact;
 }
 
 Addressee::List AddresseeDialog::getAddressees( QWidget *parent )
 {
-  AddresseeDialog dlg( parent, true );
-  if ( dlg.exec() ) {
-    return dlg.addressees();
+  Addressee::List contacts;
+
+  QPointer<AddresseeDialog> dlg = new AddresseeDialog( parent, true );
+  if ( dlg->exec() && dlg ) {
+    contacts = dlg->addressees();
   }
 
-  return Addressee::List();
+  delete dlg;
+
+  return contacts;
 }
 
 void AddresseeDialog::Private::loadAddressBook()

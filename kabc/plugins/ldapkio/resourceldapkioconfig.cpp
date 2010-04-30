@@ -31,6 +31,7 @@
 #include <kpagewidget.h>
 #include <kvbox.h>
 
+#include <QtCore/QPointer>
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -169,11 +170,13 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
 
 void ResourceLDAPKIOConfig::editAttributes()
 {
-  AttributesDialog dlg( mAttributes, mRDNPrefix, this );
-  if ( dlg.exec() ) {
-    mAttributes = dlg.attributes();
-    mRDNPrefix = dlg.rdnprefix();
+  QPointer<AttributesDialog> dlg = new AttributesDialog( mAttributes, mRDNPrefix, this );
+  if ( dlg->exec() && dlg ) {
+    mAttributes = dlg->attributes();
+    mRDNPrefix = dlg->rdnprefix();
   }
+
+  delete dlg;
 }
 
 void ResourceLDAPKIOConfig::editCache()
@@ -194,12 +197,14 @@ void ResourceLDAPKIOConfig::editCache()
     src.setAttributes( attr );
   }
   src.setExtension( QLatin1String( "x-dir" ), QLatin1String( "base" ) );
-  OfflineDialog dlg( mAutoCache, mCachePolicy, src, mCacheDst, this );
-  if ( dlg.exec() ) {
-    mCachePolicy = dlg.cachePolicy();
-    mAutoCache = dlg.autoCache();
+
+  QPointer<OfflineDialog> dlg = new OfflineDialog( mAutoCache, mCachePolicy, src, mCacheDst, this );
+  if ( dlg->exec() && dlg ) {
+    mCachePolicy = dlg->cachePolicy();
+    mAutoCache = dlg->autoCache();
   }
 
+  delete dlg;
 }
 
 AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,

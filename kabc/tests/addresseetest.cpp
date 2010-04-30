@@ -343,7 +343,8 @@ void AddresseeTest::fullEmailTest()
   emails << QLatin1String( "foo@bar.com" );
   a.setEmails( emails );
   a.setFormattedName( QLatin1String( "firstname \"nickname\" lastname" ) );
-  QCOMPARE( a.fullEmail(), QLatin1String( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
+  QCOMPARE( a.fullEmail(),
+            QLatin1String( "\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>" ) );
 }
 
 void AddresseeTest::nameFromStringTest()

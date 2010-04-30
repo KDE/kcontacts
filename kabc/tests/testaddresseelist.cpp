@@ -29,7 +29,7 @@
 
 using namespace KABC;
 
-int main( int /*argc*/, char /* **argv*/)
+int main( int, char** )
 {
 /*  KAboutData aboutData("testaddresseelist", 0,ki18n("TestAddresseeList"),"0.1");
   KCmdLineArgs::init(argc, argv, &aboutData);

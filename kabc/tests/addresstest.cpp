@@ -148,7 +148,8 @@ void AddressTest::formatTest()
     address.setLocality( QLatin1String( "Lummerstadt" ) );
     address.setCountry ( QLatin1String( "Germany" ) );
 
-    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nGERMANY" ) );
+    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n"
+                                         "12345 Lummerstadt\n\nGERMANY" ) );
 
     QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
   }
@@ -162,7 +163,8 @@ void AddressTest::formatTest()
     address.setCountry( QLatin1String( "United States of America" ) );
 
     const QString result(
-      QLatin1String( "Huck Finn\n457 Foobar Ave\nNervousbreaktown,  DC 1A2B3C\n\nUNITED STATES OF AMERICA" ) );
+      QLatin1String( "Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
+                     "  DC 1A2B3C\n\nUNITED STATES OF AMERICA" ) );
     QVERIFY( address.formattedAddress( QLatin1String( "Huck Finn" ) ) == result );
   }
 
@@ -173,7 +175,8 @@ void AddressTest::formatTest()
     address.setLocality( QLatin1String( "Lummerstadt" ) );
     address.setCountry( QLatin1String( "Deutschland" ) );
 
-    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt\n\nDEUTSCHLAND" ) );
+    const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n"
+                                         "12345 Lummerstadt\n\nDEUTSCHLAND" ) );
 
     QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
   }

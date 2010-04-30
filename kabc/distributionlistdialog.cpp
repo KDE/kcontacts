@@ -29,6 +29,7 @@
 #include <kmessagebox.h>
 #include <kcombobox.h>
 
+#include <QtCore/QPointer>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
@@ -115,10 +116,16 @@ QString EmailSelector::selected() const
 QString EmailSelector::getEmail( const QStringList &emails, const QString &current,
                                  QWidget *parent )
 {
-  EmailSelector dlg( emails, current, parent );
-  dlg.exec();
+  QString email;
 
-  return dlg.selected();
+  QPointer<EmailSelector> dlg = new EmailSelector( emails, current, parent );
+  if ( dlg->exec() && dlg ) {
+    email = dlg->selected();
+  }
+
+  delete dlg;
+
+  return email;
 }
 
 class EntryItem : public QTreeWidgetItem
