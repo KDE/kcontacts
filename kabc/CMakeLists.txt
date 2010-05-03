@@ -76,6 +76,7 @@ set(kabc_LIB_SRCS
    lock.cpp
    locknull.cpp
    sortmode.cpp
+   vcarddrag.cpp
    ${vcards_STAT_SRCS}
 )
 
@@ -135,6 +136,7 @@ install( FILES
    sound.h
    timezone.h
    vcardconverter.h
+   vcarddrag.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
 )
 

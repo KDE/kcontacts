@@ -177,3 +177,11 @@ set(contactgrouptest_SRCS contactgrouptest.cpp)
 kde4_add_unit_test(contactgrouptest TESTNAME kabc-contactgrouptest ${contactgrouptest_SRCS})
 
 target_link_libraries(contactgrouptest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(vcarddragtest_SRCS vcarddragtest.cpp)
+
+kde4_add_unit_test(vcarddragtest TESTNAME kabc-vcarddragtest ${vcarddragtest_SRCS})
+
+target_link_libraries(vcarddragtest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
