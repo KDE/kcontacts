@@ -24,7 +24,7 @@
 
 #include "kabc_export.h"
 
-#include <kabc/contact.h>
+#include <kabc/addressee.h>
 
 namespace KABC {
 
@@ -37,16 +37,6 @@ namespace KABC {
 */
 namespace VCardDrag
 {
-  /**
-    Mime-type of vCard.
-
-    @see Addressee::mimeType()
-
-    @return the MIME type used for vcards: @c text/directory
-  */
-  //AK_REVIEW: remove in favor of KABC::Addressee::mimeType()
-  KABC_EXPORT QString mimeType();
-
   /**
     Adds the vCard representation as data of the drag object.
 

@@ -32,15 +32,15 @@ using namespace KABC;
 static QString findCompatibleMimeType( const QMimeData *md )
 {
   // check the canonical MIME type first
-  if ( md->hasFormat( VCardDrag::mimeType() ) ) {
-    return VCardDrag::mimeType();
+  if ( md->hasFormat( KABC::Addressee::mimeType() ) ) {
+    return KABC::Addressee::mimeType();
   }
 
   const QStringList mimeTypeOffers = md->formats();
   Q_FOREACH( const QString &mimeType, mimeTypeOffers ) {
    const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType( mimeType, KMimeType::ResolveAliases );
     if ( !mimeTypePtr.isNull() ) {
-      if ( mimeTypePtr->is( VCardDrag::mimeType() ) ) {
+      if ( mimeTypePtr->is( KABC::Addressee::mimeType() ) ) {
         return mimeType;
       }
     }
@@ -49,14 +49,9 @@ static QString findCompatibleMimeType( const QMimeData *md )
   return QString();
 }
 
-QString VCardDrag::mimeType()
-{
-  return Addressee::mimeType();
-}
-
 bool VCardDrag::populateMimeData( QMimeData *md, const QByteArray &content )
 {
-  md->setData( mimeType(), content );
+  md->setData( KABC::Addressee::mimeType(), content );
   return true;
 }
 

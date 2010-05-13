@@ -65,29 +65,29 @@ void VCardDragTest::testPopulate()
   QMimeData *data = new QMimeData();
   bool result = VCardDrag::populateMimeData( data, vcard );
   QVERIFY( result );
-  QVERIFY( data->hasFormat( VCardDrag::mimeType() ) );
-  QCOMPARE( data->data( VCardDrag::mimeType() ), vcard );
+  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
+  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcard );
   delete data;
 
   data = new QMimeData();
   result = VCardDrag::populateMimeData( data, Addressee::List() << mAddressee1 );
   QVERIFY( result );
-  QVERIFY( data->hasFormat( VCardDrag::mimeType() ) );
-  QCOMPARE( data->data( VCardDrag::mimeType() ), vcard );
+  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
+  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcard );
   delete data;
 
   const QByteArray vcards = converter.createVCards( Addressee::List() << mAddressee1 << mAddressee2 );
   data = new QMimeData();
   result = VCardDrag::populateMimeData( data, Addressee::List() << mAddressee1 << mAddressee2 );
   QVERIFY( result );
-  QVERIFY( data->hasFormat( VCardDrag::mimeType() ) );
-  QCOMPARE( data->data( VCardDrag::mimeType() ), vcards );
+  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
+  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcards );
   delete data;
 
   data = new QMimeData();
   result = VCardDrag::populateMimeData( data, Addressee::List() );
   QVERIFY( !result );
-  QVERIFY( !data->hasFormat( VCardDrag::mimeType() ) );
+  QVERIFY( !data->hasFormat( KABC::Addressee::mimeType() ) );
   delete data;
 }
 
@@ -96,8 +96,6 @@ void VCardDragTest::testCanDecode()
   VCardConverter converter;
   const QByteArray vcard = converter.createVCard( mAddressee1 );
   QVERIFY( !vcard.isEmpty() );
-
-  QCOMPARE( Addressee::mimeType(), VCardDrag::mimeType() );
 
   QMimeData *data = new QMimeData();
   data->setData( Addressee::mimeType(), vcard );
@@ -120,8 +118,6 @@ void VCardDragTest::testFromMimeData()
   VCardConverter converter;
   const QByteArray vcard = converter.createVCard( mAddressee1 );
   QVERIFY( !vcard.isEmpty() );
-
-  QCOMPARE( Addressee::mimeType(), VCardDrag::mimeType() );
 
   QByteArray content;
 
