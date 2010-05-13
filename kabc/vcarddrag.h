@@ -1,7 +1,7 @@
 /*
   This file is part of libkabc.
 
-  Copyright (c) 2002 Tobias Koenig <tokoe@kde.org>
+  Copyright (c) 2002-2010 Tobias Koenig <tokoe@kde.org>
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General Public
@@ -24,7 +24,7 @@
 
 #include "kabc_export.h"
 
-#include <kabc/addressee.h>
+#include <kabc/contact.h>
 
 namespace KABC {
 
@@ -44,6 +44,7 @@ namespace VCardDrag
 
     @return the MIME type used for vcards: @c text/directory
   */
+  //AK_REVIEW: remove in favor of KABC::Addressee::mimeType()
   KABC_EXPORT QString mimeType();
 
   /**
@@ -60,13 +61,13 @@ namespace VCardDrag
     Adds the vCard representation as data of the drag object.
 
     @param md the object to set the data on
-    @param addressees list of Addressee objects to serialize to vCard
+    @param contacts list of Addressee objects to serialize to vCard
 
     @return @c true if serializing of the given list worked, otherwise @c false
 
     @see VCardConverter::createVCards()
   */
-  KABC_EXPORT bool populateMimeData( QMimeData *md, const KABC::Addressee::List &addressees );
+  KABC_EXPORT bool populateMimeData( QMimeData *md, const KABC::Addressee::List &contacts );
 
   /**
     Returns if drag&drop object can be decoded to vCard.
@@ -90,20 +91,19 @@ namespace VCardDrag
   KABC_EXPORT bool fromMimeData( const QMimeData *md, QByteArray &content );
 
   /**
-    Decodes the MIME data @p md and puts the resulting vCard into @p addresseess.
+    Decodes the MIME data @p md and puts the resulting vCard into @p contactss.
 
     @param md the object to check for vCard data
-    @param addressees where to put the parsed vCards from @p md
+    @param contacts where to put the parsed vCards from @p md
 
     @return @c true if there was data for the vCard MIME type and it could be parsed successfully,
             otherwise @c false
 
     @see canDecode()
   */
-  KABC_EXPORT bool fromMimeData( const QMimeData *md, KABC::Addressee::List &addressees );
+  KABC_EXPORT bool fromMimeData( const QMimeData *md, KABC::Addressee::List &contacts );
 }
 
 }
 
 #endif // VCARDDRAG_H
-// kate: space-indent on; indent-width 2; replace-tabs on;
