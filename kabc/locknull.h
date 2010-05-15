@@ -30,7 +30,7 @@ namespace KABC {
   This class provides a lock without actually locking. It can be constructed in
   two ways: One that let all locks succeed and one that let all locks fail.
 */
-class KABC_EXPORT LockNull : public Lock
+class KABC_EXPORT_DEPRECATED LockNull : public Lock
 {
   public:
     /**

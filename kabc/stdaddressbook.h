@@ -53,7 +53,7 @@ namespace KABC {
   }
   \endcode
 */
-class KABC_EXPORT StdAddressBook : public AddressBook
+class KABC_EXPORT_DEPRECATED StdAddressBook : public AddressBook
 {
   public:
 

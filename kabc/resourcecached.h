@@ -28,7 +28,7 @@
 
 namespace KABC {
 
-class KABC_EXPORT ResourceCached : public Resource
+class KABC_EXPORT_DEPRECATED ResourceCached : public Resource
 {
   Q_OBJECT
 

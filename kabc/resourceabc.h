@@ -38,7 +38,7 @@ namespace KABC {
  * handle subresources.
  */
 
-class KABC_EXPORT ResourceABC : public Resource
+class KABC_EXPORT_DEPRECATED ResourceABC : public Resource
 {
   Q_OBJECT
 

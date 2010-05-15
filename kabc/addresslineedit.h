@@ -40,7 +40,7 @@ namespace KABC {
  *
  * @see AddressLineEdit::enableCompletion()
  */
-class KABC_EXPORT AddressLineEdit : public KLineEdit
+class KABC_EXPORT_DEPRECATED AddressLineEdit : public KLineEdit
 {
   Q_OBJECT
 

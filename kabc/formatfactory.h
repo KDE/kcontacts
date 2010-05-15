@@ -92,7 +92,7 @@ struct FormatInfo
  * }
  * \endcode
  */
-class KABC_EXPORT FormatFactory
+class KABC_EXPORT_DEPRECATED FormatFactory
 {
   public:
     /**

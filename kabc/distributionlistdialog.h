@@ -48,7 +48,7 @@ class DistributionListEditorWidget;
   dlg->exec();
   \endcode
 */
-class KABC_EXPORT DistributionListDialog : public KDialog
+class KABC_EXPORT_DEPRECATED DistributionListDialog : public KDialog
 {
     Q_OBJECT
 
@@ -74,7 +74,7 @@ class KABC_EXPORT DistributionListDialog : public KDialog
 /**
   @short Helper class
 */
-class KABC_EXPORT EmailSelector : public KDialog
+class KABC_EXPORT_DEPRECATED EmailSelector : public KDialog
 {
   public:
     /**

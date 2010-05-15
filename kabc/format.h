@@ -39,7 +39,7 @@ class Addressee;
  *
  * @internal
  */
-class KABC_EXPORT Format : public Plugin
+class KABC_EXPORT_DEPRECATED Format : public Plugin
 {
   public:
 
