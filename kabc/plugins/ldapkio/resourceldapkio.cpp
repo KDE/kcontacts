@@ -58,7 +58,7 @@ class ResourceLDAPKIO::Private
       KGlobal::locale()->insertCatalog( QLatin1String( "libkldap" ) );
     }
 
-    KIO::Job *loadFromCache();
+    KIO::TransferJob *loadFromCache();
     void createCache();
     void activateCache();
     void enter_loop();
@@ -585,9 +585,9 @@ void ResourceLDAPKIO::Private::activateCache()
   }
 }
 
-KIO::Job *ResourceLDAPKIO::Private::loadFromCache()
+KIO::TransferJob *ResourceLDAPKIO::Private::loadFromCache()
 {
-  KIO::Job *job = 0;
+  KIO::TransferJob *job = 0;
   if ( mCachePolicy == Cache_Always ||
      ( mCachePolicy == Cache_NoConnection &&
       mError == KIO::ERR_COULD_NOT_CONNECT ) ) {
@@ -611,7 +611,7 @@ KIO::Job *ResourceLDAPKIO::Private::loadFromCache()
 bool ResourceLDAPKIO::load()
 {
   kDebug();
-  KIO::Job *job;
+  KIO::TransferJob *job;
 
   clear();
   //clear the addressee
@@ -662,7 +662,7 @@ bool ResourceLDAPKIO::asyncLoad()
 
   d->createCache();
   if ( d->mCachePolicy != Cache_Always ) {
-    KIO::Job *job = KIO::get( d->mLDAPUrl, KIO::Reload, KIO::HideProgressInfo );
+    KIO::TransferJob *job = KIO::get( d->mLDAPUrl, KIO::Reload, KIO::HideProgressInfo );
     connect( job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
       this, SLOT( data( KIO::Job*, const QByteArray& ) ) );
     connect( job, SIGNAL( result( KJob* ) ),
@@ -807,7 +807,7 @@ void ResourceLDAPKIO::result( KJob *job )
   }
   d->activateCache();
 
-  KIO::Job *cjob;
+  KIO::TransferJob *cjob;
   cjob = d->loadFromCache();
   if ( cjob ) {
     connect( cjob, SIGNAL( result( KJob* ) ),
@@ -827,7 +827,7 @@ bool ResourceLDAPKIO::save( Ticket *ticket )
   kDebug();
 
   d->mSaveIt = begin();
-  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
+  KIO::TransferJob *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( job, SIGNAL( dataReq( KIO::Job*, QByteArray& ) ),
     this, SLOT( saveData( KIO::Job*, QByteArray& ) ) );
   connect( job, SIGNAL( result( KJob* ) ),
@@ -848,7 +848,7 @@ bool ResourceLDAPKIO::asyncSave( Ticket *ticket )
   Q_UNUSED( ticket );
   kDebug();
   d->mSaveIt = begin();
-  KIO::Job *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
+  KIO::TransferJob *job = KIO::put( d->mLDAPUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
   connect( job, SIGNAL( dataReq( KIO::Job*, QByteArray& ) ),
     this, SLOT( saveData( KIO::Job*, QByteArray& ) ) );
   connect( job, SIGNAL( result( KJob* ) ),
