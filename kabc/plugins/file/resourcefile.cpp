@@ -213,7 +213,7 @@ bool ResourceFile::load()
   }
 
   if ( !clearAndLoad( &file ) ) {
-      addressBook()->error( i18n( "Problems during parsing file '%1'.", mFileName ) );
+      addressBook()->error( i18n( "Problems parsing file '%1'.", mFileName ) );
     return false;
   }
 

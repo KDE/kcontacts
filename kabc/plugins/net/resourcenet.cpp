@@ -156,7 +156,7 @@ bool ResourceNet::load()
 
   bool result = clearAndLoad( &file );
   if ( !result ) {
-    addressBook()->error( i18n( "Problems during parsing file '%1'.", tempFile ) );
+    addressBook()->error( i18n( "Problems parsing file '%1'.", tempFile ) );
   }
 
   KIO::NetAccess::removeTempFile( tempFile );
