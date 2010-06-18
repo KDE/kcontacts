@@ -34,6 +34,7 @@ class PhoneNumberTest : public QObject
     void differsTest();
     void assignmentTest();
     void serializeTest();
+    void labelTest();
 };
 
 #endif

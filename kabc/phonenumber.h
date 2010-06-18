@@ -177,6 +177,9 @@ class KABC_EXPORT PhoneNumber
     /**
      * Returns the translated label for phone number @p type.
      *
+     * In opposite to typeFlagLabel( TypeFlag type ), it returns all types
+     * of the phone number concatenated by '/'.
+     *
      * @param type An OR'ed combination of #TypeFlag
      *
      * @see type()
@@ -186,15 +189,12 @@ class KABC_EXPORT PhoneNumber
     /**
      * Returns the translated label for phone number @p type.
      *
-     * In opposite to typeLabel( Type type ), it returns all types
-     * of the phone number concatenated by '/'.
-     *
      * @param type An OR'ed combination of #TypeFlag
      *
-     * @see type()
+     * @see typeLabel()
      * @since 4.5
      */
-    static QString fullTypeLabel( Type type );
+    static QString typeFlagLabel( TypeFlag type );
 
     /**
      * Returns a string representation of the phone number.

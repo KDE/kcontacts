@@ -142,7 +142,7 @@ PhoneNumber::Type PhoneNumber::type() const
 
 QString PhoneNumber::typeLabel() const
 {
-  return fullTypeLabel( type() );
+  return typeLabel( type() );
 }
 
 PhoneNumber::TypeList PhoneNumber::typeList()
@@ -157,12 +157,8 @@ PhoneNumber::TypeList PhoneNumber::typeList()
   return list;
 }
 
-QString PhoneNumber::typeLabel( Type type )
+QString PhoneNumber::typeFlagLabel( TypeFlag type )
 {
-  if ( type & Pref ) {
-    return i18nc( "Preferred phone", "Preferred" );
-  }
-
   switch ( type ) {
     case Home:
       return i18nc( "Home phone", "Home" );
@@ -174,7 +170,7 @@ QString PhoneNumber::typeLabel( Type type )
       return i18n( "Messenger" );
       break;
     case Pref:
-      return i18n( "Preferred Number" );
+      return i18nc( "Preferred phone", "Preferred" );
       break;
     case Voice:
       return i18n( "Voice" );
@@ -206,32 +202,49 @@ QString PhoneNumber::typeLabel( Type type )
     case Pager:
       return i18n( "Pager" );
       break;
-    case Home + Fax:
-      return i18n( "Home Fax" );
-      break;
-    case Work + Fax:
-      return i18n( "Work Fax" );
-      break;
     default:
       return i18nc( "another type of phone", "Other" );
   }
 }
 
-QString PhoneNumber::fullTypeLabel( Type type )
+QString PhoneNumber::typeLabel( Type type )
 {
   QString label;
   bool first = true;
 
+  // special cases
+  // Pref stand alone -> Preferred Number
+  // Home+Fax or Work+Fax -> combine as initial string
+  if ( type == Pref ) {
+    return i18n( "Preferred Number" );
+  }
+
+  if ( type & Fax ) {
+    if ( type & Home ) {
+      label = i18n( "Home Fax" );
+      first = false;
+      type &= ~Fax;
+      type &= ~Home;
+    } else if ( type & Work ) {
+      label = i18n( "Work Fax" );
+      first = false;
+      type &= ~Fax;
+      type &= ~Work;
+    }
+  }
+  
   const TypeList list = typeList();
 
   TypeList::ConstIterator it;
   for ( it = list.begin(); it != list.end(); ++it ) {
-    if ( ( type & (*it) ) && ( (*it) != Pref ) ) {
+    // these are actually flags
+    const TypeFlag flag = static_cast<TypeFlag>( static_cast<int>( *it ) );
+    if ( type & flag ) {
       if ( !first ) {
         label.append( QLatin1Char( '/' ) );
       }
 
-      label.append( typeLabel( *it ) );
+      label.append( typeFlagLabel( flag ) );
 
       if ( first ) {
         first = false;

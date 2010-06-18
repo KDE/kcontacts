@@ -98,4 +98,77 @@ void PhoneNumberTest::serializeTest()
   QVERIFY( number1 == number2 );
 }
 
+void PhoneNumberTest::labelTest()
+{
+  QMap<KABC::PhoneNumber::Type, QString> labels;
+
+  const KABC::PhoneNumber::TypeList types = KABC::PhoneNumber::typeList();
+
+  // check all types standalone
+  Q_FOREACH( KABC::PhoneNumber::Type type, types ) {
+    const KABC::PhoneNumber phone( QLatin1String( "1" ), type );
+    QCOMPARE( phone.type(), type );
+
+    // Pref is special cased
+    if ( type != KABC::PhoneNumber::Pref ) {
+      QCOMPARE( phone.typeLabel(), KABC::PhoneNumber::typeFlagLabel( (KABC::PhoneNumber::TypeFlag)(int)type ) );
+      labels.insert( type, phone.typeLabel() );
+    } else {
+      labels.insert( type, KABC::PhoneNumber::typeFlagLabel( (KABC::PhoneNumber::TypeFlag)(int)type ) );
+    }
+    QCOMPARE( KABC::PhoneNumber::typeLabel( type ), phone.typeLabel() );
+  }
+
+  // combine all with Pref
+  Q_FOREACH( KABC::PhoneNumber::Type type, types ) {
+    KABC::PhoneNumber::Type combinedType = type | KABC::PhoneNumber::Pref;
+    const KABC::PhoneNumber phone( QLatin1String( "1" ), combinedType );
+    QCOMPARE( phone.type(), combinedType );
+    QCOMPARE( KABC::PhoneNumber::typeLabel( combinedType ), phone.typeLabel() );
+
+    if ( type < KABC::PhoneNumber::Pref ) {
+      const QString expectedCombinedString = QString::fromLatin1( "%1/%2" ).arg( labels[ type ] ).arg( labels[ KABC::PhoneNumber::Pref ] );
+      QCOMPARE( phone.typeLabel(), expectedCombinedString );
+    } else if ( type > KABC::PhoneNumber::Pref ) {
+      const QString expectedCombinedString = QString::fromLatin1( "%1/%2" ).arg( labels[ KABC::PhoneNumber::Pref ]  ).arg( labels[ type ] );
+      QCOMPARE( phone.typeLabel(), expectedCombinedString );
+    }
+  }
+
+  // combine all with Fax
+  Q_FOREACH( KABC::PhoneNumber::Type type, types ) {
+    KABC::PhoneNumber::Type combinedType = type | KABC::PhoneNumber::Fax;
+    const KABC::PhoneNumber phone( QLatin1String( "1" ), combinedType );
+    QCOMPARE( phone.type(), combinedType );
+    QCOMPARE( KABC::PhoneNumber::typeLabel( combinedType ), phone.typeLabel() );
+
+    if ( type == KABC::PhoneNumber::Home || type == KABC::PhoneNumber::Work ) {
+      // special cased
+    } else if ( type < KABC::PhoneNumber::Fax ) {
+      const QString expectedCombinedString = QString::fromLatin1( "%1/%2" ).arg( labels[ type ] ).arg( labels[ KABC::PhoneNumber::Fax ] );
+      QCOMPARE( phone.typeLabel(), expectedCombinedString );
+    } else if ( type > KABC::PhoneNumber::Fax ) {
+      const QString expectedCombinedString = QString::fromLatin1( "%1/%2" ).arg( labels[ KABC::PhoneNumber::Fax ]  ).arg( labels[ type ] );
+      QCOMPARE( phone.typeLabel(), expectedCombinedString );
+    }
+  }
+
+  // special cases
+  QCOMPARE( KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Pref ), QLatin1String( "Preferred Number" ) );
+  QCOMPARE( KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Home |
+                                          KABC::PhoneNumber::Fax ),
+            QLatin1String( "Home Fax" ) );
+  QCOMPARE( KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Work |
+                                          KABC::PhoneNumber::Fax ),
+            QLatin1String( "Work Fax" ) );
+  QCOMPARE( KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Home |
+                                          KABC::PhoneNumber::Fax  |
+                                          KABC::PhoneNumber::Pref ),
+            QLatin1String( "Home Fax/Preferred" ) );
+  QCOMPARE( KABC::PhoneNumber::typeLabel( KABC::PhoneNumber::Work |
+                                          KABC::PhoneNumber::Fax |
+                                          KABC::PhoneNumber::Pref ),
+            QLatin1String( "Work Fax/Preferred" ) );
+}
+
 #include "phonenumbertest.moc"
