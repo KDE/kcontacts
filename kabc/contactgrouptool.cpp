@@ -274,10 +274,6 @@ bool XmlContactGroupReader::readData( ContactGroup::Data &data )
   }
 
   const QStringRef name = elementAttributes.value( QLatin1String( "name" ) );
-  if ( name.isEmpty() ) {
-    raiseError( QLatin1String( "ContactData is missing a name" ) );
-    return false;
-  }
 
   data.setName( name.toString() );
   data.setEmail( email.toString() );
