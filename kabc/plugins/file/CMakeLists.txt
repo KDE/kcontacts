@@ -11,10 +11,6 @@ kde4_add_library(kabc_file_core SHARED ${kabc_file_core_SRCS})
 
 target_link_libraries(kabc_file_core ${KDE4_KIO_LIBS} kabc kcal kresources)
 
-if(WINCE)
-target_link_libraries(kabc_file_core ${WCECOMPAT_LIBRARIES})
-endif(WINCE)
-
 set_target_properties(kabc_file_core PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 install(TARGETS kabc_file_core EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
