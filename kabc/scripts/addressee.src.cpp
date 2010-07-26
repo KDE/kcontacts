@@ -30,7 +30,9 @@
 
 #include "addresseehelper.h"
 #include "field.h"
+#ifndef KDEPIM_NO_KRESOURCES
 #include "resource.h"
+#endif
 #include "sortmode.h"
 
 #include "addressee.h"
@@ -48,13 +50,19 @@ class Addressee::Private : public QSharedData
 {
   public:
     Private()
-      : mUid( KRandom::randomString( 10 ) ), mResource( 0 ),
+      : mUid( KRandom::randomString( 10 ) ),
+#ifndef KDEPIM_NO_KRESOURCES
+      mResource( 0 ),
+#endif
         mEmpty( true ), mChanged( false )
     {
     }
 
     Private( const Private &other )
-      : QSharedData( other ), mResource( 0 )
+      : QSharedData( other )
+#ifndef KDEPIM_NO_KRESOURCES
+      ,mResource( 0 )
+#endif
     {
       mUid = other.mUid;
       --VARIABLES_ASSIGNMENT--
@@ -66,7 +74,9 @@ class Addressee::Private : public QSharedData
       mCategories = other.mCategories;
       mCustom = other.mCustom;
 
+#ifndef KDEPIM_NO_KRESOURCES
       mResource = other.mResource;
+#endif
       mEmpty = other.mEmpty;
       mChanged = other.mChanged;
     }
@@ -85,7 +95,9 @@ class Addressee::Private : public QSharedData
     QStringList mCategories;
     QStringList mCustom;
 
+#ifndef KDEPIM_NO_KRESOURCES
     Resource *mResource;
+#endif
 
     bool mEmpty    :1;
     bool mChanged  :1;
@@ -966,6 +978,7 @@ ABORT_PARSING:
     fullName = fullName.mid( 1, len - 2 );
 }
 
+#ifndef KDEPIM_NO_KRESOURCES
 void Addressee::setResource( Resource *resource )
 {
   d->mResource = resource;
@@ -975,6 +988,7 @@ Resource *Addressee::resource() const
 {
   return d->mResource;
 }
+#endif
 
 void Addressee::setChanged( bool value )
 {

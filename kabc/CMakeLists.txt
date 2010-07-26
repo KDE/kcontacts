@@ -57,7 +57,6 @@ set(kabc_LIB_SRCS
    addresseedialog.cpp
    contactgroup.cpp
    contactgrouptool.cpp
-   distributionlist.cpp
    emailselectdialog.cpp
    errorhandler.cpp
    geo.cpp
@@ -87,6 +86,7 @@ if (NOT KDEPIM_NO_KRESOURCES)
     ${kabc_LIB_SRCS}
     addressbook.cpp
     addresslineedit.cpp
+    distributionlist.cpp
     distributionlistdialog.cpp
     formatfactory.cpp
     resource.cpp

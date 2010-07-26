@@ -19,7 +19,9 @@
 */
 
 #include "addresseedialog.h"
+#ifndef KDEPIM_NO_KRESOURCES
 #include "stdaddressbook.h"
+#endif
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -97,7 +99,9 @@ class AddresseeDialog::Private
 
     QTreeWidget *mSelectedList;
 
+#ifndef KDEPIM_NO_KRESOURCES
     AddressBook *mAddressBook;
+#endif
 
     QHash<QString, QTreeWidgetItem*> mItemDict;
     QHash<QString, QTreeWidgetItem*> mSelectedDict;

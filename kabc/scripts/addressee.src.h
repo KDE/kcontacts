@@ -39,7 +39,9 @@
 
 namespace KABC {
 
+#ifndef KDEPIM_NO_KRESOURCES
 class Resource;
+#endif
 class SortMode;
 
 /**
@@ -429,6 +431,7 @@ class KABC_EXPORT Addressee
      */
     QString toString() const;
 
+#ifndef KDEPIM_NO_KRESOURCES
     /**
       Set resource where the addressee is from.
 
@@ -440,6 +443,7 @@ class KABC_EXPORT Addressee
       Return pointer to resource.
      */
     Resource *resource() const;
+#endif
 
     /**
       Mark addressee as changed.
