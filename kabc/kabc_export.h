@@ -24,7 +24,10 @@
 #include <kdemacros.h>
 
 #ifndef KABC_EXPORT
-# if defined(MAKE_KABC_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KABC_EXPORT
+# elif defined(MAKE_KABC_LIB)
    /* We are building this library */
 #  define KABC_EXPORT KDE_EXPORT
 # else
@@ -34,7 +37,10 @@
 #endif
 
 #ifndef KABC_FILE_CORE_EXPORT
-# if defined(MAKE_KABC_FILE_CORE_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KABC_FILE_CORE_EXPORT
+# elif defined(MAKE_KABC_FILE_CORE_LIB)
    /* We are building this library */
 #  define KABC_FILE_CORE_EXPORT KDE_EXPORT
 # else
@@ -44,7 +50,10 @@
 #endif
 
 #ifndef KABC_DIR_EXPORT
-# if defined(MAKE_KABC_DIRECTORY_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KABC_DIR_EXPORT
+# elif defined(MAKE_KABC_DIRECTORY_LIB)
    /* We are building this library */
 #  define KABC_DIR_EXPORT KDE_EXPORT
 # else
@@ -54,7 +63,10 @@
 #endif
 
 #ifndef KABC_NET_EXPORT
-# if defined(MAKE_KABC_NET_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KABC_NET_EXPORT
+# elif defined(MAKE_KABC_NET_LIB)
    /* We are building this library */
 #  define KABC_NET_EXPORT KDE_EXPORT
 # else
@@ -64,7 +76,10 @@
 #endif
 
 #ifndef KABC_LDAPKIO_EXPORT
-# if defined(MAKE_KABC_LDAPKIO_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KABC_LDAPKIO_EXPORT
+# elif defined(MAKE_KABC_LDAPKIO_LIB)
    /* We are building this library */
 #  define KABC_LDAPKIO_EXPORT KDE_EXPORT
 # else

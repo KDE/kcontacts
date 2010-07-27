@@ -98,7 +98,7 @@ if (NOT KDEPIM_NO_KRESOURCES)
 endif (NOT KDEPIM_NO_KRESOURCES)
 
 
-kde4_add_library(kabc SHARED ${kabc_LIB_SRCS})
+kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
 
 target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
 target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
