@@ -84,7 +84,9 @@ void AddresseeTest::storeTest()
   addressee.setKeys( keys );
   addressee.setCategories( categories );
   addressee.setCustoms( customs );
+#ifndef KDEPIM_NO_KRESOURCES
   addressee.setResource( 0 );
+#endif
   addressee.setChanged( false );
 
   QVERIFY( addressee.uid() == QLatin1String( "My uid" ) );
@@ -116,7 +118,9 @@ void AddresseeTest::storeTest()
   QVERIFY( addressee.keys() == keys );
   QVERIFY( addressee.categories() == categories );
   QVERIFY( addressee.customs() == customs );
+#ifndef KDEPIM_NO_KRESOURCES
   QVERIFY( addressee.resource() == 0 );
+#endif
   QVERIFY( addressee.changed() == false );
 }
 
@@ -169,7 +173,9 @@ void AddresseeTest::equalsTest()
   addressee1.setKeys( keys );
   addressee1.setCategories( categories );
   addressee1.setCustoms( customs );
+#ifndef KDEPIM_NO_KRESOURCES
   addressee1.setResource( 0 );
+#endif
   addressee1.setChanged( false );
 
   addressee2.setUid( QLatin1String( "My uid" ) );
@@ -201,7 +207,9 @@ void AddresseeTest::equalsTest()
   addressee2.setKeys( keys );
   addressee2.setCategories( categories );
   addressee2.setCustoms( customs );
+#ifndef KDEPIM_NO_KRESOURCES
   addressee2.setResource( 0 );
+#endif
   addressee2.setChanged( false );
 
   QVERIFY( addressee1 == addressee2 );
@@ -266,7 +274,9 @@ void AddresseeTest::assignmentTest()
   addressee1.setKeys( keys );
   addressee1.setCategories( categories );
   addressee1.setCustoms( customs );
+#ifndef KDEPIM_NO_KRESOURCES
   addressee1.setResource( 0 );
+#endif
   addressee1.setChanged( false );
 
   addressee2 = addressee1;
@@ -323,7 +333,9 @@ void AddresseeTest::serializeTest()
   addressee1.setKeys( keys );
   addressee1.setCategories( categories );
   addressee1.setCustoms( customs );
+#ifndef KDEPIM_NO_KRESOURCES
   addressee1.setResource( 0 );
+#endif
   addressee1.setChanged( false );
 
   QByteArray data;
