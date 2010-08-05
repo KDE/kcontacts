@@ -494,4 +494,7 @@ KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
 
 }
 
+#define KABC_ADDRESSEE_METATYPE_DEFINED 1
+Q_DECLARE_METATYPE(KABC::Addressee)
+
 #endif

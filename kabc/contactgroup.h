@@ -23,6 +23,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
+#include <QtCore/QMetaType>
 
 #include "kabc_export.h"
 
@@ -466,5 +467,8 @@ class KABC_EXPORT ContactGroup
 };
 
 }
+
+#defined KABC_CONTACTGROUP_METATYPE_DEFINED
+Q_DECLARE_METATYPE(KABC::ContactGroup);
 
 #endif
