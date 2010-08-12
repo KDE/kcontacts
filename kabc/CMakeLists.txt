@@ -54,10 +54,8 @@ set(kabc_LIB_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
    ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
    ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
-   addresseedialog.cpp
    contactgroup.cpp
    contactgrouptool.cpp
-   emailselectdialog.cpp
    errorhandler.cpp
    geo.cpp
    key.cpp
@@ -80,6 +78,15 @@ set(kabc_LIB_SRCS
    vcarddrag.cpp
    ${vcards_STAT_SRCS}
 )
+
+if (NOT WINCE)
+  set(kabc_LIB_SRCS
+    ${kabc_LIB_SRCS}
+   #disabled due to no QTreeWidget
+   addresseedialog.cpp
+   emailselectdialog.cpp
+  )
+endif (NOT WINCE)
 
 if (NOT KDEPIM_NO_KRESOURCES)
   set(kabc_LIB_SRCS
