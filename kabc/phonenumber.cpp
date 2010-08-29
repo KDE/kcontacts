@@ -232,7 +232,7 @@ QString PhoneNumber::typeLabel( Type type )
       type &= ~Work;
     }
   }
-  
+
   const TypeList list = typeList();
 
   TypeList::ConstIterator it;
