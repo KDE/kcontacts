@@ -606,13 +606,15 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           TimeZone tz;
           const QString date = (*lineIt).value().toString();
 
-          int hours = date.mid( 1, 2 ).toInt();
-          int minutes = date.mid( 4, 2 ).toInt();
-          int offset = ( hours * 60 ) + minutes;
-          offset = offset * ( date[ 0 ] == QLatin1Char( '+' ) ? 1 : -1 );
+          if ( !date.isEmpty() ) {
+            int hours = date.mid( 1, 2 ).toInt();
+            int minutes = date.mid( 4, 2 ).toInt();
+            int offset = ( hours * 60 ) + minutes;
+            offset = offset * ( date[ 0 ] == QLatin1Char( '+' ) ? 1 : -1 );
 
-          tz.setOffset( offset );
-          addr.setTimeZone( tz );
+            tz.setOffset( offset );
+            addr.setTimeZone( tz );
+          }
         }
 
         // UID
