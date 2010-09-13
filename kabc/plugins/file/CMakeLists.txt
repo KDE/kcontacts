@@ -9,7 +9,7 @@ set(kabc_file_core_SRCS resourcefile.cpp resourcefileconfig.cpp )
 
 kde4_add_library(kabc_file_core ${LIBRARY_TYPE} ${kabc_file_core_SRCS})
 
-target_link_libraries(kabc_file_core ${KDE4_KIO_LIBS} kabc kcal kresources)
+target_link_libraries(kabc_file_core ${KDE4_KIO_LIBS} kabc kresources)
 
 set_target_properties(kabc_file_core PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
