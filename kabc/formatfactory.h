@@ -25,7 +25,6 @@
 #include <QtCore/QString>
 
 #include <kconfig.h>
-#include <klibloader.h>
 
 #include "format.h"
 
