@@ -75,6 +75,7 @@ Comment[nn]=Gjev tilgang til kontaktar lagra på ein LDAP-katalogtenar
 Comment[pl]=Daje dostęp do kontaktów przechowywanych na serwerze katalogowym LDAP
 Comment[pt]=Oferece o acesso aos contactos guardados num servidor de directório LDAP
 Comment[pt_BR]=Fornece acesso aos contatos armazenados em um servidor de pastas LDAP
+Comment[ro]=Oferă acces la contactele stocate în dosarele unui server LDAP
 Comment[ru]=Хранение контактов на сервере каталогов LDAP
 Comment[sk]=Poskytuje prístup ku kontaktom uloženým na LDAP adresárovom serveri.
 Comment[sl]=Nudi dostop do stikov, ki so shranjeni na imeniškem strežniku LDAP
