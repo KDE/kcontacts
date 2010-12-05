@@ -469,6 +469,6 @@ class KABC_EXPORT ContactGroup
 }
 
 #define KABC_CONTACTGROUP_METATYPE_DEFINED
-Q_DECLARE_METATYPE( KABC::ContactGroup );
+Q_DECLARE_METATYPE( KABC::ContactGroup )
 
 #endif
