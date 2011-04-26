@@ -334,9 +334,7 @@ KUrl ResourceNet::url() const
 void ResourceNet::setFormat( const QString &name )
 {
   mFormatName = name;
-  if ( mFormat ) {
-    delete mFormat;
-  }
+  delete mFormat;
 
   FormatFactory *factory = FormatFactory::self();
   mFormat = factory->format( mFormatName );
