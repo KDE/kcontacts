@@ -54,6 +54,7 @@ namespace KABC {
   \endcode
 
   @deprecated Port to libakonadi-kontact. For instance using Akonadi::ContactSearchJob.
+  See http://techbase.kde.org/Development/AkonadiPorting/AddressBook for details.
 */
 class KABC_EXPORT_DEPRECATED StdAddressBook : public AddressBook
 {
