@@ -50,8 +50,8 @@ ResourceFileConfig::ResourceFileConfig( QWidget *parent )
 
   mainLayout->addRow( i18n( "Location:" ), mFileNameEdit );
 
-  connect( mFileNameEdit, SIGNAL( textChanged( const QString & ) ),
-           SLOT( checkFilePermissions( const QString & ) ) );
+  connect( mFileNameEdit, SIGNAL(textChanged(QString)),
+           SLOT(checkFilePermissions(QString)) );
 
   FormatFactory *factory = FormatFactory::self();
   QStringList formats = factory->formats();

@@ -152,15 +152,15 @@ void StdAddressBook::Private::init( bool asynchronous )
       mParent->error( i18n( "Unable to open resource '%1'.", (*it)->resourceName() ) );
       continue;
     }
-    mParent->connect( *it, SIGNAL( loadingFinished( Resource* ) ),
-                      mParent, SLOT( resourceLoadingFinished( Resource* ) ) );
-    mParent->connect( *it, SIGNAL( savingFinished( Resource* ) ),
-                      mParent, SLOT( resourceSavingFinished( Resource* ) ) );
+    mParent->connect( *it, SIGNAL(loadingFinished(Resource*)),
+                      mParent, SLOT(resourceLoadingFinished(Resource*)) );
+    mParent->connect( *it, SIGNAL(savingFinished(Resource*)),
+                      mParent, SLOT(resourceSavingFinished(Resource*)) );
 
-    mParent->connect( *it, SIGNAL( loadingError( Resource*, const QString& ) ),
-                      mParent, SLOT( resourceLoadingError( Resource*, const QString& ) ) );
-    mParent->connect( *it, SIGNAL( savingError( Resource*, const QString& ) ),
-                      mParent, SLOT( resourceSavingError( Resource*, const QString& ) ) );
+    mParent->connect( *it, SIGNAL(loadingError(Resource*,QString)),
+                      mParent, SLOT(resourceLoadingError(Resource*,QString)) );
+    mParent->connect( *it, SIGNAL(savingError(Resource*,QString)),
+                      mParent, SLOT(resourceSavingError(Resource*,QString)) );
   }
 
   Resource *res = mParent->standardResource();

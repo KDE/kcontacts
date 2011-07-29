@@ -52,7 +52,7 @@ DistributionListDialog::DistributionListDialog( AddressBook *addressBook, QWidge
   DistributionListEditorWidget *editor = new DistributionListEditorWidget( addressBook, this );
   setMainWidget( editor );
 
-  connect( this, SIGNAL( okClicked() ), editor, SLOT( save() ) );
+  connect( this, SIGNAL(okClicked()), editor, SLOT(save()) );
 }
 
 DistributionListDialog::~DistributionListDialog()
@@ -211,19 +211,19 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
 
   d->mNameCombo = new KComboBox( this );
   nameLayout->addWidget( d->mNameCombo );
-  connect( d->mNameCombo, SIGNAL( activated( int ) ), SLOT( updateEntryView() ) );
+  connect( d->mNameCombo, SIGNAL(activated(int)), SLOT(updateEntryView()) );
 
   d->mNewButton = new QPushButton( i18n( "New List..." ), this );
   nameLayout->addWidget( d->mNewButton );
-  connect( d->mNewButton, SIGNAL( clicked() ), SLOT( newList() ) );
+  connect( d->mNewButton, SIGNAL(clicked()), SLOT(newList()) );
 
   d->mEditButton = new QPushButton( i18n( "Rename List..." ), this );
   nameLayout->addWidget( d->mEditButton );
-  connect( d->mEditButton, SIGNAL( clicked() ), SLOT( editList() ) );
+  connect( d->mEditButton, SIGNAL(clicked()), SLOT(editList()) );
 
   d->mRemoveButton = new QPushButton( i18n( "Remove List" ), this );
   nameLayout->addWidget( d->mRemoveButton );
-  connect( d->mRemoveButton, SIGNAL( clicked() ), SLOT( removeList() ) );
+  connect( d->mRemoveButton, SIGNAL(clicked()), SLOT(removeList()) );
 
   QGridLayout *gridLayout = new QGridLayout();
   topLayout->addLayout( gridLayout );
@@ -242,15 +242,15 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
          << i18nc( "@title:column addressee preferred email", "Preferred Email" );
   d->mAddresseeView->setHeaderLabels( labels );
   gridLayout->addWidget( d->mAddresseeView, 1, 0 );
-  connect( d->mAddresseeView, SIGNAL( itemSelectionChanged() ),
-           SLOT( slotSelectionAddresseeViewChanged() ) );
-  connect( d->mAddresseeView, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
-           SLOT( addEntry() ) );
+  connect( d->mAddresseeView, SIGNAL(itemSelectionChanged()),
+           SLOT(slotSelectionAddresseeViewChanged()) );
+  connect( d->mAddresseeView, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+           SLOT(addEntry()) );
 
   d->mAddEntryButton = new QPushButton( i18n( "Add Entry" ), this );
   d->mAddEntryButton->setEnabled( false );
   gridLayout->addWidget( d->mAddEntryButton, 2, 0 );
-  connect( d->mAddEntryButton, SIGNAL( clicked() ), SLOT( addEntry() ) );
+  connect( d->mAddEntryButton, SIGNAL(clicked()), SLOT(addEntry()) );
 
   d->mEntryView = new QTreeWidget( this );
   QStringList entryLabels;
@@ -259,16 +259,16 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
               << i18nc( "@title:column use preferred email", "Use Preferred" );
   d->mEntryView->setEnabled( false );
   gridLayout->addWidget( d->mEntryView, 1, 1, 1, 2 );
-  connect( d->mEntryView, SIGNAL( itemSelectionChanged() ),
-           SLOT( slotSelectionEntryViewChanged() ) );
+  connect( d->mEntryView, SIGNAL(itemSelectionChanged()),
+           SLOT(slotSelectionEntryViewChanged()) );
 
   d->mChangeEmailButton = new QPushButton( i18n( "Change Email..." ), this );
   gridLayout->addWidget( d->mChangeEmailButton, 2, 1 );
-  connect( d->mChangeEmailButton, SIGNAL( clicked() ), SLOT( changeEmail() ) );
+  connect( d->mChangeEmailButton, SIGNAL(clicked()), SLOT(changeEmail()) );
 
   d->mRemoveEntryButton = new QPushButton( i18n( "Remove Entry" ), this );
   gridLayout->addWidget( d->mRemoveEntryButton, 2, 2 );
-  connect( d->mRemoveEntryButton, SIGNAL( clicked() ), SLOT( removeEntry() ) );
+  connect( d->mRemoveEntryButton, SIGNAL(clicked()), SLOT(removeEntry()) );
 
   d->updateAddresseeView();
   d->updateNameCombo();

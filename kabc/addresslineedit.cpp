@@ -86,14 +86,14 @@ void AddressLineEdit::Private::init()
 
   if ( mUseCompletion && !mCompletionInitialized ) {
       mParent->setCompletionObject( sCompletion, false ); // we handle it ourself
-      mParent->connect( mParent, SIGNAL( completion( const QString& ) ),
-                        mParent, SLOT( slotCompletion() ) );
+      mParent->connect( mParent, SIGNAL(completion(QString)),
+                        mParent, SLOT(slotCompletion()) );
 
       KCompletionBox *box = mParent->completionBox();
-      mParent->connect( box, SIGNAL( currentTextChanged( const QString& ) ),
-                        mParent, SLOT( slotPopupCompletion( const QString& ) ) );
-      mParent->connect( box, SIGNAL( userCancelled( const QString& ) ),
-                        SLOT( userCancelled( const QString& ) ) );
+      mParent->connect( box, SIGNAL(currentTextChanged(QString)),
+                        mParent, SLOT(slotPopupCompletion(QString)) );
+      mParent->connect( box, SIGNAL(userCancelled(QString)),
+                        SLOT(userCancelled(QString)) );
 
       mCompletionInitialized = true; // don't connect muliple times. That's
                                       // ugly, tho, better have completionBox()

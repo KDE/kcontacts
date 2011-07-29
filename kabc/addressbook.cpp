@@ -839,15 +839,15 @@ bool AddressBook::addResource( Resource *resource )
   d->mManager->add( resource );
   resource->setAddressBook( this );
 
-  connect( resource, SIGNAL( loadingFinished( Resource* ) ),
-           this, SLOT( resourceLoadingFinished( Resource* ) ) );
-  connect( resource, SIGNAL( savingFinished( Resource* ) ),
-           this, SLOT( resourceSavingFinished( Resource* ) ) );
+  connect( resource, SIGNAL(loadingFinished(Resource*)),
+           this, SLOT(resourceLoadingFinished(Resource*)) );
+  connect( resource, SIGNAL(savingFinished(Resource*)),
+           this, SLOT(resourceSavingFinished(Resource*)) );
 
-  connect( resource, SIGNAL( loadingError( Resource*, const QString& ) ),
-           this, SLOT( resourceLoadingError( Resource*, const QString& ) ) );
-  connect( resource, SIGNAL( savingError( Resource*, const QString& ) ),
-           this, SLOT( resourceSavingError( Resource*, const QString& ) ) );
+  connect( resource, SIGNAL(loadingError(Resource*,QString)),
+           this, SLOT(resourceLoadingError(Resource*,QString)) );
+  connect( resource, SIGNAL(savingError(Resource*,QString)),
+           this, SLOT(resourceSavingError(Resource*,QString)) );
 
   return true;
 }
@@ -862,15 +862,15 @@ bool AddressBook::removeResource( Resource *resource )
 
   resource->setAddressBook( 0 );
 
-  disconnect( resource, SIGNAL( loadingFinished( Resource* ) ),
-              this, SLOT( resourceLoadingFinished( Resource* ) ) );
-  disconnect( resource, SIGNAL( savingFinished( Resource* ) ),
-              this, SLOT( resourceSavingFinished( Resource* ) ) );
+  disconnect( resource, SIGNAL(loadingFinished(Resource*)),
+              this, SLOT(resourceLoadingFinished(Resource*)) );
+  disconnect( resource, SIGNAL(savingFinished(Resource*)),
+              this, SLOT(resourceSavingFinished(Resource*)) );
 
-  disconnect( resource, SIGNAL( loadingError( Resource*, const QString& ) ),
-              this, SLOT( resourceLoadingError( Resource*, const QString& ) ) );
-  disconnect( resource, SIGNAL( savingError( Resource*, const QString& ) ),
-              this, SLOT( resourceLoadingError( Resource*, const QString& ) ) );
+  disconnect( resource, SIGNAL(loadingError(Resource*,QString)),
+              this, SLOT(resourceLoadingError(Resource*,QString)) );
+  disconnect( resource, SIGNAL(savingError(Resource*,QString)),
+              this, SLOT(resourceLoadingError(Resource*,QString)) );
 
   d->mManager->remove( resource );
 

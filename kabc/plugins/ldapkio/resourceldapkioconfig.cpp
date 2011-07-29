@@ -87,8 +87,8 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   mainLayout->addWidget( mSubTree );
   mainLayout->addWidget( box );
 
-  connect( mEditButton, SIGNAL( clicked() ), SLOT( editAttributes() ) );
-  connect( mCacheButton, SIGNAL( clicked() ), SLOT( editCache() ) );
+  connect( mEditButton, SIGNAL(clicked()), SLOT(editAttributes()) );
+  connect( mCacheButton, SIGNAL(clicked()), SLOT(editCache()) );
 }
 
 void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
@@ -294,7 +294,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   mMapCombo->addItem( i18n( "Netscape" ) );
   mMapCombo->addItem( i18n( "Evolution" ) );
   mMapCombo->addItem( i18n( "Outlook" ) );
-  connect( mMapCombo, SIGNAL( activated( int ) ), SLOT( mapChanged( int ) ) );
+  connect( mMapCombo, SIGNAL(activated(int)), SLOT(mapChanged(int)) );
 
   label = new QLabel( i18n( "RDN prefix attribute:" ), page );
   layout->addWidget( label, 1, 0 );
@@ -436,7 +436,7 @@ OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
   connect( bt, SIGNAL(toggled(bool)), mAutoCache, SLOT(setEnabled(bool)) );
 
   QPushButton *lcache = new QPushButton( i18n( "Load into Cache" ), page );
-  connect( lcache, SIGNAL( clicked() ), SLOT( loadCache() ) );
+  connect( lcache, SIGNAL(clicked()), SLOT(loadCache()) );
 
   layout->addWidget( mCacheBox );
   layout->addWidget( mAutoCache );

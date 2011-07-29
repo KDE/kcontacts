@@ -40,7 +40,7 @@ int main( int argc, char **argv )
 
   lineEdit->show();
 
-  QObject::connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
+  QObject::connect( &app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()) );
 
   app.exec();
 

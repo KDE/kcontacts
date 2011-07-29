@@ -85,9 +85,9 @@ void ResourceDir::Private::init( const QString &path, const QString &format )
 
   mLock = 0;
 
-  mParent->connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( pathChanged() ) );
-  mParent->connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( pathChanged() ) );
-  mParent->connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( pathChanged() ) );
+  mParent->connect( &mDirWatch, SIGNAL(dirty(QString)), SLOT(pathChanged()) );
+  mParent->connect( &mDirWatch, SIGNAL(created(QString)), SLOT(pathChanged()) );
+  mParent->connect( &mDirWatch, SIGNAL(deleted(QString)), SLOT(pathChanged()) );
 
   mParent->setPath( path );
 }

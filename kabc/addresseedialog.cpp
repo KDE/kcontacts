@@ -128,15 +128,15 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
                << i18nc( "@title:column addressee email", "Email" );
   d->mAddresseeList->setHeaderItem( new QTreeWidgetItem( headerTitles ) );
   listLayout->addWidget( d->mAddresseeList );
-  connect( d->mAddresseeList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
-           SLOT( accept() ) );
-  connect( d->mAddresseeList, SIGNAL( itemSelectionChanged() ),
-           SLOT( updateEdit() ) );
+  connect( d->mAddresseeList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+           SLOT(accept()) );
+  connect( d->mAddresseeList, SIGNAL(itemSelectionChanged()),
+           SLOT(updateEdit()) );
 
   d->mAddresseeEdit = new KLineEdit( topWidget );
   d->mAddresseeEdit->setCompletionMode( KGlobalSettings::CompletionAuto );
-  connect( d->mAddresseeEdit->completionObject(), SIGNAL( match( const QString & ) ),
-           SLOT( selectItem( const QString & ) ) );
+  connect( d->mAddresseeEdit->completionObject(), SIGNAL(match(QString)),
+           SLOT(selectItem(QString)) );
   d->mAddresseeEdit->setFocus();
   d->mAddresseeEdit->completionObject()->setIgnoreCase( true );
   listLayout->addWidget( d->mAddresseeEdit );
@@ -161,26 +161,26 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
                  << i18nc( "@title:column addressee email", "Email" );
     d->mSelectedList->setHeaderItem( new QTreeWidgetItem( headerTitles ) );
 
-    connect( d->mSelectedList, SIGNAL( itemDoubleClicked( QTreeWidgetItem *, int ) ),
-             SLOT( removeSelected() ) );
+    connect( d->mSelectedList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+             SLOT(removeSelected()) );
 
     QPushButton *unselectButton =
       new QPushButton( i18nc( "@action:button unselect addressee", "Unselect" ), selectedGroup );
     selectedLayout->addWidget( unselectButton );
-    connect( unselectButton, SIGNAL( clicked() ), SLOT( removeSelected() ) );
+    connect( unselectButton, SIGNAL(clicked()), SLOT(removeSelected()) );
 
-    connect( d->mAddresseeList, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ),
-             SLOT( addSelected( QTreeWidgetItem * ) ) );
+    connect( d->mAddresseeList, SIGNAL(itemClicked(QTreeWidgetItem*,int)),
+             SLOT(addSelected(QTreeWidgetItem*)) );
 
     setInitialSize( QSize( 650, 350 ) );
   }
 
 #ifndef KDEPIM_NO_KRESOURCES
   d->mAddressBook = StdAddressBook::self( true );
-  connect( d->mAddressBook, SIGNAL( addressBookChanged( AddressBook* ) ),
-           SLOT( addressBookChanged() ) );
-  connect( d->mAddressBook, SIGNAL( loadingFinished( Resource* ) ),
-           SLOT( addressBookChanged() ) );
+  connect( d->mAddressBook, SIGNAL(addressBookChanged(AddressBook*)),
+           SLOT(addressBookChanged()) );
+  connect( d->mAddressBook, SIGNAL(loadingFinished(Resource*)),
+           SLOT(addressBookChanged()) );
 #endif
 
   d->loadAddressBook();

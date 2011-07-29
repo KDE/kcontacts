@@ -195,8 +195,8 @@ bool ResourceNet::asyncLoad()
   KIO::Scheduler::checkSlaveOnHold( true );
   d->mLoadJob = KIO::file_copy( mUrl, dest, -1, KIO::Overwrite | KIO::HideProgressInfo );
   d->mIsLoading = true;
-  connect( d->mLoadJob, SIGNAL( result( KJob* ) ),
-           this, SLOT( downloadFinished( KJob* ) ) );
+  connect( d->mLoadJob, SIGNAL(result(KJob*)),
+           this, SLOT(downloadFinished(KJob*)) );
 
   return true;
 }
@@ -289,8 +289,8 @@ bool ResourceNet::asyncSave( Ticket *ticket )
   KIO::Scheduler::checkSlaveOnHold( true );
   d->mIsSaving = true;
   d->mSaveJob = KIO::file_copy( src, mUrl, -1, KIO::Overwrite | KIO::HideProgressInfo );
-  connect( d->mSaveJob, SIGNAL( result( KJob* ) ),
-           this, SLOT( uploadFinished( KJob* ) ) );
+  connect( d->mSaveJob, SIGNAL(result(KJob*)),
+           this, SLOT(uploadFinished(KJob*)) );
 
   return true;
 }

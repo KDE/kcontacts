@@ -96,9 +96,9 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
     mFormat = factory->format( mFormatName );
   }
 
-  connect( &mDirWatch, SIGNAL( dirty(const QString&) ), SLOT( fileChanged(const QString&) ) );
-  connect( &mDirWatch, SIGNAL( created(const QString&) ), SLOT( fileChanged(const QString&) ) );
-  connect( &mDirWatch, SIGNAL( deleted(const QString&) ), SLOT( fileChanged(const QString&) ) );
+  connect( &mDirWatch, SIGNAL(dirty(QString)), SLOT(fileChanged(QString)) );
+  connect( &mDirWatch, SIGNAL(created(QString)), SLOT(fileChanged(QString)) );
+  connect( &mDirWatch, SIGNAL(deleted(QString)), SLOT(fileChanged(QString)) );
 
   setFileName( fileName );
 
@@ -237,7 +237,7 @@ bool ResourceFile::asyncLoad()
 
   load();
 
-  QTimer::singleShot( 0, this, SLOT( emitLoadingFinished() ) );
+  QTimer::singleShot( 0, this, SLOT(emitLoadingFinished()) );
 
   return true;
 }
@@ -276,7 +276,7 @@ bool ResourceFile::asyncSave( Ticket *ticket )
 
   save( ticket );
 
-  QTimer::singleShot( 0, this, SLOT( emitSavingFinished() ) );
+  QTimer::singleShot( 0, this, SLOT(emitSavingFinished()) );
 
   return true;
 }
