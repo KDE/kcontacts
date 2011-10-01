@@ -46,16 +46,16 @@ void AddressTest::storeTest()
   address.setCountry( QLatin1String( "My Country" ) );
   address.setLabel( QLatin1String( "My Label" ) );
 
-  QVERIFY( address.id() == QLatin1String( "My Id" ) );
-  QVERIFY( address.type() == KABC::Address::Home );
-  QVERIFY( address.postOfficeBox() == QLatin1String( "1234" ) );
-  QVERIFY( address.extended() == QLatin1String( "My Extended Label" ) );
-  QVERIFY( address.street() == QLatin1String( "My Street" ) );
-  QVERIFY( address.locality() == QLatin1String( "My Locality" ) );
-  QVERIFY( address.region() == QLatin1String( "My Region" ) );
-  QVERIFY( address.postalCode() == QLatin1String( "My PostalCode" ) );
-  QVERIFY( address.country() == QLatin1String( "My Country" ) );
-  QVERIFY( address.label() == QLatin1String( "My Label" ) );
+  QCOMPARE( address.id(), QLatin1String( "My Id" ) );
+  QCOMPARE( address.type(), KABC::Address::Home );
+  QCOMPARE( address.postOfficeBox(), QLatin1String( "1234" ) );
+  QCOMPARE( address.extended(), QLatin1String( "My Extended Label" ) );
+  QCOMPARE( address.street(), QLatin1String( "My Street" ) );
+  QCOMPARE( address.locality(), QLatin1String( "My Locality" ) );
+  QCOMPARE( address.region(), QLatin1String( "My Region" ) );
+  QCOMPARE( address.postalCode(), QLatin1String( "My PostalCode" ) );
+  QCOMPARE( address.country(), QLatin1String( "My Country" ) );
+  QCOMPARE( address.label(), QLatin1String( "My Label" ) );
 }
 
 void AddressTest::equalsTest()
@@ -151,7 +151,7 @@ void AddressTest::formatTest()
     const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n"
                                          "12345 Lummerstadt\n\nGERMANY" ) );
 
-    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
+    QCOMPARE( address.formattedAddress( QLatin1String( "Jim Knopf" ) ), result );
   }
 
   {
@@ -165,7 +165,7 @@ void AddressTest::formatTest()
     const QString result(
       QLatin1String( "Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
                      "  DC 1A2B3C\n\nUNITED STATES OF AMERICA" ) );
-    QVERIFY( address.formattedAddress( QLatin1String( "Huck Finn" ) ) == result );
+    QCOMPARE( address.formattedAddress( QLatin1String( "Huck Finn" ) ), result );
   }
 
   {
@@ -178,7 +178,7 @@ void AddressTest::formatTest()
     const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\n"
                                          "12345 Lummerstadt\n\nDEUTSCHLAND" ) );
 
-    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
+    QCOMPARE( address.formattedAddress( QLatin1String( "Jim Knopf" ) ), result );
   }
 
   {
@@ -190,7 +190,7 @@ void AddressTest::formatTest()
 
     const QString result( QLatin1String( "Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345" ) );
 
-    QVERIFY( address.formattedAddress( QLatin1String( "Jim Knopf" ) ) == result );
+    QCOMPARE( address.formattedAddress( QLatin1String( "Jim Knopf" ) ), result );
   }
 }
 
