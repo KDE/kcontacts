@@ -20,6 +20,7 @@
 
 #include "addresstest.h"
 #include "kabc/address.h"
+#include "kstandarddirs.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( AddressTest, NoGUI )
@@ -141,6 +142,16 @@ void AddressTest::serializeTest()
 
 void AddressTest::formatTest()
 {
+  {
+    // check availability of country to ISO code mapping data file  
+    const QString mapfile = KGlobal::dirs()->findResource( "data", QLatin1String( "kabc/countrytransl.map" ) );
+    QVERIFY2( !mapfile.isEmpty(), "Country to ISO code mapping data file does not exist" );
+    
+    QFileInfo fileInfo( mapfile );
+    QVERIFY2( fileInfo.exists(), "Country to ISO code mapping data file does not exist" );
+    QVERIFY2( fileInfo.isReadable(), "Country to ISO code mapping data file is not readable" );
+  }
+  
   {
     KABC::Address address;
     address.setStreet( QLatin1String( "Lummerlandstr. 1" ) );
