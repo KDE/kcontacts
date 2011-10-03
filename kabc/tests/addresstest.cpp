@@ -20,6 +20,8 @@
 
 #include "addresstest.h"
 #include "kabc/address.h"
+#include <kconfig.h>
+#include <kconfiggroup.h>
 #include "kstandarddirs.h"
 #include <qtest_kde.h>
 
@@ -160,10 +162,10 @@ void AddressTest::formatTest()
     const KConfig templateConfig( templateFile );
     QVERIFY2( templateConfig.hasGroup( "KCM Locale" ),
               "Address format config for 'de' is missing expected 'KCM Locale' group" );
-    const KConfigGroup templateGroup = entry.group( "KCM Locale" );
-    QVERIFY2( templateGroup.hasEntry( "AddressFormat" ),
-              "Address format config is missing expected entry 'AddressFormat'" );
-    const QString addressTemplate = group.readEntry( "AddressFormat" );
+    const KConfigGroup templateGroup = templateConfig.group( "KCM Locale" );
+    QVERIFY2( templateGroup.hasKey( "AddressFormat" ),
+              "Address format config is missing expected key 'AddressFormat'" );
+    const QString addressTemplate = templateGroup.readEntry( "AddressFormat" );
     QVERIFY2( !addressTemplate.isEmpty(),
               "Address format template for 'de' is empty" );
     
