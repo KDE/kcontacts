@@ -37,7 +37,7 @@ static QString findCompatibleMimeType( const QMimeData *md )
   }
 
   const QStringList mimeTypeOffers = md->formats();
-  Q_FOREACH( const QString &mimeType, mimeTypeOffers ) {
+  Q_FOREACH ( const QString &mimeType, mimeTypeOffers ) {
     const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType( mimeType, KMimeType::ResolveAliases );
     if ( !mimeTypePtr.isNull() ) {
       if ( mimeTypePtr->is( KABC::Addressee::mimeType() ) ) {
