@@ -192,6 +192,9 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   Ldif::ParseValue ret;
   Addressee a;
   Address homeAddr, workAddr;
+  int birthday = -1;
+  int birthmonth = -1;
+  int birthyear = -1;
 
   ldif.setLdif( str.toLatin1() );
   QDateTime qdt = dt;
@@ -209,11 +212,17 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
       {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
-        evaluatePair( a, homeAddr, workAddr, fieldname, value );
+        evaluatePair( a, homeAddr, workAddr, fieldname, value, birthday, birthmonth,birthyear );
         break;
       }
       case Ldif::EndEntry:
-      // if the new address is not empty, append it
+      {
+        // if the new address is not empty, append it
+        QDateTime birthDate( QDate( birthyear, birthmonth, birthday ) );
+        if ( birthDate.isValid() ) {
+          a.setBirthday( birthDate );
+        }
+
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
           !a.familyName().isEmpty() ) {
           if ( !homeAddr.isEmpty() ) {
@@ -228,7 +237,8 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
         a.setRevision( qdt );
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
-        break;
+      }
+      break;
       case Ldif::MoreData:
       {
         if ( endldif ) {
@@ -249,7 +259,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
 
 bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
                                   Address &workAddr,
-                                  QString &fieldname, QString &value )
+                                  QString &fieldname, QString &value, int &birthday, int &birthmonth, int &birthyear )
 {
   if ( fieldname == QLatin1String( "dn" ) ) { // ignore & return false!
     return false;
@@ -515,6 +525,19 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "objectclass" ) ) { // ignore
+    return true;
+  }
+
+  if ( fieldname == QLatin1String( "birthyear" ) ) {
+    birthyear = value.toInt();
+    return true;
+  }
+  if ( fieldname == QLatin1String( "birthmonth" ) ) {
+    birthmonth = value.toInt();
+    return true;
+  }
+  if ( fieldname == QLatin1String( "birthday" ) ) {
+    birthday = value.toInt();
     return true;
   }
 
