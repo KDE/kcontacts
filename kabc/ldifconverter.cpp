@@ -272,7 +272,8 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   }
 
   if ( fieldname == QLatin1String( "xmozillanickname" ) ||
-       fieldname == QLatin1String( "nickname" ) ) {
+       fieldname == QLatin1String( "nickname" ) ||
+       fieldname == QLatin1String( "mozillanickname" ) ) {
     a.setNickName( value );
     return true;
   }
