@@ -94,6 +94,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, QLatin1String( "uid" ), addr.uid() );
   ldif_out( t, QLatin1String( "nickname" ), addr.nickName() );
   ldif_out( t, QLatin1String( "xmozillanickname" ), addr.nickName() );
+  ldif_out( t, QLatin1String( "mozillanickname" ), addr.nickName() );
 
   ldif_out( t, QLatin1String( "mail" ), addr.preferredEmail() );
   if ( addr.emails().count() > 1 ) {
@@ -164,9 +165,19 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
 
   ldif_out( t, QLatin1String( "workurl" ), addr.url().prettyUrl() );
   ldif_out( t, QLatin1String( "homeurl" ), addr.url().prettyUrl() );
+  ldif_out( t, QLatin1String( "mozillahomeurl" ), addr.url().prettyUrl() );
+
   ldif_out( t, QLatin1String( "description" ), addr.note() );
   if ( addr.revision().isValid() ) {
     ldif_out( t, QLatin1String( "modifytimestamp" ), dateToVCardString( addr.revision() ) );
+  }
+
+  const QDateTime birthday = addr.birthday();
+  if ( birthday.isValid() ) {
+    const QDate date = birthday.date();
+    ldif_out( t, QLatin1String( "birthyear" ), QString::number( date.year() ) );
+    ldif_out( t, QLatin1String( "birthmonth" ), QString::number( date.month() ) );
+    ldif_out( t, QLatin1String( "birthday" ), QString::number( date.day() ) );
   }
 
   t << "objectclass: top\n";
