@@ -333,7 +333,8 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "homeurl" ) ||
-       fieldname == QLatin1String( "workurl" ) ) {
+       fieldname == QLatin1String( "workurl" ) ||
+       fieldname == QLatin1String( "mozillahomeurl" )) {
     if ( a.url().isEmpty() ) {
       a.setUrl( KUrl( value ) );
       return true;
