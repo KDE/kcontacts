@@ -498,7 +498,8 @@ PhoneNumber::List Addressee::phoneNumbers( PhoneNumber::Type type ) const
   PhoneNumber::List list;
 
   PhoneNumber::List::ConstIterator it;
-  for ( it = d->mPhoneNumbers.constBegin(); it != d->mPhoneNumbers.constEnd(); ++it ) {
+  PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
+  for ( it = d->mPhoneNumbers.constBegin(); it != end; ++it ) {
     if ( matchBinaryPattern( (*it).type(), type ) ) {
       list.append( *it );
     }
@@ -509,7 +510,8 @@ PhoneNumber::List Addressee::phoneNumbers( PhoneNumber::Type type ) const
 PhoneNumber Addressee::findPhoneNumber( const QString &id ) const
 {
   PhoneNumber::List::ConstIterator it;
-  for ( it = d->mPhoneNumbers.constBegin(); it != d->mPhoneNumbers.constEnd(); ++it ) {
+  PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
+  for ( it = d->mPhoneNumbers.constBegin(); it != end; ++it ) {
     if ( (*it).id() == id ) {
       return *it;
     }
@@ -542,10 +544,11 @@ void Addressee::removeKey( const Key &key )
   }
 }
 
-Key Addressee::key( Key::Type type, QString customTypeString ) const
+Key Addressee::key( Key::Type type, const QString& customTypeString ) const
 {
   Key::List::ConstIterator it;
-  for ( it = d->mKeys.constBegin(); it != d->mKeys.constEnd(); ++it ) {
+  Key::List::ConstIterator end(d->mKeys.constEnd());
+  for ( it = d->mKeys.constBegin(); it != end; ++it ) {
     if ( (*it).type() == type ) {
       if ( type == Key::Custom ) {
         if ( customTypeString.isEmpty() ) {
@@ -572,12 +575,13 @@ Key::List Addressee::keys() const
   return d->mKeys;
 }
 
-Key::List Addressee::keys( Key::Type type, QString customTypeString ) const
+Key::List Addressee::keys( Key::Type type, const QString& customTypeString ) const
 {
   Key::List list;
 
   Key::List::ConstIterator it;
-  for ( it = d->mKeys.constBegin(); it != d->mKeys.constEnd(); ++it ) {
+  Key::List::ConstIterator end(d->mKeys.constEnd());
+  for ( it = d->mKeys.constBegin(); it != end; ++it ) {
     if ( (*it).type() == type ) {
       if ( type == Key::Custom ) {
         if ( customTypeString.isEmpty() ) {
@@ -597,7 +601,8 @@ Key::List Addressee::keys( Key::Type type, QString customTypeString ) const
 Key Addressee::findKey( const QString &id ) const
 {
   Key::List::ConstIterator it;
-  for ( it = d->mKeys.constBegin(); it != d->mKeys.constEnd(); ++it ) {
+  Key::List::ConstIterator end(d->mKeys.constEnd());
+  for ( it = d->mKeys.constBegin(); it != end; ++it ) {
     if ( (*it).id() == id ) {
       return *it;
     }
@@ -685,7 +690,8 @@ Address Addressee::address( Address::Type type ) const
 {
   Address address( type );
   Address::List::ConstIterator it;
-  for ( it = d->mAddresses.constBegin(); it != d->mAddresses.constEnd(); ++it ) {
+  Address::List::ConstIterator end(d->mAddresses.constEnd());
+  for ( it = d->mAddresses.constBegin(); it != end; ++it ) {
     if ( matchBinaryPattern( (*it).type(), type ) ) {
       if ( (*it).type() & Address::Pref )
         return (*it);
@@ -707,7 +713,8 @@ Address::List Addressee::addresses( Address::Type type ) const
   Address::List list;
 
   Address::List::ConstIterator it;
-  for ( it = d->mAddresses.constBegin(); it != d->mAddresses.constEnd(); ++it ) {
+  Address::List::ConstIterator end(d->mAddresses.constEnd());
+  for ( it = d->mAddresses.constBegin(); it != end; ++it ) {
     if ( matchBinaryPattern( (*it).type(), type ) ) {
       list.append( *it );
     }
@@ -719,7 +726,8 @@ Address::List Addressee::addresses( Address::Type type ) const
 Address Addressee::findAddress( const QString &id ) const
 {
   Address::List::ConstIterator it;
-  for ( it = d->mAddresses.constBegin(); it != d->mAddresses.constEnd(); ++it ) {
+  Address::List::ConstIterator end(d->mAddresses.constEnd());
+  for ( it = d->mAddresses.constBegin(); it != end; ++it ) {
     if ( (*it).id() == id ) {
       return *it;
     }
@@ -771,7 +779,8 @@ void Addressee::insertCustom( const QString &app, const QString &name,
   QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
 
   QStringList::Iterator it;
-  for ( it = d->mCustom.begin(); it != d->mCustom.end(); ++it ) {
+  QStringList::Iterator end(d->mCustom.end());
+  for ( it = d->mCustom.begin(); it != end); ++it ) {
     if ( (*it).startsWith( qualifiedName ) ) {
       (*it) = qualifiedName + value;
       return;
@@ -800,7 +809,8 @@ QString Addressee::custom( const QString &app, const QString &name ) const
   QString value;
 
   QStringList::ConstIterator it;
-  for ( it = d->mCustom.constBegin(); it != d->mCustom.constEnd(); ++it ) {
+  QStringList::ConstIterator end(d->mCustom.constEnd());
+  for ( it = d->mCustom.constBegin(); it != end; ++it ) {
     if ( (*it).startsWith( qualifiedName ) ) {
       value = (*it).mid( (*it).indexOf( QLatin1Char( ':' ) ) + 1 );
       break;
@@ -1068,8 +1078,8 @@ bool listEquals( const QList<L> &list, const QList<L> &pattern )
 {
   if ( list.count() != pattern.count() )
     return false;
-
-  for ( int i = 0; i < list.count(); ++i )
+  const int numberOfElement(list.count());
+  for ( int i = 0; i < numberOfElement; ++i )
     if ( !pattern.contains( list[ i ] ) )
       return false;
 
@@ -1081,7 +1091,8 @@ bool listEquals( const QStringList &list, const QStringList &pattern )
   if ( list.count() != pattern.count() )
     return false;
 
-  for ( int i = 0; i < list.count(); ++i )
+  const int numberOfElement(list.count());
+  for ( int i = 0; i < numberOfElement; ++i )
     if ( !pattern.contains( list[ i ] ) )
       return false;
 
@@ -1100,7 +1111,8 @@ bool emailsEquals( const QStringList &list, const QStringList &pattern )
     return false;
 
   QStringList::ConstIterator it;
-  for ( it = list.begin(); it != list.end(); ++it )
+  QStringList::ConstIterator end(list.constEnd());
+  for ( it = list.constBegin(); it != end; ++it )
     if ( !pattern.contains( *it ) )
       return false;
 

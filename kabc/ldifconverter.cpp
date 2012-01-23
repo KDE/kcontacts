@@ -54,7 +54,8 @@ using namespace KABC;
 bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, QString &str )
 {
   AddresseeList::ConstIterator it;
-  for ( it = addrList.begin(); it != addrList.end(); ++it ) {
+  AddresseeList::ConstIterator end( addrList.constEnd() );
+  for ( it = addrList.constBegin(); it != end; ++it ) {
     addresseeToLDIF( *it, str );
   }
   return true;
@@ -67,7 +68,7 @@ static void ldif_out( QTextStream &t, const QString &formatStr,
     return;
   }
 
-  QByteArray txt = Ldif::assembleLine( formatStr, value, 72 );
+  const QByteArray txt = Ldif::assembleLine( formatStr, value, 72 );
 
   // write the string
   t << QString::fromUtf8( txt ) << "\n";
