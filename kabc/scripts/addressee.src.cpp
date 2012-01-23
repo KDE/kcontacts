@@ -780,7 +780,7 @@ void Addressee::insertCustom( const QString &app, const QString &name,
 
   QStringList::Iterator it;
   QStringList::Iterator end(d->mCustom.end());
-  for ( it = d->mCustom.begin(); it != end); ++it ) {
+  for ( it = d->mCustom.begin(); it != end; ++it ) {
     if ( (*it).startsWith( qualifiedName ) ) {
       (*it) = qualifiedName + value;
       return;
