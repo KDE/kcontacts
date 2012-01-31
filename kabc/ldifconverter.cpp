@@ -224,7 +224,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
       {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
-        evaluatePair( a, homeAddr, workAddr, fieldname, value, birthday, birthmonth,birthyear );
+        evaluatePair( a, homeAddr, workAddr, fieldname, value, birthday, birthmonth, birthyear );
         break;
       }
       case Ldif::EndEntry:
@@ -271,7 +271,8 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
 
 bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
                                   Address &workAddr,
-                                  QString &fieldname, QString &value, int &birthday, int &birthmonth, int &birthyear )
+                                  QString &fieldname, QString &value,
+                                  int &birthday, int &birthmonth, int &birthyear )
 {
   if ( fieldname == QLatin1String( "dn" ) ) { // ignore & return false!
     return false;
@@ -357,7 +358,7 @@ addComment:
 
   if ( fieldname == QLatin1String( "homeurl" ) ||
        fieldname == QLatin1String( "workurl" ) ||
-       fieldname == QLatin1String( "mozillahomeurl" )) {
+       fieldname == QLatin1String( "mozillahomeurl" ) ) {
     if ( a.url().isEmpty() ) {
       a.setUrl( KUrl( value ) );
       return true;

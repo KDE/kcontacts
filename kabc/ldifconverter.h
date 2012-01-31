@@ -76,8 +76,10 @@ namespace KABC {
     @param fieldname LDIF field name to evaluate
     @param value The value of the field addressed by @p fieldname
   */
-  KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr, Address &workAddr,
-                                 QString &fieldname, QString &value, int &birthday, int &birthmonth, int &birthyear );
+  KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr,
+                                 Address &workAddr,
+                                 QString &fieldname, QString &value,
+                                 int &birthday, int &birthmonth, int &birthyear );
 
   }
 
