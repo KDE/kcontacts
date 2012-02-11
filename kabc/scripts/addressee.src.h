@@ -276,7 +276,7 @@ class KABC_EXPORT Addressee
       @param customTypeString A string to match custom keys against when
              @p type is @c Key::Custom
      */
-    Key key( Key::Type type, QString customTypeString = QString() ) const;
+    Key key( Key::Type type, const QString& customTypeString = QString() ) const;
 
     /**
       Return list of all keys.
@@ -299,7 +299,7 @@ class KABC_EXPORT Addressee
       @param customTypeString A string to match custom keys against when
              @p type is @c Key::Custom
      */
-    Key::List keys( Key::Type type, QString customTypeString = QString()  ) const;
+    Key::List keys( Key::Type type, const QString& customTypeString = QString()  ) const;
 
     /**
       Return key with the given id.

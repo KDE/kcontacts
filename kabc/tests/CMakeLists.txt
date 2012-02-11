@@ -122,7 +122,7 @@ if (UNIX)
 
    target_link_libraries(bigread ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc kabc_file_core )
 
-endif (UNIX)
+endif()
 
 
 ########### next target ###############
@@ -136,8 +136,8 @@ if (UNIX)
 
    target_link_libraries(bigwrite ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc kabc_file_core )
 
-endif (UNIX)
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
+endif()
 
 
 ########### next target ###############
@@ -167,7 +167,7 @@ set(testaddresslineedit_SRCS testaddresslineedit.cpp)
 kde4_add_executable(testaddresslineedit TEST ${testaddresslineedit_SRCS})
 
 target_link_libraries(testaddresslineedit ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${KDE4_KDEUI_LIBS})
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
 
 ########### next target ###############
 

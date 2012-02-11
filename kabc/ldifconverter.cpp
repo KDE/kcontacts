@@ -54,7 +54,8 @@ using namespace KABC;
 bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, QString &str )
 {
   AddresseeList::ConstIterator it;
-  for ( it = addrList.begin(); it != addrList.end(); ++it ) {
+  AddresseeList::ConstIterator end( addrList.constEnd() );
+  for ( it = addrList.constBegin(); it != end; ++it ) {
     addresseeToLDIF( *it, str );
   }
   return true;
@@ -67,7 +68,7 @@ static void ldif_out( QTextStream &t, const QString &formatStr,
     return;
   }
 
-  QByteArray txt = Ldif::assembleLine( formatStr, value, 72 );
+  const QByteArray txt = Ldif::assembleLine( formatStr, value, 72 );
 
   // write the string
   t << QString::fromUtf8( txt ) << "\n";
@@ -94,6 +95,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, QLatin1String( "uid" ), addr.uid() );
   ldif_out( t, QLatin1String( "nickname" ), addr.nickName() );
   ldif_out( t, QLatin1String( "xmozillanickname" ), addr.nickName() );
+  ldif_out( t, QLatin1String( "mozillanickname" ), addr.nickName() );
 
   ldif_out( t, QLatin1String( "mail" ), addr.preferredEmail() );
   if ( addr.emails().count() > 1 ) {
@@ -164,9 +166,19 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
 
   ldif_out( t, QLatin1String( "workurl" ), addr.url().prettyUrl() );
   ldif_out( t, QLatin1String( "homeurl" ), addr.url().prettyUrl() );
+  ldif_out( t, QLatin1String( "mozillahomeurl" ), addr.url().prettyUrl() );
+
   ldif_out( t, QLatin1String( "description" ), addr.note() );
   if ( addr.revision().isValid() ) {
     ldif_out( t, QLatin1String( "modifytimestamp" ), dateToVCardString( addr.revision() ) );
+  }
+
+  const QDateTime birthday = addr.birthday();
+  if ( birthday.isValid() ) {
+    const QDate date = birthday.date();
+    ldif_out( t, QLatin1String( "birthyear" ), QString::number( date.year() ) );
+    ldif_out( t, QLatin1String( "birthmonth" ), QString::number( date.month() ) );
+    ldif_out( t, QLatin1String( "birthday" ), QString::number( date.day() ) );
   }
 
   t << "objectclass: top\n";
@@ -192,6 +204,9 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
   Ldif::ParseValue ret;
   Addressee a;
   Address homeAddr, workAddr;
+  int birthday = -1;
+  int birthmonth = -1;
+  int birthyear = -1;
 
   ldif.setLdif( str.toLatin1() );
   QDateTime qdt = dt;
@@ -209,11 +224,17 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
       {
         QString fieldname = ldif.attr().toLower();
         QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
-        evaluatePair( a, homeAddr, workAddr, fieldname, value );
+        evaluatePair( a, homeAddr, workAddr, fieldname, value, birthday, birthmonth, birthyear );
         break;
       }
       case Ldif::EndEntry:
-      // if the new address is not empty, append it
+      {
+        // if the new address is not empty, append it
+        QDateTime birthDate( QDate( birthyear, birthmonth, birthday ) );
+        if ( birthDate.isValid() ) {
+          a.setBirthday( birthDate );
+        }
+
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
           !a.familyName().isEmpty() ) {
           if ( !homeAddr.isEmpty() ) {
@@ -228,7 +249,8 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
         a.setRevision( qdt );
         homeAddr = Address( Address::Home );
         workAddr = Address( Address::Work );
-        break;
+      }
+      break;
       case Ldif::MoreData:
       {
         if ( endldif ) {
@@ -249,7 +271,8 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
 
 bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
                                   Address &workAddr,
-                                  QString &fieldname, QString &value )
+                                  QString &fieldname, QString &value,
+                                  int &birthday, int &birthmonth, int &birthyear )
 {
   if ( fieldname == QLatin1String( "dn" ) ) { // ignore & return false!
     return false;
@@ -272,7 +295,8 @@ bool LDIFConverter::evaluatePair( Addressee &a, Address &homeAddr,
   }
 
   if ( fieldname == QLatin1String( "xmozillanickname" ) ||
-       fieldname == QLatin1String( "nickname" ) ) {
+       fieldname == QLatin1String( "nickname" ) ||
+       fieldname == QLatin1String( "mozillanickname" ) ) {
     a.setNickName( value );
     return true;
   }
@@ -333,7 +357,8 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "homeurl" ) ||
-       fieldname == QLatin1String( "workurl" ) ) {
+       fieldname == QLatin1String( "workurl" ) ||
+       fieldname == QLatin1String( "mozillahomeurl" ) ) {
     if ( a.url().isEmpty() ) {
       a.setUrl( KUrl( value ) );
       return true;
@@ -513,6 +538,19 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "objectclass" ) ) { // ignore
+    return true;
+  }
+
+  if ( fieldname == QLatin1String( "birthyear" ) ) {
+    birthyear = value.toInt();
+    return true;
+  }
+  if ( fieldname == QLatin1String( "birthmonth" ) ) {
+    birthmonth = value.toInt();
+    return true;
+  }
+  if ( fieldname == QLatin1String( "birthday" ) ) {
+    birthday = value.toInt();
     return true;
   }
 

@@ -28,7 +28,7 @@ add_subdirectory( vcardparser )
 if (NOT KDEPIM_NO_KRESOURCES)
   add_subdirectory( formats )
   add_subdirectory( plugins )
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
 add_subdirectory( tests )
 #add_subdirectory( scripts )
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
@@ -86,7 +86,7 @@ if (NOT WINCE)
    addresseedialog.cpp
    emailselectdialog.cpp
   )
-endif (NOT WINCE)
+endif()
 
 if (NOT KDEPIM_NO_KRESOURCES)
   set(kabc_LIB_SRCS
@@ -102,7 +102,7 @@ if (NOT KDEPIM_NO_KRESOURCES)
     stdaddressbook.cpp
     vcardformat.cpp
   )
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
 
 
 kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
@@ -112,7 +112,7 @@ target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
 if (NOT KDEPIM_NO_KRESOURCES)
   target_link_libraries(kabc kresources)
   target_link_libraries(kabc LINK_INTERFACE_LIBRARIES kresources)
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
 
 set_target_properties(kabc PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -164,4 +164,4 @@ if (NOT KDEPIM_NO_KRESOURCES)
     vcardformat.h
     DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
   )
-endif (NOT KDEPIM_NO_KRESOURCES)
+endif()
