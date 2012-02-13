@@ -19,7 +19,7 @@
 */
 
 #include "emailselectdialog.h"
-#include "addresseedialog.h"
+#include "addressee.h"
 
 #include <klocalizedstring.h>
 

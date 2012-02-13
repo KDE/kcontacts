@@ -6,7 +6,6 @@ include_directories(${KDE4_KIO_INCLUDES})
 add_definitions(${QDBUS_DEFINITIONS} -DKDE_DEFAULT_DEBUG_AREA=5700)
 add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
-add_definitions(-DWANT_DEPRECATED_KRESOURCE_API)
 add_definitions(-DWANT_DEPRECATED_KABC_API)
 
 # these apply also for all subdirs
@@ -25,11 +24,8 @@ set(vcards_STAT_SRCS
 )
 
 add_subdirectory(vcardparser)
-if(NOT KDEPIM_NO_KRESOURCES)
-  add_subdirectory(formats)
-  add_subdirectory(plugins)
-endif()
 add_subdirectory(tests)
+#add_subdirectory( scripts )
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
 
 add_custom_command(
@@ -79,38 +75,10 @@ set(kabc_LIB_SRCS
   ${vcards_STAT_SRCS}
 )
 
-if(NOT WINCE)
-  set(kabc_LIB_SRCS
-  ${kabc_LIB_SRCS}
-  addresseedialog.cpp
-  emailselectdialog.cpp
-)
-endif()
-
-if(NOT KDEPIM_NO_KRESOURCES)
-  set(kabc_LIB_SRCS
-    ${kabc_LIB_SRCS}
-    addressbook.cpp
-    addresslineedit.cpp
-    distributionlist.cpp
-    distributionlistdialog.cpp
-    formatfactory.cpp
-    resource.cpp
-    resourceabc.cpp
-    resourcecached.cpp
-    stdaddressbook.cpp
-    vcardformat.cpp
-  )
-endif()
-
 kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
 
 target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
 target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
-if(NOT KDEPIM_NO_KRESOURCES)
-  target_link_libraries(kabc kresources)
-  target_link_libraries(kabc LINK_INTERFACE_LIBRARIES kresources)
-endif()
 
 set_target_properties(
   kabc PROPERTIES
@@ -126,11 +94,9 @@ install(FILES
   kabc_export.h
   address.h
   ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
-  addresseedialog.h
   addresseelist.h
   contactgroup.h
   contactgrouptool.h
-  distributionlist.h
   emailselectdialog.h
   errorhandler.h
   field.h
@@ -150,20 +116,3 @@ install(FILES
   vcarddrag.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
 )
-
-if(NOT KDEPIM_NO_KRESOURCES)
-  install(FILES kabc_manager.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kresources)
-  install(FILES
-    addressbook.h
-    addresslineedit.h
-    distributionlistdialog.h
-    format.h
-    formatfactory.h
-    resource.h
-    resourceabc.h
-    resourcecached.h
-    stdaddressbook.h
-    vcardformat.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
-  )
-endif()
