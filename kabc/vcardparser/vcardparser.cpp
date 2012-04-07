@@ -38,6 +38,7 @@ static void addEscapes( QByteArray &str )
 static void removeEscapes( QByteArray &str )
 {
   str.replace( (char *)"\\n", "\n" );
+  str.replace( (char *)"\\N", "\n" );
   str.replace( (char *)"\\r", "\r" );
   str.replace( (char *)"\\,", "," );
   str.replace( (char *)"\\\\", "\\" );
