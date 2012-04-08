@@ -1,0 +1,28 @@
+<!DOCTYPE RCC><RCC version="1.0">
+  <!-- input files -->
+  <qresource prefix="/input">
+    <file>tests/vcard1.vcf</file>
+    <file>tests/vcard2.vcf</file>
+    <file>tests/vcard3.vcf</file>
+    <file>tests/vcard4.vcf</file>
+    <!--    <file>tests/vcard5.vcf</file> -->
+    <file>tests/vcard6.vcf</file>
+    <file>tests/vcard7.vcf</file>
+  </qresource>
+  
+  <!-- output files formatted for vcard version 2.1 -->
+  <qresource prefix="/output2.1">
+    <file alias="tests/vcard3.vcf.ref">tests/vcard3.vcf.2_1ref</file>
+  </qresource>
+  
+  <!-- output files formatted for vcard version 3.0 -->
+  <qresource prefix="/output3.0">
+    <file>tests/vcard1.vcf.ref</file>
+    <file>tests/vcard2.vcf.ref</file>
+    <file>tests/vcard3.vcf.ref</file>
+    <file>tests/vcard4.vcf.ref</file>
+    <file>tests/vcard5.vcf.ref</file>
+    <file>tests/vcard6.vcf.ref</file>
+    <file>tests/vcard7.vcf.ref</file>
+  </qresource>
+</RCC>
