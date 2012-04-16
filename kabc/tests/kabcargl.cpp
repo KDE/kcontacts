@@ -24,7 +24,6 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kcmdlineargs.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
 
 #include <QtCore/QFile>
