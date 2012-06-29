@@ -118,7 +118,8 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
             if ( pair[ 1 ].indexOf( ',' ) != -1 ) { // parameter in type=x,y,z format
               const QList<QByteArray> args = pair[ 1 ].split( ',' );
               QList<QByteArray>::ConstIterator argIt;
-              for ( argIt = args.constBegin(); argIt != args.constEnd(); ++argIt ) {
+              QList<QByteArray>::ConstIterator argEnd(args.constEnd());
+              for ( argIt = args.constBegin(); argIt != argEnd; ++argIt ) {
                 vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
                                         QString::fromLatin1( *argIt ) );
               }
