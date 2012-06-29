@@ -63,7 +63,7 @@ QString AddresseeItem::key( int column, bool ) const
 {
   if ( column == Email ) {
     QString value = text( Email );
-    QRegExp emailRe( QLatin1String( "<\\S*>" ) );
+    const QRegExp emailRe( QLatin1String( "<\\S*>" ) );
     int match = emailRe.indexIn( value );
     if ( match > -1 ) {
       value = value.mid( match + 1, emailRe.matchedLength() - 2 );

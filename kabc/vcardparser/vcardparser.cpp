@@ -242,7 +242,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
 
           params = (*lineIt).parameterList();
           hasEncoding = false;
-          if ( params.count() > 0 ) { // we have parameters
+          if ( !params.isEmpty() ) { // we have parameters
             for ( paramIt = params.begin(); paramIt != params.end(); ++paramIt ) {
               if ( (*paramIt) == QLatin1String( "encoding" ) ) {
                 hasEncoding = true;
