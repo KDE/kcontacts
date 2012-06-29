@@ -127,8 +127,9 @@ QStringList AddressLineEdit::Private::addresses()
     n = n.simplified();
 
     QStringList::ConstIterator mit;
+    QStringList::ConstIterator end(emails.constEnd());
 
-    for ( mit = emails.constBegin(); mit != emails.constEnd(); ++mit ) {
+    for ( mit = emails.constBegin(); mit != end; ++mit ) {
       email = *mit;
       if ( !email.isEmpty() ) {
         if ( n.isEmpty() || ( email.indexOf( QLatin1Char( '<' ) ) != -1 ) ) {
@@ -471,7 +472,8 @@ void AddressLineEdit::loadAddresses()
   d->sAddressesDirty = false;
 
   const QStringList addrs = d->addresses();
-  for ( QStringList::ConstIterator it = addrs.begin(); it != addrs.end(); ++it ) {
+  QStringList::ConstIterator end(addrs.end());
+  for ( QStringList::ConstIterator it = addrs.begin(); it != end; ++it ) {
     addAddress( *it );
   }
 }
