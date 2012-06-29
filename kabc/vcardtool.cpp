@@ -142,7 +142,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     if ( version == VCard::v3_0 ) {
       QStringList categories = (*addrIt).categories();
       QStringList::Iterator catIt;
-      for ( catIt = categories.begin(); catIt != categories.end(); ++catIt ) {
+      QStringList::Iterator catEnd(categories.end());
+      for ( catIt = categories.begin(); catIt != catEnd; ++catIt ) {
         (*catIt).replace( QLatin1Char( ',' ), QLatin1String( "\\," ) );
       }
 

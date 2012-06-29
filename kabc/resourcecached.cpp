@@ -81,7 +81,8 @@ void ResourceCached::Private::loadChangesCache( QMap<QString, KABC::Addressee> &
 
   const KABC::Addressee::List list = converter.parseVCards( file.readAll() );
   KABC::Addressee::List::ConstIterator it;
-  for ( it = list.begin(); it != list.end(); ++it ) {
+  KABC::Addressee::List::ConstIterator end(list.end());
+  for ( it = list.begin(); it != end; ++it ) {
     map.insert( (*it).uid(), *it );
   }
 
