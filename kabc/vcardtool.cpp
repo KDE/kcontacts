@@ -26,6 +26,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
+#include <QDebug>
 
 using namespace KABC;
 
@@ -330,8 +331,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // VERSION
     if ( version == VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" ) ) );
-    }
-    if ( version == VCard::v3_0 ) {
+    } else if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "3.0" ) ) );
     }
 
