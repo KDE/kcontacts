@@ -27,10 +27,11 @@
 
 using namespace KABC;
 
-static void addEscapes( QByteArray &str )
+static void addEscapes( QByteArray &str, bool excludeEscapteComma )
 {
   str.replace( '\\', (char *)"\\\\" );
-  str.replace( ',', (char *)"\\," );
+  if(!excludeEscapteComma)
+    str.replace( ',', (char *)"\\," );
   str.replace( '\r', (char *)"\\r" );
   str.replace( '\n', (char *)"\\n" );
 }
@@ -286,8 +287,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           } else {
             output = input;
           }
-
-          addEscapes( output );
+          addEscapes( output, (*lineIt).identifier() == QLatin1String("CATEGORIES") );
 
           if ( !output.isEmpty() ) {
             textLine.append( ':' + output );
