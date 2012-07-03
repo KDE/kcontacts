@@ -123,10 +123,11 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, QLatin1String( "postofficebox" ), workAddr.postOfficeBox() );
 
   QStringList streets = homeAddr.street().split( QLatin1Char( '\n' ) );
-  if ( streets.count() > 0 ) {
+  const int numberOfStreets(streets.count());
+  if ( numberOfStreets > 0 ) {
     ldif_out( t, QLatin1String( "homepostaladdress" ), streets[ 0 ] ); // Netscape 7
   }
-  if ( streets.count() > 1 ) {
+  if ( numberOfStreets > 1 ) {
     ldif_out( t, QLatin1String( "mozillahomepostaladdress2" ), streets[ 1 ] ); // Netscape 7
   }
   ldif_out( t, QLatin1String( "mozillahomelocalityname" ), homeAddr.locality() ); // Netscape 7
@@ -407,7 +408,8 @@ addComment:
   }
 
   if ( fieldname == QLatin1String( "street" ) ||
-       fieldname == QLatin1String( "streethomeaddress" ) ) {
+       fieldname == QLatin1String( "streethomeaddress" ) ||
+       fieldname == QLatin1String( "mozillahomestreet" ) /*thunderbird*/ ) {
     homeAddr.setStreet( value );
     return true;
   }
