@@ -407,14 +407,13 @@ addComment:
     return true;
   }
 
-  if ( fieldname == QLatin1String( "street" ) ||
-       fieldname == QLatin1String( "streethomeaddress" ) ||
+  if ( fieldname == QLatin1String( "streethomeaddress" ) ||
        fieldname == QLatin1String( "mozillahomestreet" ) /*thunderbird*/ ) {
     homeAddr.setStreet( value );
     return true;
   }
 
-  if ( fieldname == QLatin1String( "postaladdress" ) ) {  // mozilla
+  if ( fieldname == QLatin1String( "street" ) || fieldname == QLatin1String( "postaladdress" ) ) {  // mozilla
     workAddr.setStreet( value );
     return true;
   }
