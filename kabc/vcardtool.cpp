@@ -507,19 +507,20 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         // N
         else if ( identifier == QLatin1String( "n" ) ) {
           const QStringList nameParts = splitString( semicolonSep, (*lineIt).value().toString() );
-          if ( nameParts.count() > 0 ) {
+          const int numberOfParts(nameParts.count());
+          if ( numberOfParts > 0 ) {
             addr.setFamilyName( nameParts[ 0 ] );
           }
-          if ( nameParts.count() > 1 ) {
+          if ( numberOfParts > 1 ) {
             addr.setGivenName( nameParts[ 1 ] );
           }
-          if ( nameParts.count() > 2 ) {
+          if ( numberOfParts > 2 ) {
             addr.setAdditionalName( nameParts[ 2 ] );
           }
-          if ( nameParts.count() > 3 ) {
+          if ( numberOfParts > 3 ) {
             addr.setPrefix( nameParts[ 3 ] );
           }
-          if ( nameParts.count() > 4 ) {
+          if ( numberOfParts > 4 ) {
             addr.setSuffix( nameParts[ 4 ] );
           }
         }
@@ -588,7 +589,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           PhoneNumber::Type type;
 
           const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
+          QStringList::ConstIterator typeEnd(types.end());
+          for ( QStringList::ConstIterator it = types.begin(); it != typeEnd; ++it ) {
             type |= mPhoneTypeMap[(*it).toUpper()];
           }
 
