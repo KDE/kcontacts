@@ -468,8 +468,8 @@ void DistributionListEditorWidget::Private::updateAddresseeView()
   mAddresseeView->clear();
 
   AddressBook::ConstIterator it;
-  AddressBook::ConstIterator end(mAddressBook->end());
-  for ( it = mAddressBook->begin(); it != end; ++it ) {
+  AddressBook::ConstIterator end(mAddressBook->constEnd());
+  for ( it = mAddressBook->constBegin(); it != end; ++it ) {
     new AddresseeItem( mAddresseeView, *it );
   }
 }
