@@ -80,6 +80,7 @@ Comment[pt]=Oferece o acesso aos contactos, estando cada um guardado num único 
 Comment[pt_BR]=Fornece acesso aos contatos, cada um armazenado em um único arquivo, em uma pasta informada. Suporta o formato de arquivos VCard padrão e outros formatos, dependendo da disponibilidade de plugins.
 Comment[ro]=Oferă acces la contacte, fiecare stocat într-un singur fișier, într-un dosar dat. Susține fișiere VCard standard precum și alte formate în dependență de disponibilitatea modulelor.
 Comment[ru]=Хранение каждого контакта в отдельном файле в указанной локальной папке. Для файлов используется формат vCard или любой другой формат, который поддерживается доступными модулями.
+Comment[sk]=Poskytuje prístup ku kontaktom, každý uložený v samostatnom súbore v danom adresári. Podporuje štandardný VCard súbor a ostatné formáty v závislosti od dostupnosti zásuvných modulov.
 Comment[sl]=Nudi dostop do stikov, ki so vsak posebej shranjeni v eni datoteki, v danem imeniku. Podpira običajne datoteke VCard in druge formate, odvisno od dosegljivosti vstavkov.
 Comment[sr]=Пружа приступ контактима складиштеним у појединачним фајловима у датој фасцикли. Подржава стандардне в‑кард фајлове и друге формате, према расположивим прикључцима.
 Comment[sr@ijekavian]=Пружа приступ контактима складиштеним у појединачним фајловима у датој фасцикли. Подржава стандардне в‑кард фајлове и друге формате, према расположивим прикључцима.
