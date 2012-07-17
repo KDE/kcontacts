@@ -307,7 +307,8 @@ Addressee::List Resource::findByName( const QString &name ) // TODO: const
   Addressee::List results;
 
   ConstIterator it;
-  for ( it = constBegin(); it != constEnd(); ++it ) {
+  ConstIterator end(constEnd());
+  for ( it = constBegin(); it != end; ++it ) {
     if ( name == (*it).name() ) {
       results.append( *it );
     }
@@ -324,7 +325,8 @@ Addressee::List Resource::findByEmail( const QString &email ) // TODO: const
   ConstIterator it;
   for ( it = constBegin(); it != constEnd(); ++it ) {
     const QStringList mailList = (*it).emails();
-    for ( QStringList::ConstIterator ite = mailList.begin(); ite != mailList.end(); ++ite ) {
+    const QStringList::ConstIterator end(mailList.end());
+    for ( QStringList::ConstIterator ite = mailList.begin(); ite != end; ++ite ) {
       if ( lowerEmail == (*ite).toLower() ) {
         results.append( *it );
       }
@@ -339,7 +341,8 @@ Addressee::List Resource::findByCategory( const QString &category ) // TODO: con
   Addressee::List results;
 
   ConstIterator it;
-  for ( it = constBegin(); it != constEnd(); ++it ) {
+  ConstIterator end(constEnd());
+  for ( it = constBegin(); it != end; ++it ) {
     if ( (*it).hasCategory( category ) ) {
       results.append( *it );
     }

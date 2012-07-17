@@ -85,7 +85,8 @@ EmailSelector::EmailSelector( const QStringList &emails, const QString &current,
   QVBoxLayout *layout = new QVBoxLayout;
 
   QStringList::ConstIterator it;
-  for ( it = emails.begin(); it != emails.end(); ++it ) {
+  QStringList::ConstIterator end(emails.end());
+  for ( it = emails.begin(); it != end; ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
     d->mButtonGroup->addButton( button );
     d->mEmailMap.insert( button, *it );
@@ -413,7 +414,7 @@ void DistributionListEditorWidget::Private::changeEmail()
   EntryItem *entryItem =
       static_cast<EntryItem *>( selected.at( 0 ) );
 
-  QString email = EmailSelector::getEmail( entryItem->addressee().emails(),
+  const QString email = EmailSelector::getEmail( entryItem->addressee().emails(),
                                            entryItem->email(), mParent );
   list->removeEntry( entryItem->addressee(), entryItem->email() );
   list->insertEntry( entryItem->addressee(), email );
@@ -450,7 +451,8 @@ void DistributionListEditorWidget::Private::updateEntryView()
 
   DistributionList::Entry::List entries = list->entries();
   DistributionList::Entry::List::ConstIterator it;
-  for ( it = entries.constBegin(); it != entries.constEnd(); ++it ) {
+  DistributionList::Entry::List::ConstIterator end(entries.constEnd());
+  for ( it = entries.constBegin(); it != end; ++it ) {
     new EntryItem( mEntryView, (*it).addressee(), (*it).email() );
   }
 
@@ -465,8 +467,9 @@ void DistributionListEditorWidget::Private::updateAddresseeView()
 {
   mAddresseeView->clear();
 
-  AddressBook::Iterator it;
-  for ( it = mAddressBook->begin(); it != mAddressBook->end(); ++it ) {
+  AddressBook::ConstIterator it;
+  AddressBook::ConstIterator end(mAddressBook->constEnd());
+  for ( it = mAddressBook->constBegin(); it != end; ++it ) {
     new AddresseeItem( mAddresseeView, *it );
   }
 }

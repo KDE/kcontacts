@@ -227,10 +227,11 @@ QString AddresseeList::toString() const
   }
 
   str += QString::fromLatin1( "   Sorting criterion: %1\n" ).arg( crit );
-
+#if 0 //code commented in loop => comment it too
   for ( const_iterator it = begin(); it != end(); ++it ) {
 //    str += (*it).toString();
   }
+#endif
 
   str += QLatin1String( "}\n" );
 

@@ -27,10 +27,11 @@
 
 using namespace KABC;
 
-static void addEscapes( QByteArray &str )
+static void addEscapes( QByteArray &str, bool excludeEscapteComma )
 {
   str.replace( '\\', (char *)"\\\\" );
-  str.replace( ',', (char *)"\\," );
+  if(!excludeEscapteComma)
+    str.replace( ',', (char *)"\\," );
   str.replace( '\r', (char *)"\\r" );
   str.replace( '\n', (char *)"\\n" );
 }
@@ -38,6 +39,7 @@ static void addEscapes( QByteArray &str )
 static void removeEscapes( QByteArray &str )
 {
   str.replace( (char *)"\\n", "\n" );
+  str.replace( (char *)"\\N", "\n" );
   str.replace( (char *)"\\r", "\r" );
   str.replace( (char *)"\\,", "," );
   str.replace( (char *)"\\\\", "\\" );
@@ -116,7 +118,8 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
             if ( pair[ 1 ].indexOf( ',' ) != -1 ) { // parameter in type=x,y,z format
               const QList<QByteArray> args = pair[ 1 ].split( ',' );
               QList<QByteArray>::ConstIterator argIt;
-              for ( argIt = args.constBegin(); argIt != args.constEnd(); ++argIt ) {
+              QList<QByteArray>::ConstIterator argEnd(args.constEnd());
+              for ( argIt = args.constBegin(); argIt != argEnd; ++argIt ) {
                 vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
                                         QString::fromLatin1( *argIt ) );
               }
@@ -239,7 +242,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
 
           params = (*lineIt).parameterList();
           hasEncoding = false;
-          if ( params.count() > 0 ) { // we have parameters
+          if ( !params.isEmpty() ) { // we have parameters
             for ( paramIt = params.begin(); paramIt != params.end(); ++paramIt ) {
               if ( (*paramIt) == QLatin1String( "encoding" ) ) {
                 hasEncoding = true;
@@ -285,8 +288,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           } else {
             output = input;
           }
-
-          addEscapes( output );
+          addEscapes( output, (*lineIt).identifier() == QLatin1String("CATEGORIES") );
 
           if ( !output.isEmpty() ) {
             textLine.append( ':' + output );

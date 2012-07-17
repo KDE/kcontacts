@@ -26,6 +26,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
+#include <QDebug>
 
 using namespace KABC;
 
@@ -142,7 +143,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     if ( version == VCard::v3_0 ) {
       QStringList categories = (*addrIt).categories();
       QStringList::Iterator catIt;
-      for ( catIt = categories.begin(); catIt != categories.end(); ++catIt ) {
+      QStringList::Iterator catEnd(categories.end());
+      for ( catIt = categories.begin(); catIt != catEnd; ++catIt ) {
         (*catIt).replace( QLatin1Char( ',' ), QLatin1String( "\\," ) );
       }
 
@@ -329,8 +331,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // VERSION
     if ( version == VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" ) ) );
-    }
-    if ( version == VCard::v3_0 ) {
+    } else if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "3.0" ) ) );
     }
 
@@ -506,19 +507,20 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         // N
         else if ( identifier == QLatin1String( "n" ) ) {
           const QStringList nameParts = splitString( semicolonSep, (*lineIt).value().toString() );
-          if ( nameParts.count() > 0 ) {
+          const int numberOfParts(nameParts.count());
+          if ( numberOfParts > 0 ) {
             addr.setFamilyName( nameParts[ 0 ] );
           }
-          if ( nameParts.count() > 1 ) {
+          if ( numberOfParts > 1 ) {
             addr.setGivenName( nameParts[ 1 ] );
           }
-          if ( nameParts.count() > 2 ) {
+          if ( numberOfParts > 2 ) {
             addr.setAdditionalName( nameParts[ 2 ] );
           }
-          if ( nameParts.count() > 3 ) {
+          if ( numberOfParts > 3 ) {
             addr.setPrefix( nameParts[ 3 ] );
           }
-          if ( nameParts.count() > 4 ) {
+          if ( numberOfParts > 4 ) {
             addr.setSuffix( nameParts[ 4 ] );
           }
         }
@@ -587,7 +589,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           PhoneNumber::Type type;
 
           const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
+          QStringList::ConstIterator typeEnd(types.end());
+          for ( QStringList::ConstIterator it = types.begin(); it != typeEnd; ++it ) {
             type |= mPhoneTypeMap[(*it).toUpper()];
           }
 

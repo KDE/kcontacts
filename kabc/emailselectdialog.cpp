@@ -59,7 +59,8 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
   QVBoxLayout *layout = new QVBoxLayout;
 
   QStringList::ConstIterator it;
-  for ( it = emails.begin(); it != emails.end(); ++it ) {
+  QStringList::ConstIterator end(emails.end());
+  for ( it = emails.begin(); it != end; ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
     d->mButtonGroup->addButton( button );
     layout->addWidget( button );
