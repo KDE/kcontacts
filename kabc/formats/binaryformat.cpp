@@ -108,9 +108,9 @@ void BinaryFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
 
   Resource::Iterator it;
   for ( it = resource->begin(); it != resource->end(); ++it ) {
-    saveAddressee( (*it), stream );
+    saveAddressee( ( *it ), stream );
     counter++;
-    (*it).setChanged( false );
+    ( *it ).setChanged( false );
   }
 
   // set real number of entries

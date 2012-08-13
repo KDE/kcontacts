@@ -147,9 +147,9 @@ void StdAddressBook::Private::init( bool asynchronous )
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = manager->activeBegin(); it != manager->activeEnd(); ++it ) {
-    (*it)->setAddressBook( mParent );
-    if ( !(*it)->open() ) {
-      mParent->error( i18n( "Unable to open resource '%1'.", (*it)->resourceName() ) );
+    ( *it )->setAddressBook( mParent );
+    if ( !( *it )->open() ) {
+      mParent->error( i18n( "Unable to open resource '%1'.", ( *it )->resourceName() ) );
       continue;
     }
     mParent->connect( *it, SIGNAL(loadingFinished(Resource*)),
@@ -192,11 +192,11 @@ bool StdAddressBook::Private::saveAll()
   KRES::Manager<Resource>::ActiveIterator it;
   KRES::Manager<Resource> *manager = mParent->resourceManager();
   for ( it = manager->activeBegin(); it != manager->activeEnd(); ++it ) {
-    if ( !(*it)->readOnly() && (*it)->isOpen() ) {
+    if ( !( *it )->readOnly() && ( *it )->isOpen() ) {
       Ticket *ticket = mParent->requestSaveTicket( *it );
       if ( !ticket ) {
         mParent->error( i18n( "Unable to save to resource '%1'. It is locked.",
-                              (*it)->resourceName() ) );
+                              ( *it )->resourceName() ) );
         return false;
       }
 

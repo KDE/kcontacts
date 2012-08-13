@@ -116,18 +116,18 @@ QStringList AddressLineEdit::Private::addresses()
   KABC::AddressBook *addressBook = KABC::StdAddressBook::self();
   KABC::AddressBook::Iterator it;
   for ( it = addressBook->begin(); it != addressBook->end(); ++it ) {
-    QStringList emails = (*it).emails();
+    QStringList emails = ( *it ).emails();
 
-    QString n = (*it).prefix() + space +
-                (*it).givenName() + space +
-                (*it).additionalName() + space +
-                (*it).familyName() + space +
-                (*it).suffix();
+    QString n = ( *it ).prefix() + space +
+                ( *it ).givenName() + space +
+                ( *it ).additionalName() + space +
+                ( *it ).familyName() + space +
+                ( *it ).suffix();
 
     n = n.simplified();
 
     QStringList::ConstIterator mit;
-    QStringList::ConstIterator end(emails.constEnd());
+    QStringList::ConstIterator end( emails.constEnd() );
 
     for ( mit = emails.constBegin(); mit != end; ++mit ) {
       email = *mit;
@@ -142,7 +142,8 @@ QStringList AddressLineEdit::Private::addresses()
           }
         }
 
-        if ( !addr.isEmpty() && ( email.indexOf( QLatin1Char( '<' ) ) == -1 ) &&
+        if ( !addr.isEmpty() &&
+             ( email.indexOf( QLatin1Char( '<' ) ) == -1 ) &&
              ( email.indexOf( QLatin1Char( '>' ) ) == -1 ) &&
              ( email.indexOf( QLatin1Char( ',' ) ) == -1 ) ) {
           addr += QLatin1Char( '<' ) + email + QLatin1Char( '>' );
@@ -407,11 +408,11 @@ void AddressLineEdit::doCompletion( bool ctrlT )
           // remove the '$$whatever$' part
           for ( QStringList::Iterator it = items.begin();
                 it != items.end(); ++it ) {
-            int pos = (*it).indexOf( QLatin1Char( '$' ), 2 );
+            int pos = ( *it ).indexOf( QLatin1Char( '$' ), 2 );
             if ( pos < 0 ) { // ???
               continue;
             }
-            (*it) = (*it).mid( pos + 1 );
+            ( *it ) = ( *it ).mid( pos + 1 );
           }
         }
 
@@ -472,7 +473,7 @@ void AddressLineEdit::loadAddresses()
   d->sAddressesDirty = false;
 
   const QStringList addrs = d->addresses();
-  QStringList::ConstIterator end(addrs.end());
+  QStringList::ConstIterator end( addrs.end() );
   for ( QStringList::ConstIterator it = addrs.begin(); it != end; ++it ) {
     addAddress( *it );
   }
@@ -505,10 +506,10 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
       }
 
       KUrl u( *it );
-      if ( (*it).protocol() == QLatin1String( "mailto" ) ) {
-        ct.append( (*it).path() );
+      if ( ( *it ).protocol() == QLatin1String( "mailto" ) ) {
+        ct.append( ( *it ).path() );
       } else {
-        ct.append( (*it).url() );
+        ct.append( ( *it ).url() );
       }
     }
     setText( ct );

@@ -59,7 +59,7 @@ void ResourceCached::Private::saveChangesCache( const QMap<QString, KABC::Addres
     file.remove();
   } else {
     if ( !file.open( QIODevice::WriteOnly ) ) {
-      kError(5700) << "Can't open changes cache file '" << file.fileName() << "' for saving.";
+      kError( 5700 ) << "Can't open changes cache file '" << file.fileName() << "' for saving.";
       return;
     }
 
@@ -81,9 +81,9 @@ void ResourceCached::Private::loadChangesCache( QMap<QString, KABC::Addressee> &
 
   const KABC::Addressee::List list = converter.parseVCards( file.readAll() );
   KABC::Addressee::List::ConstIterator it;
-  KABC::Addressee::List::ConstIterator end(list.end());
+  KABC::Addressee::List::ConstIterator end( list.end() );
   for ( it = list.begin(); it != end; ++it ) {
-    map.insert( (*it).uid(), *it );
+    map.insert( ( *it ).uid(), *it );
   }
 
   file.close();
@@ -165,9 +165,9 @@ bool ResourceCached::loadFromCache()
   KABC::Addressee::List::Iterator it;
 
   for ( it = list.begin(); it != list.end(); ++it ) {
-    (*it).setResource( this );
-    (*it).setChanged( false );
-    mAddrMap.insert( (*it).uid(), *it );
+    ( *it ).setResource( this );
+    ( *it ).setChanged( false );
+    mAddrMap.insert( ( *it ).uid(), *it );
   }
 
   file.close();
@@ -209,14 +209,14 @@ void ResourceCached::cleanUpCache( const KABC::Addressee::List &addrList )
   for ( cacheIt = list.begin(); cacheIt != list.end(); ++cacheIt ) {
     bool found = false;
     for ( it = addrList.begin(); it != addrList.end(); ++it ) {
-      if ( (*it).uid() == (*cacheIt).uid() ) {
+      if ( ( *it ).uid() == ( *cacheIt ).uid() ) {
         found = true;
       }
     }
 
     if ( !found ) {
-      d->mIdMapper.removeRemoteId( d->mIdMapper.remoteId( (*cacheIt).uid() ) );
-      mAddrMap.remove( (*cacheIt).uid() );
+      d->mIdMapper.removeRemoteId( d->mIdMapper.remoteId( ( *cacheIt ).uid() ) );
+      mAddrMap.remove( ( *cacheIt ).uid() );
     }
   }
 

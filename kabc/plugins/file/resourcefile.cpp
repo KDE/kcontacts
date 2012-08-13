@@ -369,16 +369,16 @@ void ResourceFile::saveDistributionLists()
     const DistributionList::Entry::List entries = list->entries();
     DistributionList::Entry::List::ConstIterator it;
     for ( it = entries.begin(); it != entries.end(); ++it ) {
-      value.append( (*it).addressee().uid() );
-      value.append( (*it).email() );
+      value.append( ( *it ).addressee().uid() );
+      value.append( ( *it ).email() );
     }
 
     if ( d->mMissingEntries.find( list->name() ) != d->mMissingEntries.end() ) {
       const MissingEntryList missList = d->mMissingEntries[ list->name() ];
       MissingEntryList::ConstIterator missIt;
       for ( missIt = missList.begin(); missIt != missList.end(); ++missIt ) {
-        value.append( (*missIt).first );
-        value.append( (*missIt).second );
+        value.append( ( *missIt ).first );
+        value.append( ( *missIt ).second );
       }
     }
 

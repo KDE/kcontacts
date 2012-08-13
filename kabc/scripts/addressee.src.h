@@ -486,7 +486,7 @@ class KABC_EXPORT Addressee
     QSharedDataPointer<Private> d;
 };
 #ifdef MAKE_KABC_LIB
-KDE_DUMMY_QHASH_FUNCTION(Addressee)
+KDE_DUMMY_QHASH_FUNCTION( Addressee )
 #endif
 
 KABC_EXPORT QDataStream &operator<<( QDataStream &, const Addressee & );
@@ -495,6 +495,6 @@ KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
 }
 
 #define KABC_ADDRESSEE_METATYPE_DEFINED 1
-Q_DECLARE_METATYPE(KABC::Addressee)
+Q_DECLARE_METATYPE( KABC::Addressee )
 
 #endif

@@ -30,8 +30,9 @@ using namespace KABC;
 static void addEscapes( QByteArray &str, bool excludeEscapteComma )
 {
   str.replace( '\\', (char *)"\\\\" );
-  if(!excludeEscapteComma)
+  if ( !excludeEscapteComma ) {
     str.replace( ',', (char *)"\\," );
+  }
   str.replace( '\r', (char *)"\\r" );
   str.replace( '\n', (char *)"\\n" );
 }
@@ -66,21 +67,22 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
   QList<QByteArray>::Iterator linesEnd( lines.end() );
   for ( ; it != linesEnd; ++it ) {
     // remove the trailing \r, left from \r\n
-    if ( (*it).endsWith( '\r' ) ) {
-        (*it).chop( 1 );
+    if ( ( *it ).endsWith( '\r' ) ) {
+        ( *it ).chop( 1 );
     }
 
-    if ( (*it).startsWith( ' ' ) || (*it).startsWith( '\t' ) ) { //folded line => append to previous
-      currentLine.append( (*it).mid( 1 ) );
+    if ( ( *it ).startsWith( ' ' ) ||
+         ( *it ).startsWith( '\t' ) ) { //folded line => append to previous
+      currentLine.append( ( *it ).mid( 1 ) );
       continue;
     } else {
-      if ( (*it).trimmed().isEmpty() ) { // empty line
+      if ( ( *it ).trimmed().isEmpty() ) { // empty line
         continue;
       }
       if ( inVCard && !currentLine.isEmpty() ) { // now parse the line
         int colon = currentLine.indexOf( ':' );
         if ( colon == -1 ) { // invalid line
-          currentLine = (*it);
+          currentLine = ( *it );
           continue;
         }
 
@@ -102,7 +104,7 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         if ( params.count() > 1 ) { // find all parameters
           QList<QByteArray>::ConstIterator paramIt( params.constBegin() );
           for ( ++paramIt; paramIt != params.constEnd(); ++paramIt ) {
-            QList<QByteArray> pair = (*paramIt).split( '=' );
+            QList<QByteArray> pair = ( *paramIt ).split( '=' );
             if ( pair.count() == 1 ) {
               // correct the fucking 2.1 'standard'
               if ( pair[ 0 ].toLower() == "quoted-printable" ) {
@@ -118,7 +120,7 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
             if ( pair[ 1 ].indexOf( ',' ) != -1 ) { // parameter in type=x,y,z format
               const QList<QByteArray> args = pair[ 1 ].split( ',' );
               QList<QByteArray>::ConstIterator argIt;
-              QList<QByteArray>::ConstIterator argEnd(args.constEnd());
+              QList<QByteArray>::ConstIterator argEnd( args.constEnd() );
               for ( argIt = args.constBegin(); argIt != argEnd; ++argIt ) {
                 vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
                                         QString::fromLatin1( *argIt ) );
@@ -179,14 +181,14 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
       }
 
       // we do not save the start and end tag as vcardline
-      if ( (*it).toLower().startsWith( "begin:vcard" ) ) { //krazy:exclude=strings
+      if ( ( *it ).toLower().startsWith( "begin:vcard" ) ) { //krazy:exclude=strings
         inVCard = true;
         currentLine.clear();
         currentVCard.clear(); // flush vcard
         continue;
       }
 
-      if ( (*it).toLower().startsWith( "end:vcard" ) ) { //krazy:exclude=strings
+      if ( ( *it ).toLower().startsWith( "end:vcard" ) ) { //krazy:exclude=strings
         inVCard = false;
         vCardList.append( currentVCard );
         currentLine.clear();
@@ -194,7 +196,7 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         continue;
       }
 
-      currentLine = (*it);
+      currentLine = ( *it );
     }
   }
 
@@ -226,34 +228,34 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
   for ( cardIt = list.begin(); cardIt != listEnd; ++cardIt ) {
     text.append( "BEGIN:VCARD\r\n" );
 
-    idents = (*cardIt).identifiers();
+    idents = ( *cardIt ).identifiers();
     for ( identIt = idents.constBegin(); identIt != idents.constEnd(); ++identIt ) {
-      lines = (*cardIt).lines( (*identIt) );
+      lines = ( *cardIt ).lines( ( *identIt ) );
 
       // iterate over the lines
       for ( lineIt = lines.constBegin(); lineIt != lines.constEnd(); ++lineIt ) {
-        QVariant val = (*lineIt).value();
+        QVariant val = ( *lineIt ).value();
         if ( val.isValid() ) {
-          if ( (*lineIt).hasGroup() ) {
-            textLine = (*lineIt).group().toLatin1() + '.' + (*lineIt).identifier().toLatin1();
+          if ( ( *lineIt ).hasGroup() ) {
+            textLine = ( *lineIt ).group().toLatin1() + '.' + ( *lineIt ).identifier().toLatin1();
           } else {
-            textLine = (*lineIt).identifier().toLatin1();
+            textLine = ( *lineIt ).identifier().toLatin1();
           }
 
-          params = (*lineIt).parameterList();
+          params = ( *lineIt ).parameterList();
           hasEncoding = false;
           if ( !params.isEmpty() ) { // we have parameters
             for ( paramIt = params.begin(); paramIt != params.end(); ++paramIt ) {
-              if ( (*paramIt) == QLatin1String( "encoding" ) ) {
+              if ( ( *paramIt ) == QLatin1String( "encoding" ) ) {
                 hasEncoding = true;
-                encodingType = (*lineIt).parameter( QLatin1String( "encoding" ) ).toLower();
+                encodingType = ( *lineIt ).parameter( QLatin1String( "encoding" ) ).toLower();
               }
 
-              values = (*lineIt).parameters( *paramIt );
+              values = ( *lineIt ).parameters( *paramIt );
               for ( valueIt = values.constBegin(); valueIt != values.constEnd(); ++valueIt ) {
-                textLine.append( ';' + (*paramIt).toLatin1().toUpper() );
-                if ( !(*valueIt).isEmpty() ) {
-                  textLine.append( '=' + (*valueIt).toLatin1() );
+                textLine.append( ';' + ( *paramIt ).toLatin1().toUpper() );
+                if ( !( *valueIt ).isEmpty() ) {
+                  textLine.append( '=' + ( *valueIt ).toLatin1() );
                 }
               }
             }
@@ -262,20 +264,20 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           QByteArray input, output;
 
           // handle charset
-          if ( (*lineIt).parameterList().contains( QLatin1String( "charset" ) ) ) {
+          if ( ( *lineIt ).parameterList().contains( QLatin1String( "charset" ) ) ) {
             // have to convert the data
-            const QString value = (*lineIt).value().toString();
+            const QString value = ( *lineIt ).value().toString();
             QTextCodec *codec = QTextCodec::codecForName(
-              (*lineIt).parameter( QLatin1String( "charset" ) ).toLatin1() );
+              ( *lineIt ).parameter( QLatin1String( "charset" ) ).toLatin1() );
             if ( codec ) {
               input = codec->fromUnicode( value );
             } else {
               input = value.toUtf8();
             }
-          } else if ( (*lineIt).value().type() == QVariant::ByteArray ) {
-            input = (*lineIt).value().toByteArray();
+          } else if ( ( *lineIt ).value().type() == QVariant::ByteArray ) {
+            input = ( *lineIt ).value().toByteArray();
           } else {
-            input = (*lineIt).value().toString().toUtf8();
+            input = ( *lineIt ).value().toString().toUtf8();
           }
 
           // handle encoding
@@ -288,7 +290,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           } else {
             output = input;
           }
-          addEscapes( output, (*lineIt).identifier() == QLatin1String("CATEGORIES") );
+          addEscapes( output, ( *lineIt ).identifier() == QLatin1String( "CATEGORIES" ) );
 
           if ( !output.isEmpty() ) {
             textLine.append( ':' + output );

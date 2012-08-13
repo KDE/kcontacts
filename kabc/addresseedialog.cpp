@@ -216,7 +216,7 @@ Addressee::List AddresseeDialog::addressees() const
   AddresseeItem *aItem = 0;
 
   if ( d->mMultiple ) {
-    const int numberOfTopItem(d->mSelectedList->topLevelItemCount());
+    const int numberOfTopItem( d->mSelectedList->topLevelItemCount() );
     for ( int i = 0; i < numberOfTopItem; ++i ) {
       aItem = dynamic_cast<AddresseeItem *>( d->mSelectedList->topLevelItem( i ) );
       if ( aItem ) {
@@ -273,9 +273,9 @@ void AddresseeDialog::Private::loadAddressBook()
 #ifndef KDEPIM_NO_KRESOURCES
   AddressBook::Iterator it;
   for ( it = mAddressBook->begin(); it != mAddressBook->end(); ++it ) {
-    AddresseeItem *item = new AddresseeItem( mAddresseeList, (*it) );
-    addCompletionItem( (*it).realName(), item );
-    addCompletionItem( (*it).preferredEmail(), item );
+    AddresseeItem *item = new AddresseeItem( mAddresseeList, ( *it ) );
+    addCompletionItem( ( *it ).realName(), item );
+    addCompletionItem( ( *it ).preferredEmail(), item );
   }
 #endif
 }

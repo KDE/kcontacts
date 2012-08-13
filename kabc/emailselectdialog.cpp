@@ -59,12 +59,12 @@ EmailSelectDialog::EmailSelectDialog( const QStringList &emails,
   QVBoxLayout *layout = new QVBoxLayout;
 
   QStringList::ConstIterator it;
-  QStringList::ConstIterator end(emails.end());
+  QStringList::ConstIterator end( emails.end() );
   for ( it = emails.begin(); it != end; ++it ) {
     QRadioButton *button = new QRadioButton( *it, box );
     d->mButtonGroup->addButton( button );
     layout->addWidget( button );
-    if ( (*it) == current ) {
+    if ( ( *it ) == current ) {
       button->setChecked( true );
     }
   }

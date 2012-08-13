@@ -413,7 +413,7 @@ OfflineDialog::OfflineDialog( bool autoCache, int cachePolicy, const KUrl &src,
   QRadioButton *bt;
   bt = new QRadioButton( i18n( "Do not use offline cache" ), mCacheBox );
   cacheBoxLayout->addWidget( bt );
-  bt->setDown(true);
+  bt->setDown( true );
   mCacheGroup->addButton( bt );
 
   bt = new QRadioButton( i18n( "Use local copy if no connection" ), mCacheBox );

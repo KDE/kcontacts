@@ -145,20 +145,20 @@ void AddressTest::serializeTest()
 void AddressTest::formatTest()
 {
   {
-    // check availability of country to ISO code mapping data file  
+    // check availability of country to ISO code mapping data file
     const QString mapfile = KGlobal::dirs()->findResource( "data", QLatin1String( "kabc/countrytransl.map" ) );
     QVERIFY2( !mapfile.isEmpty(), "Country to ISO code mapping data file does not exist" );
-    
+
     QFileInfo fileInfo( mapfile );
     QVERIFY2( fileInfo.exists(), "Country to ISO code mapping data file does not exist" );
     QVERIFY2( fileInfo.isReadable(), "Country to ISO code mapping data file is not readable" );
   }
-  
+
   {
     const QString templateFile = KStandardDirs::locate( "locale",
         QLatin1String( "l10n/de/entry.desktop" ) );
     QVERIFY2( !templateFile.isEmpty(), "Address format template file for 'de' does not exist" );
-    
+
     const KConfig templateConfig( templateFile );
     QVERIFY2( templateConfig.hasGroup( "KCM Locale" ),
               "Address format config for 'de' is missing expected 'KCM Locale' group" );
@@ -168,7 +168,7 @@ void AddressTest::formatTest()
     const QString addressTemplate = templateGroup.readEntry( "AddressFormat" );
     QVERIFY2( !addressTemplate.isEmpty(),
               "Address format template for 'de' is empty" );
-    
+
     KABC::Address address;
     address.setStreet( QLatin1String( "Lummerlandstr. 1" ) );
     address.setPostalCode( QLatin1String( "12345" ) );

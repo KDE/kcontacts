@@ -144,14 +144,14 @@ void DistributionList::insertEntry( const Addressee &a, const QString &email )
 
   QList<Entry>::Iterator it;
   for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
-    if ( (*it).addressee().uid() == a.uid() ) {
+    if ( ( *it ).addressee().uid() == a.uid() ) {
       /**
         We have to check if both email addresses contains no data,
         a simple 'email1 == email2' wont work here
        */
-      if ( ( (*it).email().isNull() && email.isEmpty() ) ||
-           ( (*it).email().isEmpty() && email.isNull() ) ||
-           ( (*it).email() == email ) ) {
+      if ( ( ( *it ).email().isNull() && email.isEmpty() ) ||
+           ( ( *it ).email().isEmpty() && email.isNull() ) ||
+           ( ( *it ).email() == email ) ) {
         *it = e;
         return;
       }
@@ -164,7 +164,7 @@ void DistributionList::removeEntry( const Addressee &a, const QString &email )
 {
   QList<Entry>::Iterator it;
   for ( it = d->mEntries.begin(); it != d->mEntries.end(); ++it ) {
-    if ( (*it).addressee().uid() == a.uid() && (*it).email() == email ) {
+    if ( ( *it ).addressee().uid() == a.uid() && ( *it ).email() == email ) {
       d->mEntries.erase( it );
       return;
     }
@@ -177,9 +177,9 @@ QStringList DistributionList::emails() const
 
   Entry::List::ConstIterator it;
   for ( it = d->mEntries.constBegin(); it != d->mEntries.constEnd(); ++it ) {
-    const Addressee a = (*it).addressee();
-    QString email = (*it).email().isEmpty() ? a.fullEmail() :
-                                              a.fullEmail( (*it).email() );
+    const Addressee a = ( *it ).addressee();
+    QString email = ( *it ).email().isEmpty() ? a.fullEmail() :
+                                                a.fullEmail( ( *it ).email() );
 
     if ( !email.isEmpty() ) {
       emails.append( email );

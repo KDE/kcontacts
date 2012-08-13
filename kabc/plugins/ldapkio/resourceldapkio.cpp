@@ -160,7 +160,7 @@ void ResourceLDAPKIO::entries( KIO::Job *, const KIO::UDSEntryList &list )
   KIO::UDSEntryList::ConstIterator it = list.begin();
   KIO::UDSEntryList::ConstIterator end = list.end();
   for ( ; it != end; ++it ) {
-    const QString urlStr = (*it).stringValue( KIO::UDSEntry::UDS_URL );
+    const QString urlStr = ( *it ).stringValue( KIO::UDSEntry::UDS_URL );
     if ( !urlStr.isEmpty() ) {
       KUrl tmpurl( urlStr );
       d->mResultDn = tmpurl.path();
@@ -589,8 +589,8 @@ KIO::TransferJob *ResourceLDAPKIO::Private::loadFromCache()
 {
   KIO::TransferJob *job = 0;
   if ( mCachePolicy == Cache_Always ||
-     ( mCachePolicy == Cache_NoConnection &&
-      mError == KIO::ERR_COULD_NOT_CONNECT ) ) {
+       ( mCachePolicy == Cache_NoConnection &&
+         mError == KIO::ERR_COULD_NOT_CONNECT ) ) {
 
     mAddr = Addressee();
     mAd = Address( Address::Home );
@@ -882,7 +882,7 @@ void ResourceLDAPKIO::saveResult( KJob *job )
 void ResourceLDAPKIO::saveData( KIO::Job *job, QByteArray &data )
 {
   Q_UNUSED( job );
-  while ( d->mSaveIt != end() && !(*d->mSaveIt).changed() ) {
+  while ( d->mSaveIt != end() && !( *d->mSaveIt ).changed() ) {
     d->mSaveIt++;
   }
 
@@ -892,12 +892,12 @@ void ResourceLDAPKIO::saveData( KIO::Job *job, QByteArray &data )
     return;
   }
 
-  kDebug() << "ResourceLDAPKIO saveData:" << (*d->mSaveIt).assembledName();
+  kDebug() << "ResourceLDAPKIO saveData:" << ( *d->mSaveIt ).assembledName();
 
-  d->AddresseeToLDIF( data, *d->mSaveIt, d->findUid( (*d->mSaveIt).uid() ) );
+  d->AddresseeToLDIF( data, *d->mSaveIt, d->findUid( ( *d->mSaveIt ).uid() ) );
 //  kDebug() << "ResourceLDAPKIO save LDIF:" << QString::fromUtf8(data);
   // mark as unchanged
-  (*d->mSaveIt).setChanged( false );
+  ( *d->mSaveIt ).setChanged( false );
 
   d->mSaveIt++;
 }

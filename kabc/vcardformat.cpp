@@ -93,9 +93,9 @@ void VCardFormat::saveAll( AddressBook *, Resource *resource, QFile *file )
   Addressee::List vcardlist;
 
   Resource::Iterator it;
-  Resource::Iterator end(resource->end());
+  Resource::Iterator end( resource->end() );
   for ( it = resource->begin(); it != end; ++it ) {
-    (*it).setChanged( false );
+    ( *it ).setChanged( false );
     vcardlist.append( *it );
   }
 

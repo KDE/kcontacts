@@ -84,7 +84,7 @@ QString Field::label()
     case Private::CustomField:
       return d->label();
     default:
-      return i18n("Unknown Field");
+      return i18n( "Unknown Field" );
   }
 }
 
@@ -97,21 +97,21 @@ QString Field::categoryLabel( int category )
 {
   switch ( category ) {
     case All:
-      return i18n("All");
+      return i18n( "All" );
     case Frequent:
-      return i18n("Frequent");
+      return i18n( "Frequent" );
     case Address:
-      return i18nc("street/postal","Address");
+      return i18nc( "street/postal","Address" );
     case Email:
-      return i18n("Email");
+      return i18n( "Email" );
     case Personal:
-      return i18n("Personal");
+      return i18n( "Personal" );
     case Organization:
-      return i18n("Organization");
+      return i18n( "Organization" );
     case CustomCategory:
-      return i18n("Custom");
+      return i18n( "Custom" );
     default:
-      return i18n("Undefined");
+      return i18n( "Undefined" );
   }
 }
 
@@ -135,17 +135,21 @@ QString Field::value( const KABC::Addressee &a )
       {
         // check for preferred number
         const PhoneNumber::List list = a.phoneNumbers( PhoneNumber::Home | PhoneNumber::Pref );
-        for ( it = list.begin(); it != list.end(); ++it )
-          if ( ((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home )
-            return (*it).number();
+        for ( it = list.begin(); it != list.end(); ++it ) {
+          if ( ( ( *it ).type() & ~( PhoneNumber::Pref ) ) == PhoneNumber::Home ) {
+            return ( *it ).number();
+          }
+        }
       }
 
       {
         // check for normal home number
         const PhoneNumber::List list = a.phoneNumbers( PhoneNumber::Home );
-        for ( it = list.begin(); it != list.end(); ++it )
-          if ( ((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home )
-            return (*it).number();
+        for ( it = list.begin(); it != list.end(); ++it ) {
+          if ( ( ( *it ).type() & ~(PhoneNumber::Pref) ) == PhoneNumber::Home ) {
+            return ( *it ).number();
+          }
+        }
       }
 
       return QString();
@@ -157,17 +161,21 @@ QString Field::value( const KABC::Addressee &a )
       {
         // check for preferred number
         const PhoneNumber::List list = a.phoneNumbers( PhoneNumber::Work | PhoneNumber::Pref );
-        for ( it = list.begin(); it != list.end(); ++it )
-          if ( ((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Work )
-            return (*it).number();
+        for ( it = list.begin(); it != list.end(); ++it ) {
+          if ( ( ( *it ).type() & ~(PhoneNumber::Pref) ) == PhoneNumber::Work ) {
+            return ( *it ).number();
+          }
+        }
       }
 
       {
         // check for normal work number
         const PhoneNumber::List list = a.phoneNumbers( PhoneNumber::Work );
-        for ( it = list.begin(); it != list.end(); ++it )
-          if ( ((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Work )
-            return (*it).number();
+        for ( it = list.begin(); it != list.end(); ++it ) {
+          if ( ( ( *it ).type() & ~(PhoneNumber::Pref) ) == PhoneNumber::Work ) {
+            return ( *it ).number();
+          }
+        }
       }
 
       return QString();
@@ -286,17 +294,17 @@ void Field::deleteFields()
   Field::List::ConstIterator it;
 
   for ( it = Private::mAllFields.constBegin(); it != Private::mAllFields.constEnd(); ++it ) {
-    delete (*it);
+    delete ( *it );
   }
   Private::mAllFields.clear();
 
   for ( it = Private::mDefaultFields.constBegin(); it != Private::mDefaultFields.constEnd(); ++it ) {
-    delete (*it);
+    delete ( *it );
   }
   Private::mDefaultFields.clear();
 
   for ( it = Private::mCustomFields.constBegin(); it != Private::mCustomFields.constEnd(); ++it ) {
-    delete (*it);
+    delete ( *it );
   }
   Private::mCustomFields.clear();
 }
@@ -317,12 +325,12 @@ void Field::saveFields( KConfigGroup &cfg, const QString &identifier,
   int custom = 0;
   Field::List::ConstIterator it;
   for ( it = fields.begin(); it != fields.end(); ++it ) {
-    fieldIds.append( (*it)->d->fieldId() );
-    if ( (*it)->isCustom() ) {
+    fieldIds.append( ( *it )->d->fieldId() );
+    if ( ( *it )->isCustom() ) {
       QStringList customEntry;
-      customEntry << (*it)->d->label();
-      customEntry << (*it)->d->key();
-      customEntry << (*it)->d->app();
+      customEntry << ( *it )->d->label();
+      customEntry << ( *it )->d->key();
+      customEntry << ( *it )->d->app();
       cfg.writeEntry( QLatin1String( "KABC_CustomEntry_" ) + identifier + QLatin1Char( '_' ) +
                       QString::number( custom++ ), customEntry );
     }
@@ -348,7 +356,7 @@ Field::List Field::restoreFields( const KConfigGroup &cfg, const QString &identi
   QList<int>::ConstIterator it;
   for ( it = fieldIds.begin(); it != fieldIds.end(); ++it ) {
     Private *f = 0;
-    if ( (*it) == Private::CustomField ) {
+    if ( ( *it ) == Private::CustomField ) {
       QStringList customEntry = cfg.readEntry( QLatin1String( "KABC_CustomEntry_" ) +
                                                identifier + QLatin1Char( '_' ) +
                                                QString::number( custom++ ),QStringList() );
