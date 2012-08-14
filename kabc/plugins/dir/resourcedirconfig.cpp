@@ -54,7 +54,7 @@ ResourceDirConfig::ResourceDirConfig( QWidget *parent )
   for ( it = formats.begin(); it != formats.end(); ++it ) {
     FormatInfo info = factory->info( *it );
     if ( !info.isNull() ) {
-      mFormatTypes << (*it);
+      mFormatTypes << ( *it );
       mFormatBox->addItem( info.nameLabel );
     }
   }

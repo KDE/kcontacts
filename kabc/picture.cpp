@@ -112,7 +112,8 @@ bool Picture::operator!=( const Picture &p ) const
 bool Picture::isEmpty() const
 {
   return
-    ( ( d->mIntern == false && d->mUrl.isEmpty() ) || ( d->mIntern == true && d->mData.isNull() ) );
+    ( ( d->mIntern == false && d->mUrl.isEmpty() ) ||
+      ( d->mIntern == true && d->mData.isNull() ) );
 }
 
 void Picture::setUrl( const QString &url )

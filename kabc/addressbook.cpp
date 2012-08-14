@@ -94,17 +94,17 @@ AddressBook::Iterator::~Iterator()
 
 const Addressee &AddressBook::Iterator::operator*() const
 {
-  return *(d->mIt);
+  return *( d->mIt );
 }
 
 Addressee &AddressBook::Iterator::operator*()
 {
-  return *(d->mIt);
+  return *( d->mIt );
 }
 
 Addressee *AddressBook::Iterator::operator->()
 {
-  return &(*(d->mIt));
+  return &( *( d->mIt ) );
 }
 
 AddressBook::Iterator &AddressBook::Iterator::operator++()
@@ -124,7 +124,7 @@ AddressBook::Iterator &AddressBook::Iterator::operator++()
     }
 
     if ( !jumped ) {
-      (d->mIt)++;
+      ( d->mIt )++;
     }
 
   } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() );
@@ -149,7 +149,7 @@ AddressBook::Iterator &AddressBook::Iterator::operator++( int )
     }
 
     if ( !jumped ) {
-      (d->mIt)++;
+      ( d->mIt )++;
     }
 
   } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->end() );
@@ -159,14 +159,14 @@ AddressBook::Iterator &AddressBook::Iterator::operator++( int )
 
 AddressBook::Iterator &AddressBook::Iterator::operator--()
 {
-  (d->mIt)--;
+  ( d->mIt )--;
 
   return *this;
 }
 
 AddressBook::Iterator &AddressBook::Iterator::operator--( int )
 {
-  (d->mIt)--;
+  ( d->mIt )--;
 
   return *this;
 }
@@ -225,12 +225,12 @@ AddressBook::ConstIterator::~ConstIterator()
 
 const Addressee &AddressBook::ConstIterator::operator*() const
 {
-  return *(d->mIt);
+  return *( d->mIt );
 }
 
 const Addressee *AddressBook::ConstIterator::operator->() const
 {
-  return &(*(d->mIt));
+  return &( *( d->mIt ) );
 }
 
 AddressBook::ConstIterator &AddressBook::ConstIterator::operator++()
@@ -250,7 +250,7 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++()
     }
 
     if ( !jumped ) {
-      (d->mIt)++;
+      ( d->mIt )++;
     }
 
   } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() );
@@ -275,7 +275,7 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++(int)
     }
 
     if ( !jumped ) {
-      (d->mIt)++;
+      ( d->mIt )++;
     }
 
   } while ( d->mIt == ( d->mResources[ d->mCurrRes ] )->constEnd() );
@@ -285,13 +285,13 @@ AddressBook::ConstIterator &AddressBook::ConstIterator::operator++(int)
 
 AddressBook::ConstIterator &AddressBook::ConstIterator::operator--()
 {
-  (d->mIt)--;
+  ( d->mIt )--;
   return *this;
 }
 
 AddressBook::ConstIterator &AddressBook::ConstIterator::operator--(int)
 {
-  (d->mIt)--;
+  ( d->mIt )--;
   return *this;
 }
 
@@ -354,8 +354,8 @@ bool AddressBook::load()
   KRES::Manager<Resource>::ActiveIterator it;
   bool ok = true;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    if ( !(*it)->load() ) {
-      error( i18n( "Unable to load resource '%1'", (*it)->resourceName() ) );
+    if ( !( *it )->load() ) {
+      error( i18n( "Unable to load resource '%1'", ( *it )->resourceName() ) );
       ok = false;
     }
   }
@@ -373,8 +373,8 @@ bool AddressBook::asyncLoad()
   bool ok = true;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
     d->mPendingLoadResources.append( *it );
-    if ( !(*it)->asyncLoad() ) {
-      error( i18n( "Unable to load resource '%1'", (*it)->resourceName() ) );
+    if ( !( *it )->asyncLoad() ) {
+      error( i18n( "Unable to load resource '%1'", ( *it )->resourceName() ) );
       ok = false;
     }
   }
@@ -479,11 +479,11 @@ AddressBook::Iterator AddressBook::end()
 {
   KRES::Manager<Resource>::ActiveIterator resIt = d->mManager->activeEnd();
 
-  if ( resIt == d->mManager->activeBegin() || ! *(--resIt) ) {
+  if ( resIt == d->mManager->activeBegin() || ! *( --resIt ) ) {
     // no resource available
     d->end.d->mIt = Resource::Iterator();
   } else {
-    d->end.d->mIt = (*resIt)->end();
+    d->end.d->mIt = ( *resIt )->end();
   }
 
   return d->end;
@@ -493,11 +493,11 @@ AddressBook::ConstIterator AddressBook::end() const
 {
   KRES::Manager<Resource>::ActiveIterator resIt = d->mManager->activeEnd();
 
-  if ( resIt == d->mManager->activeBegin() || ! *(--resIt) ) {
+  if ( resIt == d->mManager->activeBegin() || ! *( --resIt ) ) {
     // no resource available
     d->constEnd.d->mIt = Resource::ConstIterator();
   } else {
-    d->constEnd.d->mIt = (*resIt)->constEnd();
+    d->constEnd.d->mIt = ( *resIt )->constEnd();
   }
 
   return d->constEnd;
@@ -507,7 +507,7 @@ void AddressBook::clear()
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    (*it)->clear();
+    ( *it )->clear();
   }
 }
 
@@ -521,11 +521,11 @@ Ticket *AddressBook::requestSaveTicket( Resource *resource )
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    if ( (*it) == resource ) {
-      if ( (*it)->readOnly() || !(*it)->isOpen() ) {
+    if ( ( *it ) == resource ) {
+      if ( ( *it )->readOnly() || !( *it )->isOpen() ) {
         return 0;
       } else {
-        return (*it)->requestSaveTicket();
+        return ( *it )->requestSaveTicket();
       }
     }
   }
@@ -582,8 +582,8 @@ void AddressBook::removeAddressee( const Addressee &a )
 
 void AddressBook::removeAddressee( const Iterator &it )
 {
-  if ( (*it).resource() ) {
-    (*it).resource()->removeAddressee( *it );
+  if ( ( *it ).resource() ) {
+    ( *it ).resource()->removeAddressee( *it );
   }
 }
 
@@ -591,7 +591,7 @@ AddressBook::Iterator AddressBook::find( const Addressee &a )
 {
   Iterator it;
   for ( it = begin(); it != end(); ++it ) {
-    if ( a.uid() == (*it).uid() ) {
+    if ( a.uid() == ( *it ).uid() ) {
       return it;
     }
   }
@@ -603,7 +603,7 @@ AddressBook::ConstIterator AddressBook::find( const Addressee &a ) const
 {
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    if ( a.uid() == (*it).uid() ) {
+    if ( a.uid() == ( *it ).uid() ) {
       return it;
     }
   }
@@ -615,7 +615,7 @@ Addressee AddressBook::findByUid( const QString &uid ) const
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    Addressee addr = (*it)->findByUid( uid );
+    Addressee addr = ( *it )->findByUid( uid );
     if ( !addr.isEmpty() ) {
       return addr;
     }
@@ -642,7 +642,7 @@ Addressee::List AddressBook::findByName( const QString &name ) const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    results += (*it)->findByName( name );
+    results += ( *it )->findByName( name );
   }
 
   return results;
@@ -654,7 +654,7 @@ Addressee::List AddressBook::findByEmail( const QString &email ) const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    results += (*it)->findByEmail( email );
+    results += ( *it )->findByEmail( email );
   }
 
   return results;
@@ -666,7 +666,7 @@ Addressee::List AddressBook::findByCategory( const QString &category ) const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    results += (*it)->findByCategory( category );
+    results += ( *it )->findByCategory( category );
   }
 
   return results;
@@ -694,7 +694,7 @@ DistributionList *AddressBook::findDistributionListByIdentifier( const QString &
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    DistributionList *list = (*it)->findDistributionListByIdentifier( identifier );
+    DistributionList *list = ( *it )->findDistributionListByIdentifier( identifier );
     if ( list ) {
       return list;
     }
@@ -708,7 +708,7 @@ DistributionList *AddressBook::findDistributionListByName( const QString &name,
 {
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    DistributionList *list = (*it)->findDistributionListByName( name, caseSensitivity );
+    DistributionList *list = ( *it )->findDistributionListByName( name, caseSensitivity );
     if ( list ) {
       return list;
     }
@@ -723,7 +723,7 @@ QList<DistributionList*> AddressBook::allDistributionLists()
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    results += (*it)->allDistributionLists();
+    results += ( *it )->allDistributionLists();
   }
 
   return results;
@@ -735,7 +735,7 @@ QStringList AddressBook::allDistributionListNames() const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    results += (*it)->allDistributionListNames();
+    results += ( *it )->allDistributionListNames();
   }
 
   return results;
@@ -747,7 +747,7 @@ void AddressBook::dump() const
 
   ConstIterator it;
   for ( it = begin(); it != end(); ++it ) {
-    kDebug() << (*it).toString();
+    kDebug() << ( *it ).toString();
   }
 
   kDebug() << "---  end  ---";
@@ -759,8 +759,8 @@ QString AddressBook::identifier() const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    if ( !(*it)->identifier().isEmpty() ) {
-      identifier.append( (*it)->identifier() );
+    if ( !( *it )->identifier().isEmpty() ) {
+      identifier.append( ( *it )->identifier() );
     }
   }
 
@@ -780,7 +780,7 @@ Field::List AddressBook::fields( int category ) const
   Field::List result;
   Field::List::ConstIterator it;
   for ( it = d->mAllFields.constBegin(); it != d->mAllFields.constEnd(); ++it ) {
-    if ( (*it)->category() & category ) {
+    if ( ( *it )->category() & category ) {
       result.append( *it );
     }
   }
@@ -883,7 +883,7 @@ QList<Resource*> AddressBook::resources() const
 
   KRES::Manager<Resource>::ActiveIterator it;
   for ( it = d->mManager->activeBegin(); it != d->mManager->activeEnd(); ++it ) {
-    if ( d->mManager->standardResource() == (*it) ) {
+    if ( d->mManager->standardResource() == ( *it ) ) {
       list.prepend( *it );
     } else {
       list.append( *it );

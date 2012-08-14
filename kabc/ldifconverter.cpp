@@ -123,7 +123,7 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
   ldif_out( t, QLatin1String( "postofficebox" ), workAddr.postOfficeBox() );
 
   QStringList streets = homeAddr.street().split( QLatin1Char( '\n' ) );
-  const int numberOfStreets(streets.count());
+  const int numberOfStreets( streets.count() );
   if ( numberOfStreets > 0 ) {
     ldif_out( t, QLatin1String( "homepostaladdress" ), streets[ 0 ] ); // Netscape 7
   }
@@ -237,7 +237,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
         }
 
         if ( !a.formattedName().isEmpty() || !a.name().isEmpty() ||
-          !a.familyName().isEmpty() ) {
+             !a.familyName().isEmpty() ) {
           if ( !homeAddr.isEmpty() ) {
             a.insertAddress( homeAddr );
           }
@@ -413,7 +413,8 @@ addComment:
     return true;
   }
 
-  if ( fieldname == QLatin1String( "street" ) || fieldname == QLatin1String( "postaladdress" ) ) {  // mozilla
+  if ( fieldname == QLatin1String( "street" ) ||
+       fieldname == QLatin1String( "postaladdress" ) ) {  // mozilla
     workAddr.setStreet( value );
     return true;
   }
@@ -512,11 +513,11 @@ addComment:
 
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-      if ( (*it).startsWith( QLatin1String( "cn=" ) ) ) {
-        name = (*it).mid( 3 ).trimmed();
+      if ( ( *it ).startsWith( QLatin1String( "cn=" ) ) ) {
+        name = ( *it ).mid( 3 ).trimmed();
       }
-      if ( (*it).startsWith( QLatin1String( "mail=" ) ) ) {
-        email = (*it).mid( 5 ).trimmed();
+      if ( ( *it ).startsWith( QLatin1String( "mail=" ) ) ) {
+        email = ( *it ).mid( 5 ).trimmed();
       }
     }
     if ( !name.isEmpty() && !email.isEmpty() ) {
@@ -555,7 +556,7 @@ addComment:
     return true;
   }
 
-  kWarning(5700) << QString::fromLatin1( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
+  kWarning( 5700 ) << QString::fromLatin1( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
     arg( a.formattedName() ).arg( fieldname ).arg( value );
 
   return true;

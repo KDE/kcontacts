@@ -35,9 +35,9 @@ int main( int, char** )
   KCmdLineArgs::init(argc, argv, &aboutData);
 
   KCmdLineOptions options;
-  options.add("save");
-  options.add("number");
-  KCmdLineArgs::addCmdLineOptions(options);
+  options.add( "save" );
+  options.add( "number" );
+  KCmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;
   KCmdLineArgs* args = KCmdLineArgs::parsedArgs(); */
@@ -152,12 +152,12 @@ int main( int, char** )
   }
   list.setReverseSorting( true );
   list.sortBy( Uid );
-  if ( !( ( *list.at(5) ).uid() == "78ze" &&
-          ( *list.at(4) ).uid() == "Asdf" &&
-          ( *list.at(3) ).uid() == "Fhwn" &&
-          ( *list.at(2) ).uid() == "Rsdf" &&
-          ( *list.at(1) ).uid() == "Z2hk" &&
-          ( *list.at(0) ).uid() == "kk45" ) ) {
+  if ( !( ( *list.at( 5 ) ).uid() == "78ze" &&
+          ( *list.at( 4 ) ).uid() == "Asdf" &&
+          ( *list.at( 3 ) ).uid() == "Fhwn" &&
+          ( *list.at( 2 ) ).uid() == "Rsdf" &&
+          ( *list.at( 1 ) ).uid() == "Z2hk" &&
+          ( *list.at( 0 ) ).uid() == "kk45" ) ) {
       kError() << "REVERSE SORTING BY UID NOT CORRECT!";
       kDebug() << "list sorted by Uid:";
       list.dump();

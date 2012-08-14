@@ -30,16 +30,16 @@ using namespace KABC;
 class RoundtripTest : public QObject
 {
   Q_OBJECT
- 
+
   private:
     QString mOutFilePattern;
-    
+
     QDir mInputDir;
     QDir mOutput2_1Dir;
     QDir mOutput3_0Dir;
 
     QStringList mInputFiles;
-    
+
   private Q_SLOTS:
     void initTestCase();
     void testVCardRoundtrip_data();
@@ -50,9 +50,9 @@ class RoundtripTest : public QObject
 void RoundtripTest::initTestCase()
 {
   mOutFilePattern = QLatin1String( "%1.ref" );
-  
+
   // check that all resource prefixes exist
-  
+
   mInputDir = QDir( QLatin1String( ":/input" ) );
   QVERIFY( mInputDir.exists() );
   QVERIFY( mInputDir.cd( QLatin1String( "tests" ) ) );
@@ -76,10 +76,10 @@ void RoundtripTest::testVCardRoundtrip_data()
   QTest::addColumn<QString>( "inputFile" );
   QTest::addColumn<QString>( "output2_1File" );
   QTest::addColumn<QString>( "output3_0File" );
-  
+
   Q_FOREACH ( const QString &inputFile, mInputFiles ) {
     const QString outFile = mOutFilePattern.arg( inputFile );
-    
+
     QTest::newRow( QFile::encodeName( inputFile ) )
       << inputFile
       << ( mOutput2_1Dir.exists( outFile ) ? outFile : QString() )
@@ -92,16 +92,16 @@ void RoundtripTest::testVCardRoundtrip()
   QFETCH( QString, inputFile );
   QFETCH( QString, output2_1File );
   QFETCH( QString, output3_0File );
-  
+
   QVERIFY2( !output2_1File.isEmpty() || !output3_0File.isEmpty(),
             "No reference output file for either format version" );
-  
+
   QFile input( QFileInfo( mInputDir, inputFile ).absoluteFilePath() );
   QVERIFY( input.open( QIODevice::ReadOnly ) );
-  
+
   const QByteArray inputData = input.readAll();
   QVERIFY( !inputData.isEmpty() );
-  
+
   VCardConverter converter;
   const Addressee::List list = converter.parseVCards( inputData );
   QVERIFY( !list.isEmpty() );
@@ -111,22 +111,22 @@ void RoundtripTest::testVCardRoundtrip()
 
     QFile outputFile( QFileInfo( mOutput2_1Dir, output2_1File ).absoluteFilePath() );
     QVERIFY( outputFile.open( QIODevice::ReadOnly ) );
-    
+
     const QByteArray outputRefData = outputFile.readAll();
     QCOMPARE( outputData.size(), outputRefData.size() );
-    
+
     const QList<QByteArray> outputLines = outputData.split( '\n' );
     const QList<QByteArray> outputRefLines = outputRefData.split( '\n' );
     QCOMPARE( outputLines.count(), outputRefLines.count() );
-    
+
     for ( int i = 0; i < outputLines.count(); ++i ) {
       const QByteArray actual = outputLines[ i ];
       const QByteArray expect = outputRefLines[ i ];
-      
+
       if ( actual != expect ) {
         qCritical() << "Mismatch in v2.1 output line" << ( i + 1 );
         QCOMPARE( actual.count(), expect.count() );
-        
+
         qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
         QCOMPARE( actual, expect );
       }
@@ -138,22 +138,22 @@ void RoundtripTest::testVCardRoundtrip()
 
     QFile outputFile( QFileInfo( mOutput3_0Dir, output3_0File ).absoluteFilePath() );
     QVERIFY( outputFile.open( QIODevice::ReadOnly ) );
-    
+
     const QByteArray outputRefData = outputFile.readAll();
 //    QCOMPARE( outputData.size(), outputRefData.size() );
-    
+
     const QList<QByteArray> outputLines = outputData.split( '\n' );
     const QList<QByteArray> outputRefLines = outputRefData.split( '\n' );
     QCOMPARE( outputLines.count(), outputRefLines.count() );
-    
+
     for ( int i = 0; i < outputLines.count(); ++i ) {
       const QByteArray actual = outputLines[ i ];
       const QByteArray expect = outputRefLines[ i ];
-      
+
       if ( actual != expect ) {
         qCritical() << "Mismatch in v3.0 output line" << ( i + 1 );
         QCOMPARE( actual.count(), expect.count() );
-        
+
         qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
         QCOMPARE( actual, expect );
       }

@@ -35,7 +35,7 @@ int main()
   Addressee::List parsed = vct.parseVCards( vcards );
 
   if ( l.size() != parsed.size() ) {
-    kDebug() << "\tSize - FAILED :"<<l.size()<<"vs. parsed"<<parsed.size();
+    kDebug() << "\tSize - FAILED :" << l.size() << "vs. parsed" << parsed.size();
   } else {
     kDebug() << "\tSize - PASSED";
   }
@@ -44,17 +44,17 @@ int main()
   Addressee::List::iterator itr2;
   for ( itr1 = l.begin(), itr2 = parsed.begin();
         itr1 != l.end(); ++itr1, ++itr2 ) {
-    if ( (*itr1).fullEmail() == (*itr2).fullEmail() &&
-         (*itr1).organization() == (*itr2).organization() &&
-         (*itr1).phoneNumbers() == (*itr2).phoneNumbers()  &&
-         (*itr1).emails() == (*itr2).emails() &&
-         (*itr1).role() == (*itr2).role() ) {
+    if ( ( *itr1 ).fullEmail() == ( *itr2 ).fullEmail() &&
+         ( *itr1 ).organization() == ( *itr2 ).organization() &&
+         ( *itr1 ).phoneNumbers() == ( *itr2 ).phoneNumbers()  &&
+         ( *itr1 ).emails() == ( *itr2 ).emails() &&
+         ( *itr1 ).role() == ( *itr2 ).role() ) {
       kDebug() << "\tAddressee  - PASSED";
-      kDebug() << "\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
+      kDebug() << "\t\t" << ( *itr1 ).fullEmail() << "VS." << ( *itr2 ).fullEmail();
     } else {
       kDebug() << "\tAddressee  - FAILED";
-      kDebug() << (*itr1).toString();
-      kDebug() << (*itr2).toString();
+      kDebug() << ( *itr1 ).toString();
+      kDebug() << ( *itr2 ).toString();
       //kDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
     }
   }

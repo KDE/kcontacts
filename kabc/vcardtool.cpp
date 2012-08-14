@@ -84,25 +84,25 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     QStringList::ConstIterator strIt;
 
     // ADR + LABEL
-    const Address::List addresses = (*addrIt).addresses();
+    const Address::List addresses = ( *addrIt ).addresses();
     for ( Address::List::ConstIterator it = addresses.begin(); it != addresses.end(); ++it ) {
       QStringList address;
 
-      const bool isEmpty = ( (*it).postOfficeBox().isEmpty() &&
-                             (*it).extended().isEmpty() &&
-                             (*it).street().isEmpty() &&
-                             (*it).locality().isEmpty() &&
-                             (*it).region().isEmpty() &&
-                             (*it).postalCode().isEmpty() &&
-                             (*it).country().isEmpty() );
+      const bool isEmpty = ( ( *it ).postOfficeBox().isEmpty() &&
+                             ( *it ).extended().isEmpty() &&
+                             ( *it ).street().isEmpty() &&
+                             ( *it ).locality().isEmpty() &&
+                             ( *it ).region().isEmpty() &&
+                             ( *it ).postalCode().isEmpty() &&
+                             ( *it ).country().isEmpty() );
 
-      address.append( (*it).postOfficeBox().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).extended().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).street().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).locality().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).region().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).postalCode().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( (*it).country().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).postOfficeBox().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).extended().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).street().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).locality().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).region().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).postalCode().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).country().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
 
       VCardLine adrLine( QLatin1String( "ADR" ), address.join( QLatin1String( ";" ) ) );
       if ( version == VCard::v2_1 && needsEncoding( address.join( QLatin1String( ";" ) ) ) ) {
@@ -110,17 +110,17 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
         adrLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
       }
 
-      VCardLine labelLine( QLatin1String( "LABEL" ), (*it).label() );
-      if ( version == VCard::v2_1 && needsEncoding( (*it).label() ) ) {
+      VCardLine labelLine( QLatin1String( "LABEL" ), ( *it ).label() );
+      if ( version == VCard::v2_1 && needsEncoding( ( *it ).label() ) ) {
         labelLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
         labelLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
       }
 
-      const bool hasLabel = !(*it).label().isEmpty();
+      const bool hasLabel = !( *it ).label().isEmpty();
       QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
       for ( typeIt = mAddressTypeMap.constBegin();
             typeIt != mAddressTypeMap.constEnd(); ++typeIt ) {
-        if ( typeIt.value() & (*it).type() ) {
+        if ( typeIt.value() & ( *it ).type() ) {
           adrLine.addParameter( QLatin1String( "TYPE" ), typeIt.key() );
           if ( hasLabel ) {
             labelLine.addParameter( QLatin1String( "TYPE" ), typeIt.key() );
@@ -137,15 +137,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // BDAY
-    card.addLine( VCardLine( QLatin1String( "BDAY" ), createDateTime( (*addrIt).birthday() ) ) );
+    card.addLine( VCardLine( QLatin1String( "BDAY" ), createDateTime( ( *addrIt ).birthday() ) ) );
 
     // CATEGORIES
     if ( version == VCard::v3_0 ) {
-      QStringList categories = (*addrIt).categories();
+      QStringList categories = ( *addrIt ).categories();
       QStringList::Iterator catIt;
-      QStringList::Iterator catEnd(categories.end());
+      QStringList::Iterator catEnd( categories.end() );
       for ( catIt = categories.begin(); catIt != catEnd; ++catIt ) {
-        (*catIt).replace( QLatin1Char( ',' ), QLatin1String( "\\," ) );
+        ( *catIt ).replace( QLatin1Char( ',' ), QLatin1String( "\\," ) );
       }
 
       VCardLine catLine( QLatin1String( "CATEGORIES" ), categories.join( QLatin1String( "," ) ) );
@@ -154,11 +154,11 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // CLASS
     if ( version == VCard::v3_0 ) {
-      card.addLine( createSecrecy( (*addrIt).secrecy() ) );
+      card.addLine( createSecrecy( ( *addrIt ).secrecy() ) );
     }
 
     // EMAIL
-    const QStringList emails = (*addrIt).emails();
+    const QStringList emails = ( *addrIt ).emails();
     bool pref = true;
     for ( strIt = emails.begin(); strIt != emails.end(); ++strIt ) {
       VCardLine line( QLatin1String( "EMAIL" ), *strIt );
@@ -170,15 +170,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // FN
-    VCardLine fnLine( QLatin1String( "FN" ), (*addrIt).formattedName() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).formattedName() ) ) {
+    VCardLine fnLine( QLatin1String( "FN" ), ( *addrIt ).formattedName() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).formattedName() ) ) {
       fnLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       fnLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
     card.addLine( fnLine );
 
     // GEO
-    const Geo geo = (*addrIt).geo();
+    const Geo geo = ( *addrIt ).geo();
     if ( geo.isValid() ) {
       QString str;
       str.sprintf( "%.6f;%.6f", geo.latitude(), geo.longitude() );
@@ -186,18 +186,18 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // KEY
-    const Key::List keys = (*addrIt).keys();
+    const Key::List keys = ( *addrIt ).keys();
     Key::List::ConstIterator keyIt;
     for ( keyIt = keys.begin(); keyIt != keys.end(); ++keyIt ) {
       card.addLine( createKey( *keyIt ) );
     }
 
     // LOGO
-    card.addLine( createPicture( QLatin1String( "LOGO" ), (*addrIt).logo() ) );
+    card.addLine( createPicture( QLatin1String( "LOGO" ), ( *addrIt ).logo() ) );
 
     // MAILER
-    VCardLine mailerLine( QLatin1String( "MAILER" ), (*addrIt).mailer() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).mailer() ) ) {
+    VCardLine mailerLine( QLatin1String( "MAILER" ), ( *addrIt ).mailer() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).mailer() ) ) {
       mailerLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       mailerLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
@@ -205,11 +205,11 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // N
     QStringList name;
-    name.append( (*addrIt).familyName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( (*addrIt).givenName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( (*addrIt).additionalName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( (*addrIt).prefix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( (*addrIt).suffix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).familyName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).givenName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).additionalName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).prefix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).suffix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
 
     VCardLine nLine( QLatin1String( "N" ), name.join( QLatin1String( ";" ) ) );
     if ( version == VCard::v2_1 && needsEncoding( name.join( QLatin1String( ";" ) ) ) ) {
@@ -219,8 +219,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     card.addLine( nLine );
 
     // NAME
-    VCardLine nameLine( QLatin1String( "NAME" ), (*addrIt).name() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).name() ) ) {
+    VCardLine nameLine( QLatin1String( "NAME" ), ( *addrIt ).name() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).name() ) ) {
       nameLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       nameLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
@@ -228,12 +228,12 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // NICKNAME
     if ( version == VCard::v3_0 ) {
-      card.addLine( VCardLine( QLatin1String( "NICKNAME" ), (*addrIt).nickName() ) );
+      card.addLine( VCardLine( QLatin1String( "NICKNAME" ), ( *addrIt ).nickName() ) );
     }
 
     // NOTE
-    VCardLine noteLine( QLatin1String( "NOTE" ), (*addrIt).note() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).note() ) ) {
+    VCardLine noteLine( QLatin1String( "NOTE" ), ( *addrIt ).note() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).note() ) ) {
       noteLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       noteLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
@@ -255,19 +255,19 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     card.addLine( orgLine );
 
     // PHOTO
-    card.addLine( createPicture( QLatin1String( "PHOTO" ), (*addrIt).photo() ) );
+    card.addLine( createPicture( QLatin1String( "PHOTO" ), ( *addrIt ).photo() ) );
 
     // PROID
     if ( version == VCard::v3_0 ) {
-      card.addLine( VCardLine( QLatin1String( "PRODID" ), (*addrIt).productId() ) );
+      card.addLine( VCardLine( QLatin1String( "PRODID" ), ( *addrIt ).productId() ) );
     }
 
     // REV
-    card.addLine( VCardLine( QLatin1String( "REV" ), createDateTime( (*addrIt).revision() ) ) );
+    card.addLine( VCardLine( QLatin1String( "REV" ), createDateTime( ( *addrIt ).revision() ) ) );
 
     // ROLE
-    VCardLine roleLine( QLatin1String( "ROLE" ), (*addrIt).role() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).role() ) ) {
+    VCardLine roleLine( QLatin1String( "ROLE" ), ( *addrIt ).role() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).role() ) ) {
       roleLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       roleLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
@@ -275,21 +275,21 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // SORT-STRING
     if ( version == VCard::v3_0 ) {
-      card.addLine( VCardLine( QLatin1String( "SORT-STRING" ), (*addrIt).sortString() ) );
+      card.addLine( VCardLine( QLatin1String( "SORT-STRING" ), ( *addrIt ).sortString() ) );
     }
 
     // SOUND
-    card.addLine( createSound( (*addrIt).sound() ) );
+    card.addLine( createSound( ( *addrIt ).sound() ) );
 
     // TEL
-    const PhoneNumber::List phoneNumbers = (*addrIt).phoneNumbers();
+    const PhoneNumber::List phoneNumbers = ( *addrIt ).phoneNumbers();
     PhoneNumber::List::ConstIterator phoneIt;
     for ( phoneIt = phoneNumbers.begin(); phoneIt != phoneNumbers.end(); ++phoneIt ) {
-      VCardLine line( QLatin1String( "TEL" ), (*phoneIt).number() );
+      VCardLine line( QLatin1String( "TEL" ), ( *phoneIt ).number() );
 
       QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
       for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != mPhoneTypeMap.constEnd(); ++typeIt ) {
-        if ( typeIt.value() & (*phoneIt).type() ) {
+        if ( typeIt.value() & ( *phoneIt ).type() ) {
           line.addParameter( QLatin1String( "TYPE" ), typeIt.key() );
         }
       }
@@ -298,15 +298,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // TITLE
-    VCardLine titleLine( QLatin1String( "TITLE" ), (*addrIt).title() );
-    if ( version == VCard::v2_1 && needsEncoding( (*addrIt).title() ) ) {
+    VCardLine titleLine( QLatin1String( "TITLE" ), ( *addrIt ).title() );
+    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).title() ) ) {
       titleLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       titleLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
     card.addLine( titleLine );
 
     // TZ
-    const TimeZone timeZone = (*addrIt).timeZone();
+    const TimeZone timeZone = ( *addrIt ).timeZone();
     if ( timeZone.isValid() ) {
       QString str;
 
@@ -323,10 +323,10 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // UID
-    card.addLine( VCardLine( QLatin1String( "UID" ), (*addrIt).uid() ) );
+    card.addLine( VCardLine( QLatin1String( "UID" ), ( *addrIt ).uid() ) );
 
     // URL
-    card.addLine( VCardLine( QLatin1String( "URL" ), (*addrIt).url().url() ) );
+    card.addLine( VCardLine( QLatin1String( "URL" ), ( *addrIt ).url().url() ) );
 
     // VERSION
     if ( version == VCard::v2_1 ) {
@@ -336,11 +336,11 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     }
 
     // X-
-    const QStringList customs = (*addrIt).customs();
+    const QStringList customs = ( *addrIt ).customs();
     for ( strIt = customs.begin(); strIt != customs.end(); ++strIt ) {
       const QString identifier = QLatin1String( "X-" ) +
-                                 (*strIt).left( (*strIt).indexOf( QLatin1Char( ':' ) ) );
-      const QString value = (*strIt).mid( (*strIt).indexOf( QLatin1Char( ':' ) ) + 1 );
+                                 ( *strIt ).left( ( *strIt ).indexOf( QLatin1Char( ':' ) ) );
+      const QString value = ( *strIt ).mid( ( *strIt ).indexOf( QLatin1Char( ':' ) ) + 1 );
       if ( value.isEmpty() ) {
         continue;
       }
@@ -373,20 +373,20 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
   for ( cardIt = vCardList.begin(); cardIt != listEnd; ++cardIt ) {
     Addressee addr;
 
-    const QStringList idents = (*cardIt).identifiers();
+    const QStringList idents = ( *cardIt ).identifiers();
     QStringList::ConstIterator identIt;
     QStringList::ConstIterator identEnd( idents.end() );
     for ( identIt = idents.begin(); identIt != identEnd; ++identIt ) {
-      const VCardLine::List lines = (*cardIt).lines( (*identIt) );
+      const VCardLine::List lines = ( *cardIt ).lines( ( *identIt ) );
       VCardLine::List::ConstIterator lineIt;
 
       // iterate over the lines
       for ( lineIt = lines.begin(); lineIt != lines.end(); ++lineIt ) {
-        identifier = (*lineIt).identifier().toLower();
+        identifier = ( *lineIt ).identifier().toLower();
         // ADR
         if ( identifier == QLatin1String( "adr" ) ) {
           Address address;
-          const QStringList addrParts = splitString( semicolonSep, (*lineIt).value().toString() );
+          const QStringList addrParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
           if ( addrParts.count() > 0 ) {
             address.setPostOfficeBox( addrParts[ 0 ] );
           }
@@ -411,9 +411,9 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
           Address::Type type;
 
-          const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
+          const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
           for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
-            type |= mAddressTypeMap[ (*it).toLower() ];
+            type |= mAddressTypeMap[ ( *it ).toLower() ];
           }
 
           address.setType( type );
@@ -422,12 +422,12 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // BDAY
         else if ( identifier == QLatin1String( "bday" ) ) {
-          addr.setBirthday( parseDateTime( (*lineIt).value().toString() ) );
+          addr.setBirthday( parseDateTime( ( *lineIt ).value().toString() ) );
         }
 
         // CATEGORIES
         else if ( identifier == QLatin1String( "categories" ) ) {
-          const QStringList categories = splitString( commaSep, (*lineIt).value().toString() );
+          const QStringList categories = splitString( commaSep, ( *lineIt ).value().toString() );
           addr.setCategories( categories );
         }
 
@@ -438,14 +438,14 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // EMAIL
         else if ( identifier == QLatin1String( "email" ) ) {
-          const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
-          addr.insertEmail( (*lineIt).value().toString(),
+          const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
+          addr.insertEmail( ( *lineIt ).value().toString(),
                             types.contains( QLatin1String( "PREF" ) ) );
         }
 
         // FN
         else if ( identifier == QLatin1String( "fn" ) ) {
-          addr.setFormattedName( (*lineIt).value().toString() );
+          addr.setFormattedName( ( *lineIt ).value().toString() );
         }
 
         // GEO
@@ -453,7 +453,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           Geo geo;
 
           const QStringList geoParts =
-            (*lineIt).value().toString().split( QLatin1Char( ';' ), QString::KeepEmptyParts );
+            ( *lineIt ).value().toString().split( QLatin1Char( ';' ), QString::KeepEmptyParts );
           if ( geoParts.size() >= 2 ) {
             geo.setLatitude( geoParts[ 0 ].toFloat() );
             geo.setLongitude( geoParts[ 1 ].toFloat() );
@@ -470,17 +470,17 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         else if ( identifier == QLatin1String( "label" ) ) {
           Address::Type type;
 
-          const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
+          const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
           for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
-            type |= mAddressTypeMap[ (*it).toLower() ];
+            type |= mAddressTypeMap[ ( *it ).toLower() ];
           }
 
           bool available = false;
           KABC::Address::List addressList = addr.addresses();
           for ( KABC::Address::List::Iterator it = addressList.begin();
                 it != addressList.end(); ++it ) {
-            if ( (*it).type() == type ) {
-              (*it).setLabel( (*lineIt).value().toString() );
+            if ( ( *it ).type() == type ) {
+              ( *it ).setLabel( ( *lineIt ).value().toString() );
               addr.insertAddress( *it );
               available = true;
               break;
@@ -489,7 +489,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
           if ( !available ) { // a standalone LABEL tag
             KABC::Address address( type );
-            address.setLabel( (*lineIt).value().toString() );
+            address.setLabel( ( *lineIt ).value().toString() );
             addr.insertAddress( address );
           }
         }
@@ -501,13 +501,13 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // MAILER
         else if ( identifier == QLatin1String( "mailer" ) ) {
-          addr.setMailer( (*lineIt).value().toString() );
+          addr.setMailer( ( *lineIt ).value().toString() );
         }
 
         // N
         else if ( identifier == QLatin1String( "n" ) ) {
-          const QStringList nameParts = splitString( semicolonSep, (*lineIt).value().toString() );
-          const int numberOfParts(nameParts.count());
+          const QStringList nameParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
+          const int numberOfParts( nameParts.count() );
           if ( numberOfParts > 0 ) {
             addr.setFamilyName( nameParts[ 0 ] );
           }
@@ -527,22 +527,22 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // NAME
         else if ( identifier == QLatin1String( "name" ) ) {
-          addr.setName( (*lineIt).value().toString() );
+          addr.setName( ( *lineIt ).value().toString() );
         }
 
         // NICKNAME
         else if ( identifier == QLatin1String( "nickname" ) ) {
-          addr.setNickName( (*lineIt).value().toString() );
+          addr.setNickName( ( *lineIt ).value().toString() );
         }
 
         // NOTE
         else if ( identifier == QLatin1String( "note" ) ) {
-          addr.setNote( (*lineIt).value().toString() );
+          addr.setNote( ( *lineIt ).value().toString() );
         }
 
         // ORGANIZATION
         else if ( identifier == QLatin1String( "org" ) ) {
-          const QStringList orgParts = splitString( semicolonSep, (*lineIt).value().toString() );
+          const QStringList orgParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
           if ( orgParts.count() > 0 ) {
             addr.setOrganization( orgParts[ 0 ] );
           }
@@ -558,22 +558,22 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // PROID
         else if ( identifier == QLatin1String( "prodid" ) ) {
-          addr.setProductId( (*lineIt).value().toString() );
+          addr.setProductId( ( *lineIt ).value().toString() );
         }
 
         // REV
         else if ( identifier == QLatin1String( "rev" ) ) {
-          addr.setRevision( parseDateTime( (*lineIt).value().toString() ) );
+          addr.setRevision( parseDateTime( ( *lineIt ).value().toString() ) );
         }
 
         // ROLE
         else if ( identifier == QLatin1String( "role" ) ) {
-          addr.setRole( (*lineIt).value().toString() );
+          addr.setRole( ( *lineIt ).value().toString() );
         }
 
         // SORT-STRING
         else if ( identifier == QLatin1String( "sort-string" ) ) {
-          addr.setSortString( (*lineIt).value().toString() );
+          addr.setSortString( ( *lineIt ).value().toString() );
         }
 
         // SOUND
@@ -584,14 +584,14 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         // TEL
         else if ( identifier == QLatin1String( "tel" ) ) {
           PhoneNumber phone;
-          phone.setNumber( (*lineIt).value().toString() );
+          phone.setNumber( ( *lineIt ).value().toString() );
 
           PhoneNumber::Type type;
 
-          const QStringList types = (*lineIt).parameters( QLatin1String( "type" ) );
-          QStringList::ConstIterator typeEnd(types.end());
+          const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
+          QStringList::ConstIterator typeEnd( types.end() );
           for ( QStringList::ConstIterator it = types.begin(); it != typeEnd; ++it ) {
-            type |= mPhoneTypeMap[(*it).toUpper()];
+            type |= mPhoneTypeMap[( *it ).toUpper()];
           }
 
           phone.setType( type );
@@ -601,13 +601,13 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // TITLE
         else if ( identifier == QLatin1String( "title" ) ) {
-          addr.setTitle( (*lineIt).value().toString() );
+          addr.setTitle( ( *lineIt ).value().toString() );
         }
 
         // TZ
         else if ( identifier == QLatin1String( "tz" ) ) {
           TimeZone tz;
-          const QString date = (*lineIt).value().toString();
+          const QString date = ( *lineIt ).value().toString();
 
           if ( !date.isEmpty() ) {
             int hours = date.mid( 1, 2 ).toInt();
@@ -622,19 +622,19 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // UID
         else if ( identifier == QLatin1String( "uid" ) ) {
-          addr.setUid( (*lineIt).value().toString() );
+          addr.setUid( ( *lineIt ).value().toString() );
         }
 
         // URL
         else if ( identifier == QLatin1String( "url" ) ) {
-          addr.setUrl( KUrl( (*lineIt).value().toString() ) );
+          addr.setUrl( KUrl( ( *lineIt ).value().toString() ) );
         }
 
         // X-
         else if ( identifier.startsWith( QLatin1String( "x-" ) ) ) {
-          const QString key = (*lineIt).identifier().mid( 2 );
+          const QString key = ( *lineIt ).identifier().mid( 2 );
           int dash = key.indexOf( QLatin1Char( '-' ) );
-          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), (*lineIt).value().toString() );
+          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), ( *lineIt ).value().toString() );
         }
       }
     }
@@ -686,7 +686,7 @@ QDateTime VCardTool::parseDateTime( const QString &str ) const
 
   Qt::TimeSpec spec = ( str.right( 1 ) == QLatin1String( "Z" ) ) ? Qt::UTC : Qt::LocalTime;
 
-  QDateTime dateTime(date);
+  QDateTime dateTime( date );
 
   // explicitly set the time, which might be invalid, to keep the information
   // that the time is invalid. In createDateTime() the time/invalid flag is
@@ -694,9 +694,9 @@ QDateTime VCardTool::parseDateTime( const QString &str ) const
   // This is needed to reproduce the given string in input
   // e.g. BDAY:2008-12-30
   // without time shall also result in a string without a time
-  dateTime.setTime(time);
+  dateTime.setTime( time );
 
-  dateTime.setTimeSpec(spec);
+  dateTime.setTimeSpec( spec );
   return dateTime;
 }
 

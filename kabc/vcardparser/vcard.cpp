@@ -78,10 +78,10 @@ VCardLine VCard::line( const QString &identifier ) const
     return VCardLine();
   }
 
-  if ( (*it).isEmpty() ) {
+  if ( ( *it ).isEmpty() ) {
     return VCardLine();
   } else {
-    return (*it).first();
+    return ( *it ).first();
   }
 }
 

@@ -82,7 +82,9 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
     isDn = fieldname.toLower() == QLatin1String( "dn" );
     //SAFE-INIT-CHAR
     if ( value.size() > 0 && value[0] > 0 && value[0] != '\n' &&
-         value[0] != '\r' && value[0] != ':' && value[0] != '<' ) safe = true;
+         value[0] != '\r' && value[0] != ':' && value[0] != '<' ) {
+      safe = true;
+    }
 
     //SAFE-CHAR
     if ( safe ) {

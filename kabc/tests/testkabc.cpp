@@ -64,8 +64,8 @@ int main( int argc, char **argv )
   QImage img;
   img.load( "/home/tobias/test.png" );
 /*
-  pic.setData(img);
-  pic.setType(QImage::imageFormat("/home/tobias/test.png"));
+  pic.setData( img );
+  pic.setType( QImage::imageFormat( "/home/tobias/test.png" ) );
 */
   pic.setUrl( "http://www.mypict.de" );
   addr.setLogo( pic );

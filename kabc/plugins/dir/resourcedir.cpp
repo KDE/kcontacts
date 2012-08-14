@@ -216,7 +216,7 @@ bool ResourceDir::load()
   QStringList::Iterator it;
   bool ok = true;
   for ( it = files.begin(); it != files.end(); ++it ) {
-    QFile file( d->mPath + QDir::separator() + (*it) );
+    QFile file( d->mPath + QDir::separator() + ( *it ) );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for reading", file.fileName() ) );
@@ -262,7 +262,7 @@ bool ResourceDir::save( Ticket * )
       continue;
     }
 
-    QFile file( d->mPath + QDir::separator() + (*it).uid() );
+    QFile file( d->mPath + QDir::separator() + ( *it ).uid() );
     if ( !file.open( QIODevice::WriteOnly ) ) {
       addressBook()->error( i18n( "Unable to open file '%1' for writing", file.fileName() ) );
       continue;
@@ -271,7 +271,7 @@ bool ResourceDir::save( Ticket * )
     d->mFormat->save( *it, &file );
 
     // mark as unchanged
-    (*it).setChanged( false );
+    ( *it ).setChanged( false );
 
     file.close();
   }

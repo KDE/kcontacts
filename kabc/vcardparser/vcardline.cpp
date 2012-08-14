@@ -125,10 +125,10 @@ QString VCardLine::parameter( const QString &param ) const
   if ( it == mParamMap.end() ) {
     return QString();
   } else {
-    if ( (*it).isEmpty() ) {
+    if ( ( *it ).isEmpty() ) {
       return QString();
     } else {
-      return (*it).first();
+      return ( *it ).first();
     }
   }
 }

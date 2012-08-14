@@ -55,7 +55,7 @@ bool LockNull::lock()
     return false;
   }
 
-  kWarning(5700) << "LockNull::lock() force success. Doesn't actually lock.";
+  kWarning( 5700 ) << "LockNull::lock() force success. Doesn't actually lock.";
 
   emit locked();
 
