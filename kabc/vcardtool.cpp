@@ -631,9 +631,22 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // X-
         else if ( identifier.startsWith( QLatin1String( "x-" ) ) ) {
-          const QString key = (*lineIt).identifier().mid( 2 );
-          int dash = key.indexOf( QLatin1Char( '-' ) );
-          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), (*lineIt).value().toString() );
+          QString ident = ( *lineIt ).identifier();
+          //X-Evolution
+          if(identifier==QLatin1String("x-evolution-spouse") || identifier == QLatin1String("x-spouse")) {
+            ident = QLatin1String("X-KADDRESSBOOK-X-SpousesName");
+          } else if(identifier == QLatin1String("x-evolution-blog-url")) {
+            ident = QLatin1String("X-KADDRESSBOOK-BlogFeed");
+          } else if(identifier == QLatin1String("x-evolution-assistant") || identifier == QLatin1String("x-assistant")) {
+            ident = QLatin1String("X-KADDRESSBOOK-X-AssistantsName");
+          } else if(identifier == QLatin1String("x-evolution-anniversary") || identifier == QLatin1String("x-anniversary")) {
+            ident = QLatin1String("X-KADDRESSBOOK-X-Anniversary");
+          } else if(identifier == QLatin1String("x-evolution-manager") || identifier == QLatin1String("x-manager")) {
+            ident = QLatin1String("X-KADDRESSBOOK-X-ManagersName");
+          }
+          const QString key = ident.mid( 2 );
+          const int dash = key.indexOf( QLatin1Char( '-' ) );
+          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), ( *lineIt ).value().toString() );
         }
       }
     }
