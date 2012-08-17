@@ -188,7 +188,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // KEY
     const Key::List keys = ( *addrIt ).keys();
     Key::List::ConstIterator keyIt;
-    for ( keyIt = keys.begin(); keyIt != keys.end(); ++keyIt ) {
+    Key::List::ConstIterator keyEnd(keys.end());
+    for ( keyIt = keys.begin(); keyIt != keyEnd; ++keyIt ) {
       card.addLine( createKey( *keyIt ) );
     }
 
@@ -284,11 +285,13 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // TEL
     const PhoneNumber::List phoneNumbers = ( *addrIt ).phoneNumbers();
     PhoneNumber::List::ConstIterator phoneIt;
-    for ( phoneIt = phoneNumbers.begin(); phoneIt != phoneNumbers.end(); ++phoneIt ) {
+    PhoneNumber::List::ConstIterator phoneEnd(phoneNumbers.end());
+    for ( phoneIt = phoneNumbers.begin(); phoneIt != phoneEnd; ++phoneIt ) {
       VCardLine line( QLatin1String( "TEL" ), ( *phoneIt ).number() );
 
       QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
-      for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != mPhoneTypeMap.constEnd(); ++typeIt ) {
+      QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
+      for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt ) {
         if ( typeIt.value() & ( *phoneIt ).type() ) {
           line.addParameter( QLatin1String( "TYPE" ), typeIt.key() );
         }
