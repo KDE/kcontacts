@@ -643,6 +643,24 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
             ident = QLatin1String("X-KADDRESSBOOK-X-Anniversary");
           } else if(identifier == QLatin1String("x-evolution-manager") || identifier == QLatin1String("x-manager")) {
             ident = QLatin1String("X-KADDRESSBOOK-X-ManagersName");
+          } else if(identifier == QLatin1String("x-aim")) {
+            ident = QLatin1String("X-messaging/aim-All");
+          } else if(identifier == QLatin1String("x-icq")) {
+            ident = QLatin1String("X-messaging/icq-All");
+          } else if(identifier == QLatin1String("x-jabber")) {
+            ident = QLatin1String("X-messaging/xmpp-All");
+          } else if(identifier == QLatin1String("x-jabber")) {
+            ident = QLatin1String("X-messaging/xmpp-All");
+          } else if(identifier == QLatin1String("x-msn")) {
+            ident = QLatin1String("X-messaging/msn-All");
+          } else if(identifier == QLatin1String("x-yahoo")) {
+            ident = QLatin1String("X-messaging/yahoo-All");
+          } else if(identifier == QLatin1String("x-gadugadu")) {
+            ident = QLatin1String("X-messaging/gadu-All");
+          } else if(identifier == QLatin1String("x-skype")) {
+            ident = QLatin1String("X-messaging/skype-All");
+          } else if(identifier == QLatin1String("x-groupwise")) {
+            ident = QLatin1String("X-messaging/groupwise-All");
           }
           const QString key = ident.mid( 2 );
           const int dash = key.indexOf( QLatin1Char( '-' ) );
