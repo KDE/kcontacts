@@ -73,7 +73,17 @@ VCardTool::~VCardTool()
 {
 }
 
+QByteArray VCardTool::exportVCards( const Addressee::List &list, VCard::Version version ) const
+{
+    return createVCards(list,version, true /*export vcard*/);
+}
+
 QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version version ) const
+{
+    return createVCards(list,version, false/*don't export*/);
+}
+
+QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version version, bool exportVcard ) const
 {
   VCard::List vCardList;
 
@@ -341,11 +351,35 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // X-
     const QStringList customs = ( *addrIt ).customs();
     for ( strIt = customs.begin(); strIt != customs.end(); ++strIt ) {
-      const QString identifier = QLatin1String( "X-" ) +
+      QString identifier = QLatin1String( "X-" ) +
                                  ( *strIt ).left( ( *strIt ).indexOf( QLatin1Char( ':' ) ) );
       const QString value = ( *strIt ).mid( ( *strIt ).indexOf( QLatin1Char( ':' ) ) + 1 );
       if ( value.isEmpty() ) {
         continue;
+      }
+      //Convert to standard identifier
+      if(exportVcard) {
+          if(identifier == QLatin1String("X-messaging/aim-All")) {
+              identifier = QLatin1String("X-AIM");
+          } else if(identifier == QLatin1String("X-messaging/icq-All")) {
+              identifier = QLatin1String("X-ICQ");
+          } else if(identifier == QLatin1String("X-messaging/xmpp-All")) {
+              identifier = QLatin1String("X-JABBER");
+          } else if(identifier == QLatin1String("X-messaging/msn-All")) {
+              identifier = QLatin1String("X-MSN");
+          } else if(identifier == QLatin1String("X-messaging/yahoo-All")) {
+              identifier = QLatin1String("X-YAHOO");
+          } else if(identifier == QLatin1String("X-messaging/gadu-All")) {
+              identifier = QLatin1String("X-GADUGADU");
+          } else if(identifier == QLatin1String("X-messaging/skype-All")) {
+              identifier = QLatin1String("X-SKYPE");
+          } else if(identifier == QLatin1String("X-messaging/groupwise-All")) {
+              identifier = QLatin1String("X-GROUPWISE");
+          } else if(identifier == QLatin1String("X-messaging/sms-All")) {
+              identifier = QLatin1String("X-SMS");
+          } else if(identifier == QLatin1String("X-messaging/meanwhile-All")) {
+              identifier = QLatin1String("X-MEANWHILE");
+          }
       }
 
       VCardLine line( identifier, value );
@@ -647,7 +681,30 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
             ident = QLatin1String("X-KADDRESSBOOK-X-Anniversary");
           } else if(identifier == QLatin1String("x-evolution-manager") || identifier == QLatin1String("x-manager")) {
             ident = QLatin1String("X-KADDRESSBOOK-X-ManagersName");
+          } else if(identifier == QLatin1String("x-aim")) {
+            ident = QLatin1String("X-messaging/aim-All");
+          } else if(identifier == QLatin1String("x-icq")) {
+            ident = QLatin1String("X-messaging/icq-All");
+          } else if(identifier == QLatin1String("x-jabber")) {
+            ident = QLatin1String("X-messaging/xmpp-All");
+          } else if(identifier == QLatin1String("x-jabber")) {
+            ident = QLatin1String("X-messaging/xmpp-All");
+          } else if(identifier == QLatin1String("x-msn")) {
+            ident = QLatin1String("X-messaging/msn-All");
+          } else if(identifier == QLatin1String("x-yahoo")) {
+            ident = QLatin1String("X-messaging/yahoo-All");
+          } else if(identifier == QLatin1String("x-gadugadu")) {
+            ident = QLatin1String("X-messaging/gadu-All");
+          } else if(identifier == QLatin1String("x-skype")) {
+            ident = QLatin1String("X-messaging/skype-All");
+          } else if(identifier == QLatin1String("x-groupwise")) {
+            ident = QLatin1String("X-messaging/groupwise-All");
+          } else if(identifier == QLatin1String("x-sms")) {
+            ident = QLatin1String("X-messaging/sms-All");
+          } else if(identifier == QLatin1String("x-meanwhile")) {
+            ident = QLatin1String("X-messaging/meanwhile-All");
           }
+
           const QString key = ident.mid( 2 );
           const int dash = key.indexOf( QLatin1Char( '-' ) );
           addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), ( *lineIt ).value().toString() );

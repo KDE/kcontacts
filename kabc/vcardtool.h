@@ -48,11 +48,19 @@ class KABC_EXPORT VCardTool
                              VCard::Version version = VCard::v3_0 ) const;
 
     /**
+     * since 4.9.1
+     */
+    QByteArray exportVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 ) const;
+    /**
       Parses the string and returns a list of addressee objects.
      */
     Addressee::List parseVCards( const QByteArray &vcard ) const;
 
   private:
+
+    QByteArray createVCards( const Addressee::List &list,
+                             VCard::Version version, bool exportVcard ) const;
+
     /**
       Split a string and replaces escaped separators on the fly with
       unescaped ones.
