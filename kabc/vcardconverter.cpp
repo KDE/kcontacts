@@ -32,6 +32,21 @@ VCardConverter::~VCardConverter()
 {
 }
 
+QByteArray VCardConverter::exportVCard( const Addressee &addr, Version version ) const
+{
+  Addressee::List list;
+  list.append( addr );
+
+  return exportVCards( list, version );
+}
+
+QByteArray VCardConverter::exportVCards( const Addressee::List& list, Version version ) const
+{
+  VCardTool tool;
+
+  return tool.exportVCards( list, ( version == v3_0 ? VCard::v3_0 : VCard::v2_1 ) );
+}
+
 QByteArray VCardConverter::createVCard( const Addressee &addr, Version version ) const
 {
   Addressee::List list;
