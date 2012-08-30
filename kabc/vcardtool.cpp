@@ -75,15 +75,16 @@ VCardTool::~VCardTool()
 
 QByteArray VCardTool::exportVCards( const Addressee::List &list, VCard::Version version ) const
 {
-    return createVCards(list,version, true /*export vcard*/);
+  return createVCards( list, version, true /*export vcard*/);
 }
 
 QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version version ) const
 {
-    return createVCards(list,version, false/*don't export*/);
+  return createVCards( list, version, false /*don't export*/);
 }
 
-QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version version, bool exportVcard ) const
+QByteArray VCardTool::createVCards( const Addressee::List &list,
+                                    VCard::Version version, bool exportVcard ) const
 {
   VCard::List vCardList;
 
@@ -106,13 +107,26 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
                              ( *it ).postalCode().isEmpty() &&
                              ( *it ).country().isEmpty() );
 
-      address.append( ( *it ).postOfficeBox().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).extended().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).street().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).locality().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).region().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).postalCode().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-      address.append( ( *it ).country().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+      address.append( ( *it ).postOfficeBox().replace( QLatin1Char( ';' ),
+                                                       QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).extended().replace( QLatin1Char( ';' ),
+                                                  QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).street().replace( QLatin1Char( ';' ),
+                                                QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).locality().replace( QLatin1Char( ';' ),
+                                                  QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).region().replace( QLatin1Char( ';' ),
+                                                QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).postalCode().replace( QLatin1Char( ';' ),
+                                                    QLatin1String( "\\;" ) ) );
+
+      address.append( ( *it ).country().replace( QLatin1Char( ';' ),
+                                                 QLatin1String( "\\;" ) ) );
 
       VCardLine adrLine( QLatin1String( "ADR" ), address.join( QLatin1String( ";" ) ) );
       if ( version == VCard::v2_1 && needsEncoding( address.join( QLatin1String( ";" ) ) ) ) {
@@ -198,7 +212,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // KEY
     const Key::List keys = ( *addrIt ).keys();
     Key::List::ConstIterator keyIt;
-    Key::List::ConstIterator keyEnd(keys.end());
+    Key::List::ConstIterator keyEnd( keys.end() );
     for ( keyIt = keys.begin(); keyIt != keyEnd; ++keyIt ) {
       card.addLine( createKey( *keyIt ) );
     }
@@ -216,11 +230,20 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
 
     // N
     QStringList name;
-    name.append( ( *addrIt ).familyName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( ( *addrIt ).givenName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( ( *addrIt ).additionalName().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( ( *addrIt ).prefix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
-    name.append( ( *addrIt ).suffix().replace( QLatin1Char( ';' ), QLatin1String( "\\;" ) ) );
+    name.append( ( *addrIt ).familyName().replace( QLatin1Char( ';' ),
+                                                   QLatin1String( "\\;" ) ) );
+
+    name.append( ( *addrIt ).givenName().replace( QLatin1Char( ';' ),
+                                                  QLatin1String( "\\;" ) ) );
+
+    name.append( ( *addrIt ).additionalName().replace( QLatin1Char( ';' ),
+                                                       QLatin1String( "\\;" ) ) );
+
+    name.append( ( *addrIt ).prefix().replace( QLatin1Char( ';' ),
+                                               QLatin1String( "\\;" ) ) );
+
+    name.append( ( *addrIt ).suffix().replace( QLatin1Char( ';' ),
+                                               QLatin1String( "\\;" ) ) );
 
     VCardLine nLine( QLatin1String( "N" ), name.join( QLatin1String( ";" ) ) );
     if ( version == VCard::v2_1 && needsEncoding( name.join( QLatin1String( ";" ) ) ) ) {
@@ -295,12 +318,12 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
     // TEL
     const PhoneNumber::List phoneNumbers = ( *addrIt ).phoneNumbers();
     PhoneNumber::List::ConstIterator phoneIt;
-    PhoneNumber::List::ConstIterator phoneEnd(phoneNumbers.end());
+    PhoneNumber::List::ConstIterator phoneEnd( phoneNumbers.end() );
     for ( phoneIt = phoneNumbers.begin(); phoneIt != phoneEnd; ++phoneIt ) {
       VCardLine line( QLatin1String( "TEL" ), ( *phoneIt ).number() );
 
       QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
-      QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
+      QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd( mPhoneTypeMap.constEnd() );
       for ( typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt ) {
         if ( typeIt.value() & ( *phoneIt ).type() ) {
           line.addParameter( QLatin1String( "TYPE" ), typeIt.key() );
@@ -358,28 +381,28 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
         continue;
       }
       //Convert to standard identifier
-      if(exportVcard) {
-          if(identifier == QLatin1String("X-messaging/aim-All")) {
-              identifier = QLatin1String("X-AIM");
-          } else if(identifier == QLatin1String("X-messaging/icq-All")) {
-              identifier = QLatin1String("X-ICQ");
-          } else if(identifier == QLatin1String("X-messaging/xmpp-All")) {
-              identifier = QLatin1String("X-JABBER");
-          } else if(identifier == QLatin1String("X-messaging/msn-All")) {
-              identifier = QLatin1String("X-MSN");
-          } else if(identifier == QLatin1String("X-messaging/yahoo-All")) {
-              identifier = QLatin1String("X-YAHOO");
-          } else if(identifier == QLatin1String("X-messaging/gadu-All")) {
-              identifier = QLatin1String("X-GADUGADU");
-          } else if(identifier == QLatin1String("X-messaging/skype-All")) {
-              identifier = QLatin1String("X-SKYPE");
-          } else if(identifier == QLatin1String("X-messaging/groupwise-All")) {
-              identifier = QLatin1String("X-GROUPWISE");
-          } else if(identifier == QLatin1String("X-messaging/sms-All")) {
-              identifier = QLatin1String("X-SMS");
-          } else if(identifier == QLatin1String("X-messaging/meanwhile-All")) {
-              identifier = QLatin1String("X-MEANWHILE");
-          }
+      if ( exportVcard ) {
+        if ( identifier == QLatin1String( "X-messaging/aim-All" ) ) {
+          identifier = QLatin1String( "X-AIM" );
+        } else if ( identifier == QLatin1String( "X-messaging/icq-All" ) ) {
+          identifier = QLatin1String( "X-ICQ" );
+        } else if ( identifier == QLatin1String( "X-messaging/xmpp-All" ) ) {
+          identifier = QLatin1String( "X-JABBER" );
+        } else if ( identifier == QLatin1String( "X-messaging/msn-All" ) ) {
+          identifier = QLatin1String( "X-MSN" );
+        } else if ( identifier == QLatin1String( "X-messaging/yahoo-All" ) ) {
+          identifier = QLatin1String( "X-YAHOO" );
+        } else if ( identifier == QLatin1String( "X-messaging/gadu-All" ) ) {
+          identifier = QLatin1String( "X-GADUGADU" );
+        } else if ( identifier == QLatin1String( "X-messaging/skype-All" ) ) {
+          identifier = QLatin1String( "X-SKYPE" );
+        } else if ( identifier == QLatin1String( "X-messaging/groupwise-All" ) ) {
+          identifier = QLatin1String( "X-GROUPWISE" );
+        } else if ( identifier == QLatin1String( "X-messaging/sms-All" ) ) {
+          identifier = QLatin1String( "X-SMS" );
+        } else if ( identifier == QLatin1String( "X-messaging/meanwhile-All" ) ) {
+          identifier = QLatin1String( "X-MEANWHILE" );
+        }
       }
 
       VCardLine line( identifier, value );
@@ -671,43 +694,48 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         else if ( identifier.startsWith( QLatin1String( "x-" ) ) ) {
           QString ident = ( *lineIt ).identifier();
           //X-Evolution
-          if(identifier==QLatin1String("x-evolution-spouse") || identifier == QLatin1String("x-spouse")) {
-            ident = QLatin1String("X-KADDRESSBOOK-X-SpousesName");
-          } else if(identifier == QLatin1String("x-evolution-blog-url")) {
-            ident = QLatin1String("X-KADDRESSBOOK-BlogFeed");
-          } else if(identifier == QLatin1String("x-evolution-assistant") || identifier == QLatin1String("x-assistant")) {
-            ident = QLatin1String("X-KADDRESSBOOK-X-AssistantsName");
-          } else if(identifier == QLatin1String("x-evolution-anniversary") || identifier == QLatin1String("x-anniversary")) {
-            ident = QLatin1String("X-KADDRESSBOOK-X-Anniversary");
-          } else if(identifier == QLatin1String("x-evolution-manager") || identifier == QLatin1String("x-manager")) {
-            ident = QLatin1String("X-KADDRESSBOOK-X-ManagersName");
-          } else if(identifier == QLatin1String("x-aim")) {
-            ident = QLatin1String("X-messaging/aim-All");
-          } else if(identifier == QLatin1String("x-icq")) {
-            ident = QLatin1String("X-messaging/icq-All");
-          } else if(identifier == QLatin1String("x-jabber")) {
-            ident = QLatin1String("X-messaging/xmpp-All");
-          } else if(identifier == QLatin1String("x-jabber")) {
-            ident = QLatin1String("X-messaging/xmpp-All");
-          } else if(identifier == QLatin1String("x-msn")) {
-            ident = QLatin1String("X-messaging/msn-All");
-          } else if(identifier == QLatin1String("x-yahoo")) {
-            ident = QLatin1String("X-messaging/yahoo-All");
-          } else if(identifier == QLatin1String("x-gadugadu")) {
-            ident = QLatin1String("X-messaging/gadu-All");
-          } else if(identifier == QLatin1String("x-skype")) {
-            ident = QLatin1String("X-messaging/skype-All");
-          } else if(identifier == QLatin1String("x-groupwise")) {
-            ident = QLatin1String("X-messaging/groupwise-All");
-          } else if(identifier == QLatin1String("x-sms")) {
-            ident = QLatin1String("X-messaging/sms-All");
-          } else if(identifier == QLatin1String("x-meanwhile")) {
-            ident = QLatin1String("X-messaging/meanwhile-All");
+          if ( identifier == QLatin1String( "x-evolution-spouse" ) ||
+               identifier == QLatin1String( "x-spouse" ) ) {
+            ident = QLatin1String( "X-KADDRESSBOOK-X-SpousesName" );
+          } else if ( identifier == QLatin1String( "x-evolution-blog-url" ) ) {
+            ident = QLatin1String( "X-KADDRESSBOOK-BlogFeed" );
+          } else if ( identifier == QLatin1String( "x-evolution-assistant" ) ||
+                     identifier == QLatin1String( "x-assistant" ) ) {
+            ident = QLatin1String( "X-KADDRESSBOOK-X-AssistantsName" );
+          } else if ( identifier == QLatin1String( "x-evolution-anniversary" ) ||
+                      identifier == QLatin1String( "x-anniversary" ) ) {
+            ident = QLatin1String( "X-KADDRESSBOOK-X-Anniversary" );
+          } else if ( identifier == QLatin1String( "x-evolution-manager" ) ||
+                      identifier == QLatin1String( "x-manager" ) ) {
+            ident = QLatin1String( "X-KADDRESSBOOK-X-ManagersName" );
+          } else if ( identifier == QLatin1String( "x-aim" ) ) {
+            ident = QLatin1String( "X-messaging/aim-All" );
+          } else if ( identifier == QLatin1String( "x-icq" ) ) {
+            ident = QLatin1String( "X-messaging/icq-All" );
+          } else if ( identifier == QLatin1String( "x-jabber" ) ) {
+            ident = QLatin1String( "X-messaging/xmpp-All" );
+          } else if ( identifier == QLatin1String( "x-jabber" ) ) {
+            ident = QLatin1String( "X-messaging/xmpp-All" );
+          } else if ( identifier == QLatin1String( "x-msn" ) ) {
+            ident = QLatin1String( "X-messaging/msn-All" );
+          } else if ( identifier == QLatin1String( "x-yahoo" ) ) {
+            ident = QLatin1String( "X-messaging/yahoo-All" );
+          } else if ( identifier == QLatin1String( "x-gadugadu" ) ) {
+            ident = QLatin1String( "X-messaging/gadu-All" );
+          } else if ( identifier == QLatin1String( "x-skype" ) ) {
+            ident = QLatin1String( "X-messaging/skype-All" );
+          } else if ( identifier == QLatin1String( "x-groupwise" ) ) {
+            ident = QLatin1String( "X-messaging/groupwise-All" );
+          } else if ( identifier == QLatin1String( "x-sms" ) ) {
+            ident = QLatin1String( "X-messaging/sms-All" );
+          } else if ( identifier == QLatin1String( "x-meanwhile" ) ) {
+            ident = QLatin1String( "X-messaging/meanwhile-All" );
           }
 
           const QString key = ident.mid( 2 );
           const int dash = key.indexOf( QLatin1Char( '-' ) );
-          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ), ( *lineIt ).value().toString() );
+          addr.insertCustom( key.left( dash ), key.mid( dash + 1 ),
+                             ( *lineIt ).value().toString() );
         }
       }
     }

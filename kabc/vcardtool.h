@@ -50,7 +50,8 @@ class KABC_EXPORT VCardTool
     /**
      * since 4.9.1
      */
-    QByteArray exportVCards( const Addressee::List &list, VCard::Version version = VCard::v3_0 ) const;
+    QByteArray exportVCards( const Addressee::List &list,
+                             VCard::Version version = VCard::v3_0 ) const;
     /**
       Parses the string and returns a list of addressee objects.
      */
