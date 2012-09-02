@@ -98,10 +98,11 @@ class KABC_EXPORT VCardConverter
      * @since 4.9.1
      */
     QByteArray exportVCard( const Addressee &addr, Version version ) const;
+
     /**
      * @since 4.9.1
      */
-    QByteArray exportVCards( const Addressee::List& list, Version version ) const;
+    QByteArray exportVCards( const Addressee::List &list, Version version ) const;
 
     /**
       Parses a string in vCard format and returns the first contact.

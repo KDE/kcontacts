@@ -40,7 +40,7 @@ QByteArray VCardConverter::exportVCard( const Addressee &addr, Version version )
   return exportVCards( list, version );
 }
 
-QByteArray VCardConverter::exportVCards( const Addressee::List& list, Version version ) const
+QByteArray VCardConverter::exportVCards( const Addressee::List &list, Version version ) const
 {
   VCardTool tool;
 

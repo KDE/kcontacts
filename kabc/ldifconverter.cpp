@@ -402,13 +402,13 @@ addComment:
     return true;
   }
 
-  if ( fieldname == QLatin1String( "xmozillaanyphone" ) ) { // mozilla
+  if ( fieldname == QLatin1String( "xmozillaanyphone" ) ) {  // mozilla
     a.insertPhoneNumber( PhoneNumber( value, PhoneNumber::Work ) );
     return true;
   }
 
   if ( fieldname == QLatin1String( "streethomeaddress" ) ||
-       fieldname == QLatin1String( "mozillahomestreet" ) /*thunderbird*/ ) {
+       fieldname == QLatin1String( "mozillahomestreet" ) ) {  // thunderbird
     homeAddr.setStreet( value );
     return true;
   }

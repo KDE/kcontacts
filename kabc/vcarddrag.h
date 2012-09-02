@@ -35,8 +35,8 @@ namespace KABC {
 
   @since 4.5
 */
-namespace VCardDrag
-{
+namespace VCardDrag {
+
   /**
     Adds the vCard representation as data of the drag object.
 

@@ -41,8 +41,7 @@ class Addressee;
  * If you want to implement reverse sorting, you do not have to write another
  * trait, as AddresseeList takes care of that.
  */
-namespace SortingTraits
-{
+namespace SortingTraits {
 
 class KABC_EXPORT Uid
 {
