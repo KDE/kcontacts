@@ -49,9 +49,6 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   QBoxLayout *mainLayout = new QVBoxLayout( this );
   mainLayout->setMargin( 0 );
 
-  KPageWidget *pageWidget = new KPageWidget( this );
-  pageWidget->setFaceType( KPageView::Tabbed );
-
   mCfg = new KLDAP::LdapConfigWidget(
         KLDAP::LdapConfigWidget::W_USER |
         KLDAP::LdapConfigWidget::W_PASS |
@@ -63,19 +60,10 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
         KLDAP::LdapConfigWidget::W_DN |
         KLDAP::LdapConfigWidget::W_FILTER |
         KLDAP::LdapConfigWidget::W_TIMELIMIT |
-        KLDAP::LdapConfigWidget::W_SIZELIMIT,
-        this );
-
-  mSecurityCfg = new KLDAP::LdapConfigWidget(
+        KLDAP::LdapConfigWidget::W_SIZELIMIT |
         KLDAP::LdapConfigWidget::W_SECBOX |
         KLDAP::LdapConfigWidget::W_AUTHBOX,
         this );
-
-  pageWidget->addPage( mCfg,
-                       i18nc( "@title:tab general account settings", "General" ) );
-
-  pageWidget->addPage( mSecurityCfg,
-                       i18nc( "@title:tab account security settings", "Security" ) );
 
   mSubTree = new QCheckBox( i18n( "Sub-tree query" ), this );
   KHBox *box = new KHBox( this );
@@ -83,7 +71,7 @@ ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )
   mEditButton = new QPushButton( i18n( "Edit Attributes..." ), box );
   mCacheButton = new QPushButton( i18n( "Offline Use..." ), box );
 
-  mainLayout->addWidget( pageWidget );
+  mainLayout->addWidget( mCfg );
   mainLayout->addWidget( mSubTree );
   mainLayout->addWidget( box );
 
@@ -111,20 +99,20 @@ void ResourceLDAPKIOConfig::loadSettings( KRES::Resource *res )
   mCfg->setSizeLimit( resource->sizeLimit() );
   mCfg->setDn( KLDAP::LdapDN( resource->dn() ) );
   mCfg->setFilter( resource->filter() );
-  mSecurityCfg->setMech( resource->mech() );
+  mCfg->setMech( resource->mech() );
   if ( resource->isTLS() ) {
-    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
+    mCfg->setSecurity( KLDAP::LdapConfigWidget::TLS );
   } else if ( resource->isSSL() ) {
-    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
+    mCfg->setSecurity( KLDAP::LdapConfigWidget::SSL );
   } else {
-    mSecurityCfg->setSecurity( KLDAP::LdapConfigWidget::None );
+    mCfg->setSecurity( KLDAP::LdapConfigWidget::None );
   }
   if ( resource->isAnonymous() ) {
-    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
+    mCfg->setAuth( KLDAP::LdapConfigWidget::Anonymous );
   } else if ( resource->isSASL() ) {
-    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::SASL );
+    mCfg->setAuth( KLDAP::LdapConfigWidget::SASL );
   } else {
-    mSecurityCfg->setAuth( KLDAP::LdapConfigWidget::Simple );
+    mCfg->setAuth( KLDAP::LdapConfigWidget::Simple );
   }
   mSubTree->setChecked( resource->isSubTree() );
   mAttributes = resource->attributes();
@@ -154,12 +142,12 @@ void ResourceLDAPKIOConfig::saveSettings( KRES::Resource *res )
   resource->setSizeLimit( mCfg->sizeLimit() );
   resource->setDn( mCfg->dn().toString() );
   resource->setFilter( mCfg->filter() );
-  resource->setIsAnonymous( mSecurityCfg->auth() ==
+  resource->setIsAnonymous( mCfg->auth() ==
                             KLDAP::LdapConfigWidget::Anonymous );
-  resource->setIsSASL( mSecurityCfg->auth() == KLDAP::LdapConfigWidget::SASL );
-  resource->setMech( mSecurityCfg->mech() );
-  resource->setIsTLS( mSecurityCfg->security() == KLDAP::LdapConfigWidget::TLS );
-  resource->setIsSSL( mSecurityCfg->security() == KLDAP::LdapConfigWidget::SSL );
+  resource->setIsSASL( mCfg->auth() == KLDAP::LdapConfigWidget::SASL );
+  resource->setMech( mCfg->mech() );
+  resource->setIsTLS( mCfg->security() == KLDAP::LdapConfigWidget::TLS );
+  resource->setIsSSL( mCfg->security() == KLDAP::LdapConfigWidget::SSL );
   resource->setIsSubTree( mSubTree->isChecked() );
   resource->setAttributes( mAttributes );
   resource->setRDNPrefix( mRDNPrefix );
