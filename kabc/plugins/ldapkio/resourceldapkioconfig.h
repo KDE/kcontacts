@@ -60,7 +60,6 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIOConfig : public KRES::ConfigWidget
   private:
     QPushButton *mEditButton, *mCacheButton;
     KLDAP::LdapConfigWidget *mCfg;
-    KLDAP::LdapConfigWidget *mSecurityCfg;
     QCheckBox *mSubTree;
     QMap<QString, QString> mAttributes;
     int mRDNPrefix, mCachePolicy;
