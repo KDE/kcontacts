@@ -375,6 +375,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list, VCard::Version 
               identifier = QLatin1String("X-SMS");
           } else if(identifier == QLatin1String("X-messaging/meanwhile-All")) {
               identifier = QLatin1String("X-MEANWHILE");
+          } else if ( identifier == QLatin1String( "X-messaging/irc-All" ) ) {
+            identifier = QLatin1String( "X-IRC" ); //Not defined by rfc but need for fixing #300869
           }
       }
 
@@ -699,6 +701,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
             ident = QLatin1String("X-messaging/sms-All");
           } else if(identifier == QLatin1String("x-meanwhile")) {
             ident = QLatin1String("X-messaging/meanwhile-All");
+          } else if ( identifier == QLatin1String( "x-irc" ) ) {
+            ident = QLatin1String( "X-messaging/irc-All" );
           }
 
           const QString key = ident.mid( 2 );
