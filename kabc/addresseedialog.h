@@ -33,7 +33,7 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QString>
-#include <QtGui/QTreeWidgetItem>
+#include <QTreeWidgetItem>
 
 namespace KABC {
 

@@ -32,12 +32,12 @@
 #include <kvbox.h>
 
 #include <QtCore/QPointer>
-#include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpinBox>
-#include <QtGui/QRadioButton>
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QRadioButton>
 
 #include "resourceldapkioconfig.moc"
 

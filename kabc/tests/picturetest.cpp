@@ -20,7 +20,7 @@
 
 #include "picturetest.h"
 #include "kabc/picture.h"
-#include <QtGui/QPainter>
+#include <QPainter>
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( PictureTest, NoGUI )

@@ -28,7 +28,7 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 using namespace KABC;
 

@@ -23,9 +23,9 @@
 
 #include "addresslineedit.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QMouseEvent>
+#include <QApplication>
+#include <QKeyEvent>
+#include <QMouseEvent>
 #include <QtCore/QObject>
 #include <QtCore/QRegExp>
 

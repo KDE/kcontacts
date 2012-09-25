@@ -23,7 +23,7 @@
 #include <klocale.h>
 #include <kconfiggroup.h>
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtDBus/QtDBus>
 
 using namespace KABC;

@@ -28,9 +28,9 @@
 
 #include <kdialog.h>
 
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QGroupBox>
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QGroupBox>
 #include <QtCore/QHash>
 #include <QtCore/QMap>
 

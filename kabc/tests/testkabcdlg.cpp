@@ -26,7 +26,7 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 using namespace KABC;
 
