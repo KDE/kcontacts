@@ -30,13 +30,13 @@
 #include <kcombobox.h>
 
 #include <QtCore/QPointer>
-#include <QtGui/QTreeWidget>
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QGroupBox>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QRadioButton>
+#include <QTreeWidget>
+#include <QLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QGroupBox>
+#include <QButtonGroup>
+#include <QRadioButton>
 
 using namespace KABC;
 

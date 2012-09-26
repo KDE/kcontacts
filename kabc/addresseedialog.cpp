@@ -28,9 +28,9 @@
 
 #include <QtCore/QPointer>
 #include <QtCore/QRegExp>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
+#include <QGroupBox>
+#include <QLayout>
+#include <QPushButton>
 
 using namespace KABC;
 

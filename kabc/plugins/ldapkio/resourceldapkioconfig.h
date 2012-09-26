@@ -28,9 +28,9 @@
 
 #include <kdialog.h>
 
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QGroupBox>
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QGroupBox>
 #include <QtCore/QHash>
 #include <QtCore/QMap>
 
@@ -60,7 +60,6 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIOConfig : public KRES::ConfigWidget
   private:
     QPushButton *mEditButton, *mCacheButton;
     KLDAP::LdapConfigWidget *mCfg;
-    KLDAP::LdapConfigWidget *mSecurityCfg;
     QCheckBox *mSubTree;
     QMap<QString, QString> mAttributes;
     int mRDNPrefix, mCachePolicy;

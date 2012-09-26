@@ -32,13 +32,13 @@
 #include <kdialog.h>
 
 #include <qtreewidget.h>
-#include <QtGui/QWidget>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
+#include <QWidget>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
 #include <QtCore/QDir>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QHBoxLayout>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 #include <sys/types.h>
 #include <iostream>

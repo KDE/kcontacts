@@ -24,10 +24,10 @@
 #include <klocale.h>
 
 #include <QtCore/QPointer>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
-#include <QtGui/QRadioButton>
+#include <QButtonGroup>
+#include <QGroupBox>
+#include <QLayout>
+#include <QRadioButton>
 
 #include "emailselectdialog.moc"
 

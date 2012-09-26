@@ -26,7 +26,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include <QtGui/QApplication>
+#include <QApplication>
 
 using namespace KABC;
 

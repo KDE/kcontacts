@@ -29,7 +29,7 @@
 #include <kstandarddirs.h>
 #include <kdialog.h>
 
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 using namespace KABC;
 

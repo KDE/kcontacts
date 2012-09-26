@@ -26,7 +26,7 @@
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QPair>
 #include <QtCore/QPointer>
 

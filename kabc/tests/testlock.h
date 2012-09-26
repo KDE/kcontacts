@@ -21,8 +21,8 @@
 #ifndef KABC_TESTLOCK_H
 #define KABC_TESTLOCK_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QLabel>
+#include <QWidget>
+#include <QLabel>
 
 #include "kabc/lock.h"
 

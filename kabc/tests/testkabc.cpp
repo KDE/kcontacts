@@ -33,7 +33,7 @@
 #include <kstandarddirs.h>
 
 #include <QtCore/QFile>
-#include <QtGui/QImage>
+#include <QImage>
 
 using namespace KABC;
 

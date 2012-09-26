@@ -29,7 +29,7 @@
 #include <kstandarddirs.h>
 
 #include <QtCore/QDataStream>
-#include <QtGui/QImage>
+#include <QImage>
 
 #define BINARY_FORMAT_VERSION 1
 
