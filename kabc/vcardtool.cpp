@@ -404,7 +404,9 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
           identifier = QLatin1String( "X-MEANWHILE" );
         } else if ( identifier == QLatin1String( "X-messaging/irc-All" ) ) {
           identifier = QLatin1String( "X-IRC" ); //Not defined by rfc but need for fixing #300869
-        }
+        } else if ( identifier == QLatin1String( "X-messaging/googletalk-All" ) ) {
+          identifier = QLatin1String( "X-GOOGLETALK" ); //Not defined by rfc but need for fixing #300869
+        } 
       }
 
       VCardLine line( identifier, value );
@@ -734,7 +736,9 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
             ident = QLatin1String( "X-messaging/meanwhile-All" );
           } else if ( identifier == QLatin1String( "x-irc" ) ) {
             ident = QLatin1String( "X-messaging/irc-All" );
-          }
+          } else if ( identifier == QLatin1String( "x-googletalk" ) ) {
+            ident = QLatin1String( "X-messaging/googletalk-All" );
+          } 
 
           const QString key = ident.mid( 2 );
           const int dash = key.indexOf( QLatin1Char( '-' ) );
