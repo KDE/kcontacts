@@ -868,13 +868,13 @@ VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pi
 
         line.setValue( input );
         line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
-        line.addParameter( QLatin1String( "type" ), QLatin1String( "image/jpeg" ) );
+        line.addParameter( QLatin1String( "type" ), QLatin1String( "jpeg" ) );
       } else {
         pic.data().save( &buffer, "PNG" );
 
         line.setValue( input );
         line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
-        line.addParameter( QLatin1String( "type" ), QLatin1String( "image/png" ) );
+        line.addParameter( QLatin1String( "type" ), QLatin1String( "png" ) );
       }
     }
   } else if ( !pic.url().isEmpty() ) {
