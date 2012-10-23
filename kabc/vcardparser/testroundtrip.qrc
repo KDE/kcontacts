@@ -5,7 +5,7 @@
     <file>tests/vcard2.vcf</file>
     <file>tests/vcard3.vcf</file>
     <file>tests/vcard4.vcf</file>
-    <!--    <file>tests/vcard5.vcf</file> -->
+    <file>tests/vcard5.vcf</file>
     <file>tests/vcard6.vcf</file>
     <file>tests/vcard7.vcf</file>
     <file>tests/vcard8.vcf</file>
