@@ -29,14 +29,21 @@ class PictureTest : public QObject
 
   private Q_SLOTS:
     void emptyTest();
-    void storeTestIntern();
+    void storeTestInternImage();
+    void storeTestInternRawData();
     void storeTestExtern();
-    void equalsTestIntern();
+    void equalsTestInternImage();
+    void equalsTestInternRawData();
+    void equalsTestInternImageAndRawData();
     void equalsTestExtern();
     void differsTest();
+    void differsTestInternRawData();
+    void differsTestExtern();
     void assignmentTestIntern();
     void assignmentTestExtern();
-    void serializeTest();
+    void serializeTestInternImage();
+    void serializeTestInternRawData();
+    void serializeTestExtern();
 };
 
 #endif

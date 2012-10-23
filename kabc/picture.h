@@ -26,7 +26,7 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
-#include <QImage>
+#include <QtGui/QImage>
 
 namespace KABC {
 
@@ -101,23 +101,49 @@ class KABC_EXPORT Picture
      * Sets a URL for the location of the picture file. When using this
      * function, isIntern() will return 'false' until you use
      * setData().
+     * This also clears the type, as it is unknown.
      *
      * @param url  The location URL of the picture file.
      */
     void setUrl( const QString &url );
 
     /**
-     * Sets the raw data of the picture. When using this function,
-     * isIntern() will return 'true' until you use setUrl().
+     * Sets a URL for the location of the picture file. When using this
+     * function, isIntern() will return 'false' until you use
+     * setData().
      *
-     * @param data  The raw data of the picture.
+     * @param url  The location URL of the picture file.
+     * @param type  The encoding format of the image, e.g. jpeg or png
+     * @since 4.10
+     */
+    void setUrl( const QString &url, const QString &type );
+
+    /**
+     * Sets the image data of the picture. When using this function,
+     * isIntern() will return 'true' until you use setUrl().
+     * This also sets type to "png" or "jpeg" depending
+     * on whether the image has an alpha channel or not.
+     *
+     * @param data  The image data of the picture.
      */
     void setData( const QImage &data );
 
     /**
-     * Sets the type of the picture.
+     * Sets the raw data of the picture. When using this function,
+     * isIntern() will return 'true' until you use setUrl().
+     *
+     * @param rawData  The raw data of the picture.
+     * @param type  The encoding format of the image, e.g. jpeg or png
+     * @since 4.10
      */
-    void setType( const QString &type );
+    void setRawData( const QByteArray &rawData, const QString &type );
+
+    /**
+     * Sets the type of the picture.
+     *
+     * @deprecated type should only be set along with setRawData()
+     */
+    void KDE_DEPRECATED setType( const QString &type );
 
     /**
      * Returns whether the picture is described by a URL (extern) or
@@ -134,9 +160,16 @@ class KABC_EXPORT Picture
     QString url() const;
 
     /**
-     * Returns the raw data of this picture.
+     * Returns the image data of this picture.
      */
     QImage data() const;
+
+    /**
+     * Returns the raw data of this picture.
+     *
+     * @since 4.10
+     */
+    QByteArray rawData() const;
 
     /**
      * Returns the type of this picture.
