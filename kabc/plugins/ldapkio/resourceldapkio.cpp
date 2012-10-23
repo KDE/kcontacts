@@ -753,11 +753,9 @@ void ResourceLDAPKIO::data( KIO::Job *job, const QByteArray &data )
         } else if ( name == d->mAttributes[ QLatin1String( "uid" ) ].toLower() ) {
           d->mAddr.setUid( QString::fromUtf8( value, value.size() ) );
         } else if ( name == d->mAttributes[ QLatin1String( "jpegPhoto" ) ].toLower() ) {
-          KABC::Picture photo;
-          QImage img = QImage::fromData( value );
-          if ( !img.isNull() ) {
-            photo.setData( img );
-            photo.setType( QLatin1String( "image/jpeg" ) );
+          if ( !value.isEmpty() ) {
+            KABC::Picture photo;
+            photo.setRawData( value, QLatin1String( "jpeg" ) );
             d->mAddr.setPhoto( photo );
           }
         }
