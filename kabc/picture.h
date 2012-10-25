@@ -26,7 +26,7 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
-#include <QtGui/QImage>
+#include <QImage>
 
 namespace KABC {
 
