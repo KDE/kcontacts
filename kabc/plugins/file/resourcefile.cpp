@@ -475,4 +475,3 @@ void ResourceFile::removeAddressee( const Addressee &addr )
   mAddrMap.remove( addr.uid() );
 }
 
-#include "resourcefile.moc"

@@ -85,4 +85,3 @@ void TimeZoneTest::serializeTest()
   QVERIFY( timezone1 == timezone2 );
 }
 
-#include "timezonetest.moc"

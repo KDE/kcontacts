@@ -352,4 +352,4 @@ void AddresseeDialog::Private::addressBookChanged()
   loadAddressBook();
 }
 
-#include "addresseedialog.moc"
+#include "moc_addresseedialog.cpp"

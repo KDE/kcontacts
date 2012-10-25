@@ -29,7 +29,6 @@
 #include <QLayout>
 #include <QRadioButton>
 
-#include "emailselectdialog.moc"
 
 using namespace KABC;
 

@@ -524,4 +524,4 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
   }
 }
 
-#include "addresslineedit.moc"
+#include "moc_addresslineedit.cpp"

@@ -114,4 +114,3 @@ void ResourceFileConfig::checkFilePermissions( const QString &fileName )
   }
 }
 
-#include "resourcefileconfig.moc"

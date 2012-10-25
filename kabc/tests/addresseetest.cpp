@@ -368,4 +368,3 @@ void AddresseeTest::nameFromStringTest()
   QCOMPARE( a.formattedName(), QLatin1String( "Firstname Lastname" ) );
 }
 
-#include "addresseetest.moc"

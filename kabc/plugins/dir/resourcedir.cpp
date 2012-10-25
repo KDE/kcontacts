@@ -330,4 +330,4 @@ void ResourceDir::removeAddressee( const Addressee &addr )
   mAddrMap.remove( addr.uid() );
 }
 
-#include "resourcedir.moc"
+#include "moc_resourcedir.cpp"

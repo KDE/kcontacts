@@ -1139,4 +1139,3 @@ QString ResourceLDAPKIO::cacheDst() const
   return d->mCacheDst;
 }
 
-#include "resourceldapkio.moc"

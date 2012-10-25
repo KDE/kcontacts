@@ -101,4 +101,3 @@ void ResourceDirConfig::saveSettings( KRES::Resource *res )
   resource->setPath( mFileNameEdit->url().path() );
 }
 
-#include "resourcedirconfig.moc"

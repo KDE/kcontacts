@@ -180,4 +180,3 @@ QString Lock::error() const
   return d->mError;
 }
 
-#include "lock.moc"
