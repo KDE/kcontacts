@@ -98,4 +98,3 @@ void KeyTest::serializeTest()
   QVERIFY( key1 == key2 );
 }
 
-#include "keytest.moc"

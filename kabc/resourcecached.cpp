@@ -301,4 +301,3 @@ void ResourceCached::setIdMapperIdentifier()
   d->mIdMapper.setIdentifier( type() + QLatin1Char( '_' ) + identifier() );
 }
 
-#include "resourcecached.moc"

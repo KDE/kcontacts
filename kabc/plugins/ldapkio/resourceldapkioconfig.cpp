@@ -39,7 +39,6 @@
 #include <QSpinBox>
 #include <QRadioButton>
 
-#include "resourceldapkioconfig.moc"
 
 using namespace KABC;
 

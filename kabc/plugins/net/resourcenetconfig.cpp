@@ -95,4 +95,3 @@ void ResourceNetConfig::saveSettings( KRES::Resource *res )
   resource->setUrl( KUrl( mUrlEdit->url() ) );
 }
 
-#include "resourcenetconfig.moc"

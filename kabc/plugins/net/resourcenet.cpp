@@ -388,4 +388,3 @@ void ResourceNet::uploadFinished( KJob *job )
   deleteLocalTempFile();
 }
 
-#include "resourcenet.moc"

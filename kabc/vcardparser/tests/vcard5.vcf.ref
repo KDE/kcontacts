@@ -7,7 +7,7 @@ CATEGORIES:Friend
 CLASS:CONFIDENTIAL
 EMAIL;TYPE=PREF:heiko.mustermann@freenet.org
 EMAIL:heiko8@tst.inf.tu-dresden.de
-FN:Mustermann, Heiko
+FN:Mustermann\, Heiko
 GEO:19.283333;166.616669
 LOGO;ENCODING=b;TYPE=image/png:iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVU
  AAAOW0lEQVR4nO1df2hb1xX+OlyQwQEJXJAgBQlaiEwDsdqO2l1H47RjMe2gbjOoszG2dozG7aC
@@ -78,7 +78,7 @@ LOGO;ENCODING=b;TYPE=image/png:iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVU
  xczH20lidTXe3AixDLCwsLCwsviX4P68/8cprSSqmAAAAAElFTkSuQmCC
 N:Mustermann;Heiko;;;
 NICKNAME:clown
-NOTE:I'm a friendly note text,\nplease copy me to your address book...
+NOTE:I'm a friendly note text\,\nplease copy me to your address book...
 ORG:KDE
 PHOTO;ENCODING=b;TYPE=image/png:iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pV
  UAAAOW0lEQVR4nO1df2hb1xX+OlyQwQEJXJAgBQlaiEwDsdqO2l1H47RjMe2gbjOoszG2dozG7a

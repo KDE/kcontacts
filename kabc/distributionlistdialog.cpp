@@ -488,4 +488,4 @@ void DistributionListEditorWidget::Private::slotSelectionAddresseeViewChanged()
   mAddEntryButton->setEnabled( state && !mNameCombo->currentText().isEmpty() );
 }
 
-#include "distributionlistdialog.moc"
+#include "moc_distributionlistdialog.cpp"

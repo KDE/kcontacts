@@ -26,7 +26,6 @@
 
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
-#include <QDebug>
 
 using namespace KABC;
 
@@ -405,8 +404,9 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
         } else if ( identifier == QLatin1String( "X-messaging/irc-All" ) ) {
           identifier = QLatin1String( "X-IRC" ); //Not defined by rfc but need for fixing #300869
         } else if ( identifier == QLatin1String( "X-messaging/googletalk-All" ) ) {
-          identifier = QLatin1String( "X-GOOGLETALK" ); //Not defined by rfc but need for fixing #300869
-        } 
+          //Not defined by rfc but need for fixing #300869
+          identifier = QLatin1String( "X-GOOGLETALK" );
+        }
       }
 
       VCardLine line( identifier, value );
@@ -738,7 +738,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
             ident = QLatin1String( "X-messaging/irc-All" );
           } else if ( identifier == QLatin1String( "x-googletalk" ) ) {
             ident = QLatin1String( "X-messaging/googletalk-All" );
-          } 
+          }
 
           const QString key = ident.mid( 2 );
           const int dash = key.indexOf( QLatin1Char( '-' ) );
@@ -836,18 +836,16 @@ Picture VCardTool::parsePicture( const VCardLine &line ) const
   Picture pic;
 
   const QStringList params = line.parameterList();
+  QString type;
+  if ( params.contains( QLatin1String( "type" ) ) ) {
+    type = line.parameter( QLatin1String( "type" ) );
+  }
   if ( params.contains( QLatin1String( "encoding" ) ) ) {
-    QImage img;
-    img.loadFromData( line.value().toByteArray() );
-    pic.setData( img );
+    pic.setRawData( line.value().toByteArray(), type );
   } else if ( params.contains( QLatin1String( "value" ) ) ) {
     if ( line.parameter( QLatin1String( "value" ) ).toLower() == QLatin1String( "uri" ) ) {
       pic.setUrl( line.value().toString() );
     }
-  }
-
-  if ( params.contains( QLatin1String( "type" ) ) ) {
-    pic.setType( line.parameter( QLatin1String( "type" ) ) );
   }
 
   return pic;
@@ -857,27 +855,15 @@ VCardLine VCardTool::createPicture( const QString &identifier, const Picture &pi
 {
   VCardLine line( identifier );
 
+  if ( pic.isEmpty() ) {
+    return line;
+  }
+
   if ( pic.isIntern() ) {
-    if ( !pic.data().isNull() ) {
-      QByteArray input;
-      QBuffer buffer( &input );
-      buffer.open( QIODevice::WriteOnly );
-
-      if ( !pic.data().hasAlphaChannel() ) {
-        pic.data().save( &buffer, "JPEG" );
-
-        line.setValue( input );
-        line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
-        line.addParameter( QLatin1String( "type" ), QLatin1String( "image/jpeg" ) );
-      } else {
-        pic.data().save( &buffer, "PNG" );
-
-        line.setValue( input );
-        line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
-        line.addParameter( QLatin1String( "type" ), QLatin1String( "image/png" ) );
-      }
-    }
-  } else if ( !pic.url().isEmpty() ) {
+    line.setValue( pic.rawData() );
+    line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+    line.addParameter( QLatin1String( "type" ), pic.type() );
+  } else {
     line.setValue( pic.url() );
     line.addParameter( QLatin1String( "value" ), QLatin1String( "URI" ) );
   }

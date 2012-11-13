@@ -48,4 +48,3 @@ bool ResourceABC::subresourceActive( const QString &subResource ) const
   return true;
 }
 
-#include "resourceabc.moc"

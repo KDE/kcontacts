@@ -44,7 +44,8 @@ class Picture::Private : public QSharedData
 
     QString mUrl;
     QString mType;
-    QImage mData;
+    mutable QImage mData;
+    mutable QByteArray mRawData;
 
     bool mIntern;
 };
@@ -63,8 +64,7 @@ Picture::Picture( const QString &url )
 Picture::Picture( const QImage &data )
   : d( new Private )
 {
-  d->mIntern = true;
-  d->mData = data;
+  setData( data );
 }
 
 Picture::Picture( const Picture &other )
@@ -91,8 +91,26 @@ bool Picture::operator==( const Picture &p ) const
     return false;
   }
 
+  if ( d->mType != p.d->mType ) {
+    return false;
+  }
+
   if ( d->mIntern ) {
-    if ( d->mData != p.d->mData ) {
+    if ( !d->mData.isNull() && !p.d->mData.isNull() ) {
+      if ( d->mData != p.d->mData ) {
+        return false;
+      }
+    } else if ( !d->mRawData.isEmpty() && !p.d->mRawData.isEmpty() ) {
+      if ( d->mRawData != p.d->mRawData ) {
+        return false;
+      }
+    } else if ( ( !d->mData.isNull() || !d->mRawData.isEmpty() ) &&
+                ( !p.d->mData.isNull() || !p.d->mRawData.isEmpty() ) ) {
+      if ( data() != p.data() ) {
+        return false;
+      }
+    } else {
+      // if one picture is empty and the other is not
       return false;
     }
   } else {
@@ -113,18 +131,42 @@ bool Picture::isEmpty() const
 {
   return
     ( ( d->mIntern == false && d->mUrl.isEmpty() ) ||
-      ( d->mIntern == true && d->mData.isNull() ) );
+      ( d->mIntern == true && d->mData.isNull() && d->mRawData.isEmpty() ) );
 }
 
 void Picture::setUrl( const QString &url )
 {
   d->mUrl = url;
+  d->mType.clear();
+  d->mIntern = false;
+}
+
+void Picture::setUrl( const QString &url, const QString &type )
+{
+  d->mUrl = url;
+  d->mType = type;
   d->mIntern = false;
 }
 
 void Picture::setData( const QImage &data )
 {
+  d->mRawData.clear();
   d->mData = data;
+  d->mIntern = true;
+
+ // set the type, the raw data will have when accessed through Picture::rawData()
+  if ( !d->mData.hasAlphaChannel() ) {
+    d->mType = QLatin1String( "jpeg" );
+  } else {
+    d->mType = QLatin1String( "png" );
+  }
+}
+
+void Picture::setRawData( const QByteArray &rawData, const QString &type )
+{
+  d->mRawData = rawData;
+  d->mType = type;
+  d->mData = QImage();
   d->mIntern = true;
 }
 
@@ -145,7 +187,24 @@ QString Picture::url() const
 
 QImage Picture::data() const
 {
+  if ( d->mData.isNull() && !d->mRawData.isEmpty() ) {
+    d->mData.loadFromData( d->mRawData );
+  }
+
   return d->mData;
+}
+
+QByteArray Picture::rawData() const
+{
+  if ( d->mRawData.isEmpty() && !d->mData.isNull() ) {
+    QBuffer buffer( &d->mRawData );
+    buffer.open( QIODevice::WriteOnly );
+
+    // d->mType was already set accordingly by Picture::setData()
+    d->mData.save( &buffer, d->mType.toUpper().toLatin1().data() );
+  }
+
+  return d->mRawData;
 }
 
 QString Picture::type() const
@@ -162,11 +221,7 @@ QString Picture::toString() const
   str += QString::fromLatin1( "  IsIntern: %1\n" ).
          arg( d->mIntern ? QLatin1String( "true" ) : QLatin1String( "false" ) );
   if ( d->mIntern ) {
-    QByteArray data;
-    QBuffer buffer( &data );
-    buffer.open( QIODevice::WriteOnly );
-    d->mData.save( &buffer, "PNG" );
-    str += QString::fromLatin1( "  Data: %1\n" ).arg( QString::fromLatin1( data.toBase64() ) );
+    str += QString::fromLatin1( "  Data: %1\n" ).arg( QString::fromLatin1( rawData().toBase64() ) );
   } else {
     str += QString::fromLatin1( "  Url: %1\n" ).arg( d->mUrl );
   }
@@ -177,7 +232,7 @@ QString Picture::toString() const
 
 QDataStream &KABC::operator<<( QDataStream &s, const Picture &picture )
 {
-  return s << picture.d->mIntern << picture.d->mUrl << picture.d->mType << picture.d->mData;
+  return s << picture.d->mIntern << picture.d->mUrl << picture.d->mType << picture.data();
 }
 
 QDataStream &KABC::operator>>( QDataStream &s, Picture &picture )

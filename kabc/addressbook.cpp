@@ -29,7 +29,6 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include "addressbook.moc"
 
 using namespace KABC;
 

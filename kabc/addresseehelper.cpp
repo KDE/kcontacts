@@ -115,4 +115,3 @@ bool AddresseeHelper::tradeAsFamilyName() const
   return mTradeAsFamilyName;
 }
 
-#include "addresseehelper.moc"

@@ -172,4 +172,3 @@ void PhoneNumberTest::labelTest()
             QLatin1String( "Work Fax/Preferred" ) );
 }
 
-#include "phonenumbertest.moc"

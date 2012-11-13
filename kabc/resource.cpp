@@ -454,4 +454,3 @@ bool Resource::asyncSave( Ticket *ticket )
   return ok;
 }
 
-#include "resource.moc"

@@ -221,4 +221,3 @@ void AddressTest::formatTest()
   }
 }
 
-#include "addresstest.moc"
