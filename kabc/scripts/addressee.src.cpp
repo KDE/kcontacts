@@ -548,7 +548,7 @@ void Addressee::removeKey( const Key &key )
   }
 }
 
-Key Addressee::key( Key::Type type, const QString& customTypeString ) const
+Key Addressee::key( Key::Type type, QString customTypeString ) const
 {
   Key::List::ConstIterator it;
   Key::List::ConstIterator end( d->mKeys.constEnd() );
@@ -579,7 +579,7 @@ Key::List Addressee::keys() const
   return d->mKeys;
 }
 
-Key::List Addressee::keys( Key::Type type, const QString& customTypeString ) const
+Key::List Addressee::keys( Key::Type type, QString customTypeString ) const
 {
   Key::List list;
 
