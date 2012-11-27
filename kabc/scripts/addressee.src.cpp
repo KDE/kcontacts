@@ -988,6 +988,7 @@ ABORT_PARSING:
     }
   }
 
+  email = email.toLower();
   // Check that we do not have any extra characters on the end of the
   // strings
   unsigned int len = fullName.length();
