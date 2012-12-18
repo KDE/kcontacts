@@ -33,7 +33,7 @@ class KABC_NET_EXPORT ResourceNetConfig : public KRES::ConfigWidget
   Q_OBJECT
 
   public:
-    ResourceNetConfig( QWidget *parent = 0 );
+    explicit ResourceNetConfig( QWidget *parent = 0 );
 
     void setEditMode( bool value );
 

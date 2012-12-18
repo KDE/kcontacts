@@ -33,7 +33,7 @@ class KABC_FILE_CORE_EXPORT ResourceFileConfig : public KRES::ConfigWidget
   Q_OBJECT
 
   public:
-    ResourceFileConfig( QWidget *parent = 0 );
+    explicit ResourceFileConfig( QWidget *parent = 0 );
     void setEditMode( bool value );
 
   public Q_SLOTS:

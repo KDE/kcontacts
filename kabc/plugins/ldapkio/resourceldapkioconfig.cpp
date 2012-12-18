@@ -39,7 +39,6 @@
 #include <QSpinBox>
 #include <QRadioButton>
 
-
 using namespace KABC;
 
 ResourceLDAPKIOConfig::ResourceLDAPKIOConfig( QWidget *parent )

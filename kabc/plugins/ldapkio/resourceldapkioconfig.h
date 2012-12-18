@@ -48,7 +48,7 @@ class KABC_LDAPKIO_EXPORT ResourceLDAPKIOConfig : public KRES::ConfigWidget
   Q_OBJECT
 
   public:
-    ResourceLDAPKIOConfig( QWidget *parent = 0 );
+    explicit ResourceLDAPKIOConfig( QWidget *parent = 0 );
 
   public Q_SLOTS:
     void loadSettings( KRES::Resource *resource );
