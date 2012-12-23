@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=LDAP
 Name[be]=LDAP
-Name[bs]=LDAP
 Name[ca]=LDAP
 Name[ca@valencia]=LDAP
 Name[cs]=LDAP
@@ -55,7 +54,6 @@ Name[x-test]=xxLDAPxx
 Name[zh_CN]=LDAP
 Name[zh_TW]=LDAP
 Comment=Provides access to contacts stored on a LDAP directory server
-Comment[bs]=Pruža pristup kontaktima skladištenim na serveru LDAP imenika
 Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un servidor de directori LDAP
 Comment[ca@valencia]=Proporciona l'accés als contactes emmagatzemats en un servidor de directori LDAP
 Comment[cs]=Poskytuje přístup ke kontaktům uloženým v adresářovém serveru LDAP
