@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Network
 Name[be]=Сетка
+Name[bs]=Mreža
 Name[ca]=Xarxa
 Name[ca@valencia]=Xarxa
 Name[cs]=Síť
@@ -54,6 +55,7 @@ Name[x-test]=xxNetworkxx
 Name[zh_CN]=网络
 Name[zh_TW]=網路
 Comment=Provides access to contacts in remote files using KDE's network framework KIO. Supports standard VCard files and other formats depending on available plugins.
+Comment[bs]=Pruža pristup kontaktima u udaljenim faјlovima preko KDE-ovog mrežnog radnog okvira K U/I. Podržava standardne VCard faјlove i druge formate, prema raspoloživim priključcima.
 Comment[ca]=Proporciona l'accés als contactes en fitxers remots usant la infraestructura KIO de xarxa del KDE. Accepta els fitxers estàndard VCard i altres formats, depenent dels connectors disponibles.
 Comment[ca@valencia]=Proporciona l'accés als contactes en fitxers remots usant la infraestructura KIO de xarxa del KDE. Accepta els fitxers estàndard VCard i altres formats, depenent dels connectors disponibles.
 Comment[cs]=Poskytuje přístup ke vzdáleným kontaktům pomocí síťového frameworku KDE KIO. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.

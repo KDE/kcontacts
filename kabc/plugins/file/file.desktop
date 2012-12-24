@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=File
 Name[be]=Файл
+Name[bs]=Datoteka
 Name[ca]=Fitxer
 Name[ca@valencia]=Fitxer
 Name[cs]=Soubor
@@ -54,6 +55,7 @@ Name[x-test]=xxFilexx
 Name[zh_CN]=文件
 Name[zh_TW]=檔案
 Comment=Provides access to contacts stored in a single local file. Supports standard VCard files and other formats depending on available plugins.
+Comment[bs]=Pruža pristup kontaktima skladištenim u јednom lokalnom faјlu. Podržava standardne VCard faјlove i druge formate, prema raspoloživim priključcima.
 Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un fitxer individual. Accepta els fitxers estàndard VCard i altres formats, depenent dels connectors disponibles.
 Comment[ca@valencia]=Proporciona l'accés als contactes emmagatzemats en un fitxer individual. Accepta els fitxers estàndard VCard i altres formats, depenent dels connectors disponibles.
 Comment[cs]=Poskytuje přístup ke kontaktům uloženým v jednom lokálním souboru. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
