@@ -80,7 +80,7 @@ class KABC_EXPORT ContactGroup
 
         /**
          * Sets the contact uid of the contact reference.
-         *
+         * @param uid identifier of the contact to reference
          * @note That is the Akonadi Item ID of the contact that
          *       is referenced here.
          */

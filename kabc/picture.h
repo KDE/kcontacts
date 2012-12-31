@@ -140,7 +140,7 @@ class KABC_EXPORT Picture
 
     /**
      * Sets the type of the picture.
-     *
+     * @param type the picture's data type
      * @deprecated type should only be set along with setRawData()
      */
     void KDE_DEPRECATED setType( const QString &type );
