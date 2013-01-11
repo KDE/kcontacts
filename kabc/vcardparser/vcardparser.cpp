@@ -47,6 +47,7 @@ static void removeEscapes( QByteArray &str )
 }
 
 VCardParser::VCardParser()
+  : d(0)
 {
 }
 
