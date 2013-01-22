@@ -68,6 +68,7 @@ Comment[sr@latin]=Pruža pristup kontaktima u udaljenim fajlovima preko KDE‑ov
 Comment[sv]=Ger tillgång till kontakter i fjärrfiler med användning av KDE:s I/O-ramverk. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram.
 Comment[uk]=Надає доступ до контактів, які зберігаються у віддалених файлах, за допомогою мережевих засобів KIO KDE. Підтримує стандартні файли vCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[x-test]=xxProvides access to contacts in remote files using KDE's network framework KIO. Supports standard vCard files and other formats depending on available plugins.xx
+Comment[zh_TW]=提供存取使用 KDE 網路架構 KIO 儲存在遠端檔案中的聯絡人。支援標準的 vCard 檔，以及外掛程式所提供的其它格式檔案。
 X-KDE-Library=kabc_net
 Type=Service
 X-KDE-ServiceTypes=KResources/Plugin
