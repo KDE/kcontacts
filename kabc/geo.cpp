@@ -39,7 +39,6 @@ class Geo::Private : public QSharedData
     {
       mLatitude = other.mLatitude;
       mLongitude = other.mLongitude;
-      mValid = other.mValid;
       mValidLatitude = other.mValidLatitude;
       mValidLongitude = other.mValidLongitude;
     }
@@ -47,7 +46,6 @@ class Geo::Private : public QSharedData
     float mLatitude;
     float mLongitude;
 
-    bool mValid;
     bool mValidLatitude;
     bool mValidLongitude;
 };
