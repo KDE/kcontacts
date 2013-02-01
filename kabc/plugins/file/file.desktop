@@ -57,6 +57,7 @@ Name[zh_TW]=檔案
 Comment=Provides access to contacts stored in a single local file. Supports standard vCard files and other formats depending on available plugins.
 Comment[cs]=Poskytuje přístup ke kontaktům uloženým v jednom lokálním souboru. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einer einzigen Datei lokal gespeichert sind. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
+Comment[fr]=Fournit l'accès aux contacts stockés dans un seul fichier local. Le format vCard et d'autres formats sont pris en charge en fonction des modules externes disponibles.
 Comment[nl]=Geeft toegang tot in een enkel lokaal bestand opgeslagen contactpersonen. Ondersteunt standaard vCard-bestanden en andere van beschikbare plug-ins afhankelijke formaten.
 Comment[pt]=Oferece o acesso aos contactos, estando todos guardados num único ficheiro local. Suporta os ficheiros vCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'.
 Comment[pt_BR]=Fornece acesso aos contatos armazenados em um único arquivo local. Suporta o formato de arquivos vCard padrão e outros formatos, dependendo da disponibilidade de plugins.

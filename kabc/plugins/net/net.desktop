@@ -57,6 +57,7 @@ Name[zh_TW]=網路
 Comment=Provides access to contacts in remote files using KDE's network framework KIO. Supports standard vCard files and other formats depending on available plugins.
 Comment[cs]=Poskytuje přístup ke vzdáleným kontaktům pomocí síťového frameworku KDE KIO. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[de]=Ermöglicht Zugriff auf Kontakte in entfernten Dateien durch das KIO-Netzwerksystem von KDE. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
+Comment[fr]=Fournit l'accès aux contacts stockés dans des fichiers distants en utilisant le mécanisme réseau KIO de KDE. Le format vCard et d'autres formats sont pris en charge en fonction des modules externes disponibles.
 Comment[nl]=Geeft toegang tot contactpersonen in externe bestanden gebruikmakend van KIO, een netwerkonderdeel van KDE. Ondersteunt standaard vCard-bestanden en andere van beschikbare plug-ins afhankelijke formaten.
 Comment[pt]=Oferece o acesso aos contactos em ficheiros remotos, disponíveis através de um KIO da plataforma de rede do KDE.  Suporta os ficheiros vCard normais, assim como outros formatos, dependendo da disponibilidade dos 'plugins'.
 Comment[pt_BR]=Fornece acesso aos contatos em arquivos remotos usando o KIO framework de rede do KDE. O suporte a arquivos vCard padrão e outros formatos dependem da disponibilidade de plugins.
