@@ -95,7 +95,6 @@ Comment[sr@ijekavianlatin]=Pruža pristup kontaktima skladištenim u jednom loka
 Comment[sr@latin]=Pruža pristup kontaktima skladištenim u jednom lokalnom fajlu. Podržava standardne vCard fajlove i druge formate, prema raspoloživim priključcima.
 Comment[sv]=Ger tillgång till kontakter lagrade i en enda lokal fil. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram.
 Comment[th]=จัดเตรียมส่วนเข้าใช้งานที่อยู่ติดต่อที่จัดเก็บไว้ในแฟ้มเดี่ยวภายในระบบ รองรับแฟ้มมาตรฐาน VCard และรูปแบบอื่น ๆ โดยขึ้นอยู่กับส่วนเสริมต่าง ๆ ที่ถูกติดตั้งไว้
-Comment[tr]=Yerel bir dosya içerisindeki kişilere erişmeyi sağlar. VCard dosyalarını ve eklentilere uygun diğer biçimleri destekler.
 Comment[uk]=Надає доступ до контактів, які зберігаються у окремому локальному файлі. Підтримує стандартні файли VCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[wa]=Permet d' moussî dins les contaks wårdés dins ene seule fitche coinrece. Sopoite les fitchîs VCard sitandårds eyet d' ôtès cognes sorlon çou k' vos avoz come tchôkes-divins.
 Comment[x-test]=xxProvides access to contacts stored in a single local file. Supports standard VCard files and other formats depending on available plugins.xx
