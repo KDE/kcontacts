@@ -1,2 +1,2 @@
-SKIP /scripts/\|/tests/\|/testroundtrip
+SKIP /scripts/|/tests/|/testroundtrip
 EXTRA style
