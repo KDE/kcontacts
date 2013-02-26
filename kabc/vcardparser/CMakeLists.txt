@@ -26,7 +26,7 @@ set(testwrite_SRCS testwrite.cpp)
 
 kde4_add_executable(testwrite TEST ${testwrite_SRCS})
 
-target_link_libraries(testwrite ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc)
+target_link_libraries(testwrite ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kabc ${KDE4_KDE4SUPPORT_LIBS})
 
 ########### next target ###############
 
