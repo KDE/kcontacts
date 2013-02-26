@@ -23,6 +23,7 @@
 #include <krandom.h>
 #include <kcomponentdata.h>
 #include <kdebug.h>
+#include <kglobal.h>
 #include <klocalizedstring.h>
 #include <kstandarddirs.h>
 

@@ -25,6 +25,7 @@
 
 #include <QtCore/QPointer>
 #include <QButtonGroup>
+#include <QTreeWidget>
 #include <QGroupBox>
 #include <QLayout>
 #include <QRadioButton>
