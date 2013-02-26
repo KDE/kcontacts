@@ -22,7 +22,7 @@
 #include "vcardformat.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kconfiggroup.h>

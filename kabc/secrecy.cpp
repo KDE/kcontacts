@@ -20,7 +20,7 @@
 
 #include "secrecy.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedData>

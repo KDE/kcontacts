@@ -24,7 +24,7 @@
 #endif
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QtCore/QPointer>
 #include <QtCore/QRegExp>

@@ -26,6 +26,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
+#include <klocalizedstring.h>
 #include <krandom.h>
 
 #include "addresseehelper.h"

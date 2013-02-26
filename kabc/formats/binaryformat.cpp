@@ -25,7 +25,7 @@
 #include "kabc/sound.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kstandarddirs.h>
 
 #include <QtCore/QDataStream>

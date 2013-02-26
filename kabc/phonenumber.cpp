@@ -20,7 +20,7 @@
 
 #include "phonenumber.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <krandom.h>
 
 #include <QtCore/QDataStream>

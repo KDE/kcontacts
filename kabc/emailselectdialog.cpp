@@ -21,7 +21,7 @@
 #include "emailselectdialog.h"
 #include "addresseedialog.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QtCore/QPointer>
 #include <QButtonGroup>

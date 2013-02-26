@@ -20,7 +20,7 @@
 
 #include <kaboutdata.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 

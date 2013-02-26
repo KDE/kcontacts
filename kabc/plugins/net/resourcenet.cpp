@@ -28,7 +28,7 @@
 #include <kio/netaccess.h>
 #include <kio/scheduler.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <ksavefile.h>
 #include <ktemporaryfile.h>
 #include <kurlrequester.h>

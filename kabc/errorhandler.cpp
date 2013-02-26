@@ -23,7 +23,7 @@
 #include "errorhandler.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kmessagebox.h>
 
 #include <QApplication>

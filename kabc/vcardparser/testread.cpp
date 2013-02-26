@@ -26,7 +26,7 @@
 #include <kdebug.h>
 #include <kcomponentdata.h>
 #include <kcmdlineargs.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kaboutdata.h>
 
 #include "kabc/vcardconverter.h"

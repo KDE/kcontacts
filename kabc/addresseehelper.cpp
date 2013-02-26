@@ -20,7 +20,7 @@
 #include "addresseehelper.h"
 
 #include <kconfig.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kconfiggroup.h>
 
 #include <QApplication>

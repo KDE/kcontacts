@@ -33,7 +33,7 @@
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <klineedit.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstringhandler.h>
 #include <ktemporaryfile.h>

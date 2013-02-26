@@ -30,7 +30,7 @@
 #include <kdebug.h>
 #include <kgenericfactory.h>
 #include <kglobal.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
 

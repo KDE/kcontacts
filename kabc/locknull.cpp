@@ -21,7 +21,7 @@
 
 #include "locknull.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kdebug.h>
 
 using namespace KABC;

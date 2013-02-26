@@ -29,7 +29,7 @@
 #include <kio/scheduler.h>
 #include <kconfiggroup.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <ksavefile.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>

@@ -25,7 +25,7 @@
 #include <kacceleratormanager.h>
 #include <kcombobox.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
 #include <kpagewidget.h>

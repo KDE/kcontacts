@@ -23,7 +23,7 @@
 #include "resourceldapkioconfig.h"
 
 #include <kglobal.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 using namespace KABC;
 
