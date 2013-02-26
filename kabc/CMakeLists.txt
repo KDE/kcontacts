@@ -24,7 +24,7 @@ set(vcards_STAT_SRCS
 )
 
 add_subdirectory(vcardparser)
-add_subdirectory(tests)
+# add_subdirectory(tests)
 #add_subdirectory( scripts )
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
 
