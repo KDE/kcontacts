@@ -503,7 +503,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         // EMAIL
         else if ( identifier == QLatin1String( "email" ) ) {
           const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
-          addr.insertEmail( ( *lineIt ).value().toString(),
+          addr.insertEmail( ( *lineIt ).value().toString().toLower(),
                             types.contains( QLatin1String( "PREF" ) ) );
         }
 
