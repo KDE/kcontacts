@@ -905,6 +905,9 @@ class KABC_EXPORT Addressee
 
     /**
       Return list of all custom entries.
+
+      The format of the custom entries is 'app-key:value' and the list is sorted
+      alphabetically by 'app-key'.
      */
     QStringList customs() const;
 

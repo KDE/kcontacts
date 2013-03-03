@@ -98,7 +98,7 @@ class Addressee::Private : public QSharedData
       mKeys = other.mKeys;
       mEmails = other.mEmails;
       mCategories = other.mCategories;
-      mCustom = other.mCustom;
+      mCustomFields = other.mCustomFields;
 
 #ifndef KDEPIM_NO_KRESOURCES
       mResource = other.mResource;
@@ -143,7 +143,7 @@ class Addressee::Private : public QSharedData
     Key::List mKeys;
     QStringList mEmails;
     QStringList mCategories;
-    QStringList mCustom;
+    QMap<QString, QString> mCustomFields;
 
 #ifndef KDEPIM_NO_KRESOURCES
     Resource *mResource;
@@ -348,7 +348,7 @@ bool Addressee::operator==( const Addressee &addressee ) const
     return false;
   }
 
-  if ( !listEquals( d->mCustom, addressee.d->mCustom ) ) {
+  if ( d->mCustomFields != addressee.d->mCustomFields ) {
     kDebug() << "custom differs";
     return false;
   }
@@ -1632,59 +1632,54 @@ void Addressee::insertCustom( const QString &app, const QString &name,
 
   d->mEmpty = false;
 
-  QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
+  const QString qualifiedName = app + QLatin1Char( '-' ) + name;
 
-  QStringList::Iterator it;
-  QStringList::Iterator end( d->mCustom.end() );
-  for ( it = d->mCustom.begin(); it != end; ++it ) {
-    if ( ( *it ).startsWith( qualifiedName ) ) {
-      ( *it ) = qualifiedName + value;
-      return;
-    }
-  }
-
-  d->mCustom.append( qualifiedName + value );
+  d->mCustomFields.insert( qualifiedName, value );
 }
 
 void Addressee::removeCustom( const QString &app, const QString &name )
 {
-  const QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
+  const QString qualifiedName = app + QLatin1Char( '-' ) + name;
 
-  QStringList::Iterator it;
-  for ( it = d->mCustom.begin(); it != d->mCustom.end(); ++it ) {
-    if ( ( *it ).startsWith( qualifiedName ) ) {
-      d->mCustom.erase( it );
-      return;
-    }
-  }
+  d->mCustomFields.remove( qualifiedName );
 }
 
 QString Addressee::custom( const QString &app, const QString &name ) const
 {
-  QString qualifiedName = app + QLatin1Char( '-' ) + name + QLatin1Char( ':' );
-  QString value;
+  const QString qualifiedName = app + QLatin1Char( '-' ) + name;
 
-  QStringList::ConstIterator it;
-  QStringList::ConstIterator end( d->mCustom.constEnd() );
-  for ( it = d->mCustom.constBegin(); it != end; ++it ) {
-    if ( ( *it ).startsWith( qualifiedName ) ) {
-      value = ( *it ).mid( ( *it ).indexOf( QLatin1Char( ':' ) ) + 1 );
-      break;
-    }
-  }
-
-  return value;
+  return d->mCustomFields.value( qualifiedName );
 }
 
-void Addressee::setCustoms( const QStringList &l )
+void Addressee::setCustoms( const QStringList &customs )
 {
   d->mEmpty = false;
-  d->mCustom = l;
+
+  d->mCustomFields.clear();
+
+  foreach ( const QString &custom, customs ) {
+    const int index = custom.indexOf( QLatin1Char( ':' ) );
+    if ( index == -1 )
+      continue;
+
+    const QString qualifiedName = custom.left( index );
+    const QString value = custom.mid( index + 1 );
+
+    d->mCustomFields.insert( qualifiedName, value );
+  }
 }
 
 QStringList Addressee::customs() const
 {
-  return d->mCustom;
+  QStringList result;
+
+  QMapIterator<QString, QString> it( d->mCustomFields );
+  while ( it.hasNext() ) {
+    it.next();
+    result << it.key() + QLatin1Char( ':' ) + it.value();
+  }
+
+  return result;
 }
 
 void Addressee::parseEmailAddress( const QString &rawEmail, QString &fullName,
@@ -1919,7 +1914,7 @@ QDataStream &KABC::operator<<( QDataStream &s, const Addressee &a )
   s << a.d->mAddresses;
   s << a.d->mEmails;
   s << a.d->mCategories;
-  s << a.d->mCustom;
+  s << a.customs();
   s << a.d->mKeys;
   return s;
 }
@@ -1957,7 +1952,9 @@ QDataStream &KABC::operator>>( QDataStream &s, Addressee &a )
   s >> a.d->mAddresses;
   s >> a.d->mEmails;
   s >> a.d->mCategories;
-  s >> a.d->mCustom;
+  QStringList customFields;
+  s >> customFields;
+  a.setCustoms( customFields );
   s >> a.d->mKeys;
 
   a.d->mEmpty = false;
