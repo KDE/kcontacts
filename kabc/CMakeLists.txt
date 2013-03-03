@@ -30,33 +30,16 @@ if(NOT KDEPIM_NO_KRESOURCES)
   add_subdirectory(plugins)
 endif()
 add_subdirectory(tests)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts)
-
-add_custom_command(
-  OUTPUT
-  ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
-  ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/scripts
-  COMMAND ${PERL_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/makeaddressee
-  DEPENDS
-  scripts/makeaddressee
-  scripts/addressee.src.cpp
-  scripts/addressee.src.h
-  scripts/entrylist
-  scripts/field.src.cpp
-)
 
 ########### next target ###############
 
 set(kabc_LIB_SRCS
   address.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/addressee.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
-  ${CMAKE_CURRENT_BINARY_DIR}/field.cpp
+  addressee.cpp
   contactgroup.cpp
   contactgrouptool.cpp
   errorhandler.cpp
+  field.cpp
   geo.cpp
   key.cpp
   ldapdn.cpp
@@ -125,7 +108,7 @@ install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 install(FILES
   kabc_export.h
   address.h
-  ${CMAKE_CURRENT_BINARY_DIR}/addressee.h
+  addressee.h
   addresseedialog.h
   addresseelist.h
   contactgroup.h
