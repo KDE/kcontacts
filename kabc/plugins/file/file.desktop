@@ -60,6 +60,7 @@ Comment[cs]=Poskytuje přístup ke kontaktům uloženým v jednom lokálním sou
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einer einzigen Datei lokal gespeichert sind. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[es]=Proporciona acceso a los contactos almacenados en un único archivo local. Admite archivos vCard estándar y otros formatos dependiendo de la disponibilidad de los complementos.
 Comment[fr]=Fournit l'accès aux contacts stockés dans un seul fichier local. Le format vCard et d'autres formats sont pris en charge en fonction des modules externes disponibles.
+Comment[ia]=Il provide accessos a contactos immagazinate in un singule file local. Il supporta files de standard VCard e altere formatos in dependentia de plugins disponibile.
 Comment[nb]=Gir tilgang til kontakter, lagret i en enkelt lokal fil. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg.
 Comment[nl]=Geeft toegang tot in een enkel lokaal bestand opgeslagen contactpersonen. Ondersteunt standaard vCard-bestanden en andere van beschikbare plug-ins afhankelijke formaten.
 Comment[pl]=Daje dostęp do kontaktów przechowywanych w jednym pliku lokalnym. Obsługuje pliki zgodne ze standardem vCard i inne, jeśli są dostępne odpowiednie wtyczki.
