@@ -61,13 +61,6 @@ Comment[de]=Ermöglicht Zugriff auf Kontakte in entfernten Dateien durch das KIO
 Comment[es]=Proporciona acceso a los contactos en un archivo remoto utilizando la infraestructura de red KIO de KDE. Admite archivos vCard estándar y otros formatos dependiendo en la disponibilidad de los complementos.
 Comment[fr]=Fournit l'accès aux contacts stockés dans des fichiers distants en utilisant le mécanisme réseau KIO de KDE. Le format vCard et d'autres formats sont pris en charge en fonction des modules externes disponibles.
 Comment[ia]=Il provide accesso a contactos in files remote usante le schema de rete de KDE KIO. Il suppporta files de standard VCard e altere formatos in dependentia de plugins disponibile.
-Comment[it]=Fornisce accesso a contatti su file remoti usando KIO, l'infrastruttura di rete di KDE. Gestisce file in standard VCard e altri formati in base alle estensioni disponibili.
-Comment[ja]=KDE のネットワークフレームワーク KIO を使って、リモートファイルに保存されている連絡先へのアクセスを提供します。標準の VCard ファイルと、利用可能なプラグインに応じたフォーマットをサポートします。
-Comment[kk]=KDE-нің KIO желі құрылымы арқылы қашықтағы файлдарда сақталған контакттарға қатынау мүмкіндігін береді. Плагині бар-жоғына қарай, vCard және басқа да пішімдерді тани алады.
-Comment[km]=ផ្ដល់​កា​រចូលដំណើរការ​ទៅកាន់​ទំនាក់ទំនង​ក្នុង​​ឯកសារ​ពី​ចម្ងាយ ដោយ​ប្រើ KIO ​គ្រោងការណ៍​បណ្ដាញ​របស់ KDE ។ គាំទ្រ​ឯកសារ VCard ស្តង់ដារ និង​ទ្រង់ទ្រាយ​ផ្សេងៗ​ទៀត ដោយ​អាស្រ័យ​លើ​កម្មវិធី​ជំនួយ​ដែល​មាន ។
-Comment[lt]=Suteikia prieigą prie kontaktų, esančių nutolusiuose failuose, naudojant KDE tinklo infrastruktūrą KIO. Palaiko standartinius VCard failus ir kitus failų formatus, jei įdiegti juos palaikantys įskiepiai.
-Comment[lv]=Nodrošina piekļuvi kontaktiem attālinātos failus, izmantojot KDE tīklošanas ietvaru KIO. Atbalsta standarta VCard failus un citus formātus, atkarībā no pieejamajiem spraudņiem.
->>>>>>> origin/KDE/4.10
 Comment[nb]=Gir tilgang til kontakter i nettverksfiler, ved bruk av KDEs rammeverk KIO for nettverk. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg.
 Comment[nl]=Geeft toegang tot contactpersonen in externe bestanden gebruikmakend van KIO, een netwerkonderdeel van KDE. Ondersteunt standaard vCard-bestanden en andere van beschikbare plug-ins afhankelijke formaten.
 Comment[pl]=Daje dostęp do kontaktów w zdalnym pliku przy użyciu modułu sieciowego KIO. Obsługuje pliki zgodne ze standardem vCard oraz inne, jeśli dostępne są odpowiednie wtyczki.
@@ -82,6 +75,7 @@ Comment[sv]=Ger tillgång till kontakter i fjärrfiler med användning av KDE:s 
 Comment[uk]=Надає доступ до контактів, які зберігаються у віддалених файлах, за допомогою мережевих засобів KIO KDE. Підтримує стандартні файли vCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[x-test]=xxProvides access to contacts in remote files using KDE's network framework KIO. Supports standard vCard files and other formats depending on available plugins.xx
 Comment[zh_TW]=提供存取使用 KDE 網路架構 KIO 儲存在遠端檔案中的聯絡人。支援標準的 vCard 檔，以及外掛程式所提供的其它格式檔案。
+>>>>>>> origin/KDE/4.10
 X-KDE-Library=kabc_net
 Type=Service
 X-KDE-ServiceTypes=KResources/Plugin
