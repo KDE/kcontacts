@@ -72,6 +72,7 @@ Comment[sr@ijekavian]=Пружа приступ контактима склад�
 Comment[sr@ijekavianlatin]=Pruža pristup kontaktima skladištenim u jednom lokalnom fajlu. Podržava standardne vCard fajlove i druge formate, prema raspoloživim priključcima.
 Comment[sr@latin]=Pruža pristup kontaktima skladištenim u jednom lokalnom fajlu. Podržava standardne vCard fajlove i druge formate, prema raspoloživim priključcima.
 Comment[sv]=Ger tillgång till kontakter lagrade i en enda lokal fil. Stöder vCard-standardfiler och andra format, beroende på tillgängliga insticksprogram.
+Comment[tr]=Yerel bir dosya içerisindeki kişilere erişmeyi sağlar. VCard dosyalarını ve eklentilere uygun diğer biçimleri destekler.
 Comment[uk]=Надає доступ до контактів, які зберігаються у окремому локальному файлі. Підтримує стандартні файли vCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[x-test]=xxProvides access to contacts stored in a single local file. Supports standard vCard files and other formats depending on available plugins.xx
 Comment[zh_TW]=提供存取儲存在單一檔案中的聯絡人的功能。支援標準的 vCard 檔，以及外掛程式所提供的其它格式檔案。
