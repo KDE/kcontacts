@@ -30,6 +30,8 @@
 
 namespace KABC {
 
+class PicturePrivate;
+
 /**
   A class to store a picture of an addressee. It can store the data directly or
   an url reference to a picture.
@@ -182,8 +184,7 @@ class KABC_EXPORT Picture
     QString toString() const;
 
   private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<PicturePrivate> d;
 };
 
 /**
