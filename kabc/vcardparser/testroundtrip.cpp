@@ -152,9 +152,9 @@ void RoundtripTest::testVCardRoundtrip()
 
       if ( actual != expect ) {
         qCritical() << "Mismatch in v3.0 output line" << ( i + 1 );
-        QCOMPARE( actual.count(), expect.count() );
 
         qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
+        QCOMPARE( actual.count(), expect.count() );
         QCOMPARE( actual, expect );
       }
     }
