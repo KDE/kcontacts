@@ -52,7 +52,7 @@ class PicturePrivate : public QSharedData
 
 }
 
-Q_GLOBAL_STATIC(QSharedDataPointer<KABC::PicturePrivate>, s_sharedEmpty)
+Q_GLOBAL_STATIC_WITH_ARGS(QSharedDataPointer<KABC::PicturePrivate>, s_sharedEmpty, (new KABC::PicturePrivate))
 
 using namespace KABC;
 
