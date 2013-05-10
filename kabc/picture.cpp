@@ -23,17 +23,17 @@
 #include <QtCore/QBuffer>
 #include <QtCore/QSharedData>
 
-using namespace KABC;
+namespace KABC {
 
-class Picture::Private : public QSharedData
+class PicturePrivate : public QSharedData
 {
   public:
-    Private()
+    PicturePrivate()
       : mIntern( false )
     {
     }
 
-    Private( const Private &other )
+    PicturePrivate( const PicturePrivate &other )
       : QSharedData( other )
     {
       mUrl = other.mUrl;
@@ -50,19 +50,25 @@ class Picture::Private : public QSharedData
     bool mIntern;
 };
 
+}
+
+Q_GLOBAL_STATIC_WITH_ARGS(QSharedDataPointer<KABC::PicturePrivate>, s_sharedEmpty, (new KABC::PicturePrivate))
+
+using namespace KABC;
+
 Picture::Picture()
-  : d( new Private )
+  : d( *s_sharedEmpty() )
 {
 }
 
 Picture::Picture( const QString &url )
-  : d( new Private )
+  : d( new PicturePrivate )
 {
   d->mUrl = url;
 }
 
 Picture::Picture( const QImage &data )
-  : d( new Private )
+  : d( new PicturePrivate )
 {
   setData( data );
 }
