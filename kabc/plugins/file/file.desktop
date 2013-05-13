@@ -56,6 +56,7 @@ Name[x-test]=xxFilexx
 Name[zh_CN]=文件
 Name[zh_TW]=檔案
 Comment=Provides access to contacts stored in a single local file. Supports standard vCard files and other formats depending on available plugins.
+Comment[ca]=Proporciona l'accés als contactes emmagatzemats en un fitxer individual. Accepta els fitxers estàndard vCard i altres formats, depenent dels connectors disponibles.
 Comment[cs]=Poskytuje přístup ke kontaktům uloženým v jednom lokálním souboru. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einer einzigen Datei lokal gespeichert sind. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[es]=Proporciona acceso a los contactos almacenados en un único archivo local. Admite archivos vCard estándar y otros formatos dependiendo de la disponibilidad de los complementos.
