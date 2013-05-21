@@ -59,6 +59,7 @@ Comment=Provides access to contacts in remote files using KDE's network framewor
 Comment[ca]=Proporciona l'accés als contactes en fitxers remots usant la infraestructura KIO de xarxa del KDE. Accepta els fitxers estàndard vCard i altres formats, depenent dels connectors disponibles.
 Comment[cs]=Poskytuje přístup ke vzdáleným kontaktům pomocí síťového frameworku KDE KIO. Podporuje standardní soubory s vizitkou a jiným formátům podle dostupných modulů.
 Comment[de]=Ermöglicht Zugriff auf Kontakte in entfernten Dateien durch das KIO-Netzwerksystem von KDE. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
+Comment[el]=Προσφέρει πρόσβαση σε επαφές σε απομακρυσμένα αρχεία με τη χρήση του συστήματος KIO του KDE. Υποστηρίζει τυπικά αρχεία vCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων.
 Comment[es]=Proporciona acceso a los contactos en un archivo remoto utilizando la infraestructura de red KIO de KDE. Admite archivos vCard estándar y otros formatos dependiendo en la disponibilidad de los complementos.
 Comment[fi]=Tarjoaa pääsyn etätiedostoissa oleviin yhteystietoihin KDE:n verkkokehyksen KIOn välityksellä. Tukee vakiomuotoisia vCard-tiedostoja sekä muita tiedostomuotoja liitännäisistä riippuen.
 Comment[fr]=Fournit l'accès aux contacts stockés dans des fichiers distants en utilisant le mécanisme réseau KIO de KDE. Le format vCard et d'autres formats sont pris en charge en fonction des modules externes disponibles.
