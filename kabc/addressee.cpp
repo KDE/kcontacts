@@ -1234,19 +1234,18 @@ void Addressee::insertEmail( const QString &email, bool preferred )
   if ( email.simplified().isEmpty() )
     return;
 
-  QString emailLower(email.toLower());
-  if ( d->mEmails.contains( emailLower ) ) {
-    if ( !preferred || d->mEmails.first() == emailLower )
+  if ( d->mEmails.contains( email ) ) {
+    if ( !preferred || d->mEmails.first() == email )
       return;
 
-    d->mEmails.removeAll( emailLower );
-    d->mEmails.prepend( emailLower );
+    d->mEmails.removeAll( email );
+    d->mEmails.prepend( email );
   } else {
     d->mEmpty = false;
     if ( preferred ) {
-      d->mEmails.prepend( emailLower );
+      d->mEmails.prepend( email );
     } else {
-      d->mEmails.append( emailLower );
+      d->mEmails.append( email );
     }
   }
 }
