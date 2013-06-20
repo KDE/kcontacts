@@ -251,20 +251,17 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   mDefaultMap.insert( QLatin1String( "jpegPhoto" ), QLatin1String( "jpegPhoto" ) );
 
   // overwrite the default values here
-  QMap<QString, QString> kolab2Map, kolab3Map, netscapeMap, evolutionMap, outlookMap;
+  QMap<QString, QString> kolabMap, netscapeMap, evolutionMap, outlookMap;
 
-  // Kolab 2
-  kolab2Map.insert( QLatin1String( "formattedName" ), QLatin1String( "display-name" ) );
-  kolab2Map.insert( QLatin1String( "mailAlias" ), QLatin1String( "mailalias" ) );
-  // Kolab 3
-  kolab3Map.insert( QLatin1String( "mailAlias" ), QLatin1String( "alias" ) );
+  // kolab
+  kolabMap.insert( QLatin1String( "formattedName" ), QLatin1String( "display-name" ) );
+  kolabMap.insert( QLatin1String( "mailAlias" ), QLatin1String( "mailalias" ) );
 
   // evolution
   evolutionMap.insert( QLatin1String( "formattedName" ), QLatin1String( "fileAs" ) );
 
   mMapList.append( attributes );
-  mMapList.append( kolab2Map );
-  mMapList.append( kolab3Map );
+  mMapList.append( kolabMap );
   mMapList.append( netscapeMap );
   mMapList.append( evolutionMap );
   mMapList.append( outlookMap );
@@ -279,8 +276,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   layout->addWidget( mMapCombo, 0, 1 );
 
   mMapCombo->addItem( i18n( "User Defined" ) );
-  mMapCombo->addItem( i18n( "Kolab 2" ) );
-  mMapCombo->addItem( i18n( "Kolab 3" ) );
+  mMapCombo->addItem( i18n( "Kolab" ) );
   mMapCombo->addItem( i18n( "Netscape" ) );
   mMapCombo->addItem( i18n( "Evolution" ) );
   mMapCombo->addItem( i18n( "Outlook" ) );
