@@ -81,6 +81,7 @@ Comment[sv]=Ger tillgång till kontakter lagrade i en enda lokal fil. Stöder vC
 Comment[tr]=Yerel bir dosya içerisindeki kişilere erişmeyi sağlar. VCard dosyalarını ve eklentilere uygun diğer biçimleri destekler.
 Comment[uk]=Надає доступ до контактів, які зберігаються у окремому локальному файлі. Підтримує стандартні файли vCard та файли у інших форматах, залежно від наявності відповідних додатків.
 Comment[x-test]=xxProvides access to contacts stored in a single local file. Supports standard vCard files and other formats depending on available plugins.xx
+Comment[zh_CN]=提供对被存储在单独的本地文件中的联系人的访问支持。支持标准 vCard 文件和其它插件所允许的格式。
 Comment[zh_TW]=提供存取儲存在單一檔案中的聯絡人的功能。支援標準的 vCard 檔，以及外掛程式所提供的其它格式檔案。
 X-KDE-Library=kabc_file
 Type=Service
