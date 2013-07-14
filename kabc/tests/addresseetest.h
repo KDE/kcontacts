@@ -36,6 +36,7 @@ class AddresseeTest : public QObject
     void serializeTest();
     void fullEmailTest();
     void nameFromStringTest();
+    void customFieldsTest();
 };
 
 #endif

@@ -287,7 +287,9 @@ void AddresseeTest::serializeTest()
   categories << QLatin1String( "Helper" ) << QLatin1String( "Friend" );
 
   QStringList customs;
-  customs << QLatin1String( "X-Danger: high" );
+  customs << QLatin1String( "FirstApp-FirstKey:FirstValue" )
+          << QLatin1String( "SecondApp-SecondKey:SecondValue" )
+          << QLatin1String( "ThirdApp-ThirdKey:ThirdValue" );
 
   addressee1.setUid( QLatin1String( "My uid" ) );
   addressee1.setName( QLatin1String( "John Sinclair" ) );
@@ -350,3 +352,78 @@ void AddresseeTest::nameFromStringTest()
   QCOMPARE( a.formattedName(), QLatin1String( "Firstname Lastname" ) );
 }
 
+void AddresseeTest::customFieldsTest()
+{
+  KABC::Addressee a;
+
+  // test for empty
+  QVERIFY( a.customs().isEmpty() );
+
+  // test insert
+  a.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ), QLatin1String( "MyValue" ) );
+  QCOMPARE( a.customs().count(), 1 );
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ) ), QLatin1String( "MyValue" ) );
+
+  a.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ), QLatin1String( "YourValue" ) );
+  QCOMPARE( a.customs().count(), 1 ); // still one, we overwrite...
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ) ), QLatin1String( "YourValue" ) );
+
+  // test query non-existing app/key
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "UnknownKey" ) ), QString() );
+  QCOMPARE( a.custom( QLatin1String( "UnknownApp" ), QLatin1String( "MyKey" ) ), QString() );
+
+  // test insert with different key
+  a.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "AnotherKey" ), QLatin1String( "OtherValue" ) );
+  QCOMPARE( a.customs().count(), 2 );
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "AnotherKey" ) ), QLatin1String( "OtherValue" ) );
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ) ), QLatin1String( "YourValue" ) );
+
+  // test insert with different app
+  a.insertCustom( QLatin1String( "OtherApp" ), QLatin1String( "OtherKey" ), QLatin1String( "OurValue" ) );
+  QCOMPARE( a.customs().count(), 3 );
+  QCOMPARE( a.custom( QLatin1String( "OtherApp" ), QLatin1String( "OtherKey" ) ), QLatin1String( "OurValue" ) );
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "AnotherKey" ) ), QLatin1String( "OtherValue" ) );
+  QCOMPARE( a.custom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ) ), QLatin1String( "YourValue" ) );
+
+  // test customs
+  QCOMPARE( a.customs().at( 0 ), QLatin1String( "MyApp-AnotherKey:OtherValue" ) );
+  QCOMPARE( a.customs().at( 1 ), QLatin1String( "MyApp-MyKey:YourValue" ) );
+  QCOMPARE( a.customs().at( 2 ), QLatin1String( "OtherApp-OtherKey:OurValue" ) );
+
+  // test equal operator
+  KABC::Addressee b;
+  b.setUid( a.uid() );
+  b.insertCustom( QLatin1String( "OtherApp" ), QLatin1String( "OtherKey" ), QLatin1String( "OurValue" ) );
+  b.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "MyKey" ), QLatin1String( "YourValue" ) );
+  b.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "AnotherKey" ), QLatin1String( "OtherValue" ) );
+
+  QCOMPARE( a, b );
+
+  b.insertCustom( QLatin1String( "MyApp" ), QLatin1String( "AnotherKey" ), QLatin1String( "WrongValue" ) );
+  QVERIFY( a != b );
+
+  // test setCustoms
+  KABC::Addressee c;
+  c.insertCustom( QLatin1String( "ThisApp" ), QLatin1String( "ShouldNotBe" ), QLatin1String( "There" ) );
+  QCOMPARE( c.customs().count(), 1 );
+
+  const QStringList testData = QStringList() << QLatin1String( "FirstApp-FirstKey:FirstValue" )
+                                             << QLatin1String( "SecondApp-SecondKey:SecondValue" )
+                                             << QLatin1String( "ThirdApp-ThirdKey:ThirdValue" );
+
+  c.setCustoms( testData );
+  QCOMPARE( c.customs().count(), 3 );
+
+  QCOMPARE( c.custom( QLatin1String( "FirstApp" ), QLatin1String( "FirstKey" ) ), QLatin1String( "FirstValue" ) );
+  QCOMPARE( c.custom( QLatin1String( "SecondApp" ), QLatin1String( "SecondKey" ) ), QLatin1String( "SecondValue" ) );
+  QCOMPARE( c.custom( QLatin1String( "ThirdApp" ), QLatin1String( "ThirdKey" ) ), QLatin1String( "ThirdValue" ) );
+
+  // test remove
+  QCOMPARE( c.customs().count(), 3 );
+  c.removeCustom( QLatin1String( "UnknownApp" ), QLatin1String( "FirstKey" ) );
+  QCOMPARE( c.customs().count(), 3 );
+  c.removeCustom( QLatin1String( "FirstApp" ), QLatin1String( "UnknownKey" ) );
+  QCOMPARE( c.customs().count(), 3 );
+  c.removeCustom( QLatin1String( "FirstApp" ), QLatin1String( "FirstKey" ) );
+  QCOMPARE( c.customs().count(), 2 );
+}

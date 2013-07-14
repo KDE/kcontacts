@@ -41,7 +41,44 @@ class Field::Private
     enum FieldId
     {
       CustomField,
-      --ENUMS--
+      FormattedName,
+      FamilyName,
+      GivenName,
+      AdditionalName,
+      Prefix,
+      Suffix,
+      NickName,
+      Birthday,
+      HomeAddressStreet,
+      HomeAddressPostOfficeBox,
+      HomeAddressLocality,
+      HomeAddressRegion,
+      HomeAddressPostalCode,
+      HomeAddressCountry,
+      HomeAddressLabel,
+      BusinessAddressStreet,
+      BusinessAddressPostOfficeBox,
+      BusinessAddressLocality,
+      BusinessAddressRegion,
+      BusinessAddressPostalCode,
+      BusinessAddressCountry,
+      BusinessAddressLabel,
+      HomePhone,
+      BusinessPhone,
+      MobilePhone,
+      HomeFax,
+      BusinessFax,
+      CarPhone,
+      Isdn,
+      Pager,
+      Email,
+      Mailer,
+      Title,
+      Role,
+      Organization,
+      Department,
+      Note,
+      Url
     };
 
     int fieldId() { return mFieldId; }
@@ -81,7 +118,82 @@ Field::~Field()
 QString Field::label()
 {
   switch ( d->fieldId() ) {
-    --CASELABEL--
+    case Private::FormattedName:
+      return Addressee::formattedNameLabel();
+    case Private::FamilyName:
+      return Addressee::familyNameLabel();
+    case Private::GivenName:
+      return Addressee::givenNameLabel();
+    case Private::AdditionalName:
+      return Addressee::additionalNameLabel();
+    case Private::Prefix:
+      return Addressee::prefixLabel();
+    case Private::Suffix:
+      return Addressee::suffixLabel();
+    case Private::NickName:
+      return Addressee::nickNameLabel();
+    case Private::Birthday:
+      return Addressee::birthdayLabel();
+    case Private::HomeAddressStreet:
+      return Addressee::homeAddressStreetLabel();
+    case Private::HomeAddressPostOfficeBox:
+      return Addressee::homeAddressPostOfficeBoxLabel();
+    case Private::HomeAddressLocality:
+      return Addressee::homeAddressLocalityLabel();
+    case Private::HomeAddressRegion:
+      return Addressee::homeAddressRegionLabel();
+    case Private::HomeAddressPostalCode:
+      return Addressee::homeAddressPostalCodeLabel();
+    case Private::HomeAddressCountry:
+      return Addressee::homeAddressCountryLabel();
+    case Private::HomeAddressLabel:
+      return Addressee::homeAddressLabelLabel();
+    case Private::BusinessAddressStreet:
+      return Addressee::businessAddressStreetLabel();
+    case Private::BusinessAddressPostOfficeBox:
+      return Addressee::businessAddressPostOfficeBoxLabel();
+    case Private::BusinessAddressLocality:
+      return Addressee::businessAddressLocalityLabel();
+    case Private::BusinessAddressRegion:
+      return Addressee::businessAddressRegionLabel();
+    case Private::BusinessAddressPostalCode:
+      return Addressee::businessAddressPostalCodeLabel();
+    case Private::BusinessAddressCountry:
+      return Addressee::businessAddressCountryLabel();
+    case Private::BusinessAddressLabel:
+      return Addressee::businessAddressLabelLabel();
+    case Private::HomePhone:
+      return Addressee::homePhoneLabel();
+    case Private::BusinessPhone:
+      return Addressee::businessPhoneLabel();
+    case Private::MobilePhone:
+      return Addressee::mobilePhoneLabel();
+    case Private::HomeFax:
+      return Addressee::homeFaxLabel();
+    case Private::BusinessFax:
+      return Addressee::businessFaxLabel();
+    case Private::CarPhone:
+      return Addressee::carPhoneLabel();
+    case Private::Isdn:
+      return Addressee::isdnLabel();
+    case Private::Pager:
+      return Addressee::pagerLabel();
+    case Private::Email:
+      return Addressee::emailLabel();
+    case Private::Mailer:
+      return Addressee::mailerLabel();
+    case Private::Title:
+      return Addressee::titleLabel();
+    case Private::Role:
+      return Addressee::roleLabel();
+    case Private::Organization:
+      return Addressee::organizationLabel();
+    case Private::Department:
+      return Addressee::departmentLabel();
+    case Private::Note:
+      return Addressee::noteLabel();
+    case Private::Url:
+      return Addressee::urlLabel();
     case Private::CustomField:
       return d->label();
     default:
@@ -119,7 +231,32 @@ QString Field::categoryLabel( int category )
 QString Field::value( const KABC::Addressee &a )
 {
   switch ( d->fieldId() ) {
-    --CASEVALUE--
+    case Private::FormattedName:
+      return a.formattedName();
+    case Private::FamilyName:
+      return a.familyName();
+    case Private::GivenName:
+      return a.givenName();
+    case Private::AdditionalName:
+      return a.additionalName();
+    case Private::Prefix:
+      return a.prefix();
+    case Private::Suffix:
+      return a.suffix();
+    case Private::NickName:
+      return a.nickName();
+    case Private::Mailer:
+      return a.mailer();
+    case Private::Title:
+      return a.title();
+    case Private::Role:
+      return a.role();
+    case Private::Organization:
+      return a.organization();
+    case Private::Department:
+      return a.department();
+    case Private::Note:
+      return a.note();
     case Private::Email:
       return a.preferredEmail();
     case Private::Birthday:
@@ -227,7 +364,45 @@ QString Field::value( const KABC::Addressee &a )
 bool Field::setValue( KABC::Addressee &a, const QString &value )
 {
   switch ( d->fieldId() ) {
-    --CASESETVALUE--
+    case Private::FormattedName:
+      a.setFormattedName( value );
+      return true;
+    case Private::FamilyName:
+      a.setFamilyName( value );
+      return true;
+    case Private::GivenName:
+      a.setGivenName( value );
+      return true;
+    case Private::AdditionalName:
+      a.setAdditionalName( value );
+      return true;
+    case Private::Prefix:
+      a.setPrefix( value );
+      return true;
+    case Private::Suffix:
+      a.setSuffix( value );
+      return true;
+    case Private::NickName:
+      a.setNickName( value );
+      return true;
+    case Private::Mailer:
+      a.setMailer( value );
+      return true;
+    case Private::Title:
+      a.setTitle( value );
+      return true;
+    case Private::Role:
+      a.setRole( value );
+      return true;
+    case Private::Organization:
+      a.setOrganization( value );
+      return true;
+    case Private::Department:
+      a.setDepartment( value );
+      return true;
+    case Private::Note:
+      a.setNote( value );
+      return true;
     case Private::Birthday:
       a.setBirthday( QDateTime::fromString( value, Qt::ISODate ) );
       return true;
@@ -242,7 +417,32 @@ bool Field::setValue( KABC::Addressee &a, const QString &value )
 QString Field::sortKey( const KABC::Addressee &a )
 {
   switch ( d->fieldId() ) {
-    --CASEVALUE--
+    case Private::FormattedName:
+      return a.formattedName();
+    case Private::FamilyName:
+      return a.familyName();
+    case Private::GivenName:
+      return a.givenName();
+    case Private::AdditionalName:
+      return a.additionalName();
+    case Private::Prefix:
+      return a.prefix();
+    case Private::Suffix:
+      return a.suffix();
+    case Private::NickName:
+      return a.nickName();
+    case Private::Mailer:
+      return a.mailer();
+    case Private::Title:
+      return a.title();
+    case Private::Role:
+      return a.role();
+    case Private::Organization:
+      return a.organization();
+    case Private::Department:
+      return a.department();
+    case Private::Note:
+      return a.note();
     case Private::Birthday:
       if ( a.birthday().isValid() ) {
         QDate date = a.birthday().date();
@@ -264,7 +464,44 @@ bool Field::isCustom()
 Field::List Field::allFields()
 {
   if ( Private::mAllFields.isEmpty() ) {
-    --CREATEFIELDS--
+    createField( Private::FormattedName, Frequent );
+    createField( Private::FamilyName, Frequent );
+    createField( Private::GivenName, Frequent );
+    createField( Private::AdditionalName );
+    createField( Private::Prefix );
+    createField( Private::Suffix );
+    createField( Private::NickName, Personal );
+    createField( Private::Birthday, Personal );
+    createField( Private::HomeAddressStreet, Address|Personal );
+    createField( Private::HomeAddressPostOfficeBox, Address|Personal );
+    createField( Private::HomeAddressLocality, Address|Personal );
+    createField( Private::HomeAddressRegion, Address|Personal );
+    createField( Private::HomeAddressPostalCode, Address|Personal );
+    createField( Private::HomeAddressCountry, Address|Personal );
+    createField( Private::HomeAddressLabel, Address|Personal );
+    createField( Private::BusinessAddressStreet, Address|Organization );
+    createField( Private::BusinessAddressPostOfficeBox, Address|Organization );
+    createField( Private::BusinessAddressLocality, Address|Organization );
+    createField( Private::BusinessAddressRegion, Address|Organization );
+    createField( Private::BusinessAddressPostalCode, Address|Organization );
+    createField( Private::BusinessAddressCountry, Address|Organization );
+    createField( Private::BusinessAddressLabel, Address|Organization );
+    createField( Private::HomePhone, Personal|Frequent );
+    createField( Private::BusinessPhone, Organization|Frequent );
+    createField( Private::MobilePhone, Frequent );
+    createField( Private::HomeFax );
+    createField( Private::BusinessFax );
+    createField( Private::CarPhone );
+    createField( Private::Isdn );
+    createField( Private::Pager );
+    createField( Private::Email, Email|Frequent );
+    createField( Private::Mailer, Email );
+    createField( Private::Title, Organization );
+    createField( Private::Role, Organization );
+    createField( Private::Organization, Organization );
+    createField( Private::Department, Organization );
+    createField( Private::Note );
+    createField( Private::Url );
   }
 
   return Private::mAllFields;

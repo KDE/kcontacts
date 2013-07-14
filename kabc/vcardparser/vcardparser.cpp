@@ -23,6 +23,29 @@
 #include <kdebug.h>
 #include <QtCore/QTextCodec>
 
+class StringCache
+{
+public:
+  QString fromLatin1(const QByteArray &value)
+  {
+    if (value.isEmpty()) {
+      return QString();
+    }
+
+    QHash<QByteArray, QString>::const_iterator it = m_values.constFind(value);
+    if (it != m_values.constEnd()) {
+      return it.value();
+    }
+
+    QString string = QString::fromLatin1(value, value.size());
+    m_values.insert(value, string);
+    return string;
+  }
+
+private:
+  QHash<QByteArray, QString> m_values;
+};
+
 #define FOLD_WIDTH 75
 
 using namespace KABC;
@@ -66,6 +89,9 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
   bool inVCard = false;
   QList<QByteArray>::Iterator it( lines.begin() );
   QList<QByteArray>::Iterator linesEnd( lines.end() );
+
+  StringCache cache;
+
   for ( ; it != linesEnd; ++it ) {
     // remove the trailing \r, left from \r\n
     if ( ( *it ).endsWith( '\r' ) ) {
@@ -96,10 +122,10 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
         // check for group
         int groupPos = params[ 0 ].indexOf( '.' );
         if ( groupPos != -1 ) {
-          vCardLine.setGroup( QString::fromLatin1( params[ 0 ].left( groupPos ) ) );
-          vCardLine.setIdentifier( QString::fromLatin1( params[ 0 ].mid( groupPos + 1 ) ) );
+          vCardLine.setGroup( cache.fromLatin1( params[ 0 ].left( groupPos ) ) );
+          vCardLine.setIdentifier( cache.fromLatin1( params[ 0 ].mid( groupPos + 1 ) ) );
         } else {
-          vCardLine.setIdentifier( QString::fromLatin1( params[ 0 ] ) );
+          vCardLine.setIdentifier( cache.fromLatin1( params[ 0 ] ) );
         }
 
         if ( params.count() > 1 ) { // find all parameters
@@ -123,12 +149,12 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
               QList<QByteArray>::ConstIterator argIt;
               QList<QByteArray>::ConstIterator argEnd( args.constEnd() );
               for ( argIt = args.constBegin(); argIt != argEnd; ++argIt ) {
-                vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
-                                        QString::fromLatin1( *argIt ) );
+                vCardLine.addParameter( cache.fromLatin1( pair[ 0 ].toLower() ),
+                                        cache.fromLatin1( *argIt ) );
               }
             } else {
-              vCardLine.addParameter( QString::fromLatin1( pair[ 0 ].toLower() ),
-                                      QString::fromLatin1( pair[ 1 ] ) );
+              vCardLine.addParameter( cache.fromLatin1( pair[ 0 ].toLower() ),
+                                      cache.fromLatin1( pair[ 1 ] ) );
             }
           }
         }

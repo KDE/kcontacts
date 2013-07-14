@@ -1,6 +1,7 @@
 /*
     This file is part of libkabc.
     Copyright (c) 2001 Cornelius Schumacher <schumacher@kde.org>
+                  2013 Tobias Koenig <tokoe@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KABC_ADDRESSEE_SRC_H
-#define KABC_ADDRESSEE_SRC_H
+#ifndef KABC_ADDRESSEE_H
+#define KABC_ADDRESSEE_H
 
 #include <QtCore/QDateTime>
 #include <QtCore/QStringList>
@@ -133,16 +134,507 @@ class KABC_EXPORT Addressee
       @param uid the KABC unique identifier
      */
     void setUid( const QString &uid );
+
     /**
       Return unique identifier.
      */
     QString uid() const;
+
     /**
       Return translated label for uid field.
      */
     static QString uidLabel();
 
-    --DECLARATIONS--
+    /**
+      Set name.
+     */
+    void setName( const QString &name );
+
+    /**
+      Return name.
+     */
+    QString name() const;
+
+    /**
+      Return translated label for name field.
+     */
+    static QString nameLabel();
+
+    /**
+      Set formatted name.
+     */
+    void setFormattedName( const QString &formattedName );
+
+    /**
+      Return formatted name.
+     */
+    QString formattedName() const;
+
+    /**
+      Return translated label for formattedName field.
+     */
+    static QString formattedNameLabel();
+
+    /**
+      Set family name.
+     */
+    void setFamilyName( const QString &familyName );
+
+    /**
+      Return family name.
+     */
+    QString familyName() const;
+
+    /**
+      Return translated label for familyName field.
+     */
+    static QString familyNameLabel();
+
+    /**
+      Set given name.
+     */
+    void setGivenName( const QString &givenName );
+
+    /**
+      Return given name.
+     */
+    QString givenName() const;
+
+    /**
+      Return translated label for givenName field.
+     */
+    static QString givenNameLabel();
+
+    /**
+      Set additional names.
+     */
+    void setAdditionalName( const QString &additionalName );
+
+    /**
+      Return additional names.
+     */
+    QString additionalName() const;
+
+    /**
+      Return translated label for additionalName field.
+     */
+    static QString additionalNameLabel();
+
+    /**
+      Set honorific prefixes.
+     */
+    void setPrefix( const QString &prefix );
+
+    /**
+      Return honorific prefixes.
+     */
+    QString prefix() const;
+
+    /**
+      Return translated label for prefix field.
+     */
+    static QString prefixLabel();
+
+    /**
+      Set honorific suffixes.
+     */
+    void setSuffix( const QString &suffix );
+
+    /**
+      Return honorific suffixes.
+     */
+    QString suffix() const;
+
+    /**
+      Return translated label for suffix field.
+     */
+    static QString suffixLabel();
+
+    /**
+      Set nick name.
+     */
+    void setNickName( const QString &nickName );
+
+    /**
+      Return nick name.
+     */
+    QString nickName() const;
+
+    /**
+      Return translated label for nickName field.
+     */
+    static QString nickNameLabel();
+
+    /**
+      Set birthday.
+     */
+    void setBirthday( const QDateTime &birthday );
+
+    /**
+      Return birthday.
+     */
+    QDateTime birthday() const;
+
+    /**
+      Return translated label for birthday field.
+     */
+    static QString birthdayLabel();
+
+    /**
+      Return translated label for homeAddressStreet field.
+     */
+    static QString homeAddressStreetLabel();
+
+    /**
+      Return translated label for homeAddressPostOfficeBox field.
+     */
+    static QString homeAddressPostOfficeBoxLabel();
+
+    /**
+      Return translated label for homeAddressLocality field.
+     */
+    static QString homeAddressLocalityLabel();
+
+    /**
+      Return translated label for homeAddressRegion field.
+     */
+    static QString homeAddressRegionLabel();
+
+    /**
+      Return translated label for homeAddressPostalCode field.
+     */
+    static QString homeAddressPostalCodeLabel();
+
+    /**
+      Return translated label for homeAddressCountry field.
+     */
+    static QString homeAddressCountryLabel();
+
+    /**
+      Return translated label for homeAddressLabel field.
+     */
+    static QString homeAddressLabelLabel();
+
+    /**
+      Return translated label for businessAddressStreet field.
+     */
+    static QString businessAddressStreetLabel();
+
+    /**
+      Return translated label for businessAddressPostOfficeBox field.
+     */
+    static QString businessAddressPostOfficeBoxLabel();
+
+    /**
+      Return translated label for businessAddressLocality field.
+     */
+    static QString businessAddressLocalityLabel();
+
+    /**
+      Return translated label for businessAddressRegion field.
+     */
+    static QString businessAddressRegionLabel();
+
+    /**
+      Return translated label for businessAddressPostalCode field.
+     */
+    static QString businessAddressPostalCodeLabel();
+
+    /**
+      Return translated label for businessAddressCountry field.
+     */
+    static QString businessAddressCountryLabel();
+
+    /**
+      Return translated label for businessAddressLabel field.
+     */
+    static QString businessAddressLabelLabel();
+
+    /**
+      Return translated label for homePhone field.
+     */
+    static QString homePhoneLabel();
+
+    /**
+      Return translated label for businessPhone field.
+     */
+    static QString businessPhoneLabel();
+
+    /**
+      Return translated label for mobilePhone field.
+     */
+    static QString mobilePhoneLabel();
+
+    /**
+      Return translated label for homeFax field.
+     */
+    static QString homeFaxLabel();
+
+    /**
+      Return translated label for businessFax field.
+     */
+    static QString businessFaxLabel();
+
+    /**
+      Return translated label for carPhone field.
+     */
+    static QString carPhoneLabel();
+
+    /**
+      Return translated label for isdn field.
+     */
+    static QString isdnLabel();
+
+    /**
+      Return translated label for pager field.
+     */
+    static QString pagerLabel();
+
+    /**
+      Return translated label for email field.
+     */
+    static QString emailLabel();
+
+    /**
+      Set mail client.
+     */
+    void setMailer( const QString &mailer );
+
+    /**
+      Return mail client.
+     */
+    QString mailer() const;
+
+    /**
+      Return translated label for mailer field.
+     */
+    static QString mailerLabel();
+
+    /**
+      Set time zone.
+     */
+    void setTimeZone( const TimeZone &timeZone );
+
+    /**
+      Return time zone.
+     */
+    TimeZone timeZone() const;
+
+    /**
+      Return translated label for timeZone field.
+     */
+    static QString timeZoneLabel();
+
+    /**
+      Set geographic position.
+     */
+    void setGeo( const Geo &geo );
+
+    /**
+      Return geographic position.
+     */
+    Geo geo() const;
+
+    /**
+      Return translated label for geo field.
+     */
+    static QString geoLabel();
+
+    /**
+      Set title.
+     */
+    void setTitle( const QString &title );
+
+    /**
+      Return title.
+     */
+    QString title() const;
+
+    /**
+      Return translated label for title field.
+     */
+    static QString titleLabel();
+
+    /**
+      Set role.
+     */
+    void setRole( const QString &role );
+
+    /**
+      Return role.
+     */
+    QString role() const;
+
+    /**
+      Return translated label for role field.
+     */
+    static QString roleLabel();
+
+    /**
+      Set organization.
+     */
+    void setOrganization( const QString &organization );
+
+    /**
+      Return organization.
+     */
+    QString organization() const;
+
+    /**
+      Return translated label for organization field.
+     */
+    static QString organizationLabel();
+
+    /**
+      Set department.
+     */
+    void setDepartment( const QString &department );
+
+    /**
+      Return department.
+     */
+    QString department() const;
+
+    /**
+      Return translated label for department field.
+     */
+    static QString departmentLabel();
+
+    /**
+      Set note.
+     */
+    void setNote( const QString &note );
+
+    /**
+      Return note.
+     */
+    QString note() const;
+
+    /**
+      Return translated label for note field.
+     */
+    static QString noteLabel();
+
+    /**
+      Set product identifier.
+     */
+    void setProductId( const QString &productId );
+
+    /**
+      Return product identifier.
+     */
+    QString productId() const;
+
+    /**
+      Return translated label for productId field.
+     */
+    static QString productIdLabel();
+
+    /**
+      Set revision date.
+     */
+    void setRevision( const QDateTime &revision );
+
+    /**
+      Return revision date.
+     */
+    QDateTime revision() const;
+
+    /**
+      Return translated label for revision field.
+     */
+    static QString revisionLabel();
+
+    /**
+      Set sort string.
+     */
+    void setSortString( const QString &sortString );
+
+    /**
+      Return sort string.
+     */
+    QString sortString() const;
+
+    /**
+      Return translated label for sortString field.
+     */
+    static QString sortStringLabel();
+
+    /**
+      Set homepage.
+     */
+    void setUrl( const KUrl &url );
+
+    /**
+      Return homepage.
+     */
+    KUrl url() const;
+
+    /**
+      Return translated label for url field.
+     */
+    static QString urlLabel();
+
+    /**
+      Set security class.
+     */
+    void setSecrecy( const Secrecy &secrecy );
+
+    /**
+      Return security class.
+     */
+    Secrecy secrecy() const;
+
+    /**
+      Return translated label for secrecy field.
+     */
+    static QString secrecyLabel();
+
+    /**
+      Set logo.
+     */
+    void setLogo( const Picture &logo );
+
+    /**
+      Return logo.
+     */
+    Picture logo() const;
+
+    /**
+      Return translated label for logo field.
+     */
+    static QString logoLabel();
+
+    /**
+      Set photo.
+     */
+    void setPhoto( const Picture &photo );
+
+    /**
+      Return photo.
+     */
+    Picture photo() const;
+
+    /**
+      Return translated label for photo field.
+     */
+    static QString photoLabel();
+
+    /**
+      Set sound.
+     */
+    void setSound( const Sound &sound );
+
+    /**
+      Return sound.
+     */
+    Sound sound() const;
+
+    /**
+      Return translated label for sound field.
+     */
+    static QString soundLabel();
+
     /**
       Set name fields by parsing the given string and trying to associate the
       parts of the string with according fields. This function should probably
@@ -410,6 +902,9 @@ class KABC_EXPORT Addressee
 
     /**
       Return list of all custom entries.
+
+      The format of the custom entries is 'app-key:value' and the list is sorted
+      alphabetically by 'app-key'.
      */
     QStringList customs() const;
 
