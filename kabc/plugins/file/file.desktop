@@ -67,6 +67,7 @@ Comment[fi]=Tarjoaa pääsyn yksittäiseen paikalliseen tiedostoon tallennettuih
 Comment[fr]=Fournit un accès aux contacts enregistrés dans un unique fichier local. Le format « vCard » et d'autres formats sont pris en charge selon les modules externes disponibles.
 Comment[hu]=Névjegyek elérését biztosítja. Minden névjegy egy közös helyi fájlban található. Támogatja a szabványos vCard fájlt és az elérhető bővítményektől függően más formátumokat.
 Comment[ia]=Il provide accessos a contactos immagazinate in un singule file local. Il supporta files de standard VCard e altere formatos in dependentia de plugins disponibile.
+Comment[it]=Fornisce accesso a contatti memorizzati in un singolo file locale. Gestisce file in standard vCard e altri formati in base alle estensioni disponibili.
 Comment[kk]=Бір файлда сақталған контакттарға қатынау мүмкіндігін береді. Плагині бар-жоғына қарай, vCard және басқа да пішімдерді тани алады.
 Comment[nb]=Gir tilgang til kontakter, lagret i en enkelt lokal fil. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg.
 Comment[nl]=Geeft toegang tot in een enkel lokaal bestand opgeslagen contactpersonen. Ondersteunt standaard vCard-bestanden en andere van beschikbare plug-ins afhankelijke formaten.
