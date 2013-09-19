@@ -104,6 +104,7 @@ void XmlContactGroupWriter::writeContactReference( const ContactGroup::ContactRe
 {
   writeStartElement( QLatin1String( "contactReference" ) );
   writeAttribute( QLatin1String( "uid" ), reference.uid() );
+  writeAttribute( QLatin1String( "gid" ), reference.gid() );
   if ( !reference.preferredEmail().isEmpty() ) {
     writeAttribute( QLatin1String( "preferredEmail" ), reference.preferredEmail() );
   }
@@ -285,13 +286,15 @@ bool XmlContactGroupReader::readContactReference( ContactGroup::ContactReference
 {
   const QXmlStreamAttributes elementAttributes = attributes();
   const QStringRef uid = elementAttributes.value( QLatin1String( "uid" ) );
-  if ( uid.isEmpty() ) {
-    raiseError( QLatin1String( "ContactReference is missing a uid" ) );
+  const QStringRef gid = elementAttributes.value( QLatin1String( "gid" ) );
+  if ( uid.isEmpty() && gid.isEmpty() ) {
+    raiseError( QLatin1String( "ContactReference is missing both uid and gid" ) );
     return false;
   }
   const QStringRef preferredEmail = elementAttributes.value( QLatin1String( "preferredEmail" ) );
 
   reference.setUid( uid.toString() );
+  reference.setGid( gid.toString() );
   reference.setPreferredEmail( preferredEmail.toString() );
 
   return true;

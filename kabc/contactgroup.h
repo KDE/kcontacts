@@ -95,6 +95,19 @@ class KABC_EXPORT ContactGroup
         QString uid() const;
 
         /**
+         * Sets the contact gid of the contact reference.
+         * @param gid globally unique identifier of the contact to reference
+         * @since 4.12
+         */
+        void setGid( const QString &gid );
+
+        /**
+         * Returns the contact GID of the contact reference.
+         * @since 4.12
+         */
+        QString gid() const;
+
+        /**
          * Sets the preferred email address.
          */
         void setPreferredEmail( const QString &email );
