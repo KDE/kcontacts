@@ -24,11 +24,11 @@
 #include <QtCore/QList>
 #include <QtCore/QRegExp>
 #include <QtCore/QSharedData>
+#include <QtCore/QUuid>
 
 #include <kdebug.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
-#include <krandom.h>
 
 #include "addresseehelper.h"
 #include "field.h"
@@ -52,7 +52,7 @@ class Addressee::Private : public QSharedData
 {
   public:
     Private()
-      : mUid( KRandom::randomString( 10 ) ),
+      : mUid( QUuid::createUuid().toString() ),
 #ifndef KDEPIM_NO_KRESOURCES
       mResource( 0 ),
 #endif
