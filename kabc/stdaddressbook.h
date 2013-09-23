@@ -86,7 +86,7 @@ class KABC_DEPRECATED_EXPORT StdAddressBook : public AddressBook
 
       @deprecated Use AddressBook::save( Ticket* ) instead
      */
-    static KDE_DEPRECATED bool save();
+    static KABC_DEPRECATED bool save();
 
     /**
       Returns the default file name for vcard-based addressbook
