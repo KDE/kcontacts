@@ -43,7 +43,7 @@ class Ticket;
 
   This class provides access to a collection of address book entries.
  */
-class KABC_EXPORT_DEPRECATED AddressBook : public QObject
+class KABC_DEPRECATED_EXPORT AddressBook : public QObject
 {
   Q_OBJECT
 
@@ -61,7 +61,7 @@ class KABC_EXPORT_DEPRECATED AddressBook : public QObject
 
       This class provides an iterator for address book entries.
      */
-    class KABC_EXPORT_DEPRECATED Iterator  //krazy:exclude=dpointer
+    class KABC_DEPRECATED_EXPORT Iterator  //krazy:exclude=dpointer
     {
       friend class AddressBook;
       friend class ConstIterator;
@@ -166,7 +166,7 @@ class KABC_EXPORT_DEPRECATED AddressBook : public QObject
 
       This class provides a const iterator for address book entries.
      */
-    class KABC_EXPORT_DEPRECATED ConstIterator //krazy:exclude=dpointer
+    class KABC_DEPRECATED_EXPORT ConstIterator //krazy:exclude=dpointer
     {
       friend class AddressBook;
       public:

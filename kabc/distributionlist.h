@@ -42,7 +42,7 @@ class Resource;
   associated with an address book entry. If the address book entry changes, the
   entry in the distribution list is automatically updated.
 */
-class KABC_EXPORT_DEPRECATED DistributionList
+class KABC_DEPRECATED_EXPORT DistributionList
 {
   public:
     /**

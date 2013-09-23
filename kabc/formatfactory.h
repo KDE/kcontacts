@@ -91,7 +91,7 @@ struct FormatInfo
  * }
  * \endcode
  */
-class KABC_EXPORT_DEPRECATED FormatFactory
+class KABC_DEPRECATED_EXPORT FormatFactory
 {
   public:
     /**

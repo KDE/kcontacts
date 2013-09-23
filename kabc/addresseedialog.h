@@ -95,7 +95,7 @@ class KABC_EXPORT AddresseeItem : public QTreeWidgetItem
   return or pressing the ok button to return the selected addressee to the
   application.
 */
-class KABC_EXPORT_DEPRECATED AddresseeDialog : public KDialog
+class KABC_DEPRECATED_EXPORT AddresseeDialog : public KDialog
 {
     Q_OBJECT
 

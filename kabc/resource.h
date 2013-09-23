@@ -34,7 +34,7 @@ namespace KABC {
  * This class is used as helper class for saving address book.
  * @see requestSaveTicket(), save().
  */
-class KABC_EXPORT_DEPRECATED Ticket
+class KABC_DEPRECATED_EXPORT Ticket
 {
     friend class Resource;
 
@@ -61,7 +61,7 @@ class KABC_EXPORT_DEPRECATED Ticket
 /**
  * @internal
  */
-class KABC_EXPORT_DEPRECATED Resource : public KRES::Resource
+class KABC_DEPRECATED_EXPORT Resource : public KRES::Resource
 {
   Q_OBJECT
 
@@ -73,7 +73,7 @@ class KABC_EXPORT_DEPRECATED Resource : public KRES::Resource
       This class provides an iterator for resource entries.
     */
     class ConstIterator;
-    class KABC_EXPORT_DEPRECATED Iterator
+    class KABC_DEPRECATED_EXPORT Iterator
     {
       friend class KABC::Resource::ConstIterator;
       friend class KABC::Resource;
@@ -162,7 +162,7 @@ class KABC_EXPORT_DEPRECATED Resource : public KRES::Resource
 
       This class provides a const iterator for resource entries.
     */
-    class KABC_EXPORT_DEPRECATED ConstIterator
+    class KABC_DEPRECATED_EXPORT ConstIterator
     {
       friend class KABC::Resource;
 
