@@ -22,6 +22,7 @@
 #ifndef KABC_RESOURCELDAPKIO_H
 #define KABC_RESOURCELDAPKIO_H
 
+#include "kabc_ldapkio_export.h"
 #include <kio/job.h>
 #include "kabc/resource.h"
 

@@ -21,6 +21,8 @@
 #ifndef KABC_RESOURCENET_H
 #define KABC_RESOURCENET_H
 
+#include "kabc_net_export.h"
+
 #include "kabc/resource.h"
 #include <sys/types.h>
 

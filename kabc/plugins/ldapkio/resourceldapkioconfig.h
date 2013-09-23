@@ -21,7 +21,7 @@
 #ifndef KABC_RESOURCELDAPKIOCONFIG_H
 #define KABC_RESOURCELDAPKIOCONFIG_H
 
-#include "kabc/kabc_export.h"
+#include "kabc_ldapkio_export.h"
 #include "kresources/configwidget.h"
 #include "kldap/ldapconfigwidget.h"
 #include "kldap/ldif.h"

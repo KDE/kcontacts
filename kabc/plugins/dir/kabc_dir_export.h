@@ -18,34 +18,22 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KABC_EXPORT_H
-#define KABC_EXPORT_H
+#ifndef KABC_DIR_EXPORT_H
+#define KABC_DIR_EXPORT_H
 
 #include <kdemacros.h>
 
-#ifndef KABC_EXPORT
+#ifndef KABC_DIR_EXPORT
 # if defined(KDEPIM_STATIC_LIBS)
    /* No export/import for static libraries */
-#  define KABC_EXPORT
-# elif defined(MAKE_KABC_LIB)
+#  define KABC_DIR_EXPORT
+# elif defined(MAKE_KABC_DIRECTORY_LIB)
    /* We are building this library */
-#  define KABC_EXPORT KDE_EXPORT
+#  define KABC_DIR_EXPORT KDE_EXPORT
 # else
    /* We are using this library */
-#  define KABC_EXPORT KDE_IMPORT
+#  define KABC_DIR_EXPORT KDE_IMPORT
 # endif
 #endif
-
-# ifndef KABC_EXPORT_DEPRECATED
-#  if !defined( WANT_DEPRECATED_KABC_API )
-#    define KABC_EXPORT_DEPRECATED KDE_DEPRECATED KABC_EXPORT
-#    define KABC_DEPRECATED_EXPORT KDE_DEPRECATED KABC_EXPORT
-#    define KABC_DEPRECATED KDE_DEPRECATED
-#  else
-#    define KABC_EXPORT_DEPRECATED KABC_EXPORT
-#    define KABC_DEPRECATED_EXPORT KABC_EXPORT
-#    define KABC_DEPRECATED
-#  endif
-# endif
 
 #endif

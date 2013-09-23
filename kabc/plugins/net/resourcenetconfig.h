@@ -21,7 +21,7 @@
 #ifndef RESOURCENETCONFIG_H
 #define RESOURCENETCONFIG_H
 
-#include "kabc/kabc_export.h"
+#include "kabc_net_export.h"
 #include "kresources/configwidget.h"
 #include <kcombobox.h>
 #include <kurlrequester.h>

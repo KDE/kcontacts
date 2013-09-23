@@ -21,6 +21,8 @@
 #ifndef KABC_RESOURCEDIR_H
 #define KABC_RESOURCEDIR_H
 
+#include "kabc_dir_export.h"
+
 #include "kabc/resource.h"
 #include <kdirwatch.h>
 #include <sys/types.h>

@@ -21,7 +21,8 @@
 #ifndef KABC_RESOURCEFILE_H
 #define KABC_RESOURCEFILE_H
 
-#include "kabc/kabc_export.h"
+#include "kabc_file_core_export.h"
+
 #include "kabc/resource.h"
 
 #include <kconfig.h>
