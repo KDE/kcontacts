@@ -1,5 +1,8 @@
 
-include_directories(${CMAKE_SOURCE_DIR}/kabc)
+include_directories(
+  ${CMAKE_SOURCE_DIR}/kabc
+  ${CMAKE_BINARY_DIR}/kldap
+)
 
 ########### next target ###############
 

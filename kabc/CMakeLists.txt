@@ -14,6 +14,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/vcardparser
+  ${CMAKE_BINARY_DIR}/kresources
 )
 
 # kabc/vcardparser/Makefile.am: vcards
@@ -87,6 +88,7 @@ if(NOT KDEPIM_NO_KRESOURCES)
 endif()
 
 kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
+generate_export_header(kabc)
 
 target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
 target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
@@ -106,7 +108,7 @@ install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_A
 
 install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 install(FILES
-  kabc_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
   address.h
   addressee.h
   addresseedialog.h
