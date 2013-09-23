@@ -94,7 +94,7 @@ if(NOT KDEPIM_NO_KRESOURCES)
   )
 endif()
 
-kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
+add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
 generate_export_header(kabc)
 
 target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
