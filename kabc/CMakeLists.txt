@@ -68,15 +68,9 @@ set(kabc_LIB_SRCS
   sortmode.cpp
   vcarddrag.cpp
   ${vcards_STAT_SRCS}
-)
-
-if(NOT WINCE)
-  set(kabc_LIB_SRCS
-  ${kabc_LIB_SRCS}
   addresseedialog.cpp
   emailselectdialog.cpp
 )
-endif()
 
 if(NOT KDEPIM_NO_KRESOURCES)
   set(kabc_LIB_SRCS
