@@ -1,6 +1,8 @@
 
 project(kabc)
 
+find_package(KF5 NO_MODULE REQUIRED COMPONENTS CoreAddons ItemViews I18n KDE4Support)
+
 include_directories(${KDE4_KIO_INCLUDES})
 
 add_definitions(${QDBUS_DEFINITIONS} -DKDE_DEFAULT_DEBUG_AREA=5700)
@@ -60,8 +62,7 @@ set(kabc_LIB_SRCS
 
 kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
 
-target_link_libraries(kabc ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS})
-target_link_libraries(kabc LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
+target_link_libraries(kabc KF5::CoreAddons KF5::ItemViews KF5::I18n KF5::KDE4Support)
 
 set_target_properties(
   kabc PROPERTIES
