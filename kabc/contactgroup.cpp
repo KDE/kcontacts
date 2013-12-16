@@ -45,6 +45,7 @@ class ContactGroup::ContactReference::ContactReferencePrivate : public QSharedDa
     }
 
     QString mUid;
+    QString mGid;
     QString mPreferredEmail;
     QMap<QString, QString> mCustoms;
 };
@@ -77,6 +78,16 @@ void ContactGroup::ContactReference::setUid( const QString &uid )
 QString ContactGroup::ContactReference::uid() const
 {
   return d->mUid;
+}
+
+void ContactGroup::ContactReference::setGid( const QString &gid )
+{
+  d->mGid = gid;
+}
+
+QString ContactGroup::ContactReference::gid() const
+{
+  return d->mGid;
 }
 
 void ContactGroup::ContactReference::setPreferredEmail( const QString &email )

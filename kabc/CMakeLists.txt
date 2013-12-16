@@ -10,11 +10,18 @@ add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
 add_definitions(-DWANT_DEPRECATED_KABC_API)
 
+# This one won't be needed when CMake 2.8.13 is depended on.
+add_definitions(
+  -DKRESOURCES_DEPRECATED_EXPORT=KRESOURCES_EXPORT
+  -DKABC_DEPRECATED_EXPORT=KABC_EXPORT
+)
+
 # these apply also for all subdirs
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/vcardparser
+  ${CMAKE_BINARY_DIR}/kresources
 )
 
 # kabc/vcardparser/Makefile.am: vcards
@@ -58,9 +65,8 @@ set(kabc_LIB_SRCS
   sortmode.cpp
   vcarddrag.cpp
   ${vcards_STAT_SRCS}
-)
-
-kde4_add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
+add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
+generate_export_header(kabc)
 
 target_link_libraries(kabc KF5::CoreAddons KF5::ItemViews KF5::I18n KF5::KDE4Support)
 
@@ -75,7 +81,7 @@ install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_A
 
 install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 install(FILES
-  kabc_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
   address.h
   addressee.h
   addresseelist.h

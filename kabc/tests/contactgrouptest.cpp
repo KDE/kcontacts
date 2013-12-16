@@ -45,6 +45,7 @@ QTEST_KDEMAIN( ContactGroupTest, NoGUI )
 void ContactGroupTest::contactGroupContactReference()
 {
   const QLatin1String uid( "MyReferenceId" );
+  const QLatin1String gid( "GID" );
   const QLatin1String preferredEMail( "tokoe@kde.org" );
   const QLatin1String customKey( "MyCustomKey" );
   const QLatin1String customValue( "MyCustomValue" );
@@ -81,11 +82,13 @@ void ContactGroupTest::contactGroupContactReference()
   // assignment test
   {
     ContactGroup::ContactReference ref( uid );
+    ref.setGid( gid );
     ref.setPreferredEmail( preferredEMail );
     ref.insertCustom( customKey, customValue );
 
     ContactGroup::ContactReference ref2( ref );
     QCOMPARE( ref.uid(), ref2.uid() );
+    QCOMPARE( ref.gid(), ref2.gid() );
     QCOMPARE( ref.preferredEmail(), ref2.preferredEmail() );
     QCOMPARE( ref.custom( customKey ), ref2.custom( customKey ) );
 
@@ -102,6 +105,7 @@ void ContactGroupTest::contactGroupContactReference()
     constRef.uid();
     constRef.preferredEmail();
     constRef.custom( customKey );
+    constRef.gid();
   }
 }
 
@@ -304,6 +308,9 @@ void ContactGroupTest::testGroupRoundTrip()
 
   ContactGroup group( QLatin1String( "TestGroup" ) );
   group.append( ContactGroup::ContactReference( QLatin1String( "Xggdjetw" ) ) );
+  ContactGroup::ContactReference gidReference;
+  gidReference.setGid( QLatin1String("gid") );
+  group.append( gidReference );
   group.append( ContactGroup::ContactGroupReference( QLatin1String( "aaXggdjetw" ) ) );
   group.append( ContactGroup::Data( QLatin1String( "Tobias Koenig" ),
                                     QLatin1String( "tokoe@kde.org" ) ) );

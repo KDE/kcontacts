@@ -145,7 +145,7 @@ class KABC_EXPORT Picture
      * @param type the picture's data type
      * @deprecated type should only be set along with setRawData()
      */
-    void KDE_DEPRECATED setType( const QString &type );
+    void KABC_DEPRECATED setType( const QString &type );
 
     /**
      * Returns whether the picture is described by a URL (extern) or

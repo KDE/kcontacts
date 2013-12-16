@@ -963,7 +963,7 @@ class KABC_EXPORT Addressee
     class Private;
     QSharedDataPointer<Private> d;
 };
-#ifdef MAKE_KABC_LIB
+#ifdef kabc_EXPORTS
 KDE_DUMMY_QHASH_FUNCTION( Addressee )
 #endif
 

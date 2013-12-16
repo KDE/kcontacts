@@ -5,7 +5,8 @@ include_directories(${CMAKE_SOURCE_DIR}/kabc)
 
 set(kabc_file_core_SRCS resourcefile.cpp resourcefileconfig.cpp)
 
-kde4_add_library(kabc_file_core ${LIBRARY_TYPE} ${kabc_file_core_SRCS})
+add_library(kabc_file_core ${LIBRARY_TYPE} ${kabc_file_core_SRCS})
+generate_export_header(kabc_file_core)
 
 target_link_libraries(kabc_file_core ${KDE4_KIO_LIBS} kabc kresources)
 
