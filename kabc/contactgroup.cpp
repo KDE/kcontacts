@@ -310,7 +310,7 @@ class ContactGroup::Private : public QSharedData
   public:
     Private()
       : QSharedData(),
-        mIdentifier( QUuid::createUuid().toString() )
+        mIdentifier( QUuid::createUuid().toString().mid(1, 36) )//We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     {
     }
 

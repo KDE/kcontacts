@@ -48,7 +48,7 @@ class Addressee::Private : public QSharedData
 {
   public:
     Private()
-      : mUid( QUuid::createUuid().toString() ),
+      : mUid( QUuid::createUuid().toString().mid(1, 36) ), //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
         mEmpty( true ), mChanged( false )
     {
     }
