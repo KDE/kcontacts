@@ -289,6 +289,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
           }
 
           QByteArray input, output;
+          bool checkMultibyte = false;  // avoid splitting a multibyte character
 
           // handle charset
           if ( ( *lineIt ).parameterList().contains( QLatin1String( "charset" ) ) ) {
@@ -299,19 +300,23 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
             if ( codec ) {
               input = codec->fromUnicode( value );
             } else {
+              checkMultibyte = true;
               input = value.toUtf8();
             }
           } else if ( ( *lineIt ).value().type() == QVariant::ByteArray ) {
             input = ( *lineIt ).value().toByteArray();
           } else {
+            checkMultibyte = true;
             input = ( *lineIt ).value().toString().toUtf8();
           }
 
           // handle encoding
           if ( hasEncoding ) { // have to encode the data
             if ( encodingType == QLatin1String( "b" ) ) {
+              checkMultibyte = false;
               output = input.toBase64();
             } else if ( encodingType == QLatin1String( "quoted-printable" ) ) {
+              checkMultibyte = false;
               KCodecs::quotedPrintableEncode( input, output, false );
             }
           } else {
@@ -323,9 +328,42 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
             textLine.append( ':' + output );
 
             if ( textLine.length() > FOLD_WIDTH ) { // we have to fold the line
-              for ( int i = 0; i <= ( textLine.length() / FOLD_WIDTH ); ++i ) {
-                text.append(
-                  ( i == 0 ? "" : " " ) + textLine.mid( i * FOLD_WIDTH, FOLD_WIDTH ) + "\r\n" );
+              if ( checkMultibyte ) {
+                // RFC 6350: Multi-octet characters MUST remain contiguous.
+                // we know that textLine contains UTF-8 encoded characters
+                int lineLength = 0;
+                for ( int i = 0; i < textLine.length(); ++i ) {
+                  if ( (textLine[i] & 0xC0) == 0xC0 ) {  // a multibyte sequence follows
+                    int sequenceLength = 2;
+                    if ( (textLine[i] & 0xE0) == 0xE0 ) {
+                      sequenceLength = 3;
+                    } else if ( (textLine[i] & 0xF0) == 0xF0 ) {
+                      sequenceLength = 4;
+                    }
+                    if ( (lineLength + sequenceLength) > FOLD_WIDTH ) {
+                      // the current line would be too long. fold it
+                      text += "\r\n " + textLine.mid(i, sequenceLength);
+                      lineLength = 1 + sequenceLength;  // incl. leading space
+                    } else {
+                      text += textLine.mid(i, sequenceLength);
+                      lineLength += sequenceLength;
+                    }
+                    i += sequenceLength - 1;
+                  } else {
+                    text += textLine[i];
+                    lineLength++;
+                  }
+                  if ( (lineLength == FOLD_WIDTH) && (i < (textLine.length() - 1)) ) {
+                    text += "\r\n ";
+                    lineLength = 1;  // leading space
+                  }
+                }
+                text += "\r\n";
+              } else {
+                for ( int i = 0; i <= ( textLine.length() / FOLD_WIDTH ); ++i ) {
+                  text.append(
+                    ( i == 0 ? "" : " " ) + textLine.mid( i * FOLD_WIDTH, FOLD_WIDTH ) + "\r\n" );
+                }
               }
             } else {
               text.append( textLine + "\r\n" );
