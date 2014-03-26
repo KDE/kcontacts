@@ -9,6 +9,7 @@
     <file>tests/vcard6.vcf</file>
     <file>tests/vcard7.vcf</file>
     <file>tests/vcard8.vcf</file>
+    <file>tests/vcard9.vcf</file>
   </qresource>
   
   <!-- output files formatted for vcard version 2.1 -->
@@ -26,5 +27,6 @@
     <file>tests/vcard6.vcf.ref</file>
     <file>tests/vcard7.vcf.ref</file>
     <file>tests/vcard8.vcf.ref</file>
+    <file>tests/vcard9.vcf.ref</file>
   </qresource>
 </RCC>
