@@ -1,108 +1,61 @@
+cmake_minimum_required(VERSION 2.8.12)
 
-project(kabc)
+project(KAbc)
 
-find_package(KF5 NO_MODULE REQUIRED COMPONENTS CoreAddons ItemViews I18n KDE4Support)
+# ECM setup
+find_package(ECM 0.0.11 CONFIG REQUIRED)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KAbc_SOURCE_DIR}/cmake)
 
-include_directories(${KDE4_KIO_INCLUDES})
+include(ECMGenerateHeaders)
+include(ECMGeneratePriFile)
+include(ECMPackageConfigHelpers)
+include(ECMSetupVersion)
+include(FeatureSummary)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDEFrameworkCompilerSettings)
 
-add_definitions(${QDBUS_DEFINITIONS} -DKDE_DEFAULT_DEBUG_AREA=5700)
-add_definitions(-DQT_NO_CAST_FROM_ASCII)
-add_definitions(-DQT_NO_CAST_TO_ASCII)
-add_definitions(-DWANT_DEPRECATED_KABC_API)
+set(KF5_VERSION "4.97.0")
 
-# This one won't be needed when CMake 2.8.13 is depended on.
-add_definitions(
-  -DKRESOURCES_DEPRECATED_EXPORT=KRESOURCES_EXPORT
-  -DKABC_DEPRECATED_EXPORT=KABC_EXPORT
+# FIXME ? KF5AbcConfig ? KF5AddressBookConfig ? anything else ?
+ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KABC
+                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kabc_version.h"
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AbcConfigVersion.cmake"
+                        SOVERSION 5
 )
 
-# these apply also for all subdirs
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/vcardparser
-  ${CMAKE_BINARY_DIR}/kresources
+########### Find packages ###########
+find_package(KF5 ${KF5_VERSION} CONFIG REQUIRED COMPONENTS CoreAddons ItemViews I18n KDE4Support)
+
+########### Targets ###########
+
+add_subdirectory(src)
+#add_subdirectory(autotests)
+add_subdirectory(cmake)
+
+########### CMake Config Files ###########
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Abc")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/KF5AbcConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5AbcConfig.cmake"
+  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
-# kabc/vcardparser/Makefile.am: vcards
-
-set(vcards_STAT_SRCS
-  vcardparser/vcard.cpp
-  vcardparser/vcardline.cpp
-  vcardparser/vcardparser.cpp
-)
-
-add_subdirectory(vcardparser)
-# add_subdirectory(tests)
-#add_subdirectory( scripts )
-
-########### next target ###############
-
-set(kabc_LIB_SRCS
-  address.cpp
-  addressee.cpp
-  contactgroup.cpp
-  contactgrouptool.cpp
-  errorhandler.cpp
-  field.cpp
-  geo.cpp
-  key.cpp
-  ldapdn.cpp
-  ldif.cpp
-  phonenumber.cpp
-  picture.cpp
-  plugin.cpp
-  secrecy.cpp
-  sound.cpp
-  timezone.cpp
-  ldifconverter.cpp
-  addresseelist.cpp
-  vcardconverter.cpp
-  vcardtool.cpp
-  addresseehelper.cpp
-  lock.cpp
-  locknull.cpp
-  sortmode.cpp
-  vcarddrag.cpp
-  ${vcards_STAT_SRCS}
-add_library(kabc ${LIBRARY_TYPE} ${kabc_LIB_SRCS})
-generate_export_header(kabc)
-
-target_link_libraries(kabc KF5::CoreAddons KF5::ItemViews KF5::I18n KF5::KDE4Support)
-
-set_target_properties(
-  kabc PROPERTIES
-  VERSION ${GENERIC_LIB_VERSION}
-  SOVERSION ${GENERIC_LIB_SOVERSION}
-)
-install(TARGETS kabc EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
-
-########### install files ###############
-
-install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
-  address.h
-  addressee.h
-  addresseelist.h
-  contactgroup.h
-  contactgrouptool.h
-  emailselectdialog.h
-  errorhandler.h
-  field.h
-  geo.h
-  key.h
-  ldifconverter.h
-  lock.h
-  locknull.h
-  phonenumber.h
-  picture.h
-  plugin.h
-  secrecy.h
-  sortmode.h
-  sound.h
-  timezone.h
-  vcardconverter.h
-  vcarddrag.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5AbcConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5AbcConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
 )
+
+install(EXPORT KF5AbcTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5AbcTargets.cmake NAMESPACE KF5::)
+
+install(FILES
+   ${CMAKE_CURRENT_BINARY_DIR}/kabc_version.h
+  DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+)
+
+if ("${CMAKE_BINARY_DIR}" STREQUAL "${KAbc_BINARY_DIR}")
+  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+endif()
