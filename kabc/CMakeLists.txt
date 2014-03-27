@@ -30,8 +30,7 @@ find_package(KF5 ${KF5_VERSION} CONFIG REQUIRED COMPONENTS CoreAddons ItemViews 
 ########### Targets ###########
 
 add_subdirectory(src)
-#add_subdirectory(autotests)
-#add_subdirectory(cmake)
+add_subdirectory(autotests)
 
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Abc")
