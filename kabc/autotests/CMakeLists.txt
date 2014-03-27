@@ -1,109 +1,88 @@
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-include_directories( ${CMAKE_SOURCE_DIR}/kabc ${CMAKE_BINARY_DIR}/kabc/plugins/file)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
+
+include(ECMMarkAsTest)
+
+set(QT_REQUIRED_VERSION "5.2.0")
+find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
+
 
 ########### next target ###############
 
 set(addresstest_SRCS addresstest.cpp)
 
-
-kde4_add_unit_test(addresstest TESTNAME kabc-addresstest ${addresstest_SRCS})
-
-target_link_libraries(addresstest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
-
-########### next target ###############
-
-set(addresseetest_SRCS addresseetest.cpp)
-
-
-kde4_add_unit_test(addresseetest TESTNAME kabc-addresseetest ${addresseetest_SRCS})
-
-target_link_libraries(addresseetest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(addresstest ${addresstest_SRCS})
+add_test(addresstest addresstest)
+ecm_mark_as_test(addresstest)
+target_link_libraries(addresstest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(geotest_SRCS geotest.cpp)
-
-
-kde4_add_unit_test(geotest TESTNAME kabc-geotest ${geotest_SRCS})
-
-target_link_libraries(geotest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(geotest ${geotest_SRCS})
+add_test(geotest geotest)
+ecm_mark_as_test(geotest)
+target_link_libraries(geotest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(keytest_SRCS keytest.cpp)
-
-
-kde4_add_unit_test(keytest TESTNAME kabc-keytest ${keytest_SRCS})
-
-target_link_libraries(keytest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(keytest ${keytest_SRCS})
+add_test(keytest keytest)
+ecm_mark_as_test(keytest)
+target_link_libraries(keytest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(phonenumbertest_SRCS phonenumbertest.cpp)
-
-
-kde4_add_unit_test(phonenumbertest TESTNAME kabc-phonenumbertest ${phonenumbertest_SRCS})
-
-target_link_libraries(phonenumbertest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(phonenumbertest ${phonenumbertest_SRCS})
+add_test(phonenumbertest phonenumbertest)
+ecm_mark_as_test(phonenumbertest)
+target_link_libraries(phonenumbertest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(picturetest_SRCS picturetest.cpp)
-
-
-kde4_add_unit_test(picturetest TESTNAME kabc-picturetest ${picturetest_SRCS})
-
-target_link_libraries(picturetest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(picturetest ${picturetest_SRCS})
+add_test(picturetest picturetest)
+ecm_mark_as_test(picturetest)
+target_link_libraries(picturetest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(secrecytest_SRCS secrecytest.cpp)
-
-
-kde4_add_unit_test(secrecytest TESTNAME kabc-secrecytest ${secrecytest_SRCS})
-
-target_link_libraries(secrecytest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(secrecytest ${secrecytest_SRCS})
+add_test(secrecytest secrecytest)
+ecm_mark_as_test(secrecytest)
+target_link_libraries(secrecytest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(soundtest_SRCS soundtest.cpp)
-
-
-kde4_add_unit_test(soundtest TESTNAME kabc-soundtest ${soundtest_SRCS})
-
-target_link_libraries(soundtest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_executable(soundtest ${soundtest_SRCS})
+add_test(soundtest soundtest)
+ecm_mark_as_test(soundtest)
+target_link_libraries(soundtest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(timezonetest_SRCS timezonetest.cpp)
-
-
-kde4_add_unit_test(timezonetest TESTNAME kabc-timezonetest ${timezonetest_SRCS})
-
-target_link_libraries(timezonetest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY})
-
-########### next target ###############
-
-#set(testaddresseelist_SRCS testaddresseelist.cpp)
-
-
-#kde4_add_unit_test(testaddresseelist TESTNAME kabc-testaddresseelist ${testaddresseelist_SRCS})
-
-#target_link_libraries(testaddresseelist ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+add_executable(timezonetest ${timezonetest_SRCS})
+add_test(timezonetest timezonetest)
+ecm_mark_as_test(timezonetest)
+target_link_libraries(timezonetest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(contactgrouptest_SRCS contactgrouptest.cpp)
-
-
-kde4_add_unit_test(contactgrouptest TESTNAME kabc-contactgrouptest ${contactgrouptest_SRCS})
-
-target_link_libraries(contactgrouptest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+add_executable(contactgrouptest ${contactgrouptest_SRCS})
+add_test(contactgrouptest contactgrouptest)
+ecm_mark_as_test(contactgrouptest)
+target_link_libraries(contactgrouptest KF5Abc Qt5::Test)
 
 ########### next target ###############
 
 set(vcarddragtest_SRCS vcarddragtest.cpp)
-
-kde4_add_unit_test(vcarddragtest TESTNAME kabc-vcarddragtest ${vcarddragtest_SRCS})
-
-target_link_libraries(vcarddragtest ${KDE4_KDECORE_LIBS} kabc ${QT_QTTEST_LIBRARY})
+add_executable(vcarddragtest ${vcarddragtest_SRCS})
+add_test(vcarddragtest vcarddragtest)
+ecm_mark_as_test(vcarddragtest)
+target_link_libraries(vcarddragtest KF5Abc Qt5::Test)
