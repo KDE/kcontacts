@@ -1,10 +1,10 @@
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
+# FIXME: Make it build with this flag
+remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 
 include(ECMMarkAsTest)
 
 set(QT_REQUIRED_VERSION "5.2.0")
 find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
-
 
 ########### next target ###############
 
@@ -86,3 +86,12 @@ add_executable(vcarddragtest ${vcarddragtest_SRCS})
 add_test(vcarddragtest vcarddragtest)
 ecm_mark_as_test(vcarddragtest)
 target_link_libraries(vcarddragtest KF5Abc Qt5::Test)
+
+########### next target ###############
+
+set(testroundtrip_SRCS testroundtrip.cpp)
+qt5_add_resources(testroundtrip_SRCS testroundtrip.qrc)
+add_executable(testroundtrip ${testroundtrip_SRCS})
+add_test(testroundtrip testroundtrip)
+ecm_mark_as_test(testroundtrip)
+target_link_libraries(testroundtrip KF5Abc Qt5::Test)

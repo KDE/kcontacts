@@ -128,15 +128,4 @@ if(FALSE)
 # add_subdirectory(tests)
 #add_subdirectory( scripts )
 
-
-add_definitions(-DWANT_DEPRECATED_KABC_API)
-
-# This one won't be needed when CMake 2.8.13 is depended on.
-add_definitions(
-  -DKRESOURCES_DEPRECATED_EXPORT=KRESOURCES_EXPORT
-  -DKABC_DEPRECATED_EXPORT=KABC_EXPORT
-)
-
-########### install files ###############
-
 endif()

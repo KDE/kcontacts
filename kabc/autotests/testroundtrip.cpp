@@ -55,15 +55,15 @@ void RoundtripTest::initTestCase()
 
   mInputDir = QDir( QLatin1String( ":/input" ) );
   QVERIFY( mInputDir.exists() );
-  QVERIFY( mInputDir.cd( QLatin1String( "tests" ) ) );
+  QVERIFY( mInputDir.cd( QLatin1String( "data" ) ) );
 
   mOutput2_1Dir = QDir( QLatin1String( ":/output2.1" ) );
   QVERIFY( mOutput2_1Dir.exists() );
-  QVERIFY( mOutput2_1Dir.cd( QLatin1String( "tests" ) ) );
+  QVERIFY( mOutput2_1Dir.cd( QLatin1String( "data" ) ) );
 
   mOutput3_0Dir = QDir( QLatin1String( ":/output3.0" ) );
   QVERIFY( mOutput3_0Dir.exists() );
-  QVERIFY( mOutput3_0Dir.cd( QLatin1String( "tests" ) ) );
+  QVERIFY( mOutput3_0Dir.cd( QLatin1String( "data" ) ) );
 
   // check that there are input files
 
