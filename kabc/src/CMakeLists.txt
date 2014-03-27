@@ -65,19 +65,19 @@ install(TARGETS KF5Abc EXPORT KF5AbcTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 ecm_generate_headers(KAbc_CamelCase_HEADERS
   HEADER_NAMES
   Address
-  #AddressBook FIXME
+  #AddressBook FIXME where do these headers come from ?
   #AddressLineEdit
   Addressee
   # AddresseeDialog
   AddresseeList
   ContactGroup
   ContactGroupTool
-  #DistributionList
-  #DistributionListDialog
+  # DistributionList
+  # DistributionListDialog
   EmailSelectDialog
   ErrorHandler
   Field
-  #Format
+  Format
   #FormatFactory
   Geo
   Key
@@ -88,12 +88,12 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   Picture
   Plugin
   #Resource
-  #ResourceABC
-  #ResourceCached
+  ResourceABC
+  # ResourceCached
   Secrecy
   SortMode
   Sound
-  #StdAddressBook
+  StdAddressBook
   TimeZone
   VCardConverter
   VCardDrag
@@ -116,8 +116,11 @@ install(FILES
     COMPONENT Devel
 )
 
+install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
+
 ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5KAbc DEPS "CoreAddons ItemViews I18n KDE4Support" FILENAME_VAR PRI_FILENAME)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+
 if(FALSE)
 
 # FIXME: vcardparser contains manual tests it seems
@@ -136,5 +139,4 @@ add_definitions(
 
 ########### install files ###############
 
-install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 endif()
