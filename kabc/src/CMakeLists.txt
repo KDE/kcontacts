@@ -1,3 +1,5 @@
+# FIXME: Make it build with this flag
+remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 
 set(vcardparser_SRCS
   vcardparser/vcard.cpp
@@ -38,7 +40,7 @@ add_library(KF5Abc ${kabc_SRCS})
 
 generate_export_header(KF5Abc BASE_NAME kabc)
 
-# FIXME ? KF5::Abc? KF5::AddressBook?
+# FIXME ? KF5::Abc? KF5::AddressBook? KF5::ABC?
 add_library(KF5::Abc ALIAS KF5Abc)
 
 target_include_directories(KF5Abc INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kabc>")
