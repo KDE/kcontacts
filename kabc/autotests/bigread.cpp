@@ -52,29 +52,29 @@ int main( int argc, char **argv )
   times( &start );
 
 #if 0
-  kDebug() << "utime :" << int( start.tms_utime );
-  kDebug() << "stime :" << int( start.tms_stime );
-  kDebug() << "cutime:" << int( start.tms_cutime );
-  kDebug() << "cstime:" << int( start.tms_cstime );
+  qDebug() << "utime :" << int( start.tms_utime );
+  qDebug() << "stime :" << int( start.tms_stime );
+  qDebug() << "cutime:" << int( start.tms_cutime );
+  qDebug() << "cstime:" << int( start.tms_cstime );
 #endif
 
-  kDebug() << "Start load";
+  qDebug() << "Start load";
   ab.load();
-  kDebug() << "Finished load";
+  qDebug() << "Finished load";
 
   struct tms end;
 
   times( &end );
 
 #if 0
-  kDebug() << "utime :" << int( end.tms_utime );
-  kDebug() << "stime :" << int( end.tms_stime );
-  kDebug() << "cutime:" << int( end.tms_cutime );
-  kDebug() << "cstime:" << int( end.tms_cstime );
+  qDebug() << "utime :" << int( end.tms_utime );
+  qDebug() << "stime :" << int( end.tms_stime );
+  qDebug() << "cutime:" << int( end.tms_cutime );
+  qDebug() << "cstime:" << int( end.tms_cstime );
 #endif
 
-  kDebug() << "UTime:" << int( end.tms_utime ) - int( start.tms_utime );
-  kDebug() << "STime:" << int( end.tms_stime ) - int( start.tms_stime );
+  qDebug() << "UTime:" << int( end.tms_utime ) - int( start.tms_utime );
+  qDebug() << "STime:" << int( end.tms_stime ) - int( start.tms_stime );
 
 //  ab.dump();
 }

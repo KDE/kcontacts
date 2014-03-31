@@ -78,7 +78,7 @@ void ResourceFileConfig::loadSettings( KRES::Resource *res )
   ResourceFile *resource = dynamic_cast<ResourceFile*>( res );
 
   if ( !resource ) {
-    kDebug() << "cast failed";
+    qDebug() << "cast failed";
     return;
   }
 
@@ -95,7 +95,7 @@ void ResourceFileConfig::saveSettings( KRES::Resource *res )
   ResourceFile *resource = dynamic_cast<ResourceFile*>( res );
 
   if ( !resource ) {
-    kDebug() << "cast failed";
+    qDebug() << "cast failed";
     return;
   }
 

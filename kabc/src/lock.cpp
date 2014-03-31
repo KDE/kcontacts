@@ -108,7 +108,7 @@ QString Lock::lockFileName() const
 bool Lock::lock()
 {
   QString lockName = lockFileName();
-  kDebug() << "-- lock name:" << lockName;
+  qDebug() << "-- lock name:" << lockName;
 
   if ( QFile::exists( lockName ) ) {  // check if it is a stale lock file
     int pid;
@@ -122,7 +122,7 @@ bool Lock::lock()
     int retval = ::kill( pid, 0 );
     if ( retval == -1 && errno == ESRCH ) { // process doesn't exists anymore
       QFile::remove( lockName );
-      kWarning() << "Removed stale lock file from process '" << app << "'";
+      qWarning() << "Removed stale lock file from process '" << app << "'";
     } else {
       d->mError = i18n( "The resource '%1' is locked by application '%2'.",
                         d->mOrigIdentifier, app );
@@ -134,7 +134,7 @@ bool Lock::lock()
   lockUniqueName = d->mIdentifier + KRandom::randomString( 8 );
   d->mLockUniqueName = KStandardDirs::locateLocal(
     "data", QLatin1String( "kabc/lock/" ) + lockUniqueName );
-  kDebug() << "-- lock unique name:" << d->mLockUniqueName;
+  qDebug() << "-- lock unique name:" << d->mLockUniqueName;
 
   // Create unique file
   writeLockFile( d->mLockUniqueName );
@@ -166,7 +166,7 @@ bool Lock::unlock()
       emit unlocked();
     } else {
       d->mError = i18n( "Unlock failed. Lock file is owned by other process: %1 (%2)", app, pid );
-      kDebug() << d->mError;
+      qDebug() << d->mError;
       return false;
     }
   }

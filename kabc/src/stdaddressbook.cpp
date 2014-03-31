@@ -73,7 +73,7 @@ QString StdAddressBook::directoryName()
 
 StdAddressBook *StdAddressBook::self()
 {
-  kDebug();
+  qDebug();
 
   // delegate to other self() method since the only difference
   // was the constructor being used and their only difference is
@@ -83,12 +83,12 @@ StdAddressBook *StdAddressBook::self()
 
 StdAddressBook *StdAddressBook::self( bool asynchronous )
 {
-  kDebug() << "asynchronous=" << asynchronous;
+  qDebug() << "asynchronous=" << asynchronous;
 
   if ( !s_gStdAddressBook ) {
     s_gStdAddressBook = new StdAddressBook( asynchronous, false );
 
-    kDebug() << "calling init after instance creation";
+    qDebug() << "calling init after instance creation";
     s_gStdAddressBook->d->init( asynchronous );
 
     // We don't use a global static here for this reason:
@@ -109,7 +109,7 @@ StdAddressBook *StdAddressBook::self( bool asynchronous )
 StdAddressBook::StdAddressBook()
   : AddressBook( QString() ), d( new Private( this ) )
 {
-  kDebug();
+  qDebug();
 
   d->init( false );
 }
@@ -117,7 +117,7 @@ StdAddressBook::StdAddressBook()
 StdAddressBook::StdAddressBook( bool asynchronous )
   : AddressBook( QString() ), d( new Private( this ) )
 {
-  kDebug();
+  qDebug();
 
   d->init( asynchronous );
 }
@@ -125,7 +125,7 @@ StdAddressBook::StdAddressBook( bool asynchronous )
 StdAddressBook::StdAddressBook( bool asynchronous, bool doInit )
   : AddressBook( QString() ), d( new Private( this ) )
 {
-  kDebug();
+  qDebug();
 
   if ( doInit ) {
     d->init( asynchronous );
@@ -170,7 +170,7 @@ void StdAddressBook::Private::init( bool asynchronous )
       res->setResourceName( i18n( "Default Address Book" ) );
       mParent->addResource( res );
     } else {
-      kDebug() << "No resource available!!!";
+      qDebug() << "No resource available!!!";
     }
   }
 
@@ -186,7 +186,7 @@ void StdAddressBook::Private::init( bool asynchronous )
 
 bool StdAddressBook::Private::saveAll()
 {
-  kDebug();
+  qDebug();
   bool ok = true;
 
   KRES::Manager<Resource>::ActiveIterator it;
@@ -212,7 +212,7 @@ bool StdAddressBook::Private::saveAll()
 
 bool StdAddressBook::save()
 {
-  kDebug();
+  qDebug();
 
   if ( s_gStdAddressBook ) {
     return s_gStdAddressBook->d->saveAll();

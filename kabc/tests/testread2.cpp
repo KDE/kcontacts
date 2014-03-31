@@ -35,9 +35,9 @@ int main()
   Addressee::List parsed = vct.parseVCards( vcards );
 
   if ( l.size() != parsed.size() ) {
-    kDebug() << "\tSize - FAILED :" << l.size() << "vs. parsed" << parsed.size();
+    qDebug() << "\tSize - FAILED :" << l.size() << "vs. parsed" << parsed.size();
   } else {
-    kDebug() << "\tSize - PASSED";
+    qDebug() << "\tSize - PASSED";
   }
 
   Addressee::List::iterator itr1;
@@ -49,13 +49,13 @@ int main()
          ( *itr1 ).phoneNumbers() == ( *itr2 ).phoneNumbers()  &&
          ( *itr1 ).emails() == ( *itr2 ).emails() &&
          ( *itr1 ).role() == ( *itr2 ).role() ) {
-      kDebug() << "\tAddressee  - PASSED";
-      kDebug() << "\t\t" << ( *itr1 ).fullEmail() << "VS." << ( *itr2 ).fullEmail();
+      qDebug() << "\tAddressee  - PASSED";
+      qDebug() << "\t\t" << ( *itr1 ).fullEmail() << "VS." << ( *itr2 ).fullEmail();
     } else {
-      kDebug() << "\tAddressee  - FAILED";
-      kDebug() << ( *itr1 ).toString();
-      kDebug() << ( *itr2 ).toString();
-      //kDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
+      qDebug() << "\tAddressee  - FAILED";
+      qDebug() << ( *itr1 ).toString();
+      qDebug() << ( *itr2 ).toString();
+      //qDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
     }
   }
 }

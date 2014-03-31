@@ -132,14 +132,14 @@ bool Ldif::splitLine( const QByteArray &line, QString &fieldname, QByteArray &va
   QByteArray tmp;
   int linelen;
 
-//  kDebug() << "line:" << QString::fromUtf8(line);
+//  qDebug() << "line:" << QString::fromUtf8(line);
 
   position = line.indexOf( ":" );
   if ( position == -1 ) {
     // strange: we did not find a fieldname
     fieldname = QLatin1String( "" );
     value = line.trimmed();
-//    kDebug() << "value :" << value[0];
+//    qDebug() << "value :" << value[0];
     return false;
   }
 
@@ -181,7 +181,7 @@ bool Ldif::splitControl( const QByteArray &line, QString &oid, bool &critical,
   critical = false;
   bool url = splitLine( line, tmp, value );
 
-  kDebug() << "value:" << QString::fromUtf8( value, value.size() );
+  qDebug() << "value:" << QString::fromUtf8( value, value.size() );
   if ( tmp.isEmpty() ) {
     tmp = QString::fromUtf8( value, value.size() );
     value.resize( 0 );
@@ -220,7 +220,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       }
     } else if ( attrLower == QLatin1String( "dn" ) ) {
-      kDebug() << "ldapentry dn:" << QString::fromUtf8( d->mValue, d->mValue.size() );
+      qDebug() << "ldapentry dn:" << QString::fromUtf8( d->mValue, d->mValue.size() );
       d->mDn = LdapDN( QString::fromUtf8( d->mValue, d->mValue.size() ) );
       d->mModType = Mod_None;
       retval = NewEntry;
@@ -229,7 +229,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       } else {
         QString tmpval = QString::fromUtf8( d->mValue, d->mValue.size() );
-        kDebug() << "changetype:" << tmpval;
+        qDebug() << "changetype:" << tmpval;
         if ( tmpval == QLatin1String( "add" ) ) {
           d->mEntryType = Entry_Add;
         } else if ( tmpval == QLatin1String( "delete" ) ) {
@@ -269,7 +269,7 @@ Ldif::ParseValue Ldif::processLine()
     break;
   case Entry_Mod:
     if ( d->mModType == Mod_None ) {
-      kDebug() << "new modtype" << d->mAttr;
+      qDebug() << "new modtype" << d->mAttr;
       if ( d->mAttr.isEmpty() && d->mValue.size() == 0 ) {
         retval = EndEntry;
       } else if ( attrLower == QLatin1String( "add" ) ) {

@@ -164,7 +164,7 @@ Addressee& Addressee::operator=( const Addressee &other )
 bool Addressee::operator==( const Addressee &addressee ) const
 {
   if ( d->mUid != addressee.d->mUid ) {
-    kDebug() << "uid differs";
+    qDebug() << "uid differs";
     return false;
   }
 
@@ -301,37 +301,37 @@ bool Addressee::operator==( const Addressee &addressee ) const
 
   if ( ( d->mUrl.isValid() || addressee.d->mUrl.isValid() ) &&
        ( d->mUrl != addressee.d->mUrl ) ) {
-    kDebug() << "url differs";
+    qDebug() << "url differs";
     return false;
   }
 
   if ( !listEquals( d->mPhoneNumbers, addressee.d->mPhoneNumbers ) ) {
-    kDebug() << "phoneNumbers differs";
+    qDebug() << "phoneNumbers differs";
     return false;
   }
 
   if ( !listEquals( d->mAddresses, addressee.d->mAddresses ) ) {
-    kDebug() << "addresses differs";
+    qDebug() << "addresses differs";
     return false;
   }
 
   if ( !listEquals( d->mKeys, addressee.d->mKeys ) ) {
-    kDebug() << "keys differs";
+    qDebug() << "keys differs";
     return false;
   }
 
   if ( !emailsEquals( d->mEmails, addressee.d->mEmails ) ) {
-    kDebug() << "emails differs";
+    qDebug() << "emails differs";
     return false;
   }
 
   if ( !listEquals( d->mCategories, addressee.d->mCategories ) ) {
-    kDebug() << "categories differs";
+    qDebug() << "categories differs";
     return false;
   }
 
   if ( d->mCustomFields != addressee.d->mCustomFields ) {
-    kDebug() << "custom differs";
+    qDebug() << "custom differs";
     return false;
   }
 

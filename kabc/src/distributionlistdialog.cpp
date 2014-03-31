@@ -203,7 +203,7 @@ DistributionListEditorWidget::DistributionListEditorWidget( AddressBook *address
                                                             QWidget *parent )
   : QWidget( parent ), d( new Private( addressBook, this ) )
 {
-  kDebug();
+  qDebug();
 
   QBoxLayout *topLayout = new QVBoxLayout( this );
 
@@ -363,7 +363,7 @@ void DistributionListEditorWidget::Private::addEntry()
 {
   QList<QTreeWidgetItem*> selected = mAddresseeView->selectedItems();
   if ( selected.count() == 0 ) {
-    kDebug() << "No addressee selected.";
+    qDebug() << "No addressee selected.";
     return;
   }
   AddresseeItem *addresseeItem =
@@ -371,7 +371,7 @@ void DistributionListEditorWidget::Private::addEntry()
 
   DistributionList *list = mAddressBook->findDistributionListByName( mNameCombo->currentText() );
   if ( !list ) {
-    kDebug() << "No dist list '" << mNameCombo->currentText() << "'";
+    qDebug() << "No dist list '" << mNameCombo->currentText() << "'";
     return;
   }
 

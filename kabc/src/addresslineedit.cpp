@@ -428,8 +428,8 @@ void AddressLineEdit::doCompletion( bool ctrlT )
         if ( !autoSuggest ) {
           int index = items.first().indexOf( s );
           QString newText = prevAddr + items.first().mid( index );
-          //kDebug() << "OLD TEXT:" << text();
-          //kDebug() << "NEW TEXT:" << newText;
+          //qDebug() << "OLD TEXT:" << text();
+          //qDebug() << "NEW TEXT:" << newText;
           setUserSelection( false );
           setCompletedText( newText, true );
         }

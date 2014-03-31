@@ -45,18 +45,18 @@ int main( int argc, char **argv )
   if ( args->isSet( "multiple" ) ) {
     Addressee::List al = AddresseeDialog::getAddressees( 0 );
     Addressee::List::ConstIterator it;
-    kDebug() << "Selected Addressees:";
+    qDebug() << "Selected Addressees:";
     for ( it = al.constBegin(); it != al.constEnd(); ++it ) {
-      kDebug() << "  " << ( *it ).fullEmail();
+      qDebug() << "  " << ( *it ).fullEmail();
     }
   } else {
     Addressee a = AddresseeDialog::getAddressee( 0 );
 
     if ( !a.isEmpty() ) {
-      kDebug() << "Selected Addressee:";
-      kDebug() << a.toString();
+      qDebug() << "Selected Addressee:";
+      qDebug() << a.toString();
     } else {
-      kDebug() << "No Addressee selected.";
+      qDebug() << "No Addressee selected.";
     }
   }
 }

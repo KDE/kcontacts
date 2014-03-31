@@ -146,7 +146,7 @@ void ResourceDir::writeConfig( KConfigGroup &group )
 
 Ticket *ResourceDir::requestSaveTicket()
 {
-  kDebug();
+  qDebug();
 
   if ( !addressBook() ) {
     return 0;
@@ -159,7 +159,7 @@ Ticket *ResourceDir::requestSaveTicket()
     addressBook()->emitAddressBookLocked();
   } else {
     addressBook()->error( d->mLock->error() );
-    kDebug() << "Unable to lock path '" << d->mPath
+    qDebug() << "Unable to lock path '" << d->mPath
              << "':" << d->mLock->error();
     return 0;
   }
@@ -206,7 +206,7 @@ void ResourceDir::doClose()
 
 bool ResourceDir::load()
 {
-  kDebug() << d->mPath << "'";
+  qDebug() << d->mPath << "'";
 
   d->mAsynchronous = false;
 
@@ -250,7 +250,7 @@ bool ResourceDir::asyncLoad()
 
 bool ResourceDir::save( Ticket * )
 {
-  kDebug() << d->mPath << "'";
+  qDebug() << d->mPath << "'";
 
   Addressee::Map::Iterator it;
   bool ok = true;
