@@ -22,7 +22,7 @@
 
 #include <kaboutdata.h>
 #include <kapplication.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
 

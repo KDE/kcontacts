@@ -19,7 +19,7 @@
 */
 
 #include <kaboutdata.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 #include <kstandarddirs.h>
