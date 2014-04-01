@@ -24,7 +24,7 @@
 #include "kabc/formatfactory.h"
 #include "kabc/stdaddressbook.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kdialog.h>
 

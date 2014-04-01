@@ -22,7 +22,7 @@
 
 #include "ldif_p.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 
 class Ldif::LdifPrivate
 {

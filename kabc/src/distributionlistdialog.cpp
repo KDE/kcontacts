@@ -25,7 +25,7 @@
 
 #include <kinputdialog.h>
 #include <klocalizedstring.h>
-#include <qdebug.h>
+#include <kdebug.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
 

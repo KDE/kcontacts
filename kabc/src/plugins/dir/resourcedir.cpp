@@ -27,7 +27,7 @@
 #include "kabc/lock.h"
 
 #include <kconfiggroup.h>
-#include <qdebug.h>
+#include <kdebug.h>
 #include <kgenericfactory.h>
 #include <kglobal.h>
 #include <klocalizedstring.h>

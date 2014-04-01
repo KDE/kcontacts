@@ -23,7 +23,7 @@
 #include "stdaddressbook.h"
 #endif
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 
 #include <QtCore/QPointer>

@@ -24,7 +24,7 @@
 
 #include <algorithm>
 
-#include <qdebug.h>
+#include <kdebug.h>
 
 class LdapDN::LdapDNPrivate
 {

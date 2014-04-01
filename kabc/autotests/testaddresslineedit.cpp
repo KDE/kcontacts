@@ -20,7 +20,7 @@
 
 #include <kaboutdata.h>
 #include <kapplication.h>
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 

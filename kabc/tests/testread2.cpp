@@ -21,7 +21,7 @@
 #include "testutils.h"
 #include <kabc/addressee.h>
 #include <vcardconverter.h>
-#include <qdebug.h>
+#include <kdebug.h>
 
 using namespace KABC;
 

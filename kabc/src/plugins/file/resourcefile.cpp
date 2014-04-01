@@ -28,7 +28,7 @@
 
 #include <kio/scheduler.h>
 #include <kconfiggroup.h>
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <ksavefile.h>
 #include <kstandarddirs.h>

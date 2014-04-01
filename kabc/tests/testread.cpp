@@ -23,7 +23,7 @@
 
 #include <QtCore/QFile>
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <kcomponentdata.h>
 #include <kcmdlineargs.h>
 #include <klocalizedstring.h>

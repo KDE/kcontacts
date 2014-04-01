@@ -22,7 +22,7 @@
 
 #include <kabc/vcardconverter.h>
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kstandarddirs.h>
 

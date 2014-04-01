@@ -23,7 +23,7 @@
 
 #include "kresources/manager.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
