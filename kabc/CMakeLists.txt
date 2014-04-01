@@ -26,7 +26,10 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KABC
 )
 
 ########### Find packages ###########
-find_package(KF5 ${KF5_VERSION} CONFIG REQUIRED COMPONENTS CoreAddons ItemViews I18n KDE4Support)
+find_package(KF5CoreAddons ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5ItemViews ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5KDE4Support ${KF5_VERSION} CONFIG REQUIRED)
 
 ########### Targets ###########
 
