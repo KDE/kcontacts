@@ -24,7 +24,7 @@
 #include <kio/netaccess.h>
 #include <kacceleratormanager.h>
 #include <kcombobox.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <klocalizedstring.h>
 #include <klineedit.h>
 #include <kmessagebox.h>

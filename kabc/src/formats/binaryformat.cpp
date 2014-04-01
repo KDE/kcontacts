@@ -24,7 +24,7 @@
 #include "kabc/picture.h"
 #include "kabc/sound.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 #include <klocalizedstring.h>
 #include <kstandarddirs.h>
 

@@ -32,7 +32,7 @@
 #include <kcompletionbox.h>
 #include <kconfig.h>
 #include <kcursor.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <kstandarddirs.h>
 #include <kstandardshortcut.h>
 

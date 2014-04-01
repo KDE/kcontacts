@@ -20,7 +20,7 @@
 
 #include "resource.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 #include <klocalizedstring.h>
 
 using namespace KABC;

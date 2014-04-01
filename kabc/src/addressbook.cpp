@@ -23,7 +23,7 @@
 #include "errorhandler.h"
 #include "resource.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 #include <kglobal.h>
 #include <kcomponentdata.h>
 #include <klocalizedstring.h>

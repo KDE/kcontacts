@@ -24,7 +24,7 @@
 #include <kconfig.h>
 #include <krandom.h>
 #include <kstandarddirs.h>
-#include <kdebug.h>
+#include <qdebug.h>
 
 #include <QApplication>
 #include <QtCore/QPair>

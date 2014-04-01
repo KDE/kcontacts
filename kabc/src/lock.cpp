@@ -22,7 +22,7 @@
 
 #include <krandom.h>
 #include <kcomponentdata.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <kglobal.h>
 #include <klocalizedstring.h>
 #include <kstandarddirs.h>
@@ -95,7 +95,7 @@ bool Lock::writeLockFile( const QString &filename )
   }
 
   QTextStream t( &file );
-  t << ::getpid() << endl << QString( KGlobal::mainComponent().componentName() );
+  t << ::getpid()  << QString( KGlobal::mainComponent().componentName() );
 
   return true;
 }

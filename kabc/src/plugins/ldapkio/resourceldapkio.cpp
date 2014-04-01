@@ -28,7 +28,7 @@
 
 #include <kio/netaccess.h>
 #include <kio/udsentry.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <kde_file.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>

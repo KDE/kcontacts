@@ -20,7 +20,7 @@
 
 #include "vcardparser.h"
 #include <kcodecs.h>
-#include <kdebug.h>
+#include <qdebug.h>
 #include <QtCore/QTextCodec>
 
 class StringCache
