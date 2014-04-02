@@ -303,7 +303,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
     }
     qDebug() << "itkey:" << it.key() << "i:" << i;
     label = new QLabel( mNameDict[ it.key() ] + QLatin1Char( ':' ), page );
-    KLineEdit *lineedit = new KLineEdit( page );
+    QLineEdit *lineedit = new QLineEdit( page );
     mLineEditDict.insert( it.key(), lineedit );
     lineedit->setText( it.value() );
     label->setBuddy( lineedit );
@@ -312,7 +312,7 @@ AttributesDialog::AttributesDialog( const QMap<QString, QString> &attributes,
   }
 
   for ( i = 1; i < mMapCombo->count(); ++i ) {
-    QHash<QString,KLineEdit*>::const_iterator it2 = mLineEditDict.constBegin();
+    QHash<QString,QLineEdit*>::const_iterator it2 = mLineEditDict.constBegin();
     while ( it2 != mLineEditDict.constEnd() ) {
       if ( mMapList[ i ].contains( it2.key() ) ) {
         if ( mMapList[ i ][ it2.key() ] != it2.value()->text() ) {
@@ -343,7 +343,7 @@ QMap<QString, QString> AttributesDialog::attributes() const
 {
   QMap<QString, QString> map;
 
-  QHash<QString,KLineEdit*>::const_iterator it = mLineEditDict.constBegin();
+  QHash<QString,QLineEdit*>::const_iterator it = mLineEditDict.constBegin();
   while ( it != mLineEditDict.constEnd() ) {
     map.insert( it.key(), it.value()->text() );
     ++it;
@@ -367,7 +367,7 @@ void AttributesDialog::mapChanged( int pos )
 
   for ( it = mMapList[ pos ].begin(); it != mMapList[ pos ].end(); ++it ) {
     if ( !it.value().isEmpty() ) {
-      KLineEdit *le = mLineEditDict[ it.key() ];
+      QLineEdit *le = mLineEditDict[ it.key() ];
       if ( le ) {
         le->setText( it.value() );
       }

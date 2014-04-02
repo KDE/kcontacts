@@ -95,7 +95,7 @@ class AddresseeDialog::Private
     bool mMultiple;
 
     QTreeWidget *mAddresseeList;
-    KLineEdit *mAddresseeEdit;
+    QLineEdit *mAddresseeEdit;
 
     QTreeWidget *mSelectedList;
 
@@ -133,7 +133,7 @@ AddresseeDialog::AddresseeDialog( QWidget *parent, bool multiple )
   connect( d->mAddresseeList, SIGNAL(itemSelectionChanged()),
            SLOT(updateEdit()) );
 
-  d->mAddresseeEdit = new KLineEdit( topWidget );
+  d->mAddresseeEdit = new QLineEdit( topWidget );
   d->mAddresseeEdit->setCompletionMode( KGlobalSettings::CompletionAuto );
   connect( d->mAddresseeEdit->completionObject(), SIGNAL(match(QString)),
            SLOT(selectItem(QString)) );

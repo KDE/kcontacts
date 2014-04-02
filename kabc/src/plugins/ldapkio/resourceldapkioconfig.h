@@ -39,7 +39,7 @@ class QPushButton;
 class QString;
 
 class KComboBox;
-class KLineEdit;
+class QLineEdit;
 
 namespace KABC {
 
@@ -94,7 +94,7 @@ class AttributesDialog : public KDialog
     KComboBox *mMapCombo, *mRDNCombo;
     QList< QMap<QString, QString> > mMapList;
     QMap<QString, QString> mDefaultMap;
-    QHash<QString, KLineEdit*> mLineEditDict;
+    QHash<QString, QLineEdit*> mLineEditDict;
     QHash<QString, QString> mNameDict;
 };
 

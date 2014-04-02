@@ -191,7 +191,7 @@ void AddressLineEdit::Private::slotPopupCompletion( const QString &completion )
 bool AddressLineEdit::Private::sAddressesDirty = false;
 
 AddressLineEdit::AddressLineEdit( QWidget *parent, bool useCompletion )
-  : KLineEdit( parent ), d( new Private( this ) )
+  : QLineEdit( parent ), d( new Private( this ) )
 {
   d->mUseCompletion = useCompletion;
 
@@ -214,7 +214,7 @@ AddressLineEdit::~AddressLineEdit()
 
 void AddressLineEdit::setFont( const QFont &font )
 {
-  KLineEdit::setFont( font );
+  QLineEdit::setFont( font );
   if ( d->mUseCompletion ) {
     completionBox()->setFont( font );
   }
@@ -240,7 +240,7 @@ void AddressLineEdit::keyPressEvent( QKeyEvent *event )
   }
 
   if ( !accept ) {
-    KLineEdit::keyPressEvent( event );
+    QLineEdit::keyPressEvent( event );
   }
 }
 
@@ -248,18 +248,18 @@ void AddressLineEdit::mouseReleaseEvent( QMouseEvent *event )
 {
   if ( d->mUseCompletion && ( event->button() == Qt::MidButton ) ) {
     d->mSmartPaste = true;
-    KLineEdit::mouseReleaseEvent( event );
+    QLineEdit::mouseReleaseEvent( event );
     d->mSmartPaste = false;
     return;
   }
 
-  KLineEdit::mouseReleaseEvent( event );
+  QLineEdit::mouseReleaseEvent( event );
 }
 
 void AddressLineEdit::insert( const QString &oldText )
 {
   if ( !d->mSmartPaste ) {
-    KLineEdit::insert( oldText );
+    QLineEdit::insert( oldText );
     return;
   }
 
@@ -323,7 +323,7 @@ void AddressLineEdit::paste()
     d->mSmartPaste = true;
   }
 
-  KLineEdit::paste();
+  QLineEdit::paste();
   d->mSmartPaste = false;
 }
 
@@ -418,7 +418,7 @@ void AddressLineEdit::doCompletion( bool ctrlT )
 
         items = d->removeMailDupes( items );
 
-        // We do not want KLineEdit::setCompletedItems to perform text
+        // We do not want QLineEdit::setCompletedItems to perform text
         // completion (suggestion) since it does not know how to deal
         // with providing proper completions for different items on the
         // same line, e.g. comma-separated list of email addresses.
@@ -519,7 +519,7 @@ void AddressLineEdit::dropEvent( QDropEvent *event )
        d->mSmartPaste = true;
     }
 
-    KLineEdit::dropEvent( event );
+    QLineEdit::dropEvent( event );
     d->mSmartPaste = false;
   }
 }
