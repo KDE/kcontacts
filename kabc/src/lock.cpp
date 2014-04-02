@@ -35,6 +35,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -71,7 +72,7 @@ Lock::~Lock()
 
 QString Lock::locksDir()
 {
-  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/lock/" ) );
+  return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/lock/" ) ;
 }
 
 bool Lock::readLockFile( const QString &filename, int &pid, QString &app )

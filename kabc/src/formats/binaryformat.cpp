@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 #include <klocalizedstring.h>
-#include <kstandarddirs.h>
+
 
 #include <QtCore/QDataStream>
 #include <QImage>

@@ -43,6 +43,7 @@
 #include <QtCore/QFile>
 
 #include <stdlib.h>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -103,7 +104,7 @@ class ResourceLDAPKIO::Private
 ResourceLDAPKIO::ResourceLDAPKIO()
   : Resource(), d( new Private( this ) )
 {
-  d->mCacheDst = KGlobal::dirs()->saveLocation( "cache", QLatin1String( "ldapkio" ) ) +
+  d->mCacheDst = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + '/' + QLatin1String( "ldapkio"  +
                  QLatin1Char( '/' ) + type() + QLatin1Char( '_' ) + identifier();
   init();
 }

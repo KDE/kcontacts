@@ -550,7 +550,7 @@ void Field::deleteFields()
 void Field::saveFields( const QString &identifier,
                         const Field::List &fields )
 {
-  KConfigGroup cg( KGlobal::config(), "KABCFields" );
+  KConfigGroup cg( KSharedConfig::openConfig(), "KABCFields" );
 
   saveFields( cg, identifier, fields );
 }
@@ -579,7 +579,7 @@ void Field::saveFields( KConfigGroup &cfg, const QString &identifier,
 
 Field::List Field::restoreFields( const QString &identifier )
 {
-  KConfigGroup cg( KGlobal::config(), "KABCFields" );
+  KConfigGroup cg( KSharedConfig::openConfig(), "KABCFields" );
 
   return restoreFields( cg, identifier );
 }

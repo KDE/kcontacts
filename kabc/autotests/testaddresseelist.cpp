@@ -22,7 +22,7 @@
 #include <qdebug.h>
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
-#include <kstandarddirs.h>
+
 
 #include "kabc/addressbook.h"
 #include "kabc/addresseelist.h"

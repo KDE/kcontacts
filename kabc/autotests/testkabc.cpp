@@ -30,7 +30,7 @@
 #include <qdebug.h>
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
-#include <kstandarddirs.h>
+
 
 #include <QtCore/QFile>
 #include <QImage>

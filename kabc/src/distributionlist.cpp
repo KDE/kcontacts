@@ -23,7 +23,7 @@
 
 #include <kconfig.h>
 #include <krandom.h>
-#include <kstandarddirs.h>
+
 #include <kdebug.h>
 
 #include <QApplication>

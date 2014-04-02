@@ -33,6 +33,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QTextStream>
 #include <QtCore/QSharedData>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -591,7 +592,7 @@ QString Address::formattedAddress( const QString &realName,
   // now add the country line if needed (formatting this time according to
   // the rules of our own system country )
   if ( !country().isEmpty() ) {
-    KConfig entry( KStandardDirs::locate( "locale", QLatin1String( "l10n/" ) +
+    KConfig entry( QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String( "l10n/" ) +
                                           KGlobal::locale()->country() +
                                           QLatin1String( "/entry.desktop" ) ) );
     KConfigGroup group = entry.group( "KCM Locale" );
@@ -624,7 +625,7 @@ QString Address::countryToISO( const QString &cname )
     return it.value();
   }
 
-  QString mapfile = KGlobal::dirs()->findResource( "data",
+  QString mapfile = KStandardDirs::locate( "data",
           QLatin1String( "kabc/countrytransl.map" ) );
 
   QFile file( mapfile );
@@ -655,7 +656,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
     return QString();
   }
 
-  QString mapfile = KGlobal::dirs()->findResource( "data",
+  QString mapfile = KStandardDirs::locate( "data",
           QLatin1String( "kabc/countrytransl.map" ) );
 
   QFile file( mapfile );

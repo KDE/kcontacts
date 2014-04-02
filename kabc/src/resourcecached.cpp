@@ -24,9 +24,10 @@
 
 #include <kdebug.h>
 #include <klocalizedstring.h>
-#include <kstandarddirs.h>
+
 
 #include <QtCore/QFile>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -273,12 +274,12 @@ KABC::Addressee::List ResourceCached::deletedAddressees() const
 
 QString ResourceCached::cacheFile() const
 {
-  return KStandardDirs::locateLocal( "cache", QLatin1String( "kabc/kresources/" ) + identifier() );
+  return QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QLatin1String( "kabc/kresources/" ) + identifier() ;
 }
 
 QString ResourceCached::changesCacheFile( const QString &type ) const
 {
-  return KStandardDirs::locateLocal( "cache", QLatin1String( "kabc/changescache/" ) + identifier() +
+  return QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QLatin1String( "kabc/changescache/" ) + identifier( +
                                      QLatin1Char( '_' ) + type );
 }
 

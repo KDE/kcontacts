@@ -26,12 +26,13 @@
 #include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
-#include <kstandarddirs.h>
+
 #include <kconfiggroup.h>
 
  #include <QCoreApplication>
 
 #include <stdlib.h>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -63,12 +64,12 @@ static void deleteGlobalStdAddressBook()
 
 QString StdAddressBook::fileName()
 {
-  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/std.vcf" ) );
+  return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/std.vcf" ) ;
 }
 
 QString StdAddressBook::directoryName()
 {
-  return KStandardDirs::locateLocal( "data", QLatin1String( "kabc/stdvcf" ) );
+  return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/stdvcf" ) ;
 }
 
 StdAddressBook *StdAddressBook::self()

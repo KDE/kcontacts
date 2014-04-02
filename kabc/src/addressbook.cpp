@@ -27,7 +27,7 @@
 #include <kglobal.h>
 #include <kcomponentdata.h>
 #include <klocalizedstring.h>
-#include <kstandarddirs.h>
+
 
 
 using namespace KABC;

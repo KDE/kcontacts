@@ -31,7 +31,7 @@
 #include <kgenericfactory.h>
 #include <kglobal.h>
 #include <klocalizedstring.h>
-#include <kstandarddirs.h>
+
 #include <kurlrequester.h>
 
 #include <sys/types.h>

@@ -24,6 +24,7 @@
 #include <kconfiggroup.h>
 #include "kstandarddirs.h"
 #include <qtest_kde.h>
+#include <QStandardPaths>
 
 QTEST_KDEMAIN( AddressTest, NoGUI )
 
@@ -146,7 +147,7 @@ void AddressTest::formatTest()
 {
   {
     // check availability of country to ISO code mapping data file
-    const QString mapfile = KGlobal::dirs()->findResource( "data", QLatin1String( "kabc/countrytransl.map" ) );
+    const QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String( "kabc/countrytransl.map" ) );
     QVERIFY2( !mapfile.isEmpty(), "Country to ISO code mapping data file does not exist" );
 
     QFileInfo fileInfo( mapfile );

@@ -41,6 +41,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <unistd.h>
+#include <QStandardPaths>
 
 using namespace KABC;
 
@@ -102,7 +103,7 @@ void ResourceFile::init( const QString &fileName, const QString &formatName )
 
   setFileName( fileName );
 
-  mDirWatch.addFile( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
+  mDirWatch.addFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/distlists" ) ) ;
 
   mLock = 0;
 }
@@ -293,7 +294,7 @@ void ResourceFile::emitSavingFinished()
 
 bool ResourceFile::loadDistributionLists()
 {
-  KConfig cfg( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
+  KConfig cfg( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/distlists" ) ) ;
 
   KConfigGroup cg( &cfg, "DistributionLists" );
   KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
@@ -354,7 +355,7 @@ void ResourceFile::saveDistributionLists()
 {
   qDebug();
 
-  KConfig cfg( KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) );
+  KConfig cfg( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/distlists" ) ) ;
   KConfigGroup cg( &cfg, "DistributionLists" );
   cg.deleteGroup();
   KConfigGroup cgId( &cfg, "DistributionLists-Identifiers" );
@@ -436,7 +437,7 @@ void ResourceFile::fileChanged( const QString &path )
     return;
   }
 
-  if ( path == KStandardDirs::locateLocal( "data", QLatin1String( "kabc/distlists" ) ) ) {
+  if ( path == QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String( "kabc/distlists" ) )  {
     // clear old distribution lists
     // take a copy of mDistListMap, then clear it and finally qDeleteAll
     // the copy to avoid problems with removeDistributionList() called by

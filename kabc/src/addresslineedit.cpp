@@ -33,7 +33,7 @@
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
-#include <kstandarddirs.h>
+
 #include <kstandardshortcut.h>
 
 #include "stdaddressbook.h"
