@@ -563,12 +563,12 @@ class KABC_EXPORT Addressee
     /**
       Set homepage.
      */
-    void setUrl( const KUrl &url );
+    void setUrl( const QUrl &url );
 
     /**
       Return homepage.
      */
-    KUrl url() const;
+    QUrl url() const;
 
     /**
       Return translated label for url field.

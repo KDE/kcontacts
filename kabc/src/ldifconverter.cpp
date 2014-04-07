@@ -165,9 +165,9 @@ bool LDIFConverter::addresseeToLDIF( const Addressee &addr, QString &str )
                                                              QLatin1String( "X-Department" ) ) );
   }
 
-  ldif_out( t, QLatin1String( "workurl" ), addr.url().prettyUrl() );
-  ldif_out( t, QLatin1String( "homeurl" ), addr.url().prettyUrl() );
-  ldif_out( t, QLatin1String( "mozillahomeurl" ), addr.url().prettyUrl() );
+  ldif_out( t, QLatin1String( "workurl" ), addr.url().toDisplayString() );
+  ldif_out( t, QLatin1String( "homeurl" ), addr.url().toDisplayString() );
+  ldif_out( t, QLatin1String( "mozillahomeurl" ), addr.url().toDisplayString() );
 
   ldif_out( t, QLatin1String( "description" ), addr.note() );
   if ( addr.revision().isValid() ) {
@@ -364,7 +364,7 @@ addComment:
       a.setUrl( KUrl( value ) );
       return true;
     }
-    if ( a.url().prettyUrl() == KUrl( value ).prettyUrl() ) {
+    if ( a.url().toDisplayString() == KUrl( value ).toDisplayString() ) {
       return true;
     }
     // TODO: current version of kabc only supports one URL.

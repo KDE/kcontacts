@@ -265,7 +265,7 @@ QString Field::value( const KABC::Addressee &a )
       else
         return QString();
     case Private::Url:
-      return a.url().prettyUrl();
+      return a.url().toDisplayString();
     case Private::HomePhone:
     {
       PhoneNumber::List::ConstIterator it;

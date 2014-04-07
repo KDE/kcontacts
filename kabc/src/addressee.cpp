@@ -118,7 +118,7 @@ class Addressee::Private : public QSharedData
     QString mProductId;
     QDateTime mRevision;
     QString mSortString;
-    KUrl mUrl;
+    QUrl mUrl;
     Secrecy mSecrecy;
     Picture mLogo;
     Picture mPhoto;
@@ -905,7 +905,7 @@ QString Addressee::sortStringLabel()
 }
 
 
-void Addressee::setUrl( const KUrl &url )
+void Addressee::setUrl( const QUrl &url )
 {
   if ( url == d->mUrl )
     return;
@@ -914,7 +914,7 @@ void Addressee::setUrl( const KUrl &url )
   d->mUrl = url;
 }
 
-KUrl Addressee::url() const
+QUrl Addressee::url() const
 {
   return d->mUrl;
 }
