@@ -10,6 +10,7 @@
     <file>data/vcard7.vcf</file>
     <file>data/vcard8.vcf</file>
     <file>data/vcard9.vcf</file>
+    <file>data/vcard10.vcf</file>
   </qresource>
 
   <!-- output files formatted for vcard version 2.1 -->
@@ -28,5 +29,6 @@
     <file>data/vcard7.vcf.ref</file>
     <file>data/vcard8.vcf.ref</file>
     <file>data/vcard9.vcf.ref</file>
+    <file>data/vcard10.vcf.ref</file>
   </qresource>
 </RCC>
