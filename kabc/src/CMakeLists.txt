@@ -51,7 +51,7 @@ target_link_libraries(KF5Abc
     KF5::CoreAddons
     KF5::ItemViews
     KF5::I18n
-    KF5::KDE4Support
+    KF5::KDELibs4Support
 )
 
 set_target_properties(KF5Abc PROPERTIES
