@@ -118,7 +118,7 @@ install(FILES
 
 install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 
-ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5KAbc DEPS "CoreAddons ItemViews I18n KDE4Support" FILENAME_VAR PRI_FILENAME)
+ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5KAbc DEPS "CoreAddons ItemViews I18n KDELibs4Support" FILENAME_VAR PRI_FILENAME)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
 # TODO plugins and scripts contain plugins that were disabled if kresources is skipped.
