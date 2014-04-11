@@ -178,6 +178,10 @@ VCard::List VCardParser::parseVCards( const QByteArray &text )
               value.chop( 1 ); // remove the '='
               value.append( *it );
               ++it;
+              // remove the trailing \r, left from \r\n
+              if ( (*it).endsWith('\r') ) {
+                  (*it).chop(1);
+              }
             }
             KCodecs::quotedPrintableDecode( value, output );
           } else if ( encoding == QLatin1String( "8bit" ) ) {
