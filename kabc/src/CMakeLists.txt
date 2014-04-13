@@ -57,7 +57,7 @@ target_link_libraries(KF5Abc
 set_target_properties(KF5Abc PROPERTIES
     VERSION ${KABC_VERSION_STRING}
     SOVERSION ${KABC_SOVERSION}
-    EXPORT_NAME KAbc
+    EXPORT_NAME Abc
 )
 
 install(TARGETS KF5Abc EXPORT KF5AbcTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
