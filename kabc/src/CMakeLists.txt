@@ -65,20 +65,14 @@ install(TARGETS KF5Abc EXPORT KF5AbcTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 ecm_generate_headers(KAbc_CamelCase_HEADERS
   HEADER_NAMES
   Address
-  #AddressBook FIXME where do these headers come from ?
-  #AddressLineEdit
   Addressee
-  # AddresseeDialog
   AddresseeList
   ContactGroup
   ContactGroupTool
-  # DistributionList
-  # DistributionListDialog
   EmailSelectDialog
   ErrorHandler
   Field
   Format
-  #FormatFactory
   Geo
   Key
   LDIFConverter
@@ -87,17 +81,13 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   PhoneNumber
   Picture
   Plugin
-  #Resource
   ResourceABC
-  # ResourceCached
   Secrecy
   SortMode
   Sound
-  StdAddressBook
   TimeZone
   VCardConverter
   VCardDrag
-  #VCardFormat
 
   REQUIRED_HEADERS KAbc_HEADERS
   PREFIX KAbc
@@ -120,8 +110,3 @@ install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 
 ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5KAbc DEPS "CoreAddons ItemViews I18n KDELibs4Support" FILENAME_VAR PRI_FILENAME)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
-
-# TODO plugins and scripts contain plugins that were disabled if kresources is skipped.
-# If they're not needed anymore, delete them
-#add_subdirectory(plugins)
-#add_subdirectory(scripts)
