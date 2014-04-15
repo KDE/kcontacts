@@ -141,8 +141,8 @@ bool Lock::lock()
   writeLockFile( d->mLockUniqueName );
 
   // Create lock file
-  int result = ::link( QFile::encodeName( d->mLockUniqueName ),
-                       QFile::encodeName( lockName ) );
+  int result = ::link( QFile::encodeName( d->mLockUniqueName ).constData(),
+                       QFile::encodeName( lockName ).constData() );
 
   if ( result == 0 ) {
     d->mError.clear();

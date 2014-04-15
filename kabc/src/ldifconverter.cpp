@@ -224,7 +224,7 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
       case Ldif::Item:
       {
         QString fieldname = ldif.attr().toLower();
-        QString value = QString::fromUtf8( ldif.value(), ldif.value().size() );
+        QString value = QString::fromUtf8( ldif.value() );
         evaluatePair( a, homeAddr, workAddr, fieldname, value, birthday, birthmonth, birthyear );
         break;
       }

@@ -37,7 +37,7 @@ public:
       return it.value();
     }
 
-    QString string = QString::fromLatin1(value, value.size());
+    QString string = QString::fromLatin1(value);
     m_values.insert(value, string);
     return string;
   }

@@ -668,7 +668,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
     while ( !strbuf.isEmpty() ) {
       if ( ( pos = strbuf.indexOf( searchStr ) ) != -1 ) {
         file.close();
-        return i18n( strbuf.left( pos ).toUtf8() );
+        return i18n( strbuf.left( pos ).toUtf8().constData() );
       }
       strbuf = s.readLine();
     }
