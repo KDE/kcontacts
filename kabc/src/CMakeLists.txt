@@ -66,7 +66,6 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   AddresseeList
   ContactGroup
   ContactGroupTool
-  EmailSelectDialog
   ErrorHandler
   Field
   Format
