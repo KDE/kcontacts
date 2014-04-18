@@ -90,9 +90,7 @@ class KABC_EXPORT VCardConverter
       @param version The version of the generated vCard format
      */
     // FIXME: Add error handling
-    QByteArray createVCards( Addressee::List list, Version version = v3_0 ) const;
-
-    // FIXME: Add "createVCards( AddressBook * )"
+    QByteArray createVCards( const Addressee::List &list, Version version = v3_0 ) const;
 
     /**
      * @since 4.9.1

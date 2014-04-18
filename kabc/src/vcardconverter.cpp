@@ -55,7 +55,7 @@ QByteArray VCardConverter::createVCard( const Addressee &addr, Version version )
   return createVCards( list, version );
 }
 
-QByteArray VCardConverter::createVCards( Addressee::List list, Version version ) const
+QByteArray VCardConverter::createVCards( const Addressee::List &list, Version version ) const
 {
   VCardTool tool;
 
