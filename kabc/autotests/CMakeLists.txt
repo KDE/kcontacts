@@ -1,6 +1,3 @@
-# FIXME: Make it build with this flag
-remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
-
 include(ECMMarkAsTest)
 
 set(QT_REQUIRED_VERSION "5.2.0")

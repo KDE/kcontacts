@@ -80,7 +80,7 @@ void RoundtripTest::testVCardRoundtrip_data()
   Q_FOREACH ( const QString &inputFile, mInputFiles ) {
     const QString outFile = mOutFilePattern.arg( inputFile );
 
-    QTest::newRow( QFile::encodeName( inputFile ) )
+    QTest::newRow( QFile::encodeName( inputFile ).constData() )
       << inputFile
       << ( mOutput2_1Dir.exists( outFile ) ? outFile : QString() )
       << ( mOutput3_0Dir.exists( outFile ) ? outFile : QString() );
