@@ -28,15 +28,15 @@
 
 #include <kurl.h>
 
-#include "kabc/address.h"
-#include "kabc/geo.h"
-#include "kabc/key.h"
-#include "kabc/phonenumber.h"
-#include "kabc/picture.h"
-#include "kabc/secrecy.h"
-#include "kabc/sound.h"
-#include "kabc/timezone.h"
-#include "kabc/addresseelist.h"  // for typedef QList<Addressee> List;
+#include "address.h"
+#include "geo.h"
+#include "key.h"
+#include "phonenumber.h"
+#include "picture.h"
+#include "secrecy.h"
+#include "sound.h"
+#include "timezone.h"
+#include "addresseelist.h"  // for typedef QList<Addressee> List;
 
 namespace KABC {
 
