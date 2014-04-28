@@ -40,7 +40,7 @@ generate_export_header(KF5Abc BASE_NAME kabc)
 # FIXME ? KF5::Abc? KF5::AddressBook? KF5::ABC?
 add_library(KF5::Abc ALIAS KF5Abc)
 
-target_include_directories(KF5Abc INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kabc>")
+target_include_directories(KF5Abc INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KABC>")
 target_include_directories(KF5Abc PUBLIC "$<BUILD_INTERFACE:${KAbc_SOURCE_DIR}/src;${KAbc_BINARY_DIR}/src>")
 target_include_directories(KF5Abc PUBLIC "$<BUILD_INTERFACE:${KAbc_SOURCE_DIR}/src/vcardparser>")
 
@@ -91,14 +91,9 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
 
 install(FILES
     ${KAbc_CamelCase_HEADERS}
-    DESTINATION ${INCLUDE_INSTALL_DIR}/KABC
-    COMPONENT Devel
-)
-
-install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
     ${KAbc_HEADERS}
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kabc
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KABC
     COMPONENT Devel
 )
 

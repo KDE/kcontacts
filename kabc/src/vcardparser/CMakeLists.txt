@@ -6,5 +6,5 @@ install(
   vcard.h
   vcardline.h
   vcardparser.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
+  DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/kabc COMPONENT Devel
 )
