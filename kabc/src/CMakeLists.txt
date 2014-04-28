@@ -85,7 +85,6 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   VCardDrag
 
   REQUIRED_HEADERS KAbc_HEADERS
-  PREFIX KAbc
 )
 
 install(FILES
