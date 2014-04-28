@@ -37,7 +37,6 @@ add_library(KF5Abc ${kabc_SRCS})
 
 generate_export_header(KF5Abc BASE_NAME kabc)
 
-# FIXME ? KF5::Abc? KF5::AddressBook? KF5::ABC?
 add_library(KF5::Abc ALIAS KF5Abc)
 
 target_include_directories(KF5Abc INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KABC>")
@@ -99,5 +98,5 @@ install(FILES
 
 install(FILES countrytransl.map DESTINATION ${DATA_INSTALL_DIR}/kabc)
 
-ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5KAbc DEPS "CoreAddons ItemViews I18n KDELibs4Support" FILENAME_VAR PRI_FILENAME)
+ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5Abc DEPS "CoreAddons ItemViews I18n KDELibs4Support" FILENAME_VAR PRI_FILENAME)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
