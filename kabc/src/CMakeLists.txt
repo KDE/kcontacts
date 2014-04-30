@@ -56,7 +56,7 @@ set_target_properties(KF5Abc PROPERTIES
     EXPORT_NAME Abc
 )
 
-install(TARGETS KF5Abc EXPORT KF5AbcTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5Abc EXPORT KF5AbcTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ecm_generate_headers(KAbc_CamelCase_HEADERS
   HEADER_NAMES
