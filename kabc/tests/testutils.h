@@ -24,7 +24,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
-#include <kabc/addressee.h>
+#include <addressee.h>
 
 KABC::Addressee vcard1();
 KABC::Addressee vcard2();

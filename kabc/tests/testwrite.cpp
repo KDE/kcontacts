@@ -26,14 +26,14 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 
-#include "kabc/addressee.h"
-#include "kabc/phonenumber.h"
-#include "kabc/address.h"
-#include "kabc/key.h"
-#include "kabc/picture.h"
-#include "kabc/sound.h"
-#include "kabc/secrecy.h"
-#include "kabc/vcardconverter.h"
+#include "addressee.h"
+#include "phonenumber.h"
+#include "address.h"
+#include "key.h"
+#include "picture.h"
+#include "sound.h"
+#include "secrecy.h"
+#include "vcardconverter.h"
 
 int main( int argc, char **argv )
 {

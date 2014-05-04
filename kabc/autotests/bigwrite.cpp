@@ -18,9 +18,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "kabc/addressbook.h"
-#include "kabc/vcardformat.h"
-#include "kabc/plugins/file/resourcefile.h"
+#include "addressbook.h"
+#include "vcardformat.h"
+#include "plugins/file/resourcefile.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>

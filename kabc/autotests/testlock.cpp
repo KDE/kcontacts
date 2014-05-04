@@ -20,7 +20,7 @@
 */
 
 #include "testlock.h"
-#include "kabc/stdaddressbook.h"
+#include "stdaddressbook.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>

@@ -19,7 +19,7 @@
 */
 
 #include "geotest.h"
-#include "kabc/geo.h"
+#include "geo.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( GeoTest, NoGUI )

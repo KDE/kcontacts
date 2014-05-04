@@ -19,7 +19,7 @@
 */
 
 #include "secrecytest.h"
-#include "kabc/secrecy.h"
+#include "secrecy.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( SecrecyTest, NoGUI )

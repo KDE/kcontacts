@@ -20,7 +20,7 @@
 //krazy:excludeall=contractions
 
 #include "addresseetest.h"
-#include "kabc/addressee.h"
+#include "addressee.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( AddresseeTest, NoGUI )

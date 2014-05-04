@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "kabc/plugins/file/resourcefile.h"
+#include "plugins/file/resourcefile.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>

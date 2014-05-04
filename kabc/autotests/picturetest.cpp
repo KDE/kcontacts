@@ -19,7 +19,7 @@
 */
 
 #include "picturetest.h"
-#include "kabc/picture.h"
+#include "picture.h"
 #include <QPainter>
 #include <qtest_kde.h>
 

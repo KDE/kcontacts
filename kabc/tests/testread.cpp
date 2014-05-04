@@ -29,7 +29,7 @@
 #include <klocalizedstring.h>
 #include <kaboutdata.h>
 
-#include "kabc/vcardconverter.h"
+#include "vcardconverter.h"
 #include "vcard.h"
 
 int main( int argc, char **argv )
