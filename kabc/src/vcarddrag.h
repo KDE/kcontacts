@@ -24,7 +24,7 @@
 
 #include "kabc_export.h"
 
-#include <addressee.h>
+#include <kabc/addressee.h>
 
 namespace KABC {
 
