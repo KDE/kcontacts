@@ -88,12 +88,18 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
 )
 
 install(FILES
-    ${KAbc_CamelCase_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
     ${KAbc_HEADERS}
     DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KABC/kabc
     COMPONENT Devel
 )
+
+install(FILES
+    ${KAbc_CamelCase_HEADERS}
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KABC/KABC
+    COMPONENT Devel
+)
+
 
 install(FILES countrytransl.map DESTINATION ${KF5_DATA_INSTALL_DIR}/kabc)
 
