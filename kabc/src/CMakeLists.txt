@@ -83,7 +83,7 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   TimeZone
   VCardConverter
   VCardDrag
-
+  PREFIX KABC
   REQUIRED_HEADERS KAbc_HEADERS
 )
 
@@ -91,7 +91,7 @@ install(FILES
     ${KAbc_CamelCase_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kabc_export.h
     ${KAbc_HEADERS}
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KABC
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KABC/kabc
     COMPONENT Devel
 )
 
