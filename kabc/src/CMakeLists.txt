@@ -44,10 +44,11 @@ target_include_directories(KF5Abc PUBLIC "$<BUILD_INTERFACE:${KAbc_SOURCE_DIR}/s
 target_include_directories(KF5Abc PUBLIC "$<BUILD_INTERFACE:${KAbc_SOURCE_DIR}/src/vcardparser>")
 
 target_link_libraries(KF5Abc
+PUBLIC
     KF5::CoreAddons
-    KF5::ItemViews
-    KF5::I18n
     KF5::KDELibs4Support
+PRIVATE
+    KF5::I18n
 )
 
 set_target_properties(KF5Abc PROPERTIES
@@ -103,5 +104,5 @@ install(FILES
 
 install(FILES countrytransl.map DESTINATION ${KF5_DATA_INSTALL_DIR}/kabc)
 
-ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5Abc DEPS "CoreAddons ItemViews I18n KDELibs4Support" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KABC)
+ecm_generate_pri_file(BASE_NAME KAbc LIB_NAME KF5Abc DEPS "CoreAddons KDELibs4Support" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KABC)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
