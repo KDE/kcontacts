@@ -19,7 +19,7 @@
 */
 
 #include "soundtest.h"
-#include "sound.h"
+#include "kabc/sound.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( SoundTest, NoGUI )

@@ -19,7 +19,7 @@
 */
 
 #include "phonenumbertest.h"
-#include "phonenumber.h"
+#include "kabc/phonenumber.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( PhoneNumberTest, NoGUI )

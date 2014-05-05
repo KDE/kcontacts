@@ -19,7 +19,7 @@
 */
 
 #include "timezonetest.h"
-#include "timezone.h"
+#include "kabc/timezone.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( TimeZoneTest, NoGUI )

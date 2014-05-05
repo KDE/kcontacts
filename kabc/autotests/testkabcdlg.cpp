@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "addresseedialog.h"
+#include "kabc/addresseedialog.h"
 
 #include <kaboutdata.h>
 #include <kapplication.h>

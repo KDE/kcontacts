@@ -19,7 +19,7 @@
 */
 
 #include "keytest.h"
-#include "key.h"
+#include "kabc/key.h"
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( KeyTest, NoGUI )

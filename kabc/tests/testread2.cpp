@@ -19,7 +19,7 @@
 */
 
 #include "testutils.h"
-#include <addressee.h>
+#include <kabc/addressee.h>
 #include <vcardconverter.h>
 #include <qdebug.h>
 

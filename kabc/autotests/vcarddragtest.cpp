@@ -21,8 +21,8 @@
 
 #include <qtest_kde.h>
 
-#include "vcardconverter.h"
-#include "vcarddrag.h"
+#include "kabc/vcardconverter.h"
+#include "kabc/vcarddrag.h"
 
 using namespace KABC;
 

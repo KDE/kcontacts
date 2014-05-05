@@ -20,8 +20,8 @@
 
 #include <qtest_kde.h>
 
-#include "contactgroup.h"
-#include "contactgrouptool.h"
+#include "kabc/contactgroup.h"
+#include "kabc/contactgrouptool.h"
 
 #include <QBuffer>
 

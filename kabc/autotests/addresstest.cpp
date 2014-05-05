@@ -19,7 +19,7 @@
 */
 
 #include "addresstest.h"
-#include "address.h"
+#include "kabc/address.h"
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include "kstandarddirs.h"

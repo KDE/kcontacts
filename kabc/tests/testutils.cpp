@@ -20,7 +20,7 @@
 
 #include <QtCore/QFile>
 
-#include <addressee.h>
+#include <kabc/addressee.h>
 
 #include "vcardparser.h"
 

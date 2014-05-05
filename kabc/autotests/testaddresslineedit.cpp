@@ -24,7 +24,7 @@
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 
-#include "addresslineedit.h"
+#include "kabc/addresslineedit.h"
 
 using namespace KABC;
 

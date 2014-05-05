@@ -24,8 +24,8 @@
 #include <kcmdlineargs.h>
 
 
-#include "addressbook.h"
-#include "addresseelist.h"
+#include "kabc/addressbook.h"
+#include "kabc/addresseelist.h"
 
 using namespace KABC;
 
