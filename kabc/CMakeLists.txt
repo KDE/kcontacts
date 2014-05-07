@@ -33,6 +33,8 @@ find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
 
 ########### Targets ###########
 
+add_definitions(-DTRANSLATION_DOMAIN=\"kabc\")
+
 add_subdirectory(src)
 add_subdirectory(autotests)
 add_subdirectory(tests)
