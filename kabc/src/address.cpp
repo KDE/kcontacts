@@ -23,7 +23,6 @@
 #include <krandom.h>
 #include <QDebug>
 #include <kglobal.h>
-#include <klocale.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
