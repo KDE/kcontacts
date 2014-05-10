@@ -23,7 +23,7 @@
 #include "kabc_debug.h"
 
 #include <klocalizedstring.h>
-#include <kdebug.h>
+#include <QDebug>
 
 using namespace KABC;
 

@@ -26,7 +26,7 @@
 #include <QtCore/QUuid>
 
 #include "kabc_debug.h"
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 #include <klocalizedstring.h>
 

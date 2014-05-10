@@ -21,7 +21,7 @@
 #include "address.h"
 #include "kabc_debug.h"
 #include <krandom.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kglobal.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
