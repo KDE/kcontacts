@@ -34,6 +34,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QSharedData>
 #include <QStandardPaths>
+#include <KLocale>
 
 using namespace KABC;
 
@@ -561,7 +562,7 @@ QString Address::formattedAddress( const QString &realName,
     ciso = countryToISO( country() );
   } else {
     // fall back to our own country
-    ciso = KGlobal::locale()->country();
+    ciso = KLocale::global()->country();
   }
   KConfig entry( KStandardDirs::locate( "locale",
         QLatin1String( "l10n/" ) + ciso + QLatin1String( "/entry.desktop" ) ) );
@@ -593,7 +594,7 @@ QString Address::formattedAddress( const QString &realName,
   // the rules of our own system country )
   if ( !country().isEmpty() ) {
     KConfig entry( QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String( "l10n/" ) +
-                                          KGlobal::locale()->country() +
+                                          KLocale::global()->country() +
                                           QLatin1String( "/entry.desktop" ) ) );
     KConfigGroup group = entry.group( "KCM Locale" );
     QString cpos = group.readEntry( "AddressCountryPosition" );
@@ -645,8 +646,8 @@ QString Address::countryToISO( const QString &cname )
   }
 
   // fall back to system country
-  sISOMap->insert( cname, KGlobal::locale()->country() );
-  return KGlobal::locale()->country();
+  sISOMap->insert( cname, KLocale::global()->country() );
+  return KLocale::global()->country();
 }
 
 QString Address::ISOtoCountry( const QString &ISOname )
