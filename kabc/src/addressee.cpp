@@ -25,6 +25,7 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QUuid>
 
+#include "kabc_debug.h"
 #include <kdebug.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
@@ -170,132 +171,132 @@ bool Addressee::operator==( const Addressee &addressee ) const
 
   if ( d->mName != addressee.d->mName &&
      !( d->mName.isEmpty() && addressee.d->mName.isEmpty() ) ) {
-    kDebug(5700) << "name differs";
+    qCDebug(KABC_LOG) << "name differs";
     return false;
   }
 
   if ( d->mFormattedName != addressee.d->mFormattedName &&
      !( d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty() ) ) {
-    kDebug(5700) << "formattedName differs";
+    qCDebug(KABC_LOG) << "formattedName differs";
     return false;
   }
 
   if ( d->mFamilyName != addressee.d->mFamilyName &&
      !( d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty() ) ) {
-    kDebug(5700) << "familyName differs";
+    qCDebug(KABC_LOG) << "familyName differs";
     return false;
   }
 
   if ( d->mGivenName != addressee.d->mGivenName &&
      !( d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty() ) ) {
-    kDebug(5700) << "givenName differs";
+    qCDebug(KABC_LOG) << "givenName differs";
     return false;
   }
 
   if ( d->mAdditionalName != addressee.d->mAdditionalName &&
      !( d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty() ) ) {
-    kDebug(5700) << "additionalName differs";
+    qCDebug(KABC_LOG) << "additionalName differs";
     return false;
   }
 
   if ( d->mPrefix != addressee.d->mPrefix &&
      !( d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty() ) ) {
-    kDebug(5700) << "prefix differs";
+    qCDebug(KABC_LOG) << "prefix differs";
     return false;
   }
 
   if ( d->mSuffix != addressee.d->mSuffix &&
      !( d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty() ) ) {
-    kDebug(5700) << "suffix differs";
+    qCDebug(KABC_LOG) << "suffix differs";
     return false;
   }
 
   if ( d->mNickName != addressee.d->mNickName &&
      !( d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty() ) ) {
-    kDebug(5700) << "nickName differs";
+    qCDebug(KABC_LOG) << "nickName differs";
     return false;
   }
 
   if ( d->mBirthday != addressee.d->mBirthday ) {
-    kDebug(5700) << "birthday differs";
+    qCDebug(KABC_LOG) << "birthday differs";
     return false;
   }
 
   if ( d->mMailer != addressee.d->mMailer &&
      !( d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty() ) ) {
-    kDebug(5700) << "mailer differs";
+    qCDebug(KABC_LOG) << "mailer differs";
     return false;
   }
 
   if ( d->mTimeZone != addressee.d->mTimeZone ) {
-    kDebug(5700) << "timeZone differs";
+    qCDebug(KABC_LOG) << "timeZone differs";
     return false;
   }
 
   if ( d->mGeo != addressee.d->mGeo ) {
-    kDebug(5700) << "geo differs";
+    qCDebug(KABC_LOG) << "geo differs";
     return false;
   }
 
   if ( d->mTitle != addressee.d->mTitle &&
      !( d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty() ) ) {
-    kDebug(5700) << "title differs";
+    qCDebug(KABC_LOG) << "title differs";
     return false;
   }
 
   if ( d->mRole != addressee.d->mRole &&
      !( d->mRole.isEmpty() && addressee.d->mRole.isEmpty() ) ) {
-    kDebug(5700) << "role differs";
+    qCDebug(KABC_LOG) << "role differs";
     return false;
   }
 
   if ( d->mOrganization != addressee.d->mOrganization &&
      !( d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty() ) ) {
-    kDebug(5700) << "organization differs";
+    qCDebug(KABC_LOG) << "organization differs";
     return false;
   }
 
   if ( d->mDepartment != addressee.d->mDepartment &&
      !( d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty() ) ) {
-    kDebug(5700) << "department differs";
+    qCDebug(KABC_LOG) << "department differs";
     return false;
   }
 
   if ( d->mNote != addressee.d->mNote &&
      !( d->mNote.isEmpty() && addressee.d->mNote.isEmpty() ) ) {
-    kDebug(5700) << "note differs";
+    qCDebug(KABC_LOG) << "note differs";
     return false;
   }
 
   if ( d->mProductId != addressee.d->mProductId &&
      !( d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty() ) ) {
-    kDebug(5700) << "productId differs";
+    qCDebug(KABC_LOG) << "productId differs";
     return false;
   }
 
   if ( d->mSortString != addressee.d->mSortString &&
      !( d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty() ) ) {
-    kDebug(5700) << "sortString differs";
+    qCDebug(KABC_LOG) << "sortString differs";
     return false;
   }
 
   if ( d->mSecrecy != addressee.d->mSecrecy ) {
-    kDebug(5700) << "secrecy differs";
+    qCDebug(KABC_LOG) << "secrecy differs";
     return false;
   }
 
   if ( d->mLogo != addressee.d->mLogo ) {
-    kDebug(5700) << "logo differs";
+    qCDebug(KABC_LOG) << "logo differs";
     return false;
   }
 
   if ( d->mPhoto != addressee.d->mPhoto ) {
-    kDebug(5700) << "photo differs";
+    qCDebug(KABC_LOG) << "photo differs";
     return false;
   }
 
   if ( d->mSound != addressee.d->mSound ) {
-    kDebug(5700) << "sound differs";
+    qCDebug(KABC_LOG) << "sound differs";
     return false;
   }
 

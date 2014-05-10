@@ -20,6 +20,7 @@
 */
 
 #include "locknull.h"
+#include "kabc_debug.h"
 
 #include <klocalizedstring.h>
 #include <kdebug.h>
@@ -55,7 +56,7 @@ bool LockNull::lock()
     return false;
   }
 
-  kWarning( 5700 ) << "LockNull::lock() force success. Doesn't actually lock.";
+  qCWarning( KABC_LOG ) << "LockNull::lock() force success. Doesn't actually lock.";
 
   emit locked();
 

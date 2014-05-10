@@ -21,8 +21,8 @@
 */
 
 #include "errorhandler.h"
-
-#include <kdebug.h>
+#include "kabc_debug.h"
+#include <qdebug.h>
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 
@@ -46,7 +46,7 @@ ConsoleErrorHandler::~ConsoleErrorHandler()
 void ConsoleErrorHandler::error( const QString &msg )
 {
   // no debug area is ok here
-  kError( 5700 ) << msg;
+  qCCritical( KABC_LOG ) << msg;
 }
 
 class GuiErrorHandler::Private

@@ -19,7 +19,7 @@
 */
 
 #include "address.h"
-
+#include "kabc_debug.h"
 #include <krandom.h>
 #include <kdebug.h>
 #include <kglobal.h>
@@ -35,6 +35,8 @@
 #include <QtCore/QSharedData>
 #include <QStandardPaths>
 #include <KLocale>
+
+Q_LOGGING_CATEGORY(KABC_LOG, "kabc")
 
 using namespace KABC;
 
@@ -581,7 +583,7 @@ QString Address::formattedAddress( const QString &realName,
   // in the case there's no format found at all, default to what we've always
   // used:
   if ( addrTemplate.isEmpty() ) {
-    kWarning( 5700 ) << "address format database incomplete"
+    qCWarning(KABC_LOG) << "address format database incomplete"
         << "(no format for locale" << ciso
         << "found). Using default address formatting.";
     addrTemplate = QLatin1String( "%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z" );

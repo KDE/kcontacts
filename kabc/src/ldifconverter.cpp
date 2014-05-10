@@ -36,6 +36,7 @@
 #include "vcardconverter.h"
 #include "address.h"
 #include "addressee.h"
+#include "kabc_debug.h"
 
 #include "ldif_p.h"
 
@@ -556,7 +557,7 @@ addComment:
     return true;
   }
 
-  kWarning( 5700 ) << QString::fromLatin1( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
+  qCWarning( KABC_LOG ) << QString::fromLatin1( "LDIFConverter: Unknown field for '%1': '%2=%3'\n" ).
     arg( a.formattedName() ).arg( fieldname ).arg( value );
 
   return true;
