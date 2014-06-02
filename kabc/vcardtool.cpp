@@ -162,8 +162,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // BDAY
     card.addLine( VCardLine( QLatin1String( "BDAY" ), createDateTime( ( *addrIt ).birthday() ) ) );
 
-    // CATEGORIES
-    if ( version == VCard::v3_0 ) {
+    // CATEGORIES only > 2.1
+    if ( version != VCard::v2_1 ) {
       QStringList categories = ( *addrIt ).categories();
       QStringList::Iterator catIt;
       QStringList::Iterator catEnd( categories.end() );
@@ -175,7 +175,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       card.addLine( catLine );
     }
 
-    // CLASS
+    // CLASS only for version == 3.0
     if ( version == VCard::v3_0 ) {
       card.addLine( createSecrecy( ( *addrIt ).secrecy() ) );
     }
@@ -263,8 +263,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
         card.addLine( nameLine );
     }
 
-    // NICKNAME
-    if ( version == VCard::v3_0 ) {
+    // NICKNAME only for version > 2.1
+    if ( version != VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "NICKNAME" ), ( *addrIt ).nickName() ) );
     }
 
@@ -294,8 +294,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // PHOTO
     card.addLine( createPicture( QLatin1String( "PHOTO" ), ( *addrIt ).photo() ) );
 
-    // PROID
-    if ( version == VCard::v3_0 ) {
+    // PROID only for version > 2.1
+    if ( version != VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "PRODID" ), ( *addrIt ).productId() ) );
     }
 
