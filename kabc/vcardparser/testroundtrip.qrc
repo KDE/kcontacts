@@ -31,4 +31,17 @@
     <file>tests/vcard9.vcf.ref</file>
     <file>tests/vcard10.vcf.ref</file>
   </qresource>
+
+  <!-- output files formatted for vcard version 4.0 -->
+  <qresource prefix="/output4.0">
+    <file>tests/v4_0.vcard1.vcf.ref</file>
+    <file>tests/v4_0.vcard2.vcf.ref</file>
+    <file>tests/v4_0.vcard3.vcf.ref</file>
+    <file>tests/v4_0.vcard4.vcf.ref</file>
+    <file>tests/v4_0.vcard5.vcf.ref</file>
+    <file>tests/v4_0.vcard6.vcf.ref</file>
+    <file>tests/v4_0.vcard7.vcf.ref</file>
+    <file>tests/v4_0.vcard8.vcf.ref</file>
+  </qresource>
+
 </RCC>

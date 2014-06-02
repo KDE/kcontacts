@@ -355,7 +355,7 @@ QByteArray VCardParser::createVCards( const VCard::List &list )
                     i += sequenceLength - 1;
                   } else {
                     text += textLine[i];
-                    lineLength++;
+                    ++lineLength;
                   }
                   if ( (lineLength == FOLD_WIDTH) && (i < (textLine.length() - 1)) ) {
                     text += "\r\n ";
