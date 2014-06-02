@@ -368,6 +368,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" ) ) );
     } else if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "3.0" ) ) );
+    } else if ( version == VCard::v4_0 ) {
+      card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "4.0" ) ) );
     }
 
     // X-

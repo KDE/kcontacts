@@ -57,10 +57,12 @@ class KABC_EXPORT VCardConverter
     /**
       @li v2_1 - VCard format version 2.1
       @li v3_0 - VCard format version 3.0
+      @li v4_0 - VCard format version 4.0
      */
     enum Version {
       v2_1,
-      v3_0
+      v3_0,
+      v4_0
     };
 
     /**
