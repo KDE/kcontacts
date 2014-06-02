@@ -219,13 +219,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // LOGO
     card.addLine( createPicture( QLatin1String( "LOGO" ), ( *addrIt ).logo() ) );
 
-    // MAILER
-    VCardLine mailerLine( QLatin1String( "MAILER" ), ( *addrIt ).mailer() );
-    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).mailer() ) ) {
-      mailerLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
-      mailerLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+    // MAILER only for version < 4.0
+    if ( version != VCard::v4_0 ) {
+        VCardLine mailerLine( QLatin1String( "MAILER" ), ( *addrIt ).mailer() );
+        if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).mailer() ) ) {
+            mailerLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
+            mailerLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+        }
+        card.addLine( mailerLine );
     }
-    card.addLine( mailerLine );
 
     // N
     QStringList name;
@@ -251,13 +253,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     }
     card.addLine( nLine );
 
-    // NAME
-    VCardLine nameLine( QLatin1String( "NAME" ), ( *addrIt ).name() );
-    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).name() ) ) {
-      nameLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
-      nameLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+    // NAME only for version < 4.0
+    if ( version != VCard::v4_0 ) {
+        VCardLine nameLine( QLatin1String( "NAME" ), ( *addrIt ).name() );
+        if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).name() ) ) {
+            nameLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
+            nameLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+        }
+        card.addLine( nameLine );
     }
-    card.addLine( nameLine );
 
     // NICKNAME
     if ( version == VCard::v3_0 ) {
