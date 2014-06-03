@@ -162,8 +162,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // BDAY
     card.addLine( VCardLine( QLatin1String( "BDAY" ), createDateTime( ( *addrIt ).birthday() ) ) );
 
-    // CATEGORIES
-    if ( version == VCard::v3_0 ) {
+    // CATEGORIES only > 2.1
+    if ( version != VCard::v2_1 ) {
       QStringList categories = ( *addrIt ).categories();
       QStringList::Iterator catIt;
       QStringList::Iterator catEnd( categories.end() );
@@ -175,7 +175,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       card.addLine( catLine );
     }
 
-    // CLASS
+    // CLASS only for version == 3.0
     if ( version == VCard::v3_0 ) {
       card.addLine( createSecrecy( ( *addrIt ).secrecy() ) );
     }
@@ -219,13 +219,15 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // LOGO
     card.addLine( createPicture( QLatin1String( "LOGO" ), ( *addrIt ).logo() ) );
 
-    // MAILER
-    VCardLine mailerLine( QLatin1String( "MAILER" ), ( *addrIt ).mailer() );
-    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).mailer() ) ) {
-      mailerLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
-      mailerLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+    // MAILER only for version < 4.0
+    if ( version != VCard::v4_0 ) {
+        VCardLine mailerLine( QLatin1String( "MAILER" ), ( *addrIt ).mailer() );
+        if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).mailer() ) ) {
+            mailerLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
+            mailerLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+        }
+        card.addLine( mailerLine );
     }
-    card.addLine( mailerLine );
 
     // N
     QStringList name;
@@ -251,16 +253,18 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     }
     card.addLine( nLine );
 
-    // NAME
-    VCardLine nameLine( QLatin1String( "NAME" ), ( *addrIt ).name() );
-    if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).name() ) ) {
-      nameLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
-      nameLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+    // NAME only for version < 4.0
+    if ( version != VCard::v4_0 ) {
+        VCardLine nameLine( QLatin1String( "NAME" ), ( *addrIt ).name() );
+        if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).name() ) ) {
+            nameLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
+            nameLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
+        }
+        card.addLine( nameLine );
     }
-    card.addLine( nameLine );
 
-    // NICKNAME
-    if ( version == VCard::v3_0 ) {
+    // NICKNAME only for version > 2.1
+    if ( version != VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "NICKNAME" ), ( *addrIt ).nickName() ) );
     }
 
@@ -290,8 +294,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
     // PHOTO
     card.addLine( createPicture( QLatin1String( "PHOTO" ), ( *addrIt ).photo() ) );
 
-    // PROID
-    if ( version == VCard::v3_0 ) {
+    // PROID only for version > 2.1
+    if ( version != VCard::v2_1 ) {
       card.addLine( VCardLine( QLatin1String( "PRODID" ), ( *addrIt ).productId() ) );
     }
 
@@ -368,6 +372,8 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "2.1" ) ) );
     } else if ( version == VCard::v3_0 ) {
       card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "3.0" ) ) );
+    } else if ( version == VCard::v4_0 ) {
+      card.addLine( VCardLine( QLatin1String( "VERSION" ), QLatin1String( "4.0" ) ) );
     }
 
     // X-
@@ -452,35 +458,39 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           Address address;
           const QStringList addrParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
           if ( addrParts.count() > 0 ) {
-            address.setPostOfficeBox( addrParts[ 0 ] );
+            address.setPostOfficeBox( addrParts.at(0) );
           }
           if ( addrParts.count() > 1 ) {
-            address.setExtended( addrParts[ 1 ] );
+            address.setExtended( addrParts.at(1) );
           }
           if ( addrParts.count() > 2 ) {
-            address.setStreet( addrParts[ 2 ] );
+            address.setStreet( addrParts.at(2) );
           }
           if ( addrParts.count() > 3 ) {
-            address.setLocality( addrParts[ 3 ] );
+            address.setLocality( addrParts.at(3) );
           }
           if ( addrParts.count() > 4 ) {
-            address.setRegion( addrParts[ 4 ] );
+            address.setRegion( addrParts.at(4) );
           }
           if ( addrParts.count() > 5 ) {
-            address.setPostalCode( addrParts[ 5 ] );
+            address.setPostalCode( addrParts.at(5) );
           }
           if ( addrParts.count() > 6 ) {
-            address.setCountry( addrParts[ 6 ] );
+            address.setCountry( addrParts.at(6) );
           }
 
           Address::Type type;
 
           const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
+          QStringList::ConstIterator end(types.end());
+          for ( QStringList::ConstIterator it = types.begin(); it != end; ++it ) {
             type |= mAddressTypeMap[ ( *it ).toLower() ];
           }
 
           address.setType( type );
+          if ( !( *lineIt ).parameter( QLatin1String( "label" ) ).isEmpty() ) {
+              address.setLabel( ( *lineIt ).parameter( QLatin1String( "label" ) ) );
+          }
           addr.insertAddress( address );
         }
 
@@ -519,8 +529,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           const QStringList geoParts =
             ( *lineIt ).value().toString().split( QLatin1Char( ';' ), QString::KeepEmptyParts );
           if ( geoParts.size() >= 2 ) {
-            geo.setLatitude( geoParts[ 0 ].toFloat() );
-            geo.setLongitude( geoParts[ 1 ].toFloat() );
+            geo.setLatitude( geoParts.at( 0 ).toFloat() );
+            geo.setLongitude( geoParts.at( 1 ).toFloat() );
             addr.setGeo( geo );
           }
         }
@@ -535,7 +545,8 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           Address::Type type;
 
           const QStringList types = ( *lineIt ).parameters( QLatin1String( "type" ) );
-          for ( QStringList::ConstIterator it = types.begin(); it != types.end(); ++it ) {
+          QStringList::ConstIterator end(types.end());
+          for ( QStringList::ConstIterator it = types.begin(); it != end; ++it ) {
             type |= mAddressTypeMap[ ( *it ).toLower() ];
           }
 
@@ -573,19 +584,22 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
           const QStringList nameParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
           const int numberOfParts( nameParts.count() );
           if ( numberOfParts > 0 ) {
-            addr.setFamilyName( nameParts[ 0 ] );
+            addr.setFamilyName( nameParts.at( 0 ) );
           }
           if ( numberOfParts > 1 ) {
-            addr.setGivenName( nameParts[ 1 ] );
+            addr.setGivenName( nameParts.at( 1 ) );
           }
           if ( numberOfParts > 2 ) {
-            addr.setAdditionalName( nameParts[ 2 ] );
+            addr.setAdditionalName( nameParts.at( 2 ) );
           }
           if ( numberOfParts > 3 ) {
-            addr.setPrefix( nameParts[ 3 ] );
+            addr.setPrefix( nameParts.at( 3 ) );
           }
           if ( numberOfParts > 4 ) {
-            addr.setSuffix( nameParts[ 4 ] );
+            addr.setSuffix( nameParts.at( 4 ) );
+          }
+          if ( !( *lineIt ).parameter( QLatin1String( "sort-as" ) ).isEmpty() ) {
+              addr.setSortString( ( *lineIt ).parameter( QLatin1String( "sort-as" ) ) );
           }
         }
 
@@ -608,10 +622,13 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
         else if ( identifier == QLatin1String( "org" ) ) {
           const QStringList orgParts = splitString( semicolonSep, ( *lineIt ).value().toString() );
           if ( orgParts.count() > 0 ) {
-            addr.setOrganization( orgParts[ 0 ] );
+            addr.setOrganization( orgParts.at( 0 ) );
           }
           if ( orgParts.count() > 1 ) {
-            addr.setDepartment( orgParts[ 1 ] );
+            addr.setDepartment( orgParts.at( 1 ) );
+          }
+          if ( !( *lineIt ).parameter( QLatin1String( "sort-as" ) ).isEmpty() ) {
+              addr.setSortString( ( *lineIt ).parameter( QLatin1String( "sort-as" ) ) );
           }
         }
 

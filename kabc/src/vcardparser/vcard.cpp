@@ -95,6 +95,8 @@ void VCard::setVersion( Version version )
     line.setIdentifier( QLatin1String( "2.1" ) );
   } else if ( version == v3_0 ) {
     line.setIdentifier( QLatin1String( "3.0" ) );
+  } else if ( version == v4_0 ) {
+    line.setIdentifier( QLatin1String( "4.0" ) );
   }
 
   mLineMap[ QLatin1String( "VERSION" ) ].append( line );
@@ -110,7 +112,9 @@ VCard::Version VCard::version() const
   VCardLine line = ( *versionEntry )[ 0 ];
   if ( line.value() == QLatin1String( "2.1" ) ) {
     return v2_1;
-  } else {
+  } else if ( line.value() == QLatin1String( "3.0" ) ) {
     return v3_0;
+  } else {
+    return v4_0;
   }
 }
