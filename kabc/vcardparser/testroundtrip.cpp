@@ -37,6 +37,7 @@ class RoundtripTest : public QObject
     QDir mInputDir;
     QDir mOutput2_1Dir;
     QDir mOutput3_0Dir;
+    QDir mOutput4_0Dir;
 
     QStringList mInputFiles;
 
@@ -65,6 +66,10 @@ void RoundtripTest::initTestCase()
   QVERIFY( mOutput3_0Dir.exists() );
   QVERIFY( mOutput3_0Dir.cd( QLatin1String( "tests" ) ) );
 
+  mOutput4_0Dir = QDir( QLatin1String( ":/output4.0" ) );
+  QVERIFY( mOutput4_0Dir.exists() );
+  QVERIFY( mOutput4_0Dir.cd( QLatin1String( "tests" ) ) );
+
   // check that there are input files
 
   mInputFiles = mInputDir.entryList();
@@ -76,6 +81,7 @@ void RoundtripTest::testVCardRoundtrip_data()
   QTest::addColumn<QString>( "inputFile" );
   QTest::addColumn<QString>( "output2_1File" );
   QTest::addColumn<QString>( "output3_0File" );
+  QTest::addColumn<QString>( "output4_0File" );
 
   Q_FOREACH ( const QString &inputFile, mInputFiles ) {
     const QString outFile = mOutFilePattern.arg( inputFile );
@@ -83,7 +89,8 @@ void RoundtripTest::testVCardRoundtrip_data()
     QTest::newRow( QFile::encodeName( inputFile ) )
       << inputFile
       << ( mOutput2_1Dir.exists( outFile ) ? outFile : QString() )
-      << ( mOutput3_0Dir.exists( outFile ) ? outFile : QString() );
+      << ( mOutput3_0Dir.exists( outFile ) ? outFile : QString() )
+      << ( mOutput4_0Dir.exists( outFile ) ? outFile : QString() );
   }
 }
 
@@ -92,8 +99,11 @@ void RoundtripTest::testVCardRoundtrip()
   QFETCH( QString, inputFile );
   QFETCH( QString, output2_1File );
   QFETCH( QString, output3_0File );
+  QFETCH( QString, output4_0File );
 
-  QVERIFY2( !output2_1File.isEmpty() || !output3_0File.isEmpty(),
+  QVERIFY2( !output2_1File.isEmpty()
+            || !output3_0File.isEmpty()
+            || !output4_0File.isEmpty(),
             "No reference output file for either format version" );
 
   QFile input( QFileInfo( mInputDir, inputFile ).absoluteFilePath() );
