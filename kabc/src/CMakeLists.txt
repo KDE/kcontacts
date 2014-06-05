@@ -18,8 +18,6 @@ set(kabc_SRCS
   ldapdn.cpp
   ldif.cpp
   ldifconverter.cpp
-  lock.cpp
-  locknull.cpp
   phonenumber.cpp
   picture.cpp
   plugin.cpp
@@ -68,16 +66,12 @@ ecm_generate_headers(KAbc_CamelCase_HEADERS
   ContactGroupTool
   ErrorHandler
   Field
-  Format
   Geo
   Key
   LDIFConverter
-  Lock
-  LockNull
   PhoneNumber
   Picture
   Plugin
-  ResourceABC
   Secrecy
   SortMode
   Sound
