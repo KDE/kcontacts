@@ -46,6 +46,7 @@ PUBLIC
     KF5::CoreAddons
     KF5::KDELibs4Support
 PRIVATE
+    KF5::ConfigCore
     KF5::I18n
 )
 
