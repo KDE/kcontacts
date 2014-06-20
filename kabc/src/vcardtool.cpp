@@ -192,7 +192,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       card.addLine( line );
     }
 
-    // FN
+    // FN required for only version > 2.1
     VCardLine fnLine( QLatin1String( "FN" ), ( *addrIt ).formattedName() );
     if ( version == VCard::v2_1 && needsEncoding( ( *addrIt ).formattedName() ) ) {
       fnLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
@@ -229,7 +229,7 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
         card.addLine( mailerLine );
     }
 
-    // N
+    // N required for only version < 4.0
     QStringList name;
     name.append( ( *addrIt ).familyName().replace( QLatin1Char( ';' ),
                                                    QLatin1String( "\\;" ) ) );
@@ -251,6 +251,10 @@ QByteArray VCardTool::createVCards( const Addressee::List &list,
       nLine.addParameter( QLatin1String( "charset" ), QLatin1String( "UTF-8" ) );
       nLine.addParameter( QLatin1String( "encoding" ), QLatin1String( "QUOTED-PRINTABLE" ) );
     }
+    if ( version == VCard::v4_0 && !( *addrIt ).sortString().isEmpty() ) {
+        nLine.addParameter( QLatin1String( "SORT-AS" ), ( *addrIt ).sortString() );
+    }
+
     card.addLine( nLine );
 
     // NAME only for version < 4.0
