@@ -26,7 +26,6 @@
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 
-#include <QWidget>
 
 using namespace KABC;
 

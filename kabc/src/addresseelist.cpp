@@ -24,7 +24,6 @@
 #include "sortmode.h"
 #include "kabc_debug.h"
 
-#include <QDebug>
 
 #include <QtCore/QSharedData>
 

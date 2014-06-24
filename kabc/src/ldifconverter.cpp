@@ -40,7 +40,6 @@
 
 #include "ldif_p.h"
 
-#include <QDebug>
 #include <klocalizedstring.h>
 
 #include <QtCore/QRegExp>

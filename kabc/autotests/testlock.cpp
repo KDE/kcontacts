@@ -32,9 +32,7 @@
 #include <kdialog.h>
 
 #include <qtreewidget.h>
-#include <QWidget>
 #include <QLabel>
-#include <QLayout>
 #include <QPushButton>
 #include <QtCore/QDir>
 #include <QVBoxLayout>
