@@ -16,7 +16,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
-set(KF5_VERSION "4.98.0")
+set(KF5_VERSION "4.100.0")
 
 # FIXME ? KF5AbcConfig ? KF5AddressBookConfig ? anything else ?
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KABC
