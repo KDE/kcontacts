@@ -85,7 +85,8 @@ class AttributesDialog : public KDialog
   private:
     enum {
       UserMap,
-      KolabMap,
+      Kolab2Map,
+      Kolab3Map,
       NetscapeMap,
       EvolutionMap,
       OutlookMap
