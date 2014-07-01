@@ -20,7 +20,7 @@ set(KF5_VERSION "5.0.0")
 set(KDEPIMLIBS_VERSION "4.70.0")
 
 # FIXME ? KF5AbcConfig ? KF5AddressBookConfig ? anything else ?
-ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KABC
+ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX KABC
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kabc_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AbcConfigVersion.cmake"
                         SOVERSION 5
