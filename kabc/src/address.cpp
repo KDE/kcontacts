@@ -626,7 +626,7 @@ QString Address::countryToISO( const QString &cname )
     return it.value();
   }
 
-  QString mapfile = KStandardDirs::locate( "data", QLatin1String( "kf5/kabc/countrytransl.map" ) );
+  QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String( "kf5/kabc/countrytransl.map" ) );
 
   QFile file( mapfile );
   if ( file.open( QIODevice::ReadOnly ) ) {
@@ -656,7 +656,7 @@ QString Address::ISOtoCountry( const QString &ISOname )
     return QString();
   }
 
-  QString mapfile = KStandardDirs::locate( "data", QLatin1String( "kf5/kabc/countrytransl.map" ) );
+  QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String( "kf5/kabc/countrytransl.map" ) );
 
   QFile file( mapfile );
   if ( file.open( QIODevice::ReadOnly ) ) {
