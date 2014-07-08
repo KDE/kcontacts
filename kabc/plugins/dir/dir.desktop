@@ -59,6 +59,7 @@ Comment[cs]=Poskytuje přístup ke kontaktům, každém uloženém v jednom soub
 Comment[da]=Giver adgang til kontakter, hver lagret i en enkelt fil, i en given mappe. Understøtter standard vCard-fil og andre formater afhængigt af tilgængeligheden af plugins.
 Comment[de]=Ermöglicht Zugriff auf Kontakte, die in einzelnen Dateien in einem vorgegebenen Ordner gespeichert sind. Unterstützt Standard-vCard-Dateien und andere Formate abhängig von den verfügbaren Modulen.
 Comment[el]=Προσφέρει πρόσβαση σε επαφές, αποθηκευμένες σε ξεχωριστά αρχεία, σε ένα δοσμένο φάκελο. Υποστηρίζει τυπικά αρχεία vCard και άλλες μορφές αρχείων ανάλογα με τη διαθεσιμότητα των πρόσθετων.
+Comment[en_GB]=Provides access to contacts, each stored in a single file, in a given folder. Supports standard vCard file and other formats depending on availability of plugins.
 Comment[es]=Proporciona acceso a los contactos, cada uno almacenado en un archivo diferente, dentro de una carpeta determinada. Admite archivos vCard estándar y otros formatos dependiendo de la disponibilidad de los complementos.
 Comment[et]=Võimaldab kasutada eraldi failidesse salvestatud kontakte määratud kataloogis. Toetab standardseid vCard-faile ja teisi vorminguid sõltuvalt pluginate olemasolust.
 Comment[fi]=Tarjoaa pääsyn annetun kansion yksittäisiin tiedostoihin tallennettuihin yhteystietoihin. Tukee vakiomuotoista vCard-tiedostoa sekä muita tiedostomuotoja liitännäisistä riippuen.
