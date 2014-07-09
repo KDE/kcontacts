@@ -20,9 +20,9 @@
 
 #include "soundtest.h"
 #include "kabc/sound.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( SoundTest, NoGUI )
+QTEST_MAIN( SoundTest )
 
 static QByteArray testData()
 {

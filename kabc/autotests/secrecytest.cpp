@@ -20,9 +20,9 @@
 
 #include "secrecytest.h"
 #include "kabc/secrecy.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( SecrecyTest, NoGUI )
+QTEST_MAIN( SecrecyTest )
 
 void SecrecyTest::emptyTest()
 {

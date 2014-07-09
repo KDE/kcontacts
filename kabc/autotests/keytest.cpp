@@ -20,9 +20,9 @@
 
 #include "keytest.h"
 #include "kabc/key.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( KeyTest, NoGUI )
+QTEST_MAIN( KeyTest )
 
 void KeyTest::storeTest()
 {

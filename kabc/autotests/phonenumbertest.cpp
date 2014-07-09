@@ -20,9 +20,9 @@
 
 #include "phonenumbertest.h"
 #include "kabc/phonenumber.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( PhoneNumberTest, NoGUI )
+QTEST_MAIN( PhoneNumberTest )
 
 void PhoneNumberTest::emptyTest()
 {

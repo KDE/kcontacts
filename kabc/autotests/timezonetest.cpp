@@ -20,9 +20,9 @@
 
 #include "timezonetest.h"
 #include "kabc/timezone.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( TimeZoneTest, NoGUI )
+QTEST_MAIN( TimeZoneTest )
 
 void TimeZoneTest::emptyTest()
 {

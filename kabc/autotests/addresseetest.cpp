@@ -21,9 +21,9 @@
 
 #include "addresseetest.h"
 #include "kabc/addressee.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( AddresseeTest, NoGUI )
+QTEST_MAIN( AddresseeTest )
 
 void AddresseeTest::emptyTest()
 {

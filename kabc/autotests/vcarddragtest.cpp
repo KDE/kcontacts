@@ -19,11 +19,12 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
+#include <qtest.h>
 
 #include "kabc/vcardconverter.h"
 #include "kabc/vcarddrag.h"
 
+#include <QMimeData>
 using namespace KABC;
 
 class VCardDragTest : public QObject
@@ -43,7 +44,7 @@ class VCardDragTest : public QObject
     void testFromMimeData();
 };
 
-QTEST_KDEMAIN( VCardDragTest, NoGUI )
+QTEST_MAIN( VCardDragTest )
 
 VCardDragTest::VCardDragTest() : QObject()
 {

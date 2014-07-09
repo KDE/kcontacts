@@ -23,10 +23,11 @@
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include "kstandarddirs.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 #include <QStandardPaths>
+#include <QFileInfo>
 
-QTEST_KDEMAIN( AddressTest, NoGUI )
+QTEST_MAIN( AddressTest )
 
 void AddressTest::emptyTest()
 {

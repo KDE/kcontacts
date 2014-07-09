@@ -21,9 +21,10 @@
 #include "picturetest.h"
 #include "kabc/picture.h"
 #include <QPainter>
-#include <qtest_kde.h>
+#include <qtest.h>
+#include <QBuffer>
 
-QTEST_KDEMAIN( PictureTest, NoGUI )
+QTEST_MAIN( PictureTest )
 
 static QImage testImage()
 {

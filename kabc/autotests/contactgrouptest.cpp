@@ -18,7 +18,7 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <qtest_kde.h>
+#include <qtest.h>
 
 #include "kabc/contactgroup.h"
 #include "kabc/contactgrouptool.h"
@@ -40,7 +40,7 @@ class ContactGroupTest : public QObject
     void testGroupListRoundTrip();
 };
 
-QTEST_KDEMAIN( ContactGroupTest, NoGUI )
+QTEST_MAIN( ContactGroupTest )
 
 void ContactGroupTest::contactGroupContactReference()
 {

@@ -20,9 +20,9 @@
 
 #include "geotest.h"
 #include "kabc/geo.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( GeoTest, NoGUI )
+QTEST_MAIN( GeoTest )
 
 void GeoTest::constructor()
 {

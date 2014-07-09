@@ -21,8 +21,8 @@
 #include "addressee.h"
 #include "vcardconverter.h"
 
-#include <qtest_kde.h>
-
+#include <qtest.h>
+#include <QDir>
 #include <QObject>
 
 using namespace KABC;
@@ -171,6 +171,6 @@ void RoundtripTest::testVCardRoundtrip()
   }
 }
 
-QTEST_KDEMAIN( RoundtripTest, NoGUI )
+QTEST_MAIN( RoundtripTest )
 
 #include "testroundtrip.moc"
