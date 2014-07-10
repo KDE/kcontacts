@@ -24,7 +24,7 @@
 #include <kglobal.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
-#include <kstandarddirs.h>
+
 #include <kconfiggroup.h>
 
 #include <QtCore/QFile>
@@ -564,8 +564,7 @@ QString Address::formattedAddress( const QString &realName,
     // fall back to our own country
     ciso = KLocale::global()->country();
   }
-  KConfig entry( KStandardDirs::locate( "locale",
-        QLatin1String( "l10n/" ) + ciso + QLatin1String( "/entry.desktop" ) ) );
+  KConfig entry( QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String( "l10n/" ) + ciso + QLatin1String( "/entry.desktop" ) ) );
 
   KConfigGroup group = entry.group( "KCM Locale" );
   // decide whether this needs special business address formatting
