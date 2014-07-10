@@ -25,6 +25,7 @@
 #include "kabc_export.h"
 
 #include <kabc/addressee.h>
+#include <QMimeData>
 
 namespace KABC {
 

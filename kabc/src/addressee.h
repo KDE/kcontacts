@@ -26,7 +26,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QSharedDataPointer>
 
-#include <kurl.h>
+#include <QUrl>
 
 #include "address.h"
 #include "geo.h"

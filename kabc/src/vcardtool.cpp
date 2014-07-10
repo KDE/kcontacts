@@ -712,7 +712,7 @@ Addressee::List VCardTool::parseVCards( const QByteArray &vcard ) const
 
         // URL
         else if ( identifier == QLatin1String( "url" ) ) {
-          addr.setUrl( KUrl( ( *lineIt ).value().toString() ) );
+          addr.setUrl( QUrl( ( *lineIt ).value().toString() ) );
         }
 
         // X-

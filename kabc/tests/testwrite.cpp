@@ -63,7 +63,7 @@ int main( int argc, char **argv )
   addressee.setProductId( QLatin1String( "testId" ) );
   addressee.setRevision( QDateTime::currentDateTime() );
   addressee.setSortString( QLatin1String( "koenig" ) );
-  addressee.setUrl( KUrl( QLatin1String( "http://wgess16.dyndns.org" ) ) );
+  addressee.setUrl( QUrl( QLatin1String( "http://wgess16.dyndns.org" ) ) );
   addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Confidential ) );
 
   addressee.insertEmail( QLatin1String( "tokoe@kde.org" ), true );

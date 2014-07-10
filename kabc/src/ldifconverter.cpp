@@ -361,10 +361,10 @@ addComment:
        fieldname == QLatin1String( "workurl" ) ||
        fieldname == QLatin1String( "mozillahomeurl" ) ) {
     if ( a.url().isEmpty() ) {
-      a.setUrl( KUrl( value ) );
+      a.setUrl( QUrl( value ) );
       return true;
     }
-    if ( a.url().toDisplayString() == KUrl( value ).toDisplayString() ) {
+    if ( a.url().toDisplayString() == QUrl( value ).toDisplayString() ) {
       return true;
     }
     // TODO: current version of kabc only supports one URL.

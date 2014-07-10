@@ -75,7 +75,7 @@ void AddresseeTest::storeTest()
   addressee.setProductId( QLatin1String( "ProductId45" ) );
   addressee.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
   addressee.setSortString( QLatin1String( "Name" ) );
-  addressee.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
+  addressee.setUrl( QUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee.setLogo( logo );
   addressee.setPhoto( photo );
@@ -106,7 +106,7 @@ void AddresseeTest::storeTest()
   QVERIFY( addressee.productId() == QLatin1String( "ProductId45" ) );
   QVERIFY( addressee.revision() == QDateTime( QDate( 1982, 9, 15 ) ) );
   QVERIFY( addressee.sortString() == QLatin1String( "Name" ) );
-  QVERIFY( addressee.url() == KUrl( "www.scottlandyard.info" ) );
+  QVERIFY( addressee.url() == QUrl( "www.scottlandyard.info" ) );
   QVERIFY( addressee.secrecy() == KABC::Secrecy( KABC::Secrecy::Public ) );
   QVERIFY( addressee.logo() == logo );
   QVERIFY( addressee.photo() == photo );
@@ -158,7 +158,7 @@ void AddresseeTest::equalsTest()
   addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
   addressee1.setSortString( QLatin1String( "Name" ) );
-  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
+  addressee1.setUrl( QUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
@@ -189,7 +189,7 @@ void AddresseeTest::equalsTest()
   addressee2.setProductId( QLatin1String( "ProductId45" ) );
   addressee2.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
   addressee2.setSortString( QLatin1String( "Name" ) );
-  addressee2.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
+  addressee2.setUrl( QUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee2.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee2.setLogo( logo );
   addressee2.setPhoto( photo );
@@ -253,7 +253,7 @@ void AddresseeTest::assignmentTest()
   addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
   addressee1.setSortString( QLatin1String( "Name" ) );
-  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
+  addressee1.setUrl( QUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
@@ -311,7 +311,7 @@ void AddresseeTest::serializeTest()
   addressee1.setProductId( QLatin1String( "ProductId45" ) );
   addressee1.setRevision( QDateTime( QDate( 1982, 9, 15 ) ) );
   addressee1.setSortString( QLatin1String( "Name" ) );
-  addressee1.setUrl( KUrl( QLatin1String( "www.scottlandyard.info" ) ) );
+  addressee1.setUrl( QUrl( QLatin1String( "www.scottlandyard.info" ) ) );
   addressee1.setSecrecy( KABC::Secrecy( KABC::Secrecy::Public ) );
   addressee1.setLogo( logo );
   addressee1.setPhoto( photo );
