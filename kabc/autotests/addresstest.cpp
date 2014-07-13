@@ -22,7 +22,6 @@
 #include "kabc/address.h"
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include "kstandarddirs.h"
 #include <qtest.h>
 #include <QStandardPaths>
 #include <QFileInfo>
@@ -157,8 +156,7 @@ void AddressTest::formatTest()
   }
 
   {
-    const QString templateFile = KStandardDirs::locate( "locale",
-        QLatin1String( "l10n/de/entry.desktop" ) );
+    const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String( "l10n/de/entry.desktop" ) );
     QVERIFY2( !templateFile.isEmpty(), "Address format template file for 'de' does not exist" );
 
     const KConfig templateConfig( templateFile );

@@ -21,4 +21,4 @@ include(ECMMarkAsTest)
 
 set(testread2_SRCS testread2.cpp testutils.cpp)
 add_executable(testread2 ${testread2_SRCS})
-target_link_libraries(testread2 KF5Abc)
+target_link_libraries(testread2 KF5Abc Qt5::Gui)
