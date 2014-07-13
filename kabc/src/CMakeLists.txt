@@ -44,6 +44,7 @@ target_include_directories(KF5Abc PUBLIC "$<BUILD_INTERFACE:${KAbc_SOURCE_DIR}/s
 target_link_libraries(KF5Abc
 PUBLIC
     KF5::CoreAddons
+    Qt5::Gui
 PRIVATE
     KF5::KDELibs4Support
     KF5::ConfigCore
