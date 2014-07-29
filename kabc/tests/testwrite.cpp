@@ -22,9 +22,11 @@
 
 #include <kaboutdata.h>
 #include <klocalizedstring.h>
-#include <klocale.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+
+#include <QCoreApplication>
+#include <KAboutData>
+#include <QCommandLineParser>
+
 
 #include "kabc/addressee.h"
 #include "kabc/phonenumber.h"
@@ -37,11 +39,17 @@
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "testwrite", 0, ki18n( "vCard test writer" ), "0.1" );
+  KAboutData aboutData( QLatin1String("testwrite"),i18n( "vCard test writer" ), QLatin1String("0.1") );
 
-  KCmdLineArgs::init( argc, argv, &aboutData );
+  QCoreApplication app(argc, argv);
+  QCommandLineParser parser;
+  KAboutData::setApplicationData(aboutData);
+  parser.addVersionOption();
+  parser.addHelpOption();
+  aboutData.setupCommandLine(&parser);
+  parser.process(app);
+  aboutData.processCommandLine(&parser);
 
-  KApplication app( false );
 
   KABC::Addressee addressee;
 
