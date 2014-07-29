@@ -36,18 +36,15 @@ static QString findCompatibleMimeType( const QMimeData *md )
     return KABC::Addressee::mimeType();
   }
 
-#if 0
-  Qt5  Port.
   const QStringList mimeTypeOffers = md->formats();
   Q_FOREACH ( const QString &mimeType, mimeTypeOffers ) {
     const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType( mimeType, KMimeType::ResolveAliases );
-    if ( !mimeTypePtr.isNull() ) {
+    if ( mimeTypePtr ) {
       if ( mimeTypePtr->is( KABC::Addressee::mimeType() ) ) {
         return mimeType;
       }
     }
   }
-#endif
 
   return QString();
 }
