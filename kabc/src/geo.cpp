@@ -27,20 +27,20 @@ using namespace KABC;
 
 class Geo::Private : public QSharedData
 {
-  public:
+public:
     Private()
-      : mLatitude( 91 ), mLongitude( 181 ),
-        mValidLatitude( false ), mValidLongitude( false )
+        : mLatitude(91), mLongitude(181),
+          mValidLatitude(false), mValidLongitude(false)
     {
     }
 
-    Private( const Private &other )
-      : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
-      mLatitude = other.mLatitude;
-      mLongitude = other.mLongitude;
-      mValidLatitude = other.mValidLatitude;
-      mValidLongitude = other.mValidLongitude;
+        mLatitude = other.mLatitude;
+        mLongitude = other.mLongitude;
+        mValidLatitude = other.mValidLatitude;
+        mValidLongitude = other.mValidLongitude;
     }
 
     float mLatitude;
@@ -51,19 +51,19 @@ class Geo::Private : public QSharedData
 };
 
 Geo::Geo()
-  : d( new Private )
+    : d(new Private)
 {
 }
 
-Geo::Geo( float latitude, float longitude )
-  : d( new Private )
+Geo::Geo(float latitude, float longitude)
+    : d(new Private)
 {
-  setLatitude( latitude );
-  setLongitude( longitude );
+    setLatitude(latitude);
+    setLongitude(longitude);
 }
 
-Geo::Geo( const Geo &other )
-  : d( other.d )
+Geo::Geo(const Geo &other)
+    : d(other.d)
 {
 }
 
@@ -71,95 +71,95 @@ Geo::~Geo()
 {
 }
 
-void Geo::setLatitude( float latitude )
+void Geo::setLatitude(float latitude)
 {
-  if ( latitude >= -90 && latitude <= 90 ) {
-    d->mLatitude = latitude;
-    d->mValidLatitude = true;
-  } else {
-    d->mLatitude = 91;
-    d->mValidLatitude = false;
-  }
+    if (latitude >= -90 && latitude <= 90) {
+        d->mLatitude = latitude;
+        d->mValidLatitude = true;
+    } else {
+        d->mLatitude = 91;
+        d->mValidLatitude = false;
+    }
 }
 
 float Geo::latitude() const
 {
-  return d->mLatitude;
+    return d->mLatitude;
 }
 
-void Geo::setLongitude( float longitude )
+void Geo::setLongitude(float longitude)
 {
-  if ( longitude >= -180 && longitude <= 180 ) {
-    d->mLongitude = longitude;
-    d->mValidLongitude = true;
-  } else {
-    d->mLongitude = 181;
-    d->mValidLongitude = false;
-  }
+    if (longitude >= -180 && longitude <= 180) {
+        d->mLongitude = longitude;
+        d->mValidLongitude = true;
+    } else {
+        d->mLongitude = 181;
+        d->mValidLongitude = false;
+    }
 }
 
 float Geo::longitude() const
 {
-  return d->mLongitude;
+    return d->mLongitude;
 }
 
 bool Geo::isValid() const
 {
-  return d->mValidLatitude && d->mValidLongitude;
+    return d->mValidLatitude && d->mValidLongitude;
 }
 
-bool Geo::operator==( const Geo &other ) const
+bool Geo::operator==(const Geo &other) const
 {
-  if ( !other.isValid() && !isValid() ) {
-    return true;
-  }
+    if (!other.isValid() && !isValid()) {
+        return true;
+    }
 
-  if ( !other.isValid() || !isValid() ) {
+    if (!other.isValid() || !isValid()) {
+        return false;
+    }
+
+    if (other.d->mLatitude == d->mLatitude && other.d->mLongitude == d->mLongitude) {
+        return true;
+    }
+
     return false;
-  }
-
-  if ( other.d->mLatitude == d->mLatitude && other.d->mLongitude == d->mLongitude ) {
-    return true;
-  }
-
-  return false;
 }
 
-bool Geo::operator!=( const Geo &other ) const
+bool Geo::operator!=(const Geo &other) const
 {
-  return !( *this == other );
+    return !(*this == other);
 }
 
-Geo &Geo::operator=( const Geo &other )
+Geo &Geo::operator=(const Geo &other)
 {
-  if ( this != &other ) {
-    d = other.d;
-  }
+    if (this != &other) {
+        d = other.d;
+    }
 
-  return *this;
+    return *this;
 }
 
 QString Geo::toString() const
 {
-  QString str;
+    QString str;
 
-  str += QLatin1String( "Geo {\n" );
-  str += QString::fromLatin1( "  Valid: %1\n" ).
-         arg( isValid() ? QLatin1String( "true" ) : QLatin1String( "false" ) );
-  str += QString::fromLatin1( "  Latitude: %1\n" ).arg( d->mLatitude );
-  str += QString::fromLatin1( "  Longitude: %1\n" ).arg( d->mLongitude );
-  str += QLatin1String( "}\n" );
+    str += QLatin1String("Geo {\n");
+    str += QString::fromLatin1("  Valid: %1\n").
+           arg(isValid() ? QLatin1String("true") : QLatin1String("false"));
+    str += QString::fromLatin1("  Latitude: %1\n").arg(d->mLatitude);
+    str += QString::fromLatin1("  Longitude: %1\n").arg(d->mLongitude);
+    str += QLatin1String("}\n");
 
-  return str;
+    return str;
 }
 
-QDataStream &KABC::operator<<( QDataStream &s, const Geo &geo )
+QDataStream &KABC::operator<<(QDataStream &s, const Geo &geo)
 {
     return s << geo.d->mLatitude << geo.d->mValidLatitude
-             << geo.d->mLongitude << geo.d->mValidLongitude;
+           << geo.d->mLongitude << geo.d->mValidLongitude;
 }
 
-QDataStream &KABC::operator>>( QDataStream &s, Geo &geo )
+QDataStream &KABC::operator>>(QDataStream &s, Geo &geo)
 {
     s >> geo.d->mLatitude >> geo.d->mValidLatitude
       >> geo.d->mLongitude >> geo.d->mValidLongitude;

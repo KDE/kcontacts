@@ -29,7 +29,8 @@ class QString;
 
 template <class T> class QList;
 
-namespace KABC {
+namespace KABC
+{
 
 class ContactGroup;
 
@@ -39,36 +40,37 @@ class ContactGroup;
  * @author Kevin Krammer <kevin.krammer@gmx.at>
  * @since 4.3
  */
-namespace ContactGroupTool {
+namespace ContactGroupTool
+{
 
-  /**
-   * Converts XML data coming from a @p device into a contact @p group.
-   * If an error occurs, @c false is returned and @p errorMessage is set.
-   */
-  KABC_EXPORT bool convertFromXml( QIODevice *device, ContactGroup &group,
-                                   QString *errorMessage = 0 );
+/**
+ * Converts XML data coming from a @p device into a contact @p group.
+ * If an error occurs, @c false is returned and @p errorMessage is set.
+ */
+KABC_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group,
+                                QString *errorMessage = 0);
 
-  /**
-   * Converts a contact @p group into XML data and writes them to a @p device.
-   * If an error occurs, @c false is returned and @p errorMessage is set.
-   */
-  KABC_EXPORT bool convertToXml( const ContactGroup &group, QIODevice *device,
-                                 QString *errorMessage = 0 );
+/**
+ * Converts a contact @p group into XML data and writes them to a @p device.
+ * If an error occurs, @c false is returned and @p errorMessage is set.
+ */
+KABC_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
+                              QString *errorMessage = 0);
 
-  /**
-   * Converts XML data coming from a @p device into a @p list of contact groups.
-   * If an error occurs, @c false is returned and @p errorMessage is set.
-   */
-  KABC_EXPORT bool convertFromXml( QIODevice *device,
-                                   QList<ContactGroup> &list,
-                                   QString *errorMessage = 0 );
+/**
+ * Converts XML data coming from a @p device into a @p list of contact groups.
+ * If an error occurs, @c false is returned and @p errorMessage is set.
+ */
+KABC_EXPORT bool convertFromXml(QIODevice *device,
+                                QList<ContactGroup> &list,
+                                QString *errorMessage = 0);
 
-  /**
-   * Converts a @p list of contact groups into XML data and writes them to a @p device.
-   * If an error occurs, @c false is returned and @p errorMessage is set.
-   */
-  KABC_EXPORT bool convertToXml( const QList<ContactGroup> &list,
-                                 QIODevice *device, QString *errorMessage = 0 );
+/**
+ * Converts a @p list of contact groups into XML data and writes them to a @p device.
+ * If an error occurs, @c false is returned and @p errorMessage is set.
+ */
+KABC_EXPORT bool convertToXml(const QList<ContactGroup> &list,
+                              QIODevice *device, QString *errorMessage = 0);
 }
 
 }

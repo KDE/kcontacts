@@ -29,29 +29,29 @@ using namespace KABC;
 
 class Secrecy::PrivateData : public QSharedData
 {
-  public:
+public:
     PrivateData()
-      : mType( Secrecy::Invalid )
+        : mType(Secrecy::Invalid)
     {
     }
 
-    PrivateData( const PrivateData &other )
-      : QSharedData( other )
+    PrivateData(const PrivateData &other)
+        : QSharedData(other)
     {
-      mType = other.mType;
+        mType = other.mType;
     }
 
     Type mType;
 };
 
-Secrecy::Secrecy( Type type )
-  : d( new PrivateData )
+Secrecy::Secrecy(Type type)
+    : d(new PrivateData)
 {
-  d->mType = type;
+    d->mType = type;
 }
 
-Secrecy::Secrecy( const Secrecy &other )
-  : d( other.d )
+Secrecy::Secrecy(const Secrecy &other)
+    : d(other.d)
 {
 }
 
@@ -59,101 +59,101 @@ Secrecy::~Secrecy()
 {
 }
 
-Secrecy &Secrecy::operator=( const Secrecy &other )
+Secrecy &Secrecy::operator=(const Secrecy &other)
 {
-  if ( this != &other ) {
-    d = other.d;
-  }
+    if (this != &other) {
+        d = other.d;
+    }
 
-  return *this;
+    return *this;
 }
 
-bool Secrecy::operator==( const Secrecy &other ) const
+bool Secrecy::operator==(const Secrecy &other) const
 {
-  return d->mType == other.d->mType;
+    return d->mType == other.d->mType;
 }
 
-bool Secrecy::operator!=( const Secrecy &other ) const
+bool Secrecy::operator!=(const Secrecy &other) const
 {
-  return !( *this == other );
+    return !(*this == other);
 }
 
 bool Secrecy::isValid() const
 {
-  return d->mType != Invalid;
+    return d->mType != Invalid;
 }
 
-void Secrecy::setType( Type type )
+void Secrecy::setType(Type type)
 {
-  d->mType = type;
+    d->mType = type;
 }
 
 Secrecy::Type Secrecy::type() const
 {
-  return d->mType;
+    return d->mType;
 }
 
 Secrecy::TypeList Secrecy::typeList()
 {
-  static TypeList list;
+    static TypeList list;
 
-  if ( list.isEmpty() ) {
-    list << Public << Private << Confidential;
-  }
+    if (list.isEmpty()) {
+        list << Public << Private << Confidential;
+    }
 
-  return list;
+    return list;
 }
 
-QString Secrecy::typeLabel( Type type )
+QString Secrecy::typeLabel(Type type)
 {
-  switch ( type ) {
+    switch (type) {
     case Public:
-      return i18nc( "access is for everyone", "Public" );
-      break;
+        return i18nc("access is for everyone", "Public");
+        break;
     case Private:
-      return i18nc( "access is by owner only", "Private" );
-      break;
+        return i18nc("access is by owner only", "Private");
+        break;
     case Confidential:
-      return i18nc( "access is by owner and a controlled group", "Confidential" );
-      break;
+        return i18nc("access is by owner and a controlled group", "Confidential");
+        break;
     default:
-      return i18nc( "unknown secrecy type", "Unknown type" );
-      break;
-  }
+        return i18nc("unknown secrecy type", "Unknown type");
+        break;
+    }
 }
 
 QString Secrecy::toString() const
 {
-  QString str;
+    QString str;
 
-  str += QString::fromLatin1( "Secrecy {\n" );
-  str += QString::fromLatin1( "  Type: %1\n" ).arg( typeLabel( d->mType ) );
-  str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("Secrecy {\n");
+    str += QString::fromLatin1("  Type: %1\n").arg(typeLabel(d->mType));
+    str += QString::fromLatin1("}\n");
 
-  return str;
+    return str;
 }
 
-QDataStream &KABC::operator<<( QDataStream &s, const Secrecy &secrecy )
+QDataStream &KABC::operator<<(QDataStream &s, const Secrecy &secrecy)
 {
     return s << (uint)secrecy.d->mType;
 }
 
-QDataStream &KABC::operator>>( QDataStream &s, Secrecy &secrecy )
+QDataStream &KABC::operator>>(QDataStream &s, Secrecy &secrecy)
 {
     uint type;
     s >> type;
 
-    switch ( type ) {
-      case 0:
+    switch (type) {
+    case 0:
         secrecy.d->mType = Secrecy::Public;
         break;
-      case 1:
+    case 1:
         secrecy.d->mType = Secrecy::Private;
         break;
-      case 2:
+    case 2:
         secrecy.d->mType = Secrecy::Confidential;
         break;
-      default:
+    default:
         secrecy.d->mType = Secrecy::Invalid;
         break;
     }

@@ -29,7 +29,8 @@
 
 class QString;
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * @short This class represents a group of contacts.
@@ -45,14 +46,14 @@ namespace KABC {
  */
 class KABC_EXPORT ContactGroup
 {
-  public:
+public:
 
     /**
      * This class represents a contact reference
      */
     class KABC_EXPORT ContactReference
     {
-      public:
+    public:
         /**
          * A list of contact references.
          */
@@ -66,12 +67,12 @@ class KABC_EXPORT ContactGroup
         /**
          * Creates a contact reference from an @p other reference.
          */
-        ContactReference( const ContactReference &other );
+        ContactReference(const ContactReference &other);
 
         /**
          * Creates a contact reference for the given contact @p uid.
          */
-        ContactReference( const QString &uid );
+        ContactReference(const QString &uid);
 
         /**
          * Destroys the contact reference.
@@ -84,7 +85,7 @@ class KABC_EXPORT ContactGroup
          * @note That is the Akonadi Item ID of the contact that
          *       is referenced here.
          */
-        void setUid( const QString &uid );
+        void setUid(const QString &uid);
 
         /**
          * Returns the contact uid of the contact reference.
@@ -99,7 +100,7 @@ class KABC_EXPORT ContactGroup
          * @param gid globally unique identifier of the contact to reference
          * @since 4.12
          */
-        void setGid( const QString &gid );
+        void setGid(const QString &gid);
 
         /**
          * Returns the contact GID of the contact reference.
@@ -110,7 +111,7 @@ class KABC_EXPORT ContactGroup
         /**
          * Sets the preferred email address.
          */
-        void setPreferredEmail( const QString &email );
+        void setPreferredEmail(const QString &email);
 
         /**
          * Returns the preferred email address, or an empty string
@@ -126,30 +127,30 @@ class KABC_EXPORT ContactGroup
          * @param key The unique key.
          * @param value The value.
          */
-        void insertCustom( const QString &key, const QString &value );
+        void insertCustom(const QString &key, const QString &value);
 
         /**
          * Removes the custom entry with the given @p key.
          */
-        void removeCustom( const QString &key );
+        void removeCustom(const QString &key);
 
         /**
          * Returns the value for the given @p key, or an empty string
          * if the entry for that key does not exists.
          */
-        QString custom( const QString &key ) const;
+        QString custom(const QString &key) const;
 
         /**
          * @internal
          */
-        ContactReference &operator=( const ContactReference & );
+        ContactReference &operator=(const ContactReference &);
 
         /**
          * @internal
          */
-        bool operator==( const ContactReference & ) const;
+        bool operator==(const ContactReference &) const;
 
-      private:
+    private:
         class ContactReferencePrivate;
         QSharedDataPointer<ContactReferencePrivate> d;
     };
@@ -159,7 +160,7 @@ class KABC_EXPORT ContactGroup
      */
     class KABC_EXPORT ContactGroupReference
     {
-      public:
+    public:
         /**
          * A list of contact group references.
          */
@@ -173,12 +174,12 @@ class KABC_EXPORT ContactGroup
         /**
          * Creates a contact group reference from an @p other reference.
          */
-        ContactGroupReference( const ContactGroupReference &other );
+        ContactGroupReference(const ContactGroupReference &other);
 
         /**
          * Creates a contact group reference for the given contact group @p uid.
          */
-        ContactGroupReference( const QString &uid );
+        ContactGroupReference(const QString &uid);
 
         /**
          * Destroys the contact group reference.
@@ -188,7 +189,7 @@ class KABC_EXPORT ContactGroup
         /**
          * Sets the contact group uid of the contact group reference.
          */
-        void setUid( const QString &uid );
+        void setUid(const QString &uid);
 
         /**
          * Returns the contact group uid of the contact group reference.
@@ -203,30 +204,30 @@ class KABC_EXPORT ContactGroup
          * @param key The unique key.
          * @param value The value.
          */
-        void insertCustom( const QString &key, const QString &value );
+        void insertCustom(const QString &key, const QString &value);
 
         /**
          * Removes the custom entry with the given @p key.
          */
-        void removeCustom( const QString &key );
+        void removeCustom(const QString &key);
 
         /**
          * Returns the value for the given @p key, or an empty string
          * if the entry for that key does not exists.
          */
-        QString custom( const QString &key ) const;
+        QString custom(const QString &key) const;
 
         /**
          * @internal
          */
-        ContactGroupReference &operator=( const ContactGroupReference & );
+        ContactGroupReference &operator=(const ContactGroupReference &);
 
         /**
          * @internal
          */
-        bool operator==( const ContactGroupReference & ) const;
+        bool operator==(const ContactGroupReference &) const;
 
-      private:
+    private:
         class ContactGroupReferencePrivate;
         QSharedDataPointer<ContactGroupReferencePrivate> d;
     };
@@ -236,7 +237,7 @@ class KABC_EXPORT ContactGroup
      */
     class KABC_EXPORT Data
     {
-      public:
+    public:
         /**
          * A list of contact data.
          */
@@ -250,12 +251,12 @@ class KABC_EXPORT ContactGroup
         /**
          * Creates a contact data object from an @p other data object.
          */
-        Data( const Data &other );
+        Data(const Data &other);
 
         /**
          * Creates a contact data object with the given @p name and @p email address.
          */
-        Data( const QString &name, const QString &email );
+        Data(const QString &name, const QString &email);
 
         /**
          * Destroys the contact data object.
@@ -265,7 +266,7 @@ class KABC_EXPORT ContactGroup
         /**
          * Sets the @p name of the contact data object.
          */
-        void setName( const QString &name );
+        void setName(const QString &name);
 
         /**
          * Returns the name of the contact data object.
@@ -275,7 +276,7 @@ class KABC_EXPORT ContactGroup
         /**
          * Sets the @p email address of the contact data object.
          */
-        void setEmail( const QString &email );
+        void setEmail(const QString &email);
 
         /**
          * Returns the email address of the contact data object.
@@ -290,30 +291,30 @@ class KABC_EXPORT ContactGroup
          * @param key The unique key.
          * @param value The value.
          */
-        void insertCustom( const QString &key, const QString &value );
+        void insertCustom(const QString &key, const QString &value);
 
         /**
          * Removes the custom entry with the given @p key.
          */
-        void removeCustom( const QString &key );
+        void removeCustom(const QString &key);
 
         /**
          * Returns the value for the given @p key, or an empty string
          * if the entry for that key does not exists.
          */
-        QString custom( const QString &key ) const;
+        QString custom(const QString &key) const;
 
         /**
          * @internal
          */
-        Data &operator=( const Data & );
+        Data &operator=(const Data &);
 
         /**
          * @internal
          */
-        bool operator==( const Data & ) const;
+        bool operator==(const Data &) const;
 
-      private:
+    private:
         class DataPrivate;
         QSharedDataPointer<DataPrivate> d;
     };
@@ -331,12 +332,12 @@ class KABC_EXPORT ContactGroup
     /**
      * Creates a contact group from an @p other group.
      */
-    ContactGroup( const ContactGroup &other );
+    ContactGroup(const ContactGroup &other);
 
     /**
      * Creates a contact group with the given name.
      */
-    ContactGroup( const QString &name );
+    ContactGroup(const QString &name);
 
     /**
      * Destroys the contact group.
@@ -346,7 +347,7 @@ class KABC_EXPORT ContactGroup
     /**
      * Sets the unique @p id of the contact group.
      */
-    void setId( const QString &id );
+    void setId(const QString &id);
 
     /**
      * Returns the unique id of the contact group.
@@ -356,7 +357,7 @@ class KABC_EXPORT ContactGroup
     /**
      * Sets the i18n'd @p name of the contact group.
      */
-    void setName( const QString &name );
+    void setName(const QString &name);
 
     /**
      * Returns the i18n'd name of the contact group.
@@ -387,62 +388,62 @@ class KABC_EXPORT ContactGroup
     /**
      * Returns the contact reference at the given @p index.
      */
-    ContactReference &contactReference( unsigned int index );
+    ContactReference &contactReference(unsigned int index);
 
     /**
      * Returns the contact reference at the given @p index.
      */
-    const ContactReference &contactReference( unsigned int index ) const;
+    const ContactReference &contactReference(unsigned int index) const;
 
     /**
      * Returns the contact group reference at the given @p index.
      */
-    ContactGroupReference &contactGroupReference( unsigned int index );
+    ContactGroupReference &contactGroupReference(unsigned int index);
 
     /**
      * Returns the contact group reference at the given @p index.
      */
-    const ContactGroupReference &contactGroupReference( unsigned int index ) const;
+    const ContactGroupReference &contactGroupReference(unsigned int index) const;
 
     /**
      * Returns the contact data object at the given @p index.
      */
-    Data &data( unsigned int index );
+    Data &data(unsigned int index);
 
     /**
      * Returns the contact data object at the given @p index.
      */
-    const Data &data( unsigned int index ) const;
+    const Data &data(unsigned int index) const;
 
     /**
      * Appends a new contact @p reference to the contact group.
      */
-    void append( const ContactReference &reference );
+    void append(const ContactReference &reference);
 
     /**
      * Appends a new contact group @p reference to the contact group.
      */
-    void append( const ContactGroupReference &reference );
+    void append(const ContactGroupReference &reference);
 
     /**
      * Appends a new contact @p data object to the contact group.
      */
-    void append( const Data &data );
+    void append(const Data &data);
 
     /**
      * Removes the given contact @p reference from the contact group.
      */
-    void remove( const ContactReference &reference );
+    void remove(const ContactReference &reference);
 
     /**
      * Removes the given contact group @p reference from the contact group.
      */
-    void remove( const ContactGroupReference &reference );
+    void remove(const ContactGroupReference &reference);
 
     /**
      * Removes the given contact @p data object from the contact group.
      */
-    void remove( const Data &data );
+    void remove(const Data &data);
 
     /**
      * Removes all contact references from the contact group.
@@ -462,19 +463,19 @@ class KABC_EXPORT ContactGroup
     /**
      * @internal
      */
-    ContactGroup &operator=( const ContactGroup & );
+    ContactGroup &operator=(const ContactGroup &);
 
     /**
      * @internal
      */
-    bool operator==( const ContactGroup & ) const;
+    bool operator==(const ContactGroup &) const;
 
     /**
      * Returns the MIME type used for Contact Groups
      */
     static QString mimeType();
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
@@ -482,6 +483,6 @@ class KABC_EXPORT ContactGroup
 }
 
 #define KABC_CONTACTGROUP_METATYPE_DEFINED
-Q_DECLARE_METATYPE( KABC::ContactGroup )
+Q_DECLARE_METATYPE(KABC::ContactGroup)
 
 #endif

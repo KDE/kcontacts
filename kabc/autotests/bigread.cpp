@@ -30,51 +30,51 @@
 
 using namespace KABC;
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "bigread", 0, ki18n( "BigReadKabc" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("bigread", 0, ki18n("BigReadKabc"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KApplication app( false );
+    KApplication app(false);
 
-  AddressBook ab;
+    AddressBook ab;
 
-  ResourceFile r( QLatin1String( "my.kabc" ), QLatin1String( "vcard2" ) );
-  ab.addResource( &r );
-
-#if 0
-  ResourceSql rsql( &ab, "root", "kde4ever", "localhost" );
-  ab.addResource( &rsql );
-#endif
-
-  struct tms start;
-
-  times( &start );
+    ResourceFile r(QLatin1String("my.kabc"), QLatin1String("vcard2"));
+    ab.addResource(&r);
 
 #if 0
-  qDebug() << "utime :" << int( start.tms_utime );
-  qDebug() << "stime :" << int( start.tms_stime );
-  qDebug() << "cutime:" << int( start.tms_cutime );
-  qDebug() << "cstime:" << int( start.tms_cstime );
+    ResourceSql rsql(&ab, "root", "kde4ever", "localhost");
+    ab.addResource(&rsql);
 #endif
 
-  qDebug() << "Start load";
-  ab.load();
-  qDebug() << "Finished load";
+    struct tms start;
 
-  struct tms end;
-
-  times( &end );
+    times(&start);
 
 #if 0
-  qDebug() << "utime :" << int( end.tms_utime );
-  qDebug() << "stime :" << int( end.tms_stime );
-  qDebug() << "cutime:" << int( end.tms_cutime );
-  qDebug() << "cstime:" << int( end.tms_cstime );
+    qDebug() << "utime :" << int(start.tms_utime);
+    qDebug() << "stime :" << int(start.tms_stime);
+    qDebug() << "cutime:" << int(start.tms_cutime);
+    qDebug() << "cstime:" << int(start.tms_cstime);
 #endif
 
-  qDebug() << "UTime:" << int( end.tms_utime ) - int( start.tms_utime );
-  qDebug() << "STime:" << int( end.tms_stime ) - int( start.tms_stime );
+    qDebug() << "Start load";
+    ab.load();
+    qDebug() << "Finished load";
+
+    struct tms end;
+
+    times(&end);
+
+#if 0
+    qDebug() << "utime :" << int(end.tms_utime);
+    qDebug() << "stime :" << int(end.tms_stime);
+    qDebug() << "cutime:" << int(end.tms_cutime);
+    qDebug() << "cstime:" << int(end.tms_cstime);
+#endif
+
+    qDebug() << "UTime:" << int(end.tms_utime) - int(start.tms_utime);
+    qDebug() << "STime:" << int(end.tms_stime) - int(start.tms_stime);
 
 //  ab.dump();
 }

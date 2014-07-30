@@ -38,7 +38,8 @@
 #include "timezone.h"
 #include "addresseelist.h"  // for typedef QList<Addressee> List;
 
-namespace KABC {
+namespace KABC
+{
 
 class SortMode;
 
@@ -70,10 +71,10 @@ class SortMode;
  */
 class KABC_EXPORT Addressee
 {
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Addressee & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 
-  public:
+public:
     /**
       A list of addressee objects
      */
@@ -98,14 +99,14 @@ class KABC_EXPORT Addressee
     /**
       Copy constructor.
      */
-    Addressee( const Addressee & );
+    Addressee(const Addressee &);
 
     /**
       Assignment operator.
 
       @return a reference to @c this
     */
-    Addressee &operator=( const Addressee & );
+    Addressee &operator=(const Addressee &);
 
     /**
       Equality operator.
@@ -113,7 +114,7 @@ class KABC_EXPORT Addressee
       @return @c true if @c this and the given addressee are equal,
               otherwise @c false
     */
-    bool operator==( const Addressee & ) const;
+    bool operator==(const Addressee &) const;
 
     /**
       Not-equal operator.
@@ -121,7 +122,7 @@ class KABC_EXPORT Addressee
       @return @c true if @c this and the given addressee are not equal,
               otherwise @c false
     */
-    bool operator!=( const Addressee & ) const;
+    bool operator!=(const Addressee &) const;
 
     /**
       Return, if the address book entry is empty.
@@ -133,7 +134,7 @@ class KABC_EXPORT Addressee
 
       @param uid the KABC unique identifier
      */
-    void setUid( const QString &uid );
+    void setUid(const QString &uid);
 
     /**
       Return unique identifier.
@@ -148,7 +149,7 @@ class KABC_EXPORT Addressee
     /**
       Set name.
      */
-    void setName( const QString &name );
+    void setName(const QString &name);
 
     /**
       Return name.
@@ -163,7 +164,7 @@ class KABC_EXPORT Addressee
     /**
       Set formatted name.
      */
-    void setFormattedName( const QString &formattedName );
+    void setFormattedName(const QString &formattedName);
 
     /**
       Return formatted name.
@@ -178,7 +179,7 @@ class KABC_EXPORT Addressee
     /**
       Set family name.
      */
-    void setFamilyName( const QString &familyName );
+    void setFamilyName(const QString &familyName);
 
     /**
       Return family name.
@@ -193,7 +194,7 @@ class KABC_EXPORT Addressee
     /**
       Set given name.
      */
-    void setGivenName( const QString &givenName );
+    void setGivenName(const QString &givenName);
 
     /**
       Return given name.
@@ -208,7 +209,7 @@ class KABC_EXPORT Addressee
     /**
       Set additional names.
      */
-    void setAdditionalName( const QString &additionalName );
+    void setAdditionalName(const QString &additionalName);
 
     /**
       Return additional names.
@@ -223,7 +224,7 @@ class KABC_EXPORT Addressee
     /**
       Set honorific prefixes.
      */
-    void setPrefix( const QString &prefix );
+    void setPrefix(const QString &prefix);
 
     /**
       Return honorific prefixes.
@@ -238,7 +239,7 @@ class KABC_EXPORT Addressee
     /**
       Set honorific suffixes.
      */
-    void setSuffix( const QString &suffix );
+    void setSuffix(const QString &suffix);
 
     /**
       Return honorific suffixes.
@@ -253,7 +254,7 @@ class KABC_EXPORT Addressee
     /**
       Set nick name.
      */
-    void setNickName( const QString &nickName );
+    void setNickName(const QString &nickName);
 
     /**
       Return nick name.
@@ -268,7 +269,7 @@ class KABC_EXPORT Addressee
     /**
       Set birthday.
      */
-    void setBirthday( const QDateTime &birthday );
+    void setBirthday(const QDateTime &birthday);
 
     /**
       Return birthday.
@@ -398,7 +399,7 @@ class KABC_EXPORT Addressee
     /**
       Set mail client.
      */
-    void setMailer( const QString &mailer );
+    void setMailer(const QString &mailer);
 
     /**
       Return mail client.
@@ -413,7 +414,7 @@ class KABC_EXPORT Addressee
     /**
       Set time zone.
      */
-    void setTimeZone( const TimeZone &timeZone );
+    void setTimeZone(const TimeZone &timeZone);
 
     /**
       Return time zone.
@@ -428,7 +429,7 @@ class KABC_EXPORT Addressee
     /**
       Set geographic position.
      */
-    void setGeo( const Geo &geo );
+    void setGeo(const Geo &geo);
 
     /**
       Return geographic position.
@@ -443,7 +444,7 @@ class KABC_EXPORT Addressee
     /**
       Set title.
      */
-    void setTitle( const QString &title );
+    void setTitle(const QString &title);
 
     /**
       Return title.
@@ -458,7 +459,7 @@ class KABC_EXPORT Addressee
     /**
       Set role.
      */
-    void setRole( const QString &role );
+    void setRole(const QString &role);
 
     /**
       Return role.
@@ -473,7 +474,7 @@ class KABC_EXPORT Addressee
     /**
       Set organization.
      */
-    void setOrganization( const QString &organization );
+    void setOrganization(const QString &organization);
 
     /**
       Return organization.
@@ -488,7 +489,7 @@ class KABC_EXPORT Addressee
     /**
       Set department.
      */
-    void setDepartment( const QString &department );
+    void setDepartment(const QString &department);
 
     /**
       Return department.
@@ -503,7 +504,7 @@ class KABC_EXPORT Addressee
     /**
       Set note.
      */
-    void setNote( const QString &note );
+    void setNote(const QString &note);
 
     /**
       Return note.
@@ -518,7 +519,7 @@ class KABC_EXPORT Addressee
     /**
       Set product identifier.
      */
-    void setProductId( const QString &productId );
+    void setProductId(const QString &productId);
 
     /**
       Return product identifier.
@@ -533,7 +534,7 @@ class KABC_EXPORT Addressee
     /**
       Set revision date.
      */
-    void setRevision( const QDateTime &revision );
+    void setRevision(const QDateTime &revision);
 
     /**
       Return revision date.
@@ -548,7 +549,7 @@ class KABC_EXPORT Addressee
     /**
       Set sort string.
      */
-    void setSortString( const QString &sortString );
+    void setSortString(const QString &sortString);
 
     /**
       Return sort string.
@@ -563,7 +564,7 @@ class KABC_EXPORT Addressee
     /**
       Set homepage.
      */
-    void setUrl( const QUrl &url );
+    void setUrl(const QUrl &url);
 
     /**
       Return homepage.
@@ -578,7 +579,7 @@ class KABC_EXPORT Addressee
     /**
       Set security class.
      */
-    void setSecrecy( const Secrecy &secrecy );
+    void setSecrecy(const Secrecy &secrecy);
 
     /**
       Return security class.
@@ -593,7 +594,7 @@ class KABC_EXPORT Addressee
     /**
       Set logo.
      */
-    void setLogo( const Picture &logo );
+    void setLogo(const Picture &logo);
 
     /**
       Return logo.
@@ -608,7 +609,7 @@ class KABC_EXPORT Addressee
     /**
       Set photo.
      */
-    void setPhoto( const Picture &photo );
+    void setPhoto(const Picture &photo);
 
     /**
       Return photo.
@@ -623,7 +624,7 @@ class KABC_EXPORT Addressee
     /**
       Set sound.
      */
-    void setSound( const Sound &sound );
+    void setSound(const Sound &sound);
 
     /**
       Return sound.
@@ -640,7 +641,7 @@ class KABC_EXPORT Addressee
       parts of the string with according fields. This function should probably
       be a bit more clever.
      */
-    void setNameFromString( const QString & );
+    void setNameFromString(const QString &);
 
     /**
       Return the name of the addressee. This is calculated from all the name
@@ -659,7 +660,7 @@ class KABC_EXPORT Addressee
       @param email Email address to be used to construct the full email string.
                    If this is QString() the preferred email address is used.
      */
-    QString fullEmail( const QString &email=QString() ) const;
+    QString fullEmail(const QString &email = QString()) const;
 
     /**
       Insert an email address. If the email address already exists in this
@@ -669,14 +670,14 @@ class KABC_EXPORT Addressee
       @param preferred Set to true, if this is the preferred email address of
                        the addressee.
      */
-    void insertEmail( const QString &email, bool preferred=false );
+    void insertEmail(const QString &email, bool preferred = false);
 
     /**
       Remove email address. If the email address doesn't exist, nothing happens.
 
       @param email Email address to remove
      */
-    void removeEmail( const QString &email );
+    void removeEmail(const QString &email);
 
     /**
       Return preferred email address. This is the first email address or the
@@ -694,7 +695,7 @@ class KABC_EXPORT Addressee
        The first email address gets the preferred one!
        @param list The list of email addresses.
      */
-    void setEmails( const QStringList& list);
+    void setEmails(const QStringList &list);
 
     /**
       Insert a phone number. If a phone number with the same id already exists
@@ -702,7 +703,7 @@ class KABC_EXPORT Addressee
 
       @param phoneNumber The telephone number to insert to the addressee
      */
-    void insertPhoneNumber( const PhoneNumber &phoneNumber );
+    void insertPhoneNumber(const PhoneNumber &phoneNumber);
 
     /**
       Remove phone number. If no phone number with the given id exists for this
@@ -710,14 +711,14 @@ class KABC_EXPORT Addressee
 
       @param phoneNumber The telephone number to remove from the addressee
      */
-    void removePhoneNumber( const PhoneNumber &phoneNumber );
+    void removePhoneNumber(const PhoneNumber &phoneNumber);
 
     /**
       Return phone number, which matches the given type.
 
       @param type The type of phone number to get
      */
-    PhoneNumber phoneNumber( PhoneNumber::Type type ) const;
+    PhoneNumber phoneNumber(PhoneNumber::Type type) const;
 
     /**
       Return list of all phone numbers.
@@ -729,7 +730,7 @@ class KABC_EXPORT Addressee
 
       @param type The type of phone number to get
      */
-    PhoneNumber::List phoneNumbers( PhoneNumber::Type type ) const;
+    PhoneNumber::List phoneNumbers(PhoneNumber::Type type) const;
 
     /**
       Return phone number with the given id.
@@ -737,7 +738,7 @@ class KABC_EXPORT Addressee
       @param id The identifier of the phone number to look for.
                 See PhoneNumber::id()
      */
-    PhoneNumber findPhoneNumber( const QString &id ) const;
+    PhoneNumber findPhoneNumber(const QString &id) const;
 
     /**
       Insert a key. If a key with the same id already exists
@@ -745,7 +746,7 @@ class KABC_EXPORT Addressee
 
       @param key The key to insert
      */
-    void insertKey( const Key &key );
+    void insertKey(const Key &key);
 
     /**
       Remove a key. If no key with the given id exists for this
@@ -753,7 +754,7 @@ class KABC_EXPORT Addressee
 
       @param key The key to remove
      */
-    void removeKey( const Key &key );
+    void removeKey(const Key &key);
 
     /**
       Return key, which matches the given type.
@@ -765,7 +766,7 @@ class KABC_EXPORT Addressee
       @param customTypeString A string to match custom keys against when
              @p type is @c Key::Custom
      */
-    Key key( Key::Type type, const QString &customTypeString = QString() ) const;
+    Key key(Key::Type type, const QString &customTypeString = QString()) const;
 
     /**
       Return list of all keys.
@@ -776,7 +777,7 @@ class KABC_EXPORT Addressee
        Set the list of keys
        @param keys The keys to be set.
      */
-    void setKeys( const Key::List& keys);
+    void setKeys(const Key::List &keys);
 
     /**
       Return list of keys with a special type.
@@ -788,14 +789,14 @@ class KABC_EXPORT Addressee
       @param customTypeString A string to match custom keys against when
              @p type is @c Key::Custom
      */
-    Key::List keys( Key::Type type, const QString &customTypeString = QString()  ) const;
+    Key::List keys(Key::Type type, const QString &customTypeString = QString()) const;
 
     /**
       Return key with the given id.
 
       @param id The identifier of the key to look for. See Key::id()
      */
-    Key findKey( const QString &id ) const;
+    Key findKey(const QString &id) const;
 
     /**
       Insert an address. If an address with the same id already exists
@@ -803,7 +804,7 @@ class KABC_EXPORT Addressee
 
       @param address The address to insert
      */
-    void insertAddress( const Address &address );
+    void insertAddress(const Address &address);
 
     /**
       Remove address. If no address with the given id exists for this
@@ -811,14 +812,14 @@ class KABC_EXPORT Addressee
 
       @param address The address to remove
      */
-    void removeAddress( const Address &address );
+    void removeAddress(const Address &address);
 
     /**
       Return address, which matches the given type.
 
       @param type The type of address to look for
      */
-    Address address( Address::Type type ) const;
+    Address address(Address::Type type) const;
 
     /**
       Return list of all addresses.
@@ -830,34 +831,34 @@ class KABC_EXPORT Addressee
 
       @param type The type of addresses to look for
      */
-    Address::List addresses( Address::Type type ) const;
+    Address::List addresses(Address::Type type) const;
 
     /**
       Return address with the given id.
 
       @param id The identifier of the address to look for. See Address::id()
      */
-    Address findAddress( const QString &id ) const;
+    Address findAddress(const QString &id) const;
 
     /**
       Insert category. If the category already exists it is not duplicated.
      */
-    void insertCategory( const QString & );
+    void insertCategory(const QString &);
 
     /**
       Remove category.
      */
-    void removeCategory( const QString & );
+    void removeCategory(const QString &);
 
     /**
       Return, if addressee has the given category.
      */
-    bool hasCategory( const QString & ) const;
+    bool hasCategory(const QString &) const;
 
     /**
       Set categories to given value.
      */
-    void setCategories( const QStringList & );
+    void setCategories(const QStringList &);
 
     /**
       Return list of all set categories.
@@ -876,8 +877,8 @@ class KABC_EXPORT Addressee
       @param name Name of this application specific custom entry
       @param value Value of this application specific custom entry
      */
-    void insertCustom( const QString &app, const QString &name,
-                       const QString &value );
+    void insertCustom(const QString &app, const QString &name,
+                      const QString &value);
 
     /**
       Remove custom entry.
@@ -885,7 +886,7 @@ class KABC_EXPORT Addressee
       @param app Name of the application which has inserted this custom entry
       @param name Name of this application specific custom entry
      */
-    void removeCustom( const QString &app, const QString &name );
+    void removeCustom(const QString &app, const QString &name);
 
     /**
       Return value of custom entry, identified by app and entry name.
@@ -893,12 +894,12 @@ class KABC_EXPORT Addressee
       @param app Name of the application which has inserted this custom entry
       @param name Name of this application specific custom entry
      */
-    QString custom( const QString &app, const QString &name ) const;
+    QString custom(const QString &app, const QString &name) const;
 
     /**
       Set all custom entries.
      */
-    void setCustoms( const QStringList & );
+    void setCustoms(const QStringList &);
 
     /**
       Return list of all custom entries.
@@ -915,8 +916,8 @@ class KABC_EXPORT Addressee
       @param fullName The name part of the @p rawEmail input, if it contained one
       @param email The email part of the @p rawEmail input, if it contained one
      */
-    static void parseEmailAddress( const QString &rawEmail, QString &fullName,
-                                   QString &email );
+    static void parseEmailAddress(const QString &rawEmail, QString &fullName,
+                                  QString &email);
 
     /**
       Returns string representation of the addressee.
@@ -928,7 +929,7 @@ class KABC_EXPORT Addressee
 
       @param value Sets the status indicating changed data
      */
-    void setChanged( bool value );
+    void setChanged(bool value);
 
     /**
       Return whether the addressee is changed.
@@ -943,7 +944,7 @@ class KABC_EXPORT Addressee
 
       @param mode The sort mode implementator to use
      */
-    static void setSortMode( KABC::SortMode *mode );
+    static void setSortMode(KABC::SortMode *mode);
 
     /**
       Return whether this addressee is "less-than" a given one
@@ -952,27 +953,27 @@ class KABC_EXPORT Addressee
 
       @see setSortMode()
      */
-    bool operator< ( const Addressee &addr ) const;
+    bool operator< (const Addressee &addr) const;
 
     /**
       Returns the MIME type used for Addressees
      */
     static QString mimeType();
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
 #ifdef kabc_EXPORTS
-KDE_DUMMY_QHASH_FUNCTION( Addressee )
+KDE_DUMMY_QHASH_FUNCTION(Addressee)
 #endif
 
-KABC_EXPORT QDataStream &operator<<( QDataStream &, const Addressee & );
-KABC_EXPORT QDataStream &operator>>( QDataStream &, Addressee & );
+KABC_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
+KABC_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 
 }
 
 #define KABC_ADDRESSEE_METATYPE_DEFINED 1
-Q_DECLARE_METATYPE( KABC::Addressee )
+Q_DECLARE_METATYPE(KABC::Addressee)
 
 #endif

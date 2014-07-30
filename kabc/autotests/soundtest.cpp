@@ -22,114 +22,114 @@
 #include "kabc/sound.h"
 #include <qtest.h>
 
-QTEST_MAIN( SoundTest )
+QTEST_MAIN(SoundTest)
 
 static QByteArray testData()
 {
-  static QByteArray data;
+    static QByteArray data;
 
-  if ( data.isNull() ) {
-    for ( int i = 0; i < 20; ++i ) {
-      data.append( char( i ) );
+    if (data.isNull()) {
+        for (int i = 0; i < 20; ++i) {
+            data.append(char(i));
+        }
     }
-  }
 
-  return data;
+    return data;
 }
 
 void SoundTest::emptyTest()
 {
-  KABC::Sound sound;
+    KABC::Sound sound;
 
-  QVERIFY( sound.isEmpty() );
+    QVERIFY(sound.isEmpty());
 }
 
 void SoundTest::storeTestIntern()
 {
-  KABC::Sound sound;
+    KABC::Sound sound;
 
-  sound.setData( testData() );
+    sound.setData(testData());
 
-  QVERIFY( sound.isIntern() == true );
-  QVERIFY( sound.data() == testData() );
+    QVERIFY(sound.isIntern() == true);
+    QVERIFY(sound.data() == testData());
 }
 
 void SoundTest::storeTestExtern()
 {
-  KABC::Sound sound;
+    KABC::Sound sound;
 
-  sound.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
+    sound.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
 
-  QVERIFY( sound.isIntern() == false );
-  QVERIFY( sound.url() == QLatin1String( QLatin1String( "http://myhomepage.com/sound.wav" ) ) );
+    QVERIFY(sound.isIntern() == false);
+    QVERIFY(sound.url() == QLatin1String(QLatin1String("http://myhomepage.com/sound.wav")));
 }
 
 void SoundTest::equalsTestIntern()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setData( testData() );
-  sound2.setData( testData() );
+    sound1.setData(testData());
+    sound2.setData(testData());
 
-  QVERIFY( sound1 == sound2 );
+    QVERIFY(sound1 == sound2);
 }
 
 void SoundTest::equalsTestExtern()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
-  sound2.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
+    sound1.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
+    sound2.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
 
-  QVERIFY( sound1 == sound2 );
+    QVERIFY(sound1 == sound2);
 }
 
 void SoundTest::differsTest()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
-  sound2.setData( testData() );
+    sound1.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
+    sound2.setData(testData());
 
-  QVERIFY( sound1 != sound2 );
+    QVERIFY(sound1 != sound2);
 }
 
 void SoundTest::assignmentTestIntern()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setData( testData() );
+    sound1.setData(testData());
 
-  sound2 = sound1;
+    sound2 = sound1;
 
-  QVERIFY( sound1 == sound2 );
+    QVERIFY(sound1 == sound2);
 }
 
 void SoundTest::assignmentTestExtern()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
+    sound1.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
 
-  sound2 = sound1;
+    sound2 = sound1;
 
-  QVERIFY( sound1 == sound2 );
+    QVERIFY(sound1 == sound2);
 }
 
 void SoundTest::serializeTest()
 {
-  KABC::Sound sound1, sound2;
+    KABC::Sound sound1, sound2;
 
-  sound1.setUrl( QLatin1String( "http://myhomepage.com/sound.wav" ) );
-  sound1.setData( testData() );
+    sound1.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
+    sound1.setData(testData());
 
-  QByteArray data;
-  QDataStream s( &data, QIODevice::WriteOnly );
-  s << sound1;
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << sound1;
 
-  QDataStream t( &data, QIODevice::ReadOnly );
-  t >> sound2;
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> sound2;
 
-  QVERIFY( sound1 == sound2 );
+    QVERIFY(sound1 == sound2);
 }
 

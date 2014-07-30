@@ -22,65 +22,65 @@
 #include "kabc/secrecy.h"
 #include <qtest.h>
 
-QTEST_MAIN( SecrecyTest )
+QTEST_MAIN(SecrecyTest)
 
 void SecrecyTest::emptyTest()
 {
-  KABC::Secrecy secrecy;
+    KABC::Secrecy secrecy;
 
-  QVERIFY( secrecy.type() == KABC::Secrecy::Invalid );
+    QVERIFY(secrecy.type() == KABC::Secrecy::Invalid);
 }
 
 void SecrecyTest::storeTest()
 {
-  KABC::Secrecy secrecy;
+    KABC::Secrecy secrecy;
 
-  secrecy.setType( KABC::Secrecy::Private );
+    secrecy.setType(KABC::Secrecy::Private);
 
-  QVERIFY( secrecy.type() == KABC::Secrecy::Private );
+    QVERIFY(secrecy.type() == KABC::Secrecy::Private);
 }
 
 void SecrecyTest::equalsTest()
 {
-  KABC::Secrecy secrecy1, secrecy2;
+    KABC::Secrecy secrecy1, secrecy2;
 
-  secrecy1.setType( KABC::Secrecy::Confidential );
-  secrecy2.setType( KABC::Secrecy::Confidential );
+    secrecy1.setType(KABC::Secrecy::Confidential);
+    secrecy2.setType(KABC::Secrecy::Confidential);
 
-  QVERIFY( secrecy1 == secrecy2 );
+    QVERIFY(secrecy1 == secrecy2);
 }
 
 void SecrecyTest::differsTest()
 {
-  KABC::Secrecy secrecy1( KABC::Secrecy::Private );
-  KABC::Secrecy secrecy2( KABC::Secrecy::Confidential );
+    KABC::Secrecy secrecy1(KABC::Secrecy::Private);
+    KABC::Secrecy secrecy2(KABC::Secrecy::Confidential);
 
-  QVERIFY( secrecy1 != secrecy2 );
+    QVERIFY(secrecy1 != secrecy2);
 }
 
 void SecrecyTest::assignmentTest()
 {
-  KABC::Secrecy secrecy1, secrecy2;
+    KABC::Secrecy secrecy1, secrecy2;
 
-  secrecy1.setType( KABC::Secrecy::Confidential );
-  secrecy1 = secrecy2;
+    secrecy1.setType(KABC::Secrecy::Confidential);
+    secrecy1 = secrecy2;
 
-  QVERIFY( secrecy1 == secrecy2 );
+    QVERIFY(secrecy1 == secrecy2);
 }
 
 void SecrecyTest::serializeTest()
 {
-  KABC::Secrecy secrecy1, secrecy2;
+    KABC::Secrecy secrecy1, secrecy2;
 
-  secrecy1.setType( KABC::Secrecy::Confidential );
+    secrecy1.setType(KABC::Secrecy::Confidential);
 
-  QByteArray data;
-  QDataStream s( &data, QIODevice::WriteOnly );
-  s << secrecy1;
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << secrecy1;
 
-  QDataStream t( &data, QIODevice::ReadOnly );
-  t >> secrecy2;
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> secrecy2;
 
-  QVERIFY( secrecy1 == secrecy2 );
+    QVERIFY(secrecy1 == secrecy2);
 }
 

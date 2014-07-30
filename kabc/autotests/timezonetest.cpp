@@ -22,66 +22,66 @@
 #include "kabc/timezone.h"
 #include <qtest.h>
 
-QTEST_MAIN( TimeZoneTest )
+QTEST_MAIN(TimeZoneTest)
 
 void TimeZoneTest::emptyTest()
 {
-  KABC::TimeZone timezone;
+    KABC::TimeZone timezone;
 
-  QVERIFY( timezone.isValid() == false );
+    QVERIFY(timezone.isValid() == false);
 }
 
 void TimeZoneTest::storeTest()
 {
-  KABC::TimeZone timezone;
+    KABC::TimeZone timezone;
 
-  timezone.setOffset( 2 );
+    timezone.setOffset(2);
 
-  QVERIFY( timezone.offset() == 2 );
+    QVERIFY(timezone.offset() == 2);
 }
 
 void TimeZoneTest::equalsTest()
 {
-  KABC::TimeZone timezone1, timezone2;
+    KABC::TimeZone timezone1, timezone2;
 
-  timezone1.setOffset( 2 );
-  timezone2.setOffset( 2 );
+    timezone1.setOffset(2);
+    timezone2.setOffset(2);
 
-  QVERIFY( timezone1 == timezone2 );
+    QVERIFY(timezone1 == timezone2);
 }
 
 void TimeZoneTest::differsTest()
 {
-  KABC::TimeZone timezone1( 2 );
-  KABC::TimeZone timezone2( 3 );
+    KABC::TimeZone timezone1(2);
+    KABC::TimeZone timezone2(3);
 
-  QVERIFY( timezone1 != timezone2 );
-  QVERIFY( timezone1 != KABC::TimeZone() );
+    QVERIFY(timezone1 != timezone2);
+    QVERIFY(timezone1 != KABC::TimeZone());
 }
 
 void TimeZoneTest::assignmentTest()
 {
-  KABC::TimeZone timezone1, timezone2;
+    KABC::TimeZone timezone1, timezone2;
 
-  timezone1.setOffset( 2 );
-  timezone1 = timezone2;
+    timezone1.setOffset(2);
+    timezone1 = timezone2;
 
-  QVERIFY( timezone1 == timezone2 );
+    QVERIFY(timezone1 == timezone2);
 }
 
 void TimeZoneTest::serializeTest()
 {
-  KABC::TimeZone timezone1, timezone2;
+    KABC::TimeZone timezone1, timezone2;
 
-  timezone1.setOffset( 2 );
+    timezone1.setOffset(2);
 
-  QByteArray data;
-  QDataStream s( &data, QIODevice::WriteOnly );
-  s << timezone1;
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << timezone1;
 
-  QDataStream t( &data, QIODevice::ReadOnly );
-  t >> timezone2;
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> timezone2;
 
-  QVERIFY( timezone1 == timezone2 );
+    QVERIFY(timezone1 == timezone2);
 }
 

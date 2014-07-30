@@ -25,9 +25,9 @@
 
 class PhoneNumberTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void emptyTest();
     void storeTest();
     void equalsTest();

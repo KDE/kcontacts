@@ -29,66 +29,65 @@
 
 using namespace KABC;
 
-static QString findCompatibleMimeType( const QMimeData *md )
+static QString findCompatibleMimeType(const QMimeData *md)
 {
-  // check the canonical MIME type first
-  if ( md->hasFormat( KABC::Addressee::mimeType() ) ) {
-    return KABC::Addressee::mimeType();
-  }
-
-  const QStringList mimeTypeOffers = md->formats();
-  Q_FOREACH ( const QString &mimeType, mimeTypeOffers ) {
-    const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType( mimeType, KMimeType::ResolveAliases );
-    if ( mimeTypePtr ) {
-      if ( mimeTypePtr->is( KABC::Addressee::mimeType() ) ) {
-        return mimeType;
-      }
+    // check the canonical MIME type first
+    if (md->hasFormat(KABC::Addressee::mimeType())) {
+        return KABC::Addressee::mimeType();
     }
-  }
 
-  return QString();
+    const QStringList mimeTypeOffers = md->formats();
+    Q_FOREACH (const QString &mimeType, mimeTypeOffers) {
+        const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType(mimeType, KMimeType::ResolveAliases);
+        if (mimeTypePtr) {
+            if (mimeTypePtr->is(KABC::Addressee::mimeType())) {
+                return mimeType;
+            }
+        }
+    }
+
+    return QString();
 }
 
-bool VCardDrag::populateMimeData( QMimeData *md, const QByteArray &content )
+bool VCardDrag::populateMimeData(QMimeData *md, const QByteArray &content)
 {
-  md->setData( KABC::Addressee::mimeType(), content );
-  return true;
+    md->setData(KABC::Addressee::mimeType(), content);
+    return true;
 }
 
-bool VCardDrag::populateMimeData( QMimeData *md, const KABC::Addressee::List &addressees )
+bool VCardDrag::populateMimeData(QMimeData *md, const KABC::Addressee::List &addressees)
 {
-  KABC::VCardConverter converter;
-  const QByteArray vcards = converter.createVCards( addressees );
-  if ( !vcards.isEmpty() ) {
-    return populateMimeData( md, vcards );
-  } else {
-    return false;
-  }
+    KABC::VCardConverter converter;
+    const QByteArray vcards = converter.createVCards(addressees);
+    if (!vcards.isEmpty()) {
+        return populateMimeData(md, vcards);
+    } else {
+        return false;
+    }
 }
 
-bool VCardDrag::canDecode( const QMimeData *md )
+bool VCardDrag::canDecode(const QMimeData *md)
 {
-  return !findCompatibleMimeType( md ).isEmpty();
+    return !findCompatibleMimeType(md).isEmpty();
 }
 
-bool VCardDrag::fromMimeData( const QMimeData *md, QByteArray &content )
+bool VCardDrag::fromMimeData(const QMimeData *md, QByteArray &content)
 {
-  const QString mimeOffer = findCompatibleMimeType( md );
-  if ( mimeOffer.isEmpty() ) {
-    return false;
-  }
-  content = md->data( mimeOffer );
-  return !content.isEmpty();
+    const QString mimeOffer = findCompatibleMimeType(md);
+    if (mimeOffer.isEmpty()) {
+        return false;
+    }
+    content = md->data(mimeOffer);
+    return !content.isEmpty();
 }
 
-bool VCardDrag::fromMimeData( const QMimeData *md, KABC::Addressee::List &addressees )
+bool VCardDrag::fromMimeData(const QMimeData *md, KABC::Addressee::List &addressees)
 {
-  const QString mimeOffer = findCompatibleMimeType( md );
-  if ( mimeOffer.isEmpty() ) {
-    return false;
-  }
-  addressees = KABC::VCardConverter().parseVCards( md->data( mimeOffer ) );
-  return !addressees.isEmpty();
+    const QString mimeOffer = findCompatibleMimeType(md);
+    if (mimeOffer.isEmpty()) {
+        return false;
+    }
+    addressees = KABC::VCardConverter().parseVCards(md->data(mimeOffer));
+    return !addressees.isEmpty();
 }
 
-// kate: space-indent on; indent-width 2; replace-tabs on;

@@ -28,88 +28,88 @@ using namespace KABC;
 
 Addressee vcard1()
 {
-  Addressee addr;
+    Addressee addr;
 
-  addr.setName( QLatin1String( "Frank Dawson" ) );
-  addr.setOrganization( QLatin1String( "Lotus Development Corporation" ) );
-  addr.setUrl( QUrl( QLatin1String( "http://home.earthlink.net/~fdawson" ) ) );
-  addr.insertEmail( QLatin1String( "fdawson@earthlink.net" ) );
-  addr.insertEmail( QLatin1String( "Frank_Dawson@Lotus.com" ), true );
-  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-919-676-9515" ),
-                                       PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
-  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-919-676-9564" ),
-                                       PhoneNumber::Fax |PhoneNumber::Work ) );
-  Address a( Address::Work | Address::Postal | Address::Parcel );
-  a.setStreet( QLatin1String( "6544 Battleford Drive" ) );
-  a.setLocality( QLatin1String( "Raleigh" ) );
-  a.setRegion( QLatin1String( "NC" ) );
-  a.setPostalCode( QLatin1String( "27613-3502" ) );
-  a.setCountry( QLatin1String( "U.S.A." ) );
-  addr.insertAddress( a );
-  return addr;
+    addr.setName(QLatin1String("Frank Dawson"));
+    addr.setOrganization(QLatin1String("Lotus Development Corporation"));
+    addr.setUrl(QUrl(QLatin1String("http://home.earthlink.net/~fdawson")));
+    addr.insertEmail(QLatin1String("fdawson@earthlink.net"));
+    addr.insertEmail(QLatin1String("Frank_Dawson@Lotus.com"), true);
+    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-919-676-9515"),
+                                       PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
+    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-919-676-9564"),
+                                       PhoneNumber::Fax | PhoneNumber::Work));
+    Address a(Address::Work | Address::Postal | Address::Parcel);
+    a.setStreet(QLatin1String("6544 Battleford Drive"));
+    a.setLocality(QLatin1String("Raleigh"));
+    a.setRegion(QLatin1String("NC"));
+    a.setPostalCode(QLatin1String("27613-3502"));
+    a.setCountry(QLatin1String("U.S.A."));
+    addr.insertAddress(a);
+    return addr;
 }
 
 Addressee vcard2()
 {
-  Addressee addr;
+    Addressee addr;
 
-  addr.setName( QLatin1String( "Tim Howes" ) );
-  addr.setOrganization( QLatin1String( "Netscape Communications Corp." ) );
-  addr.insertEmail( QLatin1String( "howes@netscape.com" ) );
-  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-415-937-3419" ),
-                                       PhoneNumber::Voice|PhoneNumber::Msg|PhoneNumber::Work ) );
-  addr.insertPhoneNumber( PhoneNumber( QLatin1String( "+1-415-528-4164" ),
-                                       PhoneNumber::Fax|PhoneNumber::Work ) );
-  Address a( Address::Work );
-  a.setStreet( QLatin1String( "501 E. Middlefield Rd." ) );
-  a.setLocality( QLatin1String( "Mountain View" ) );
-  a.setRegion( QLatin1String( "CA" ) );
-  a.setPostalCode( QLatin1String( "94043" ) );
-  a.setCountry( QLatin1String( "U.S.A." ) );
-  addr.insertAddress( a );
-  return addr;
+    addr.setName(QLatin1String("Tim Howes"));
+    addr.setOrganization(QLatin1String("Netscape Communications Corp."));
+    addr.insertEmail(QLatin1String("howes@netscape.com"));
+    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-415-937-3419"),
+                                       PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
+    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-415-528-4164"),
+                                       PhoneNumber::Fax | PhoneNumber::Work));
+    Address a(Address::Work);
+    a.setStreet(QLatin1String("501 E. Middlefield Rd."));
+    a.setLocality(QLatin1String("Mountain View"));
+    a.setRegion(QLatin1String("CA"));
+    a.setPostalCode(QLatin1String("94043"));
+    a.setCountry(QLatin1String("U.S.A."));
+    addr.insertAddress(a);
+    return addr;
 }
 
 Addressee vcard3()
 {
-  Addressee addr;
+    Addressee addr;
 
-  addr.setName( QLatin1String( "ian geiser" ) );
-  addr.setOrganization( QLatin1String( "Source eXtreme" ) );
-  addr.insertEmail( QLatin1String( "geiseri@yahoo.com" ) );
-  addr.setTitle( QLatin1String( "VP of Engineering" ) );
-  return addr;
+    addr.setName(QLatin1String("ian geiser"));
+    addr.setOrganization(QLatin1String("Source eXtreme"));
+    addr.insertEmail(QLatin1String("geiseri@yahoo.com"));
+    addr.setTitle(QLatin1String("VP of Engineering"));
+    return addr;
 }
 
-QByteArray vcardAsText( const QString &location )
+QByteArray vcardAsText(const QString &location)
 {
-  QByteArray text;
+    QByteArray text;
 
-  QFile file( location );
-  if ( file.open( QIODevice::ReadOnly ) ) {
-    text = file.readAll();
-    file.close();
-  }
+    QFile file(location);
+    if (file.open(QIODevice::ReadOnly)) {
+        text = file.readAll();
+        file.close();
+    }
 
-  return text;
+    return text;
 }
 
 Addressee::List vCardsAsAddresseeList()
 {
-  Addressee::List l;
+    Addressee::List l;
 
-  l.append( vcard1() );
-  l.append( vcard2() );
-  l.append( vcard3() );
+    l.append(vcard1());
+    l.append(vcard2());
+    l.append(vcard3());
 
-  return l;
+    return l;
 }
 
 QByteArray vCardsAsText()
 {
-  QByteArray vcards = vcardAsText( QLatin1String( "tests/vcard1.vcf" ) );
-  vcards += vcardAsText( QLatin1String( "tests/vcard2.vcf" ) );
-  vcards += vcardAsText( QLatin1String( "tests/vcard3.vcf" ) );
+    QByteArray vcards = vcardAsText(QLatin1String("tests/vcard1.vcf"));
+    vcards += vcardAsText(QLatin1String("tests/vcard2.vcf"));
+    vcards += vcardAsText(QLatin1String("tests/vcard3.vcf"));
 
-  return vcards;
+    return vcards;
 }

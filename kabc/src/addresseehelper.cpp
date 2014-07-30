@@ -33,85 +33,85 @@ AddresseeHelper *AddresseeHelper::s_self;
 // static
 AddresseeHelper *AddresseeHelper::self()
 {
-  if ( !s_self ) {
-    s_self = new AddresseeHelper();
-  }
+    if (!s_self) {
+        s_self = new AddresseeHelper();
+    }
 
-  return s_self;
+    return s_self;
 }
 
 AddresseeHelper::AddresseeHelper()
-  : QObject( qApp )
+    : QObject(qApp)
 {
-  initSettings();
+    initSettings();
 
-  QDBusConnection::sessionBus().connect( QString(), QLatin1String( "/KABC" ),
-                                         QLatin1String( "org.kde.kabc.AddressBookConfig" ),
-                                         QLatin1String( "changed" ),
-                                         this, SLOT(initSettings()));
+    QDBusConnection::sessionBus().connect(QString(), QLatin1String("/KABC"),
+                                          QLatin1String("org.kde.kabc.AddressBookConfig"),
+                                          QLatin1String("changed"),
+                                          this, SLOT(initSettings()));
 }
 
 // static
-void AddresseeHelper::addToSet( const QStringList &list, QSet<QString> &container )
+void AddresseeHelper::addToSet(const QStringList &list, QSet<QString> &container)
 {
-  QStringList::ConstIterator it;
-  QStringList::ConstIterator end( list.end() );
-  for ( it = list.begin(); it != end; ++it ) {
-    if ( !( *it ).isEmpty() ) {
-      container.insert( *it );
+    QStringList::ConstIterator it;
+    QStringList::ConstIterator end(list.end());
+    for (it = list.begin(); it != end; ++it) {
+        if (!(*it).isEmpty()) {
+            container.insert(*it);
+        }
     }
-  }
 }
 
 void AddresseeHelper::initSettings()
 {
-  mTitles.clear();
-  mSuffixes.clear();
-  mPrefixes.clear();
+    mTitles.clear();
+    mSuffixes.clear();
+    mPrefixes.clear();
 
-  mTitles.insert( i18n( "Dr." ) );
-  mTitles.insert( i18n( "Miss" ) );
-  mTitles.insert( i18n( "Mr." ) );
-  mTitles.insert( i18n( "Mrs." ) );
-  mTitles.insert( i18n( "Ms." ) );
-  mTitles.insert( i18n( "Prof." ) );
+    mTitles.insert(i18n("Dr."));
+    mTitles.insert(i18n("Miss"));
+    mTitles.insert(i18n("Mr."));
+    mTitles.insert(i18n("Mrs."));
+    mTitles.insert(i18n("Ms."));
+    mTitles.insert(i18n("Prof."));
 
-  mSuffixes.insert( i18n( "I" ) );
-  mSuffixes.insert( i18n( "II" ) );
-  mSuffixes.insert( i18n( "III" ) );
-  mSuffixes.insert( i18n( "Jr." ) );
-  mSuffixes.insert( i18n( "Sr." ) );
+    mSuffixes.insert(i18n("I"));
+    mSuffixes.insert(i18n("II"));
+    mSuffixes.insert(i18n("III"));
+    mSuffixes.insert(i18n("Jr."));
+    mSuffixes.insert(i18n("Sr."));
 
-  mPrefixes.insert( QLatin1String( "van" ) );
-  mPrefixes.insert( QLatin1String( "von" ) );
-  mPrefixes.insert( QLatin1String( "de" ) );
+    mPrefixes.insert(QLatin1String("van"));
+    mPrefixes.insert(QLatin1String("von"));
+    mPrefixes.insert(QLatin1String("de"));
 
-  KConfig _config( QLatin1String( "kabcrc" ), KConfig::NoGlobals );
-  KConfigGroup config(&_config, "General" );
+    KConfig _config(QLatin1String("kabcrc"), KConfig::NoGlobals);
+    KConfigGroup config(&_config, "General");
 
-  addToSet( config.readEntry( "Prefixes", QStringList() ), mTitles );
-  addToSet( config.readEntry( "Inclusions", QStringList() ), mPrefixes );
-  addToSet( config.readEntry( "Suffixes", QStringList() ), mSuffixes );
-  mTradeAsFamilyName = config.readEntry( "TradeAsFamilyName", true );
+    addToSet(config.readEntry("Prefixes", QStringList()), mTitles);
+    addToSet(config.readEntry("Inclusions", QStringList()), mPrefixes);
+    addToSet(config.readEntry("Suffixes", QStringList()), mSuffixes);
+    mTradeAsFamilyName = config.readEntry("TradeAsFamilyName", true);
 }
 
-bool AddresseeHelper::containsTitle( const QString &title ) const
+bool AddresseeHelper::containsTitle(const QString &title) const
 {
-  return mTitles.contains( title );
+    return mTitles.contains(title);
 }
 
-bool AddresseeHelper::containsPrefix( const QString &prefix ) const
+bool AddresseeHelper::containsPrefix(const QString &prefix) const
 {
-  return mPrefixes.contains( prefix );
+    return mPrefixes.contains(prefix);
 }
 
-bool AddresseeHelper::containsSuffix( const QString &suffix ) const
+bool AddresseeHelper::containsSuffix(const QString &suffix) const
 {
-  return mSuffixes.contains( suffix );
+    return mSuffixes.contains(suffix);
 }
 
 bool AddresseeHelper::tradeAsFamilyName() const
 {
-  return mTradeAsFamilyName;
+    return mTradeAsFamilyName;
 }
 

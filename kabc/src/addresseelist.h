@@ -26,7 +26,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QList>
 
-namespace KABC {
+namespace KABC
+{
 
 class Field;
 class SortMode;
@@ -41,11 +42,12 @@ class Addressee;
  * If you want to implement reverse sorting, you do not have to write another
  * trait, as AddresseeList takes care of that.
  */
-namespace SortingTraits {
+namespace SortingTraits
+{
 
 class KABC_EXPORT Uid
 {
-  public:
+public:
     /**
      * Creates an instance.
      */
@@ -65,7 +67,7 @@ class KABC_EXPORT Uid
      * @see Addressee::uid()
      * @see QString::compare()
      */
-    static bool eq( const Addressee &, const Addressee & );
+    static bool eq(const Addressee &, const Addressee &);
 
     /**
      * "Less-Than" compare method
@@ -76,16 +78,16 @@ class KABC_EXPORT Uid
      * @see Addressee::uid()
      * @see QString::compare()
      */
-    static bool lt( const Addressee &, const Addressee & );
+    static bool lt(const Addressee &, const Addressee &);
 
-  private:
+private:
     class Private;
     Private *const d;
 };
 
 class KABC_EXPORT Name
 {
-  public:
+public:
     /**
      * Creates an instance.
      */
@@ -105,7 +107,7 @@ class KABC_EXPORT Name
      * @see Addressee::name()
      * @see QString::localeAwareCompare()
      */
-    static bool eq( const Addressee &, const Addressee & );
+    static bool eq(const Addressee &, const Addressee &);
 
     /**
      * "Less-Than" compare method
@@ -116,16 +118,16 @@ class KABC_EXPORT Name
      * @see Addressee::name()
      * @see QString::localeAwareCompare()
      */
-    static bool lt( const Addressee &, const Addressee & );
+    static bool lt(const Addressee &, const Addressee &);
 
-  private:
+private:
     class Private;
     Private *const d;
 };
 
 class KABC_EXPORT FormattedName
 {
-  public:
+public:
     /**
      * Creates an instance.
      */
@@ -145,7 +147,7 @@ class KABC_EXPORT FormattedName
      * @see Addressee::formattedName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq( const Addressee &, const Addressee & );
+    static bool eq(const Addressee &, const Addressee &);
 
     /**
      * "Less-Than" compare method
@@ -156,16 +158,16 @@ class KABC_EXPORT FormattedName
      * @see Addressee::formattedName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt( const Addressee &, const Addressee & );
+    static bool lt(const Addressee &, const Addressee &);
 
-  private:
+private:
     class Private;
     Private *const d;
 };
 
 class KABC_EXPORT FamilyName // fallback to given name
 {
-  public:
+public:
     /**
      * Creates an instance.
      */
@@ -186,7 +188,7 @@ class KABC_EXPORT FamilyName // fallback to given name
      * @see Addressee::givenName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq( const Addressee &, const Addressee & );
+    static bool eq(const Addressee &, const Addressee &);
 
     /**
      * "Less-Than" compare method
@@ -199,16 +201,16 @@ class KABC_EXPORT FamilyName // fallback to given name
      * @see Addressee::familyName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt( const Addressee &, const Addressee & );
+    static bool lt(const Addressee &, const Addressee &);
 
-  private:
+private:
     class Private;
     Private *const d;
 };
 
 class KABC_EXPORT GivenName  // fallback to family name
 {
-  public:
+public:
     /**
      * Creates an instance.
      */
@@ -229,7 +231,7 @@ class KABC_EXPORT GivenName  // fallback to family name
      * @see Addressee::familyName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq( const Addressee &, const Addressee & );
+    static bool eq(const Addressee &, const Addressee &);
 
     /**
      * "Less-Than" compare method
@@ -242,9 +244,9 @@ class KABC_EXPORT GivenName  // fallback to family name
      * @see Addressee::givenName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt( const Addressee &, const Addressee & );
+    static bool lt(const Addressee &, const Addressee &);
 
-  private:
+private:
     class Private;
     Private *const d;
 };
@@ -255,11 +257,11 @@ class KABC_EXPORT GivenName  // fallback to family name
  * Addressee attribute used for sorting.
  */
 typedef enum {
-  Uid,
-  Name,
-  FormattedName,
-  FamilyName,
-  GivenName
+    Uid,
+    Name,
+    FormattedName,
+    FamilyName,
+    GivenName
 } SortingCriterion;
 
 /**
@@ -287,7 +289,7 @@ typedef enum {
  */
 class KABC_EXPORT AddresseeList : public QList<Addressee>
 {
-  public:
+public:
     /**
      * Creates a new addressee list.
      */
@@ -296,12 +298,12 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
     /**
      * Creates a new addressee list.
      */
-    AddresseeList( const AddresseeList & );
+    AddresseeList(const AddresseeList &);
 
     /**
      * Creates a new addressee list.
      */
-    AddresseeList( const QList<Addressee> & );
+    AddresseeList(const QList<Addressee> &);
 
     /**
      * Destroys the addressee list.
@@ -314,7 +316,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      * @param other the list to assign from
      * @return a reference to @c this
      */
-    AddresseeList &operator=( const AddresseeList &other );
+    AddresseeList &operator=(const AddresseeList &other);
 
     /**
      * Determines the direction of sorting. On change, the list
@@ -322,7 +324,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      * @param reverseSorting <tt>true</tt> if sorting should be done reverse,
      *                       <tt>false</tt> otherwise
      */
-    void setReverseSorting( bool reverseSorting = true );
+    void setReverseSorting(bool reverseSorting = true);
 
     /**
      * Returns the direction of sorting.
@@ -334,20 +336,20 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      * Sorts this list by a specific criterion.
      * @param c    the criterion by which should be sorted
      */
-    void sortBy( SortingCriterion c );
+    void sortBy(SortingCriterion c);
 
     /**
      * Sorts this list by a specific field. If no parameter is given, the
      * last used Field object will be used.
      * @param field    pointer to the Field object to be sorted by
      */
-    void sortByField( Field *field = 0 );
+    void sortByField(Field *field = 0);
 
     /**
      * Sorts this list by a specific sorting mode.
      * @param mode    pointer to the sorting mode object to be sorted by
     */
-    void sortByMode( SortMode *mode = 0 );
+    void sortByMode(SortMode *mode = 0);
 
     /**
      * Sorts this list by its active sorting criterion. This normally is the
@@ -409,7 +411,7 @@ class KABC_EXPORT AddresseeList : public QList<Addressee>
      */
     QString toString() const;
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };

@@ -26,62 +26,64 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QString>
 
-namespace KABC {
+namespace KABC
+{
 
-  /**
-    A set of functions to convert a string with LDIF information to addressees
-    and vice versa. It is useful for addressbook import- and exportfilters
-    and might be used to read and write Mozilla and Netscape addresssbooks.
-  */
+/**
+  A set of functions to convert a string with LDIF information to addressees
+  and vice versa. It is useful for addressbook import- and exportfilters
+  and might be used to read and write Mozilla and Netscape addresssbooks.
+*/
 
-  namespace LDIFConverter {
+namespace LDIFConverter
+{
 
-  /**
-    Converts a LDIF string to a list of addressees.
+/**
+  Converts a LDIF string to a list of addressees.
 
-    @param str         The vcard string.
-    @param addrList    The addresseelist.
-    @param dt          The date & time value of the last modification (e.g. file modification time).
-  */
-  KABC_EXPORT bool LDIFToAddressee( const QString &str, AddresseeList &addrList,
-                                    const QDateTime &dt = QDateTime::currentDateTime() );
+  @param str         The vcard string.
+  @param addrList    The addresseelist.
+  @param dt          The date & time value of the last modification (e.g. file modification time).
+*/
+KABC_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList,
+                                 const QDateTime &dt = QDateTime::currentDateTime());
 
-  /**
-    Converts a list of addressees to a LDIF string.
+/**
+  Converts a list of addressees to a LDIF string.
 
-    @param addrList    The addresseelist.
-    @param str         The LDIF string.
-  */
-  KABC_EXPORT bool addresseeToLDIF( const AddresseeList &addrList, QString &str );
+  @param addrList    The addresseelist.
+  @param str         The LDIF string.
+*/
+KABC_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &str);
 
-  /**
-    Converts an addressee to a LDIF string.
+/**
+  Converts an addressee to a LDIF string.
 
-    @param addr    The addressee.
-    @param str     The LDIF string.
-  */
-  KABC_EXPORT bool addresseeToLDIF( const Addressee &addr, QString &str );
+  @param addr    The addressee.
+  @param str     The LDIF string.
+*/
+KABC_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
 
-  /* internal functions - do not use !! */
+/* internal functions - do not use !! */
 
-  /**
-    @internal
+/**
+  @internal
 
-    Evaluates @p fieldname and sets the @p value at the addressee or the address
-    objects when appropriate.
+  Evaluates @p fieldname and sets the @p value at the addressee or the address
+  objects when appropriate.
 
-    @param a The addressee to store information into
-    @param homeAddr The home address to store respective information into
-    @param workAddr The work address to store respective information into
-    @param fieldname LDIF field name to evaluate
-    @param value The value of the field addressed by @p fieldname
-  */
-  KABC_EXPORT bool evaluatePair( Addressee &a, Address &homeAddr,
-                                 Address &workAddr,
-                                 QString &fieldname, QString &value,
-                                 int &birthday, int &birthmonth, int &birthyear );
+  @param a The addressee to store information into
+  @param homeAddr The home address to store respective information into
+  @param workAddr The work address to store respective information into
+  @param fieldname LDIF field name to evaluate
+  @param value The value of the field addressed by @p fieldname
+*/
+KABC_EXPORT bool evaluatePair(Addressee &a, Address &homeAddr,
+                              Address &workAddr,
+                              QString &fieldname, QString &value,
+                              int &birthday, int &birthmonth, int &birthyear);
 
-  }
+}
 
 }
 #endif

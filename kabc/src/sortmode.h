@@ -24,7 +24,8 @@
 #include "kabc_export.h"
 #include "addressee.h"
 
-namespace KABC {
+namespace KABC
+{
 
 class Field;
 
@@ -36,14 +37,14 @@ class Field;
 */
 class KABC_EXPORT SortMode
 {
-  public:
+public:
     virtual ~SortMode();
 
     /**
       Reimplement this method and return whether the first contact is 'smaller'
       than the second.
      */
-    virtual bool lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const = 0;
+    virtual bool lesser(const KABC::Addressee &first, const KABC::Addressee &second) const = 0;
 };
 
 /**
@@ -53,14 +54,14 @@ class KABC_EXPORT SortMode
  */
 class KABC_EXPORT NameSortMode : public SortMode
 {
-  public:
+public:
     /**
       Specifies which parts of the name are used for comparison.
      */
     enum NameType {
-      FormattedName,    /**< use the formatted name, e.g. "John Doe" */
-      FamilyName,       /**< use the last name, e.g. "Doe" */
-      GivenName         /**< use the first name, e.g. "John" */
+        FormattedName,    /**< use the formatted name, e.g. "John Doe" */
+        FamilyName,       /**< use the last name, e.g. "Doe" */
+        GivenName         /**< use the first name, e.g. "John" */
     };
 
     /**
@@ -80,20 +81,20 @@ class KABC_EXPORT NameSortMode : public SortMode
              ascending order; if @c false, objects are sorted in
              descending order
      */
-    explicit NameSortMode( NameType type, bool ascending = true );
+    explicit NameSortMode(NameType type, bool ascending = true);
 
     virtual ~NameSortMode();
 
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const;
+    virtual bool lesser(const KABC::Addressee &first, const KABC::Addressee &second) const;
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_DISABLE_COPY( NameSortMode )
+    Q_DISABLE_COPY(NameSortMode)
 };
 
 /**
@@ -104,7 +105,7 @@ class KABC_EXPORT NameSortMode : public SortMode
  */
 class KABC_EXPORT FieldSortMode : public SortMode
 {
-  public:
+public:
     /**
       Constructor.
 
@@ -115,20 +116,20 @@ class KABC_EXPORT FieldSortMode : public SortMode
              ascending order; if @c false, objects are sorted in
              descending order
      */
-    explicit FieldSortMode( KABC::Field *field, bool ascending = true );
+    explicit FieldSortMode(KABC::Field *field, bool ascending = true);
 
     virtual ~FieldSortMode();
 
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const;
+    virtual bool lesser(const KABC::Addressee &first, const KABC::Addressee &second) const;
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_DISABLE_COPY( FieldSortMode )
+    Q_DISABLE_COPY(FieldSortMode)
 };
 
 }

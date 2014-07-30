@@ -26,26 +26,27 @@
 
 #include "vcardline.h"
 
-namespace KABC {
+namespace KABC
+{
 
 class VCard
 {
-  public:
+public:
     typedef QList<VCard> List;
     typedef QMap<QString, VCardLine::List> LineMap;
 
     enum Version {
-      v2_1,
-      v3_0,
-      v4_0
+        v2_1,
+        v3_0,
+        v4_0
     };
 
     VCard();
-    VCard( const VCard &card );
+    VCard(const VCard &card);
 
     ~VCard();
 
-    VCard &operator=( const VCard &card );
+    VCard &operator=(const VCard &card);
 
     /**
      * Removes all lines from the vCard.
@@ -60,29 +61,29 @@ class VCard
     /**
      * Adds a VCardLine to the VCard
      */
-    void addLine( const VCardLine &line );
+    void addLine(const VCardLine &line);
 
     /**
      * Returns all lines of the vcard with a special identifier.
      */
-    VCardLine::List lines( const QString &identifier ) const;
+    VCardLine::List lines(const QString &identifier) const;
 
     /**
      * Returns only the first line of the vcard with a special identifier.
      */
-    VCardLine line( const QString &identifier ) const;
+    VCardLine line(const QString &identifier) const;
 
     /**
      * Set the version of the vCard.
      */
-    void setVersion( Version version );
+    void setVersion(Version version);
 
     /**
      * Returns the version of this vCard.
      */
     Version version() const;
 
-  private:
+private:
     LineMap mLineMap;
 
     class VCardPrivate;

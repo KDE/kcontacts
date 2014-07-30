@@ -24,18 +24,19 @@
 #include "vcard.h"
 #include <QtCore/QByteArray>
 
-namespace KABC {
+namespace KABC
+{
 
 class VCardParser
 {
-  public:
+public:
     VCardParser();
     ~VCardParser();
 
-    static VCard::List parseVCards( const QByteArray &text );
-    static QByteArray createVCards( const VCard::List &list );
+    static VCard::List parseVCards(const QByteArray &text);
+    static QByteArray createVCards(const VCard::List &list);
 
-  private:
+private:
     class VCardParserPrivate;
     VCardParserPrivate *d;
 };

@@ -27,17 +27,17 @@ using namespace KABC;
 
 class TimeZone::Private : public QSharedData
 {
-  public:
-    Private( int offset = 0, bool valid = false )
-      : mOffset( offset ), mValid( valid )
+public:
+    Private(int offset = 0, bool valid = false)
+        : mOffset(offset), mValid(valid)
     {
     }
 
-    Private( const Private &other )
-      : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
-      mOffset = other.mOffset;
-      mValid = other.mValid;
+        mOffset = other.mOffset;
+        mValid = other.mValid;
     }
 
     int mOffset;
@@ -45,17 +45,17 @@ class TimeZone::Private : public QSharedData
 };
 
 TimeZone::TimeZone()
-  : d( new Private )
+    : d(new Private)
 {
 }
 
-TimeZone::TimeZone( int offset )
-  : d( new Private( offset, true ) )
+TimeZone::TimeZone(int offset)
+    : d(new Private(offset, true))
 {
 }
 
-TimeZone::TimeZone( const TimeZone &other )
-  : d( other.d )
+TimeZone::TimeZone(const TimeZone &other)
+    : d(other.d)
 {
 }
 
@@ -63,72 +63,72 @@ TimeZone::~TimeZone()
 {
 }
 
-void TimeZone::setOffset( int offset )
+void TimeZone::setOffset(int offset)
 {
-  d->mOffset = offset;
-  d->mValid = true;
+    d->mOffset = offset;
+    d->mValid = true;
 }
 
 int TimeZone::offset() const
 {
-  return d->mOffset;
+    return d->mOffset;
 }
 
 bool TimeZone::isValid() const
 {
-  return d->mValid;
+    return d->mValid;
 }
 
-bool TimeZone::operator==( const TimeZone &t ) const
+bool TimeZone::operator==(const TimeZone &t) const
 {
-  if ( !t.isValid() && !isValid() ) {
-    return true;
-  }
+    if (!t.isValid() && !isValid()) {
+        return true;
+    }
 
-  if ( !t.isValid() || !isValid() ) {
+    if (!t.isValid() || !isValid()) {
+        return false;
+    }
+
+    if (t.d->mOffset == d->mOffset) {
+        return true;
+    }
+
     return false;
-  }
-
-  if ( t.d->mOffset == d->mOffset ) {
-    return true;
-  }
-
-  return false;
 }
 
-bool TimeZone::operator!=( const TimeZone &t ) const
+bool TimeZone::operator!=(const TimeZone &t) const
 {
-  return !( *this == t );
+    return !(*this == t);
 }
 
-TimeZone &TimeZone::operator=( const TimeZone &other )
+TimeZone &TimeZone::operator=(const TimeZone &other)
 {
-  if ( this != &other ) {
-    d = other.d;
-  }
+    if (this != &other) {
+        d = other.d;
+    }
 
-  return *this;
+    return *this;
 }
 
 QString TimeZone::toString() const
 {
-  QString str;
+    QString str;
 
-  str += QString::fromLatin1( "TimeZone {\n" );
-  str += QString::fromLatin1( "  Offset: %1\n" ).arg( d->mOffset );
-  str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("TimeZone {\n");
+    str += QString::fromLatin1("  Offset: %1\n").arg(d->mOffset);
+    str += QString::fromLatin1("}\n");
 
-  return str;
+    return str;
 }
 
-QDataStream &KABC::operator<<( QDataStream &s, const TimeZone &zone )
+QDataStream &KABC::operator<<(QDataStream &s, const TimeZone &zone)
 {
-  return s << zone.d->mOffset << zone.d->mValid;
+    return s << zone.d->mOffset << zone.d->mValid;
 }
 
-QDataStream &KABC::operator>>( QDataStream &s, TimeZone &zone )
+QDataStream &KABC::operator>>(QDataStream &s, TimeZone &zone)
 {
-  s >> zone.d->mOffset >> zone.d->mValid;
+    s >> zone.d->mOffset >> zone.d->mValid;
 
-  return s;
+    return s;
 }

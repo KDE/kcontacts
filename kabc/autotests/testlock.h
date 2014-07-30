@@ -32,17 +32,17 @@ class QTreeWidget;
 class LockWidget : public QWidget
 {
     Q_OBJECT
-  public:
-    LockWidget( const QString &identifier );
+public:
+    LockWidget(const QString &identifier);
     ~LockWidget();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void lock();
     void unlock();
 
     void updateLockView();
 
-  private:
+private:
     KABC::Lock *mLock;
 
     QLabel *mStatus;

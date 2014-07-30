@@ -29,86 +29,86 @@ SortMode::~SortMode()
 
 class NameSortMode::Private
 {
-  public:
+public:
     NameType mNameType;
     bool mAscendingOrder;
 };
 
 NameSortMode::NameSortMode()
- : d( new Private )
+    : d(new Private)
 {
-  d->mNameType = FormattedName;
-  d->mAscendingOrder = true;
+    d->mNameType = FormattedName;
+    d->mAscendingOrder = true;
 }
 
-NameSortMode::NameSortMode( NameType type, bool ascending )
-  : d( new Private )
+NameSortMode::NameSortMode(NameType type, bool ascending)
+    : d(new Private)
 {
-  d->mNameType = type;
-  d->mAscendingOrder = ascending;
+    d->mNameType = type;
+    d->mAscendingOrder = ascending;
 }
 
 NameSortMode::~NameSortMode()
 {
-  delete d;
+    delete d;
 }
 
-bool NameSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const
+bool NameSortMode::lesser(const KABC::Addressee &first, const KABC::Addressee &second) const
 {
-  bool lesser = false;
+    bool lesser = false;
 
-  switch ( d->mNameType ) {
+    switch (d->mNameType) {
     case FormattedName:
-      lesser = QString::localeAwareCompare( first.formattedName(), second.formattedName() ) < 0;
-      break;
+        lesser = QString::localeAwareCompare(first.formattedName(), second.formattedName()) < 0;
+        break;
     case FamilyName:
-      lesser = QString::localeAwareCompare( first.familyName(), second.familyName() ) < 0;
-      break;
+        lesser = QString::localeAwareCompare(first.familyName(), second.familyName()) < 0;
+        break;
     case GivenName:
-      lesser = QString::localeAwareCompare( first.givenName(), second.givenName() ) < 0;
-      break;
+        lesser = QString::localeAwareCompare(first.givenName(), second.givenName()) < 0;
+        break;
     default:
-      lesser = false;
-      break;
-  }
+        lesser = false;
+        break;
+    }
 
-  if ( !d->mAscendingOrder ) {
-    lesser = !lesser;
-  }
+    if (!d->mAscendingOrder) {
+        lesser = !lesser;
+    }
 
-  return lesser;
+    return lesser;
 }
 
 class FieldSortMode::Private
 {
-  public:
+public:
     KABC::Field *mField;
     bool mAscendingOrder;
 };
 
-FieldSortMode::FieldSortMode( KABC::Field *field, bool ascending )
-  : d( new Private )
+FieldSortMode::FieldSortMode(KABC::Field *field, bool ascending)
+    : d(new Private)
 {
-  d->mField = field;
-  d->mAscendingOrder = ascending;
+    d->mField = field;
+    d->mAscendingOrder = ascending;
 }
 
 FieldSortMode::~FieldSortMode()
 {
-  delete d;
+    delete d;
 }
 
-bool FieldSortMode::lesser( const KABC::Addressee &first, const KABC::Addressee &second ) const
+bool FieldSortMode::lesser(const KABC::Addressee &first, const KABC::Addressee &second) const
 {
-  if ( !d->mField ) {
-    return false;
-  } else {
-    bool lesser =
-      QString::localeAwareCompare( d->mField->value( first ), d->mField->value( second ) ) < 0;
-    if ( !d->mAscendingOrder ) {
-      lesser = !lesser;
-    }
+    if (!d->mField) {
+        return false;
+    } else {
+        bool lesser =
+            QString::localeAwareCompare(d->mField->value(first), d->mField->value(second)) < 0;
+        if (!d->mAscendingOrder) {
+            lesser = !lesser;
+        }
 
-    return lesser;
-  }
+        return lesser;
+    }
 }

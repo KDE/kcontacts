@@ -25,7 +25,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * @short Time zone information.
@@ -34,10 +35,10 @@ namespace KABC {
  */
 class KABC_EXPORT TimeZone
 {
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const TimeZone & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, TimeZone & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const TimeZone &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, TimeZone &);
 
-  public:
+public:
     /**
      * Construct invalid time zone.
      */
@@ -48,12 +49,12 @@ class KABC_EXPORT TimeZone
      *
      * @param offset Offset in minutes relative to UTC.
      */
-    TimeZone( int offset );
+    TimeZone(int offset);
 
     /**
      * Copy constructor.
      */
-    TimeZone( const TimeZone &other );
+    TimeZone(const TimeZone &other);
 
     /**
      * Destroys the time zone.
@@ -65,7 +66,7 @@ class KABC_EXPORT TimeZone
      *
      * @param offset Offset in minutes.
      */
-    void setOffset( int offset );
+    void setOffset(int offset);
 
     /**
      * Return offset in minutes relative to UTC.
@@ -77,16 +78,16 @@ class KABC_EXPORT TimeZone
      */
     bool isValid() const;
 
-    bool operator==( const TimeZone & ) const;
-    bool operator!=( const TimeZone & ) const;
-    TimeZone &operator=( const TimeZone &other );
+    bool operator==(const TimeZone &) const;
+    bool operator!=(const TimeZone &) const;
+    TimeZone &operator=(const TimeZone &other);
 
     /**
      * Return string representation of time zone offset.
      */
     QString toString() const;
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
@@ -94,12 +95,12 @@ class KABC_EXPORT TimeZone
 /**
  * Serializes the @p timezone object into the @p stream.
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const TimeZone &timeZone );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const TimeZone &timeZone);
 
 /**
  * Initializes the @p timezone object from the @p stream.
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, TimeZone &timeZone );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, TimeZone &timeZone);
 
 }
 

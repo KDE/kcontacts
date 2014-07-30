@@ -28,21 +28,21 @@
 
 using namespace KABC;
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "testaddresslineedit", 0,
-                        ki18n( "Test Address LineEdit" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("testaddresslineedit", 0,
+                         ki18n("Test Address LineEdit"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KApplication app;
+    KApplication app;
 
-  AddressLineEdit *lineEdit = new AddressLineEdit( 0 );
+    AddressLineEdit *lineEdit = new AddressLineEdit(0);
 
-  lineEdit->show();
+    lineEdit->show();
 
-  QObject::connect( &app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()) );
+    QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 
-  app.exec();
+    app.exec();
 
-  delete lineEdit;
+    delete lineEdit;
 }

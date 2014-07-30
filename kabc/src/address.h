@@ -26,7 +26,8 @@
 
 #include "kabc_export.h"
 
-namespace KABC {
+namespace KABC
+{
 
 /**
   @brief
@@ -36,10 +37,10 @@ namespace KABC {
 */
 class KABC_EXPORT Address
 {
-    friend KABC_EXPORT QDataStream &operator<<( QDataStream &s, const Address &addr );
-    friend KABC_EXPORT QDataStream &operator>>( QDataStream &s, Address &addr );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &s, const Address &addr);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &s, Address &addr);
 
-  public:
+public:
     /**
       List of addresses.
     */
@@ -49,16 +50,16 @@ class KABC_EXPORT Address
       Address types:
     */
     enum TypeFlag {
-      Dom = 1,     /**< domestic */
-      Intl = 2,    /**< international */
-      Postal = 4,  /**< postal */
-      Parcel = 8,  /**< parcel */
-      Home = 16,   /**< home address */
-      Work = 32,   /**< address at work */
-      Pref = 64    /**< preferred address */
+        Dom = 1,     /**< domestic */
+        Intl = 2,    /**< international */
+        Postal = 4,  /**< postal */
+        Parcel = 8,  /**< parcel */
+        Home = 16,   /**< home address */
+        Work = 32,   /**< address at work */
+        Pref = 64    /**< preferred address */
     };
 
-    Q_DECLARE_FLAGS( Type, TypeFlag )
+    Q_DECLARE_FLAGS(Type, TypeFlag)
 
     /**
       List of address types.
@@ -73,12 +74,12 @@ class KABC_EXPORT Address
     /**
       Creates an address of the given @p type.
     */
-    Address( Type type );
+    Address(Type type);
 
     /**
       Copy constructor.
     */
-    Address( const Address &address );
+    Address(const Address &address);
 
     /**
       Destroys the address.
@@ -91,7 +92,7 @@ class KABC_EXPORT Address
       @param addr the address to compare to
       @return @c true if @c this and @p addr are equal, otherwise @c false
     */
-    bool operator==( const Address &addr ) const;
+    bool operator==(const Address &addr) const;
 
     /**
       Not-equal operator.
@@ -99,7 +100,7 @@ class KABC_EXPORT Address
       @param addr the address to compare to
       @return @c true if @c this and @p addr are not equal, otherwise @c false
     */
-    bool operator!=( const Address &addr ) const;
+    bool operator!=(const Address &addr) const;
 
     /**
       Assignment operator.
@@ -107,7 +108,7 @@ class KABC_EXPORT Address
       @param addr the address data to assign to @c this
       @return a reference to @c this
     */
-    Address &operator=( const Address &addr );
+    Address &operator=(const Address &addr);
 
     /**
       Returns true, if the address is empty.
@@ -122,7 +123,7 @@ class KABC_EXPORT Address
     /**
       Sets the unique @p identifier.
     */
-    void setId( const QString &identifier );
+    void setId(const QString &identifier);
 
     /**
       Returns the unique identifier.
@@ -134,7 +135,7 @@ class KABC_EXPORT Address
 
       @param type type, can be a bitwise or of multiple types.
     */
-    void setType( Type type );
+    void setType(Type type);
 
     /**
       Returns the type of address. Can be a bitwise or of multiple types.
@@ -149,7 +150,7 @@ class KABC_EXPORT Address
     /**
       Sets the post office box.
     */
-    void setPostOfficeBox( const QString &postOfficeBox );
+    void setPostOfficeBox(const QString &postOfficeBox);
 
     /**
       Returns the post office box.
@@ -164,7 +165,7 @@ class KABC_EXPORT Address
     /**
       Sets the @p extended address information.
     */
-    void setExtended( const QString &extended );
+    void setExtended(const QString &extended);
 
     /**
       Returns the extended address information.
@@ -179,7 +180,7 @@ class KABC_EXPORT Address
     /**
       Sets the @p street (including house number).
     */
-    void setStreet( const QString &street );
+    void setStreet(const QString &street);
 
     /**
       Returns the street.
@@ -196,7 +197,7 @@ class KABC_EXPORT Address
 
       @param locality the locality of the address, e.g. city
     */
-    void setLocality( const QString &locality );
+    void setLocality(const QString &locality);
 
     /**
       Returns the locality.
@@ -213,7 +214,7 @@ class KABC_EXPORT Address
 
       @param region the region the address falls into, e.g. state
     */
-    void setRegion( const QString &region );
+    void setRegion(const QString &region);
 
     /**
       Returns the region.
@@ -228,7 +229,7 @@ class KABC_EXPORT Address
     /**
       Sets the postal @p code.
     */
-    void setPostalCode( const QString &code );
+    void setPostalCode(const QString &code);
 
     /**
       Returns the postal code.
@@ -243,7 +244,7 @@ class KABC_EXPORT Address
     /**
       Sets the @p country.
     */
-    void setCountry( const QString &country );
+    void setCountry(const QString &country);
 
     /**
       Returns the country.
@@ -260,7 +261,7 @@ class KABC_EXPORT Address
 
       @param label the string to use for delivery labels
     */
-    void setLabel( const QString &label );
+    void setLabel(const QString &label);
 
     /**
       Returns the delivery label.
@@ -280,7 +281,7 @@ class KABC_EXPORT Address
     /**
       Returns the translated label for the given @p type.
     */
-    static QString typeLabel( Type type );
+    static QString typeLabel(Type type);
 
     /**
       Returns a string representation of the address.
@@ -298,8 +299,8 @@ class KABC_EXPORT Address
       @param orgaName   the name of the organization or company
       @return           the formatted address (containing newline characters)
     */
-    QString formattedAddress( const QString &realName = QString(),
-                              const QString &orgaName = QString() ) const;
+    QString formattedAddress(const QString &realName = QString(),
+                             const QString &orgaName = QString()) const;
 
     /**
       Returns ISO code for a localized country name. Only localized country
@@ -308,7 +309,7 @@ class KABC_EXPORT Address
       @param cname  name of the country
       @return       two digit ISO code
     */
-    static QString countryToISO( const QString &cname );
+    static QString countryToISO(const QString &cname);
 
     /**
       Returns a localized country name for a ISO code.
@@ -316,24 +317,24 @@ class KABC_EXPORT Address
       @param ISOname two digit ISO code
       @return        localized name of the country
     */
-    static QString ISOtoCountry( const QString &ISOname );
+    static QString ISOtoCountry(const QString &ISOname);
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( Address::Type )
+Q_DECLARE_OPERATORS_FOR_FLAGS(Address::Type)
 
 /**
   Serializes the @p address object into the @p stream.
 */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Address &address );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Address &address);
 
 /**
   Initializes the @p address object from the @p stream.
 */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Address &address );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Address &address);
 
 }
 

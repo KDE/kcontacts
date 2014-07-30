@@ -24,7 +24,7 @@
 using namespace KABC;
 
 VCardConverter::VCardConverter()
-  : d( 0 )
+    : d(0)
 {
 }
 
@@ -32,101 +32,101 @@ VCardConverter::~VCardConverter()
 {
 }
 
-QByteArray VCardConverter::exportVCard( const Addressee &addr, Version version ) const
+QByteArray VCardConverter::exportVCard(const Addressee &addr, Version version) const
 {
-  Addressee::List list;
-  list.append( addr );
+    Addressee::List list;
+    list.append(addr);
 
-  return exportVCards( list, version );
+    return exportVCards(list, version);
 }
 
-QByteArray VCardConverter::exportVCards( const Addressee::List &list, Version version ) const
+QByteArray VCardConverter::exportVCards(const Addressee::List &list, Version version) const
 {
-  VCardTool tool;
-  QByteArray returnValue;
-  switch (version) {
-  case v2_1:
-     returnValue = tool.exportVCards( list, VCard::v2_1 );
-     break;
-  case v3_0:
-     returnValue = tool.exportVCards( list, VCard::v3_0 );
-     break;     
-  case v4_0:
-     returnValue = tool.exportVCards( list, VCard::v4_0 );
-     break;
-  }
+    VCardTool tool;
+    QByteArray returnValue;
+    switch (version) {
+    case v2_1:
+        returnValue = tool.exportVCards(list, VCard::v2_1);
+        break;
+    case v3_0:
+        returnValue = tool.exportVCards(list, VCard::v3_0);
+        break;
+    case v4_0:
+        returnValue = tool.exportVCards(list, VCard::v4_0);
+        break;
+    }
 
-  return returnValue;
+    return returnValue;
 }
 
-QByteArray VCardConverter::createVCard( const Addressee &addr, Version version ) const
+QByteArray VCardConverter::createVCard(const Addressee &addr, Version version) const
 {
-  Addressee::List list;
-  list.append( addr );
+    Addressee::List list;
+    list.append(addr);
 
-  return createVCards( list, version );
+    return createVCards(list, version);
 }
 
-QByteArray VCardConverter::createVCards( const Addressee::List &list, Version version ) const
+QByteArray VCardConverter::createVCards(const Addressee::List &list, Version version) const
 {
-  VCardTool tool;
-  QByteArray returnValue;
-  switch (version) {
-  case v2_1:
-     returnValue = tool.createVCards( list, VCard::v2_1 );
-     break;
-  case v3_0:
-     returnValue = tool.createVCards( list, VCard::v3_0 );
-     break;
-  case v4_0:
-     returnValue = tool.createVCards( list, VCard::v4_0 );
-     break;
-  }
+    VCardTool tool;
+    QByteArray returnValue;
+    switch (version) {
+    case v2_1:
+        returnValue = tool.createVCards(list, VCard::v2_1);
+        break;
+    case v3_0:
+        returnValue = tool.createVCards(list, VCard::v3_0);
+        break;
+    case v4_0:
+        returnValue = tool.createVCards(list, VCard::v4_0);
+        break;
+    }
 
-  return returnValue;
+    return returnValue;
 }
 
-Addressee VCardConverter::parseVCard( const QByteArray &vcard ) const
+Addressee VCardConverter::parseVCard(const QByteArray &vcard) const
 {
-  Addressee::List list = parseVCards( vcard );
+    Addressee::List list = parseVCards(vcard);
 
-  return list.isEmpty() ? Addressee() : list[ 0 ];
+    return list.isEmpty() ? Addressee() : list[ 0 ];
 }
 
-Addressee::List VCardConverter::parseVCards( const QByteArray &vcard ) const
+Addressee::List VCardConverter::parseVCards(const QByteArray &vcard) const
 {
-  VCardTool tool;
+    VCardTool tool;
 
-  return tool.parseVCards( vcard );
+    return tool.parseVCards(vcard);
 }
 
 /* Helper functions */
 
-QString KABC::dateToVCardString( const QDateTime &dateTime )
+QString KABC::dateToVCardString(const QDateTime &dateTime)
 {
-  return dateTime.toString( QLatin1String( "yyyyMMddThhmmssZ" ) );
+    return dateTime.toString(QLatin1String("yyyyMMddThhmmssZ"));
 }
 
-QString KABC::dateToVCardString( const QDate &date )
+QString KABC::dateToVCardString(const QDate &date)
 {
-  return date.toString( QLatin1String( "yyyyMMdd" ) );
+    return date.toString(QLatin1String("yyyyMMdd"));
 }
 
-QDateTime KABC::VCardStringToDate( const QString &dateString )
+QDateTime KABC::VCardStringToDate(const QString &dateString)
 {
-  QDate date;
-  QTime time;
-  QString d( dateString );
+    QDate date;
+    QTime time;
+    QString d(dateString);
 
-  d = d.remove( QLatin1Char( '-' ) ).remove( QLatin1Char( ':' ) );
+    d = d.remove(QLatin1Char('-')).remove(QLatin1Char(':'));
 
-  if ( d.length() >= 8 ) {
-    date = QDate( d.mid( 0, 4 ).toUInt(), d.mid( 4, 2 ).toUInt(), d.mid( 6, 2 ).toUInt() );
-  }
+    if (d.length() >= 8) {
+        date = QDate(d.mid(0, 4).toUInt(), d.mid(4, 2).toUInt(), d.mid(6, 2).toUInt());
+    }
 
-  if ( d.length() > 9 && d[ 8 ].toUpper() == QLatin1Char( 'T' ) ) {
-    time = QTime( d.mid( 9, 2 ).toUInt(), d.mid( 11, 2 ).toUInt(), d.mid( 13, 2 ).toUInt() );
-  }
+    if (d.length() > 9 && d[ 8 ].toUpper() == QLatin1Char('T')) {
+        time = QTime(d.mid(9, 2).toUInt(), d.mid(11, 2).toUInt(), d.mid(13, 2).toUInt());
+    }
 
-  return QDateTime( date, time );
+    return QDateTime(date, time);
 }

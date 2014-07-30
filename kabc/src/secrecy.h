@@ -25,14 +25,15 @@
 #include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
 
-namespace KABC {
+namespace KABC
+{
 
 class KABC_EXPORT Secrecy
 {
-    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Secrecy & );
-    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Secrecy & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Secrecy &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Secrecy &);
 
-  public:
+public:
     /**
      * Secrecy types
      *
@@ -41,10 +42,10 @@ class KABC_EXPORT Secrecy
      * @li Confidential - access for confidential persons
      */
     enum Type {
-      Public,
-      Private,
-      Confidential,
-      Invalid
+        Public,
+        Private,
+        Confidential,
+        Invalid
     };
 
     /**
@@ -57,22 +58,22 @@ class KABC_EXPORT Secrecy
      *
      * @param type  The secrecy type. @see Type
      */
-    Secrecy( Type type = Invalid );
+    Secrecy(Type type = Invalid);
 
     /**
      * Copy constructor.
      */
-    Secrecy( const Secrecy &other );
+    Secrecy(const Secrecy &other);
 
     /**
      * Destroys the secrecy.
      */
     ~Secrecy();
 
-    Secrecy &operator=( const Secrecy & );
+    Secrecy &operator=(const Secrecy &);
 
-    bool operator==( const Secrecy & ) const;
-    bool operator!=( const Secrecy & ) const;
+    bool operator==(const Secrecy &) const;
+    bool operator!=(const Secrecy &) const;
 
     /**
      * Returns if the Secrecy object has a valid value.
@@ -84,7 +85,7 @@ class KABC_EXPORT Secrecy
      *
      * @param type The #Type of secrecy
      */
-    void setType( Type type );
+    void setType(Type type);
 
     /**
      * Returns the type.
@@ -99,14 +100,14 @@ class KABC_EXPORT Secrecy
     /**
      * Returns a translated label for a given secrecy @p type.
      */
-    static QString typeLabel( Type type );
+    static QString typeLabel(Type type);
 
     /**
      * Returns a string representation of the secrecy.
      */
     QString toString() const;
 
-  private:
+private:
     class PrivateData;
     QSharedDataPointer<PrivateData> d;
 };
@@ -114,12 +115,12 @@ class KABC_EXPORT Secrecy
 /**
  * Serializes the @p secrecy object into the @p stream.
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Secrecy &secrecy );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Secrecy &secrecy);
 
 /**
  * Initializes the @p secrecy object from the @p stream.
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Secrecy &secrecy );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Secrecy &secrecy);
 
 }
 #endif

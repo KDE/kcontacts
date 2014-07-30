@@ -32,59 +32,59 @@
 
 using namespace KABC;
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "bigwrite", 0, ki18n( "BigWriteKabc" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("bigwrite", 0, ki18n("BigWriteKabc"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KApplication app( false );
+    KApplication app(false);
 
-  AddressBook ab;
-  ResourceFile r( QLatin1String( "my.kabc" ), QLatin1String( "vcard" ) );
-  ab.addResource( &r );
+    AddressBook ab;
+    ResourceFile r(QLatin1String("my.kabc"), QLatin1String("vcard"));
+    ab.addResource(&r);
 
-  for ( int i = 0; i < 5000; ++i ) {
-    Addressee a;
-    a.setGivenName( QLatin1String( "number" ) + QString::number( i ) );
-    a.setFamilyName( QLatin1String( "Name" ) );
-    a.insertEmail( QString::number( i ) + QLatin1String( "@domain" ) );
+    for (int i = 0; i < 5000; ++i) {
+        Addressee a;
+        a.setGivenName(QLatin1String("number") + QString::number(i));
+        a.setFamilyName(QLatin1String("Name"));
+        a.insertEmail(QString::number(i) + QLatin1String("@domain"));
 
-    ab.insertAddressee( a );
-  }
-  printf( "\n" );
-
-  Ticket *t = ab.requestSaveTicket( &r );
-  if ( t ) {
-    struct tms start;
-
-    times( &start );
-
-#if 0
-    qDebug() << "utime :" << int( start.tms_utime );
-    qDebug() << "stime :" << int( start.tms_stime );
-    qDebug() << "cutime:" << int( start.tms_cutime );
-    qDebug() << "cstime:" << int( start.tms_cstime );
-#endif
-
-    if ( !ab.save( t ) ) {
-      qDebug() << "Can't save.";
+        ab.insertAddressee(a);
     }
+    printf("\n");
 
-    struct tms end;
+    Ticket *t = ab.requestSaveTicket(&r);
+    if (t) {
+        struct tms start;
 
-    times( &end );
+        times(&start);
 
 #if 0
-    qDebug() << "utime :" << int( end.tms_utime );
-    qDebug() << "stime :" << int( end.tms_stime );
-    qDebug() << "cutime:" << int( end.tms_cutime );
-    qDebug() << "cstime:" << int( end.tms_cstime );
+        qDebug() << "utime :" << int(start.tms_utime);
+        qDebug() << "stime :" << int(start.tms_stime);
+        qDebug() << "cutime:" << int(start.tms_cutime);
+        qDebug() << "cstime:" << int(start.tms_cstime);
 #endif
 
-    qDebug() << "UTime:" << int( end.tms_utime ) - int( start.tms_utime );
-    qDebug() << "STime:" << int( end.tms_stime ) - int( start.tms_stime );
+        if (!ab.save(t)) {
+            qDebug() << "Can't save.";
+        }
 
-  } else {
-    qDebug() << "No ticket for save.";
-  }
+        struct tms end;
+
+        times(&end);
+
+#if 0
+        qDebug() << "utime :" << int(end.tms_utime);
+        qDebug() << "stime :" << int(end.tms_stime);
+        qDebug() << "cutime:" << int(end.tms_cutime);
+        qDebug() << "cstime:" << int(end.tms_cstime);
+#endif
+
+        qDebug() << "UTime:" << int(end.tms_utime) - int(start.tms_utime);
+        qDebug() << "STime:" << int(end.tms_stime) - int(start.tms_stime);
+
+    } else {
+        qDebug() << "No ticket for save.";
+    }
 }

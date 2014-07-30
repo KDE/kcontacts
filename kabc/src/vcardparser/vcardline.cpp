@@ -23,116 +23,116 @@
 using namespace KABC;
 
 VCardLine::VCardLine()
-  : d( 0 )
+    : d(0)
 {
 }
 
-VCardLine::VCardLine( const QString &identifier )
-  : d( 0 )
+VCardLine::VCardLine(const QString &identifier)
+    : d(0)
 {
-  mIdentifier = identifier;
+    mIdentifier = identifier;
 }
 
-VCardLine::VCardLine( const QString &identifier, const QVariant &value )
-  : d( 0 )
+VCardLine::VCardLine(const QString &identifier, const QVariant &value)
+    : d(0)
 {
-  mIdentifier = identifier;
-  mValue = value;
+    mIdentifier = identifier;
+    mValue = value;
 }
 
-VCardLine::VCardLine( const VCardLine &line )
-  : d( 0 )
+VCardLine::VCardLine(const VCardLine &line)
+    : d(0)
 {
-  mParamMap = line.mParamMap;
-  mValue = line.mValue;
-  mIdentifier = line.mIdentifier;
+    mParamMap = line.mParamMap;
+    mValue = line.mValue;
+    mIdentifier = line.mIdentifier;
 }
 
 VCardLine::~VCardLine()
 {
 }
 
-VCardLine &VCardLine::operator=( const VCardLine &line )
+VCardLine &VCardLine::operator=(const VCardLine &line)
 {
-  if ( &line == this ) {
+    if (&line == this) {
+        return *this;
+    }
+
+    mParamMap = line.mParamMap;
+    mValue = line.mValue;
+    mIdentifier = line.mIdentifier;
+
     return *this;
-  }
-
-  mParamMap = line.mParamMap;
-  mValue = line.mValue;
-  mIdentifier = line.mIdentifier;
-
-  return *this;
 }
 
-void VCardLine::setIdentifier( const QString &identifier )
+void VCardLine::setIdentifier(const QString &identifier)
 {
-  mIdentifier = identifier;
+    mIdentifier = identifier;
 }
 
 QString VCardLine::identifier() const
 {
-  return mIdentifier;
+    return mIdentifier;
 }
 
-void VCardLine::setValue( const QVariant &value )
+void VCardLine::setValue(const QVariant &value)
 {
-  mValue = value;
+    mValue = value;
 }
 
 QVariant VCardLine::value() const
 {
-  return mValue;
+    return mValue;
 }
 
-void VCardLine::setGroup( const QString &group )
+void VCardLine::setGroup(const QString &group)
 {
-  mGroup = group;
+    mGroup = group;
 }
 
 QString VCardLine::group() const
 {
-  return mGroup;
+    return mGroup;
 }
 
 bool VCardLine::hasGroup() const
 {
-  return !mGroup.isEmpty();
+    return !mGroup.isEmpty();
 }
 
 QStringList VCardLine::parameterList() const
 {
-  return mParamMap.keys();
+    return mParamMap.keys();
 }
 
-void VCardLine::addParameter( const QString &param, const QString &value )
+void VCardLine::addParameter(const QString &param, const QString &value)
 {
-  QStringList &list = mParamMap[ param ];
-  if ( !list.contains( value ) ) { // not included yet
-    list.append( value );
-  }
-}
-
-QStringList VCardLine::parameters( const QString &param ) const
-{
-  ParamMap::ConstIterator it = mParamMap.find( param );
-  if ( it == mParamMap.end() ) {
-    return QStringList();
-  } else {
-    return *it;
-  }
-}
-
-QString VCardLine::parameter( const QString &param ) const
-{
-  ParamMap::ConstIterator it = mParamMap.find( param );
-  if ( it == mParamMap.end() ) {
-    return QString();
-  } else {
-    if ( ( *it ).isEmpty() ) {
-      return QString();
-    } else {
-      return ( *it ).first();
+    QStringList &list = mParamMap[ param ];
+    if (!list.contains(value)) {     // not included yet
+        list.append(value);
     }
-  }
+}
+
+QStringList VCardLine::parameters(const QString &param) const
+{
+    ParamMap::ConstIterator it = mParamMap.find(param);
+    if (it == mParamMap.end()) {
+        return QStringList();
+    } else {
+        return *it;
+    }
+}
+
+QString VCardLine::parameter(const QString &param) const
+{
+    ParamMap::ConstIterator it = mParamMap.find(param);
+    if (it == mParamMap.end()) {
+        return QString();
+    } else {
+        if ((*it).isEmpty()) {
+            return QString();
+        } else {
+            return (*it).first();
+        }
+    }
 }

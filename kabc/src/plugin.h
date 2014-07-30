@@ -24,7 +24,8 @@
 #include "kabc_export.h"
 #include <QtCore/QString>
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * Base class for Plugins. Defines the interface for the basic
@@ -34,7 +35,7 @@ namespace KABC {
  */
 class KABC_EXPORT Plugin
 {
-  public:
+public:
     /**
      * Creates the Plugin instance.
      */
@@ -50,7 +51,7 @@ class KABC_EXPORT Plugin
      *
      * @param type The type of the plugin
      */
-    virtual void setType( const QString &type );
+    virtual void setType(const QString &type);
 
     /**
      * Returns the plugin's type.
@@ -62,7 +63,7 @@ class KABC_EXPORT Plugin
      *
      * @param label The localized string to display as the name
      */
-    virtual void setNameLabel( const QString &label );
+    virtual void setNameLabel(const QString &label);
 
     /**
      * Returns the plugin's name.
@@ -74,18 +75,18 @@ class KABC_EXPORT Plugin
      *
      * @param label The localized string to display as a description
      */
-    virtual void setDescriptionLabel( const QString &label );
+    virtual void setDescriptionLabel(const QString &label);
 
     /**
      * Returns the plugin's description.
      */
     virtual QString descriptionLabel() const;
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_DISABLE_COPY( Plugin )
+    Q_DISABLE_COPY(Plugin)
 };
 
 }

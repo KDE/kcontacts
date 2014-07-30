@@ -27,7 +27,8 @@
 
 class QDateTime;
 
-namespace KABC {
+namespace KABC
+{
 
 class Key;
 class Picture;
@@ -36,7 +37,7 @@ class Sound;
 
 class KABC_EXPORT VCardTool
 {
-  public:
+public:
     VCardTool();
     ~VCardTool();
 
@@ -44,44 +45,44 @@ class KABC_EXPORT VCardTool
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards( const Addressee::List &list,
-                             VCard::Version version = VCard::v3_0 ) const;
+    QByteArray createVCards(const Addressee::List &list,
+                            VCard::Version version = VCard::v3_0) const;
 
     /**
      * since 4.9.1
      */
-    QByteArray exportVCards( const Addressee::List &list,
-                             VCard::Version version = VCard::v3_0 ) const;
+    QByteArray exportVCards(const Addressee::List &list,
+                            VCard::Version version = VCard::v3_0) const;
     /**
       Parses the string and returns a list of addressee objects.
      */
-    Addressee::List parseVCards( const QByteArray &vcard ) const;
+    Addressee::List parseVCards(const QByteArray &vcard) const;
 
-  private:
+private:
 
-    QByteArray createVCards( const Addressee::List &list,
-                             VCard::Version version, bool exportVcard ) const;
+    QByteArray createVCards(const Addressee::List &list,
+                            VCard::Version version, bool exportVcard) const;
 
     /**
       Split a string and replaces escaped separators on the fly with
       unescaped ones.
      */
-    QStringList splitString( const QChar &sep, const QString &value ) const;
+    QStringList splitString(const QChar &sep, const QString &value) const;
 
-    QDateTime parseDateTime( const QString &str ) const;
-    QString createDateTime( const QDateTime &dateTime ) const;
+    QDateTime parseDateTime(const QString &str) const;
+    QString createDateTime(const QDateTime &dateTime) const;
 
-    Picture parsePicture( const VCardLine &line ) const;
-    VCardLine createPicture( const QString &identifier, const Picture &pic ) const;
+    Picture parsePicture(const VCardLine &line) const;
+    VCardLine createPicture(const QString &identifier, const Picture &pic) const;
 
-    Sound parseSound( const VCardLine &line ) const;
-    VCardLine createSound( const Sound &snd ) const;
+    Sound parseSound(const VCardLine &line) const;
+    VCardLine createSound(const Sound &snd) const;
 
-    Key parseKey( const VCardLine &line ) const;
-    VCardLine createKey( const Key &key ) const;
+    Key parseKey(const VCardLine &line) const;
+    VCardLine createKey(const Key &key) const;
 
-    Secrecy parseSecrecy( const VCardLine &line ) const;
-    VCardLine createSecrecy( const Secrecy &secrecy ) const;
+    Secrecy parseSecrecy(const VCardLine &line) const;
+    VCardLine createSecrecy(const Secrecy &secrecy) const;
 
     QMap<QString, Address::TypeFlag> mAddressTypeMap;
     QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;

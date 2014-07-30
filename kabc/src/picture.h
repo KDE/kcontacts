@@ -28,7 +28,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QImage>
 
-namespace KABC {
+namespace KABC
+{
 
 class PicturePrivate;
 
@@ -38,10 +39,10 @@ class PicturePrivate;
 */
 class KABC_EXPORT Picture
 {
-    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Picture & );
-    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Picture & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Picture &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Picture &);
 
-  public:
+public:
     /**
      * Creates an empty picture.
      */
@@ -52,14 +53,14 @@ class KABC_EXPORT Picture
      *
      * @param url A URL that describes the location of the picture file.
      */
-    Picture( const QString &url );
+    Picture(const QString &url);
 
     /**
      * Creates a picture with the given data.
      *
      * @param data The raw data of the picture.
      */
-    Picture( const QImage &data );
+    Picture(const QImage &data);
 
     /**
      * Copy constructor.
@@ -68,7 +69,7 @@ class KABC_EXPORT Picture
      *
      * @param picture The Picture instance to copy from
      */
-    Picture( const Picture &picture );
+    Picture(const Picture &picture);
 
     /**
      * Destructor.
@@ -82,17 +83,17 @@ class KABC_EXPORT Picture
      *
      * @param other The Picture instance to assign to @c this
      */
-    Picture &operator=( const Picture &other );
+    Picture &operator=(const Picture &other);
 
     /**
      * Equality operator.
      */
-    bool operator==( const Picture & ) const;
+    bool operator==(const Picture &) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=( const Picture & ) const;
+    bool operator!=(const Picture &) const;
 
     /**
      * Returns true, if the picture is empty.
@@ -107,7 +108,7 @@ class KABC_EXPORT Picture
      *
      * @param url  The location URL of the picture file.
      */
-    void setUrl( const QString &url );
+    void setUrl(const QString &url);
 
     /**
      * Sets a URL for the location of the picture file. When using this
@@ -118,7 +119,7 @@ class KABC_EXPORT Picture
      * @param type  The encoding format of the image, e.g. jpeg or png
      * @since 4.10
      */
-    void setUrl( const QString &url, const QString &type );
+    void setUrl(const QString &url, const QString &type);
 
     /**
      * Sets the image data of the picture. When using this function,
@@ -128,7 +129,7 @@ class KABC_EXPORT Picture
      *
      * @param data  The image data of the picture.
      */
-    void setData( const QImage &data );
+    void setData(const QImage &data);
 
     /**
      * Sets the raw data of the picture. When using this function,
@@ -138,14 +139,14 @@ class KABC_EXPORT Picture
      * @param type  The encoding format of the image, e.g. jpeg or png
      * @since 4.10
      */
-    void setRawData( const QByteArray &rawData, const QString &type );
+    void setRawData(const QByteArray &rawData, const QString &type);
 
     /**
      * Sets the type of the picture.
      * @param type the picture's data type
      * @deprecated type should only be set along with setRawData()
      */
-    void KABC_DEPRECATED setType( const QString &type );
+    void KABC_DEPRECATED setType(const QString &type);
 
     /**
      * Returns whether the picture is described by a URL (extern) or
@@ -183,19 +184,19 @@ class KABC_EXPORT Picture
      */
     QString toString() const;
 
-  private:
+private:
     QSharedDataPointer<PicturePrivate> d;
 };
 
 /**
  * Serializes the @p picture object into the @p stream.
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Picture &picture );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Picture &picture);
 
 /**
  * Initializes the @p picture object from the @p stream.
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Picture &picture );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Picture &picture);
 
 }
 

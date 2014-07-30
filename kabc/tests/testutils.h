@@ -30,7 +30,7 @@ KABC::Addressee vcard1();
 KABC::Addressee vcard2();
 KABC::Addressee vcard3();
 KABC::Addressee::List vCardsAsAddresseeList();
-QByteArray vCardAsText( const QString &location );
+QByteArray vCardAsText(const QString &location);
 QByteArray vCardsAsText();
 
 #endif

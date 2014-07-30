@@ -24,48 +24,48 @@ using namespace KABC;
 
 class Plugin::Private
 {
-  public:
+public:
     QString mType;
     QString mNameLabel;
     QString mDescriptionLabel;
 };
 
 Plugin::Plugin()
-  : d( new Private )
+    : d(new Private)
 {
 }
 
 Plugin::~Plugin()
 {
-  delete d;
+    delete d;
 }
 
-void Plugin::setType( const QString &type )
+void Plugin::setType(const QString &type)
 {
-  d->mType = type;
+    d->mType = type;
 }
 
 QString Plugin::type() const
 {
-  return d->mType;
+    return d->mType;
 }
 
-void Plugin::setNameLabel( const QString &label )
+void Plugin::setNameLabel(const QString &label)
 {
-  d->mNameLabel = label;
+    d->mNameLabel = label;
 }
 
 QString Plugin::nameLabel() const
 {
-  return d->mNameLabel;
+    return d->mNameLabel;
 }
 
-void Plugin::setDescriptionLabel( const QString &label )
+void Plugin::setDescriptionLabel(const QString &label)
 {
-  d->mDescriptionLabel = label;
+    d->mDescriptionLabel = label;
 }
 
 QString Plugin::descriptionLabel() const
 {
-  return d->mDescriptionLabel;
+    return d->mDescriptionLabel;
 }

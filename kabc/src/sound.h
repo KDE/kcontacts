@@ -25,7 +25,8 @@
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
 
-namespace KABC {
+namespace KABC
+{
 
 /** @short Class that holds a Sound clip for a contact.
  *
@@ -57,10 +58,10 @@ namespace KABC {
  */
 class KABC_EXPORT Sound
 {
-    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Sound & );
-    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Sound & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Sound &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Sound &);
 
-  public:
+public:
 
     /**
      * Creates an empty sound object.
@@ -72,19 +73,19 @@ class KABC_EXPORT Sound
      *
      * @param url A url that describes the position of the sound file.
      */
-    Sound( const QString &url );
+    Sound(const QString &url);
 
     /**
      * Creates a sound object for the given data.
      *
      * @param data The raw data of the sound.
      */
-    Sound( const QByteArray &data );
+    Sound(const QByteArray &data);
 
     /**
      * Copy constructor.
      */
-    Sound( const Sound &other );
+    Sound(const Sound &other);
 
     /**
      * Destroys the sound object.
@@ -96,7 +97,7 @@ class KABC_EXPORT Sound
      *
      * @param other The sound object to assign to @c this
      */
-    Sound &operator=( const Sound &other );
+    Sound &operator=(const Sound &other);
 
     /**
      * Equality operator.
@@ -105,7 +106,7 @@ class KABC_EXPORT Sound
      *
      * @return @c true if the two objects are equal, otherwise @c false
      */
-    bool operator==( const Sound &other ) const;
+    bool operator==(const Sound &other) const;
 
     /**
      * Not-Equal operator.
@@ -114,7 +115,7 @@ class KABC_EXPORT Sound
      *
      * @return @c true if the two objects are not equal, otherwise @c false
      */
-    bool operator!=( const Sound &other ) const;
+    bool operator!=(const Sound &other) const;
 
     /**
      * Sets a URL for the location of the sound file. When using this
@@ -123,7 +124,7 @@ class KABC_EXPORT Sound
      *
      * @param url  The location URL of the sound file.
      */
-    void setUrl( const QString &url );
+    void setUrl(const QString &url);
 
     /**
      * Returns true, if the sound object is empty.
@@ -136,7 +137,7 @@ class KABC_EXPORT Sound
      *
      * @param data  The raw data of the sound.
      */
-    void setData( const QByteArray &data );
+    void setData(const QByteArray &data);
 
     /**
      * Returns whether the sound is described by a URL (extern) or
@@ -162,7 +163,7 @@ class KABC_EXPORT Sound
      */
     QString toString() const;
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
@@ -170,12 +171,12 @@ class KABC_EXPORT Sound
 /**
  * Serializes the @p sound object into the @p stream.
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Sound &sound );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Sound &sound);
 
 /**
  * Initializes the @p sound object from the @p stream.
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Sound &sound );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Sound &sound);
 
 }
 

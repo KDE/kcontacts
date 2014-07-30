@@ -22,70 +22,70 @@
 #include "kabc/geo.h"
 #include <qtest.h>
 
-QTEST_MAIN( GeoTest )
+QTEST_MAIN(GeoTest)
 
 void GeoTest::constructor()
 {
-  KABC::Geo geo( 1.2f, 3.4f );
+    KABC::Geo geo(1.2f, 3.4f);
 
-  QVERIFY( (float)geo.latitude() == (float)1.2 );
-  QVERIFY( (float)geo.longitude() == (float)3.4 );
+    QVERIFY((float)geo.latitude() == (float)1.2);
+    QVERIFY((float)geo.longitude() == (float)3.4);
 }
 
 void GeoTest::isValid()
 {
-  KABC::Geo geo;
+    KABC::Geo geo;
 
-  QVERIFY( !geo.isValid() );
+    QVERIFY(!geo.isValid());
 
-  geo.setLatitude( 23 );
+    geo.setLatitude(23);
 
-  QVERIFY( !geo.isValid() );
+    QVERIFY(!geo.isValid());
 
-  geo.setLongitude( 45 );
+    geo.setLongitude(45);
 
-  QVERIFY( geo.isValid() );
+    QVERIFY(geo.isValid());
 }
 
 void GeoTest::setData()
 {
-  KABC::Geo geo;
+    KABC::Geo geo;
 
-  geo.setLatitude( 22.5f );
-  geo.setLongitude( 45.1f );
+    geo.setLatitude(22.5f);
+    geo.setLongitude(45.1f);
 
-  QVERIFY( (float)geo.latitude() == (float)22.5 );
-  QVERIFY( (float)geo.longitude() == (float)45.1 );
+    QVERIFY((float)geo.latitude() == (float)22.5);
+    QVERIFY((float)geo.longitude() == (float)45.1);
 }
 
 void GeoTest::equals()
 {
-  KABC::Geo geo1( 22.5f, 33.7f );
-  KABC::Geo geo2( 22.5f, 33.7f );
+    KABC::Geo geo1(22.5f, 33.7f);
+    KABC::Geo geo2(22.5f, 33.7f);
 
-  QVERIFY( geo1 == geo2 );
+    QVERIFY(geo1 == geo2);
 }
 
 void GeoTest::differs()
 {
-  KABC::Geo geo1( 22.5f, 33.7f );
-  KABC::Geo geo2( 22.5f, 33.6f );
+    KABC::Geo geo1(22.5f, 33.7f);
+    KABC::Geo geo2(22.5f, 33.6f);
 
-  QVERIFY( geo1 != geo2 );
+    QVERIFY(geo1 != geo2);
 }
 
 void GeoTest::serialization()
 {
-  KABC::Geo geo1( 22.5f, 33.7f );
-  QByteArray data;
+    KABC::Geo geo1(22.5f, 33.7f);
+    QByteArray data;
 
-  QDataStream s( &data, QIODevice::WriteOnly );
-  s << geo1;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << geo1;
 
-  KABC::Geo geo2;
-  QDataStream t( &data, QIODevice::ReadOnly );
-  t >> geo2;
+    KABC::Geo geo2;
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> geo2;
 
-  QVERIFY( geo1 == geo2 );
+    QVERIFY(geo1 == geo2);
 }
 

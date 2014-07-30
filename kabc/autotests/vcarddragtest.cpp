@@ -29,155 +29,154 @@ using namespace KABC;
 
 class VCardDragTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     VCardDragTest();
 
-  private:
+private:
     Addressee mAddressee1;
     Addressee mAddressee2;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void testPopulate();
     void testCanDecode();
     void testFromMimeData();
 };
 
-QTEST_MAIN( VCardDragTest )
+QTEST_MAIN(VCardDragTest)
 
 VCardDragTest::VCardDragTest() : QObject()
 {
-  mAddressee1.setGivenName( QLatin1String( "Kevin" ) );
-  mAddressee1.setFamilyName( QLatin1String( "Krammer" ) );
-  mAddressee1.insertEmail( QLatin1String( "kevin.krammer@gmx.at" ) );
+    mAddressee1.setGivenName(QLatin1String("Kevin"));
+    mAddressee1.setFamilyName(QLatin1String("Krammer"));
+    mAddressee1.insertEmail(QLatin1String("kevin.krammer@gmx.at"));
 
-  mAddressee2.setGivenName( QLatin1String( "Tobias" ) );
-  mAddressee2.setFamilyName( QLatin1String( "König" ) );
-  mAddressee2.insertEmail( QLatin1String( "tokoe@kde.org" ) );
+    mAddressee2.setGivenName(QLatin1String("Tobias"));
+    mAddressee2.setFamilyName(QLatin1String("König"));
+    mAddressee2.insertEmail(QLatin1String("tokoe@kde.org"));
 }
 
 void VCardDragTest::testPopulate()
 {
-  VCardConverter converter;
-  const QByteArray vcard = converter.createVCard( mAddressee1 );
-  QVERIFY( !vcard.isEmpty() );
+    VCardConverter converter;
+    const QByteArray vcard = converter.createVCard(mAddressee1);
+    QVERIFY(!vcard.isEmpty());
 
-  QMimeData *data = new QMimeData();
-  bool result = VCardDrag::populateMimeData( data, vcard );
-  QVERIFY( result );
-  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
-  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcard );
-  delete data;
+    QMimeData *data = new QMimeData();
+    bool result = VCardDrag::populateMimeData(data, vcard);
+    QVERIFY(result);
+    QVERIFY(data->hasFormat(KABC::Addressee::mimeType()));
+    QCOMPARE(data->data(KABC::Addressee::mimeType()), vcard);
+    delete data;
 
-  data = new QMimeData();
-  result = VCardDrag::populateMimeData( data, Addressee::List() << mAddressee1 );
-  QVERIFY( result );
-  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
-  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcard );
-  delete data;
+    data = new QMimeData();
+    result = VCardDrag::populateMimeData(data, Addressee::List() << mAddressee1);
+    QVERIFY(result);
+    QVERIFY(data->hasFormat(KABC::Addressee::mimeType()));
+    QCOMPARE(data->data(KABC::Addressee::mimeType()), vcard);
+    delete data;
 
-  const QByteArray vcards = converter.createVCards( Addressee::List() << mAddressee1 << mAddressee2 );
-  data = new QMimeData();
-  result = VCardDrag::populateMimeData( data, Addressee::List() << mAddressee1 << mAddressee2 );
-  QVERIFY( result );
-  QVERIFY( data->hasFormat( KABC::Addressee::mimeType() ) );
-  QCOMPARE( data->data( KABC::Addressee::mimeType() ), vcards );
-  delete data;
+    const QByteArray vcards = converter.createVCards(Addressee::List() << mAddressee1 << mAddressee2);
+    data = new QMimeData();
+    result = VCardDrag::populateMimeData(data, Addressee::List() << mAddressee1 << mAddressee2);
+    QVERIFY(result);
+    QVERIFY(data->hasFormat(KABC::Addressee::mimeType()));
+    QCOMPARE(data->data(KABC::Addressee::mimeType()), vcards);
+    delete data;
 
-  data = new QMimeData();
-  result = VCardDrag::populateMimeData( data, Addressee::List() );
-  QVERIFY( !result );
-  QVERIFY( !data->hasFormat( KABC::Addressee::mimeType() ) );
-  delete data;
+    data = new QMimeData();
+    result = VCardDrag::populateMimeData(data, Addressee::List());
+    QVERIFY(!result);
+    QVERIFY(!data->hasFormat(KABC::Addressee::mimeType()));
+    delete data;
 }
 
 void VCardDragTest::testCanDecode()
 {
-  VCardConverter converter;
-  const QByteArray vcard = converter.createVCard( mAddressee1 );
-  QVERIFY( !vcard.isEmpty() );
+    VCardConverter converter;
+    const QByteArray vcard = converter.createVCard(mAddressee1);
+    QVERIFY(!vcard.isEmpty());
 
-  QMimeData *data = new QMimeData();
-  data->setData( Addressee::mimeType(), vcard );
-  QVERIFY( VCardDrag::canDecode( data ) );
-  delete data;
+    QMimeData *data = new QMimeData();
+    data->setData(Addressee::mimeType(), vcard);
+    QVERIFY(VCardDrag::canDecode(data));
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "text/x-vcard" ), vcard );
-  QVERIFY( VCardDrag::canDecode( data ) );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("text/x-vcard"), vcard);
+    QVERIFY(VCardDrag::canDecode(data));
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "application/octetstream" ), vcard );
-  QVERIFY( !VCardDrag::canDecode( data ) );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("application/octetstream"), vcard);
+    QVERIFY(!VCardDrag::canDecode(data));
+    delete data;
 }
 
 void VCardDragTest::testFromMimeData()
 {
-  VCardConverter converter;
-  const QByteArray vcard = converter.createVCard( mAddressee1 );
-  QVERIFY( !vcard.isEmpty() );
+    VCardConverter converter;
+    const QByteArray vcard = converter.createVCard(mAddressee1);
+    QVERIFY(!vcard.isEmpty());
 
-  QByteArray content;
+    QByteArray content;
 
-  QMimeData *data = new QMimeData();
-  data->setData( Addressee::mimeType(), vcard );
-  bool result = VCardDrag::fromMimeData( data, content );
-  QVERIFY( result );
-  QCOMPARE( content, vcard );
-  delete data;
+    QMimeData *data = new QMimeData();
+    data->setData(Addressee::mimeType(), vcard);
+    bool result = VCardDrag::fromMimeData(data, content);
+    QVERIFY(result);
+    QCOMPARE(content, vcard);
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "text/x-vcard" ), vcard );
-  result = VCardDrag::fromMimeData( data, content );
-  QVERIFY( result );
-  QCOMPARE( content, vcard );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("text/x-vcard"), vcard);
+    result = VCardDrag::fromMimeData(data, content);
+    QVERIFY(result);
+    QCOMPARE(content, vcard);
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "application/octetstream" ), vcard );
-  result = VCardDrag::fromMimeData( data, content );
-  QVERIFY( !result );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("application/octetstream"), vcard);
+    result = VCardDrag::fromMimeData(data, content);
+    QVERIFY(!result);
+    delete data;
 
-  const QByteArray vcards = converter.createVCards( Addressee::List() << mAddressee1 << mAddressee2 );
-  QVERIFY( !vcards.isEmpty() );
+    const QByteArray vcards = converter.createVCards(Addressee::List() << mAddressee1 << mAddressee2);
+    QVERIFY(!vcards.isEmpty());
 
-  Addressee::List addresseeList;
+    Addressee::List addresseeList;
 
-  data = new QMimeData();
-  data->setData( Addressee::mimeType(), vcards );
-  result = VCardDrag::fromMimeData( data, addresseeList );
-  QVERIFY( result );
-  QCOMPARE( addresseeList.count(), 2 );
-  QCOMPARE( addresseeList[ 0 ], mAddressee1 );
-  QCOMPARE( addresseeList[ 1 ], mAddressee2 );
-  delete data;
+    data = new QMimeData();
+    data->setData(Addressee::mimeType(), vcards);
+    result = VCardDrag::fromMimeData(data, addresseeList);
+    QVERIFY(result);
+    QCOMPARE(addresseeList.count(), 2);
+    QCOMPARE(addresseeList[ 0 ], mAddressee1);
+    QCOMPARE(addresseeList[ 1 ], mAddressee2);
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "text/x-vcard" ), vcards );
-  result = VCardDrag::fromMimeData( data, addresseeList );
-  QVERIFY( result );
-  QCOMPARE( addresseeList.count(), 2 );
-  QCOMPARE( addresseeList[ 0 ], mAddressee1 );
-  QCOMPARE( addresseeList[ 1 ], mAddressee2 );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("text/x-vcard"), vcards);
+    result = VCardDrag::fromMimeData(data, addresseeList);
+    QVERIFY(result);
+    QCOMPARE(addresseeList.count(), 2);
+    QCOMPARE(addresseeList[ 0 ], mAddressee1);
+    QCOMPARE(addresseeList[ 1 ], mAddressee2);
+    delete data;
 
-  data = new QMimeData();
-  data->setData( QLatin1String( "application/octetstream" ), vcards );
-  result = VCardDrag::fromMimeData( data, addresseeList );
-  QVERIFY( !result );
-  delete data;
+    data = new QMimeData();
+    data->setData(QLatin1String("application/octetstream"), vcards);
+    result = VCardDrag::fromMimeData(data, addresseeList);
+    QVERIFY(!result);
+    delete data;
 
-  data = new QMimeData();
-  data->setData( Addressee::mimeType(), QByteArray() );
-  result = VCardDrag::fromMimeData( data, addresseeList );
-  QVERIFY( !result );
-  delete data;
+    data = new QMimeData();
+    data->setData(Addressee::mimeType(), QByteArray());
+    result = VCardDrag::fromMimeData(data, addresseeList);
+    QVERIFY(!result);
+    delete data;
 }
 
 #include "vcarddragtest.moc"
 
-// kate: space-indent on; indent-width 2; replace-tabs on;

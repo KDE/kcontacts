@@ -26,36 +26,35 @@
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 
-
 using namespace KABC;
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "testkabcdlg", 0, ki18n( "TestKabc" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("testkabcdlg", 0, ki18n("TestKabc"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KCmdLineOptions options;
-  options.add( "multiple", ki18n( "Allow selection of multiple addressees" ) );
-  KCmdLineArgs::addCmdLineOptions( options );
+    KCmdLineOptions options;
+    options.add("multiple", ki18n("Allow selection of multiple addressees"));
+    KCmdLineArgs::addCmdLineOptions(options);
 
-  KApplication app;
+    KApplication app;
 
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if ( args->isSet( "multiple" ) ) {
-    Addressee::List al = AddresseeDialog::getAddressees( 0 );
-    Addressee::List::ConstIterator it;
-    qDebug() << "Selected Addressees:";
-    for ( it = al.constBegin(); it != al.constEnd(); ++it ) {
-      qDebug() << "  " << ( *it ).fullEmail();
-    }
-  } else {
-    Addressee a = AddresseeDialog::getAddressee( 0 );
-
-    if ( !a.isEmpty() ) {
-      qDebug() << "Selected Addressee:";
-      qDebug() << a.toString();
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    if (args->isSet("multiple")) {
+        Addressee::List al = AddresseeDialog::getAddressees(0);
+        Addressee::List::ConstIterator it;
+        qDebug() << "Selected Addressees:";
+        for (it = al.constBegin(); it != al.constEnd(); ++it) {
+            qDebug() << "  " << (*it).fullEmail();
+        }
     } else {
-      qDebug() << "No Addressee selected.";
+        Addressee a = AddresseeDialog::getAddressee(0);
+
+        if (!a.isEmpty()) {
+            qDebug() << "Selected Addressee:";
+            qDebug() << a.toString();
+        } else {
+            qDebug() << "No Addressee selected.";
+        }
     }
-  }
 }

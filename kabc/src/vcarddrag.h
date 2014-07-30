@@ -27,7 +27,8 @@
 #include <kabc/addressee.h>
 #include <QMimeData>
 
-namespace KABC {
+namespace KABC
+{
 
 /**
   @brief Utility function for implementing drag&drop for vCards
@@ -36,63 +37,64 @@ namespace KABC {
 
   @since 4.5
 */
-namespace VCardDrag {
+namespace VCardDrag
+{
 
-  /**
-    Adds the vCard representation as data of the drag object.
+/**
+  Adds the vCard representation as data of the drag object.
 
-    @param md the object to set the data on
-    @param content the vCard data to set
+  @param md the object to set the data on
+  @param content the vCard data to set
 
-    @return Always @c true
-  */
-  KABC_EXPORT bool populateMimeData( QMimeData *md, const QByteArray &content );
+  @return Always @c true
+*/
+KABC_EXPORT bool populateMimeData(QMimeData *md, const QByteArray &content);
 
-  /**
-    Adds the vCard representation as data of the drag object.
+/**
+  Adds the vCard representation as data of the drag object.
 
-    @param md the object to set the data on
-    @param contacts list of Addressee objects to serialize to vCard
+  @param md the object to set the data on
+  @param contacts list of Addressee objects to serialize to vCard
 
-    @return @c true if serializing of the given list worked, otherwise @c false
+  @return @c true if serializing of the given list worked, otherwise @c false
 
-    @see VCardConverter::createVCards()
-  */
-  KABC_EXPORT bool populateMimeData( QMimeData *md, const KABC::Addressee::List &contacts );
+  @see VCardConverter::createVCards()
+*/
+KABC_EXPORT bool populateMimeData(QMimeData *md, const KABC::Addressee::List &contacts);
 
-  /**
-    Returns if drag&drop object can be decoded to vCard.
+/**
+  Returns if drag&drop object can be decoded to vCard.
 
-    @param md the object to check for vCard data
+  @param md the object to check for vCard data
 
-    @return @c true if the given data object contains a vCard MIME type, otherwise @c false
-  */
-  KABC_EXPORT bool canDecode( const QMimeData *md );
+  @return @c true if the given data object contains a vCard MIME type, otherwise @c false
+*/
+KABC_EXPORT bool canDecode(const QMimeData *md);
 
-  /**
-    Decodes the drag&drop object to vCard component @p content.
+/**
+  Decodes the drag&drop object to vCard component @p content.
 
-    @param md the object to check for vCard data
-    @param content where to put the vCard data from @p md
+  @param md the object to check for vCard data
+  @param content where to put the vCard data from @p md
 
-    @return @c true if there was data for the vCard MIME type, otherwise @c false
+  @return @c true if there was data for the vCard MIME type, otherwise @c false
 
-    @see canDecode()
-  */
-  KABC_EXPORT bool fromMimeData( const QMimeData *md, QByteArray &content );
+  @see canDecode()
+*/
+KABC_EXPORT bool fromMimeData(const QMimeData *md, QByteArray &content);
 
-  /**
-    Decodes the MIME data @p md and puts the resulting vCard into @p contactss.
+/**
+  Decodes the MIME data @p md and puts the resulting vCard into @p contactss.
 
-    @param md the object to check for vCard data
-    @param contacts where to put the parsed vCards from @p md
+  @param md the object to check for vCard data
+  @param contacts where to put the parsed vCards from @p md
 
-    @return @c true if there was data for the vCard MIME type and it could be parsed successfully,
-            otherwise @c false
+  @return @c true if there was data for the vCard MIME type and it could be parsed successfully,
+          otherwise @c false
 
-    @see canDecode()
-  */
-  KABC_EXPORT bool fromMimeData( const QMimeData *md, KABC::Addressee::List &contacts );
+  @see canDecode()
+*/
+KABC_EXPORT bool fromMimeData(const QMimeData *md, KABC::Addressee::List &contacts);
 }
 
 }

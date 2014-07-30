@@ -25,9 +25,9 @@
 
 class GeoTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void constructor();
     void isValid();
     void setData();

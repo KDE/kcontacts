@@ -27,7 +27,8 @@
 
 class QWidget;
 
-namespace KABC {
+namespace KABC
+{
 
 /**
   Abstract class that provides displaying of error messages.
@@ -38,7 +39,7 @@ namespace KABC {
 */
 class KABC_EXPORT ErrorHandler
 {
-  public:
+public:
     /**
       Destroys the handler instance.
     */
@@ -49,7 +50,7 @@ class KABC_EXPORT ErrorHandler
 
       @param msg The error message to show
     */
-    virtual void error( const QString &msg ) = 0;
+    virtual void error(const QString &msg) = 0;
 };
 
 /**
@@ -57,7 +58,7 @@ class KABC_EXPORT ErrorHandler
 */
 class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
 {
-  public:
+public:
     /**
       Create an error handler for console output.
 
@@ -70,13 +71,13 @@ class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
     */
     virtual ~ConsoleErrorHandler();
 
-    virtual void error( const QString &msg );
+    virtual void error(const QString &msg);
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_DISABLE_COPY( ConsoleErrorHandler )
+    Q_DISABLE_COPY(ConsoleErrorHandler)
 };
 
 /**
@@ -85,7 +86,7 @@ class KABC_EXPORT ConsoleErrorHandler : public ErrorHandler
 */
 class KABC_EXPORT GuiErrorHandler : public ErrorHandler
 {
-  public:
+public:
     /**
       Create error handler.
 
@@ -93,20 +94,20 @@ class KABC_EXPORT GuiErrorHandler : public ErrorHandler
 
       @param parent Widget which is used as parent for the error dialogs.
     */
-    GuiErrorHandler( QWidget *parent = 0 );
+    GuiErrorHandler(QWidget *parent = 0);
 
     /**
       Destroys the handler instance.
     */
     virtual ~GuiErrorHandler();
 
-    virtual void error( const QString &msg );
+    virtual void error(const QString &msg);
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_DISABLE_COPY( GuiErrorHandler )
+    Q_DISABLE_COPY(GuiErrorHandler)
 };
 
 }

@@ -26,17 +26,18 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedDataPointer>
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * @short A class to store an encryption key.
  */
 class KABC_EXPORT Key
 {
-  friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const Key & );
-  friend KABC_EXPORT QDataStream &operator>>( QDataStream &, Key & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Key &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Key &);
 
-  public:
+public:
     /**
       List of keys.
     */
@@ -46,9 +47,9 @@ class KABC_EXPORT Key
       Key types
     */
     enum Type {
-      X509,   /**< X509 key */
-      PGP,    /**< Pretty Good Privacy key */
-      Custom  /**< Custom or IANA conform key */
+        X509,   /**< X509 key */
+        PGP,    /**< Pretty Good Privacy key */
+        Custom  /**< Custom or IANA conform key */
     };
 
     /**
@@ -62,12 +63,12 @@ class KABC_EXPORT Key
       @param text  The text data.
       @param type  The key type, see Types.
     */
-    explicit Key( const QString &text = QString(), Type type = PGP );
+    explicit Key(const QString &text = QString(), Type type = PGP);
 
     /**
       Copy constructor.
     */
-    Key( const Key &other );
+    Key(const Key &other);
 
     /**
       Destroys the key.
@@ -77,24 +78,24 @@ class KABC_EXPORT Key
     /**
       Equality operator.
     */
-    bool operator==( const Key & ) const;
+    bool operator==(const Key &) const;
 
     /**
       Not-equal operator.
     */
-    bool operator!=( const Key & ) const;
+    bool operator!=(const Key &) const;
 
     /**
       Assignment operator.
 
       @param other The Key instance to assign to @c this
     */
-    Key &operator=( const Key &other );
+    Key &operator=(const Key &other);
 
     /**
       Sets the unique @p identifier.
     */
-    void setId( const QString &identifier );
+    void setId(const QString &identifier);
 
     /**
       Returns the unique identifier.
@@ -104,7 +105,7 @@ class KABC_EXPORT Key
     /**
       Sets binary @p data.
     */
-    void setBinaryData( const QByteArray &data );
+    void setBinaryData(const QByteArray &data);
 
     /**
       Returns the binary data.
@@ -114,7 +115,7 @@ class KABC_EXPORT Key
     /**
       Sets text @p data.
     */
-    void setTextData( const QString &data );
+    void setTextData(const QString &data);
 
     /**
       Returns the text data.
@@ -133,12 +134,12 @@ class KABC_EXPORT Key
 
       @see Type
     */
-    void setType( Type type );
+    void setType(Type type);
 
     /**
       Sets custom @p type string.
     */
-    void setCustomTypeString( const QString &type );
+    void setCustomTypeString(const QString &type);
 
     /**
       Returns the type, see Type.
@@ -163,9 +164,9 @@ class KABC_EXPORT Key
     /**
       Returns a translated label for a given key @p type.
     */
-    static QString typeLabel( Type type );
+    static QString typeLabel(Type type);
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
@@ -173,12 +174,12 @@ class KABC_EXPORT Key
 /**
   Serializes the @p key object into the @p stream.
 */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const Key &key );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Key &key);
 
 /**
   Initializes the @p key object from the @p stream.
 */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, Key &key );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Key &key);
 
 }
 

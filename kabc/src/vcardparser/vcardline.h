@@ -26,29 +26,30 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
-namespace KABC {
+namespace KABC
+{
 
 class VCardLine
 {
-  public:
+public:
     typedef QList<VCardLine> List;
     typedef QMap<QString, QStringList> ParamMap;
 
     VCardLine();
-    VCardLine( const QString &identifier );
-    VCardLine( const QString &identifier, const QVariant &value );
-    VCardLine( const VCardLine &line );
+    VCardLine(const QString &identifier);
+    VCardLine(const QString &identifier, const QVariant &value);
+    VCardLine(const VCardLine &line);
 
     ~VCardLine();
 
-    VCardLine &operator=( const VCardLine &line );
+    VCardLine &operator=(const VCardLine &line);
 
     /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
      *
      * @param identifier The VCard identifier of this line
      */
-    void setIdentifier( const QString &identifier );
+    void setIdentifier(const QString &identifier);
 
     /**
      * Returns the identifier of this line.
@@ -58,7 +59,7 @@ class VCardLine
     /**
      * Sets the value of of this line.
      */
-    void setValue( const QVariant &value );
+    void setValue(const QVariant &value);
 
     /**
      * Returns the value of this line.
@@ -68,7 +69,7 @@ class VCardLine
     /**
      * Sets the group the line belongs to.
      */
-    void setGroup( const QString &group );
+    void setGroup(const QString &group);
 
     /**
      * Returns the group the line belongs to.
@@ -91,7 +92,7 @@ class VCardLine
      * @param param Name of the parameter to insert
      * @param value Value of the parameter to insert
      */
-    void addParameter( const QString &param, const QString &value );
+    void addParameter(const QString &param, const QString &value);
 
     /**
      * Returns the values of a special parameter.
@@ -99,7 +100,7 @@ class VCardLine
      *
      * @param param Name of the parameter to look for
      */
-    QStringList parameters( const QString &param ) const;
+    QStringList parameters(const QString &param) const;
 
     /**
      * Returns only the first value of a special parameter.
@@ -107,9 +108,9 @@ class VCardLine
      *
      * @param param Name of the parameter to look for
      */
-    QString parameter( const QString &param ) const;
+    QString parameter(const QString &param) const;
 
-  private:
+private:
     ParamMap mParamMap;
     QString mIdentifier;
     QString mGroup;

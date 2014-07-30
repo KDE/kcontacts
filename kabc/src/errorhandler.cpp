@@ -35,7 +35,7 @@ ErrorHandler::~ErrorHandler()
 }
 
 ConsoleErrorHandler::ConsoleErrorHandler()
-  : d( 0 )
+    : d(0)
 {
 }
 
@@ -43,36 +43,36 @@ ConsoleErrorHandler::~ConsoleErrorHandler()
 {
 }
 
-void ConsoleErrorHandler::error( const QString &msg )
+void ConsoleErrorHandler::error(const QString &msg)
 {
-  // no debug area is ok here
-  qCCritical( KABC_LOG ) << msg;
+    // no debug area is ok here
+    qCCritical(KABC_LOG) << msg;
 }
 
 class GuiErrorHandler::Private
 {
-  public:
-    Private( QWidget *widget )
-      : mWidget( widget )
+public:
+    Private(QWidget *widget)
+        : mWidget(widget)
     {
     }
 
     QWidget *mWidget;
 };
 
-GuiErrorHandler::GuiErrorHandler( QWidget *widget )
-  : d( new Private( widget ) )
+GuiErrorHandler::GuiErrorHandler(QWidget *widget)
+    : d(new Private(widget))
 {
 }
 
 GuiErrorHandler::~GuiErrorHandler()
 {
-  delete d;
+    delete d;
 }
 
-void GuiErrorHandler::error( const QString &msg )
+void GuiErrorHandler::error(const QString &msg)
 {
-  if ( qApp ) {
-    KMessageBox::error( d->mWidget, msg );
-  }
+    if (qApp) {
+        KMessageBox::error(d->mWidget, msg);
+    }
 }

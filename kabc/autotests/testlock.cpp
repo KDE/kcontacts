@@ -44,162 +44,162 @@
 
 using namespace KABC;
 
-LockWidget::LockWidget( const QString &identifier )
+LockWidget::LockWidget(const QString &identifier)
 {
-  QVBoxLayout *topLayout = new QVBoxLayout( this );
+    QVBoxLayout *topLayout = new QVBoxLayout(this);
 
-  if ( identifier.isEmpty() ) {
-    mLock = 0;
-  } else {
-    mLock = new Lock( identifier );
+    if (identifier.isEmpty()) {
+        mLock = 0;
+    } else {
+        mLock = new Lock(identifier);
 
-    int pid = getpid();
+        int pid = getpid();
 
-    QLabel *pidLabel = new QLabel( QLatin1String( "Process ID: " ) + QString::number( pid ),
-                                   this );
-    topLayout->addWidget( pidLabel );
+        QLabel *pidLabel = new QLabel(QLatin1String("Process ID: ") + QString::number(pid),
+                                      this);
+        topLayout->addWidget(pidLabel);
 
-    QHBoxLayout *identifierLayout = new QHBoxLayout();
-    identifierLayout->setParent( topLayout );
-    topLayout->addLayout( identifierLayout );
+        QHBoxLayout *identifierLayout = new QHBoxLayout();
+        identifierLayout->setParent(topLayout);
+        topLayout->addLayout(identifierLayout);
 
-    QLabel *resourceLabel = new QLabel( QLatin1String( "Identifier:" ), this );
-    identifierLayout->addWidget( resourceLabel );
+        QLabel *resourceLabel = new QLabel(QLatin1String("Identifier:"), this);
+        identifierLayout->addWidget(resourceLabel);
 
-    QLabel *resourceIdentifier = new QLabel( identifier, this );
-    identifierLayout->addWidget( resourceIdentifier );
+        QLabel *resourceIdentifier = new QLabel(identifier, this);
+        identifierLayout->addWidget(resourceIdentifier);
 
-    mStatus = new QLabel( QLatin1String( "Status: Unlocked" ), this );
-    topLayout->addWidget( mStatus );
+        mStatus = new QLabel(QLatin1String("Status: Unlocked"), this);
+        topLayout->addWidget(mStatus);
 
-    QPushButton *button = new QPushButton( QLatin1String( "Lock" ), this );
-    topLayout->addWidget( button );
-    connect( button, SIGNAL(clicked()), SLOT(lock()) );
+        QPushButton *button = new QPushButton(QLatin1String("Lock"), this);
+        topLayout->addWidget(button);
+        connect(button, SIGNAL(clicked()), SLOT(lock()));
 
-    button = new QPushButton( QLatin1String( "Unlock" ), this );
-    topLayout->addWidget( button );
-    connect( button, SIGNAL(clicked()), SLOT(unlock()) );
-  }
+        button = new QPushButton(QLatin1String("Unlock"), this);
+        topLayout->addWidget(button);
+        connect(button, SIGNAL(clicked()), SLOT(unlock()));
+    }
 
-  mLockView = new QTreeWidget( this );
-  topLayout->addWidget( mLockView );
-  QStringList headers;
-  headers.append( QLatin1String( "Lock File" ) );
-  headers.append( QLatin1String( "PID" ) );
-  headers.append( QLatin1String( "Locking App" ) );
-  mLockView->setHeaderLabels( headers );
+    mLockView = new QTreeWidget(this);
+    topLayout->addWidget(mLockView);
+    QStringList headers;
+    headers.append(QLatin1String("Lock File"));
+    headers.append(QLatin1String("PID"));
+    headers.append(QLatin1String("Locking App"));
+    mLockView->setHeaderLabels(headers);
 
-  updateLockView();
+    updateLockView();
 
-  QPushButton *quitButton = new QPushButton( QLatin1String( "Quit" ), this );
-  topLayout->addWidget( quitButton );
-  connect( quitButton, SIGNAL(clicked()), SLOT(close()) );
+    QPushButton *quitButton = new QPushButton(QLatin1String("Quit"), this);
+    topLayout->addWidget(quitButton);
+    connect(quitButton, SIGNAL(clicked()), SLOT(close()));
 
-  KDirWatch *watch = KDirWatch::self();
-  connect( watch, SIGNAL(dirty(QString)),
-           SLOT(updateLockView()) );
-  connect( watch, SIGNAL(created(QString)),
-           SLOT(updateLockView()) );
-  connect( watch, SIGNAL(deleted(QString)),
-           SLOT(updateLockView()) );
-  watch->addDir( Lock::locksDir() );
-  watch->startScan();
+    KDirWatch *watch = KDirWatch::self();
+    connect(watch, SIGNAL(dirty(QString)),
+            SLOT(updateLockView()));
+    connect(watch, SIGNAL(created(QString)),
+            SLOT(updateLockView()));
+    connect(watch, SIGNAL(deleted(QString)),
+            SLOT(updateLockView()));
+    watch->addDir(Lock::locksDir());
+    watch->startScan();
 }
 
 LockWidget::~LockWidget()
 {
-  delete mLock;
+    delete mLock;
 }
 
 void LockWidget::updateLockView()
 {
-  mLockView->clear();
+    mLockView->clear();
 
-  QDir dir( Lock::locksDir() );
+    QDir dir(Lock::locksDir());
 
-  QStringList files = dir.entryList( QStringList( QLatin1String( "*.lock" ) ) );
+    QStringList files = dir.entryList(QStringList(QLatin1String("*.lock")));
 
-  QStringList::ConstIterator it;
-  for ( it = files.constBegin(); it != files.constEnd(); ++it ) {
-    if ( *it == QLatin1String( "." ) || *it == QLatin1String( ".." ) ) {
-      continue;
+    QStringList::ConstIterator it;
+    for (it = files.constBegin(); it != files.constEnd(); ++it) {
+        if (*it == QLatin1String(".") || *it == QLatin1String("..")) {
+            continue;
+        }
+
+        QString app;
+        int pid;
+        if (!Lock::readLockFile(dir.filePath(*it), pid, app)) {
+            qWarning() << "Unable to open lock file '" << *it << "'";
+        } else {
+            QTreeWidgetItem *item = new QTreeWidgetItem();
+            item->setText(0, *it);
+            item->setText(1, QString::number(pid));
+            item->setText(2, app);
+            mLockView->addTopLevelItem(item);
+        }
     }
-
-    QString app;
-    int pid;
-    if ( !Lock::readLockFile( dir.filePath( *it ), pid, app ) ) {
-      qWarning() << "Unable to open lock file '" << *it << "'";
-    } else {
-      QTreeWidgetItem *item = new QTreeWidgetItem();
-      item->setText( 0, *it );
-      item->setText( 1, QString::number( pid ) );
-      item->setText( 2, app );
-      mLockView->addTopLevelItem( item );
-    }
-  }
 }
 
 void LockWidget::lock()
 {
-  if ( !mLock->lock() ) {
-    KMessageBox::sorry( this, mLock->error() );
-  } else {
-    mStatus->setText( QLatin1String( "Status: Locked" ) );
-  }
+    if (!mLock->lock()) {
+        KMessageBox::sorry(this, mLock->error());
+    } else {
+        mStatus->setText(QLatin1String("Status: Locked"));
+    }
 }
 
 void LockWidget::unlock()
 {
-  if ( !mLock->unlock() ) {
-    KMessageBox::sorry( this, mLock->error() );
-  } else {
-    mStatus->setText( QLatin1String( "Status: Unlocked" ) );
-  }
+    if (!mLock->unlock()) {
+        KMessageBox::sorry(this, mLock->error());
+    } else {
+        mStatus->setText(QLatin1String("Status: Unlocked"));
+    }
 }
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "testlock", 0, ki18n( "Test libkabc Lock" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("testlock", 0, ki18n("Test libkabc Lock"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KCmdLineOptions options;
-  options.add( "a" );
-  options.add( "addressbook", ki18n( "Standard address book" ) );
-  options.add( "d" );
-  options.add( "diraddressbook", ki18n( "Standard address book directory resource" ) );
-  options.add( "+identifier", ki18n( "Identifier of resource to be locked, e.g. filename" ) );
-  KCmdLineArgs::addCmdLineOptions( options );
+    KCmdLineOptions options;
+    options.add("a");
+    options.add("addressbook", ki18n("Standard address book"));
+    options.add("d");
+    options.add("diraddressbook", ki18n("Standard address book directory resource"));
+    options.add("+identifier", ki18n("Identifier of resource to be locked, e.g. filename"));
+    KCmdLineArgs::addCmdLineOptions(options);
 
-  KApplication app;
+    KApplication app;
 
-  QString identifier;
+    QString identifier;
 
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if ( args->count() == 1 ) {
-    identifier = args->arg( 0 );
-  } else if ( args->count() != 0 ) {
-    std::cerr << "Usage: testlock <identifier>" << std::endl;
-    return 1;
-  }
-
-  if ( args->isSet( "addressbook" ) ) {
-    if ( args->count() == 1 ) {
-      std::cerr << "Ignoring resource identifier" << std::endl;
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    if (args->count() == 1) {
+        identifier = args->arg(0);
+    } else if (args->count() != 0) {
+        std::cerr << "Usage: testlock <identifier>" << std::endl;
+        return 1;
     }
-    identifier = StdAddressBook::fileName();
-  }
 
-  if ( args->isSet( "diraddressbook" ) ) {
-    if ( args->count() == 1 ) {
-      std::cerr << "Ignoring resource identifier" << std::endl;
+    if (args->isSet("addressbook")) {
+        if (args->count() == 1) {
+            std::cerr << "Ignoring resource identifier" << std::endl;
+        }
+        identifier = StdAddressBook::fileName();
     }
-    identifier = StdAddressBook::directoryName();
-  }
 
-  LockWidget mainWidget( identifier );
+    if (args->isSet("diraddressbook")) {
+        if (args->count() == 1) {
+            std::cerr << "Ignoring resource identifier" << std::endl;
+        }
+        identifier = StdAddressBook::directoryName();
+    }
 
-  mainWidget.show();
+    LockWidget mainWidget(identifier);
 
-  return app.exec();
+    mainWidget.show();
+
+    return app.exec();
 }
 

@@ -31,49 +31,48 @@
 #include <klocalizedstring.h>
 #include <kcmdlineargs.h>
 
-
 #include <QtCore/QFile>
 #include <QImage>
 
 using namespace KABC;
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( "testkabc", 0, ki18n( "TestKabc" ), "0.1" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData aboutData("testkabc", 0, ki18n("TestKabc"), "0.1");
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-  KApplication app( false );
-  AddressBook *ab = StdAddressBook::self();
+    KApplication app(false);
+    AddressBook *ab = StdAddressBook::self();
 
 #define READ
 
 #ifdef READ
-  AddressBook::Iterator it;
-  for ( it = ab->begin(); it != ab->end(); ++it ) {
-    VCardConverter converter;
-    const QByteArray vcard = converter.createVCard( *it );
-    qDebug() << "card=" << vcard;
-  }
+    AddressBook::Iterator it;
+    for (it = ab->begin(); it != ab->end(); ++it) {
+        VCardConverter converter;
+        const QByteArray vcard = converter.createVCard(*it);
+        qDebug() << "card=" << vcard;
+    }
 #else
-  Addressee addr;
+    Addressee addr;
 
-  addr.setGivenName( "Tobias" );
-  addr.setFamilyName( "Koenig" );
+    addr.setGivenName("Tobias");
+    addr.setFamilyName("Koenig");
 
-  Picture pic;
-  QImage img;
-  img.load( "/home/tobias/test.png" );
-/*
-  pic.setData( img );
-  pic.setType( QImage::imageFormat( "/home/tobias/test.png" ) );
-*/
-  pic.setUrl( "http://www.mypict.de" );
-  addr.setLogo( pic );
+    Picture pic;
+    QImage img;
+    img.load("/home/tobias/test.png");
+    /*
+      pic.setData( img );
+      pic.setType( QImage::imageFormat( "/home/tobias/test.png" ) );
+    */
+    pic.setUrl("http://www.mypict.de");
+    addr.setLogo(pic);
 
-  ab->insertAddressee( addr );
+    ab->insertAddressee(addr);
 
-  StdAddressBook::save();
+    StdAddressBook::save();
 #endif
 
-  return 0;
+    return 0;
 }

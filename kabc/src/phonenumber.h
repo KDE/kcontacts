@@ -26,7 +26,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * @short Phonenumber information.
@@ -37,31 +38,31 @@ namespace KABC {
 */
 class KABC_EXPORT PhoneNumber
 {
-    friend KABC_EXPORT QDataStream &operator<<( QDataStream &, const PhoneNumber & );
-    friend KABC_EXPORT QDataStream &operator>>( QDataStream &, PhoneNumber & );
+    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const PhoneNumber &);
+    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, PhoneNumber &);
 
-  public:
+public:
     /**
       Phone number types.
     */
     enum TypeFlag {
-      Home = 1,     /**< Home number */
-      Work = 2,     /**< Office number */
-      Msg = 4,      /**< Messaging */
-      Pref = 8,     /**< Preferred number */
-      Voice = 16,   /**< Voice */
-      Fax = 32,     /**< Fax machine */
-      Cell = 64,    /**< Cell phone */
-      Video = 128,  /**< Video phone */
-      Bbs = 256,    /**< Mailbox */
-      Modem = 512,  /**< Modem */
-      Car = 1024,   /**< Car phone */
-      Isdn = 2048,  /**< ISDN connection */
-      Pcs = 4096,   /**< Personal Communication Service*/
-      Pager = 8192  /**< Pager */
+        Home = 1,     /**< Home number */
+        Work = 2,     /**< Office number */
+        Msg = 4,      /**< Messaging */
+        Pref = 8,     /**< Preferred number */
+        Voice = 16,   /**< Voice */
+        Fax = 32,     /**< Fax machine */
+        Cell = 64,    /**< Cell phone */
+        Video = 128,  /**< Video phone */
+        Bbs = 256,    /**< Mailbox */
+        Modem = 512,  /**< Modem */
+        Car = 1024,   /**< Car phone */
+        Isdn = 2048,  /**< ISDN connection */
+        Pcs = 4096,   /**< Personal Communication Service*/
+        Pager = 8192  /**< Pager */
     };
 
-    Q_DECLARE_FLAGS( Type, TypeFlag )
+    Q_DECLARE_FLAGS(Type, TypeFlag)
 
     /**
      * List of phone number types.
@@ -85,7 +86,7 @@ class KABC_EXPORT PhoneNumber
      * @param type   Type as defined in enum. Multiple types can be
      *               specified by combining them by a logical or.
      */
-    PhoneNumber( const QString &number, Type type = Home ); //krazy:exclude=explicit
+    PhoneNumber(const QString &number, Type type = Home);   //krazy:exclude=explicit
 
     /**
      * Copy constructor.
@@ -94,7 +95,7 @@ class KABC_EXPORT PhoneNumber
      *
      * @param other The PhoneNumber object to copy from
      */
-    PhoneNumber( const PhoneNumber &other );
+    PhoneNumber(const PhoneNumber &other);
 
     /**
      * Destroys the phone number.
@@ -107,12 +108,12 @@ class KABC_EXPORT PhoneNumber
      * @return @c true if number, type and identifier are equal,
      *         otherwise @c false
      */
-    bool operator==( const PhoneNumber & ) const;
+    bool operator==(const PhoneNumber &) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=( const PhoneNumber & ) const;
+    bool operator!=(const PhoneNumber &) const;
 
     /**
      * Assignment operator.
@@ -121,7 +122,7 @@ class KABC_EXPORT PhoneNumber
      *
      * @param other The PhoneNumber object to asssign to @c this
      */
-    PhoneNumber &operator=( const PhoneNumber &other );
+    PhoneNumber &operator=(const PhoneNumber &other);
 
     /**
      * Returns true, if the phone number is empty.
@@ -131,7 +132,7 @@ class KABC_EXPORT PhoneNumber
     /**
      * Sets the unique @p identifier.
      */
-    void setId( const QString &identifier );
+    void setId(const QString &identifier);
 
     /**
      * Returns the unique identifier.
@@ -141,7 +142,7 @@ class KABC_EXPORT PhoneNumber
     /**
      * Sets the phone @p number.
      */
-    void setNumber( const QString &number );
+    void setNumber(const QString &number);
 
     /**
      * Returns the phone number.
@@ -154,7 +155,7 @@ class KABC_EXPORT PhoneNumber
      *
      * @param type The #Type of the phone number
      */
-    void setType( Type type );
+    void setType(Type type);
 
     /**
      * Returns the type. Can be a multiple types combined by a logical or.
@@ -184,7 +185,7 @@ class KABC_EXPORT PhoneNumber
      *
      * @see type()
      */
-    static QString typeLabel( Type type );
+    static QString typeLabel(Type type);
 
     /**
      * Returns the translated label for phone number @p type.
@@ -194,19 +195,19 @@ class KABC_EXPORT PhoneNumber
      * @see typeLabel()
      * @since 4.5
      */
-    static QString typeFlagLabel( TypeFlag type );
+    static QString typeFlagLabel(TypeFlag type);
 
     /**
      * Returns a string representation of the phone number.
      */
     QString toString() const;
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( PhoneNumber::Type )
+Q_DECLARE_OPERATORS_FOR_FLAGS(PhoneNumber::Type)
 
 /**
  * Serializes the phone @p number object into the @p stream.
@@ -214,7 +215,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( PhoneNumber::Type )
  * @param stream The stream to write into
  * @param number The phone number object to serialize
  */
-KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const PhoneNumber &number );
+KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber &number);
 
 /**
  * Initializes the phone @p number object from the @p stream.
@@ -222,7 +223,7 @@ KABC_EXPORT QDataStream &operator<<( QDataStream &stream, const PhoneNumber &num
  * @param stream The stream to read from
  * @param number The phone number object to deserialize into
  */
-KABC_EXPORT QDataStream &operator>>( QDataStream &stream, const PhoneNumber &number );
+KABC_EXPORT QDataStream &operator>>(QDataStream &stream, const PhoneNumber &number);
 
 }
 

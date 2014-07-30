@@ -27,7 +27,6 @@
 #include <KAboutData>
 #include <QCommandLineParser>
 
-
 #include "kabc/addressee.h"
 #include "kabc/phonenumber.h"
 #include "kabc/address.h"
@@ -37,93 +36,92 @@
 #include "kabc/secrecy.h"
 #include "kabc/vcardconverter.h"
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  KAboutData aboutData( QLatin1String("testwrite"),i18n( "vCard test writer" ), QLatin1String("0.1") );
+    KAboutData aboutData(QLatin1String("testwrite"), i18n("vCard test writer"), QLatin1String("0.1"));
 
-  QCoreApplication app(argc, argv);
-  QCommandLineParser parser;
-  KAboutData::setApplicationData(aboutData);
-  parser.addVersionOption();
-  parser.addHelpOption();
-  aboutData.setupCommandLine(&parser);
-  parser.process(app);
-  aboutData.processCommandLine(&parser);
+    QCoreApplication app(argc, argv);
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
 
+    KABC::Addressee addressee;
 
-  KABC::Addressee addressee;
+    addressee.setNameFromString(QLatin1String("Mr. Tobias Koenig Jr."));
+    addressee.setNickName(QLatin1String("tokoe"));
+    addressee.setBirthday(QDateTime(QDate(1982, 7, 19)));
+    addressee.setMailer(QLatin1String("mutt1.2"));
+    addressee.setTimeZone(KABC::TimeZone(+2));
 
-  addressee.setNameFromString( QLatin1String( "Mr. Tobias Koenig Jr." ) );
-  addressee.setNickName( QLatin1String( "tokoe" ) );
-  addressee.setBirthday( QDateTime( QDate( 1982, 7, 19 ) ) );
-  addressee.setMailer( QLatin1String( "mutt1.2" ) );
-  addressee.setTimeZone( KABC::TimeZone( +2 ) );
+    KABC::Geo geo;
+    geo.setLatitude(30);
+    geo.setLongitude(51);
+    addressee.setGeo(geo);
 
-  KABC::Geo geo;
-  geo.setLatitude( 30 );
-  geo.setLongitude( 51 );
-  addressee.setGeo( geo );
+    addressee.setTitle(QLatin1String("nerd"));
+    addressee.setRole(QLatin1String("Maintainer"));
+    addressee.setOrganization(QLatin1String("KDE"));
+    addressee.setNote(QLatin1String("nerver\ntouch a running system"));
+    addressee.setProductId(QLatin1String("testId"));
+    addressee.setRevision(QDateTime::currentDateTime());
+    addressee.setSortString(QLatin1String("koenig"));
+    addressee.setUrl(QUrl(QLatin1String("http://wgess16.dyndns.org")));
+    addressee.setSecrecy(KABC::Secrecy(KABC::Secrecy::Confidential));
 
-  addressee.setTitle( QLatin1String( "nerd" ) );
-  addressee.setRole( QLatin1String( "Maintainer" ) );
-  addressee.setOrganization( QLatin1String( "KDE" ) );
-  addressee.setNote( QLatin1String( "nerver\ntouch a running system" ) );
-  addressee.setProductId( QLatin1String( "testId" ) );
-  addressee.setRevision( QDateTime::currentDateTime() );
-  addressee.setSortString( QLatin1String( "koenig" ) );
-  addressee.setUrl( QUrl( QLatin1String( "http://wgess16.dyndns.org" ) ) );
-  addressee.setSecrecy( KABC::Secrecy( KABC::Secrecy::Confidential ) );
+    addressee.insertEmail(QLatin1String("tokoe@kde.org"), true);
+    addressee.insertEmail(QLatin1String("tokoe82@yahoo.de"), true);
 
-  addressee.insertEmail( QLatin1String( "tokoe@kde.org" ), true );
-  addressee.insertEmail( QLatin1String( "tokoe82@yahoo.de" ), true );
+    KABC::PhoneNumber phone1(QLatin1String("3541523475"),
+                             KABC::PhoneNumber::Pref | KABC::PhoneNumber::Home);
+    KABC::PhoneNumber phone2(QLatin1String("+46745673475"),
+                             KABC::PhoneNumber::Work);
+    addressee.insertPhoneNumber(phone1);
+    addressee.insertPhoneNumber(phone2);
 
-  KABC::PhoneNumber phone1( QLatin1String( "3541523475" ),
-                            KABC::PhoneNumber::Pref | KABC::PhoneNumber::Home );
-  KABC::PhoneNumber phone2( QLatin1String( "+46745673475" ),
-                            KABC::PhoneNumber::Work );
-  addressee.insertPhoneNumber( phone1 );
-  addressee.insertPhoneNumber( phone2 );
+    KABC::Key key(QLatin1String("secret key"), KABC::Key::X509);
+    addressee.insertKey(key);
 
-  KABC::Key key( QLatin1String( "secret key" ), KABC::Key::X509 );
-  addressee.insertKey( key );
+    QStringList categories;
+    categories << QLatin1String("Friends") << QLatin1String("School") << QLatin1String("KDE");
+    addressee.setCategories(categories);
 
-  QStringList categories;
-  categories << QLatin1String( "Friends" ) << QLatin1String( "School" ) << QLatin1String( "KDE" );
-  addressee.setCategories( categories );
+    KABC::Address a(KABC::Address::Work | KABC::Address::Postal | KABC::Address::Parcel);
+    a.setStreet(QLatin1String("6544 Battleford Drive"));
+    a.setLocality(QLatin1String("Raleigh"));
+    a.setRegion(QLatin1String("NC"));
+    a.setPostalCode(QLatin1String("27613-3502"));
+    a.setCountry(QLatin1String("U.S.A."));
+    addressee.insertAddress(a);
 
-  KABC::Address a( KABC::Address::Work | KABC::Address::Postal | KABC::Address::Parcel );
-  a.setStreet( QLatin1String( "6544 Battleford Drive" ) );
-  a.setLocality( QLatin1String( "Raleigh" ) );
-  a.setRegion( QLatin1String( "NC" ) );
-  a.setPostalCode( QLatin1String( "27613-3502" ) );
-  a.setCountry( QLatin1String( "U.S.A." ) );
-  addressee.insertAddress( a );
+    addressee.insertCustom(QLatin1String("1hsdf"), QLatin1String("ertuer"),
+                           QLatin1String("iurt"));
+    addressee.insertCustom(QLatin1String("2hsdf"), QLatin1String("ertuer"),
+                           QLatin1String("iurt"));
+    addressee.insertCustom(QLatin1String("3hsdf"), QLatin1String("ertuer"),
+                           QLatin1String("iurt"));
 
-  addressee.insertCustom( QLatin1String( "1hsdf" ), QLatin1String( "ertuer" ),
-                          QLatin1String( "iurt" ) );
-  addressee.insertCustom( QLatin1String( "2hsdf" ), QLatin1String( "ertuer" ),
-                          QLatin1String( "iurt" ) );
-  addressee.insertCustom( QLatin1String( "3hsdf" ), QLatin1String( "ertuer" ),
-                          QLatin1String( "iurt" ) );
+    KABC::Addressee::List list;
+    for (int i = 0; i < 1000; ++i) {
+        KABC::Addressee addr = addressee;
+        addr.setUid(QString::number(i));
+        list.append(addr);
+    }
 
-  KABC::Addressee::List list;
-  for ( int i = 0; i < 1000; ++i ) {
-    KABC::Addressee addr = addressee;
-    addr.setUid( QString::number( i ) );
-    list.append( addr );
-  }
+    KABC::VCardConverter converter;
+    QByteArray txt = converter.createVCards(list);
 
-  KABC::VCardConverter converter;
-  QByteArray txt = converter.createVCards( list );
+    QFile file(QLatin1String("out.vcf"));
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug("Can't open file '%s' fro writing", qPrintable(file.fileName()));
+        return 1;
+    }
 
-  QFile file( QLatin1String( "out.vcf" ) );
-  if ( !file.open( QIODevice::WriteOnly ) ) {
-    qDebug( "Can't open file '%s' fro writing", qPrintable( file.fileName() ) );
-    return 1;
-  }
+    file.write(txt);
+    file.close();
 
-  file.write( txt );
-  file.close();
-
-  return 0;
+    return 0;
 }

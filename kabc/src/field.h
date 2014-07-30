@@ -26,7 +26,8 @@
 
 class KConfigGroup;
 
-namespace KABC {
+namespace KABC
+{
 
 /**
  * @short Represents a field in the Addressbook
@@ -45,7 +46,7 @@ namespace KABC {
  */
 class KABC_EXPORT Field
 {
-  public:
+public:
     /**
      * This type is used for a list of fields.
      */
@@ -55,36 +56,36 @@ class KABC_EXPORT Field
      * Represents the category a field belongs to.
      */
     enum FieldCategory {
-      /**
-       * All fields
-       */
-      All = 0x0,
-      /**
-       * Frequently used fields
-       */
-      Frequent = 0x01,
-      /**
-       * Fields which belong to the address, such as Street, City, Zip, etc.
-       */
-      Address = 0x02,
-      /**
-       * Fields which store information about the e-mail contact, such as
-       * e-mail address or mail client
-       */
-      Email = 0x04,
-      /**
-       * Personal fields, such as Birthday, Home Address fields, IM Address, etc.
-       */
-      Personal = 0x08,
-      /**
-       * Fields about the organization, such as Business Address fields, Department,
-       * Profession, etc.
-       */
-      Organization = 0x10,
-      /**
-       * Custom (user-defined) fields
-       */
-      CustomCategory = 0x20
+        /**
+         * All fields
+         */
+        All = 0x0,
+        /**
+         * Frequently used fields
+         */
+        Frequent = 0x01,
+        /**
+         * Fields which belong to the address, such as Street, City, Zip, etc.
+         */
+        Address = 0x02,
+        /**
+         * Fields which store information about the e-mail contact, such as
+         * e-mail address or mail client
+         */
+        Email = 0x04,
+        /**
+         * Personal fields, such as Birthday, Home Address fields, IM Address, etc.
+         */
+        Personal = 0x08,
+        /**
+         * Fields about the organization, such as Business Address fields, Department,
+         * Profession, etc.
+         */
+        Organization = 0x10,
+        /**
+         * Custom (user-defined) fields
+         */
+        CustomCategory = 0x20
     };
 
     /**
@@ -103,7 +104,7 @@ class KABC_EXPORT Field
      * @param category the category of type FieldCategory
      * @return the translated label
      */
-    static QString categoryLabel( int category );
+    static QString categoryLabel(int category);
 
     /**
      * Returns a string representation of the value the field has in the given
@@ -112,7 +113,7 @@ class KABC_EXPORT Field
      * @return the string representation of the value or QString(), if it
      * is not possible to convert the value to a string.
      */
-    virtual QString value( const KABC::Addressee & );
+    virtual QString value(const KABC::Addressee &);
 
     /**
      * Sets the value of the field in the given Addressee.
@@ -120,12 +121,12 @@ class KABC_EXPORT Field
      * @return @c true on success or @c false, if the given string couldn't
      * be converted to a valid value.
      */
-    virtual bool setValue( KABC::Addressee &, const QString & );
+    virtual bool setValue(KABC::Addressee &, const QString &);
 
     /**
      * Returns a string, that can be used for sorting.
      */
-    QString sortKey( const KABC::Addressee & );
+    QString sortKey(const KABC::Addressee &);
 
     /**
      * Returns, if the field is a user-defined field.
@@ -140,7 +141,7 @@ class KABC_EXPORT Field
      * @param field the field to compare this field to
      * @return @c true if the fields are equal, @c false otherwise
      */
-    virtual bool equals( Field *field );
+    virtual bool equals(Field *field);
 
     /**
      * Returns a list of all fields.
@@ -160,8 +161,8 @@ class KABC_EXPORT Field
      * @param key      Unique key for this field
      * @param app      Unique app name for this field
      */
-    static Field *createCustomField( const QString &label, int category,
-                                     const QString &key, const QString &app );
+    static Field *createCustomField(const QString &label, int category,
+                                    const QString &key, const QString &app);
 
     /**
      * Delete all fields from list.
@@ -175,8 +176,8 @@ class KABC_EXPORT Field
      * @param identifier The unique identifier
      * @param fields     The list of the fields
      */
-    static void saveFields( KConfigGroup &cfg, const QString &identifier,
-                            const Field::List &fields );
+    static void saveFields(KConfigGroup &cfg, const QString &identifier,
+                           const Field::List &fields);
     /**
      * @overload
      *
@@ -185,8 +186,8 @@ class KABC_EXPORT Field
      * @param identifier The unique identifier
      * @param fields     The list of the fields
      */
-    static void saveFields( const QString &identifier,
-                            const Field::List &fields );
+    static void saveFields(const QString &identifier,
+                           const Field::List &fields);
 
     /**
      * Load the field settings from a config file.
@@ -194,7 +195,7 @@ class KABC_EXPORT Field
      * @param cfg        The config file object
      * @param identifier The unique identifier
      */
-    static Field::List restoreFields( const KConfigGroup &cfg, const QString &identifier );
+    static Field::List restoreFields(const KConfigGroup &cfg, const QString &identifier);
 
     /**
      * @overload
@@ -203,9 +204,9 @@ class KABC_EXPORT Field
      *
      * @param identifier The unique identifier
      */
-    static Field::List restoreFields( const QString &identifier );
+    static Field::List restoreFields(const QString &identifier);
 
-  protected:
+protected:
     /**
      * @internal
      *
@@ -214,7 +215,7 @@ class KABC_EXPORT Field
      * @param id The identifier for the field
      * @param category The optional category for the field
      */
-    static void createField( int id, int category = 0 );
+    static void createField(int id, int category = 0);
 
     /**
      * @internal
@@ -224,12 +225,12 @@ class KABC_EXPORT Field
      * @param id The identifier for the field
      * @param category The optional category for the field
      */
-    static void createDefaultField( int id, int category = 0 );
+    static void createDefaultField(int id, int category = 0);
 
-  private:
+private:
     class Private;
 
-    Field( Private * );
+    Field(Private *);
     virtual ~Field();
 
     Private *const d;
