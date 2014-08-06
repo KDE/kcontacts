@@ -74,11 +74,11 @@ LockWidget::LockWidget(const QString &identifier)
 
         QPushButton *button = new QPushButton(QLatin1String("Lock"), this);
         topLayout->addWidget(button);
-        connect(button, SIGNAL(clicked()), SLOT(lock()));
+        connect(button, &QPushButton::clicked, this, &LockWidget::lock);
 
         button = new QPushButton(QLatin1String("Unlock"), this);
         topLayout->addWidget(button);
-        connect(button, SIGNAL(clicked()), SLOT(unlock()));
+        connect(button, &QPushButton::clicked, this, &LockWidget::unlock);
     }
 
     mLockView = new QTreeWidget(this);
@@ -93,7 +93,7 @@ LockWidget::LockWidget(const QString &identifier)
 
     QPushButton *quitButton = new QPushButton(QLatin1String("Quit"), this);
     topLayout->addWidget(quitButton);
-    connect(quitButton, SIGNAL(clicked()), SLOT(close()));
+    connect(quitButton, &QPushButton::clicked, this, &LockWidget::close);
 
     KDirWatch *watch = KDirWatch::self();
     connect(watch, SIGNAL(dirty(QString)),
