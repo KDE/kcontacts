@@ -18,12 +18,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <klocale.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 
 #include <kconfiggroup.h>
-
+#include <KSharedConfig>
 #include "field.h"
 
 using namespace KABC;
