@@ -83,6 +83,7 @@ Comment[pt]=Oferece o acesso aos contactos em ficheiros remotos, disponíveis at
 Comment[pt_BR]=Fornece acesso aos contatos em arquivos remotos usando o KIO framework de rede do KDE. O suporte a arquivos vCard padrão e outros formatos dependem da disponibilidade de plugins.
 Comment[ru]=Предоставляет доступ к контактам в удалённых файлах, используя сетевую подсистему KDE KIO. Поддерживает стандартный формат vCard и другие форматы при наличии соответствующих модулей.
 Comment[sk]=Poskytuje prístup ku kontaktom vo vzdialených súboroch s použitím KDE sieťového rámca KIO. Podporuje štandardný vCard súbor a ostatné formáty v závislosti od dostupnosti zásuvných modulov.
+Comment[sl]=Nudi dostop do stikov v oddaljenih datotekah z uporabo KDE-jevega ogrodja KIO. Podpira običajne datoteke VCard in druge vrste, odvisno od razpoložljivosti vstavkov.
 Comment[sr]=Пружа приступ контактима у удаљеним фајловима преко КДЕ‑овог мрежног радног оквира К‑У/И. Подржава стандардне в‑кард фајлове и друге формате, према расположивим прикључцима.
 Comment[sr@ijekavian]=Пружа приступ контактима у удаљеним фајловима преко КДЕ‑овог мрежног радног оквира К‑У/И. Подржава стандардне в‑кард фајлове и друге формате, према расположивим прикључцима.
 Comment[sr@ijekavianlatin]=Pruža pristup kontaktima u udaljenim fajlovima preko KDE‑ovog mrežnog radnog okvira K‑U/I. Podržava standardne vCard fajlove i druge formate, prema raspoloživim priključcima.
