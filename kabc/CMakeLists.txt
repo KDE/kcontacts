@@ -17,7 +17,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
 set(KF5_VERSION "5.1.0")
-set(KDEPIMLIBS_VERSION "4.70.0")
+set(KDEPIMLIBS_VERSION "4.71.0")
 
 # FIXME ? KF5AbcConfig ? KF5AddressBookConfig ? anything else ?
 ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX KABC
