@@ -68,6 +68,7 @@ Comment[gl]=Fornece acceso aos contactos, cada un gardado nun ficheiro nun carta
 Comment[hu]=Névjegyek elérését biztosítja. Minden névjegy külön fájlban található, egy adott mappában. Támogatja a szabványos vCard fájlt és az elérhető bővítményektől függően más formátumokat.
 Comment[ia]=Il provide accessos a contactos, cata un immagazinate in un singule file, in un date dossier. Il supporta file de standard VCard e altere formatos dependente ab le disponibilitate de plugins.
 Comment[it]=Fornisce accesso a contatti, ciascuno dei quali memorizzato in un singolo file in una cartella data. Gestisce file in standard vCard e altri formati in base alle estensioni disponibili.
+Comment[ja]=それぞれが単一のファイルに保存されている任意のフォルダ内の連絡先へのアクセスを提供します。標準の VCard ファイルと、利用可能なプラグインに応じたフォーマットをサポートします。
 Comment[kk]=Көрсетілген қапшықта, әрбірі бөлек файлда сақталған контакттарға қатынау мүмкіндігін береді. Плагині бар-жоғына қарай, vCard және басқа да пішімдерді тани алады.
 Comment[ko]=주어진 폴더에 있는 개별 파일로 저장된 연락처에 접근할 수 있도록 합니다. 표준 vCard 파일 및 플러그인에 의한 추가 형식 지원이 가능합니다.
 Comment[nb]=Gir tilgang til kontakter, lagret hver for seg i en enkelt fil, i en gitt mappe. Støtter standard vCard og andre formater avhengig av tilgjengelige programtillegg.
