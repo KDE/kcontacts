@@ -16,7 +16,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
-set(KF5_VERSION "5.2.0")
+set(KF5_VERSION "5.3.0")
 set(KDEPIMLIBS_VERSION "4.71.0")
 
 # FIXME ? KF5AbcConfig ? KF5AddressBookConfig ? anything else ?
