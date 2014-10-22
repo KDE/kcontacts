@@ -23,10 +23,7 @@
 #include "errorhandler.h"
 #include "kabc_debug.h"
 #include <qdebug.h>
-#include <qmessagebox.h>
 #include <klocalizedstring.h>
-
-#include <QApplication>
 
 using namespace KABC;
 
@@ -49,30 +46,3 @@ void ConsoleErrorHandler::error(const QString &msg)
     qCCritical(KABC_LOG) << msg;
 }
 
-class GuiErrorHandler::Private
-{
-public:
-    Private(QWidget *widget)
-        : mWidget(widget)
-    {
-    }
-
-    QWidget *mWidget;
-};
-
-GuiErrorHandler::GuiErrorHandler(QWidget *widget)
-    : d(new Private(widget))
-{
-}
-
-GuiErrorHandler::~GuiErrorHandler()
-{
-    delete d;
-}
-
-void GuiErrorHandler::error(const QString &msg)
-{
-    if (qApp) {
-        QMessageBox::warning(d->mWidget, QString(), msg);
-    }
-}

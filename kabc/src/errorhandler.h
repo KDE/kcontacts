@@ -80,36 +80,6 @@ private:
     Q_DISABLE_COPY(ConsoleErrorHandler)
 };
 
-/**
-  This class shows messages boxes for every
-  error message.
-*/
-class KABC_EXPORT GuiErrorHandler : public ErrorHandler
-{
-public:
-    /**
-      Create error handler.
-
-      Uses KMessageBox::error() to display the error messages.
-
-      @param parent Widget which is used as parent for the error dialogs.
-    */
-    GuiErrorHandler(QWidget *parent = 0);
-
-    /**
-      Destroys the handler instance.
-    */
-    virtual ~GuiErrorHandler();
-
-    virtual void error(const QString &msg);
-
-private:
-    class Private;
-    Private *const d;
-
-    Q_DISABLE_COPY(GuiErrorHandler)
-};
-
 }
 
 #endif

@@ -23,7 +23,7 @@
 #include <klocalizedstring.h>
 #include <kconfiggroup.h>
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QtDBus/QtDBus>
 
 using namespace KABC;
