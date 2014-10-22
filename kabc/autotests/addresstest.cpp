@@ -156,9 +156,8 @@ void AddressTest::formatTest()
     }
 
     {
-        const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String("l10n/de/entry.desktop"));
-        QVERIFY2(!templateFile.isEmpty(), "Address format template file for 'de' does not exist");
-
+        const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/de/country.desktop"));
+        QVERIFY(!templateFile.isEmpty());
         const KConfig templateConfig(templateFile);
         QVERIFY2(templateConfig.hasGroup("KCM Locale"),
                  "Address format config for 'de' is missing expected 'KCM Locale' group");

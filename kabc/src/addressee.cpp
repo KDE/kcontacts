@@ -27,7 +27,6 @@
 
 #include "kabc_debug.h"
 #include <QDebug>
-#include <klocale.h>
 #include <klocalizedstring.h>
 
 #include "addresseehelper.h"

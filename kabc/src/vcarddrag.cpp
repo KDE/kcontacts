@@ -23,9 +23,8 @@
 
 #include "vcardconverter.h"
 
-#include <KMimeType>
-
 #include <QMimeData>
+#include <QMimeDatabase>
 
 using namespace KABC;
 
@@ -37,12 +36,11 @@ static QString findCompatibleMimeType(const QMimeData *md)
     }
 
     const QStringList mimeTypeOffers = md->formats();
+    const QMimeDatabase db;
     Q_FOREACH (const QString &mimeType, mimeTypeOffers) {
-        const KMimeType::Ptr mimeTypePtr = KMimeType::mimeType(mimeType, KMimeType::ResolveAliases);
-        if (mimeTypePtr) {
-            if (mimeTypePtr->is(KABC::Addressee::mimeType())) {
-                return mimeType;
-            }
+        const QMimeType mimeTypePtr = db.mimeTypeForName(mimeType);
+        if (mimeTypePtr.isValid() && mimeTypePtr.inherits(KABC::Addressee::mimeType())) {
+            return mimeType;
         }
     }
 

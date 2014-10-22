@@ -23,8 +23,8 @@
 #include "errorhandler.h"
 #include "kabc_debug.h"
 #include <qdebug.h>
+#include <qmessagebox.h>
 #include <klocalizedstring.h>
-#include <kmessagebox.h>
 
 #include <QApplication>
 
@@ -73,6 +73,6 @@ GuiErrorHandler::~GuiErrorHandler()
 void GuiErrorHandler::error(const QString &msg)
 {
     if (qApp) {
-        KMessageBox::error(d->mWidget, msg);
+        QMessageBox::warning(d->mWidget, QString(), msg);
     }
 }

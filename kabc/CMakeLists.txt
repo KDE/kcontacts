@@ -27,10 +27,8 @@ ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX KABC
 )
 
 ########### Find packages ###########
-find_package(KF5CoreAddons ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5Config ${KF5_VERSION} CONFIG REQUIRED)
+find_package(Qt5 5.3 REQUIRED COMPONENTS Widgets DBus)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 
 ########### Targets ###########
 

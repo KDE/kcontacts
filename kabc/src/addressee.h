@@ -25,8 +25,8 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QStringList>
 #include <QtCore/QSharedDataPointer>
-
-#include <QUrl>
+#include <QtCore/QUrl>
+#include <QtCore/QMap>
 
 #include "address.h"
 #include "geo.h"

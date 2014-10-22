@@ -21,7 +21,6 @@
 #include "address.h"
 #include "kabc_debug.h"
 #include <krandom.h>
-#include <kglobal.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 
@@ -31,8 +30,8 @@
 #include <QtCore/QMap>
 #include <QtCore/QTextStream>
 #include <QtCore/QSharedData>
-#include <QStandardPaths>
-#include <KLocale>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QLocale>
 
 Q_LOGGING_CATEGORY(KABC_LOG, "kabc")
 
@@ -562,9 +561,9 @@ QString Address::formattedAddress(const QString &realName,
         ciso = countryToISO(country());
     } else {
         // fall back to our own country
-        ciso = KLocale::global()->country();
+        ciso = QLocale().bcp47Name();
     }
-    KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String("l10n/") + ciso + QLatin1String("/entry.desktop")));
+    KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/") + ciso + QLatin1String("/country.desktop")));
 
     KConfigGroup group = entry.group("KCM Locale");
     // decide whether this needs special business address formatting
@@ -592,9 +591,9 @@ QString Address::formattedAddress(const QString &realName,
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
-        KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("locale/") + QLatin1String("l10n/") +
-                                             KLocale::global()->country() +
-                                             QLatin1String("/entry.desktop")));
+        KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/") +
+                                             QLocale().name() +
+                                             QLatin1String("/country.desktop")));
         KConfigGroup group = entry.group("KCM Locale");
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
@@ -611,13 +610,14 @@ QString Address::formattedAddress(const QString &realName,
     return ret;
 }
 
+typedef QMap<QString, QString> StringMap;
+Q_GLOBAL_STATIC(StringMap, sISOMap)
+
 QString Address::countryToISO(const QString &cname)
 {
     // we search a map file for translations from country names to
     // iso codes, storing caching things in a QMap for faster future
     // access.
-    typedef QMap<QString, QString> stringMap;
-    K_GLOBAL_STATIC(stringMap, sISOMap)
 
     QMap<QString, QString>::ConstIterator it;
     it = sISOMap->constFind(cname);
@@ -644,8 +644,9 @@ QString Address::countryToISO(const QString &cname)
     }
 
     // fall back to system country
-    sISOMap->insert(cname, KLocale::global()->country());
-    return KLocale::global()->country();
+    QString systemCountry = QLocale().bcp47Name();
+    sISOMap->insert(cname, systemCountry);
+    return systemCountry;
 }
 
 QString Address::ISOtoCountry(const QString &ISOname)
