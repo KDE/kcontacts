@@ -130,8 +130,8 @@ void RoundtripTest::testVCardRoundtrip()
         QCOMPARE(outputLines.count(), outputRefLines.count());
 
         for (int i = 0; i < outputLines.count(); ++i) {
-            const QByteArray actual = outputLines[ i ];
-            const QByteArray expect = outputRefLines[ i ];
+            const QByteArray actual = outputLines[i];
+            const QByteArray expect = outputRefLines[i];
 
             if (actual != expect) {
                 qCritical() << "Mismatch in v2.1 output line" << (i + 1);
@@ -157,8 +157,8 @@ void RoundtripTest::testVCardRoundtrip()
         QCOMPARE(outputLines.count(), outputRefLines.count());
 
         for (int i = 0; i < outputLines.count(); ++i) {
-            const QByteArray actual = outputLines[ i ];
-            const QByteArray expect = outputRefLines[ i ];
+            const QByteArray actual = outputLines[i];
+            const QByteArray expect = outputRefLines[i];
 
             if (actual != expect) {
                 qCritical() << "Mismatch in v3.0 output line" << (i + 1);

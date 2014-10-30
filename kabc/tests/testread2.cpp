@@ -43,12 +43,12 @@ int main()
     Addressee::List::iterator itr1;
     Addressee::List::iterator itr2;
     for (itr1 = l.begin(), itr2 = parsed.begin();
-            itr1 != l.end() && itr2 != parsed.end(); ++itr1, ++itr2) {
+         itr1 != l.end() && itr2 != parsed.end(); ++itr1, ++itr2) {
         if ((*itr1).fullEmail() == (*itr2).fullEmail() &&
-                (*itr1).organization() == (*itr2).organization() &&
-                (*itr1).phoneNumbers() == (*itr2).phoneNumbers()  &&
-                (*itr1).emails() == (*itr2).emails() &&
-                (*itr1).role() == (*itr2).role()) {
+            (*itr1).organization() == (*itr2).organization() &&
+            (*itr1).phoneNumbers() == (*itr2).phoneNumbers()  &&
+            (*itr1).emails() == (*itr2).emails() &&
+            (*itr1).role() == (*itr2).role()) {
             qDebug() << "\tAddressee  - PASSED";
             qDebug() << "\t\t" << (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
         } else {

@@ -132,4 +132,3 @@ void SoundTest::serializeTest()
 
     QVERIFY(sound1 == sound2);
 }
-

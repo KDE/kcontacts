@@ -84,4 +84,3 @@ void TimeZoneTest::serializeTest()
 
     QVERIFY(timezone1 == timezone2);
 }
-

@@ -83,4 +83,3 @@ void SecrecyTest::serializeTest()
 
     QVERIFY(secrecy1 == secrecy2);
 }
-

@@ -46,7 +46,8 @@ private Q_SLOTS:
 
 QTEST_MAIN(VCardDragTest)
 
-VCardDragTest::VCardDragTest() : QObject()
+VCardDragTest::VCardDragTest()
+    : QObject()
 {
     mAddressee1.setGivenName(QLatin1String("Kevin"));
     mAddressee1.setFamilyName(QLatin1String("Krammer"));
@@ -152,8 +153,8 @@ void VCardDragTest::testFromMimeData()
     result = VCardDrag::fromMimeData(data, addresseeList);
     QVERIFY(result);
     QCOMPARE(addresseeList.count(), 2);
-    QCOMPARE(addresseeList[ 0 ], mAddressee1);
-    QCOMPARE(addresseeList[ 1 ], mAddressee2);
+    QCOMPARE(addresseeList[0], mAddressee1);
+    QCOMPARE(addresseeList[1], mAddressee2);
     delete data;
 
     data = new QMimeData();
@@ -161,8 +162,8 @@ void VCardDragTest::testFromMimeData()
     result = VCardDrag::fromMimeData(data, addresseeList);
     QVERIFY(result);
     QCOMPARE(addresseeList.count(), 2);
-    QCOMPARE(addresseeList[ 0 ], mAddressee1);
-    QCOMPARE(addresseeList[ 1 ], mAddressee2);
+    QCOMPARE(addresseeList[0], mAddressee1);
+    QCOMPARE(addresseeList[1], mAddressee2);
     delete data;
 
     data = new QMimeData();
@@ -179,4 +180,3 @@ void VCardDragTest::testFromMimeData()
 }
 
 #include "vcarddragtest.moc"
-

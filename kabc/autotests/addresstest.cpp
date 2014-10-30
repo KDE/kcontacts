@@ -219,4 +219,3 @@ void AddressTest::formatTest()
         QCOMPARE(address.formattedAddress(QLatin1String("Jim Knopf")), result);
     }
 }
-

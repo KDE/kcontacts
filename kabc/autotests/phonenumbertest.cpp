@@ -127,10 +127,10 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(KABC::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
         if (type < KABC::PhoneNumber::Pref) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[ type ]).arg(labels[ KABC::PhoneNumber::Pref ]);
+            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[type]).arg(labels[KABC::PhoneNumber::Pref]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         } else if (type > KABC::PhoneNumber::Pref) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[ KABC::PhoneNumber::Pref ]).arg(labels[ type ]);
+            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[KABC::PhoneNumber::Pref]).arg(labels[type]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         }
     }
@@ -143,13 +143,13 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(KABC::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
         if (type == KABC::PhoneNumber::Home ||
-                type == KABC::PhoneNumber::Work) {
+            type == KABC::PhoneNumber::Work) {
             // special cased
         } else if (type < KABC::PhoneNumber::Fax) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[ type ]).arg(labels[ KABC::PhoneNumber::Fax ]);
+            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[type]).arg(labels[KABC::PhoneNumber::Fax]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         } else if (type > KABC::PhoneNumber::Fax) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[ KABC::PhoneNumber::Fax ]).arg(labels[ type ]);
+            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[KABC::PhoneNumber::Fax]).arg(labels[type]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         }
     }
@@ -171,4 +171,3 @@ void PhoneNumberTest::labelTest()
                                           KABC::PhoneNumber::Pref),
              QLatin1String("Work Fax/Preferred"));
 }
-

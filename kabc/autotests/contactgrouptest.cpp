@@ -383,4 +383,3 @@ void ContactGroupTest::testGroupListRoundTrip()
 }
 
 #include "contactgrouptest.moc"
-

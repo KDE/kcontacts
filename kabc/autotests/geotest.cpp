@@ -88,4 +88,3 @@ void GeoTest::serialization()
 
     QVERIFY(geo1 == geo2);
 }
-

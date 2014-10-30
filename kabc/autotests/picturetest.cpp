@@ -265,4 +265,3 @@ void PictureTest::serializeTestExtern()
 
     QVERIFY(picture1 == picture2);
 }
-
