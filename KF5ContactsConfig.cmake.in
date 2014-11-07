@@ -1,0 +1,3 @@
+find_dependency(KF5CoreAddons "5.5.0")
+
+include("${CMAKE_CURRENT_LIST_DIR}/KF5ContactsTargets.cmake")
