@@ -25,7 +25,6 @@
 #include "kcontacts_export.h"
 #include <QtCore/QString>
 
-class QWidget;
 
 namespace KContacts
 {
