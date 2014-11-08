@@ -1,5 +1,5 @@
 /*
-    This file is part of the KContacts framework..
+    This file is part of the KContacts framework.
 
     Copyright (c) 2003 Cornelius Schumacher <schumacher@kde.org>
 

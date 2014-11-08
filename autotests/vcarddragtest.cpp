@@ -1,5 +1,5 @@
 /*
-  This file is part of the KContacts framework..
+  This file is part of the KContacts framework.
   Copyright (C) 2010 Klarälvdalens Datakonsult AB, a KDAB Group company, info@kdab.net
   Author: Kevin Krammer, krake@kdab.com
 
