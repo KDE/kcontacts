@@ -127,10 +127,10 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(KContacts::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
         if (type < KContacts::PhoneNumber::Pref) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Pref]);
+            const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Pref]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         } else if (type > KContacts::PhoneNumber::Pref) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[KContacts::PhoneNumber::Pref]).arg(labels[type]);
+            const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[KContacts::PhoneNumber::Pref]).arg(labels[type]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         }
     }
@@ -146,10 +146,10 @@ void PhoneNumberTest::labelTest()
             type == KContacts::PhoneNumber::Work) {
             // special cased
         } else if (type < KContacts::PhoneNumber::Fax) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Fax]);
+            const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Fax]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         } else if (type > KContacts::PhoneNumber::Fax) {
-            const QString expectedCombinedString = QString::fromLatin1("%1/%2").arg(labels[KContacts::PhoneNumber::Fax]).arg(labels[type]);
+            const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[KContacts::PhoneNumber::Fax]).arg(labels[type]);
             QCOMPARE(phone.typeLabel(), expectedCombinedString);
         }
     }
