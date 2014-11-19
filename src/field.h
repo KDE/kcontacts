@@ -26,8 +26,7 @@
 
 class KConfigGroup;
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
  * @short Represents a field in the Addressbook
@@ -113,7 +112,7 @@ public:
      * @return the string representation of the value or QString(), if it
      * is not possible to convert the value to a string.
      */
-    virtual QString value(const KContacts::Addressee &);
+    virtual QString value(const KContacts::Addressee &addressee);
 
     /**
      * Sets the value of the field in the given Addressee.
@@ -121,12 +120,12 @@ public:
      * @return @c true on success or @c false, if the given string couldn't
      * be converted to a valid value.
      */
-    virtual bool setValue(KContacts::Addressee &, const QString &);
+    virtual bool setValue(KContacts::Addressee &addressee, const QString &value);
 
     /**
      * Returns a string, that can be used for sorting.
      */
-    QString sortKey(const KContacts::Addressee &);
+    QString sortKey(const KContacts::Addressee &addressee);
 
     /**
      * Returns, if the field is a user-defined field.
@@ -230,7 +229,7 @@ protected:
 private:
     class Private;
 
-    Field(Private *);
+    Field(Private *p);
     virtual ~Field();
 
     Private *const d;

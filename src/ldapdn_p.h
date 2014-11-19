@@ -72,9 +72,9 @@ public:
      */
     int depth() const;
 
-    bool operator == (const LdapDN &rhs) const;
+    bool operator==(const LdapDN &rhs) const;
 
-    bool operator != (const LdapDN &rhs) const;
+    bool operator!=(const LdapDN &rhs) const;
 
 private:
     class LdapDNPrivate;

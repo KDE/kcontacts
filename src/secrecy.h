@@ -25,8 +25,7 @@
 #include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
 
-namespace KContacts
-{
+namespace KContacts {
 
 class KCONTACTS_EXPORT Secrecy
 {

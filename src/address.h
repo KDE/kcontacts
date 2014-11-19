@@ -26,8 +26,7 @@
 
 #include "kcontacts_export.h"
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
   @brief
@@ -92,7 +91,7 @@ public:
       @param addr the address to compare to
       @return @c true if @c this and @p addr are equal, otherwise @c false
     */
-    bool operator==(const Address &addr) const;
+    bool operator==(const Address &other) const;
 
     /**
       Not-equal operator.
@@ -100,7 +99,7 @@ public:
       @param addr the address to compare to
       @return @c true if @c this and @p addr are not equal, otherwise @c false
     */
-    bool operator!=(const Address &addr) const;
+    bool operator!=(const Address &other) const;
 
     /**
       Assignment operator.
@@ -108,7 +107,7 @@ public:
       @param addr the address data to assign to @c this
       @return a reference to @c this
     */
-    Address &operator=(const Address &addr);
+    Address &operator=(const Address &other);
 
     /**
       Returns true, if the address is empty.

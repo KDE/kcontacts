@@ -28,8 +28,7 @@
 #include <QtCore/QSharedDataPointer>
 #include <QImage>
 
-namespace KContacts
-{
+namespace KContacts {
 
 class PicturePrivate;
 
@@ -88,12 +87,12 @@ public:
     /**
      * Equality operator.
      */
-    bool operator==(const Picture &) const;
+    bool operator==(const Picture &other) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=(const Picture &) const;
+    bool operator!=(const Picture &other) const;
 
     /**
      * Returns true, if the picture is empty.

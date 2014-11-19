@@ -26,8 +26,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QString>
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
   A set of functions to convert a string with LDIF information to addressees
@@ -35,8 +34,7 @@ namespace KContacts
   and might be used to read and write Mozilla and Netscape addresssbooks.
 */
 
-namespace LDIFConverter
-{
+namespace LDIFConverter {
 
 /**
   Converts a LDIF string to a list of addressees.
@@ -46,7 +44,7 @@ namespace LDIFConverter
   @param dt          The date & time value of the last modification (e.g. file modification time).
 */
 KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList,
-                                 const QDateTime &dt = QDateTime::currentDateTime());
+                                      const QDateTime &dt = QDateTime::currentDateTime());
 
 /**
   Converts a list of addressees to a LDIF string.
@@ -79,12 +77,11 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
   @param value The value of the field addressed by @p fieldname
 */
 KCONTACTS_EXPORT bool evaluatePair(Addressee &a, Address &homeAddr,
-                              Address &workAddr,
-                              QString &fieldname, QString &value,
-                              int &birthday, int &birthmonth, int &birthyear);
+                                   Address &workAddr,
+                                   QString &fieldname, QString &value,
+                                   int &birthday, int &birthmonth, int &birthyear);
 
 }
 
 }
 #endif
-

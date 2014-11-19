@@ -25,9 +25,7 @@
 #include "kcontacts_export.h"
 #include <QtCore/QString>
 
-
-namespace KContacts
-{
+namespace KContacts {
 
 /**
   Abstract class that provides displaying of error messages.

@@ -26,8 +26,7 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QList>
 
-namespace KContacts
-{
+namespace KContacts {
 
 class Field;
 class SortMode;
@@ -42,8 +41,7 @@ class Addressee;
  * If you want to implement reverse sorting, you do not have to write another
  * trait, as AddresseeList takes care of that.
  */
-namespace SortingTraits
-{
+namespace SortingTraits {
 
 class KCONTACTS_EXPORT Uid
 {

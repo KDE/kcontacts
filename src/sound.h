@@ -25,8 +25,7 @@
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
 
-namespace KContacts
-{
+namespace KContacts {
 
 /** @short Class that holds a Sound clip for a contact.
  *

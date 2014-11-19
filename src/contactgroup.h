@@ -29,8 +29,7 @@
 
 class QString;
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
  * @short This class represents a group of contacts.

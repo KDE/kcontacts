@@ -38,8 +38,7 @@
 #include "timezone.h"
 #include "addresseelist.h"  // for typedef QList<Addressee> List;
 
-namespace KContacts
-{
+namespace KContacts {
 
 class SortMode;
 
@@ -99,14 +98,14 @@ public:
     /**
       Copy constructor.
      */
-    Addressee(const Addressee &);
+    Addressee(const Addressee &other);
 
     /**
       Assignment operator.
 
       @return a reference to @c this
     */
-    Addressee &operator=(const Addressee &);
+    Addressee &operator=(const Addressee &other);
 
     /**
       Equality operator.
@@ -114,7 +113,7 @@ public:
       @return @c true if @c this and the given addressee are equal,
               otherwise @c false
     */
-    bool operator==(const Addressee &) const;
+    bool operator==(const Addressee &other) const;
 
     /**
       Not-equal operator.
@@ -122,7 +121,7 @@ public:
       @return @c true if @c this and the given addressee are not equal,
               otherwise @c false
     */
-    bool operator!=(const Addressee &) const;
+    bool operator!=(const Addressee &other) const;
 
     /**
       Return, if the address book entry is empty.
@@ -641,7 +640,7 @@ public:
       parts of the string with according fields. This function should probably
       be a bit more clever.
      */
-    void setNameFromString(const QString &);
+    void setNameFromString(const QString &s);
 
     /**
       Return the name of the addressee. This is calculated from all the name
@@ -843,22 +842,22 @@ public:
     /**
       Insert category. If the category already exists it is not duplicated.
      */
-    void insertCategory(const QString &);
+    void insertCategory(const QString &category);
 
     /**
       Remove category.
      */
-    void removeCategory(const QString &);
+    void removeCategory(const QString &category);
 
     /**
       Return, if addressee has the given category.
      */
-    bool hasCategory(const QString &) const;
+    bool hasCategory(const QString &category) const;
 
     /**
       Set categories to given value.
      */
-    void setCategories(const QStringList &);
+    void setCategories(const QStringList &category);
 
     /**
       Return list of all set categories.
@@ -899,7 +898,7 @@ public:
     /**
       Set all custom entries.
      */
-    void setCustoms(const QStringList &);
+    void setCustoms(const QStringList &customs);
 
     /**
       Return list of all custom entries.
@@ -953,7 +952,7 @@ public:
 
       @see setSortMode()
      */
-    bool operator< (const Addressee &addr) const;
+    bool operator<(const Addressee &addr) const;
 
     /**
       Returns the MIME type used for Addressees

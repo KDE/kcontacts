@@ -24,8 +24,7 @@
 #include "kcontacts_export.h"
 #include <QtCore/QString>
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
  * Base class for Plugins. Defines the interface for the basic

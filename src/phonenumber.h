@@ -26,8 +26,7 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
  * @short Phonenumber information.

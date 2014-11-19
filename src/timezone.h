@@ -25,8 +25,7 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
-namespace KContacts
-{
+namespace KContacts {
 
 /**
  * @short Time zone information.
@@ -78,8 +77,8 @@ public:
      */
     bool isValid() const;
 
-    bool operator==(const TimeZone &) const;
-    bool operator!=(const TimeZone &) const;
+    bool operator==(const TimeZone &other) const;
+    bool operator!=(const TimeZone &other) const;
     TimeZone &operator=(const TimeZone &other);
 
     /**
