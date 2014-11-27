@@ -68,7 +68,7 @@ public:
     */
     virtual ~ConsoleErrorHandler();
 
-    virtual void error(const QString &msg);
+    void error(const QString &msg) Q_DECL_OVERRIDE;
 
 private:
     class Private;
