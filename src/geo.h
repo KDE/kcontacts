@@ -95,12 +95,12 @@ public:
      *
      * @note Two invalid Geo instance will return @c true
      */
-    bool operator==(const Geo &) const;
+    bool operator==(const Geo &other) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=(const Geo &) const;
+    bool operator!=(const Geo &other) const;
 
     /**
      * Assignment operator.

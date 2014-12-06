@@ -65,7 +65,7 @@ public:
      * @see Addressee::uid()
      * @see QString::compare()
      */
-    static bool eq(const Addressee &, const Addressee &);
+    static bool eq(const Addressee &a1, const Addressee &a2);
 
     /**
      * "Less-Than" compare method
@@ -76,7 +76,7 @@ public:
      * @see Addressee::uid()
      * @see QString::compare()
      */
-    static bool lt(const Addressee &, const Addressee &);
+    static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
     class Private;
@@ -105,7 +105,7 @@ public:
      * @see Addressee::name()
      * @see QString::localeAwareCompare()
      */
-    static bool eq(const Addressee &, const Addressee &);
+    static bool eq(const Addressee &a1, const Addressee &a2);
 
     /**
      * "Less-Than" compare method
@@ -116,7 +116,7 @@ public:
      * @see Addressee::name()
      * @see QString::localeAwareCompare()
      */
-    static bool lt(const Addressee &, const Addressee &);
+    static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
     class Private;
@@ -145,7 +145,7 @@ public:
      * @see Addressee::formattedName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq(const Addressee &, const Addressee &);
+    static bool eq(const Addressee &a1, const Addressee &a2);
 
     /**
      * "Less-Than" compare method
@@ -156,7 +156,7 @@ public:
      * @see Addressee::formattedName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt(const Addressee &, const Addressee &);
+    static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
     class Private;
@@ -186,7 +186,7 @@ public:
      * @see Addressee::givenName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq(const Addressee &, const Addressee &);
+    static bool eq(const Addressee &a1, const Addressee &a2);
 
     /**
      * "Less-Than" compare method
@@ -199,7 +199,7 @@ public:
      * @see Addressee::familyName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt(const Addressee &, const Addressee &);
+    static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
     class Private;
@@ -229,7 +229,7 @@ public:
      * @see Addressee::familyName()
      * @see QString::localeAwareCompare()
      */
-    static bool eq(const Addressee &, const Addressee &);
+    static bool eq(const Addressee &a1, const Addressee &a2);
 
     /**
      * "Less-Than" compare method
@@ -242,7 +242,7 @@ public:
      * @see Addressee::givenName()
      * @see QString::localeAwareCompare()
      */
-    static bool lt(const Addressee &, const Addressee &);
+    static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
     class Private;
@@ -296,12 +296,12 @@ public:
     /**
      * Creates a new addressee list.
      */
-    AddresseeList(const AddresseeList &);
+    AddresseeList(const AddresseeList &other);
 
     /**
      * Creates a new addressee list.
      */
-    AddresseeList(const QList<Addressee> &);
+    AddresseeList(const QList<Addressee> &list);
 
     /**
      * Destroys the addressee list.

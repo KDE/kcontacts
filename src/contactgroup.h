@@ -142,12 +142,12 @@ public:
         /**
          * @internal
          */
-        ContactReference &operator=(const ContactReference &);
+        ContactReference &operator=(const ContactReference &other);
 
         /**
          * @internal
          */
-        bool operator==(const ContactReference &) const;
+        bool operator==(const ContactReference &other) const;
 
     private:
         class ContactReferencePrivate;
@@ -219,12 +219,12 @@ public:
         /**
          * @internal
          */
-        ContactGroupReference &operator=(const ContactGroupReference &);
+        ContactGroupReference &operator=(const ContactGroupReference &other);
 
         /**
          * @internal
          */
-        bool operator==(const ContactGroupReference &) const;
+        bool operator==(const ContactGroupReference &other) const;
 
     private:
         class ContactGroupReferencePrivate;
@@ -306,12 +306,12 @@ public:
         /**
          * @internal
          */
-        Data &operator=(const Data &);
+        Data &operator=(const Data &other);
 
         /**
          * @internal
          */
-        bool operator==(const Data &) const;
+        bool operator==(const Data &other) const;
 
     private:
         class DataPrivate;
@@ -462,12 +462,12 @@ public:
     /**
      * @internal
      */
-    ContactGroup &operator=(const ContactGroup &);
+    ContactGroup &operator=(const ContactGroup &other);
 
     /**
      * @internal
      */
-    bool operator==(const ContactGroup &) const;
+    bool operator==(const ContactGroup &other) const;
 
     /**
      * Returns the MIME type used for Contact Groups

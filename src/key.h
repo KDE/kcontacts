@@ -77,12 +77,12 @@ public:
     /**
       Equality operator.
     */
-    bool operator==(const Key &) const;
+    bool operator==(const Key &other) const;
 
     /**
       Not-equal operator.
     */
-    bool operator!=(const Key &) const;
+    bool operator!=(const Key &other) const;
 
     /**
       Assignment operator.

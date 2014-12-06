@@ -69,10 +69,10 @@ public:
      */
     ~Secrecy();
 
-    Secrecy &operator=(const Secrecy &);
+    Secrecy &operator=(const Secrecy &other);
 
-    bool operator==(const Secrecy &) const;
-    bool operator!=(const Secrecy &) const;
+    bool operator==(const Secrecy &other) const;
+    bool operator!=(const Secrecy &other) const;
 
     /**
      * Returns if the Secrecy object has a valid value.

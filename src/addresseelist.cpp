@@ -157,7 +157,8 @@ class AddresseeList::Private : public QSharedData
 {
 public:
     Private()
-        : mReverseSorting(false), mActiveSortingCriterion(FormattedName)
+        : mReverseSorting(false)
+        , mActiveSortingCriterion(FormattedName)
     {
     }
 
@@ -173,7 +174,8 @@ public:
 };
 
 AddresseeList::AddresseeList()
-    : QList<Addressee>(), d(new Private)
+    : QList<Addressee>()
+    , d(new Private)
 {
 }
 
@@ -182,12 +184,14 @@ AddresseeList::~AddresseeList()
 }
 
 AddresseeList::AddresseeList(const AddresseeList &other)
-    : QList<Addressee>(other), d(other.d)
+    : QList<Addressee>(other)
+    , d(other.d)
 {
 }
 
-AddresseeList::AddresseeList(const QList<Addressee> &l)
-    : QList<Addressee>(l), d(new Private)
+AddresseeList::AddresseeList(const QList<Addressee> &list)
+    : QList<Addressee>(list)
+    , d(new Private)
 {
 }
 
@@ -207,8 +211,8 @@ QString AddresseeList::toString() const
 
     str += QLatin1String("AddresseeList {\n");
     str += QString::fromLatin1("   Reverse Order: %1\n").arg(d->mReverseSorting ?
-            QLatin1String("true") :
-            QLatin1String("false"));
+                                                             QLatin1String("true") :
+                                                             QLatin1String("false"));
 
     QString crit;
     if (Uid == d->mActiveSortingCriterion) {
@@ -262,7 +266,7 @@ void AddresseeList::sortBy(SortingCriterion c)
         sortByTrait<SortingTraits::GivenName>();
     } else {
         qCCritical(KCONTACTS_LOG) << "AddresseeList sorting criterion passed for which a trait is not known."
-                             << "No sorting done.";
+                                  << "No sorting done.";
     }
 }
 
@@ -297,7 +301,7 @@ void AddresseeList::sortByTrait()
         ++j2;
         while (j1 != i2) {
             if ((!d->mReverseSorting && Trait::lt(*j2, *j1)) ||
-                    (d->mReverseSorting && Trait::lt(*j1, *j2))) {
+                (d->mReverseSorting && Trait::lt(*j1, *j2))) {
                 qSwap(*j1, *j2);
             }
             ++j1;

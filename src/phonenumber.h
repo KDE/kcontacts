@@ -107,12 +107,12 @@ public:
      * @return @c true if number, type and identifier are equal,
      *         otherwise @c false
      */
-    bool operator==(const PhoneNumber &) const;
+    bool operator==(const PhoneNumber &other) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=(const PhoneNumber &) const;
+    bool operator!=(const PhoneNumber &other) const;
 
     /**
      * Assignment operator.
