@@ -27,7 +27,8 @@
 #include <kcontacts/addressee.h>
 #include <QMimeData>
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
   @brief Utility function for implementing drag&drop for vCards
@@ -36,7 +37,8 @@ namespace KContacts {
 
   @since 4.5
 */
-namespace VCardDrag {
+namespace VCardDrag
+{
 
 /**
   Adds the vCard representation as data of the drag object.

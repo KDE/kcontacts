@@ -25,7 +25,8 @@
 #include "kcontacts/addressee.h"
 #include <QtCore/QString>
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
   @short Class to converting contact objects into vCard format and vice versa.

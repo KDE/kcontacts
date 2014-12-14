@@ -579,8 +579,8 @@ QString Address::formattedAddress(const QString &realName,
     // used:
     if (addrTemplate.isEmpty()) {
         qCWarning(KCONTACTS_LOG) << "address format database incomplete"
-                            << "(no format for locale" << ciso
-                            << "found). Using default address formatting.";
+                                 << "(no format for locale" << ciso
+                                 << "found). Using default address formatting.";
         addrTemplate = QLatin1String("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
     }
 

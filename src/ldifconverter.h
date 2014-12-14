@@ -26,7 +26,8 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QString>
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
   A set of functions to convert a string with LDIF information to addressees
@@ -34,7 +35,8 @@ namespace KContacts {
   and might be used to read and write Mozilla and Netscape addresssbooks.
 */
 
-namespace LDIFConverter {
+namespace LDIFConverter
+{
 
 /**
   Converts a LDIF string to a list of addressees.

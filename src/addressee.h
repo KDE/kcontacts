@@ -38,7 +38,8 @@
 #include "timezone.h"
 #include "addresseelist.h"  // for typedef QList<Addressee> List;
 
-namespace KContacts {
+namespace KContacts
+{
 
 class SortMode;
 

@@ -29,7 +29,8 @@ class QString;
 
 template <class T> class QList;
 
-namespace KContacts {
+namespace KContacts
+{
 
 class ContactGroup;
 
@@ -39,7 +40,8 @@ class ContactGroup;
  * @author Kevin Krammer <kevin.krammer@gmx.at>
  * @since 4.3
  */
-namespace ContactGroupTool {
+namespace ContactGroupTool
+{
 
 /**
  * Converts XML data coming from a @p device into a contact @p group.

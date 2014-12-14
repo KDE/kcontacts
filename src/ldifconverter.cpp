@@ -554,7 +554,7 @@ bool LDIFConverter::evaluatePair(Addressee &a, Address &homeAddr,
     }
 
     qCWarning(KCONTACTS_LOG) << QString::fromLatin1("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
-                        arg(a.formattedName()).arg(fieldname).arg(value);
+                             arg(a.formattedName()).arg(fieldname).arg(value);
 
     return true;
 }

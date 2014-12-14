@@ -27,7 +27,8 @@
 
 class QDateTime;
 
-namespace KContacts {
+namespace KContacts
+{
 
 class Key;
 class Picture;

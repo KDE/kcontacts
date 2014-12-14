@@ -26,7 +26,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QSet>
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
  * This singleton class stores static data, which is shared

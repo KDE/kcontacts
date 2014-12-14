@@ -26,7 +26,8 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QSharedDataPointer>
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
  * @short A class to store an encryption key.

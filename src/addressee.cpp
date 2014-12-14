@@ -25,7 +25,6 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QUuid>
 
-
 #include "kcontacts_debug.h"
 #include <klocalizedstring.h>
 

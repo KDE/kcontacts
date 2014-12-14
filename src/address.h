@@ -26,7 +26,8 @@
 
 #include "kcontacts_export.h"
 
-namespace KContacts {
+namespace KContacts
+{
 
 /**
   @brief

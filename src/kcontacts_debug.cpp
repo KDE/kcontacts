@@ -20,4 +20,3 @@
 #include "kcontacts_debug.h"
 Q_LOGGING_CATEGORY(KCONTACTS_LOG, "log_kcontacts")
 
-

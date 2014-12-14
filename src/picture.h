@@ -28,7 +28,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QImage>
 
-namespace KContacts {
+namespace KContacts
+{
 
 class PicturePrivate;
 
