@@ -22,7 +22,7 @@
 
 #include "ldif_p.h"
 
-#include <QDebug>
+#include "kcontacts_debug.h"
 
 class Ldif::LdifPrivate
 {
@@ -132,14 +132,14 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
     QByteArray tmp;
     int linelen;
 
-//  qDebug() << "line:" << QString::fromUtf8(line);
+//  qCDebug(KCONTACTS_LOG) << "line:" << QString::fromUtf8(line);
 
     position = line.indexOf(":");
     if (position == -1) {
         // strange: we did not find a fieldname
         fieldname = QLatin1String("");
         value = line.trimmed();
-//    qDebug() << "value :" << value[0];
+//    qCDebug(KCONTACTS_LOG) << "value :" << value[0];
         return false;
     }
 
@@ -181,7 +181,7 @@ bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical,
     critical = false;
     bool url = splitLine(line, tmp, value);
 
-    qDebug() << "value:" << QString::fromUtf8(value);
+    qCDebug(KCONTACTS_LOG) << "value:" << QString::fromUtf8(value);
     if (tmp.isEmpty()) {
         tmp = QString::fromUtf8(value);
         value.resize(0);
@@ -220,7 +220,7 @@ Ldif::ParseValue Ldif::processLine()
                 retval = Err;
             }
         } else if (attrLower == QLatin1String("dn")) {
-            qDebug() << "ldapentry dn:" << QString::fromUtf8(d->mValue);
+            qCDebug(KCONTACTS_LOG) << "ldapentry dn:" << QString::fromUtf8(d->mValue);
             d->mDn = LdapDN(QString::fromUtf8(d->mValue));
             d->mModType = Mod_None;
             retval = NewEntry;
@@ -229,7 +229,7 @@ Ldif::ParseValue Ldif::processLine()
                 retval = Err;
             } else {
                 QString tmpval = QString::fromUtf8(d->mValue);
-                qDebug() << "changetype:" << tmpval;
+                qCDebug(KCONTACTS_LOG) << "changetype:" << tmpval;
                 if (tmpval == QLatin1String("add")) {
                     d->mEntryType = Entry_Add;
                 } else if (tmpval == QLatin1String("delete")) {
@@ -269,7 +269,7 @@ Ldif::ParseValue Ldif::processLine()
         break;
     case Entry_Mod:
         if (d->mModType == Mod_None) {
-            qDebug() << "new modtype" << d->mAttr;
+            qCDebug(KCONTACTS_LOG) << "new modtype" << d->mAttr;
             if (d->mAttr.isEmpty() && d->mValue.size() == 0) {
                 retval = EndEntry;
             } else if (attrLower == QLatin1String("add")) {

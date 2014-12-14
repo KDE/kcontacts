@@ -22,7 +22,7 @@
 #include "addresseelist.h"
 #include "field.h"
 #include "sortmode.h"
-#include "kabc_debug.h"
+#include "kcontacts_debug.h"
 
 #include <QtCore/QSharedData>
 

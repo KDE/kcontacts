@@ -36,7 +36,7 @@
 #include "vcardconverter.h"
 #include "address.h"
 #include "addressee.h"
-#include "kabc_debug.h"
+#include "kcontacts_debug.h"
 
 #include "ldif_p.h"
 

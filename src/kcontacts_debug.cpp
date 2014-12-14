@@ -1,8 +1,5 @@
-/*
-    This file is part of the KContacts framework.
-
-    Copyright (c) 2002 Tobias Koenig <tokoe@kde.org>
-    Copyright (c) 2003 Cornelius Schumacher <schumacher@kde.org>
+/*  This file is part of the KDE project
+    Copyright (C) 2014 Laurent Montel <montel@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -20,29 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "errorhandler.h"
-
 #include "kcontacts_debug.h"
-#include <klocalizedstring.h>
+Q_LOGGING_CATEGORY(KCONTACTS_LOG, "log_kcontacts")
 
-using namespace KContacts;
-
-ErrorHandler::~ErrorHandler()
-{
-}
-
-ConsoleErrorHandler::ConsoleErrorHandler()
-    : d(0)
-{
-}
-
-ConsoleErrorHandler::~ConsoleErrorHandler()
-{
-}
-
-void ConsoleErrorHandler::error(const QString &msg)
-{
-    // no debug area is ok here
-    qCCritical(KCONTACTS_LOG) << msg;
-}
 

@@ -5,6 +5,7 @@ set(vcardparser_SRCS
 )
 
 set(kcontacts_SRCS
+  kcontacts_debug.cpp
   address.cpp
   addressee.cpp
   addresseehelper.cpp

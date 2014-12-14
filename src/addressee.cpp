@@ -25,8 +25,8 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QUuid>
 
-#include "kabc_debug.h"
-#include <QDebug>
+
+#include "kcontacts_debug.h"
 #include <klocalizedstring.h>
 
 #include "addresseehelper.h"
@@ -165,7 +165,7 @@ Addressee &Addressee::operator=(const Addressee &other)
 bool Addressee::operator==(const Addressee &addressee) const
 {
     if (d->mUid != addressee.d->mUid) {
-        qDebug() << "uid differs";
+        qCDebug(KCONTACTS_LOG) << "uid differs";
         return false;
     }
 
@@ -302,37 +302,37 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if ((d->mUrl.isValid() || addressee.d->mUrl.isValid()) &&
             (d->mUrl != addressee.d->mUrl)) {
-        qDebug() << "url differs";
+        qCDebug(KCONTACTS_LOG) << "url differs";
         return false;
     }
 
     if (!listEquals(d->mPhoneNumbers, addressee.d->mPhoneNumbers)) {
-        qDebug() << "phoneNumbers differs";
+        qCDebug(KCONTACTS_LOG) << "phoneNumbers differs";
         return false;
     }
 
     if (!listEquals(d->mAddresses, addressee.d->mAddresses)) {
-        qDebug() << "addresses differs";
+        qCDebug(KCONTACTS_LOG) << "addresses differs";
         return false;
     }
 
     if (!listEquals(d->mKeys, addressee.d->mKeys)) {
-        qDebug() << "keys differs";
+        qCDebug(KCONTACTS_LOG) << "keys differs";
         return false;
     }
 
     if (!emailsEquals(d->mEmails, addressee.d->mEmails)) {
-        qDebug() << "emails differs";
+        qCDebug(KCONTACTS_LOG) << "emails differs";
         return false;
     }
 
     if (!listEquals(d->mCategories, addressee.d->mCategories)) {
-        qDebug() << "categories differs";
+        qCDebug(KCONTACTS_LOG) << "categories differs";
         return false;
     }
 
     if (d->mCustomFields != addressee.d->mCustomFields) {
-        qDebug() << "custom differs";
+        qCDebug(KCONTACTS_LOG) << "custom differs";
         return false;
     }
 

@@ -1,7 +1,5 @@
-/*
-    This file is part of the KContacts framework.
-
-    Copyright (c) 2014 Laurent Montel <montel@kde.org>
+/*  This file is part of the KDE project
+    Copyright (C) 2014 Laurent Montel <montel@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -25,4 +23,5 @@
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(KCONTACTS_LOG)
 
-#endif // KCONTACTS_DEBUG_H
+#endif 
+

@@ -19,7 +19,8 @@
 */
 
 #include "address.h"
-#include "kabc_debug.h"
+
+#include "kcontacts_debug.h"
 #include <krandom.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
@@ -32,8 +33,6 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QLocale>
-
-Q_LOGGING_CATEGORY(KCONTACTS_LOG, "kabc")
 
 using namespace KContacts;
 
