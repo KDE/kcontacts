@@ -23,6 +23,7 @@
 
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include "kcontacts_export.h"
 
@@ -44,7 +45,7 @@ public:
     /**
       List of addresses.
     */
-    typedef QList<Address> List;
+    typedef QVector<Address> List;
 
     /**
       Address types:

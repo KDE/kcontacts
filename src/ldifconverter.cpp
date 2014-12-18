@@ -49,6 +49,27 @@
 
 using namespace KContacts;
 
+/* internal functions - do not use !! */
+
+namespace KContacts {
+/**
+  @internal
+
+  Evaluates @p fieldname and sets the @p value at the addressee or the address
+  objects when appropriate.
+
+  @param a The addressee to store information into
+  @param homeAddr The home address to store respective information into
+  @param workAddr The work address to store respective information into
+  @param fieldname LDIF field name to evaluate
+  @param value The value of the field addressed by @p fieldname
+*/
+bool evaluatePair(Addressee &a, Address &homeAddr,
+                    Address &workAddr,
+                    QString &fieldname, QString &value,
+                    int &birthday, int &birthmonth, int &birthyear);
+}
+
 /* generate LDIF stream */
 
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
@@ -267,7 +288,7 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
     return true;
 }
 
-bool LDIFConverter::evaluatePair(Addressee &a, Address &homeAddr,
+bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
                                  Address &workAddr,
                                  QString &fieldname, QString &value,
                                  int &birthday, int &birthmonth, int &birthyear)

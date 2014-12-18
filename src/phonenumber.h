@@ -25,6 +25,7 @@
 
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
 namespace KContacts
 {
@@ -67,12 +68,12 @@ public:
     /**
      * List of phone number types.
      */
-    typedef QList<TypeFlag> TypeList;
+    typedef QVector<TypeFlag> TypeList;
 
     /**
      * List of phone numbers.
      */
-    typedef QList<PhoneNumber> List;
+    typedef QVector<PhoneNumber> List;
 
     /**
      * Creates an empty phone number object.

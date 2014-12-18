@@ -28,6 +28,7 @@
 
 namespace KContacts
 {
+class AddresseeHelperPrivate;
 
 /**
  * This singleton class stores static data, which is shared
@@ -100,6 +101,11 @@ public:
      */
     bool tradeAsFamilyName() const;
 
+    /** @internal */
+    AddresseeHelper();
+
+    ~AddresseeHelper();
+
 public Q_SLOTS:
     /**
      * Recreates the static data and reparses the configuration.
@@ -107,15 +113,7 @@ public Q_SLOTS:
     void initSettings();
 
 private:
-    AddresseeHelper();
-
-    static void addToSet(const QStringList &list, QSet<QString> &container);
-    QSet<QString> mTitles;
-    QSet<QString> mPrefixes;
-    QSet<QString> mSuffixes;
-    bool mTradeAsFamilyName;
-
-    static AddresseeHelper *s_self;
+    QScopedPointer<AddresseeHelperPrivate> d;
 };
 
 }

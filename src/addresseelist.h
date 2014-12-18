@@ -24,7 +24,7 @@
 
 #include "kcontacts_export.h"
 #include <QtCore/QSharedDataPointer>
-#include <QtCore/QList>
+#include <QtCore/QVector>
 
 namespace KContacts
 {
@@ -277,7 +277,7 @@ typedef enum {
  * such operations you have to call {@link #sort} or {@link #sortBy} to
  * create a defined order again.
  *
- * Iterator usage is inherited from QList and extensively documented
+ * Iterator usage is inherited from QVector and extensively documented
  * there. Please remember that the state of an iterator is undefined
  * after any sorting operation.
  *
@@ -287,7 +287,7 @@ typedef enum {
  *
  * @author Jost Schenck jost@schenck.de
  */
-class KCONTACTS_EXPORT AddresseeList : public QList<Addressee>
+class KCONTACTS_EXPORT AddresseeList : public QVector<Addressee>
 {
 public:
     /**
@@ -303,7 +303,7 @@ public:
     /**
      * Creates a new addressee list.
      */
-    AddresseeList(const QList<Addressee> &list);
+    AddresseeList(const QVector<Addressee> &list);
 
     /**
      * Destroys the addressee list.

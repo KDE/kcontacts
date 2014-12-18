@@ -174,7 +174,7 @@ public:
 };
 
 AddresseeList::AddresseeList()
-    : QList<Addressee>()
+    : QVector<Addressee>()
     , d(new Private)
 {
 }
@@ -184,13 +184,13 @@ AddresseeList::~AddresseeList()
 }
 
 AddresseeList::AddresseeList(const AddresseeList &other)
-    : QList<Addressee>(other)
+    : QVector<Addressee>(other)
     , d(other.d)
 {
 }
 
-AddresseeList::AddresseeList(const QList<Addressee> &list)
-    : QList<Addressee>(list)
+AddresseeList::AddresseeList(const QVector<Addressee> &list)
+    : QVector<Addressee>(list)
     , d(new Private)
 {
 }
@@ -198,7 +198,7 @@ AddresseeList::AddresseeList(const QList<Addressee> &list)
 AddresseeList &AddresseeList::operator=(const AddresseeList &other)
 {
     if (this != &other) {
-        QList<Addressee>::operator=(other);
+        QVector<Addressee>::operator=(other);
         d = other.d;
     }
 
@@ -210,26 +210,33 @@ QString AddresseeList::toString() const
     QString str;
 
     str += QLatin1String("AddresseeList {\n");
-    str += QString::fromLatin1("   Reverse Order: %1\n").arg(d->mReverseSorting ?
+    str += QStringLiteral("   Reverse Order: %1\n").arg(d->mReverseSorting ?
             QLatin1String("true") :
             QLatin1String("false"));
 
     QString crit;
-    if (Uid == d->mActiveSortingCriterion) {
-        crit = QLatin1String("Uid");
-    } else if (Name == d->mActiveSortingCriterion) {
-        crit = QLatin1String("Name");
-    } else if (FormattedName == d->mActiveSortingCriterion) {
-        crit = QLatin1String("FormattedName");
-    } else if (FamilyName == d->mActiveSortingCriterion) {
-        crit = QLatin1String("FamilyName");
-    } else if (GivenName == d->mActiveSortingCriterion) {
-        crit = QLatin1String("GivenName");
-    } else {
-        crit = QLatin1String("unknown -- update dump method");
+    switch (d->mActiveSortingCriterion) {
+        case Uid:
+            crit = QStringLiteral("Uid");
+            break;
+        case Name:
+            crit = QStringLiteral("Name");
+            break;
+        case FormattedName:
+            crit = QStringLiteral("FormattedName");
+            break;
+        case FamilyName:
+            crit = QStringLiteral("FamilyName");
+            break;
+        case GivenName:
+            crit = QStringLiteral("GivenName");
+            break;
+        default:
+            crit = QStringLiteral("unknown -- update dump method");
+            break;
     }
 
-    str += QString::fromLatin1("   Sorting criterion: %1\n").arg(crit);
+    str += QStringLiteral("   Sorting criterion: %1\n").arg(crit);
 #if 0 //code commented in loop => comment it too
     for (const_iterator it = begin(); it != end(); ++it) {
 //    str += (*it).toString();

@@ -28,20 +28,26 @@
 
 using namespace KContacts;
 
-AddresseeHelper *AddresseeHelper::s_self;
+class KContacts::AddresseeHelperPrivate
+{
+public:
+    QSet<QString> mTitles;
+    QSet<QString> mPrefixes;
+    QSet<QString> mSuffixes;
+    bool mTradeAsFamilyName;
+};
+
+Q_GLOBAL_STATIC(AddresseeHelper, s_self)
 
 // static
 AddresseeHelper *AddresseeHelper::self()
 {
-    if (!s_self) {
-        s_self = new AddresseeHelper();
-    }
-
     return s_self;
 }
 
 AddresseeHelper::AddresseeHelper()
-    : QObject(qApp)
+    : QObject()
+    , d(new AddresseeHelperPrivate)
 {
     initSettings();
 
@@ -51,8 +57,11 @@ AddresseeHelper::AddresseeHelper()
                                           this, SLOT(initSettings()));
 }
 
-// static
-void AddresseeHelper::addToSet(const QStringList &list, QSet<QString> &container)
+AddresseeHelper::~AddresseeHelper()
+{
+}
+
+static void addToSet(const QStringList &list, QSet<QString> &container)
 {
     QStringList::ConstIterator it;
     QStringList::ConstIterator end(list.end());
@@ -65,53 +74,53 @@ void AddresseeHelper::addToSet(const QStringList &list, QSet<QString> &container
 
 void AddresseeHelper::initSettings()
 {
-    mTitles.clear();
-    mSuffixes.clear();
-    mPrefixes.clear();
+    d->mTitles.clear();
+    d->mSuffixes.clear();
+    d->mPrefixes.clear();
 
-    mTitles.insert(i18n("Dr."));
-    mTitles.insert(i18n("Miss"));
-    mTitles.insert(i18n("Mr."));
-    mTitles.insert(i18n("Mrs."));
-    mTitles.insert(i18n("Ms."));
-    mTitles.insert(i18n("Prof."));
+    d->mTitles.insert(i18n("Dr."));
+    d->mTitles.insert(i18n("Miss"));
+    d->mTitles.insert(i18n("Mr."));
+    d->mTitles.insert(i18n("Mrs."));
+    d->mTitles.insert(i18n("Ms."));
+    d->mTitles.insert(i18n("Prof."));
 
-    mSuffixes.insert(i18n("I"));
-    mSuffixes.insert(i18n("II"));
-    mSuffixes.insert(i18n("III"));
-    mSuffixes.insert(i18n("Jr."));
-    mSuffixes.insert(i18n("Sr."));
+    d->mSuffixes.insert(i18n("I"));
+    d->mSuffixes.insert(i18n("II"));
+    d->mSuffixes.insert(i18n("III"));
+    d->mSuffixes.insert(i18n("Jr."));
+    d->mSuffixes.insert(i18n("Sr."));
 
-    mPrefixes.insert(QLatin1String("van"));
-    mPrefixes.insert(QLatin1String("von"));
-    mPrefixes.insert(QLatin1String("de"));
+    d->mPrefixes.insert(QLatin1String("van"));
+    d->mPrefixes.insert(QLatin1String("von"));
+    d->mPrefixes.insert(QLatin1String("de"));
 
     KConfig _config(QLatin1String("kabcrc"), KConfig::NoGlobals);
     KConfigGroup config(&_config, "General");
 
-    addToSet(config.readEntry("Prefixes", QStringList()), mTitles);
-    addToSet(config.readEntry("Inclusions", QStringList()), mPrefixes);
-    addToSet(config.readEntry("Suffixes", QStringList()), mSuffixes);
-    mTradeAsFamilyName = config.readEntry("TradeAsFamilyName", true);
+    addToSet(config.readEntry("Prefixes", QStringList()), d->mTitles);
+    addToSet(config.readEntry("Inclusions", QStringList()), d->mPrefixes);
+    addToSet(config.readEntry("Suffixes", QStringList()), d->mSuffixes);
+    d->mTradeAsFamilyName = config.readEntry("TradeAsFamilyName", true);
 }
 
 bool AddresseeHelper::containsTitle(const QString &title) const
 {
-    return mTitles.contains(title);
+    return d->mTitles.contains(title);
 }
 
 bool AddresseeHelper::containsPrefix(const QString &prefix) const
 {
-    return mPrefixes.contains(prefix);
+    return d->mPrefixes.contains(prefix);
 }
 
 bool AddresseeHelper::containsSuffix(const QString &suffix) const
 {
-    return mSuffixes.contains(suffix);
+    return d->mSuffixes.contains(suffix);
 }
 
 bool AddresseeHelper::tradeAsFamilyName() const
 {
-    return mTradeAsFamilyName;
+    return d->mTradeAsFamilyName;
 }
 

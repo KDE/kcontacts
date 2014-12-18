@@ -39,7 +39,7 @@ using namespace KContacts;
 static bool matchBinaryPattern(int value, int pattern);
 
 template <class L>
-static bool listEquals(const QList<L> &, const QList<L> &);
+static bool listEquals(const QVector<L> &, const QVector<L> &);
 static bool listEquals(const QStringList &, const QStringList &);
 static bool emailsEquals(const QStringList &, const QStringList &);
 
@@ -128,7 +128,7 @@ public:
     Key::List mKeys;
     QStringList mEmails;
     QStringList mCategories;
-    QMap<QString, QString> mCustomFields;
+    QHash<QString, QString> mCustomFields;
 
     bool mEmpty    : 1;
     bool mChanged  : 1;
@@ -1656,7 +1656,7 @@ QStringList Addressee::customs() const
 {
     QStringList result;
 
-    QMapIterator<QString, QString> it(d->mCustomFields);
+    QHashIterator<QString, QString> it(d->mCustomFields);
     while (it.hasNext()) {
         it.next();
         result << it.key() + QLatin1Char(':') + it.value();
@@ -1860,7 +1860,7 @@ bool Addressee::operator< (const Addressee &addr) const
 
 QString Addressee::mimeType()
 {
-    return QLatin1String("text/directory");
+    return QStringLiteral("text/directory");
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
@@ -1960,7 +1960,7 @@ bool matchBinaryPattern(int value, int pattern)
 }
 
 template <class L>
-bool listEquals(const QList<L> &list, const QList<L> &pattern)
+bool listEquals(const QVector<L> &list, const QVector<L> &pattern)
 {
     if (list.count() != pattern.count()) {
         return false;

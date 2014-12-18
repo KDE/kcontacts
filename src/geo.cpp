@@ -153,6 +153,12 @@ QString Geo::toString() const
     return str;
 }
 
+void Geo::clear()
+{
+    d->mValidLatitude = false;
+    d->mValidLongitude = false;
+}
+
 QDataStream &KContacts::operator<<(QDataStream &s, const Geo &geo)
 {
     return s << geo.d->mLatitude << geo.d->mValidLatitude

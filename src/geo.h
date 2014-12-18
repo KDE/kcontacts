@@ -115,6 +115,13 @@ public:
      */
     QString toString() const;
 
+    /**
+     * Clears the class, marking it as invalid.
+     *
+     * @since 5.6
+     */
+    void clear();
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -45,6 +45,11 @@ void GeoTest::isValid()
     geo.setLongitude(45);
 
     QVERIFY(geo.isValid());
+
+    geo.clear();
+
+    QVERIFY(!geo.isValid());
+    QVERIFY(geo == KContacts::Geo());
 }
 
 void GeoTest::setData()

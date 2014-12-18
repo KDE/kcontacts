@@ -12,7 +12,6 @@ set(kcontacts_SRCS
   addresseelist.cpp
   contactgroup.cpp
   contactgrouptool.cpp
-  errorhandler.cpp
   field.cpp
   geo.cpp
   key.cpp
@@ -68,7 +67,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   AddresseeList
   ContactGroup
   ContactGroupTool
-  ErrorHandler
   Field
   Geo
   Key

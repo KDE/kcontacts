@@ -84,7 +84,7 @@ public:
 
       @see uid()
      */
-    typedef QMap<QString, Addressee> Map;
+    typedef QHash<QString, Addressee> Map;
 
     /**
       Construct an empty address book entry.
@@ -125,7 +125,7 @@ public:
     bool operator!=(const Addressee &other) const;
 
     /**
-      Return, if the address book entry is empty.
+      Return if the address book entry is empty.
      */
     bool isEmpty() const;
 

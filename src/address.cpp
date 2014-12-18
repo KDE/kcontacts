@@ -624,7 +624,9 @@ QString Address::countryToISO(const QString &cname)
         return it.value();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kabc/countrytransl.map"));
+    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kcontacts/countrytransl.map"));
+    if (mapfile.isEmpty())
+        qWarning() << "Installation error, couldn't find the countrytransl.map file";
 
     QFile file(mapfile);
     if (file.open(QIODevice::ReadOnly)) {
