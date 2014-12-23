@@ -39,17 +39,19 @@ using namespace KContacts;
 static bool matchBinaryPattern(int value, int pattern);
 
 template <class L>
-static bool listEquals(const QVector<L> &, const QVector<L> &);
-static bool listEquals(const QStringList &, const QStringList &);
-static bool emailsEquals(const QStringList &, const QStringList &);
+static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
+static bool listEquals(const QStringList &list, const QStringList &pattern);
+static bool emailsEquals(const QStringList &list, const QStringList &pattern);
 
 class Addressee::Private : public QSharedData
 {
 public:
     Private()
-        : mUid(QUuid::createUuid().toString().mid(1, 36)),   //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
-          mEmpty(true), mChanged(false)
+        : mUid(QUuid::createUuid().toString().mid(1, 36))
+        , mEmpty(true)
+        , mChanged(false)
     {
+        //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     }
 
     Private(const Private &other)
@@ -169,49 +171,49 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mName != addressee.d->mName &&
-            !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
+        !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "name differs";
         return false;
     }
 
     if (d->mFormattedName != addressee.d->mFormattedName &&
-            !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
+        !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "formattedName differs";
         return false;
     }
 
     if (d->mFamilyName != addressee.d->mFamilyName &&
-            !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
+        !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "familyName differs";
         return false;
     }
 
     if (d->mGivenName != addressee.d->mGivenName &&
-            !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
+        !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "givenName differs";
         return false;
     }
 
     if (d->mAdditionalName != addressee.d->mAdditionalName &&
-            !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
+        !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "additionalName differs";
         return false;
     }
 
     if (d->mPrefix != addressee.d->mPrefix &&
-            !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
+        !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "prefix differs";
         return false;
     }
 
     if (d->mSuffix != addressee.d->mSuffix &&
-            !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
+        !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "suffix differs";
         return false;
     }
 
     if (d->mNickName != addressee.d->mNickName &&
-            !(d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty())) {
+        !(d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "nickName differs";
         return false;
     }
@@ -222,7 +224,7 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mMailer != addressee.d->mMailer &&
-            !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
+        !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "mailer differs";
         return false;
     }
@@ -238,43 +240,43 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mTitle != addressee.d->mTitle &&
-            !(d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty())) {
+        !(d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "title differs";
         return false;
     }
 
     if (d->mRole != addressee.d->mRole &&
-            !(d->mRole.isEmpty() && addressee.d->mRole.isEmpty())) {
+        !(d->mRole.isEmpty() && addressee.d->mRole.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "role differs";
         return false;
     }
 
     if (d->mOrganization != addressee.d->mOrganization &&
-            !(d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty())) {
+        !(d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "organization differs";
         return false;
     }
 
     if (d->mDepartment != addressee.d->mDepartment &&
-            !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
+        !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "department differs";
         return false;
     }
 
     if (d->mNote != addressee.d->mNote &&
-            !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
+        !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "note differs";
         return false;
     }
 
     if (d->mProductId != addressee.d->mProductId &&
-            !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
+        !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "productId differs";
         return false;
     }
 
     if (d->mSortString != addressee.d->mSortString &&
-            !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
+        !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "sortString differs";
         return false;
     }
@@ -300,7 +302,7 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if ((d->mUrl.isValid() || addressee.d->mUrl.isValid()) &&
-            (d->mUrl != addressee.d->mUrl)) {
+        (d->mUrl != addressee.d->mUrl)) {
         qCDebug(KCONTACTS_LOG) << "url differs";
         return false;
     }
@@ -988,8 +990,8 @@ void Addressee::setNameFromString(const QString &s)
     QString str = s;
     //remove enclosing quotes from string
     if (str.length() > 1  &&
-            s[ 0 ] == QLatin1Char('"') &&
-            s[ s.length() - 1 ] == QLatin1Char('"')) {
+        s[0] == QLatin1Char('"') &&
+        s[s.length() - 1] == QLatin1Char('"')) {
         str = s.mid(1, s.length() - 2);
     }
 
@@ -1019,8 +1021,8 @@ void Addressee::setNameFromString(const QString &s)
 
         QString suffix;
         while (rightOffset >= 0) {
-            if (helper->containsSuffix(parts[ rightOffset ])) {
-                suffix.prepend(parts[ rightOffset ] + (suffix.isEmpty() ? emptyStr : spaceStr));
+            if (helper->containsSuffix(parts[rightOffset])) {
+                suffix.prepend(parts[rightOffset] + (suffix.isEmpty() ? emptyStr : spaceStr));
                 rightOffset--;
             } else {
                 break;
@@ -1032,21 +1034,21 @@ void Addressee::setNameFromString(const QString &s)
             return;
         }
 
-        if (rightOffset - 1 >= 0 && helper->containsPrefix(parts[ rightOffset - 1 ].toLower())) {
-            setFamilyName(parts[ rightOffset - 1 ] + spaceStr + parts[ rightOffset ]);
+        if (rightOffset - 1 >= 0 && helper->containsPrefix(parts[rightOffset - 1].toLower())) {
+            setFamilyName(parts[rightOffset - 1] + spaceStr + parts[rightOffset]);
             rightOffset--;
         } else {
             if (helper->tradeAsFamilyName()) {
-                setFamilyName(parts[ rightOffset ]);
+                setFamilyName(parts[rightOffset]);
             } else {
-                setGivenName(parts[ rightOffset ]);
+                setGivenName(parts[rightOffset]);
             }
         }
 
         QString prefix;
         while (leftOffset < rightOffset) {
-            if (helper->containsTitle(parts[ leftOffset ])) {
-                prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[ leftOffset ]);
+            if (helper->containsTitle(parts[leftOffset])) {
+                prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[leftOffset]);
                 leftOffset++;
             } else {
                 break;
@@ -1055,13 +1057,13 @@ void Addressee::setNameFromString(const QString &s)
         setPrefix(prefix);
 
         if (leftOffset < rightOffset) {
-            setGivenName(parts[ leftOffset ]);
+            setGivenName(parts[leftOffset]);
             leftOffset++;
         }
 
         QString additionalName;
         while (leftOffset < rightOffset) {
-            additionalName.append((additionalName.isEmpty() ? emptyStr : spaceStr) + parts[ leftOffset ]);
+            additionalName.append((additionalName.isEmpty() ? emptyStr : spaceStr) + parts[leftOffset]);
             leftOffset++;
         }
         setAdditionalName(additionalName);
@@ -1077,8 +1079,8 @@ void Addressee::setNameFromString(const QString &s)
 
             QString suffix;
             while (rightOffset >= 0) {
-                if (helper->containsSuffix(parts[ rightOffset ])) {
-                    suffix.prepend(parts[ rightOffset ] + (suffix.isEmpty() ? emptyStr : spaceStr));
+                if (helper->containsSuffix(parts[rightOffset])) {
+                    suffix.prepend(parts[rightOffset] + (suffix.isEmpty() ? emptyStr : spaceStr));
                     rightOffset--;
                 } else {
                     break;
@@ -1086,17 +1088,17 @@ void Addressee::setNameFromString(const QString &s)
             }
             setSuffix(suffix);
 
-            if (rightOffset - 1 >= 0 && helper->containsPrefix(parts[ rightOffset - 1 ].toLower())) {
-                setFamilyName(parts[ rightOffset - 1 ] + spaceStr + parts[ rightOffset ]);
+            if (rightOffset - 1 >= 0 && helper->containsPrefix(parts[rightOffset - 1].toLower())) {
+                setFamilyName(parts[rightOffset - 1] + spaceStr + parts[rightOffset]);
                 rightOffset--;
             } else {
-                setFamilyName(parts[ rightOffset ]);
+                setFamilyName(parts[rightOffset]);
             }
 
             QString prefix;
             while (leftOffset < rightOffset) {
-                if (helper->containsTitle(parts[ leftOffset ])) {
-                    prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[ leftOffset ]);
+                if (helper->containsTitle(parts[leftOffset])) {
+                    prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[leftOffset]);
                     leftOffset++;
                 } else {
                     break;
@@ -1117,8 +1119,8 @@ void Addressee::setNameFromString(const QString &s)
 
             QString prefix;
             while (leftOffset < rightOffset) {
-                if (helper->containsTitle(parts[ leftOffset ])) {
-                    prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[ leftOffset ]);
+                if (helper->containsTitle(parts[leftOffset])) {
+                    prefix.append((prefix.isEmpty() ? emptyStr : spaceStr) + parts[leftOffset]);
                     leftOffset++;
                 } else {
                     break;
@@ -1127,13 +1129,13 @@ void Addressee::setNameFromString(const QString &s)
             setPrefix(prefix);
 
             if (leftOffset < rightOffset) {
-                setGivenName(parts[ leftOffset ]);
+                setGivenName(parts[leftOffset]);
                 leftOffset++;
             }
 
             QString additionalName;
             while (leftOffset < rightOffset) {
-                additionalName.append((additionalName.isEmpty() ? emptyStr : spaceStr) + parts[ leftOffset ]);
+                additionalName.append((additionalName.isEmpty() ? emptyStr : spaceStr) + parts[leftOffset]);
                 leftOffset++;
             }
             setAdditionalName(additionalName);
@@ -1342,18 +1344,21 @@ void Addressee::insertKey(const Key &key)
 }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
-    void vectorRemoveAll(Key::List &t, const Key& key)
-    { t.removeAll(key); }
+void vectorRemoveAll(Key::List &t, const Key &key)
+{
+    t.removeAll(key);
+}
 #else
-    void vectorRemoveAll(Key::List &vector, const Key& t)
-    {
-        for(Key::List::iterator it=vector.begin(), itEnd=vector.end(); it!=itEnd;) {
-            if(*it == t) {
-                it = vector.erase(it);
-            } else
-                ++it;
+void vectorRemoveAll(Key::List &vector, const Key &t)
+{
+    for (Key::List::iterator it = vector.begin(), itEnd = vector.end(); it != itEnd;) {
+        if (*it == t) {
+            it = vector.erase(it);
+        } else {
+            ++it;
         }
     }
+}
 #endif
 
 void Addressee::removeKey(const Key &key)
@@ -1703,7 +1708,12 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
     // The purpose is to extract a displayable string from the mailboxes.
     // Comments in the addr-spec are not handled. No error checking is done.
 
-    enum { TopLevel, InComment, InAngleAddress } context = TopLevel;
+    enum sourceLevel {
+        TopLevel,
+        InComment,
+        InAngleAddress
+    };
+    sourceLevel context = TopLevel;
     bool inQuotedString = false;
     int commentLevel = 0;
     bool stop = false;
@@ -1712,34 +1722,37 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
         switch (context) {
         case TopLevel : {
             switch (*p) {
-            case '"' : inQuotedString = !inQuotedString;
+            case '"':
+                inQuotedString = !inQuotedString;
                 displayName += *p;
                 break;
-            case '(' : if (!inQuotedString) {
+            case '(':
+                if (!inQuotedString) {
                     context = InComment;
                     commentLevel = 1;
                 } else {
                     displayName += *p;
                 }
                 break;
-            case '<' : if (!inQuotedString) {
+            case '<':
+                if (!inQuotedString) {
                     context = InAngleAddress;
                 } else {
                     displayName += *p;
+                    break;
                 }
-                break;
-            case '\\' : // quoted character
+            case '\\': // quoted character
                 displayName += *p;
                 ++p; // skip the '\'
                 if (*p) {
                     displayName += *p;
-                } else
+                } else {
                     //return KPIM::UnexpectedEnd;
-                {
                     goto ABORT_PARSING;
+                    break;
                 }
-                break;
-            case ',' : if (!inQuotedString) {
+            case ',':
+                if (!inQuotedString) {
                     //if ( allowMultipleAddresses )
                     //  stop = true;
                     //else
@@ -1749,16 +1762,19 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                     displayName += *p;
                 }
                 break;
-            default :  displayName += *p;
+            default:
+                displayName += *p;
             }
             break;
         }
-        case InComment : {
+        case InComment: {
             switch (*p) {
-            case '(' : ++commentLevel;
+            case '(':
+                ++commentLevel;
                 comment += *p;
                 break;
-            case ')' : --commentLevel;
+            case ')':
+                --commentLevel;
                 if (commentLevel == 0) {
                     context = TopLevel;
                     comment += ' '; // separate the text of several comments
@@ -1766,44 +1782,46 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                     comment += *p;
                 }
                 break;
-            case '\\' : // quoted character
+            case '\\': // quoted character
                 comment += *p;
                 ++p; // skip the '\'
                 if (*p) {
                     comment += *p;
-                } else
+                } else {
                     //return KPIM::UnexpectedEnd;
-                {
                     goto ABORT_PARSING;
                 }
                 break;
-            default :  comment += *p;
+            default:
+                comment += *p;
             }
             break;
         }
-        case InAngleAddress : {
+        case InAngleAddress: {
             switch (*p) {
-            case '"' : inQuotedString = !inQuotedString;
+            case '"':
+                inQuotedString = !inQuotedString;
                 addrSpec += *p;
                 break;
-            case '>' : if (!inQuotedString) {
+            case '>':
+                if (!inQuotedString) {
                     context = TopLevel;
                 } else {
                     addrSpec += *p;
                 }
                 break;
-            case '\\' : // quoted character
+            case '\\': // quoted character
                 addrSpec += *p;
                 ++p; // skip the '\'
                 if (*p) {
                     addrSpec += *p;
-                } else
+                } else {
                     //return KPIM::UnexpectedEnd;
-                {
                     goto ABORT_PARSING;
                 }
                 break;
-            default :  addrSpec += *p;
+            default:
+                addrSpec += *p;
             }
             break;
         }
@@ -1814,11 +1832,8 @@ ABORT_PARSING:
     displayName = displayName.trimmed();
     comment = comment.trimmed();
     addrSpec = addrSpec.trimmed();
-
     fullName = QString::fromUtf8(displayName);
-    email = QString::fromUtf8(addrSpec);
-
-    // check for errors
+    email = QString::fromUtf8(addrSpec);  // check for errors
     if (inQuotedString) {
         return;    // KPIM::UnbalancedQuote;
     }
@@ -1845,7 +1860,7 @@ ABORT_PARSING:
     // Check that we do not have any extra characters on the end of the
     // strings
     unsigned int len = fullName.length();
-    if (fullName[ 0 ] == QLatin1Char('"') && fullName[ len - 1 ] == QLatin1Char('"')) {
+    if (fullName[0] == QLatin1Char('"') && fullName[len - 1] == QLatin1Char('"')) {
         fullName = fullName.mid(1, len - 2);
     }
 }
@@ -1865,7 +1880,7 @@ void Addressee::setSortMode(KContacts::SortMode *mode)
     Private::mSortMode = mode;
 }
 
-bool Addressee::operator< (const Addressee &addr) const
+bool Addressee::operator<(const Addressee &addr) const
 {
     if (!Private::mSortMode) {
         return false;
@@ -1983,7 +1998,7 @@ bool listEquals(const QVector<L> &list, const QVector<L> &pattern)
     }
     const int numberOfElement(list.count());
     for (int i = 0; i < numberOfElement; ++i) {
-        if (!pattern.contains(list[ i ])) {
+        if (!pattern.contains(list[i])) {
             return false;
         }
     }
@@ -1999,7 +2014,7 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
 
     const int numberOfElement(list.count());
     for (int i = 0; i < numberOfElement; ++i) {
-        if (!pattern.contains(list[ i ])) {
+        if (!pattern.contains(list[i])) {
             return false;
         }
     }

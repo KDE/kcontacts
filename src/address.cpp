@@ -108,8 +108,8 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
                 // we have balanced brackets, recursively parse:
                 QString rplstr;
                 bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1,
-                             bpos2 - bpos1 - 1), rplstr,
-                             realName, orgaName, address);
+                                                                     bpos2 - bpos1 - 1), rplstr,
+                                                          realName, orgaName, address);
                 if (purge) {
                     // purge -> remove all
                     // replace with !_P_!, so conditional tags work later
@@ -192,7 +192,8 @@ class Address::Private : public QSharedData
 {
 public:
     Private()
-        : mEmpty(true), mType(0)
+        : mEmpty(true)
+        , mType(0)
     {
         mId = KRandom::randomString(10);
     }
@@ -625,8 +626,9 @@ QString Address::countryToISO(const QString &cname)
     }
 
     QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kcontacts/countrytransl.map"));
-    if (mapfile.isEmpty())
+    if (mapfile.isEmpty()) {
         qWarning() << "Installation error, couldn't find the countrytransl.map file";
+    }
 
     QFile file(mapfile);
     if (file.open(QIODevice::ReadOnly)) {
@@ -634,10 +636,10 @@ QString Address::countryToISO(const QString &cname)
         QString strbuf = s.readLine();
         while (!strbuf.isEmpty()) {
             QStringList countryInfo = strbuf.split(QLatin1Char('\t'), QString::KeepEmptyParts);
-            if (countryInfo[ 0 ] == cname) {
+            if (countryInfo[0] == cname) {
                 file.close();
-                sISOMap->insert(cname, countryInfo[ 1 ]);
-                return countryInfo[ 1 ];
+                sISOMap->insert(cname, countryInfo[1]);
+                return countryInfo[1];
             }
             strbuf = s.readLine();
         }

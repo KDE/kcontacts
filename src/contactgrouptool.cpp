@@ -41,9 +41,9 @@ public:
 
 private:
     void writeGroup(const ContactGroup &group);
-    void writeContactReference(const ContactGroup::ContactReference &);
-    void writeContactGroupReference(const ContactGroup::ContactGroupReference &);
-    void writeData(const ContactGroup::Data &);
+    void writeContactReference(const ContactGroup::ContactReference &reference);
+    void writeContactGroupReference(const ContactGroup::ContactGroupReference &reference);
+    void writeData(const ContactGroup::Data &data);
 };
 
 XmlContactGroupWriter::XmlContactGroupWriter()

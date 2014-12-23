@@ -123,4 +123,3 @@ bool AddresseeHelper::tradeAsFamilyName() const
 {
     return d->mTradeAsFamilyName;
 }
-
