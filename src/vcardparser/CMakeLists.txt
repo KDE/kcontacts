@@ -6,5 +6,5 @@ install(
   vcard.h
   vcardline.h
   vcardparser.h
-  DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/kcontacts COMPONENT Devel
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/kcontacts COMPONENT Devel
 )

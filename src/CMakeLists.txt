@@ -37,7 +37,7 @@ generate_export_header(KF5Contacts BASE_NAME kcontacts)
 
 add_library(KF5::Contacts ALIAS KF5Contacts)
 
-target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KContacts>")
+target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts>")
 target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_SOURCE_DIR}/src;${KContacts_BINARY_DIR}/src>")
 target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_SOURCE_DIR}/src/vcardparser>")
 
@@ -87,18 +87,18 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h
     ${KContacts_HEADERS}
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KContacts/kcontacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/kcontacts
     COMPONENT Devel
 )
 
 install(FILES
     ${KContacts_CamelCase_HEADERS}
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KContacts/KContacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/KContacts
     COMPONENT Devel
 )
 
 
-install(FILES countrytransl.map DESTINATION ${KF5_DATA_INSTALL_DIR}/kcontacts)
+install(FILES countrytransl.map DESTINATION ${KDE_INSTALL_DATADIR_KF5}/kcontacts)
 
-ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KContacts)
+ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
