@@ -17,7 +17,6 @@ set(kcontacts_SRCS
   key.cpp
   ldapdn.cpp
   ldif.cpp
-  ldifconverter.cpp
   phonenumber.cpp
   picture.cpp
   plugin.cpp
@@ -25,13 +24,17 @@ set(kcontacts_SRCS
   sortmode.cpp
   sound.cpp
   timezone.cpp
-  vcardconverter.cpp
   vcarddrag.cpp
   vcardtool.cpp
   ${vcardparser_SRCS}
 )
 
-add_library(KF5Contacts ${kcontacts_SRCS})
+set(kcontacts_converter_SRCS
+  converter/vcardconverter.cpp
+  converter/ldifconverter.cpp
+)
+
+add_library(KF5Contacts ${kcontacts_SRCS} ${kcontacts_converter_SRCS})
 
 generate_export_header(KF5Contacts BASE_NAME kcontacts)
 
@@ -70,7 +73,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Field
   Geo
   Key
-  LDIFConverter
   PhoneNumber
   Picture
   Plugin
@@ -78,11 +80,12 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   SortMode
   Sound
   TimeZone
-  VCardConverter
   VCardDrag
   PREFIX KContacts
   REQUIRED_HEADERS KContacts_HEADERS
 )
+
+add_subdirectory(converter)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h

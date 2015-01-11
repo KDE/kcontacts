@@ -21,7 +21,7 @@
 
 #include "vcarddrag.h"
 
-#include "vcardconverter.h"
+#include "converter/vcardconverter.h"
 
 #include <QMimeData>
 #include <QMimeDatabase>

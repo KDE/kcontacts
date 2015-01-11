@@ -21,7 +21,7 @@
 
 #include <qtest.h>
 
-#include "kcontacts/vcardconverter.h"
+#include "converter/kcontacts/vcardconverter.h"
 #include "kcontacts/vcarddrag.h"
 
 #include <QMimeData>

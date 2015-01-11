@@ -19,7 +19,7 @@
 */
 
 #include "addressee.h"
-#include "vcardconverter.h"
+#include "converter/vcardconverter.h"
 
 #include <qtest.h>
 #include <QDir>

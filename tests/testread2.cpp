@@ -20,7 +20,7 @@
 
 #include "testutils.h"
 #include <kcontacts/addressee.h>
-#include <vcardconverter.h>
+#include <converter/kcontacts/vcardconverter.h>
 #include <qdebug.h>
 
 using namespace KContacts;

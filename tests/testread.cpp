@@ -30,7 +30,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-#include "kcontacts/vcardconverter.h"
+#include "converter/kcontacts/vcardconverter.h"
 #include "vcard.h"
 
 int main(int argc, char **argv)

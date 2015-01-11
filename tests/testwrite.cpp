@@ -34,7 +34,7 @@
 #include "kcontacts/picture.h"
 #include "kcontacts/sound.h"
 #include "kcontacts/secrecy.h"
-#include "kcontacts/vcardconverter.h"
+#include "converter/kcontacts/vcardconverter.h"
 
 int main(int argc, char **argv)
 {
