@@ -415,7 +415,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     identifier = QLatin1String("X-IRC");   //Not defined by rfc but need for fixing #300869
                 } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
                     //Not defined by rfc but need for fixing #300869
-                    identifier = QLatin1String("X-GOOGLETALK");
+                    identifier = QLatin1String("X-GTALK");
                 }
             }
 
@@ -757,7 +757,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         ident = QLatin1String("X-messaging/meanwhile-All");
                     } else if (identifier == QLatin1String("x-irc")) {
                         ident = QLatin1String("X-messaging/irc-All");
-                    } else if (identifier == QLatin1String("x-googletalk")) {
+                    } else if (identifier == QLatin1String("x-gtalk")) {
                         ident = QLatin1String("X-messaging/googletalk-All");
                     }
 
