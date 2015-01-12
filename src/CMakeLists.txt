@@ -12,6 +12,7 @@ set(kcontacts_SRCS
   addresseelist.cpp
   contactgroup.cpp
   contactgrouptool.cpp
+  email.cpp
   field.cpp
   geo.cpp
   key.cpp
@@ -70,6 +71,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   AddresseeList
   ContactGroup
   ContactGroupTool
+  Email
   Field
   Geo
   Key

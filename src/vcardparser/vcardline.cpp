@@ -136,3 +136,8 @@ QString VCardLine::parameter(const QString &param) const
         }
     }
 }
+
+VCardLine::ParamMap VCardLine::parameterMap() const
+{
+    return mParamMap;
+}
