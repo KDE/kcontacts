@@ -671,7 +671,7 @@ public:
       @param preferred Set to true, if this is the preferred email address of
                        the addressee.
      */
-    void insertEmail(const QString &email, bool preferred = false);
+    void insertEmail(const QString &email, bool preferred = false, const QMap<QString, QStringList> &param = QMap<QString, QStringList>());
 
     /**
       Remove email address. If the email address doesn't exist, nothing happens.
@@ -960,18 +960,13 @@ public:
       Returns the MIME type used for Addressees
      */
     static QString mimeType();
-    //kf5 merge with insertEmail(...)
-    void insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param);
 
     KContacts::Email::List emailList() const;
-
+    void setEmailList(const Email::List &list);
 private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-#ifdef kabc_EXPORTS
-KDE_DUMMY_QHASH_FUNCTION(Addressee)
-#endif
 
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);

@@ -1,5 +1,5 @@
 BEGIN:VCARD
-EMAIL:hello@ximian.com
+EMAIL;TYPE=INTERNET:hello@ximian.com
 LABEL;TYPE=work:401 Park Drive  3 West\nBoston\, MA 02215\nUSA
 N:;;;;
 NOTE:Welcome to the Ximian Addressbook.

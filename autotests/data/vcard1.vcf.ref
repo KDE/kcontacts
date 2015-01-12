@@ -1,8 +1,8 @@
 BEGIN:VCARD
 ADR;TYPE=parcel;TYPE=postal;TYPE=work:;;6544 Battleford Drive;Raleigh;NC;27
  613-3502;U.S.A.
-EMAIL;TYPE=PREF:Frank_Dawson@Lotus.com
-EMAIL:fdawson@earthlink.net
+EMAIL;TYPE=INTERNET,PREF:Frank_Dawson@Lotus.com
+EMAIL;TYPE=INTERNET:fdawson@earthlink.net
 FN:Frank Dawson
 N:;;;;
 ORG:Lotus Development Corporation

@@ -1229,11 +1229,6 @@ void Addressee::insertEmail( const QString &email, bool preferred, const QMap<QS
     }
 }
 
-void Addressee::insertEmail(const QString &email, bool preferred)
-{
-    insertEmail(email, preferred, QMap<QString, QStringList>());
-}
-
 void Addressee::removeEmail(const QString &email)
 {
     for (int i = 0; i < d->mEmails.size(); ++i) {
@@ -1274,6 +1269,12 @@ void Addressee::setEmails( const QStringList& emails )
         d->mEmails.append(Email(emails.at(i)));
     }
 }
+
+void Addressee::setEmailList(const Email::List &list)
+{
+    d->mEmails = list;
+}
+
 
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {

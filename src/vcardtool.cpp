@@ -187,17 +187,33 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         bool pref = true;
 
         for ( emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt ) {
-             VCardLine line( QLatin1String( "EMAIL" ), (*emailIt).mail() );
-             if ( pref == true && emailList.count() > 1 ) {
-                  line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
-                  pref = false;
-             }
-             QMapIterator<QString, QStringList> i((*emailIt).parameters());
-             while (i.hasNext()) {
-                 i.next();
-                 line.addParameter( i.key(), i.value().join(QLatin1String(",")) );
-             }
-             card.addLine( line );
+            bool needToAddPref = false;
+            VCardLine line( QLatin1String( "EMAIL" ), (*emailIt).mail() );
+            if ( pref == true && emailList.count() > 1 ) {
+                needToAddPref = true;
+                pref = false;
+            }
+            QMapIterator<QString, QStringList> i((*emailIt).parameters());
+            bool foundType = false;
+            while (i.hasNext()) {
+                i.next();
+                QStringList valueStringList = i.value();
+                if (i.key().toLower() == QLatin1String( "type" )) {
+                    if (!valueStringList.contains(QLatin1String("PREF"))) {
+                        if (needToAddPref) {
+                            valueStringList.append(QLatin1String( "PREF" ));
+                        } else {
+                            needToAddPref = false;
+                        }
+                    }
+                    foundType = true;
+                }
+                line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+            }
+            if (!foundType && needToAddPref) {
+                line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
+            }
+            card.addLine( line );
         }
 
         // FN required for only version > 2.1
