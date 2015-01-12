@@ -320,12 +320,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "keys differs";
         return false;
     }
-#if 0 //Port it
     if (!listEquals(d->mEmails, addressee.d->mEmails)) {
         qCDebug(KCONTACTS_LOG) << "emails differs";
         return false;
     }
-#endif
 
     if (!listEquals(d->mCategories, addressee.d->mCategories)) {
         qCDebug(KCONTACTS_LOG) << "categories differs";
