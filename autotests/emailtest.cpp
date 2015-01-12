@@ -1,5 +1,5 @@
 /*
-    This file is part of libKContacts.
+    This file is part of libkabc.
     Copyright (c) 2015 Laurent Montel <montel@kde.org>
 
     This library is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 #include "emailtest.h"
-#include "kcontacts/email.h"
+#include "email.h"
 #include <qtest.h>
 
 EmailTest::EmailTest(QObject *parent)
@@ -38,22 +38,19 @@ void EmailTest::shouldHaveDefaultValue()
     QVERIFY(!email.isValid());
     QVERIFY(email.mail().isEmpty());
     QVERIFY(email.parameters().isEmpty());
-    QVERIFY(!email.preferred());
 }
 
 void EmailTest::shouldAssignValue()
 {
     const QString mail(QLatin1String("foo@kde.org"));
-    const bool preferred = true;
     QMap<QString, QStringList> params;
     params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
     params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
-    KContacts::Email email(mail, preferred);
+    KContacts::Email email(mail);
     email.setParameters(params);
     QVERIFY(email.isValid());
     QVERIFY(!email.mail().isEmpty());
     QCOMPARE(email.mail(), mail);
-    QVERIFY(email.preferred());
     QVERIFY(!email.parameters().isEmpty());
     QCOMPARE(email.parameters(), params);
 }
@@ -62,13 +59,10 @@ void EmailTest::shouldAssignExternal()
 {
     KContacts::Email email;
     const QString mail(QLatin1String("foo@kde.org"));
-    const bool preferred = true;
     email.setEmail(mail);
-    email.setPreferred(preferred);
     QVERIFY(email.isValid());
     QVERIFY(!email.mail().isEmpty());
     QCOMPARE(email.mail(), mail);
-    QVERIFY(email.preferred());
 }
 
 void EmailTest::shouldSerialized()
@@ -76,9 +70,7 @@ void EmailTest::shouldSerialized()
     KContacts::Email email;
     KContacts::Email result;
     const QString mail(QLatin1String("foo@kde.org"));
-    const bool preferred = true;
     email.setEmail(mail);
-    email.setPreferred(preferred);
     QMap<QString, QStringList> params;
     params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
     params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
@@ -100,9 +92,7 @@ void EmailTest::shouldEqualEmail()
     KContacts::Email email;
     KContacts::Email result;
     const QString mail(QLatin1String("foo@kde.org"));
-    const bool preferred = true;
     email.setEmail(mail);
-    email.setPreferred(preferred);
     QMap<QString, QStringList> params;
     params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
     params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));

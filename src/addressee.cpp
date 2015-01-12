@@ -41,7 +41,6 @@ static bool matchBinaryPattern(int value, int pattern);
 template <class L>
 static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
 static bool listEquals(const QStringList &list, const QStringList &pattern);
-static bool emailsEquals(const QStringList &list, const QStringList &pattern);
 
 class Addressee::Private : public QSharedData
 {
@@ -128,7 +127,7 @@ public:
     PhoneNumber::List mPhoneNumbers;
     Address::List mAddresses;
     Key::List mKeys;
-    QStringList mEmails;
+    Email::List mEmails;
     QStringList mCategories;
     QHash<QString, QString> mCustomFields;
 
@@ -321,11 +320,12 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "keys differs";
         return false;
     }
-
-    if (!emailsEquals(d->mEmails, addressee.d->mEmails)) {
+#if 0 //Port it
+    if (!listEquals(d->mEmails, addressee.d->mEmails)) {
         qCDebug(KCONTACTS_LOG) << "emails differs";
         return false;
     }
+#endif
 
     if (!listEquals(d->mCategories, addressee.d->mCategories)) {
         qCDebug(KCONTACTS_LOG) << "categories differs";
@@ -1205,55 +1205,78 @@ QString Addressee::fullEmail(const QString &email) const
 
     return text;
 }
+void Addressee::insertEmail( const QString &email, bool preferred, const QMap<QString, QStringList> &param )
+{
+    if ( email.simplified().isEmpty() )
+      return;
+
+    for (int i = 0; i < d->mEmails.size(); ++i) {
+        if (d->mEmails.at(i).mail() == email)  {
+            if (!preferred || i == 0) {
+                return;
+            }
+            Email tempMail = d->mEmails.takeAt(i);
+            d->mEmails.prepend( tempMail );
+            return;
+        }
+    }
+
+    Email mail(email);
+    mail.setParameters(param);
+    d->mEmpty = false;
+    if ( preferred ) {
+        d->mEmails.prepend( mail );
+    } else {
+        d->mEmails.append( mail );
+    }
+}
 
 void Addressee::insertEmail(const QString &email, bool preferred)
 {
-    if (email.simplified().isEmpty()) {
-        return;
-    }
-
-    if (d->mEmails.contains(email)) {
-        if (!preferred || d->mEmails.first() == email) {
-            return;
-        }
-
-        d->mEmails.removeAll(email);
-        d->mEmails.prepend(email);
-    } else {
-        d->mEmpty = false;
-        if (preferred) {
-            d->mEmails.prepend(email);
-        } else {
-            d->mEmails.append(email);
-        }
-    }
+    insertEmail(email, preferred, QMap<QString, QStringList>());
 }
 
 void Addressee::removeEmail(const QString &email)
 {
-    if (d->mEmails.contains(email)) {
-        d->mEmails.removeAll(email);
+    for (int i = 0; i < d->mEmails.size(); ++i) {
+        if (d->mEmails.at(i).mail() == email)  {
+            d->mEmails.removeAt(i);
+        }
     }
 }
 
 QString Addressee::preferredEmail() const
 {
-    if (d->mEmails.count() == 0) {
-        return QString();
-    } else {
-        return d->mEmails.first();
-    }
+    if ( d->mEmails.count() == 0 )
+       return QString();
+    else
+       return d->mEmails.first().mail();
 }
 
 QStringList Addressee::emails() const
 {
+    QStringList list;
+    const int numberOfEmail(d->mEmails.size());
+    for (int i = 0; i < numberOfEmail; ++i) {
+        list << d->mEmails.at(i).mail();
+    }
+
+    return list;
+}
+
+Email::List Addressee::emailList() const
+{
     return d->mEmails;
 }
 
-void Addressee::setEmails(const QStringList &emails)
+void Addressee::setEmails( const QStringList& emails )
 {
-    d->mEmails = emails;
+    d->mEmails.clear();
+    for (int i = 0; i < emails.size(); ++i) {
+        d->mEmails.append(Email(emails.at(i)));
+    }
 }
+
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
     d->mEmpty = false;
@@ -1475,12 +1498,12 @@ QString Addressee::toString() const
     str += QString::fromLatin1("  Sound: %1\n").arg(sound().toString());
 
     str += QLatin1String("  Emails {\n");
-    const QStringList e = emails();
-    QStringList::ConstIterator it;
-    for (it = e.begin(); it != e.end(); ++it) {
-        str += QString::fromLatin1("    %1\n").arg(*it);
+    const Email::List listEmail = d->mEmails;
+    Email::List::ConstIterator it5;
+    for ( it5 = listEmail.begin(); it5 != listEmail.end(); ++it5 ) {
+       str += ( *it5 ).toString();
     }
-    str += QLatin1String("  }\n");
+    str += QLatin1String( "  }\n" );
 
     str += QLatin1String("  PhoneNumbers {\n");
     const PhoneNumber::List p = phoneNumbers();
@@ -2015,31 +2038,6 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
     const int numberOfElement(list.count());
     for (int i = 0; i < numberOfElement; ++i) {
         if (!pattern.contains(list[i])) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool emailsEquals(const QStringList &list, const QStringList &pattern)
-{
-    if (list.count() != pattern.count()) {
-        return false;
-    }
-
-    if (list.isEmpty()) {
-        return true;
-    }
-
-    if (list.first() != pattern.first()) {
-        return false;
-    }
-
-    QStringList::ConstIterator it;
-    QStringList::ConstIterator end(list.constEnd());
-    for (it = list.constBegin(); it != end; ++it) {
-        if (!pattern.contains(*it)) {
             return false;
         }
     }

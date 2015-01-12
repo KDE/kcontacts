@@ -42,7 +42,8 @@ public:
      * Creates an empty email object.
      */
     Email();
-    Email(const QString &mail, bool preferred);
+    Email(const Email &other);
+    Email(const QString &mail);
 
     ~Email();
 
@@ -56,12 +57,11 @@ public:
     void setParameters(const QMap<QString, QStringList> &params);
     QMap<QString, QStringList> parameters() const;
 
-    void setPreferred(bool pref);
-    bool preferred() const;
-
     bool operator==( const Email &other ) const;
+    bool operator!=( const Email &other ) const;
 
     Email &operator=( const Email &other );
+
 
     QString toString() const;
 private:

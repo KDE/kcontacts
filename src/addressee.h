@@ -31,6 +31,7 @@
 #include "address.h"
 #include "geo.h"
 #include "key.h"
+#include "email.h"
 #include "phonenumber.h"
 #include "picture.h"
 #include "secrecy.h"
@@ -959,6 +960,10 @@ public:
       Returns the MIME type used for Addressees
      */
     static QString mimeType();
+    //kf5 merge with insertEmail(...)
+    void insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param);
+
+    KContacts::Email::List emailList() const;
 
 private:
     class Private;

@@ -181,15 +181,23 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // EMAIL
-        const QStringList emails = (*addrIt).emails();
+        const Email::List emailList = ( *addrIt ).emailList();
+        Email::List::ConstIterator emailIt;
+        Email::List::ConstIterator emailEnd( emailList.end() );
         bool pref = true;
-        for (strIt = emails.begin(); strIt != emails.end(); ++strIt) {
-            VCardLine line(QLatin1String("EMAIL"), *strIt);
-            if (pref == true && emails.count() > 1) {
-                line.addParameter(QLatin1String("TYPE"), QLatin1String("PREF"));
-                pref = false;
-            }
-            card.addLine(line);
+
+        for ( emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt ) {
+             VCardLine line( QLatin1String( "EMAIL" ), (*emailIt).mail() );
+             if ( pref == true && emailList.count() > 1 ) {
+                  line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
+                  pref = false;
+             }
+             QMapIterator<QString, QStringList> i((*emailIt).parameters());
+             while (i.hasNext()) {
+                 i.next();
+                 line.addParameter( i.key(), i.value().join(QLatin1String(",")) );
+             }
+             card.addLine( line );
         }
 
         // FN required for only version > 2.1
@@ -518,7 +526,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("email")) {
                     const QStringList types = (*lineIt).parameters(QLatin1String("type"));
                     addr.insertEmail((*lineIt).value().toString(),
-                                     types.contains(QLatin1String("PREF")));
+                                     types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
                 }
 
                 // FN

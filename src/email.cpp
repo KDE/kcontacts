@@ -29,7 +29,6 @@ class Email::Private : public QSharedData
 {
 public:
     Private()
-        : preferred(false)
     {
     }
 
@@ -38,11 +37,9 @@ public:
     {
         parameters = other.parameters;
         mail = other.mail;
-        preferred = other.preferred;
     }
     QMap<QString, QStringList> parameters;
     QString mail;
-    bool preferred;
 };
 
 Email::Email()
@@ -51,11 +48,15 @@ Email::Email()
 
 }
 
-Email::Email(const QString &mail, bool preferred)
+Email::Email(const QString &mail)
     : d( new Private )
 {
     d->mail = mail;
-    d->preferred = preferred;
+}
+
+Email::Email( const Email &other )
+  : d( other.d )
+{
 }
 
 Email::~Email()
@@ -70,7 +71,12 @@ QMap<QString, QStringList> Email::parameters() const
 
 bool Email::operator==(const Email &other) const
 {
-    return (d->parameters == other.parameters()) && (d->mail == other.mail()) && (d->preferred == other.preferred());
+    return (d->parameters == other.parameters()) && (d->mail == other.mail());
+}
+
+bool Email::operator!=(const Email &other) const
+{
+    return !( other == *this );
 }
 
 Email &Email::operator=(const Email &other)
@@ -87,7 +93,6 @@ QString Email::toString() const
     QString str;
     str += QString::fromLatin1( "Email {\n" );
     str += QString::fromLatin1( "    mail: %1\n" ).arg( d->mail );
-    str += QString::fromLatin1( "    preferred: %1\n" ).arg( d->preferred ? QLatin1String("True") : QLatin1String("False") );
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
@@ -99,16 +104,6 @@ QString Email::toString() const
     }
     str += QString::fromLatin1( "}\n" );
     return str;
-}
-
-void Email::setPreferred(bool pref)
-{
-    d->preferred = pref;
-}
-
-bool Email::preferred() const
-{
-    return d->preferred;
 }
 
 void Email::setParameters(const QMap<QString, QStringList> &params)
@@ -133,12 +128,12 @@ bool Email::isValid() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Email &email)
 {
-    return s << email.d->parameters << email.d->mail << email.d->preferred;
+    return s << email.d->parameters << email.d->mail;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Email &email)
 {
-    s >> email.d->parameters >> email.d->mail >> email.d->preferred;
+    s >> email.d->parameters >> email.d->mail;
     return s;
 }
 
