@@ -73,6 +73,15 @@ bool Email::operator==(const Email &other) const
     return (d->parameters == other.parameters()) && (d->mail == other.mail()) && (d->preferred == other.preferred());
 }
 
+Email &Email::operator=(const Email &other)
+{
+    if ( this != &other ) {
+      d = other.d;
+    }
+
+    return *this;
+}
+
 QString Email::toString() const
 {
     QString str;

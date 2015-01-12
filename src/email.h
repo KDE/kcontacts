@@ -46,6 +46,8 @@ public:
 
     ~Email();
 
+    typedef QList<Email> List;
+
     void setEmail(const QString &mail);
     QString mail() const;
 
@@ -58,6 +60,8 @@ public:
     bool preferred() const;
 
     bool operator==( const Email &other ) const;
+
+    Email &operator=( const Email &other );
 
     QString toString() const;
 private:

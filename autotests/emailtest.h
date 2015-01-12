@@ -35,6 +35,7 @@ private Q_SLOTS:
     void shouldAssignValue();
     void shouldAssignExternal();
     void shouldSerialized();
+    void shouldEqualEmail();
 };
 
 #endif // EMAILTEST_H
