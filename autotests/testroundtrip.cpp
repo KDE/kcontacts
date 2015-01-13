@@ -32,7 +32,6 @@ class RoundtripTest : public QObject
     Q_OBJECT
 
 private:
-    QString mOutFilePattern;
 
     QDir mInputDir;
     QDir mOutput2_1Dir;
@@ -50,7 +49,6 @@ private Q_SLOTS:
 // check the validity of our test data set
 void RoundtripTest::initTestCase()
 {
-    mOutFilePattern = QLatin1String("%1.ref");
 
     // check that all resource prefixes exist
 
@@ -73,6 +71,7 @@ void RoundtripTest::initTestCase()
     // check that there are input files
 
     mInputFiles = mInputDir.entryList();
+    
     QVERIFY(!mInputFiles.isEmpty());
 }
 
@@ -83,14 +82,18 @@ void RoundtripTest::testVCardRoundtrip_data()
     QTest::addColumn<QString>("output3_0File");
     QTest::addColumn<QString>("output4_0File");
 
+    QString outFile21Pattern = QLatin1String("%1.2_1ref");
+    QString outFile4Pattern = QLatin1String("v4_0.%1.ref");
+    QString outFilePattern = QLatin1String("%1.ref");
     Q_FOREACH (const QString &inputFile, mInputFiles) {
-        const QString outFile = mOutFilePattern.arg(inputFile);
-
+        const QString outFile = outFilePattern.arg(inputFile);
+        const QString outFileV2_1 = outFile21Pattern.arg(inputFile);
+        const QString outFileV4 = outFile4Pattern.arg(inputFile);
         QTest::newRow(QFile::encodeName(inputFile).constData())
                 << inputFile
-                << (mOutput2_1Dir.exists(outFile) ? outFile : QString())
+                << (mOutput2_1Dir.exists(outFileV2_1) ? outFileV2_1 : QString())
                 << (mOutput3_0Dir.exists(outFile) ? outFile : QString())
-                << (mOutput4_0Dir.exists(outFile) ? outFile : QString());
+                << (mOutput4_0Dir.exists(outFileV4) ? outFileV4 : QString());
     }
 }
 
@@ -169,6 +172,34 @@ void RoundtripTest::testVCardRoundtrip()
             }
         }
     }
+#if 0
+    if (!output4_0File.isEmpty()) {
+        const QByteArray outputData = converter.createVCards(list, VCardConverter::v4_0);
+
+        QFile outputFile(QFileInfo(mOutput4_0Dir, output4_0File).absoluteFilePath());
+        QVERIFY(outputFile.open(QIODevice::ReadOnly));
+
+        const QByteArray outputRefData = outputFile.readAll();
+        //QCOMPARE( outputData.size(), outputRefData.size() );
+
+        const QList<QByteArray> outputLines = outputData.split('\n');
+        const QList<QByteArray> outputRefLines = outputRefData.split('\n');
+        //QCOMPARE(outputLines.count(), outputRefLines.count());
+
+        for (int i = 0; i < outputLines.count(); ++i) {
+            const QByteArray actual = outputLines[i];
+            const QByteArray expect = outputRefLines[i];
+
+            if (actual != expect) {
+                qCritical() << "Mismatch in v4.0 output line" << (i + 1);
+
+                qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
+                QCOMPARE(actual.count(), expect.count());
+                QCOMPARE(actual, expect);
+            }
+        }
+    }
+#endif
 }
 
 QTEST_MAIN(RoundtripTest)
