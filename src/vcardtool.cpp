@@ -185,7 +185,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         Email::List::ConstIterator emailIt;
         Email::List::ConstIterator emailEnd( emailList.end() );
         bool pref = true;
-
         for ( emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt ) {
             bool needToAddPref = false;
             VCardLine line( QLatin1String( "EMAIL" ), (*emailIt).mail() );
@@ -205,16 +204,23 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                         } else {
                             needToAddPref = false;
                         }
+                    } else {
+                        if (!needToAddPref) {
+                            valueStringList.removeAll(QLatin1String( "PREF" ));
+                        }
                     }
                     foundType = true;
                 }
-                line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+                if (!valueStringList.isEmpty()) {
+                    line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+                }
             }
             if (!foundType && needToAddPref) {
                 line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
             }
             card.addLine( line );
         }
+
 
         // FN required for only version > 2.1
         VCardLine fnLine(QLatin1String("FN"), (*addrIt).formattedName());
