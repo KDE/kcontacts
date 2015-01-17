@@ -25,7 +25,7 @@
 #include "kcontacts_export.h"
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
-#include <qmap.h>
+#include <QtCore/QMap>
 
 /** @short Class that holds a Email for a contact.
  *  @since 4.14.5
