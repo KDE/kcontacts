@@ -22,6 +22,7 @@
 
 #include <QMap>
 #include <qstringlist.h>
+#include <QDataStream>
 
 using namespace KContacts;
 

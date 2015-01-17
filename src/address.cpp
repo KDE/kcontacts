@@ -33,6 +33,7 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QLocale>
+#include <QtCore/QDataStream>
 
 using namespace KContacts;
 
