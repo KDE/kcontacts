@@ -31,8 +31,8 @@ public:
     {
     }
 
-    Private( const Private &other )
-        : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
         parameters = other.parameters;
         language = other.language;
@@ -41,7 +41,6 @@ public:
     QString language;
 };
 
-
 Lang::Lang()
     : d(new Private)
 {
@@ -49,7 +48,7 @@ Lang::Lang()
 }
 
 Lang::Lang(const Lang &other)
-    : d( other.d )
+    : d(other.d)
 {
 
 }
@@ -97,13 +96,13 @@ bool Lang::operator==(const Lang &other) const
 
 bool Lang::operator!=(const Lang &other) const
 {
-    return !( other == *this );
+    return !(other == *this);
 }
 
 Lang &Lang::operator=(const Lang &other)
 {
-    if ( this != &other ) {
-      d = other.d;
+    if (this != &other) {
+        d = other.d;
     }
 
     return *this;
@@ -112,8 +111,8 @@ Lang &Lang::operator=(const Lang &other)
 QString Lang::toString() const
 {
     QString str;
-    str += QString::fromLatin1( "Lang {\n" );
-    str += QString::fromLatin1( "    language: %1\n" ).arg( d->language );
+    str += QString::fromLatin1("Lang {\n");
+    str += QString::fromLatin1("    language: %1\n").arg(d->language);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
@@ -121,12 +120,11 @@ QString Lang::toString() const
             i.next();
             param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
         }
-        str += QString::fromLatin1( "    parameters: %1\n" ).arg( param );
+        str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("}\n");
     return str;
 }
-
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Lang &lang)
 {

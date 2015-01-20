@@ -51,7 +51,8 @@ using namespace KContacts;
 
 /* internal functions - do not use !! */
 
-namespace KContacts {
+namespace KContacts
+{
 /**
   @internal
 
@@ -65,9 +66,9 @@ namespace KContacts {
   @param value The value of the field addressed by @p fieldname
 */
 bool evaluatePair(Addressee &a, Address &homeAddr,
-                    Address &workAddr,
-                    QString &fieldname, QString &value,
-                    int &birthday, int &birthmonth, int &birthyear);
+                  Address &workAddr,
+                  QString &fieldname, QString &value,
+                  int &birthday, int &birthmonth, int &birthyear);
 }
 
 /* generate LDIF stream */
@@ -289,9 +290,9 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
 }
 
 bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
-                                 Address &workAddr,
-                                 QString &fieldname, QString &value,
-                                 int &birthday, int &birthmonth, int &birthyear)
+                             Address &workAddr,
+                             QString &fieldname, QString &value,
+                             int &birthday, int &birthmonth, int &birthyear)
 {
     if (fieldname == QLatin1String("dn")) {     // ignore & return false!
         return false;

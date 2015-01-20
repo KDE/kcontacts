@@ -143,7 +143,7 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(KContacts::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
         if (type == KContacts::PhoneNumber::Home ||
-            type == KContacts::PhoneNumber::Work) {
+                type == KContacts::PhoneNumber::Work) {
             // special cased
         } else if (type < KContacts::PhoneNumber::Fax) {
             const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Fax]);
@@ -157,17 +157,17 @@ void PhoneNumberTest::labelTest()
     // special cases
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Pref), QLatin1String("Preferred Number"));
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home |
-                                          KContacts::PhoneNumber::Fax),
+             KContacts::PhoneNumber::Fax),
              QLatin1String("Home Fax"));
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work |
-                                          KContacts::PhoneNumber::Fax),
+             KContacts::PhoneNumber::Fax),
              QLatin1String("Work Fax"));
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home |
-                                          KContacts::PhoneNumber::Fax  |
-                                          KContacts::PhoneNumber::Pref),
+             KContacts::PhoneNumber::Fax  |
+             KContacts::PhoneNumber::Pref),
              QLatin1String("Home Fax/Preferred"));
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work |
-                                          KContacts::PhoneNumber::Fax |
-                                          KContacts::PhoneNumber::Pref),
+             KContacts::PhoneNumber::Fax |
+             KContacts::PhoneNumber::Pref),
              QLatin1String("Work Fax/Preferred"));
 }

@@ -44,8 +44,8 @@ void EmailTest::shouldAssignValue()
 {
     const QString mail(QLatin1String("foo@kde.org"));
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     KContacts::Email email(mail);
     email.setParameters(params);
     QVERIFY(email.isValid());
@@ -72,19 +72,18 @@ void EmailTest::shouldSerialized()
     const QString mail(QLatin1String("foo@kde.org"));
     email.setEmail(mail);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     email.setParameters(params);
 
-
     QByteArray data;
-    QDataStream s( &data, QIODevice::WriteOnly );
+    QDataStream s(&data, QIODevice::WriteOnly);
     s << email;
 
-    QDataStream t( &data, QIODevice::ReadOnly );
+    QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY( email == result );
+    QVERIFY(email == result);
 }
 
 void EmailTest::shouldEqualEmail()
@@ -94,12 +93,12 @@ void EmailTest::shouldEqualEmail()
     const QString mail(QLatin1String("foo@kde.org"));
     email.setEmail(mail);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     email.setParameters(params);
 
     result = email;
-    QVERIFY( email == result );
+    QVERIFY(email == result);
 }
 
 QTEST_MAIN(EmailTest)

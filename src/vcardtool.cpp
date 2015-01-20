@@ -181,14 +181,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // EMAIL
-        const Email::List emailList = ( *addrIt ).emailList();
+        const Email::List emailList = (*addrIt).emailList();
         Email::List::ConstIterator emailIt;
-        Email::List::ConstIterator emailEnd( emailList.end() );
+        Email::List::ConstIterator emailEnd(emailList.end());
         bool pref = true;
-        for ( emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt ) {
+        for (emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt) {
             bool needToAddPref = false;
-            VCardLine line( QLatin1String( "EMAIL" ), (*emailIt).mail() );
-            if ( pref == true && emailList.count() > 1 ) {
+            VCardLine line(QLatin1String("EMAIL"), (*emailIt).mail());
+            if (pref == true && emailList.count() > 1) {
                 needToAddPref = true;
                 pref = false;
             }
@@ -197,30 +197,29 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             while (i.hasNext()) {
                 i.next();
                 QStringList valueStringList = i.value();
-                if (i.key().toLower() == QLatin1String( "type" )) {
+                if (i.key().toLower() == QLatin1String("type")) {
                     if (!valueStringList.contains(QLatin1String("PREF"))) {
                         if (needToAddPref) {
-                            valueStringList.append(QLatin1String( "PREF" ));
+                            valueStringList.append(QLatin1String("PREF"));
                         } else {
                             needToAddPref = false;
                         }
                     } else {
                         if (!needToAddPref) {
-                            valueStringList.removeAll(QLatin1String( "PREF" ));
+                            valueStringList.removeAll(QLatin1String("PREF"));
                         }
                     }
                     foundType = true;
                 }
                 if (!valueStringList.isEmpty()) {
-                    line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+                    line.addParameter(i.key(), valueStringList.join(QLatin1String(",")));
                 }
             }
             if (!foundType && needToAddPref) {
-                line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
+                line.addParameter(QLatin1String("TYPE"), QLatin1String("PREF"));
             }
-            card.addLine( line );
+            card.addLine(line);
         }
-
 
         // FN required for only version > 2.1
         VCardLine fnLine(QLatin1String("FN"), (*addrIt).formattedName());

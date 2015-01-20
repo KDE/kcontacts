@@ -18,7 +18,6 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 #ifndef EMAIL_H
 #define EMAIL_H
 
@@ -31,12 +30,13 @@
  *  @since 4.14.5
  */
 
-namespace KContacts {
+namespace KContacts
+{
 
 class KCONTACTS_EXPORT Email
 {
-    friend KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &, const Email & );
-    friend KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &, Email & );
+    friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Email &);
+    friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Email &);
 public:
     /**
      * Creates an empty email object.
@@ -57,11 +57,10 @@ public:
     void setParameters(const QMap<QString, QStringList> &params);
     QMap<QString, QStringList> parameters() const;
 
-    bool operator==( const Email &other ) const;
-    bool operator!=( const Email &other ) const;
+    bool operator==(const Email &other) const;
+    bool operator!=(const Email &other) const;
 
-    Email &operator=( const Email &other );
-
+    Email &operator=(const Email &other);
 
     QString toString() const;
 private:
@@ -69,9 +68,9 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &stream, const Email &object );
+KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &object);
 
-KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &stream, Email &object );
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Email &object);
 
 }
 #endif // EMAIL_H

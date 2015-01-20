@@ -45,8 +45,8 @@ void LangTest::shouldAssignValue()
 {
     const QString lang(QLatin1String("fr"));
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     KContacts::Lang language(lang);
     language.setParameters(params);
     QVERIFY(language.isValid());
@@ -73,19 +73,18 @@ void LangTest::shouldSerialized()
     const QString lang(QLatin1String("fr"));
     language.setLanguage(lang);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     language.setParameters(params);
 
-
     QByteArray data;
-    QDataStream s( &data, QIODevice::WriteOnly );
+    QDataStream s(&data, QIODevice::WriteOnly);
     s << language;
 
-    QDataStream t( &data, QIODevice::ReadOnly );
+    QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY( language == result );
+    QVERIFY(language == result);
 
 }
 
@@ -96,12 +95,12 @@ void LangTest::shouldEqualLanguage()
     const QString lang(QLatin1String("fr"));
     language.setLanguage(lang);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     language.setParameters(params);
 
     result = language;
-    QVERIFY( language == result );
+    QVERIFY(language == result);
 }
 
 QTEST_MAIN(LangTest)

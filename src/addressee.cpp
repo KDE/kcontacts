@@ -170,49 +170,49 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mName != addressee.d->mName &&
-        !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
+            !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "name differs";
         return false;
     }
 
     if (d->mFormattedName != addressee.d->mFormattedName &&
-        !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
+            !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "formattedName differs";
         return false;
     }
 
     if (d->mFamilyName != addressee.d->mFamilyName &&
-        !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
+            !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "familyName differs";
         return false;
     }
 
     if (d->mGivenName != addressee.d->mGivenName &&
-        !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
+            !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "givenName differs";
         return false;
     }
 
     if (d->mAdditionalName != addressee.d->mAdditionalName &&
-        !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
+            !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "additionalName differs";
         return false;
     }
 
     if (d->mPrefix != addressee.d->mPrefix &&
-        !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
+            !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "prefix differs";
         return false;
     }
 
     if (d->mSuffix != addressee.d->mSuffix &&
-        !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
+            !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "suffix differs";
         return false;
     }
 
     if (d->mNickName != addressee.d->mNickName &&
-        !(d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty())) {
+            !(d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "nickName differs";
         return false;
     }
@@ -223,7 +223,7 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mMailer != addressee.d->mMailer &&
-        !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
+            !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "mailer differs";
         return false;
     }
@@ -239,43 +239,43 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if (d->mTitle != addressee.d->mTitle &&
-        !(d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty())) {
+            !(d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "title differs";
         return false;
     }
 
     if (d->mRole != addressee.d->mRole &&
-        !(d->mRole.isEmpty() && addressee.d->mRole.isEmpty())) {
+            !(d->mRole.isEmpty() && addressee.d->mRole.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "role differs";
         return false;
     }
 
     if (d->mOrganization != addressee.d->mOrganization &&
-        !(d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty())) {
+            !(d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "organization differs";
         return false;
     }
 
     if (d->mDepartment != addressee.d->mDepartment &&
-        !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
+            !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "department differs";
         return false;
     }
 
     if (d->mNote != addressee.d->mNote &&
-        !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
+            !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "note differs";
         return false;
     }
 
     if (d->mProductId != addressee.d->mProductId &&
-        !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
+            !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "productId differs";
         return false;
     }
 
     if (d->mSortString != addressee.d->mSortString &&
-        !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
+            !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "sortString differs";
         return false;
     }
@@ -301,7 +301,7 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
 
     if ((d->mUrl.isValid() || addressee.d->mUrl.isValid()) &&
-        (d->mUrl != addressee.d->mUrl)) {
+            (d->mUrl != addressee.d->mUrl)) {
         qCDebug(KCONTACTS_LOG) << "url differs";
         return false;
     }
@@ -988,8 +988,8 @@ void Addressee::setNameFromString(const QString &s)
     QString str = s;
     //remove enclosing quotes from string
     if (str.length() > 1  &&
-        s[0] == QLatin1Char('"') &&
-        s[s.length() - 1] == QLatin1Char('"')) {
+            s[0] == QLatin1Char('"') &&
+            s[s.length() - 1] == QLatin1Char('"')) {
         str = s.mid(1, s.length() - 2);
     }
 
@@ -1203,10 +1203,11 @@ QString Addressee::fullEmail(const QString &email) const
 
     return text;
 }
-void Addressee::insertEmail( const QString &email, bool preferred, const QMap<QString, QStringList> &param )
+void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param)
 {
-    if ( email.simplified().isEmpty() )
-      return;
+    if (email.simplified().isEmpty()) {
+        return;
+    }
 
     for (int i = 0; i < d->mEmails.size(); ++i) {
         if (d->mEmails.at(i).mail() == email)  {
@@ -1214,7 +1215,7 @@ void Addressee::insertEmail( const QString &email, bool preferred, const QMap<QS
                 return;
             }
             Email tempMail = d->mEmails.takeAt(i);
-            d->mEmails.prepend( tempMail );
+            d->mEmails.prepend(tempMail);
             return;
         }
     }
@@ -1222,10 +1223,10 @@ void Addressee::insertEmail( const QString &email, bool preferred, const QMap<QS
     Email mail(email);
     mail.setParameters(param);
     d->mEmpty = false;
-    if ( preferred ) {
-        d->mEmails.prepend( mail );
+    if (preferred) {
+        d->mEmails.prepend(mail);
     } else {
-        d->mEmails.append( mail );
+        d->mEmails.append(mail);
     }
 }
 
@@ -1240,10 +1241,11 @@ void Addressee::removeEmail(const QString &email)
 
 QString Addressee::preferredEmail() const
 {
-    if ( d->mEmails.count() == 0 )
-       return QString();
-    else
-       return d->mEmails.first().mail();
+    if (d->mEmails.count() == 0) {
+        return QString();
+    } else {
+        return d->mEmails.first().mail();
+    }
 }
 
 QStringList Addressee::emails() const
@@ -1262,7 +1264,7 @@ Email::List Addressee::emailList() const
     return d->mEmails;
 }
 
-void Addressee::setEmails( const QStringList& emails )
+void Addressee::setEmails(const QStringList &emails)
 {
     d->mEmails.clear();
     for (int i = 0; i < emails.size(); ++i) {
@@ -1274,7 +1276,6 @@ void Addressee::setEmailList(const Email::List &list)
 {
     d->mEmails = list;
 }
-
 
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
@@ -1499,10 +1500,10 @@ QString Addressee::toString() const
     str += QLatin1String("  Emails {\n");
     const Email::List listEmail = d->mEmails;
     Email::List::ConstIterator it5;
-    for ( it5 = listEmail.begin(); it5 != listEmail.end(); ++it5 ) {
-       str += ( *it5 ).toString();
+    for (it5 = listEmail.begin(); it5 != listEmail.end(); ++it5) {
+        str += (*it5).toString();
     }
-    str += QLatin1String( "  }\n" );
+    str += QLatin1String("  }\n");
 
     str += QLatin1String("  PhoneNumbers {\n");
     const PhoneNumber::List p = phoneNumbers();

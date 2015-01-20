@@ -216,24 +216,24 @@ QString AddresseeList::toString() const
 
     QString crit;
     switch (d->mActiveSortingCriterion) {
-        case Uid:
-            crit = QStringLiteral("Uid");
-            break;
-        case Name:
-            crit = QStringLiteral("Name");
-            break;
-        case FormattedName:
-            crit = QStringLiteral("FormattedName");
-            break;
-        case FamilyName:
-            crit = QStringLiteral("FamilyName");
-            break;
-        case GivenName:
-            crit = QStringLiteral("GivenName");
-            break;
-        default:
-            crit = QStringLiteral("unknown -- update dump method");
-            break;
+    case Uid:
+        crit = QStringLiteral("Uid");
+        break;
+    case Name:
+        crit = QStringLiteral("Name");
+        break;
+    case FormattedName:
+        crit = QStringLiteral("FormattedName");
+        break;
+    case FamilyName:
+        crit = QStringLiteral("FamilyName");
+        break;
+    case GivenName:
+        crit = QStringLiteral("GivenName");
+        break;
+    default:
+        crit = QStringLiteral("unknown -- update dump method");
+        break;
     }
 
     str += QStringLiteral("   Sorting criterion: %1\n").arg(crit);

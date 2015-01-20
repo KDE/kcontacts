@@ -29,11 +29,12 @@
 /** @short Class that holds a Language for a contact.
  *  @since 4.14.5
  */
-namespace KContacts {
+namespace KContacts
+{
 class KCONTACTS_EXPORT Lang
 {
-    friend KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &, const Lang & );
-    friend KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &, Lang & );
+    friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Lang &);
+    friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Lang &);
 public:
     Lang();
     Lang(const Lang &other);
@@ -51,19 +52,19 @@ public:
     void setParameters(const QMap<QString, QStringList> &params);
     QMap<QString, QStringList> parameters() const;
 
-    bool operator==( const Lang &other ) const;
-    bool operator!=( const Lang &other ) const;
+    bool operator==(const Lang &other) const;
+    bool operator!=(const Lang &other) const;
 
-    Lang &operator=( const Lang &other );
+    Lang &operator=(const Lang &other);
 
     QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &stream, const Lang &object );
+KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Lang &object);
 
-KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &stream, Lang &object );
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Lang &object);
 
 }
 

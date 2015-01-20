@@ -109,8 +109,8 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
                 // we have balanced brackets, recursively parse:
                 QString rplstr;
                 bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1,
-                                                                     bpos2 - bpos1 - 1), rplstr,
-                                                          realName, orgaName, address);
+                             bpos2 - bpos1 - 1), rplstr,
+                             realName, orgaName, address);
                 if (purge) {
                     // purge -> remove all
                     // replace with !_P_!, so conditional tags work later

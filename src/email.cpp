@@ -33,8 +33,8 @@ public:
     {
     }
 
-    Private( const Private &other )
-        : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
         parameters = other.parameters;
         mail = other.mail;
@@ -44,19 +44,19 @@ public:
 };
 
 Email::Email()
-    : d( new Private )
+    : d(new Private)
 {
 
 }
 
 Email::Email(const QString &mail)
-    : d( new Private )
+    : d(new Private)
 {
     d->mail = mail;
 }
 
-Email::Email( const Email &other )
-  : d( other.d )
+Email::Email(const Email &other)
+    : d(other.d)
 {
 }
 
@@ -77,13 +77,13 @@ bool Email::operator==(const Email &other) const
 
 bool Email::operator!=(const Email &other) const
 {
-    return !( other == *this );
+    return !(other == *this);
 }
 
 Email &Email::operator=(const Email &other)
 {
-    if ( this != &other ) {
-      d = other.d;
+    if (this != &other) {
+        d = other.d;
     }
 
     return *this;
@@ -92,8 +92,8 @@ Email &Email::operator=(const Email &other)
 QString Email::toString() const
 {
     QString str;
-    str += QString::fromLatin1( "Email {\n" );
-    str += QString::fromLatin1( "    mail: %1\n" ).arg( d->mail );
+    str += QString::fromLatin1("Email {\n");
+    str += QString::fromLatin1("    mail: %1\n").arg(d->mail);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
@@ -101,9 +101,9 @@ QString Email::toString() const
             i.next();
             param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
         }
-        str += QString::fromLatin1( "    parameters: %1\n" ).arg( param );
+        str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("}\n");
     return str;
 }
 
@@ -124,7 +124,7 @@ QString Email::mail() const
 
 bool Email::isValid() const
 {
-  return !d->mail.isEmpty();
+    return !d->mail.isEmpty();
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Email &email)
