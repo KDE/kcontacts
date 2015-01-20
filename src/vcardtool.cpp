@@ -247,7 +247,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         const Geo geo = (*addrIt).geo();
         if (geo.isValid()) {
             QString str;
-            str.sprintf("%.6f;%.6f", geo.latitude(), geo.longitude());
+            if (version == VCard::v4_0) {
+                str.sprintf("geo:%.6f,%.6f", geo.latitude(), geo.longitude());
+            } else {
+                str.sprintf("%.6f;%.6f", geo.latitude(), geo.longitude());
+            }
             card.addLine(VCardLine(QLatin1String("GEO"), str));
         }
 
@@ -578,13 +582,24 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 // GEO
                 else if (identifier == QLatin1String("geo")) {
                     Geo geo;
-
-                    const QStringList geoParts =
-                        (*lineIt).value().toString().split(QLatin1Char(';'), QString::KeepEmptyParts);
-                    if (geoParts.size() >= 2) {
-                        geo.setLatitude(geoParts.at(0).toFloat());
-                        geo.setLongitude(geoParts.at(1).toFloat());
-                        addr.setGeo(geo);
+                    QString lineStr = (*lineIt).value().toString();
+                    if (lineStr.startsWith(QLatin1String("geo:"))) { //VCard 4.0
+                        lineStr.remove(QLatin1String("geo:"));
+                        const QStringList geoParts =
+                            lineStr.split(QLatin1Char(','), QString::KeepEmptyParts);
+                        if (geoParts.size() >= 2) {
+                            geo.setLatitude(geoParts.at(0).toFloat());
+                            geo.setLongitude(geoParts.at(1).toFloat());
+                            addr.setGeo(geo);
+                        }
+                    } else {
+                        const QStringList geoParts =
+                            lineStr.split(QLatin1Char(';'), QString::KeepEmptyParts);
+                        if (geoParts.size() >= 2) {
+                            geo.setLatitude(geoParts.at(0).toFloat());
+                            geo.setLongitude(geoParts.at(1).toFloat());
+                            addr.setGeo(geo);
+                        }
                     }
                 }
 

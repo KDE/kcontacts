@@ -325,7 +325,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     } else {
                         output = input;
                     }
-                    addEscapes(output, (*lineIt).identifier() == QLatin1String("CATEGORIES"));
+                    addEscapes(output, ((*lineIt).identifier() == QLatin1String("CATEGORIES") || (*lineIt).identifier() == QLatin1String("GEO")));
 
                     if (!output.isEmpty()) {
                         textLine.append(':' + output);
