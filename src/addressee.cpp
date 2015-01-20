@@ -1283,7 +1283,7 @@ void Addressee::setEmailList(const Email::List &list)
     d->mEmails = list;
 }
 
-void Addressee::removeLang( const QString &language )
+void Addressee::removeLang(const QString &language)
 {
     for (int i = 0; i < d->mLangs.size(); ++i) {
         if (d->mLangs.at(i).language() == language)  {
@@ -1292,29 +1292,29 @@ void Addressee::removeLang( const QString &language )
     }
 }
 
-void Addressee::insertLang( const Lang &language )
+void Addressee::insertLang(const Lang &language)
 {
     const QString languageStr = language.language();
-    if (languageStr.simplified().isEmpty())
+    if (languageStr.simplified().isEmpty()) {
         return;
+    }
     d->mEmpty = false;
 
     Lang::List::Iterator it;
     Lang::List::Iterator end(d->mLangs.end());
-    for ( it = d->mLangs.begin(); it != end; ++it ) {
-        if ( ( *it ).language() == languageStr ) {
+    for (it = d->mLangs.begin(); it != end; ++it) {
+        if ((*it).language() == languageStr) {
             (*it).setParameters(language.parameters());
             return;
         }
     }
-    d->mLangs.append( language );
+    d->mLangs.append(language);
 }
 
 Lang::List Addressee::langs() const
 {
-  return d->mLangs;
+    return d->mLangs;
 }
-
 
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
@@ -1544,13 +1544,13 @@ QString Addressee::toString() const
     }
     str += QLatin1String("  }\n");
 
-    str += QLatin1String( "  Langs {\n" );
+    str += QLatin1String("  Langs {\n");
     const Lang::List listLang = d->mLangs;
     Lang::List::ConstIterator it6;
-    for ( it6 = listLang.begin(); it6 != listLang.end(); ++it6 ) {
-        str += ( *it6 ).toString();
+    for (it6 = listLang.begin(); it6 != listLang.end(); ++it6) {
+        str += (*it6).toString();
     }
-    str += QLatin1String( "  }\n" );
+    str += QLatin1String("  }\n");
 
     str += QLatin1String("  PhoneNumbers {\n");
     const PhoneNumber::List p = phoneNumbers();
