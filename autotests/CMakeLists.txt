@@ -11,4 +11,4 @@ add_executable(testroundtrip ${testroundtrip_srcs})
 add_test(NAME kcontacts-testroundtrip COMMAND testroundtrip)
 target_link_libraries(testroundtrip KF5Contacts Qt5::Test)
 
-ecm_add_tests(emailtest.cpp addresstest.cpp geotest.cpp keytest.cpp phonenumbertest.cpp picturetest.cpp secrecytest.cpp soundtest.cpp timezonetest.cpp  contactgrouptest.cpp vcarddragtest.cpp NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore Qt5::Gui)
+ecm_add_tests(emailtest.cpp addresstest.cpp geotest.cpp keytest.cpp phonenumbertest.cpp picturetest.cpp secrecytest.cpp soundtest.cpp timezonetest.cpp  contactgrouptest.cpp vcarddragtest.cpp langtest.cpp NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore Qt5::Gui)

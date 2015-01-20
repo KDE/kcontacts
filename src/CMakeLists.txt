@@ -16,6 +16,7 @@ set(kcontacts_SRCS
   field.cpp
   geo.cpp
   key.cpp
+  lang.cpp
   ldapdn.cpp
   ldif.cpp
   phonenumber.cpp
@@ -75,6 +76,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Field
   Geo
   Key
+  Lang
   PhoneNumber
   Picture
   Plugin
