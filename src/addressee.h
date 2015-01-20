@@ -32,6 +32,7 @@
 #include "geo.h"
 #include "key.h"
 #include "email.h"
+#include "lang.h"
 #include "phonenumber.h"
 #include "picture.h"
 #include "secrecy.h"
@@ -963,6 +964,25 @@ public:
 
     KContacts::Email::List emailList() const;
     void setEmailList(const Email::List &list);
+
+    /**
+     * Remove Language
+     * @brief removeLang
+     * @param language
+     */
+    void removeLang(const QString &language);
+    /**
+     * Insert Language
+     * @brief insertLang
+     * @param language
+     */
+    void insertLang(const Lang &language);
+    /**
+     * @brief langs
+     * @return List of lang
+     */
+    Lang::List langs() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

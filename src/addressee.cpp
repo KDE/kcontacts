@@ -86,6 +86,7 @@ public:
         mPhoneNumbers = other.mPhoneNumbers;
         mAddresses = other.mAddresses;
         mKeys = other.mKeys;
+        mLangs =  other.mLangs;
         mEmails = other.mEmails;
         mCategories = other.mCategories;
         mCustomFields = other.mCustomFields;
@@ -128,6 +129,7 @@ public:
     Address::List mAddresses;
     Key::List mKeys;
     Email::List mEmails;
+    Lang::List mLangs;
     QStringList mCategories;
     QHash<QString, QString> mCustomFields;
 
@@ -332,6 +334,10 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mCustomFields != addressee.d->mCustomFields) {
         qCDebug(KCONTACTS_LOG) << "custom differs";
+        return false;
+    }
+    if (d->mLangs != addressee.d->mLangs) {
+        qCDebug(KCONTACTS_LOG) << "langs differs";
         return false;
     }
 
@@ -1277,6 +1283,39 @@ void Addressee::setEmailList(const Email::List &list)
     d->mEmails = list;
 }
 
+void Addressee::removeLang( const QString &language )
+{
+    for (int i = 0; i < d->mLangs.size(); ++i) {
+        if (d->mLangs.at(i).language() == language)  {
+            d->mLangs.removeAt(i);
+        }
+    }
+}
+
+void Addressee::insertLang( const Lang &language )
+{
+    const QString languageStr = language.language();
+    if (languageStr.simplified().isEmpty())
+        return;
+    d->mEmpty = false;
+
+    Lang::List::Iterator it;
+    Lang::List::Iterator end(d->mLangs.end());
+    for ( it = d->mLangs.begin(); it != end; ++it ) {
+        if ( ( *it ).language() == languageStr ) {
+            (*it).setParameters(language.parameters());
+            return;
+        }
+    }
+    d->mLangs.append( language );
+}
+
+Lang::List Addressee::langs() const
+{
+  return d->mLangs;
+}
+
+
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
     d->mEmpty = false;
@@ -1504,6 +1543,14 @@ QString Addressee::toString() const
         str += (*it5).toString();
     }
     str += QLatin1String("  }\n");
+
+    str += QLatin1String( "  Langs {\n" );
+    const Lang::List listLang = d->mLangs;
+    Lang::List::ConstIterator it6;
+    for ( it6 = listLang.begin(); it6 != listLang.end(); ++it6 ) {
+        str += ( *it6 ).toString();
+    }
+    str += QLatin1String( "  }\n" );
 
     str += QLatin1String("  PhoneNumbers {\n");
     const PhoneNumber::List p = phoneNumbers();
@@ -1952,6 +1999,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mCategories;
     s << a.customs();
     s << a.d->mKeys;
+    s << a.d->mLangs;
     return s;
 }
 
@@ -1992,7 +2040,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> customFields;
     a.setCustoms(customFields);
     s >> a.d->mKeys;
-
+    s >> a.d->mLangs;
     a.d->mEmpty = false;
 
     return s;
