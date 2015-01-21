@@ -79,24 +79,24 @@ public:
         Url
     };
 
-    int fieldId()
+    int fieldId() const
     {
         return mFieldId;
     }
-    int category()
+    int category() const
     {
         return mCategory;
     }
 
-    QString label()
+    QString label() const
     {
         return mLabel;
     }
-    QString key()
+    QString key() const
     {
         return mKey;
     }
-    QString app()
+    QString app() const
     {
         return mApp;
     }
