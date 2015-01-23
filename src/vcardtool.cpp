@@ -553,7 +553,12 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
                     addr.insertAddress(address);
                 }
-
+                // ANNIVERSARY
+                else if ( identifier == QLatin1String( "anniversary" ) ) {
+                    const QString t = ( *lineIt ).value().toString();
+                    const QDateTime dt(parseDateTime( t ));
+                    addr.insertCustom( QLatin1String("KADDRESSBOOK"), QLatin1String("X-Anniversary"), dt.date().toString(Qt::ISODate) );
+                }
                 // BDAY
                 else if (identifier == QLatin1String("bday")) {
                     addr.setBirthday(parseDateTime((*lineIt).value().toString()));
