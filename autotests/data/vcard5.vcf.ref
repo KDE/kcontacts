@@ -1,4 +1,5 @@
 BEGIN:VCARD
+VERSION:3.0
 ADR;TYPE=home;TYPE=pref:;;Buehlauer Strasse 45;Dresden;Sachsen;01327;German
  y
 ADR;TYPE=work:;;Prager Strasse 55;Dresden;Sachsen;01066;Germany
@@ -300,7 +301,6 @@ TEL;TYPE=WORK:0351 443322
 TEL;TYPE=CELL:0173 223344
 UID:P9HXg34Oav
 URL:http://www.mustermann.de/~heiko/
-VERSION:3.0
 X-KADDRESSBOOK-X-Anniversary:1982-07-07
 X-KADDRESSBOOK-X-AssistantsName:Mr. Smithers
 X-KADDRESSBOOK-X-Department:Edutainment

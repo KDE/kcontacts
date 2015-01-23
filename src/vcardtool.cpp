@@ -92,6 +92,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
     for (addrIt = list.constBegin(); addrIt != listEnd; ++addrIt) {
         VCard card;
         QStringList::ConstIterator strIt;
+        // VERSION
+        if (version == VCard::v2_1) {
+            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("2.1")));
+        } else if (version == VCard::v3_0) {
+            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("3.0")));
+        } else if (version == VCard::v4_0) {
+            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("4.0")));
+        }
 
         // ADR + LABEL
         const Address::List addresses = (*addrIt).addresses();
@@ -418,14 +426,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // URL
         card.addLine(VCardLine(QLatin1String("URL"), (*addrIt).url().url()));
 
-        // VERSION
-        if (version == VCard::v2_1) {
-            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("2.1")));
-        } else if (version == VCard::v3_0) {
-            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("3.0")));
-        } else if (version == VCard::v4_0) {
-            card.addLine(VCardLine(QLatin1String("VERSION"), QLatin1String("4.0")));
-        }
 
         // X-
         const QStringList customs = (*addrIt).customs();

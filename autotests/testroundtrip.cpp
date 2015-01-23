@@ -162,7 +162,7 @@ void RoundtripTest::testVCardRoundtrip()
         for (int i = 0; i < outputLines.count(); ++i) {
             const QByteArray actual = outputLines[i];
             const QByteArray expect = outputRefLines[i];
-
+   
             if (actual != expect) {
                 qCritical() << "Mismatch in v3.0 output line" << (i + 1);
 

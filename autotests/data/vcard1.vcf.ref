@@ -1,4 +1,5 @@
 BEGIN:VCARD
+VERSION:3.0
 ADR;TYPE=parcel;TYPE=postal;TYPE=work:;;6544 Battleford Drive;Raleigh;NC;27
  613-3502;U.S.A.
 EMAIL;TYPE=INTERNET,PREF:Frank_Dawson@Lotus.com
@@ -10,6 +11,5 @@ TEL;TYPE=MSG;TYPE=VOICE;TYPE=WORK:+1-919-676-9515
 TEL;TYPE=FAX;TYPE=WORK:+1-919-676-9564
 UID:gDVbA6LY3t
 URL:http://home.earthlink.net/~fdawson
-VERSION:3.0
 END:VCARD
 
