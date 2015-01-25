@@ -264,7 +264,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
             const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
             idents.prepend(str);
         }
- 
+
         for (identIt = idents.constBegin(); identIt != idents.constEnd(); ++identIt) {
             lines = (*cardIt).lines((*identIt));
 
