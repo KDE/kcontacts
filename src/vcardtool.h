@@ -73,13 +73,13 @@ private:
     QString createDateTime(const QDateTime &dateTime) const;
 
     Picture parsePicture(const VCardLine &line) const;
-    VCardLine createPicture(const QString &identifier, const Picture &pic) const;
+    VCardLine createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const;
 
     Sound parseSound(const VCardLine &line) const;
-    VCardLine createSound(const Sound &snd) const;
+    VCardLine createSound(const Sound &snd, VCard::Version version) const;
 
     Key parseKey(const VCardLine &line) const;
-    VCardLine createKey(const Key &key) const;
+    VCardLine createKey(const Key &key, VCard::Version version) const;
 
     Secrecy parseSecrecy(const VCardLine &line) const;
     VCardLine createSecrecy(const Secrecy &secrecy) const;

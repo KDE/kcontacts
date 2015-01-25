@@ -268,11 +268,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         Key::List::ConstIterator keyIt;
         Key::List::ConstIterator keyEnd(keys.end());
         for (keyIt = keys.begin(); keyIt != keyEnd; ++keyIt) {
-            card.addLine(createKey(*keyIt));
+            card.addLine(createKey(*keyIt, version));
         }
 
         // LOGO
-        card.addLine(createPicture(QLatin1String("LOGO"), (*addrIt).logo()));
+        card.addLine(createPicture(QLatin1String("LOGO"), (*addrIt).logo(), version));
 
         // MAILER only for version < 4.0
         if (version != VCard::v4_0) {
@@ -351,7 +351,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(orgLine);
 
         // PHOTO
-        card.addLine(createPicture(QLatin1String("PHOTO"), (*addrIt).photo()));
+        card.addLine(createPicture(QLatin1String("PHOTO"), (*addrIt).photo(), version));
 
         // PROID only for version > 2.1
         if (version != VCard::v2_1) {
@@ -375,7 +375,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // SOUND
-        card.addLine(createSound((*addrIt).sound()));
+        card.addLine(createSound((*addrIt).sound(), version));
 
         // TEL
         const PhoneNumber::List phoneNumbers = (*addrIt).phoneNumbers();
@@ -950,8 +950,9 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     return pic;
 }
 
-VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic) const
+VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const
 {
+    Q_UNUSED(version);
     VCardLine line(identifier);
 
     if (pic.isEmpty()) {
@@ -991,8 +992,9 @@ Sound VCardTool::parseSound(const VCardLine &line) const
     return snd;
 }
 
-VCardLine VCardTool::createSound(const Sound &snd) const
+VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
 {
+    Q_UNUSED(version);
     VCardLine line(QLatin1String("SOUND"));
 
     if (snd.isIntern()) {
@@ -1034,8 +1036,9 @@ Key VCardTool::parseKey(const VCardLine &line) const
     return key;
 }
 
-VCardLine VCardTool::createKey(const Key &key) const
+VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
 {
+    Q_UNUSED(version);
     VCardLine line(QLatin1String("KEY"));
 
     if (key.isBinary()) {
