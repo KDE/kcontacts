@@ -467,7 +467,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
             if (version == VCard::v4_0) {
                 // GENDER
-                const Gender gender = ( *addrIt ).gender();
+                const Gender gender = (*addrIt).gender();
                 if (gender.isValid()) {
                     QString genderStr;
                     if (!gender.gender().isEmpty()) {
@@ -476,8 +476,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     if (!gender.comment().isEmpty()) {
                         genderStr += QLatin1Char(';') + gender.comment();
                     }
-                    VCardLine line( QLatin1String( "GENDER" ), genderStr );
-                    card.addLine( line );
+                    VCardLine line(QLatin1String("GENDER"), genderStr);
+                    card.addLine(line);
                 }
             }
             if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
@@ -590,8 +590,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.setSecrecy(parseSecrecy(*lineIt));
                 }
                 // GENDER
-                else if ( identifier == QLatin1String( "gender" ) ) {
-                    QString genderStr = ( *lineIt ).value().toString();
+                else if (identifier == QLatin1String("gender")) {
+                    QString genderStr = (*lineIt).value().toString();
                     if (!genderStr.isEmpty()) {
                         Gender gender;
                         if (genderStr.at(0) != QLatin1Char(';')) {

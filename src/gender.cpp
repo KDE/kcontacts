@@ -32,8 +32,8 @@ public:
     {
     }
 
-    Private( const Private &other )
-        : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
         comment = other.comment;
         gender = other.gender;
@@ -43,19 +43,19 @@ public:
 };
 
 Gender::Gender()
-    : d( new Private )
+    : d(new Private)
 {
 
 }
 
 Gender::Gender(const QString &gender)
-    : d( new Private )
+    : d(new Private)
 {
     d->gender = gender;
 }
 
-Gender::Gender( const Gender &other )
-  : d( other.d )
+Gender::Gender(const Gender &other)
+    : d(other.d)
 {
 }
 
@@ -71,13 +71,13 @@ bool Gender::operator==(const Gender &other) const
 
 bool Gender::operator!=(const Gender &other) const
 {
-    return !( other == *this );
+    return !(other == *this);
 }
 
 Gender &Gender::operator=(const Gender &other)
 {
-    if ( this != &other ) {
-      d = other.d;
+    if (this != &other) {
+        d = other.d;
     }
 
     return *this;
@@ -86,10 +86,10 @@ Gender &Gender::operator=(const Gender &other)
 QString Gender::toString() const
 {
     QString str;
-    str += QString::fromLatin1( "Gender {\n" );
-    str += QString::fromLatin1( "    gender: %1\n" ).arg( d->gender );
-    str += QString::fromLatin1( "    comment: %1\n" ).arg( d->comment );
-    str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("Gender {\n");
+    str += QString::fromLatin1("    gender: %1\n").arg(d->gender);
+    str += QString::fromLatin1("    comment: %1\n").arg(d->comment);
+    str += QString::fromLatin1("}\n");
     return str;
 }
 
@@ -115,7 +115,7 @@ QString Gender::comment() const
 
 bool Gender::isValid() const
 {
-  return !d->gender.isEmpty() || !d->comment.isEmpty();
+    return !d->gender.isEmpty() || !d->comment.isEmpty();
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Gender &gender)

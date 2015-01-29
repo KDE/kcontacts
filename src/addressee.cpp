@@ -1324,8 +1324,9 @@ Lang::List Addressee::langs() const
 
 void Addressee::setGender(const Gender &gender)
 {
-    if ( gender == d->mGender )
-      return;
+    if (gender == d->mGender) {
+        return;
+    }
 
     d->mEmpty = false;
     d->mGender = gender;
@@ -1335,7 +1336,6 @@ Gender Addressee::gender() const
 {
     return d->mGender;
 }
-
 
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
@@ -1556,7 +1556,7 @@ QString Addressee::toString() const
     str += QString::fromLatin1("  Logo: %1\n").arg(logo().toString());
     str += QString::fromLatin1("  Photo: %1\n").arg(photo().toString());
     str += QString::fromLatin1("  Sound: %1\n").arg(sound().toString());
-    str += QString::fromLatin1( "  Gender: %1\n" ).arg( gender().toString() );
+    str += QString::fromLatin1("  Gender: %1\n").arg(gender().toString());
 
     str += QLatin1String("  Emails {\n");
     const Email::List listEmail = d->mEmails;

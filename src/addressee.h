@@ -984,7 +984,6 @@ public:
      */
     Lang::List langs() const;
 
-
     void setGender(const Gender &gender);
     Gender gender() const;
 

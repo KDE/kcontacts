@@ -18,7 +18,6 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 #ifndef GENDER_H
 #define GENDER_H
 #include "kcontacts_export.h"
@@ -29,12 +28,13 @@
  *  @since 4.14.5
  */
 
-namespace KContacts {
+namespace KContacts
+{
 
 class KCONTACTS_EXPORT Gender
 {
-    friend KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &, const Gender & );
-    friend KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &, Gender & );
+    friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Gender &);
+    friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Gender &);
 public:
     /**
      * Creates an empty Gender object.
@@ -53,10 +53,10 @@ public:
 
     bool isValid() const;
 
-    bool operator==( const Gender &other ) const;
-    bool operator!=( const Gender &other ) const;
+    bool operator==(const Gender &other) const;
+    bool operator!=(const Gender &other) const;
 
-    Gender &operator=( const Gender &other );
+    Gender &operator=(const Gender &other);
 
     QString toString() const;
 private:
@@ -64,9 +64,9 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &stream, const Gender &object );
+KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Gender &object);
 
-KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &stream, Gender &object );
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Gender &object);
 
 }
 #endif // GENDER_H
