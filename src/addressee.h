@@ -33,6 +33,7 @@
 #include "key.h"
 #include "email.h"
 #include "lang.h"
+#include "gender.h"
 #include "phonenumber.h"
 #include "picture.h"
 #include "secrecy.h"
@@ -982,6 +983,10 @@ public:
      * @return List of lang
      */
     Lang::List langs() const;
+
+
+    void setGender(const Gender &gender);
+    Gender gender() const;
 
 private:
     class Private;

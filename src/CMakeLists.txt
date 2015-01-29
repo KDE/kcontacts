@@ -15,6 +15,7 @@ set(kcontacts_SRCS
   email.cpp
   field.cpp
   geo.cpp
+  gender.cpp
   key.cpp
   lang.cpp
   ldapdn.cpp
@@ -75,6 +76,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Email
   Field
   Geo
+  Gender
   Key
   Lang
   PhoneNumber

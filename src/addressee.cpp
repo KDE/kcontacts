@@ -87,6 +87,7 @@ public:
         mAddresses = other.mAddresses;
         mKeys = other.mKeys;
         mLangs =  other.mLangs;
+        mGender = other.mGender;
         mEmails = other.mEmails;
         mCategories = other.mCategories;
         mCustomFields = other.mCustomFields;
@@ -130,6 +131,7 @@ public:
     Key::List mKeys;
     Email::List mEmails;
     Lang::List mLangs;
+    Gender mGender;
     QStringList mCategories;
     QHash<QString, QString> mCustomFields;
 
@@ -338,6 +340,10 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
     if (d->mLangs != addressee.d->mLangs) {
         qCDebug(KCONTACTS_LOG) << "langs differs";
+        return false;
+    }
+    if (d->mGender != addressee.d->mGender) {
+        qCDebug(KCONTACTS_LOG) << "gender differs";
         return false;
     }
 
@@ -1316,6 +1322,21 @@ Lang::List Addressee::langs() const
     return d->mLangs;
 }
 
+void Addressee::setGender(const Gender &gender)
+{
+    if ( gender == d->mGender )
+      return;
+
+    d->mEmpty = false;
+    d->mGender = gender;
+}
+
+Gender Addressee::gender() const
+{
+    return d->mGender;
+}
+
+
 void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
     d->mEmpty = false;
@@ -1535,6 +1556,7 @@ QString Addressee::toString() const
     str += QString::fromLatin1("  Logo: %1\n").arg(logo().toString());
     str += QString::fromLatin1("  Photo: %1\n").arg(photo().toString());
     str += QString::fromLatin1("  Sound: %1\n").arg(sound().toString());
+    str += QString::fromLatin1( "  Gender: %1\n" ).arg( gender().toString() );
 
     str += QLatin1String("  Emails {\n");
     const Email::List listEmail = d->mEmails;
@@ -2000,6 +2022,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.customs();
     s << a.d->mKeys;
     s << a.d->mLangs;
+    s << a.d->mGender;
     return s;
 }
 
@@ -2041,6 +2064,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     a.setCustoms(customFields);
     s >> a.d->mKeys;
     s >> a.d->mLangs;
+    s >> a.d->mGender;
     a.d->mEmpty = false;
 
     return s;
