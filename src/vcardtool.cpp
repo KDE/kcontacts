@@ -479,6 +479,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     VCardLine line(QLatin1String("GENDER"), genderStr);
                     card.addLine(line);
                 }
+                // KIND
+                if (!( *addrIt ).kind().isEmpty()) {
+                    VCardLine line( QLatin1String( "KIND" ), ( *addrIt ).kind() );
+                    card.addLine(line);
+                }
             }
             if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
                 // ANNIVERSARY
@@ -617,7 +622,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.insertEmail((*lineIt).value().toString(),
                                      types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
                 }
-
+                // KIND
+                else if ( identifier == QLatin1String( "kind" ) ) {
+                    addr.setKind( ( *lineIt ).value().toString() );
+                }
                 // FN
                 else if (identifier == QLatin1String("fn")) {
                     addr.setFormattedName((*lineIt).value().toString());

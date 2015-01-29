@@ -987,6 +987,8 @@ public:
     void setGender(const Gender &gender);
     Gender gender() const;
 
+    QString kind() const;
+    void setKind(const QString &kind);
 private:
     class Private;
     QSharedDataPointer<Private> d;
