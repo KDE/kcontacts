@@ -405,6 +405,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(titleLine);
 
         // TZ
+        // TODO Add vcard4.0 support
         const TimeZone timeZone = (*addrIt).timeZone();
         if (timeZone.isValid()) {
             QString str;
