@@ -171,17 +171,21 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // BDAY
         card.addLine(VCardLine(QLatin1String("BDAY"), createDateTime((*addrIt).birthday())));
 
+        //Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
+        //=> not necessary to export just tag...
         // CATEGORIES only > 2.1
-        if (version != VCard::v2_1) {
-            QStringList categories = (*addrIt).categories();
-            QStringList::Iterator catIt;
-            QStringList::Iterator catEnd(categories.end());
-            for (catIt = categories.begin(); catIt != catEnd; ++catIt) {
-                (*catIt).replace(QLatin1Char(','), QLatin1String("\\,"));
-            }
+        if (exportVcard) {
+            if (version != VCard::v2_1) {
+                QStringList categories = (*addrIt).categories();
+                QStringList::Iterator catIt;
+                QStringList::Iterator catEnd(categories.end());
+                for (catIt = categories.begin(); catIt != catEnd; ++catIt) {
+                    (*catIt).replace(QLatin1Char(','), QLatin1String("\\,"));
+                }
 
-            VCardLine catLine(QLatin1String("CATEGORIES"), categories.join(QLatin1String(",")));
-            card.addLine(catLine);
+                VCardLine catLine(QLatin1String("CATEGORIES"), categories.join(QLatin1String(",")));
+                card.addLine(catLine);
+            }
         }
 
         // CLASS only for version == 3.0
