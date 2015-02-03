@@ -174,7 +174,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         //Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
         //=> not necessary to export just tag...
         // CATEGORIES only > 2.1
-        if (exportVcard) {
+        if (!exportVcard) {
             if (version != VCard::v2_1) {
                 QStringList categories = (*addrIt).categories();
                 QStringList::Iterator catIt;
