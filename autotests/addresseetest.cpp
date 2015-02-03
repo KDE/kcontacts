@@ -389,11 +389,12 @@ void AddresseeTest::customFieldsTest()
     QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("AnotherKey")), QLatin1String("OtherValue"));
     QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("YourValue"));
 
+#if 0 //Order is not defined now as we use a QHash
     // test customs
     QCOMPARE(a.customs().at(0), QLatin1String("MyApp-MyKey:YourValue"));
     QCOMPARE(a.customs().at(1), QLatin1String("MyApp-AnotherKey:OtherValue"));
     QCOMPARE(a.customs().at(2), QLatin1String("OtherApp-OtherKey:OurValue"));
-
+#endif
     // test equal operator
     KContacts::Addressee b;
     b.setUid(a.uid());
