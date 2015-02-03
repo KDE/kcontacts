@@ -55,6 +55,9 @@ void AddresseeTest::storeTest()
     QStringList customs;
     customs << QLatin1String("X-Danger: high");
 
+    KContacts::Gender gender(QLatin1String("H"));
+    addressee.setGender(gender);
+
     addressee.setUid(QLatin1String("My uid"));
     addressee.setName(QLatin1String("John Sinclair"));
     addressee.setFormattedName(QLatin1String("Sinclair, John"));
@@ -86,6 +89,7 @@ void AddresseeTest::storeTest()
     addressee.setCustoms(customs);
     addressee.setChanged(false);
 
+    QVERIFY(addressee.gender() == gender);
     QVERIFY(addressee.uid() == QLatin1String("My uid"));
     QVERIFY(addressee.name() == QLatin1String("John Sinclair"));
     QVERIFY(addressee.formattedName() == QLatin1String("Sinclair, John"));
@@ -106,7 +110,7 @@ void AddresseeTest::storeTest()
     QVERIFY(addressee.productId() == QLatin1String("ProductId45"));
     QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15)));
     QVERIFY(addressee.sortString() == QLatin1String("Name"));
-    QVERIFY(addressee.url() == QUrl("www.scottlandyard.info"));
+    QVERIFY(addressee.url() == QUrl(QLatin1Literal("www.scottlandyard.info")));
     QVERIFY(addressee.secrecy() == KContacts::Secrecy(KContacts::Secrecy::Public));
     QVERIFY(addressee.logo() == logo);
     QVERIFY(addressee.photo() == photo);
@@ -386,8 +390,8 @@ void AddresseeTest::customFieldsTest()
     QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("YourValue"));
 
     // test customs
-    QCOMPARE(a.customs().at(0), QLatin1String("MyApp-AnotherKey:OtherValue"));
-    QCOMPARE(a.customs().at(1), QLatin1String("MyApp-MyKey:YourValue"));
+    QCOMPARE(a.customs().at(0), QLatin1String("MyApp-MyKey:YourValue"));
+    QCOMPARE(a.customs().at(1), QLatin1String("MyApp-AnotherKey:OtherValue"));
     QCOMPARE(a.customs().at(2), QLatin1String("OtherApp-OtherKey:OurValue"));
 
     // test equal operator
