@@ -1,0 +1,14 @@
+maintainer:
+description: Address book API for KDE 
+tier: 3
+type: functional
+platforms:
+    - name: All
+portingAid: false
+deprecated: false
+release: false
+libraries:
+ - qmake: KContacts
+   cmake: "KF5::Contacts"
+cmakename: KF5Contacts
+
