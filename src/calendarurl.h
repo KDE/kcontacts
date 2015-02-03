@@ -50,7 +50,7 @@ public:
 
     ~CalendarUrl();
 
-    typedef QList<CalendarUrl> List;
+    typedef QVector<CalendarUrl> List;
 
     bool isValid() const;
 

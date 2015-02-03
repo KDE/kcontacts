@@ -91,6 +91,7 @@ public:
         mEmails = other.mEmails;
         mCategories = other.mCategories;
         mCustomFields = other.mCustomFields;
+        mCalendarUrl = other.mCalendarUrl;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -135,7 +136,7 @@ public:
     QString mKind;
     QStringList mCategories;
     QHash<QString, QString> mCustomFields;
-
+    CalendarUrl::List mCalendarUrl;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -351,6 +352,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "kind differs";
         return false;
     }
+    if ( !listEquals( d->mCalendarUrl, addressee.d->mCalendarUrl ) ) {
+        qCDebug(KCONTACTS_LOG) << "calendarUrl differs";
+        return false;
+    }
 
     return true;
 }
@@ -417,6 +422,15 @@ void Addressee::setKind( const QString &kind )
 QString Addressee::kind() const
 {
     return d->mKind;
+}
+
+void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
+{
+    d->mEmpty = false;
+    //TODO verify that there is not same calendarurl
+    if (calendarUrl.isValid()) {
+        d->mCalendarUrl.append(calendarUrl);
+    }
 }
 
 void Addressee::setFormattedName(const QString &formattedName)
@@ -2044,6 +2058,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mLangs;
     s << a.d->mGender;
     s << a.d->mKind;
+    s << a.d->mCalendarUrl;
     return s;
 }
 
@@ -2087,6 +2102,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mLangs;
     s >> a.d->mGender;
     s >> a.d->mKind;
+    s >> a.d->mCalendarUrl;
     a.d->mEmpty = false;
 
     return s;

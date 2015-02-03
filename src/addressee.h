@@ -39,6 +39,7 @@
 #include "secrecy.h"
 #include "sound.h"
 #include "timezone.h"
+#include "calendarurl.h"
 #include "addresseelist.h"  // for typedef QList<Addressee> List;
 
 namespace KContacts
@@ -989,6 +990,9 @@ public:
 
     QString kind() const;
     void setKind(const QString &kind);
+
+    void insertCalendarUrl(const CalendarUrl &calendarUrl);
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

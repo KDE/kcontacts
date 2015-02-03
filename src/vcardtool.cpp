@@ -594,7 +594,18 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList categories = splitString(commaSep, (*lineIt).value().toString());
                     addr.setCategories(categories);
                 }
-
+                // FBURL
+                else if (identifier == QLatin1String( "fburl" ) ) {
+                    //TODO
+                }
+                // CALADRURI
+                else if (identifier == QLatin1String( "caladruri" ) ) {
+                    //TODO
+                }
+                // CALURI
+                else if (identifier == QLatin1String( "caluri" ) ) {
+                    //TODO
+                }
                 // CLASS
                 else if (identifier == QLatin1String("class")) {
                     addr.setSecrecy(parseSecrecy(*lineIt));
