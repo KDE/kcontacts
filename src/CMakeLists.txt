@@ -10,6 +10,7 @@ set(kcontacts_SRCS
   addressee.cpp
   addresseehelper.cpp
   addresseelist.cpp
+  calendarurl.cpp
   contactgroup.cpp
   contactgrouptool.cpp
   email.cpp
@@ -71,6 +72,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Address
   Addressee
   AddresseeList
+  CalendarUrl
   ContactGroup
   ContactGroupTool
   Email
