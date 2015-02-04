@@ -984,6 +984,7 @@ public:
      * @return List of lang
      */
     Lang::List langs() const;
+    void setLangs(const Lang::List &langs);
 
     void setGender(const Gender &gender);
     Gender gender() const;
@@ -992,6 +993,18 @@ public:
     void setKind(const QString &kind);
 
     void insertCalendarUrl(const CalendarUrl &calendarUrl);
+
+    void insertExtraSound(const Sound &sound);
+    void setExtraSoundList(const Sound::List &soundList);
+    Sound::List extraSound() const;
+
+    void insertExtraPhoto(const Picture &picture);
+    void setExtraPhotoList(const Picture::List &pictureList);
+    Picture::List extraPhoto() const;
+
+    void insertExtraLogo(const Picture &logo);
+    void setExtraLogoList(const Picture::List &logoList);
+    Picture::List extraLogo() const;
 
 private:
     class Private;

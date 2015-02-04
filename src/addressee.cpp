@@ -92,6 +92,9 @@ public:
         mCategories = other.mCategories;
         mCustomFields = other.mCustomFields;
         mCalendarUrl = other.mCalendarUrl;
+        mSoundListExtra = other.mSoundListExtra;
+        mPhotoListExtra = other.mPhotoListExtra;
+        mLogoListExtra = other.mLogoListExtra;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -137,6 +140,9 @@ public:
     QStringList mCategories;
     QHash<QString, QString> mCustomFields;
     CalendarUrl::List mCalendarUrl;
+    Sound::List mSoundListExtra;
+    Picture::List mPhotoListExtra;
+    Picture::List mLogoListExtra;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -356,6 +362,18 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "calendarUrl differs";
         return false;
     }
+    if ( !listEquals( d->mSoundListExtra, addressee.d->mSoundListExtra ) ) {
+        qCDebug(KCONTACTS_LOG) << "Extra sound differs";
+        return false;
+    }
+    if ( !listEquals( d->mPhotoListExtra, addressee.d->mPhotoListExtra ) ) {
+        qCDebug(KCONTACTS_LOG) << "Extra photo differs";
+        return false;
+    }
+    if ( !listEquals( d->mLogoListExtra, addressee.d->mLogoListExtra ) ) {
+        qCDebug(KCONTACTS_LOG) << "Extra logo differs";
+        return false;
+    }
 
     return true;
 }
@@ -422,6 +440,51 @@ void Addressee::setKind( const QString &kind )
 QString Addressee::kind() const
 {
     return d->mKind;
+}
+
+void Addressee::insertExtraSound(const Sound &sound)
+{
+    d->mSoundListExtra.append(sound);
+}
+
+Sound::List Addressee::extraSound() const
+{
+    return d->mSoundListExtra;
+}
+
+void Addressee::insertExtraPhoto(const Picture &picture)
+{
+    d->mPhotoListExtra.append(picture);
+}
+
+Picture::List Addressee::extraPhoto() const
+{
+    return d->mPhotoListExtra;
+}
+
+void Addressee::insertExtraLogo(const Picture &logo)
+{
+    d->mLogoListExtra.append(logo);
+}
+
+Picture::List Addressee::extraLogo() const
+{
+    return d->mLogoListExtra;
+}
+
+void Addressee::setExtraSoundList(const Sound::List &soundList)
+{
+    d->mSoundListExtra = soundList;
+}
+
+void Addressee::setExtraPhotoList(const Picture::List &pictureList)
+{
+    d->mPhotoListExtra = pictureList;
+}
+
+void Addressee::setExtraLogoList(const Picture::List &logoList)
+{
+    d->mLogoListExtra = logoList;
 }
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
@@ -1331,6 +1394,12 @@ void Addressee::removeLang(const QString &language)
     }
 }
 
+void Addressee::setLangs(const Lang::List &langs)
+{
+    d->mLangs = langs;
+    d->mEmpty = false;
+}
+
 void Addressee::insertLang(const Lang &language)
 {
     const QString languageStr = language.language();
@@ -2059,6 +2128,10 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mGender;
     s << a.d->mKind;
     s << a.d->mCalendarUrl;
+    s << a.d->mSoundListExtra;
+    s << a.d->mPhotoListExtra;
+    s << a.d->mLogoListExtra;
+
     return s;
 }
 
@@ -2103,6 +2176,9 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mGender;
     s >> a.d->mKind;
     s >> a.d->mCalendarUrl;
+    s >> a.d->mSoundListExtra;
+    s >> a.d->mPhotoListExtra;
+    s >> a.d->mLogoListExtra;
     a.d->mEmpty = false;
 
     return s;

@@ -92,6 +92,7 @@ public:
      */
     ~Sound();
 
+    typedef QVector<Sound> List;
     /**
      * Assignment operator.
      *
