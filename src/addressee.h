@@ -996,16 +996,19 @@ public:
 
     void insertExtraSound(const Sound &sound);
     void setExtraSoundList(const Sound::List &soundList);
-    Sound::List extraSound() const;
+    Sound::List extraSoundList() const;
 
     void insertExtraPhoto(const Picture &picture);
     void setExtraPhotoList(const Picture::List &pictureList);
-    Picture::List extraPhoto() const;
+    Picture::List extraPhotoList() const;
 
     void insertExtraLogo(const Picture &logo);
     void setExtraLogoList(const Picture::List &logoList);
-    Picture::List extraLogo() const;
+    Picture::List extraLogoList() const;
 
+    QVector<QUrl> extraUrlList() const;
+    void setExtraUrlList(const QVector<QUrl> &urlList);
+    void insertExtraUrl(const QUrl &url);
 private:
     class Private;
     QSharedDataPointer<Private> d;

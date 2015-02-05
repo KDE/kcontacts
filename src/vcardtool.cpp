@@ -278,7 +278,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // LOGO
         card.addLine(createPicture(QLatin1String("LOGO"), (*addrIt).logo(), version));
-        Q_FOREACH (const Picture &logo, ( *addrIt ).extraLogo()) {
+        Q_FOREACH (const Picture &logo, ( *addrIt ).extraLogoList()) {
             card.addLine( createPicture( QLatin1String( "LOGO" ), logo, version ) );
         }
 
@@ -361,7 +361,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // PHOTO
         card.addLine(createPicture(QLatin1String("PHOTO"), (*addrIt).photo(), version));
-        Q_FOREACH (const Picture &photo, ( *addrIt ).extraPhoto()) {
+        Q_FOREACH (const Picture &photo, ( *addrIt ).extraPhotoList()) {
             card.addLine( createPicture( QLatin1String( "PHOTO" ), photo, version ) );
         }
 
@@ -388,7 +388,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // SOUND
         card.addLine(createSound((*addrIt).sound(), version));
-        Q_FOREACH (const Sound &sound, ( *addrIt ).extraSound()) {
+        Q_FOREACH (const Sound &sound, ( *addrIt ).extraSoundList()) {
             card.addLine( createSound( sound, version ) );
         }
 
@@ -441,6 +441,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // URL
         card.addLine(VCardLine(QLatin1String("URL"), (*addrIt).url().url()));
+        Q_FOREACH (const QUrl &url, ( *addrIt ).extraUrlList()) {
+            card.addLine( VCardLine( QLatin1String( "URL" ), url ) );
+        }
 
         // X-
         const QStringList customs = (*addrIt).customs();
@@ -869,7 +872,12 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // URL
                 else if (identifier == QLatin1String("url")) {
-                    addr.setUrl(QUrl((*lineIt).value().toString()));
+                    const QUrl url = QUrl( ( *lineIt ).value().toString() );
+                    if (addr.url().isEmpty()) {
+                        addr.setUrl( url );
+                    } else {
+                        addr.insertExtraUrl(url);
+                    }
                 }
 
                 // X-

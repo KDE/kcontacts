@@ -95,6 +95,7 @@ public:
         mSoundListExtra = other.mSoundListExtra;
         mPhotoListExtra = other.mPhotoListExtra;
         mLogoListExtra = other.mLogoListExtra;
+        mUrlListExtra = other.mUrlListExtra;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -143,6 +144,7 @@ public:
     Sound::List mSoundListExtra;
     Picture::List mPhotoListExtra;
     Picture::List mLogoListExtra;
+    QVector<QUrl> mUrlListExtra;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -374,7 +376,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "Extra logo differs";
         return false;
     }
-
+    if ( !listEquals( d->mUrlListExtra, addressee.d->mUrlListExtra ) ) {
+        qCDebug(KCONTACTS_LOG) << "Extra url differs";
+        return false;
+    }
     return true;
 }
 
@@ -447,7 +452,7 @@ void Addressee::insertExtraSound(const Sound &sound)
     d->mSoundListExtra.append(sound);
 }
 
-Sound::List Addressee::extraSound() const
+Sound::List Addressee::extraSoundList() const
 {
     return d->mSoundListExtra;
 }
@@ -457,7 +462,7 @@ void Addressee::insertExtraPhoto(const Picture &picture)
     d->mPhotoListExtra.append(picture);
 }
 
-Picture::List Addressee::extraPhoto() const
+Picture::List Addressee::extraPhotoList() const
 {
     return d->mPhotoListExtra;
 }
@@ -467,7 +472,7 @@ void Addressee::insertExtraLogo(const Picture &logo)
     d->mLogoListExtra.append(logo);
 }
 
-Picture::List Addressee::extraLogo() const
+Picture::List Addressee::extraLogoList() const
 {
     return d->mLogoListExtra;
 }
@@ -485,6 +490,21 @@ void Addressee::setExtraPhotoList(const Picture::List &pictureList)
 void Addressee::setExtraLogoList(const Picture::List &logoList)
 {
     d->mLogoListExtra = logoList;
+}
+
+void Addressee::insertExtraUrl(const QUrl &url)
+{
+    d->mUrlListExtra.append(url);
+}
+
+void Addressee::setExtraUrlList(const QVector<QUrl> &urlList)
+{
+    d->mUrlListExtra = urlList;
+}
+
+QVector<QUrl> Addressee::extraUrlList() const
+{
+    return d->mUrlListExtra;
 }
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
@@ -2131,6 +2151,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mSoundListExtra;
     s << a.d->mPhotoListExtra;
     s << a.d->mLogoListExtra;
+    s << a.d->mUrlListExtra;
 
     return s;
 }
@@ -2179,6 +2200,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mSoundListExtra;
     s >> a.d->mPhotoListExtra;
     s >> a.d->mLogoListExtra;
+    s >> a.d->mUrlListExtra;
     a.d->mEmpty = false;
 
     return s;
