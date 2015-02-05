@@ -93,9 +93,9 @@ public:
         mCustomFields = other.mCustomFields;
         mCalendarUrl = other.mCalendarUrl;
         mSoundListExtra = other.mSoundListExtra;
-        mPhotoListExtra = other.mPhotoListExtra;
-        mLogoListExtra = other.mLogoListExtra;
-        mUrlListExtra = other.mUrlListExtra;
+        mPhotoExtraList = other.mPhotoExtraList;
+        mLogoExtraList = other.mLogoExtraList;
+        mUrlExtraList = other.mUrlExtraList;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -142,9 +142,9 @@ public:
     QHash<QString, QString> mCustomFields;
     CalendarUrl::List mCalendarUrl;
     Sound::List mSoundListExtra;
-    Picture::List mPhotoListExtra;
-    Picture::List mLogoListExtra;
-    QVector<QUrl> mUrlListExtra;
+    Picture::List mPhotoExtraList;
+    Picture::List mLogoExtraList;
+    QVector<QUrl> mUrlExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -368,15 +368,15 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "Extra sound differs";
         return false;
     }
-    if (!listEquals(d->mPhotoListExtra, addressee.d->mPhotoListExtra)) {
+    if (!listEquals(d->mPhotoExtraList, addressee.d->mPhotoExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra photo differs";
         return false;
     }
-    if (!listEquals(d->mLogoListExtra, addressee.d->mLogoListExtra)) {
+    if (!listEquals(d->mLogoExtraList, addressee.d->mLogoExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra logo differs";
         return false;
     }
-    if (!listEquals(d->mUrlListExtra, addressee.d->mUrlListExtra)) {
+    if (!listEquals(d->mUrlExtraList, addressee.d->mUrlExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
         return false;
     }
@@ -460,22 +460,22 @@ Sound::List Addressee::extraSoundList() const
 
 void Addressee::insertExtraPhoto(const Picture &picture)
 {
-    d->mPhotoListExtra.append(picture);
+    d->mPhotoExtraList.append(picture);
 }
 
 Picture::List Addressee::extraPhotoList() const
 {
-    return d->mPhotoListExtra;
+    return d->mPhotoExtraList;
 }
 
 void Addressee::insertExtraLogo(const Picture &logo)
 {
-    d->mLogoListExtra.append(logo);
+    d->mLogoExtraList.append(logo);
 }
 
 Picture::List Addressee::extraLogoList() const
 {
-    return d->mLogoListExtra;
+    return d->mLogoExtraList;
 }
 
 void Addressee::setExtraSoundList(const Sound::List &soundList)
@@ -485,27 +485,27 @@ void Addressee::setExtraSoundList(const Sound::List &soundList)
 
 void Addressee::setExtraPhotoList(const Picture::List &pictureList)
 {
-    d->mPhotoListExtra = pictureList;
+    d->mPhotoExtraList = pictureList;
 }
 
 void Addressee::setExtraLogoList(const Picture::List &logoList)
 {
-    d->mLogoListExtra = logoList;
+    d->mLogoExtraList = logoList;
 }
 
 void Addressee::insertExtraUrl(const QUrl &url)
 {
-    d->mUrlListExtra.append(url);
+    d->mUrlExtraList.append(url);
 }
 
 void Addressee::setExtraUrlList(const QVector<QUrl> &urlList)
 {
-    d->mUrlListExtra = urlList;
+    d->mUrlExtraList = urlList;
 }
 
 QVector<QUrl> Addressee::extraUrlList() const
 {
-    return d->mUrlListExtra;
+    return d->mUrlExtraList;
 }
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
@@ -2150,9 +2150,9 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mKind;
     s << a.d->mCalendarUrl;
     s << a.d->mSoundListExtra;
-    s << a.d->mPhotoListExtra;
-    s << a.d->mLogoListExtra;
-    s << a.d->mUrlListExtra;
+    s << a.d->mPhotoExtraList;
+    s << a.d->mLogoExtraList;
+    s << a.d->mUrlExtraList;
 
     return s;
 }
@@ -2199,9 +2199,9 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mKind;
     s >> a.d->mCalendarUrl;
     s >> a.d->mSoundListExtra;
-    s >> a.d->mPhotoListExtra;
-    s >> a.d->mLogoListExtra;
-    s >> a.d->mUrlListExtra;
+    s >> a.d->mPhotoExtraList;
+    s >> a.d->mLogoExtraList;
+    s >> a.d->mUrlExtraList;
     a.d->mEmpty = false;
 
     return s;
