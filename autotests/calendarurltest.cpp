@@ -48,8 +48,8 @@ void CalendarUrlTest::shouldHaveDefaultValue()
 void CalendarUrlTest::shouldAssignValue()
 {
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     CalendarUrl calendarUrl(CalendarUrl::FBUrl);
     calendarUrl.setParameters(params);
     QVERIFY(!calendarUrl.isValid());
@@ -75,19 +75,19 @@ void CalendarUrlTest::shouldSerialized()
     CalendarUrl::CalendarType type = CalendarUrl::CALUri;
     calendarUrl.setType(type);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     calendarUrl.setParameters(params);
     calendarUrl.setUrl(QUrl(QLatin1String("mailto:foo@kde.org")));
 
     QByteArray data;
-    QDataStream s( &data, QIODevice::WriteOnly );
+    QDataStream s(&data, QIODevice::WriteOnly);
     s << calendarUrl;
 
-    QDataStream t( &data, QIODevice::ReadOnly );
+    QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY( calendarUrl == result );
+    QVERIFY(calendarUrl == result);
 }
 
 void CalendarUrlTest::shouldEqualCalendarUrl()
@@ -97,13 +97,13 @@ void CalendarUrlTest::shouldEqualCalendarUrl()
     CalendarUrl::CalendarType type = CalendarUrl::CALUri;
     calendarUrl.setType(type);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList()<< QLatin1String("bla1") <<QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList()<< QLatin1String("bla2") <<QLatin1String("blo2"));
+    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
+    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
     calendarUrl.setUrl(QUrl(QLatin1String("mailto:foo@kde.org")));
     calendarUrl.setParameters(params);
 
     result = calendarUrl;
-    QVERIFY( calendarUrl == result );
+    QVERIFY(calendarUrl == result);
 }
 
 QTEST_MAIN(CalendarUrlTest)

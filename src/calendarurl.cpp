@@ -33,8 +33,8 @@ public:
     {
     }
 
-    Private( const Private &other )
-        : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
         parameters = other.parameters;
         type = other.type;
@@ -50,23 +50,22 @@ public:
 QString CalendarUrl::Private::typeToString(CalendarUrl::CalendarType type)
 {
     QString ret;
-    switch(type) {
-        case Unknown:
-            ret = QLatin1String("Unknown");
-            break;
-        case FBUrl:
-            ret = QLatin1String("FreeBusy");
-            break;
-        case CALUri:
-            ret = QLatin1String("CalUri");
-            break;
-        case CALADRUri:
-            ret = QLatin1String("Caladruri");
-            break;
+    switch (type) {
+    case Unknown:
+        ret = QLatin1String("Unknown");
+        break;
+    case FBUrl:
+        ret = QLatin1String("FreeBusy");
+        break;
+    case CALUri:
+        ret = QLatin1String("CalUri");
+        break;
+    case CALADRUri:
+        ret = QLatin1String("Caladruri");
+        break;
     }
     return ret;
 }
-
 
 CalendarUrl::CalendarUrl()
     : d(new Private)
@@ -80,8 +79,8 @@ CalendarUrl::CalendarUrl(CalendarUrl::CalendarType type)
     d->type = type;
 }
 
-CalendarUrl::CalendarUrl( const CalendarUrl &other )
-  : d( other.d )
+CalendarUrl::CalendarUrl(const CalendarUrl &other)
+    : d(other.d)
 {
 }
 
@@ -102,25 +101,24 @@ bool CalendarUrl::operator==(const CalendarUrl &other) const
 
 bool CalendarUrl::operator!=(const CalendarUrl &other) const
 {
-    return !( other == *this );
+    return !(other == *this);
 }
 
 CalendarUrl &CalendarUrl::operator=(const CalendarUrl &other)
 {
-    if ( this != &other ) {
-      d = other.d;
+    if (this != &other) {
+        d = other.d;
     }
 
     return *this;
 }
 
-
 QString CalendarUrl::toString() const
 {
     QString str;
-    str += QString::fromLatin1( "CalendarUrl {\n" );
-    str += QString::fromLatin1( "    url: %1\n" ).arg( d->url.toString() );
-    str += QString::fromLatin1( "    type: %1\n" ).arg( CalendarUrl::Private::typeToString(d->type) );
+    str += QString::fromLatin1("CalendarUrl {\n");
+    str += QString::fromLatin1("    url: %1\n").arg(d->url.toString());
+    str += QString::fromLatin1("    type: %1\n").arg(CalendarUrl::Private::typeToString(d->type));
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
@@ -128,9 +126,9 @@ QString CalendarUrl::toString() const
             i.next();
             param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
         }
-        str += QString::fromLatin1( "    parameters: %1\n" ).arg( param );
+        str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("}\n");
     return str;
 }
 

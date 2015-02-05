@@ -30,12 +30,13 @@ class QUrl;
  *  @since 4.14.6
  */
 
-namespace KContacts {
+namespace KContacts
+{
 
 class KCONTACTS_EXPORT CalendarUrl
 {
-    friend KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &, const CalendarUrl & );
-    friend KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &, CalendarUrl & );
+    friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const CalendarUrl &);
+    friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, CalendarUrl &);
 public:
     enum CalendarType {
         Unknown = 0,
@@ -63,11 +64,10 @@ public:
     void setParameters(const QMap<QString, QStringList> &params);
     QMap<QString, QStringList> parameters() const;
 
-    bool operator==( const CalendarUrl &other ) const;
-    bool operator!=( const CalendarUrl &other ) const;
+    bool operator==(const CalendarUrl &other) const;
+    bool operator!=(const CalendarUrl &other) const;
 
-    CalendarUrl &operator=( const CalendarUrl &other );
-
+    CalendarUrl &operator=(const CalendarUrl &other);
 
     QString toString() const;
 private:
@@ -75,9 +75,9 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-KCONTACTS_EXPORT QDataStream &operator<<( QDataStream &stream, const CalendarUrl &object );
+KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const CalendarUrl &object);
 
-KCONTACTS_EXPORT QDataStream &operator>>( QDataStream &stream, CalendarUrl &object );
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, CalendarUrl &object);
 
 }
 #endif // CALENDARURL_H

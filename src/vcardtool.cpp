@@ -278,10 +278,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // LOGO
         card.addLine(createPicture(QLatin1String("LOGO"), (*addrIt).logo(), version));
-        Q_FOREACH (const Picture &logo, ( *addrIt ).extraLogoList()) {
-            card.addLine( createPicture( QLatin1String( "LOGO" ), logo, version ) );
+        Q_FOREACH (const Picture &logo, (*addrIt).extraLogoList()) {
+            card.addLine(createPicture(QLatin1String("LOGO"), logo, version));
         }
-
 
         // MAILER only for version < 4.0
         if (version != VCard::v4_0) {
@@ -361,8 +360,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // PHOTO
         card.addLine(createPicture(QLatin1String("PHOTO"), (*addrIt).photo(), version));
-        Q_FOREACH (const Picture &photo, ( *addrIt ).extraPhotoList()) {
-            card.addLine( createPicture( QLatin1String( "PHOTO" ), photo, version ) );
+        Q_FOREACH (const Picture &photo, (*addrIt).extraPhotoList()) {
+            card.addLine(createPicture(QLatin1String("PHOTO"), photo, version));
         }
 
         // PROID only for version > 2.1
@@ -388,8 +387,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // SOUND
         card.addLine(createSound((*addrIt).sound(), version));
-        Q_FOREACH (const Sound &sound, ( *addrIt ).extraSoundList()) {
-            card.addLine( createSound( sound, version ) );
+        Q_FOREACH (const Sound &sound, (*addrIt).extraSoundList()) {
+            card.addLine(createSound(sound, version));
         }
 
         // TEL
@@ -441,8 +440,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // URL
         card.addLine(VCardLine(QLatin1String("URL"), (*addrIt).url().url()));
-        Q_FOREACH (const QUrl &url, ( *addrIt ).extraUrlList()) {
-            card.addLine( VCardLine( QLatin1String( "URL" ), url ) );
+        Q_FOREACH (const QUrl &url, (*addrIt).extraUrlList()) {
+            card.addLine(VCardLine(QLatin1String("URL"), url));
         }
 
         // X-
@@ -498,8 +497,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     card.addLine(line);
                 }
                 // KIND
-                if (!( *addrIt ).kind().isEmpty()) {
-                    VCardLine line( QLatin1String( "KIND" ), ( *addrIt ).kind() );
+                if (!(*addrIt).kind().isEmpty()) {
+                    VCardLine line(QLatin1String("KIND"), (*addrIt).kind());
                     card.addLine(line);
                 }
             }
@@ -608,15 +607,15 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.setCategories(categories);
                 }
                 // FBURL
-                else if (identifier == QLatin1String( "fburl" ) ) {
+                else if (identifier == QLatin1String("fburl")) {
                     //TODO
                 }
                 // CALADRURI
-                else if (identifier == QLatin1String( "caladruri" ) ) {
+                else if (identifier == QLatin1String("caladruri")) {
                     //TODO
                 }
                 // CALURI
-                else if (identifier == QLatin1String( "caluri" ) ) {
+                else if (identifier == QLatin1String("caluri")) {
                     //TODO
                 }
                 // CLASS
@@ -652,8 +651,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                                      types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
                 }
                 // KIND
-                else if ( identifier == QLatin1String( "kind" ) ) {
-                    addr.setKind( ( *lineIt ).value().toString() );
+                else if (identifier == QLatin1String("kind")) {
+                    addr.setKind((*lineIt).value().toString());
                 }
                 // FN
                 else if (identifier == QLatin1String("fn")) {
@@ -720,11 +719,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // LOGO
                 else if (identifier == QLatin1String("logo")) {
-                    Picture picture = parsePicture( *lineIt );
+                    Picture picture = parsePicture(*lineIt);
                     if (addr.logo().isEmpty()) {
-                        addr.setLogo( picture );
+                        addr.setLogo(picture);
                     } else {
-                        addr.insertExtraLogo( picture );
+                        addr.insertExtraLogo(picture);
                     }
                 }
 
@@ -788,11 +787,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // PHOTO
                 else if (identifier == QLatin1String("photo")) {
-                    Picture picture = parsePicture( *lineIt );
+                    Picture picture = parsePicture(*lineIt);
                     if (addr.photo().isEmpty()) {
-                        addr.setPhoto( picture );
+                        addr.setPhoto(picture);
                     } else {
-                        addr.insertExtraPhoto( picture );
+                        addr.insertExtraPhoto(picture);
                     }
                 }
 
@@ -818,9 +817,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // SOUND
                 else if (identifier == QLatin1String("sound")) {
-                    Sound sound = parseSound( *lineIt );
+                    Sound sound = parseSound(*lineIt);
                     if (addr.sound().isEmpty()) {
-                        addr.setSound( sound );
+                        addr.setSound(sound);
                     } else {
                         addr.insertExtraSound(sound);
                     }
@@ -872,9 +871,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // URL
                 else if (identifier == QLatin1String("url")) {
-                    const QUrl url = QUrl( ( *lineIt ).value().toString() );
+                    const QUrl url = QUrl((*lineIt).value().toString());
                     if (addr.url().isEmpty()) {
-                        addr.setUrl( url );
+                        addr.setUrl(url);
                     } else {
                         addr.insertExtraUrl(url);
                     }

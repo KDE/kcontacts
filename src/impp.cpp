@@ -32,8 +32,8 @@ public:
     {
     }
 
-    Private( const Private &other )
-        : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
         parameters = other.parameters;
     }
@@ -48,7 +48,7 @@ Impp::Impp()
 }
 
 Impp::Impp(const Impp &other)
-    : d( other.d )
+    : d(other.d)
 {
 }
 
@@ -95,13 +95,13 @@ bool Impp::operator==(const Impp &other) const
 
 bool Impp::operator!=(const Impp &other) const
 {
-    return !( other == *this );
+    return !(other == *this);
 }
 
 Impp &Impp::operator=(const Impp &other)
 {
-    if ( this != &other ) {
-      d = other.d;
+    if (this != &other) {
+        d = other.d;
     }
 
     return *this;
@@ -110,8 +110,8 @@ Impp &Impp::operator=(const Impp &other)
 QString Impp::toString() const
 {
     QString str;
-    str += QString::fromLatin1( "Impp {\n" );
-    str += QString::fromLatin1( "    address: %1\n" ).arg( d->address );
+    str += QString::fromLatin1("Impp {\n");
+    str += QString::fromLatin1("    address: %1\n").arg(d->address);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
@@ -119,12 +119,11 @@ QString Impp::toString() const
             i.next();
             param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
         }
-        str += QString::fromLatin1( "    parameters: %1\n" ).arg( param );
+        str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1( "}\n" );
+    str += QString::fromLatin1("}\n");
     return str;
 }
-
 
 QDataStream &KABC::operator<<(QDataStream &s, const Impp &impp)
 {

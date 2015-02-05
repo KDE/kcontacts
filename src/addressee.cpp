@@ -356,27 +356,27 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "gender differs";
         return false;
     }
-    if ( d->mKind != addressee.d->mKind ) {
+    if (d->mKind != addressee.d->mKind) {
         qCDebug(KCONTACTS_LOG) << "kind differs";
         return false;
     }
-    if ( !listEquals( d->mCalendarUrl, addressee.d->mCalendarUrl ) ) {
+    if (!listEquals(d->mCalendarUrl, addressee.d->mCalendarUrl)) {
         qCDebug(KCONTACTS_LOG) << "calendarUrl differs";
         return false;
     }
-    if ( !listEquals( d->mSoundListExtra, addressee.d->mSoundListExtra ) ) {
+    if (!listEquals(d->mSoundListExtra, addressee.d->mSoundListExtra)) {
         qCDebug(KCONTACTS_LOG) << "Extra sound differs";
         return false;
     }
-    if ( !listEquals( d->mPhotoListExtra, addressee.d->mPhotoListExtra ) ) {
+    if (!listEquals(d->mPhotoListExtra, addressee.d->mPhotoListExtra)) {
         qCDebug(KCONTACTS_LOG) << "Extra photo differs";
         return false;
     }
-    if ( !listEquals( d->mLogoListExtra, addressee.d->mLogoListExtra ) ) {
+    if (!listEquals(d->mLogoListExtra, addressee.d->mLogoListExtra)) {
         qCDebug(KCONTACTS_LOG) << "Extra logo differs";
         return false;
     }
-    if ( !listEquals( d->mUrlListExtra, addressee.d->mUrlListExtra ) ) {
+    if (!listEquals(d->mUrlListExtra, addressee.d->mUrlListExtra)) {
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
         return false;
     }
@@ -433,10 +433,11 @@ QString Addressee::nameLabel()
     return i18n("Name");
 }
 
-void Addressee::setKind( const QString &kind )
+void Addressee::setKind(const QString &kind)
 {
-    if ( kind == d->mKind )
+    if (kind == d->mKind) {
         return;
+    }
 
     d->mEmpty = false;
     d->mKind = kind;
