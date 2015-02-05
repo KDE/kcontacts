@@ -441,7 +441,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // URL
         card.addLine(VCardLine(QLatin1String("URL"), (*addrIt).url().url()));
         Q_FOREACH (const QUrl &url, (*addrIt).extraUrlList()) {
-            card.addLine(VCardLine(QLatin1String("URL"), url));
+            card.addLine(VCardLine(QLatin1String("URL"), url.url()));
         }
 
         // X-

@@ -13,6 +13,7 @@
     <file>data/vcard10.vcf</file>
     <file>data/vcard11.vcf</file>
     <file>data/vcard12.vcf</file>
+    <file>data/vcard13.vcf</file>
   </qresource>
   
   <!-- output files formatted for vcard version 2.1 -->
@@ -34,6 +35,7 @@
     <file>data/vcard10.vcf.ref</file>
     <file>data/vcard11.vcf.ref</file>
     <file>data/vcard12.vcf.ref</file>
+    <file>data/vcard13.vcf.ref</file>
   </qresource>
 
   <!-- output files formatted for vcard version 4.0 -->
