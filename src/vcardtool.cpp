@@ -189,9 +189,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
         // MEMBER (only in 4.0)
         if ( version == VCard::v4_0) {
-            Q_FOREACH (const QString &member, ( *addrIt ).members() ) {
-                VCardLine line( QLatin1String( "MEMBER" ), member );
-                card.addLine( line );
+            // The KIND property must be set to "group" in order to use this property.
+            if (( *addrIt ).kind().toLower() == QLatin1String("group")) {
+                Q_FOREACH (const QString &member, ( *addrIt ).members() ) {
+                    VCardLine line( QLatin1String( "MEMBER" ), member );
+                    card.addLine( line );
+                }
             }
         }
 
