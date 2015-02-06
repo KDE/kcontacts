@@ -187,6 +187,13 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 card.addLine(catLine);
             }
         }
+        // MEMBER (only in 4.0)
+        if ( version == VCard::v4_0) {
+            Q_FOREACH (const QString &member, ( *addrIt ).members() ) {
+                VCardLine line( QLatin1String( "MEMBER" ), member );
+                card.addLine( line );
+            }
+        }
 
         // CLASS only for version == 3.0
         if (version == VCard::v3_0) {
@@ -877,6 +884,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     } else {
                         addr.insertExtraUrl(url);
                     }
+                }
+                // MEMBER (vcard 4.0)
+                else if ( identifier == QLatin1String( "member" ) ) {
+                    addr.insertMember( ( *lineIt ).value().toString() );
                 }
 
                 // X-

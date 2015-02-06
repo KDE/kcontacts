@@ -1009,6 +1009,12 @@ public:
     QVector<QUrl> extraUrlList() const;
     void setExtraUrlList(const QVector<QUrl> &urlList);
     void insertExtraUrl(const QUrl &url);
+
+
+    void insertMember(const QString &member);
+    void setMembers(const QStringList &c);
+    QStringList members() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;
