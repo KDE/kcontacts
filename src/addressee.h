@@ -1015,6 +1015,10 @@ public:
     void setMembers(const QStringList &c);
     QStringList members() const;
 
+    void insertRelationShip(const QString &related);
+    void setRelationShips(const QStringList &c);
+    QStringList relationShips() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

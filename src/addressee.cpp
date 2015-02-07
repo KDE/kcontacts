@@ -97,6 +97,7 @@ public:
         mLogoExtraList = other.mLogoExtraList;
         mUrlExtraList = other.mUrlExtraList;
         mMembers = other.mMembers;
+        mRelationShips = other.mRelationShips;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -147,6 +148,7 @@ public:
     Picture::List mLogoExtraList;
     QVector<QUrl> mUrlExtraList;
     QStringList mMembers;
+    QStringList mRelationShips;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -384,6 +386,10 @@ bool Addressee::operator==(const Addressee &addressee) const
     }
     if (!listEquals( d->mMembers, addressee.d->mMembers)) {
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
+        return false;
+    }
+    if (!listEquals( d->mRelationShips, addressee.d->mRelationShips)) {
+        qCDebug(KCONTACTS_LOG) << "RelationShips differs";
         return false;
     }
 
@@ -1870,6 +1876,27 @@ QStringList Addressee::members() const
     return d->mMembers;
 }
 
+void Addressee::insertRelationShip(const QString &relation)
+{
+    d->mEmpty = false;
+
+    if ( d->mRelationShips.contains( relation ) )
+        return;
+
+    d->mRelationShips.append( relation );
+}
+
+void Addressee::setRelationShips(const QStringList &c)
+{
+    d->mEmpty = false;
+    d->mRelationShips = c;
+}
+
+QStringList Addressee::relationShips() const
+{
+    return d->mRelationShips;
+}
+
 void Addressee::insertCustom(const QString &app, const QString &name,
                              const QString &value)
 {
@@ -2182,6 +2209,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mLogoExtraList;
     s << a.d->mUrlExtraList;
     s << a.d->mMembers;
+    s << a.d->mRelationShips;
 
     return s;
 }
@@ -2232,6 +2260,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mLogoExtraList;
     s >> a.d->mUrlExtraList;
     s >> a.d->mMembers;
+    s >> a.d->mRelationShips;
     a.d->mEmpty = false;
 
     return s;
