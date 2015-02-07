@@ -188,19 +188,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
         }
         // MEMBER (only in 4.0)
-        if ( version == VCard::v4_0) {
+        if (version == VCard::v4_0) {
             // The KIND property must be set to "group" in order to use this property.
-            if (( *addrIt ).kind().toLower() == QLatin1String("group")) {
-                Q_FOREACH (const QString &member, ( *addrIt ).members() ) {
-                    VCardLine line( QLatin1String( "MEMBER" ), member );
-                    card.addLine( line );
+            if ((*addrIt).kind().toLower() == QLatin1String("group")) {
+                Q_FOREACH (const QString &member, (*addrIt).members()) {
+                    VCardLine line(QLatin1String("MEMBER"), member);
+                    card.addLine(line);
                 }
             }
         }
         if (version == VCard::v4_0) {
-            Q_FOREACH (const QString &relation, ( *addrIt ).relationShips() ) {
-                VCardLine line( QLatin1String( "RELATED" ), relation );
-                card.addLine( line );
+            Q_FOREACH (const QString &relation, (*addrIt).relationShips()) {
+                VCardLine line(QLatin1String("RELATED"), relation);
+                card.addLine(line);
             }
         }
         // CLASS only for version == 3.0
@@ -894,12 +894,12 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
                 }
                 // MEMBER (vcard 4.0)
-                else if ( identifier == QLatin1String( "member" ) ) {
-                    addr.insertMember( ( *lineIt ).value().toString() );
+                else if (identifier == QLatin1String("member")) {
+                    addr.insertMember((*lineIt).value().toString());
                 }
                 // RELATED (vcard 4.0)
-                else if ( identifier == QLatin1String( "related" ) ) {
-                    addr.insertRelationShip( ( *lineIt ).value().toString() );
+                else if (identifier == QLatin1String("related")) {
+                    addr.insertRelationShip((*lineIt).value().toString());
                 }
                 // X-
                 else if (identifier.startsWith(QLatin1String("x-"))) {

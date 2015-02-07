@@ -384,11 +384,11 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
         return false;
     }
-    if (!listEquals( d->mMembers, addressee.d->mMembers)) {
+    if (!listEquals(d->mMembers, addressee.d->mMembers)) {
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
         return false;
     }
-    if (!listEquals( d->mRelationShips, addressee.d->mRelationShips)) {
+    if (!listEquals(d->mRelationShips, addressee.d->mRelationShips)) {
         qCDebug(KCONTACTS_LOG) << "RelationShips differs";
         return false;
     }
@@ -1855,17 +1855,18 @@ QStringList Addressee::categories() const
     return d->mCategories;
 }
 
-void Addressee::insertMember( const QString & member)
+void Addressee::insertMember(const QString &member)
 {
     d->mEmpty = false;
 
-    if ( d->mMembers.contains( member ) )
+    if (d->mMembers.contains(member)) {
         return;
+    }
 
-    d->mMembers.append( member );
+    d->mMembers.append(member);
 }
 
-void Addressee::setMembers( const QStringList &m )
+void Addressee::setMembers(const QStringList &m)
 {
     d->mEmpty = false;
     d->mMembers = m;
@@ -1880,10 +1881,11 @@ void Addressee::insertRelationShip(const QString &relation)
 {
     d->mEmpty = false;
 
-    if ( d->mRelationShips.contains( relation ) )
+    if (d->mRelationShips.contains(relation)) {
         return;
+    }
 
-    d->mRelationShips.append( relation );
+    d->mRelationShips.append(relation);
 }
 
 void Addressee::setRelationShips(const QStringList &c)
