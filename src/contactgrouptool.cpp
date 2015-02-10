@@ -324,7 +324,7 @@ bool ContactGroupTool::convertFromXml(QIODevice *device, ContactGroup &group,
 
     bool ok = reader.read(device, group);
 
-    if (!ok && errorMessage != 0) {
+    if (!ok && errorMessage != Q_NULLPTR) {
         *errorMessage = reader.errorString();
     }
 
@@ -351,7 +351,7 @@ bool ContactGroupTool::convertFromXml(QIODevice *device, QList<ContactGroup> &gr
 
     bool ok = reader.read(device, groupList);
 
-    if (!ok && errorMessage != 0) {
+    if (!ok && errorMessage != Q_NULLPTR) {
         *errorMessage = reader.errorString();
     }
 

@@ -343,13 +343,13 @@ public:
      * last used Field object will be used.
      * @param field    pointer to the Field object to be sorted by
      */
-    void sortByField(Field *field = 0);
+    void sortByField(Field *field = Q_NULLPTR);
 
     /**
      * Sorts this list by a specific sorting mode.
      * @param mode    pointer to the sorting mode object to be sorted by
     */
-    void sortByMode(SortMode *mode = 0);
+    void sortByMode(SortMode *mode = Q_NULLPTR);
 
     /**
      * Sorts this list by its active sorting criterion. This normally is the

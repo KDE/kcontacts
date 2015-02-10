@@ -23,9 +23,8 @@
 #define KCONTACTS_CONTACTGROUPTOOL_H
 
 #include "kcontacts_export.h"
-
+#include <QString>
 class QIODevice;
-class QString;
 
 template <class T> class QList;
 
@@ -48,14 +47,14 @@ namespace ContactGroupTool
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group,
-                                     QString *errorMessage = 0);
+                                     QString *errorMessage = Q_NULLPTR);
 
 /**
  * Converts a contact @p group into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
-                                   QString *errorMessage = 0);
+                                   QString *errorMessage = Q_NULLPTR);
 
 /**
  * Converts XML data coming from a @p device into a @p list of contact groups.
@@ -63,14 +62,14 @@ KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
  */
 KCONTACTS_EXPORT bool convertFromXml(QIODevice *device,
                                      QList<ContactGroup> &list,
-                                     QString *errorMessage = 0);
+                                     QString *errorMessage = Q_NULLPTR);
 
 /**
  * Converts a @p list of contact groups into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list,
-                                   QIODevice *device, QString *errorMessage = 0);
+                                   QIODevice *device, QString *errorMessage = Q_NULLPTR);
 }
 
 }

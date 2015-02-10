@@ -606,7 +606,7 @@ Field::List Field::restoreFields(const KConfigGroup &cfg, const QString &identif
     int custom = 0;
     QList<int>::ConstIterator it;
     for (it = fieldIds.begin(); it != fieldIds.end(); ++it) {
-        Private *f = 0;
+        Private *f = Q_NULLPTR;
         if ((*it) == Private::CustomField) {
             QStringList customEntry = cfg.readEntry(QLatin1String("KCONTACTS_CustomEntry_") +
                                                     identifier + QLatin1Char('_') +

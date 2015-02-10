@@ -155,7 +155,7 @@ public:
     static KContacts::SortMode *mSortMode;
 };
 
-KContacts::SortMode *Addressee::Private::mSortMode = 0;
+KContacts::SortMode *Addressee::Private::mSortMode = Q_NULLPTR;
 
 Addressee::Addressee()
     : d(new Private)

@@ -194,7 +194,7 @@ class Address::Private : public QSharedData
 public:
     Private()
         : mEmpty(true)
-        , mType(0)
+        , mType(Q_NULLPTR)
     {
         mId = KRandom::randomString(10);
     }

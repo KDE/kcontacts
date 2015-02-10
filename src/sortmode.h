@@ -88,7 +88,7 @@ public:
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser(const KContacts::Addressee &first, const KContacts::Addressee &second) const;
+    bool lesser(const KContacts::Addressee &first, const KContacts::Addressee &second) const Q_DECL_OVERRIDE;
 
 private:
     class Private;
@@ -123,7 +123,7 @@ public:
     /**
       Returns whether the first contact is 'smaller' then the second.
      */
-    virtual bool lesser(const KContacts::Addressee &first, const KContacts::Addressee &second) const;
+    bool lesser(const KContacts::Addressee &first, const KContacts::Addressee &second) const Q_DECL_OVERRIDE;
 
 private:
     class Private;
