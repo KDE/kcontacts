@@ -1,11 +1,11 @@
 BEGIN:VCARD
-EMAIL;TYPE=internet:geiseri@yahoo.com
+VERSION:2.1
+EMAIL;INTERNET:geiseri@yahoo.com
 FN:ian geiser
 N:geiser;ian;;;
 ORG:Source eXtreme
 TITLE:VP of Engineering
 UID:ebvq9Wo9rO
-VERSION:2.1
 X-mozilla-cpt:;0
 X-mozilla-html:FALSE
 END:VCARD

@@ -19,7 +19,7 @@
   
   <!-- output files formatted for vcard version 2.1 -->
   <qresource prefix="/output2.1">
-    <file alias="data/vcard3.vcf.ref">data/vcard3.vcf.2_1ref</file>
+    <file>data/vcard3.vcf.2_1ref</file>
   </qresource>
   
   <!-- output files formatted for vcard version 3.0 -->

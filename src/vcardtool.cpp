@@ -83,6 +83,17 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
     return createVCards(list, version, false /*don't export*/);
 }
 
+void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const
+{
+    if (version == VCard::v2_1) {
+        Q_FOREACH(const QString &valueStr, valueStringList) {
+            line.addParameter( valueStr, QString() );
+        }
+    } else {
+        line.addParameter( key, valueStringList.join(QLatin1String(",")) );
+    }
+}
+
 QByteArray VCardTool::createVCards(const Addressee::List &list,
                                    VCard::Version version, bool exportVcard) const
 {
@@ -260,11 +271,15 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     foundType = true;
                 }
                 if (!valueStringList.isEmpty()) {
-                    line.addParameter(i.key(), valueStringList.join(QLatin1String(",")));
+                    addParameter(line, version, i.key(), valueStringList);
                 }
             }
             if (!foundType && needToAddPref) {
-                line.addParameter(QLatin1String("TYPE"), QLatin1String("PREF"));
+                if (version == VCard::v2_1) {
+                    line.addParameter( QLatin1String( "PREF" ), QString() );
+                } else {
+                    line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
+                }
             }
             card.addLine(line);
         }
