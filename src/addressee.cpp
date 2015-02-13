@@ -98,6 +98,7 @@ public:
         mUrlExtraList = other.mUrlExtraList;
         mMembers = other.mMembers;
         mRelationShips = other.mRelationShips;
+        mSources = other.mSources;
         mEmpty = other.mEmpty;
         mChanged = other.mChanged;
     }
@@ -147,6 +148,7 @@ public:
     Picture::List mPhotoExtraList;
     Picture::List mLogoExtraList;
     QVector<QUrl> mUrlExtraList;
+    QVector<QUrl> mSources;
     QStringList mMembers;
     QStringList mRelationShips;
     bool mEmpty    : 1;
@@ -392,6 +394,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "RelationShips differs";
         return false;
     }
+    if (!listEquals( d->mSources, addressee.d->mSources)) {
+        qCDebug(KCONTACTS_LOG) << "Sources differs";
+        return false;
+    }
 
     return true;
 }
@@ -520,6 +526,22 @@ QVector<QUrl> Addressee::extraUrlList() const
 {
     return d->mUrlExtraList;
 }
+
+void Addressee::insertSourceUrl(const QUrl &url)
+{
+    d->mSources.append(url);
+}
+
+void Addressee::setSourcesUrlList(const QVector<QUrl> &urlList)
+{
+    d->mSources = urlList;
+}
+
+QVector<QUrl> Addressee::sourcesUrlList() const
+{
+    return d->mSources;
+}
+
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
 {
@@ -2212,6 +2234,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mUrlExtraList;
     s << a.d->mMembers;
     s << a.d->mRelationShips;
+    s << a.d->mSources;
 
     return s;
 }
@@ -2263,6 +2286,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mUrlExtraList;
     s >> a.d->mMembers;
     s >> a.d->mRelationShips;
+    s >> a.d->mSources;
     a.d->mEmpty = false;
 
     return s;

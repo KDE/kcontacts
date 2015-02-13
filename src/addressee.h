@@ -1018,6 +1018,10 @@ public:
     void setRelationShips(const QStringList &c);
     QStringList relationShips() const;
 
+    void insertSourceUrl(const QUrl &url);
+    void setSourcesUrlList(const QVector<QUrl> &urlList);
+    QVector<QUrl> sourcesUrlList() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;
