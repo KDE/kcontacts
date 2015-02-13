@@ -394,7 +394,7 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "RelationShips differs";
         return false;
     }
-    if (!listEquals( d->mSources, addressee.d->mSources)) {
+    if (!listEquals(d->mSources, addressee.d->mSources)) {
         qCDebug(KCONTACTS_LOG) << "Sources differs";
         return false;
     }
@@ -541,7 +541,6 @@ QVector<QUrl> Addressee::sourcesUrlList() const
 {
     return d->mSources;
 }
-
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
 {
