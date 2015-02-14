@@ -19,7 +19,12 @@
   
   <!-- output files formatted for vcard version 2.1 -->
   <qresource prefix="/output2.1">
+    <file>data/vcard1.vcf.2_1ref</file>
+    <file>data/vcard2.vcf.2_1ref</file>
     <file>data/vcard3.vcf.2_1ref</file>
+    <file>data/vcard6.vcf.2_1ref</file>
+    <file>data/vcard7.vcf.2_1ref</file>
+    <file>data/vcard12.vcf.2_1ref</file>
   </qresource>
   
   <!-- output files formatted for vcard version 3.0 -->

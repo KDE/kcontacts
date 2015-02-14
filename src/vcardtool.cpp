@@ -1,6 +1,7 @@
 /*
     This file is part of the KContacts framework.
     Copyright (c) 2003 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2015 Laurent Montel <montel@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -164,9 +165,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             for (typeIt = mAddressTypeMap.constBegin();
                     typeIt != mAddressTypeMap.constEnd(); ++typeIt) {
                 if (typeIt.value() & (*it).type()) {
-                    adrLine.addParameter(QLatin1String("TYPE"), typeIt.key());
+                    addParameter(adrLine, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
                     if (hasLabel) {
-                        labelLine.addParameter(QLatin1String("TYPE"), typeIt.key());
+                        addParameter(labelLine, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
                     }
                 }
             }
@@ -438,7 +439,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
             for (typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt) {
                 if (typeIt.value() & (*phoneIt).type()) {
-                    line.addParameter(QLatin1String("TYPE"), typeIt.key());
+                    addParameter(line, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
                 }
             }
 
@@ -1086,7 +1087,6 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
 
 VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const
 {
-    Q_UNUSED(version);
     VCardLine line(identifier);
 
     if (pic.isEmpty()) {
@@ -1095,7 +1095,11 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
 
     if (pic.isIntern()) {
         line.setValue(pic.rawData());
-        line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+        if (version == VCard::v2_1) {
+            line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
+        } else {
+            line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+        }
         line.addParameter(QLatin1String("type"), pic.type());
     } else {
         line.setValue(pic.url());
@@ -1134,7 +1138,11 @@ VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
     if (snd.isIntern()) {
         if (!snd.data().isEmpty()) {
             line.setValue(snd.data());
-            line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+            if (version == VCard::v2_1) {
+                line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
+            } else {
+                line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+            }
             // TODO: need to store sound type!!!
         }
     } else if (!snd.url().isEmpty()) {
