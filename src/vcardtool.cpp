@@ -272,7 +272,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     foundType = true;
                 }
                 if (!valueStringList.isEmpty()) {
-                    addParameter(line, version, i.key(), valueStringList);
+                    if (i.key().toLower() == QLatin1String( "type" )) {
+                        addParameter(line, version, i.key(), valueStringList);
+                    } else {
+                        line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+                    }
                 }
             }
             if (!foundType && needToAddPref) {

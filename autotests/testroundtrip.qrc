@@ -25,6 +25,7 @@
     <file>data/vcard6.vcf.2_1ref</file>
     <file>data/vcard7.vcf.2_1ref</file>
     <file>data/vcard12.vcf.2_1ref</file>
+    <file>data/vcard14.vcf.2_1ref</file>
   </qresource>
   
   <!-- output files formatted for vcard version 3.0 -->
