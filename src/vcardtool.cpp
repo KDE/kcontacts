@@ -1101,10 +1101,11 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
         line.setValue(pic.rawData());
         if (version == VCard::v2_1) {
             line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
+            line.addParameter( pic.type(), QString() );
         } else {
             line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+            line.addParameter( QLatin1String( "type" ), pic.type() );
         }
-        line.addParameter(QLatin1String("type"), pic.type());
     } else {
         line.setValue(pic.url());
         line.addParameter(QLatin1String("value"), QLatin1String("URI"));
