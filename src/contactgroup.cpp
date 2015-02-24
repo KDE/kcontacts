@@ -503,5 +503,5 @@ bool ContactGroup::operator==(const ContactGroup &other) const
 
 QString ContactGroup::mimeType()
 {
-    return QLatin1String("application/x-vnd.kde.contactgroup");
+    return QStringLiteral("application/x-vnd.kde.contactgroup");
 }

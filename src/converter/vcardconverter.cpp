@@ -104,12 +104,12 @@ Addressee::List VCardConverter::parseVCards(const QByteArray &vcard) const
 
 QString KContacts::dateToVCardString(const QDateTime &dateTime)
 {
-    return dateTime.toString(QLatin1String("yyyyMMddThhmmssZ"));
+    return dateTime.toString(QStringLiteral("yyyyMMddThhmmssZ"));
 }
 
 QString KContacts::dateToVCardString(const QDate &date)
 {
-    return date.toString(QLatin1String("yyyyMMdd"));
+    return date.toString(QStringLiteral("yyyyMMdd"));
 }
 
 QDateTime KContacts::VCardStringToDate(const QString &dateString)

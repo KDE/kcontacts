@@ -28,15 +28,15 @@ void KeyTest::storeTest()
 {
     KContacts::Key key;
 
-    key.setId(QLatin1String("My Id"));
+    key.setId(QStringLiteral("My Id"));
     key.setType(KContacts::Key::Custom);
-    key.setCustomTypeString(QLatin1String("GnuPG"));
-    key.setTextData(QLatin1String("That's my super secret key"));
+    key.setCustomTypeString(QStringLiteral("GnuPG"));
+    key.setTextData(QStringLiteral("That's my super secret key"));
 
-    QVERIFY(key.id() == QLatin1String("My Id"));
+    QVERIFY(key.id() == QStringLiteral("My Id"));
     QVERIFY(key.type() == KContacts::Key::Custom);
-    QVERIFY(key.customTypeString() == QLatin1String("GnuPG"));
-    QVERIFY(key.textData() == QLatin1String("That's my super secret key"));
+    QVERIFY(key.customTypeString() == QStringLiteral("GnuPG"));
+    QVERIFY(key.textData() == QStringLiteral("That's my super secret key"));
     QVERIFY(key.isBinary() == false);
 }
 
@@ -44,23 +44,23 @@ void KeyTest::equalsTest()
 {
     KContacts::Key key1, key2;
 
-    key1.setId(QLatin1String("My Id"));
+    key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);
-    key1.setCustomTypeString(QLatin1String("GnuPG"));
-    key1.setTextData(QLatin1String("That's my super secret key"));
+    key1.setCustomTypeString(QStringLiteral("GnuPG"));
+    key1.setTextData(QStringLiteral("That's my super secret key"));
 
-    key2.setId(QLatin1String("My Id"));
+    key2.setId(QStringLiteral("My Id"));
     key2.setType(KContacts::Key::Custom);
-    key2.setCustomTypeString(QLatin1String("GnuPG"));
-    key2.setTextData(QLatin1String("That's my super secret key"));
+    key2.setCustomTypeString(QStringLiteral("GnuPG"));
+    key2.setTextData(QStringLiteral("That's my super secret key"));
 
     QVERIFY(key1 == key2);
 }
 
 void KeyTest::differsTest()
 {
-    KContacts::Key key1(QLatin1String("TextKey"), KContacts::Key::PGP);
-    KContacts::Key key2(QLatin1String("TextKey"), KContacts::Key::Custom);
+    KContacts::Key key1(QStringLiteral("TextKey"), KContacts::Key::PGP);
+    KContacts::Key key2(QStringLiteral("TextKey"), KContacts::Key::Custom);
 
     QVERIFY(key1 != key2);
 }
@@ -69,10 +69,10 @@ void KeyTest::assignmentTest()
 {
     KContacts::Key key1, key2;
 
-    key1.setId(QLatin1String("My Id"));
+    key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);
-    key1.setCustomTypeString(QLatin1String("GnuPG"));
-    key1.setTextData(QLatin1String("That's my super secret key"));
+    key1.setCustomTypeString(QStringLiteral("GnuPG"));
+    key1.setTextData(QStringLiteral("That's my super secret key"));
 
     key2 = key1;
 
@@ -83,10 +83,10 @@ void KeyTest::serializeTest()
 {
     KContacts::Key key1, key2;
 
-    key1.setId(QLatin1String("My Id"));
+    key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);
-    key1.setCustomTypeString(QLatin1String("GnuPG"));
-    key1.setTextData(QLatin1String("That's my super secret key"));
+    key1.setCustomTypeString(QStringLiteral("GnuPG"));
+    key1.setTextData(QStringLiteral("That's my super secret key"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);

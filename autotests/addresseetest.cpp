@@ -31,7 +31,7 @@ void AddresseeTest::emptyTest()
     QVERIFY(addressee.isEmpty());
 
     KContacts::Addressee addresseeWithMail;
-    addresseeWithMail.insertEmail(QLatin1String("foo@bar.org"));
+    addresseeWithMail.insertEmail(QStringLiteral("foo@bar.org"));
     QVERIFY(!addresseeWithMail.isEmpty());
 }
 
@@ -39,46 +39,46 @@ void AddresseeTest::storeTest()
 {
     KContacts::Addressee addressee;
 
-    KContacts::Picture logo(QLatin1String("http://scottlandyard.info/pics/logo.png"));
-    KContacts::Picture photo(QLatin1String("http://scottlandyard.info/~sinclair/photo.png"));
-    KContacts::Sound sound(QLatin1String("http://scottlandyard.info/~sinclair/sound.wav"));
+    KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
+    KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
+    KContacts::Sound sound(QStringLiteral("http://scottlandyard.info/~sinclair/sound.wav"));
 
     QStringList emails;
-    emails << QLatin1String("john@sinclair.com") << QLatin1String("ghosthunter@sinclair.com");
+    emails << QStringLiteral("john@sinclair.com") << QStringLiteral("ghosthunter@sinclair.com");
 
     KContacts::Key::List keys;
-    keys << KContacts::Key(QLatin1String("SecretKey"));
+    keys << KContacts::Key(QStringLiteral("SecretKey"));
 
     QStringList categories;
-    categories << QLatin1String("Helper") << QLatin1String("Friend");
+    categories << QStringLiteral("Helper") << QStringLiteral("Friend");
 
     QStringList customs;
-    customs << QLatin1String("X-Danger: high");
+    customs << QStringLiteral("X-Danger: high");
 
-    KContacts::Gender gender(QLatin1String("H"));
+    KContacts::Gender gender(QStringLiteral("H"));
     addressee.setGender(gender);
 
-    addressee.setUid(QLatin1String("My uid"));
-    addressee.setName(QLatin1String("John Sinclair"));
-    addressee.setFormattedName(QLatin1String("Sinclair, John"));
-    addressee.setFamilyName(QLatin1String("Sinclair"));
-    addressee.setGivenName(QLatin1String("John"));
-    addressee.setAdditionalName(QLatin1String("Bob"));
-    addressee.setPrefix(QLatin1String("Sir"));
-    addressee.setSuffix(QLatin1String("II"));
-    addressee.setNickName(QLatin1String("ghosthunter"));
+    addressee.setUid(QStringLiteral("My uid"));
+    addressee.setName(QStringLiteral("John Sinclair"));
+    addressee.setFormattedName(QStringLiteral("Sinclair, John"));
+    addressee.setFamilyName(QStringLiteral("Sinclair"));
+    addressee.setGivenName(QStringLiteral("John"));
+    addressee.setAdditionalName(QStringLiteral("Bob"));
+    addressee.setPrefix(QStringLiteral("Sir"));
+    addressee.setSuffix(QStringLiteral("II"));
+    addressee.setNickName(QStringLiteral("ghosthunter"));
     addressee.setBirthday(QDateTime(QDate(1982, 7, 19)));
-    addressee.setMailer(QLatin1String("mutt"));
+    addressee.setMailer(QStringLiteral("mutt"));
     addressee.setTimeZone(KContacts::TimeZone(2));
     addressee.setGeo(KContacts::Geo(42, 23));
-    addressee.setTitle(QLatin1String("Ghost Hunter"));
-    addressee.setRole(QLatin1String("Leader"));
-    addressee.setOrganization(QLatin1String("Scottland Yard"));
-    addressee.setNote(QLatin1String("Don't cross black deads way..."));
-    addressee.setProductId(QLatin1String("ProductId45"));
+    addressee.setTitle(QStringLiteral("Ghost Hunter"));
+    addressee.setRole(QStringLiteral("Leader"));
+    addressee.setOrganization(QStringLiteral("Scottland Yard"));
+    addressee.setNote(QStringLiteral("Don't cross black deads way..."));
+    addressee.setProductId(QStringLiteral("ProductId45"));
     addressee.setRevision(QDateTime(QDate(1982, 9, 15)));
-    addressee.setSortString(QLatin1String("Name"));
-    addressee.setUrl(QUrl(QLatin1String("www.scottlandyard.info")));
+    addressee.setSortString(QStringLiteral("Name"));
+    addressee.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
     addressee.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
     addressee.setLogo(logo);
     addressee.setPhoto(photo);
@@ -90,26 +90,26 @@ void AddresseeTest::storeTest()
     addressee.setChanged(false);
 
     QVERIFY(addressee.gender() == gender);
-    QVERIFY(addressee.uid() == QLatin1String("My uid"));
-    QVERIFY(addressee.name() == QLatin1String("John Sinclair"));
-    QVERIFY(addressee.formattedName() == QLatin1String("Sinclair, John"));
-    QVERIFY(addressee.familyName() == QLatin1String("Sinclair"));
-    QVERIFY(addressee.givenName() == QLatin1String("John"));
-    QVERIFY(addressee.additionalName() == QLatin1String("Bob"));
-    QVERIFY(addressee.prefix() == QLatin1String("Sir"));
-    QVERIFY(addressee.suffix() == QLatin1String("II"));
-    QVERIFY(addressee.nickName() == QLatin1String("ghosthunter"));
+    QVERIFY(addressee.uid() == QStringLiteral("My uid"));
+    QVERIFY(addressee.name() == QStringLiteral("John Sinclair"));
+    QVERIFY(addressee.formattedName() == QStringLiteral("Sinclair, John"));
+    QVERIFY(addressee.familyName() == QStringLiteral("Sinclair"));
+    QVERIFY(addressee.givenName() == QStringLiteral("John"));
+    QVERIFY(addressee.additionalName() == QStringLiteral("Bob"));
+    QVERIFY(addressee.prefix() == QStringLiteral("Sir"));
+    QVERIFY(addressee.suffix() == QStringLiteral("II"));
+    QVERIFY(addressee.nickName() == QStringLiteral("ghosthunter"));
     QVERIFY(addressee.birthday() == QDateTime(QDate(1982, 7, 19)));
-    QVERIFY(addressee.mailer() == QLatin1String("mutt"));
+    QVERIFY(addressee.mailer() == QStringLiteral("mutt"));
     QVERIFY(addressee.timeZone() == KContacts::TimeZone(2));
     QVERIFY(addressee.geo() == KContacts::Geo(42, 23));
-    QVERIFY(addressee.title() == QLatin1String("Ghost Hunter"));
-    QVERIFY(addressee.role() == QLatin1String("Leader"));
-    QVERIFY(addressee.organization() == QLatin1String("Scottland Yard"));
-    QVERIFY(addressee.note() == QLatin1String("Don't cross black deads way..."));
-    QVERIFY(addressee.productId() == QLatin1String("ProductId45"));
+    QVERIFY(addressee.title() == QStringLiteral("Ghost Hunter"));
+    QVERIFY(addressee.role() == QStringLiteral("Leader"));
+    QVERIFY(addressee.organization() == QStringLiteral("Scottland Yard"));
+    QVERIFY(addressee.note() == QStringLiteral("Don't cross black deads way..."));
+    QVERIFY(addressee.productId() == QStringLiteral("ProductId45"));
     QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15)));
-    QVERIFY(addressee.sortString() == QLatin1String("Name"));
+    QVERIFY(addressee.sortString() == QStringLiteral("Name"));
     QVERIFY(addressee.url() == QUrl(QLatin1Literal("www.scottlandyard.info")));
     QVERIFY(addressee.secrecy() == KContacts::Secrecy(KContacts::Secrecy::Public));
     QVERIFY(addressee.logo() == logo);
@@ -126,43 +126,43 @@ void AddresseeTest::equalsTest()
 {
     KContacts::Addressee addressee1, addressee2;
 
-    KContacts::Picture logo(QLatin1String("http://scottlandyard.info/pics/logo.png"));
-    KContacts::Picture photo(QLatin1String("http://scottlandyard.info/~sinclair/photo.png"));
-    KContacts::Sound sound(QLatin1String("http://scottlandyard.info/~sinclair/sound.wav"));
+    KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
+    KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
+    KContacts::Sound sound(QStringLiteral("http://scottlandyard.info/~sinclair/sound.wav"));
 
     QStringList emails;
-    emails << QLatin1String("john@sinclair.com") << QLatin1String("ghosthunter@sinclair.com");
+    emails << QStringLiteral("john@sinclair.com") << QStringLiteral("ghosthunter@sinclair.com");
 
     KContacts::Key::List keys;
-    keys << KContacts::Key(QLatin1String("SecretKey"));
+    keys << KContacts::Key(QStringLiteral("SecretKey"));
 
     QStringList categories;
-    categories << QLatin1String("Helper") << QLatin1String("Friend");
+    categories << QStringLiteral("Helper") << QStringLiteral("Friend");
 
     QStringList customs;
-    customs << QLatin1String("X-Danger: high");
+    customs << QStringLiteral("X-Danger: high");
 
-    addressee1.setUid(QLatin1String("My uid"));
-    addressee1.setName(QLatin1String("John Sinclair"));
-    addressee1.setFormattedName(QLatin1String("Sinclair, John"));
-    addressee1.setFamilyName(QLatin1String("Sinclair"));
-    addressee1.setGivenName(QLatin1String("John"));
-    addressee1.setAdditionalName(QLatin1String("Bob"));
-    addressee1.setPrefix(QLatin1String("Sir"));
-    addressee1.setSuffix(QLatin1String("II"));
-    addressee1.setNickName(QLatin1String("ghosthunter"));
+    addressee1.setUid(QStringLiteral("My uid"));
+    addressee1.setName(QStringLiteral("John Sinclair"));
+    addressee1.setFormattedName(QStringLiteral("Sinclair, John"));
+    addressee1.setFamilyName(QStringLiteral("Sinclair"));
+    addressee1.setGivenName(QStringLiteral("John"));
+    addressee1.setAdditionalName(QStringLiteral("Bob"));
+    addressee1.setPrefix(QStringLiteral("Sir"));
+    addressee1.setSuffix(QStringLiteral("II"));
+    addressee1.setNickName(QStringLiteral("ghosthunter"));
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
-    addressee1.setMailer(QLatin1String("mutt"));
+    addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
-    addressee1.setTitle(QLatin1String("Ghost Hunter"));
-    addressee1.setRole(QLatin1String("Leader"));
-    addressee1.setOrganization(QLatin1String("Scottland Yard"));
-    addressee1.setNote(QLatin1String("Don't cross black deads way..."));
-    addressee1.setProductId(QLatin1String("ProductId45"));
+    addressee1.setTitle(QStringLiteral("Ghost Hunter"));
+    addressee1.setRole(QStringLiteral("Leader"));
+    addressee1.setOrganization(QStringLiteral("Scottland Yard"));
+    addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
+    addressee1.setProductId(QStringLiteral("ProductId45"));
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
-    addressee1.setSortString(QLatin1String("Name"));
-    addressee1.setUrl(QUrl(QLatin1String("www.scottlandyard.info")));
+    addressee1.setSortString(QStringLiteral("Name"));
+    addressee1.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
     addressee1.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
     addressee1.setLogo(logo);
     addressee1.setPhoto(photo);
@@ -173,27 +173,27 @@ void AddresseeTest::equalsTest()
     addressee1.setCustoms(customs);
     addressee1.setChanged(false);
 
-    addressee2.setUid(QLatin1String("My uid"));
-    addressee2.setName(QLatin1String("John Sinclair"));
-    addressee2.setFormattedName(QLatin1String("Sinclair, John"));
-    addressee2.setFamilyName(QLatin1String("Sinclair"));
-    addressee2.setGivenName(QLatin1String("John"));
-    addressee2.setAdditionalName(QLatin1String("Bob"));
-    addressee2.setPrefix(QLatin1String("Sir"));
-    addressee2.setSuffix(QLatin1String("II"));
-    addressee2.setNickName(QLatin1String("ghosthunter"));
+    addressee2.setUid(QStringLiteral("My uid"));
+    addressee2.setName(QStringLiteral("John Sinclair"));
+    addressee2.setFormattedName(QStringLiteral("Sinclair, John"));
+    addressee2.setFamilyName(QStringLiteral("Sinclair"));
+    addressee2.setGivenName(QStringLiteral("John"));
+    addressee2.setAdditionalName(QStringLiteral("Bob"));
+    addressee2.setPrefix(QStringLiteral("Sir"));
+    addressee2.setSuffix(QStringLiteral("II"));
+    addressee2.setNickName(QStringLiteral("ghosthunter"));
     addressee2.setBirthday(QDateTime(QDate(1982, 7, 19)));
-    addressee2.setMailer(QLatin1String("mutt"));
+    addressee2.setMailer(QStringLiteral("mutt"));
     addressee2.setTimeZone(KContacts::TimeZone(2));
     addressee2.setGeo(KContacts::Geo(42, 23));
-    addressee2.setTitle(QLatin1String("Ghost Hunter"));
-    addressee2.setRole(QLatin1String("Leader"));
-    addressee2.setOrganization(QLatin1String("Scottland Yard"));
-    addressee2.setNote(QLatin1String("Don't cross black deads way..."));
-    addressee2.setProductId(QLatin1String("ProductId45"));
+    addressee2.setTitle(QStringLiteral("Ghost Hunter"));
+    addressee2.setRole(QStringLiteral("Leader"));
+    addressee2.setOrganization(QStringLiteral("Scottland Yard"));
+    addressee2.setNote(QStringLiteral("Don't cross black deads way..."));
+    addressee2.setProductId(QStringLiteral("ProductId45"));
     addressee2.setRevision(QDateTime(QDate(1982, 9, 15)));
-    addressee2.setSortString(QLatin1String("Name"));
-    addressee2.setUrl(QUrl(QLatin1String("www.scottlandyard.info")));
+    addressee2.setSortString(QStringLiteral("Name"));
+    addressee2.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
     addressee2.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
     addressee2.setLogo(logo);
     addressee2.setPhoto(photo);
@@ -211,8 +211,8 @@ void AddresseeTest::differsTest()
 {
     KContacts::Addressee addressee1, addressee2;
 
-    addressee1.setNameFromString(QLatin1String("John Sinclair"));
-    addressee2.setNameFromString(QLatin1String("Suko"));
+    addressee1.setNameFromString(QStringLiteral("John Sinclair"));
+    addressee2.setNameFromString(QStringLiteral("Suko"));
 
     QVERIFY(addressee1 != addressee2);
 }
@@ -221,43 +221,43 @@ void AddresseeTest::assignmentTest()
 {
     KContacts::Addressee addressee1, addressee2;
 
-    KContacts::Picture logo(QLatin1String("http://scottlandyard.info/pics/logo.png"));
-    KContacts::Picture photo(QLatin1String("http://scottlandyard.info/~sinclair/photo.png"));
-    KContacts::Sound sound(QLatin1String("http://scottlandyard.info/~sinclair/sound.wav"));
+    KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
+    KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
+    KContacts::Sound sound(QStringLiteral("http://scottlandyard.info/~sinclair/sound.wav"));
 
     QStringList emails;
-    emails << QLatin1String("john@sinclair.com") << QLatin1String("ghosthunter@sinclair.com");
+    emails << QStringLiteral("john@sinclair.com") << QStringLiteral("ghosthunter@sinclair.com");
 
     KContacts::Key::List keys;
-    keys << KContacts::Key(QLatin1String("SecretKey"));
+    keys << KContacts::Key(QStringLiteral("SecretKey"));
 
     QStringList categories;
-    categories << QLatin1String("Helper") << QLatin1String("Friend");
+    categories << QStringLiteral("Helper") << QStringLiteral("Friend");
 
     QStringList customs;
-    customs << QLatin1String("X-Danger: high");
+    customs << QStringLiteral("X-Danger: high");
 
-    addressee1.setUid(QLatin1String("My uid"));
-    addressee1.setName(QLatin1String("John Sinclair"));
-    addressee1.setFormattedName(QLatin1String("Sinclair, John"));
-    addressee1.setFamilyName(QLatin1String("Sinclair"));
-    addressee1.setGivenName(QLatin1String("John"));
-    addressee1.setAdditionalName(QLatin1String("Bob"));
-    addressee1.setPrefix(QLatin1String("Sir"));
-    addressee1.setSuffix(QLatin1String("II"));
-    addressee1.setNickName(QLatin1String("ghosthunter"));
+    addressee1.setUid(QStringLiteral("My uid"));
+    addressee1.setName(QStringLiteral("John Sinclair"));
+    addressee1.setFormattedName(QStringLiteral("Sinclair, John"));
+    addressee1.setFamilyName(QStringLiteral("Sinclair"));
+    addressee1.setGivenName(QStringLiteral("John"));
+    addressee1.setAdditionalName(QStringLiteral("Bob"));
+    addressee1.setPrefix(QStringLiteral("Sir"));
+    addressee1.setSuffix(QStringLiteral("II"));
+    addressee1.setNickName(QStringLiteral("ghosthunter"));
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
-    addressee1.setMailer(QLatin1String("mutt"));
+    addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
-    addressee1.setTitle(QLatin1String("Ghost Hunter"));
-    addressee1.setRole(QLatin1String("Leader"));
-    addressee1.setOrganization(QLatin1String("Scottland Yard"));
-    addressee1.setNote(QLatin1String("Don't cross black deads way..."));
-    addressee1.setProductId(QLatin1String("ProductId45"));
+    addressee1.setTitle(QStringLiteral("Ghost Hunter"));
+    addressee1.setRole(QStringLiteral("Leader"));
+    addressee1.setOrganization(QStringLiteral("Scottland Yard"));
+    addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
+    addressee1.setProductId(QStringLiteral("ProductId45"));
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
-    addressee1.setSortString(QLatin1String("Name"));
-    addressee1.setUrl(QUrl(QLatin1String("www.scottlandyard.info")));
+    addressee1.setSortString(QStringLiteral("Name"));
+    addressee1.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
     addressee1.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
     addressee1.setLogo(logo);
     addressee1.setPhoto(photo);
@@ -277,45 +277,45 @@ void AddresseeTest::serializeTest()
 {
     KContacts::Addressee addressee1, addressee2;
 
-    KContacts::Picture logo(QLatin1String("http://scottlandyard.info/pics/logo.png"));
-    KContacts::Picture photo(QLatin1String("http://scottlandyard.info/~sinclair/photo.png"));
-    KContacts::Sound sound(QLatin1String("http://scottlandyard.info/~sinclair/sound.wav"));
+    KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
+    KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
+    KContacts::Sound sound(QStringLiteral("http://scottlandyard.info/~sinclair/sound.wav"));
 
     QStringList emails;
-    emails << QLatin1String("john@sinclair.com") << QLatin1String("ghosthunter@sinclair.com");
+    emails << QStringLiteral("john@sinclair.com") << QStringLiteral("ghosthunter@sinclair.com");
 
     KContacts::Key::List keys;
-    keys << KContacts::Key(QLatin1String("SecretKey"));
+    keys << KContacts::Key(QStringLiteral("SecretKey"));
 
     QStringList categories;
-    categories << QLatin1String("Helper") << QLatin1String("Friend");
+    categories << QStringLiteral("Helper") << QStringLiteral("Friend");
 
     QStringList customs;
-    customs << QLatin1String("FirstApp-FirstKey:FirstValue")
-            << QLatin1String("SecondApp-SecondKey:SecondValue")
-            << QLatin1String("ThirdApp-ThirdKey:ThirdValue");
+    customs << QStringLiteral("FirstApp-FirstKey:FirstValue")
+            << QStringLiteral("SecondApp-SecondKey:SecondValue")
+            << QStringLiteral("ThirdApp-ThirdKey:ThirdValue");
 
-    addressee1.setUid(QLatin1String("My uid"));
-    addressee1.setName(QLatin1String("John Sinclair"));
-    addressee1.setFormattedName(QLatin1String("Sinclair, John"));
-    addressee1.setFamilyName(QLatin1String("Sinclair"));
-    addressee1.setGivenName(QLatin1String("John"));
-    addressee1.setAdditionalName(QLatin1String("Bob"));
-    addressee1.setPrefix(QLatin1String("Sir"));
-    addressee1.setSuffix(QLatin1String("II"));
-    addressee1.setNickName(QLatin1String("ghosthunter"));
+    addressee1.setUid(QStringLiteral("My uid"));
+    addressee1.setName(QStringLiteral("John Sinclair"));
+    addressee1.setFormattedName(QStringLiteral("Sinclair, John"));
+    addressee1.setFamilyName(QStringLiteral("Sinclair"));
+    addressee1.setGivenName(QStringLiteral("John"));
+    addressee1.setAdditionalName(QStringLiteral("Bob"));
+    addressee1.setPrefix(QStringLiteral("Sir"));
+    addressee1.setSuffix(QStringLiteral("II"));
+    addressee1.setNickName(QStringLiteral("ghosthunter"));
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
-    addressee1.setMailer(QLatin1String("mutt"));
+    addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
-    addressee1.setTitle(QLatin1String("Ghost Hunter"));
-    addressee1.setRole(QLatin1String("Leader"));
-    addressee1.setOrganization(QLatin1String("Scottland Yard"));
-    addressee1.setNote(QLatin1String("Don't cross black deads way..."));
-    addressee1.setProductId(QLatin1String("ProductId45"));
+    addressee1.setTitle(QStringLiteral("Ghost Hunter"));
+    addressee1.setRole(QStringLiteral("Leader"));
+    addressee1.setOrganization(QStringLiteral("Scottland Yard"));
+    addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
+    addressee1.setProductId(QStringLiteral("ProductId45"));
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
-    addressee1.setSortString(QLatin1String("Name"));
-    addressee1.setUrl(QUrl(QLatin1String("www.scottlandyard.info")));
+    addressee1.setSortString(QStringLiteral("Name"));
+    addressee1.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
     addressee1.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
     addressee1.setLogo(logo);
     addressee1.setPhoto(photo);
@@ -340,20 +340,20 @@ void AddresseeTest::fullEmailTest()
 {
     KContacts::Addressee a;
     QStringList emails;
-    emails << QLatin1String("foo@bar.com");
+    emails << QStringLiteral("foo@bar.com");
     a.setEmails(emails);
-    a.setFormattedName(QLatin1String("firstname \"nickname\" lastname"));
+    a.setFormattedName(QStringLiteral("firstname \"nickname\" lastname"));
     QCOMPARE(a.fullEmail(),
-             QLatin1String("\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>"));
+             QStringLiteral("\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>"));
 }
 
 void AddresseeTest::nameFromStringTest()
 {
     KContacts::Addressee a;
-    a.setNameFromString(QLatin1String("Firstname Lastname"));
-    QCOMPARE(a.givenName(), QLatin1String("Firstname"));
-    QCOMPARE(a.familyName(), QLatin1String("Lastname"));
-    QCOMPARE(a.formattedName(), QLatin1String("Firstname Lastname"));
+    a.setNameFromString(QStringLiteral("Firstname Lastname"));
+    QCOMPARE(a.givenName(), QStringLiteral("Firstname"));
+    QCOMPARE(a.familyName(), QStringLiteral("Lastname"));
+    QCOMPARE(a.formattedName(), QStringLiteral("Firstname Lastname"));
 }
 
 void AddresseeTest::customFieldsTest()
@@ -364,71 +364,71 @@ void AddresseeTest::customFieldsTest()
     QVERIFY(a.customs().isEmpty());
 
     // test insert
-    a.insertCustom(QLatin1String("MyApp"), QLatin1String("MyKey"), QLatin1String("MyValue"));
+    a.insertCustom(QStringLiteral("MyApp"), QStringLiteral("MyKey"), QStringLiteral("MyValue"));
     QCOMPARE(a.customs().count(), 1);
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("MyValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("MyValue"));
 
-    a.insertCustom(QLatin1String("MyApp"), QLatin1String("MyKey"), QLatin1String("YourValue"));
+    a.insertCustom(QStringLiteral("MyApp"), QStringLiteral("MyKey"), QStringLiteral("YourValue"));
     QCOMPARE(a.customs().count(), 1);   // still one, we overwrite...
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("YourValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("YourValue"));
 
     // test query non-existing app/key
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("UnknownKey")), QString());
-    QCOMPARE(a.custom(QLatin1String("UnknownApp"), QLatin1String("MyKey")), QString());
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("UnknownKey")), QString());
+    QCOMPARE(a.custom(QStringLiteral("UnknownApp"), QStringLiteral("MyKey")), QString());
 
     // test insert with different key
-    a.insertCustom(QLatin1String("MyApp"), QLatin1String("AnotherKey"), QLatin1String("OtherValue"));
+    a.insertCustom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey"), QStringLiteral("OtherValue"));
     QCOMPARE(a.customs().count(), 2);
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("AnotherKey")), QLatin1String("OtherValue"));
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("YourValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey")), QStringLiteral("OtherValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("YourValue"));
 
     // test insert with different app
-    a.insertCustom(QLatin1String("OtherApp"), QLatin1String("OtherKey"), QLatin1String("OurValue"));
+    a.insertCustom(QStringLiteral("OtherApp"), QStringLiteral("OtherKey"), QStringLiteral("OurValue"));
     QCOMPARE(a.customs().count(), 3);
-    QCOMPARE(a.custom(QLatin1String("OtherApp"), QLatin1String("OtherKey")), QLatin1String("OurValue"));
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("AnotherKey")), QLatin1String("OtherValue"));
-    QCOMPARE(a.custom(QLatin1String("MyApp"), QLatin1String("MyKey")), QLatin1String("YourValue"));
+    QCOMPARE(a.custom(QStringLiteral("OtherApp"), QStringLiteral("OtherKey")), QStringLiteral("OurValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey")), QStringLiteral("OtherValue"));
+    QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("YourValue"));
 
 #if 0 //Order is not defined now as we use a QHash
     // test customs
-    QCOMPARE(a.customs().at(0), QLatin1String("MyApp-MyKey:YourValue"));
-    QCOMPARE(a.customs().at(1), QLatin1String("MyApp-AnotherKey:OtherValue"));
-    QCOMPARE(a.customs().at(2), QLatin1String("OtherApp-OtherKey:OurValue"));
+    QCOMPARE(a.customs().at(0), QStringLiteral("MyApp-MyKey:YourValue"));
+    QCOMPARE(a.customs().at(1), QStringLiteral("MyApp-AnotherKey:OtherValue"));
+    QCOMPARE(a.customs().at(2), QStringLiteral("OtherApp-OtherKey:OurValue"));
 #endif
     // test equal operator
     KContacts::Addressee b;
     b.setUid(a.uid());
-    b.insertCustom(QLatin1String("OtherApp"), QLatin1String("OtherKey"), QLatin1String("OurValue"));
-    b.insertCustom(QLatin1String("MyApp"), QLatin1String("MyKey"), QLatin1String("YourValue"));
-    b.insertCustom(QLatin1String("MyApp"), QLatin1String("AnotherKey"), QLatin1String("OtherValue"));
+    b.insertCustom(QStringLiteral("OtherApp"), QStringLiteral("OtherKey"), QStringLiteral("OurValue"));
+    b.insertCustom(QStringLiteral("MyApp"), QStringLiteral("MyKey"), QStringLiteral("YourValue"));
+    b.insertCustom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey"), QStringLiteral("OtherValue"));
 
     QCOMPARE(a, b);
 
-    b.insertCustom(QLatin1String("MyApp"), QLatin1String("AnotherKey"), QLatin1String("WrongValue"));
+    b.insertCustom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey"), QStringLiteral("WrongValue"));
     QVERIFY(a != b);
 
     // test setCustoms
     KContacts::Addressee c;
-    c.insertCustom(QLatin1String("ThisApp"), QLatin1String("ShouldNotBe"), QLatin1String("There"));
+    c.insertCustom(QStringLiteral("ThisApp"), QStringLiteral("ShouldNotBe"), QStringLiteral("There"));
     QCOMPARE(c.customs().count(), 1);
 
-    const QStringList testData = QStringList() << QLatin1String("FirstApp-FirstKey:FirstValue")
-                                 << QLatin1String("SecondApp-SecondKey:SecondValue")
-                                 << QLatin1String("ThirdApp-ThirdKey:ThirdValue");
+    const QStringList testData = QStringList() << QStringLiteral("FirstApp-FirstKey:FirstValue")
+                                 << QStringLiteral("SecondApp-SecondKey:SecondValue")
+                                 << QStringLiteral("ThirdApp-ThirdKey:ThirdValue");
 
     c.setCustoms(testData);
     QCOMPARE(c.customs().count(), 3);
 
-    QCOMPARE(c.custom(QLatin1String("FirstApp"), QLatin1String("FirstKey")), QLatin1String("FirstValue"));
-    QCOMPARE(c.custom(QLatin1String("SecondApp"), QLatin1String("SecondKey")), QLatin1String("SecondValue"));
-    QCOMPARE(c.custom(QLatin1String("ThirdApp"), QLatin1String("ThirdKey")), QLatin1String("ThirdValue"));
+    QCOMPARE(c.custom(QStringLiteral("FirstApp"), QStringLiteral("FirstKey")), QStringLiteral("FirstValue"));
+    QCOMPARE(c.custom(QStringLiteral("SecondApp"), QStringLiteral("SecondKey")), QStringLiteral("SecondValue"));
+    QCOMPARE(c.custom(QStringLiteral("ThirdApp"), QStringLiteral("ThirdKey")), QStringLiteral("ThirdValue"));
 
     // test remove
     QCOMPARE(c.customs().count(), 3);
-    c.removeCustom(QLatin1String("UnknownApp"), QLatin1String("FirstKey"));
+    c.removeCustom(QStringLiteral("UnknownApp"), QStringLiteral("FirstKey"));
     QCOMPARE(c.customs().count(), 3);
-    c.removeCustom(QLatin1String("FirstApp"), QLatin1String("UnknownKey"));
+    c.removeCustom(QStringLiteral("FirstApp"), QStringLiteral("UnknownKey"));
     QCOMPARE(c.customs().count(), 3);
-    c.removeCustom(QLatin1String("FirstApp"), QLatin1String("FirstKey"));
+    c.removeCustom(QStringLiteral("FirstApp"), QStringLiteral("FirstKey"));
     QCOMPARE(c.customs().count(), 2);
 }

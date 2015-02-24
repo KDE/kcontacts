@@ -42,10 +42,10 @@ void EmailTest::shouldHaveDefaultValue()
 
 void EmailTest::shouldAssignValue()
 {
-    const QString mail(QLatin1String("foo@kde.org"));
+    const QString mail(QStringLiteral("foo@kde.org"));
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Email email(mail);
     email.setParameters(params);
     QVERIFY(email.isValid());
@@ -58,7 +58,7 @@ void EmailTest::shouldAssignValue()
 void EmailTest::shouldAssignExternal()
 {
     KContacts::Email email;
-    const QString mail(QLatin1String("foo@kde.org"));
+    const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
     QVERIFY(email.isValid());
     QVERIFY(!email.mail().isEmpty());
@@ -69,11 +69,11 @@ void EmailTest::shouldSerialized()
 {
     KContacts::Email email;
     KContacts::Email result;
-    const QString mail(QLatin1String("foo@kde.org"));
+    const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     email.setParameters(params);
 
     QByteArray data;
@@ -90,11 +90,11 @@ void EmailTest::shouldEqualEmail()
 {
     KContacts::Email email;
     KContacts::Email result;
-    const QString mail(QLatin1String("foo@kde.org"));
+    const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     email.setParameters(params);
 
     result = email;

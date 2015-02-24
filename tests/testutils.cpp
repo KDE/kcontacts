@@ -30,21 +30,21 @@ Addressee vcard1()
 {
     Addressee addr;
 
-    addr.setName(QLatin1String("Frank Dawson"));
-    addr.setOrganization(QLatin1String("Lotus Development Corporation"));
-    addr.setUrl(QUrl(QLatin1String("http://home.earthlink.net/~fdawson")));
-    addr.insertEmail(QLatin1String("fdawson@earthlink.net"));
-    addr.insertEmail(QLatin1String("Frank_Dawson@Lotus.com"), true);
-    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-919-676-9515"),
+    addr.setName(QStringLiteral("Frank Dawson"));
+    addr.setOrganization(QStringLiteral("Lotus Development Corporation"));
+    addr.setUrl(QUrl(QStringLiteral("http://home.earthlink.net/~fdawson")));
+    addr.insertEmail(QStringLiteral("fdawson@earthlink.net"));
+    addr.insertEmail(QStringLiteral("Frank_Dawson@Lotus.com"), true);
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9515"),
                                        PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
-    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-919-676-9564"),
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9564"),
                                        PhoneNumber::Fax | PhoneNumber::Work));
     Address a(Address::Work | Address::Postal | Address::Parcel);
-    a.setStreet(QLatin1String("6544 Battleford Drive"));
-    a.setLocality(QLatin1String("Raleigh"));
-    a.setRegion(QLatin1String("NC"));
-    a.setPostalCode(QLatin1String("27613-3502"));
-    a.setCountry(QLatin1String("U.S.A."));
+    a.setStreet(QStringLiteral("6544 Battleford Drive"));
+    a.setLocality(QStringLiteral("Raleigh"));
+    a.setRegion(QStringLiteral("NC"));
+    a.setPostalCode(QStringLiteral("27613-3502"));
+    a.setCountry(QStringLiteral("U.S.A."));
     addr.insertAddress(a);
     return addr;
 }
@@ -53,19 +53,19 @@ Addressee vcard2()
 {
     Addressee addr;
 
-    addr.setName(QLatin1String("Tim Howes"));
-    addr.setOrganization(QLatin1String("Netscape Communications Corp."));
-    addr.insertEmail(QLatin1String("howes@netscape.com"));
-    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-415-937-3419"),
+    addr.setName(QStringLiteral("Tim Howes"));
+    addr.setOrganization(QStringLiteral("Netscape Communications Corp."));
+    addr.insertEmail(QStringLiteral("howes@netscape.com"));
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-937-3419"),
                                        PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
-    addr.insertPhoneNumber(PhoneNumber(QLatin1String("+1-415-528-4164"),
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-528-4164"),
                                        PhoneNumber::Fax | PhoneNumber::Work));
     Address a(Address::Work);
-    a.setStreet(QLatin1String("501 E. Middlefield Rd."));
-    a.setLocality(QLatin1String("Mountain View"));
-    a.setRegion(QLatin1String("CA"));
-    a.setPostalCode(QLatin1String("94043"));
-    a.setCountry(QLatin1String("U.S.A."));
+    a.setStreet(QStringLiteral("501 E. Middlefield Rd."));
+    a.setLocality(QStringLiteral("Mountain View"));
+    a.setRegion(QStringLiteral("CA"));
+    a.setPostalCode(QStringLiteral("94043"));
+    a.setCountry(QStringLiteral("U.S.A."));
     addr.insertAddress(a);
     return addr;
 }
@@ -74,10 +74,10 @@ Addressee vcard3()
 {
     Addressee addr;
 
-    addr.setName(QLatin1String("ian geiser"));
-    addr.setOrganization(QLatin1String("Source eXtreme"));
-    addr.insertEmail(QLatin1String("geiseri@yahoo.com"));
-    addr.setTitle(QLatin1String("VP of Engineering"));
+    addr.setName(QStringLiteral("ian geiser"));
+    addr.setOrganization(QStringLiteral("Source eXtreme"));
+    addr.insertEmail(QStringLiteral("geiseri@yahoo.com"));
+    addr.setTitle(QStringLiteral("VP of Engineering"));
     return addr;
 }
 
@@ -107,9 +107,9 @@ Addressee::List vCardsAsAddresseeList()
 
 QByteArray vCardsAsText()
 {
-    QByteArray vcards = vcardAsText(QLatin1String("tests/vcard1.vcf"));
-    vcards += vcardAsText(QLatin1String("tests/vcard2.vcf"));
-    vcards += vcardAsText(QLatin1String("tests/vcard3.vcf"));
+    QByteArray vcards = vcardAsText(QStringLiteral("tests/vcard1.vcf"));
+    vcards += vcardAsText(QStringLiteral("tests/vcard2.vcf"));
+    vcards += vcardAsText(QStringLiteral("tests/vcard3.vcf"));
 
     return vcards;
 }

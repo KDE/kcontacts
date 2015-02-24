@@ -52,16 +52,16 @@ QString CalendarUrl::Private::typeToString(CalendarUrl::CalendarType type)
     QString ret;
     switch (type) {
     case Unknown:
-        ret = QLatin1String("Unknown");
+        ret = QStringLiteral("Unknown");
         break;
     case FBUrl:
-        ret = QLatin1String("FreeBusy");
+        ret = QStringLiteral("FreeBusy");
         break;
     case CALUri:
-        ret = QLatin1String("CalUri");
+        ret = QStringLiteral("CalUri");
         break;
     case CALADRUri:
-        ret = QLatin1String("Caladruri");
+        ret = QStringLiteral("Caladruri");
         break;
     }
     return ret;
@@ -124,7 +124,7 @@ QString CalendarUrl::toString() const
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
+            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
         str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }

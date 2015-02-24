@@ -35,13 +35,13 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData(QLatin1String("testread"), i18n("vCard test reader"), QLatin1String("0.1"));
-    aboutData.addAuthor(i18n("Cornelius Schumacher"), QString(), QLatin1String("schumacher@kde.org"));
+    KAboutData aboutData(QStringLiteral("testread"), i18n("vCard test reader"), QStringLiteral("0.1"));
+    aboutData.addAuthor(i18n("Cornelius Schumacher"), QString(), QStringLiteral("schumacher@kde.org"));
 
     QCoreApplication app(argc, argv);
     QCommandLineParser parser;
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("vcard21"), i18n("vCard 2.1")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("+inputfile"), i18n("Input file")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("vcard21"), i18n("vCard 2.1")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("+inputfile"), i18n("Input file")));
 
     KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
     KContacts::VCardConverter converter;
     KContacts::Addressee::List list = converter.parseVCards(text);
 
-    if (parser.isSet(QLatin1String("vcard21"))) {
+    if (parser.isSet(QStringLiteral("vcard21"))) {
         text = converter.createVCards(list, KContacts::VCardConverter::v2_1);   // uses version 2.1
     } else {
         text = converter.createVCards(list);   // uses version 3.0

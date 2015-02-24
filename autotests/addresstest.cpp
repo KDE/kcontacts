@@ -39,54 +39,54 @@ void AddressTest::storeTest()
 {
     KContacts::Address address;
 
-    address.setId(QLatin1String("My Id"));
+    address.setId(QStringLiteral("My Id"));
     address.setType(KContacts::Address::Home);
-    address.setPostOfficeBox(QLatin1String("1234"));
-    address.setExtended(QLatin1String("My Extended Label"));
-    address.setStreet(QLatin1String("My Street"));
-    address.setLocality(QLatin1String("My Locality"));
-    address.setRegion(QLatin1String("My Region"));
-    address.setPostalCode(QLatin1String("My PostalCode"));
-    address.setCountry(QLatin1String("My Country"));
-    address.setLabel(QLatin1String("My Label"));
+    address.setPostOfficeBox(QStringLiteral("1234"));
+    address.setExtended(QStringLiteral("My Extended Label"));
+    address.setStreet(QStringLiteral("My Street"));
+    address.setLocality(QStringLiteral("My Locality"));
+    address.setRegion(QStringLiteral("My Region"));
+    address.setPostalCode(QStringLiteral("My PostalCode"));
+    address.setCountry(QStringLiteral("My Country"));
+    address.setLabel(QStringLiteral("My Label"));
 
-    QCOMPARE(address.id(), QLatin1String("My Id"));
+    QCOMPARE(address.id(), QStringLiteral("My Id"));
     QCOMPARE(address.type(), KContacts::Address::Home);
-    QCOMPARE(address.postOfficeBox(), QLatin1String("1234"));
-    QCOMPARE(address.extended(), QLatin1String("My Extended Label"));
-    QCOMPARE(address.street(), QLatin1String("My Street"));
-    QCOMPARE(address.locality(), QLatin1String("My Locality"));
-    QCOMPARE(address.region(), QLatin1String("My Region"));
-    QCOMPARE(address.postalCode(), QLatin1String("My PostalCode"));
-    QCOMPARE(address.country(), QLatin1String("My Country"));
-    QCOMPARE(address.label(), QLatin1String("My Label"));
+    QCOMPARE(address.postOfficeBox(), QStringLiteral("1234"));
+    QCOMPARE(address.extended(), QStringLiteral("My Extended Label"));
+    QCOMPARE(address.street(), QStringLiteral("My Street"));
+    QCOMPARE(address.locality(), QStringLiteral("My Locality"));
+    QCOMPARE(address.region(), QStringLiteral("My Region"));
+    QCOMPARE(address.postalCode(), QStringLiteral("My PostalCode"));
+    QCOMPARE(address.country(), QStringLiteral("My Country"));
+    QCOMPARE(address.label(), QStringLiteral("My Label"));
 }
 
 void AddressTest::equalsTest()
 {
     KContacts::Address address1, address2;
 
-    address1.setId(QLatin1String("My Id"));
+    address1.setId(QStringLiteral("My Id"));
     address1.setType(KContacts::Address::Home);
-    address1.setPostOfficeBox(QLatin1String("1234"));
-    address1.setExtended(QLatin1String("My Extended Label"));
-    address1.setStreet(QLatin1String("My Street"));
-    address1.setLocality(QLatin1String("My Locality"));
-    address1.setRegion(QLatin1String("My Region"));
-    address1.setPostalCode(QLatin1String("My Postalcode"));
-    address1.setCountry(QLatin1String("My country"));
-    address1.setLabel(QLatin1String("My Label"));
+    address1.setPostOfficeBox(QStringLiteral("1234"));
+    address1.setExtended(QStringLiteral("My Extended Label"));
+    address1.setStreet(QStringLiteral("My Street"));
+    address1.setLocality(QStringLiteral("My Locality"));
+    address1.setRegion(QStringLiteral("My Region"));
+    address1.setPostalCode(QStringLiteral("My Postalcode"));
+    address1.setCountry(QStringLiteral("My country"));
+    address1.setLabel(QStringLiteral("My Label"));
 
-    address2.setId(QLatin1String("My Id"));
+    address2.setId(QStringLiteral("My Id"));
     address2.setType(KContacts::Address::Home);
-    address2.setPostOfficeBox(QLatin1String("1234"));
-    address2.setExtended(QLatin1String("My Extended Label"));
-    address2.setStreet(QLatin1String("My Street"));
-    address2.setLocality(QLatin1String("My Locality"));
-    address2.setRegion(QLatin1String("My Region"));
-    address2.setPostalCode(QLatin1String("My Postalcode"));
-    address2.setCountry(QLatin1String("My country"));
-    address2.setLabel(QLatin1String("My Label"));
+    address2.setPostOfficeBox(QStringLiteral("1234"));
+    address2.setExtended(QStringLiteral("My Extended Label"));
+    address2.setStreet(QStringLiteral("My Street"));
+    address2.setLocality(QStringLiteral("My Locality"));
+    address2.setRegion(QStringLiteral("My Region"));
+    address2.setPostalCode(QStringLiteral("My Postalcode"));
+    address2.setCountry(QStringLiteral("My country"));
+    address2.setLabel(QStringLiteral("My Label"));
 
     QVERIFY(address1 == address2);
 }
@@ -103,16 +103,16 @@ void AddressTest::assignmentTest()
 {
     KContacts::Address address1, address2;
 
-    address1.setId(QLatin1String("My Id"));
+    address1.setId(QStringLiteral("My Id"));
     address1.setType(KContacts::Address::Home);
-    address1.setPostOfficeBox(QLatin1String("1234"));
-    address1.setExtended(QLatin1String("My Extended Label"));
-    address1.setStreet(QLatin1String("My Street"));
-    address1.setLocality(QLatin1String("My Locality"));
-    address1.setRegion(QLatin1String("My Region"));
-    address1.setPostalCode(QLatin1String("My Postalcode"));
-    address1.setCountry(QLatin1String("My country"));
-    address1.setLabel(QLatin1String("My Label"));
+    address1.setPostOfficeBox(QStringLiteral("1234"));
+    address1.setExtended(QStringLiteral("My Extended Label"));
+    address1.setStreet(QStringLiteral("My Street"));
+    address1.setLocality(QStringLiteral("My Locality"));
+    address1.setRegion(QStringLiteral("My Region"));
+    address1.setPostalCode(QStringLiteral("My Postalcode"));
+    address1.setCountry(QStringLiteral("My country"));
+    address1.setLabel(QStringLiteral("My Label"));
 
     address2 = address1;
 
@@ -124,14 +124,14 @@ void AddressTest::serializeTest()
     KContacts::Address address1, address2;
 
     address1.setType(KContacts::Address::Work);
-    address1.setPostOfficeBox(QLatin1String("1234"));
-    address1.setExtended(QLatin1String("My Extended Label"));
-    address1.setStreet(QLatin1String("My Street"));
-    address1.setLocality(QLatin1String("My Locality"));
-    address1.setRegion(QLatin1String("My Region"));
-    address1.setPostalCode(QLatin1String("My Postalcode"));
-    address1.setCountry(QLatin1String("My country"));
-    address1.setLabel(QLatin1String("My Label"));
+    address1.setPostOfficeBox(QStringLiteral("1234"));
+    address1.setExtended(QStringLiteral("My Extended Label"));
+    address1.setStreet(QStringLiteral("My Street"));
+    address1.setLocality(QStringLiteral("My Locality"));
+    address1.setRegion(QStringLiteral("My Region"));
+    address1.setPostalCode(QStringLiteral("My Postalcode"));
+    address1.setCountry(QStringLiteral("My country"));
+    address1.setLabel(QStringLiteral("My Label"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -147,7 +147,7 @@ void AddressTest::formatTest()
 {
     {
         // check availability of country to ISO code mapping data file
-        const QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kcontacts/countrytransl.map"));
+        const QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
         QVERIFY2(!mapfile.isEmpty(), "Country to ISO code mapping data file does not exist");
 
         QFileInfo fileInfo(mapfile);
@@ -156,7 +156,7 @@ void AddressTest::formatTest()
     }
 
     {
-        const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/de/country.desktop"));
+        const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/locale/countries/de/country.desktop"));
         QVERIFY(!templateFile.isEmpty());
         const KConfig templateConfig(templateFile);
         QVERIFY2(templateConfig.hasGroup("KCM Locale"),
@@ -169,53 +169,53 @@ void AddressTest::formatTest()
                  "Address format template for 'de' is empty");
 
         KContacts::Address address;
-        address.setStreet(QLatin1String("Lummerlandstr. 1"));
-        address.setPostalCode(QLatin1String("12345"));
-        address.setLocality(QLatin1String("Lummerstadt"));
-        address.setCountry(QLatin1String("Germany"));
+        address.setStreet(QStringLiteral("Lummerlandstr. 1"));
+        address.setPostalCode(QStringLiteral("12345"));
+        address.setLocality(QStringLiteral("Lummerstadt"));
+        address.setCountry(QStringLiteral("Germany"));
 
-        const QString result(QLatin1String("Jim Knopf\nLummerlandstr. 1\n"
+        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                                            "12345 Lummerstadt\n\nGERMANY"));
 
-        QCOMPARE(address.formattedAddress(QLatin1String("Jim Knopf")), result);
+        QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
 
     {
         KContacts::Address address;
-        address.setStreet(QLatin1String("457 Foobar Ave"));
-        address.setPostalCode(QLatin1String("1A2B3C"));
-        address.setLocality(QLatin1String("Nervousbreaktown"));
-        address.setRegion(QLatin1String("DC"));
-        address.setCountry(QLatin1String("United States of America"));
+        address.setStreet(QStringLiteral("457 Foobar Ave"));
+        address.setPostalCode(QStringLiteral("1A2B3C"));
+        address.setLocality(QStringLiteral("Nervousbreaktown"));
+        address.setRegion(QStringLiteral("DC"));
+        address.setCountry(QStringLiteral("United States of America"));
 
         const QString result(
-            QLatin1String("Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
+            QStringLiteral("Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
                           "  DC 1A2B3C\n\nUNITED STATES OF AMERICA"));
-        QCOMPARE(address.formattedAddress(QLatin1String("Huck Finn")), result);
+        QCOMPARE(address.formattedAddress(QStringLiteral("Huck Finn")), result);
     }
 
     {
         KContacts::Address address;
-        address.setStreet(QLatin1String("Lummerlandstr. 1"));
-        address.setPostalCode(QLatin1String("12345"));
-        address.setLocality(QLatin1String("Lummerstadt"));
-        address.setCountry(QLatin1String("Deutschland"));
+        address.setStreet(QStringLiteral("Lummerlandstr. 1"));
+        address.setPostalCode(QStringLiteral("12345"));
+        address.setLocality(QStringLiteral("Lummerstadt"));
+        address.setCountry(QStringLiteral("Deutschland"));
 
-        const QString result(QLatin1String("Jim Knopf\nLummerlandstr. 1\n"
+        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                                            "12345 Lummerstadt\n\nDEUTSCHLAND"));
 
-        QCOMPARE(address.formattedAddress(QLatin1String("Jim Knopf")), result);
+        QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
 
     {
         KContacts::Address address;
-        address.setStreet(QLatin1String("Lummerlandstr. 1"));
-        address.setPostalCode(QLatin1String("12345"));
-        address.setLocality(QLatin1String("Lummerstadt"));
+        address.setStreet(QStringLiteral("Lummerlandstr. 1"));
+        address.setPostalCode(QStringLiteral("12345"));
+        address.setLocality(QStringLiteral("Lummerstadt"));
         address.setCountry(QString());
 
-        const QString result(QLatin1String("Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345"));
+        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345"));
 
-        QCOMPARE(address.formattedAddress(QLatin1String("Jim Knopf")), result);
+        QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
 }
