@@ -16,7 +16,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
-set(KF5_VERSION "5.6.0")
+set(KF5_VERSION "5.7.0")
 set(KCONTACTS_LIB_VERSION "4.84.0")
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
