@@ -43,9 +43,9 @@ void GenderTest::shouldHaveDefaultValue()
 
 void GenderTest::shouldAssignValue()
 {
-    const QString genderStr(QLatin1String("F"));
+    const QString genderStr(QStringLiteral("F"));
     KContacts::Gender gender(genderStr);
-    const QString commentStr(QLatin1String("foo"));
+    const QString commentStr(QStringLiteral("foo"));
     gender.setComment(commentStr);
     QVERIFY(gender.isValid());
     QVERIFY(!gender.gender().isEmpty());
@@ -57,7 +57,7 @@ void GenderTest::shouldAssignValue()
 void GenderTest::shouldAssignExternal()
 {
     KContacts::Gender gender;
-    const QString genderStr(QLatin1String("H"));
+    const QString genderStr(QStringLiteral("H"));
     gender.setGender(genderStr);
     QVERIFY(gender.isValid());
     QVERIFY(!gender.gender().isEmpty());
@@ -68,9 +68,9 @@ void GenderTest::shouldSerialized()
 {
     KContacts::Gender gender;
     KContacts::Gender result;
-    const QString genderStr(QLatin1String("H"));
+    const QString genderStr(QStringLiteral("H"));
     gender.setGender(genderStr);
-    gender.setComment(QLatin1String("foo"));
+    gender.setComment(QStringLiteral("foo"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -86,9 +86,9 @@ void GenderTest::shouldEqualGender()
 {
     KContacts::Gender gender;
     KContacts::Gender result;
-    const QString genderStr(QLatin1String("H"));
+    const QString genderStr(QStringLiteral("H"));
     gender.setGender(genderStr);
-    gender.setComment(QLatin1String("foo"));
+    gender.setComment(QStringLiteral("foo"));
 
     result = gender;
     QVERIFY(gender == result);
