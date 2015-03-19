@@ -175,7 +175,7 @@ void AddressTest::formatTest()
         address.setCountry(QStringLiteral("Germany"));
 
         const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                                           "12345 Lummerstadt\n\nGERMANY"));
+                                            "12345 Lummerstadt\n\nGERMANY"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
@@ -190,7 +190,7 @@ void AddressTest::formatTest()
 
         const QString result(
             QStringLiteral("Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
-                          "  DC 1A2B3C\n\nUNITED STATES OF AMERICA"));
+                           "  DC 1A2B3C\n\nUNITED STATES OF AMERICA"));
         QCOMPARE(address.formattedAddress(QStringLiteral("Huck Finn")), result);
     }
 
@@ -202,7 +202,7 @@ void AddressTest::formatTest()
         address.setCountry(QStringLiteral("Deutschland"));
 
         const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                                           "12345 Lummerstadt\n\nDEUTSCHLAND"));
+                                            "12345 Lummerstadt\n\nDEUTSCHLAND"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }

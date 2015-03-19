@@ -330,9 +330,9 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         a.setUid(value);
         return true;
     }
-    if ( fieldname == QLatin1String( "mail" ) ||
-         fieldname == QLatin1String( "mozillasecondemail" ) /* mozilla */ ||
-         fieldname == QLatin1String( "othermailbox" )  /*TheBat!*/ )  {
+    if (fieldname == QLatin1String("mail") ||
+            fieldname == QLatin1String("mozillasecondemail") /* mozilla */ ||
+            fieldname == QLatin1String("othermailbox")  /*TheBat!*/)  {
         if (a.emails().indexOf(value) == -1) {
             a.insertEmail(value);
         }
@@ -575,7 +575,7 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         birthday = value.toInt();
         return true;
     }
-    if ( fieldname == QLatin1String("xbatbirthday")) {
+    if (fieldname == QLatin1String("xbatbirthday")) {
         QDate dt = QDate::fromString(value, QString::fromLatin1("yyyyMMdd"));
         if (dt.isValid()) {
             a.setBirthday(QDateTime(dt));

@@ -70,7 +70,7 @@ void LDifConverterTest::shouldConvertStandardBirthday()
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
-    QCOMPARE(lst.at(0).birthday().date(), QDate(2015,3,19));
+    QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
 }
 
 void LDifConverterTest::shouldConvertTheBatsBirthday()
@@ -89,7 +89,7 @@ void LDifConverterTest::shouldConvertTheBatsBirthday()
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
-    QCOMPARE(lst.at(0).birthday().date(), QDate(2015,3,19));
+    QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
 }
 
 void LDifConverterTest::shouldConvertTitle()
@@ -109,6 +109,5 @@ void LDifConverterTest::shouldConvertTitle()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).title(), QLatin1String("foo"));
 }
-
 
 QTEST_MAIN(LDifConverterTest)

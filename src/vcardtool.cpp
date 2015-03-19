@@ -87,11 +87,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const
 {
     if (version == VCard::v2_1) {
-        Q_FOREACH(const QString &valueStr, valueStringList) {
-            line.addParameter( valueStr, QString() );
+        Q_FOREACH (const QString &valueStr, valueStringList) {
+            line.addParameter(valueStr, QString());
         }
     } else {
-        line.addParameter( key, valueStringList.join(QLatin1String(",")) );
+        line.addParameter(key, valueStringList.join(QLatin1String(",")));
     }
 }
 
@@ -165,9 +165,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             for (typeIt = mAddressTypeMap.constBegin();
                     typeIt != mAddressTypeMap.constEnd(); ++typeIt) {
                 if (typeIt.value() & (*it).type()) {
-                    addParameter(adrLine, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
+                    addParameter(adrLine, version, QLatin1String("TYPE"), QStringList() << typeIt.key());
                     if (hasLabel) {
-                        addParameter(labelLine, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
+                        addParameter(labelLine, version, QLatin1String("TYPE"), QStringList() << typeIt.key());
                     }
                 }
             }
@@ -272,18 +272,18 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     foundType = true;
                 }
                 if (!valueStringList.isEmpty()) {
-                    if (i.key().toLower() == QLatin1String( "type" )) {
+                    if (i.key().toLower() == QLatin1String("type")) {
                         addParameter(line, version, i.key(), valueStringList);
                     } else {
-                        line.addParameter( i.key(), valueStringList.join(QLatin1String(",")) );
+                        line.addParameter(i.key(), valueStringList.join(QLatin1String(",")));
                     }
                 }
             }
             if (!foundType && needToAddPref) {
                 if (version == VCard::v2_1) {
-                    line.addParameter( QLatin1String( "PREF" ), QString() );
+                    line.addParameter(QLatin1String("PREF"), QString());
                 } else {
-                    line.addParameter( QLatin1String( "TYPE" ), QLatin1String( "PREF" ) );
+                    line.addParameter(QLatin1String("TYPE"), QLatin1String("PREF"));
                 }
             }
             card.addLine(line);
@@ -443,7 +443,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
             for (typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt) {
                 if (typeIt.value() & (*phoneIt).type()) {
-                    addParameter(line, version, QLatin1String( "TYPE" ), QStringList()<<typeIt.key());
+                    addParameter(line, version, QLatin1String("TYPE"), QStringList() << typeIt.key());
                 }
             }
 
@@ -1100,11 +1100,11 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
     if (pic.isIntern()) {
         line.setValue(pic.rawData());
         if (version == VCard::v2_1) {
-            line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
-            line.addParameter( pic.type(), QString() );
+            line.addParameter(QLatin1String("ENCODING"), QLatin1String("BASE64"));
+            line.addParameter(pic.type(), QString());
         } else {
-            line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
-            line.addParameter( QLatin1String( "type" ), pic.type() );
+            line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+            line.addParameter(QLatin1String("type"), pic.type());
         }
     } else {
         line.setValue(pic.url());
@@ -1144,9 +1144,9 @@ VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
         if (!snd.data().isEmpty()) {
             line.setValue(snd.data());
             if (version == VCard::v2_1) {
-                line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
+                line.addParameter(QLatin1String("ENCODING"), QLatin1String("BASE64"));
             } else {
-                line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+                line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
             }
             // TODO: need to store sound type!!!
         }
