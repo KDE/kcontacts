@@ -110,4 +110,25 @@ void LDifConverterTest::shouldConvertTitle()
     QCOMPARE(lst.at(0).title(), QLatin1String("foo"));
 }
 
+void LDifConverterTest::shouldConvertWorkStreet()
+{
+    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+                                "sn: laurent\n"
+                                "cn: laurent\n"
+                                "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
+                                "title: foo\n"
+                                "mail: foo@kde.org\n"
+                                "street: work address\n"
+                                "mozillaWorkStreet2: work address next\n"
+                                "objectclass: top_n"
+                                "objectclass: person\n"
+                                "objectclass: organizationalPerson");
+    AddresseeList lst;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).address(Address::Work).street(), QLatin1String("work address\nwork address next"));
+}
+
+
 QTEST_MAIN(LDifConverterTest)

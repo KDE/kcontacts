@@ -162,10 +162,10 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
 
     streets = workAddr.street().split(QLatin1Char('\n'));
     if (streets.count() > 0) {
-        ldif_out(t, QLatin1String("postaladdress"), streets.at(0));
+        ldif_out(t, QLatin1String("street"), streets.at(0));
     }
     if (streets.count() > 1) {
-        ldif_out(t, QLatin1String("mozillapostaladdress2"), streets.at(1));
+        ldif_out(t, QLatin1String("mozillaworkstreet2"), streets.at(1));
     }
     ldif_out(t, QLatin1String("countryname"), Address::ISOtoCountry(workAddr.country()));
     ldif_out(t, QLatin1String("l"), workAddr.locality());
@@ -400,13 +400,8 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Work));
         return true;
     }
-
-    if (fieldname == QLatin1String("mobile")) {             // mozilla/Netscape 7
-        a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Cell));
-        return true;
-    }
-
-    if (fieldname == QLatin1String("cellphone")) {
+    if ( fieldname == QLatin1String( "mobile" ) || /* mozilla/Netscape 7 */
+         fieldname == QLatin1String( "cellphone" )) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Cell));
         return true;
     }
@@ -438,8 +433,8 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         workAddr.setStreet(value);
         return true;
     }
-
-    if (fieldname == QLatin1String("mozillapostaladdress2")) {      // mozilla
+    if ( fieldname == QLatin1String( "mozillapostaladdress2" ) ||
+         fieldname == QLatin1String( "mozillaworkstreet2" ) ) {  // mozilla
         workAddr.setStreet(workAddr.street() + QLatin1String("\n") + value);
         return true;
     }
@@ -531,8 +526,9 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         QStringList list = value.split(QLatin1Char(','));
         QString name, email;
 
-        QStringList::Iterator it;
-        for (it = list.begin(); it != list.end(); ++it) {
+        QStringList::ConstIterator it;
+        QStringList::ConstIterator end(list.constEnd());
+        for ( it = list.constBegin(); it != end; ++it ) {
             if ((*it).startsWith(QLatin1String("cn="))) {
                 name = (*it).mid(3).trimmed();
             }
@@ -544,7 +540,6 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
             email = QLatin1String(" <") + email + QLatin1Char('>');
         }
         a.insertEmail(name + email);
-        a.insertCategory(i18n("List of Emails"));
         return true;
     }
 
