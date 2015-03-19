@@ -197,7 +197,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     }
 
     const QDateTime birthday = addr.birthday();
-    if (birthday.isValid()) {
+    if (birthday.date().isValid()) {
         const QDate date = birthday.date();
         ldif_out(t, QLatin1String("birthyear"), QString::number(date.year()));
         ldif_out(t, QLatin1String("birthmonth"), QString::number(date.month()));
