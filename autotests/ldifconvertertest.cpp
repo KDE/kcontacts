@@ -130,5 +130,4 @@ void LDifConverterTest::shouldConvertWorkStreet()
     QCOMPARE(lst.at(0).address(Address::Work).street(), QLatin1String("work address\nwork address next"));
 }
 
-
 QTEST_MAIN(LDifConverterTest)

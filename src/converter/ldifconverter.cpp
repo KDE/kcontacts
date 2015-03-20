@@ -400,8 +400,8 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Work));
         return true;
     }
-    if ( fieldname == QLatin1String( "mobile" ) || /* mozilla/Netscape 7 */
-         fieldname == QLatin1String( "cellphone" )) {
+    if (fieldname == QLatin1String("mobile") ||    /* mozilla/Netscape 7 */
+            fieldname == QLatin1String("cellphone")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Cell));
         return true;
     }
@@ -433,8 +433,8 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         workAddr.setStreet(value);
         return true;
     }
-    if ( fieldname == QLatin1String( "mozillapostaladdress2" ) ||
-         fieldname == QLatin1String( "mozillaworkstreet2" ) ) {  // mozilla
+    if (fieldname == QLatin1String("mozillapostaladdress2") ||
+            fieldname == QLatin1String("mozillaworkstreet2")) {     // mozilla
         workAddr.setStreet(workAddr.street() + QLatin1String("\n") + value);
         return true;
     }
@@ -528,7 +528,7 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
 
         QStringList::ConstIterator it;
         QStringList::ConstIterator end(list.constEnd());
-        for ( it = list.constBegin(); it != end; ++it ) {
+        for (it = list.constBegin(); it != end; ++it) {
             if ((*it).startsWith(QLatin1String("cn="))) {
                 name = (*it).mid(3).trimmed();
             }
