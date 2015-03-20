@@ -19,7 +19,7 @@
 */
 
 #include "impptest.h"
-#include <qtest_kde.h>
+#include <qtest.h>
 
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
@@ -32,4 +32,4 @@ ImppTest::~ImppTest()
 
 }
 
-QTEST_KDEMAIN(ImppTest, NoGUI)
+QTEST_MAIN(ImppTest)
