@@ -361,20 +361,16 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return true;
     }
 
-    if (fieldname == QLatin1String("description")) {
-    addComment:
+    if (fieldname == QLatin1String("description") ||
+            fieldname == QLatin1String("custom1") ||
+            fieldname == QLatin1String("custom2") ||
+            fieldname == QLatin1String("custom3") ||
+            fieldname == QLatin1String("custom4")) {
         if (!a.note().isEmpty()) {
             a.setNote(a.note() + QLatin1Char('\n'));
         }
         a.setNote(a.note() + value);
         return true;
-    }
-
-    if (fieldname == QLatin1String("custom1") ||
-            fieldname == QLatin1String("custom2") ||
-            fieldname == QLatin1String("custom3") ||
-            fieldname == QLatin1String("custom4")) {
-        goto addComment;
     }
 
     if (fieldname == QLatin1String("homeurl") ||

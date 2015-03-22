@@ -88,7 +88,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
 
         //SAFE-CHAR
         if (safe) {
-            for (int i = 1; i < value.size(); i++) {
+            for (int i = 1; i < value.size(); ++i) {
                 //allow utf-8 in Distinguished Names
                 if ((isDn && value[i] == 0) ||
                         (!isDn && value[i] <= 0) ||
