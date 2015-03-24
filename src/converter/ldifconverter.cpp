@@ -65,7 +65,7 @@ namespace KContacts
   @param fieldname LDIF field name to evaluate
   @param value The value of the field addressed by @p fieldname
 */
-bool evaluatePair(Addressee &a, Address &homeAddr,
+void evaluatePair(Addressee &a, Address &homeAddr,
                   Address &workAddr,
                   QString &fieldname, QString &value,
                   int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup);
@@ -294,46 +294,46 @@ bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList
     return true;
 }
 
-bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
+void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
                              Address &workAddr,
                              QString &fieldname, QString &value,
                              int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup)
 {
-    if (fieldname == QLatin1String("dn")) {     // ignore & return false!
-        return false;
+    if (fieldname == QLatin1String("dn")) {     // ignore
+        return;
     }
 
     if (fieldname.startsWith(QLatin1Char('#'))) {
-        return true;
+        return;
     }
 
     if (fieldname.isEmpty() && !a.note().isEmpty()) {
         // some LDIF export filters are borken and add additional
         // comments on stand-alone lines. Just add them to the notes for now.
         a.setNote(a.note() + QLatin1Char('\n') + value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("givenname")) {
         a.setGivenName(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("xmozillanickname") ||
             fieldname == QLatin1String("nickname") ||
             fieldname == QLatin1String("mozillanickname")) {
         a.setNickName(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("sn")) {
         a.setFamilyName(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("uid")) {
         a.setUid(value);
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("mail") ||
             fieldname == QLatin1String("mozillasecondemail") /* mozilla */ ||
@@ -341,29 +341,29 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         if (a.emails().indexOf(value) == -1) {
             a.insertEmail(value);
         }
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("title")) {
         a.setTitle(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("vocation")) {
         a.setPrefix(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("cn")) {
         a.setFormattedName(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("o") ||
             fieldname == QLatin1String("organization") ||        // Exchange
             fieldname == QLatin1String("organizationname")) {    // Exchange
         a.setOrganization(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("description") ||
@@ -375,7 +375,7 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
             a.setNote(a.note() + QLatin1Char('\n'));
         }
         a.setNote(a.note() + value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("homeurl") ||
@@ -383,10 +383,10 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
             fieldname == QLatin1String("mozillahomeurl")) {
         if (a.url().isEmpty()) {
             a.setUrl(QUrl(value));
-            return true;
+            return;
         }
         if (a.url().toDisplayString() == QUrl(value).toDisplayString()) {
-            return true;
+            return;
         }
         // TODO: current version of kabc only supports one URL.
         // TODO: change this with KDE 4
@@ -394,85 +394,85 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
 
     if (fieldname == QLatin1String("homephone")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Home));
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("telephonenumber")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Work));
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("mobile") ||    /* mozilla/Netscape 7 */
             fieldname == QLatin1String("cellphone")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Cell));
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("pager")  ||          // mozilla
             fieldname == QLatin1String("pagerphone")) {     // mozilla
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Pager));
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("facsimiletelephonenumber")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Fax));
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("xmozillaanyphone")) {      // mozilla
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Work));
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("streethomeaddress") ||
             fieldname == QLatin1String("mozillahomestreet")) {     // thunderbird
         homeAddr.setStreet(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("street") ||
             fieldname == QLatin1String("postaladdress")) {     // mozilla
         workAddr.setStreet(value);
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("mozillapostaladdress2") ||
             fieldname == QLatin1String("mozillaworkstreet2")) {     // mozilla
         workAddr.setStreet(workAddr.street() + QLatin1String("\n") + value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("postalcode")) {
         workAddr.setPostalCode(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("postofficebox")) {
         workAddr.setPostOfficeBox(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("homepostaladdress")) {      // Netscape 7
         homeAddr.setStreet(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("mozillahomepostaladdress2")) {      // mozilla
         homeAddr.setStreet(homeAddr.street() + QLatin1String("\n") + value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("mozillahomelocalityname")) {      // mozilla
         homeAddr.setLocality(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("mozillahomestate")) {     // mozilla
         homeAddr.setRegion(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("mozillahomepostalcode")) {      // mozilla
         homeAddr.setPostalCode(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("mozillahomecountryname")) {     // mozilla
@@ -480,17 +480,17 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
             value = Address::ISOtoCountry(value);
         }
         homeAddr.setCountry(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("locality")) {
         workAddr.setLocality(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("streetaddress")) {     // Netscape 4.x
         workAddr.setStreet(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("countryname") ||
@@ -499,27 +499,27 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
             value = Address::ISOtoCountry(value);
         }
         workAddr.setCountry(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("l")) {      // mozilla
         workAddr.setLocality(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("st")) {
         workAddr.setRegion(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("ou")) {
         a.setRole(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("department")) {
         a.setDepartment(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("member")) {
@@ -546,50 +546,50 @@ bool KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         contactGroup.append(data);
 
         a.insertEmail(name + email);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("modifytimestamp")) {
         if (value == QLatin1String("0Z")) {     // ignore
-            return true;
+            return;
         }
         QDateTime dt = VCardStringToDate(value);
         if (dt.isValid()) {
             a.setRevision(dt);
-            return true;
+            return;
         }
     }
 
     if ( fieldname == QLatin1String( "display-name" ) ) {
         contactGroup.setName(value);
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("objectclass")) {     // ignore
-        return true;
+        return;
     }
 
     if (fieldname == QLatin1String("birthyear")) {
         birthyear = value.toInt();
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("birthmonth")) {
         birthmonth = value.toInt();
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("birthday")) {
         birthday = value.toInt();
-        return true;
+        return;
     }
     if (fieldname == QLatin1String("xbatbirthday")) {
         QDate dt = QDate::fromString(value, QString::fromLatin1("yyyyMMdd"));
         if (dt.isValid()) {
             a.setBirthday(QDateTime(dt));
         }
-        return true;
+        return;
     }
     qCWarning(KCONTACTS_LOG) << QString::fromLatin1("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
                              arg(a.formattedName()).arg(fieldname).arg(value);
 
-    return true;
+    return;
 }
