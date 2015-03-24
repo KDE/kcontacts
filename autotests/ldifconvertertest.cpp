@@ -140,4 +140,88 @@ void LDifConverterTest::shouldConvertWorkStreet()
     QCOMPARE(contactGroup.count(), 0);
 }
 
+void LDifConverterTest::shouldConvertContactGroup()
+{
+    QString str = QLatin1String("dn: cn=test,mail=\n"
+                                "cn: test\n"
+                                "modifyTimeStamp: 20080526T234914Z\n"
+                                "display-name: Test\n"
+                                "objectclass: top\n"
+                                "objectclass: groupOfNames\n"
+                                "member: cn=Jim Doe,mail=jim.doe@foobar.com\n"
+                                "member: cn=Jane Doe,mail=jane.doe@foobar.com\n"
+                                "member: cn=John Doe,mail=john.doe@foobar.com\n");
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 0);
+    QCOMPARE(contactGroup.count(), 1);
+    ContactGroup first = contactGroup.first();
+    QCOMPARE(first.name(), QLatin1String("Test"));
+    QCOMPARE((int)first.count(), 3);
+}
+
+void LDifConverterTest::shouldConvertMultiEntries()
+{
+    QString str = QLatin1String("dn: cn=test1,mail=test1@test.test\n"
+                                "sn: test1\n"
+                                "cn: test1\n"
+                                "uid: jpgdf2NrLQ\n"
+                                "mail: test1@test.test\n"
+                                "modifytimestamp: 20121219T140848Z\n"
+                                "objectclass: top\n"
+                                "objectclass: person\n"
+                                "objectclass: organizationalPerson\n"
+                                "\n"
+                                "dn: cn=test2,mail=test2@test.test\n"
+                                "sn: test2\n"
+                                "cn: test2\n"
+                                "uid: ow2mwdUb6A\n"
+                                "mail: test2@test.test\n"
+                                "objectclass: top\n"
+                                "objectclass: person\n"
+                                "objectclass: organizationalPerson\n");
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 2);
+    QCOMPARE(contactGroup.count(), 0);
+    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("test1@test.test"));
+    QCOMPARE(lst.at(1).emails().at(0), QLatin1String("test2@test.test"));
+}
+
+void LDifConverterTest::shouldConvertGroupAndAddress()
+{
+    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+                                "sn: laurent\n"
+                                "cn: laurent\n"
+                                "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
+                                "title: foo\n"
+                                "mail: foo@kde.org\n"
+                                "street: work address\n"
+                                "mozillaWorkStreet2: work address next\n"
+                                "objectclass: top_n"
+                                "objectclass: person\n"
+                                "objectclass: organizationalPerson\n"
+                                "\n"
+                                "dn: cn=test,mail=\n"
+                                "cn: test\n"
+                                "modifyTimeStamp: 20080526T234914Z\n"
+                                "display-name: Test\n"
+                                "objectclass: top\n"
+                                "objectclass: groupOfNames\n"
+                                "member: cn=Jim Doe,mail=jim.doe@foobar.com\n"
+                                "member: cn=Jane Doe,mail=jane.doe@foobar.com\n"
+                                "member: cn=John Doe,mail=john.doe@foobar.com\n");
+
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(contactGroup.count(), 1);
+}
+
 QTEST_MAIN(LDifConverterTest)

@@ -36,6 +36,9 @@ private Q_SLOTS:
     void shouldConvertTheBatsBirthday();
     void shouldConvertTitle();
     void shouldConvertWorkStreet();
+    void shouldConvertContactGroup();
+    void shouldConvertMultiEntries();
+    void shouldConvertGroupAndAddress();
 };
 
 #endif // LDIFCONVERTERTEST_H
