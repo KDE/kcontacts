@@ -45,11 +45,13 @@ void LDifConverterTest::shouldConvertEmail()
                                 "objectclass: person\n"
                                 "objectclass: organizationalPerson");
     AddresseeList lst;
-    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).emails().count(), 1);
     QCOMPARE(lst.at(0).emails().at(0), QLatin1String("foo@kde.org"));
+    QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldConvertStandardBirthday()
@@ -66,11 +68,13 @@ void LDifConverterTest::shouldConvertStandardBirthday()
                                 "objectclass: person\n"
                                 "objectclass: organizationalPerson");
     AddresseeList lst;
-    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
     QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
+    QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldConvertTheBatsBirthday()
@@ -85,11 +89,13 @@ void LDifConverterTest::shouldConvertTheBatsBirthday()
                                 "objectclass: person\n"
                                 "objectclass: organizationalPerson");
     AddresseeList lst;
-    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
     QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
+    QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldConvertTitle()
@@ -104,10 +110,12 @@ void LDifConverterTest::shouldConvertTitle()
                                 "objectclass: person\n"
                                 "objectclass: organizationalPerson");
     AddresseeList lst;
-    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).title(), QLatin1String("foo"));
+    QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldConvertWorkStreet()
@@ -124,10 +132,12 @@ void LDifConverterTest::shouldConvertWorkStreet()
                                 "objectclass: person\n"
                                 "objectclass: organizationalPerson");
     AddresseeList lst;
-    bool result = LDIFConverter::LDIFToAddressee(str, lst);
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).address(Address::Work).street(), QLatin1String("work address\nwork address next"));
+    QCOMPARE(contactGroup.count(), 0);
 }
 
 QTEST_MAIN(LDifConverterTest)

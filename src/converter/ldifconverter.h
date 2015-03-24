@@ -22,6 +22,7 @@
 
 #include "addressee.h"
 #include "addresseelist.h"
+#include "contactgroup.h"
 
 #include <QtCore/QDateTime>
 #include <QtCore/QString>
@@ -43,9 +44,10 @@ namespace LDIFConverter
 
   @param str         The vcard string.
   @param addrList    The addresseelist.
+  @param contactGroupList the contactGroupList
   @param dt          The date & time value of the last modification (e.g. file modification time).
 */
-KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList,
+KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
                                       const QDateTime &dt = QDateTime::currentDateTime());
 
 /**
