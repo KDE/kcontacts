@@ -27,7 +27,7 @@ class GenderTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit GenderTest(QObject *parent = 0);
+    explicit GenderTest(QObject *parent = Q_NULLPTR);
     ~GenderTest();
 
 private Q_SLOTS:
