@@ -73,6 +73,24 @@ void evaluatePair(Addressee &a, Address &homeAddr,
 
 /* generate LDIF stream */
 
+bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str )
+{
+    bool result = addresseeToLDIF( addrList, str );
+    if (!contactGroupList.isEmpty()) {
+
+    }
+    return result;
+}
+
+bool LDIFConverter::addresseeToLDIF( const ContactGroup::List &contactGroupList, QString &str )
+{
+    if ( contactGroupList.isEmpty() ) {
+        return false;
+    }
+    //TODO
+    return true;
+}
+
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
 {
     AddresseeList::ConstIterator it;
