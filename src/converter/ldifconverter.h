@@ -67,7 +67,7 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &st
   @param str         The LDIF string.
 
 */
-KCONTACTS_EXPORT bool addresseeToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str );
+KCONTACTS_EXPORT bool addresseeAndContactGroupToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str );
 /**
   Converts an addressee to a LDIF string.
 
@@ -82,7 +82,15 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
   @param contactGroupList    The contact group list
   @param str         The LDIF string.
 */
-KCONTACTS_EXPORT bool addresseeToLDIF( const ContactGroup::List &contactGroupList, QString &str );
+KCONTACTS_EXPORT bool contactGroupToLDIF( const ContactGroup::List &contactGroupList, QString &str );
+
+/**
+  Converts a contact group to a LDIF string.
+
+  @param contactGroup    The contact group
+  @param str         The LDIF string.
+*/
+KCONTACTS_EXPORT bool contactGroupToLDIF( const ContactGroup &contactGroup, QString &str );
 
 }
 

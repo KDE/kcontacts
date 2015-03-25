@@ -73,34 +73,6 @@ void evaluatePair(Addressee &a, Address &homeAddr,
 
 /* generate LDIF stream */
 
-bool LDIFConverter::addresseeToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str )
-{
-    bool result = addresseeToLDIF( addrList, str );
-    if (!contactGroupList.isEmpty()) {
-
-    }
-    return result;
-}
-
-bool LDIFConverter::addresseeToLDIF( const ContactGroup::List &contactGroupList, QString &str )
-{
-    if ( contactGroupList.isEmpty() ) {
-        return false;
-    }
-    //TODO
-    return true;
-}
-
-bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
-{
-    AddresseeList::ConstIterator it;
-    AddresseeList::ConstIterator end(addrList.constEnd());
-    for (it = addrList.constBegin(); it != end; ++it) {
-        addresseeToLDIF(*it, str);
-    }
-    return true;
-}
-
 static void ldif_out(QTextStream &t, const QString &formatStr,
                      const QString &value)
 {
@@ -113,6 +85,57 @@ static void ldif_out(QTextStream &t, const QString &formatStr,
     // write the string
     t << QString::fromUtf8(txt) << "\n";
 }
+
+bool LDIFConverter::addresseeAndContactGroupToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str )
+{
+    bool result = addresseeToLDIF( addrList, str );
+    if (!contactGroupList.isEmpty()) {
+        result = contactGroupToLDIF( contactGroupList, str );
+    }
+    return result;
+}
+
+bool LDIFConverter::contactGroupToLDIF( const ContactGroup &contactGroup, QString &str )
+{
+    if ( contactGroup.dataCount() <= 0 ) {
+        return false;
+    }
+    QTextStream t( &str, QIODevice::WriteOnly|QIODevice::Append );
+    t.setCodec( QTextCodec::codecForName( "UTF-8" ) );
+    t << "objectclass: top\n";
+    t << "objectclass: groupOfNames\n";
+
+    for (unsigned int i = 0; i < contactGroup.dataCount(); ++i) {
+        ContactGroup::Data data = contactGroup.data(i);
+        const QString value = QString::fromLatin1("cn=%1,mail=%2").arg(data.name()).arg(data.email());
+        ldif_out( t, QLatin1String( "member" ), value );
+    }
+
+    t << "\n";
+    return true;
+}
+
+bool LDIFConverter::contactGroupToLDIF( const ContactGroup::List &contactGroupList, QString &str )
+{
+    ContactGroup::List::ConstIterator it;
+    ContactGroup::List::ConstIterator end( contactGroupList.constEnd() );
+    for ( it = contactGroupList.constBegin(); it != end; ++it ) {
+        contactGroupToLDIF( *it, str );
+    }
+    return true;
+}
+
+
+bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
+{
+    AddresseeList::ConstIterator it;
+    AddresseeList::ConstIterator end(addrList.constEnd());
+    for (it = addrList.constBegin(); it != end; ++it) {
+        addresseeToLDIF(*it, str);
+    }
+    return true;
+}
+
 
 bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
 {
