@@ -31,14 +31,14 @@ public:
     ~LDifConverterTest();
 
 private Q_SLOTS:
-    void shouldConvertEmail();
-    void shouldConvertStandardBirthday();
-    void shouldConvertTheBatsBirthday();
-    void shouldConvertTitle();
-    void shouldConvertWorkStreet();
-    void shouldConvertContactGroup();
-    void shouldConvertMultiEntries();
-    void shouldConvertGroupAndAddress();
+    void shouldImportEmail();
+    void shouldImportStandardBirthday();
+    void shouldImportTheBatsBirthday();
+    void shouldImportTitle();
+    void shouldImportWorkStreet();
+    void shouldImportContactGroup();
+    void shouldImportMultiEntries();
+    void shouldImportGroupAndAddress();
 };
 
 #endif // LDIFCONVERTERTEST_H

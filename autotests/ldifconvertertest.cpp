@@ -34,7 +34,7 @@ LDifConverterTest::~LDifConverterTest()
 
 }
 
-void LDifConverterTest::shouldConvertEmail()
+void LDifConverterTest::shouldImportEmail()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
@@ -54,7 +54,7 @@ void LDifConverterTest::shouldConvertEmail()
     QCOMPARE(contactGroup.count(), 0);
 }
 
-void LDifConverterTest::shouldConvertStandardBirthday()
+void LDifConverterTest::shouldImportStandardBirthday()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
@@ -77,7 +77,7 @@ void LDifConverterTest::shouldConvertStandardBirthday()
     QCOMPARE(contactGroup.count(), 0);
 }
 
-void LDifConverterTest::shouldConvertTheBatsBirthday()
+void LDifConverterTest::shouldImportTheBatsBirthday()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
@@ -98,7 +98,7 @@ void LDifConverterTest::shouldConvertTheBatsBirthday()
     QCOMPARE(contactGroup.count(), 0);
 }
 
-void LDifConverterTest::shouldConvertTitle()
+void LDifConverterTest::shouldImportTitle()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
@@ -118,7 +118,7 @@ void LDifConverterTest::shouldConvertTitle()
     QCOMPARE(contactGroup.count(), 0);
 }
 
-void LDifConverterTest::shouldConvertWorkStreet()
+void LDifConverterTest::shouldImportWorkStreet()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
@@ -140,7 +140,7 @@ void LDifConverterTest::shouldConvertWorkStreet()
     QCOMPARE(contactGroup.count(), 0);
 }
 
-void LDifConverterTest::shouldConvertContactGroup()
+void LDifConverterTest::shouldImportContactGroup()
 {
     QString str = QLatin1String("dn: cn=test,mail=\n"
                                 "cn: test\n"
@@ -162,7 +162,7 @@ void LDifConverterTest::shouldConvertContactGroup()
     QCOMPARE((int)first.count(), 3);
 }
 
-void LDifConverterTest::shouldConvertMultiEntries()
+void LDifConverterTest::shouldImportMultiEntries()
 {
     QString str = QLatin1String("dn: cn=test1,mail=test1@test.test\n"
                                 "sn: test1\n"
@@ -192,7 +192,7 @@ void LDifConverterTest::shouldConvertMultiEntries()
     QCOMPARE(lst.at(1).emails().at(0), QLatin1String("test2@test.test"));
 }
 
-void LDifConverterTest::shouldConvertGroupAndAddress()
+void LDifConverterTest::shouldImportGroupAndAddress()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
