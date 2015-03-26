@@ -224,4 +224,25 @@ void LDifConverterTest::shouldImportGroupAndAddress()
     QCOMPARE(contactGroup.count(), 1);
 }
 
+void LDifConverterTest::shouldExportEmail()
+{
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    Addressee addr;
+    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
+    addr.setUid(QLatin1String("testuid"));
+    lst << addr;
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+                                     "objectclass: top\n"
+                                     "objectclass: person\n"
+                                     "objectclass: organizationalPerson\n"
+                                     "uid: testuid\n"
+                                     "mail: foo@kde.org\n\n");
+
+    QCOMPARE(str, expected);
+}
+
 QTEST_MAIN(LDifConverterTest)
