@@ -245,4 +245,55 @@ void LDifConverterTest::shouldExportEmail()
     QCOMPARE(str, expected);
 }
 
+void LDifConverterTest::shouldExportBirthday()
+{
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    Addressee addr;
+    QDate date(2015, 3, 3);
+    addr.setBirthday(QDateTime(date));
+    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
+    addr.setUid(QLatin1String("testuid"));
+    lst << addr;
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+                                     "objectclass: top\n"
+                                     "objectclass: person\n"
+                                     "objectclass: organizationalPerson\n"
+                                     "uid: testuid\n"
+                                     "mail: foo@kde.org\n"
+                                     "birthyear: 2015\n"
+                                     "birthmonth: 3\n"
+                                     "birthday: 3\n"
+                                     "\n");
+
+    QCOMPARE(str, expected);
+}
+
+void LDifConverterTest::shouldExportTitle()
+{
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    Addressee addr;
+    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
+    addr.setTitle(QLatin1String("foo"));
+    addr.setUid(QLatin1String("testuid"));
+    lst << addr;
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+                                     "objectclass: top\n"
+                                     "objectclass: person\n"
+                                     "objectclass: organizationalPerson\n"
+                                     "uid: testuid\n"
+                                     "mail: foo@kde.org\n"
+                                     "title: foo\n"
+                                     "\n");
+
+    QCOMPARE(str, expected);
+}
+
 QTEST_MAIN(LDifConverterTest)

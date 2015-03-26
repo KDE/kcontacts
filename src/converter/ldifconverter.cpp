@@ -86,45 +86,44 @@ static void ldif_out(QTextStream &t, const QString &formatStr,
     t << QString::fromUtf8(txt) << "\n";
 }
 
-bool LDIFConverter::addresseeAndContactGroupToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str )
+bool LDIFConverter::addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str)
 {
-    bool result = addresseeToLDIF( addrList, str );
+    bool result = addresseeToLDIF(addrList, str);
     if (!contactGroupList.isEmpty()) {
-        result = contactGroupToLDIF( contactGroupList, str );
+        result = contactGroupToLDIF(contactGroupList, str);
     }
     return result;
 }
 
-bool LDIFConverter::contactGroupToLDIF( const ContactGroup &contactGroup, QString &str )
+bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString &str)
 {
-    if ( contactGroup.dataCount() <= 0 ) {
+    if (contactGroup.dataCount() <= 0) {
         return false;
     }
-    QTextStream t( &str, QIODevice::WriteOnly|QIODevice::Append );
-    t.setCodec( QTextCodec::codecForName( "UTF-8" ) );
+    QTextStream t(&str, QIODevice::WriteOnly | QIODevice::Append);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << "objectclass: top\n";
     t << "objectclass: groupOfNames\n";
 
     for (unsigned int i = 0; i < contactGroup.dataCount(); ++i) {
         ContactGroup::Data data = contactGroup.data(i);
         const QString value = QString::fromLatin1("cn=%1,mail=%2").arg(data.name()).arg(data.email());
-        ldif_out( t, QLatin1String( "member" ), value );
+        ldif_out(t, QLatin1String("member"), value);
     }
 
     t << "\n";
     return true;
 }
 
-bool LDIFConverter::contactGroupToLDIF( const ContactGroup::List &contactGroupList, QString &str )
+bool LDIFConverter::contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str)
 {
     ContactGroup::List::ConstIterator it;
-    ContactGroup::List::ConstIterator end( contactGroupList.constEnd() );
-    for ( it = contactGroupList.constBegin(); it != end; ++it ) {
-        contactGroupToLDIF( *it, str );
+    ContactGroup::List::ConstIterator end(contactGroupList.constEnd());
+    for (it = contactGroupList.constBegin(); it != end; ++it) {
+        contactGroupToLDIF(*it, str);
     }
     return true;
 }
-
 
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
 {
@@ -135,7 +134,6 @@ bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
     }
     return true;
 }
-
 
 bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
 {
@@ -249,15 +247,14 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
         ldif_out(t, QLatin1String("birthday"), QString::number(date.day()));
     }
 
-
     t << "\n";
 
     return true;
 }
 
 /* convert from LDIF stream */
-bool LDIFConverter::LDIFToAddressee( const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
-                                  const QDateTime &dt )
+bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
+                                    const QDateTime &dt)
 {
     if (str.isEmpty()) {
         return true;
@@ -408,6 +405,10 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     }
 
     if (fieldname == QLatin1String("description") ||
+            fieldname == QLatin1String("mozillacustom1") ||
+            fieldname == QLatin1String("mozillacustom2") ||
+            fieldname == QLatin1String("mozillacustom3") ||
+            fieldname == QLatin1String("mozillacustom4") ||
             fieldname == QLatin1String("custom1") ||
             fieldname == QLatin1String("custom2") ||
             fieldname == QLatin1String("custom3") ||
@@ -599,7 +600,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         }
     }
 
-    if ( fieldname == QLatin1String( "display-name" ) ) {
+    if (fieldname == QLatin1String("display-name")) {
         contactGroup.setName(value);
         return;
     }

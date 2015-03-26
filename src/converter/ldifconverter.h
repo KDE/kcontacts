@@ -50,7 +50,6 @@ namespace LDIFConverter
 KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
                                       const QDateTime &dt = QDateTime::currentDateTime());
 
-
 /**
   Converts a list of addressees to a LDIF string.
 
@@ -67,7 +66,7 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &st
   @param str         The LDIF string.
 
 */
-KCONTACTS_EXPORT bool addresseeAndContactGroupToLDIF( const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str );
+KCONTACTS_EXPORT bool addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str);
 /**
   Converts an addressee to a LDIF string.
 
@@ -82,7 +81,7 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
   @param contactGroupList    The contact group list
   @param str         The LDIF string.
 */
-KCONTACTS_EXPORT bool contactGroupToLDIF( const ContactGroup::List &contactGroupList, QString &str );
+KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str);
 
 /**
   Converts a contact group to a LDIF string.
@@ -90,7 +89,7 @@ KCONTACTS_EXPORT bool contactGroupToLDIF( const ContactGroup::List &contactGroup
   @param contactGroup    The contact group
   @param str         The LDIF string.
 */
-KCONTACTS_EXPORT bool contactGroupToLDIF( const ContactGroup &contactGroup, QString &str );
+KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup &contactGroup, QString &str);
 
 }
 
