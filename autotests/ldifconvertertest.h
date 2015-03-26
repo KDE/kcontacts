@@ -45,6 +45,8 @@ private Q_SLOTS:
     void shouldExportEmail();
     void shouldExportBirthday();
     void shouldExportTitle();
+    void shouldExportMultiEntries();
+    void shouldExportGroup();
 };
 
 #endif // LDIFCONVERTERTEST_H
