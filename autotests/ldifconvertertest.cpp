@@ -54,6 +54,28 @@ void LDifConverterTest::shouldImportEmail()
     QCOMPARE(contactGroup.count(), 0);
 }
 
+void LDifConverterTest::shouldImportMultiEmails()
+{
+    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+                                "sn: laurent\n"
+                                "cn: laurent\n"
+                                "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
+                                "mail: foo@kde.org\n"
+                                "mail: foo2@kde.org\n"
+                                "objectclass: top_n"
+                                "objectclass: person\n"
+                                "objectclass: organizationalPerson");
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).emails().count(), 2);
+    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("foo@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(1), QLatin1String("foo2@kde.org"));
+    QCOMPARE(contactGroup.count(), 0);
+}
+
 void LDifConverterTest::shouldImportStandardBirthday()
 {
     QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
@@ -364,4 +386,37 @@ void LDifConverterTest::shouldExportGroup()
                                            "\n");
     QCOMPARE(str, expected);
 }
+
+
+void LDifConverterTest::shouldExportWorkStreet()
+{
+    AddresseeList lst;
+    Addressee addr;
+    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
+    addr.setUid(QLatin1String("testuid"));
+    Address address(Address::Work);
+    address.setStreet(QLatin1String("work address"));
+    address.setPostalCode(QLatin1String("postal"));
+    addr.insertAddress(address);
+    lst << addr;
+    ContactGroup::List contactGroup;
+
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+
+    const QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+                                           "objectclass: top\n"
+                                           "objectclass: person\n"
+                                           "objectclass: organizationalPerson\n"
+                                           "uid: testuid\n"
+                                           "mail: foo@kde.org\n"
+                                           "postalcode: postal\n"
+                                           "streetaddress: work address\n"
+                                           "street: work address\n"
+                                           "\n");
+    QCOMPARE(str, expected);
+}
+
+
 QTEST_MAIN(LDifConverterTest)
