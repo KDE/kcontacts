@@ -162,11 +162,18 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     ldif_out(t, QLatin1String("xmozillanickname"), addr.nickName());
     ldif_out(t, QLatin1String("mozillanickname"), addr.nickName());
 
+
     ldif_out(t, QLatin1String("mail"), addr.preferredEmail());
-    if (addr.emails().count() > 1) {
-        ldif_out(t, QLatin1String("mozillasecondemail"), addr.emails().at(1));
+    for (int i = 1; i < addr.emails().count(); ++i) {
+        if (i == 0) {
+            //nothing
+        } else if (i == 1) {
+            ldif_out( t, QLatin1String( "mozillasecondemail" ), addr.emails()[ 1 ] );
+        } else {
+            ldif_out( t, QLatin1String( "othermailbox" ), addr.emails()[ i ] );
+        }
     }
-//ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
+    //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
 
     ldif_out(t, QLatin1String("telephonenumber"),
              addr.phoneNumber(PhoneNumber::Work).number());

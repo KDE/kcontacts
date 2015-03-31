@@ -36,6 +36,7 @@ private Q_SLOTS:
     void shouldImportMultiEmails();
     void shouldImportStandardBirthday();
     void shouldImportTheBatsBirthday();
+    void shouldImportTheBatsEmails();
     void shouldImportTitle();
     void shouldImportWorkStreet();
     void shouldImportContactGroup();
@@ -49,6 +50,7 @@ private Q_SLOTS:
     void shouldExportMultiEntries();
     void shouldExportGroup();
     void shouldExportWorkStreet();
+    void shouldExportMultiEmails();
 };
 
 #endif // LDIFCONVERTERTEST_H
