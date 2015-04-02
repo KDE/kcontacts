@@ -468,5 +468,36 @@ void LDifConverterTest::shouldExportWorkStreet()
     QCOMPARE(str, expected);
 }
 
+void LDifConverterTest::shouldExportFullName()
+{
+    AddresseeList lst;
+    Addressee addr;
+    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
+    addr.setUid(QLatin1String("testuid"));
+    addr.setName(QLatin1String("name"));
+    addr.setNickName(QLatin1String("nickname"));
+    addr.setFamilyName(QLatin1String("familyname"));
+    lst << addr;
+    ContactGroup::List contactGroup;
+
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+
+    const QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+                                           "objectclass: top\n"
+                                           "objectclass: person\n"
+                                           "objectclass: organizationalPerson\n"
+                                           "sn: familyname\n"
+                                           "uid: testuid\n"
+                                           "nickname: nickname\n"
+                                           "xmozillanickname: nickname\n"
+                                           "mozillanickname: nickname\n"
+                                           "mail: foo@kde.org\n"
+                                           "\n");
+
+    QCOMPARE(str, expected);
+}
+
 
 QTEST_MAIN(LDifConverterTest)
