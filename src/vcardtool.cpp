@@ -1035,13 +1035,9 @@ QDateTime VCardTool::parseDateTime(const QString &str) const
 
     QDateTime dateTime(date);
 
-    // explicitly set the time, which might be invalid, to keep the information
-    // that the time is invalid. In createDateTime() the time/invalid flag is
-    // checked which omits then to print the timestamp
-    // This is needed to reproduce the given string in input
-    // e.g. BDAY:2008-12-30
-    // without time shall also result in a string without a time
-    dateTime.setTime(time);
+    if (time.isValid()) {
+        dateTime.setTime(time);
+    }
 
     dateTime.setTimeSpec(spec);
     return dateTime;
