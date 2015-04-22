@@ -1,10 +1,10 @@
-libkcontacts - new address book API for KDE
+KContacts - new address book API for KDE
 
 PURPOSE:
 
-libkcontacts provides an API for address book data. This can be used by all KDE
+KCcontacts provides an API for address book data. This can be used by all
 application using data of this type, e.g. KAddressBook, KMail, KOrganizer,
-KPilot etc. It is meant as replacement for libkab (in kdebase/kab).
+etc. 
 
 FEATURES:
 

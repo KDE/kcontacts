@@ -1,4 +1,4 @@
-Address formats can be a tricky thing. libkabc tries very hard to perfectly fit
+Address formats can be a tricky thing. KContacts tries very hard to perfectly fit
 the needs of ~95% of users and to be at least sufficient for the other 5%.
 
 The formatting of an address depends on the destination country as well as on
@@ -15,7 +15,7 @@ format in a field "AddressFormat". Note that for most countries one field
 however, in some countries (eg. Hungary) business addresses differ in their
 structure. In this case you have the possibility of adding another field
 "BusinessAddressFormat" which will be preferred for formatting of business
-addresses; if libkabc can't find such a field, it will fall back to
+addresses; if KContacts can't find such a field, it will fall back to
 "AddressFormat". (Please use BusinessAddressFormat ONLY if you really need to)
 
 The format consists mainly of tags that will be replaced by address fields.
