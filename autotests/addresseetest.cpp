@@ -57,6 +57,8 @@ void AddresseeTest::storeTest()
 
     KContacts::Gender gender(QStringLiteral("H"));
     addressee.setGender(gender);
+    KContacts::Lang lang(QLatin1String("lang"));
+    addressee.setLangs(KContacts::Lang::List() << lang);
 
     addressee.setUid(QStringLiteral("My uid"));
     addressee.setName(QStringLiteral("John Sinclair"));
@@ -87,8 +89,10 @@ void AddresseeTest::storeTest()
     addressee.setKeys(keys);
     addressee.setCategories(categories);
     addressee.setCustoms(customs);
+    addressee.setKind(QStringLiteral("foo"));
     addressee.setChanged(false);
 
+    QVERIFY(addressee.langs() == (KContacts::Lang::List() << lang));
     QVERIFY(addressee.gender() == gender);
     QVERIFY(addressee.uid() == QStringLiteral("My uid"));
     QVERIFY(addressee.name() == QStringLiteral("John Sinclair"));
@@ -120,6 +124,7 @@ void AddresseeTest::storeTest()
     QVERIFY(addressee.categories() == categories);
     QVERIFY(addressee.customs() == customs);
     QVERIFY(addressee.changed() == false);
+    QCOMPARE(addressee.kind(), QStringLiteral("foo"));
 }
 
 void AddresseeTest::equalsTest()

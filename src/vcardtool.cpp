@@ -1181,13 +1181,15 @@ Key VCardTool::parseKey(const VCardLine &line) const
 
 VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
 {
-    Q_UNUSED(version);
     VCardLine line(QLatin1String("KEY"));
 
     if (key.isBinary()) {
         if (!key.binaryData().isEmpty()) {
             line.setValue(key.binaryData());
-            line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+            if (version == VCard::v2_1)
+                line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
+            else
+                line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
         }
     } else if (!key.textData().isEmpty()) {
         line.setValue(key.textData());
