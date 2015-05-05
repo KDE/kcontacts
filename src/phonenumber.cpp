@@ -37,7 +37,7 @@ class PhoneNumber::Private : public QSharedData
 {
 public:
     Private(Type type)
-        : mId(KRandom::randomString(8)), mType(type)
+        : mType(type), mId(KRandom::randomString(8))
     {
     }
 
@@ -49,8 +49,8 @@ public:
         mNumber = other.mNumber;
     }
 
-    QString mId;
     Type mType;
+    QString mId;
     QString mNumber;
 };
 
