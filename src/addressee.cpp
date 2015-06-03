@@ -2036,8 +2036,8 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                     context = InAngleAddress;
                 } else {
                     displayName += *p;
-                    break;
                 }
+                break;
             case '\\': // quoted character
                 displayName += *p;
                 ++p; // skip the '\'
@@ -2046,8 +2046,8 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                 } else {
                     //return KPIM::UnexpectedEnd;
                     goto ABORT_PARSING;
-                    break;
                 }
+                break;
             case ',':
                 if (!inQuotedString) {
                     //if ( allowMultipleAddresses )

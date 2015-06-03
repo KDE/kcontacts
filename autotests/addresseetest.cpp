@@ -444,7 +444,8 @@ void AddresseeTest::parseEmailAddress_data()
     QTest::addColumn<QString>("email");
     QTest::addColumn<QString>("name");
     QTest::newRow("simpleemail") << QStringLiteral("foo@kde.org") << QStringLiteral("foo@kde.org") << QString();
-    //TODO need to fix it QTest::newRow("email") << QStringLiteral("foo <foo@kde.org>") << QStringLiteral("foo@kde.org") << QStringLiteral("foo");
+    QTest::newRow("email") << QStringLiteral("foo <foo@kde.org>") << QStringLiteral("foo@kde.org") << QStringLiteral("foo");
+    QTest::newRow("namewithdoublequote") << QStringLiteral("\"foo\" <foo@kde.org>") << QStringLiteral("foo@kde.org") << QStringLiteral("foo");
 }
 
 void AddresseeTest::parseEmailAddress()
