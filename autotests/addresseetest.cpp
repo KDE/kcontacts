@@ -437,3 +437,25 @@ void AddresseeTest::customFieldsTest()
     c.removeCustom(QStringLiteral("FirstApp"), QStringLiteral("FirstKey"));
     QCOMPARE(c.customs().count(), 2);
 }
+
+void AddresseeTest::parseEmailAddress_data()
+{
+    QTest::addColumn<QString>("inputEmail");
+    QTest::addColumn<QString>("email");
+    QTest::addColumn<QString>("name");
+    QTest::newRow("simpleemail") << QStringLiteral("foo@kde.org") << QStringLiteral("foo@kde.org") << QString();
+    //TODO need to fix it QTest::newRow("email") << QStringLiteral("foo <foo@kde.org>") << QStringLiteral("foo@kde.org") << QStringLiteral("foo");
+}
+
+void AddresseeTest::parseEmailAddress()
+{
+    QFETCH(QString, inputEmail);
+    QFETCH(QString, email);
+    QFETCH(QString, name);
+
+    QString parsedName;
+    QString parsedEmail;
+    KContacts::Addressee::parseEmailAddress(inputEmail, parsedName, parsedEmail);
+    QCOMPARE(parsedEmail, email);
+    QCOMPARE(parsedName, name);
+}
