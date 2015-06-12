@@ -1414,7 +1414,8 @@ QString Addressee::preferredEmail() const
 QStringList Addressee::emails() const
 {
     QStringList list;
-    const int numberOfEmail(d->mEmails.size());
+    const int numberOfEmail = d->mEmails.size();
+    list.reserve(numberOfEmail);
     for (int i = 0; i < numberOfEmail; ++i) {
         list << d->mEmails.at(i).mail();
     }
@@ -1430,7 +1431,9 @@ Email::List Addressee::emailList() const
 void Addressee::setEmails(const QStringList &emails)
 {
     d->mEmails.clear();
-    for (int i = 0; i < emails.size(); ++i) {
+    const int numEmails = emails.size();
+    d->mEmails.reserve(numEmails);
+    for (int i = 0; i < numEmails; ++i) {
         d->mEmails.append(Email(emails.at(i)));
     }
     d->mEmpty = false;
@@ -1975,6 +1978,7 @@ QStringList Addressee::customs() const
     QStringList result;
 
     QHashIterator<QString, QString> it(d->mCustomFields);
+    result.reserve(result.count());
     while (it.hasNext()) {
         it.next();
         result << it.key() + QLatin1Char(':') + it.value();

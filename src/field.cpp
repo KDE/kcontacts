@@ -575,6 +575,7 @@ void Field::saveFields(KConfigGroup &cfg, const QString &identifier,
 
     int custom = 0;
     Field::List::ConstIterator it;
+    fieldIds.reserve(fields.count());
     for (it = fields.begin(); it != fields.end(); ++it) {
         fieldIds.append((*it)->d->fieldId());
         if ((*it)->isCustom()) {
@@ -605,6 +606,7 @@ Field::List Field::restoreFields(const KConfigGroup &cfg, const QString &identif
 
     int custom = 0;
     QList<int>::ConstIterator it;
+    fields.reserve(fieldIds.count());
     for (it = fieldIds.begin(); it != fieldIds.end(); ++it) {
         Private *f = Q_NULLPTR;
         if ((*it) == Private::CustomField) {
