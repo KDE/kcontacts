@@ -36,7 +36,7 @@ LDifConverterTest::~LDifConverterTest()
 
 void LDifConverterTest::shouldImportEmail()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -50,13 +50,13 @@ void LDifConverterTest::shouldImportEmail()
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).emails().count(), 1);
-    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("foo@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(0), QStringLiteral("foo@kde.org"));
     QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldImportMultiEmails()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -71,14 +71,14 @@ void LDifConverterTest::shouldImportMultiEmails()
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).emails().count(), 2);
-    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("foo@kde.org"));
-    QCOMPARE(lst.at(0).emails().at(1), QLatin1String("foo2@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(0), QStringLiteral("foo@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(1), QStringLiteral("foo2@kde.org"));
     QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldImportStandardBirthday()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -101,7 +101,7 @@ void LDifConverterTest::shouldImportStandardBirthday()
 
 void LDifConverterTest::shouldImportTheBatsBirthday()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -122,7 +122,7 @@ void LDifConverterTest::shouldImportTheBatsBirthday()
 
 void LDifConverterTest::shouldImportTheBatsEmails()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -138,16 +138,16 @@ void LDifConverterTest::shouldImportTheBatsEmails()
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).emails().count(), 3);
-    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("foo@kde.org"));
-    QCOMPARE(lst.at(0).emails().at(1), QLatin1String("foo2@kde.org"));
-    QCOMPARE(lst.at(0).emails().at(2), QLatin1String("foo3@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(0), QStringLiteral("foo@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(1), QStringLiteral("foo2@kde.org"));
+    QCOMPARE(lst.at(0).emails().at(2), QStringLiteral("foo3@kde.org"));
     QCOMPARE(contactGroup.count(), 0);
 }
 
 
 void LDifConverterTest::shouldImportTitle()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -161,13 +161,13 @@ void LDifConverterTest::shouldImportTitle()
     bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).title(), QLatin1String("foo"));
+    QCOMPARE(lst.at(0).title(), QStringLiteral("foo"));
     QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldImportWorkStreet()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -183,13 +183,13 @@ void LDifConverterTest::shouldImportWorkStreet()
     bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
     QVERIFY(result);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).address(Address::Work).street(), QLatin1String("work address\nwork address next"));
+    QCOMPARE(lst.at(0).address(Address::Work).street(), QStringLiteral("work address\nwork address next"));
     QCOMPARE(contactGroup.count(), 0);
 }
 
 void LDifConverterTest::shouldImportContactGroup()
 {
-    QString str = QLatin1String("dn: cn=test,mail=\n"
+    QString str = QStringLiteral("dn: cn=test,mail=\n"
                                 "cn: test\n"
                                 "modifyTimeStamp: 20080526T234914Z\n"
                                 "display-name: Test\n"
@@ -205,13 +205,13 @@ void LDifConverterTest::shouldImportContactGroup()
     QCOMPARE(lst.count(), 0);
     QCOMPARE(contactGroup.count(), 1);
     ContactGroup first = contactGroup.first();
-    QCOMPARE(first.name(), QLatin1String("Test"));
+    QCOMPARE(first.name(), QStringLiteral("Test"));
     QCOMPARE((int)first.count(), 3);
 }
 
 void LDifConverterTest::shouldImportMultiEntries()
 {
-    QString str = QLatin1String("dn: cn=test1,mail=test1@test.test\n"
+    QString str = QStringLiteral("dn: cn=test1,mail=test1@test.test\n"
                                 "sn: test1\n"
                                 "cn: test1\n"
                                 "uid: jpgdf2NrLQ\n"
@@ -235,13 +235,13 @@ void LDifConverterTest::shouldImportMultiEntries()
     QVERIFY(result);
     QCOMPARE(lst.count(), 2);
     QCOMPARE(contactGroup.count(), 0);
-    QCOMPARE(lst.at(0).emails().at(0), QLatin1String("test1@test.test"));
-    QCOMPARE(lst.at(1).emails().at(0), QLatin1String("test2@test.test"));
+    QCOMPARE(lst.at(0).emails().at(0), QStringLiteral("test1@test.test"));
+    QCOMPARE(lst.at(1).emails().at(0), QStringLiteral("test2@test.test"));
 }
 
 void LDifConverterTest::shouldImportGroupAndAddress()
 {
-    QString str = QLatin1String("dn: cn=laurent,mail=foo@kde.org\n"
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
                                 "sn: laurent\n"
                                 "cn: laurent\n"
                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
@@ -276,13 +276,13 @@ void LDifConverterTest::shouldExportEmail()
     AddresseeList lst;
     ContactGroup::List contactGroup;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
     lst << addr;
     QString str;
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
-    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                      "objectclass: top\n"
                                      "objectclass: person\n"
                                      "objectclass: organizationalPerson\n"
@@ -297,13 +297,13 @@ void LDifConverterTest::shouldExportMultiEmails()
     AddresseeList lst;
     ContactGroup::List contactGroup;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org") << QLatin1String("foo2@kde.org") << QLatin1String("foo3@kde.org"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org") << QStringLiteral("foo2@kde.org") << QStringLiteral("foo3@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
     lst << addr;
     QString str;
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
-    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                      "objectclass: top\n"
                                      "objectclass: person\n"
                                      "objectclass: organizationalPerson\n"
@@ -324,13 +324,13 @@ void LDifConverterTest::shouldExportBirthday()
     Addressee addr;
     QDate date(2015, 3, 3);
     addr.setBirthday(QDateTime(date));
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
     lst << addr;
     QString str;
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
-    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                      "objectclass: top\n"
                                      "objectclass: person\n"
                                      "objectclass: organizationalPerson\n"
@@ -349,14 +349,14 @@ void LDifConverterTest::shouldExportTitle()
     AddresseeList lst;
     ContactGroup::List contactGroup;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setTitle(QLatin1String("foo"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setTitle(QStringLiteral("foo"));
+    addr.setUid(QStringLiteral("testuid"));
     lst << addr;
     QString str;
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
-    QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                      "objectclass: top\n"
                                      "objectclass: person\n"
                                      "objectclass: organizationalPerson\n"
@@ -373,23 +373,23 @@ void LDifConverterTest::shouldExportMultiEntries()
     AddresseeList lst;
     ContactGroup::List contactGroup;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setTitle(QLatin1String("foo"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setTitle(QStringLiteral("foo"));
+    addr.setUid(QStringLiteral("testuid"));
     lst << addr;
 
     Addressee addr2;
     QDate date(2015,3,3);
     addr2.setBirthday(QDateTime(date));
-    addr2.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr2.setUid(QLatin1String("testuid"));
+    addr2.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr2.setUid(QStringLiteral("testuid"));
     lst << addr2;
 
     QString str;
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
 
-    const QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    const QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                            "objectclass: top\n"
                                            "objectclass: person\n"
                                            "objectclass: organizationalPerson\n"
@@ -416,12 +416,12 @@ void LDifConverterTest::shouldExportGroup()
     ContactGroup::List contactGroup;
     ContactGroup grp;
     ContactGroup::Data data;
-    data.setEmail(QLatin1String("foo@kde.org"));
-    data.setName(QLatin1String("foo"));
+    data.setEmail(QStringLiteral("foo@kde.org"));
+    data.setName(QStringLiteral("foo"));
     grp.append(data);
     ContactGroup::Data data2;
-    data2.setEmail(QLatin1String("foo2@kde.org"));
-    data2.setName(QLatin1String("foo2"));
+    data2.setEmail(QStringLiteral("foo2@kde.org"));
+    data2.setName(QStringLiteral("foo2"));
     grp.append(data2);
     contactGroup.append(grp);
 
@@ -429,7 +429,7 @@ void LDifConverterTest::shouldExportGroup()
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
 
-    const QString expected = QLatin1String("objectclass: top\n"
+    const QString expected = QStringLiteral("objectclass: top\n"
                                            "objectclass: groupOfNames\n"
                                            "member: cn=foo,mail=foo@kde.org\n"
                                            "member: cn=foo2,mail=foo2@kde.org\n"
@@ -442,11 +442,11 @@ void LDifConverterTest::shouldExportWorkStreet()
 {
     AddresseeList lst;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setUid(QLatin1String("testuid"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
     Address address(Address::Work);
-    address.setStreet(QLatin1String("work address"));
-    address.setPostalCode(QLatin1String("postal"));
+    address.setStreet(QStringLiteral("work address"));
+    address.setPostalCode(QStringLiteral("postal"));
     addr.insertAddress(address);
     lst << addr;
     ContactGroup::List contactGroup;
@@ -455,7 +455,7 @@ void LDifConverterTest::shouldExportWorkStreet()
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
 
-    const QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    const QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                            "objectclass: top\n"
                                            "objectclass: person\n"
                                            "objectclass: organizationalPerson\n"
@@ -472,11 +472,11 @@ void LDifConverterTest::shouldExportFullName()
 {
     AddresseeList lst;
     Addressee addr;
-    addr.setEmails(QStringList() << QLatin1String("foo@kde.org"));
-    addr.setUid(QLatin1String("testuid"));
-    addr.setName(QLatin1String("name"));
-    addr.setNickName(QLatin1String("nickname"));
-    addr.setFamilyName(QLatin1String("familyname"));
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    addr.setName(QStringLiteral("name"));
+    addr.setNickName(QStringLiteral("nickname"));
+    addr.setFamilyName(QStringLiteral("familyname"));
     lst << addr;
     ContactGroup::List contactGroup;
 
@@ -484,7 +484,7 @@ void LDifConverterTest::shouldExportFullName()
     bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
     QVERIFY(result);
 
-    const QString expected = QLatin1String("dn: cn=,mail=foo@kde.org\n"
+    const QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
                                            "objectclass: top\n"
                                            "objectclass: person\n"
                                            "objectclass: organizationalPerson\n"

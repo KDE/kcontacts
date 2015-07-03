@@ -43,10 +43,10 @@ void LangTest::shouldHaveDefaultValue()
 
 void LangTest::shouldAssignValue()
 {
-    const QString lang(QLatin1String("fr"));
+    const QString lang(QStringLiteral("fr"));
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Lang language(lang);
     language.setParameters(params);
     QVERIFY(language.isValid());
@@ -60,7 +60,7 @@ void LangTest::shouldAssignValue()
 void LangTest::shouldAssignExternal()
 {
     KContacts::Lang language;
-    const QString lang(QLatin1String("fr"));
+    const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
     QVERIFY(language.isValid());
     QCOMPARE(language.language(), lang);
@@ -70,11 +70,11 @@ void LangTest::shouldSerialized()
 {
     KContacts::Lang language;
     KContacts::Lang result;
-    const QString lang(QLatin1String("fr"));
+    const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     language.setParameters(params);
 
     QByteArray data;
@@ -92,11 +92,11 @@ void LangTest::shouldEqualLanguage()
 {
     KContacts::Lang language;
     KContacts::Lang result;
-    const QString lang(QLatin1String("fr"));
+    const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
     QMap<QString, QStringList> params;
-    params.insert(QLatin1String("Foo1"), QStringList() << QLatin1String("bla1") << QLatin1String("blo1"));
-    params.insert(QLatin1String("Foo2"), QStringList() << QLatin1String("bla2") << QLatin1String("blo2"));
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     language.setParameters(params);
 
     result = language;

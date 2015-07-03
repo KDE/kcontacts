@@ -52,21 +52,21 @@ void RoundtripTest::initTestCase()
 
     // check that all resource prefixes exist
 
-    mInputDir = QDir(QLatin1String(":/input"));
+    mInputDir = QDir(QStringLiteral(":/input"));
     QVERIFY(mInputDir.exists());
-    QVERIFY(mInputDir.cd(QLatin1String("data")));
+    QVERIFY(mInputDir.cd(QStringLiteral("data")));
 
-    mOutput2_1Dir = QDir(QLatin1String(":/output2.1"));
+    mOutput2_1Dir = QDir(QStringLiteral(":/output2.1"));
     QVERIFY(mOutput2_1Dir.exists());
-    QVERIFY(mOutput2_1Dir.cd(QLatin1String("data")));
+    QVERIFY(mOutput2_1Dir.cd(QStringLiteral("data")));
 
-    mOutput3_0Dir = QDir(QLatin1String(":/output3.0"));
+    mOutput3_0Dir = QDir(QStringLiteral(":/output3.0"));
     QVERIFY(mOutput3_0Dir.exists());
-    QVERIFY(mOutput3_0Dir.cd(QLatin1String("data")));
+    QVERIFY(mOutput3_0Dir.cd(QStringLiteral("data")));
 
-    mOutput4_0Dir = QDir(QLatin1String(":/output4.0"));
+    mOutput4_0Dir = QDir(QStringLiteral(":/output4.0"));
     QVERIFY(mOutput4_0Dir.exists());
-    QVERIFY(mOutput4_0Dir.cd(QLatin1String("data")));
+    QVERIFY(mOutput4_0Dir.cd(QStringLiteral("data")));
 
     // check that there are input files
 

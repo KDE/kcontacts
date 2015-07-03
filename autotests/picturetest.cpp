@@ -89,7 +89,7 @@ void PictureTest::storeTestInternRawData()
 {
     KContacts::Picture picture;
 
-    picture.setRawData(testImageRawPNG(), QLatin1String("png"));
+    picture.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
     QVERIFY(picture.isEmpty() == false);
     QVERIFY(picture.isIntern() == true);
@@ -102,7 +102,7 @@ void PictureTest::storeTestExtern()
 {
     KContacts::Picture picture;
 
-    picture.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
     QVERIFY(picture.isEmpty() == false);
     QVERIFY(picture.isIntern() == false);
@@ -155,9 +155,9 @@ void PictureTest::equalsTestExtern()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
-    picture2.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture2.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
     QVERIFY(picture1 == picture2);
 }
@@ -166,7 +166,7 @@ void PictureTest::differsTest()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
     picture2.setData(testImage());
 
@@ -177,9 +177,9 @@ void PictureTest::differsTestInternRawData()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setRawData(testImageRawJPEG(), QLatin1String("jpeg"));
+    picture1.setRawData(testImageRawJPEG(), QStringLiteral("jpeg"));
 
-    picture2.setRawData(testImageRawPNG(), QLatin1String("png"));
+    picture2.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
     QVERIFY(picture1 != picture2);
     QVERIFY(picture1.rawData() != picture2.rawData());
@@ -189,9 +189,9 @@ void PictureTest::differsTestExtern()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto2.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto2.png"), QStringLiteral("png"));
 
     QVERIFY(picture1 != picture2);
 }
@@ -211,7 +211,7 @@ void PictureTest::assignmentTestExtern()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
     picture2 = picture1;
 
@@ -238,7 +238,7 @@ void PictureTest::serializeTestInternRawData()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setRawData(testImageRawPNG(), QLatin1String("png"));
+    picture1.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -254,7 +254,7 @@ void PictureTest::serializeTestExtern()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setUrl(QLatin1String("http://myhomepage.com/foto.png"), QLatin1String("png"));
+    picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);

@@ -35,9 +35,9 @@ void PhoneNumberTest::storeTest()
 {
     KContacts::PhoneNumber number;
 
-    number.setId(QLatin1String("My Id"));
+    number.setId(QStringLiteral("My Id"));
     number.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
-    number.setNumber(QLatin1String("2734826345"));
+    number.setNumber(QStringLiteral("2734826345"));
 
     QVERIFY(number.id() == QLatin1String("My Id"));
     QVERIFY(number.type() == (KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell));
@@ -48,21 +48,21 @@ void PhoneNumberTest::equalsTest()
 {
     KContacts::PhoneNumber number1, number2;
 
-    number1.setId(QLatin1String("My Id"));
+    number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
-    number1.setNumber(QLatin1String("2734826345"));
+    number1.setNumber(QStringLiteral("2734826345"));
 
-    number2.setId(QLatin1String("My Id"));
+    number2.setId(QStringLiteral("My Id"));
     number2.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
-    number2.setNumber(QLatin1String("2734826345"));
+    number2.setNumber(QStringLiteral("2734826345"));
 
     QVERIFY(number1 == number2);
 }
 
 void PhoneNumberTest::differsTest()
 {
-    KContacts::PhoneNumber number1(QLatin1String("123"), KContacts::PhoneNumber::Home);
-    KContacts::PhoneNumber number2(QLatin1String("123"), KContacts::PhoneNumber::Work);
+    KContacts::PhoneNumber number1(QStringLiteral("123"), KContacts::PhoneNumber::Home);
+    KContacts::PhoneNumber number2(QStringLiteral("123"), KContacts::PhoneNumber::Work);
 
     QVERIFY(number1 != number2);
 }
@@ -71,9 +71,9 @@ void PhoneNumberTest::assignmentTest()
 {
     KContacts::PhoneNumber number1, number2;
 
-    number1.setId(QLatin1String("My Id"));
+    number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
-    number1.setNumber(QLatin1String("2734826345"));
+    number1.setNumber(QStringLiteral("2734826345"));
 
     number1 = number2;
 
@@ -84,9 +84,9 @@ void PhoneNumberTest::serializeTest()
 {
     KContacts::PhoneNumber number1, number2;
 
-    number1.setId(QLatin1String("My Id"));
+    number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
-    number1.setNumber(QLatin1String("2734826345"));
+    number1.setNumber(QStringLiteral("2734826345"));
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -106,7 +106,7 @@ void PhoneNumberTest::labelTest()
 
     // check all types standalone
     Q_FOREACH (KContacts::PhoneNumber::Type type, types) {
-        const KContacts::PhoneNumber phone(QLatin1String("1"), type);
+        const KContacts::PhoneNumber phone(QStringLiteral("1"), type);
         QCOMPARE(phone.type(), type);
 
         // Pref is special cased
