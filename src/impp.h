@@ -42,7 +42,7 @@ public:
 
     ~Impp();
 
-    typedef QList<Impp> List;
+    typedef QVector<Impp> List;
 
     bool isValid() const;
 
