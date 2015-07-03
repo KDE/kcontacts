@@ -19,6 +19,7 @@
 */
 
 #include "impptest.h"
+#include "impp.h"
 #include <qtest.h>
 
 ImppTest::ImppTest(QObject *parent)

@@ -38,9 +38,10 @@
 #include "picture.h"
 #include "secrecy.h"
 #include "sound.h"
+#include "impp.h"
 #include "timezone.h"
 #include "calendarurl.h"
-#include "addresseelist.h"  // for typedef QList<Addressee> List;
+#include "addresseelist.h"
 
 namespace KContacts
 {

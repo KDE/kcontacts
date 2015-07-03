@@ -659,6 +659,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("caluri")) {
                     //TODO
                 }
+                //IMPP
+                else if (identifier == QLatin1String("impp")) {
+                    //TODO
+                }
                 // CLASS
                 else if (identifier == QLatin1String("class")) {
                     addr.setSecrecy(parseSecrecy(*lineIt));
