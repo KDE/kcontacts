@@ -17,6 +17,7 @@ set(kcontacts_SRCS
   field.cpp
   geo.cpp
   gender.cpp
+  impp.cpp
   key.cpp
   lang.cpp
   ldapdn.cpp
@@ -81,6 +82,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Gender
   Key
   Lang
+  Impp
   PhoneNumber
   Picture
   Plugin

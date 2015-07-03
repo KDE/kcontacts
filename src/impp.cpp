@@ -23,7 +23,7 @@
 #include <QMap>
 #include <qstringlist.h>
 
-using namespace KABC;
+using namespace KContacts;
 
 class Impp::Private : public QSharedData
 {
@@ -125,12 +125,12 @@ QString Impp::toString() const
     return str;
 }
 
-QDataStream &KABC::operator<<(QDataStream &s, const Impp &impp)
+QDataStream &KContacts::operator<<(QDataStream &s, const Impp &impp)
 {
     return s << impp.d->parameters << impp.d->address;
 }
 
-QDataStream &KABC::operator>>(QDataStream &s, Impp &impp)
+QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
 {
     s >> impp.d->parameters >> impp.d->address;
     return s;

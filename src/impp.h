@@ -21,7 +21,7 @@
 #ifndef IMPP_H
 #define IMPP_H
 
-#include "kabc_export.h"
+#include "kcontacts_export.h"
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 #include <QtCore/QMap>
@@ -29,12 +29,12 @@
 /** @short Class that holds a IMPP for a contact.
  *  @since 4.14.5
  */
-namespace KABC
+namespace KContacts
 {
-class KABC_EXPORT Impp
+class KCONTACTS_EXPORT Impp
 {
-    friend KABC_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
-    friend KABC_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
+    friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
+    friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
 public:
     Impp();
     Impp(const Impp &other);
@@ -62,9 +62,9 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-KABC_EXPORT QDataStream &operator<<(QDataStream &stream, const Impp &object);
+KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Impp &object);
 
-KABC_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
 
 }
 
