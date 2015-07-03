@@ -35,6 +35,10 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualLanguage();
+    void shouldParseLanguage();
+    void shouldParseWithoutLanguage();
+    void shouldCreateVCard();
+    void shouldCreateVCardWithTwoLang();
 };
 
 #endif // LANGTEST_H

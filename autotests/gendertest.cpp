@@ -158,4 +158,81 @@ void GenderTest::shouldParseGender()
     QCOMPARE(lst.at(0).gender().gender(), genre);
 }
 
+QByteArray GenderTest::createCard(const QByteArray &gender)
+{
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n");
+    if (!gender.isEmpty()) {
+        expected += gender + "\r\n";
+    }
+    expected += QByteArray(
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    return expected;
+}
+
+void GenderTest::shouldExportEmptyGender()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected = createCard(QByteArray());
+    QCOMPARE(ba, expected);
+}
+
+void GenderTest::shouldExportOnlyGenderWithoutCommentGender()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Gender gender;
+    gender.setGender(QStringLiteral("H"));
+    addr.setGender(gender);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected = createCard(QByteArray("GENDER:H"));
+    QCOMPARE(ba, expected);
+}
+
+void GenderTest::shouldExportOnlyGenderWithCommentGender()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Gender gender;
+    gender.setGender(QStringLiteral("H"));
+    gender.setComment(QStringLiteral("comment"));
+    addr.setGender(gender);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected = createCard(QByteArray("GENDER:H;comment"));
+    QCOMPARE(ba, expected);
+}
+
+void GenderTest::shouldExportOnlyGenderWithoutTypeCommentGender()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Gender gender;
+    gender.setComment(QStringLiteral("comment"));
+    addr.setGender(gender);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected = createCard(QByteArray("GENDER:;comment"));
+    QCOMPARE(ba, expected);
+}
+
 QTEST_MAIN(GenderTest)

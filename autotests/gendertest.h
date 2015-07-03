@@ -30,6 +30,9 @@ public:
     explicit GenderTest(QObject *parent = Q_NULLPTR);
     ~GenderTest();
 
+private:
+    QByteArray createCard(const QByteArray &gender);
+
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();
@@ -38,6 +41,10 @@ private Q_SLOTS:
     void shouldEqualGender();
     void shouldParseGender();
     void shouldParseGender_data();
+    void shouldExportOnlyGenderWithoutCommentGender();
+    void shouldExportEmptyGender();
+    void shouldExportOnlyGenderWithCommentGender();
+    void shouldExportOnlyGenderWithoutTypeCommentGender();
 };
 
 #endif // GENDERTEST_H

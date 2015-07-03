@@ -28,6 +28,7 @@
 #include "gender.h"
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
+#include <QDebug>
 
 using namespace KContacts;
 
