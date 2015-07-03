@@ -36,6 +36,8 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualGender();
+    void shouldParseGender();
+    void shouldParseGender_data();
 };
 
 #endif // GENDERTEST_H

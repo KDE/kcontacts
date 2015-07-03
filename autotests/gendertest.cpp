@@ -20,6 +20,7 @@
 
 #include "gendertest.h"
 #include "gender.h"
+#include "vcardtool.h"
 #include <qtest.h>
 
 GenderTest::GenderTest(QObject *parent)
@@ -92,6 +93,69 @@ void GenderTest::shouldEqualGender()
 
     result = gender;
     QVERIFY(gender == result);
+}
+
+
+void GenderTest::shouldParseGender_data()
+{
+    QTest::addColumn<QByteArray>("vcarddata");
+    QTest::addColumn<QString>("genre");
+    QTest::addColumn<QString>("comment");
+    QTest::addColumn<bool>("hasGender");
+
+    QByteArray str("BEGIN:VCARD\n"
+                   "VERSION:3.0\n"
+                   "N:LastName;FirstName;;;\n"
+                   "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                   "REV:2015-03-14T09:24:45+00:00\n"
+                   "FN:FirstName LastName\n"
+                   "END:VCARD\n");
+    QTest::newRow("nogender") << str << QString() << QString() << false;
+
+    str = QByteArray("BEGIN:VCARD\n"
+                     "VERSION:3.0\n"
+                     "N:LastName;FirstName;;;\n"
+                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                     "REV:2015-03-14T09:24:45+00:00\n"
+                     "FN:FirstName LastName\n"
+                     "GENDER:H\n"
+                     "END:VCARD\n");
+    QTest::newRow("hasgenderbutnocomment") << str << QStringLiteral("H") << QString() << true;
+
+    str = QByteArray("BEGIN:VCARD\n"
+                     "VERSION:3.0\n"
+                     "N:LastName;FirstName;;;\n"
+                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                     "REV:2015-03-14T09:24:45+00:00\n"
+                     "FN:FirstName LastName\n"
+                     "GENDER:;foo\n"
+                     "END:VCARD\n");
+    QTest::newRow("hasgenderbutnotypebutcomment") << str << QString() << QStringLiteral("foo") << true;
+
+    str = QByteArray("BEGIN:VCARD\n"
+                     "VERSION:3.0\n"
+                     "N:LastName;FirstName;;;\n"
+                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                     "REV:2015-03-14T09:24:45+00:00\n"
+                     "FN:FirstName LastName\n"
+                     "GENDER:H;foo\n"
+                     "END:VCARD\n");
+    QTest::newRow("hasgendertypeandcomment") << str << QStringLiteral("H") << QStringLiteral("foo") << true;
+}
+
+void GenderTest::shouldParseGender()
+{
+    QFETCH(QByteArray, vcarddata);
+    QFETCH(QString, genre);
+    QFETCH(QString, comment);
+    QFETCH(bool, hasGender);
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).gender().isValid(), hasGender);
+    QCOMPARE(lst.at(0).gender().comment(), comment);
+    QCOMPARE(lst.at(0).gender().gender(), genre);
 }
 
 QTEST_MAIN(GenderTest)
