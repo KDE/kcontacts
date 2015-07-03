@@ -484,6 +484,26 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         Q_FOREACH (const QUrl &url, (*addrIt).extraUrlList()) {
             card.addLine(VCardLine(QLatin1String("URL"), url.url()));
         }
+        if (version == VCard::v4_0) {
+            // GENDER
+            const Gender gender = (*addrIt).gender();
+            if (gender.isValid()) {
+                QString genderStr;
+                if (!gender.gender().isEmpty()) {
+                    genderStr = gender.gender();
+                }
+                if (!gender.comment().isEmpty()) {
+                    genderStr += QLatin1Char(';') + gender.comment();
+                }
+                VCardLine line(QLatin1String("GENDER"), genderStr);
+                card.addLine(line);
+            }
+            // KIND
+            if (!(*addrIt).kind().isEmpty()) {
+                VCardLine line(QLatin1String("KIND"), (*addrIt).kind());
+                card.addLine(line);
+            }
+        }
 
         // X-
         const QStringList customs = (*addrIt).customs();
@@ -521,26 +541,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
                     //Not defined by rfc but need for fixing #300869
                     identifier = QLatin1String("X-GTALK");
-                }
-            }
-            if (version == VCard::v4_0) {
-                // GENDER
-                const Gender gender = (*addrIt).gender();
-                if (gender.isValid()) {
-                    QString genderStr;
-                    if (!gender.gender().isEmpty()) {
-                        genderStr = gender.gender();
-                    }
-                    if (!gender.comment().isEmpty()) {
-                        genderStr += QLatin1Char(';') + gender.comment();
-                    }
-                    VCardLine line(QLatin1String("GENDER"), genderStr);
-                    card.addLine(line);
-                }
-                // KIND
-                if (!(*addrIt).kind().isEmpty()) {
-                    VCardLine line(QLatin1String("KIND"), (*addrIt).kind());
-                    card.addLine(line);
                 }
             }
             if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
@@ -670,11 +670,12 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         Gender gender;
                         if (genderStr.at(0) != QLatin1Char(';')) {
                             gender.setGender(genderStr.at(0));
-                            //TODO add comment
+                            if (genderStr.length() > 2 && (genderStr.at(1) == QLatin1Char(';'))) {
+                                gender.setComment(genderStr.right(genderStr.length()-2));
+                            }
                         } else {
-
+                            gender.setComment(genderStr.right(genderStr.length()-1));
                         }
-                        //TODO comment
                         addr.setGender(gender);
                     }
                 }
