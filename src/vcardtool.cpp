@@ -46,28 +46,28 @@ static bool needsEncoding(const QString &value)
 
 VCardTool::VCardTool()
 {
-    mAddressTypeMap.insert(QLatin1String("dom"), Address::Dom);
-    mAddressTypeMap.insert(QLatin1String("intl"), Address::Intl);
-    mAddressTypeMap.insert(QLatin1String("postal"), Address::Postal);
-    mAddressTypeMap.insert(QLatin1String("parcel"), Address::Parcel);
-    mAddressTypeMap.insert(QLatin1String("home"), Address::Home);
-    mAddressTypeMap.insert(QLatin1String("work"), Address::Work);
-    mAddressTypeMap.insert(QLatin1String("pref"), Address::Pref);
+    mAddressTypeMap.insert(QStringLiteral("dom"), Address::Dom);
+    mAddressTypeMap.insert(QStringLiteral("intl"), Address::Intl);
+    mAddressTypeMap.insert(QStringLiteral("postal"), Address::Postal);
+    mAddressTypeMap.insert(QStringLiteral("parcel"), Address::Parcel);
+    mAddressTypeMap.insert(QStringLiteral("home"), Address::Home);
+    mAddressTypeMap.insert(QStringLiteral("work"), Address::Work);
+    mAddressTypeMap.insert(QStringLiteral("pref"), Address::Pref);
 
-    mPhoneTypeMap.insert(QLatin1String("HOME"), PhoneNumber::Home);
-    mPhoneTypeMap.insert(QLatin1String("WORK"), PhoneNumber::Work);
-    mPhoneTypeMap.insert(QLatin1String("MSG"), PhoneNumber::Msg);
-    mPhoneTypeMap.insert(QLatin1String("PREF"), PhoneNumber::Pref);
-    mPhoneTypeMap.insert(QLatin1String("VOICE"), PhoneNumber::Voice);
-    mPhoneTypeMap.insert(QLatin1String("FAX"), PhoneNumber::Fax);
-    mPhoneTypeMap.insert(QLatin1String("CELL"), PhoneNumber::Cell);
-    mPhoneTypeMap.insert(QLatin1String("VIDEO"), PhoneNumber::Video);
-    mPhoneTypeMap.insert(QLatin1String("BBS"), PhoneNumber::Bbs);
-    mPhoneTypeMap.insert(QLatin1String("MODEM"), PhoneNumber::Modem);
-    mPhoneTypeMap.insert(QLatin1String("CAR"), PhoneNumber::Car);
-    mPhoneTypeMap.insert(QLatin1String("ISDN"), PhoneNumber::Isdn);
-    mPhoneTypeMap.insert(QLatin1String("PCS"), PhoneNumber::Pcs);
-    mPhoneTypeMap.insert(QLatin1String("PAGER"), PhoneNumber::Pager);
+    mPhoneTypeMap.insert(QStringLiteral("HOME"), PhoneNumber::Home);
+    mPhoneTypeMap.insert(QStringLiteral("WORK"), PhoneNumber::Work);
+    mPhoneTypeMap.insert(QStringLiteral("MSG"), PhoneNumber::Msg);
+    mPhoneTypeMap.insert(QStringLiteral("PREF"), PhoneNumber::Pref);
+    mPhoneTypeMap.insert(QStringLiteral("VOICE"), PhoneNumber::Voice);
+    mPhoneTypeMap.insert(QStringLiteral("FAX"), PhoneNumber::Fax);
+    mPhoneTypeMap.insert(QStringLiteral("CELL"), PhoneNumber::Cell);
+    mPhoneTypeMap.insert(QStringLiteral("VIDEO"), PhoneNumber::Video);
+    mPhoneTypeMap.insert(QStringLiteral("BBS"), PhoneNumber::Bbs);
+    mPhoneTypeMap.insert(QStringLiteral("MODEM"), PhoneNumber::Modem);
+    mPhoneTypeMap.insert(QStringLiteral("CAR"), PhoneNumber::Car);
+    mPhoneTypeMap.insert(QStringLiteral("ISDN"), PhoneNumber::Isdn);
+    mPhoneTypeMap.insert(QStringLiteral("PCS"), PhoneNumber::Pcs);
+    mPhoneTypeMap.insert(QStringLiteral("PAGER"), PhoneNumber::Pager);
 }
 
 VCardTool::~VCardTool()
