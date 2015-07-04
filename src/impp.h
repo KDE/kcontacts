@@ -43,7 +43,10 @@ public:
     ~Impp();
 
     typedef QVector<Impp> List;
-
+    enum ImppType {
+        Skype = 0,
+        Xmmp = 1
+    };
     bool isValid() const;
 
     void setAddress(const QString &address);
