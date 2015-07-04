@@ -38,16 +38,20 @@ class KCONTACTS_EXPORT Impp
 public:
     Impp();
     Impp(const Impp &other);
-    Impp(const QString &mail);
+    Impp(const QString &address);
 
     ~Impp();
 
     typedef QVector<Impp> List;
     enum ImppType {
-        Skype = 0,
-        Xmmp = 1
+        Unknown = 0,
+        Skype = 1,
+        Xmmp = 2
     };
     bool isValid() const;
+
+    ImppType type() const;
+    void setType(ImppType type);
 
     void setAddress(const QString &address);
     QString address() const;
@@ -65,6 +69,7 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Impp &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
