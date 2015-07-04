@@ -34,6 +34,8 @@ private Q_SLOTS:
     void equals();
     void differs();
     void serialization();
+    void shouldParseGeoVCard3();
+    void shouldParseGeoVCard4();
 };
 
 #endif

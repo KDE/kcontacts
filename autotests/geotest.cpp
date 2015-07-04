@@ -20,6 +20,7 @@
 
 #include "geotest.h"
 #include "kcontacts/geo.h"
+#include "vcardtool.h"
 #include <qtest.h>
 
 QTEST_MAIN(GeoTest)
@@ -92,4 +93,44 @@ void GeoTest::serialization()
     t >> geo2;
 
     QVERIFY(geo1 == geo2);
+}
+
+void GeoTest::shouldParseGeoVCard3()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "GEO:22.5;180.0\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(lst.at(0).geo().isValid());
+    KContacts::Geo geo = lst.at(0).geo();
+    QCOMPARE(geo.latitude(), 22.5);
+    QCOMPARE(geo.longitude(), 180.0);
+}
+
+void GeoTest::shouldParseGeoVCard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:4.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "GEO:geo:22.5,180.0\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(lst.at(0).geo().isValid());
+    KContacts::Geo geo = lst.at(0).geo();
+    QCOMPARE(geo.latitude(), 22.5);
+    QCOMPARE(geo.longitude(), 180.0);
 }
