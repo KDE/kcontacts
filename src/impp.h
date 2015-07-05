@@ -46,7 +46,18 @@ public:
     enum ImppType {
         Unknown = 0,
         Skype = 1,
-        Xmmp = 2
+        Xmpp = 2,
+        Jabber = 3,
+        Sip = 4,
+        Aim = 5,
+        Msn = 6,
+        Twitter = 7,
+        GoogleTalk = 8,
+        Yahoo = 9,
+        Apple = 10,
+        GaduGadu = 11,
+        Ownclound = 12,
+        Icq = 13
     };
     bool isValid() const;
 
@@ -65,6 +76,9 @@ public:
     Impp &operator=(const Impp &other);
 
     QString toString() const;
+
+    QString typeToString(ImppType type);
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

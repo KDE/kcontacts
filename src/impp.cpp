@@ -140,6 +140,42 @@ QString Impp::toString() const
     return str;
 }
 
+QString Impp::typeToString(ImppType type)
+{
+    //TODO
+    switch(type) {
+    case Unknown:
+        break;
+    case Skype:
+        return QStringLiteral("skype");
+    case Xmpp:
+        return QStringLiteral("xmpp");
+    case Jabber:
+        return QStringLiteral("jabber");
+    case Sip:
+        return QStringLiteral("sip");
+    case Aim:
+        return QStringLiteral("aim");
+    case Msn:
+        return QStringLiteral("msn");
+    case Twitter:
+        return QStringLiteral("twitter");
+    case GoogleTalk:
+        return QStringLiteral("googletalk");
+    case Yahoo:
+        return QStringLiteral("yahoo");
+    case Apple:
+        return QStringLiteral("x-apple");
+    case GaduGadu:
+        return QStringLiteral("gadugadu");
+    case Ownclound:
+        break;
+    case Icq:
+        return QStringLiteral("icq");
+    }
+    return QString();
+}
+
 QDataStream &KContacts::operator<<(QDataStream &s, const Impp &impp)
 {
     return s << impp.d->parameters << impp.d->address << impp.d->type;
@@ -152,3 +188,4 @@ QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
     impp.d->type = static_cast<Impp::ImppType>(i);
     return s;
 }
+
