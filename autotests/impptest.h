@@ -27,8 +27,13 @@ class ImppTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImppTest(QObject *parent = 0);
+    explicit ImppTest(QObject *parent = Q_NULLPTR);
     ~ImppTest();
+private Q_SLOTS:
+    void shouldHaveDefaultValue();
+    void shouldAssignValue();
+    void shouldSerialized();
+    void shouldEqualLanguage();
 };
 
 #endif // IMPPTEST_H

@@ -77,7 +77,7 @@ public:
 
     QString toString() const;
 
-    QString typeToString(ImppType type);
+    QString typeToString(ImppType type) const;
 
 private:
     class Private;

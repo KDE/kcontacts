@@ -1011,17 +1011,25 @@ public:
     void setExtraUrlList(const QVector<QUrl> &urlList);
     void insertExtraUrl(const QUrl &url);
 
+    //Member
     void insertMember(const QString &member);
     void setMembers(const QStringList &c);
     QStringList members() const;
 
+    //Relation
     void insertRelationShip(const QString &related);
     void setRelationShips(const QStringList &c);
     QStringList relationShips() const;
 
+    //Source
     void insertSourceUrl(const QUrl &url);
     void setSourcesUrlList(const QVector<QUrl> &urlList);
     QVector<QUrl> sourcesUrlList() const;
+
+    //Impp
+    Impp::List imppList() const;
+    void setImppList(const Impp::List &imppList);
+    void insertImpp(const Impp &impp);
 
 private:
     class Private;

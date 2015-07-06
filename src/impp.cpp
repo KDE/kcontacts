@@ -30,6 +30,7 @@ class Impp::Private : public QSharedData
 {
 public:
     Private()
+        : type(KContacts::Impp::Unknown)
     {
     }
 
@@ -124,8 +125,7 @@ QString Impp::toString() const
 {
     QString str;
     str += QString::fromLatin1("Impp {\n");
-    //TODO translate as string
-    str += QString::fromLatin1("    type: %1\n").arg(d->type);
+    str += QString::fromLatin1("    type: %1\n").arg(typeToString(d->type));
     str += QString::fromLatin1("    address: %1\n").arg(d->address);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
@@ -140,9 +140,8 @@ QString Impp::toString() const
     return str;
 }
 
-QString Impp::typeToString(ImppType type)
+QString Impp::typeToString(ImppType type) const
 {
-    //TODO
     switch(type) {
     case Unknown:
         break;

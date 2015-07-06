@@ -33,4 +33,69 @@ ImppTest::~ImppTest()
 
 }
 
+void ImppTest::shouldHaveDefaultValue()
+{
+    KContacts::Impp impp;
+    QVERIFY(!impp.isValid());
+    QVERIFY(impp.address().isEmpty());
+    QCOMPARE(impp.type(), KContacts::Impp::Unknown);
+    QVERIFY(impp.parameters().isEmpty());
+}
+
+void ImppTest::shouldAssignValue()
+{
+    const QString address(QStringLiteral("address"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::Impp impp;
+    impp.setParameters(params);
+    impp.setType(KContacts::Impp::Icq);
+    impp.setAddress(address);
+    QVERIFY(impp.isValid());
+    QVERIFY(!impp.address().isEmpty());
+    QCOMPARE(impp.address(), address);
+    QCOMPARE(impp.type(), KContacts::Impp::Icq);
+    QVERIFY(!impp.parameters().isEmpty());
+    QCOMPARE(impp.parameters(), params);
+}
+
+void ImppTest::shouldSerialized()
+{
+    const QString address(QStringLiteral("address"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::Impp impp;
+    impp.setParameters(params);
+    impp.setType(KContacts::Impp::Icq);
+    impp.setAddress(address);
+
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << impp;
+
+    KContacts::Impp result;
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> result;
+
+    QVERIFY(impp == result);
+}
+
+void ImppTest::shouldEqualLanguage()
+{
+    const QString address(QStringLiteral("address"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::Impp impp;
+    impp.setParameters(params);
+    impp.setType(KContacts::Impp::Icq);
+    impp.setAddress(address);
+
+
+    KContacts::Impp result(impp);
+    QVERIFY(impp == result);
+}
+
 QTEST_MAIN(ImppTest)

@@ -100,6 +100,7 @@ public:
         mRelationShips = other.mRelationShips;
         mSources = other.mSources;
         mEmpty = other.mEmpty;
+        mImpps = other.mImpps;
         mChanged = other.mChanged;
     }
 
@@ -139,6 +140,7 @@ public:
     Key::List mKeys;
     Email::List mEmails;
     Lang::List mLangs;
+    Impp::List mImpps;
     Gender mGender;
     QString mKind;
     QStringList mCategories;
@@ -358,6 +360,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "langs differs";
         return false;
     }
+    if (d->mImpps != addressee.d->mImpps) {
+        qCDebug(KCONTACTS_LOG) << "impps differs";
+        return false;
+    }
     if (d->mGender != addressee.d->mGender) {
         qCDebug(KCONTACTS_LOG) << "gender differs";
         return false;
@@ -540,6 +546,25 @@ void Addressee::setSourcesUrlList(const QVector<QUrl> &urlList)
 QVector<QUrl> Addressee::sourcesUrlList() const
 {
     return d->mSources;
+}
+
+
+void Addressee::insertImpp(const Impp &impp)
+{
+    d->mEmpty = false;
+    //Don't duplicate ?
+    d->mImpps.append(impp);
+}
+
+void Addressee::setImppList(const Impp::List &imppList)
+{
+    d->mEmpty = false;
+    d->mImpps = imppList;
+}
+
+Impp::List Addressee::imppList() const
+{
+    return d->mImpps;
 }
 
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
@@ -2241,6 +2266,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mMembers;
     s << a.d->mRelationShips;
     s << a.d->mSources;
+    s << a.d->mImpps;
 
     return s;
 }
@@ -2293,6 +2319,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mMembers;
     s >> a.d->mRelationShips;
     s >> a.d->mSources;
+    s >> a.d->mImpps;
     a.d->mEmpty = false;
 
     return s;
