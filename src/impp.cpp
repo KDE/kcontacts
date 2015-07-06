@@ -140,7 +140,7 @@ QString Impp::toString() const
     return str;
 }
 
-QString Impp::typeToString(ImppType type) const
+QString Impp::typeToString(ImppType type)
 {
     switch(type) {
     case Unknown:
@@ -164,11 +164,11 @@ QString Impp::typeToString(ImppType type) const
     case Yahoo:
         return QStringLiteral("yahoo");
     case Qq:
-        return QStringLiteral("x-apple");
+        return QStringLiteral("qq");
     case GaduGadu:
         return QStringLiteral("gadugadu");
     case Ownclound:
-        break;
+        return QStringLiteral("owncloud-handle");
     case Facebook:
         return QStringLiteral("facebook");
     case Icq:

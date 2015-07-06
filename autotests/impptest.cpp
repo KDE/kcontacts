@@ -22,6 +22,7 @@
 #include "impp.h"
 #include <qtest.h>
 #include "vcardtool.h"
+Q_DECLARE_METATYPE(KContacts::Impp::ImppType)
 
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
@@ -134,6 +135,115 @@ void ImppTest::shouldParseImpp()
     KContacts::Impp impp = lst.at(0).imppList().at(0);
     QCOMPARE(impp.address(), QStringLiteral("skype:xxxxxxxx"));
     QCOMPARE(impp.type(), KContacts::Impp::Skype);
+}
+
+QByteArray createCard(KContacts::Impp::ImppType type)
+{
+    QByteArray expected("BEGIN:VCARD\n"
+                        "VERSION:3.0\n"
+                        "EMAIL:foo@kde.org\n");
+    if (type != KContacts::Impp::Unknown) {
+        const QByteArray baType = KContacts::Impp::typeToString(type).toLatin1();
+        expected += "IMPP;X-SERVICE-TYPE=" + baType + ":" + baType + ":address\n";
+    }
+    expected += QByteArray(
+                        "N:;;;;\n"
+                        "UID:testuid\n"
+                        "END:VCARD\n\n");
+    return expected;
+}
+
+void ImppTest::shouldParseServiceType_data()
+{
+    QTest::addColumn<KContacts::Impp::ImppType>("type");
+    QTest::addColumn<bool>("hasImpp");
+    QTest::newRow("withoutimpp") << KContacts::Impp::Unknown << false;
+    QTest::newRow("skype") << KContacts::Impp::Skype << true;
+    for (int i = KContacts::Impp::Unknown + 1; i < KContacts::Impp::EndList; ++i) {
+        KContacts::Impp::ImppType type = static_cast<KContacts::Impp::ImppType>(i);
+        QTest::newRow(KContacts::Impp::typeToString(type).toLatin1().constData()) << type << true;
+    }
+}
+
+void ImppTest::shouldParseServiceType()
+{
+    QFETCH(KContacts::Impp::ImppType, type);
+    QFETCH(bool, hasImpp);
+
+    QByteArray vcarddata = createCard(type);
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+
+    QCOMPARE(!lst.at(0).imppList().isEmpty(), hasImpp);
+    if (hasImpp) {
+        KContacts::Impp impp = lst.at(0).imppList().at(0);
+        QCOMPARE(impp.address(), QStringLiteral("%1:address").arg(KContacts::Impp::typeToString(type)));
+        QCOMPARE(impp.type(), type);
+    }
+}
+
+QByteArray expectedVcard(KContacts::Impp::ImppType type)
+{
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n");
+    if (type != KContacts::Impp::Unknown) {
+        const QByteArray baType = KContacts::Impp::typeToString(type).toLatin1();
+        expected += "IMPP;X-SERVICE-TYPE=" + baType + ":address\r\n";
+    }
+
+    expected += ("N:;;;;\r\n"
+                 "UID:testuid\r\n"
+                 "END:VCARD\r\n\r\n");
+    return expected;
+}
+
+void ImppTest::shouldExportEmptyType()
+{
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QCOMPARE(ba, expected);
+}
+
+void ImppTest::shouldExportType_data()
+{
+    QTest::addColumn<KContacts::Impp::ImppType>("type");
+    for (int i = KContacts::Impp::Unknown + 1; i < KContacts::Impp::EndList; ++i) {
+        KContacts::Impp::ImppType type = static_cast<KContacts::Impp::ImppType>(i);
+        QTest::newRow(KContacts::Impp::typeToString(type).toLatin1().constData()) << type;
+    }
+}
+
+void ImppTest::shouldExportType()
+{
+    QFETCH(KContacts::Impp::ImppType, type);
+
+    QByteArray expected = expectedVcard(type);
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Impp impp;
+    impp.setAddress(QStringLiteral("address"));
+    impp.setType(type);
+    addr.insertImpp(impp);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QCOMPARE(ba, expected);
 }
 
 QTEST_MAIN(ImppTest)

@@ -58,7 +58,8 @@ public:
         GaduGadu = 11,
         Ownclound = 12,
         Icq = 13,
-        Facebook = 14
+        Facebook = 14,
+        EndList
     };
     bool isValid() const;
 
@@ -78,7 +79,7 @@ public:
 
     QString toString() const;
 
-    QString typeToString(ImppType type) const;
+    static QString typeToString(ImppType type);
 
 private:
     class Private;

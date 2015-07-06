@@ -505,6 +505,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 card.addLine(line);
             }
         }
+        // IMPP
+        Q_FOREACH (const Impp &impp, (*addrIt).imppList()) {
+            VCardLine line(QLatin1String("IMPP"), impp.address());
+            line.addParameter(QStringLiteral("X-SERVICE-TYPE"), Impp::typeToString(impp.type()));
+            card.addLine(line);
+        }
 
         // X-
         const QStringList customs = (*addrIt).customs();

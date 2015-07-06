@@ -29,6 +29,7 @@ class ImppTest : public QObject
 public:
     explicit ImppTest(QObject *parent = Q_NULLPTR);
     ~ImppTest();
+
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();
@@ -36,6 +37,12 @@ private Q_SLOTS:
     void shouldEqualImpp();
     void shouldParseWithoutImpp();
     void shouldParseImpp();
+    void shouldParseServiceType_data();
+    void shouldParseServiceType();
+    void shouldExportEmptyType();
+
+    void shouldExportType_data();
+    void shouldExportType();
 };
 
 #endif // IMPPTEST_H
