@@ -111,5 +111,27 @@ void CalendarUrlTest::shouldEqualCalendarUrl()
     }
 }
 
+void CalendarUrlTest::shouldParseCalendarUrl()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "CALURI;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).calendarUrlList().count(), 1);
+    const CalendarUrl calurl = lst.at(0).calendarUrlList().at(0);
+    QCOMPARE(calurl.type(), CalendarUrl::CALUri);
+    QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QVERIFY(!calurl.parameters().isEmpty());
+}
+
+
 QTEST_MAIN(CalendarUrlTest)
 

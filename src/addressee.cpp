@@ -578,6 +578,11 @@ void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
     }
 }
 
+CalendarUrl::List Addressee::calendarUrlList() const
+{
+    return d->mCalendarUrl;
+}
+
 void Addressee::setFormattedName(const QString &formattedName)
 {
     if (formattedName == d->mFormattedName) {

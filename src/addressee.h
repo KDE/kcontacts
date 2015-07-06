@@ -994,6 +994,7 @@ public:
     void setKind(const QString &kind);
 
     void insertCalendarUrl(const CalendarUrl &calendarUrl);
+    CalendarUrl::List calendarUrlList() const;
 
     void insertExtraSound(const Sound &sound);
     void setExtraSoundList(const Sound::List &soundList);
