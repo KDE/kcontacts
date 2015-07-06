@@ -151,14 +151,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
             VCardLine adrLine(QLatin1String("ADR"), address.join(QLatin1String(";")));
             if (version == VCard::v2_1 && needsEncoding(address.join(QLatin1String(";")))) {
-                adrLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-                adrLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+                adrLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+                adrLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
             }
 
             VCardLine labelLine(QLatin1String("LABEL"), (*it).label());
             if (version == VCard::v2_1 && needsEncoding((*it).label())) {
-                labelLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-                labelLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+                labelLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+                labelLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
             }
 
             const bool hasLabel = !(*it).label().isEmpty();
@@ -282,9 +282,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
             if (!foundType && needToAddPref) {
                 if (version == VCard::v2_1) {
-                    line.addParameter(QLatin1String("PREF"), QString());
+                    line.addParameter(QStringLiteral("PREF"), QString());
                 } else {
-                    line.addParameter(QLatin1String("TYPE"), QLatin1String("PREF"));
+                    line.addParameter(QStringLiteral("TYPE"), QLatin1String("PREF"));
                 }
             }
             card.addLine(line);
@@ -293,8 +293,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // FN required for only version > 2.1
         VCardLine fnLine(QLatin1String("FN"), (*addrIt).formattedName());
         if (version == VCard::v2_1 && needsEncoding((*addrIt).formattedName())) {
-            fnLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            fnLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            fnLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            fnLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         card.addLine(fnLine);
 
@@ -328,8 +328,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         if (version != VCard::v4_0) {
             VCardLine mailerLine(QLatin1String("MAILER"), (*addrIt).mailer());
             if (version == VCard::v2_1 && needsEncoding((*addrIt).mailer())) {
-                mailerLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-                mailerLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+                mailerLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+                mailerLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
             }
             card.addLine(mailerLine);
         }
@@ -353,11 +353,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         VCardLine nLine(QLatin1String("N"), name.join(QLatin1String(";")));
         if (version == VCard::v2_1 && needsEncoding(name.join(QLatin1String(";")))) {
-            nLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            nLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            nLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            nLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         if (version == VCard::v4_0 && !(*addrIt).sortString().isEmpty()) {
-            nLine.addParameter(QLatin1String("SORT-AS"), (*addrIt).sortString());
+            nLine.addParameter(QStringLiteral("SORT-AS"), (*addrIt).sortString());
         }
 
         card.addLine(nLine);
@@ -366,8 +366,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         if (version != VCard::v4_0) {
             VCardLine nameLine(QLatin1String("NAME"), (*addrIt).name());
             if (version == VCard::v2_1 && needsEncoding((*addrIt).name())) {
-                nameLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-                nameLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+                nameLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+                nameLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
             }
             card.addLine(nameLine);
         }
@@ -380,8 +380,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // NOTE
         VCardLine noteLine(QLatin1String("NOTE"), (*addrIt).note());
         if (version == VCard::v2_1 && needsEncoding((*addrIt).note())) {
-            noteLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            noteLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            noteLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            noteLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         card.addLine(noteLine);
 
@@ -395,8 +395,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
         VCardLine orgLine(QLatin1String("ORG"), organization.join(QLatin1String(";")));
         if (version == VCard::v2_1 && needsEncoding(organization.join(QLatin1String(";")))) {
-            orgLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            orgLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            orgLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            orgLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         card.addLine(orgLine);
 
@@ -417,8 +417,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // ROLE
         VCardLine roleLine(QLatin1String("ROLE"), (*addrIt).role());
         if (version == VCard::v2_1 && needsEncoding((*addrIt).role())) {
-            roleLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            roleLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            roleLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            roleLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         card.addLine(roleLine);
 
@@ -454,8 +454,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // TITLE
         VCardLine titleLine(QLatin1String("TITLE"), (*addrIt).title());
         if (version == VCard::v2_1 && needsEncoding((*addrIt).title())) {
-            titleLine.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-            titleLine.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+            titleLine.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+            titleLine.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
         }
         card.addLine(titleLine);
 
@@ -568,8 +568,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             } else {
                 VCardLine line(identifier, value);
                 if (version == VCard::v2_1 && needsEncoding(value)) {
-                    line.addParameter(QLatin1String("charset"), QLatin1String("UTF-8"));
-                    line.addParameter(QLatin1String("encoding"), QLatin1String("QUOTED-PRINTABLE"));
+                    line.addParameter(QStringLiteral("charset"), QLatin1String("UTF-8"));
+                    line.addParameter(QStringLiteral("encoding"), QLatin1String("QUOTED-PRINTABLE"));
                 }
                 card.addLine(line);
             }
@@ -1153,15 +1153,15 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
     if (pic.isIntern()) {
         line.setValue(pic.rawData());
         if (version == VCard::v2_1) {
-            line.addParameter(QLatin1String("ENCODING"), QLatin1String("BASE64"));
+            line.addParameter(QStringLiteral("ENCODING"), QLatin1String("BASE64"));
             line.addParameter(pic.type(), QString());
         } else {
-            line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
-            line.addParameter(QLatin1String("type"), pic.type());
+            line.addParameter(QStringLiteral("encoding"), QLatin1String("b"));
+            line.addParameter(QStringLiteral("type"), pic.type());
         }
     } else {
         line.setValue(pic.url());
-        line.addParameter(QLatin1String("value"), QLatin1String("URI"));
+        line.addParameter(QStringLiteral("value"), QLatin1String("URI"));
     }
 
     return line;
@@ -1197,15 +1197,15 @@ VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
         if (!snd.data().isEmpty()) {
             line.setValue(snd.data());
             if (version == VCard::v2_1) {
-                line.addParameter(QLatin1String("ENCODING"), QLatin1String("BASE64"));
+                line.addParameter(QStringLiteral("ENCODING"), QLatin1String("BASE64"));
             } else {
-                line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+                line.addParameter(QStringLiteral("encoding"), QLatin1String("b"));
             }
             // TODO: need to store sound type!!!
         }
     } else if (!snd.url().isEmpty()) {
         line.setValue(snd.url());
-        line.addParameter(QLatin1String("value"), QLatin1String("URI"));
+        line.addParameter(QStringLiteral("value"), QLatin1String("URI"));
     }
 
     return line;
@@ -1253,11 +1253,11 @@ VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
     }
 
     if (key.type() == Key::X509) {
-        line.addParameter(QLatin1String("type"), QLatin1String("X509"));
+        line.addParameter(QStringLiteral("type"), QLatin1String("X509"));
     } else if (key.type() == Key::PGP) {
-        line.addParameter(QLatin1String("type"), QLatin1String("PGP"));
+        line.addParameter(QStringLiteral("type"), QLatin1String("PGP"));
     } else if (key.type() == Key::Custom) {
-        line.addParameter(QLatin1String("type"), key.customTypeString());
+        line.addParameter(QStringLiteral("type"), key.customTypeString());
     }
 
     return line;
