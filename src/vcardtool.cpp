@@ -663,15 +663,30 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // FBURL
                 else if (identifier == QLatin1String("fburl")) {
-                    //TODO
+                    CalendarUrl calurl;
+                    calurl.setType(CalendarUrl::FBUrl);
+                    const QUrl url = QUrl((*lineIt).value().toString());
+                    calurl.setUrl(url);
+                    calurl.setParameters((*lineIt).parameterMap());
+                    addr.insertCalendarUrl(calurl);
                 }
                 // CALADRURI
                 else if (identifier == QLatin1String("caladruri")) {
-                    //TODO
+                    CalendarUrl calurl;
+                    calurl.setType(CalendarUrl::CALADRUri);
+                    const QUrl url = QUrl((*lineIt).value().toString());
+                    calurl.setUrl(url);
+                    calurl.setParameters((*lineIt).parameterMap());
+                    addr.insertCalendarUrl(calurl);
                 }
                 // CALURI
                 else if (identifier == QLatin1String("caluri")) {
-                    //TODO
+                    CalendarUrl calurl;
+                    calurl.setType(CalendarUrl::CALUri);
+                    const QUrl url = QUrl((*lineIt).value().toString());
+                    calurl.setUrl(url);
+                    calurl.setParameters((*lineIt).parameterMap());
+                    addr.insertCalendarUrl(calurl);
                 }
                 //IMPP
                 else if (identifier == QLatin1String("impp")) {

@@ -42,7 +42,8 @@ public:
         Unknown = 0,
         FBUrl,
         CALUri,
-        CALADRUri
+        CALADRUri,
+        EndCalendarType
     };
 
     CalendarUrl();
