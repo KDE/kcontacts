@@ -21,6 +21,7 @@
 #include "impptest.h"
 #include "impp.h"
 #include <qtest.h>
+#include "vcardtool.h"
 
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
@@ -82,7 +83,7 @@ void ImppTest::shouldSerialized()
     QVERIFY(impp == result);
 }
 
-void ImppTest::shouldEqualLanguage()
+void ImppTest::shouldEqualImpp()
 {
     const QString address(QStringLiteral("address"));
     QMap<QString, QStringList> params;
@@ -96,6 +97,43 @@ void ImppTest::shouldEqualLanguage()
 
     KContacts::Impp result(impp);
     QVERIFY(impp == result);
+}
+
+void ImppTest::shouldParseWithoutImpp()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "LANG:fr"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).imppList().count(), 0);
+}
+
+void ImppTest::shouldParseImpp()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "IMPP;X-SERVICE-TYPE=skype:skype:xxxxxxxx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).imppList().count(), 1);
+    KContacts::Impp impp = lst.at(0).imppList().at(0);
+    QCOMPARE(impp.address(), QStringLiteral("skype:xxxxxxxx"));
+    QCOMPARE(impp.type(), KContacts::Impp::Skype);
 }
 
 QTEST_MAIN(ImppTest)

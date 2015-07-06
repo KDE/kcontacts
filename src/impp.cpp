@@ -163,12 +163,14 @@ QString Impp::typeToString(ImppType type) const
         return QStringLiteral("googletalk");
     case Yahoo:
         return QStringLiteral("yahoo");
-    case Apple:
+    case Qq:
         return QStringLiteral("x-apple");
     case GaduGadu:
         return QStringLiteral("gadugadu");
     case Ownclound:
         break;
+    case Facebook:
+        return QStringLiteral("facebook");
     case Icq:
         return QStringLiteral("icq");
     }

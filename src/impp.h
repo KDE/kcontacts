@@ -54,10 +54,11 @@ public:
         Twitter = 7,
         GoogleTalk = 8,
         Yahoo = 9,
-        Apple = 10,
+        Qq = 10,
         GaduGadu = 11,
         Ownclound = 12,
-        Icq = 13
+        Icq = 13,
+        Facebook = 14
     };
     bool isValid() const;
 

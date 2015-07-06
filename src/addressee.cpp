@@ -551,9 +551,11 @@ QVector<QUrl> Addressee::sourcesUrlList() const
 
 void Addressee::insertImpp(const Impp &impp)
 {
-    d->mEmpty = false;
-    //Don't duplicate ?
-    d->mImpps.append(impp);
+    if (impp.isValid()) {
+        d->mEmpty = false;
+        //Don't duplicate ?
+        d->mImpps.append(impp);
+    }
 }
 
 void Addressee::setImppList(const Impp::List &imppList)

@@ -33,7 +33,9 @@ private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();
     void shouldSerialized();
-    void shouldEqualLanguage();
+    void shouldEqualImpp();
+    void shouldParseWithoutImpp();
+    void shouldParseImpp();
 };
 
 #endif // IMPPTEST_H
