@@ -17,7 +17,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
 set(KF5_VERSION "5.12.0")
-set(KCONTACTS_LIB_VERSION "4.87.0")
+set(KCONTACTS_LIB_VERSION "4.88.0")
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
@@ -26,7 +26,7 @@ ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt5 5.3 REQUIRED COMPONENTS DBus Gui)
+find_package(Qt5 5.4 REQUIRED COMPONENTS DBus Gui)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 
 ########### Targets ###########
