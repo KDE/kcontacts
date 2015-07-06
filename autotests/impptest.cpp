@@ -246,4 +246,61 @@ void ImppTest::shouldExportType()
     QCOMPARE(ba, expected);
 }
 
+void ImppTest::shouldExportWithParameters()
+{
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype:address\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::Impp impp;
+    impp.setAddress(QStringLiteral("address"));
+    impp.setType(KContacts::Impp::Skype);
+    impp.setParameters(params);
+    addr.insertImpp(impp);
+    lst << addr;
+
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QCOMPARE(ba, expected);
+}
+
+void ImppTest::shouldShouldNoyExportTwiceServiceType()
+{
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype:address\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    params.insert(QStringLiteral("X-SERVICE-TYPE"), QStringList() << QStringLiteral("aim"));
+    KContacts::Impp impp;
+    impp.setAddress(QStringLiteral("address"));
+    impp.setType(KContacts::Impp::Skype);
+    impp.setParameters(params);
+    addr.insertImpp(impp);
+    lst << addr;
+
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QCOMPARE(ba, expected);
+}
+
 QTEST_MAIN(ImppTest)
