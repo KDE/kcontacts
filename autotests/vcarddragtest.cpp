@@ -49,13 +49,13 @@ QTEST_MAIN(VCardDragTest)
 VCardDragTest::VCardDragTest()
     : QObject()
 {
-    mAddressee1.setGivenName(QLatin1String("Kevin"));
-    mAddressee1.setFamilyName(QLatin1String("Krammer"));
-    mAddressee1.insertEmail(QLatin1String("kevin.krammer@gmx.at"));
+    mAddressee1.setGivenName(QStringLiteral("Kevin"));
+    mAddressee1.setFamilyName(QStringLiteral("Krammer"));
+    mAddressee1.insertEmail(QStringLiteral("kevin.krammer@gmx.at"));
 
-    mAddressee2.setGivenName(QLatin1String("Tobias"));
-    mAddressee2.setFamilyName(QLatin1String("König"));
-    mAddressee2.insertEmail(QLatin1String("tokoe@kde.org"));
+    mAddressee2.setGivenName(QStringLiteral("Tobias"));
+    mAddressee2.setFamilyName(QStringLiteral("König"));
+    mAddressee2.insertEmail(QStringLiteral("tokoe@kde.org"));
 }
 
 void VCardDragTest::testPopulate()
@@ -105,12 +105,12 @@ void VCardDragTest::testCanDecode()
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("text/x-vcard"), vcard);
+    data->setData(QStringLiteral("text/x-vcard"), vcard);
     QVERIFY(VCardDrag::canDecode(data));
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("application/octetstream"), vcard);
+    data->setData(QStringLiteral("application/octetstream"), vcard);
     QVERIFY(!VCardDrag::canDecode(data));
     delete data;
 }
@@ -131,14 +131,14 @@ void VCardDragTest::testFromMimeData()
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("text/x-vcard"), vcard);
+    data->setData(QStringLiteral("text/x-vcard"), vcard);
     result = VCardDrag::fromMimeData(data, content);
     QVERIFY(result);
     QCOMPARE(content, vcard);
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("application/octetstream"), vcard);
+    data->setData(QStringLiteral("application/octetstream"), vcard);
     result = VCardDrag::fromMimeData(data, content);
     QVERIFY(!result);
     delete data;
@@ -158,7 +158,7 @@ void VCardDragTest::testFromMimeData()
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("text/x-vcard"), vcards);
+    data->setData(QStringLiteral("text/x-vcard"), vcards);
     result = VCardDrag::fromMimeData(data, addresseeList);
     QVERIFY(result);
     QCOMPARE(addresseeList.count(), 2);
@@ -167,7 +167,7 @@ void VCardDragTest::testFromMimeData()
     delete data;
 
     data = new QMimeData();
-    data->setData(QLatin1String("application/octetstream"), vcards);
+    data->setData(QStringLiteral("application/octetstream"), vcards);
     result = VCardDrag::fromMimeData(data, addresseeList);
     QVERIFY(!result);
     delete data;
