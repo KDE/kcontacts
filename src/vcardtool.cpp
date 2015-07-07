@@ -505,6 +505,35 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 card.addLine(line);
             }
         }
+        Q_FOREACH (const CalendarUrl &url, (*addrIt).calendarUrlList()) {
+            if (url.isValid()) {
+                QString type;
+                switch (url.type()) {
+                case CalendarUrl::Unknown:
+                case CalendarUrl::EndCalendarType:
+                    break;
+                case CalendarUrl::FBUrl:
+                    type = QStringLiteral("FBURL");
+                    break;
+                case CalendarUrl::CALUri:
+                    type = QStringLiteral("CALURI");
+                    break;
+                case CalendarUrl::CALADRUri:
+                    type = QStringLiteral("CALADRURI");
+                    break;
+
+                }
+                if (!type.isEmpty()) {
+                    VCardLine line(type, url.url().toDisplayString());
+                    QMapIterator<QString, QStringList> i(url.parameters());
+                    while (i.hasNext()) {
+                        i.next();
+                        line.addParameter(i.key(), i.value().join(QLatin1String(",")));
+                    }
+                    card.addLine(line);
+                }
+            }
+        }
         // IMPP
         Q_FOREACH (const Impp &impp, (*addrIt).imppList()) {
             VCardLine line(QLatin1String("IMPP"), impp.address());

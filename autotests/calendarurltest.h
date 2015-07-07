@@ -37,6 +37,8 @@ private Q_SLOTS:
     void shouldSerialized();
     void shouldEqualCalendarUrl();
     void shouldParseCalendarUrl();
+    void shouldGenerateVCard_data();
+    void shouldGenerateVCard();
 };
 
 #endif // CALENDARURLTEST_H

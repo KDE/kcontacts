@@ -26,7 +26,7 @@
 #include <qtest.h>
 
 using namespace KContacts;
-
+Q_DECLARE_METATYPE(KContacts::CalendarUrl::CalendarType)
 CalendarUrlTest::CalendarUrlTest(QObject *parent)
     : QObject(parent)
 {
@@ -154,6 +154,70 @@ void CalendarUrlTest::shouldParseCalendarUrl()
     }
 }
 
+void CalendarUrlTest::shouldGenerateVCard_data()
+{
+    QTest::addColumn<KContacts::CalendarUrl::CalendarType>("type");
+    QTest::addColumn<QByteArray>("value");
+    for (int i = CalendarUrl::Unknown + 1; i < CalendarUrl::EndCalendarType; ++i) {
+        KContacts::CalendarUrl::CalendarType type = static_cast<KContacts::CalendarUrl::CalendarType>(i);
+        QByteArray baType;
+        switch(type) {
+        case CalendarUrl::Unknown:
+        case CalendarUrl::EndCalendarType:
+            break;
+        case CalendarUrl::FBUrl:
+            baType = QByteArray("FBURL");
+            break;
+        case CalendarUrl::CALUri:
+            baType = QByteArray("CALURI");
+            break;
+        case CalendarUrl::CALADRUri:
+            baType = QByteArray("CALADRURI");
+            break;
+
+        }
+        QTest::newRow(baType.constData()) << type << baType;
+    }
+}
+
+void CalendarUrlTest::shouldGenerateVCard()
+{
+    QFETCH(KContacts::CalendarUrl::CalendarType, type);
+    QFETCH(QByteArray, value);
+
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    CalendarUrl url;
+    url.setType(type);
+    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    addr.insertCalendarUrl(url);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected;
+    // Different order
+    if (type == KContacts::CalendarUrl::FBUrl) {
+        expected = QByteArray("BEGIN:VCARD\r\n"
+                              "VERSION:4.0\r\n"
+                              "EMAIL:foo@kde.org\r\n");
+        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                                       "N:;;;;\r\n"
+                                       "UID:testuid\r\n"
+                                       "END:VCARD\r\n\r\n");
+    } else {
+        expected = QByteArray("BEGIN:VCARD\r\n"
+                              "VERSION:4.0\r\n");
+        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                                       "EMAIL:foo@kde.org\r\n"
+                                       "N:;;;;\r\n"
+                                       "UID:testuid\r\n"
+                                       "END:VCARD\r\n\r\n");
+    }
+
+    QCOMPARE(ba, expected);
+}
 
 QTEST_MAIN(CalendarUrlTest)
 
