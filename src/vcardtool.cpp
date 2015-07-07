@@ -754,7 +754,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         } else if (serviceType == QLatin1String("skype")) {
                             impp.setType(KContacts::Impp::Skype);
                         } else {
-                            qDebug() << "unknown service type "<<serviceType;
+                            qDebug() << "unknown service type " << serviceType;
                         }
                     }
                     addr.insertImpp(impp);
@@ -771,10 +771,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         if (genderStr.at(0) != QLatin1Char(';')) {
                             gender.setGender(genderStr.at(0));
                             if (genderStr.length() > 2 && (genderStr.at(1) == QLatin1Char(';'))) {
-                                gender.setComment(genderStr.right(genderStr.length()-2));
+                                gender.setComment(genderStr.right(genderStr.length() - 2));
                             }
                         } else {
-                            gender.setComment(genderStr.right(genderStr.length()-1));
+                            gender.setComment(genderStr.right(genderStr.length() - 1));
                         }
                         addr.setGender(gender);
                     }
@@ -1287,10 +1287,11 @@ VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
     if (key.isBinary()) {
         if (!key.binaryData().isEmpty()) {
             line.setValue(key.binaryData());
-            if (version == VCard::v2_1)
-                line.addParameter( QLatin1String( "ENCODING" ), QLatin1String( "BASE64" ) );
-            else
-                line.addParameter( QLatin1String( "encoding" ), QLatin1String( "b" ) );
+            if (version == VCard::v2_1) {
+                line.addParameter(QLatin1String("ENCODING"), QLatin1String("BASE64"));
+            } else {
+                line.addParameter(QLatin1String("encoding"), QLatin1String("b"));
+            }
         }
     } else if (!key.textData().isEmpty()) {
         line.setValue(key.textData());

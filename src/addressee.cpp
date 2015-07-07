@@ -548,7 +548,6 @@ QVector<QUrl> Addressee::sourcesUrlList() const
     return d->mSources;
 }
 
-
 void Addressee::insertImpp(const Impp &impp)
 {
     if (impp.isValid()) {

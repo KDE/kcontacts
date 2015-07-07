@@ -95,7 +95,6 @@ void ImppTest::shouldEqualImpp()
     impp.setType(KContacts::Impp::Icq);
     impp.setAddress(address);
 
-
     KContacts::Impp result(impp);
     QVERIFY(impp == result);
 }
@@ -147,9 +146,9 @@ QByteArray createCard(KContacts::Impp::ImppType type)
         expected += "IMPP;X-SERVICE-TYPE=" + baType + ":" + baType + ":address\n";
     }
     expected += QByteArray(
-                        "N:;;;;\n"
-                        "UID:testuid\n"
-                        "END:VCARD\n\n");
+                    "N:;;;;\n"
+                    "UID:testuid\n"
+                    "END:VCARD\n\n");
     return expected;
 }
 

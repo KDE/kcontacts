@@ -142,7 +142,7 @@ QString Impp::toString() const
 
 QString Impp::typeToString(ImppType type)
 {
-    switch(type) {
+    switch (type) {
     case Unknown:
         break;
     case Skype:

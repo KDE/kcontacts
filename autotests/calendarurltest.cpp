@@ -116,7 +116,7 @@ void CalendarUrlTest::shouldParseCalendarUrl()
     for (int i = CalendarUrl::Unknown + 1; i < CalendarUrl::EndCalendarType; ++i) {
         CalendarUrl::CalendarType type = static_cast<CalendarUrl::CalendarType>(i);
         QByteArray baType;
-        switch(type) {
+        switch (type) {
         case CalendarUrl::Unknown:
         case CalendarUrl::EndCalendarType:
             break;
@@ -138,10 +138,10 @@ void CalendarUrlTest::shouldParseCalendarUrl()
                              "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n");
         vcarddata += baType;
         vcarddata += QByteArray(
-                             ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
-                             "REV:2015-03-14T09:24:45+00:00\n"
-                             "FN:FirstName LastName\n"
-                             "END:VCARD\n");
+                         ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
 
         KContacts::VCardTool vcard;
         const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -161,7 +161,7 @@ void CalendarUrlTest::shouldGenerateVCard_data()
     for (int i = CalendarUrl::Unknown + 1; i < CalendarUrl::EndCalendarType; ++i) {
         KContacts::CalendarUrl::CalendarType type = static_cast<KContacts::CalendarUrl::CalendarType>(i);
         QByteArray baType;
-        switch(type) {
+        switch (type) {
         case CalendarUrl::Unknown:
         case CalendarUrl::EndCalendarType:
             break;

@@ -95,7 +95,6 @@ void GenderTest::shouldEqualGender()
     QVERIFY(gender == result);
 }
 
-
 void GenderTest::shouldParseGender_data()
 {
     QTest::addColumn<QByteArray>("vcarddata");
@@ -167,9 +166,9 @@ QByteArray GenderTest::createCard(const QByteArray &gender)
         expected += gender + "\r\n";
     }
     expected += QByteArray(
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+                    "N:;;;;\r\n"
+                    "UID:testuid\r\n"
+                    "END:VCARD\r\n\r\n");
     return expected;
 }
 
