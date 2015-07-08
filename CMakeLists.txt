@@ -17,7 +17,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 
 set(KF5_VERSION "5.12.0")
-set(KCONTACTS_LIB_VERSION "4.88.0")
+set(KCONTACTS_LIB_VERSION "4.89.0")
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
