@@ -21,7 +21,7 @@
 #ifndef KCONTACTS_CONTACTGROUP_H
 #define KCONTACTS_CONTACTGROUP_H
 
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QMetaType>
 
@@ -57,7 +57,7 @@ public:
         /**
          * A list of contact references.
          */
-        typedef QList<ContactReference> List;
+        typedef QVector<ContactReference> List;
 
         /**
          * Creates an empty contact reference.
@@ -164,7 +164,7 @@ public:
         /**
          * A list of contact group references.
          */
-        typedef QList<ContactGroupReference> List;
+        typedef QVector<ContactGroupReference> List;
 
         /**
          * Creates an empty contact group reference.
@@ -241,7 +241,7 @@ public:
         /**
          * A list of contact data.
          */
-        typedef QList<Data> List;
+        typedef QVector<Data> List;
 
         /**
          * Creates an empty contact data object.

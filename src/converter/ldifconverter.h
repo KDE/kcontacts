@@ -47,7 +47,7 @@ namespace LDIFConverter
   @param contactGroupList the contactGroupList
   @param dt          The date & time value of the last modification (e.g. file modification time).
 */
-KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
+KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, QVector<KContacts::ContactGroup> &contactGroupList,
                                       const QDateTime &dt = QDateTime::currentDateTime());
 
 /**
@@ -66,7 +66,7 @@ KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &st
   @param str         The LDIF string.
 
 */
-KCONTACTS_EXPORT bool addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const ContactGroup::List &contactGroupList, QString &str);
+KCONTACTS_EXPORT bool addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const QVector<KContacts::ContactGroup> &contactGroupList, QString &str);
 /**
   Converts an addressee to a LDIF string.
 
