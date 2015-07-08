@@ -132,7 +132,7 @@ QString Impp::toString() const
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QLatin1String(",")));
+            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
         str += QString::fromLatin1("    parameters: %1\n").arg(param);
     }
