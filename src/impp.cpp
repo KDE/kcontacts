@@ -144,6 +144,7 @@ QString Impp::typeToString(ImppType type)
 {
     switch (type) {
     case Unknown:
+    case EndList:
         break;
     case Skype:
         return QStringLiteral("skype");
