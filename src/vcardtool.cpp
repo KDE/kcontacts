@@ -669,8 +669,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
 
                     address.setType(type);
-                    if (!(*lineIt).parameter(QLatin1String("label")).isEmpty()) {
-                        address.setLabel((*lineIt).parameter(QLatin1String("label")));
+                    if (!(*lineIt).parameter(QStringLiteral("label")).isEmpty()) {
+                        address.setLabel((*lineIt).parameter(QStringLiteral("label")));
                     }
                     addr.insertAddress(address);
                 }
@@ -893,8 +893,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (numberOfParts > 4) {
                         addr.setSuffix(nameParts.at(4));
                     }
-                    if (!(*lineIt).parameter(QLatin1String("sort-as")).isEmpty()) {
-                        addr.setSortString((*lineIt).parameter(QLatin1String("sort-as")));
+                    if (!(*lineIt).parameter(QStringLiteral("sort-as")).isEmpty()) {
+                        addr.setSortString((*lineIt).parameter(QStringLiteral("sort-as")));
                     }
                 }
 
@@ -922,8 +922,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (orgParts.count() > 1) {
                         addr.setDepartment(orgParts.at(1));
                     }
-                    if (!(*lineIt).parameter(QLatin1String("sort-as")).isEmpty()) {
-                        addr.setSortString((*lineIt).parameter(QLatin1String("sort-as")));
+                    if (!(*lineIt).parameter(QStringLiteral("sort-as")).isEmpty()) {
+                        addr.setSortString((*lineIt).parameter(QStringLiteral("sort-as")));
                     }
                 }
 
@@ -1173,12 +1173,12 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     const QStringList params = line.parameterList();
     QString type;
     if (params.contains(QLatin1String("type"))) {
-        type = line.parameter(QLatin1String("type"));
+        type = line.parameter(QStringLiteral("type"));
     }
     if (params.contains(QLatin1String("encoding"))) {
         pic.setRawData(line.value().toByteArray(), type);
     } else if (params.contains(QLatin1String("value"))) {
-        if (line.parameter(QLatin1String("value")).toLower() == QLatin1String("uri")) {
+        if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
             pic.setUrl(line.value().toString());
         }
     }
@@ -1219,7 +1219,7 @@ Sound VCardTool::parseSound(const VCardLine &line) const
     if (params.contains(QLatin1String("encoding"))) {
         snd.setData(line.value().toByteArray());
     } else if (params.contains(QLatin1String("value"))) {
-        if (line.parameter(QLatin1String("value")).toLower() == QLatin1String("uri")) {
+        if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
             snd.setUrl(line.value().toString());
         }
     }
@@ -1267,13 +1267,13 @@ Key VCardTool::parseKey(const VCardLine &line) const
     }
 
     if (params.contains(QLatin1String("type"))) {
-        if (line.parameter(QLatin1String("type")).toLower() == QLatin1String("x509")) {
+        if (line.parameter(QStringLiteral("type")).toLower() == QLatin1String("x509")) {
             key.setType(Key::X509);
-        } else if (line.parameter(QLatin1String("type")).toLower() == QLatin1String("pgp")) {
+        } else if (line.parameter(QStringLiteral("type")).toLower() == QLatin1String("pgp")) {
             key.setType(Key::PGP);
         } else {
             key.setType(Key::Custom);
-            key.setCustomTypeString(line.parameter(QLatin1String("type")));
+            key.setCustomTypeString(line.parameter(QStringLiteral("type")));
         }
     }
 
