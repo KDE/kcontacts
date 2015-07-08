@@ -38,7 +38,7 @@ class KCONTACTS_EXPORT Lang
 public:
     Lang();
     Lang(const Lang &other);
-    Lang(const QString &mail);
+    Lang(const QString &language);
 
     ~Lang();
 

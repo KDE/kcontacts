@@ -54,10 +54,10 @@ Lang::Lang(const Lang &other)
 
 }
 
-Lang::Lang(const QString &lang)
+Lang::Lang(const QString &language)
     : d(new Private)
 {
-    d->language = lang;
+    d->language = language;
 }
 
 Lang::~Lang()
