@@ -61,14 +61,14 @@ KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertFromXml(QIODevice *device,
-                                     QList<ContactGroup> &list,
+                                     QVector<ContactGroup> &list,
                                      QString *errorMessage = Q_NULLPTR);
 
 /**
  * Converts a @p list of contact groups into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list,
+KCONTACTS_EXPORT bool convertToXml(const QVector<ContactGroup> &list,
                                    QIODevice *device, QString *errorMessage = Q_NULLPTR);
 }
 

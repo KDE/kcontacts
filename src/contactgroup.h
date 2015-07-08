@@ -322,7 +322,7 @@ public:
     /**
      * A list of contact groups.
      */
-    typedef QList<ContactGroup> List;
+    typedef QVector<ContactGroup> List;
 
     /**
      * Creates an empty contact group.
