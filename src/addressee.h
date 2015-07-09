@@ -41,6 +41,7 @@
 #include "impp.h"
 #include "timezone.h"
 #include "calendarurl.h"
+#include "related.h"
 #include "addresseelist.h"
 
 namespace KContacts
@@ -1018,9 +1019,9 @@ public:
     QStringList members() const;
 
     //Relation
-    void insertRelationShip(const QString &related);
-    void setRelationShips(const QStringList &c);
-    QStringList relationShips() const;
+    void insertRelationShip(const Related &related);
+    void setRelationShips(const Related::List &c);
+    Related::List relationShips() const;
 
     //Source
     void insertSourceUrl(const QUrl &url);

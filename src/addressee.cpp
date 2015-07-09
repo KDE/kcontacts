@@ -152,7 +152,7 @@ public:
     QVector<QUrl> mUrlExtraList;
     QVector<QUrl> mSources;
     QStringList mMembers;
-    QStringList mRelationShips;
+    Related::List mRelationShips;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -1935,7 +1935,7 @@ QStringList Addressee::members() const
     return d->mMembers;
 }
 
-void Addressee::insertRelationShip(const QString &relation)
+void Addressee::insertRelationShip(const Related &relation)
 {
     d->mEmpty = false;
 
@@ -1946,13 +1946,13 @@ void Addressee::insertRelationShip(const QString &relation)
     d->mRelationShips.append(relation);
 }
 
-void Addressee::setRelationShips(const QStringList &c)
+void Addressee::setRelationShips(const Related::List &c)
 {
     d->mEmpty = false;
     d->mRelationShips = c;
 }
 
-QStringList Addressee::relationShips() const
+Related::List Addressee::relationShips() const
 {
     return d->mRelationShips;
 }

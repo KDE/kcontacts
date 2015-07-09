@@ -26,6 +26,7 @@
 #include "sound.h"
 #include "lang.h"
 #include "gender.h"
+#include "related.h"
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QDebug>
@@ -217,8 +218,16 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         if (version == VCard::v4_0) {
-            Q_FOREACH (const QString &relation, (*addrIt).relationShips()) {
-                VCardLine line(QLatin1String("RELATED"), relation);
+            const Related::List relatedList = (*addrIt).relationShips();
+            Related::List::ConstIterator relatedIt;
+            Related::List::ConstIterator relatedEnd(relatedList.end());
+            for (relatedIt = relatedList.begin(); relatedIt != relatedEnd; ++relatedIt) {
+                VCardLine line(QLatin1String("RELATED"), (*relatedIt).related());
+                QMapIterator<QString, QStringList> i((*relatedIt).parameters());
+                while (i.hasNext()) {
+                    i.next();
+                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                }
                 card.addLine(line);
             }
         }
@@ -1034,7 +1043,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // RELATED (vcard 4.0)
                 else if (identifier == QLatin1String("related")) {
-                    addr.insertRelationShip((*lineIt).value().toString());
+                    Related related;
+                    related.setRelated((*lineIt).value().toString());
+                    related.setParameters((*lineIt).parameterMap());
+                    addr.insertRelationShip(related);
                 }
                 // X-
                 else if (identifier.startsWith(QLatin1String("x-"))) {
