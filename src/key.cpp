@@ -52,8 +52,8 @@ public:
     QString mTextData;
     QString mCustomTypeString;
 
-    bool mIsBinary;
     Type mType;
+    bool mIsBinary;
 };
 
 Key::Key(const QString &text, Type type)

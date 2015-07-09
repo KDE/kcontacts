@@ -32,7 +32,7 @@ namespace KContacts
 class VCardLine
 {
 public:
-    typedef QList<VCardLine> List;
+    typedef QVector<VCardLine> List;
     typedef QMap<QString, QStringList> ParamMap;
 
     VCardLine();
