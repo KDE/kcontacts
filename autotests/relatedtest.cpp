@@ -102,14 +102,14 @@ void RelatedTest::shouldEqualRelated()
     result = related;
     QVERIFY(related == result);
 }
-#if 0
-void RelatedTest::shouldParseLanguage()
+
+void RelatedTest::shouldParseRelated()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
+                         "VERSION:4.0\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr"
+                         "RELATED:friend"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -117,10 +117,10 @@ void RelatedTest::shouldParseLanguage()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).langs().count(), 1);
+    QCOMPARE(lst.at(0).relationShips().count(), 1);
 }
 
-void RelatedTest::shouldParseWithoutLanguage()
+void RelatedTest::shouldParseWithoutRelated()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
@@ -133,7 +133,7 @@ void RelatedTest::shouldParseWithoutLanguage()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).langs().count(), 0);
+    QCOMPARE(lst.at(0).relationShips().count(), 0);
 }
 
 void RelatedTest::shouldCreateVCard()
@@ -142,44 +142,44 @@ void RelatedTest::shouldCreateVCard()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
-    lstLang << lang;
-    addr.setLangs(lstLang);
+    KContacts::Related::List lstRelated;
+    KContacts::Related related(QStringLiteral("friend"));
+    lstRelated << related;
+    addr.setRelationShips(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG:fr\r\n"
                         "N:;;;;\r\n"
+                        "RELATED:friend\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
 
-void RelatedTest::shouldCreateVCardWithTwoLang()
+void RelatedTest::shouldCreateVCardWithTwoRelated()
 {
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
-    KContacts::Lang lang2(QStringLiteral("fr2"));
-    lstLang << lang << lang2;
-    addr.setLangs(lstLang);
+    KContacts::Related::List lstRelated;
+    KContacts::Related related(QStringLiteral("friend"));
+    KContacts::Related related2(QStringLiteral("kde"));
+    lstRelated << related << related2;
+    addr.setRelationShips(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG:fr\r\n"
-                        "LANG:fr2\r\n"
                         "N:;;;;\r\n"
+                        "RELATED:friend\r\n"
+                        "RELATED:kde\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
@@ -193,25 +193,25 @@ void RelatedTest::shouldCreateVCardWithParameters()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
+    KContacts::Related::List lstRelated;
+    KContacts::Related related(QStringLiteral("friend"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    lang.setParameters(params);
-    lstLang << lang;
-    addr.setLangs(lstLang);
+    related.setParameters(params);
+    lstRelated << related;
+    addr.setRelationShips(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "N:;;;;\r\n"
+                        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-#endif
+
 QTEST_MAIN(RelatedTest)

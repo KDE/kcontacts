@@ -35,13 +35,11 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualRelated();
-#if 0
-    void shouldParseLanguage();
-    void shouldParseWithoutLanguage();
+    void shouldParseRelated();
+    void shouldParseWithoutRelated();
     void shouldCreateVCard();
-    void shouldCreateVCardWithTwoLang();
+    void shouldCreateVCardWithTwoRelated();
     void shouldCreateVCardWithParameters();
-#endif
 };
 
 #endif // RELATEDTEST_H
