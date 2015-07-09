@@ -245,5 +245,67 @@ void CalendarUrlTest::shouldGenerateVCardWithParameter()
     QCOMPARE(ba, expected);
 }
 
+void CalendarUrlTest::shouldNotGeneratedAttributeForVcard3()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    CalendarUrl url;
+    url.setType(CalendarUrl::CALUri);
+    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    url.setParameters(params);
+    addr.insertCalendarUrl(url);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
+                                     "VERSION:3.0\r\n"
+                                     "EMAIL:foo@kde.org\r\n"
+                                     "N:;;;;\r\n"
+                                     "UID:testuid\r\n"
+                                     "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
+void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    CalendarUrl url;
+    url.setType(CalendarUrl::CALUri);
+    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    url.setParameters(params);
+    addr.insertCalendarUrl(url);
+
+    url.setType(CalendarUrl::FBUrl);
+    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes2")));
+    params.clear();
+
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    url.setParameters(params);
+    addr.insertCalendarUrl(url);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
+                                     "VERSION:4.0\r\n"
+                                     "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                                     "EMAIL:foo@kde.org\r\n"
+                                     "FBURL;FOO1=bla1,blo1:https://sherlockholmes.com/calendar/sherlockholmes2\r\n"
+                                     "N:;;;;\r\n"
+                                     "UID:testuid\r\n"
+                                     "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+
+}
+
 QTEST_MAIN(CalendarUrlTest)
 

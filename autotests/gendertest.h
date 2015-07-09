@@ -45,6 +45,7 @@ private Q_SLOTS:
     void shouldExportEmptyGender();
     void shouldExportOnlyGenderWithCommentGender();
     void shouldExportOnlyGenderWithoutTypeCommentGender();
+    void shouldNotExportInVcard3();
 };
 
 #endif // GENDERTEST_H

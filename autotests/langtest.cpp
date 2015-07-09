@@ -215,4 +215,30 @@ void LangTest::shouldCreateVCardWithParameters()
     QCOMPARE(ba, expected);
 }
 
+void LangTest::shouldNotGenerateLangForVCard3()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Lang::List lstLang;
+    KContacts::Lang lang(QStringLiteral("fr"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    lang.setParameters(params);
+    lstLang << lang;
+    addr.setLangs(lstLang);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
 QTEST_MAIN(LangTest)

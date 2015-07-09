@@ -40,6 +40,7 @@ private Q_SLOTS:
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoLang();
     void shouldCreateVCardWithParameters();
+    void shouldNotGenerateLangForVCard3();
 };
 
 #endif // LANGTEST_H

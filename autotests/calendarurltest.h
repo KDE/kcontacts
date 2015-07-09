@@ -40,6 +40,8 @@ private Q_SLOTS:
     void shouldGenerateVCard_data();
     void shouldGenerateVCard();
     void shouldGenerateVCardWithParameter();
+    void shouldNotGeneratedAttributeForVcard3();
+    void shouldGenerateMultiCalendarUrl();
 };
 
 #endif // CALENDARURLTEST_H
