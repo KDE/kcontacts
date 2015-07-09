@@ -25,6 +25,7 @@ set(kcontacts_SRCS
   phonenumber.cpp
   picture.cpp
   plugin.cpp
+  related.cpp
   secrecy.cpp
   sortmode.cpp
   sound.cpp
@@ -86,6 +87,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   PhoneNumber
   Picture
   Plugin
+  Related
   Secrecy
   SortMode
   Sound
