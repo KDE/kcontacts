@@ -19,7 +19,7 @@
 */
 
 #include "relatedtest.h"
-#include "lang.h"
+#include "related.h"
 #include "vcardtool.h"
 #include <qtest.h>
 
@@ -36,74 +36,73 @@ RelatedTest::~RelatedTest()
 
 void RelatedTest::shouldHaveDefaultValue()
 {
-    KContacts::Lang language;
-    QVERIFY(!language.isValid());
-    QVERIFY(language.language().isEmpty());
-    QVERIFY(language.parameters().isEmpty());
+    KContacts::Related related;
+    QVERIFY(!related.isValid());
+    QVERIFY(related.related().isEmpty());
+    QVERIFY(related.parameters().isEmpty());
 }
 
 void RelatedTest::shouldAssignValue()
 {
-    const QString lang(QStringLiteral("fr"));
+    const QString relatedTo(QStringLiteral("friend"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    KContacts::Lang language(lang);
-    language.setParameters(params);
-    QVERIFY(language.isValid());
-    QVERIFY(!language.language().isEmpty());
-    QCOMPARE(language.language(), lang);
-    QVERIFY(!language.parameters().isEmpty());
-    QCOMPARE(language.parameters(), params);
+    KContacts::Related related(relatedTo);
+    related.setParameters(params);
+    QVERIFY(related.isValid());
+    QVERIFY(!related.related().isEmpty());
+    QCOMPARE(related.related(), relatedTo);
+    QVERIFY(!related.parameters().isEmpty());
+    QCOMPARE(related.parameters(), params);
 
 }
 
 void RelatedTest::shouldAssignExternal()
 {
-    KContacts::Lang language;
-    const QString lang(QStringLiteral("fr"));
-    language.setLanguage(lang);
-    QVERIFY(language.isValid());
-    QCOMPARE(language.language(), lang);
+    KContacts::Related related;
+    const QString relatedTo(QStringLiteral("friend"));
+    related.setRelated(relatedTo);
+    QVERIFY(related.isValid());
+    QCOMPARE(related.related(), relatedTo);
 }
 
 void RelatedTest::shouldSerialized()
 {
-    KContacts::Lang language;
-    KContacts::Lang result;
-    const QString lang(QStringLiteral("fr"));
-    language.setLanguage(lang);
+    KContacts::Related related;
+    KContacts::Related result;
+    const QString relatedTo(QStringLiteral("friend"));
+    related.setRelated(relatedTo);
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    language.setParameters(params);
+    related.setParameters(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
-    s << language;
+    s << related;
 
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(language == result);
-
+    QVERIFY(related == result);
 }
 
-void RelatedTest::shouldEqualLanguage()
+void RelatedTest::shouldEqualRelated()
 {
-    KContacts::Lang language;
-    KContacts::Lang result;
-    const QString lang(QStringLiteral("fr"));
-    language.setLanguage(lang);
+    KContacts::Related related;
+    KContacts::Related result;
+    const QString relatedTo(QStringLiteral("friend"));
+    related.setRelated(relatedTo);
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    language.setParameters(params);
+    related.setParameters(params);
 
-    result = language;
-    QVERIFY(language == result);
+    result = related;
+    QVERIFY(related == result);
 }
-
+#if 0
 void RelatedTest::shouldParseLanguage()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
@@ -214,5 +213,5 @@ void RelatedTest::shouldCreateVCardWithParameters()
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-
+#endif
 QTEST_MAIN(RelatedTest)
