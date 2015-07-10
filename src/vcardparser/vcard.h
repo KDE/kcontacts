@@ -32,7 +32,7 @@ namespace KContacts
 class VCard
 {
 public:
-    typedef QList<VCard> List;
+    typedef QVector<VCard> List;
     typedef QMap<QString, VCardLine::List> LineMap;
 
     enum Version {
