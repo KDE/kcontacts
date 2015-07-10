@@ -36,6 +36,9 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualEmail();
+    void shouldParseEmailVCard();
+    void shouldParseEmailVCardWithoutEmail();
+    void shouldParseEmailVCardWithMultiEmails();
 };
 
 #endif // EMAILTEST_H

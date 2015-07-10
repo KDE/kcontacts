@@ -20,6 +20,7 @@
 #include "emailtest.h"
 #include "email.h"
 #include <qtest.h>
+#include "vcardtool.h"
 
 EmailTest::EmailTest(QObject *parent)
     : QObject(parent)
@@ -99,6 +100,68 @@ void EmailTest::shouldEqualEmail()
 
     result = email;
     QVERIFY(email == result);
+}
+
+void EmailTest::shouldParseEmailVCard()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(!lst.at(0).emailList().isEmpty());
+    QCOMPARE(lst.at(0).emailList().count(), 1);
+    KContacts::Email email = lst.at(0).emailList().at(0);
+    QCOMPARE(email.mail(), QStringLiteral("foo@foo.com"));
+    QCOMPARE(email.parameters().count(), 2);
+}
+
+void EmailTest::shouldParseEmailVCardWithMultiEmails()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
+                         "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:bla@bla.com\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(!lst.at(0).emailList().isEmpty());
+    QCOMPARE(lst.at(0).emailList().count(), 2);
+    KContacts::Email email = lst.at(0).emailList().at(0);
+    QCOMPARE(email.mail(), QStringLiteral("bla@bla.com"));
+    email = lst.at(0).emailList().at(1);
+    QCOMPARE(email.mail(), QStringLiteral("foo@foo.com"));
+
+    QCOMPARE(email.parameters().count(), 2);
+}
+
+void EmailTest::shouldParseEmailVCardWithoutEmail()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(lst.at(0).emailList().isEmpty());
 }
 
 QTEST_MAIN(EmailTest)
