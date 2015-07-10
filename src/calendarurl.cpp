@@ -53,6 +53,7 @@ QString CalendarUrl::Private::typeToString(CalendarUrl::CalendarType type)
     QString ret;
     switch (type) {
     case Unknown:
+    case EndCalendarType:
         ret = QStringLiteral("Unknown");
         break;
     case FBUrl:
