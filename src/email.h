@@ -73,4 +73,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &objec
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Email &object);
 
 }
+Q_DECLARE_TYPEINFO( KContacts::Email, Q_MOVABLE_TYPE );
 #endif // EMAIL_H

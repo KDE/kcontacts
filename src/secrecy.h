@@ -22,7 +22,7 @@
 #define KCONTACTS_SECRECY_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #include <QtCore/QSharedDataPointer>
 
 namespace KContacts
@@ -51,7 +51,7 @@ public:
     /**
      * List of secrecy types.
      */
-    typedef QList<Type> TypeList;
+    typedef QVector<Type> TypeList;
 
     /**
      * Creates a new secrecy of the given type.
@@ -123,4 +123,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Secrecy &sec
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Secrecy &secrecy);
 
 }
+
 #endif

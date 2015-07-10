@@ -182,5 +182,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Key &key);
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Key &key);
 
 }
-
+Q_DECLARE_TYPEINFO( KContacts::Key, Q_MOVABLE_TYPE );
 #endif

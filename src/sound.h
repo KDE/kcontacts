@@ -180,5 +180,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Sound &sound
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Sound &sound);
 
 }
-
+Q_DECLARE_TYPEINFO( KContacts::Sound, Q_MOVABLE_TYPE );
 #endif

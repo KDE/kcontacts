@@ -481,6 +481,8 @@ private:
 };
 
 }
+Q_DECLARE_TYPEINFO(KContacts::ContactGroup::ContactGroupReference, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::ContactGroup::ContactReference, Q_MOVABLE_TYPE);
 
 #define KCONTACTS_CONTACTGROUP_METATYPE_DEFINED
 Q_DECLARE_METATYPE(KContacts::ContactGroup)

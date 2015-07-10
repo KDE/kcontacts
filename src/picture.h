@@ -200,5 +200,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Picture &pic
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Picture &picture);
 
 }
-
+Q_DECLARE_TYPEINFO( KContacts::Picture, Q_MOVABLE_TYPE );
 #endif
