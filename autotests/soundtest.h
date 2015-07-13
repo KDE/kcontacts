@@ -37,6 +37,7 @@ private Q_SLOTS:
     void assignmentTestIntern();
     void assignmentTestExtern();
     void serializeTest();
+    void shouldParseSource();
 };
 
 #endif

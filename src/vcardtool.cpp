@@ -596,6 +596,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
                     //Not defined by rfc but need for fixing #300869
                     identifier = QLatin1String("X-GTALK");
+                } else if (identifier == QLatin1String("X-messaging/twitter-All")) {
+                    identifier = QLatin1String("X-TWITTER");
                 }
             }
             if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
@@ -1092,6 +1094,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         ident = QLatin1String("X-messaging/irc-All");
                     } else if (identifier == QLatin1String("x-gtalk")) {
                         ident = QLatin1String("X-messaging/googletalk-All");
+                    } else if (identifier == QLatin1String("x-twitter")) {
+                        ident = QLatin1String("X-messaging/twitter-All");
                     }
 
                     const QString key = ident.mid(2);
