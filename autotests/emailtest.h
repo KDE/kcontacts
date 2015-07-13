@@ -39,6 +39,7 @@ private Q_SLOTS:
     void shouldParseEmailVCard();
     void shouldParseEmailVCardWithoutEmail();
     void shouldParseEmailVCardWithMultiEmails();
+    void shouldExportVcard();
 };
 
 #endif // EMAILTEST_H

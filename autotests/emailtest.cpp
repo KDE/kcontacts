@@ -164,4 +164,24 @@ void EmailTest::shouldParseEmailVCardWithoutEmail()
     QVERIFY(lst.at(0).emailList().isEmpty());
 }
 
+void EmailTest::shouldExportVcard()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org") << QStringLiteral("bla@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL;TYPE=PREF:foo@kde.org\r\n"
+                        "EMAIL:bla@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
 QTEST_MAIN(EmailTest)
