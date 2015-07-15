@@ -24,7 +24,6 @@ set(kcontacts_SRCS
   ldif.cpp
   phonenumber.cpp
   picture.cpp
-  plugin.cpp
   related.cpp
   secrecy.cpp
   sortmode.cpp
@@ -86,7 +85,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Impp
   PhoneNumber
   Picture
-  Plugin
   Related
   Secrecy
   SortMode
