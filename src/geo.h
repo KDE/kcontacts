@@ -136,7 +136,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Geo &object)
  * Initializes the geographical position @p object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Geo &object);
-
 }
-
+Q_DECLARE_TYPEINFO( KContacts::Geo, Q_MOVABLE_TYPE );
 #endif

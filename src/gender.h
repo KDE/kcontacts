@@ -67,6 +67,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Gender &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Gender &object);
-
 }
+Q_DECLARE_TYPEINFO( KContacts::Gender, Q_MOVABLE_TYPE );
 #endif // GENDER_H
