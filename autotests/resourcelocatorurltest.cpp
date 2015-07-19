@@ -59,9 +59,11 @@ void ResourceLocatorUrlTest::shouldAssignValue()
 
 void ResourceLocatorUrlTest::shouldAssignExternal()
 {
-    //TODO
-    ResourceLocatorUrl ResourceLocatorUrl;
-    QVERIFY(ResourceLocatorUrl.url().isEmpty());
+    ResourceLocatorUrl resourcelocatorurl;
+    QUrl url = QUrl(QStringLiteral("https://www.kde.org"));
+    resourcelocatorurl.setUrl(url);
+    QVERIFY(!resourcelocatorurl.url().isEmpty());
+    QCOMPARE(resourcelocatorurl.url(), url);
 }
 
 void ResourceLocatorUrlTest::shouldSerialized()
@@ -101,45 +103,23 @@ void ResourceLocatorUrlTest::shouldEqualResourceLocatorUrl()
 void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
 {
 #if 0
-    for (int i = ResourceLocatorUrl::Unknown + 1; i < ResourceLocatorUrl::EndCalendarType; ++i) {
-        ResourceLocatorUrl::CalendarType type = static_cast<ResourceLocatorUrl::CalendarType>(i);
-        QByteArray baType;
-        switch (type) {
-        case ResourceLocatorUrl::Unknown:
-        case ResourceLocatorUrl::EndCalendarType:
-            break;
-        case ResourceLocatorUrl::FBUrl:
-            baType = QByteArray("FBURL");
-            break;
-        case ResourceLocatorUrl::CALUri:
-            baType = QByteArray("CALURI");
-            break;
-        case ResourceLocatorUrl::CALADRUri:
-            baType = QByteArray("CALADRURI");
-            break;
-
-        }
-
-        QByteArray vcarddata("BEGIN:VCARD\n"
-                             "VERSION:3.0\n"
-                             "N:LastName;FirstName;;;\n"
-                             "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n");
-        vcarddata += baType;
-        vcarddata += QByteArray(
-                         ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "URL;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
 
-        KContacts::VCardTool vcard;
-        const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
-        QCOMPARE(lst.count(), 1);
-        QCOMPARE(lst.at(0).ResourceLocatorUrlList().count(), 1);
-        const ResourceLocatorUrl calurl = lst.at(0).ResourceLocatorUrlList().at(0);
-        QCOMPARE(calurl.type(), type);
-        QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-        QVERIFY(!calurl.parameters().isEmpty());
-    }
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).ResourceLocatorUrlList().count(), 1);
+    const ResourceLocatorUrl calurl = lst.at(0).ResourceLocatorUrlList().at(0);
+    QCOMPARE(calurl.type(), type);
+    QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QVERIFY(!calurl.parameters().isEmpty());
 #endif
 }
 
