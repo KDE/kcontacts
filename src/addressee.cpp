@@ -129,7 +129,7 @@ public:
     QString mProductId;
     QDateTime mRevision;
     QString mSortString;
-    QUrl mUrl;
+    ResourceLocatorUrl mUrl;
     Secrecy mSecrecy;
     Picture mLogo;
     Picture mPhoto;
@@ -1077,7 +1077,7 @@ QString Addressee::sortStringLabel()
     return i18n("Sort String");
 }
 
-void Addressee::setUrl(const QUrl &url)
+void Addressee::setUrl(const ResourceLocatorUrl &url)
 {
     if (url == d->mUrl) {
         return;
@@ -1087,7 +1087,7 @@ void Addressee::setUrl(const QUrl &url)
     d->mUrl = url;
 }
 
-QUrl Addressee::url() const
+ResourceLocatorUrl Addressee::url() const
 {
     return d->mUrl;
 }
@@ -1745,7 +1745,7 @@ QString Addressee::toString() const
     str += QString::fromLatin1("  ProductId: %1\n").arg(productId());
     str += QString::fromLatin1("  Revision: %1\n").arg(revision().toString());
     str += QString::fromLatin1("  SortString: %1\n").arg(sortString());
-    str += QString::fromLatin1("  Url: %1\n").arg(url().url());
+    str += QString::fromLatin1("  Url: %1\n").arg(url().url().url());
     str += QString::fromLatin1("  Secrecy: %1\n").arg(secrecy().toString());
     str += QString::fromLatin1("  Logo: %1\n").arg(logo().toString());
     str += QString::fromLatin1("  Photo: %1\n").arg(photo().toString());

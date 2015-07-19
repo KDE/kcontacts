@@ -1034,12 +1034,13 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 // URL
                 else if (identifier == QLatin1String("url")) {
                     const QUrl url = QUrl((*lineIt).value().toString());
-                    if (addr.url().isEmpty()) {
-                        addr.setUrl(url);
+                    ResourceLocatorUrl resourceLocatorUrl;
+                    resourceLocatorUrl.setUrl(url);
+                    resourceLocatorUrl.setParameters((*lineIt).parameterMap());
+
+                    if (addr.url().url().isEmpty()) {
+                        addr.setUrl(resourceLocatorUrl);
                     } else {
-                        ResourceLocatorUrl resourceLocatorUrl;
-                        resourceLocatorUrl.setUrl(url);
-                        resourceLocatorUrl.setParameters((*lineIt).parameterMap());
                         addr.insertExtraUrl(resourceLocatorUrl);
                     }
                 }

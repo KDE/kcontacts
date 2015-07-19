@@ -571,12 +571,12 @@ public:
     /**
       Set homepage.
      */
-    void setUrl(const QUrl &url);
+    void setUrl(const ResourceLocatorUrl &url);
 
     /**
       Return homepage.
      */
-    QUrl url() const;
+    ResourceLocatorUrl url() const;
 
     /**
       Return translated label for url field.

@@ -279,7 +279,7 @@ QString Field::value(const KContacts::Addressee &a)
             return QString();
         }
     case Private::Url:
-        return a.url().toDisplayString();
+        return a.url().url().toDisplayString();
     case Private::HomePhone: {
         PhoneNumber::List::ConstIterator it;
 

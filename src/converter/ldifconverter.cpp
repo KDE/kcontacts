@@ -236,9 +236,9 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
                  QLatin1String("X-Department")));
     }
 
-    ldif_out(t, QLatin1String("workurl"), addr.url().toDisplayString());
-    ldif_out(t, QLatin1String("homeurl"), addr.url().toDisplayString());
-    ldif_out(t, QLatin1String("mozillahomeurl"), addr.url().toDisplayString());
+    ldif_out(t, QLatin1String("workurl"), addr.url().url().toDisplayString());
+    ldif_out(t, QLatin1String("homeurl"), addr.url().url().toDisplayString());
+    ldif_out(t, QLatin1String("mozillahomeurl"), addr.url().url().toDisplayString());
 
     ldif_out(t, QLatin1String("description"), addr.note());
     if (addr.revision().isValid()) {
@@ -429,11 +429,13 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     if (fieldname == QLatin1String("homeurl") ||
             fieldname == QLatin1String("workurl") ||
             fieldname == QLatin1String("mozillahomeurl")) {
-        if (a.url().isEmpty()) {
-            a.setUrl(QUrl(value));
+        if (a.url().url().isEmpty()) {
+            ResourceLocatorUrl url;
+            url.setUrl(QUrl(value));
+            a.setUrl(url);
             return;
         }
-        if (a.url().toDisplayString() == QUrl(value).toDisplayString()) {
+        if (a.url().url().toDisplayString() == QUrl(value).toDisplayString()) {
             return;
         }
         // TODO: current version of kabc only supports one URL.

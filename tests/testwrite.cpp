@@ -69,7 +69,9 @@ int main(int argc, char **argv)
     addressee.setProductId(QLatin1String("testId"));
     addressee.setRevision(QDateTime::currentDateTime());
     addressee.setSortString(QLatin1String("koenig"));
-    addressee.setUrl(QUrl(QLatin1String("http://wgess16.dyndns.org")));
+    KContacts::ResourceLocatorUrl url;
+    url.setUrl(QUrl(QLatin1String("http://wgess16.dyndns.org")));
+    addressee.setUrl(url);
     addressee.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Confidential));
 
     addressee.insertEmail(QLatin1String("tokoe@kde.org"), true);

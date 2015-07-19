@@ -32,7 +32,9 @@ Addressee vcard1()
 
     addr.setName(QStringLiteral("Frank Dawson"));
     addr.setOrganization(QStringLiteral("Lotus Development Corporation"));
-    addr.setUrl(QUrl(QStringLiteral("http://home.earthlink.net/~fdawson")));
+    KContacts::ResourceLocatorUrl url;
+    url.setUrl(QUrl(QStringLiteral("http://home.earthlink.net/~fdawson")));
+    addr.setUrl(url);
     addr.insertEmail(QStringLiteral("fdawson@earthlink.net"));
     addr.insertEmail(QStringLiteral("Frank_Dawson@Lotus.com"), true);
     addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9515"),
