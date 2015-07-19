@@ -20,7 +20,6 @@
 
 #include "calendarurltest.h"
 
-#include "emailtest.h"
 #include "calendarurl.h"
 #include "vcardtool.h"
 #include <qtest.h>
