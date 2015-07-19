@@ -1077,6 +1077,18 @@ QString Addressee::sortStringLabel()
     return i18n("Sort String");
 }
 
+void Addressee::setUrl(const QUrl &url)
+{
+    KContacts::ResourceLocatorUrl resourceLocator;
+    resourceLocator.setUrl(url);
+    if (resourceLocator == d->mUrl) {
+        return;
+    }
+
+    d->mEmpty = false;
+    d->mUrl = resourceLocator;
+}
+
 void Addressee::setUrl(const ResourceLocatorUrl &url)
 {
     if (url == d->mUrl) {
