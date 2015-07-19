@@ -149,7 +149,7 @@ public:
     Sound::List mSoundListExtra;
     Picture::List mPhotoExtraList;
     Picture::List mLogoExtraList;
-    QVector<QUrl> mUrlExtraList;
+    ResourceLocatorUrl::List mUrlExtraList;
     QVector<QUrl> mSources;
     QStringList mMembers;
     Related::List mRelationShips;
@@ -518,17 +518,17 @@ void Addressee::setExtraLogoList(const Picture::List &logoList)
     d->mLogoExtraList = logoList;
 }
 
-void Addressee::insertExtraUrl(const QUrl &url)
+void Addressee::insertExtraUrl(const ResourceLocatorUrl &url)
 {
     d->mUrlExtraList.append(url);
 }
 
-void Addressee::setExtraUrlList(const QVector<QUrl> &urlList)
+void Addressee::setExtraUrlList(const ResourceLocatorUrl::List &urlList)
 {
     d->mUrlExtraList = urlList;
 }
 
-QVector<QUrl> Addressee::extraUrlList() const
+ResourceLocatorUrl::List Addressee::extraUrlList() const
 {
     return d->mUrlExtraList;
 }

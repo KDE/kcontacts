@@ -43,6 +43,7 @@
 #include "calendarurl.h"
 #include "related.h"
 #include "addresseelist.h"
+#include "resourcelocatorurl.h"
 
 namespace KContacts
 {
@@ -1009,9 +1010,9 @@ public:
     void setExtraLogoList(const Picture::List &logoList);
     Picture::List extraLogoList() const;
 
-    QVector<QUrl> extraUrlList() const;
-    void setExtraUrlList(const QVector<QUrl> &urlList);
-    void insertExtraUrl(const QUrl &url);
+    ResourceLocatorUrl::List extraUrlList() const;
+    void setExtraUrlList(const ResourceLocatorUrl::List &urlList);
+    void insertExtraUrl(const ResourceLocatorUrl &url);
 
     //Member
     void insertMember(const QString &member);

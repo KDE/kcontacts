@@ -491,8 +491,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // URL
         card.addLine(VCardLine(QLatin1String("URL"), (*addrIt).url().url()));
-        Q_FOREACH (const QUrl &url, (*addrIt).extraUrlList()) {
-            card.addLine(VCardLine(QLatin1String("URL"), url.url()));
+        Q_FOREACH (const ResourceLocatorUrl &url, (*addrIt).extraUrlList()) {
+            VCardLine line(QLatin1String("URL"), url.url());
+            QMapIterator<QString, QStringList> i(url.parameters());
+            while (i.hasNext()) {
+                i.next();
+                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+            }
+            card.addLine(line);
         }
         if (version == VCard::v4_0) {
             // GENDER
@@ -1031,7 +1037,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (addr.url().isEmpty()) {
                         addr.setUrl(url);
                     } else {
-                        addr.insertExtraUrl(url);
+                        ResourceLocatorUrl resourceLocatorUrl;
+                        resourceLocatorUrl.setUrl(url);
+                        resourceLocatorUrl.setParameters((*lineIt).parameterMap());
+                        addr.insertExtraUrl(resourceLocatorUrl);
                     }
                 }
                 // SOURCE
