@@ -286,7 +286,8 @@ QString Field::value(const KContacts::Addressee &a)
         {
             // check for preferred number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Home | PhoneNumber::Pref);
-            for (it = list.begin(); it != list.end(); ++it) {
+            PhoneNumber::List::ConstIterator end(list.end());
+            for (it = list.begin(); it != end; ++it) {
                 if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home) {
                     return (*it).number();
                 }
@@ -296,7 +297,8 @@ QString Field::value(const KContacts::Addressee &a)
         {
             // check for normal home number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Home);
-            for (it = list.begin(); it != list.end(); ++it) {
+            PhoneNumber::List::ConstIterator end(list.end());
+            for (it = list.begin(); it != end; ++it) {
                 if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home) {
                     return (*it).number();
                 }
@@ -311,7 +313,8 @@ QString Field::value(const KContacts::Addressee &a)
         {
             // check for preferred number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Work | PhoneNumber::Pref);
-            for (it = list.begin(); it != list.end(); ++it) {
+            PhoneNumber::List::ConstIterator end(list.end());
+            for (it = list.begin(); it != end; ++it) {
                 if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Work) {
                     return (*it).number();
                 }
