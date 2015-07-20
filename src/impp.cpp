@@ -23,6 +23,7 @@
 #include <QMap>
 #include <qstringlist.h>
 #include <QDataStream>
+#include "kcontacts_debug.h"
 
 using namespace KContacts;
 
@@ -145,6 +146,7 @@ QString Impp::typeToString(ImppType type)
     switch (type) {
     case Unknown:
     case EndList:
+        qCWarning(KCONTACTS_LOG) << "Invalid type requested";
         break;
     case Skype:
         return QStringLiteral("skype");

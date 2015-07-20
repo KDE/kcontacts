@@ -227,5 +227,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, const PhoneNumber &number);
 
 }
-Q_DECLARE_TYPEINFO( KContacts::PhoneNumber, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::PhoneNumber, Q_MOVABLE_TYPE);
 #endif

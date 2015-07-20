@@ -103,6 +103,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const TimeZone &ti
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, TimeZone &timeZone);
 
 }
-Q_DECLARE_TYPEINFO( KContacts::TimeZone, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::TimeZone, Q_MOVABLE_TYPE);
 
 #endif

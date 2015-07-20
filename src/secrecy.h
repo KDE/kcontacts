@@ -123,5 +123,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Secrecy &sec
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Secrecy &secrecy);
 
 }
-Q_DECLARE_TYPEINFO( KContacts::Secrecy, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::Secrecy, Q_MOVABLE_TYPE);
 #endif

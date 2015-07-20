@@ -71,6 +71,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ResourceLoca
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ResourceLocatorUrl &object);
 
 }
-Q_DECLARE_TYPEINFO( KContacts::ResourceLocatorUrl, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::ResourceLocatorUrl, Q_MOVABLE_TYPE);
 
 #endif // RESOURCELOCATORURL_H

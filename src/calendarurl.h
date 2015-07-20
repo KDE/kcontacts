@@ -81,5 +81,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const CalendarUrl 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, CalendarUrl &object);
 
 }
-Q_DECLARE_TYPEINFO( KContacts::CalendarUrl, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::CalendarUrl, Q_MOVABLE_TYPE);
 #endif // CALENDARURL_H

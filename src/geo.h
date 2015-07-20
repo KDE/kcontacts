@@ -137,5 +137,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Geo &object)
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Geo &object);
 }
-Q_DECLARE_TYPEINFO( KContacts::Geo, Q_MOVABLE_TYPE );
+Q_DECLARE_TYPEINFO(KContacts::Geo, Q_MOVABLE_TYPE);
 #endif
