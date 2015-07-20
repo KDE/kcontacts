@@ -121,166 +121,109 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
     QVERIFY(!calurl.parameters().isEmpty());
 }
 
-void ResourceLocatorUrlTest::shouldGenerateVCard_data()
-{
-#if 0
-    QTest::addColumn<KContacts::ResourceLocatorUrl::CalendarType>("type");
-    QTest::addColumn<QByteArray>("value");
-    for (int i = ResourceLocatorUrl::Unknown + 1; i < ResourceLocatorUrl::EndCalendarType; ++i) {
-        KContacts::ResourceLocatorUrl::CalendarType type = static_cast<KContacts::ResourceLocatorUrl::CalendarType>(i);
-        QByteArray baType;
-        switch (type) {
-        case ResourceLocatorUrl::Unknown:
-        case ResourceLocatorUrl::EndCalendarType:
-            break;
-        case ResourceLocatorUrl::FBUrl:
-            baType = QByteArray("FBURL");
-            break;
-        case ResourceLocatorUrl::CALUri:
-            baType = QByteArray("CALURI");
-            break;
-        case ResourceLocatorUrl::CALADRUri:
-            baType = QByteArray("CALADRURI");
-            break;
-
-        }
-        QTest::newRow(baType.constData()) << type << baType;
-    }
-#endif
-}
 
 void ResourceLocatorUrlTest::shouldGenerateVCard()
 {
-#if 0
-    QFETCH(KContacts::ResourceLocatorUrl::CalendarType, type);
-    QFETCH(QByteArray, value);
-
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
+    KContacts::ResourceLocatorUrl webpage;
+    webpage.setUrl(QUrl(QStringLiteral("https://www.kde.org")));
+    addr.setUrl(webpage);
     ResourceLocatorUrl url;
-    url.setType(type);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    addr.insertResourceLocatorUrl(url);
+    addr.insertExtraUrl(url);
+    url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
+    addr.insertExtraUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected;
-    // Different order
-    if (type == KContacts::ResourceLocatorUrl::FBUrl) {
-        expected = QByteArray("BEGIN:VCARD\r\n"
-                              "VERSION:4.0\r\n"
-                              "EMAIL:foo@kde.org\r\n");
-        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                       "N:;;;;\r\n"
-                                       "UID:testuid\r\n"
-                                       "END:VCARD\r\n\r\n");
-    } else {
-        expected = QByteArray("BEGIN:VCARD\r\n"
-                              "VERSION:4.0\r\n");
-        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                       "EMAIL:foo@kde.org\r\n"
-                                       "N:;;;;\r\n"
-                                       "UID:testuid\r\n"
-                                       "END:VCARD\r\n\r\n");
-    }
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:4.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "UID:testuid\r\n"
+                          "URL:https://www.kde.org\r\n"
+                          "URL:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                          "URL:https://foo.kde.org\r\n"
+                          "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-#endif
 }
 
 void ResourceLocatorUrlTest::shouldGenerateVCardWithParameter()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
+    KContacts::ResourceLocatorUrl webpage;
+    webpage.setUrl(QUrl(QStringLiteral("https://www.kde.org")));
+    addr.setUrl(webpage);
     ResourceLocatorUrl url;
-    url.setType(ResourceLocatorUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
-    addr.insertResourceLocatorUrl(url);
+    addr.insertExtraUrl(url);
+    url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
+    QMap<QString, QStringList> params2;
+    url.setParameters(params2);
+    addr.insertExtraUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:4.0\r\n"
-                                     "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:4.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "UID:testuid\r\n"
+                          "URL:https://www.kde.org\r\n"
+                          "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                          "URL:https://foo.kde.org\r\n"
+                          "END:VCARD\r\n\r\n");
+
     QCOMPARE(ba, expected);
-#endif
 }
 
-void ResourceLocatorUrlTest::shouldNotGeneratedAttributeForVcard3()
+void ResourceLocatorUrlTest::shouldGenerateVCard3()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
+    KContacts::ResourceLocatorUrl webpage;
+    webpage.setUrl(QUrl(QStringLiteral("https://www.kde.org")));
+    addr.setUrl(webpage);
     ResourceLocatorUrl url;
-    url.setType(ResourceLocatorUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
-    addr.insertResourceLocatorUrl(url);
+    addr.insertExtraUrl(url);
+    url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
+    QMap<QString, QStringList> params2;
+    url.setParameters(params2);
+    addr.insertExtraUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:3.0\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:3.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "UID:testuid\r\n"
+                          "URL:https://www.kde.org\r\n"
+                          "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                          "URL:https://foo.kde.org\r\n"
+                          "END:VCARD\r\n\r\n");
+
     QCOMPARE(ba, expected);
-#endif
-}
 
-void ResourceLocatorUrlTest::shouldGenerateMultiResourceLocatorUrl()
-{
-#if 0
-    KContacts::AddresseeList lst;
-    KContacts::Addressee addr;
-    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
-    addr.setUid(QStringLiteral("testuid"));
-    ResourceLocatorUrl url;
-    url.setType(ResourceLocatorUrl::CALUri);
-    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    url.setParameters(params);
-    addr.insertResourceLocatorUrl(url);
-
-    url.setType(ResourceLocatorUrl::FBUrl);
-    url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes2")));
-    params.clear();
-
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    url.setParameters(params);
-    addr.insertResourceLocatorUrl(url);
-
-    lst << addr;
-    KContacts::VCardTool vcard;
-    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:4.0\r\n"
-                                     "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "FBURL;FOO1=bla1,blo1:https://sherlockholmes.com/calendar/sherlockholmes2\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
-    QCOMPARE(ba, expected);
-#endif
 }
 
 QTEST_MAIN(ResourceLocatorUrlTest)

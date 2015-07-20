@@ -37,11 +37,9 @@ private Q_SLOTS:
     void shouldSerialized();
     void shouldEqualResourceLocatorUrl();
     void shouldParseResourceLocatorUrl();
-    void shouldGenerateVCard_data();
     void shouldGenerateVCard();
     void shouldGenerateVCardWithParameter();
-    void shouldNotGeneratedAttributeForVcard3();
-    void shouldGenerateMultiResourceLocatorUrl();
+    void shouldGenerateVCard3();
 };
 
 #endif // ResourceLocatorUrlTest_H
