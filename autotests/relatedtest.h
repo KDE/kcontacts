@@ -37,7 +37,7 @@ private Q_SLOTS:
     void shouldEqualRelated();
     void shouldParseRelated();
     void shouldParseWithoutRelated();
-    void shouldCreateVCard();
+    void shouldCreateVCard4();
     void shouldCreateVCardWithTwoRelated();
     void shouldCreateVCardWithParameters();
     void shouldNotExportInVcard3();

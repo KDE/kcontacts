@@ -136,7 +136,7 @@ void RelatedTest::shouldParseWithoutRelated()
     QCOMPARE(lst.at(0).relationShips().count(), 0);
 }
 
-void RelatedTest::shouldCreateVCard()
+void RelatedTest::shouldCreateVCard4()
 {
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;

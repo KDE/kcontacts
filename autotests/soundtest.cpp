@@ -140,7 +140,7 @@ void SoundTest::shouldParseSource()
     //TODO
 }
 
-void SoundTest::shouldGenerateVCardWithData()
+void SoundTest::shouldGenerateVCard4WithData()
 {
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
@@ -167,7 +167,7 @@ void SoundTest::shouldGenerateVCardWithData()
     QCOMPARE(ba, expected);
 }
 
-void SoundTest::shouldGenerateVCardWithUrl()
+void SoundTest::shouldGenerateVCard4WithUrl()
 {
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
@@ -184,6 +184,59 @@ void SoundTest::shouldGenerateVCardWithUrl()
     QByteArray expected;
     expected = QByteArray("BEGIN:VCARD\r\n"
                           "VERSION:4.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "SOUND;VALUE=URI:http://myhomepage.com/sound.wav\r\n"
+                          "UID:testuid\r\n"
+                          "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
+void SoundTest::shouldGenerateVCard3WithData()
+{
+    KContacts::Addressee::List lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Sound sound1;
+
+    sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
+    sound1.setData(testData());
+    addr.setSound(sound1);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:3.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "SOUND;ENCODING=b:AAECAwQFBgcICQoLDA0ODxAREhM=\r\n"
+                          "UID:testuid\r\n"
+                          "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
+void SoundTest::shouldGenerateVCard3WithUrl()
+{
+    KContacts::Addressee::List lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Sound sound1;
+
+    sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
+    addr.setSound(sound1);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:3.0\r\n"
                           "EMAIL:foo@kde.org\r\n"
                           "N:;;;;\r\n"
                           "SOUND;VALUE=URI:http://myhomepage.com/sound.wav\r\n"
