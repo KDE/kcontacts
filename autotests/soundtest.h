@@ -38,6 +38,8 @@ private Q_SLOTS:
     void assignmentTestExtern();
     void serializeTest();
     void shouldParseSource();
+    void shouldGenerateVCardWithData();
+    void shouldGenerateVCardWithUrl();
 };
 
 #endif

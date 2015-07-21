@@ -20,7 +20,9 @@
 
 #include "soundtest.h"
 #include "kcontacts/sound.h"
+#include "addressee.h"
 #include <qtest.h>
+#include "vcardtool.h"
 
 QTEST_MAIN(SoundTest)
 
@@ -136,4 +138,57 @@ void SoundTest::serializeTest()
 void SoundTest::shouldParseSource()
 {
     //TODO
+}
+
+void SoundTest::shouldGenerateVCardWithData()
+{
+    KContacts::Addressee::List lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Sound sound1;
+
+    sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
+    sound1.setData(testData());
+    addr.setSound(sound1);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:4.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "SOUND;ENCODING=b:AAECAwQFBgcICQoLDA0ODxAREhM=\r\n"
+                          "UID:testuid\r\n"
+                          "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
+void SoundTest::shouldGenerateVCardWithUrl()
+{
+    KContacts::Addressee::List lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Sound sound1;
+
+    sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
+    addr.setSound(sound1);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:4.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "SOUND;VALUE=URI:http://myhomepage.com/sound.wav\r\n"
+                          "UID:testuid\r\n"
+                          "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
 }
