@@ -121,7 +121,7 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
     QVERIFY(!calurl.parameters().isEmpty());
 }
 
-void ResourceLocatorUrlTest::shouldGenerateVCard()
+void ResourceLocatorUrlTest::shouldGenerateVCard4()
 {
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
