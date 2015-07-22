@@ -129,9 +129,9 @@ void PictureTest::equalsTestInternRawData()
 {
     KContacts::Picture picture1, picture2;
 
-    picture1.setRawData(testImageRawPNG(), QLatin1String("png"));
+    picture1.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
-    picture2.setRawData(testImageRawPNG(), QLatin1String("png"));
+    picture2.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
     QVERIFY(picture1 == picture2);
 
@@ -146,7 +146,7 @@ void PictureTest::equalsTestInternImageAndRawData()
 
     picture1.setData(testImage());
 
-    picture2.setRawData(testImageRawJPEG(), QLatin1String("jpeg"));
+    picture2.setRawData(testImageRawJPEG(), QStringLiteral("jpeg"));
 
     QVERIFY(picture1.rawData() == picture2.rawData());
 }
