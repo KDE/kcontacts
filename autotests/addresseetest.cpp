@@ -93,7 +93,14 @@ void AddresseeTest::storeTest()
     addressee.setCustoms(customs);
     addressee.setKind(QStringLiteral("foo"));
     addressee.setChanged(false);
+    KContacts::Impp imp;
+    imp.setType(KContacts::Impp::GaduGadu);
+    imp.setAddress(QStringLiteral("foo@kde.org"));
+    KContacts::Impp::List listImp;
+    listImp << imp;
+    addressee.setImppList(listImp);
 
+    QVERIFY(addressee.imppList() == listImp);
     QVERIFY(addressee.langs() == (KContacts::Lang::List() << lang));
     QVERIFY(addressee.gender() == gender);
     QVERIFY(addressee.uid() == QStringLiteral("My uid"));

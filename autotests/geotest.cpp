@@ -134,3 +134,73 @@ void GeoTest::shouldParseGeoVCard4()
     QCOMPARE(geo.latitude(), 22.5);
     QCOMPARE(geo.longitude(), 180.0);
 }
+
+void GeoTest::shouldGenerateVCard3()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+
+    KContacts::Geo geo;
+    geo.setLongitude(180.0);
+    geo.setLatitude(22.5);
+    addr.setGeo(geo);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "GEO:22.500000;180.000000\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+
+}
+
+void GeoTest::shouldGenerateVCard4()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+
+    KContacts::Geo geo;
+    geo.setLongitude(180.0);
+    geo.setLatitude(22.5);
+    addr.setGeo(geo);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "GEO:geo:22.500000,180.000000\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
+void GeoTest::shouldGenerateWithoutGeo()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}

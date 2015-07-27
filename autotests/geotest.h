@@ -36,6 +36,9 @@ private Q_SLOTS:
     void serialization();
     void shouldParseGeoVCard3();
     void shouldParseGeoVCard4();
+    void shouldGenerateVCard3();
+    void shouldGenerateVCard4();
+    void shouldGenerateWithoutGeo();
 };
 
 #endif
