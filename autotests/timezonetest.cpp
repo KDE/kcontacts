@@ -21,6 +21,7 @@
 #include "timezonetest.h"
 #include "kcontacts/timezone.h"
 #include <qtest.h>
+#include "vcardtool.h"
 
 QTEST_MAIN(TimeZoneTest)
 
@@ -83,4 +84,29 @@ void TimeZoneTest::serializeTest()
     t >> timezone2;
 
     QVERIFY(timezone1 == timezone2);
+}
+
+void TimeZoneTest::shouldGenerateVCard3()
+{
+    KContacts::Addressee::List lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::TimeZone timezone;
+
+    timezone.setOffset(2);
+    addr.setTimeZone(timezone);
+
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected;
+    expected = QByteArray("BEGIN:VCARD\r\n"
+                          "VERSION:3.0\r\n"
+                          "EMAIL:foo@kde.org\r\n"
+                          "N:;;;;\r\n"
+                          "TZ:+00:02\r\n"
+                          "UID:testuid\r\n"
+                          "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
 }
