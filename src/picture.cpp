@@ -163,9 +163,9 @@ void Picture::setData(const QImage &data)
 
 // set the type, the raw data will have when accessed through Picture::rawData()
     if (!d->mData.hasAlphaChannel()) {
-        d->mType = QLatin1String("jpeg");
+        d->mType = QStringLiteral("jpeg");
     } else {
-        d->mType = QLatin1String("png");
+        d->mType = QStringLiteral("png");
     }
 }
 
