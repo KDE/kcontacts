@@ -42,7 +42,7 @@ template <class L>
 static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
 static bool listEquals(const QStringList &list, const QStringList &pattern);
 
-class Addressee::Private : public QSharedData
+class Q_DECL_HIDDEN Addressee::Private : public QSharedData
 {
 public:
     Private()

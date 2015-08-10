@@ -25,7 +25,7 @@
 
 using namespace KContacts;
 
-class TimeZone::Private : public QSharedData
+class Q_DECL_HIDDEN TimeZone::Private : public QSharedData
 {
 public:
     Private(int offset = 0, bool valid = false)

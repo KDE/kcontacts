@@ -189,7 +189,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
     return ret;
 }
 
-class Address::Private : public QSharedData
+class Q_DECL_HIDDEN Address::Private : public QSharedData
 {
 public:
     Private()

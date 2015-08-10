@@ -28,7 +28,7 @@
 
 using namespace KContacts;
 
-class KContacts::AddresseeHelperPrivate
+class Q_DECL_HIDDEN KContacts::AddresseeHelperPrivate
 {
 public:
     QSet<QString> mTitles;

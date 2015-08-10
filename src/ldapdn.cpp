@@ -26,7 +26,7 @@
 
 #include "kcontacts_debug.h"
 
-class LdapDN::LdapDNPrivate
+class Q_DECL_HIDDEN LdapDN::LdapDNPrivate
 {
 public:
     LdapDNPrivate() : m_dn() {}

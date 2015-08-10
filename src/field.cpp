@@ -27,7 +27,7 @@
 
 using namespace KContacts;
 
-class Field::Private
+class Q_DECL_HIDDEN Field::Private
 {
 public:
     Private(int fieldId, int category = 0,

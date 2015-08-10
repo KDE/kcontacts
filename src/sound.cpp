@@ -25,7 +25,7 @@
 
 using namespace KContacts;
 
-class Sound::Private : public QSharedData
+class Q_DECL_HIDDEN Sound::Private : public QSharedData
 {
 public:
     Private()

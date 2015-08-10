@@ -27,7 +27,7 @@ SortMode::~SortMode()
 {
 }
 
-class NameSortMode::Private
+class Q_DECL_HIDDEN NameSortMode::Private
 {
 public:
     NameType mNameType;
@@ -79,7 +79,7 @@ bool NameSortMode::lesser(const KContacts::Addressee &first, const KContacts::Ad
     return lesser;
 }
 
-class FieldSortMode::Private
+class Q_DECL_HIDDEN FieldSortMode::Private
 {
 public:
     KContacts::Field *mField;

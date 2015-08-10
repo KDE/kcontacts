@@ -24,7 +24,7 @@
 
 #include "kcontacts_debug.h"
 
-class Ldif::LdifPrivate
+class Q_DECL_HIDDEN Ldif::LdifPrivate
 {
 public:
     int mModType;

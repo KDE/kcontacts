@@ -27,7 +27,7 @@
 
 using namespace KContacts;
 
-class CalendarUrl::Private : public QSharedData
+class Q_DECL_HIDDEN CalendarUrl::Private : public QSharedData
 {
 public:
     Private()

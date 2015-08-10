@@ -26,7 +26,7 @@
 
 using namespace KContacts;
 
-class ResourceLocatorUrl::Private : public QSharedData
+class Q_DECL_HIDDEN ResourceLocatorUrl::Private : public QSharedData
 {
 public:
     Private()

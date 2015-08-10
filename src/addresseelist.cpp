@@ -153,7 +153,7 @@ bool SortingTraits::GivenName::lt(const Addressee &a1, const Addressee &a2)
 
 static Field *sActiveField = Q_NULLPTR;
 
-class AddresseeList::Private : public QSharedData
+class Q_DECL_HIDDEN AddresseeList::Private : public QSharedData
 {
 public:
     Private()

@@ -33,7 +33,7 @@ static QString cleanupNumber(const QString &input)
     return input.simplified();
 }
 
-class PhoneNumber::Private : public QSharedData
+class Q_DECL_HIDDEN PhoneNumber::Private : public QSharedData
 {
 public:
     Private(Type type)

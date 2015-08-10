@@ -28,7 +28,7 @@
 
 using namespace KContacts;
 
-class Key::Private : public QSharedData
+class Q_DECL_HIDDEN Key::Private : public QSharedData
 {
 public:
     Private()

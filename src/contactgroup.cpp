@@ -28,7 +28,7 @@
 
 using namespace KContacts;
 
-class ContactGroup::ContactReference::ContactReferencePrivate : public QSharedData
+class Q_DECL_HIDDEN ContactGroup::ContactReference::ContactReferencePrivate : public QSharedData
 {
 public:
     ContactReferencePrivate()
@@ -132,7 +132,7 @@ bool ContactGroup::ContactReference::operator==(const ContactReference &other) c
            d->mCustoms == other.d->mCustoms;
 }
 
-class ContactGroup::ContactGroupReference::ContactGroupReferencePrivate : public QSharedData
+class Q_DECL_HIDDEN ContactGroup::ContactGroupReference::ContactGroupReferencePrivate : public QSharedData
 {
 public:
     ContactGroupReferencePrivate()
@@ -212,7 +212,7 @@ bool ContactGroup::ContactGroupReference::operator==(const ContactGroupReference
            d->mCustoms == other.d->mCustoms;
 }
 
-class ContactGroup::Data::DataPrivate : public QSharedData
+class Q_DECL_HIDDEN ContactGroup::Data::DataPrivate : public QSharedData
 {
 public:
     DataPrivate()
@@ -305,7 +305,7 @@ bool ContactGroup::Data::operator==(const Data &other) const
            d->mCustoms == other.d->mCustoms;
 }
 
-class ContactGroup::Private : public QSharedData
+class Q_DECL_HIDDEN ContactGroup::Private : public QSharedData
 {
 public:
     Private()
