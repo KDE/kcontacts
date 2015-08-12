@@ -125,19 +125,19 @@ Impp &Impp::operator=(const Impp &other)
 QString Impp::toString() const
 {
     QString str;
-    str += QString::fromLatin1("Impp {\n");
-    str += QString::fromLatin1("    type: %1\n").arg(typeToString(d->type));
-    str += QString::fromLatin1("    address: %1\n").arg(d->address);
+    str += QLatin1String("Impp {\n");
+    str += QStringLiteral("    type: %1\n").arg(typeToString(d->type));
+    str += QStringLiteral("    address: %1\n").arg(d->address);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
-        str += QString::fromLatin1("    parameters: %1\n").arg(param);
+        str += QStringLiteral("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("}\n");
     return str;
 }
 

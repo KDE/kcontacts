@@ -92,18 +92,18 @@ Email &Email::operator=(const Email &other)
 QString Email::toString() const
 {
     QString str;
-    str += QString::fromLatin1("Email {\n");
-    str += QString::fromLatin1("    mail: %1\n").arg(d->mail);
+    str += QLatin1String("Email {\n");
+    str += QStringLiteral("    mail: %1\n").arg(d->mail);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
-        str += QString::fromLatin1("    parameters: %1\n").arg(param);
+        str += QStringLiteral("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("}\n");
     return str;
 }
 

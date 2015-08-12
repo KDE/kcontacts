@@ -112,18 +112,18 @@ Related &Related::operator=(const Related &other)
 QString Related::toString() const
 {
     QString str;
-    str += QString::fromLatin1("Related {\n");
-    str += QString::fromLatin1("    relatedTo: %1\n").arg(d->relatedTo);
+    str += QLatin1String("Related {\n");
+    str += QStringLiteral("    relatedTo: %1\n").arg(d->relatedTo);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
-        str += QString::fromLatin1("    parameters: %1\n").arg(param);
+        str += QStringLiteral("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("}\n");
     return str;
 }
 

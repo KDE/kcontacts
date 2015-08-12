@@ -112,18 +112,18 @@ Lang &Lang::operator=(const Lang &other)
 QString Lang::toString() const
 {
     QString str;
-    str += QString::fromLatin1("Lang {\n");
-    str += QString::fromLatin1("    language: %1\n").arg(d->language);
+    str += QLatin1String("Lang {\n");
+    str += QStringLiteral("    language: %1\n").arg(d->language);
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
-        str += QString::fromLatin1("    parameters: %1\n").arg(param);
+        str += QStringLiteral("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("}\n");
     return str;
 }
 

@@ -85,18 +85,18 @@ ResourceLocatorUrl &ResourceLocatorUrl::operator=(const ResourceLocatorUrl &othe
 QString ResourceLocatorUrl::toString() const
 {
     QString str;
-    str += QString::fromLatin1("ResourceLocatorUrl {\n");
-    str += QString::fromLatin1("    url: %1\n").arg(d->url.toString());
+    str += QLatin1String("ResourceLocatorUrl {\n");
+    str += QStringLiteral("    url: %1\n").arg(d->url.toString());
     if (!d->parameters.isEmpty()) {
         QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QString::fromLatin1("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
         }
-        str += QString::fromLatin1("    parameters: %1\n").arg(param);
+        str += QStringLiteral("    parameters: %1\n").arg(param);
     }
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("}\n");
     return str;
 }
 

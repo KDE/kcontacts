@@ -1213,8 +1213,8 @@ void Addressee::setNameFromString(const QString &s)
         return;
     }
 
-    static QString spaceStr = QString::fromLatin1(" ");
-    static QString emptyStr = QString::fromLatin1("");
+    static QString spaceStr = QStringLiteral(" ");
+    static QString emptyStr = QStringLiteral("");
     AddresseeHelper *helper = AddresseeHelper::self();
 
     int i = str.indexOf(QLatin1Char(','));
@@ -1735,35 +1735,35 @@ QString Addressee::toString() const
     QString str;
 
     str += QLatin1String("Addressee {\n");
-    str += QString::fromLatin1("  Uid: %1\n").arg(uid());
+    str += QStringLiteral("  Uid: %1\n").arg(uid());
 
-    str += QString::fromLatin1("  Name: %1\n").arg(name());
-    str += QString::fromLatin1("  FormattedName: %1\n").arg(formattedName());
-    str += QString::fromLatin1("  FamilyName: %1\n").arg(familyName());
-    str += QString::fromLatin1("  GivenName: %1\n").arg(givenName());
-    str += QString::fromLatin1("  AdditionalName: %1\n").arg(additionalName());
-    str += QString::fromLatin1("  Prefix: %1\n").arg(prefix());
-    str += QString::fromLatin1("  Suffix: %1\n").arg(suffix());
-    str += QString::fromLatin1("  NickName: %1\n").arg(nickName());
-    str += QString::fromLatin1("  Birthday: %1\n").arg(birthday().toString());
-    str += QString::fromLatin1("  Mailer: %1\n").arg(mailer());
-    str += QString::fromLatin1("  TimeZone: %1\n").arg(timeZone().toString());
-    str += QString::fromLatin1("  Geo: %1\n").arg(geo().toString());
-    str += QString::fromLatin1("  Title: %1\n").arg(title());
-    str += QString::fromLatin1("  Role: %1\n").arg(role());
-    str += QString::fromLatin1("  Organization: %1\n").arg(organization());
-    str += QString::fromLatin1("  Department: %1\n").arg(department());
-    str += QString::fromLatin1("  Note: %1\n").arg(note());
-    str += QString::fromLatin1("  ProductId: %1\n").arg(productId());
-    str += QString::fromLatin1("  Revision: %1\n").arg(revision().toString());
-    str += QString::fromLatin1("  SortString: %1\n").arg(sortString());
-    str += QString::fromLatin1("  Url: %1\n").arg(url().url().url());
-    str += QString::fromLatin1("  Secrecy: %1\n").arg(secrecy().toString());
-    str += QString::fromLatin1("  Logo: %1\n").arg(logo().toString());
-    str += QString::fromLatin1("  Photo: %1\n").arg(photo().toString());
-    str += QString::fromLatin1("  Sound: %1\n").arg(sound().toString());
-    str += QString::fromLatin1("  Gender: %1\n").arg(gender().toString());
-    str += QString::fromLatin1("  Kind: %1\n").arg(kind());
+    str += QStringLiteral("  Name: %1\n").arg(name());
+    str += QStringLiteral("  FormattedName: %1\n").arg(formattedName());
+    str += QStringLiteral("  FamilyName: %1\n").arg(familyName());
+    str += QStringLiteral("  GivenName: %1\n").arg(givenName());
+    str += QStringLiteral("  AdditionalName: %1\n").arg(additionalName());
+    str += QStringLiteral("  Prefix: %1\n").arg(prefix());
+    str += QStringLiteral("  Suffix: %1\n").arg(suffix());
+    str += QStringLiteral("  NickName: %1\n").arg(nickName());
+    str += QStringLiteral("  Birthday: %1\n").arg(birthday().toString());
+    str += QStringLiteral("  Mailer: %1\n").arg(mailer());
+    str += QStringLiteral("  TimeZone: %1\n").arg(timeZone().toString());
+    str += QStringLiteral("  Geo: %1\n").arg(geo().toString());
+    str += QStringLiteral("  Title: %1\n").arg(title());
+    str += QStringLiteral("  Role: %1\n").arg(role());
+    str += QStringLiteral("  Organization: %1\n").arg(organization());
+    str += QStringLiteral("  Department: %1\n").arg(department());
+    str += QStringLiteral("  Note: %1\n").arg(note());
+    str += QStringLiteral("  ProductId: %1\n").arg(productId());
+    str += QStringLiteral("  Revision: %1\n").arg(revision().toString());
+    str += QStringLiteral("  SortString: %1\n").arg(sortString());
+    str += QStringLiteral("  Url: %1\n").arg(url().url().url());
+    str += QStringLiteral("  Secrecy: %1\n").arg(secrecy().toString());
+    str += QStringLiteral("  Logo: %1\n").arg(logo().toString());
+    str += QStringLiteral("  Photo: %1\n").arg(photo().toString());
+    str += QStringLiteral("  Sound: %1\n").arg(sound().toString());
+    str += QStringLiteral("  Gender: %1\n").arg(gender().toString());
+    str += QStringLiteral("  Kind: %1\n").arg(kind());
 
     str += QLatin1String("  Emails {\n");
     const Email::List listEmail = d->mEmails;

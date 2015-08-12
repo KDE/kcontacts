@@ -145,13 +145,13 @@ QString Sound::toString() const
     QString str;
 
     str += QLatin1String("Sound {\n");
-    str += QString::fromLatin1("  IsIntern: %1\n").
+    str += QStringLiteral("  IsIntern: %1\n").
            arg(d->mIntern ? QLatin1String("true") : QLatin1String("false"));
     if (d->mIntern) {
-        str += QString::fromLatin1("  Data: %1\n").
+        str += QStringLiteral("  Data: %1\n").
                arg(QString::fromLatin1(d->mData.toBase64()));
     } else {
-        str += QString::fromLatin1("  Url: %1\n").arg(d->mUrl);
+        str += QStringLiteral("  Url: %1\n").arg(d->mUrl);
     }
     str += QLatin1String("}\n");
 

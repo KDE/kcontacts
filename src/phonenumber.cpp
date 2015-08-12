@@ -260,11 +260,11 @@ QString PhoneNumber::toString() const
 {
     QString str;
 
-    str += QString::fromLatin1("PhoneNumber {\n");
-    str += QString::fromLatin1("    Id: %1\n").arg(d->mId);
-    str += QString::fromLatin1("    Type: %1\n").arg(typeLabel(d->mType));
-    str += QString::fromLatin1("    Number: %1\n").arg(d->mNumber);
-    str += QString::fromLatin1("}\n");
+    str += QLatin1String("PhoneNumber {\n");
+    str += QStringLiteral("    Id: %1\n").arg(d->mId);
+    str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
+    str += QStringLiteral("    Number: %1\n").arg(d->mNumber);
+    str += QLatin1String("}\n");
 
     return str;
 }

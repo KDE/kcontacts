@@ -180,18 +180,18 @@ QString Key::toString() const
     QString str;
 
     str += QLatin1String("Key {\n");
-    str += QString::fromLatin1("  Id: %1\n").arg(d->mId);
-    str += QString::fromLatin1("  Type: %1\n").arg(typeLabel(d->mType));
+    str += QStringLiteral("  Id: %1\n").arg(d->mId);
+    str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
     if (d->mType == Custom) {
-        str += QString::fromLatin1("  CustomType: %1\n").arg(d->mCustomTypeString);
+        str += QStringLiteral("  CustomType: %1\n").arg(d->mCustomTypeString);
     }
-    str += QString::fromLatin1("  IsBinary: %1\n").
-           arg(d->mIsBinary ? QLatin1String("true") : QLatin1String("false"));
+    str += QStringLiteral("  IsBinary: %1\n").
+           arg(d->mIsBinary ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIsBinary) {
-        str += QString::fromLatin1("  Binary: %1\n").
+        str += QStringLiteral("  Binary: %1\n").
                arg(QString::fromLatin1(d->mBinaryData.toBase64()));
     } else {
-        str += QString::fromLatin1("  Text: %1\n").arg(d->mTextData);
+        str += QStringLiteral("  Text: %1\n").arg(d->mTextData);
     }
     str += QLatin1String("}\n");
 

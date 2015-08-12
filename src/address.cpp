@@ -38,22 +38,22 @@
 using namespace KContacts;
 
 // template tags for address formatting localization
-#define KCONTACTS_FMTTAG_realname   QString::fromLatin1("%n")
-#define KCONTACTS_FMTTAG_REALNAME   QString::fromLatin1("%N")
-#define KCONTACTS_FMTTAG_company    QString::fromLatin1("%cm")
-#define KCONTACTS_FMTTAG_COMPANY    QString::fromLatin1("%CM")
-#define KCONTACTS_FMTTAG_pobox      QString::fromLatin1("%p")
-#define KCONTACTS_FMTTAG_street     QString::fromLatin1("%s")
-#define KCONTACTS_FMTTAG_STREET     QString::fromLatin1("%S")
-#define KCONTACTS_FMTTAG_zipcode    QString::fromLatin1("%z")
-#define KCONTACTS_FMTTAG_location   QString::fromLatin1("%l")
-#define KCONTACTS_FMTTAG_LOCATION   QString::fromLatin1("%L")
-#define KCONTACTS_FMTTAG_region     QString::fromLatin1("%r")
-#define KCONTACTS_FMTTAG_REGION     QString::fromLatin1("%R")
-#define KCONTACTS_FMTTAG_newline    QString::fromLatin1("\\n")
-#define KCONTACTS_FMTTAG_condcomma  QString::fromLatin1("%,")
-#define KCONTACTS_FMTTAG_condwhite  QString::fromLatin1("%w")
-#define KCONTACTS_FMTTAG_purgeempty QString::fromLatin1("%0")
+#define KCONTACTS_FMTTAG_realname   QStringLiteral("%n")
+#define KCONTACTS_FMTTAG_REALNAME   QStringLiteral("%N")
+#define KCONTACTS_FMTTAG_company    QStringLiteral("%cm")
+#define KCONTACTS_FMTTAG_COMPANY    QStringLiteral("%CM")
+#define KCONTACTS_FMTTAG_pobox      QStringLiteral("%p")
+#define KCONTACTS_FMTTAG_street     QStringLiteral("%s")
+#define KCONTACTS_FMTTAG_STREET     QStringLiteral("%S")
+#define KCONTACTS_FMTTAG_zipcode    QStringLiteral("%z")
+#define KCONTACTS_FMTTAG_location   QStringLiteral("%l")
+#define KCONTACTS_FMTTAG_LOCATION   QStringLiteral("%L")
+#define KCONTACTS_FMTTAG_region     QStringLiteral("%r")
+#define KCONTACTS_FMTTAG_REGION     QStringLiteral("%R")
+#define KCONTACTS_FMTTAG_newline    QStringLiteral("\\n")
+#define KCONTACTS_FMTTAG_condcomma  QStringLiteral("%,")
+#define KCONTACTS_FMTTAG_condwhite  QStringLiteral("%w")
+#define KCONTACTS_FMTTAG_purgeempty QStringLiteral("%0")
 
 /**
   Finds the balanced closing bracket starting from the opening bracket at
@@ -533,18 +533,18 @@ QString Address::toString() const
     QString str;
 
     str += QLatin1String("Address {\n");
-    str += QString::fromLatin1("  IsEmpty: %1\n").
+    str += QStringLiteral("  IsEmpty: %1\n").
            arg(d->mEmpty ? QLatin1String("true") : QLatin1String("false"));
-    str += QString::fromLatin1("  Id: %1\n").arg(d->mId);
-    str += QString::fromLatin1("  Type: %1\n").arg(typeLabel(d->mType));
-    str += QString::fromLatin1("  Post office box: %1\n").arg(d->mPostOfficeBox);
-    str += QString::fromLatin1("  Extended: %1\n").arg(d->mExtended);
-    str += QString::fromLatin1("  Street: %1\n").arg(d->mStreet);
-    str += QString::fromLatin1("  Locality: %1\n").arg(d->mLocality);
-    str += QString::fromLatin1("  Region: %1\n").arg(d->mRegion);
-    str += QString::fromLatin1("  Postal code: %1\n").arg(d->mPostalCode);
-    str += QString::fromLatin1("  Country: %1\n").arg(d->mCountry);
-    str += QString::fromLatin1("  Label: %1\n").arg(d->mLabel);
+    str += QStringLiteral("  Id: %1\n").arg(d->mId);
+    str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
+    str += QStringLiteral("  Post office box: %1\n").arg(d->mPostOfficeBox);
+    str += QStringLiteral("  Extended: %1\n").arg(d->mExtended);
+    str += QStringLiteral("  Street: %1\n").arg(d->mStreet);
+    str += QStringLiteral("  Locality: %1\n").arg(d->mLocality);
+    str += QStringLiteral("  Region: %1\n").arg(d->mRegion);
+    str += QStringLiteral("  Postal code: %1\n").arg(d->mPostalCode);
+    str += QStringLiteral("  Country: %1\n").arg(d->mCountry);
+    str += QStringLiteral("  Label: %1\n").arg(d->mLabel);
     str += QLatin1String("}\n");
 
     return str;

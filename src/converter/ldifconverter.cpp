@@ -107,8 +107,8 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
 
     for (unsigned int i = 0; i < contactGroup.dataCount(); ++i) {
         ContactGroup::Data data = contactGroup.data(i);
-        const QString value = QString::fromLatin1("cn=%1,mail=%2").arg(data.name()).arg(data.email());
-        ldif_out(t, QLatin1String("member"), value);
+        const QString value = QStringLiteral("cn=%1,mail=%2").arg(data.name()).arg(data.email());
+        ldif_out(t, QStringLiteral("member"), value);
     }
 
     t << "\n";
@@ -147,7 +147,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     const Address homeAddr = addr.address(Address::Home);
     const Address workAddr = addr.address(Address::Work);
 
-    ldif_out(t, QLatin1String("dn"), QString::fromLatin1("cn=%1,mail=%2").
+    ldif_out(t, QStringLiteral("dn"), QStringLiteral("cn=%1,mail=%2").
              arg(addr.formattedName().simplified()).
              arg(addr.preferredEmail()));
     t << "objectclass: top\n";
@@ -630,13 +630,13 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
     if (fieldname == QLatin1String("xbatbirthday")) {
-        QDate dt = QDate::fromString(value, QString::fromLatin1("yyyyMMdd"));
+        QDate dt = QDate::fromString(value, QStringLiteral("yyyyMMdd"));
         if (dt.isValid()) {
             a.setBirthday(QDateTime(dt));
         }
         return;
     }
-    qCWarning(KCONTACTS_LOG) << QString::fromLatin1("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
+    qCWarning(KCONTACTS_LOG) << QStringLiteral("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
                              arg(a.formattedName()).arg(fieldname).arg(value);
 
     return;
