@@ -211,8 +211,8 @@ QString AddresseeList::toString() const
 
     str += QLatin1String("AddresseeList {\n");
     str += QStringLiteral("   Reverse Order: %1\n").arg(d->mReverseSorting ?
-            QLatin1String("true") :
-            QLatin1String("false"));
+            QStringLiteral("true") :
+            QStringLiteral("false"));
 
     QString crit;
     switch (d->mActiveSortingCriterion) {

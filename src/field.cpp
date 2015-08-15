@@ -465,7 +465,7 @@ QString Field::sortKey(const KContacts::Addressee &a)
             key.sprintf("%02d-%02d", date.month(), date.day());
             return key;
         } else {
-            return QLatin1String("00-00");
+            return QStringLiteral("00-00");
         }
     default:
         return value(a).toLower();

@@ -146,7 +146,7 @@ QString Sound::toString() const
 
     str += QLatin1String("Sound {\n");
     str += QStringLiteral("  IsIntern: %1\n").
-           arg(d->mIntern ? QLatin1String("true") : QLatin1String("false"));
+           arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIntern) {
         str += QStringLiteral("  Data: %1\n").
                arg(QString::fromLatin1(d->mData.toBase64()));

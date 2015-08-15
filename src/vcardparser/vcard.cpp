@@ -88,24 +88,24 @@ VCardLine VCard::line(const QString &identifier) const
 
 void VCard::setVersion(Version version)
 {
-    mLineMap.remove(QLatin1String("VERSION"));
+    mLineMap.remove(QStringLiteral("VERSION"));
 
     VCardLine line;
-    line.setIdentifier(QLatin1String("VERSION"));
+    line.setIdentifier(QStringLiteral("VERSION"));
     if (version == v2_1) {
-        line.setIdentifier(QLatin1String("2.1"));
+        line.setIdentifier(QStringLiteral("2.1"));
     } else if (version == v3_0) {
-        line.setIdentifier(QLatin1String("3.0"));
+        line.setIdentifier(QStringLiteral("3.0"));
     } else if (version == v4_0) {
-        line.setIdentifier(QLatin1String("4.0"));
+        line.setIdentifier(QStringLiteral("4.0"));
     }
 
-    mLineMap[ QLatin1String("VERSION") ].append(line);
+    mLineMap[ QStringLiteral("VERSION") ].append(line);
 }
 
 VCard::Version VCard::version() const
 {
-    LineMap::ConstIterator versionEntry = mLineMap.find(QLatin1String("VERSION"));
+    LineMap::ConstIterator versionEntry = mLineMap.find(QStringLiteral("VERSION"));
     if (versionEntry == mLineMap.end()) {
         return v3_0;
     }

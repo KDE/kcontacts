@@ -154,103 +154,103 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     t << "objectclass: person\n";
     t << "objectclass: organizationalPerson\n";
 
-    ldif_out(t, QLatin1String("givenname"), addr.givenName());
-    ldif_out(t, QLatin1String("sn"), addr.familyName());
-    ldif_out(t, QLatin1String("cn"), addr.formattedName().simplified());
-    ldif_out(t, QLatin1String("uid"), addr.uid());
-    ldif_out(t, QLatin1String("nickname"), addr.nickName());
-    ldif_out(t, QLatin1String("xmozillanickname"), addr.nickName());
-    ldif_out(t, QLatin1String("mozillanickname"), addr.nickName());
+    ldif_out(t, QStringLiteral("givenname"), addr.givenName());
+    ldif_out(t, QStringLiteral("sn"), addr.familyName());
+    ldif_out(t, QStringLiteral("cn"), addr.formattedName().simplified());
+    ldif_out(t, QStringLiteral("uid"), addr.uid());
+    ldif_out(t, QStringLiteral("nickname"), addr.nickName());
+    ldif_out(t, QStringLiteral("xmozillanickname"), addr.nickName());
+    ldif_out(t, QStringLiteral("mozillanickname"), addr.nickName());
 
-    ldif_out(t, QLatin1String("mail"), addr.preferredEmail());
+    ldif_out(t, QStringLiteral("mail"), addr.preferredEmail());
     for (int i = 1; i < addr.emails().count(); ++i) {
         if (i == 0) {
             //nothing
         } else if (i == 1) {
-            ldif_out(t, QLatin1String("mozillasecondemail"), addr.emails()[ 1 ]);
+            ldif_out(t, QStringLiteral("mozillasecondemail"), addr.emails()[ 1 ]);
         } else {
-            ldif_out(t, QLatin1String("othermailbox"), addr.emails()[ i ]);
+            ldif_out(t, QStringLiteral("othermailbox"), addr.emails()[ i ]);
         }
     }
     //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
 
-    ldif_out(t, QLatin1String("telephonenumber"),
+    ldif_out(t, QStringLiteral("telephonenumber"),
              addr.phoneNumber(PhoneNumber::Work).number());
-    ldif_out(t, QLatin1String("facsimiletelephonenumber"),
+    ldif_out(t, QStringLiteral("facsimiletelephonenumber"),
              addr.phoneNumber(PhoneNumber::Fax).number());
-    ldif_out(t, QLatin1String("homephone"),
+    ldif_out(t, QStringLiteral("homephone"),
              addr.phoneNumber(PhoneNumber::Home).number());
-    ldif_out(t, QLatin1String("mobile"),
+    ldif_out(t, QStringLiteral("mobile"),
              addr.phoneNumber(PhoneNumber::Cell).number());    // Netscape 7
-    ldif_out(t, QLatin1String("cellphone"),
+    ldif_out(t, QStringLiteral("cellphone"),
              addr.phoneNumber(PhoneNumber::Cell).number());    // Netscape 4.x
-    ldif_out(t, QLatin1String("pager"),
+    ldif_out(t, QStringLiteral("pager"),
              addr.phoneNumber(PhoneNumber::Pager).number());
-    ldif_out(t, QLatin1String("pagerphone"),
+    ldif_out(t, QStringLiteral("pagerphone"),
              addr.phoneNumber(PhoneNumber::Pager).number());
 
-    ldif_out(t, QLatin1String("streethomeaddress"), homeAddr.street());
-    ldif_out(t, QLatin1String("postalcode"), workAddr.postalCode());
-    ldif_out(t, QLatin1String("postofficebox"), workAddr.postOfficeBox());
+    ldif_out(t, QStringLiteral("streethomeaddress"), homeAddr.street());
+    ldif_out(t, QStringLiteral("postalcode"), workAddr.postalCode());
+    ldif_out(t, QStringLiteral("postofficebox"), workAddr.postOfficeBox());
 
     QStringList streets = homeAddr.street().split(QLatin1Char('\n'));
     const int numberOfStreets(streets.count());
     if (numberOfStreets > 0) {
-        ldif_out(t, QLatin1String("homepostaladdress"), streets.at(0));     // Netscape 7
+        ldif_out(t, QStringLiteral("homepostaladdress"), streets.at(0));     // Netscape 7
     }
     if (numberOfStreets > 1) {
-        ldif_out(t, QLatin1String("mozillahomepostaladdress2"), streets.at(1));     // Netscape 7
+        ldif_out(t, QStringLiteral("mozillahomepostaladdress2"), streets.at(1));     // Netscape 7
     }
-    ldif_out(t, QLatin1String("mozillahomelocalityname"), homeAddr.locality());     // Netscape 7
-    ldif_out(t, QLatin1String("mozillahomestate"), homeAddr.region());
-    ldif_out(t, QLatin1String("mozillahomepostalcode"), homeAddr.postalCode());
-    ldif_out(t, QLatin1String("mozillahomecountryname"),
+    ldif_out(t, QStringLiteral("mozillahomelocalityname"), homeAddr.locality());     // Netscape 7
+    ldif_out(t, QStringLiteral("mozillahomestate"), homeAddr.region());
+    ldif_out(t, QStringLiteral("mozillahomepostalcode"), homeAddr.postalCode());
+    ldif_out(t, QStringLiteral("mozillahomecountryname"),
              Address::ISOtoCountry(homeAddr.country()));
-    ldif_out(t, QLatin1String("locality"), workAddr.locality());
-    ldif_out(t, QLatin1String("streetaddress"), workAddr.street());     // Netscape 4.x
+    ldif_out(t, QStringLiteral("locality"), workAddr.locality());
+    ldif_out(t, QStringLiteral("streetaddress"), workAddr.street());     // Netscape 4.x
 
     streets = workAddr.street().split(QLatin1Char('\n'));
     if (streets.count() > 0) {
-        ldif_out(t, QLatin1String("street"), streets.at(0));
+        ldif_out(t, QStringLiteral("street"), streets.at(0));
     }
     if (streets.count() > 1) {
-        ldif_out(t, QLatin1String("mozillaworkstreet2"), streets.at(1));
+        ldif_out(t, QStringLiteral("mozillaworkstreet2"), streets.at(1));
     }
-    ldif_out(t, QLatin1String("countryname"), Address::ISOtoCountry(workAddr.country()));
-    ldif_out(t, QLatin1String("l"), workAddr.locality());
-    ldif_out(t, QLatin1String("c"), Address::ISOtoCountry(workAddr.country()));
-    ldif_out(t, QLatin1String("st"), workAddr.region());
+    ldif_out(t, QStringLiteral("countryname"), Address::ISOtoCountry(workAddr.country()));
+    ldif_out(t, QStringLiteral("l"), workAddr.locality());
+    ldif_out(t, QStringLiteral("c"), Address::ISOtoCountry(workAddr.country()));
+    ldif_out(t, QStringLiteral("st"), workAddr.region());
 
-    ldif_out(t, QLatin1String("title"), addr.title());
-    ldif_out(t, QLatin1String("vocation"), addr.prefix());
-    ldif_out(t, QLatin1String("ou"), addr.role());
-    ldif_out(t, QLatin1String("o"), addr.organization());
-    ldif_out(t, QLatin1String("organization"), addr.organization());
-    ldif_out(t, QLatin1String("organizationname"), addr.organization());
+    ldif_out(t, QStringLiteral("title"), addr.title());
+    ldif_out(t, QStringLiteral("vocation"), addr.prefix());
+    ldif_out(t, QStringLiteral("ou"), addr.role());
+    ldif_out(t, QStringLiteral("o"), addr.organization());
+    ldif_out(t, QStringLiteral("organization"), addr.organization());
+    ldif_out(t, QStringLiteral("organizationname"), addr.organization());
 
     // Compatibility with older kabc versions.
     if (!addr.department().isEmpty()) {
-        ldif_out(t, QLatin1String("department"), addr.department());
+        ldif_out(t, QStringLiteral("department"), addr.department());
     } else {
-        ldif_out(t, QLatin1String("department"), addr.custom(QLatin1String("KADDRESSBOOK"),
-                 QLatin1String("X-Department")));
+        ldif_out(t, QStringLiteral("department"), addr.custom(QStringLiteral("KADDRESSBOOK"),
+                 QStringLiteral("X-Department")));
     }
 
-    ldif_out(t, QLatin1String("workurl"), addr.url().url().toDisplayString());
-    ldif_out(t, QLatin1String("homeurl"), addr.url().url().toDisplayString());
-    ldif_out(t, QLatin1String("mozillahomeurl"), addr.url().url().toDisplayString());
+    ldif_out(t, QStringLiteral("workurl"), addr.url().url().toDisplayString());
+    ldif_out(t, QStringLiteral("homeurl"), addr.url().url().toDisplayString());
+    ldif_out(t, QStringLiteral("mozillahomeurl"), addr.url().url().toDisplayString());
 
-    ldif_out(t, QLatin1String("description"), addr.note());
+    ldif_out(t, QStringLiteral("description"), addr.note());
     if (addr.revision().isValid()) {
-        ldif_out(t, QLatin1String("modifytimestamp"), dateToVCardString(addr.revision()));
+        ldif_out(t, QStringLiteral("modifytimestamp"), dateToVCardString(addr.revision()));
     }
 
     const QDateTime birthday = addr.birthday();
     if (birthday.date().isValid()) {
         const QDate date = birthday.date();
-        ldif_out(t, QLatin1String("birthyear"), QString::number(date.year()));
-        ldif_out(t, QLatin1String("birthmonth"), QString::number(date.month()));
-        ldif_out(t, QLatin1String("birthday"), QString::number(date.day()));
+        ldif_out(t, QStringLiteral("birthyear"), QString::number(date.year()));
+        ldif_out(t, QStringLiteral("birthmonth"), QString::number(date.month()));
+        ldif_out(t, QStringLiteral("birthday"), QString::number(date.day()));
     }
 
     t << "\n";

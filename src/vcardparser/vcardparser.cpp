@@ -164,8 +164,8 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 QByteArray output;
                 bool wasBase64Encoded = false;
 
-                if (vCardLine.parameterList().contains(QLatin1String("encoding"))) {
-                    const QString encoding = vCardLine.parameter(QLatin1String("encoding")).toLower();
+                if (vCardLine.parameterList().contains(QStringLiteral("encoding"))) {
+                    const QString encoding = vCardLine.parameter(QStringLiteral("encoding")).toLower();
 
                     // have to decode the data
                     if (encoding == QLatin1String("b") || encoding == QLatin1String("base64")) {
@@ -192,10 +192,10 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                     output = value;
                 }
 
-                if (vCardLine.parameterList().contains(QLatin1String("charset"))) {
+                if (vCardLine.parameterList().contains(QStringLiteral("charset"))) {
                     // have to convert the data
                     QTextCodec *codec = QTextCodec::codecForName(
-                                            vCardLine.parameter(QLatin1String("charset")).toLatin1());
+                                            vCardLine.parameter(QStringLiteral("charset")).toLatin1());
                     if (codec) {
                         vCardLine.setValue(codec->toUnicode(output));
                     } else {
@@ -260,8 +260,8 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
 
         idents = (*cardIt).identifiers();
         //VERSION must be first
-        if (idents.contains(QLatin1String("VERSION"))) {
-            const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
+        if (idents.contains(QStringLiteral("VERSION"))) {
+            const QString str = idents.takeAt(idents.indexOf(QStringLiteral("VERSION")));
             idents.prepend(str);
         }
 
@@ -284,7 +284,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                         for (paramIt = params.begin(); paramIt != params.end(); ++paramIt) {
                             if ((*paramIt) == QLatin1String("encoding")) {
                                 hasEncoding = true;
-                                encodingType = (*lineIt).parameter(QLatin1String("encoding")).toLower();
+                                encodingType = (*lineIt).parameter(QStringLiteral("encoding")).toLower();
                             }
 
                             values = (*lineIt).parameters(*paramIt);
@@ -301,11 +301,11 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     bool checkMultibyte = false;  // avoid splitting a multibyte character
 
                     // handle charset
-                    if ((*lineIt).parameterList().contains(QLatin1String("charset"))) {
+                    if ((*lineIt).parameterList().contains(QStringLiteral("charset"))) {
                         // have to convert the data
                         const QString value = (*lineIt).value().toString();
                         QTextCodec *codec = QTextCodec::codecForName(
-                                                (*lineIt).parameter(QLatin1String("charset")).toLatin1());
+                                                (*lineIt).parameter(QStringLiteral("charset")).toLatin1());
                         if (codec) {
                             input = codec->fromUnicode(value);
                         } else {

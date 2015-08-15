@@ -114,7 +114,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
                 if (purge) {
                     // purge -> remove all
                     // replace with !_P_!, so conditional tags work later
-                    result.replace(fpos, bpos2 - fpos + 1, QLatin1String("!_P_!"));
+                    result.replace(fpos, bpos2 - fpos + 1, QStringLiteral("!_P_!"));
                     // leave stpos as it is
                 } else {
                     // no purge -> replace with recursively parsed string
@@ -164,7 +164,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
         const QString str1 = result.mid(fpos - 5, 5);
         const QString str2 = result.mid(fpos + 2, 5);
         if (str1 != QLatin1String("!_P_!") && str2 != QLatin1String("!_P_!")) {
-            result.replace(fpos, 2, QLatin1String(", "));
+            result.replace(fpos, 2, QStringLiteral(", "));
         } else {
             result.remove(fpos, 2);
         }
@@ -176,7 +176,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
         const QString str1 = result.mid(fpos - 5, 5);
         const QString str2 = result.mid(fpos + 2, 5);
         if (str1 != QLatin1String("!_P_!") && str2 != QLatin1String("!_P_!")) {
-            result.replace(fpos, 2, QLatin1String(" "));
+            result.replace(fpos, 2, QStringLiteral(" "));
         } else {
             result.remove(fpos, 2);
         }
@@ -184,7 +184,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
     }
 
     // remove purged:
-    result.remove(QLatin1String("!_P_!"));
+    result.remove(QStringLiteral("!_P_!"));
 
     return ret;
 }
@@ -534,7 +534,7 @@ QString Address::toString() const
 
     str += QLatin1String("Address {\n");
     str += QStringLiteral("  IsEmpty: %1\n").
-           arg(d->mEmpty ? QLatin1String("true") : QLatin1String("false"));
+           arg(d->mEmpty ? QStringLiteral("true") : QStringLiteral("false"));
     str += QStringLiteral("  Id: %1\n").arg(d->mId);
     str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
     str += QStringLiteral("  Post office box: %1\n").arg(d->mPostOfficeBox);
@@ -583,7 +583,7 @@ QString Address::formattedAddress(const QString &realName,
         qCWarning(KCONTACTS_LOG) << "address format database incomplete"
                                  << "(no format for locale" << ciso
                                  << "found). Using default address formatting.";
-        addrTemplate = QLatin1String("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
+        addrTemplate = QStringLiteral("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
     }
 
     // scan
@@ -626,7 +626,7 @@ QString Address::countryToISO(const QString &cname)
         return it.value();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kcontacts/countrytransl.map"));
+    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
     if (mapfile.isEmpty()) {
         qWarning() << "Installation error, couldn't find the countrytransl.map file";
     }
@@ -660,7 +660,7 @@ QString Address::ISOtoCountry(const QString &ISOname)
         return QString();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/kabc/countrytransl.map"));
+    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kabc/countrytransl.map"));
 
     QFile file(mapfile);
     if (file.open(QIODevice::ReadOnly)) {

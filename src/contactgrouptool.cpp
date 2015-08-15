@@ -68,7 +68,7 @@ void XmlContactGroupWriter::write(const QVector<ContactGroup> &groupList, QIODev
 
     writeStartDocument();
 
-    writeStartElement(QLatin1String("contactGroupList"));
+    writeStartElement(QStringLiteral("contactGroupList"));
 
     foreach (const ContactGroup &group, groupList) {
         writeGroup(group);
@@ -81,9 +81,9 @@ void XmlContactGroupWriter::write(const QVector<ContactGroup> &groupList, QIODev
 
 void XmlContactGroupWriter::writeGroup(const ContactGroup &group)
 {
-    writeStartElement(QLatin1String("contactGroup"));
-    writeAttribute(QLatin1String("uid"), group.id());
-    writeAttribute(QLatin1String("name"), group.name());
+    writeStartElement(QStringLiteral("contactGroup"));
+    writeAttribute(QStringLiteral("uid"), group.id());
+    writeAttribute(QStringLiteral("name"), group.name());
 
     for (uint i = 0; i < group.contactReferenceCount(); ++i) {
         writeContactReference(group.contactReference(i));
@@ -102,11 +102,11 @@ void XmlContactGroupWriter::writeGroup(const ContactGroup &group)
 
 void XmlContactGroupWriter::writeContactReference(const ContactGroup::ContactReference &reference)
 {
-    writeStartElement(QLatin1String("contactReference"));
-    writeAttribute(QLatin1String("uid"), reference.uid());
-    writeAttribute(QLatin1String("gid"), reference.gid());
+    writeStartElement(QStringLiteral("contactReference"));
+    writeAttribute(QStringLiteral("uid"), reference.uid());
+    writeAttribute(QStringLiteral("gid"), reference.gid());
     if (!reference.preferredEmail().isEmpty()) {
-        writeAttribute(QLatin1String("preferredEmail"), reference.preferredEmail());
+        writeAttribute(QStringLiteral("preferredEmail"), reference.preferredEmail());
     }
 
     // TODO: customs
@@ -117,8 +117,8 @@ void XmlContactGroupWriter::writeContactReference(const ContactGroup::ContactRef
 void XmlContactGroupWriter::writeContactGroupReference(
     const ContactGroup::ContactGroupReference &reference)
 {
-    writeStartElement(QLatin1String("contactGroupReference"));
-    writeAttribute(QLatin1String("uid"), reference.uid());
+    writeStartElement(QStringLiteral("contactGroupReference"));
+    writeAttribute(QStringLiteral("uid"), reference.uid());
 
     // TODO: customs
 
@@ -127,9 +127,9 @@ void XmlContactGroupWriter::writeContactGroupReference(
 
 void XmlContactGroupWriter::writeData(const ContactGroup::Data &data)
 {
-    writeStartElement(QLatin1String("contactData"));
-    writeAttribute(QLatin1String("name"), data.name());
-    writeAttribute(QLatin1String("email"), data.email());
+    writeStartElement(QStringLiteral("contactData"));
+    writeAttribute(QStringLiteral("name"), data.name());
+    writeAttribute(QStringLiteral("email"), data.email());
 
     // TODO: customs
 
@@ -165,7 +165,7 @@ bool XmlContactGroupReader::read(QIODevice *device, ContactGroup &group)
             if (name() == QLatin1String("contactGroup")) {
                 return readGroup(group);
             } else {
-                raiseError(QLatin1String("The document does not describe a ContactGroup"));
+                raiseError(QStringLiteral("The document does not describe a ContactGroup"));
             }
         }
     }
@@ -187,7 +187,7 @@ bool XmlContactGroupReader::read(QIODevice *device, QVector<ContactGroup> &group
                 if (name() == QLatin1String("contactGroupList")) {
                     continue;
                 } else {
-                    raiseError(QLatin1String("The document does not describe a list of ContactGroup"));
+                    raiseError(QStringLiteral("The document does not describe a list of ContactGroup"));
                 }
             } else if (depth == 2) {
                 if (name() == QLatin1String("contactGroup")) {
@@ -198,7 +198,7 @@ bool XmlContactGroupReader::read(QIODevice *device, QVector<ContactGroup> &group
 
                     groupList.append(group);
                 } else {
-                    raiseError(QLatin1String("The document does not describe a list of ContactGroup"));
+                    raiseError(QStringLiteral("The document does not describe a list of ContactGroup"));
                 }
             }
         }
@@ -216,13 +216,13 @@ bool XmlContactGroupReader::readGroup(ContactGroup &group)
     const QXmlStreamAttributes elementAttributes = attributes();
     const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
     if (uid.isEmpty()) {
-        raiseError(QLatin1String("ContactGroup is missing a uid"));
+        raiseError(QStringLiteral("ContactGroup is missing a uid"));
         return false;
     }
 
     const QStringRef groupName = elementAttributes.value(QLatin1String("name"));
     if (groupName.isEmpty()) {
-        raiseError(QLatin1String("ContactGroup is missing a name"));
+        raiseError(QStringLiteral("ContactGroup is missing a name"));
         return false;
     }
 
@@ -251,7 +251,7 @@ bool XmlContactGroupReader::readGroup(ContactGroup &group)
                 }
                 group.append(reference);
             } else {
-                raiseError(QLatin1String("The document does not describe a ContactGroup"));
+                raiseError(QStringLiteral("The document does not describe a ContactGroup"));
             }
         }
 
@@ -270,7 +270,7 @@ bool XmlContactGroupReader::readData(ContactGroup::Data &data)
     const QXmlStreamAttributes elementAttributes = attributes();
     const QStringRef email = elementAttributes.value(QLatin1String("email"));
     if (email.isEmpty()) {
-        raiseError(QLatin1String("ContactData is missing an email address"));
+        raiseError(QStringLiteral("ContactData is missing an email address"));
         return false;
     }
 
@@ -288,7 +288,7 @@ bool XmlContactGroupReader::readContactReference(ContactGroup::ContactReference 
     const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
     const QStringRef gid = elementAttributes.value(QLatin1String("gid"));
     if (uid.isEmpty() && gid.isEmpty()) {
-        raiseError(QLatin1String("ContactReference is missing both uid and gid"));
+        raiseError(QStringLiteral("ContactReference is missing both uid and gid"));
         return false;
     }
     const QStringRef preferredEmail = elementAttributes.value(QLatin1String("preferredEmail"));
@@ -306,7 +306,7 @@ bool XmlContactGroupReader::readContactGroupReference(
     const QXmlStreamAttributes elementAttributes = attributes();
     const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
     if (uid.isEmpty()) {
-        raiseError(QLatin1String("ContactGroupReference is missing a uid"));
+        raiseError(QStringLiteral("ContactGroupReference is missing a uid"));
         return false;
     }
 
