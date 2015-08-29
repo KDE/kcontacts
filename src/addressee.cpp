@@ -2021,7 +2021,7 @@ QStringList Addressee::customs() const
     QStringList result;
 
     QHashIterator<QString, QString> it(d->mCustomFields);
-    result.reserve(result.count());
+    result.reserve(d->mCustomFields.count());
     while (it.hasNext()) {
         it.next();
         result << it.key() + QLatin1Char(':') + it.value();
