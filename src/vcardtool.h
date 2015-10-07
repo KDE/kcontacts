@@ -58,6 +58,7 @@ public:
      */
     Addressee::List parseVCards(const QByteArray &vcard) const;
 
+
 private:
 
     QByteArray createVCards(const Addressee::List &list,

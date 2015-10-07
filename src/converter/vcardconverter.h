@@ -147,5 +147,11 @@ KCONTACTS_EXPORT QString dateToVCardString(const QDate &date);
   */
 KCONTACTS_EXPORT QDateTime VCardStringToDate(const QString &dateString);
 
+/**
+ * @brief adaptIMAttributes. Convert KAddressBook attribute to VCard IM Attribute
+ * @param data
+ */
+KCONTACTS_EXPORT void adaptIMAttributes(QByteArray &data);
+
 }
 #endif
