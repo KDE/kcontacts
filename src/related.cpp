@@ -119,7 +119,7 @@ QString Related::toString() const
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QStringLiteral("%1 %2").arg(i.key()).arg(i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QStringLiteral(",")));
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

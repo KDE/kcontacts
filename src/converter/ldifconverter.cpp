@@ -107,7 +107,7 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
 
     for (unsigned int i = 0; i < contactGroup.dataCount(); ++i) {
         ContactGroup::Data data = contactGroup.data(i);
-        const QString value = QStringLiteral("cn=%1,mail=%2").arg(data.name()).arg(data.email());
+        const QString value = QStringLiteral("cn=%1,mail=%2").arg(data.name(), data.email());
         ldif_out(t, QStringLiteral("member"), value);
     }
 
@@ -148,8 +148,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     const Address workAddr = addr.address(Address::Work);
 
     ldif_out(t, QStringLiteral("dn"), QStringLiteral("cn=%1,mail=%2").
-             arg(addr.formattedName().simplified()).
-             arg(addr.preferredEmail()));
+             arg(addr.formattedName().simplified(), addr.preferredEmail()));
     t << "objectclass: top\n";
     t << "objectclass: person\n";
     t << "objectclass: organizationalPerson\n";
@@ -637,7 +636,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
     qCWarning(KCONTACTS_LOG) << QStringLiteral("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
-                             arg(a.formattedName()).arg(fieldname).arg(value);
+                             arg(a.formattedName(), fieldname, value);
 
     return;
 }
