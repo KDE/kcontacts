@@ -1016,8 +1016,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QString date = (*lineIt).value().toString();
 
                     if (!date.isEmpty()) {
-                        int hours = date.mid(1, 2).toInt();
-                        int minutes = date.mid(4, 2).toInt();
+                        int hours = date.midRef(1, 2).toInt();
+                        int minutes = date.midRef(4, 2).toInt();
                         int offset = (hours * 60) + minutes;
                         offset = offset * (date[ 0 ] == QLatin1Char('+') ? 1 : -1);
 
@@ -1128,11 +1128,11 @@ QDateTime VCardTool::parseDateTime(const QString &str) const
     QTime time;
 
     if (str.indexOf(QLatin1Char('-')) == -1) {       // is base format (yyyymmdd)
-        date = QDate(str.left(4).toInt(), str.mid(4, 2).toInt(),
-                     str.mid(6, 2).toInt());
+        date = QDate(str.leftRef(4).toInt(), str.midRef(4, 2).toInt(),
+                     str.midRef(6, 2).toInt());
     } else { // is extended format yyyy-mm-dd
-        date = QDate(str.left(4).toInt(), str.mid(5, 2).toInt(),
-                     str.mid(8, 2).toInt());
+        date = QDate(str.leftRef(4).toInt(), str.midRef(5, 2).toInt(),
+                     str.midRef(8, 2).toInt());
     }
 
     // does it also contain a time ? (Note: mm, ss are optional according ISO-8601)
@@ -1140,20 +1140,20 @@ QDateTime VCardTool::parseDateTime(const QString &str) const
     if (timeStart >= 0) {
         int hour = 0, minute = 0, second = 0;
 
-        hour = str.mid(timeStart + 1, 2).toInt();    // hour must always be given
+        hour = str.midRef(timeStart + 1, 2).toInt();    // hour must always be given
 
         if (str.indexOf(QLatin1Char(':'), timeStart + 1) > 0) {        // extended format (hh:mm:ss)
             if (str.length() >= (timeStart + 5)) {
-                minute = str.mid(timeStart + 4, 2).toInt();
+                minute = str.midRef(timeStart + 4, 2).toInt();
                 if (str.length() >= (timeStart + 8)) {
-                    second = str.mid(timeStart + 7, 2).toInt();
+                    second = str.midRef(timeStart + 7, 2).toInt();
                 }
             }
         } else {  // basic format (hhmmss)
             if (str.length() >= (timeStart + 4)) {
-                minute = str.mid(timeStart + 3, 2).toInt();
+                minute = str.midRef(timeStart + 3, 2).toInt();
                 if (str.length() >= (timeStart + 6)) {
-                    second = str.mid(timeStart + 5, 2).toInt();
+                    second = str.midRef(timeStart + 5, 2).toInt();
                 }
             }
         }
@@ -1395,8 +1395,9 @@ QStringList VCardTool::splitString(const QChar &sep, const QString &str) const
     }
 
     int l = value.length() - 1;
-    if (value.mid(start, l - start + 1).length() > 0) {
-        list << value.mid(start, l - start + 1);
+    const QString mid = value.mid(start, l - start + 1);
+    if (!mid.isEmpty()) {
+        list << mid;
     } else {
         list << QString();
     }

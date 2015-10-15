@@ -121,11 +121,11 @@ QDateTime KContacts::VCardStringToDate(const QString &dateString)
     d = d.remove(QLatin1Char('-')).remove(QLatin1Char(':'));
 
     if (d.length() >= 8) {
-        date = QDate(d.mid(0, 4).toUInt(), d.mid(4, 2).toUInt(), d.mid(6, 2).toUInt());
+        date = QDate(d.midRef(0, 4).toUInt(), d.midRef(4, 2).toUInt(), d.midRef(6, 2).toUInt());
     }
 
     if (d.length() > 9 && d[ 8 ].toUpper() == QLatin1Char('T')) {
-        time = QTime(d.mid(9, 2).toUInt(), d.mid(11, 2).toUInt(), d.mid(13, 2).toUInt());
+        time = QTime(d.midRef(9, 2).toUInt(), d.midRef(11, 2).toUInt(), d.midRef(13, 2).toUInt());
     }
 
     return QDateTime(date, time);
