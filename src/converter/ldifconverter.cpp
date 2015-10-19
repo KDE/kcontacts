@@ -162,13 +162,15 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     ldif_out(t, QStringLiteral("mozillanickname"), addr.nickName());
 
     ldif_out(t, QStringLiteral("mail"), addr.preferredEmail());
-    for (int i = 1; i < addr.emails().count(); ++i) {
+    const QStringList emails = addr.emails();
+    const int numEmails = emails.count();
+    for (int i = 1; i < numEmails; ++i) {
         if (i == 0) {
             //nothing
         } else if (i == 1) {
-            ldif_out(t, QStringLiteral("mozillasecondemail"), addr.emails()[ 1 ]);
+            ldif_out(t, QStringLiteral("mozillasecondemail"), emails[1]);
         } else {
-            ldif_out(t, QStringLiteral("othermailbox"), addr.emails()[ i ]);
+            ldif_out(t, QStringLiteral("othermailbox"), emails[i]);
         }
     }
     //ldif_out( t, "mozilla_AIMScreenName: %1\n", "screen_name" );
