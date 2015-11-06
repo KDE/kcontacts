@@ -42,7 +42,6 @@
 
 #include <klocalizedstring.h>
 
-#include <QtCore/QRegExp>
 #include <QtCore/QStringList>
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
