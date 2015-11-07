@@ -117,6 +117,7 @@ public:
     Addressee::List parseVCards(const QByteArray &vcard) const;
 
 private:
+    Q_DISABLE_COPY(VCardConverter)
     class VCardConverterPrivate;
     VCardConverterPrivate *const d;
 };

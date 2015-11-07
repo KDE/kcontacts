@@ -81,6 +81,7 @@ public:
     static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
+    Q_DISABLE_COPY(Uid)
     class Private;
     Private *const d;
 };
@@ -121,6 +122,7 @@ public:
     static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
+    Q_DISABLE_COPY(Name)
     class Private;
     Private *const d;
 };
@@ -161,6 +163,7 @@ public:
     static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
+    Q_DISABLE_COPY(FormattedName)
     class Private;
     Private *const d;
 };
@@ -204,6 +207,7 @@ public:
     static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
+    Q_DISABLE_COPY(FamilyName)
     class Private;
     Private *const d;
 };
@@ -247,6 +251,7 @@ public:
     static bool lt(const Addressee &a1, const Addressee &a2);
 
 private:
+    Q_DISABLE_COPY(GivenName)
     class Private;
     Private *const d;
 };

@@ -90,6 +90,7 @@ private:
     QMap<QString, Address::TypeFlag> mAddressTypeMap;
     QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;
 
+    Q_DISABLE_COPY(VCardTool)
     class VCardToolPrivate;
     VCardToolPrivate *d;
 };
