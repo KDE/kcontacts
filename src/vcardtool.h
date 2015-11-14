@@ -68,7 +68,7 @@ private:
       Split a string and replaces escaped separators on the fly with
       unescaped ones.
      */
-    QStringList splitString(const QChar &sep, const QString &value) const;
+    QStringList splitString(QChar sep, const QString &value) const;
 
     QDateTime parseDateTime(const QString &str) const;
     QString createDateTime(const QDateTime &dateTime) const;

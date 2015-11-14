@@ -33,7 +33,7 @@ public:
     ~LdapDNPrivate() {}
 
     bool isValidRDNString(const QString &rdn) const;
-    QStringList splitOnNonEscapedChar(const QString &rdn, const QChar &ch) const;
+    QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
 
     QString m_dn;
 };
@@ -64,8 +64,7 @@ bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
     return true;
 }
 
-QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str,
-        const QChar &ch) const
+QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QChar ch) const
 {
     QStringList strParts;
     int index = 0;

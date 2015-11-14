@@ -1370,7 +1370,7 @@ VCardLine VCardTool::createSecrecy(const Secrecy &secrecy) const
     return line;
 }
 
-QStringList VCardTool::splitString(const QChar &sep, const QString &str) const
+QStringList VCardTool::splitString(QChar sep, const QString &str) const
 {
     QStringList list;
     QString value(str);

@@ -107,7 +107,7 @@ QString KContacts::dateToVCardString(const QDateTime &dateTime)
     return dateTime.toString(QStringLiteral("yyyyMMddThhmmssZ"));
 }
 
-QString KContacts::dateToVCardString(const QDate &date)
+QString KContacts::dateToVCardString(QDate date)
 {
     return date.toString(QStringLiteral("yyyyMMdd"));
 }

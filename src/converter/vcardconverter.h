@@ -138,7 +138,7 @@ KCONTACTS_EXPORT QString dateToVCardString(const QDateTime &dateTime);
   * The return value is in the form "yyyyMMdd" (e.g. "20031201")
   * @param date date to be converted
   */
-KCONTACTS_EXPORT QString dateToVCardString(const QDate &date);
+KCONTACTS_EXPORT QString dateToVCardString(QDate date);
 
 /**
   * Converts a date string as it is used in VCard and LDIF files to a QDateTime value.
