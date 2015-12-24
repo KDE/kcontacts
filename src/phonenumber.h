@@ -60,7 +60,8 @@ public:
         Car = 1024,   /**< Car phone */
         Isdn = 2048,  /**< ISDN connection */
         Pcs = 4096,   /**< Personal Communication Service*/
-        Pager = 8192  /**< Pager */
+        Pager = 8192,  /**< Pager */
+        Undefined = 16384 /** Undefined number type */
     };
 
     Q_DECLARE_FLAGS(Type, TypeFlag)
