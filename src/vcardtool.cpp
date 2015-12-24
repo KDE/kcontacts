@@ -1061,6 +1061,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.insertRelationShip(related);
                 }
                 // X-
+                //TODO import X-GENDER
                 else if (identifier.startsWith(QLatin1String("x-"))) {
                     QString ident = (*lineIt).identifier();
                     //X-Evolution
