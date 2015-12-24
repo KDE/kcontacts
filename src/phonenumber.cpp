@@ -151,7 +151,7 @@ PhoneNumber::TypeList PhoneNumber::typeList()
 
     if (list.isEmpty()) {
         list << Home << Work << Msg << Pref << Voice << Fax << Cell << Video
-             << Bbs << Modem << Car << Isdn << Pcs << Pager;
+             << Bbs << Modem << Car << Isdn << Pcs << Pager << Undefined;
     }
 
     return list;
@@ -160,48 +160,36 @@ PhoneNumber::TypeList PhoneNumber::typeList()
 QString PhoneNumber::typeFlagLabel(TypeFlag type)
 {
     switch (type) {
+    case Undefined:
+        return i18nc("Undefined phone type", "Telephone number");
     case Home:
         return i18nc("Home phone", "Home");
-        break;
     case Work:
         return i18nc("Work phone", "Work");
-        break;
     case Msg:
         return i18n("Messenger");
-        break;
     case Pref:
         return i18nc("Preferred phone", "Preferred");
-        break;
     case Voice:
         return i18n("Voice");
-        break;
     case Fax:
         return i18n("Fax");
-        break;
     case Cell:
         return i18nc("Mobile Phone", "Mobile");
-        break;
     case Video:
         return i18nc("Video phone", "Video");
-        break;
     case Bbs:
         return i18n("Mailbox");
-        break;
     case Modem:
         return i18n("Modem");
-        break;
     case Car:
         return i18nc("Car Phone", "Car");
-        break;
     case Isdn:
         return i18n("ISDN");
-        break;
     case Pcs:
         return i18n("PCS");
-        break;
     case Pager:
         return i18n("Pager");
-        break;
     default:
         return i18nc("another type of phone", "Other");
     }

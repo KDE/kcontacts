@@ -993,14 +993,14 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     phone.setNumber((*lineIt).value().toString());
 
                     PhoneNumber::Type type;
-
+                    bool foundType = false;
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator typeEnd(types.end());
                     for (QStringList::ConstIterator it = types.begin(); it != typeEnd; ++it) {
                         type |= mPhoneTypeMap[(*it).toUpper()];
+                        foundType = true;
                     }
-
-                    phone.setType(type);
+                    phone.setType( foundType ? type : PhoneNumber::Undefined);
 
                     addr.insertPhoneNumber(phone);
                 }
