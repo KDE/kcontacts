@@ -28,6 +28,7 @@ class AddressTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
+    void initTestCase();
     void emptyTest();
     void storeTest();
     void equalsTest();
