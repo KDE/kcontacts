@@ -1631,23 +1631,10 @@ void Addressee::insertKey(const Key &key)
     d->mKeys.append(key);
 }
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
 void vectorRemoveAll(Key::List &t, const Key &key)
 {
     t.removeAll(key);
 }
-#else
-void vectorRemoveAll(Key::List &vector, const Key &t)
-{
-    for (Key::List::iterator it = vector.begin(), itEnd = vector.end(); it != itEnd;) {
-        if (*it == t) {
-            it = vector.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-#endif
 
 void Addressee::removeKey(const Key &key)
 {
