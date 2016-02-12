@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(KContacts)
 
 # ECM setup
-find_package(ECM 5.17.0 CONFIG REQUIRED)
+find_package(ECM 5.19.0 CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
 
 include(GenerateExportHeader)
@@ -17,8 +17,8 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-set(KF5_VERSION "5.17.0")
-set(KCONTACTS_LIB_VERSION "5.1.40")
+set(KF5_VERSION "5.19.0")
+set(KCONTACTS_LIB_VERSION "5.1.41")
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"

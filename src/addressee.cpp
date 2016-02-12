@@ -1591,6 +1591,13 @@ PhoneNumber::List Addressee::phoneNumbers() const
     return d->mPhoneNumbers;
 }
 
+void Addressee::setPhoneNumbers(const PhoneNumber::List &phoneNumbers)
+{
+    d->mEmpty = false;
+    d->mPhoneNumbers.clear();
+    d->mPhoneNumbers = phoneNumbers;
+}
+
 PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
 {
     PhoneNumber::List list;

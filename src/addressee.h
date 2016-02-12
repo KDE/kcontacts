@@ -733,6 +733,8 @@ public:
      */
     PhoneNumber::List phoneNumbers() const;
 
+    void setPhoneNumbers(const PhoneNumber::List &phoneNumbers);
+
     /**
       Return list of phone numbers with a special type.
 
