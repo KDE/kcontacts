@@ -284,15 +284,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
                 }
             }
-#if 0
-            if (!foundType && needToAddPref) {
-                if (version == VCard::v2_1) {
-                    line.addParameter(QStringLiteral("PREF"), QString());
-                } else {
-                    line.addParameter(QStringLiteral("TYPE"), QStringLiteral("PREF"));
-                }
-            }
-#endif
             card.addLine(line);
         }
 
