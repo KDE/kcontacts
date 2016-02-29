@@ -992,7 +992,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         type |= mPhoneTypeMap[(*it).toUpper()];
                         foundType = true;
                     }
-                    phone.setType( foundType ? type : PhoneNumber::Undefined);
+                    phone.setType(foundType ? type : PhoneNumber::Undefined);
 
                     addr.insertPhoneNumber(phone);
                 }
