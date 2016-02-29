@@ -164,20 +164,24 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
             const bool hasLabel = !(*it).label().isEmpty();
             QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
+            QStringList addreLineType;
+            QStringList labelLineType;
             for (typeIt = mAddressTypeMap.constBegin();
                     typeIt != mAddressTypeMap.constEnd(); ++typeIt) {
                 if (typeIt.value() & (*it).type()) {
-                    addParameter(adrLine, version, QStringLiteral("TYPE"), QStringList() << typeIt.key());
+                    addreLineType << typeIt.key();
                     if (hasLabel) {
-                        addParameter(labelLine, version, QStringLiteral("TYPE"), QStringList() << typeIt.key());
+                        labelLineType << typeIt.key();
                     }
                 }
             }
 
             if (!isEmpty) {
+                addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
                 card.addLine(adrLine);
             }
             if (hasLabel) {
+                addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
                 card.addLine(labelLine);
             }
         }

@@ -1,7 +1,7 @@
 BEGIN:VCARD
 VERSION:3.0
-ADR;TYPE=parcel;TYPE=postal;TYPE=work:;;6544 Battleford Drive;Raleigh;NC;27
- 613-3502;U.S.A.
+ADR;TYPE=parcel,postal,work:;;6544 Battleford Drive;Raleigh;NC;27613-3502;U
+ .S.A.
 EMAIL;TYPE=INTERNET,PREF:Frank_Dawson@Lotus.com
 EMAIL;TYPE=INTERNET:fdawson@earthlink.net
 FN:Frank Dawson

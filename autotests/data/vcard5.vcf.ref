@@ -1,7 +1,6 @@
 BEGIN:VCARD
 VERSION:3.0
-ADR;TYPE=home;TYPE=pref:;;Buehlauer Strasse 45;Dresden;Sachsen;01327;German
- y
+ADR;TYPE=home,pref:;;Buehlauer Strasse 45;Dresden;Sachsen;01327;Germany
 ADR;TYPE=work:;;Prager Strasse 55;Dresden;Sachsen;01066;Germany
 BDAY:1955-07-19T00:00:00Z
 CATEGORIES:Friend
