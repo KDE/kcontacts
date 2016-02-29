@@ -451,12 +451,16 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
+            QStringList lst;
             for (typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt) {
                 if (typeIt.value() & (*phoneIt).type()) {
-                    addParameter(line, version, QStringLiteral("TYPE"), QStringList() << typeIt.key());
+                    lst << typeIt.key();
+
                 }
             }
-
+            if (!lst.isEmpty()) {
+                addParameter(line, version, QStringLiteral("TYPE"), lst);
+            }
             card.addLine(line);
         }
 
