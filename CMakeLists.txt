@@ -18,7 +18,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
 set(KF5_VERSION "5.19.0")
-set(KCONTACTS_LIB_VERSION "5.1.41")
+set(KCONTACTS_LIB_VERSION "5.1.42")
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
