@@ -24,7 +24,6 @@
 #include <kconfiggroup.h>
 
 #include <QCoreApplication>
-#include <QtDBus/QtDBus>
 
 using namespace KContacts;
 
@@ -50,11 +49,6 @@ AddresseeHelper::AddresseeHelper()
     , d(new AddresseeHelperPrivate)
 {
     initSettings();
-
-    QDBusConnection::sessionBus().connect(QString(), QStringLiteral("/KABC"),
-                                          QStringLiteral("org.kde.kabc.AddressBookConfig"),
-                                          QStringLiteral("changed"),
-                                          this, SLOT(initSettings()));
 }
 
 AddresseeHelper::~AddresseeHelper()
