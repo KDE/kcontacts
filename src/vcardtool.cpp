@@ -258,41 +258,33 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         const Email::List emailList = (*addrIt).emailList();
         Email::List::ConstIterator emailIt;
         Email::List::ConstIterator emailEnd(emailList.end());
-        bool pref = true;
         for (emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt) {
-            bool needToAddPref = false;
             VCardLine line(QStringLiteral("EMAIL"), (*emailIt).mail());
-            if (pref == true && emailList.count() > 1) {
-                needToAddPref = true;
-                pref = false;
-            }
             QMapIterator<QString, QStringList> i((*emailIt).parameters());
-            bool foundType = false;
             while (i.hasNext()) {
                 i.next();
-                QStringList valueStringList = i.value();
-                if (i.key().toLower() == QLatin1String("type")) {
-                    if (!valueStringList.contains(QStringLiteral("PREF"))) {
-                        if (needToAddPref) {
-                            valueStringList.append(QStringLiteral("PREF"));
-                        } else {
-                            needToAddPref = false;
-                        }
-                    } else {
-                        if (!needToAddPref) {
-                            valueStringList.removeAll(QStringLiteral("PREF"));
-                        }
-                    }
-                    foundType = true;
-                }
-                if (!valueStringList.isEmpty()) {
+                if (version == VCard::v2_1) {
                     if (i.key().toLower() == QLatin1String("type")) {
-                        addParameter(line, version, i.key(), valueStringList);
+                        QStringList valueStringList = i.value();
+                        bool hasPreferred = false;
+                        if (valueStringList.contains(QStringLiteral("PREF"))) {
+                            valueStringList.removeAll(QStringLiteral("PREF"));
+                            hasPreferred = true;
+                        }
+                        if (!valueStringList.isEmpty()) {
+                            addParameter(line, version, i.key(), valueStringList);
+                        }
+                        if (hasPreferred) {
+                            line.addParameter(QStringLiteral("PREF"), QString());
+                        }
                     } else {
-                        line.addParameter(i.key(), valueStringList.join(QStringLiteral(",")));
+                        line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
                     }
+                } else {
+                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
                 }
             }
+#if 0
             if (!foundType && needToAddPref) {
                 if (version == VCard::v2_1) {
                     line.addParameter(QStringLiteral("PREF"), QString());
@@ -300,6 +292,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     line.addParameter(QStringLiteral("TYPE"), QStringLiteral("PREF"));
                 }
             }
+#endif
             card.addLine(line);
         }
 

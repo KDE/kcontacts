@@ -175,7 +175,7 @@ void EmailTest::shouldExportVcard()
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
-                        "EMAIL;TYPE=PREF:foo@kde.org\r\n"
+                        "EMAIL:foo@kde.org\r\n"
                         "EMAIL:bla@kde.org\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
