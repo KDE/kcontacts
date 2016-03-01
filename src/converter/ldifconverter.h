@@ -21,7 +21,6 @@
 #define KCONTACTS_LDIFCONVERTER_H
 
 #include "addressee.h"
-#include "addresseelist.h"
 #include "contactgroup.h"
 
 #include <QtCore/QDateTime>
