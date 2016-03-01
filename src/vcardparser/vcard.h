@@ -85,9 +85,6 @@ public:
 
 private:
     LineMap mLineMap;
-
-    class VCardPrivate;
-    VCardPrivate *d;
 };
 
 }
