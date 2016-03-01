@@ -121,9 +121,6 @@ private:
     QString mIdentifier;
     QString mGroup;
     QVariant mValue;
-
-    class VCardLinePrivate;
-    VCardLinePrivate *d;
 };
 
 }

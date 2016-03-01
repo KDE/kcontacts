@@ -23,25 +23,21 @@
 using namespace KContacts;
 
 VCardLine::VCardLine()
-    : d(Q_NULLPTR)
 {
 }
 
 VCardLine::VCardLine(const QString &identifier)
-    : d(Q_NULLPTR)
 {
     mIdentifier = identifier;
 }
 
 VCardLine::VCardLine(const QString &identifier, const QVariant &value)
-    : d(Q_NULLPTR)
 {
     mIdentifier = identifier;
     mValue = value;
 }
 
 VCardLine::VCardLine(const VCardLine &line)
-    : d(Q_NULLPTR)
 {
     mParamMap = line.mParamMap;
     mValue = line.mValue;
