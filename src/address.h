@@ -320,6 +320,7 @@ public:
     */
     static QString ISOtoCountry(const QString &ISOname);
 
+    static QString typeFlagLabel(TypeFlag type);
 private:
     class Private;
     QSharedDataPointer<Private> d;

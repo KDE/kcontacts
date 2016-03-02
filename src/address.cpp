@@ -332,6 +332,32 @@ Address::Type Address::type() const
     return d->mType;
 }
 
+QString Address::typeLabel(Type type)
+{
+    QString label;
+    bool first = true;
+    const TypeList list = typeList();
+
+    TypeList::ConstIterator it;
+    TypeList::ConstIterator end(list.end());
+    for (it = list.begin(); it != end; ++it) {
+        // these are actually flags
+        const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(*it));
+        if (type & flag) {
+            if (!first) {
+                label.append(QLatin1Char('/'));
+            }
+
+            label.append(typeFlagLabel(flag));
+
+            if (first) {
+                first = false;
+            }
+        }
+    }
+    return label;
+}
+
 QString Address::typeLabel() const
 {
     QString label;
@@ -494,37 +520,25 @@ Address::TypeList Address::typeList()
     return list;
 }
 
-QString Address::typeLabel(Type type)
+QString Address::typeFlagLabel(TypeFlag type)
 {
-    if (type & Pref) {
-        return i18nc("Preferred address", "Preferred");
-    }
-
     switch (type) {
     case Dom:
         return i18nc("Address is in home country", "Domestic");
-        break;
     case Intl:
         return i18nc("Address is not in home country", "International");
-        break;
     case Postal:
         return i18nc("Address for delivering letters", "Postal");
-        break;
     case Parcel:
         return i18nc("Address for delivering packages", "Parcel");
-        break;
     case Home:
         return i18nc("Home Address", "Home");
-        break;
     case Work:
         return i18nc("Work Address", "Work");
-        break;
     case Pref:
         return i18n("Preferred Address");
-        break;
     default:
         return i18nc("another type of address", "Other");
-        break;
     }
 }
 
