@@ -77,7 +77,6 @@ public:
         mProductId = other.mProductId;
         mRevision = other.mRevision;
         mSortString = other.mSortString;
-        mUrl = other.mUrl;
         mSecrecy = other.mSecrecy;
         mLogo = other.mLogo;
         mPhoto = other.mPhoto;
@@ -129,7 +128,6 @@ public:
     QString mProductId;
     QDateTime mRevision;
     QString mSortString;
-    ResourceLocatorUrl mUrl;
     Secrecy mSecrecy;
     Picture mLogo;
     Picture mPhoto;
@@ -319,12 +317,6 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mSound != addressee.d->mSound) {
         qCDebug(KCONTACTS_LOG) << "sound differs";
-        return false;
-    }
-
-    if ((d->mUrl.isValid() || addressee.d->mUrl.isValid()) &&
-            (d->mUrl != addressee.d->mUrl)) {
-        qCDebug(KCONTACTS_LOG) << "url differs";
         return false;
     }
 
@@ -1091,27 +1083,21 @@ void Addressee::setUrl(const QUrl &url)
 {
     KContacts::ResourceLocatorUrl resourceLocator;
     resourceLocator.setUrl(url);
-    if (resourceLocator == d->mUrl) {
-        return;
-    }
-
-    d->mEmpty = false;
-    d->mUrl = resourceLocator;
+    insertExtraUrl(resourceLocator);
 }
 
 void Addressee::setUrl(const ResourceLocatorUrl &url)
 {
-    if (url == d->mUrl) {
-        return;
-    }
-
-    d->mEmpty = false;
-    d->mUrl = url;
+    insertExtraUrl(url);
 }
 
 ResourceLocatorUrl Addressee::url() const
 {
-    return d->mUrl;
+    if (d->mUrlExtraList.isEmpty()) {
+        return ResourceLocatorUrl();
+    } else {
+        return d->mUrlExtraList.at(0);
+    }
 }
 
 QString Addressee::urlLabel()
@@ -2266,7 +2252,6 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mProductId;
     s << a.d->mRevision;
     s << a.d->mSortString;
-    s << a.d->mUrl;
     s << a.d->mSecrecy;
     s << a.d->mLogo;
     s << a.d->mPhoto;
@@ -2317,7 +2302,6 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mProductId;
     s >> a.d->mRevision;
     s >> a.d->mSortString;
-    s >> a.d->mUrl;
     s >> a.d->mSecrecy;
     s >> a.d->mLogo;
     s >> a.d->mPhoto;

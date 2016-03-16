@@ -482,7 +482,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(VCardLine(QStringLiteral("UID"), (*addrIt).uid()));
 
         // URL
-        card.addLine(VCardLine(QStringLiteral("URL"), (*addrIt).url().url()));
         Q_FOREACH (const ResourceLocatorUrl &url, (*addrIt).extraUrlList()) {
             VCardLine line(QStringLiteral("URL"), url.url());
             QMapIterator<QString, QStringList> i(url.parameters());
@@ -1029,12 +1028,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     ResourceLocatorUrl resourceLocatorUrl;
                     resourceLocatorUrl.setUrl(url);
                     resourceLocatorUrl.setParameters((*lineIt).parameterMap());
-
-                    if (addr.url().url().isEmpty()) {
-                        addr.setUrl(resourceLocatorUrl);
-                    } else {
-                        addr.insertExtraUrl(resourceLocatorUrl);
-                    }
+                    addr.insertExtraUrl(resourceLocatorUrl);
                 }
                 // SOURCE
                 else if (identifier == QLatin1String("source")) {

@@ -115,9 +115,9 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).extraUrlList().count(), 1);
+    QCOMPARE(lst.at(0).extraUrlList().count(), 2);
     const ResourceLocatorUrl calurl = lst.at(0).extraUrlList().at(0);
-    QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://firsturl")));
     QVERIFY(!calurl.parameters().isEmpty());
 }
 
