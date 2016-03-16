@@ -475,6 +475,7 @@ QString Addressee::kind() const
 
 void Addressee::insertExtraSound(const Sound &sound)
 {
+    d->mEmpty = false;
     d->mSoundListExtra.append(sound);
 }
 
@@ -485,6 +486,7 @@ Sound::List Addressee::extraSoundList() const
 
 void Addressee::insertExtraPhoto(const Picture &picture)
 {
+    d->mEmpty = false;
     d->mPhotoExtraList.append(picture);
 }
 
@@ -495,6 +497,7 @@ Picture::List Addressee::extraPhotoList() const
 
 void Addressee::insertExtraLogo(const Picture &logo)
 {
+    d->mEmpty = false;
     d->mLogoExtraList.append(logo);
 }
 
@@ -505,26 +508,31 @@ Picture::List Addressee::extraLogoList() const
 
 void Addressee::setExtraSoundList(const Sound::List &soundList)
 {
+    d->mEmpty = false;
     d->mSoundListExtra = soundList;
 }
 
 void Addressee::setExtraPhotoList(const Picture::List &pictureList)
 {
+    d->mEmpty = false;
     d->mPhotoExtraList = pictureList;
 }
 
 void Addressee::setExtraLogoList(const Picture::List &logoList)
 {
+    d->mEmpty = false;
     d->mLogoExtraList = logoList;
 }
 
 void Addressee::insertExtraUrl(const ResourceLocatorUrl &url)
 {
+    d->mEmpty = false;
     d->mUrlExtraList.append(url);
 }
 
 void Addressee::setExtraUrlList(const ResourceLocatorUrl::List &urlList)
 {
+    d->mEmpty = false;
     d->mUrlExtraList = urlList;
 }
 
@@ -535,11 +543,13 @@ ResourceLocatorUrl::List Addressee::extraUrlList() const
 
 void Addressee::insertSourceUrl(const QUrl &url)
 {
+    d->mEmpty = false;
     d->mSources.append(url);
 }
 
 void Addressee::setSourcesUrlList(const QVector<QUrl> &urlList)
 {
+    d->mEmpty = false;
     d->mSources = urlList;
 }
 
