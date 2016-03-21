@@ -572,6 +572,7 @@ public:
       Set homepage.
      */
     void setUrl(const ResourceLocatorUrl &url);
+    //kf6: remove it
     void setUrl(const QUrl &url);
 
     /**
