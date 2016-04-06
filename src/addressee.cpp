@@ -518,8 +518,10 @@ void Addressee::setExtraLogoList(const Picture::List &logoList)
 
 void Addressee::insertExtraUrl(const ResourceLocatorUrl &url)
 {
-    d->mEmpty = false;
-    d->mUrlExtraList.append(url);
+    if (url.isValid()) {
+        d->mEmpty = false;
+        d->mUrlExtraList.append(url);
+    }
 }
 
 void Addressee::setExtraUrlList(const ResourceLocatorUrl::List &urlList)
