@@ -85,15 +85,18 @@ void XmlContactGroupWriter::writeGroup(const ContactGroup &group)
     writeAttribute(QStringLiteral("uid"), group.id());
     writeAttribute(QStringLiteral("name"), group.name());
 
-    for (uint i = 0; i < group.contactReferenceCount(); ++i) {
+    const uint contactCount(group.contactReferenceCount());
+    for (uint i = 0; i < contactCount; ++i) {
         writeContactReference(group.contactReference(i));
     }
 
-    for (uint i = 0; i < group.contactGroupReferenceCount(); ++i) {
+    const uint contactGroupReference(group.contactGroupReferenceCount());
+    for (uint i = 0; i < contactGroupReference; ++i) {
         writeContactGroupReference(group.contactGroupReference(i));
     }
 
-    for (uint i = 0; i < group.dataCount(); ++i) {
+    const uint dataCount(group.dataCount());
+    for (uint i = 0; i < dataCount; ++i) {
         writeData(group.data(i));
     }
 
