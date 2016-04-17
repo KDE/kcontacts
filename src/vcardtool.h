@@ -70,7 +70,7 @@ private:
     QStringList splitString(QChar sep, const QString &value) const;
 
     QDateTime parseDateTime(const QString &str) const;
-    QString createDateTime(const QDateTime &dateTime) const;
+    QString createDateTime(const QDateTime &dateTime, VCard::Version version) const;
 
     Picture parsePicture(const VCardLine &line) const;
     VCardLine createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const;

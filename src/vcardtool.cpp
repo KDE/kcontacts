@@ -187,7 +187,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // BDAY
-        card.addLine(VCardLine(QStringLiteral("BDAY"), createDateTime((*addrIt).birthday())));
+        card.addLine(VCardLine(QStringLiteral("BDAY"), createDateTime((*addrIt).birthday(), version)));
 
         //Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
         //=> not necessary to export just tag...
@@ -409,7 +409,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // REV
-        card.addLine(VCardLine(QStringLiteral("REV"), createDateTime((*addrIt).revision())));
+        card.addLine(VCardLine(QStringLiteral("REV"), createDateTime((*addrIt).revision(), version)));
 
         // ROLE
         VCardLine roleLine(QStringLiteral("ROLE"), (*addrIt).role());
@@ -603,7 +603,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     const QDate date = QDate::fromString(value, Qt::ISODate);
                     QDateTime dt = QDateTime(date);
                     dt.setTime(QTime());
-                    card.addLine(VCardLine(QStringLiteral("ANNIVERSARY"), createDateTime(dt)));
+                    card.addLine(VCardLine(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version)));
                 }
             } else {
                 VCardLine line(identifier, value);
@@ -1160,25 +1160,41 @@ QDateTime VCardTool::parseDateTime(const QString &str) const
     return dateTime;
 }
 
-QString VCardTool::createDateTime(const QDateTime &dateTime) const
+QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version) const
 {
     QString str;
+    if (version == VCard::v4_0) {
+        if (dateTime.date().isValid()) {
+            str.sprintf("%4d%02d%02d", dateTime.date().year(), dateTime.date().month(),
+                        dateTime.date().day());
+            if (dateTime.time().isValid()) {
+                QString tmp;
+                tmp.sprintf("T%02d%02d%02d", dateTime.time().hour(), dateTime.time().minute(),
+                            dateTime.time().second());
+                str += tmp;
 
-    if (dateTime.date().isValid()) {
-        str.sprintf("%4d-%02d-%02d", dateTime.date().year(), dateTime.date().month(),
-                    dateTime.date().day());
-        if (dateTime.time().isValid()) {
-            QString tmp;
-            tmp.sprintf("T%02d:%02d:%02d", dateTime.time().hour(), dateTime.time().minute(),
-                        dateTime.time().second());
-            str += tmp;
+                if (dateTime.timeSpec() == Qt::UTC) {
+                    str += QLatin1Char('Z');
+                }
+            }
+        }
 
-            if (dateTime.timeSpec() == Qt::UTC) {
-                str += QLatin1Char('Z');
+    } else {
+        if (dateTime.date().isValid()) {
+            str.sprintf("%4d-%02d-%02d", dateTime.date().year(), dateTime.date().month(),
+                        dateTime.date().day());
+            if (dateTime.time().isValid()) {
+                QString tmp;
+                tmp.sprintf("T%02d:%02d:%02d", dateTime.time().hour(), dateTime.time().minute(),
+                            dateTime.time().second());
+                str += tmp;
+
+                if (dateTime.timeSpec() == Qt::UTC) {
+                    str += QLatin1Char('Z');
+                }
             }
         }
     }
-
     return str;
 }
 
