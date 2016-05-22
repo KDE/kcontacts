@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 2.8.12)
 project(KContacts)
 
 # ECM setup
-find_package(ECM 5.19.0 CONFIG REQUIRED)
+set(KF5_VERSION "5.22.0")
+find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
 
 include(GenerateExportHeader)
@@ -19,7 +20,6 @@ include(ECMQtDeclareLoggingCategory)
 
 set(PIM_VERSION "5.2.40")
 
-set(KF5_VERSION "5.19.0")
 set(KCONTACTS_LIB_VERSION ${PIM_VERSION})
 
 ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
