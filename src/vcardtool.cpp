@@ -605,6 +605,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     dt.setTime(QTime());
                     card.addLine(VCardLine(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version)));
                 }
+            } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
+                if (!value.isEmpty()) {
+                    VCardLine line( QStringLiteral("RELATED"));
+                    line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
+                    card.addLine(line);
+                }
             } else {
                 VCardLine line(identifier, value);
                 if (version == VCard::v2_1 && needsEncoding(value)) {
