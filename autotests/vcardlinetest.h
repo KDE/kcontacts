@@ -30,6 +30,8 @@ class VCardLineTest : public QObject
 public:
     explicit VCardLineTest(QObject *parent = Q_NULLPTR);
     ~VCardLineTest();
+private Q_SLOTS:
+    void shouldHaveDefaultValue();
 };
 
 #endif // VCARDLINETEST_H

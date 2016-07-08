@@ -19,7 +19,7 @@
 */
 
 #include "vcardlinetest.h"
-
+#include "vcardline.h"
 #include <QTest>
 
 VCardLineTest::VCardLineTest(QObject *parent)
@@ -31,6 +31,15 @@ VCardLineTest::VCardLineTest(QObject *parent)
 VCardLineTest::~VCardLineTest()
 {
 
+}
+
+void VCardLineTest::shouldHaveDefaultValue()
+{
+    KContacts::VCardLine line;
+    QVERIFY(line.identifier().isEmpty());
+    QVERIFY(line.group().isEmpty());
+    QVERIFY(line.parameterList().isEmpty());
+    QVERIFY(line.value().isNull());
 }
 
 QTEST_MAIN(VCardLineTest)
