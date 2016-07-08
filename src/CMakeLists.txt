@@ -31,6 +31,7 @@ set(kcontacts_SRCS
   timezone.cpp
   vcarddrag.cpp
   vcardtool.cpp
+  fieldgroup.cpp
   ${vcardparser_SRCS}
 )
 
@@ -94,6 +95,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Sound
   TimeZone
   VCardDrag
+  FieldGroup
   PREFIX KContacts
   REQUIRED_HEADERS KContacts_HEADERS
 )

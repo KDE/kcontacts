@@ -151,6 +151,7 @@ public:
     QVector<QUrl> mSources;
     QStringList mMembers;
     Related::List mRelationShips;
+    FieldGroup::List mFieldGroupList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -397,6 +398,11 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
+    if (!listEquals(d->mFieldGroupList, addressee.d->mFieldGroupList)) {
+        qCDebug(KCONTACTS_LOG) << "Field Groups differs";
+        return false;
+    }
+
     return true;
 }
 
@@ -550,6 +556,27 @@ void Addressee::setSourcesUrlList(const QVector<QUrl> &urlList)
 QVector<QUrl> Addressee::sourcesUrlList() const
 {
     return d->mSources;
+}
+
+
+FieldGroup::List Addressee::fieldGroupList() const
+{
+    return d->mFieldGroupList;
+}
+
+void Addressee::setFieldGroupList(const FieldGroup::List &fieldGroupList)
+{
+    d->mEmpty = false;
+    d->mFieldGroupList = fieldGroupList;
+}
+
+void Addressee::insertFieldGroup(const FieldGroup &fieldGroup)
+{
+    if (fieldGroup.isValid()) {
+        d->mEmpty = false;
+        //TODO don't duplicate ?
+        d->mFieldGroupList.append(fieldGroup);
+    }
 }
 
 void Addressee::insertImpp(const Impp &impp)
@@ -2276,6 +2303,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mRelationShips;
     s << a.d->mSources;
     s << a.d->mImpps;
+    s << a.d->mFieldGroupList;
 
     return s;
 }
@@ -2328,6 +2356,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mRelationShips;
     s >> a.d->mSources;
     s >> a.d->mImpps;
+    s >> a.d->mFieldGroupList;
     a.d->mEmpty = false;
 
     return s;

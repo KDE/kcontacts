@@ -44,6 +44,7 @@
 #include "related.h"
 #include "addresseelist.h"
 #include "resourcelocatorurl.h"
+#include "fieldgroup.h"
 
 namespace KContacts
 {
@@ -1037,6 +1038,12 @@ public:
     Impp::List imppList() const;
     void setImppList(const Impp::List &imppList);
     void insertImpp(const Impp &impp);
+
+    //FieldGroup
+    FieldGroup::List fieldGroupList() const;
+    void setFieldGroupList(const FieldGroup::List &fieldGroupList);
+    void insertFieldGroup(const FieldGroup &fieldGroup);
+
 
 private:
     class Private;

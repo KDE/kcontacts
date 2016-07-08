@@ -1,0 +1,261 @@
+/*
+    This file is part of the KContacts framework.
+    Copyright (c) 2016 Laurent Montel <montel@kde.org>
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Library General Public
+    License as published by the Free Software Foundation; either
+    version 2 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Library General Public License for more details.
+
+    You should have received a copy of the GNU Library General Public License
+    along with this library; see the file COPYING.LIB.  If not, write to
+    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+    Boston, MA 02110-1301, USA.
+*/
+
+#include "fieldgrouptest.h"
+#include "fieldgroup.h"
+#include "vcardtool.h"
+#include <qtest.h>
+
+FieldGroupTest::FieldGroupTest(QObject *parent)
+    : QObject(parent)
+{
+
+}
+
+FieldGroupTest::~FieldGroupTest()
+{
+
+}
+
+void FieldGroupTest::shouldHaveDefaultValue()
+{
+    KContacts::FieldGroup fieldgroup;
+    QVERIFY(!fieldgroup.isValid());
+    QVERIFY(fieldgroup.fieldGroupName().isEmpty());
+    QVERIFY(fieldgroup.parameters().isEmpty());
+    QVERIFY(fieldgroup.value().isEmpty());
+}
+
+void FieldGroupTest::shouldAssignValue()
+{
+    const QString fielgroundname(QStringLiteral("fr"));
+    const QString value(QStringLiteral("bla"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::FieldGroup fieldGroup(fielgroundname);
+    fieldGroup.setParameters(params);
+    fieldGroup.setValue(value);
+    QVERIFY(fieldGroup.isValid());
+    QVERIFY(!fieldGroup.fieldGroupName().isEmpty());
+    QCOMPARE(fieldGroup.fieldGroupName(), fielgroundname);
+    QVERIFY(!fieldGroup.parameters().isEmpty());
+    QCOMPARE(fieldGroup.parameters(), params);
+    QCOMPARE(fieldGroup.value(), value);
+
+}
+
+void FieldGroupTest::shouldAssignExternal()
+{
+    KContacts::FieldGroup fieldgroup;
+    const QString fieldgroundname(QStringLiteral("fr"));
+    const QString value(QStringLiteral("bla"));
+    fieldgroup.setValue(value);
+    fieldgroup.setFieldGroupName(fieldgroundname);
+    QVERIFY(fieldgroup.isValid());
+    QCOMPARE(fieldgroup.fieldGroupName(), fieldgroundname);
+    QCOMPARE(fieldgroup.value(), value);
+}
+
+void FieldGroupTest::shouldSerialized()
+{
+    KContacts::FieldGroup fieldGroup;
+    KContacts::FieldGroup result;
+    const QString lang(QStringLiteral("fr"));
+    fieldGroup.setFieldGroupName(lang);
+    const QString value(QStringLiteral("bla"));
+    fieldGroup.setValue(value);
+
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    fieldGroup.setParameters(params);
+
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+    s << fieldGroup;
+
+    QDataStream t(&data, QIODevice::ReadOnly);
+    t >> result;
+
+    QVERIFY(fieldGroup == result);
+
+}
+
+void FieldGroupTest::shouldEqualFieldGroup()
+{
+    KContacts::FieldGroup fieldGroup;
+    KContacts::FieldGroup result;
+    const QString lang(QStringLiteral("fr"));
+    const QString value(QStringLiteral("bla"));
+    fieldGroup.setValue(value);
+    fieldGroup.setFieldGroupName(lang);
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    fieldGroup.setParameters(params);
+
+    result = fieldGroup;
+    QVERIFY(fieldGroup == result);
+}
+
+void FieldGroupTest::shouldParseFieldGroup()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).fieldGroupList().count(), 1);
+}
+
+void FieldGroupTest::shouldParseWithoutFieldGroup()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).fieldGroupList().count(), 0);
+}
+
+void FieldGroupTest::shouldCreateVCard()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::FieldGroup::List lstFieldGroup;
+    KContacts::FieldGroup fieldGroup(QStringLiteral("fr"));
+    const QString value(QStringLiteral("bla"));
+    fieldGroup.setValue(value);
+    lstFieldGroup << fieldGroup;
+    addr.setFieldGroupList(lstFieldGroup);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
+void FieldGroupTest::shouldCreateVCardWithTwoLang()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::FieldGroup::List lstFieldGroup;
+    KContacts::FieldGroup fieldGroup1(QStringLiteral("fr"));
+    const QString value(QStringLiteral("bla"));
+    fieldGroup1.setValue(value);
+
+    KContacts::FieldGroup fieldGroup2(QStringLiteral("fr2"));
+    fieldGroup2.setValue(value);
+    lstFieldGroup << fieldGroup1 << fieldGroup2;
+    addr.setFieldGroupList(lstFieldGroup);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+
+}
+
+void FieldGroupTest::shouldCreateVCardWithParameters()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    const QString value(QStringLiteral("bla"));
+    KContacts::FieldGroup::List lstFieldGroup;
+    KContacts::FieldGroup fieldGroup(QStringLiteral("fr"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    fieldGroup.setParameters(params);
+    fieldGroup.setValue(value);
+    lstFieldGroup << fieldGroup;
+    addr.setFieldGroupList(lstFieldGroup);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
+void FieldGroupTest::shouldNotGenerateFieldGroupForVCard3()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::FieldGroup::List lstFieldGroup;
+    KContacts::FieldGroup fieldGroup(QStringLiteral("fr"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    fieldGroup.setParameters(params);
+    const QString value(QStringLiteral("bla"));
+    fieldGroup.setValue(value);
+    lstFieldGroup << fieldGroup;
+    addr.setFieldGroupList(lstFieldGroup);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
+QTEST_MAIN(FieldGroupTest)
