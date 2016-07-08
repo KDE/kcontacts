@@ -657,7 +657,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     qDebug() << "group not empty "<< (*lineIt).value().toString();
                 }
                 // ADR
-                if (identifier == QLatin1String("adr")) {
+                else if (identifier == QLatin1String("adr")) {
                     Address address;
                     const QStringList addrParts = splitString(semicolonSep, (*lineIt).value().toString());
                     if (addrParts.count() > 0) {
