@@ -78,9 +78,9 @@ int main(int argc, char **argv)
     addressee.insertEmail(QLatin1String("tokoe82@yahoo.de"), true);
 
     KContacts::PhoneNumber phone1(QLatin1String("3541523475"),
-                             KContacts::PhoneNumber::Pref | KContacts::PhoneNumber::Home);
+                                  KContacts::PhoneNumber::Pref | KContacts::PhoneNumber::Home);
     KContacts::PhoneNumber phone2(QLatin1String("+46745673475"),
-                             KContacts::PhoneNumber::Work);
+                                  KContacts::PhoneNumber::Work);
     addressee.insertPhoneNumber(phone1);
     addressee.insertPhoneNumber(phone2);
 

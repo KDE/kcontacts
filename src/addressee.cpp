@@ -558,7 +558,6 @@ QVector<QUrl> Addressee::sourcesUrlList() const
     return d->mSources;
 }
 
-
 FieldGroup::List Addressee::fieldGroupList() const
 {
     return d->mFieldGroupList;

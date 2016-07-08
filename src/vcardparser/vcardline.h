@@ -52,7 +52,6 @@ public:
      */
     bool operator==(const VCardLine &other) const;
 
-
     /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
      *

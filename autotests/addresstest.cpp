@@ -30,7 +30,7 @@ QTEST_MAIN(AddressTest)
 
 void AddressTest::initTestCase()
 {
-     setenv("LANG", "C", 1);
+    setenv("LANG", "C", 1);
 }
 
 void AddressTest::emptyTest()

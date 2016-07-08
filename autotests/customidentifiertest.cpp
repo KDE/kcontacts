@@ -122,5 +122,4 @@ void CustomIdentifierTest::shouldExportVcard4()
 
 }
 
-
 QTEST_MAIN(CustomIdentifierTest)

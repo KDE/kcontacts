@@ -1044,7 +1044,6 @@ public:
     void setFieldGroupList(const FieldGroup::List &fieldGroupList);
     void insertFieldGroup(const FieldGroup &fieldGroup);
 
-
 private:
     class Private;
     QSharedDataPointer<Private> d;

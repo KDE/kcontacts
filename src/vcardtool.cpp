@@ -618,7 +618,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 }
             } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
                 if (!value.isEmpty()) {
-                    VCardLine line( QStringLiteral("RELATED"), QStringLiteral(";"));
+                    VCardLine line(QStringLiteral("RELATED"), QStringLiteral(";"));
                     line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
                     line.addParameter(QStringLiteral("VALUE"), value);
                     card.addLine(line);

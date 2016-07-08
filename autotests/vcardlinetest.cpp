@@ -50,7 +50,7 @@ void VCardLineTest::shouldAssignValues()
     line.setIdentifier(identifier);
     line.setGroup(group);
     QMap<QString, QString> map;
-    for(int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) {
         map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
         line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
     }
@@ -74,7 +74,7 @@ void VCardLineTest::shouldCopyValue()
     line.setIdentifier(identifier);
     line.setGroup(group);
     QMap<QString, QString> map;
-    for(int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) {
         map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
         line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
     }
@@ -88,7 +88,6 @@ void VCardLineTest::shouldCopyValue()
 
     QCOMPARE(line.group(), group);
     QCOMPARE(line.value(), valueVariant);
-
 
     KContacts::VCardLine copyLine(line);
     QVERIFY(!copyLine.parameterList().isEmpty());
@@ -108,7 +107,7 @@ void VCardLineTest::shouldEqualValue()
     line.setIdentifier(identifier);
     line.setGroup(group);
     QMap<QString, QString> map;
-    for(int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) {
         map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
         line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
     }
@@ -122,7 +121,6 @@ void VCardLineTest::shouldEqualValue()
 
     QCOMPARE(line.group(), group);
     QCOMPARE(line.value(), valueVariant);
-
 
     KContacts::VCardLine copyLine(line);
     QVERIFY(line == copyLine);
