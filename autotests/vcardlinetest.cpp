@@ -42,4 +42,90 @@ void VCardLineTest::shouldHaveDefaultValue()
     QVERIFY(line.value().isNull());
 }
 
+void VCardLineTest::shouldAssignValues()
+{
+    KContacts::VCardLine line;
+    const QString identifier(QStringLiteral("foo"));
+    const QString group(QStringLiteral("bla"));
+    line.setIdentifier(identifier);
+    line.setGroup(group);
+    QMap<QString, QString> map;
+    for(int i = 0; i < 5; ++i) {
+        map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+        line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+    }
+    const QVariant valueVariant = QVariant(QStringLiteral("a"));
+    line.setValue(valueVariant);
+
+    QVERIFY(!line.parameterList().isEmpty());
+    QCOMPARE(line.parameterList(), QStringList() << map.keys());
+
+    QCOMPARE(line.identifier(), identifier);
+
+    QCOMPARE(line.group(), group);
+    QCOMPARE(line.value(), valueVariant);
+}
+
+void VCardLineTest::shouldCopyValue()
+{
+    KContacts::VCardLine line;
+    const QString identifier(QStringLiteral("foo"));
+    const QString group(QStringLiteral("bla"));
+    line.setIdentifier(identifier);
+    line.setGroup(group);
+    QMap<QString, QString> map;
+    for(int i = 0; i < 5; ++i) {
+        map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+        line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+    }
+    const QVariant valueVariant = QVariant(QStringLiteral("a"));
+    line.setValue(valueVariant);
+
+    QVERIFY(!line.parameterList().isEmpty());
+    QCOMPARE(line.parameterList(), QStringList() << map.keys());
+
+    QCOMPARE(line.identifier(), identifier);
+
+    QCOMPARE(line.group(), group);
+    QCOMPARE(line.value(), valueVariant);
+
+
+    KContacts::VCardLine copyLine(line);
+    QVERIFY(!copyLine.parameterList().isEmpty());
+    QCOMPARE(copyLine.parameterList(), QStringList() << map.keys());
+
+    QCOMPARE(copyLine.identifier(), identifier);
+
+    QCOMPARE(copyLine.group(), group);
+    QCOMPARE(copyLine.value(), valueVariant);
+}
+
+void VCardLineTest::shouldEqualValue()
+{
+    KContacts::VCardLine line;
+    const QString identifier(QStringLiteral("foo"));
+    const QString group(QStringLiteral("bla"));
+    line.setIdentifier(identifier);
+    line.setGroup(group);
+    QMap<QString, QString> map;
+    for(int i = 0; i < 5; ++i) {
+        map.insert(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+        line.addParameter(QStringLiteral("foo%1").arg(i), QStringLiteral("bla%1").arg(i));
+    }
+    const QVariant valueVariant = QVariant(QStringLiteral("a"));
+    line.setValue(valueVariant);
+
+    QVERIFY(!line.parameterList().isEmpty());
+    QCOMPARE(line.parameterList(), QStringList() << map.keys());
+
+    QCOMPARE(line.identifier(), identifier);
+
+    QCOMPARE(line.group(), group);
+    QCOMPARE(line.value(), valueVariant);
+
+
+    KContacts::VCardLine copyLine(line);
+    QVERIFY(line == copyLine);
+}
+
 QTEST_MAIN(VCardLineTest)

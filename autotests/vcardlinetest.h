@@ -32,6 +32,9 @@ public:
     ~VCardLineTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();
+    void shouldAssignValues();
+    void shouldCopyValue();
+    void shouldEqualValue();
 };
 
 #endif // VCARDLINETEST_H
