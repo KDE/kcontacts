@@ -124,7 +124,6 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 if (groupPos != -1) {
                     vCardLine.setGroup(cache.fromLatin1(params[ 0 ].left(groupPos)));
                     vCardLine.setIdentifier(cache.fromLatin1(params[ 0 ].mid(groupPos + 1)));
-                    qDebug()<<" group !!!!!!!!!!" << vCardLine.group();
                 } else {
                     vCardLine.setIdentifier(cache.fromLatin1(params[ 0 ]));
                 }

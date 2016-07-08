@@ -666,11 +666,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 identifier = (*lineIt).identifier().toLower();
                 group = (*lineIt).group();
                 if (!group.isEmpty()) {
-                    KContacts::FieldGroup groupField(group);
+                    KContacts::FieldGroup groupField(group + QLatin1Char('.') + (*lineIt).identifier());
                     groupField.setParameters((*lineIt).parameterMap());
                     groupField.setValue((*lineIt).value().toString());
                     addr.insertFieldGroup(groupField);
-                    qDebug() << "group not empty "<< (*lineIt).value().toString();
                 }
                 // ADR
                 else if (identifier == QLatin1String("adr")) {
