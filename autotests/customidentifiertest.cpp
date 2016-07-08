@@ -97,6 +97,7 @@ void CustomIdentifierTest::shouldExportVcard4()
                         "EMAIL:foo@kde.org\r\n"
                         "EMAIL:bla@kde.org\r\n"
                         "N:;;;;\r\n"
+                        "RELATED;TYPE=spouse:;\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
@@ -113,6 +114,7 @@ void CustomIdentifierTest::shouldExportVcard4()
                           "EMAIL:foo@kde.org\r\n"
                           "EMAIL:bla@kde.org\r\n"
                           "N:;;;;\r\n"
+                          "RELATED;TYPE=spouse:;\r\n"
                           "UID:testuid\r\n"
                           "END:VCARD\r\n\r\n");
 
