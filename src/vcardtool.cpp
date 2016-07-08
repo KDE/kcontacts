@@ -221,19 +221,17 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             card.addLine(line);
         }
 
-        if (version == VCard::v4_0) {
-            const Related::List relatedList = (*addrIt).relationShips();
-            Related::List::ConstIterator relatedIt;
-            Related::List::ConstIterator relatedEnd(relatedList.end());
-            for (relatedIt = relatedList.begin(); relatedIt != relatedEnd; ++relatedIt) {
-                VCardLine line(QStringLiteral("RELATED"), (*relatedIt).related());
-                QMapIterator<QString, QStringList> i((*relatedIt).parameters());
-                while (i.hasNext()) {
-                    i.next();
-                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
-                }
-                card.addLine(line);
+        const Related::List relatedList = (*addrIt).relationShips();
+        Related::List::ConstIterator relatedIt;
+        Related::List::ConstIterator relatedEnd(relatedList.end());
+        for (relatedIt = relatedList.begin(); relatedIt != relatedEnd; ++relatedIt) {
+            VCardLine line(QStringLiteral("RELATED"), (*relatedIt).related());
+            QMapIterator<QString, QStringList> i((*relatedIt).parameters());
+            while (i.hasNext()) {
+                i.next();
+                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
             }
+            card.addLine(line);
         }
         // CLASS only for version == 3.0
         if (version == VCard::v3_0) {

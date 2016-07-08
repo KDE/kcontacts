@@ -235,6 +235,7 @@ void RelatedTest::shouldNotExportInVcard3()
                         "VERSION:3.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
+                        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);

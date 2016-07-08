@@ -153,11 +153,9 @@ void RoundtripTest::testVCardRoundtrip()
 
         const QByteArray outputRefData = outputFile.readAll();
         QCOMPARE(outputData.size(), outputRefData.size());
-
         const QList<QByteArray> outputLines = outputData.split('\n');
         const QList<QByteArray> outputRefLines = outputRefData.split('\n');
         QCOMPARE(outputLines.count(), outputRefLines.count());
-
         for (int i = 0; i < outputLines.count(); ++i) {
             const QByteArray actual = outputLines[i];
             const QByteArray expect = outputRefLines[i];
