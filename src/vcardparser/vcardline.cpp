@@ -63,6 +63,14 @@ VCardLine &VCardLine::operator=(const VCardLine &line)
     return *this;
 }
 
+bool VCardLine::operator==(const VCardLine &other) const
+{
+    return (mParamMap == other.parameterMap()) &&
+           (mValue == other.value()) &&
+           (mIdentifier == other.identifier()) &&
+           (mGroup == other.group());
+}
+
 void VCardLine::setIdentifier(const QString &identifier)
 {
     mIdentifier = identifier;

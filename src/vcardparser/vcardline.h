@@ -47,6 +47,13 @@ public:
     VCardLine &operator=(const VCardLine &line);
 
     /**
+     * Equality operator.
+     *
+     */
+    bool operator==(const VCardLine &other) const;
+
+
+    /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
      *
      * @param identifier The VCard identifier of this line
