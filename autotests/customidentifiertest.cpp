@@ -102,18 +102,18 @@ void CustomIdentifierTest::shouldExportVcard4()
 
     QCOMPARE(ba, expected);
 
-    addr.insertCustom(QStringLiteral("KADDRESSBOOK"), QStringLiteral("X-ANNIVERSARY"), QStringLiteral("19960415"));
+    QDate dt(12, 9, 3);
+    addr.insertCustom(QStringLiteral("KADDRESSBOOK"), QStringLiteral("X-ANNIVERSARY"), dt.toString(Qt::ISODate));
     lst.clear();
     lst << addr;
     ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     expected = QByteArray("BEGIN:VCARD\r\n"
                           "VERSION:4.0\r\n"
+                          "ANNIVERSARY:  120903T000000\r\n"
                           "EMAIL:foo@kde.org\r\n"
                           "EMAIL:bla@kde.org\r\n"
                           "N:;;;;\r\n"
                           "UID:testuid\r\n"
-                          "X-KADDRESSBOOK-X-ANNIVERSARY:19960415\r\n"
-                          "X-KADDRESSBOOK-X-SpousesName:foo\r\n"
                           "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);

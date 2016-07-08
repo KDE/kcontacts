@@ -603,12 +603,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     const QDate date = QDate::fromString(value, Qt::ISODate);
                     QDateTime dt = QDateTime(date);
                     dt.setTime(QTime());
-                    card.addLine(VCardLine(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version)));
+                    VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version));
+                    card.addLine(line);
                 }
             } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
                 if (!value.isEmpty()) {
                     VCardLine line( QStringLiteral("RELATED"));
                     line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
+                    qDebug()<<" line valid"<<line.value();
                     card.addLine(line);
                 }
             } else {
