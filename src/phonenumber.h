@@ -225,7 +225,7 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber 
  * @param stream The stream to read from
  * @param number The phone number object to deserialize into
  */
-KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, const PhoneNumber &number);
+KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, PhoneNumber &number);
 
 }
 Q_DECLARE_TYPEINFO(KContacts::PhoneNumber, Q_MOVABLE_TYPE);
