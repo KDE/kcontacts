@@ -124,12 +124,14 @@ void FieldGroupTest::shouldParseFieldGroup()
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
+                         "fr.foo:bla\n"
+                         "fr2.foo:bla\n"
                          "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).fieldGroupList().count(), 1);
+    QCOMPARE(lst.at(0).fieldGroupList().count(), 2);
 }
 
 void FieldGroupTest::shouldParseWithoutFieldGroup()
@@ -168,6 +170,7 @@ void FieldGroupTest::shouldCreateVCard()
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
+                        "fr:bla\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
@@ -196,6 +199,8 @@ void FieldGroupTest::shouldCreateVCardWithTwoLang()
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
+                        "fr:bla\r\n"
+                        "fr2:bla\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
@@ -226,6 +231,7 @@ void FieldGroupTest::shouldCreateVCardWithParameters()
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
+                        "fr;FOO1=bla1,blo1;FOO2=bla2,blo2:bla\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
@@ -254,6 +260,7 @@ void FieldGroupTest::shouldNotGenerateFieldGroupForVCard3()
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
+                        "fr;FOO1=bla1,blo1;FOO2=bla2,blo2:bla\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }

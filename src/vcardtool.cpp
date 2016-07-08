@@ -27,6 +27,7 @@
 #include "lang.h"
 #include "gender.h"
 #include "related.h"
+#include "fieldgroup.h"
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QDebug>
@@ -541,6 +542,17 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 }
             }
         }
+        //FieldGroup
+        Q_FOREACH (const FieldGroup &group, (*addrIt).fieldGroupList()) {
+            VCardLine line(group.fieldGroupName(), group.value());
+            QMapIterator<QString, QStringList> i(group.parameters());
+            while (i.hasNext()) {
+                i.next();
+                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+            }
+            card.addLine(line);
+        }
+
         // IMPP (supported in vcard 3 too)
         Q_FOREACH (const Impp &impp, (*addrIt).imppList()) {
             VCardLine line(QStringLiteral("IMPP"), impp.address());
@@ -654,6 +666,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 identifier = (*lineIt).identifier().toLower();
                 group = (*lineIt).group();
                 if (!group.isEmpty()) {
+                    KContacts::FieldGroup groupField(group);
+                    groupField.setParameters((*lineIt).parameterMap());
+                    groupField.setValue((*lineIt).value().toString());
+                    addr.insertFieldGroup(groupField);
                     qDebug() << "group not empty "<< (*lineIt).value().toString();
                 }
                 // ADR
