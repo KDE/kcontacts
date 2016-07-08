@@ -42,6 +42,7 @@ VCardLine::VCardLine(const VCardLine &line)
     mParamMap = line.mParamMap;
     mValue = line.mValue;
     mIdentifier = line.mIdentifier;
+    mGroup = line.mGroup;
 }
 
 VCardLine::~VCardLine()
@@ -57,6 +58,7 @@ VCardLine &VCardLine::operator=(const VCardLine &line)
     mParamMap = line.mParamMap;
     mValue = line.mValue;
     mIdentifier = line.mIdentifier;
+    mGroup = line.mGroup;
 
     return *this;
 }
