@@ -632,6 +632,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
     static const QLatin1Char semicolonSep(';');
     static const QLatin1Char commaSep(',');
     QString identifier;
+    QString group;
 
     Addressee::List addrList;
     const VCard::List vCardList = VCardParser::parseVCards(vcard);
@@ -651,6 +652,10 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
             // iterate over the lines
             for (lineIt = lines.begin(); lineIt != lines.end(); ++lineIt) {
                 identifier = (*lineIt).identifier().toLower();
+                group = (*lineIt).group();
+                if (!group.isEmpty()) {
+                    qDebug() << "group not empty "<< (*lineIt).value().toString();
+                }
                 // ADR
                 if (identifier == QLatin1String("adr")) {
                     Address address;

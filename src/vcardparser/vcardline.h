@@ -26,10 +26,12 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
+#include "kcontacts_export.h"
+
 namespace KContacts
 {
 
-class VCardLine
+class KCONTACTS_EXPORT VCardLine
 {
 public:
     typedef QVector<VCardLine> List;
