@@ -157,11 +157,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
             }
 
-            VCardLine labelLine(QStringLiteral("LABEL"), (*it).label());
-            if (version == VCard::v2_1 && needsEncoding((*it).label())) {
-                labelLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-                labelLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-            }
 
             const bool hasLabel = !(*it).label().isEmpty();
             QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
@@ -177,13 +172,24 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 }
             }
 
+            if (hasLabel) {
+                if (version == VCard::v4_0) {
+                    if (!(*it).label().isEmpty()) {
+                        adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg((*it).label()));
+                    }
+                } else {
+                    VCardLine labelLine(QStringLiteral("LABEL"), (*it).label());
+                    if (version == VCard::v2_1 && needsEncoding((*it).label())) {
+                        labelLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                        labelLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+                    }
+                    addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
+                    card.addLine(labelLine);
+                }
+            }
             if (!isEmpty) {
                 addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
                 card.addLine(adrLine);
-            }
-            if (hasLabel) {
-                addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
-                card.addLine(labelLine);
             }
         }
 

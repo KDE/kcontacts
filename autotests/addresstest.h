@@ -36,6 +36,8 @@ private Q_SLOTS:
     void assignmentTest();
     void serializeTest();
     void formatTest();
+    void shouldExportVcard4();
+    void shouldExportVcard3();
 };
 
 #endif

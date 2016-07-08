@@ -19,6 +19,8 @@
 */
 
 #include "addresstest.h"
+#include "addresseelist.h"
+#include "vcardtool.h"
 #include "kcontacts/address.h"
 #include <kconfig.h>
 #include <kconfiggroup.h>
@@ -223,4 +225,74 @@ void AddressTest::formatTest()
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
+}
+
+
+void AddressTest::shouldExportVcard3()
+{
+    KContacts::Address address;
+
+    address.setId(QStringLiteral("My Id"));
+    address.setType(KContacts::Address::Home);
+    address.setPostOfficeBox(QStringLiteral("1234"));
+    address.setExtended(QStringLiteral("My Extended Label"));
+    address.setStreet(QStringLiteral("My Street"));
+    address.setLocality(QStringLiteral("My Locality"));
+    address.setRegion(QStringLiteral("My Region"));
+    address.setPostalCode(QStringLiteral("My Postalcode"));
+    address.setCountry(QStringLiteral("My country"));
+    address.setLabel(QStringLiteral("My Label"));
+
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    addr.insertAddress(address);
+    lst << addr;
+
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n talcode;My country\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "LABEL;TYPE=home:My Label\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+}
+
+void AddressTest::shouldExportVcard4()
+{
+    KContacts::Address address;
+
+    address.setId(QStringLiteral("My Id"));
+    address.setType(KContacts::Address::Home);
+    address.setPostOfficeBox(QStringLiteral("1234"));
+    address.setExtended(QStringLiteral("My Extended Label"));
+    address.setStreet(QStringLiteral("My Street"));
+    address.setLocality(QStringLiteral("My Locality"));
+    address.setRegion(QStringLiteral("My Region"));
+    address.setPostalCode(QStringLiteral("My Postalcode"));
+    address.setCountry(QStringLiteral("My country"));
+    address.setLabel(QStringLiteral("My Label"));
+
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    addr.insertAddress(address);
+    lst << addr;
+
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
+                        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
 }
