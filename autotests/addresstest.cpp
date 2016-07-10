@@ -254,7 +254,8 @@ void AddressTest::shouldExportVcard3()
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:3.0\r\n"
-                        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n talcode;My country\r\n"
+                        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
+                        " talcode;My country\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "LABEL;TYPE=home:My Label\r\n"
                         "N:;;;;\r\n"
