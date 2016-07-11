@@ -38,7 +38,7 @@ private Q_SLOTS:
     void formatTest();
     void shouldExportVcard4();
     void shouldExportVcard3();
-    void shouldParseAddress();
+    void shouldParseAddressVCard3();
 };
 
 #endif

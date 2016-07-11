@@ -264,7 +264,7 @@ void AddressTest::shouldExportVcard3()
     QCOMPARE(ba, expected);
 }
 
-void AddressTest::shouldParseAddress()
+void AddressTest::shouldParseAddressVCard3()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
