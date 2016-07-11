@@ -719,9 +719,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                                 label = label.mid(1, label.length() - 2 );
                             }
                         }
-
                         address.setLabel(label);
                     }
+                    //TODO add GEO support
                     addr.insertAddress(address);
                 }
                 // ANNIVERSARY
