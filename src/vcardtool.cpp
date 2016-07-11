@@ -905,7 +905,6 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (!available) {   // a standalone LABEL tag
                         KContacts::Address address(type);
                         address.setLabel((*lineIt).value().toString());
-                        qDebug()<< "222 (*lineIt).value().toString()"<<(*lineIt).value().toString();
                         addr.insertAddress(address);
                     }
                 }
