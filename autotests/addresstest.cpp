@@ -272,6 +272,7 @@ void AddressTest::shouldParseAddress()
                          "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
                          " talcode;My country\r\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "LABEL;TYPE=home:My Label\r\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -280,6 +281,15 @@ void AddressTest::shouldParseAddress()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).addresses().count(), 1);
+    KContacts::Address address = lst.at(0).addresses().at(0);
+    QCOMPARE(address.type(), KContacts::Address::Home);
+    QCOMPARE(address.postOfficeBox(), QStringLiteral("1234"));
+    QCOMPARE(address.extended(), QStringLiteral("My Extended Label"));
+    QCOMPARE(address.region(), QStringLiteral("My Region"));
+    QCOMPARE(address.street(), QStringLiteral("My Street"));
+    QCOMPARE(address.country(), QStringLiteral("My country"));
+    QCOMPARE(address.postalCode(), QStringLiteral("My Postalcode"));
+    QCOMPARE(address.label(), QStringLiteral("My Label"));
 }
 
 void AddressTest::shouldExportVcard4()
