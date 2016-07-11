@@ -292,6 +292,31 @@ void AddressTest::shouldParseAddressVCard3()
     QCOMPARE(address.label(), QStringLiteral("My Label"));
 }
 
+void AddressTest::shouldParseAddressVCard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
+                        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).addresses().count(), 1);
+    KContacts::Address address = lst.at(0).addresses().at(0);
+    QCOMPARE(address.type(), KContacts::Address::Home);
+    QCOMPARE(address.postOfficeBox(), QStringLiteral("1234"));
+    QCOMPARE(address.extended(), QStringLiteral("My Extended Label"));
+    QCOMPARE(address.region(), QStringLiteral("My Region"));
+    QCOMPARE(address.street(), QStringLiteral("My Street"));
+    QCOMPARE(address.country(), QStringLiteral("My country"));
+    QCOMPARE(address.postalCode(), QStringLiteral("My Postalcode"));
+    QCOMPARE(address.label(), QStringLiteral("My Label"));
+
+}
+
 void AddressTest::shouldExportVcard4()
 {
     KContacts::Address address;
