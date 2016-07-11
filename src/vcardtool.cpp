@@ -713,7 +713,14 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                     address.setType(type);
                     if (!(*lineIt).parameter(QStringLiteral("label")).isEmpty()) {
-                        address.setLabel((*lineIt).parameter(QStringLiteral("label")));
+                        QString label = (*lineIt).parameter(QStringLiteral("label"));
+                        if (label.length() > 1) {
+                            if (label.at(0) == QLatin1Char('"') && label.at(label.length() - 1) == QLatin1Char('"')) {
+                                label = label.mid(1, label.length() - 2 );
+                            }
+                        }
+
+                        address.setLabel(label);
                     }
                     addr.insertAddress(address);
                 }
@@ -898,6 +905,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (!available) {   // a standalone LABEL tag
                         KContacts::Address address(type);
                         address.setLabel((*lineIt).value().toString());
+                        qDebug()<< "222 (*lineIt).value().toString()"<<(*lineIt).value().toString();
                         addr.insertAddress(address);
                     }
                 }
