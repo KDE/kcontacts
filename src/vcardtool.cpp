@@ -720,8 +720,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
 
                     address.setType(type);
-                    if (!(*lineIt).parameter(QStringLiteral("label")).isEmpty()) {
-                        QString label = (*lineIt).parameter(QStringLiteral("label"));
+                    QString label = (*lineIt).parameter(QStringLiteral("label"));
+                    if (!label.isEmpty()) {
                         if (label.length() > 1) {
                             if (label.at(0) == QLatin1Char('"') && label.at(label.length() - 1) == QLatin1Char('"')) {
                                 label = label.mid(1, label.length() - 2 );
