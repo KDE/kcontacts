@@ -187,6 +187,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     card.addLine(labelLine);
                 }
             }
+            if (version == VCard::v4_0) {
+                Geo geo = (*it).geo();
+                if (geo.isValid()) {
+                    QString str;
+                    str.sprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
+                    adrLine.addParameter(QStringLiteral("GEO"), str);
+                }
+            }
             if (!isEmpty) {
                 addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
                 card.addLine(adrLine);

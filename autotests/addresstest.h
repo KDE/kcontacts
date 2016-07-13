@@ -40,6 +40,8 @@ private Q_SLOTS:
     void shouldExportVcard3();
     void shouldParseAddressVCard3();
     void shouldParseAddressVCard4();
+    void shouldExportVCard4WithGeoPosition();
+    void shouldParseAddressVCard4WithGeoPosition();
 };
 
 #endif

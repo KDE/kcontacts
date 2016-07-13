@@ -324,6 +324,81 @@ void AddressTest::shouldParseAddressVCard4()
 
 }
 
+void AddressTest::shouldParseAddressVCard4WithGeoPosition()
+{
+#if 0 //FIXME vcardtool is not able to parse several ITEM
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                         "VERSION:4.0\r\n"
+                         "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
+                         " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
+                         "EMAIL:foo@kde.org\r\n"
+                         "N:;;;;\r\n"
+                         "UID:testuid\r\n"
+                         "END:VCARD\r\n\r\n");
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).addresses().count(), 1);
+    KContacts::Address address = lst.at(0).addresses().at(0);
+    QCOMPARE(address.type(), KContacts::Address::Home);
+    QCOMPARE(address.postOfficeBox(), QStringLiteral("1234"));
+    QCOMPARE(address.extended(), QStringLiteral("My Extended Label"));
+    QCOMPARE(address.region(), QStringLiteral("My Region"));
+    QCOMPARE(address.street(), QStringLiteral("My Street"));
+    QCOMPARE(address.country(), QStringLiteral("My country"));
+    QCOMPARE(address.postalCode(), QStringLiteral("My Postalcode"));
+    QCOMPARE(address.label(), QStringLiteral("My Label"));
+    KContacts::Geo geo = address.geo();
+    QVERIFY(geo.isValid());
+    QCOMPARE(geo.latitude(), 22.5f);
+    QCOMPARE(geo.longitude(), 45.1f);
+#endif
+}
+
+
+void AddressTest::shouldExportVCard4WithGeoPosition()
+{
+    KContacts::Address address;
+
+    address.setId(QStringLiteral("My Id"));
+    address.setType(KContacts::Address::Home);
+    address.setPostOfficeBox(QStringLiteral("1234"));
+    address.setExtended(QStringLiteral("My Extended Label"));
+    address.setStreet(QStringLiteral("My Street"));
+    address.setLocality(QStringLiteral("My Locality"));
+    address.setRegion(QStringLiteral("My Region"));
+    address.setPostalCode(QStringLiteral("My Postalcode"));
+    address.setCountry(QStringLiteral("My country"));
+    address.setLabel(QStringLiteral("My Label"));
+
+    KContacts::Geo geo;
+
+    geo.setLatitude(22.5f);
+    geo.setLongitude(45.1f);
+    address.setGeo(geo);
+
+
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    addr.insertAddress(address);
+    lst << addr;
+
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
+                        " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+
+}
+
 void AddressTest::shouldExportVcard4()
 {
     KContacts::Address address;
