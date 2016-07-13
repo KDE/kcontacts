@@ -24,6 +24,14 @@
 
 QTEST_MAIN(PhoneNumberTest)
 
+#ifndef Q_OS_WIN
+void initLocale()
+{
+    setenv("LC_ALL", "en_US.utf-8", 1);
+}
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+#endif
+
 void PhoneNumberTest::emptyTest()
 {
     KContacts::PhoneNumber number;

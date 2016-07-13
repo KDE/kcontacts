@@ -29,10 +29,16 @@
 #include <QFileInfo>
 
 QTEST_MAIN(AddressTest)
+#ifndef Q_OS_WIN
+void initLocale()
+{
+    setenv("LC_ALL", "en_US.utf-8", 1);
+}
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+#endif
 
 void AddressTest::initTestCase()
 {
-    setenv("LANG", "C", 1);
 }
 
 void AddressTest::emptyTest()
