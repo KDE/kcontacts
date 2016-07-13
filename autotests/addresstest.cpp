@@ -73,6 +73,7 @@ void AddressTest::storeTest()
     QCOMPARE(address.postalCode(), QStringLiteral("My PostalCode"));
     QCOMPARE(address.country(), QStringLiteral("My Country"));
     QCOMPARE(address.label(), QStringLiteral("My Label"));
+    QVERIFY(!address.geo().isValid());
 }
 
 void AddressTest::equalsTest()
