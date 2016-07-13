@@ -692,7 +692,7 @@ QString Address::ISOtoCountry(const QString &ISOname)
         return QString();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kabc/countrytransl.map"));
+    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
 
     QFile file(mapfile);
     if (file.open(QIODevice::ReadOnly)) {
