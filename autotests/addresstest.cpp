@@ -326,7 +326,6 @@ void AddressTest::shouldParseAddressVCard4()
 
 void AddressTest::shouldParseAddressVCard4WithGeoPosition()
 {
-#if 0 //FIXME vcardtool is not able to parse several ITEM
     QByteArray vcarddata("BEGIN:VCARD\r\n"
                          "VERSION:4.0\r\n"
                          "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
@@ -352,7 +351,6 @@ void AddressTest::shouldParseAddressVCard4WithGeoPosition()
     QVERIFY(geo.isValid());
     QCOMPARE(geo.latitude(), 22.5f);
     QCOMPARE(geo.longitude(), 45.1f);
-#endif
 }
 
 

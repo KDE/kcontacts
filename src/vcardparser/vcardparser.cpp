@@ -112,13 +112,61 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                     currentLine = (*it);
                     continue;
                 }
+                bool keyFound = false;
+                QByteArray key;
+                QList<QByteArray> params;
+                for(int i = 0; i < currentLine.length(); ++i) {
+                    char character = currentLine.at(i);
+                    if (keyFound) {
+                        QList<QByteArray> tmpParams = currentLine.right(currentLine.length()-i).split(';');
+                        QByteArray tmpParameter;
+                        bool valueAdded = false;
+                        Q_FOREACH(const QByteArray &parameter, tmpParams) {
 
+                            if (parameter.contains('=')) {
+                                if (tmpParameter.isEmpty()) {
+                                    tmpParameter = parameter;
+                                } else {
+                                    params << tmpParameter;
+                                    tmpParameter = parameter;
+                                }
+                            } else {
+                                if (tmpParameter.isEmpty() && !valueAdded) {
+                                    tmpParameter = parameter;
+                                    valueAdded = true;
+                                } else {
+                                    tmpParameter += ';' + parameter;
+                                }
+                            }
+                        }
+                        if (!tmpParameter.isEmpty()) {
+                            params << tmpParameter;
+                        }
+                        break;
+                    } else {
+                        if ((character == ';' || character == ':') && !keyFound) {
+                            keyFound = true;
+                        } else {
+                            key += character;
+                        }
+                    }
+                }
                 VCardLine vCardLine;
-                const QByteArray key = currentLine.left(colon).trimmed();
-                QByteArray value = currentLine.mid(colon + 1);
-
-                QList<QByteArray> params = key.split(';');
-
+                QByteArray value;
+                if (!params.isEmpty()) {
+                    value = params.takeLast();
+                    if (value.contains('=')) {
+                        colon = value.indexOf(':');
+                        const QByteArray lastParam = value.left(colon).trimmed();
+                        if ((lastParam != "geo")) {
+                            params.append(lastParam);
+                            value = value.mid(colon + 1);
+                        } else {
+                            params.append(value);
+                        }
+                    }
+                }
+                params.prepend(key);
                 // check for group
                 int groupPos = params[ 0 ].indexOf('.');
                 if (groupPos != -1) {
@@ -144,7 +192,10 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                                 pair.prepend("type");
                             }
                         }
-                        if (pair[ 1 ].indexOf(',') != -1) {     // parameter in type=x,y,z format
+                        if (pair[ 1 ].contains(':')) {
+                            vCardLine.addParameter(cache.fromLatin1(pair[ 0 ].toLower()),
+                                                   cache.fromLatin1(pair[ 1 ]));
+                        } else if (pair[ 1 ].indexOf(',') != -1) {     // parameter in type=x,y,z format
                             const QList<QByteArray> args = pair[ 1 ].split(',');
                             QList<QByteArray>::ConstIterator argIt;
                             QList<QByteArray>::ConstIterator argEnd(args.constEnd());
