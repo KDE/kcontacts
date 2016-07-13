@@ -19,6 +19,7 @@
 */
 
 #include "address.h"
+#include "geo.h"
 
 #include "kcontacts_debug.h"
 #include <krandom.h>
@@ -219,6 +220,7 @@ public:
     bool mEmpty;
     QString mId;
     Type mType;
+    Geo mGeo;
 
     QString mPostOfficeBox;
     QString mExtended;
@@ -289,6 +291,10 @@ bool Address::operator==(const Address &other) const
         return false;
     }
     if (d->mLabel != other.d->mLabel) {
+        return false;
+    }
+
+    if (d->mGeo != other.d->mGeo) {
         return false;
     }
 
@@ -542,6 +548,17 @@ QString Address::typeFlagLabel(TypeFlag type)
     }
 }
 
+void Address::setGeo(const Geo &geo)
+{
+    d->mEmpty = false;
+    d->mGeo = geo;
+}
+
+Geo Address::geo() const
+{
+    return d->mGeo;
+}
+
 QString Address::toString() const
 {
     QString str;
@@ -559,6 +576,7 @@ QString Address::toString() const
     str += QStringLiteral("  Postal code: %1\n").arg(d->mPostalCode);
     str += QStringLiteral("  Country: %1\n").arg(d->mCountry);
     str += QStringLiteral("  Label: %1\n").arg(d->mLabel);
+    str += QStringLiteral("  Geo: %1\n").arg(d->mGeo.toString());
     str += QLatin1String("}\n");
 
     return str;
@@ -700,7 +718,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)
     return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox
            << addr.d->mExtended << addr.d->mStreet << addr.d->mLocality
            << addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry
-           << addr.d->mLabel << addr.d->mEmpty;
+           << addr.d->mLabel << addr.d->mEmpty << addr.d->mGeo;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
@@ -709,7 +727,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
     s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended
       >> addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion
       >> addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel
-      >> addr.d->mEmpty;
+      >> addr.d->mEmpty >> addr.d->mGeo;
 
     addr.d->mType = Address::Type(type);
 

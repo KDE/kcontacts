@@ -29,7 +29,7 @@
 
 namespace KContacts
 {
-
+class Geo;
 /**
   @brief
   Postal address information.
@@ -321,6 +321,18 @@ public:
     static QString ISOtoCountry(const QString &ISOname);
 
     static QString typeFlagLabel(TypeFlag type);
+
+    /**
+      Set geographic position.
+     */
+    void setGeo(const Geo &geo);
+
+    /**
+      Return geographic position.
+     */
+    Geo geo() const;
+
+
 private:
     class Private;
     QSharedDataPointer<Private> d;
