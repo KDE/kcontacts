@@ -729,7 +729,18 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         }
                         address.setLabel(label);
                     }
-                    //TODO add GEO support
+                    QString geoStr = (*lineIt).parameter(QStringLiteral("geo"));
+                    if (!geoStr.isEmpty()) {
+                        geoStr.remove(QLatin1Char('\"'));
+                        geoStr.remove(QStringLiteral("geo:"));
+                        if (geoStr.contains(QLatin1Char(','))) {
+                            QStringList arguments = geoStr.split(QLatin1Char(','));
+                            KContacts::Geo geo;
+                            geo.setLatitude(arguments.at(0).toDouble());
+                            geo.setLongitude(arguments.at(1).toDouble());
+                            address.setGeo(geo);
+                        }
+                    }
                     addr.insertAddress(address);
                 }
                 // ANNIVERSARY
