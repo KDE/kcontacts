@@ -110,3 +110,8 @@ void TimeZoneTest::shouldGenerateVCard3()
                           "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
+
+void TimeZoneTest::shouldGenerateVCard4()
+{
+    //TODO
+}

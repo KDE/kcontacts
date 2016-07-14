@@ -35,6 +35,7 @@ private Q_SLOTS:
     void assignmentTest();
     void serializeTest();
     void shouldGenerateVCard3();
+    void shouldGenerateVCard4();
 };
 
 #endif
