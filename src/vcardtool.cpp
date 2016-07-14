@@ -1387,12 +1387,22 @@ VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
         line.setValue(key.textData());
     }
 
-    if (key.type() == Key::X509) {
-        line.addParameter(QStringLiteral("type"), QStringLiteral("X509"));
-    } else if (key.type() == Key::PGP) {
-        line.addParameter(QStringLiteral("type"), QStringLiteral("PGP"));
-    } else if (key.type() == Key::Custom) {
-        line.addParameter(QStringLiteral("type"), key.customTypeString());
+    if (version == VCard::v4_0) {
+        if (key.type() == Key::X509) {
+            line.addParameter(QStringLiteral("MEDIATYPE"), QStringLiteral("X509"));
+        } else if (key.type() == Key::PGP) {
+            line.addParameter(QStringLiteral("MEDIATYPE"), QStringLiteral("application/pgp-keys"));
+        } else if (key.type() == Key::Custom) {
+            line.addParameter(QStringLiteral("MEDIATYPE"), key.customTypeString());
+        }
+    } else {
+        if (key.type() == Key::X509) {
+            line.addParameter(QStringLiteral("type"), QStringLiteral("X509"));
+        } else if (key.type() == Key::PGP) {
+            line.addParameter(QStringLiteral("type"), QStringLiteral("PGP"));
+        } else if (key.type() == Key::Custom) {
+            line.addParameter(QStringLiteral("type"), key.customTypeString());
+        }
     }
 
     return line;

@@ -103,12 +103,46 @@ void KeyTest::serializeTest()
 
 void KeyTest::shouldExportVCard3()
 {
-    //TODO
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Key key1(QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"), KContacts::Key::PGP);
+    addr.setKeys(KContacts::Key::List{key1});
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "KEY;TYPE=PGP:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
 }
 
 void KeyTest::shouldExportVCard4()
 {
-    //TODO
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Key key1(QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"), KContacts::Key::PGP);
+    addr.setKeys(KContacts::Key::List{key1});
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "KEY;MEDIATYPE=application/pgp-keys:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
 }
 
 void KeyTest::shouldParseVcard3()
