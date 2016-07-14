@@ -29,6 +29,8 @@ class ImportExportVCardTest : public QObject
 public:
     explicit ImportExportVCardTest(QObject *parent = Q_NULLPTR);
     ~ImportExportVCardTest();
+private Q_SLOTS:
+    void shouldExportFullTestVcard4();
 };
 
 #endif // IMPORTEXPORTVCARDTEST_H
