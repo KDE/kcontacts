@@ -83,7 +83,8 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "FN:Sherlock Holmes\r\n"
                              "GENDER:M\r\n"
                              "GEO:geo:51.523701,0.158500\r\n"
-                             "KEY;TYPE=PGP:https://sherlockholmes.com/sherlock-holmes.pub.asc\r\n"
+                             "KEY;MEDIATYPE=application/pgp-keys:https://sherlockholmes.com/sherlock-holm\r\n"
+                             " es.pub.asc\r\n"
                              "KIND:individual\r\n"
                              "LANG;PREF=1;TYPE=work:en\r\n"
                              "LANG;PREF=2;TYPE=work:fr\r\n"
@@ -94,12 +95,10 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "TEL:ext=5555\r\n"
                              "TEL;TYPE=CELL:tel:+44-555-555-6666\r\n"
                              "TEL:tel:+44-555-555-7777\r\n"
-                             "TITLE:Detective\r\n"
-                             "TZ:+00:00\r\n"
+                             "TITLE:Detective\r\nTZ:+00:00\r\n"
                              "UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519\r\n"
                              "URL:https://sherlockholmes.com\r\n"
-                             "END:VCARD\r\n"
-                             "\r\n");
+                             "END:VCARD\r\n\r\n");
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 
