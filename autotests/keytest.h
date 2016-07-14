@@ -1,6 +1,7 @@
 /*
     This file is part of the KContacts framework.
     Copyright (c) 2007 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2016 Laurent Montel <montel@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -33,6 +34,10 @@ private Q_SLOTS:
     void differsTest();
     void assignmentTest();
     void serializeTest();
+    void shouldExportVCard3();
+    void shouldExportVCard4();
+    void shouldParseVcard3();
+    void shouldParseVcard4();
 };
 
 #endif
