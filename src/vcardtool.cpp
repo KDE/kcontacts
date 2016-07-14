@@ -1365,6 +1365,16 @@ Key VCardTool::parseKey(const VCardLine &line) const
             key.setType(Key::Custom);
             key.setCustomTypeString(line.parameter(QStringLiteral("type")));
         }
+    } else if (params.contains(QStringLiteral("mediatype"))) {
+        const QString param = line.parameter(QStringLiteral("mediatype")).toLower();
+        if (param == QLatin1String("application/x-x509-ca-cert")) {
+            key.setType(Key::X509);
+        } else if (param == QLatin1String("application/pgp-keys")) {
+            key.setType(Key::PGP);
+        } else {
+            key.setType(Key::Custom);
+            key.setCustomTypeString(line.parameter(QStringLiteral("type")));
+        }
     }
 
     return key;
@@ -1389,7 +1399,7 @@ VCardLine VCardTool::createKey(const Key &key, VCard::Version version) const
 
     if (version == VCard::v4_0) {
         if (key.type() == Key::X509) {
-            line.addParameter(QStringLiteral("MEDIATYPE"), QStringLiteral("X509"));
+            line.addParameter(QStringLiteral("MEDIATYPE"), QStringLiteral("application/x-x509-ca-cert"));
         } else if (key.type() == Key::PGP) {
             line.addParameter(QStringLiteral("MEDIATYPE"), QStringLiteral("application/pgp-keys"));
         } else if (key.type() == Key::Custom) {
