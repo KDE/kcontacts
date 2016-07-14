@@ -152,6 +152,10 @@ void RoundtripTest::testVCardRoundtrip()
         QVERIFY(outputFile.open(QIODevice::ReadOnly));
 
         const QByteArray outputRefData = outputFile.readAll();
+        if (outputData.size() != outputRefData.size()) {
+            qDebug() << " outputRefData " << outputRefData << endl;
+            qDebug() << " outputData " << outputData;
+        }
         QCOMPARE(outputData.size(), outputRefData.size());
         const QList<QByteArray> outputLines = outputData.split('\n');
         const QList<QByteArray> outputRefLines = outputRefData.split('\n');
@@ -177,6 +181,10 @@ void RoundtripTest::testVCardRoundtrip()
         QVERIFY(outputFile.open(QIODevice::ReadOnly));
 
         const QByteArray outputRefData = outputFile.readAll();
+        if (outputData.size() != outputRefData.size()) {
+            qDebug() << " outputRefData " << outputRefData << endl;
+            qDebug() << " outputData " << outputData;
+        }
         //QCOMPARE( outputData.size(), outputRefData.size() );
 
         const QList<QByteArray> outputLines = outputData.split('\n');
