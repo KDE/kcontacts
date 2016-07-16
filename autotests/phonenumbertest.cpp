@@ -223,5 +223,18 @@ void PhoneNumberTest::shouldParseVcard3()
 
 void PhoneNumberTest::shouldParseVcard4()
 {
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:4.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
+                         "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
+                         "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "LANG:fr"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
 
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 }

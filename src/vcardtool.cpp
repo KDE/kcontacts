@@ -1044,6 +1044,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                     PhoneNumber::Type type;
                     bool foundType = false;
+#if 0
+                    qDebug() << " (*lineIt).parameters" << (*lineIt).parameterMap();
+#endif
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator typeEnd(types.constEnd());
                     for (QStringList::ConstIterator it = types.constBegin(); it != typeEnd; ++it) {
