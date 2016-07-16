@@ -224,8 +224,8 @@ QString PhoneNumber::typeLabel(Type type)
     const TypeList list = typeList();
 
     TypeList::ConstIterator it;
-    TypeList::ConstIterator end(list.end());
-    for (it = list.begin(); it != end; ++it) {
+    TypeList::ConstIterator end(list.constEnd());
+    for (it = list.constBegin(); it != end; ++it) {
         // these are actually flags
         const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(*it));
         if (type & flag) {
