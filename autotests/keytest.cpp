@@ -147,10 +147,42 @@ void KeyTest::shouldExportVCard4()
 
 void KeyTest::shouldParseVcard3()
 {
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "KEY;TYPE=PGP:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
 
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(!lst.at(0).keys().isEmpty());
+    QCOMPARE(lst.at(0).keys().count(), 1);
+
+    KContacts::Key key = lst.at(0).keys().at(0);
+    QCOMPARE(key.type(), KContacts::Key::PGP);
+    QCOMPARE(key.textData(), QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"));
 }
 
 void KeyTest::shouldParseVcard4()
 {
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "KEY;MEDIATYPE=application/pgp-keys:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(!lst.at(0).keys().isEmpty());
+    QCOMPARE(lst.at(0).keys().count(), 1);
+
+    KContacts::Key key = lst.at(0).keys().at(0);
+    QCOMPARE(key.type(), KContacts::Key::PGP);
+    QCOMPARE(key.textData(), QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"));
 
 }
