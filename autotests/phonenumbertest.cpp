@@ -20,7 +20,10 @@
 
 #include "phonenumbertest.h"
 #include "kcontacts/phonenumber.h"
+#include <addressee.h>
+#include <addresseelist.h>
 #include <qtest.h>
+#include <vcardtool.h>
 
 QTEST_MAIN(PhoneNumberTest)
 
@@ -182,6 +185,29 @@ void PhoneNumberTest::labelTest()
 
 void PhoneNumberTest::shouldExportVCard3()
 {
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+
+    KContacts::PhoneNumber number1;
+
+    number1.setId(QStringLiteral("My Id"));
+    number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
+    number1.setNumber(QStringLiteral("+1-919-676-9564"));
+    addr.setPhoneNumbers(KContacts::PhoneNumber::List() << number1);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TEL;TYPE=CELL,WORK:+1-919-676-9564\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n"
+                        "\r\n");
+    QCOMPARE(ba, expected);
 
 }
 
