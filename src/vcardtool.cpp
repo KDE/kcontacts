@@ -1038,14 +1038,15 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // TEL
                 else if (identifier == QLatin1String("tel")) {
+                    //TODO implement load vcard4
                     PhoneNumber phone;
                     phone.setNumber((*lineIt).value().toString());
 
                     PhoneNumber::Type type;
                     bool foundType = false;
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
-                    QStringList::ConstIterator typeEnd(types.end());
-                    for (QStringList::ConstIterator it = types.begin(); it != typeEnd; ++it) {
+                    QStringList::ConstIterator typeEnd(types.constEnd());
+                    for (QStringList::ConstIterator it = types.constBegin(); it != typeEnd; ++it) {
                         type |= mPhoneTypeMap[(*it).toUpper()];
                         foundType = true;
                     }
