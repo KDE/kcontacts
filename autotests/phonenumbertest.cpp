@@ -179,3 +179,23 @@ void PhoneNumberTest::labelTest()
              KContacts::PhoneNumber::Pref),
              QLatin1String("Work Fax/Preferred"));
 }
+
+void PhoneNumberTest::shouldExportVCard3()
+{
+
+}
+
+void PhoneNumberTest::shouldExportVCard4()
+{
+
+}
+
+void PhoneNumberTest::shouldParseVcard3()
+{
+
+}
+
+void PhoneNumberTest::shouldParseVcard4()
+{
+
+}
