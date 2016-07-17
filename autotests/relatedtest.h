@@ -41,6 +41,7 @@ private Q_SLOTS:
     void shouldCreateVCardWithTwoRelated();
     void shouldCreateVCardWithParameters();
     void shouldNotExportInVcard3();
+    void shouldParseRelatedWithArgument();
 };
 
 #endif // RELATEDTEST_H
