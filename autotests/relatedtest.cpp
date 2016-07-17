@@ -109,7 +109,7 @@ void RelatedTest::shouldParseRelated()
                          "VERSION:4.0\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "RELATED:friend"
+                         "RELATED:friend\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -118,6 +118,9 @@ void RelatedTest::shouldParseRelated()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).relationShips().count(), 1);
+    const KContacts::Related related = lst.at(0).relationShips().at(0);
+    QCOMPARE(related.related(), QStringLiteral("friend"));
+
 }
 
 void RelatedTest::shouldParseWithoutRelated()
