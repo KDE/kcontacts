@@ -985,10 +985,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 // ORGANIZATION
                 else if (identifier == QLatin1String("org")) {
                     const QStringList orgParts = splitString(semicolonSep, (*lineIt).value().toString());
-                    if (orgParts.count() > 0) {
+                    const int orgPartsCount(orgParts.count());
+                    if (orgPartsCount > 0) {
                         addr.setOrganization(orgParts.at(0));
                     }
-                    if (orgParts.count() > 1) {
+                    if (orgPartsCount > 1) {
                         addr.setDepartment(orgParts.at(1));
                     }
                     if (!(*lineIt).parameter(QStringLiteral("sort-as")).isEmpty()) {
@@ -1065,6 +1066,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // TZ
                 else if (identifier == QLatin1String("tz")) {
+                    //TODO add vcard4 support
                     TimeZone tz;
                     const QString date = (*lineIt).value().toString();
 

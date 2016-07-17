@@ -1471,7 +1471,7 @@ void Addressee::removeEmail(const QString &email)
 
 QString Addressee::preferredEmail() const
 {
-    if (d->mEmails.count() == 0) {
+    if (d->mEmails.isEmpty()) {
         return QString();
     } else {
         return d->mEmails.first().mail();
