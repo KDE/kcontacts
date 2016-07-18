@@ -273,7 +273,7 @@ void ImppTest::shouldExportWithParameters()
     QCOMPARE(ba, expected);
 }
 
-void ImppTest::shouldShouldNoyExportTwiceServiceType()
+void ImppTest::shouldShouldNotExportTwiceServiceType()
 {
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"

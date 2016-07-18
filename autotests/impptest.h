@@ -45,7 +45,7 @@ private Q_SLOTS:
     void shouldExportType();
 
     void shouldExportWithParameters();
-    void shouldShouldNoyExportTwiceServiceType();
+    void shouldShouldNotExportTwiceServiceType();
 };
 
 #endif // IMPPTEST_H
