@@ -132,7 +132,7 @@ QString FieldGroup::toString() const
         QString param;
         while (i.hasNext()) {
             i.next();
-            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QStringLiteral(",")));
+            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QLatin1Char(',')));
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }
