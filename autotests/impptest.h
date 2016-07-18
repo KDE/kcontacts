@@ -31,6 +31,7 @@ public:
     ~ImppTest();
 
 private Q_SLOTS:
+    void shouldParseImppVcard4();
     void shouldHaveDefaultValue();
     void shouldAssignValue();
     void shouldSerialized();
