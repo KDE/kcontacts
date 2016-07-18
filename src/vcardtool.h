@@ -88,6 +88,7 @@ private:
 
     QMap<QString, Address::TypeFlag> mAddressTypeMap;
     QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;
+    void imppService(const QString &serviceType, KContacts::Impp &impp) const;
 
     Q_DISABLE_COPY(VCardTool)
     class VCardToolPrivate;

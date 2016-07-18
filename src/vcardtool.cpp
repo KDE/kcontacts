@@ -791,40 +791,18 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("impp")) {
                     QString imppStr = (*lineIt).value().toString();
                     Impp impp;
-                    impp.setAddress(imppStr);
                     impp.setParameters((*lineIt).parameterMap());
                     if (!(*lineIt).parameter(QStringLiteral("x-service-type")).isEmpty()) {
+                        impp.setAddress(imppStr);
                         const QString serviceType = (*lineIt).parameter(QStringLiteral("x-service-type")).toLower();
-                        if (serviceType == QLatin1String("facebook")) {
-                            impp.setType(KContacts::Impp::Facebook);
-                        } else if (serviceType == QLatin1String("jabber")) {
-                            impp.setType(KContacts::Impp::Jabber);
-                        } else if (serviceType == QLatin1String("sip")) {
-                            impp.setType(KContacts::Impp::Sip);
-                        } else if (serviceType == QLatin1String("aim")) {
-                            impp.setType(KContacts::Impp::Aim);
-                        } else if (serviceType == QLatin1String("msn")) {
-                            impp.setType(KContacts::Impp::Msn);
-                        } else if (serviceType == QLatin1String("twitter")) {
-                            impp.setType(KContacts::Impp::Twitter);
-                        } else if (serviceType == QLatin1String("googletalk")) {
-                            impp.setType(KContacts::Impp::GoogleTalk);
-                        } else if (serviceType == QLatin1String("xmpp")) {
-                            impp.setType(KContacts::Impp::Xmpp);
-                        } else if (serviceType == QLatin1String("icq")) {
-                            impp.setType(KContacts::Impp::Icq);
-                        } else if (serviceType == QLatin1String("yahoo")) {
-                            impp.setType(KContacts::Impp::Yahoo);
-                        } else if (serviceType == QLatin1String("qq")) {
-                            impp.setType(KContacts::Impp::Qq);
-                        } else if (serviceType == QLatin1String("gadugadu")) {
-                            impp.setType(KContacts::Impp::GaduGadu);
-                        } else if (serviceType == QLatin1String("owncloud-handle")) {
-                            impp.setType(KContacts::Impp::Ownclound);
-                        } else if (serviceType == QLatin1String("skype")) {
-                            impp.setType(KContacts::Impp::Skype);
-                        } else {
-                            qCDebug(KCONTACTS_LOG) << "unknown service type " << serviceType;
+                        imppService(serviceType, impp);
+                    } else {
+                        const int pos = imppStr.indexOf(QLatin1Char(':'));
+                        if (pos != -1) {
+                            const QString serviceType = imppStr.left(pos);
+                            const QString address = imppStr.right(imppStr.length() - pos - 1);
+                            impp.setAddress(address);
+                            imppService(serviceType, impp);
                         }
                     }
                     addr.insertImpp(impp);
@@ -1491,4 +1469,40 @@ QStringList VCardTool::splitString(QChar sep, const QString &str) const
     }
 
     return list;
+}
+
+
+void VCardTool::imppService(const QString &serviceType, KContacts::Impp &impp) const
+{
+    if (serviceType == QLatin1String("facebook")) {
+        impp.setType(KContacts::Impp::Facebook);
+    } else if (serviceType == QLatin1String("jabber")) {
+        impp.setType(KContacts::Impp::Jabber);
+    } else if (serviceType == QLatin1String("sip")) {
+        impp.setType(KContacts::Impp::Sip);
+    } else if (serviceType == QLatin1String("aim")) {
+        impp.setType(KContacts::Impp::Aim);
+    } else if (serviceType == QLatin1String("msn")) {
+        impp.setType(KContacts::Impp::Msn);
+    } else if (serviceType == QLatin1String("twitter")) {
+        impp.setType(KContacts::Impp::Twitter);
+    } else if (serviceType == QLatin1String("googletalk")) {
+        impp.setType(KContacts::Impp::GoogleTalk);
+    } else if (serviceType == QLatin1String("xmpp")) {
+        impp.setType(KContacts::Impp::Xmpp);
+    } else if (serviceType == QLatin1String("icq")) {
+        impp.setType(KContacts::Impp::Icq);
+    } else if (serviceType == QLatin1String("yahoo")) {
+        impp.setType(KContacts::Impp::Yahoo);
+    } else if (serviceType == QLatin1String("qq")) {
+        impp.setType(KContacts::Impp::Qq);
+    } else if (serviceType == QLatin1String("gadugadu")) {
+        impp.setType(KContacts::Impp::GaduGadu);
+    } else if (serviceType == QLatin1String("owncloud-handle")) {
+        impp.setType(KContacts::Impp::Ownclound);
+    } else if (serviceType == QLatin1String("skype")) {
+        impp.setType(KContacts::Impp::Skype);
+    } else {
+        qCDebug(KCONTACTS_LOG) << "unknown service type " << serviceType;
+    }
 }
