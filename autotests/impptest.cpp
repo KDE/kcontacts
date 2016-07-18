@@ -136,6 +136,27 @@ void ImppTest::shouldParseImpp()
     QCOMPARE(impp.type(), KContacts::Impp::Skype);
 }
 
+void ImppTest::shouldParseImppVcard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:4.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "IMPP:skype:xxxxxxxx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).imppList().count(), 1);
+    KContacts::Impp impp = lst.at(0).imppList().at(0);
+    QCOMPARE(impp.address(), QStringLiteral("xxxxxxxx"));
+    QCOMPARE(impp.type(), KContacts::Impp::Skype);
+}
+
+
 QByteArray createCard(KContacts::Impp::ImppType type)
 {
     QByteArray expected("BEGIN:VCARD\n"

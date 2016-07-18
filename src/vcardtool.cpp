@@ -245,7 +245,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QMapIterator<QString, QStringList> i((*relatedIt).parameters());
             while (i.hasNext()) {
                 i.next();
-                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
             }
             card.addLine(line);
         }
@@ -263,7 +263,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 QMapIterator<QString, QStringList> i((*langIt).parameters());
                 while (i.hasNext()) {
                     i.next();
-                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                 }
                 card.addLine(line);
             }
@@ -292,10 +292,10 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                             line.addParameter(QStringLiteral("PREF"), QString());
                         }
                     } else {
-                        line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                        line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                     }
                 } else {
-                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                 }
             }
             card.addLine(line);
@@ -501,7 +501,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QMapIterator<QString, QStringList> i(url.parameters());
             while (i.hasNext()) {
                 i.next();
-                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
             }
             card.addLine(line);
         }
@@ -550,7 +550,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                         QMapIterator<QString, QStringList> i(url.parameters());
                         while (i.hasNext()) {
                             i.next();
-                            line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                            line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                         }
                         card.addLine(line);
                     }
@@ -563,7 +563,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QMapIterator<QString, QStringList> i(group.parameters());
             while (i.hasNext()) {
                 i.next();
-                line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
             }
             card.addLine(line);
         }
@@ -576,7 +576,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             while (i.hasNext()) {
                 i.next();
                 if (i.key().toLower() != QStringLiteral("x-service-type")) {
-                    line.addParameter(i.key(), i.value().join(QStringLiteral(",")));
+                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                 }
             }
             card.addLine(line);
