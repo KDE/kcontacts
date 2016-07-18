@@ -113,6 +113,7 @@ void TimeZoneTest::shouldGenerateVCard3()
 
 void TimeZoneTest::shouldGenerateVCard4()
 {
+    //TODO fixme.
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
