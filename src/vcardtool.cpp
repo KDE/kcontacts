@@ -28,6 +28,7 @@
 #include "gender.h"
 #include "related.h"
 #include "fieldgroup.h"
+#include "kcontacts_debug.h"
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QDebug>
@@ -823,7 +824,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         } else if (serviceType == QLatin1String("skype")) {
                             impp.setType(KContacts::Impp::Skype);
                         } else {
-                            qDebug() << "unknown service type " << serviceType;
+                            qCDebug(KCONTACTS_LOG) << "unknown service type " << serviceType;
                         }
                     }
                     addr.insertImpp(impp);
