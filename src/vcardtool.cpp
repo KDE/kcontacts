@@ -94,8 +94,14 @@ void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QStr
         Q_FOREACH (const QString &valueStr, valueStringList) {
             line.addParameter(valueStr, QString());
         }
-    } else {
+    } else if (version == VCard::v3_0) {
         line.addParameter(key, valueStringList.join(QLatin1Char(',')));
+    } else {
+        if (valueStringList.count() < 2) {
+            line.addParameter(key, valueStringList.join(QLatin1Char(',')));
+        } else {
+            line.addParameter(key, QLatin1Char('"') + valueStringList.join(QLatin1Char(',')) + QLatin1Char('"'));
+        }
     }
 }
 
@@ -456,8 +462,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             QStringList lst;
             for (typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt) {
                 if (typeIt.value() & (*phoneIt).type()) {
-                    lst << typeIt.key();
-
+                    if (version == VCard::v4_0) {
+                        lst << typeIt.key().toLower();
+                    } else {
+                        lst << typeIt.key();
+                    }
                 }
             }
             if (!lst.isEmpty()) {
@@ -1026,6 +1035,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     bool foundType = false;
 #if 0
                     qDebug() << " (*lineIt).parameters" << (*lineIt).parameterMap();
+                    qDebug() << " (*lineIt).value()" << (*lineIt).value().toString();
 #endif
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator typeEnd(types.constEnd());

@@ -61,6 +61,7 @@ public:
         Isdn = 2048,  /**< ISDN connection */
         Pcs = 4096,   /**< Personal Communication Service*/
         Pager = 8192,  /**< Pager */
+        //TODO add Text support vcard4
         Undefined = 16384 /** Undefined number type */
     };
 

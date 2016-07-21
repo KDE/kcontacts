@@ -115,14 +115,14 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 bool keyFound = false;
                 QByteArray key;
                 QList<QByteArray> params;
-                for(int i = 0; i < currentLine.length(); ++i) {
+                const int currentLineLength(currentLine.length());
+                for(int i = 0; i < currentLineLength; ++i) {
                     char character = currentLine.at(i);
                     if (keyFound) {
-                        QList<QByteArray> tmpParams = currentLine.right(currentLine.length()-i).split(';');
+                        QList<QByteArray> tmpParams = currentLine.right(currentLineLength-i).split(';');
                         QByteArray tmpParameter;
                         bool valueAdded = false;
                         Q_FOREACH(const QByteArray &parameter, tmpParams) {
-
                             if (parameter.contains('=')) {
                                 if (tmpParameter.isEmpty()) {
                                     tmpParameter = parameter;
@@ -200,8 +200,14 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                             QList<QByteArray>::ConstIterator argIt;
                             QList<QByteArray>::ConstIterator argEnd(args.constEnd());
                             for (argIt = args.constBegin(); argIt != argEnd; ++argIt) {
+                                QByteArray tmpArg = (*argIt);
+                                if (tmpArg.startsWith('"')) {
+                                    tmpArg = tmpArg.right(tmpArg.length() - 1);
+                                } else if (tmpArg.endsWith('"')) {
+                                    tmpArg = tmpArg.left(tmpArg.length() - 1);
+                                }
                                 vCardLine.addParameter(cache.fromLatin1(pair[ 0 ].toLower()),
-                                                       cache.fromLatin1(*argIt));
+                                                       cache.fromLatin1(tmpArg));
                             }
                         } else {
                             vCardLine.addParameter(cache.fromLatin1(pair[ 0 ].toLower()),
