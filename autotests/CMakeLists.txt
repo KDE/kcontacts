@@ -34,5 +34,6 @@ ecm_add_tests(birthdaytest.cpp
     vcardlinetest.cpp
     fieldgrouptest.cpp
     importexportvcardtest.cpp
+    titletest.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore Qt5::Gui)
 
