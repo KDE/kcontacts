@@ -26,6 +26,8 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 #include <QtCore/QVector>
+#include <QtCore/QMap>
+
 
 namespace KContacts
 {
@@ -204,6 +206,10 @@ public:
      * Returns a string representation of the phone number.
      */
     QString toString() const;
+
+    void setParameters(const QMap<QString, QStringList> &params);
+    QMap<QString, QStringList> parameters() const;
+
 
 private:
     class Private;
