@@ -69,7 +69,6 @@ public:
         mMailer = other.mMailer;
         mTimeZone = other.mTimeZone;
         mGeo = other.mGeo;
-        mTitle = other.mTitle;
         mRole = other.mRole;
         mOrganization = other.mOrganization;
         mDepartment = other.mDepartment;
@@ -101,6 +100,7 @@ public:
         mEmpty = other.mEmpty;
         mImpps = other.mImpps;
         mChanged = other.mChanged;
+        mTitleExtraList = other.mTitleExtraList;
     }
 
     ~Private()
@@ -120,7 +120,6 @@ public:
     QString mMailer;
     TimeZone mTimeZone;
     Geo mGeo;
-    QString mTitle;
     QString mRole;
     QString mOrganization;
     QString mDepartment;
@@ -152,6 +151,7 @@ public:
     QStringList mMembers;
     Related::List mRelationShips;
     FieldGroup::List mFieldGroupList;
+    Title::List mTitleExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -256,12 +256,6 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mGeo != addressee.d->mGeo) {
         qCDebug(KCONTACTS_LOG) << "geo differs";
-        return false;
-    }
-
-    if (d->mTitle != addressee.d->mTitle &&
-            !(d->mTitle.isEmpty() && addressee.d->mTitle.isEmpty())) {
-        qCDebug(KCONTACTS_LOG) << "title differs";
         return false;
     }
 
@@ -403,6 +397,10 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
+    if (!listEquals(d->mTitleExtraList, addressee.d->mTitleExtraList)) {
+        qCDebug(KCONTACTS_LOG) << "Extra TitleList differs";
+        return false;
+    }
     return true;
 }
 
@@ -949,17 +947,47 @@ QString Addressee::geoLabel()
 
 void Addressee::setTitle(const QString &title)
 {
-    if (title == d->mTitle) {
-        return;
+    Title t(title);
+    if (!d->mTitleExtraList.isEmpty()) {
+        d->mTitleExtraList.takeFirst();
+        d->mTitleExtraList.prepend(t);
+        d->mEmpty = false;
+    } else {
+        insertExtraTitle(title);
     }
+}
 
-    d->mEmpty = false;
-    d->mTitle = title;
+void Addressee::setTitle(const Title &title)
+{
+    insertExtraTitle(title);
+}
+
+void Addressee::insertExtraTitle(const Title &title)
+{
+    if (title.isValid()) {
+        d->mEmpty = false;
+        d->mTitleExtraList.append(title);
+    }
 }
 
 QString Addressee::title() const
 {
-    return d->mTitle;
+    if (d->mTitleExtraList.isEmpty()) {
+        return {};
+    } else {
+        return d->mTitleExtraList.at(0).title();
+    }
+}
+
+Title::List Addressee::extraTitleList() const
+{
+    return d->mTitleExtraList;
+}
+
+void Addressee::setExtraTitleList(const Title::List &urltitle)
+{
+    d->mEmpty = false;
+    d->mTitleExtraList = urltitle;
 }
 
 QString Addressee::titleLabel()
@@ -2272,7 +2300,6 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mMailer;
     s << a.d->mTimeZone;
     s << a.d->mGeo;
-    s << a.d->mTitle;
     s << a.d->mRole;
     s << a.d->mOrganization;
     s << a.d->mDepartment;
@@ -2303,6 +2330,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mSources;
     s << a.d->mImpps;
     s << a.d->mFieldGroupList;
+    s << a.d->mTitleExtraList;
 
     return s;
 }
@@ -2323,7 +2351,6 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mMailer;
     s >> a.d->mTimeZone;
     s >> a.d->mGeo;
-    s >> a.d->mTitle;
     s >> a.d->mRole;
     s >> a.d->mOrganization;
     s >> a.d->mDepartment;
@@ -2356,6 +2383,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mSources;
     s >> a.d->mImpps;
     s >> a.d->mFieldGroupList;
+    s >> a.d->mTitleExtraList;
     a.d->mEmpty = false;
 
     return s;

@@ -54,10 +54,10 @@ Title::Title(const Title &other)
 
 }
 
-Title::Title(const QString &language)
+Title::Title(const QString &title)
     : d(new Private)
 {
-    d->title = language;
+    d->title = title;
 }
 
 Title::~Title()
