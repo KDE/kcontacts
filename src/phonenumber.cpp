@@ -52,6 +52,7 @@ public:
     QString mId;
     QString mNumber;
     Type mType;
+    QMap<QString, QStringList> mParameters;
 };
 
 PhoneNumber::PhoneNumber()
@@ -85,6 +86,10 @@ bool PhoneNumber::operator==(const PhoneNumber &other) const
     }
 
     if (d->mType != other.d->mType) {
+        return false;
+    }
+
+    if (d->mParameters != other.d->mParameters) {
         return false;
     }
 
@@ -251,21 +256,40 @@ QString PhoneNumber::toString() const
     str += QLatin1String("PhoneNumber {\n");
     str += QStringLiteral("    Id: %1\n").arg(d->mId);
     str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
+    if (!d->mParameters.isEmpty()) {
+        QMapIterator<QString, QStringList> i(d->mParameters);
+        QString param;
+        while (i.hasNext()) {
+            i.next();
+            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QLatin1Char(',')));
+        }
+        str += QStringLiteral("    parameters: %1\n").arg(param);
+    }
     str += QStringLiteral("    Number: %1\n").arg(d->mNumber);
     str += QLatin1String("}\n");
 
     return str;
 }
 
+void PhoneNumber::setParameters(const QMap<QString, QStringList> &params)
+{
+    d->mParameters = params;
+}
+
+QMap<QString, QStringList> PhoneNumber::parameters() const
+{
+    return d->mParameters;
+}
+
 QDataStream &KContacts::operator<<(QDataStream &s, const PhoneNumber &phone)
 {
-    return s << phone.d->mId << (uint)phone.d->mType << phone.d->mNumber;
+    return s << phone.d->mId << (uint)phone.d->mType << phone.d->mNumber << phone.d->mParameters;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, PhoneNumber &phone)
 {
     uint type;
-    s >> phone.d->mId >> type >> phone.d->mNumber;
+    s >> phone.d->mId >> type >> phone.d->mNumber >> phone.d->mParameters;
     phone.d->mType = PhoneNumber::Type(type);
 
     return s;

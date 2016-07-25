@@ -456,6 +456,13 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         PhoneNumber::List::ConstIterator phoneEnd(phoneNumbers.end());
         for (phoneIt = phoneNumbers.begin(); phoneIt != phoneEnd; ++phoneIt) {
             VCardLine line(QStringLiteral("TEL"), (*phoneIt).number());
+            QMapIterator<QString, QStringList> i((*phoneIt).parameters());
+            while (i.hasNext()) {
+                i.next();
+                if (i.key().toUpper() != QLatin1String("TYPE")) {
+                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
+                }
+            }
 
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
             QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
@@ -1044,6 +1051,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         foundType = true;
                     }
                     phone.setType(foundType ? type : PhoneNumber::Undefined);
+                    phone.setParameters((*lineIt).parameterMap());
 
                     addr.insertPhoneNumber(phone);
                 }
