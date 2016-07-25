@@ -45,6 +45,7 @@
 #include "addresseelist.h"
 #include "resourcelocatorurl.h"
 #include "fieldgroup.h"
+#include "title.h"
 
 namespace KContacts
 {
@@ -452,7 +453,13 @@ public:
     /**
       Set title.
      */
+    //Remove in kf6
     void setTitle(const QString &title);
+    void setTitle(const Title &title);
+    void insertExtraTitle(const Title &title);
+    void setExtraTitleList(const Title::List &urltitle);
+    Title::List extraTitleList() const;
+
 
     /**
       Return title.

@@ -57,7 +57,8 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                          "LANG;TYPE=work;PREF=2:fr\r\n"
                          "TZ:London/Europe\r\n"
                          "GEO:geo:51.5237,0.1585\r\n"
-                         "TITLE:Detective\r\n"
+                         "TITLE;ALTID=1;LANGUAGE=fr:Patron\r\n"
+                         "TITLE;ALTID=2;LANGUAGE=en:Boss\r\n"
                          "ROLE:Detective\r\n"
                          "UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519\r\n"
                          "CATEGORIES:FICTION,LITERATURE\r\n"
@@ -85,8 +86,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "GEO:geo:51.523701,0.158500\r\n"
                              "IMPP;X-SERVICE-TYPE=xmpp;PREF=1:detective@sherlockholmes.com\r\n"
                              "KEY;MEDIATYPE=application/pgp-keys:https://sherlockholmes.com/sherlock-holm\r\n"
-                             " es.pub.asc\r\n"
-                             "KIND:individual\r\n"
+                             " es.pub.asc\r\nKIND:individual\r\n"
                              "LANG;PREF=1;TYPE=work:en\r\n"
                              "LANG;PREF=2;TYPE=work:fr\r\n"
                              "N:Holmes;Sherlock;;Mr;\r\n"
@@ -96,11 +96,13 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "TEL;PREF=1;VALUE=uri:ext=5555\r\n"
                              "TEL;TYPE=\"cell,voice\";VALUE=uri:tel:+44-555-555-6666\r\n"
                              "TEL;TYPE=\"voice,work\";VALUE=uri:tel:+44-555-555-7777\r\n"
-                             "TITLE:Detective\r\n"
+                             "TITLE;ALTID=1;LANGUAGE=fr:Patron\r\n"
+                             "TITLE;ALTID=2;LANGUAGE=en:Boss\r\n"
                              "TZ:+00:00\r\n"
                              "UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519\r\n"
                              "URL:https://sherlockholmes.com\r\n"
                              "END:VCARD\r\n\r\n");
+
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 

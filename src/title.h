@@ -38,7 +38,7 @@ class KCONTACTS_EXPORT Title
 public:
     Title();
     Title(const Title &other);
-    Title(const QString &titleuage);
+    Title(const QString &title);
 
     ~Title();
 

@@ -483,12 +483,20 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // TITLE
-        VCardLine titleLine(QStringLiteral("TITLE"), (*addrIt).title());
-        if (version == VCard::v2_1 && needsEncoding((*addrIt).title())) {
-            titleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-            titleLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+        Q_FOREACH (const Title &title, (*addrIt).extraTitleList()) {
+            VCardLine titleLine(QStringLiteral("TITLE"), title.title());
+            if (version == VCard::v2_1 && needsEncoding(title.title())) {
+                titleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                titleLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+            }
+            QMapIterator<QString, QStringList> i(title.parameters());
+            while (i.hasNext()) {
+                i.next();
+                titleLine.addParameter(i.key(), i.value().join(QLatin1Char(',')));
+            }
+
+            card.addLine(titleLine);
         }
-        card.addLine(titleLine);
 
         // TZ
         // TODO Add vcard4.0 support
@@ -1034,16 +1042,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // TEL
                 else if (identifier == QLatin1String("tel")) {
-                    //TODO implement load vcard4
                     PhoneNumber phone;
                     phone.setNumber((*lineIt).value().toString());
 
                     PhoneNumber::Type type;
                     bool foundType = false;
-#if 0
-                    qDebug() << " (*lineIt).parameters" << (*lineIt).parameterMap();
-                    qDebug() << " (*lineIt).value()" << (*lineIt).value().toString();
-#endif
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator typeEnd(types.constEnd());
                     for (QStringList::ConstIterator it = types.constBegin(); it != typeEnd; ++it) {
@@ -1058,7 +1061,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // TITLE
                 else if (identifier == QLatin1String("title")) {
-                    addr.setTitle((*lineIt).value().toString());
+                    Title title((*lineIt).value().toString());
+                    title.setParameters((*lineIt).parameterMap());
+                    addr.insertExtraTitle(title);
                 }
 
                 // TZ
