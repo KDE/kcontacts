@@ -63,7 +63,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                          "CATEGORIES:FICTION,LITERATURE\r\n"
                          "PRODID:-//KADDRESSBOOK//NONSGML Version 1//EN\r\n"
                          "REV:2014722T222710Z\r\n"
-                         "URL:https://sherlockholmes.com\r\n"
+                         "URL;TYPE=home:https://sherlockholmes.com\r\n"
                          "KEY;MEDIATYPE=application/pgp-keys:https://sherlockholmes.com/sherlock-holmes.pub.asc\r\n"
                          "CALURI;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
                          "FBURL;PREF=1:https://sherlockholmes.com/busy/detective\r\n"
@@ -99,7 +99,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "TITLE;ALTID=2;LANGUAGE=en:Boss\r\n"
                              "TZ:+00:00\r\n"
                              "UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519\r\n"
-                             "URL:https://sherlockholmes.com\r\n"
+                             "URL;TYPE=home:https://sherlockholmes.com\r\n"
                              "END:VCARD\r\n\r\n");
 
     KContacts::VCardTool vcard;
