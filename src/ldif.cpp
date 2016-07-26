@@ -248,20 +248,20 @@ Ldif::ParseValue Ldif::processLine()
         } else if (attrLower == QLatin1String("control")) {
             d->mUrl = splitControl(d->mValue, d->mOid, d->mCritical, d->mValue);
             retval = Control;
-        } else if (!d->mAttr.isEmpty() && d->mValue.size() > 0) {
+        } else if (!d->mAttr.isEmpty() && !d->mValue.isEmpty()) {
             d->mEntryType = Entry_Add;
             retval = Item;
         }
         break;
     case Entry_Add:
-        if (d->mAttr.isEmpty() && d->mValue.size() == 0) {
+        if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
             retval = EndEntry;
         } else {
             retval = Item;
         }
         break;
     case Entry_Del:
-        if (d->mAttr.isEmpty() && d->mValue.size() == 0) {
+        if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
             retval = EndEntry;
         } else {
             retval = Err;
@@ -270,7 +270,7 @@ Ldif::ParseValue Ldif::processLine()
     case Entry_Mod:
         if (d->mModType == Mod_None) {
             qCDebug(KCONTACTS_LOG) << "new modtype" << d->mAttr;
-            if (d->mAttr.isEmpty() && d->mValue.size() == 0) {
+            if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
                 retval = EndEntry;
             } else if (attrLower == QLatin1String("add")) {
                 d->mModType = Mod_Add;
@@ -291,7 +291,7 @@ Ldif::ParseValue Ldif::processLine()
             if (d->mAttr.isEmpty()) {
                 if (QString::fromUtf8(d->mValue) == QLatin1String("-")) {
                     d->mModType = Mod_None;
-                } else if (d->mValue.size() == 0) {
+                } else if (d->mValue.isEmpty()) {
                     retval = EndEntry;
                 } else {
                     retval = Err;
@@ -302,7 +302,7 @@ Ldif::ParseValue Ldif::processLine()
         }
         break;
     case Entry_Modrdn:
-        if (d->mAttr.isEmpty() && d->mValue.size() == 0) {
+        if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
             retval = EndEntry;
         } else if (attrLower == QLatin1String("newrdn")) {
             d->mNewRdn = QString::fromUtf8(d->mValue);

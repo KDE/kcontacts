@@ -44,8 +44,9 @@ bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
 
     // If it is a muli-valued rdn, split it into its constituent parts
     QStringList rdnParts = splitOnNonEscapedChar(rdn, QLatin1Char('+'));
-    if (rdnParts.size() > 1) {
-        for (int i = 0; i < rdnParts.size(); i++) {
+    const int numberOfParts(rdnParts.size());
+    if (numberOfParts > 1) {
+        for (int i = 0; i < numberOfParts; i++) {
             if (!isValidRDNString(rdnParts.at(i))) {
                 return false;
             }
@@ -168,10 +169,11 @@ QString LdapDN::rdnString() const
 QString LdapDN::rdnString(int depth) const
 {
     QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
-    if (depth >= rdns.size()) {
+    const int numberOfRdns(rdns.size());
+    if (depth >= numberOfRdns) {
         return QString();
     }
-    return rdns.at(rdns.size() - 1 - depth);
+    return rdns.at(numberOfRdns - 1 - depth);
 }
 
 bool LdapDN::isValid() const
