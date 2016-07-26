@@ -949,7 +949,8 @@ void Addressee::setTitle(const QString &title)
 {
     Title t(title);
     if (!d->mTitleExtraList.isEmpty()) {
-        d->mTitleExtraList.takeFirst();
+        t = d->mTitleExtraList.takeFirst();
+        t.setTitle(title);
         d->mTitleExtraList.prepend(t);
         d->mEmpty = false;
     } else {
