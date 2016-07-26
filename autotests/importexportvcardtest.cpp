@@ -22,7 +22,6 @@
 #include <QTest>
 #include "vcardtool.h"
 
-
 ImportExportVCardTest::ImportExportVCardTest(QObject *parent)
     : QObject(parent)
 {
@@ -107,7 +106,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    qDebug() << " result "<< result;
+    qDebug() << " result " << result;
     QCOMPARE(result, vcardexpected);
 
 }

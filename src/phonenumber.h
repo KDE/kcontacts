@@ -28,7 +28,6 @@
 #include <QtCore/QVector>
 #include <QtCore/QMap>
 
-
 namespace KContacts
 {
 
@@ -209,7 +208,6 @@ public:
 
     void setParameters(const QMap<QString, QStringList> &params);
     QMap<QString, QStringList> parameters() const;
-
 
 private:
     class Private;
