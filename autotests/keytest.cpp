@@ -24,7 +24,6 @@
 #include <qtest.h>
 #include "vcardtool.h"
 
-
 QTEST_MAIN(KeyTest)
 
 void KeyTest::storeTest()
@@ -148,12 +147,12 @@ void KeyTest::shouldExportVCard4()
 void KeyTest::shouldParseVcard3()
 {
     QByteArray vcarddata("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "KEY;TYPE=PGP:https://foo.org/sherlock-holmes.pub.asc\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+                         "VERSION:3.0\r\n"
+                         "EMAIL:foo@kde.org\r\n"
+                         "KEY;TYPE=PGP:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                         "N:;;;;\r\n"
+                         "UID:testuid\r\n"
+                         "END:VCARD\r\n\r\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -169,12 +168,12 @@ void KeyTest::shouldParseVcard3()
 void KeyTest::shouldParseVcard4()
 {
     QByteArray vcarddata("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "KEY;MEDIATYPE=application/pgp-keys:https://foo.org/sherlock-holmes.pub.asc\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+                         "VERSION:4.0\r\n"
+                         "EMAIL:foo@kde.org\r\n"
+                         "KEY;MEDIATYPE=application/pgp-keys:https://foo.org/sherlock-holmes.pub.asc\r\n"
+                         "N:;;;;\r\n"
+                         "UID:testuid\r\n"
+                         "END:VCARD\r\n\r\n");
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);

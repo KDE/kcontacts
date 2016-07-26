@@ -156,7 +156,6 @@ void ImppTest::shouldParseImppVcard4()
     QCOMPARE(impp.type(), KContacts::Impp::Skype);
 }
 
-
 QByteArray createCard(KContacts::Impp::ImppType type)
 {
     QByteArray expected("BEGIN:VCARD\n"

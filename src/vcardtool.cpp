@@ -164,7 +164,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
             }
 
-
             const bool hasLabel = !(*it).label().isEmpty();
             QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
             QStringList addreLineType;
@@ -749,7 +748,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (!label.isEmpty()) {
                         if (label.length() > 1) {
                             if (label.at(0) == QLatin1Char('"') && label.at(label.length() - 1) == QLatin1Char('"')) {
-                                label = label.mid(1, label.length() - 2 );
+                                label = label.mid(1, label.length() - 2);
                             }
                         }
                         address.setLabel(label);
@@ -1493,7 +1492,6 @@ QStringList VCardTool::splitString(QChar sep, const QString &str) const
 
     return list;
 }
-
 
 void VCardTool::imppService(const QString &serviceType, KContacts::Impp &impp) const
 {

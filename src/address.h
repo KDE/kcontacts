@@ -332,7 +332,6 @@ public:
      */
     Geo geo() const;
 
-
 private:
     class Private;
     QSharedDataPointer<Private> d;

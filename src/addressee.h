@@ -460,7 +460,6 @@ public:
     void setExtraTitleList(const Title::List &urltitle);
     Title::List extraTitleList() const;
 
-
     /**
       Return title.
      */

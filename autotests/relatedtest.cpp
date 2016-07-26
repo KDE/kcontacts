@@ -143,7 +143,6 @@ void RelatedTest::shouldParseRelatedWithArgument()
     QCOMPARE(related.parameters().count(), 2);
 }
 
-
 void RelatedTest::shouldParseWithoutRelated()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"

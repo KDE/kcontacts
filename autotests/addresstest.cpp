@@ -234,7 +234,6 @@ void AddressTest::formatTest()
     }
 }
 
-
 void AddressTest::shouldExportVcard3()
 {
     KContacts::Address address;
@@ -302,12 +301,12 @@ void AddressTest::shouldParseAddressVCard3()
 void AddressTest::shouldParseAddressVCard4()
 {
     QByteArray vcarddata("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
-                        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+                         "VERSION:4.0\r\n"
+                         "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
+                         " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+                         "N:;;;;\r\n"
+                         "UID:testuid\r\n"
+                         "END:VCARD\r\n\r\n");
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
@@ -353,7 +352,6 @@ void AddressTest::shouldParseAddressVCard4WithGeoPosition()
     QCOMPARE(geo.longitude(), 45.1f);
 }
 
-
 void AddressTest::shouldExportVCard4WithGeoPosition()
 {
     KContacts::Address address;
@@ -374,7 +372,6 @@ void AddressTest::shouldExportVCard4WithGeoPosition()
     geo.setLatitude(22.5f);
     geo.setLongitude(45.1f);
     address.setGeo(geo);
-
 
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;

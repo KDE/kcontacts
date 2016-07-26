@@ -116,13 +116,13 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 QByteArray key;
                 QList<QByteArray> params;
                 const int currentLineLength(currentLine.length());
-                for(int i = 0; i < currentLineLength; ++i) {
+                for (int i = 0; i < currentLineLength; ++i) {
                     char character = currentLine.at(i);
                     if (keyFound) {
-                        QList<QByteArray> tmpParams = currentLine.right(currentLineLength-i).split(';');
+                        QList<QByteArray> tmpParams = currentLine.right(currentLineLength - i).split(';');
                         QByteArray tmpParameter;
                         bool valueAdded = false;
-                        Q_FOREACH(const QByteArray &parameter, tmpParams) {
+                        Q_FOREACH (const QByteArray &parameter, tmpParams) {
                             if (parameter.contains('=')) {
                                 if (tmpParameter.isEmpty()) {
                                     tmpParameter = parameter;
