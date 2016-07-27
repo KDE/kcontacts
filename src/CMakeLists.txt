@@ -33,6 +33,7 @@ set(kcontacts_SRCS
   vcardtool.cpp
   fieldgroup.cpp
   title.cpp
+  nickname.cpp
   ${vcardparser_SRCS}
 )
 
@@ -96,6 +97,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Sound
   TimeZone
   Title
+  NickName
   VCardDrag
   FieldGroup
   PREFIX KContacts
