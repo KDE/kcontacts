@@ -35,8 +35,8 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualTitle();
+    void shouldParseTitle();
 #if 0
-    void shouldParseLanguage();
     void shouldParseWithoutLanguage();
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoLang();
