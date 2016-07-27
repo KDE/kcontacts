@@ -18,31 +18,24 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef TITLETEST_H
-#define TITLETEST_H
+#ifndef NICKNAMETEST_H
+#define NICKNAMETEST_H
 
 #include <QObject>
 
-class TitleTest : public QObject
+class NickNameTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit TitleTest(QObject *parent = Q_NULLPTR);
-    ~TitleTest();
+    explicit NickNameTest(QObject *parent = Q_NULLPTR);
+    ~NickNameTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();
     void shouldAssignExternal();
     void shouldSerialized();
-    void shouldEqualTitle();
-    void shouldParseTitle();
-#if 0
-    void shouldParseWithoutLanguage();
-    void shouldCreateVCard();
-    void shouldCreateVCardWithTwoLang();
-    void shouldCreateVCardWithParameters();
-    void shouldNotGenerateLangForVCard3();
-#endif
+    void shouldEqualNickName();
+    //TODO add parsing and co
 };
 
-#endif // TITLETEST_H
+#endif // NICKNAMETEST_H
