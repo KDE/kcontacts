@@ -110,7 +110,7 @@ void LangTest::shouldParseLanguage()
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr"
+                         "LANG:fr\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -119,6 +119,7 @@ void LangTest::shouldParseLanguage()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).langs().count(), 1);
+    QCOMPARE(lst.at(0).langs().at(0).language(), QStringLiteral("fr"));
 }
 
 void LangTest::shouldParseWithoutLanguage()
