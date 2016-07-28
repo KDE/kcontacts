@@ -55,7 +55,6 @@ void NickNameTest::shouldAssignValue()
     QCOMPARE(nickname.nickname(), lang);
     QVERIFY(!nickname.parameters().isEmpty());
     QCOMPARE(nickname.parameters(), params);
-
 }
 
 void NickNameTest::shouldAssignExternal()
@@ -102,6 +101,156 @@ void NickNameTest::shouldEqualNickName()
 
     result = nickname;
     QVERIFY(nickname == result);
+}
+
+void NickNameTest::shouldParseNickName()
+{
+#if 0
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "NickName:boo\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).extraNickNameList().count(), 1);
+    QCOMPARE(lst.at(0).title(), QStringLiteral("boo"));
+#endif
+}
+
+void NickNameTest::shouldParseWithoutNickName()
+{
+#if 0
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).extraNickNameList().count(), 0);
+#endif
+}
+
+void NickNameTest::shouldCreateVCard()
+{
+#if 0
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::NickName::List lstNickName;
+    KContacts::NickName title(QStringLiteral("fr"));
+    lstNickName << title;
+    addr.setExtraNickNameList(lstNickName);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TITLE:fr\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+#endif
+}
+
+void NickNameTest::shouldCreateVCardWithTwoNickName()
+{
+#if 0
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::NickName::List lstNickName;
+    KContacts::NickName title(QStringLiteral("fr"));
+    KContacts::NickName title2(QStringLiteral("fr2"));
+    lstNickName << title << title2;
+    addr.setExtraNickNameList(lstNickName);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TITLE:fr\r\n"
+                        "TITLE:fr2\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+#endif
+}
+
+void NickNameTest::shouldCreateVCardWithParameters()
+{
+#if 0
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::NickName::List lstNickName;
+    KContacts::NickName title(QStringLiteral("fr"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    title.setParameters(params);
+    lstNickName << title;
+    addr.setExtraNickNameList(lstNickName);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+#endif
+}
+
+void NickNameTest::shouldGenerateNickNameForVCard3()
+{
+#if 0
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::NickName::List lstNickName;
+    KContacts::NickName title(QStringLiteral("fr"));
+    QMap<QString, QStringList> params;
+    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
+    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    title.setParameters(params);
+    lstNickName << title;
+    addr.setExtraNickNameList(lstNickName);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+    QCOMPARE(ba, expected);
+#endif
 }
 
 QTEST_MAIN(NickNameTest)
