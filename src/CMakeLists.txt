@@ -35,6 +35,7 @@ set(kcontacts_SRCS
   title.cpp
   nickname.cpp
   role.cpp
+  org.cpp
   ${vcardparser_SRCS}
 )
 
@@ -99,6 +100,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   TimeZone
   Title
   Role
+  Org
   NickName
   VCardDrag
   FieldGroup
