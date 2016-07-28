@@ -46,6 +46,7 @@
 #include "resourcelocatorurl.h"
 #include "fieldgroup.h"
 #include "title.h"
+#include "nickname.h"
 
 namespace KContacts
 {

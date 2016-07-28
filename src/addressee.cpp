@@ -1372,7 +1372,7 @@ void Addressee::setNameFromString(const QString &s)
         leftOffset = 0;
         rightOffset = parts.count();
 
-        if (parts.count() > 0) {
+        if (!parts.isEmpty()) {
 
             QString prefix;
             while (leftOffset < rightOffset) {
@@ -1600,7 +1600,8 @@ void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
     d->mEmpty = false;
 
     PhoneNumber::List::Iterator it;
-    for (it = d->mPhoneNumbers.begin(); it != d->mPhoneNumbers.end(); ++it) {
+    PhoneNumber::List::Iterator end(d->mPhoneNumbers.end());
+    for (it = d->mPhoneNumbers.begin(); it != end; ++it) {
         if ((*it).id() == phoneNumber.id()) {
             *it = phoneNumber;
             return;
@@ -1866,7 +1867,8 @@ void Addressee::insertAddress(const Address &address)
     d->mEmpty = false;
 
     Address::List::Iterator it;
-    for (it = d->mAddresses.begin(); it != d->mAddresses.end(); ++it) {
+    Address::List::Iterator end(d->mAddresses.end());
+    for (it = d->mAddresses.begin(); it != end; ++it) {
         if ((*it).id() == address.id()) {
             *it = address;
             return;
