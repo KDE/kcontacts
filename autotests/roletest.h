@@ -35,11 +35,11 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualRole();
-#if 0
     void shouldParseRole();
     void shouldParseWithoutRole();
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoRole();
+#if 0
     void shouldCreateVCardWithParameters();
     void shouldGenerateRoleForVCard3();
 #endif

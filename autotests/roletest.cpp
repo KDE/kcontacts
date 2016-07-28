@@ -103,7 +103,6 @@ void RoleTest::shouldEqualRole()
     result = role;
     QVERIFY(role == result);
 }
-#if 0
 void RoleTest::shouldParseRole()
 {
 
@@ -162,6 +161,7 @@ void RoleTest::shouldCreateVCard()
 
     QCOMPARE(ba, expected);
 }
+
 void RoleTest::shouldCreateVCardWithTwoRole()
 {
     KContacts::AddresseeList lst;
@@ -188,7 +188,7 @@ void RoleTest::shouldCreateVCardWithTwoRole()
     QCOMPARE(ba, expected);
 
 }
-
+#if 0
 void RoleTest::shouldCreateVCardWithParameters()
 {
     KContacts::AddresseeList lst;
