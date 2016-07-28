@@ -47,6 +47,7 @@
 #include "fieldgroup.h"
 #include "title.h"
 #include "nickname.h"
+#include "role.h"
 
 namespace KContacts
 {
@@ -460,7 +461,6 @@ public:
     void insertExtraTitle(const Title &title);
     void setExtraTitleList(const Title::List &urltitle);
     Title::List extraTitleList() const;
-
     /**
       Return title.
      */
@@ -475,6 +475,10 @@ public:
       Set role.
      */
     void setRole(const QString &role);
+    void setRole(const Role &role);
+    void insertExtraRole(const Role &role);
+    void setExtraRoleList(const Role::List &roleList);
+    Role::List extraRoleList() const;
 
     /**
       Return role.

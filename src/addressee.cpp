@@ -69,7 +69,6 @@ public:
         mMailer = other.mMailer;
         mTimeZone = other.mTimeZone;
         mGeo = other.mGeo;
-        mRole = other.mRole;
         mOrganization = other.mOrganization;
         mDepartment = other.mDepartment;
         mNote = other.mNote;
@@ -101,6 +100,7 @@ public:
         mImpps = other.mImpps;
         mChanged = other.mChanged;
         mTitleExtraList = other.mTitleExtraList;
+        mRoleExtraList = other.mRoleExtraList;
     }
 
     ~Private()
@@ -120,7 +120,6 @@ public:
     QString mMailer;
     TimeZone mTimeZone;
     Geo mGeo;
-    QString mRole;
     QString mOrganization;
     QString mDepartment;
     QString mNote;
@@ -152,6 +151,7 @@ public:
     Related::List mRelationShips;
     FieldGroup::List mFieldGroupList;
     Title::List mTitleExtraList;
+    Role::List mRoleExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -256,12 +256,6 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mGeo != addressee.d->mGeo) {
         qCDebug(KCONTACTS_LOG) << "geo differs";
-        return false;
-    }
-
-    if (d->mRole != addressee.d->mRole &&
-            !(d->mRole.isEmpty() && addressee.d->mRole.isEmpty())) {
-        qCDebug(KCONTACTS_LOG) << "role differs";
         return false;
     }
 
@@ -399,6 +393,11 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (!listEquals(d->mTitleExtraList, addressee.d->mTitleExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra TitleList differs";
+        return false;
+    }
+
+    if (!listEquals(d->mRoleExtraList, addressee.d->mRoleExtraList)) {
+        qCDebug(KCONTACTS_LOG) << "Extra RoleList differs";
         return false;
     }
     return true;
@@ -998,17 +997,49 @@ QString Addressee::titleLabel()
 
 void Addressee::setRole(const QString &role)
 {
-    if (role == d->mRole) {
-        return;
+    Role t(role);
+    if (!d->mRoleExtraList.isEmpty()) {
+        t = d->mRoleExtraList.takeFirst();
+        t.setRole(role);
+        d->mRoleExtraList.prepend(t);
+        d->mEmpty = false;
+    } else {
+        insertExtraRole(role);
     }
+}
 
+void Addressee::setRole(const Role &role)
+{
+    insertExtraRole(role);
+}
+
+void Addressee::insertExtraRole(const Role &role)
+{
+    if (role.isValid()) {
+        d->mEmpty = false;
+        d->mRoleExtraList.append(role);
+    }
+}
+
+void Addressee::setExtraRoleList(const Role::List &roleList)
+{
     d->mEmpty = false;
-    d->mRole = role;
+    d->mRoleExtraList = roleList;
+
+}
+
+Role::List Addressee::extraRoleList() const
+{
+    return d->mRoleExtraList;
 }
 
 QString Addressee::role() const
 {
-    return d->mRole;
+    if (d->mRoleExtraList.isEmpty()) {
+        return {};
+    } else {
+        return d->mRoleExtraList.at(0).role();
+    }
 }
 
 QString Addressee::roleLabel()
@@ -2303,7 +2334,6 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mMailer;
     s << a.d->mTimeZone;
     s << a.d->mGeo;
-    s << a.d->mRole;
     s << a.d->mOrganization;
     s << a.d->mDepartment;
     s << a.d->mNote;
@@ -2334,6 +2364,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mImpps;
     s << a.d->mFieldGroupList;
     s << a.d->mTitleExtraList;
+    s << a.d->mRoleExtraList;
 
     return s;
 }
@@ -2354,7 +2385,6 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mMailer;
     s >> a.d->mTimeZone;
     s >> a.d->mGeo;
-    s >> a.d->mRole;
     s >> a.d->mOrganization;
     s >> a.d->mDepartment;
     s >> a.d->mNote;
@@ -2387,6 +2417,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mImpps;
     s >> a.d->mFieldGroupList;
     s >> a.d->mTitleExtraList;
+    s >> a.d->mRoleExtraList;
     a.d->mEmpty = false;
 
     return s;
