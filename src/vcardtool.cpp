@@ -431,12 +431,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(VCardLine(QStringLiteral("REV"), createDateTime((*addrIt).revision(), version)));
 
         // ROLE
-        VCardLine roleLine(QStringLiteral("ROLE"), (*addrIt).role());
-        if (version == VCard::v2_1 && needsEncoding((*addrIt).role())) {
-            roleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-            roleLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+        Q_FOREACH (const Role &role, (*addrIt).extraRoleList()) {
+            VCardLine roleLine(QStringLiteral("ROLE"), role.role());
+            if (version == VCard::v2_1 && needsEncoding(role.role())) {
+                roleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                roleLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+            }
+            QMapIterator<QString, QStringList> i(role.parameters());
+            while (i.hasNext()) {
+                i.next();
+                roleLine.addParameter(i.key(), i.value().join(QLatin1Char(',')));
+            }
+            card.addLine(roleLine);
         }
-        card.addLine(roleLine);
 
         // SORT-STRING
         if (version == VCard::v3_0) {
@@ -1021,7 +1028,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // ROLE
                 else if (identifier == QLatin1String("role")) {
-                    addr.setRole((*lineIt).value().toString());
+                    Role role((*lineIt).value().toString());
+                    role.setParameters((*lineIt).parameterMap());
+                    addr.insertExtraRole(role);
                 }
 
                 // SORT-STRING
