@@ -188,7 +188,6 @@ void RoleTest::shouldCreateVCardWithTwoRole()
     QCOMPARE(ba, expected);
 
 }
-#if 0
 void RoleTest::shouldCreateVCardWithParameters()
 {
     KContacts::AddresseeList lst;
@@ -242,5 +241,5 @@ void RoleTest::shouldGenerateRoleForVCard3()
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-#endif
+
 QTEST_MAIN(RoleTest)

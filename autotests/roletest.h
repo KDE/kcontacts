@@ -39,10 +39,8 @@ private Q_SLOTS:
     void shouldParseWithoutRole();
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoRole();
-#if 0
     void shouldCreateVCardWithParameters();
     void shouldGenerateRoleForVCard3();
-#endif
 };
 
 #endif // ROLETEST_H

@@ -1028,7 +1028,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // ROLE
                 else if (identifier == QLatin1String("role")) {
-                    addr.setRole((*lineIt).value().toString());
+                    Role role((*lineIt).value().toString());
+                    role.setParameters((*lineIt).parameterMap());
+                    addr.insertExtraRole(role);
                 }
 
                 // SORT-STRING
