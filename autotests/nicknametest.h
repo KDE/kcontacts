@@ -35,7 +35,12 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualNickName();
-    //TODO add parsing and co
+    void shouldParseNickName();
+    void shouldParseWithoutNickName();
+    void shouldCreateVCard();
+    void shouldCreateVCardWithTwoNickName();
+    void shouldCreateVCardWithParameters();
+    void shouldGenerateNickNameForVCard3();
 };
 
 #endif // NICKNAMETEST_H
