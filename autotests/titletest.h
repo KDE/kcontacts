@@ -36,13 +36,11 @@ private Q_SLOTS:
     void shouldSerialized();
     void shouldEqualTitle();
     void shouldParseTitle();
-#if 0
-    void shouldParseWithoutLanguage();
+    void shouldParseWithoutTitle();
     void shouldCreateVCard();
-    void shouldCreateVCardWithTwoLang();
+    void shouldCreateVCardWithTwoTitle();
     void shouldCreateVCardWithParameters();
-    void shouldNotGenerateLangForVCard3();
-#endif
+    void shouldGenerateTitleForVCard3();
 };
 
 #endif // TITLETEST_H

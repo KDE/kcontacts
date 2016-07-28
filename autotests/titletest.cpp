@@ -123,8 +123,7 @@ void TitleTest::shouldParseTitle()
     QCOMPARE(lst.at(0).title(), QStringLiteral("boo"));
 }
 
-#if 0
-void TitleTest::shouldParseWithoutLanguage()
+void TitleTest::shouldParseWithoutTitle()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
@@ -137,7 +136,7 @@ void TitleTest::shouldParseWithoutLanguage()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).langs().count(), 0);
+    QCOMPARE(lst.at(0).extraTitleList().count(), 0);
 }
 
 void TitleTest::shouldCreateVCard()
@@ -146,44 +145,43 @@ void TitleTest::shouldCreateVCard()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
-    lstLang << lang;
-    addr.setLangs(lstLang);
+    KContacts::Title::List lstTitle;
+    KContacts::Title title(QStringLiteral("fr"));
+    lstTitle << title;
+    addr.setExtraTitleList(lstTitle);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG:fr\r\n"
                         "N:;;;;\r\n"
+                        "TITLE:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
-
-void TitleTest::shouldCreateVCardWithTwoLang()
+void TitleTest::shouldCreateVCardWithTwoTitle()
 {
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
-    KContacts::Lang lang2(QStringLiteral("fr2"));
-    lstLang << lang << lang2;
-    addr.setLangs(lstLang);
+    KContacts::Title::List lstTitle;
+    KContacts::Title title(QStringLiteral("fr"));
+    KContacts::Title title2(QStringLiteral("fr2"));
+    lstTitle << title << title2;
+    addr.setExtraTitleList(lstTitle);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG:fr\r\n"
-                        "LANG:fr2\r\n"
                         "N:;;;;\r\n"
+                        "TITLE:fr\r\n"
+                        "TITLE:fr2\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
@@ -197,41 +195,41 @@ void TitleTest::shouldCreateVCardWithParameters()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
+    KContacts::Title::List lstTitle;
+    KContacts::Title title(QStringLiteral("fr"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    lang.setParameters(params);
-    lstLang << lang;
-    addr.setLangs(lstLang);
+    title.setParameters(params);
+    lstTitle << title;
+    addr.setExtraTitleList(lstTitle);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "LANG;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "N:;;;;\r\n"
+                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
-void TitleTest::shouldNotGenerateLangForVCard3()
+void TitleTest::shouldGenerateTitleForVCard3()
 {
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    KContacts::Lang::List lstLang;
-    KContacts::Lang lang(QStringLiteral("fr"));
+    KContacts::Title::List lstTitle;
+    KContacts::Title title(QStringLiteral("fr"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    lang.setParameters(params);
-    lstLang << lang;
-    addr.setLangs(lstLang);
+    title.setParameters(params);
+    lstTitle << title;
+    addr.setExtraTitleList(lstTitle);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
@@ -239,9 +237,10 @@ void TitleTest::shouldNotGenerateLangForVCard3()
                         "VERSION:3.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
+                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-#endif
+
 QTEST_MAIN(TitleTest)
