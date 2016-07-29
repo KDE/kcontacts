@@ -18,7 +18,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-set(PIM_VERSION "5.3.41")
+set(PIM_VERSION "5.3.42")
 
 set(KCONTACTS_LIB_VERSION ${PIM_VERSION})
 
