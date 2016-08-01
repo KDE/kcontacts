@@ -126,11 +126,11 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         QStringList::ConstIterator strIt;
         // VERSION
         if (version == VCard::v2_1) {
-            card.addLine(VCardLine(QStringLiteral("VERSION"), QLatin1String("2.1")));
+            card.addLine(VCardLine(QStringLiteral("VERSION"), QStringLiteral("2.1")));
         } else if (version == VCard::v3_0) {
-            card.addLine(VCardLine(QStringLiteral("VERSION"), QLatin1String("3.0")));
+            card.addLine(VCardLine(QStringLiteral("VERSION"), QStringLiteral("3.0")));
         } else if (version == VCard::v4_0) {
-            card.addLine(VCardLine(QStringLiteral("VERSION"), QLatin1String("4.0")));
+            card.addLine(VCardLine(QStringLiteral("VERSION"), QStringLiteral("4.0")));
         }
 
         // ADR + LABEL
@@ -147,25 +147,25 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                                   (*it).country().isEmpty());
 
             address.append((*it).postOfficeBox().replace(QLatin1Char(';'),
-                           QLatin1String("\\;")));
+                           QStringLiteral("\\;")));
 
             address.append((*it).extended().replace(QLatin1Char(';'),
-                                                    QLatin1String("\\;")));
+                                                    QStringLiteral("\\;")));
 
             address.append((*it).street().replace(QLatin1Char(';'),
-                                                  QLatin1String("\\;")));
+                                                  QStringLiteral("\\;")));
 
             address.append((*it).locality().replace(QLatin1Char(';'),
-                                                    QLatin1String("\\;")));
+                                                    QStringLiteral("\\;")));
 
             address.append((*it).region().replace(QLatin1Char(';'),
-                                                  QLatin1String("\\;")));
+                                                  QStringLiteral("\\;")));
 
             address.append((*it).postalCode().replace(QLatin1Char(';'),
-                           QLatin1String("\\;")));
+                           QStringLiteral("\\;")));
 
             address.append((*it).country().replace(QLatin1Char(';'),
-                                                   QLatin1String("\\;")));
+                                                   QStringLiteral("\\;")));
 
             VCardLine adrLine(QStringLiteral("ADR"), address.join(QLatin1Char(';')));
             if (version == VCard::v2_1 && needsEncoding(address.join(QLatin1Char(';')))) {
@@ -228,7 +228,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 QStringList::Iterator catIt;
                 QStringList::Iterator catEnd(categories.end());
                 for (catIt = categories.begin(); catIt != catEnd; ++catIt) {
-                    (*catIt).replace(QLatin1Char(','), QLatin1String("\\,"));
+                    (*catIt).replace(QLatin1Char(','), QStringLiteral("\\,"));
                 }
 
                 VCardLine catLine(QStringLiteral("CATEGORIES"), categories.join(QLatin1Char(',')));
@@ -354,19 +354,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // N required for only version < 4.0
         QStringList name;
         name.append((*addrIt).familyName().replace(QLatin1Char(';'),
-                    QLatin1String("\\;")));
+                    QStringLiteral("\\;")));
 
         name.append((*addrIt).givenName().replace(QLatin1Char(';'),
-                    QLatin1String("\\;")));
+                    QStringLiteral("\\;")));
 
         name.append((*addrIt).additionalName().replace(QLatin1Char(';'),
-                    QLatin1String("\\;")));
+                    QStringLiteral("\\;")));
 
         name.append((*addrIt).prefix().replace(QLatin1Char(';'),
-                                               QLatin1String("\\;")));
+                                               QStringLiteral("\\;")));
 
         name.append((*addrIt).suffix().replace(QLatin1Char(';'),
-                                               QLatin1String("\\;")));
+                                               QStringLiteral("\\;")));
 
         VCardLine nLine(QStringLiteral("N"), name.join(QLatin1Char(';')));
         if (version == VCard::v2_1 && needsEncoding(name.join(QLatin1Char(';')))) {
@@ -405,10 +405,10 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         // ORG
         QStringList organization;
         organization.append((*addrIt).organization().replace(QLatin1Char(';'),
-                            QLatin1String("\\;")));
+                            QStringLiteral("\\;")));
         if (!(*addrIt).department().isEmpty()) {
             organization.append((*addrIt).department().replace(QLatin1Char(';'),
-                                QLatin1String("\\;")));
+                                QStringLiteral("\\;")));
         }
         VCardLine orgLine(QStringLiteral("ORG"), organization.join(QLatin1Char(';')));
         if (version == VCard::v2_1 && needsEncoding(organization.join(QLatin1Char(';')))) {
@@ -1438,11 +1438,11 @@ VCardLine VCardTool::createSecrecy(const Secrecy &secrecy) const
     int type = secrecy.type();
 
     if (type == Secrecy::Public) {
-        line.setValue(QLatin1String("PUBLIC"));
+        line.setValue(QStringLiteral("PUBLIC"));
     } else if (type == Secrecy::Private) {
-        line.setValue(QLatin1String("PRIVATE"));
+        line.setValue(QStringLiteral("PRIVATE"));
     } else if (type == Secrecy::Confidential) {
-        line.setValue(QLatin1String("CONFIDENTIAL"));
+        line.setValue(QStringLiteral("CONFIDENTIAL"));
     }
 
     return line;
