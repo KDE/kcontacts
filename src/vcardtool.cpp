@@ -135,7 +135,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // ADR + LABEL
         const Address::List addresses = (*addrIt).addresses();
-        for (Address::List::ConstIterator it = addresses.begin(); it != addresses.end(); ++it) {
+        Address::List::ConstIterator end(addresses.end());
+        for (Address::List::ConstIterator it = addresses.begin(); it != end; ++it) {
             QStringList address;
 
             const bool isEmpty = ((*it).postOfficeBox().isEmpty() &&
@@ -167,8 +168,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             address.append((*it).country().replace(QLatin1Char(';'),
                                                    QStringLiteral("\\;")));
 
-            VCardLine adrLine(QStringLiteral("ADR"), address.join(QLatin1Char(';')));
-            if (version == VCard::v2_1 && needsEncoding(address.join(QLatin1Char(';')))) {
+            const QString addressJoined(address.join(QLatin1Char(';')));
+            VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
+            if (version == VCard::v2_1 && needsEncoding(addressJoined)) {
                 adrLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
                 adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
             }
@@ -701,25 +703,26 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("adr")) {
                     Address address;
                     const QStringList addrParts = splitString(semicolonSep, (*lineIt).value().toString());
-                    if (addrParts.count() > 0) {
+                    const int addrPartsCount(addrParts.count());
+                    if (addrPartsCount > 0) {
                         address.setPostOfficeBox(addrParts.at(0));
                     }
-                    if (addrParts.count() > 1) {
+                    if (addrPartsCount > 1) {
                         address.setExtended(addrParts.at(1));
                     }
-                    if (addrParts.count() > 2) {
+                    if (addrPartsCount > 2) {
                         address.setStreet(addrParts.at(2));
                     }
-                    if (addrParts.count() > 3) {
+                    if (addrPartsCount > 3) {
                         address.setLocality(addrParts.at(3));
                     }
-                    if (addrParts.count() > 4) {
+                    if (addrPartsCount > 4) {
                         address.setRegion(addrParts.at(4));
                     }
-                    if (addrParts.count() > 5) {
+                    if (addrPartsCount > 5) {
                         address.setPostalCode(addrParts.at(5));
                     }
-                    if (addrParts.count() > 6) {
+                    if (addrPartsCount > 6) {
                         address.setCountry(addrParts.at(6));
                     }
 
