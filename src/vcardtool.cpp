@@ -405,19 +405,23 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(noteLine);
 
         // ORG
-        QStringList organization;
-        organization.append((*addrIt).organization().replace(QLatin1Char(';'),
-                            QStringLiteral("\\;")));
-        if (!(*addrIt).department().isEmpty()) {
-            organization.append((*addrIt).department().replace(QLatin1Char(';'),
+        Q_FOREACH (const Org &org, (*addrIt).extraOrganizationList()) {
+            QStringList organization;
+            organization.append(org.organization().replace(QLatin1Char(';'),
                                 QStringLiteral("\\;")));
+            if (!(*addrIt).department().isEmpty()) {
+                organization.append((*addrIt).department().replace(QLatin1Char(';'),
+                                    QStringLiteral("\\;")));
+            }
+            const QString orgStr = organization.join(QLatin1Char(';'));
+            VCardLine orgLine(QStringLiteral("ORG"), orgStr);
+            if (version == VCard::v2_1 && needsEncoding(orgStr)) {
+                orgLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                orgLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+            }
+            addParameters(orgLine, org.parameters());
+            card.addLine(orgLine);
         }
-        VCardLine orgLine(QStringLiteral("ORG"), organization.join(QLatin1Char(';')));
-        if (version == VCard::v2_1 && needsEncoding(organization.join(QLatin1Char(';')))) {
-            orgLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-            orgLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-        }
-        card.addLine(orgLine);
 
         // PHOTO
         card.addLine(createPicture(QStringLiteral("PHOTO"), (*addrIt).photo(), version));
@@ -980,7 +984,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList orgParts = splitString(semicolonSep, (*lineIt).value().toString());
                     const int orgPartsCount(orgParts.count());
                     if (orgPartsCount > 0) {
-                        addr.setOrganization(orgParts.at(0));
+                        Org organization(orgParts.at(0));
+                        organization.setParameters((*lineIt).parameterMap());
+                        addr.insertExtraOrganization(organization);
                     }
                     if (orgPartsCount > 1) {
                         addr.setDepartment(orgParts.at(1));

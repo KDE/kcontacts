@@ -48,6 +48,7 @@
 #include "title.h"
 #include "nickname.h"
 #include "role.h"
+#include "org.h"
 
 namespace KContacts
 {
@@ -493,7 +494,13 @@ public:
     /**
       Set organization.
      */
+    //Remove in kf6
     void setOrganization(const QString &organization);
+    void setOrganization(const Org &organization);
+    void insertExtraOrganization(const Org &organization);
+    void setExtraOrganizationList(const Org::List &orgList);
+    Org::List extraOrganizationList() const;
+
 
     /**
       Return organization.

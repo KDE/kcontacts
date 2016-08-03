@@ -104,10 +104,8 @@ void OrgTest::shouldEqualOrg()
     QVERIFY(org == result);
 }
 
-#if 0
 void OrgTest::shouldParseOrg()
 {
-
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
@@ -120,8 +118,28 @@ void OrgTest::shouldParseOrg()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).extraOrgList().count(), 1);
-    QCOMPARE(lst.at(0).org(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).extraOrganizationList().count(), 1);
+    QCOMPARE(lst.at(0).organization(), QStringLiteral("boo"));
+}
+
+void OrgTest::shouldParseVcardWithTwoOrg()
+{
+    QByteArray vcarddata("BEGIN:VCARD\n"
+                         "VERSION:3.0\n"
+                         "N:LastName;FirstName;;;\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+                         "Org:boo\n"
+                         "Org:bla\n"
+                         "REV:2015-03-14T09:24:45+00:00\n"
+                         "FN:FirstName LastName\n"
+                         "END:VCARD\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QCOMPARE(lst.at(0).extraOrganizationList().count(), 2);
+    QCOMPARE(lst.at(0).extraOrganizationList().at(0).organization(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).extraOrganizationList().at(1).organization(), QStringLiteral("bla"));
 }
 
 void OrgTest::shouldParseWithoutOrg()
@@ -137,7 +155,7 @@ void OrgTest::shouldParseWithoutOrg()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).extraOrgList().count(), 0);
+    QCOMPARE(lst.at(0).extraOrganizationList().count(), 0);
 }
 
 void OrgTest::shouldCreateVCard()
@@ -149,7 +167,7 @@ void OrgTest::shouldCreateVCard()
     KContacts::Org::List lstOrg;
     KContacts::Org org(QStringLiteral("fr"));
     lstOrg << org;
-    addr.setExtraOrgList(lstOrg);
+    addr.setExtraOrganizationList(lstOrg);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -163,6 +181,7 @@ void OrgTest::shouldCreateVCard()
 
     QCOMPARE(ba, expected);
 }
+
 void OrgTest::shouldCreateVCardWithTwoOrg()
 {
     KContacts::AddresseeList lst;
@@ -173,7 +192,7 @@ void OrgTest::shouldCreateVCardWithTwoOrg()
     KContacts::Org org(QStringLiteral("fr"));
     KContacts::Org org2(QStringLiteral("fr2"));
     lstOrg << org << org2;
-    addr.setExtraOrgList(lstOrg);
+    addr.setExtraOrganizationList(lstOrg);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -203,7 +222,7 @@ void OrgTest::shouldCreateVCardWithParameters()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);
     lstOrg << org;
-    addr.setExtraOrgList(lstOrg);
+    addr.setExtraOrganizationList(lstOrg);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -230,7 +249,7 @@ void OrgTest::shouldGenerateOrgForVCard3()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);
     lstOrg << org;
-    addr.setExtraOrgList(lstOrg);
+    addr.setExtraOrganizationList(lstOrg);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
@@ -243,5 +262,5 @@ void OrgTest::shouldGenerateOrgForVCard3()
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-#endif
+
 QTEST_MAIN(OrgTest)
