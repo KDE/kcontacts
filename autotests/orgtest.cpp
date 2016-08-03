@@ -142,6 +142,30 @@ void OrgTest::shouldParseVcardWithTwoOrg()
     QCOMPARE(lst.at(0).extraOrganizationList().at(1).organization(), QStringLiteral("bla"));
 }
 
+void OrgTest::shouldCreateVCardWithSemiColon()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    KContacts::Org::List lstOrg;
+    KContacts::Org org(QStringLiteral("fr;bla"));
+    lstOrg << org;
+    addr.setExtraOrganizationList(lstOrg);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "ORG:fr\\\\;bla\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
 void OrgTest::shouldParseWithoutOrg()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
