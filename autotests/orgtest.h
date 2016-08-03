@@ -35,14 +35,13 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualOrg();
-#if 0
     void shouldParseOrg();
     void shouldParseWithoutOrg();
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoOrg();
     void shouldCreateVCardWithParameters();
     void shouldGenerateOrgForVCard3();
-#endif
+    void shouldParseVcardWithTwoOrg();
 };
 
 #endif // ORGTEST_H

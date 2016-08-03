@@ -69,7 +69,6 @@ public:
         mMailer = other.mMailer;
         mTimeZone = other.mTimeZone;
         mGeo = other.mGeo;
-        mOrganization = other.mOrganization;
         mDepartment = other.mDepartment;
         mNote = other.mNote;
         mProductId = other.mProductId;
@@ -101,6 +100,7 @@ public:
         mChanged = other.mChanged;
         mTitleExtraList = other.mTitleExtraList;
         mRoleExtraList = other.mRoleExtraList;
+        mOrgExtraList = other.mOrgExtraList;
     }
 
     ~Private()
@@ -120,7 +120,6 @@ public:
     QString mMailer;
     TimeZone mTimeZone;
     Geo mGeo;
-    QString mOrganization;
     QString mDepartment;
     QString mNote;
     QString mProductId;
@@ -152,6 +151,7 @@ public:
     FieldGroup::List mFieldGroupList;
     Title::List mTitleExtraList;
     Role::List mRoleExtraList;
+    Org::List mOrgExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -256,12 +256,6 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mGeo != addressee.d->mGeo) {
         qCDebug(KCONTACTS_LOG) << "geo differs";
-        return false;
-    }
-
-    if (d->mOrganization != addressee.d->mOrganization &&
-            !(d->mOrganization.isEmpty() && addressee.d->mOrganization.isEmpty())) {
-        qCDebug(KCONTACTS_LOG) << "organization differs";
         return false;
     }
 
@@ -398,6 +392,11 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (!listEquals(d->mRoleExtraList, addressee.d->mRoleExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra RoleList differs";
+        return false;
+    }
+
+    if (!listEquals(d->mOrgExtraList, addressee.d->mOrgExtraList)) {
+        qCDebug(KCONTACTS_LOG) << "Extra Organization List differs";
         return false;
     }
     return true;
@@ -1049,17 +1048,48 @@ QString Addressee::roleLabel()
 
 void Addressee::setOrganization(const QString &organization)
 {
-    if (organization == d->mOrganization) {
-        return;
+    Org t(organization);
+    if (!d->mOrgExtraList.isEmpty()) {
+        t = d->mOrgExtraList.takeFirst();
+        t.setOrganization(organization);
+        d->mOrgExtraList.prepend(t);
+        d->mEmpty = false;
+    } else {
+        insertExtraOrganization(organization);
     }
+}
 
+void Addressee::setOrganization(const Org &organization)
+{
+    insertExtraOrganization(organization);
+}
+
+void Addressee::insertExtraOrganization(const Org &organization)
+{
+    if (organization.isValid()) {
+        d->mEmpty = false;
+        d->mOrgExtraList.append(organization);
+    }
+}
+
+void Addressee::setExtraOrganizationList(const Org::List &orgList)
+{
     d->mEmpty = false;
-    d->mOrganization = organization;
+    d->mOrgExtraList = orgList;
+}
+
+Org::List Addressee::extraOrganizationList() const
+{
+    return d->mOrgExtraList;
 }
 
 QString Addressee::organization() const
 {
-    return d->mOrganization;
+    if (d->mOrgExtraList.isEmpty()) {
+        return {};
+    } else {
+        return d->mOrgExtraList.at(0).organization();
+    }
 }
 
 QString Addressee::organizationLabel()
@@ -2334,7 +2364,6 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mMailer;
     s << a.d->mTimeZone;
     s << a.d->mGeo;
-    s << a.d->mOrganization;
     s << a.d->mDepartment;
     s << a.d->mNote;
     s << a.d->mProductId;
@@ -2365,6 +2394,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mFieldGroupList;
     s << a.d->mTitleExtraList;
     s << a.d->mRoleExtraList;
+    s << a.d->mOrgExtraList;
 
     return s;
 }
@@ -2385,7 +2415,6 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mMailer;
     s >> a.d->mTimeZone;
     s >> a.d->mGeo;
-    s >> a.d->mOrganization;
     s >> a.d->mDepartment;
     s >> a.d->mNote;
     s >> a.d->mProductId;
@@ -2418,6 +2447,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mFieldGroupList;
     s >> a.d->mTitleExtraList;
     s >> a.d->mRoleExtraList;
+    s >> a.d->mOrgExtraList;
     a.d->mEmpty = false;
 
     return s;
