@@ -42,6 +42,7 @@ private Q_SLOTS:
     void shouldCreateVCardWithParameters();
     void shouldGenerateOrgForVCard3();
     void shouldParseVcardWithTwoOrg();
+    void shouldCreateVCardWithSemiColon();
 };
 
 #endif // ORGTEST_H
