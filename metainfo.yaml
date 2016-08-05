@@ -2,6 +2,8 @@ maintainer:
 description: Address book API for KDE 
 tier: 3
 type: functional
+public_lib: true
+group: kdepim
 platforms:
     - name: All
 portingAid: false
