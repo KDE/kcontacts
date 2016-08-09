@@ -152,6 +152,7 @@ public:
     Title::List mTitleExtraList;
     Role::List mRoleExtraList;
     Org::List mOrgExtraList;
+    NickName::List mNickNameExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
 
@@ -397,6 +398,11 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (!listEquals(d->mOrgExtraList, addressee.d->mOrgExtraList)) {
         qCDebug(KCONTACTS_LOG) << "Extra Organization List differs";
+        return false;
+    }
+
+    if (!listEquals(d->mNickNameExtraList, addressee.d->mNickNameExtraList)) {
+        qCDebug(KCONTACTS_LOG) << "Extra NickName List differs";
         return false;
     }
     return true;
@@ -2395,6 +2401,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mTitleExtraList;
     s << a.d->mRoleExtraList;
     s << a.d->mOrgExtraList;
+    s << a.d->mNickNameExtraList;
 
     return s;
 }
@@ -2448,6 +2455,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mTitleExtraList;
     s >> a.d->mRoleExtraList;
     s >> a.d->mOrgExtraList;
+    s >> a.d->mNickNameExtraList;
     a.d->mEmpty = false;
 
     return s;
