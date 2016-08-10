@@ -1032,7 +1032,7 @@ void Addressee::setRole(const QString &role)
         d->mRoleExtraList.prepend(t);
         d->mEmpty = false;
     } else {
-        insertExtraRole(role);
+        insertExtraRole(t);
     }
 }
 
