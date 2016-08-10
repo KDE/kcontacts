@@ -121,6 +121,7 @@ void TitleTest::shouldParseTitle()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraTitleList().count(), 1);
     QCOMPARE(lst.at(0).title(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).extraTitleList().at(0).title(), QStringLiteral("boo"));
 }
 
 void TitleTest::shouldParseWithoutTitle()
@@ -137,6 +138,7 @@ void TitleTest::shouldParseWithoutTitle()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraTitleList().count(), 0);
+    QCOMPARE(lst.at(0).title(), QString());
 }
 
 void TitleTest::shouldCreateVCard()
