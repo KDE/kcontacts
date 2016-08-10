@@ -120,6 +120,7 @@ void OrgTest::shouldParseOrg()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraOrganizationList().count(), 1);
     QCOMPARE(lst.at(0).organization(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).extraOrganizationList().at(0).organization(), QStringLiteral("boo"));
 }
 
 void OrgTest::shouldParseVcardWithTwoOrg()

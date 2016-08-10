@@ -267,6 +267,11 @@ public:
       Set nick name.
      */
     void setNickName(const QString &nickName);
+    void setNickName(const NickName &nickName);
+    void insertExtraNickName(const NickName &nickName);
+    void setExtraNickNameList(const NickName::List &nickNameList);
+    NickName::List extraNickNameList() const;
+
 
     /**
       Return nick name.

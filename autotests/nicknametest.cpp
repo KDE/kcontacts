@@ -105,7 +105,6 @@ void NickNameTest::shouldEqualNickName()
 
 void NickNameTest::shouldParseNickName()
 {
-#if 0
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
@@ -119,13 +118,12 @@ void NickNameTest::shouldParseNickName()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraNickNameList().count(), 1);
-    QCOMPARE(lst.at(0).title(), QStringLiteral("boo"));
-#endif
+    QCOMPARE(lst.at(0).extraNickNameList().at(0).nickname(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).nickName(), QStringLiteral("boo"));
 }
 
 void NickNameTest::shouldParseWithoutNickName()
 {
-#if 0
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
@@ -138,18 +136,17 @@ void NickNameTest::shouldParseWithoutNickName()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraNickNameList().count(), 0);
-#endif
+    QCOMPARE(lst.at(0).nickName(), QString());
 }
 
 void NickNameTest::shouldCreateVCard()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
     KContacts::NickName::List lstNickName;
-    KContacts::NickName title(QStringLiteral("fr"));
+    KContacts::NickName title(QStringLiteral("blo"));
     lstNickName << title;
     addr.setExtraNickNameList(lstNickName);
     lst << addr;
@@ -159,17 +156,15 @@ void NickNameTest::shouldCreateVCard()
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "TITLE:fr\r\n"
+                        "NICKNAME:blo\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-#endif
 }
 
 void NickNameTest::shouldCreateVCardWithTwoNickName()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -186,18 +181,16 @@ void NickNameTest::shouldCreateVCardWithTwoNickName()
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "TITLE:fr\r\n"
-                        "TITLE:fr2\r\n"
+                        "NICKNAME:fr\r\n"
+                        "NICKNAME:fr2\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-#endif
 }
 
 void NickNameTest::shouldCreateVCardWithParameters()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -217,16 +210,14 @@ void NickNameTest::shouldCreateVCardWithParameters()
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+                        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
-#endif
 }
 
 void NickNameTest::shouldGenerateNickNameForVCard3()
 {
-#if 0
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -246,11 +237,10 @@ void NickNameTest::shouldGenerateNickNameForVCard3()
                         "VERSION:3.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "TITLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+                        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
-#endif
 }
 
 QTEST_MAIN(NickNameTest)

@@ -64,7 +64,6 @@ public:
         mAdditionalName = other.mAdditionalName;
         mPrefix = other.mPrefix;
         mSuffix = other.mSuffix;
-        mNickName = other.mNickName;
         mBirthday = other.mBirthday;
         mMailer = other.mMailer;
         mTimeZone = other.mTimeZone;
@@ -115,7 +114,6 @@ public:
     QString mAdditionalName;
     QString mPrefix;
     QString mSuffix;
-    QString mNickName;
     QDateTime mBirthday;
     QString mMailer;
     TimeZone mTimeZone;
@@ -230,12 +228,6 @@ bool Addressee::operator==(const Addressee &addressee) const
     if (d->mSuffix != addressee.d->mSuffix &&
             !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "suffix differs";
-        return false;
-    }
-
-    if (d->mNickName != addressee.d->mNickName &&
-            !(d->mNickName.isEmpty() && addressee.d->mNickName.isEmpty())) {
-        qCDebug(KCONTACTS_LOG) << "nickName differs";
         return false;
     }
 
@@ -736,17 +728,48 @@ QString Addressee::suffixLabel()
 
 void Addressee::setNickName(const QString &nickName)
 {
-    if (nickName == d->mNickName) {
-        return;
+    NickName t(nickName);
+    if (!d->mNickNameExtraList.isEmpty()) {
+        t = d->mNickNameExtraList.takeFirst();
+        t.setNickName(nickName);
+        d->mNickNameExtraList.prepend(t);
+        d->mEmpty = false;
+    } else {
+        insertExtraNickName(t);
     }
+}
 
+void Addressee::setNickName(const NickName &nickName)
+{
+    insertExtraNickName(nickName);
+}
+
+void Addressee::insertExtraNickName(const NickName &nickName)
+{
+    if (nickName.isValid()) {
+        d->mEmpty = false;
+        d->mNickNameExtraList.append(nickName);
+    }
+}
+
+void Addressee::setExtraNickNameList(const NickName::List &nickNameList)
+{
     d->mEmpty = false;
-    d->mNickName = nickName;
+    d->mNickNameExtraList = nickNameList;
+}
+
+NickName::List Addressee::extraNickNameList() const
+{
+    return d->mNickNameExtraList;
 }
 
 QString Addressee::nickName() const
 {
-    return d->mNickName;
+    if (d->mNickNameExtraList.isEmpty()) {
+        return {};
+    } else {
+        return d->mNickNameExtraList.at(0).nickname();
+    }
 }
 
 QString Addressee::nickNameLabel()
@@ -1009,7 +1032,7 @@ void Addressee::setRole(const QString &role)
         d->mRoleExtraList.prepend(t);
         d->mEmpty = false;
     } else {
-        insertExtraRole(role);
+        insertExtraRole(t);
     }
 }
 
@@ -1061,7 +1084,7 @@ void Addressee::setOrganization(const QString &organization)
         d->mOrgExtraList.prepend(t);
         d->mEmpty = false;
     } else {
-        insertExtraOrganization(organization);
+        insertExtraOrganization(t);
     }
 }
 
@@ -2365,7 +2388,6 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mAdditionalName;
     s << a.d->mPrefix;
     s << a.d->mSuffix;
-    s << a.d->mNickName;
     s << a.d->mBirthday;
     s << a.d->mMailer;
     s << a.d->mTimeZone;
@@ -2417,7 +2439,6 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mAdditionalName;
     s >> a.d->mPrefix;
     s >> a.d->mSuffix;
-    s >> a.d->mNickName;
     s >> a.d->mBirthday;
     s >> a.d->mMailer;
     s >> a.d->mTimeZone;

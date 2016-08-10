@@ -120,6 +120,7 @@ void RoleTest::shouldParseRole()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraRoleList().count(), 1);
     QCOMPARE(lst.at(0).role(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).extraRoleList().at(0).role(), QStringLiteral("boo"));
 }
 
 void RoleTest::shouldParseWithoutRole()
@@ -136,6 +137,7 @@ void RoleTest::shouldParseWithoutRole()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraRoleList().count(), 0);
+    QCOMPARE(lst.at(0).role(), QString());
 }
 
 void RoleTest::shouldCreateVCard()

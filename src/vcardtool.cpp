@@ -393,7 +393,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // NICKNAME only for version > 2.1
         if (version != VCard::v2_1) {
-            card.addLine(VCardLine(QStringLiteral("NICKNAME"), (*addrIt).nickName()));
+            Q_FOREACH (const NickName &nickName, (*addrIt).extraNickNameList()) {
+                VCardLine nickNameLine(QStringLiteral("NICKNAME"), nickName.nickname());
+                addParameters(nickNameLine, nickName.parameters());
+
+                card.addLine(nickNameLine);
+            }
         }
 
         // NOTE
@@ -971,7 +976,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                 // NICKNAME
                 else if (identifier == QLatin1String("nickname")) {
-                    addr.setNickName((*lineIt).value().toString());
+                    NickName nickName((*lineIt).value().toString());
+                    nickName.setParameters((*lineIt).parameterMap());
+                    addr.insertExtraNickName(nickName);
                 }
 
                 // NOTE
