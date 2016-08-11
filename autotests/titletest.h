@@ -35,6 +35,7 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualTitle();
+    void shouldParseTwoTitles();
     void shouldParseTitle();
     void shouldParseWithoutTitle();
     void shouldCreateVCard();
