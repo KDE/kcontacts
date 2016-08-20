@@ -1186,7 +1186,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     const QStringList strings = str.split(QLatin1Char('T'));
 
     QString dateString = strings.at(0);
-    dateString = dateString.replace(QLatin1String("-"), QLatin1String(""));
+    dateString = dateString.replace(QLatin1String("-"), QString());
     QDate date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
 
     QTime time;

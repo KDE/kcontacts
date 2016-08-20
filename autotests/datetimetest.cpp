@@ -120,7 +120,7 @@ void DateTimeTest::shouldCreateDateTime()
 
     dt = QDateTime(QDate(), QTime(12, 33, 30), Qt::OffsetFromUTC, -2 * 3600);
     str = VCardTool::createDateTime(dt, VCard::v3_0);
-    expected = QStringLiteral("");
+    expected = QString();
     QCOMPARE(str, expected);
 }
 
