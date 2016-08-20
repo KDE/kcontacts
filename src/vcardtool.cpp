@@ -32,6 +32,7 @@
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QDebug>
+#include <QRegularExpression>
 
 using namespace KContacts;
 
@@ -1180,93 +1181,110 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
     return addrList;
 }
 
-QDateTime VCardTool::parseDateTime(const QString &str) const
+QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
 {
-    QDate date;
+    const QStringList strings = str.split(QLatin1Char('T'));
+
+    QString dateString = strings.at(0);
+    dateString = dateString.replace(QLatin1String("-"), QLatin1String(""));
+    QDate date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
+
     QTime time;
-
-    if (str.indexOf(QLatin1Char('-')) == -1) {       // is base format (yyyymmdd)
-        date = QDate(str.leftRef(4).toInt(), str.midRef(4, 2).toInt(),
-                     str.midRef(6, 2).toInt());
-    } else { // is extended format yyyy-mm-dd
-        date = QDate(str.leftRef(4).toInt(), str.midRef(5, 2).toInt(),
-                     str.midRef(8, 2).toInt());
-    }
-
-    // does it also contain a time ? (Note: mm, ss are optional according ISO-8601)
-    int timeStart = str.indexOf(QLatin1Char('T'));
-    if (timeStart >= 0) {
-        int hour = 0, minute = 0, second = 0;
-
-        hour = str.midRef(timeStart + 1, 2).toInt();    // hour must always be given
-
-        if (str.indexOf(QLatin1Char(':'), timeStart + 1) > 0) {        // extended format (hh:mm:ss)
-            if (str.length() >= (timeStart + 5)) {
-                minute = str.midRef(timeStart + 4, 2).toInt();
-                if (str.length() >= (timeStart + 8)) {
-                    second = str.midRef(timeStart + 7, 2).toInt();
+    Qt::TimeSpec spec = Qt::LocalTime;
+    int offsetSecs = 0;
+    if (strings.length() > 1) {
+        QString timeString = strings.at(1);
+        timeString = timeString.replace(QLatin1String(":"), QLatin1String(""));
+        QStringList timeStrings = timeString.split(QRegularExpression(QStringLiteral("[Z+-]")));
+        const QString hhmmssString = timeStrings.at(0);
+        switch(hhmmssString.size())
+        {
+        case 2:
+            time = QTime::fromString(hhmmssString, QStringLiteral("hh"));
+            break;
+        case 4:
+            time = QTime::fromString(hhmmssString, QStringLiteral("hhmm"));
+            break;
+        case 6:
+            time = QTime::fromString(hhmmssString, QStringLiteral("hhmmss"));
+            break;
+        }
+        if (timeStrings.length() > 1) {
+            if (timeString.contains(QLatin1Char('Z'))) {
+                spec = Qt::UTC;
+            } else {
+                spec = Qt::OffsetFromUTC;
+                QTime offsetTime;
+                const QString offsetString = timeStrings.at(1);
+                switch(offsetString.size())
+                {
+                case 2:
+                    offsetTime = QTime::fromString(offsetString, QStringLiteral("hh"));
+                    break;
+                case 4:
+                    offsetTime = QTime::fromString(offsetString, QStringLiteral("hhmm"));
+                    break;
                 }
+                offsetSecs = offsetTime.hour() * 3600 + offsetTime.minute() * 60;
             }
-        } else {  // basic format (hhmmss)
-            if (str.length() >= (timeStart + 4)) {
-                minute = str.midRef(timeStart + 3, 2).toInt();
-                if (str.length() >= (timeStart + 6)) {
-                    second = str.midRef(timeStart + 5, 2).toInt();
-                }
+            if (timeString.contains(QLatin1Char('-'))) {
+                offsetSecs *= -1;
             }
         }
-
-        time = QTime(hour, minute, second);
+    }
+    if (timeValid) {
+        *timeValid = time.isValid();
     }
 
-    Qt::TimeSpec spec = (str.right(1) == QLatin1String("Z")) ? Qt::UTC : Qt::LocalTime;
-
-    QDateTime dateTime(date);
-
-    if (time.isValid()) {
-        dateTime.setTime(time);
-    }
-
-    dateTime.setTimeSpec(spec);
-    return dateTime;
+    return QDateTime(date, time, spec, offsetSecs);
 }
 
-QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version) const
+QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version)
 {
-    QString str;
-    if (version == VCard::v4_0) {
-        if (dateTime.date().isValid()) {
-            str.sprintf("%4d%02d%02d", dateTime.date().year(), dateTime.date().month(),
-                        dateTime.date().day());
-            if (dateTime.time().isValid()) {
-                QString tmp;
-                tmp.sprintf("T%02d%02d%02d", dateTime.time().hour(), dateTime.time().minute(),
-                            dateTime.time().second());
-                str += tmp;
-
-                if (dateTime.timeSpec() == Qt::UTC) {
-                    str += QLatin1Char('Z');
-                }
-            }
+    if (!dateTime.date().isValid()) {
+        return QString();
+    }
+    QString str = createDate(dateTime.date(), version);
+    str += createTime(dateTime.time(), version);
+    if (dateTime.timeSpec() == Qt::UTC) {
+        str += QLatin1Char('Z');
+    } else if (dateTime.timeSpec() == Qt::OffsetFromUTC) {
+        const int offsetSecs = dateTime.offsetFromUtc();
+        if (offsetSecs >= 0) {
+            str += QLatin1Char('+');
+        } else {
+            str += QLatin1Char('-');
         }
-
-    } else {
-        if (dateTime.date().isValid()) {
-            str.sprintf("%4d-%02d-%02d", dateTime.date().year(), dateTime.date().month(),
-                        dateTime.date().day());
-            if (dateTime.time().isValid()) {
-                QString tmp;
-                tmp.sprintf("T%02d:%02d:%02d", dateTime.time().hour(), dateTime.time().minute(),
-                            dateTime.time().second());
-                str += tmp;
-
-                if (dateTime.timeSpec() == Qt::UTC) {
-                    str += QLatin1Char('Z');
-                }
-            }
+        QTime offsetTime = QTime(0, 0).addSecs(abs(offsetSecs));
+        if (version == VCard::v4_0) {
+            str += offsetTime.toString(QStringLiteral("HHmm"));
+        } else {
+            str += offsetTime.toString(QStringLiteral("HH:mm"));
         }
     }
     return str;
+}
+
+QString VCardTool::createDate(const QDate &date, VCard::Version version)
+{
+    QString format;
+    if (version == VCard::v4_0) {
+        format = QStringLiteral("yyyyMMdd");
+    } else {
+        format = QStringLiteral("yyyy-MM-dd");
+    }
+    return date.toString(format);
+}
+
+QString VCardTool::createTime(const QTime &time, VCard::Version version)
+{
+    QString format;
+    if (version == VCard::v4_0) {
+        format = QStringLiteral("HHmmss");
+    } else {
+        format = QStringLiteral("HH:mm:ss");
+    }
+    return QStringLiteral("T") + time.toString(format);
 }
 
 Picture VCardTool::parsePicture(const VCardLine &line) const

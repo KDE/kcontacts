@@ -58,6 +58,11 @@ public:
      */
     Addressee::List parseVCards(const QByteArray &vcard) const;
 
+    static QDateTime parseDateTime(const QString &str, bool *timeValid = 0);
+    static QString createDateTime(const QDateTime &dateTime, VCard::Version version);
+    static QString createDate(const QDate &date, VCard::Version version);
+    static QString createTime(const QTime &time, VCard::Version version);
+
 private:
 
     QByteArray createVCards(const Addressee::List &list,
@@ -68,9 +73,6 @@ private:
       unescaped ones.
      */
     QStringList splitString(QChar sep, const QString &value) const;
-
-    QDateTime parseDateTime(const QString &str) const;
-    QString createDateTime(const QDateTime &dateTime, VCard::Version version) const;
 
     Picture parsePicture(const VCardLine &line) const;
     VCardLine createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const;
