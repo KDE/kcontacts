@@ -1773,7 +1773,8 @@ void Addressee::insertKey(const Key &key)
     d->mEmpty = false;
 
     Key::List::Iterator it;
-    for (it = d->mKeys.begin(); it != d->mKeys.end(); ++it) {
+    Key::List::Iterator end(d->mKeys.end());
+    for (it = d->mKeys.begin(); it != end; ++it) {
         if ((*it).id() == key.id()) {
             *it = key;
             return;
@@ -1792,8 +1793,7 @@ void Addressee::removeKey(const Key &key)
     Key::List::Iterator it;
     for (it = d->mKeys.begin(); it != d->mKeys.end(); ++it) {
         if ((*it).id() == key.id()) {
-            //Just use d->mKeys.removeAll(key) when depending on Qt 5.4
-            vectorRemoveAll(d->mKeys, key);
+            d->mKeys.removeAll(key);
             return;
         }
     }
