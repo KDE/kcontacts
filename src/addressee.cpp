@@ -1793,8 +1793,7 @@ void Addressee::removeKey(const Key &key)
     Key::List::Iterator it;
     for (it = d->mKeys.begin(); it != d->mKeys.end(); ++it) {
         if ((*it).id() == key.id()) {
-            //Just use d->mKeys.removeAll(key) when depending on Qt 5.4
-            vectorRemoveAll(d->mKeys, key);
+            d->mKeys.removeAll(key);
             return;
         }
     }
