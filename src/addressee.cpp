@@ -1773,7 +1773,8 @@ void Addressee::insertKey(const Key &key)
     d->mEmpty = false;
 
     Key::List::Iterator it;
-    for (it = d->mKeys.begin(); it != d->mKeys.end(); ++it) {
+    Key::List::Iterator end(d->mKeys.end());
+    for (it = d->mKeys.begin(); it != end; ++it) {
         if ((*it).id() == key.id()) {
             *it = key;
             return;
