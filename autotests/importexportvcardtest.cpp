@@ -108,6 +108,39 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     qDebug() << " result " << result;
+    QCOMPARE(result, vcardexpected);    
+}
+
+void ImportExportVCardTest::shouldExportMiscElementVcard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                         "VERSION:4.0\r\n"
+                         "UID:urn:uuid:4fbe8971-0bc3-424c-9c26-36c3e1eff6b1\r\n"
+                         "FN;PID=1.1:J. Doe\r\n"
+                         "N:Doe;J.;;;\r\n"
+                         "EMAIL;PID=1.1:jdoe@example.com\r\n"
+                         "EMAIL;PID=2.1:boss@example.com\r\n"
+                         "TEL;PID=1.1;VALUE=uri:tel:+1-555-555-5555\r\n"
+                         "TEL;PID=2.1;VALUE=uri:tel:+1-666-666-6666\r\n"
+                         "CLIENTPIDMAP:1;urn:uuid:53e374d9-337e-4727-8803-a1e9c14e0556\r\n"
+                         "END:VCARD\r\n\r\n");
+    QByteArray vcardexpected("BEGIN:VCARD\r\n"
+                             "VERSION:4.0\r\n"
+                             "CLIENTPIDMAP:1;urn:uuid:53e374d9-337e-4727-8803-a1e9c14e0556\r\n"
+                             "EMAIL;PID=1.1:jdoe@example.com\r\n"
+                             "EMAIL;PID=2.1:boss@example.com\r\n"
+                             "FN:J. Doe\r\n"
+                             "N:Doe;J.;;;\r\n"
+                             "TEL;PID=1.1;VALUE=uri:tel:+1-555-555-5555\r\n"
+                             "TEL;PID=2.1;VALUE=uri:tel:+1-666-666-6666\r\n"
+                             "UID:urn:uuid:4fbe8971-0bc3-424c-9c26-36c3e1eff6b1\r\n"
+                             "END:VCARD\r\n\r\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+
+    const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    qDebug() << " result " << result;
     QCOMPARE(result, vcardexpected);
 
 }

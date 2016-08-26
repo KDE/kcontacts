@@ -49,6 +49,7 @@
 #include "nickname.h"
 #include "role.h"
 #include "org.h"
+#include "clientpidmap.h"
 
 namespace KContacts
 {
@@ -1078,6 +1079,11 @@ public:
     FieldGroup::List fieldGroupList() const;
     void setFieldGroupList(const FieldGroup::List &fieldGroupList);
     void insertFieldGroup(const FieldGroup &fieldGroup);
+
+    //ClientPidMap
+    ClientPidMap::List clientPidMapList() const;
+    void setClientPidMapList(const ClientPidMap::List &clientpidmaplist);
+    void insertClientPidMap(const ClientPidMap &clientpidmap);
 
 private:
     class Private;

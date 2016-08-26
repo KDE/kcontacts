@@ -279,6 +279,17 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 card.addLine(line);
             }
         }
+        // CLIENTPIDMAP
+        if (version == VCard::v4_0) {
+            const ClientPidMap::List clientpidmapList = (*addrIt).clientPidMapList();
+            ClientPidMap::List::ConstIterator clientPidMapIt;
+            ClientPidMap::List::ConstIterator clientPidMapEnd(clientpidmapList.end());
+            for (clientPidMapIt = clientpidmapList.begin(); clientPidMapIt != clientPidMapEnd; ++clientPidMapIt) {
+                VCardLine line(QStringLiteral("CLIENTPIDMAP"), (*clientPidMapIt).clientPidMap());
+                addParameters(line, (*clientPidMapIt).parameters());
+                card.addLine(line);
+            }
+        }
         // EMAIL
         const Email::List emailList = (*addrIt).emailList();
         Email::List::ConstIterator emailIt;
@@ -1122,6 +1133,13 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     related.setParameters((*lineIt).parameterMap());
                     addr.insertRelationShip(related);
                 }
+                // CLIENTPIDMAP (vcard 4.0)
+                else if (identifier == QLatin1String("clientpidmap")) {
+                    ClientPidMap clientpidmap;
+                    clientpidmap.setClientPidMap((*lineIt).value().toString());
+                    clientpidmap.setParameters((*lineIt).parameterMap());
+                    addr.insertClientPidMap(clientpidmap);
+                }
                 // X-
                 //TODO import X-GENDER
                 else if (identifier.startsWith(QLatin1String("x-"))) {
@@ -1203,7 +1221,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     int offsetSecs = 0;
     if (strings.length() > 1) {
         QString timeString = strings.at(1);
-        timeString = timeString.replace(QLatin1String(":"), QLatin1String(""));
+        timeString = timeString.replace(QLatin1String(":"), QString());
         QStringList timeStrings = timeString.split(QRegularExpression(QStringLiteral("[Z+-]")));
         const QString hhmmssString = timeStrings.at(0);
         switch(hhmmssString.size())

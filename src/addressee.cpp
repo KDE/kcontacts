@@ -153,6 +153,7 @@ public:
     Role::List mRoleExtraList;
     Org::List mOrgExtraList;
     NickName::List mNickNameExtraList;
+    ClientPidMap::List mClientPidMapList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
     bool mBirthdayWithTime;
@@ -400,6 +401,11 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "Extra NickName List differs";
         return false;
     }
+
+    if (!listEquals(d->mClientPidMapList, addressee.d->mClientPidMapList)) {
+        qCDebug(KCONTACTS_LOG) << "ClientPidMap List differs";
+        return false;
+    }
     return true;
 }
 
@@ -572,6 +578,26 @@ void Addressee::insertFieldGroup(const FieldGroup &fieldGroup)
         d->mEmpty = false;
         //TODO don't duplicate ?
         d->mFieldGroupList.append(fieldGroup);
+    }
+}
+
+ClientPidMap::List Addressee::clientPidMapList() const
+{
+    return d->mClientPidMapList;
+}
+
+void Addressee::setClientPidMapList(const ClientPidMap::List &clientpidmaplist)
+{
+    d->mEmpty = false;
+    d->mClientPidMapList = clientpidmaplist;
+}
+
+void Addressee::insertClientPidMap(const ClientPidMap &clientpidmap)
+{
+    if (clientpidmap.isValid()) {
+        d->mEmpty = false;
+        //TODO don't duplicate ?
+        d->mClientPidMapList.append(clientpidmap);
     }
 }
 
@@ -2448,6 +2474,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mRoleExtraList;
     s << a.d->mOrgExtraList;
     s << a.d->mNickNameExtraList;
+    s << a.d->mClientPidMapList;
 
     return s;
 }
@@ -2502,6 +2529,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mRoleExtraList;
     s >> a.d->mOrgExtraList;
     s >> a.d->mNickNameExtraList;
+    s >> a.d->mClientPidMapList;
     a.d->mEmpty = false;
 
     return s;

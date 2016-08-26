@@ -37,6 +37,7 @@ set(kcontacts_SRCS
   role.cpp
   note.cpp
   org.cpp
+  clientpidmap.cpp
   ${vcardparser_SRCS}
 )
 
@@ -106,6 +107,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   NickName
   VCardDrag
   FieldGroup
+  ClientPidMap
   PREFIX KContacts
   REQUIRED_HEADERS KContacts_HEADERS
 )

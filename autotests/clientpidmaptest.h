@@ -18,20 +18,31 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef IMPORTEXPORTVCARDTEST_H
-#define IMPORTEXPORTVCARDTEST_H
+#ifndef ROLETEST_H
+#define ROLETEST_H
 
 #include <QObject>
 
-class ImportExportVCardTest : public QObject
+class ClientPidMapTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImportExportVCardTest(QObject *parent = Q_NULLPTR);
-    ~ImportExportVCardTest();
+    explicit ClientPidMapTest(QObject *parent = Q_NULLPTR);
+    ~ClientPidMapTest();
 private Q_SLOTS:
-    void shouldExportFullTestVcard4();
-    void shouldExportMiscElementVcard4();
+    void shouldHaveDefaultValue();
+    void shouldAssignValue();
+    void shouldAssignExternal();
+    void shouldSerialized();
+    void shouldEqualClientPidMap();
+#if 0
+    void shouldParseClientPidMap();
+    void shouldParseWithoutClientPidMap();
+    void shouldCreateVCard();
+    void shouldCreateVCardWithTwoClientPidMap();
+    void shouldCreateVCardWithParameters();
+    void shouldGenerateClientPidMapForVCard3();
+#endif
 };
 
-#endif // IMPORTEXPORTVCARDTEST_H
+#endif // ROLETEST_H
