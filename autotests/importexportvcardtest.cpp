@@ -73,7 +73,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "VERSION:4.0\r\n"
                              "ADR;GEO=\"geo:51.523701,0.158500\";LABEL=\"Mr Sherlock Holmes\";TYPE:;;221B Bak\r\n"
                              " er Street;London;;NW1;United Kingdom\r\n"
-                             "ANNIVERSARY:19960415T000000\r\n"
+                             "ANNIVERSARY:19960415\r\n"
                              "BDAY:19531015T231000Z\r\n"
                              "CALADRURI;PREF=1:mailto:detective@sherlockholmes.com\r\n"
                              "CALURI;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\r\n"

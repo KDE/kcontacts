@@ -653,7 +653,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     const QDate date = QDate::fromString(value, Qt::ISODate);
                     QDateTime dt = QDateTime(date);
                     dt.setTime(QTime());
-                    VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version));
+                    VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version, false));
                     card.addLine(line);
                 }
             } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {

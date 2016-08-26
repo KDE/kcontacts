@@ -110,7 +110,7 @@ void CustomIdentifierTest::shouldExportVcard4()
     ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     expected = QByteArray("BEGIN:VCARD\r\n"
                           "VERSION:4.0\r\n"
-                          "ANNIVERSARY:00120903T000000\r\n"
+                          "ANNIVERSARY:00120903\r\n"
                           "EMAIL:foo@kde.org\r\n"
                           "EMAIL:bla@kde.org\r\n"
                           "N:;;;;\r\n"
