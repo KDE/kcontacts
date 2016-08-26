@@ -49,6 +49,7 @@ public:
         : mUid(QUuid::createUuid().toString().mid(1, 36))
         , mEmpty(true)
         , mChanged(false)
+        , mBirthdayWithTime(false)
     {
         //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     }
@@ -65,6 +66,7 @@ public:
         mPrefix = other.mPrefix;
         mSuffix = other.mSuffix;
         mBirthday = other.mBirthday;
+        mBirthdayWithTime = other.mBirthdayWithTime;
         mMailer = other.mMailer;
         mTimeZone = other.mTimeZone;
         mGeo = other.mGeo;
@@ -153,6 +155,7 @@ public:
     NickName::List mNickNameExtraList;
     bool mEmpty    : 1;
     bool mChanged  : 1;
+    bool mBirthdayWithTime;
 
     static KContacts::SortMode *mSortMode;
 };
@@ -231,7 +234,7 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mBirthday != addressee.d->mBirthday) {
+    if (d->mBirthday != addressee.d->mBirthday || d->mBirthdayWithTime != addressee.d->mBirthdayWithTime) {
         qCDebug(KCONTACTS_LOG) << "birthday differs";
         return false;
     }
@@ -777,19 +780,39 @@ QString Addressee::nickNameLabel()
     return i18n("Nick Name");
 }
 
-void Addressee::setBirthday(const QDateTime &birthday)
+void Addressee::setBirthday(const QDateTime &birthday, bool withTime)
 {
-    if (birthday == d->mBirthday) {
+    if (birthday == d->mBirthday && d->mBirthdayWithTime == withTime) {
         return;
     }
 
     d->mEmpty = false;
     d->mBirthday = birthday;
+    if (!withTime) {
+        d->mBirthday.setTime(QTime());
+    }
+    d->mBirthdayWithTime = withTime;
+}
+
+void Addressee::setBirthday(const QDate &birthday)
+{
+    if (birthday == d->mBirthday.date() && !d->mBirthdayWithTime) {
+        return;
+    }
+
+    d->mEmpty = false;
+    d->mBirthday = QDateTime(birthday, QTime());
+    d->mBirthdayWithTime = false;
 }
 
 QDateTime Addressee::birthday() const
 {
     return d->mBirthday;
+}
+
+bool Addressee::birthdayHasTime() const
+{
+    return d->mBirthdayWithTime;
 }
 
 QString Addressee::birthdayLabel()
@@ -2389,6 +2412,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mPrefix;
     s << a.d->mSuffix;
     s << a.d->mBirthday;
+    s << a.d->mBirthdayWithTime;
     s << a.d->mMailer;
     s << a.d->mTimeZone;
     s << a.d->mGeo;
@@ -2440,6 +2464,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mPrefix;
     s >> a.d->mSuffix;
     s >> a.d->mBirthday;
+    s >> a.d->mBirthdayWithTime;
     s >> a.d->mMailer;
     s >> a.d->mTimeZone;
     s >> a.d->mGeo;

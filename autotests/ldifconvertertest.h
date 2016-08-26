@@ -35,6 +35,7 @@ private Q_SLOTS:
     void shouldImportEmail();
     void shouldImportMultiEmails();
     void shouldImportStandardBirthday();
+    void shouldImportStandardBirthdayWithoutYear();
     void shouldImportTheBatsBirthday();
     void shouldImportTheBatsEmails();
     void shouldImportTitle();
@@ -46,6 +47,7 @@ private Q_SLOTS:
     //Export
     void shouldExportEmail();
     void shouldExportBirthday();
+    void shouldExportBirthdayWithoutYear();
     void shouldExportTitle();
     void shouldExportMultiEntries();
     void shouldExportGroup();

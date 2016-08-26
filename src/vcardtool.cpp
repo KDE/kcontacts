@@ -220,7 +220,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // BDAY
-        card.addLine(VCardLine(QStringLiteral("BDAY"), createDateTime((*addrIt).birthday(), version)));
+        const bool withTime = (*addrIt).birthdayHasTime();
+        const QString birthdayString = createDateTime((*addrIt).birthday(), version, withTime);
+        card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
 
         //Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
         //=> not necessary to export just tag...
@@ -776,7 +778,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // BDAY
                 else if (identifier == QLatin1String("bday")) {
-                    addr.setBirthday(parseDateTime((*lineIt).value().toString()));
+                    bool withTime;
+                    const QDateTime bday = parseDateTime((*lineIt).value().toString(), &withTime);
+                    addr.setBirthday(bday, withTime);
                 }
 
                 // CATEGORIES
@@ -1186,8 +1190,13 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     const QStringList strings = str.split(QLatin1Char('T'));
 
     QString dateString = strings.at(0);
+    const bool noYear = dateString.startsWith(QLatin1String("--"));
     dateString = dateString.replace(QLatin1String("-"), QString());
     QDate date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
+    if (noYear) {
+        date = QDate::fromString(dateString, QStringLiteral("MMdd"));
+        date = date.addYears(-1900);
+    }
 
     QTime time;
     Qt::TimeSpec spec = Qt::LocalTime;
@@ -1239,12 +1248,15 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     return QDateTime(date, time, spec, offsetSecs);
 }
 
-QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version)
+QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime)
 {
     if (!dateTime.date().isValid()) {
         return QString();
     }
     QString str = createDate(dateTime.date(), version);
+    if (!withTime) {
+        return str;
+    }
     str += createTime(dateTime.time(), version);
     if (dateTime.timeSpec() == Qt::UTC) {
         str += QLatin1Char('Z');
@@ -1268,10 +1280,14 @@ QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version vers
 QString VCardTool::createDate(const QDate &date, VCard::Version version)
 {
     QString format;
-    if (version == VCard::v4_0) {
+    if (date.year() > 0) {
         format = QStringLiteral("yyyyMMdd");
     } else {
-        format = QStringLiteral("yyyy-MM-dd");
+        format = QStringLiteral("--MMdd");
+    }
+    if (version != VCard::v4_0) {
+        format = format.replace(QStringLiteral("yyyy"), QStringLiteral("yyyy-"));
+        format = format.replace(QStringLiteral("MM"), QStringLiteral("MM-"));
     }
     return date.toString(format);
 }

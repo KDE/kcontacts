@@ -284,14 +284,26 @@ public:
     static QString nickNameLabel();
 
     /**
-      Set birthday.
+      Set birthday (date and time). If withTime is false the time will be set
+      to midnight and birthdayHasTime() will return false afterwards.
      */
-    void setBirthday(const QDateTime &birthday);
+    void setBirthday(const QDateTime &birthday, bool withTime = true);
 
     /**
-      Return birthday.
+      Set birthday (date only). birthdayHasTime() will return false afterwards.
+     */
+    void setBirthday(const QDate &birthday);
+
+    /**
+      Return birthday. (If a valid date has been set, birthday().time() will
+      always return a valid QTime!)
      */
     QDateTime birthday() const;
+
+    /**
+      Returns true if birthday has been set with a time. Returns false otherwise.
+     */
+    bool birthdayHasTime() const;
 
     /**
       Return translated label for birthday field.

@@ -245,12 +245,14 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
         ldif_out(t, QStringLiteral("modifytimestamp"), dateToVCardString(addr.revision()));
     }
 
-    const QDateTime birthday = addr.birthday();
-    if (birthday.date().isValid()) {
-        const QDate date = birthday.date();
-        ldif_out(t, QStringLiteral("birthyear"), QString::number(date.year()));
-        ldif_out(t, QStringLiteral("birthmonth"), QString::number(date.month()));
-        ldif_out(t, QStringLiteral("birthday"), QString::number(date.day()));
+    const QDate birthday = addr.birthday().date();
+    if (birthday.isValid()) {
+        const int year = birthday.year();
+        if (year > 0) {
+            ldif_out(t, QStringLiteral("birthyear"), QString::number(year));
+        }
+        ldif_out(t, QStringLiteral("birthmonth"), QString::number(birthday.month()));
+        ldif_out(t, QStringLiteral("birthday"), QString::number(birthday.day()));
     }
 
     t << "\n";
@@ -296,7 +298,7 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
         case Ldif::EndEntry: {
             if (contactGroup.count() == 0) {
                 // if the new address is not empty, append it
-                QDateTime birthDate(QDate(birthyear, birthmonth, birthday));
+                QDate birthDate(birthyear, birthmonth, birthday);
                 if (birthDate.isValid()) {
                     a.setBirthday(birthDate);
                 }
@@ -618,7 +620,11 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     }
 
     if (fieldname == QLatin1String("birthyear")) {
-        birthyear = value.toInt();
+        bool ok;
+        birthyear = value.toInt(&ok);
+        if (!ok) {
+            birthyear = -1;
+        }
         return;
     }
     if (fieldname == QLatin1String("birthmonth")) {
@@ -632,7 +638,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     if (fieldname == QLatin1String("xbatbirthday")) {
         QDate dt = QDate::fromString(value, QStringLiteral("yyyyMMdd"));
         if (dt.isValid()) {
-            a.setBirthday(QDateTime(dt));
+            a.setBirthday(dt);
         }
         return;
     }

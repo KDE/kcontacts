@@ -59,7 +59,7 @@ public:
     Addressee::List parseVCards(const QByteArray &vcard) const;
 
     static QDateTime parseDateTime(const QString &str, bool *timeValid = 0);
-    static QString createDateTime(const QDateTime &dateTime, VCard::Version version);
+    static QString createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime = true);
     static QString createDate(const QDate &date, VCard::Version version);
     static QString createTime(const QTime &time, VCard::Version version);
 

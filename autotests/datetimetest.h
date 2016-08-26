@@ -33,6 +33,7 @@ public:
 private Q_SLOTS:
     void shouldParseDateTime();
     void shouldCreateDateTime();
+    void shouldCreateDate();
 };
 
 #endif // DATETIMETEST_H

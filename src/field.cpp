@@ -419,7 +419,7 @@ bool Field::setValue(KContacts::Addressee &a, const QString &value)
         a.setNote(value);
         return true;
     case Private::Birthday:
-        a.setBirthday(QDateTime::fromString(value, Qt::ISODate));
+        a.setBirthday(QDate::fromString(value, Qt::ISODate));
         return true;
     case Private::CustomField:
         a.insertCustom(d->app(), d->key(), value);

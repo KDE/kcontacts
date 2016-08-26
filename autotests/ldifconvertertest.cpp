@@ -96,6 +96,30 @@ void LDifConverterTest::shouldImportStandardBirthday()
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
     QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
+    QVERIFY(!lst.at(0).birthdayHasTime());
+    QCOMPARE(contactGroup.count(), 0);
+}
+
+void LDifConverterTest::shouldImportStandardBirthdayWithoutYear()
+{
+    QString str = QStringLiteral("dn: cn=laurent,mail=foo@kde.org\n"
+                                 "sn: laurent\n"
+                                 "cn: laurent\n"
+                                 "uid: d1d5cdd4-7d5d-484b-828d-58864d8efe74\n"
+                                 "birthmonth: 3\n"
+                                 "birthday: 19\n"
+                                 "mail: foo@kde.org\n"
+                                 "objectclass: top_n"
+                                 "objectclass: person\n"
+                                 "objectclass: organizationalPerson");
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    bool result = LDIFConverter::LDIFToAddressee(str, lst, contactGroup);
+    QVERIFY(result);
+    QCOMPARE(lst.count(), 1);
+    QVERIFY(lst.at(0).birthday().date().isValid());
+    QCOMPARE(lst.at(0).birthday().date(), QDate(-1, 3, 19));
+    QVERIFY(!lst.at(0).birthdayHasTime());
     QCOMPARE(contactGroup.count(), 0);
 }
 
@@ -117,6 +141,7 @@ void LDifConverterTest::shouldImportTheBatsBirthday()
     QCOMPARE(lst.count(), 1);
     QVERIFY(lst.at(0).birthday().date().isValid());
     QCOMPARE(lst.at(0).birthday().date(), QDate(2015, 3, 19));
+    QVERIFY(!lst.at(0).birthdayHasTime());
     QCOMPARE(contactGroup.count(), 0);
 }
 
@@ -322,7 +347,7 @@ void LDifConverterTest::shouldExportBirthday()
     ContactGroup::List contactGroup;
     Addressee addr;
     QDate date(2015, 3, 3);
-    addr.setBirthday(QDateTime(date));
+    addr.setBirthday(date);
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
     lst << addr;
@@ -336,6 +361,32 @@ void LDifConverterTest::shouldExportBirthday()
                                       "uid: testuid\n"
                                       "mail: foo@kde.org\n"
                                       "birthyear: 2015\n"
+                                      "birthmonth: 3\n"
+                                      "birthday: 3\n"
+                                      "\n");
+
+    QCOMPARE(str, expected);
+}
+
+void LDifConverterTest::shouldExportBirthdayWithoutYear()
+{
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    Addressee addr;
+    QDate date(-1, 3, 3);
+    addr.setBirthday(date);
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    lst << addr;
+    QString str;
+    bool result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(result);
+    QString expected = QStringLiteral("dn: cn=,mail=foo@kde.org\n"
+                                      "objectclass: top\n"
+                                      "objectclass: person\n"
+                                      "objectclass: organizationalPerson\n"
+                                      "uid: testuid\n"
+                                      "mail: foo@kde.org\n"
                                       "birthmonth: 3\n"
                                       "birthday: 3\n"
                                       "\n");
@@ -379,7 +430,7 @@ void LDifConverterTest::shouldExportMultiEntries()
 
     Addressee addr2;
     QDate date(2015, 3, 3);
-    addr2.setBirthday(QDateTime(date));
+    addr2.setBirthday(date);
     addr2.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr2.setUid(QStringLiteral("testuid"));
     lst << addr2;

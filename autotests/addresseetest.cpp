@@ -69,7 +69,7 @@ void AddresseeTest::storeTest()
     addressee.setPrefix(QStringLiteral("Sir"));
     addressee.setSuffix(QStringLiteral("II"));
     addressee.setNickName(QStringLiteral("ghosthunter"));
-    addressee.setBirthday(QDateTime(QDate(1982, 7, 19)));
+    addressee.setBirthday(QDate(1982, 7, 19));
     addressee.setMailer(QStringLiteral("mutt"));
     addressee.setTimeZone(KContacts::TimeZone(2));
     addressee.setGeo(KContacts::Geo(42, 23));
@@ -112,7 +112,9 @@ void AddresseeTest::storeTest()
     QVERIFY(addressee.prefix() == QStringLiteral("Sir"));
     QVERIFY(addressee.suffix() == QStringLiteral("II"));
     QVERIFY(addressee.nickName() == QStringLiteral("ghosthunter"));
-    QVERIFY(addressee.birthday() == QDateTime(QDate(1982, 7, 19)));
+    QVERIFY(addressee.birthday().date() == QDate(1982, 7, 19));
+    QVERIFY(addressee.birthday().time() == QTime(0, 0));
+    QVERIFY(!addressee.birthdayHasTime());
     QVERIFY(addressee.mailer() == QStringLiteral("mutt"));
     QVERIFY(addressee.timeZone() == KContacts::TimeZone(2));
     QVERIFY(addressee.geo() == KContacts::Geo(42, 23));
