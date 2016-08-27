@@ -35,14 +35,12 @@ private Q_SLOTS:
     void shouldAssignExternal();
     void shouldSerialized();
     void shouldEqualClientPidMap();
-#if 0
     void shouldParseClientPidMap();
     void shouldParseWithoutClientPidMap();
     void shouldCreateVCard();
     void shouldCreateVCardWithTwoClientPidMap();
     void shouldCreateVCardWithParameters();
     void shouldGenerateClientPidMapForVCard3();
-#endif
 };
 
 #endif // ROLETEST_H

@@ -104,15 +104,13 @@ void ClientPidMapTest::shouldEqualClientPidMap()
     QVERIFY(role == result);
 }
 
-#if 0
 void ClientPidMapTest::shouldParseClientPidMap()
 {
-
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
+                         "CLIENTPIDMAP:boo\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "ClientPidMap:boo\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -120,9 +118,8 @@ void ClientPidMapTest::shouldParseClientPidMap()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).extraClientPidMapList().count(), 1);
-    QCOMPARE(lst.at(0).clie(), QStringLiteral("boo"));
-    QCOMPARE(lst.at(0).extraClientPidMapList().at(0).role(), QStringLiteral("boo"));
+    QCOMPARE(lst.at(0).clientPidMapList().count(), 1);
+    QCOMPARE(lst.at(0).clientPidMapList().at(0).clientPidMap(), QStringLiteral("boo"));
 }
 
 void ClientPidMapTest::shouldParseWithoutClientPidMap()
@@ -138,8 +135,7 @@ void ClientPidMapTest::shouldParseWithoutClientPidMap()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).extraClientPidMapList().count(), 0);
-    QCOMPARE(lst.at(0).role(), QString());
+    QCOMPARE(lst.at(0).clientPidMapList().count(), 0);
 }
 
 void ClientPidMapTest::shouldCreateVCard()
@@ -151,15 +147,15 @@ void ClientPidMapTest::shouldCreateVCard()
     KContacts::ClientPidMap::List lstClientPidMap;
     KContacts::ClientPidMap role(QStringLiteral("fr"));
     lstClientPidMap << role;
-    addr.setExtraClientPidMapList(lstClientPidMap);
+    addr.setClientPidMapList(lstClientPidMap);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
+                        "CLIENTPIDMAP:fr\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "ROLE:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
@@ -176,16 +172,16 @@ void ClientPidMapTest::shouldCreateVCardWithTwoClientPidMap()
     KContacts::ClientPidMap role(QStringLiteral("fr"));
     KContacts::ClientPidMap role2(QStringLiteral("fr2"));
     lstClientPidMap << role << role2;
-    addr.setExtraClientPidMapList(lstClientPidMap);
+    addr.setClientPidMapList(lstClientPidMap);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
+                        "CLIENTPIDMAP:fr\r\n"
+                        "CLIENTPIDMAP:fr2\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "ROLE:fr\r\n"
-                        "ROLE:fr2\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
 
@@ -205,15 +201,15 @@ void ClientPidMapTest::shouldCreateVCardWithParameters()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     role.setParameters(params);
     lstClientPidMap << role;
-    addr.setExtraClientPidMapList(lstClientPidMap);
+    addr.setClientPidMapList(lstClientPidMap);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
+                        "CLIENTPIDMAP;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "ROLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
@@ -232,7 +228,7 @@ void ClientPidMapTest::shouldGenerateClientPidMapForVCard3()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     role.setParameters(params);
     lstClientPidMap << role;
-    addr.setExtraClientPidMapList(lstClientPidMap);
+    addr.setClientPidMapList(lstClientPidMap);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
@@ -240,10 +236,9 @@ void ClientPidMapTest::shouldGenerateClientPidMapForVCard3()
                         "VERSION:3.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "N:;;;;\r\n"
-                        "ROLE;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
-#endif
+
 QTEST_MAIN(ClientPidMapTest)
