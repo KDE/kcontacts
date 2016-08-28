@@ -49,9 +49,28 @@ void BirthDayTest::shouldParseBirthDay()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    //QCOMPARE(lst.at(0).clientPidMapList().count(), 1);
-    //QCOMPARE(lst.at(0).clientPidMapList().at(0).clientPidMap(), QStringLiteral("boo"));
+    QDateTime dt(QDate(1976, 5, 5), QTime(12, 5, 5));
+    QCOMPARE(lst.at(0).birthday(), dt);
+    QCOMPARE(lst.at(0).birthdayHasTime(), true);
+}
 
+void BirthDayTest::shouldParseBirthDayWithoutTime()
+{
+    QByteArray vcarddata("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "BDAY:19760505\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "EMAIL:bla@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    QDateTime dt(QDate(1976, 5, 5));
+    QCOMPARE(lst.at(0).birthday(), dt);
+    QCOMPARE(lst.at(0).birthdayHasTime(), false);
 }
 
 void BirthDayTest::shouldExportVcard4()
