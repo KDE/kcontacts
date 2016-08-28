@@ -37,6 +37,7 @@ private Q_SLOTS:
     void shouldExportVcard3WithoutTime();
     void shouldParseBirthDay();
     void shouldParseBirthDayWithoutTime();
+    void shouldParseBirthDayWithoutTimeAndYear();
 };
 
 #endif // BIRTHDAYTEST_H
