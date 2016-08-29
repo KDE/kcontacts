@@ -27,7 +27,7 @@
 #include <QtCore/QMap>
 
 /** @short Class that holds a ClientPidMap for a contact.
- *  @since 5.3
+ *  @since 5.4
  */
 namespace KContacts
 {
