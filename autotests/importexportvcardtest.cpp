@@ -108,7 +108,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     //qDebug() << " result " << result;
-    QCOMPARE(result, vcardexpected);    
+    QCOMPARE(result, vcardexpected);
 }
 
 void ImportExportVCardTest::shouldExportMiscElementVcard4()
@@ -143,6 +143,39 @@ void ImportExportVCardTest::shouldExportMiscElementVcard4()
     //qDebug() << " result " << result;
     QCOMPARE(result, vcardexpected);
 
+}
+
+void ImportExportVCardTest::shouldExportMemberElementVcard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD"
+                         "VERSION:4.0\r\n"
+                         "KIND:group\r\n"
+                         "FN:Funky distribution list\r\n"
+                         "MEMBER:mailto:subscriber1@example.com\r\n"
+                         "MEMBER:xmpp:subscriber2@example.com\r\n"
+                         "MEMBER:sip:subscriber3@example.com\r\n"
+                         "MEMBER:tel:+1-418-555-5555\r\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\r\n"
+                         "END:VCARD\r\n");
+
+    QByteArray vcardexpected("BEGIN:VCARD\r\n"
+                             "VERSION:4.0\r\n"
+                             "FN:Funky distribution list\r\n"
+                             "KIND:group\r\n"
+                             "MEMBER:mailto:subscriber1@example.com\r\n"
+                             "MEMBER:xmpp:subscriber2@example.com\r\n"
+                             "MEMBER:sip:subscriber3@example.com\r\n"
+                             "MEMBER:tel:+1-418-555-5555\r\n"
+                             "N:;;;;\r\n"
+                             "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\r\n"
+                             "END:VCARD\r\n\r\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+
+    const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    //qDebug() << " result " << result;
+    QCOMPARE(result, vcardexpected);
 }
 
 QTEST_MAIN(ImportExportVCardTest)

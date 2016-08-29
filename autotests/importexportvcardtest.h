@@ -32,6 +32,7 @@ public:
 private Q_SLOTS:
     void shouldExportFullTestVcard4();
     void shouldExportMiscElementVcard4();
+    void shouldExportMemberElementVcard4();
 };
 
 #endif // IMPORTEXPORTVCARDTEST_H
