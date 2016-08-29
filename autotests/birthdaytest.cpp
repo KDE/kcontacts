@@ -138,6 +138,29 @@ void BirthDayTest::shouldExportVcard4WithoutTime()
     QCOMPARE(ba, expected);
 }
 
+void BirthDayTest::shouldExportVcard4WithoutTimeAndWithoutYear()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org") << QStringLiteral("bla@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    const QDate d(-1, 5, 5);
+    addr.setBirthday(d);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:4.0\r\n"
+                        "BDAY:--0505\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "EMAIL:bla@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
 void BirthDayTest::shouldExportVcard3()
 {
     KContacts::AddresseeList lst;
@@ -152,6 +175,29 @@ void BirthDayTest::shouldExportVcard3()
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:3.0\r\n"
                         "BDAY:1976-05-05T12:05:05\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "EMAIL:bla@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
+
+    QCOMPARE(ba, expected);
+}
+
+void BirthDayTest::shouldExportVcard3WithoutTimeAndWithoutYear()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org") << QStringLiteral("bla@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+    const QDate d(-1, 5, 5);
+    addr.setBirthday(d);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:3.0\r\n"
+                        "BDAY:--05-05\r\n"
                         "EMAIL:foo@kde.org\r\n"
                         "EMAIL:bla@kde.org\r\n"
                         "N:;;;;\r\n"

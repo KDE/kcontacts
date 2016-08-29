@@ -38,6 +38,8 @@ private Q_SLOTS:
     void shouldParseBirthDay();
     void shouldParseBirthDayWithoutTime();
     void shouldParseBirthDayWithoutTimeAndYear();
+    void shouldExportVcard4WithoutTimeAndWithoutYear();
+    void shouldExportVcard3WithoutTimeAndWithoutYear();
 };
 
 #endif // BIRTHDAYTEST_H
