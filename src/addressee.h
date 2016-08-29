@@ -287,6 +287,7 @@ public:
     /**
       Set birthday (date and time). If withTime is false the time will be set
       to midnight and birthdayHasTime() will return false afterwards.
+      @since 5.4
      */
     void setBirthday(const QDateTime &birthday, bool withTime = true);
 
