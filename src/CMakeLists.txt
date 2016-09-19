@@ -46,7 +46,7 @@ set(kcontacts_converter_SRCS
   converter/ldifconverter.cpp
 )
 
-ecm_qt_declare_logging_category(kcontacts_converter_SRCS HEADER kcontacts_debug.h IDENTIFIER KCONTACTS_LOG CATEGORY_NAME log_kcontacts)
+ecm_qt_declare_logging_category(kcontacts_converter_SRCS HEADER kcontacts_debug.h IDENTIFIER KCONTACTS_LOG CATEGORY_NAME org.kde.pim.kcontacts)
 
 add_library(KF5Contacts ${kcontacts_SRCS} ${kcontacts_converter_SRCS})
 
