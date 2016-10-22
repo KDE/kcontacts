@@ -22,7 +22,6 @@
 #include <QTest>
 #include <vcardtool.h>
 
-
 DateTimeTest::DateTimeTest(QObject *parent)
     : QObject(parent)
 {

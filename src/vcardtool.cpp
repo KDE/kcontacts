@@ -1224,8 +1224,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
         timeString = timeString.replace(QLatin1String(":"), QString());
         QStringList timeStrings = timeString.split(QRegularExpression(QStringLiteral("[Z+-]")));
         const QString hhmmssString = timeStrings.at(0);
-        switch(hhmmssString.size())
-        {
+        switch (hhmmssString.size()) {
         case 2:
             time = QTime::fromString(hhmmssString, QStringLiteral("hh"));
             break;
@@ -1243,8 +1242,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                 spec = Qt::OffsetFromUTC;
                 QTime offsetTime;
                 const QString offsetString = timeStrings.at(1);
-                switch(offsetString.size())
-                {
+                switch (offsetString.size()) {
                 case 2:
                     offsetTime = QTime::fromString(offsetString, QStringLiteral("hh"));
                     break;

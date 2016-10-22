@@ -273,7 +273,6 @@ public:
     void setExtraNickNameList(const NickName::List &nickNameList);
     NickName::List extraNickNameList() const;
 
-
     /**
       Return nick name.
      */
@@ -519,7 +518,6 @@ public:
     void insertExtraOrganization(const Org &organization);
     void setExtraOrganizationList(const Org::List &orgList);
     Org::List extraOrganizationList() const;
-
 
     /**
       Return organization.
