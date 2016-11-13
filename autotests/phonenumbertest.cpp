@@ -275,7 +275,7 @@ void PhoneNumberTest::shouldParseVcard3()
                          "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
                          "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr"
+                         "LANG:fr\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -296,7 +296,7 @@ void PhoneNumberTest::shouldParseVcard4()
                          "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
                          "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr"
+                         "LANG:fr\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
