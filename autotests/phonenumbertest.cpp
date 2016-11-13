@@ -183,6 +183,34 @@ void PhoneNumberTest::labelTest()
              QLatin1String("Work Fax/Preferred"));
 }
 
+void PhoneNumberTest::shouldExportVCard21()
+{
+    KContacts::AddresseeList lst;
+    KContacts::Addressee addr;
+    addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
+    addr.setUid(QStringLiteral("testuid"));
+
+    KContacts::PhoneNumber number1;
+
+    number1.setId(QStringLiteral("My Id"));
+    number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
+    number1.setNumber(QStringLiteral("+1-919-676-9564"));
+    addr.setPhoneNumbers(KContacts::PhoneNumber::List() << number1);
+    lst << addr;
+    KContacts::VCardTool vcard;
+    const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v2_1);
+    QByteArray expected("BEGIN:VCARD\r\n"
+                        "VERSION:2.1\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "TEL;CELL;WORK:+1-919-676-9564\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n"
+                        "\r\n");
+    QCOMPARE(ba, expected);
+
+}
+
 void PhoneNumberTest::shouldExportVCard3()
 {
     KContacts::AddresseeList lst;
