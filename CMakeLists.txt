@@ -20,6 +20,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 include(ECMCoverageOption)
 
+
 set(PIM_VERSION "5.4.40")
 
 set(KCONTACTS_LIB_VERSION ${PIM_VERSION})
