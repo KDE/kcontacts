@@ -70,7 +70,7 @@ void XmlContactGroupWriter::write(const QVector<ContactGroup> &groupList, QIODev
 
     writeStartElement(QStringLiteral("contactGroupList"));
 
-    foreach (const ContactGroup &group, groupList) {
+    for (const ContactGroup &group : groupList) {
         writeGroup(group);
     }
 

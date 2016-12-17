@@ -2191,7 +2191,7 @@ void Addressee::setCustoms(const QStringList &customs)
 
     d->mCustomFields.clear();
 
-    foreach (const QString &custom, customs) {
+    for (const QString &custom : customs) {
         const int index = custom.indexOf(QLatin1Char(':'));
         if (index == -1) {
             continue;
