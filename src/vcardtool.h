@@ -89,8 +89,6 @@ private:
     void addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const;
     void addParameters(VCardLine &line, const QMap<QString, QStringList> &params) const;
 
-    QMap<QString, Address::TypeFlag> mAddressTypeMap;
-    QMap<QString, PhoneNumber::TypeFlag> mPhoneTypeMap;
     void imppService(const QString &serviceType, KContacts::Impp &impp) const;
 
     Q_DISABLE_COPY(VCardTool)

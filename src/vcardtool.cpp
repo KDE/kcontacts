@@ -49,30 +49,66 @@ static bool needsEncoding(const QString &value)
     return false;
 }
 
+static const struct {
+  const char *addressType;
+  Address::TypeFlag flag;
+} s_addressTypes[] = {
+  { "dom", Address::Dom },
+  { "home", Address::Home },
+  { "intl", Address::Intl },
+  { "parcel", Address::Parcel },
+  { "postal", Address::Postal },
+  { "pref", Address::Pref },
+  { "work", Address::Work },
+};
+
+static const unsigned int s_numAddressTypes
+  = sizeof s_addressTypes / sizeof *s_addressTypes;
+
+static Address::TypeFlag stringToAddressType(const QString &str)
+{
+    for (unsigned int i = 0 ; i < s_numAddressTypes ; ++i)
+        if (str == QLatin1String(s_addressTypes[i].addressType))
+            return s_addressTypes[i].flag;
+    return {};
+}
+
+static const struct {
+  const char *phoneType;
+  PhoneNumber::TypeFlag flag;
+} s_phoneTypes[] = {
+    { "BBS", PhoneNumber::Bbs },
+    { "CAR", PhoneNumber::Car },
+    { "CELL", PhoneNumber::Cell },
+    { "FAX", PhoneNumber::Fax },
+    { "HOME", PhoneNumber::Home },
+    { "ISDN", PhoneNumber::Isdn },
+    { "MODEM", PhoneNumber::Modem },
+    { "MSG", PhoneNumber::Msg },
+    { "PAGER", PhoneNumber::Pager },
+    { "PCS", PhoneNumber::Pcs },
+    { "PREF", PhoneNumber::Pref },
+    { "VIDEO", PhoneNumber::Video },
+    { "VOICE", PhoneNumber::Voice },
+    { "WORK", PhoneNumber::Work },
+};
+
+static const unsigned int s_numPhoneTypes
+  = sizeof s_phoneTypes / sizeof *s_phoneTypes;
+
+static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
+{
+    for (unsigned int i = 0 ; i < s_numPhoneTypes ; ++i)
+        if (str == QLatin1String(s_phoneTypes[i].phoneType))
+            return s_phoneTypes[i].flag;
+    return {};
+}
+
+
+
 VCardTool::VCardTool()
 {
-    mAddressTypeMap.insert(QStringLiteral("dom"), Address::Dom);
-    mAddressTypeMap.insert(QStringLiteral("intl"), Address::Intl);
-    mAddressTypeMap.insert(QStringLiteral("postal"), Address::Postal);
-    mAddressTypeMap.insert(QStringLiteral("parcel"), Address::Parcel);
-    mAddressTypeMap.insert(QStringLiteral("home"), Address::Home);
-    mAddressTypeMap.insert(QStringLiteral("work"), Address::Work);
-    mAddressTypeMap.insert(QStringLiteral("pref"), Address::Pref);
 
-    mPhoneTypeMap.insert(QStringLiteral("HOME"), PhoneNumber::Home);
-    mPhoneTypeMap.insert(QStringLiteral("WORK"), PhoneNumber::Work);
-    mPhoneTypeMap.insert(QStringLiteral("MSG"), PhoneNumber::Msg);
-    mPhoneTypeMap.insert(QStringLiteral("PREF"), PhoneNumber::Pref);
-    mPhoneTypeMap.insert(QStringLiteral("VOICE"), PhoneNumber::Voice);
-    mPhoneTypeMap.insert(QStringLiteral("FAX"), PhoneNumber::Fax);
-    mPhoneTypeMap.insert(QStringLiteral("CELL"), PhoneNumber::Cell);
-    mPhoneTypeMap.insert(QStringLiteral("VIDEO"), PhoneNumber::Video);
-    mPhoneTypeMap.insert(QStringLiteral("BBS"), PhoneNumber::Bbs);
-    mPhoneTypeMap.insert(QStringLiteral("MODEM"), PhoneNumber::Modem);
-    mPhoneTypeMap.insert(QStringLiteral("CAR"), PhoneNumber::Car);
-    mPhoneTypeMap.insert(QStringLiteral("ISDN"), PhoneNumber::Isdn);
-    mPhoneTypeMap.insert(QStringLiteral("PCS"), PhoneNumber::Pcs);
-    mPhoneTypeMap.insert(QStringLiteral("PAGER"), PhoneNumber::Pager);
 }
 
 VCardTool::~VCardTool()
@@ -177,15 +213,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
 
             const bool hasLabel = !(*it).label().isEmpty();
-            QMap<QString, Address::TypeFlag>::ConstIterator typeIt;
             QStringList addreLineType;
             QStringList labelLineType;
-            for (typeIt = mAddressTypeMap.constBegin();
-                    typeIt != mAddressTypeMap.constEnd(); ++typeIt) {
-                if (typeIt.value() & (*it).type()) {
-                    addreLineType << typeIt.key();
+            for (unsigned int i = 0 ; i < s_numAddressTypes ; ++i) {
+                if (s_addressTypes[i].flag & (*it).type()) {
+                    const QString str = QString::fromLatin1(s_addressTypes[i].addressType);
+                    addreLineType << str;
                     if (hasLabel) {
-                        labelLineType << typeIt.key();
+                        labelLineType << str;
                     }
                 }
             }
@@ -492,15 +527,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                 }
             }
 
-            QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeIt;
-            QMap<QString, PhoneNumber::TypeFlag>::ConstIterator typeEnd(mPhoneTypeMap.constEnd());
             QStringList lst;
-            for (typeIt = mPhoneTypeMap.constBegin(); typeIt != typeEnd; ++typeIt) {
-                if (typeIt.value() & (*phoneIt).type()) {
+            for (unsigned int i = 0 ; i < s_numPhoneTypes ; ++i) {
+                if (s_phoneTypes[i].flag & (*phoneIt).type()) {
+                    const QString str = QString::fromLatin1(s_phoneTypes[i].phoneType);
                     if (version == VCard::v4_0) {
-                        lst << typeIt.key().toLower();
+                        lst << str.toLower();
                     } else {
-                        lst << typeIt.key();
+                        lst << str;
                     }
                 }
             }
@@ -754,7 +788,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator end(types.end());
                     for (QStringList::ConstIterator it = types.begin(); it != end; ++it) {
-                        type |= mAddressTypeMap[(*it).toLower() ];
+                        type |= stringToAddressType((*it).toLower());
                     }
 
                     address.setType(type);
@@ -924,7 +958,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator end(types.end());
                     for (QStringList::ConstIterator it = types.begin(); it != end; ++it) {
-                        type |= mAddressTypeMap[(*it).toLower() ];
+                        type |= stringToAddressType((*it).toLower());
                     }
 
                     bool available = false;
@@ -1071,7 +1105,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     QStringList::ConstIterator typeEnd(types.constEnd());
                     for (QStringList::ConstIterator it = types.constBegin(); it != typeEnd; ++it) {
-                        type |= mPhoneTypeMap[(*it).toUpper()];
+                        type |= stringToPhoneType((*it).toUpper());
                         foundType = true;
                     }
                     phone.setType(foundType ? type : PhoneNumber::Undefined);
