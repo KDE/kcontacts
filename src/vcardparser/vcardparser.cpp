@@ -52,21 +52,25 @@ using namespace KContacts;
 
 static void addEscapes(QByteArray &str, bool excludeEscapteComma)
 {
-    str.replace('\\', (char *)"\\\\");
+    str.replace('\\', "\\\\");
     if (!excludeEscapteComma) {
-        str.replace(',', (char *)"\\,");
+        str.replace(',', "\\,");
     }
-    str.replace('\r', (char *)"\\r");
-    str.replace('\n', (char *)"\\n");
+    str.replace('\r', "\\r");
+    str.replace('\n', "\\n");
 }
 
 static void removeEscapes(QByteArray &str)
 {
-    str.replace((char *)"\\n", "\n");
-    str.replace((char *)"\\N", "\n");
-    str.replace((char *)"\\r", "\r");
-    str.replace((char *)"\\,", ",");
-    str.replace((char *)"\\\\", "\\");
+    // It's more likely that no escape is present, so add fast path
+    if (!str.contains('\\')) {
+        return;
+    }
+    str.replace("\\n", "\n");
+    str.replace("\\N", "\n");
+    str.replace("\\r", "\r");
+    str.replace("\\,", ",");
+    str.replace("\\\\", "\\");
 }
 
 VCardParser::VCardParser()
