@@ -1239,25 +1239,29 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
 QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
 {
-    const QStringList strings = str.split(QLatin1Char('T'));
-
-    QString dateString = strings.at(0);
+    const int posT = str.indexOf(QLatin1Char('T'));
+    QString dateString = posT >= 0 ? str.left(posT) : str;
     const bool noYear = dateString.startsWith(QLatin1String("--"));
-    dateString = dateString.replace(QLatin1String("-"), QString());
-    QDate date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
+    dateString = dateString.remove(QLatin1Char('-'));
+    QDate date;
     if (noYear) {
         date = QDate::fromString(dateString, QStringLiteral("MMdd"));
         date = date.addYears(-1900);
+    } else {
+        date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
     }
 
     QTime time;
     Qt::TimeSpec spec = Qt::LocalTime;
     int offsetSecs = 0;
-    if (strings.length() > 1) {
-        QString timeString = strings.at(1);
-        timeString = timeString.replace(QLatin1String(":"), QString());
-        QStringList timeStrings = timeString.split(QRegularExpression(QStringLiteral("[Z+-]")));
-        const QString hhmmssString = timeStrings.at(0);
+    if (posT >= 0) {
+        QString timeString = str.mid(posT + 1);
+        timeString = timeString.remove(QLatin1Char(':'));
+        const int zPos = timeString.indexOf(QLatin1Char('Z'));
+        const int plusPos = timeString.indexOf(QLatin1Char('+'));
+        const int minusPos = timeString.indexOf(QLatin1Char('-'));
+        const int tzPos = qMax(qMax(zPos, plusPos), minusPos);
+        const QString hhmmssString = tzPos >= 0 ? timeString.left(tzPos) : timeString;
         switch (hhmmssString.size()) {
         case 2:
             time = QTime::fromString(hhmmssString, QStringLiteral("hh"));
@@ -1269,13 +1273,13 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
             time = QTime::fromString(hhmmssString, QStringLiteral("hhmmss"));
             break;
         }
-        if (timeStrings.length() > 1) {
-            if (timeString.contains(QLatin1Char('Z'))) {
+        if (tzPos >= 0) {
+            if (zPos >= 0) {
                 spec = Qt::UTC;
             } else {
                 spec = Qt::OffsetFromUTC;
                 QTime offsetTime;
-                const QString offsetString = timeStrings.at(1);
+                const QString offsetString = timeString.mid(tzPos + 1);
                 switch (offsetString.size()) {
                 case 2:
                     offsetTime = QTime::fromString(offsetString, QStringLiteral("hh"));
@@ -1286,7 +1290,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                 }
                 offsetSecs = offsetTime.hour() * 3600 + offsetTime.minute() * 60;
             }
-            if (timeString.contains(QLatin1Char('-'))) {
+            if (minusPos >= 0) {
                 offsetSecs *= -1;
             }
         }
