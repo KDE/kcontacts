@@ -37,7 +37,7 @@ static QString findCompatibleMimeType(const QMimeData *md)
 
     const QStringList mimeTypeOffers = md->formats();
     const QMimeDatabase db;
-    Q_FOREACH (const QString &mimeType, mimeTypeOffers) {
+    for (const QString &mimeType : mimeTypeOffers) {
         const QMimeType mimeTypePtr = db.mimeTypeForName(mimeType);
         if (mimeTypePtr.isValid() && mimeTypePtr.inherits(KContacts::Addressee::mimeType())) {
             return mimeType;

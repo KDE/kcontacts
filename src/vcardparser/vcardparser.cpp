@@ -123,10 +123,10 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 for (int i = 0; i < currentLineLength; ++i) {
                     char character = currentLine.at(i);
                     if (keyFound) {
-                        QList<QByteArray> tmpParams = currentLine.right(currentLineLength - i).split(';');
+                        const QList<QByteArray> tmpParams = currentLine.right(currentLineLength - i).split(';');
                         QByteArray tmpParameter;
                         bool valueAdded = false;
-                        Q_FOREACH (const QByteArray &parameter, tmpParams) {
+                        for (const QByteArray &parameter : tmpParams) {
                             if (parameter.contains('=')) {
                                 if (tmpParameter.isEmpty()) {
                                     tmpParameter = parameter;

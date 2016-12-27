@@ -137,7 +137,7 @@ void VCardTool::addParameters(VCardLine &line, const QMap<QString, QStringList> 
 void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const
 {
     if (version == VCard::v2_1) {
-        Q_FOREACH (const QString &valueStr, valueStringList) {
+        for (const QString &valueStr : valueStringList) {
             line.addParameter(valueStr, QString());
         }
     } else if (version == VCard::v3_0) {
