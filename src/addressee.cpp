@@ -1471,7 +1471,7 @@ void Addressee::setNameFromString(const QString &s)
         int leftOffset = 0;
         int rightOffset = parts.count() - 1;
 
-        if (parts.count() > 0) {
+        if (!parts.isEmpty()) {
 
             QString suffix;
             while (rightOffset >= 0) {
