@@ -50,32 +50,33 @@ static bool needsEncoding(const QString &value)
 }
 
 static const struct {
-  const char *addressType;
-  Address::TypeFlag flag;
+    const char *addressType;
+    Address::TypeFlag flag;
 } s_addressTypes[] = {
-  { "dom", Address::Dom },
-  { "home", Address::Home },
-  { "intl", Address::Intl },
-  { "parcel", Address::Parcel },
-  { "postal", Address::Postal },
-  { "pref", Address::Pref },
-  { "work", Address::Work },
+    { "dom", Address::Dom },
+    { "home", Address::Home },
+    { "intl", Address::Intl },
+    { "parcel", Address::Parcel },
+    { "postal", Address::Postal },
+    { "pref", Address::Pref },
+    { "work", Address::Work },
 };
 
 static const unsigned int s_numAddressTypes
-  = sizeof s_addressTypes / sizeof *s_addressTypes;
+    = sizeof s_addressTypes / sizeof * s_addressTypes;
 
 static Address::TypeFlag stringToAddressType(const QString &str)
 {
-    for (unsigned int i = 0 ; i < s_numAddressTypes ; ++i)
-        if (str == QLatin1String(s_addressTypes[i].addressType))
+    for (unsigned int i = 0; i < s_numAddressTypes; ++i)
+        if (str == QLatin1String(s_addressTypes[i].addressType)) {
             return s_addressTypes[i].flag;
+        }
     return {};
 }
 
 static const struct {
-  const char *phoneType;
-  PhoneNumber::TypeFlag flag;
+    const char *phoneType;
+    PhoneNumber::TypeFlag flag;
 } s_phoneTypes[] = {
     { "BBS", PhoneNumber::Bbs },
     { "CAR", PhoneNumber::Car },
@@ -94,17 +95,16 @@ static const struct {
 };
 
 static const unsigned int s_numPhoneTypes
-  = sizeof s_phoneTypes / sizeof *s_phoneTypes;
+    = sizeof s_phoneTypes / sizeof * s_phoneTypes;
 
 static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
 {
-    for (unsigned int i = 0 ; i < s_numPhoneTypes ; ++i)
-        if (str == QLatin1String(s_phoneTypes[i].phoneType))
+    for (unsigned int i = 0; i < s_numPhoneTypes; ++i)
+        if (str == QLatin1String(s_phoneTypes[i].phoneType)) {
             return s_phoneTypes[i].flag;
+        }
     return {};
 }
-
-
 
 VCardTool::VCardTool()
 {
@@ -215,7 +215,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             const bool hasLabel = !(*it).label().isEmpty();
             QStringList addreLineType;
             QStringList labelLineType;
-            for (unsigned int i = 0 ; i < s_numAddressTypes ; ++i) {
+            for (unsigned int i = 0; i < s_numAddressTypes; ++i) {
                 if (s_addressTypes[i].flag & (*it).type()) {
                     const QString str = QString::fromLatin1(s_addressTypes[i].addressType);
                     addreLineType << str;
@@ -528,7 +528,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
 
             QStringList lst;
-            for (unsigned int i = 0 ; i < s_numPhoneTypes ; ++i) {
+            for (unsigned int i = 0; i < s_numPhoneTypes; ++i) {
                 if (s_phoneTypes[i].flag & (*phoneIt).type()) {
                     const QString str = QString::fromLatin1(s_phoneTypes[i].phoneType);
                     if (version == VCard::v4_0) {

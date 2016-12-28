@@ -186,13 +186,13 @@ void PhoneNumberTest::labelTest()
 void PhoneNumberTest::shouldParseVCard21()
 {
     QByteArray vcarddata("BEGIN:VCARD\n"
-                        "VERSION:2.1\n"
-                        "EMAIL:foo@kde.org\n"
-                        "N:;;;;\n"
-                        "TEL;CELL;WORK:+1-919-676-9564\n"
-                        "UID:testuid\n"
-                        "END:VCARD\n"
-                        "\n");
+                         "VERSION:2.1\n"
+                         "EMAIL:foo@kde.org\n"
+                         "N:;;;;\n"
+                         "TEL;CELL;WORK:+1-919-676-9564\n"
+                         "UID:testuid\n"
+                         "END:VCARD\n"
+                         "\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
