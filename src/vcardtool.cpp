@@ -279,14 +279,16 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         if (version == VCard::v4_0) {
             // The KIND property must be set to "group" in order to use this property.
             if ((*addrIt).kind().toLower() == QLatin1String("group")) {
-                Q_FOREACH (const QString &member, (*addrIt).members()) {
+                const QStringList lst = (*addrIt).members();
+                for (const QString &member : lst) {
                     VCardLine line(QStringLiteral("MEMBER"), member);
                     card.addLine(line);
                 }
             }
         }
         // SOURCE
-        Q_FOREACH (const QUrl &url, (*addrIt).sourcesUrlList()) {
+        const QVector<QUrl> lstUrl = (*addrIt).sourcesUrlList();
+        for (const QUrl &url : lstUrl) {
             VCardLine line = VCardLine(QStringLiteral("SOURCE"), url.url());
             card.addLine(line);
         }
@@ -388,7 +390,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // LOGO
         card.addLine(createPicture(QStringLiteral("LOGO"), (*addrIt).logo(), version));
-        Q_FOREACH (const Picture &logo, (*addrIt).extraLogoList()) {
+        const QVector<Picture> lstLogo = (*addrIt).extraLogoList();
+        for (const Picture &logo : lstLogo) {
             card.addLine(createPicture(QStringLiteral("LOGO"), logo, version));
         }
 
@@ -442,7 +445,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // NICKNAME only for version > 2.1
         if (version != VCard::v2_1) {
-            Q_FOREACH (const NickName &nickName, (*addrIt).extraNickNameList()) {
+            const QVector<NickName> lstNickName = (*addrIt).extraNickNameList();
+            for (const NickName &nickName : lstNickName) {
                 VCardLine nickNameLine(QStringLiteral("NICKNAME"), nickName.nickname());
                 addParameters(nickNameLine, nickName.parameters());
 
@@ -459,7 +463,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(noteLine);
 
         // ORG
-        Q_FOREACH (const Org &org, (*addrIt).extraOrganizationList()) {
+        const QVector<Org> lstOrg = (*addrIt).extraOrganizationList();
+        for (const Org &org : lstOrg) {
             QStringList organization;
             organization.append(org.organization().replace(QLatin1Char(';'),
                                 QStringLiteral("\\;")));
@@ -479,7 +484,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // PHOTO
         card.addLine(createPicture(QStringLiteral("PHOTO"), (*addrIt).photo(), version));
-        Q_FOREACH (const Picture &photo, (*addrIt).extraPhotoList()) {
+        const QVector<Picture> lstExtraPhoto = (*addrIt).extraPhotoList();
+        for (const Picture &photo : lstExtraPhoto) {
             card.addLine(createPicture(QStringLiteral("PHOTO"), photo, version));
         }
 
@@ -492,7 +498,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(VCardLine(QStringLiteral("REV"), createDateTime((*addrIt).revision(), version)));
 
         // ROLE
-        Q_FOREACH (const Role &role, (*addrIt).extraRoleList()) {
+        const QVector<Role> lstExtraRole = (*addrIt).extraRoleList();
+        for (const Role &role : lstExtraRole) {
             VCardLine roleLine(QStringLiteral("ROLE"), role.role());
             if (version == VCard::v2_1 && needsEncoding(role.role())) {
                 roleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
@@ -509,7 +516,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
 
         // SOUND
         card.addLine(createSound((*addrIt).sound(), version));
-        Q_FOREACH (const Sound &sound, (*addrIt).extraSoundList()) {
+        const QVector<Sound> lstSound = (*addrIt).extraSoundList();
+        for (const Sound &sound : lstSound) {
             card.addLine(createSound(sound, version));
         }
 
@@ -545,7 +553,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
 
         // TITLE
-        Q_FOREACH (const Title &title, (*addrIt).extraTitleList()) {
+        const QVector<Title> lstTitle = (*addrIt).extraTitleList();
+        for (const Title &title : lstTitle) {
             VCardLine titleLine(QStringLiteral("TITLE"), title.title());
             if (version == VCard::v2_1 && needsEncoding(title.title())) {
                 titleLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
@@ -578,7 +587,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         card.addLine(VCardLine(QStringLiteral("UID"), (*addrIt).uid()));
 
         // URL
-        Q_FOREACH (const ResourceLocatorUrl &url, (*addrIt).extraUrlList()) {
+        const QVector<ResourceLocatorUrl> lstExtraUrl = (*addrIt).extraUrlList();
+        for (const ResourceLocatorUrl &url : lstExtraUrl) {
             VCardLine line(QStringLiteral("URL"), url.url());
             addParameters(line, url.parameters());
             card.addLine(line);
@@ -605,7 +615,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
         }
         // From vcard4.
         if (version == VCard::v4_0) {
-            Q_FOREACH (const CalendarUrl &url, (*addrIt).calendarUrlList()) {
+            const QVector<CalendarUrl> lstCalendarUrl = (*addrIt).calendarUrlList();
+            for (const CalendarUrl &url : lstCalendarUrl) {
                 if (url.isValid()) {
                     QString type;
                     switch (url.type()) {
@@ -632,14 +643,16 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
             }
         }
         //FieldGroup
-        Q_FOREACH (const FieldGroup &group, (*addrIt).fieldGroupList()) {
+        const QVector<FieldGroup> lstGroup = (*addrIt).fieldGroupList();
+        for (const FieldGroup &group : lstGroup) {
             VCardLine line(group.fieldGroupName(), group.value());
             addParameters(line, group.parameters());
             card.addLine(line);
         }
 
         // IMPP (supported in vcard 3 too)
-        Q_FOREACH (const Impp &impp, (*addrIt).imppList()) {
+        const QVector<Impp> lstImpp = (*addrIt).imppList();
+        for (const Impp &impp : lstImpp) {
             VCardLine line(QStringLiteral("IMPP"), impp.address());
             line.addParameter(QStringLiteral("X-SERVICE-TYPE"), Impp::typeToString(impp.type()));
             QMapIterator<QString, QStringList> i(impp.parameters());
