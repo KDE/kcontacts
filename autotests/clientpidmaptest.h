@@ -27,7 +27,7 @@ class ClientPidMapTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientPidMapTest(QObject *parent = Q_NULLPTR);
+    explicit ClientPidMapTest(QObject *parent = nullptr);
     ~ClientPidMapTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

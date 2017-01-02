@@ -24,7 +24,7 @@
 using namespace KContacts;
 
 VCardConverter::VCardConverter()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 

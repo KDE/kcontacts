@@ -27,7 +27,7 @@ class OrgTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit OrgTest(QObject *parent = Q_NULLPTR);
+    explicit OrgTest(QObject *parent = nullptr);
     ~OrgTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

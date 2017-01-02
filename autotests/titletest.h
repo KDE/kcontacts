@@ -27,7 +27,7 @@ class TitleTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit TitleTest(QObject *parent = Q_NULLPTR);
+    explicit TitleTest(QObject *parent = nullptr);
     ~TitleTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

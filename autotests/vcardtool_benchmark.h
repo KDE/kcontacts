@@ -27,7 +27,7 @@ class PerformanceTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit PerformanceTest(QObject *parent = Q_NULLPTR);
+    explicit PerformanceTest(QObject *parent = nullptr);
     ~PerformanceTest();
 private Q_SLOTS:
     void testParserPerformance();

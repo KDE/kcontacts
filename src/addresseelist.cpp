@@ -35,7 +35,7 @@ using namespace KContacts;
 //
 
 SortingTraits::Uid::Uid()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 
@@ -56,7 +56,7 @@ bool SortingTraits::Uid::lt(const Addressee &a1, const Addressee &a2)
 }
 
 SortingTraits::Name::Name()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 
@@ -75,7 +75,7 @@ bool SortingTraits::Name::lt(const Addressee &a1, const Addressee &a2)
 }
 
 SortingTraits::FormattedName::FormattedName()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 
@@ -94,7 +94,7 @@ bool SortingTraits::FormattedName::lt(const Addressee &a1, const Addressee &a2)
 }
 
 SortingTraits::FamilyName::FamilyName()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 
@@ -120,7 +120,7 @@ bool SortingTraits::FamilyName::lt(const Addressee &a1, const Addressee &a2)
 }
 
 SortingTraits::GivenName::GivenName()
-    : d(Q_NULLPTR)
+    : d(nullptr)
 {
 }
 
@@ -151,7 +151,7 @@ bool SortingTraits::GivenName::lt(const Addressee &a1, const Addressee &a2)
 //
 //
 
-static Field *sActiveField = Q_NULLPTR;
+static Field *sActiveField = nullptr;
 
 class Q_DECL_HIDDEN AddresseeList::Private : public QSharedData
 {
@@ -336,7 +336,7 @@ void AddresseeList::sortByField(Field *field)
 
     KContacts::Addressee::setSortMode(mode);
     qSort(*this);
-    KContacts::Addressee::setSortMode(Q_NULLPTR);
+    KContacts::Addressee::setSortMode(nullptr);
 
     delete mode;
 }
@@ -349,7 +349,7 @@ void AddresseeList::sortByMode(SortMode *mode)
 
     KContacts::Addressee::setSortMode(mode);
     qSort(*this);
-    KContacts::Addressee::setSortMode(Q_NULLPTR);
+    KContacts::Addressee::setSortMode(nullptr);
 }
 
 SortingCriterion AddresseeList::sortingCriterion() const

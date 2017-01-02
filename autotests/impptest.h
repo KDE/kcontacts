@@ -27,7 +27,7 @@ class ImppTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImppTest(QObject *parent = Q_NULLPTR);
+    explicit ImppTest(QObject *parent = nullptr);
     ~ImppTest();
 
 private Q_SLOTS:

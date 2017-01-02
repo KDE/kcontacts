@@ -27,7 +27,7 @@ class LDifConverterTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit LDifConverterTest(QObject *parent = Q_NULLPTR);
+    explicit LDifConverterTest(QObject *parent = nullptr);
     ~LDifConverterTest();
 
 private Q_SLOTS:

@@ -27,7 +27,7 @@ class RelatedTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit RelatedTest(QObject *parent = Q_NULLPTR);
+    explicit RelatedTest(QObject *parent = nullptr);
     ~RelatedTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

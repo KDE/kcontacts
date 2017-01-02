@@ -27,7 +27,7 @@ class CalendarUrlTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit CalendarUrlTest(QObject *parent = Q_NULLPTR);
+    explicit CalendarUrlTest(QObject *parent = nullptr);
     ~CalendarUrlTest();
 
 private Q_SLOTS:

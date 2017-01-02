@@ -27,7 +27,7 @@ class DateTimeTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit DateTimeTest(QObject *parent = Q_NULLPTR);
+    explicit DateTimeTest(QObject *parent = nullptr);
     ~DateTimeTest();
 
 private Q_SLOTS:

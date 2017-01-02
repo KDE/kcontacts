@@ -47,14 +47,14 @@ namespace ContactGroupTool
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group,
-                                     QString *errorMessage = Q_NULLPTR);
+                                     QString *errorMessage = nullptr);
 
 /**
  * Converts a contact @p group into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
-                                   QString *errorMessage = Q_NULLPTR);
+                                   QString *errorMessage = nullptr);
 
 /**
  * Converts XML data coming from a @p device into a @p list of contact groups.
@@ -62,14 +62,14 @@ KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
  */
 KCONTACTS_EXPORT bool convertFromXml(QIODevice *device,
                                      QVector<ContactGroup> &list,
-                                     QString *errorMessage = Q_NULLPTR);
+                                     QString *errorMessage = nullptr);
 
 /**
  * Converts a @p list of contact groups into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
 KCONTACTS_EXPORT bool convertToXml(const QVector<ContactGroup> &list,
-                                   QIODevice *device, QString *errorMessage = Q_NULLPTR);
+                                   QIODevice *device, QString *errorMessage = nullptr);
 }
 
 }

@@ -195,7 +195,7 @@ class Q_DECL_HIDDEN Address::Private : public QSharedData
 public:
     Private()
         : mEmpty(true)
-        , mType(Q_NULLPTR)
+        , mType(nullptr)
     {
         mId = KRandom::randomString(10);
     }

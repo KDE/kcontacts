@@ -27,7 +27,7 @@ class EmailTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit EmailTest(QObject *parent = Q_NULLPTR);
+    explicit EmailTest(QObject *parent = nullptr);
     ~EmailTest();
 
 private Q_SLOTS:

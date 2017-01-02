@@ -27,7 +27,7 @@ class ResourceLocatorUrlTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ResourceLocatorUrlTest(QObject *parent = Q_NULLPTR);
+    explicit ResourceLocatorUrlTest(QObject *parent = nullptr);
     ~ResourceLocatorUrlTest();
 
 private Q_SLOTS:

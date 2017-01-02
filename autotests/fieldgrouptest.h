@@ -27,7 +27,7 @@ class FieldGroupTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit FieldGroupTest(QObject *parent = Q_NULLPTR);
+    explicit FieldGroupTest(QObject *parent = nullptr);
     ~FieldGroupTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();
