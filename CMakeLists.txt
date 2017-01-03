@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
+set(PIM_VERSION "5.4.40")
 
-project(KContacts)
+project(KContacts VERSION ${PIM_VERSION})
 
 # ECM setup
 set(QT_REQUIRED_VERSION "5.6.0")
@@ -21,11 +22,10 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMCoverageOption)
 
 
-set(PIM_VERSION "5.4.40")
 
 set(KCONTACTS_LIB_VERSION ${PIM_VERSION})
 
-ecm_setup_version(${KCONTACTS_LIB_VERSION} VARIABLE_PREFIX KContacts
+ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5ContactsConfigVersion.cmake"
                         SOVERSION 5
