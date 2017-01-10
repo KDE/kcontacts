@@ -196,7 +196,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                                 pair.prepend("type");
                             }
                         }
-                        if (pair[ 1 ].contains(QLatin1Char(':'))) {
+                        if (pair[ 1 ].contains(':')) {
                             vCardLine.addParameter(cache.fromLatin1(pair[ 0 ].toLower()),
                                                    cache.fromLatin1(pair[ 1 ]));
                         } else if (pair[ 1 ].indexOf(',') != -1) {     // parameter in type=x,y,z format
