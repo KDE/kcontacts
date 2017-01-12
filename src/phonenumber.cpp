@@ -257,11 +257,12 @@ QString PhoneNumber::toString() const
     str += QStringLiteral("    Id: %1\n").arg(d->mId);
     str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
     if (!d->mParameters.isEmpty()) {
-        QMapIterator<QString, QStringList> i(d->mParameters);
         QString param;
-        while (i.hasNext()) {
-            i.next();
-            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QLatin1Char(',')));
+        QMap<QString, QStringList>::const_iterator it = d->mParameters.constBegin();
+        const QMap<QString, QStringList>::const_iterator end = d->mParameters.constEnd();
+        while (it != end) {
+            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
+            it++;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

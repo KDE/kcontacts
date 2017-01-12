@@ -122,11 +122,12 @@ QString CalendarUrl::toString() const
     str += QStringLiteral("    url: %1\n").arg(d->url.toString());
     str += QStringLiteral("    type: %1\n").arg(CalendarUrl::Private::typeToString(d->type));
     if (!d->parameters.isEmpty()) {
-        QMapIterator<QString, QStringList> i(d->parameters);
+        QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
+        const QMap<QString, QStringList>::const_iterator end = d->parameters.constEnd();
         QString param;
-        while (i.hasNext()) {
-            i.next();
-            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QLatin1Char(',')));
+        while (it != end) {
+            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
+            it++;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

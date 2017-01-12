@@ -128,11 +128,12 @@ QString FieldGroup::toString() const
     str += QLatin1String("FieldGroup {\n");
     str += QStringLiteral("    FieldGroupName: %1 Value %2\n").arg(d->fieldGroupName).arg(d->value);
     if (!d->parameters.isEmpty()) {
-        QMapIterator<QString, QStringList> i(d->parameters);
         QString param;
-        while (i.hasNext()) {
-            i.next();
-            param += QStringLiteral("%1 %2").arg(i.key(), i.value().join(QLatin1Char(',')));
+        QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
+        const QMap<QString, QStringList>::const_iterator end = d->parameters.constEnd();
+        while (it != end) {
+            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
+            it++;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

@@ -2208,11 +2208,12 @@ QStringList Addressee::customs() const
 {
     QStringList result;
 
-    QHashIterator<QString, QString> it(d->mCustomFields);
+    QHash<QString, QString>::const_iterator it = d->mCustomFields.constBegin();
+    const QHash<QString, QString>::const_iterator end = d->mCustomFields.constEnd();
     result.reserve(d->mCustomFields.count());
-    while (it.hasNext()) {
-        it.next();
+    while (it != end) {
         result << it.key() + QLatin1Char(':') + it.value();
+        it++;
     }
 
     return result;
