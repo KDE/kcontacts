@@ -340,8 +340,8 @@ QByteArray VCardTool::createVCards(const Addressee::List &list,
                     if (i.key().toLower() == QLatin1String("type")) {
                         QStringList valueStringList = i.value();
                         bool hasPreferred = false;
-                        if (valueStringList.contains(QStringLiteral("PREF"))) {
-                            valueStringList.removeAll(QStringLiteral("PREF"));
+                        const int removeItems = valueStringList.removeAll(QStringLiteral("PREF"));
+                        if (removeItems > 0) {
                             hasPreferred = true;
                         }
                         if (!valueStringList.isEmpty()) {
