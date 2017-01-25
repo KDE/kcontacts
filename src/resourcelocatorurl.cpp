@@ -84,8 +84,7 @@ ResourceLocatorUrl &ResourceLocatorUrl::operator=(const ResourceLocatorUrl &othe
 
 QString ResourceLocatorUrl::toString() const
 {
-    QString str;
-    str += QLatin1String("ResourceLocatorUrl {\n");
+    QString str = QLatin1String("ResourceLocatorUrl {\n");
     str += QStringLiteral("    url: %1\n").arg(d->url.toString());
     if (!d->parameters.isEmpty()) {
         QString param;

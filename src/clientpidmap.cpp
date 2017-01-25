@@ -111,8 +111,7 @@ ClientPidMap &ClientPidMap::operator=(const ClientPidMap &other)
 
 QString ClientPidMap::toString() const
 {
-    QString str;
-    str += QLatin1String("ClientPidMap {\n");
+    QString str = QLatin1String("ClientPidMap {\n");
     str += QStringLiteral("    clientpidmap: %1\n").arg(d->clientpidmap);
     if (!d->parameters.isEmpty()) {
         QString param;

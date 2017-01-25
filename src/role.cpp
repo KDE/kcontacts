@@ -111,8 +111,7 @@ Role &Role::operator=(const Role &other)
 
 QString Role::toString() const
 {
-    QString str;
-    str += QLatin1String("Role {\n");
+    QString str = QLatin1String("Role {\n");
     str += QStringLiteral("    role: %1\n").arg(d->role);
     if (!d->parameters.isEmpty()) {
         QString param;

@@ -207,9 +207,7 @@ AddresseeList &AddresseeList::operator=(const AddresseeList &other)
 
 QString AddresseeList::toString() const
 {
-    QString str;
-
-    str += QLatin1String("AddresseeList {\n");
+    QString str = QLatin1String("AddresseeList {\n");
     str += QStringLiteral("   Reverse Order: %1\n").arg(d->mReverseSorting ?
             QStringLiteral("true") :
             QStringLiteral("false"));

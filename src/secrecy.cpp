@@ -124,9 +124,7 @@ QString Secrecy::typeLabel(Type type)
 
 QString Secrecy::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Secrecy {\n");
+    QString str = QLatin1String("Secrecy {\n");
     str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
     str += QLatin1String("}\n");
 

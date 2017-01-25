@@ -99,10 +99,11 @@ static const unsigned int s_numPhoneTypes
 
 static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
 {
-    for (unsigned int i = 0; i < s_numPhoneTypes; ++i)
+    for (unsigned int i = 0; i < s_numPhoneTypes; ++i) {
         if (str == QLatin1String(s_phoneTypes[i].phoneType)) {
             return s_phoneTypes[i].flag;
         }
+    }
     return {};
 }
 

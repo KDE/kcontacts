@@ -111,8 +111,7 @@ Lang &Lang::operator=(const Lang &other)
 
 QString Lang::toString() const
 {
-    QString str;
-    str += QLatin1String("Lang {\n");
+    QString str = QLatin1String("Lang {\n");
     str += QStringLiteral("    language: %1\n").arg(d->language);
     if (!d->parameters.isEmpty()) {
         QString param;

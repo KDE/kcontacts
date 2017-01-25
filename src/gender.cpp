@@ -85,8 +85,7 @@ Gender &Gender::operator=(const Gender &other)
 
 QString Gender::toString() const
 {
-    QString str;
-    str += QLatin1String("Gender {\n");
+    QString str = QLatin1String("Gender {\n");
     str += QStringLiteral("    gender: %1\n").arg(d->gender);
     str += QStringLiteral("    comment: %1\n").arg(d->comment);
     str += QLatin1String("}\n");

@@ -117,8 +117,7 @@ CalendarUrl &CalendarUrl::operator=(const CalendarUrl &other)
 
 QString CalendarUrl::toString() const
 {
-    QString str;
-    str += QLatin1String("CalendarUrl {\n");
+    QString str = QLatin1String("CalendarUrl {\n");
     str += QStringLiteral("    url: %1\n").arg(d->url.toString());
     str += QStringLiteral("    type: %1\n").arg(CalendarUrl::Private::typeToString(d->type));
     if (!d->parameters.isEmpty()) {

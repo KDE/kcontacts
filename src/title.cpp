@@ -111,8 +111,7 @@ Title &Title::operator=(const Title &other)
 
 QString Title::toString() const
 {
-    QString str;
-    str += QLatin1String("Title {\n");
+    QString str = QLatin1String("Title {\n");
     str += QStringLiteral("    title: %1\n").arg(d->title);
     if (!d->parameters.isEmpty()) {
         QString param;

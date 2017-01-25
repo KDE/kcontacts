@@ -112,9 +112,7 @@ TimeZone &TimeZone::operator=(const TimeZone &other)
 
 QString TimeZone::toString() const
 {
-    QString str;
-
-    str += QLatin1String("TimeZone {\n");
+    QString str = QLatin1String("TimeZone {\n");
     str += QStringLiteral("  Offset: %1\n").arg(d->mOffset);
     str += QLatin1String("}\n");
 

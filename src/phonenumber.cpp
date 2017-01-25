@@ -251,9 +251,7 @@ QString PhoneNumber::typeLabel(Type type)
 
 QString PhoneNumber::toString() const
 {
-    QString str;
-
-    str += QLatin1String("PhoneNumber {\n");
+    QString str = QLatin1String("PhoneNumber {\n");
     str += QStringLiteral("    Id: %1\n").arg(d->mId);
     str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
     if (!d->mParameters.isEmpty()) {

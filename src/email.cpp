@@ -91,8 +91,7 @@ Email &Email::operator=(const Email &other)
 
 QString Email::toString() const
 {
-    QString str;
-    str += QLatin1String("Email {\n");
+    QString str = QLatin1String("Email {\n");
     str += QStringLiteral("    mail: %1\n").arg(d->mail);
     if (!d->parameters.isEmpty()) {
         QString param;

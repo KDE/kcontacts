@@ -142,9 +142,7 @@ QByteArray Sound::data() const
 
 QString Sound::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Sound {\n");
+    QString str = QLatin1String("Sound {\n");
     str += QStringLiteral("  IsIntern: %1\n").
            arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIntern) {

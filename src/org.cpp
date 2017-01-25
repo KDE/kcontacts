@@ -111,8 +111,7 @@ Org &Org::operator=(const Org &other)
 
 QString Org::toString() const
 {
-    QString str;
-    str += QLatin1String("Org {\n");
+    QString str = QLatin1String("Org {\n");
     str += QStringLiteral("    organization: %1\n").arg(d->organization);
     if (!d->parameters.isEmpty()) {
         QString param;

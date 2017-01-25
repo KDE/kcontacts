@@ -111,8 +111,7 @@ Note &Note::operator=(const Note &other)
 
 QString Note::toString() const
 {
-    QString str;
-    str += QLatin1String("Note {\n");
+    QString str = QLatin1String("Note {\n");
     str += QStringLiteral("    note: %1\n").arg(d->note);
     if (!d->parameters.isEmpty()) {
         QString param;

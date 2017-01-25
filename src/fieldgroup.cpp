@@ -124,8 +124,7 @@ FieldGroup &FieldGroup::operator=(const FieldGroup &other)
 
 QString FieldGroup::toString() const
 {
-    QString str;
-    str += QLatin1String("FieldGroup {\n");
+    QString str = QLatin1String("FieldGroup {\n");
     str += QStringLiteral("    FieldGroupName: %1 Value %2\n").arg(d->fieldGroupName).arg(d->value);
     if (!d->parameters.isEmpty()) {
         QString param;

@@ -177,9 +177,7 @@ QString Key::customTypeString() const
 
 QString Key::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Key {\n");
+    QString str = QLatin1String("Key {\n");
     str += QStringLiteral("  Id: %1\n").arg(d->mId);
     str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
     if (d->mType == Custom) {

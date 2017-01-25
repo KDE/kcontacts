@@ -221,9 +221,7 @@ QString Picture::type() const
 
 QString Picture::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Picture {\n");
+    QString str = QLatin1String("Picture {\n");
     str += QStringLiteral("  Type: %1\n").arg(d->mType);
     str += QStringLiteral("  IsIntern: %1\n").
            arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));

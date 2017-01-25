@@ -1796,7 +1796,7 @@ PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
     PhoneNumber::List list;
 
     PhoneNumber::List::ConstIterator it;
-    PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
+    const PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
     for (it = d->mPhoneNumbers.constBegin(); it != end; ++it) {
         if (matchBinaryPattern((*it).type(), type)) {
             list.append(*it);
@@ -1808,7 +1808,7 @@ PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
 PhoneNumber Addressee::findPhoneNumber(const QString &id) const
 {
     PhoneNumber::List::ConstIterator it;
-    PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
+    const PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
     for (it = d->mPhoneNumbers.constBegin(); it != end; ++it) {
         if ((*it).id() == id) {
             return *it;

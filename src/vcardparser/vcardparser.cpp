@@ -92,7 +92,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
 
     bool inVCard = false;
     QList<QByteArray>::Iterator it(lines.begin());
-    QList<QByteArray>::Iterator linesEnd(lines.end());
+    const QList<QByteArray>::Iterator linesEnd(lines.end());
 
     StringCache cache;
 
@@ -315,7 +315,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
     text.reserve(list.size() * 300);   // reserve memory to be more efficient
 
     // iterate over the cards
-    VCard::List::ConstIterator listEnd(list.end());
+    const VCard::List::ConstIterator listEnd(list.end());
     for (cardIt = list.begin(); cardIt != listEnd; ++cardIt) {
         text.append("BEGIN:VCARD\r\n");
 

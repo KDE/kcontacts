@@ -111,8 +111,7 @@ NickName &NickName::operator=(const NickName &other)
 
 QString NickName::toString() const
 {
-    QString str;
-    str += QLatin1String("NickName {\n");
+    QString str = QLatin1String("NickName {\n");
     str += QStringLiteral("    nickname: %1\n").arg(d->nickname);
     if (!d->parameters.isEmpty()) {
         QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();

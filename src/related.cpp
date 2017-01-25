@@ -111,8 +111,7 @@ Related &Related::operator=(const Related &other)
 
 QString Related::toString() const
 {
-    QString str;
-    str += QLatin1String("Related {\n");
+    QString str = QLatin1String("Related {\n");
     str += QStringLiteral("    relatedTo: %1\n").arg(d->relatedTo);
     if (!d->parameters.isEmpty()) {
         QString param;

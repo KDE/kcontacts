@@ -117,7 +117,7 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
 bool LDIFConverter::contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str)
 {
     ContactGroup::List::ConstIterator it;
-    ContactGroup::List::ConstIterator end(contactGroupList.constEnd());
+    const ContactGroup::List::ConstIterator end(contactGroupList.constEnd());
     for (it = contactGroupList.constBegin(); it != end; ++it) {
         contactGroupToLDIF(*it, str);
     }
@@ -127,7 +127,7 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup::List &contactGroupLis
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
 {
     AddresseeList::ConstIterator it;
-    AddresseeList::ConstIterator end(addrList.constEnd());
+    const AddresseeList::ConstIterator end(addrList.constEnd());
     for (it = addrList.constBegin(); it != end; ++it) {
         addresseeToLDIF(*it, str);
     }
@@ -576,11 +576,11 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
 
     if (fieldname == QLatin1String("member")) {
         // this is a mozilla list member (cn=xxx, mail=yyy)
-        QStringList list = value.split(QLatin1Char(','));
+        const QStringList list = value.split(QLatin1Char(','));
         QString name, email;
 
         QStringList::ConstIterator it;
-        QStringList::ConstIterator end(list.constEnd());
+        const QStringList::ConstIterator end(list.constEnd());
         for (it = list.constBegin(); it != end; ++it) {
             if ((*it).startsWith(QLatin1String("cn="))) {
                 name = (*it).mid(3).trimmed();

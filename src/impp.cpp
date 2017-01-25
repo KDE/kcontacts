@@ -124,8 +124,7 @@ Impp &Impp::operator=(const Impp &other)
 
 QString Impp::toString() const
 {
-    QString str;
-    str += QLatin1String("Impp {\n");
+    QString str = QLatin1String("Impp {\n");
     str += QStringLiteral("    type: %1\n").arg(typeToString(d->type));
     str += QStringLiteral("    address: %1\n").arg(d->address);
     if (!d->parameters.isEmpty()) {
