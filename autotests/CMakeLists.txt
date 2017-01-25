@@ -19,7 +19,6 @@ ecm_add_tests(birthdaytest.cpp
     geotest.cpp
     keytest.cpp
     phonenumbertest.cpp
-    picturetest.cpp
     secrecytest.cpp
     soundtest.cpp
     timezonetest.cpp
@@ -41,5 +40,8 @@ ecm_add_tests(birthdaytest.cpp
     datetimetest.cpp
     clientpidmaptest.cpp
     vcardtool_benchmark.cpp
+    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore)
+
+ecm_add_tests(picturetest.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore Qt5::Gui)
 

@@ -23,6 +23,8 @@
 #include <QtCore/QBuffer>
 #include <QtCore/QSharedData>
 
+#include <QtGui/QImage>
+
 namespace KContacts
 {
 

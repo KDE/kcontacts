@@ -26,7 +26,8 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QSharedDataPointer>
-#include <QImage>
+
+class QImage;
 
 namespace KContacts
 {
