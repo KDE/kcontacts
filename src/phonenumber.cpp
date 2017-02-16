@@ -260,7 +260,7 @@ QString PhoneNumber::toString() const
         const QMap<QString, QStringList>::const_iterator end = d->mParameters.constEnd();
         while (it != end) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            it++;
+            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

@@ -101,11 +101,10 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
     int fpos = result.indexOf(KCONTACTS_FMTTAG_purgeempty, stpos);
     while (-1 != fpos) {
         int bpos1 = fpos + KCONTACTS_FMTTAG_purgeempty.length();
-        int bpos2;
         // expect opening bracket and find next balanced closing bracket. If
         // next char is no opening bracket, continue parsing (no valid tag)
         if (QLatin1Char('(') == result[bpos1]) {
-            bpos2 = findBalancedBracket(result, bpos1);
+            int bpos2 = findBalancedBracket(result, bpos1);
             if (-1 != bpos2) {
                 // we have balanced brackets, recursively parse:
                 QString rplstr;
@@ -699,8 +698,8 @@ QString Address::ISOtoCountry(const QString &ISOname)
         QTextStream s(&file);
         QString searchStr = QLatin1Char('\t') + ISOname.simplified().toLower();
         QString strbuf = s.readLine();
-        int pos;
         while (!strbuf.isEmpty()) {
+            int pos;
             if ((pos = strbuf.indexOf(searchStr)) != -1) {
                 file.close();
                 return i18n(strbuf.left(pos).toUtf8().constData());

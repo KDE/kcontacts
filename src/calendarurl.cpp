@@ -126,7 +126,7 @@ QString CalendarUrl::toString() const
         QString param;
         while (it != end) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            it++;
+            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

@@ -92,8 +92,6 @@ private:
     void imppService(const QString &serviceType, KContacts::Impp &impp) const;
 
     Q_DISABLE_COPY(VCardTool)
-    class VCardToolPrivate;
-    VCardToolPrivate *d;
 };
 
 }

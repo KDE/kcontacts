@@ -2213,7 +2213,7 @@ QStringList Addressee::customs() const
     result.reserve(d->mCustomFields.count());
     while (it != end) {
         result << it.key() + QLatin1Char(':') + it.value();
-        it++;
+        ++it;
     }
 
     return result;
