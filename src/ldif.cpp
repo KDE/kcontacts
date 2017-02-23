@@ -99,7 +99,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
             }
         }
 
-        if (value.size() == 0) {
+        if (value.isEmpty()) {
             safe = true;
         }
 
