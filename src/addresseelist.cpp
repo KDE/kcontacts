@@ -326,7 +326,7 @@ void AddresseeList::sortByField(Field *field)
 
     sActiveField = field;
 
-    if (count() == 0) {
+    if (isEmpty()) {
         return;
     }
 
@@ -341,7 +341,7 @@ void AddresseeList::sortByField(Field *field)
 
 void AddresseeList::sortByMode(SortMode *mode)
 {
-    if (count() == 0) {
+    if (isEmpty()) {
         return;
     }
 
