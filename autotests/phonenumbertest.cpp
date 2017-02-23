@@ -24,6 +24,7 @@
 #include <addresseelist.h>
 #include <qtest.h>
 #include <vcardtool.h>
+#include "helper_p.h"
 
 QTEST_MAIN(PhoneNumberTest)
 
@@ -116,7 +117,7 @@ void PhoneNumberTest::labelTest()
     const KContacts::PhoneNumber::TypeList types = KContacts::PhoneNumber::typeList();
 
     // check all types standalone
-    Q_FOREACH (KContacts::PhoneNumber::Type type, types) {
+    for (KContacts::PhoneNumber::Type type : types) {
         const KContacts::PhoneNumber phone(QStringLiteral("1"), type);
         QCOMPARE(phone.type(), type);
 
@@ -131,7 +132,7 @@ void PhoneNumberTest::labelTest()
     }
 
     // combine all with Pref
-    Q_FOREACH (KContacts::PhoneNumber::Type type, types) {
+    for (KContacts::PhoneNumber::Type type : qAsConst(types)) {
         KContacts::PhoneNumber::Type combinedType = type | KContacts::PhoneNumber::Pref;
         const KContacts::PhoneNumber phone(QLatin1String("1"), combinedType);
         QCOMPARE(phone.type(), combinedType);
@@ -147,7 +148,7 @@ void PhoneNumberTest::labelTest()
     }
 
     // combine all with Fax
-    Q_FOREACH (KContacts::PhoneNumber::Type type, types) {
+    for (KContacts::PhoneNumber::Type type : qAsConst(types)) {
         KContacts::PhoneNumber::Type combinedType = type | KContacts::PhoneNumber::Fax;
         const KContacts::PhoneNumber phone(QLatin1String("1"), combinedType);
         QCOMPARE(phone.type(), combinedType);

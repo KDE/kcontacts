@@ -19,6 +19,7 @@
 */
 
 #include "addressee.h"
+#include "helper_p.h"
 #include "converter/vcardconverter.h"
 
 #include <qtest.h>
@@ -86,7 +87,7 @@ void RoundtripTest::testVCardRoundtrip_data()
     QString outFile21Pattern = QLatin1String("%1.2_1ref");
     QString outFile4Pattern = QLatin1String("v4_0.%1.ref");
     QString outFilePattern = QLatin1String("%1.ref");
-    Q_FOREACH (const QString &inputFile, mInputFiles) {
+    for (const QString &inputFile : qAsConst(mInputFiles)) {
         const QString outFile = outFilePattern.arg(inputFile);
         const QString outFileV2_1 = outFile21Pattern.arg(inputFile);
         const QString outFileV4 = outFile4Pattern.arg(inputFile);
