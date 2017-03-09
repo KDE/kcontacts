@@ -176,7 +176,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
         const QString str1 = result.mid(fpos - 5, 5);
         const QString str2 = result.mid(fpos + 2, 5);
         if (str1 != QLatin1String("!_P_!") && str2 != QLatin1String("!_P_!")) {
-            result.replace(fpos, 2, QStringLiteral(" "));
+            result.replace(fpos, 2, QLatin1Char(' '));
         } else {
             result.remove(fpos, 2);
         }
