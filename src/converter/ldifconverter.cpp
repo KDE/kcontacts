@@ -488,7 +488,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     }
     if (fieldname == QLatin1String("mozillapostaladdress2") ||
             fieldname == QLatin1String("mozillaworkstreet2")) {     // mozilla
-        workAddr.setStreet(workAddr.street() + QLatin1String("\n") + value);
+        workAddr.setStreet(workAddr.street() + QLatin1Char('\n') + value);
         return;
     }
 
@@ -508,7 +508,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
     }
 
     if (fieldname == QLatin1String("mozillahomepostaladdress2")) {      // mozilla
-        homeAddr.setStreet(homeAddr.street() + QLatin1String("\n") + value);
+        homeAddr.setStreet(homeAddr.street() + QLatin1Char('\n') + value);
         return;
     }
 
