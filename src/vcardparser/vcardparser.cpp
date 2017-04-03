@@ -367,11 +367,11 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     bool checkMultibyte = false;  // avoid splitting a multibyte character
 
                     // handle charset
-                    if ((*lineIt).parameterList().contains(QStringLiteral("charset"))) {
+                    const QString charset = (*lineIt).parameter(QStringLiteral("charset"));
+                    if (!charset.isEmpty()) {
                         // have to convert the data
                         const QString value = (*lineIt).value().toString();
-                        QTextCodec *codec = QTextCodec::codecForName(
-                                                (*lineIt).parameter(QStringLiteral("charset")).toLatin1());
+                        QTextCodec *codec = QTextCodec::codecForName(charset.toLatin1());
                         if (codec) {
                             input = codec->fromUnicode(value);
                         } else {
