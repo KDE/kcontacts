@@ -1919,9 +1919,7 @@ Key Addressee::findKey(const QString &id) const
 
 QString Addressee::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Addressee {\n");
+    QString str = QLatin1String("Addressee {\n");
     str += QStringLiteral("  Uid: %1\n").arg(uid());
 
     str += QStringLiteral("  Name: %1\n").arg(name());

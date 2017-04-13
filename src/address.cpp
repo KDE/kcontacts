@@ -560,9 +560,7 @@ Geo Address::geo() const
 
 QString Address::toString() const
 {
-    QString str;
-
-    str += QLatin1String("Address {\n");
+    QString str = QLatin1String("Address {\n");
     str += QStringLiteral("  IsEmpty: %1\n").
            arg(d->mEmpty ? QStringLiteral("true") : QStringLiteral("false"));
     str += QStringLiteral("  Id: %1\n").arg(d->mId);
