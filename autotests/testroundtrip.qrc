@@ -3,14 +3,14 @@
   <qresource prefix="/input">
     <file>data/vcard1.vcf</file>
     <file>data/vcard2.vcf</file>
-    <!-- <file>data/vcard3.vcf</file> 
-    <file>data/vcard4.vcf</file> -->
+    <file>data/vcard3.vcf</file>
+    <file>data/vcard4.vcf</file>
     <file>data/vcard5.vcf</file>
     <file>data/vcard6.vcf</file>
     <file>data/vcard7.vcf</file>
     <file>data/vcard8.vcf</file>
     <file>data/vcard9.vcf</file>
-    <!-- <file>data/vcard10.vcf</file> -->
+    <file>data/vcard10.vcf</file>
     <file>data/vcard11.vcf</file>
     <file>data/vcard12.vcf</file>
     <file>data/vcard13.vcf</file>

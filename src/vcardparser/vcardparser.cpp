@@ -110,79 +110,34 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 continue;
             }
             if (inVCard && !currentLine.isEmpty()) {   // now parse the line
-                int colon = currentLine.indexOf(':');
+                // ### The syntax is key:value, but the key can contain semicolon-separated parameters, which can contain a ':', so indexOf(':') is wrong.
+                // EXAMPLE: "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
+                const int colon = currentLine.indexOf(':');
                 if (colon == -1) {   // invalid line
                     currentLine = cur;
                     continue;
                 }
-                bool keyFound = false;
-                QByteArray key;
-                QList<QByteArray> params;
-                const int currentLineLength(currentLine.length());
-                for (int i = 0; i < currentLineLength; ++i) {
-                    char character = currentLine.at(i);
-                    if (keyFound) {
-                        const QList<QByteArray> tmpParams = currentLine.mid(i).split(';');
-                        QByteArray tmpParameter;
-                        bool valueAdded = false;
-                        for (const QByteArray &parameter : tmpParams) {
-                            if (parameter.contains('=')) {
-                                if (tmpParameter.isEmpty()) {
-                                    tmpParameter = parameter;
-                                } else {
-                                    params << tmpParameter;
-                                    tmpParameter = parameter;
-                                }
-                            } else {
-                                if (tmpParameter.isEmpty() && !valueAdded) {
-                                    tmpParameter = parameter;
-                                    valueAdded = true;
-                                } else {
-                                    tmpParameter += ';' + parameter;
-                                }
-                            }
-                        }
-                        if (!tmpParameter.isEmpty()) {
-                            params << tmpParameter;
-                        }
-                        break;
-                    } else {
-                        if ((character == ';' || character == ':') && !keyFound) {
-                            keyFound = true;
-                        } else {
-                            key += character;
-                        }
-                    }
-                }
                 VCardLine vCardLine;
-                QByteArray value;
-                if (!params.isEmpty()) {
-                    value = params.takeLast();
-                    if (value.contains('=')) {
-                        colon = value.indexOf(':');
-                        const QByteArray lastParam = value.left(colon).trimmed();
-                        if ((lastParam != "geo")) {
-                            params.append(lastParam);
-                            value = value.mid(colon + 1);
-                        } else {
-                            params.append(value);
-                        }
-                    }
-                }
-                params.prepend(key);
+                const QByteArray key = currentLine.left(colon).trimmed();
+                QByteArray value = currentLine.mid(colon + 1);
+                const QList<QByteArray> params = key.split(';');
+                //qDebug() << "key=" << QString::fromLatin1(key) << "params=" << params;
                 // check for group
                 const QByteArray firstParam = params.at(0);
                 const int groupPos = firstParam.indexOf('.');
                 if (groupPos != -1) {
                     vCardLine.setGroup(cache.fromLatin1(firstParam.left(groupPos)));
                     vCardLine.setIdentifier(cache.fromLatin1(firstParam.mid(groupPos + 1)));
+                    //qDebug() << "group" << vCardLine.group() << "identifier" << vCardLine.identifier();
                 } else {
                     vCardLine.setIdentifier(cache.fromLatin1(firstParam));
+                    //qDebug() << "identifier" << vCardLine.identifier();
                 }
 
                 if (params.count() > 1) {   // find all parameters
                     QList<QByteArray>::ConstIterator paramIt(params.constBegin());
                     for (++paramIt; paramIt != params.constEnd(); ++paramIt) {
+                        //qDebug() << "param" << QString::fromLatin1(*paramIt);
                         QList<QByteArray> pair = (*paramIt).split('=');
                         QByteArray first = pair.at(0).toLower();
                         if (pair.count() == 1) {
@@ -199,10 +154,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                             first = pair.at(0);
                         }
                         const QByteArray second = pair.at(1);
-                        if (second.contains(':')) {
-                            vCardLine.addParameter(cache.fromLatin1(first),
-                                                   cache.fromLatin1(second));
-                        } else if (second.contains(',')) {     // parameter in type=x,y,z format
+                        if (second.contains(',')) {     // parameter in type=x,y,z format
                             const QList<QByteArray> args = second.split(',');
                             for (QByteArray tmpArg : args) {
                                 if (tmpArg.startsWith('"')) {

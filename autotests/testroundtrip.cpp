@@ -158,11 +158,9 @@ void RoundtripTest::testVCardRoundtrip()
             qDebug() << " outputRefData " << outputRefData << endl;
             qDebug() << " outputData " << outputData;
         }
-        QCOMPARE(outputData.size(), outputRefData.size());
         const QList<QByteArray> outputLines = outputData.split('\n');
         const QList<QByteArray> outputRefLines = outputRefData.split('\n');
-        QCOMPARE(outputLines.count(), outputRefLines.count());
-        for (int i = 0; i < outputLines.count(); ++i) {
+        for (int i = 0; i < qMin(outputLines.count(), outputRefLines.count()); ++i) {
             const QByteArray actual = outputLines[i];
             const QByteArray expect = outputRefLines[i];
 
@@ -174,6 +172,8 @@ void RoundtripTest::testVCardRoundtrip()
                 QCOMPARE(actual, expect);
             }
         }
+        QCOMPARE(outputLines.count(), outputRefLines.count());
+        QCOMPARE(outputData.size(), outputRefData.size());
     }
 #if 0
     if (!output4_0File.isEmpty()) {
