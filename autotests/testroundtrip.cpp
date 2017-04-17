@@ -99,6 +99,27 @@ void RoundtripTest::testVCardRoundtrip_data()
     }
 }
 
+static void compareBuffers(const char *version, const QByteArray &outputData, const QByteArray &outputRefData)
+{
+    if (outputData != outputRefData) {
+        qDebug() << " outputData " << outputData;
+        qDebug() << " outputRefData " << outputRefData;
+    }
+    const QList<QByteArray> outputLines = outputData.split('\n');
+    const QList<QByteArray> outputRefLines = outputRefData.split('\n');
+    for (int i = 0; i < qMin(outputLines.count(), outputRefLines.count()); ++i) {
+        const QByteArray actual = outputLines.at(i);
+        const QByteArray expect = outputRefLines.at(i);
+        if (actual != expect) {
+            qCritical() << "Mismatch in" << version << "output line" << (i + 1);
+            QCOMPARE(actual, expect);
+            QCOMPARE(actual.count(), expect.count());
+        }
+    }
+    QCOMPARE(outputLines.count(), outputRefLines.count());
+    QCOMPARE(outputData.size(), outputRefData.size());
+}
+
 void RoundtripTest::testVCardRoundtrip()
 {
     QFETCH(QString, inputFile);
@@ -128,23 +149,7 @@ void RoundtripTest::testVCardRoundtrip()
         QVERIFY(outputFile.open(QIODevice::ReadOnly));
 
         const QByteArray outputRefData = outputFile.readAll();
-        QCOMPARE(outputData.size(), outputRefData.size());
-
-        const QList<QByteArray> outputLines = outputData.split('\n');
-        const QList<QByteArray> outputRefLines = outputRefData.split('\n');
-        QCOMPARE(outputLines.count(), outputRefLines.count());
-        for (int i = 0; i < outputLines.count(); ++i) {
-            const QByteArray actual = outputLines[i];
-            const QByteArray expect = outputRefLines[i];
-
-            if (actual != expect) {
-                qCritical() << "Mismatch in v2.1 output line" << (i + 1);
-                QCOMPARE(actual.count(), expect.count());
-
-                qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
-                QCOMPARE(actual, expect);
-            }
-        }
+        compareBuffers("v2.1", outputData, outputRefData);
     }
 
     if (!output3_0File.isEmpty()) {
@@ -154,26 +159,7 @@ void RoundtripTest::testVCardRoundtrip()
         QVERIFY(outputFile.open(QIODevice::ReadOnly));
 
         const QByteArray outputRefData = outputFile.readAll();
-        if (outputData.size() != outputRefData.size()) {
-            qDebug() << " outputRefData " << outputRefData << endl;
-            qDebug() << " outputData " << outputData;
-        }
-        const QList<QByteArray> outputLines = outputData.split('\n');
-        const QList<QByteArray> outputRefLines = outputRefData.split('\n');
-        for (int i = 0; i < qMin(outputLines.count(), outputRefLines.count()); ++i) {
-            const QByteArray actual = outputLines[i];
-            const QByteArray expect = outputRefLines[i];
-
-            if (actual != expect) {
-                qCritical() << "Mismatch in v3.0 output line" << (i + 1);
-
-                qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
-                QCOMPARE(actual.count(), expect.count());
-                QCOMPARE(actual, expect);
-            }
-        }
-        QCOMPARE(outputLines.count(), outputRefLines.count());
-        QCOMPARE(outputData.size(), outputRefData.size());
+        compareBuffers("v3.0", outputData, outputRefData);
     }
 #if 0
     if (!output4_0File.isEmpty()) {
@@ -183,28 +169,7 @@ void RoundtripTest::testVCardRoundtrip()
         QVERIFY(outputFile.open(QIODevice::ReadOnly));
 
         const QByteArray outputRefData = outputFile.readAll();
-        if (outputData.size() != outputRefData.size()) {
-            qDebug() << " outputRefData " << outputRefData << endl;
-            qDebug() << " outputData " << outputData;
-        }
-        //QCOMPARE( outputData.size(), outputRefData.size() );
-
-        const QList<QByteArray> outputLines = outputData.split('\n');
-        const QList<QByteArray> outputRefLines = outputRefData.split('\n');
-        //QCOMPARE(outputLines.count(), outputRefLines.count());
-
-        for (int i = 0; i < outputLines.count(); ++i) {
-            const QByteArray actual = outputLines[i];
-            const QByteArray expect = outputRefLines[i];
-
-            if (actual != expect) {
-                qCritical() << "Mismatch in v4.0 output line" << (i + 1);
-
-                qCritical() << "\nActual:" << actual << "\nExpect:" << expect;
-                QCOMPARE(actual.count(), expect.count());
-                QCOMPARE(actual, expect);
-            }
-        }
+        compareBuffers("v4.0", outputData, outputRefData);
     }
 #endif
 }

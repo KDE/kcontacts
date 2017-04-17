@@ -80,96 +80,152 @@ public:
     {
     }
 
-    void parseLine(const QByteArray &currentLine, VCardLine &vCardLine);
+    void parseLine(const QByteArray &currentLine, VCardLine *vCardLine);
+
+private:
+    void addParameter(const QByteArray &paramKey, const QByteArray &paramValue);
 
 private:
     StringCache &m_cache;
     std::function<QByteArray()> m_fetchAnotherLine;
+
+    VCardLine *m_vCardLine;
+    QByteArray m_encoding;
+    QByteArray m_charset;
 };
 
-void VCardLineParser::parseLine(const QByteArray& currentLine, KContacts::VCardLine& vCardLine)
+void VCardLineParser::addParameter(const QByteArray& paramKey, const QByteArray& paramValue)
 {
-    // ### The syntax is key:value, but the key can contain semicolon-separated parameters, which can contain a ':', so indexOf(':') is wrong.
-    // EXAMPLE: "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
-    const int colon = currentLine.indexOf(':');
-    if (colon == -1) {   // invalid line
-        return;
+    if (paramKey == "encoding") {
+        m_encoding = paramValue.toLower();
+    } else if (paramKey == "charset") {
+        m_charset = paramValue.toLower();
     }
-    const QByteArray key = currentLine.left(colon).trimmed();
-    QByteArray value = currentLine.mid(colon + 1);
-    const QList<QByteArray> params = key.split(';');
-    //qDebug() << "key=" << QString::fromLatin1(key) << "params=" << params;
-    // check for group
-    const QByteArray firstParam = params.at(0);
-    const int groupPos = firstParam.indexOf('.');
-    if (groupPos != -1) {
-        vCardLine.setGroup(m_cache.fromLatin1(firstParam.left(groupPos)));
-        vCardLine.setIdentifier(m_cache.fromLatin1(firstParam.mid(groupPos + 1)));
-        //qDebug() << "group" << vCardLine.group() << "identifier" << vCardLine.identifier();
-    } else {
-        vCardLine.setIdentifier(m_cache.fromLatin1(firstParam));
-        //qDebug() << "identifier" << vCardLine.identifier();
-    }
+    //qDebug() << "  add parameter" << paramKey << "    =    " << paramValue;
+    m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), m_cache.fromLatin1(paramValue));
+}
 
-    if (params.count() > 1) {   // find all parameters
-        QList<QByteArray>::ConstIterator paramIt(params.constBegin());
-        for (++paramIt; paramIt != params.constEnd(); ++paramIt) {
-            //qDebug() << "param" << QString::fromLatin1(*paramIt);
-            QList<QByteArray> pair = (*paramIt).split('=');
-            QByteArray first = pair.at(0).toLower();
-            if (pair.count() == 1) {
-                // correct the fucking 2.1 'standard'
-                if (first == "quoted-printable") {
-                    pair[ 0 ] = "encoding";
-                    pair.append("quoted-printable");
-                } else if (first == "base64") {
-                    pair[ 0 ] = "encoding";
-                    pair.append("base64");
+void VCardLineParser::parseLine(const QByteArray& currentLine, KContacts::VCardLine* vCardLine)
+{
+    //qDebug() << currentLine;
+    m_vCardLine = vCardLine;
+    // The syntax is key:value, but the key can contain semicolon-separated parameters, which can contain a ':', so indexOf(':') is wrong.
+    // EXAMPLE: ADR;GEO="geo:22.500000,45.099998";LABEL="My Label";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
+    // Therefore we need a small state machine, just the way I like it.
+    enum State { StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue };
+    State state = StateInitial;
+    const int lineLength = currentLine.length();
+    const char *lineData = currentLine.constData(); // to skip length checks from at() in debug mode
+    QByteArray paramKey;
+    QByteArray paramValue;
+    int start = 0;
+    int pos = 0;
+    for (; pos < lineLength; ++pos) {
+        const char ch = lineData[pos];
+        const bool colonOrSemicolon = (ch == ';' || ch == ':');
+        switch (state) {
+        case StateInitial:
+            if (colonOrSemicolon) {
+                const QByteArray identifier = currentLine.mid(start, pos - start);
+                //qDebug() << " identifier" << identifier;
+                vCardLine->setIdentifier(m_cache.fromLatin1(identifier));
+                start = pos + 1;
+            }
+            if (ch == ';') {
+                state = StateParamKey;
+            } else if (ch == ':') {
+                state = StateValue;
+            } else if (ch == '.') {
+                vCardLine->setGroup(m_cache.fromLatin1(currentLine.mid(start, pos - start)));
+                start = pos + 1;
+            }
+            break;
+        case StateParamKey:
+            if (colonOrSemicolon || ch == '=') {
+                paramKey = currentLine.mid(start, pos - start);
+                start = pos + 1;
+            }
+            if (colonOrSemicolon) {
+                // correct the so-called 2.1 'standard'
+                paramValue = paramKey;
+                const QByteArray lowerKey = paramKey.toLower();
+                if (lowerKey == "quoted-printable" || lowerKey == "base64") {
+                    paramKey = "encoding";
                 } else {
-                    pair.prepend("type");
+                    paramKey = "type";
                 }
-                first = pair.at(0);
+                addParameter(paramKey, paramValue);
             }
-            const QByteArray second = pair.at(1);
-            if (second.contains(',')) {     // parameter in type=x,y,z format
-                const QList<QByteArray> args = second.split(',');
-                for (QByteArray tmpArg : args) {
-                    if (tmpArg.startsWith('"')) {
-                        tmpArg = tmpArg.mid(1);
-                    }
-                    if (tmpArg.endsWith('"')) {
-                        tmpArg.chop(1);
-                    }
-                    vCardLine.addParameter(m_cache.fromLatin1(first),
-                                           m_cache.fromLatin1(tmpArg));
+            if (ch == ';') {
+                state = StateParamKey;
+            } else if (ch == ':') {
+                state = StateValue;
+            } else if (ch == '=') {
+                state = StateParamValue;
+            }
+            break;
+        case StateQuotedValue:
+            if (ch == '"' || (ch == ',' && paramKey.toLower() == "type")) {
+                // TODO the hack above is for TEL;TYPE=\"voice,home\":... without breaking GEO.... TODO: check spec
+                paramValue = currentLine.mid(start, pos - start);
+                addParameter(paramKey.toLower(), paramValue);
+                start = pos + 1;
+                if (ch == '"') {
+                    state = StateAfterParamValue; // to avoid duplicating code with StateParamValue, we use this intermediate state for one char
                 }
-            } else {
-                vCardLine.addParameter(m_cache.fromLatin1(first),
-                                       m_cache.fromLatin1(second));
             }
+            break;
+        case StateParamValue:
+            if (colonOrSemicolon || ch == ',') {
+                paramValue = currentLine.mid(start, pos - start);
+                addParameter(paramKey.toLower(), paramValue);
+                start = pos + 1;
+            }
+            // fall-through intended
+        case StateAfterParamValue:
+            if (ch == ';') {
+                state = StateParamKey;
+                start = pos + 1;
+            } else if (ch == ':') {
+                state = StateValue;
+            } else if (pos == start && ch == '"') { // don't treat foo"bar" as quoted - TODO check the vCard 3.0 spec.
+                state = StateQuotedValue;
+                start = pos + 1;
+            }
+            break;
+        case StateValue:
+            Q_UNREACHABLE();
+            break;
+        }
+
+        if (state == StateValue) {
+            break;
         }
     }
 
+    if (state != StateValue) {   // invalid line, no ':'
+        return;
+    }
+
+    QByteArray value = currentLine.mid(pos + 1);
     removeEscapes(value);
 
     QByteArray output;
     bool wasBase64Encoded = false;
 
-    const QString encoding = vCardLine.parameter(QStringLiteral("encoding")).toLower();
-    if (!encoding.isEmpty()) {
-
+    if (!m_encoding.isEmpty()) {
         // have to decode the data
-        if (encoding == QLatin1String("b") || encoding == QLatin1String("base64")) {
+        if (m_encoding == "b" || m_encoding == "base64") {
             output = QByteArray::fromBase64(value);
             wasBase64Encoded = true;
-        } else if (encoding == QLatin1String("quoted-printable")) {
+        } else if (m_encoding == "quoted-printable") {
             // join any qp-folded lines
             while (value.endsWith('=')) {
                 value.chop(1);   // remove the '='
                 value.append(m_fetchAnotherLine());
             }
             KCodecs::quotedPrintableDecode(value, output);
-        } else if (encoding == QLatin1String("8bit")) {
+        } else if (m_encoding == "8bit") {
             output = value;
         } else {
             qDebug("Unknown vcard encoding type!");
@@ -178,21 +234,22 @@ void VCardLineParser::parseLine(const QByteArray& currentLine, KContacts::VCardL
         output = value;
     }
 
-    const QString charset = vCardLine.parameter(QStringLiteral("charset"));
-    if (!charset.isEmpty()) {
+    if (!m_charset.isEmpty()) {
         // have to convert the data
-        QTextCodec *codec = QTextCodec::codecForName(charset.toLatin1());
+        QTextCodec *codec = QTextCodec::codecForName(m_charset);
         if (codec) {
-            vCardLine.setValue(codec->toUnicode(output));
+            vCardLine->setValue(codec->toUnicode(output));
         } else {
-            vCardLine.setValue(QString::fromUtf8(output));
+            vCardLine->setValue(QString::fromUtf8(output));
         }
     } else if (wasBase64Encoded) {
-        vCardLine.setValue(output);
+        vCardLine->setValue(output);
     } else {
-        vCardLine.setValue(QString::fromUtf8(output));
+        vCardLine->setValue(QString::fromUtf8(output));
     }
 }
+
+////
 
 VCardParser::VCardParser()
     : d(nullptr)
@@ -248,7 +305,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
 
                 VCardLineParser lineParser(cache, fetchAnotherLine);
 
-                lineParser.parseLine(currentLine, vCardLine);
+                lineParser.parseLine(currentLine, &vCardLine);
 
                 currentVCard.addLine(vCardLine);
             }
