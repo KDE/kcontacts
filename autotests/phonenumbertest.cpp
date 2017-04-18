@@ -24,7 +24,7 @@
 #include <addresseelist.h>
 #include <qtest.h>
 #include <vcardtool.h>
-#include "helper_p.h"
+
 
 QTEST_MAIN(PhoneNumberTest)
 
