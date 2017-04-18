@@ -22,6 +22,7 @@
 #include <kcodecs.h>
 #include "kcontacts_debug.h"
 #include <QtCore/QTextCodec>
+#include <functional>
 
 // This cache for QString::fromLatin1() isn't about improving speed, but about reducing memory usage by sharing common strings
 class StringCache
