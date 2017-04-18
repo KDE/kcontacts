@@ -267,14 +267,14 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
     VCard::List vCardList;
     QByteArray currentLine;
 
-    const QList<QByteArray> lines = text.split('\n');
+    int lineStart = 0;
+    int lineEnd = text.indexOf('\n');
 
     bool inVCard = false;
-    const QList<QByteArray>::const_iterator linesEnd(lines.end());
 
     StringCache cache;
-    for (auto it = lines.begin(); it != linesEnd; ++it) {
-        QByteArray cur = *it;
+    for (; lineEnd != -1; lineStart = lineEnd + 1, lineEnd = text.indexOf('\n', lineStart)) {
+        QByteArray cur = text.mid(lineStart, lineEnd - lineStart);
         // remove the trailing \r, left from \r\n
         if (cur.endsWith('\r')) {
             cur.chop(1);
@@ -292,10 +292,12 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 VCardLine vCardLine;
 
                 // Provide a way for the parseVCardLine function to read more lines (for quoted-printable support)
-                auto fetchAnotherLine = [&it, &linesEnd, &cur]() -> QByteArray {
+                auto fetchAnotherLine = [&text, &lineStart, &lineEnd, &cur]() -> QByteArray {
                     const QByteArray ret = cur;
-                    if (it != linesEnd) {
-                        cur = *(++it);
+                    lineStart = lineEnd + 1;
+                    lineEnd = text.indexOf('\n', lineStart);
+                    if (lineEnd != -1) {
+                        cur = text.mid(lineStart, lineEnd - lineStart);
                         // remove the trailing \r, left from \r\n
                         if (cur.endsWith('\r')) {
                             cur.chop(1);
