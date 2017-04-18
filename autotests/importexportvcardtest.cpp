@@ -21,6 +21,7 @@
 #include "importexportvcardtest.h"
 #include <QTest>
 #include "vcardtool.h"
+#include <QDebug>
 
 ImportExportVCardTest::ImportExportVCardTest(QObject *parent)
     : QObject(parent)
@@ -31,6 +32,27 @@ ImportExportVCardTest::ImportExportVCardTest(QObject *parent)
 ImportExportVCardTest::~ImportExportVCardTest()
 {
 
+}
+
+static void compareBuffers(const QByteArray &outputData, const QByteArray &expected)
+{
+    if (outputData != expected) {
+        qDebug() << " outputData " << outputData;
+        qDebug() << " expected " << expected;
+    }
+    const QList<QByteArray> outputLines = outputData.split('\n');
+    const QList<QByteArray> outputRefLines = expected.split('\n');
+    for (int i = 0; i < qMin(outputLines.count(), outputRefLines.count()); ++i) {
+        const QByteArray actual = outputLines.at(i);
+        const QByteArray expect = outputRefLines.at(i);
+        if (actual != expect) {
+            qCritical() << "Mismatch at output line" << (i + 1);
+            QCOMPARE(actual, expect);
+            QCOMPARE(actual.count(), expect.count());
+        }
+    }
+    QCOMPARE(outputLines.count(), outputRefLines.count());
+    QCOMPARE(outputData.size(), expected.size());
 }
 
 void ImportExportVCardTest::shouldExportFullTestVcard4()
@@ -71,8 +93,9 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                          "END:VCARD\r\n\r\n");
     QByteArray vcardexpected("BEGIN:VCARD\r\n"
                              "VERSION:4.0\r\n"
-                             "ADR;GEO=\"geo:51.523701,0.158500\";LABEL=\"Mr Sherlock Holmes\";TYPE:;;221B Bak\r\n"
-                             " er Street;London;;NW1;United Kingdom\r\n"
+                             "ADR;GEO=\"geo:51.523701,0.158500\";LABEL=\"Mr Sherlock Holmes, 221B Baker Stre\r\n"
+                             " et, London NW1, England, United Kingdom\";TYPE:;;221B Baker Street;London;;\r\n"
+                             " NW1;United Kingdom\r\n"
                              "ANNIVERSARY:19960415\r\n"
                              "BDAY:19531015T231000Z\r\n"
                              "CALADRURI;PREF=1:mailto:detective@sherlockholmes.com\r\n"
@@ -93,7 +116,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "PRODID:-//KADDRESSBOOK//NONSGML Version 1//EN\r\n"
                              "REV:20140722T222710Z\r\n"
                              "ROLE:Detective\r\n"
-                             "TEL;PREF=1;VALUE=uri:ext=5555\r\n"
+                             "TEL;TYPE=\"home,voice\";PREF=1;VALUE=uri:tel:+44-555-555-5555;ext=5555\r\n"
                              "TEL;TYPE=\"cell,voice\";VALUE=uri:tel:+44-555-555-6666\r\n"
                              "TEL;TYPE=\"voice,work\";VALUE=uri:tel:+44-555-555-7777\r\n"
                              "TITLE;ALTID=1;LANGUAGE=fr:Patron\r\n"
@@ -107,8 +130,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    //qDebug() << " result " << result;
-    QCOMPARE(result, vcardexpected);
+    compareBuffers(result, vcardexpected);
 }
 
 void ImportExportVCardTest::shouldExportMiscElementVcard4()
@@ -140,9 +162,7 @@ void ImportExportVCardTest::shouldExportMiscElementVcard4()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    //qDebug() << " result " << result;
-    QCOMPARE(result, vcardexpected);
-
+    compareBuffers(result, vcardexpected);
 }
 
 void ImportExportVCardTest::shouldExportMemberElementVcard4()
@@ -174,8 +194,9 @@ void ImportExportVCardTest::shouldExportMemberElementVcard4()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
 
     const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    //qDebug() << " result " << result;
-    QCOMPARE(result, vcardexpected);
+    compareBuffers(result, vcardexpected);
 }
+
+// TODO please make this data driven before copy/pasting more methods here...
 
 QTEST_MAIN(ImportExportVCardTest)
