@@ -333,7 +333,7 @@ void AddresseeList::sortByField(Field *field)
     KContacts::FieldSortMode *mode = new KContacts::FieldSortMode(sActiveField, !d->mReverseSorting);
 
     KContacts::Addressee::setSortMode(mode);
-    qSort(*this);
+    std::sort((*this).begin(), (*this).end());
     KContacts::Addressee::setSortMode(nullptr);
 
     delete mode;
@@ -346,7 +346,7 @@ void AddresseeList::sortByMode(SortMode *mode)
     }
 
     KContacts::Addressee::setSortMode(mode);
-    qSort(*this);
+    std::sort((*this).begin(), (*this).end());
     KContacts::Addressee::setSortMode(nullptr);
 }
 
