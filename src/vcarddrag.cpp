@@ -30,6 +30,9 @@ using namespace KContacts;
 
 static QString findCompatibleMimeType(const QMimeData *md)
 {
+    if (!md) {
+        return {};
+    }
     // check the canonical MIME type first
     if (md->hasFormat(KContacts::Addressee::mimeType())) {
         return KContacts::Addressee::mimeType();
