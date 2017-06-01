@@ -183,6 +183,9 @@ void VCardLineParser::parseLine(const QByteArray& currentLine, KContacts::VCardL
                 start = pos + 1;
             }
             // fall-through intended
+#if QT_VERSION >= QT_VERSION_CHECK(5,8,0)
+        Q_FALLTHROUGH();
+#endif
         case StateAfterParamValue:
             if (ch == ';') {
                 state = StateParamKey;
