@@ -39,8 +39,8 @@ find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codec
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
 add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
-add_definitions( -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT )
-add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 )
+add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 add_subdirectory(src)
 
 if(BUILD_TESTING)
