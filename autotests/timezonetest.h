@@ -21,7 +21,7 @@
 #ifndef TIMEZONE_TEST_H
 #define TIMEZONE_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class TimeZoneTest : public QObject
 {

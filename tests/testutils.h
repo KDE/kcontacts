@@ -21,8 +21,8 @@
 #ifndef TESTUTILS_H
 #define TESTUTILS_H
 
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <QByteArray>
+#include <QString>
 
 #include <kcontacts/addressee.h>
 

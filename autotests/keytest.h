@@ -22,7 +22,7 @@
 #ifndef KEY_TEST_H
 #define KEY_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class KeyTest : public QObject
 {

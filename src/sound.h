@@ -22,8 +22,8 @@
 #define KCONTACTS_SOUND_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QString>
-#include <QtCore/QSharedDataPointer>
+#include <QString>
+#include <QSharedDataPointer>
 
 namespace KContacts
 {

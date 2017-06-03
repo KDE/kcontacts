@@ -23,9 +23,9 @@
 
 #include "kcontacts_export.h"
 
-#include <QtCore/QDataStream>
-#include <QtCore/QString>
-#include <QtCore/QSharedDataPointer>
+#include <QDataStream>
+#include <QString>
+#include <QSharedDataPointer>
 
 class QImage;
 

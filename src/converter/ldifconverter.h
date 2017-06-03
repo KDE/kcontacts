@@ -23,8 +23,8 @@
 #include "addressee.h"
 #include "contactgroup.h"
 
-#include <QtCore/QDateTime>
-#include <QtCore/QString>
+#include <QDateTime>
+#include <QString>
 
 namespace KContacts
 {

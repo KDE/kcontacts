@@ -22,9 +22,9 @@
 #define TITLE_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QMap>
 
 /** @short Class that holds a Title for a contact.
  *  @since 5.3

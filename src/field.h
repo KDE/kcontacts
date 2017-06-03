@@ -22,7 +22,7 @@
 #define KCONTACTS_FIELD_H
 
 #include "addressee.h"
-#include <QtCore/QString>
+#include <QString>
 
 class KConfigGroup;
 

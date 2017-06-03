@@ -21,7 +21,7 @@
 #ifndef GEOTEST_H
 #define GEOTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class GeoTest : public QObject
 {

@@ -23,8 +23,8 @@
 #define KCONTACTS_ADDRESSEELIST_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QVector>
+#include <QSharedDataPointer>
+#include <QVector>
 
 namespace KContacts
 {

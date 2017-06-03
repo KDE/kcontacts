@@ -21,7 +21,7 @@
 #ifndef PHONENUMBER_TEST_H
 #define PHONENUMBER_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class PhoneNumberTest : public QObject
 {

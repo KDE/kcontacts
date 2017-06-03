@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFile>
+#include <QFile>
 
 #include <kcontacts/addressee.h>
 

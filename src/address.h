@@ -21,9 +21,9 @@
 #ifndef KCONTACTS_ADDRESS_H
 #define KCONTACTS_ADDRESS_H
 
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QVector>
 
 #include "kcontacts_export.h"
 

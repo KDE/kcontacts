@@ -21,7 +21,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <QtCore/QFile>
+#include <QFile>
 
 #include <qdebug.h>
 #include <KAboutData>

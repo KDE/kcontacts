@@ -23,8 +23,8 @@
 #ifndef LDIF_P_H
 #define LDIF_P_H
 
-#include <QtCore/QString>
-#include <QtCore/QByteArray>
+#include <QString>
+#include <QByteArray>
 
 #include "ldapdn_p.h"
 

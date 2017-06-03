@@ -21,10 +21,10 @@
 #ifndef VCARDLINE_H
 #define VCARDLINE_H
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QVariant>
+#include <QMap>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
 #include "kcontacts_export.h"
 

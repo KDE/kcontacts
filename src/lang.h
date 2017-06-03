@@ -22,9 +22,9 @@
 #define LANG_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QMap>
 
 /** @short Class that holds a Language for a contact.
  *  @since 4.14.5

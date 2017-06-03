@@ -29,8 +29,8 @@
 #include "related.h"
 #include "fieldgroup.h"
 #include "kcontacts_debug.h"
-#include <QtCore/QString>
-#include <QtCore/QBuffer>
+#include <QString>
+#include <QBuffer>
 #include <QDebug>
 #include <QRegularExpression>
 

@@ -20,10 +20,10 @@
 
 #include "picture.h"
 
-#include <QtCore/QBuffer>
-#include <QtCore/QSharedData>
+#include <QBuffer>
+#include <QSharedData>
 
-#include <QtGui/QImage>
+#include <QImage>
 
 namespace KContacts
 {

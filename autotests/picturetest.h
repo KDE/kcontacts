@@ -21,7 +21,7 @@
 #ifndef PICTURE_TEST_H
 #define PICTURE_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class PictureTest : public QObject
 {

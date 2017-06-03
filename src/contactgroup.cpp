@@ -21,10 +21,10 @@
 
 #include "contactgroup.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QSharedData>
-#include <QtCore/QString>
-#include <QtCore/QUuid>
+#include <QMap>
+#include <QSharedData>
+#include <QString>
+#include <QUuid>
 
 using namespace KContacts;
 

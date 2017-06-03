@@ -23,7 +23,7 @@
 
 #include "kcontacts_export.h"
 #include "kcontacts/addressee.h"
-#include <QtCore/QString>
+#include <QString>
 
 namespace KContacts
 {

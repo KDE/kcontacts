@@ -24,7 +24,7 @@
 #include "sortmode.h"
 #include "kcontacts_debug.h"
 
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 using namespace KContacts;
 

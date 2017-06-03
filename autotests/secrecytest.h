@@ -21,7 +21,7 @@
 #ifndef SECRECY_TEST_H
 #define SECRECY_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class SecrecyTest : public QObject
 {

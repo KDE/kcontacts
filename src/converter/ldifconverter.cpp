@@ -42,9 +42,9 @@
 
 #include <klocalizedstring.h>
 
-#include <QtCore/QStringList>
-#include <QtCore/QTextCodec>
-#include <QtCore/QTextStream>
+#include <QStringList>
+#include <QTextCodec>
+#include <QTextStream>
 
 using namespace KContacts;
 

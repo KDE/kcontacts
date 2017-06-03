@@ -22,8 +22,8 @@
 #define KCONTACTS_SECRECY_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QVector>
-#include <QtCore/QSharedDataPointer>
+#include <QVector>
+#include <QSharedDataPointer>
 
 namespace KContacts
 {

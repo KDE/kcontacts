@@ -23,7 +23,7 @@
 #ifndef LDAPDN_P_H
 #define LDAPDN_P_H
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class LdapDN
 {

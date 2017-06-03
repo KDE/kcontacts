@@ -21,9 +21,9 @@
 #ifndef KCONTACTS_CONTACTGROUP_H
 #define KCONTACTS_CONTACTGROUP_H
 
-#include <QtCore/QVector>
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QMetaType>
+#include <QVector>
+#include <QSharedDataPointer>
+#include <QMetaType>
 
 #include "kcontacts_export.h"
 

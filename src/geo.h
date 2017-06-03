@@ -22,8 +22,8 @@
 #define KCONTACTS_GEO_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
+#include <QSharedDataPointer>
+#include <QString>
 
 namespace KContacts
 {

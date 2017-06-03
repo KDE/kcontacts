@@ -22,9 +22,9 @@
 
 #include "kcontacts_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
-#include <QtCore/QSet>
+#include <QObject>
+#include <QStringList>
+#include <QSet>
 
 namespace KContacts
 {

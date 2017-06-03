@@ -23,8 +23,8 @@
 
 #include "kcontacts_export.h"
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSharedDataPointer>
+#include <QDataStream>
+#include <QSharedDataPointer>
 
 namespace KContacts
 {

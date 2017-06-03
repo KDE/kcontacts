@@ -23,10 +23,10 @@
 
 #include "kcontacts_export.h"
 
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QVector>
+#include <QMap>
 
 namespace KContacts
 {

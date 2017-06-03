@@ -28,13 +28,13 @@
 
 #include <kconfiggroup.h>
 
-#include <QtCore/QFile>
-#include <QtCore/QMap>
-#include <QtCore/QTextStream>
-#include <QtCore/QSharedData>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QLocale>
-#include <QtCore/QDataStream>
+#include <QFile>
+#include <QMap>
+#include <QTextStream>
+#include <QSharedData>
+#include <QStandardPaths>
+#include <QLocale>
+#include <QDataStream>
 
 using namespace KContacts;
 

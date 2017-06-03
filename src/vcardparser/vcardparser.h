@@ -22,7 +22,7 @@
 #define VCARDPARSER_H
 
 #include "vcard.h"
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 namespace KContacts
 {

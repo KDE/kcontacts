@@ -22,9 +22,9 @@
 #define CALENDARURL_H
 #include "kcontacts_export.h"
 
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QMap>
 class QUrl;
 /** @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
  *  @since 4.14.6

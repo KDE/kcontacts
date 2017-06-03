@@ -22,11 +22,11 @@
 #ifndef KCONTACTS_ADDRESSEE_H
 #define KCONTACTS_ADDRESSEE_H
 
-#include <QtCore/QDateTime>
-#include <QtCore/QStringList>
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QUrl>
-#include <QtCore/QMap>
+#include <QDateTime>
+#include <QStringList>
+#include <QSharedDataPointer>
+#include <QUrl>
+#include <QMap>
 
 #include "address.h"
 #include "geo.h"

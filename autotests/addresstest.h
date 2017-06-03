@@ -21,7 +21,7 @@
 #ifndef ADDRESS_TEST_H
 #define ADDRESS_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class AddressTest : public QObject
 {

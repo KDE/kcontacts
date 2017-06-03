@@ -21,8 +21,8 @@
 #ifndef GENDER_H
 #define GENDER_H
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
+#include <QSharedDataPointer>
+#include <QString>
 
 /** @short Class that holds a Gender for a contact.
  *  @since 4.14.5

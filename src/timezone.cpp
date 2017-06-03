@@ -20,8 +20,8 @@
 
 #include "timezone.h"
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSharedData>
+#include <QDataStream>
+#include <QSharedData>
 
 using namespace KContacts;
 

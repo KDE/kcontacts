@@ -22,12 +22,12 @@
 #include "contactgrouptool.h"
 #include "contactgroup.h"
 
-#include <QtCore/QIODevice>
-#include <QtCore/QString>
-#include <QtCore/QDebug>
+#include <QIODevice>
+#include <QString>
+#include <QDebug>
 
-#include <QtCore/QXmlStreamReader>
-#include <QtCore/QXmlStreamWriter>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 using namespace KContacts;
 

@@ -22,9 +22,9 @@
 #define RELATED_H
 
 #include "kcontacts_export.h"
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QSharedDataPointer>
+#include <QString>
+#include <QMap>
 
 namespace KContacts
 {

@@ -20,10 +20,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QList>
-#include <QtCore/QRegExp>
-#include <QtCore/QSharedData>
-#include <QtCore/QUuid>
+#include <QList>
+#include <QRegExp>
+#include <QSharedData>
+#include <QUuid>
 
 #include "kcontacts_debug.h"
 #include <klocalizedstring.h>

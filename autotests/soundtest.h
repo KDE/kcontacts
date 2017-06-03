@@ -21,7 +21,7 @@
 #ifndef SOUND_TEST_H
 #define SOUND_TEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class SoundTest : public QObject
 {
