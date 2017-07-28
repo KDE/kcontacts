@@ -1404,9 +1404,13 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
         if (version == VCard::v2_1) {
             line.addParameter(QStringLiteral("ENCODING"), QStringLiteral("BASE64"));
             line.addParameter(pic.type(), QString());
-        } else {
+        } else /*if (version == VCard::v3_0) */ {
             line.addParameter(QStringLiteral("encoding"), QStringLiteral("b"));
             line.addParameter(QStringLiteral("type"), pic.type());
+#if 0
+        } else { //version 4.0
+            line.addParameter(QStringLiteral("data") + QStringLiteral(":image/") + pic.type(), QStringLiteral("base64"));
+#endif
         }
     } else {
         line.setValue(pic.url());
