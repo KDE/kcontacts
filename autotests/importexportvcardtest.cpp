@@ -197,6 +197,30 @@ void ImportExportVCardTest::shouldExportMemberElementVcard4()
     compareBuffers(result, vcardexpected);
 }
 
+void ImportExportVCardTest::shouldExportMissingNewlineVcard4()
+{
+    QByteArray vcarddata("BEGIN:VCARD"
+                         "VERSION:4.0\r\n"
+                         "KIND:group\r\n"
+                         "FN:Funky distribution list\r\n"
+                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\r\n"
+                         "END:VCARD");
+
+    QByteArray vcardexpected("BEGIN:VCARD\r\n"
+                             "VERSION:4.0\r\n"
+                             "FN:Funky distribution list\r\n"
+                             "KIND:group\r\n"
+                             "N:;;;;\r\n"
+                             "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\r\n"
+                             "END:VCARD\r\n\r\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+
+    const QByteArray result = vcard.exportVCards(lst, KContacts::VCard::v4_0);
+    compareBuffers(result, vcardexpected);
+}
+
 // TODO please make this data driven before copy/pasting more methods here...
 
 QTEST_MAIN(ImportExportVCardTest)
