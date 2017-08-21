@@ -210,10 +210,11 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     ldif_out(t, QStringLiteral("streetaddress"), workAddr.street());     // Netscape 4.x
 
     streets = workAddr.street().split(QLatin1Char('\n'));
-    if (streets.count() > 0) {
+    const int streetsCount = streets.count();
+    if (streetsCount > 0) {
         ldif_out(t, QStringLiteral("street"), streets.at(0));
     }
-    if (streets.count() > 1) {
+    if (streetsCount > 1) {
         ldif_out(t, QStringLiteral("mozillaworkstreet2"), streets.at(1));
     }
     ldif_out(t, QStringLiteral("countryname"), Address::ISOtoCountry(workAddr.country()));
