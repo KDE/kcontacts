@@ -43,10 +43,10 @@ protected Q_SLOTS:
     void updateLockView();
 
 private:
-    KContacts::Lock *mLock;
+    KContacts::Lock *mLock = nullptr;
 
-    QLabel *mStatus;
-    QTreeWidget *mLockView;
+    QLabel *mStatus = nullptr;
+    QTreeWidget *mLockView = nullptr;
 };
 
 #endif
