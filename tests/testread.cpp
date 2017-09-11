@@ -24,9 +24,7 @@
 #include <QFile>
 
 #include <qdebug.h>
-#include <KAboutData>
 #include <QCoreApplication>
-#include <klocalizedstring.h>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
@@ -35,20 +33,14 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData(QStringLiteral("testread"), i18n("vCard test reader"), QStringLiteral("0.1"));
-    aboutData.addAuthor(i18n("Cornelius Schumacher"), QString(), QStringLiteral("schumacher@kde.org"));
-
     QCoreApplication app(argc, argv);
     QCommandLineParser parser;
-    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("vcard21"), i18n("vCard 2.1")));
-    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("+inputfile"), i18n("Input file")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("vcard21"), QStringLiteral("vCard 2.1")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("+inputfile"), QStringLiteral("Input file")));
 
-    KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
-    aboutData.setupCommandLine(&parser);
     parser.process(app);
-    aboutData.processCommandLine(&parser);
 
     if (parser.positionalArguments().count() != 1) {
         std::cerr << "Missing argument" << std::endl;

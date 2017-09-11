@@ -20,11 +20,9 @@
 
 #include <QFile>
 
-#include <kaboutdata.h>
 #include <klocalizedstring.h>
 
 #include <QCoreApplication>
-#include <KAboutData>
 #include <QCommandLineParser>
 
 #include "kcontacts/addressee.h"
@@ -38,16 +36,11 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData(QLatin1String("testwrite"), i18n("vCard test writer"), QLatin1String("0.1"));
-
     QCoreApplication app(argc, argv);
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
-    aboutData.setupCommandLine(&parser);
     parser.process(app);
-    aboutData.processCommandLine(&parser);
 
     KContacts::Addressee addressee;
 
