@@ -90,7 +90,7 @@ private:
     StringCache &m_cache;
     std::function<QByteArray()> m_fetchAnotherLine;
 
-    VCardLine *m_vCardLine;
+    VCardLine *m_vCardLine = nullptr;
     QByteArray m_encoding;
     QByteArray m_charset;
 };

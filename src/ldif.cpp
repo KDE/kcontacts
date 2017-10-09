@@ -72,14 +72,13 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
                               const QByteArray &value,
                               uint linelen, bool url)
 {
-    bool safe = false;
-    bool isDn;
     QByteArray result;
 
     if (url) {
         result = fieldname.toUtf8() + ":< " + value;
     } else {
-        isDn = fieldname.toLower() == QLatin1String("dn");
+        bool safe = false;
+        bool isDn = fieldname.toLower() == QLatin1String("dn");
         //SAFE-INIT-CHAR
         if (value.size() > 0 && value[0] > 0 && value[0] != '\n' &&
                 value[0] != '\r' && value[0] != ':' && value[0] != '<') {
