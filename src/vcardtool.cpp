@@ -1368,7 +1368,7 @@ QString VCardTool::createTime(const QTime &time, VCard::Version version)
     } else {
         format = QStringLiteral("HH:mm:ss");
     }
-    return QStringLiteral("T") + time.toString(format);
+    return QLatin1Char('T') + time.toString(format);
 }
 
 Picture VCardTool::parsePicture(const VCardLine &line) const
