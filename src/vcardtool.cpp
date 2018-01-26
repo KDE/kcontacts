@@ -925,7 +925,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("email")) {
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     addr.insertEmail((*lineIt).value().toString(),
-                                     types.contains(QStringLiteral("PREF")), (*lineIt).parameterMap());
+                                     types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
                 }
                 // KIND
                 else if (identifier == QLatin1String("kind")) {
@@ -1377,12 +1377,12 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
 
     const QStringList params = line.parameterList();
     QString type;
-    if (params.contains(QStringLiteral("type"))) {
+    if (params.contains(QLatin1String("type"))) {
         type = line.parameter(QStringLiteral("type"));
     }
-    if (params.contains(QStringLiteral("encoding"))) {
+    if (params.contains(QLatin1String("encoding"))) {
         pic.setRawData(line.value().toByteArray(), type);
-    } else if (params.contains(QStringLiteral("value"))) {
+    } else if (params.contains(QLatin1String("value"))) {
         if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
             pic.setUrl(line.value().toString());
         }
@@ -1425,9 +1425,9 @@ Sound VCardTool::parseSound(const VCardLine &line) const
     Sound snd;
 
     const QStringList params = line.parameterList();
-    if (params.contains(QStringLiteral("encoding"))) {
+    if (params.contains(QLatin1String("encoding"))) {
         snd.setData(line.value().toByteArray());
-    } else if (params.contains(QStringLiteral("value"))) {
+    } else if (params.contains(QLatin1String("value"))) {
         if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
             snd.setUrl(line.value().toString());
         }
@@ -1469,13 +1469,13 @@ Key VCardTool::parseKey(const VCardLine &line) const
     Key key;
 
     const QStringList params = line.parameterList();
-    if (params.contains(QStringLiteral("encoding"))) {
+    if (params.contains(QLatin1String("encoding"))) {
         key.setBinaryData(line.value().toByteArray());
     } else {
         key.setTextData(line.value().toString());
     }
 
-    if (params.contains(QStringLiteral("type"))) {
+    if (params.contains(QLatin1String("type"))) {
         if (line.parameter(QStringLiteral("type")).toLower() == QLatin1String("x509")) {
             key.setType(Key::X509);
         } else if (line.parameter(QStringLiteral("type")).toLower() == QLatin1String("pgp")) {
@@ -1484,7 +1484,7 @@ Key VCardTool::parseKey(const VCardLine &line) const
             key.setType(Key::Custom);
             key.setCustomTypeString(line.parameter(QStringLiteral("type")));
         }
-    } else if (params.contains(QStringLiteral("mediatype"))) {
+    } else if (params.contains(QLatin1String("mediatype"))) {
         const QString param = line.parameter(QStringLiteral("mediatype")).toLower();
         if (param == QLatin1String("application/x-x509-ca-cert")) {
             key.setType(Key::X509);
