@@ -26,12 +26,10 @@
 CustomIdentifierTest::CustomIdentifierTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 CustomIdentifierTest::~CustomIdentifierTest()
 {
-
 }
 
 void CustomIdentifierTest::shouldHaveEmptyCustoms()
@@ -78,7 +76,6 @@ void CustomIdentifierTest::shouldExportVcard3()
                           "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void CustomIdentifierTest::shouldExportVcard4()
@@ -119,7 +116,6 @@ void CustomIdentifierTest::shouldExportVcard4()
                           "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 QTEST_MAIN(CustomIdentifierTest)

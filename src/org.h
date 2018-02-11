@@ -29,8 +29,7 @@
 /** @short Class that holds a Organization for a contact.
  *  @since 5.3
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Org
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Org &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Org &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Org &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Org, Q_MOVABLE_TYPE);
 #endif // ORG_H

@@ -26,8 +26,7 @@
 #include <QStringList>
 #include <QSet>
 
-namespace KContacts
-{
+namespace KContacts {
 class AddresseeHelperPrivate;
 
 /**
@@ -115,7 +114,6 @@ public Q_SLOTS:
 private:
     QScopedPointer<AddresseeHelperPrivate> d;
 };
-
 }
 
 #endif

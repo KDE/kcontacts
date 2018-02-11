@@ -31,9 +31,7 @@ class QUrl;
  *  @since 5.0
  */
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT ResourceLocatorUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ResourceLocatorUrl &);
@@ -69,7 +67,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ResourceLocatorUrl &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ResourceLocatorUrl &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::ResourceLocatorUrl, Q_MOVABLE_TYPE);
 

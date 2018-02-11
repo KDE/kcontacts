@@ -40,6 +40,7 @@ public:
         fieldGroupName = other.fieldGroupName;
         value = other.value;
     }
+
     QMap<QString, QStringList> parameters;
     QString fieldGroupName;
     QString value;
@@ -48,13 +49,11 @@ public:
 FieldGroup::FieldGroup()
     : d(new Private)
 {
-
 }
 
 FieldGroup::FieldGroup(const FieldGroup &other)
     : d(other.d)
 {
-
 }
 
 FieldGroup::FieldGroup(const QString &FieldGroupName)
@@ -65,7 +64,6 @@ FieldGroup::FieldGroup(const QString &FieldGroupName)
 
 FieldGroup::~FieldGroup()
 {
-
 }
 
 void FieldGroup::setFieldGroupName(const QString &fieldGroup)
@@ -150,4 +148,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, FieldGroup &fieldGroup)
     s >> fieldGroup.d->parameters >> fieldGroup.d->fieldGroupName >> fieldGroup.d->value;
     return s;
 }
-

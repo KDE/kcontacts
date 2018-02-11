@@ -26,9 +26,7 @@
 #include <QDataStream>
 #include <QSharedDataPointer>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
  * @short A class to store an encryption key.
  */
@@ -180,7 +178,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Key &key);
   Initializes the @p key object from the @p stream.
 */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Key &key);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Key, Q_MOVABLE_TYPE);
 #endif

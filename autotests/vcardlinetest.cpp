@@ -25,12 +25,10 @@
 VCardLineTest::VCardLineTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 VCardLineTest::~VCardLineTest()
 {
-
 }
 
 void VCardLineTest::shouldHaveDefaultValue()

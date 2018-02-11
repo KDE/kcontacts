@@ -26,12 +26,10 @@
 TitleTest::TitleTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 TitleTest::~TitleTest()
 {
-
 }
 
 void TitleTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void TitleTest::shouldAssignValue()
     QCOMPARE(title.title(), lang);
     QVERIFY(!title.parameters().isEmpty());
     QCOMPARE(title.parameters(), params);
-
 }
 
 void TitleTest::shouldAssignExternal()
@@ -86,7 +83,6 @@ void TitleTest::shouldSerialized()
     t >> result;
 
     QVERIFY(title == result);
-
 }
 
 void TitleTest::shouldEqualTitle()
@@ -127,7 +123,6 @@ void TitleTest::shouldParseTwoTitles()
 
 void TitleTest::shouldParseTitle()
 {
-
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
@@ -185,6 +180,7 @@ void TitleTest::shouldCreateVCard()
 
     QCOMPARE(ba, expected);
 }
+
 void TitleTest::shouldCreateVCardWithTwoTitle()
 {
     KContacts::AddresseeList lst;
@@ -209,7 +205,6 @@ void TitleTest::shouldCreateVCardWithTwoTitle()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void TitleTest::shouldCreateVCardWithParameters()

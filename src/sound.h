@@ -25,9 +25,7 @@
 #include <QString>
 #include <QSharedDataPointer>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /** @short Class that holds a Sound clip for a contact.
  *
  *  The sound can be played doing something like this:
@@ -178,7 +176,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Sound &sound
  * Initializes the @p sound object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Sound &sound);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Sound, Q_MOVABLE_TYPE);
 #endif

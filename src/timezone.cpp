@@ -29,7 +29,8 @@ class Q_DECL_HIDDEN TimeZone::Private : public QSharedData
 {
 public:
     Private(int offset = 0, bool valid = false)
-        : mOffset(offset), mValid(valid)
+        : mOffset(offset)
+        , mValid(valid)
     {
     }
 

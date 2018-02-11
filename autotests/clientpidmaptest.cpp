@@ -26,12 +26,10 @@
 ClientPidMapTest::ClientPidMapTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 ClientPidMapTest::~ClientPidMapTest()
 {
-
 }
 
 void ClientPidMapTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void ClientPidMapTest::shouldAssignValue()
     QCOMPARE(role.clientPidMap(), lang);
     QVERIFY(!role.parameters().isEmpty());
     QCOMPARE(role.parameters(), params);
-
 }
 
 void ClientPidMapTest::shouldAssignExternal()
@@ -86,7 +83,6 @@ void ClientPidMapTest::shouldSerialized()
     t >> result;
 
     QVERIFY(role == result);
-
 }
 
 void ClientPidMapTest::shouldEqualClientPidMap()
@@ -186,8 +182,8 @@ void ClientPidMapTest::shouldCreateVCardWithTwoClientPidMap()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
+
 void ClientPidMapTest::shouldCreateVCardWithParameters()
 {
     KContacts::AddresseeList lst;

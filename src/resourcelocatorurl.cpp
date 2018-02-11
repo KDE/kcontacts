@@ -39,6 +39,7 @@ public:
         parameters = other.parameters;
         url = other.url;
     }
+
     QMap<QString, QStringList> parameters;
     QUrl url;
 };
@@ -55,7 +56,6 @@ ResourceLocatorUrl::ResourceLocatorUrl(const ResourceLocatorUrl &other)
 
 ResourceLocatorUrl::~ResourceLocatorUrl()
 {
-
 }
 
 QMap<QString, QStringList> ResourceLocatorUrl::parameters() const
@@ -107,7 +107,7 @@ void ResourceLocatorUrl::setParameters(const QMap<QString, QStringList> &params)
 
 bool ResourceLocatorUrl::isValid() const
 {
-    return (d->url.isValid());
+    return d->url.isValid();
 }
 
 void ResourceLocatorUrl::setUrl(const QUrl &url)
@@ -130,4 +130,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, ResourceLocatorUrl &calUrl)
     s >> calUrl.d->parameters >> calUrl.d->url;
     return s;
 }
-

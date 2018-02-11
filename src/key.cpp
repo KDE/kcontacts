@@ -228,14 +228,14 @@ QString Key::typeLabel(Type type)
 QDataStream &KContacts::operator<<(QDataStream &s, const Key &key)
 {
     return s << key.d->mId << key.d->mType << key.d->mIsBinary << key.d->mBinaryData
-           << key.d->mTextData << key.d->mCustomTypeString;
+             << key.d->mTextData << key.d->mCustomTypeString;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Key &key)
 {
     uint type;
     s >> key.d->mId >> type >> key.d->mIsBinary >> key.d->mBinaryData >> key.d->mTextData
-      >> key.d->mCustomTypeString;
+    >> key.d->mCustomTypeString;
 
     key.d->mType = Key::Type(type);
 

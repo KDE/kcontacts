@@ -27,12 +27,10 @@
 BirthDayTest::BirthDayTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 BirthDayTest::~BirthDayTest()
 {
-
 }
 
 void BirthDayTest::shouldParseBirthDay()

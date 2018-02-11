@@ -183,5 +183,4 @@ void KeyTest::shouldParseVcard4()
     KContacts::Key key = lst.at(0).keys().at(0);
     QCOMPARE(key.type(), KContacts::Key::PGP);
     QCOMPARE(key.textData(), QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"));
-
 }

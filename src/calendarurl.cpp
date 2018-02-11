@@ -41,11 +41,11 @@ public:
         type = other.type;
         url = other.url;
     }
+
     static QString typeToString(CalendarUrl::CalendarType type);
     QMap<QString, QStringList> parameters;
     QUrl url;
     CalendarUrl::CalendarType type;
-
 };
 
 QString CalendarUrl::Private::typeToString(CalendarUrl::CalendarType type)
@@ -88,7 +88,6 @@ CalendarUrl::CalendarUrl(const CalendarUrl &other)
 
 CalendarUrl::~CalendarUrl()
 {
-
 }
 
 QMap<QString, QStringList> CalendarUrl::parameters() const
@@ -176,4 +175,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, CalendarUrl &calUrl)
     calUrl.d->type = static_cast<CalendarUrl::CalendarType>(type);
     return s;
 }
-

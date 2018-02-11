@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         nickname = other.nickname;
     }
+
     QMap<QString, QStringList> parameters;
     QString nickname;
 };
@@ -45,13 +46,11 @@ public:
 NickName::NickName()
     : d(new Private)
 {
-
 }
 
 NickName::NickName(const NickName &other)
     : d(other.d)
 {
-
 }
 
 NickName::NickName(const QString &nickname)
@@ -62,7 +61,6 @@ NickName::NickName(const QString &nickname)
 
 NickName::~NickName()
 {
-
 }
 
 void NickName::setNickName(const QString &nickname)

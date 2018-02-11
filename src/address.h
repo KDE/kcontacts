@@ -27,8 +27,7 @@
 
 #include "kcontacts_export.h"
 
-namespace KContacts
-{
+namespace KContacts {
 class Geo;
 /**
   @brief
@@ -300,8 +299,7 @@ public:
       @param orgaName   the name of the organization or company
       @return           the formatted address (containing newline characters)
     */
-    QString formattedAddress(const QString &realName = QString(),
-                             const QString &orgaName = QString()) const;
+    QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
 
     /**
       Returns ISO code for a localized country name. Only localized country
@@ -348,7 +346,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Address &add
   Initializes the @p address object from the @p stream.
 */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Address &address);
-
 }
 
 #endif

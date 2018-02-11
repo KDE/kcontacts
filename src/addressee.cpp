@@ -38,7 +38,7 @@ using namespace KContacts;
 
 static bool matchBinaryPattern(int value, int pattern);
 
-template <class L>
+template<class L>
 static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
 static bool listEquals(const QStringList &list, const QStringList &pattern);
 
@@ -83,7 +83,7 @@ public:
         mPhoneNumbers = other.mPhoneNumbers;
         mAddresses = other.mAddresses;
         mKeys = other.mKeys;
-        mLangs =  other.mLangs;
+        mLangs = other.mLangs;
         mGender = other.mGender;
         mEmails = other.mEmails;
         mCategories = other.mCategories;
@@ -193,44 +193,44 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mName != addressee.d->mName &&
-            !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
+    if (d->mName != addressee.d->mName
+        && !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "name differs";
         return false;
     }
 
-    if (d->mFormattedName != addressee.d->mFormattedName &&
-            !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
+    if (d->mFormattedName != addressee.d->mFormattedName
+        && !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "formattedName differs";
         return false;
     }
 
-    if (d->mFamilyName != addressee.d->mFamilyName &&
-            !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
+    if (d->mFamilyName != addressee.d->mFamilyName
+        && !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "familyName differs";
         return false;
     }
 
-    if (d->mGivenName != addressee.d->mGivenName &&
-            !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
+    if (d->mGivenName != addressee.d->mGivenName
+        && !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "givenName differs";
         return false;
     }
 
-    if (d->mAdditionalName != addressee.d->mAdditionalName &&
-            !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
+    if (d->mAdditionalName != addressee.d->mAdditionalName
+        && !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "additionalName differs";
         return false;
     }
 
-    if (d->mPrefix != addressee.d->mPrefix &&
-            !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
+    if (d->mPrefix != addressee.d->mPrefix
+        && !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "prefix differs";
         return false;
     }
 
-    if (d->mSuffix != addressee.d->mSuffix &&
-            !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
+    if (d->mSuffix != addressee.d->mSuffix
+        && !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "suffix differs";
         return false;
     }
@@ -240,8 +240,8 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mMailer != addressee.d->mMailer &&
-            !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
+    if (d->mMailer != addressee.d->mMailer
+        && !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "mailer differs";
         return false;
     }
@@ -256,26 +256,26 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mDepartment != addressee.d->mDepartment &&
-            !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
+    if (d->mDepartment != addressee.d->mDepartment
+        && !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "department differs";
         return false;
     }
 
-    if (d->mNote != addressee.d->mNote &&
-            !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
+    if (d->mNote != addressee.d->mNote
+        && !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "note differs";
         return false;
     }
 
-    if (d->mProductId != addressee.d->mProductId &&
-            !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
+    if (d->mProductId != addressee.d->mProductId
+        && !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "productId differs";
         return false;
     }
 
-    if (d->mSortString != addressee.d->mSortString &&
-            !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
+    if (d->mSortString != addressee.d->mSortString
+        && !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "sortString differs";
         return false;
     }
@@ -1102,7 +1102,6 @@ void Addressee::setExtraRoleList(const Role::List &roleList)
 {
     d->mEmpty = false;
     d->mRoleExtraList = roleList;
-
 }
 
 Role::List Addressee::extraRoleList() const
@@ -1385,9 +1384,9 @@ void Addressee::setNameFromString(const QString &s)
 {
     QString str = s;
     //remove enclosing quotes from string
-    if (str.length() > 1  &&
-            s[0] == QLatin1Char('"') &&
-            s[s.length() - 1] == QLatin1Char('"')) {
+    if (str.length() > 1
+        && s[0] == QLatin1Char('"')
+        && s[s.length() - 1] == QLatin1Char('"')) {
         str = s.mid(1, s.length() - 2);
     }
 
@@ -1472,7 +1471,6 @@ void Addressee::setNameFromString(const QString &s)
         int rightOffset = parts.count() - 1;
 
         if (!parts.isEmpty()) {
-
             QString suffix;
             while (rightOffset >= 0) {
                 if (helper->containsSuffix(parts[rightOffset])) {
@@ -1512,7 +1510,6 @@ void Addressee::setNameFromString(const QString &s)
         rightOffset = parts.count();
 
         if (!parts.isEmpty()) {
-
             QString prefix;
             while (leftOffset < rightOffset) {
                 if (helper->containsTitle(parts[leftOffset])) {
@@ -1564,11 +1561,11 @@ QString Addressee::realName() const
 
 QString Addressee::assembledName() const
 {
-    const QString name = prefix() + QLatin1Char(' ') +
-                         givenName() + QLatin1Char(' ') +
-                         additionalName() + QLatin1Char(' ') +
-                         familyName() + QLatin1Char(' ') +
-                         suffix();
+    const QString name = prefix() + QLatin1Char(' ')
+                         +givenName() + QLatin1Char(' ')
+                         +additionalName() + QLatin1Char(' ')
+                         +familyName() + QLatin1Char(' ')
+                         +suffix();
 
     return name.simplified();
 }
@@ -1601,6 +1598,7 @@ QString Addressee::fullEmail(const QString &email) const
 
     return text;
 }
+
 void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param)
 {
     if (email.simplified().isEmpty()) {
@@ -1608,7 +1606,7 @@ void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QSt
     }
 
     for (int i = 0; i < d->mEmails.size(); ++i) {
-        if (d->mEmails.at(i).mail() == email)  {
+        if (d->mEmails.at(i).mail() == email) {
             if (!preferred || i == 0) {
                 return;
             }
@@ -1631,7 +1629,7 @@ void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QSt
 void Addressee::removeEmail(const QString &email)
 {
     for (int i = 0; i < d->mEmails.size(); ++i) {
-        if (d->mEmails.at(i).mail() == email)  {
+        if (d->mEmails.at(i).mail() == email) {
             d->mEmails.removeAt(i);
         }
     }
@@ -1683,7 +1681,7 @@ void Addressee::setEmailList(const Email::List &list)
 void Addressee::removeLang(const QString &language)
 {
     for (int i = 0; i < d->mLangs.size(); ++i) {
-        if (d->mLangs.at(i).language() == language)  {
+        if (d->mLangs.at(i).language() == language) {
             d->mLangs.removeAt(i);
         }
     }
@@ -1769,7 +1767,7 @@ PhoneNumber Addressee::phoneNumber(PhoneNumber::Type type) const
     for (it = d->mPhoneNumbers.constBegin(); it != d->mPhoneNumbers.constEnd(); ++it) {
         if (matchBinaryPattern((*it).type(), type)) {
             if ((*it).type() & PhoneNumber::Pref) {
-                return (*it);
+                return *it;
             } else if (phoneNumber.number().isEmpty()) {
                 phoneNumber = (*it);
             }
@@ -1859,7 +1857,7 @@ Key Addressee::key(Key::Type type, const QString &customTypeString) const
                     return *it;
                 } else {
                     if ((*it).customTypeString() == customTypeString) {
-                        return (*it);
+                        return *it;
                     }
                 }
             } else {
@@ -2034,7 +2032,7 @@ Address Addressee::address(Address::Type type) const
     for (it = d->mAddresses.constBegin(); it != end; ++it) {
         if (matchBinaryPattern((*it).type(), type)) {
             if ((*it).type() & Address::Pref) {
-                return (*it);
+                return *it;
             } else if (address.isEmpty()) {
                 address = (*it);
             }
@@ -2155,8 +2153,7 @@ Related::List Addressee::relationShips() const
     return d->mRelationShips;
 }
 
-void Addressee::insertCustom(const QString &app, const QString &name,
-                             const QString &value)
+void Addressee::insertCustom(const QString &app, const QString &name, const QString &value)
 {
     if (value.isEmpty() || name.isEmpty() || app.isEmpty()) {
         return;
@@ -2217,8 +2214,7 @@ QStringList Addressee::customs() const
     return result;
 }
 
-void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
-                                  QString &email)
+void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QString &email)
 {
     // This is a simplified version of KPIM::splitAddress().
 
@@ -2251,7 +2247,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
 
     for (char *p = address.data(); *p && !stop; ++p) {
         switch (context) {
-        case TopLevel : {
+        case TopLevel:
             switch (*p) {
             case '"':
                 inQuotedString = !inQuotedString;
@@ -2297,8 +2293,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                 displayName += *p;
             }
             break;
-        }
-        case InComment: {
+        case InComment:
             switch (*p) {
             case '(':
                 ++commentLevel;
@@ -2327,8 +2322,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                 comment += *p;
             }
             break;
-        }
-        case InAngleAddress: {
+        case InAngleAddress:
             switch (*p) {
             case '"':
                 inQuotedString = !inQuotedString;
@@ -2355,7 +2349,6 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName,
                 addrSpec += *p;
             }
             break;
-        }
         } // switch ( context )
     }
 
@@ -2543,13 +2536,13 @@ bool matchBinaryPattern(int value, int pattern)
       exactly no bit set.
      */
     if (pattern == 0) {
-        return (value == 0);
+        return value == 0;
     } else {
-        return (pattern == (pattern & value));
+        return pattern == (pattern & value);
     }
 }
 
-template <class L>
+template<class L>
 bool listEquals(const QVector<L> &list, const QVector<L> &pattern)
 {
     if (list.count() != pattern.count()) {

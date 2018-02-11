@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         organization = other.organization;
     }
+
     QMap<QString, QStringList> parameters;
     QString organization;
 };
@@ -45,13 +46,11 @@ public:
 Org::Org()
     : d(new Private)
 {
-
 }
 
 Org::Org(const Org &other)
     : d(other.d)
 {
-
 }
 
 Org::Org(const QString &org)
@@ -62,7 +61,6 @@ Org::Org(const QString &org)
 
 Org::~Org()
 {
-
 }
 
 void Org::setOrganization(const QString &org)

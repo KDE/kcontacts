@@ -28,9 +28,7 @@
 
 #include "kcontacts_export.h"
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT VCardLine
 {
 public:
@@ -130,7 +128,6 @@ private:
     QString mGroup;
     QVariant mValue;
 };
-
 }
 
 #endif

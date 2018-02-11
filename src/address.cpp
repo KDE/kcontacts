@@ -84,9 +84,7 @@ static int findBalancedBracket(const QString &tsection, int pos)
   @param result     QString reference in which the result will be stored
   @return           true if at least one tag evaluated positively, else false
 */
-static bool parseAddressTemplateSection(const QString &tsection, QString &result,
-                                        const QString &realName, const QString &orgaName,
-                                        const KContacts::Address &address)
+static bool parseAddressTemplateSection(const QString &tsection, QString &result, const QString &realName, const QString &orgaName, const KContacts::Address &address)
 {
     // This method first parses and substitutes any bracketed sections and
     // after that replaces any tags with their values. If a bracketed section
@@ -109,8 +107,8 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
                 // we have balanced brackets, recursively parse:
                 QString rplstr;
                 bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1,
-                             bpos2 - bpos1 - 1), rplstr,
-                             realName, orgaName, address);
+                                                                     bpos2 - bpos1 - 1), rplstr,
+                                                          realName, orgaName, address);
                 if (purge) {
                     // purge -> remove all
                     // replace with !_P_!, so conditional tags work later
@@ -135,11 +133,11 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
     // keeping track of whether at least one tag evaluates to something.
     // The following macro needs QString for R_FIELD
     // It substitutes !_P_! for empty fields so conditional tags work later
-#define REPLTAG(R_TAG,R_FIELD) \
-    if ( result.contains( R_TAG ) ) { \
-        QString rpl = R_FIELD.isEmpty() ? QStringLiteral( "!_P_!" ) : R_FIELD; \
-        result.replace( R_TAG, rpl ); \
-        if ( !R_FIELD.isEmpty() ) { \
+#define REPLTAG(R_TAG, R_FIELD) \
+    if (result.contains(R_TAG)) { \
+        QString rpl = R_FIELD.isEmpty() ? QStringLiteral("!_P_!") : R_FIELD; \
+        result.replace(R_TAG, rpl); \
+        if (!R_FIELD.isEmpty()) { \
             ret = true; \
         } \
     }
@@ -579,8 +577,7 @@ QString Address::toString() const
     return str;
 }
 
-QString Address::formattedAddress(const QString &realName,
-                                  const QString &orgaName) const
+QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
 {
     QString ciso;
     QString addrTemplate;
@@ -621,9 +618,9 @@ QString Address::formattedAddress(const QString &realName,
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
-        KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/") +
-                                             QLocale().name() +
-                                             QLatin1String("/country.desktop")));
+        KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/")
+                                             +QLocale().name()
+                                             +QLatin1String("/country.desktop")));
         KConfigGroup group = entry.group("KCM Locale");
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
@@ -713,18 +710,18 @@ QString Address::ISOtoCountry(const QString &ISOname)
 QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)
 {
     return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox
-           << addr.d->mExtended << addr.d->mStreet << addr.d->mLocality
-           << addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry
-           << addr.d->mLabel << addr.d->mEmpty << addr.d->mGeo;
+             << addr.d->mExtended << addr.d->mStreet << addr.d->mLocality
+             << addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry
+             << addr.d->mLabel << addr.d->mEmpty << addr.d->mGeo;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
 {
     uint type;
     s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended
-      >> addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion
-      >> addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel
-      >> addr.d->mEmpty >> addr.d->mGeo;
+    >> addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion
+    >> addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel
+    >> addr.d->mEmpty >> addr.d->mGeo;
 
     addr.d->mType = Address::Type(type);
 

@@ -26,12 +26,10 @@
 LangTest::LangTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LangTest::~LangTest()
 {
-
 }
 
 void LangTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void LangTest::shouldAssignValue()
     QCOMPARE(language.language(), lang);
     QVERIFY(!language.parameters().isEmpty());
     QCOMPARE(language.parameters(), params);
-
 }
 
 void LangTest::shouldAssignExternal()
@@ -86,7 +83,6 @@ void LangTest::shouldSerialized()
     t >> result;
 
     QVERIFY(language == result);
-
 }
 
 void LangTest::shouldEqualLanguage()
@@ -186,7 +182,6 @@ void LangTest::shouldCreateVCardWithTwoLang()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void LangTest::shouldCreateVCardWithParameters()

@@ -34,6 +34,7 @@ void initLocale()
 {
     qputenv("LC_ALL", "en_US.utf-8");
 }
+
 Q_CONSTRUCTOR_FUNCTION(initLocale)
 #endif
 
@@ -320,7 +321,6 @@ void AddressTest::shouldParseAddressVCard4()
     QCOMPARE(address.country(), QStringLiteral("My country"));
     QCOMPARE(address.postalCode(), QStringLiteral("My Postalcode"));
     QCOMPARE(address.label(), QStringLiteral("My Label"));
-
 }
 
 void AddressTest::shouldParseAddressVCard4WithGeoPosition()
@@ -391,7 +391,6 @@ void AddressTest::shouldExportVCard4WithGeoPosition()
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
-
 }
 
 void AddressTest::shouldExportVcard4()

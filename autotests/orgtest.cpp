@@ -26,12 +26,10 @@
 OrgTest::OrgTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 OrgTest::~OrgTest()
 {
-
 }
 
 void OrgTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void OrgTest::shouldAssignValue()
     QCOMPARE(org.organization(), organization);
     QVERIFY(!org.parameters().isEmpty());
     QCOMPARE(org.parameters(), params);
-
 }
 
 void OrgTest::shouldAssignExternal()
@@ -86,7 +83,6 @@ void OrgTest::shouldSerialized()
     t >> result;
 
     QVERIFY(org == result);
-
 }
 
 void OrgTest::shouldEqualOrg()
@@ -231,7 +227,6 @@ void OrgTest::shouldCreateVCardWithTwoOrg()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void OrgTest::shouldCreateVCardWithParameters()

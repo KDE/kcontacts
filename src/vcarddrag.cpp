@@ -91,4 +91,3 @@ bool VCardDrag::fromMimeData(const QMimeData *md, KContacts::Addressee::List &ad
     addressees = KContacts::VCardConverter().parseVCards(md->data(mimeOffer));
     return !addressees.isEmpty();
 }
-

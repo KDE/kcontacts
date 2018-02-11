@@ -30,9 +30,7 @@ class QUrl;
  *  @since 4.14.6
  */
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT CalendarUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const CalendarUrl &);
@@ -79,7 +77,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const CalendarUrl &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, CalendarUrl &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::CalendarUrl, Q_MOVABLE_TYPE);
 #endif // CALENDARURL_H

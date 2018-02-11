@@ -26,12 +26,10 @@
 GenderTest::GenderTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 GenderTest::~GenderTest()
 {
-
 }
 
 void GenderTest::shouldHaveDefaultValue()
@@ -166,9 +164,9 @@ QByteArray GenderTest::createCard(const QByteArray &gender)
         expected += gender + "\r\n";
     }
     expected += QByteArray(
-                    "N:;;;;\r\n"
-                    "UID:testuid\r\n"
-                    "END:VCARD\r\n\r\n");
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     return expected;
 }
 

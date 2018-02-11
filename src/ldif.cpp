@@ -68,9 +68,7 @@ Ldif::~Ldif()
     delete d;
 }
 
-QByteArray Ldif::assembleLine(const QString &fieldname,
-                              const QByteArray &value,
-                              uint linelen, bool url)
+QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value, uint linelen, bool url)
 {
     QByteArray result;
 
@@ -80,8 +78,8 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
         bool safe = false;
         bool isDn = fieldname.toLower() == QLatin1String("dn");
         //SAFE-INIT-CHAR
-        if (value.size() > 0 && value[0] > 0 && value[0] != '\n' &&
-                value[0] != '\r' && value[0] != ':' && value[0] != '<') {
+        if (value.size() > 0 && value[0] > 0 && value[0] != '\n'
+            && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;
         }
 
@@ -89,9 +87,9 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
         if (safe) {
             for (int i = 1; i < value.size(); ++i) {
                 //allow utf-8 in Distinguished Names
-                if ((isDn && value[i] == 0) ||
-                        (!isDn && value[i] <= 0) ||
-                        value[i] == '\r' || value[i] == '\n') {
+                if ((isDn && value[i] == 0)
+                    || (!isDn && value[i] <= 0)
+                    || value[i] == '\r' || value[i] == '\n') {
                     safe = false;
                     break;
                 }
@@ -119,8 +117,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname,
     return result;
 }
 
-QByteArray Ldif::assembleLine(const QString &fieldname, const QString &value,
-                              uint linelen, bool url)
+QByteArray Ldif::assembleLine(const QString &fieldname, const QString &value, uint linelen, bool url)
 {
     return assembleLine(fieldname, value.toUtf8(), linelen, url);
 }
@@ -173,8 +170,7 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
     return false;
 }
 
-bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical,
-                        QByteArray &value)
+bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value)
 {
     QString tmp;
     critical = false;
@@ -198,7 +194,6 @@ bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical,
 
 Ldif::ParseValue Ldif::processLine()
 {
-
     if (d->mIsComment) {
         return None;
     }

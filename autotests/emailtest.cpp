@@ -25,12 +25,10 @@
 EmailTest::EmailTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 EmailTest::~EmailTest()
 {
-
 }
 
 void EmailTest::shouldHaveDefaultValue()

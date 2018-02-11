@@ -29,8 +29,7 @@
 /** @short Class that holds a Role for a contact.
  *  @since 5.3
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Role
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Role &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Role &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Role &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Role, Q_MOVABLE_TYPE);
 #endif // ROLE_H

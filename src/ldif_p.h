@@ -66,23 +66,18 @@ public:
      * @param linelen Maximum length of the lines in the result.
      * @param url If true, encode value as url ( use :< ).
      */
-    static QByteArray assembleLine(const QString &fieldname,
-                                   const QByteArray &value, uint linelen = 0,
-                                   bool url = false);
+    static QByteArray assembleLine(const QString &fieldname, const QByteArray &value, uint linelen = 0, bool url = false);
     /**
      * This is the same as the above function, the only difference that
      * this accepts QString as the value.
      */
-    static QByteArray assembleLine(const QString &fieldname,
-                                   const QString &value, uint linelen = 0,
-                                   bool url = false);
+    static QByteArray assembleLine(const QString &fieldname, const QString &value, uint linelen = 0, bool url = false);
 
     /**
      * Splits one line from an Ldif file to attribute and value components.
      * @return true if value is an URL, false otherwise
      */
-    static bool splitLine(const QByteArray &line, QString &fieldname,
-                          QByteArray &value);
+    static bool splitLine(const QByteArray &line, QString &fieldname, QByteArray &value);
 
     /**
      * Splits a control specification (without the "control:" directive)
@@ -91,8 +86,7 @@ public:
      * @param critical will contain the criticality of control
      * @param value is the control value
      */
-    static bool splitControl(const QByteArray &line, QString &oid,
-                             bool &critical, QByteArray &value);
+    static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
 
     /**
      * Starts the parsing of a new Ldif

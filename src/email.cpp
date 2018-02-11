@@ -39,6 +39,7 @@ public:
         parameters = other.parameters;
         mail = other.mail;
     }
+
     QMap<QString, QStringList> parameters;
     QString mail;
 };
@@ -46,7 +47,6 @@ public:
 Email::Email()
     : d(new Private)
 {
-
 }
 
 Email::Email(const QString &mail)
@@ -62,7 +62,6 @@ Email::Email(const Email &other)
 
 Email::~Email()
 {
-
 }
 
 QMap<QString, QStringList> Email::parameters() const
@@ -137,4 +136,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, Email &email)
     s >> email.d->parameters >> email.d->mail;
     return s;
 }
-

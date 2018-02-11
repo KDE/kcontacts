@@ -26,12 +26,10 @@
 RelatedTest::RelatedTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 RelatedTest::~RelatedTest()
 {
-
 }
 
 void RelatedTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void RelatedTest::shouldAssignValue()
     QCOMPARE(related.related(), relatedTo);
     QVERIFY(!related.parameters().isEmpty());
     QCOMPARE(related.parameters(), params);
-
 }
 
 void RelatedTest::shouldAssignExternal()
@@ -120,7 +117,6 @@ void RelatedTest::shouldParseRelated()
     QCOMPARE(lst.at(0).relationShips().count(), 1);
     const KContacts::Related related = lst.at(0).relationShips().at(0);
     QCOMPARE(related.related(), QStringLiteral("friend"));
-
 }
 
 void RelatedTest::shouldParseRelatedWithArgument()
@@ -207,7 +203,6 @@ void RelatedTest::shouldCreateVCardWithTwoRelated()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void RelatedTest::shouldCreateVCardWithParameters()

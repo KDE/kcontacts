@@ -41,6 +41,7 @@ public:
         parameters = other.parameters;
         type = other.type;
     }
+
     QMap<QString, QStringList> parameters;
     QString address;
     ImppType type;
@@ -49,7 +50,6 @@ public:
 Impp::Impp()
     : d(new Private)
 {
-
 }
 
 Impp::Impp(const Impp &other)
@@ -65,7 +65,6 @@ Impp::Impp(const QString &address)
 
 Impp::~Impp()
 {
-
 }
 
 bool Impp::isValid() const
@@ -192,4 +191,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
     impp.d->type = static_cast<Impp::ImppType>(i);
     return s;
 }
-

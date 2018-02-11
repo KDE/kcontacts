@@ -25,9 +25,7 @@
 #include <QSharedDataPointer>
 #include <QString>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
  * @short Time zone information.
  *
@@ -101,7 +99,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const TimeZone &ti
  * Initializes the @p timezone object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, TimeZone &timeZone);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::TimeZone, Q_MOVABLE_TYPE);
 

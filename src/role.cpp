@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         role = other.role;
     }
+
     QMap<QString, QStringList> parameters;
     QString role;
 };
@@ -45,13 +46,11 @@ public:
 Role::Role()
     : d(new Private)
 {
-
 }
 
 Role::Role(const Role &other)
     : d(other.d)
 {
-
 }
 
 Role::Role(const QString &role)
@@ -62,7 +61,6 @@ Role::Role(const QString &role)
 
 Role::~Role()
 {
-
 }
 
 void Role::setRole(const QString &role)

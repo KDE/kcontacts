@@ -26,8 +26,7 @@
 #include <QString>
 #include <QMap>
 
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Related
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Related &);
@@ -62,7 +61,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Related &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Related &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Related, Q_MOVABLE_TYPE);
 #endif // LANG_H

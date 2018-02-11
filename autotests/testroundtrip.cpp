@@ -51,7 +51,6 @@ private Q_SLOTS:
 // check the validity of our test data set
 void RoundtripTest::initTestCase()
 {
-
     // check that all resource prefixes exist
 
     mInputDir = QDir(QStringLiteral(":/input"));
@@ -92,10 +91,10 @@ void RoundtripTest::testVCardRoundtrip_data()
         const QString outFileV2_1 = outFile21Pattern.arg(inputFile);
         const QString outFileV4 = outFile4Pattern.arg(inputFile);
         QTest::newRow(QFile::encodeName(inputFile).constData())
-                << inputFile
-                << (mOutput2_1Dir.exists(outFileV2_1) ? outFileV2_1 : QString())
-                << (mOutput3_0Dir.exists(outFile) ? outFile : QString())
-                << (mOutput4_0Dir.exists(outFileV4) ? outFileV4 : QString());
+            << inputFile
+            << (mOutput2_1Dir.exists(outFileV2_1) ? outFileV2_1 : QString())
+            << (mOutput3_0Dir.exists(outFile) ? outFile : QString())
+            << (mOutput4_0Dir.exists(outFileV4) ? outFileV4 : QString());
     }
 }
 

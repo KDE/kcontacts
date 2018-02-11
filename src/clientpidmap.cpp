@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         clientpidmap = other.clientpidmap;
     }
+
     QMap<QString, QStringList> parameters;
     QString clientpidmap;
 };
@@ -45,13 +46,11 @@ public:
 ClientPidMap::ClientPidMap()
     : d(new Private)
 {
-
 }
 
 ClientPidMap::ClientPidMap(const ClientPidMap &other)
     : d(other.d)
 {
-
 }
 
 ClientPidMap::ClientPidMap(const QString &clientpidmap)
@@ -62,7 +61,6 @@ ClientPidMap::ClientPidMap(const QString &clientpidmap)
 
 ClientPidMap::~ClientPidMap()
 {
-
 }
 
 void ClientPidMap::setClientPidMap(const QString &clientpidmap)

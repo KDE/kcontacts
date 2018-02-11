@@ -29,12 +29,10 @@ Q_DECLARE_METATYPE(KContacts::CalendarUrl::CalendarType)
 CalendarUrlTest::CalendarUrlTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 CalendarUrlTest::~CalendarUrlTest()
 {
-
 }
 
 void CalendarUrlTest::shouldHaveDefaultValue()
@@ -128,7 +126,6 @@ void CalendarUrlTest::shouldParseCalendarUrl()
         case CalendarUrl::CALADRUri:
             baType = QByteArray("CALADRURI");
             break;
-
         }
 
         QByteArray vcarddata("BEGIN:VCARD\n"
@@ -137,10 +134,10 @@ void CalendarUrlTest::shouldParseCalendarUrl()
                              "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n");
         vcarddata += baType;
         vcarddata += QByteArray(
-                         ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+            ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
+            "REV:2015-03-14T09:24:45+00:00\n"
+            "FN:FirstName LastName\n"
+            "END:VCARD\n");
 
         KContacts::VCardTool vcard;
         const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -173,7 +170,6 @@ void CalendarUrlTest::shouldGenerateVCard_data()
         case CalendarUrl::CALADRUri:
             baType = QByteArray("CALADRURI");
             break;
-
         }
         QTest::newRow(baType.constData()) << type << baType;
     }
@@ -303,8 +299,6 @@ void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
                                      "UID:testuid\r\n"
                                      "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
-
 }
 
 QTEST_MAIN(CalendarUrlTest)
-

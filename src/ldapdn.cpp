@@ -29,8 +29,13 @@
 class Q_DECL_HIDDEN LdapDN::LdapDNPrivate
 {
 public:
-    LdapDNPrivate() : m_dn() {}
-    ~LdapDNPrivate() {}
+    LdapDNPrivate() : m_dn()
+    {
+    }
+
+    ~LdapDNPrivate()
+    {
+    }
 
     bool isValidRDNString(const QString &rdn) const;
     QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
@@ -96,7 +101,6 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
 LdapDN::LdapDN()
     : d(new LdapDNPrivate)
 {
-
 }
 
 LdapDN::LdapDN(const QString &dn)
@@ -199,12 +203,12 @@ int LdapDN::depth() const
     return rdns.size();
 }
 
-bool LdapDN::operator == (const LdapDN &rhs) const
+bool LdapDN::operator ==(const LdapDN &rhs) const
 {
     return d->m_dn == rhs.d->m_dn;
 }
 
-bool LdapDN::operator != (const LdapDN &rhs) const
+bool LdapDN::operator !=(const LdapDN &rhs) const
 {
     return d->m_dn != rhs.d->m_dn;
 }

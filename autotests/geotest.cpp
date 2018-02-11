@@ -158,7 +158,6 @@ void GeoTest::shouldGenerateVCard3()
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
-
 }
 
 void GeoTest::shouldGenerateVCard4()

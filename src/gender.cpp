@@ -38,6 +38,7 @@ public:
         comment = other.comment;
         gender = other.gender;
     }
+
     QString gender;
     QString comment;
 };
@@ -45,7 +46,6 @@ public:
 Gender::Gender()
     : d(new Private)
 {
-
 }
 
 Gender::Gender(const QString &gender)
@@ -61,7 +61,6 @@ Gender::Gender(const Gender &other)
 
 Gender::~Gender()
 {
-
 }
 
 bool Gender::operator==(const Gender &other) const
@@ -127,4 +126,3 @@ QDataStream &KContacts::operator>>(QDataStream &s, Gender &gender)
     s >> gender.d->comment >> gender.d->gender;
     return s;
 }
-

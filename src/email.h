@@ -30,9 +30,7 @@
  *  @since 4.14.5
  */
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT Email
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Email &);
@@ -71,7 +69,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Email &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Email, Q_MOVABLE_TYPE);
 #endif // EMAIL_H

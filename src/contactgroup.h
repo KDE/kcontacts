@@ -29,9 +29,7 @@
 
 class QString;
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
  * @short This class represents a group of contacts.
  *
@@ -479,7 +477,6 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-
 }
 Q_DECLARE_TYPEINFO(KContacts::ContactGroup::ContactGroupReference, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KContacts::ContactGroup::ContactReference, Q_MOVABLE_TYPE);

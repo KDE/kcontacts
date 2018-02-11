@@ -29,8 +29,10 @@ class Q_DECL_HIDDEN Geo::Private : public QSharedData
 {
 public:
     Private()
-        : mLatitude(91), mLongitude(181),
-          mValidLatitude(false), mValidLongitude(false)
+        : mLatitude(91)
+        , mLongitude(181)
+        , mValidLatitude(false)
+        , mValidLongitude(false)
     {
     }
 
@@ -160,13 +162,13 @@ void Geo::clear()
 QDataStream &KContacts::operator<<(QDataStream &s, const Geo &geo)
 {
     return s << geo.d->mLatitude << geo.d->mValidLatitude
-           << geo.d->mLongitude << geo.d->mValidLongitude;
+             << geo.d->mLongitude << geo.d->mValidLongitude;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Geo &geo)
 {
     s >> geo.d->mLatitude >> geo.d->mValidLatitude
-      >> geo.d->mLongitude >> geo.d->mValidLongitude;
+    >> geo.d->mLongitude >> geo.d->mValidLongitude;
 
     return s;
 }

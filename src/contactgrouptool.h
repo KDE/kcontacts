@@ -26,11 +26,9 @@
 #include <QString>
 class QIODevice;
 
-template <class T> class QList;
+template<class T> class QList;
 
-namespace KContacts
-{
-
+namespace KContacts {
 class ContactGroup;
 
 /**
@@ -39,39 +37,31 @@ class ContactGroup;
  * @author Kevin Krammer <kevin.krammer@gmx.at>
  * @since 4.3
  */
-namespace ContactGroupTool
-{
-
+namespace ContactGroupTool {
 /**
  * Converts XML data coming from a @p device into a contact @p group.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group,
-                                     QString *errorMessage = nullptr);
+KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group, QString *errorMessage = nullptr);
 
 /**
  * Converts a contact @p group into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device,
-                                   QString *errorMessage = nullptr);
+KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device, QString *errorMessage = nullptr);
 
 /**
  * Converts XML data coming from a @p device into a @p list of contact groups.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-KCONTACTS_EXPORT bool convertFromXml(QIODevice *device,
-                                     QVector<ContactGroup> &list,
-                                     QString *errorMessage = nullptr);
+KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QVector<ContactGroup> &list, QString *errorMessage = nullptr);
 
 /**
  * Converts a @p list of contact groups into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-KCONTACTS_EXPORT bool convertToXml(const QVector<ContactGroup> &list,
-                                   QIODevice *device, QString *errorMessage = nullptr);
+KCONTACTS_EXPORT bool convertToXml(const QVector<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
 }
-
 }
 
 #endif

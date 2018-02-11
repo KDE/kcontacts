@@ -28,12 +28,10 @@ using namespace KContacts;
 ResourceLocatorUrlTest::ResourceLocatorUrlTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 ResourceLocatorUrlTest::~ResourceLocatorUrlTest()
 {
-
 }
 
 void ResourceLocatorUrlTest::shouldHaveDefaultValue()
@@ -222,8 +220,6 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
                           "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 QTEST_MAIN(ResourceLocatorUrlTest)
-

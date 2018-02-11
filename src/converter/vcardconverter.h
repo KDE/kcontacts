@@ -25,9 +25,7 @@
 #include "kcontacts/addressee.h"
 #include <QString>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
   @short Class to converting contact objects into vCard format and vice versa.
 
@@ -153,6 +151,5 @@ KCONTACTS_EXPORT QDateTime VCardStringToDate(const QString &dateString);
  * @param data
  */
 KCONTACTS_EXPORT void adaptIMAttributes(QByteArray &data);
-
 }
 #endif

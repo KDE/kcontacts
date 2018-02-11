@@ -27,9 +27,7 @@
 
 class QDateTime;
 
-namespace KContacts
-{
-
+namespace KContacts {
 class Key;
 class Picture;
 class Secrecy;
@@ -45,14 +43,12 @@ public:
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards(const Addressee::List &list,
-                            VCard::Version version = VCard::v3_0) const;
+    QByteArray createVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
 
     /**
      * @since 4.9.1
      */
-    QByteArray exportVCards(const Addressee::List &list,
-                            VCard::Version version = VCard::v3_0) const;
+    QByteArray exportVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
     /**
       Parses the string and returns a list of addressee objects.
      */
@@ -65,8 +61,7 @@ public:
 
 private:
 
-    QByteArray createVCards(const Addressee::List &list,
-                            VCard::Version version, bool exportVcard) const;
+    QByteArray createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const;
 
     /**
       Split a string and replaces escaped separators on the fly with
@@ -93,7 +88,6 @@ private:
 
     Q_DISABLE_COPY(VCardTool)
 };
-
 }
 
 #endif

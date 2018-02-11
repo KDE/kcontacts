@@ -26,9 +26,7 @@
 
 class KConfigGroup;
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
  * @short Represents a field in the Addressbook
  *
@@ -161,8 +159,7 @@ public:
      * @param key      Unique key for this field
      * @param app      Unique app name for this field
      */
-    static Field *createCustomField(const QString &label, int category,
-                                    const QString &key, const QString &app);
+    static Field *createCustomField(const QString &label, int category, const QString &key, const QString &app);
 
     /**
      * Delete all fields from list.
@@ -176,8 +173,7 @@ public:
      * @param identifier The unique identifier
      * @param fields     The list of the fields
      */
-    static void saveFields(KConfigGroup &cfg, const QString &identifier,
-                           const Field::List &fields);
+    static void saveFields(KConfigGroup &cfg, const QString &identifier, const Field::List &fields);
     /**
      * @overload
      *
@@ -186,8 +182,7 @@ public:
      * @param identifier The unique identifier
      * @param fields     The list of the fields
      */
-    static void saveFields(const QString &identifier,
-                           const Field::List &fields);
+    static void saveFields(const QString &identifier, const Field::List &fields);
 
     /**
      * Load the field settings from a config file.
@@ -235,6 +230,5 @@ private:
 
     Private *const d;
 };
-
 }
 #endif

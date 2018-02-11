@@ -103,8 +103,8 @@ bool FieldSortMode::lesser(const KContacts::Addressee &first, const KContacts::A
     if (!d->mField) {
         return false;
     } else {
-        bool lesser =
-            QString::localeAwareCompare(d->mField->value(first), d->mField->value(second)) < 0;
+        bool lesser
+            = QString::localeAwareCompare(d->mField->value(first), d->mField->value(second)) < 0;
         if (!d->mAscendingOrder) {
             lesser = !lesser;
         }

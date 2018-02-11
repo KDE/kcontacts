@@ -24,9 +24,7 @@
 #include "kcontacts_export.h"
 #include "addressee.h"
 
-namespace KContacts
-{
-
+namespace KContacts {
 class Field;
 
 /**
@@ -131,7 +129,6 @@ private:
 
     Q_DISABLE_COPY(FieldSortMode)
 };
-
 }
 
 #endif

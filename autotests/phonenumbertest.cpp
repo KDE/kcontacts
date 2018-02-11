@@ -25,7 +25,6 @@
 #include <qtest.h>
 #include <vcardtool.h>
 
-
 QTEST_MAIN(PhoneNumberTest)
 
 #ifndef Q_OS_WIN
@@ -33,6 +32,7 @@ void initLocale()
 {
     qputenv("LC_ALL", "en_US.utf-8");
 }
+
 Q_CONSTRUCTOR_FUNCTION(initLocale)
 #endif
 
@@ -154,8 +154,8 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(phone.type(), combinedType);
         QCOMPARE(KContacts::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
-        if (type == KContacts::PhoneNumber::Home ||
-                type == KContacts::PhoneNumber::Work) {
+        if (type == KContacts::PhoneNumber::Home
+            || type == KContacts::PhoneNumber::Work) {
             // special cased
         } else if (type < KContacts::PhoneNumber::Fax) {
             const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Fax]);
@@ -168,19 +168,19 @@ void PhoneNumberTest::labelTest()
 
     // special cases
     QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Pref), QLatin1String("Preferred Number"));
-    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home |
-             KContacts::PhoneNumber::Fax),
+    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home
+                                               |KContacts::PhoneNumber::Fax),
              QLatin1String("Home Fax"));
-    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work |
-             KContacts::PhoneNumber::Fax),
+    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work
+                                               |KContacts::PhoneNumber::Fax),
              QLatin1String("Work Fax"));
-    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home |
-             KContacts::PhoneNumber::Fax  |
-             KContacts::PhoneNumber::Pref),
+    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Home
+                                               |KContacts::PhoneNumber::Fax
+                                               |KContacts::PhoneNumber::Pref),
              QLatin1String("Home Fax/Preferred"));
-    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work |
-             KContacts::PhoneNumber::Fax |
-             KContacts::PhoneNumber::Pref),
+    QCOMPARE(KContacts::PhoneNumber::typeLabel(KContacts::PhoneNumber::Work
+                                               |KContacts::PhoneNumber::Fax
+                                               |KContacts::PhoneNumber::Pref),
              QLatin1String("Work Fax/Preferred"));
 }
 
@@ -229,7 +229,6 @@ void PhoneNumberTest::shouldExportVCard21()
                         "END:VCARD\r\n"
                         "\r\n");
     QCOMPARE(ba, expected);
-
 }
 
 void PhoneNumberTest::shouldExportVCard3()
@@ -257,7 +256,6 @@ void PhoneNumberTest::shouldExportVCard3()
                         "END:VCARD\r\n"
                         "\r\n");
     QCOMPARE(ba, expected);
-
 }
 
 void PhoneNumberTest::shouldExportVCard4()

@@ -29,8 +29,7 @@
 /** @short Class that holds a Note for a contact.
  *  @since 5.3
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Note
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Note &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Note &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Note &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Note, Q_MOVABLE_TYPE);
 #endif // NOTE_H

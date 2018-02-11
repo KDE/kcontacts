@@ -25,9 +25,7 @@
 #include <QVector>
 #include <QSharedDataPointer>
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT Secrecy
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Secrecy &);
@@ -121,7 +119,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Secrecy &sec
  * Initializes the @p secrecy object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Secrecy &secrecy);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Secrecy, Q_MOVABLE_TYPE);
 #endif

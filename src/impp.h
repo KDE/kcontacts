@@ -29,8 +29,7 @@
 /** @short Class that holds a IMPP for a contact.
  *  @since 4.14.5
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Impp
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
@@ -89,7 +88,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Impp &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
-
 }
 
 Q_DECLARE_TYPEINFO(KContacts::Impp, Q_MOVABLE_TYPE);

@@ -37,7 +37,8 @@ class Q_DECL_HIDDEN PhoneNumber::Private : public QSharedData
 {
 public:
     Private(Type type)
-        : mId(KRandom::randomString(8)), mType(type)
+        : mId(KRandom::randomString(8))
+        , mType(type)
     {
     }
 

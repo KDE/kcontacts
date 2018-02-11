@@ -30,12 +30,14 @@ using namespace KContacts;
 class Q_DECL_HIDDEN Field::Private
 {
 public:
-    Private(int fieldId, int category = 0,
-            const QString &label = QString(),
-            const QString &key = QString(),
-            const QString &app = QString())
-        : mFieldId(fieldId), mCategory(category), mLabel(label),
-          mKey(key), mApp(app) {}
+    Private(int fieldId, int category = 0, const QString &label = QString(), const QString &key = QString(), const QString &app = QString())
+        : mFieldId(fieldId)
+        , mCategory(category)
+        , mLabel(label)
+        , mKey(key)
+        , mApp(app)
+    {
+    }
 
     enum FieldId {
         CustomField,
@@ -83,6 +85,7 @@ public:
     {
         return mFieldId;
     }
+
     int category() const
     {
         return mCategory;
@@ -92,10 +95,12 @@ public:
     {
         return mLabel;
     }
+
     QString key() const
     {
         return mKey;
     }
+
     QString app() const
     {
         return mApp;
@@ -280,7 +285,8 @@ QString Field::value(const KContacts::Addressee &a)
         }
     case Private::Url:
         return a.url().url().toDisplayString();
-    case Private::HomePhone: {
+    case Private::HomePhone:
+    {
         PhoneNumber::List::ConstIterator it;
 
         {
@@ -307,7 +313,8 @@ QString Field::value(const KContacts::Addressee &a)
 
         return QString();
     }
-    case Private::BusinessPhone: {
+    case Private::BusinessPhone:
+    {
         PhoneNumber::List::ConstIterator it;
 
         {
@@ -563,16 +570,14 @@ void Field::deleteFields()
     Private::mCustomFields.clear();
 }
 
-void Field::saveFields(const QString &identifier,
-                       const Field::List &fields)
+void Field::saveFields(const QString &identifier, const Field::List &fields)
 {
     KConfigGroup cg(KSharedConfig::openConfig(), "KABCFields");
 
     saveFields(cg, identifier, fields);
 }
 
-void Field::saveFields(KConfigGroup &cfg, const QString &identifier,
-                       const Field::List &fields)
+void Field::saveFields(KConfigGroup &cfg, const QString &identifier, const Field::List &fields)
 {
     QList<int> fieldIds;
 
@@ -586,8 +591,8 @@ void Field::saveFields(KConfigGroup &cfg, const QString &identifier,
             customEntry << (*it)->d->label();
             customEntry << (*it)->d->key();
             customEntry << (*it)->d->app();
-            cfg.writeEntry(QLatin1String("KCONTACTS_CustomEntry_") + identifier + QLatin1Char('_') +
-                           QString::number(custom++), customEntry);
+            cfg.writeEntry(QLatin1String("KCONTACTS_CustomEntry_") + identifier + QLatin1Char('_')
+                           +QString::number(custom++), customEntry);
         }
     }
 
@@ -613,9 +618,9 @@ Field::List Field::restoreFields(const KConfigGroup &cfg, const QString &identif
     for (it = fieldIds.begin(); it != fieldIds.end(); ++it) {
         Private *f = nullptr;
         if ((*it) == Private::CustomField) {
-            QStringList customEntry = cfg.readEntry(QLatin1String("KCONTACTS_CustomEntry_") +
-                                                    identifier + QLatin1Char('_') +
-                                                    QString::number(custom++), QStringList());
+            QStringList customEntry = cfg.readEntry(QLatin1String("KCONTACTS_CustomEntry_")
+                                                    +identifier + QLatin1Char('_')
+                                                    +QString::number(custom++), QStringList());
             f = new Private(*it, CustomCategory, customEntry[ 0 ],
                             customEntry[ 1 ], customEntry[ 2 ]);
         } else {
@@ -642,8 +647,7 @@ bool Field::equals(Field *field)
     return d->key() == field->d->key();
 }
 
-Field *Field::createCustomField(const QString &label, int category,
-                                const QString &key, const QString &app)
+Field *Field::createCustomField(const QString &label, int category, const QString &key, const QString &app)
 {
     Field *field = new Field(new Private(Private::CustomField,
                                          category | CustomCategory,

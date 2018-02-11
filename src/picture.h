@@ -29,9 +29,7 @@
 
 class QImage;
 
-namespace KContacts
-{
-
+namespace KContacts {
 class PicturePrivate;
 
 /**
@@ -199,7 +197,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Picture &pic
  * Initializes the @p picture object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Picture &picture);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Picture, Q_MOVABLE_TYPE);
 #endif

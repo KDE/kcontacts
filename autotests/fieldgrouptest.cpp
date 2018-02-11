@@ -26,12 +26,10 @@
 FieldGroupTest::FieldGroupTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 FieldGroupTest::~FieldGroupTest()
 {
-
 }
 
 void FieldGroupTest::shouldHaveDefaultValue()
@@ -59,7 +57,6 @@ void FieldGroupTest::shouldAssignValue()
     QVERIFY(!fieldGroup.parameters().isEmpty());
     QCOMPARE(fieldGroup.parameters(), params);
     QCOMPARE(fieldGroup.value(), value);
-
 }
 
 void FieldGroupTest::shouldAssignExternal()
@@ -96,7 +93,6 @@ void FieldGroupTest::shouldSerialized()
     t >> result;
 
     QVERIFY(fieldGroup == result);
-
 }
 
 void FieldGroupTest::shouldEqualFieldGroup()
@@ -204,7 +200,6 @@ void FieldGroupTest::shouldCreateVCardWithTwoLang()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
 
 void FieldGroupTest::shouldCreateVCardWithParameters()

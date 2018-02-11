@@ -77,7 +77,8 @@ class VCardLineParser
 {
 public:
     VCardLineParser(StringCache &cache, std::function<QByteArray()> fetchAnotherLine)
-      : m_cache(cache), m_fetchAnotherLine(fetchAnotherLine)
+        : m_cache(cache)
+        , m_fetchAnotherLine(fetchAnotherLine)
     {
     }
 
@@ -95,7 +96,7 @@ private:
     QByteArray m_charset;
 };
 
-void VCardLineParser::addParameter(const QByteArray& paramKey, const QByteArray& paramValue)
+void VCardLineParser::addParameter(const QByteArray &paramKey, const QByteArray &paramValue)
 {
     if (paramKey == "encoding") {
         m_encoding = paramValue.toLower();
@@ -106,14 +107,16 @@ void VCardLineParser::addParameter(const QByteArray& paramKey, const QByteArray&
     m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), m_cache.fromLatin1(paramValue));
 }
 
-void VCardLineParser::parseLine(const QByteArray& currentLine, KContacts::VCardLine* vCardLine)
+void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardLine *vCardLine)
 {
     //qDebug() << currentLine;
     m_vCardLine = vCardLine;
     // The syntax is key:value, but the key can contain semicolon-separated parameters, which can contain a ':', so indexOf(':') is wrong.
     // EXAMPLE: ADR;GEO="geo:22.500000,45.099998";LABEL="My Label";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
     // Therefore we need a small state machine, just the way I like it.
-    enum State { StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue };
+    enum State {
+        StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue
+    };
     State state = StateInitial;
     const int lineLength = currentLine.length();
     const char *lineData = currentLine.constData(); // to skip length checks from at() in debug mode
@@ -281,8 +284,8 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
             cur.chop(1);
         }
 
-        if (cur.startsWith(' ') ||
-            cur.startsWith('\t')) {      //folded line => append to previous
+        if (cur.startsWith(' ')
+            || cur.startsWith('\t')) {   //folded line => append to previous
             currentLine.append(cur.mid(1));
             continue;
         } else {
@@ -294,18 +297,18 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
 
                 // Provide a way for the parseVCardLine function to read more lines (for quoted-printable support)
                 auto fetchAnotherLine = [&text, &lineStart, &lineEnd, &cur]() -> QByteArray {
-                    const QByteArray ret = cur;
-                    lineStart = lineEnd + 1;
-                    lineEnd = text.indexOf('\n', lineStart);
-                    if (lineEnd != -1) {
-                        cur = text.mid(lineStart, lineEnd - lineStart);
-                        // remove the trailing \r, left from \r\n
-                        if (cur.endsWith('\r')) {
-                            cur.chop(1);
-                        }
-                    }
-                    return ret;
-                };
+                                            const QByteArray ret = cur;
+                                            lineStart = lineEnd + 1;
+                                            lineEnd = text.indexOf('\n', lineStart);
+                                            if (lineEnd != -1) {
+                                                cur = text.mid(lineStart, lineEnd - lineStart);
+                                                // remove the trailing \r, left from \r\n
+                                                if (cur.endsWith('\r')) {
+                                                    cur.chop(1);
+                                                }
+                                            }
+                                            return ret;
+                                        };
 
                 VCardLineParser lineParser(cache, fetchAnotherLine);
 

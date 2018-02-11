@@ -26,12 +26,10 @@
 RoleTest::RoleTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 RoleTest::~RoleTest()
 {
-
 }
 
 void RoleTest::shouldHaveDefaultValue()
@@ -55,7 +53,6 @@ void RoleTest::shouldAssignValue()
     QCOMPARE(role.role(), lang);
     QVERIFY(!role.parameters().isEmpty());
     QCOMPARE(role.parameters(), params);
-
 }
 
 void RoleTest::shouldAssignExternal()
@@ -86,7 +83,6 @@ void RoleTest::shouldSerialized()
     t >> result;
 
     QVERIFY(role == result);
-
 }
 
 void RoleTest::shouldEqualRole()
@@ -103,9 +99,9 @@ void RoleTest::shouldEqualRole()
     result = role;
     QVERIFY(role == result);
 }
+
 void RoleTest::shouldParseRole()
 {
-
     QByteArray vcarddata("BEGIN:VCARD\n"
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
@@ -188,8 +184,8 @@ void RoleTest::shouldCreateVCardWithTwoRole()
                         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-
 }
+
 void RoleTest::shouldCreateVCardWithParameters()
 {
     KContacts::AddresseeList lst;

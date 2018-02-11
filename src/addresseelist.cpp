@@ -105,8 +105,8 @@ SortingTraits::FamilyName::~FamilyName()
 bool SortingTraits::FamilyName::eq(const Addressee &a1, const Addressee &a2)
 {
     return
-        QString::localeAwareCompare(a1.familyName(), a2.familyName()) == 0 &&
-        QString::localeAwareCompare(a1.givenName(), a2.givenName()) == 0;
+        QString::localeAwareCompare(a1.familyName(), a2.familyName()) == 0
+        && QString::localeAwareCompare(a1.givenName(), a2.givenName()) == 0;
 }
 
 bool SortingTraits::FamilyName::lt(const Addressee &a1, const Addressee &a2)
@@ -131,8 +131,8 @@ SortingTraits::GivenName::~GivenName()
 bool SortingTraits::GivenName::eq(const Addressee &a1, const Addressee &a2)
 {
     return
-        QString::localeAwareCompare(a1.givenName(), a2.givenName()) == 0 &&
-        QString::localeAwareCompare(a1.familyName(), a2.familyName()) == 0;
+        QString::localeAwareCompare(a1.givenName(), a2.givenName()) == 0
+        && QString::localeAwareCompare(a1.familyName(), a2.familyName()) == 0;
 }
 
 bool SortingTraits::GivenName::lt(const Addressee &a1, const Addressee &a2)
@@ -208,9 +208,9 @@ AddresseeList &AddresseeList::operator=(const AddresseeList &other)
 QString AddresseeList::toString() const
 {
     QString str = QLatin1String("AddresseeList {\n");
-    str += QStringLiteral("   Reverse Order: %1\n").arg(d->mReverseSorting ?
-            QStringLiteral("true") :
-            QStringLiteral("false"));
+    str += QStringLiteral("   Reverse Order: %1\n").arg(d->mReverseSorting
+                                                        ? QStringLiteral("true")
+                                                        : QStringLiteral("false"));
 
     QString crit;
     switch (d->mActiveSortingCriterion) {
@@ -305,8 +305,8 @@ void AddresseeList::sortByTrait()
         iterator j2 = j1;
         ++j2;
         while (j1 != i2) {
-            if ((!d->mReverseSorting && Trait::lt(*j2, *j1)) ||
-                    (d->mReverseSorting && Trait::lt(*j1, *j2))) {
+            if ((!d->mReverseSorting && Trait::lt(*j2, *j1))
+                || (d->mReverseSorting && Trait::lt(*j1, *j2))) {
                 qSwap(*j1, *j2);
             }
             ++j1;

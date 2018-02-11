@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         relatedTo = other.relatedTo;
     }
+
     QMap<QString, QStringList> parameters;
     QString relatedTo;
 };
@@ -45,13 +46,11 @@ public:
 Related::Related()
     : d(new Private)
 {
-
 }
 
 Related::Related(const Related &other)
     : d(other.d)
 {
-
 }
 
 Related::Related(const QString &relatedTo)
@@ -62,7 +61,6 @@ Related::Related(const QString &relatedTo)
 
 Related::~Related()
 {
-
 }
 
 void Related::setRelated(const QString &relatedTo)

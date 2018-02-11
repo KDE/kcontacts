@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         title = other.title;
     }
+
     QMap<QString, QStringList> parameters;
     QString title;
 };
@@ -45,13 +46,11 @@ public:
 Title::Title()
     : d(new Private)
 {
-
 }
 
 Title::Title(const Title &other)
     : d(other.d)
 {
-
 }
 
 Title::Title(const QString &title)
@@ -62,7 +61,6 @@ Title::Title(const QString &title)
 
 Title::~Title()
 {
-
 }
 
 void Title::setTitle(const QString &title)

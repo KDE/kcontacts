@@ -26,12 +26,10 @@ using namespace KContacts;
 LDifConverterTest::LDifConverterTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LDifConverterTest::~LDifConverterTest()
 {
-
 }
 
 void LDifConverterTest::shouldImportEmail()
@@ -338,7 +336,6 @@ void LDifConverterTest::shouldExportMultiEmails()
                                       "\n");
 
     QCOMPARE(str, expected);
-
 }
 
 void LDifConverterTest::shouldExportBirthday()

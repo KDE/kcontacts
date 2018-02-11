@@ -436,8 +436,8 @@ void AddresseeTest::customFieldsTest()
     QCOMPARE(c.customs().count(), 1);
 
     const QStringList testData = QStringList() << QStringLiteral("FirstApp-FirstKey:FirstValue")
-                                 << QStringLiteral("SecondApp-SecondKey:SecondValue")
-                                 << QStringLiteral("ThirdApp-ThirdKey:ThirdValue");
+                                               << QStringLiteral("SecondApp-SecondKey:SecondValue")
+                                               << QStringLiteral("ThirdApp-ThirdKey:ThirdValue");
 
     c.setCustoms(testData);
     QCOMPARE(c.customs().count(), 3);

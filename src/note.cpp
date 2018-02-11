@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         note = other.note;
     }
+
     QMap<QString, QStringList> parameters;
     QString note;
 };
@@ -45,13 +46,11 @@ public:
 Note::Note()
     : d(new Private)
 {
-
 }
 
 Note::Note(const Note &other)
     : d(other.d)
 {
-
 }
 
 Note::Note(const QString &note)
@@ -62,7 +61,6 @@ Note::Note(const QString &note)
 
 Note::~Note()
 {
-
 }
 
 void Note::setNote(const QString &note)

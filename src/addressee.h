@@ -51,9 +51,7 @@
 #include "org.h"
 #include "clientpidmap.h"
 
-namespace KContacts
-{
-
+namespace KContacts {
 class SortMode;
 
 /**
@@ -924,8 +922,7 @@ public:
       @param name Name of this application specific custom entry
       @param value Value of this application specific custom entry
      */
-    void insertCustom(const QString &app, const QString &name,
-                      const QString &value);
+    void insertCustom(const QString &app, const QString &name, const QString &value);
 
     /**
       Remove custom entry.
@@ -963,8 +960,7 @@ public:
       @param fullName The name part of the @p rawEmail input, if it contained one
       @param email The email part of the @p rawEmail input, if it contained one
      */
-    static void parseEmailAddress(const QString &rawEmail, QString &fullName,
-                                  QString &email);
+    static void parseEmailAddress(const QString &rawEmail, QString &fullName, QString &email);
 
     /**
       Returns string representation of the addressee.
@@ -1091,7 +1087,6 @@ private:
 
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
-
 }
 
 #define KCONTACTS_ADDRESSEE_METATYPE_DEFINED 1

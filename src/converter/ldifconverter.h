@@ -26,18 +26,14 @@
 #include <QDateTime>
 #include <QString>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
   A set of functions to convert a string with LDIF information to addressees
   and vice versa. It is useful for addressbook import- and exportfilters
   and might be used to read and write Mozilla and Netscape addresssbooks.
 */
 
-namespace LDIFConverter
-{
-
+namespace LDIFConverter {
 /**
   Converts a LDIF string to a list of addressees.
 
@@ -46,8 +42,7 @@ namespace LDIFConverter
   @param contactGroupList the contactGroupList
   @param dt          The date & time value of the last modification (e.g. file modification time).
 */
-KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, QVector<KContacts::ContactGroup> &contactGroupList,
-                                      const QDateTime &dt = QDateTime::currentDateTime());
+KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str, AddresseeList &addrList, QVector<KContacts::ContactGroup> &contactGroupList, const QDateTime &dt = QDateTime::currentDateTime());
 
 /**
   Converts a list of addressees to a LDIF string.
@@ -89,8 +84,6 @@ KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::List &contactGroupL
   @param str         The LDIF string.
 */
 KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup &contactGroup, QString &str);
-
 }
-
 }
 #endif

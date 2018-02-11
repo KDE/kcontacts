@@ -26,12 +26,10 @@
 ImportExportVCardTest::ImportExportVCardTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 ImportExportVCardTest::~ImportExportVCardTest()
 {
-
 }
 
 static void compareBuffers(const QByteArray &outputData, const QByteArray &expected)

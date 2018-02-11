@@ -29,8 +29,7 @@
 /** @short Class that holds a ClientPidMap for a contact.
  *  @since 5.4
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT ClientPidMap
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ClientPidMap &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ClientPidMap &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ClientPidMap &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::ClientPidMap, Q_MOVABLE_TYPE);
 #endif // CLIENTPIDMAP_H

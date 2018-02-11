@@ -26,9 +26,7 @@
 
 #include "vcardline.h"
 
-namespace KContacts
-{
-
+namespace KContacts {
 class VCard
 {
 public:
@@ -86,7 +84,6 @@ public:
 private:
     LineMap mLineMap;
 };
-
 }
 
 #endif

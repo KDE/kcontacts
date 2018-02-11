@@ -38,6 +38,7 @@ public:
         parameters = other.parameters;
         language = other.language;
     }
+
     QMap<QString, QStringList> parameters;
     QString language;
 };
@@ -45,13 +46,11 @@ public:
 Lang::Lang()
     : d(new Private)
 {
-
 }
 
 Lang::Lang(const Lang &other)
     : d(other.d)
 {
-
 }
 
 Lang::Lang(const QString &language)
@@ -62,7 +61,6 @@ Lang::Lang(const QString &language)
 
 Lang::~Lang()
 {
-
 }
 
 void Lang::setLanguage(const QString &lang)

@@ -29,8 +29,7 @@
 /** @short Class that holds a NickName for a contact.
  *  @since 5.3
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT NickName
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const NickName &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const NickName &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, NickName &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::NickName, Q_MOVABLE_TYPE);
 #endif // NICKNAME_H

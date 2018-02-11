@@ -26,12 +26,10 @@
 NickNameTest::NickNameTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 NickNameTest::~NickNameTest()
 {
-
 }
 
 void NickNameTest::shouldHaveDefaultValue()
@@ -85,7 +83,6 @@ void NickNameTest::shouldSerialized()
     t >> result;
 
     QVERIFY(nickname == result);
-
 }
 
 void NickNameTest::shouldEqualNickName()

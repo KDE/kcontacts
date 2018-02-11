@@ -28,9 +28,7 @@
 #include <QVector>
 #include <QMap>
 
-namespace KContacts
-{
-
+namespace KContacts {
 /**
  * @short Phonenumber information.
  *
@@ -231,7 +229,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber 
  * @param number The phone number object to deserialize into
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, PhoneNumber &number);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::PhoneNumber, Q_MOVABLE_TYPE);
 #endif

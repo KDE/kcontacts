@@ -28,9 +28,7 @@
  *  @since 4.14.5
  */
 
-namespace KContacts
-{
-
+namespace KContacts {
 class KCONTACTS_EXPORT Gender
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Gender &);

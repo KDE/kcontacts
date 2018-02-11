@@ -29,8 +29,7 @@
 /** @short Class that holds a Title for a contact.
  *  @since 5.3
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Title
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Title &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Title &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Title &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Title, Q_MOVABLE_TYPE);
 #endif // TITLE_H

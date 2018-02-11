@@ -26,9 +26,7 @@
 #include <QSharedDataPointer>
 #include <QVector>
 
-namespace KContacts
-{
-
+namespace KContacts {
 class Field;
 class SortMode;
 class Addressee;
@@ -42,9 +40,7 @@ class Addressee;
  * If you want to implement reverse sorting, you do not have to write another
  * trait, as AddresseeList takes care of that.
  */
-namespace SortingTraits
-{
-
+namespace SortingTraits {
 class KCONTACTS_EXPORT Uid
 {
 public:
@@ -255,7 +251,6 @@ private:
     class Private;
     Private *const d;
 };
-
 }
 
 /**
@@ -420,7 +415,6 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-
 }
 
 #endif

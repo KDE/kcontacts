@@ -50,8 +50,7 @@ using namespace KContacts;
 
 /* internal functions - do not use !! */
 
-namespace KContacts
-{
+namespace KContacts {
 /**
   @internal
 
@@ -64,16 +63,12 @@ namespace KContacts
   @param fieldname LDIF field name to evaluate
   @param value The value of the field addressed by @p fieldname
 */
-void evaluatePair(Addressee &a, Address &homeAddr,
-                  Address &workAddr,
-                  QString &fieldname, QString &value,
-                  int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup);
+void evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr, QString &fieldname, QString &value, int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup);
 }
 
 /* generate LDIF stream */
 
-static void ldif_out(QTextStream &t, const QString &formatStr,
-                     const QString &value)
+static void ldif_out(QTextStream &t, const QString &formatStr, const QString &value)
 {
     if (value.isEmpty()) {
         return;
@@ -234,7 +229,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
         ldif_out(t, QStringLiteral("department"), addr.department());
     } else {
         ldif_out(t, QStringLiteral("department"), addr.custom(QStringLiteral("KADDRESSBOOK"),
-                 QStringLiteral("X-Department")));
+                                                              QStringLiteral("X-Department")));
     }
 
     ldif_out(t, QStringLiteral("workurl"), addr.url().url().toDisplayString());
@@ -262,8 +257,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
 }
 
 /* convert from LDIF stream */
-bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList,
-                                    const QDateTime &dt)
+bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList, ContactGroup::List &contactGroupList, const QDateTime &dt)
 {
     if (str.isEmpty()) {
         return true;
@@ -290,13 +284,14 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
     do {
         ret = ldif.nextItem();
         switch (ret) {
-        case Ldif::Item: {
+        case Ldif::Item:
+        {
             QString fieldname = ldif.attr().toLower();
             QString value = QString::fromUtf8(ldif.value());
             evaluatePair(a, homeAddr, workAddr, fieldname, value, birthday, birthmonth, birthyear, contactGroup);
             break;
         }
-        case Ldif::EndEntry: {
+        case Ldif::EndEntry:
             if (contactGroup.count() == 0) {
                 // if the new address is not empty, append it
                 QDate birthDate(birthyear, birthmonth, birthday);
@@ -304,8 +299,8 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
                     a.setBirthday(birthDate);
                 }
 
-                if (!a.formattedName().isEmpty() || !a.name().isEmpty() ||
-                        !a.familyName().isEmpty()) {
+                if (!a.formattedName().isEmpty() || !a.name().isEmpty()
+                    || !a.familyName().isEmpty()) {
                     if (!homeAddr.isEmpty()) {
                         a.insertAddress(homeAddr);
                     }
@@ -322,9 +317,8 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
             a.setRevision(qdt);
             homeAddr = Address(Address::Home);
             workAddr = Address(Address::Work);
-        }
-        break;
-        case Ldif::MoreData: {
+            break;
+        case Ldif::MoreData:
             if (endldif) {
                 end = true;
             } else {
@@ -332,7 +326,6 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
                 endldif = true;
                 break;
             }
-        }
         default:
             break;
         }
@@ -341,10 +334,7 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
     return true;
 }
 
-void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
-                             Address &workAddr,
-                             QString &fieldname, QString &value,
-                             int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup)
+void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr, QString &fieldname, QString &value, int &birthday, int &birthmonth, int &birthyear, ContactGroup &contactGroup)
 {
     if (fieldname == QLatin1String("dn")) {     // ignore
         return;
@@ -366,9 +356,9 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("xmozillanickname") ||
-            fieldname == QLatin1String("nickname") ||
-            fieldname == QLatin1String("mozillanickname")) {
+    if (fieldname == QLatin1String("xmozillanickname")
+        || fieldname == QLatin1String("nickname")
+        || fieldname == QLatin1String("mozillanickname")) {
         a.setNickName(value);
         return;
     }
@@ -382,9 +372,9 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         a.setUid(value);
         return;
     }
-    if (fieldname == QLatin1String("mail") ||
-            fieldname == QLatin1String("mozillasecondemail") /* mozilla */ ||
-            fieldname == QLatin1String("othermailbox")  /*TheBat!*/)  {
+    if (fieldname == QLatin1String("mail")
+        || fieldname == QLatin1String("mozillasecondemail")  /* mozilla */
+        || fieldname == QLatin1String("othermailbox") /*TheBat!*/) {
         if (a.emails().indexOf(value) == -1) {
             a.insertEmail(value);
         }
@@ -406,22 +396,22 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("o") ||
-            fieldname == QLatin1String("organization") ||        // Exchange
-            fieldname == QLatin1String("organizationname")) {    // Exchange
+    if (fieldname == QLatin1String("o")
+        || fieldname == QLatin1String("organization")            // Exchange
+        || fieldname == QLatin1String("organizationname")) {     // Exchange
         a.setOrganization(value);
         return;
     }
 
-    if (fieldname == QLatin1String("description") ||
-            fieldname == QLatin1String("mozillacustom1") ||
-            fieldname == QLatin1String("mozillacustom2") ||
-            fieldname == QLatin1String("mozillacustom3") ||
-            fieldname == QLatin1String("mozillacustom4") ||
-            fieldname == QLatin1String("custom1") ||
-            fieldname == QLatin1String("custom2") ||
-            fieldname == QLatin1String("custom3") ||
-            fieldname == QLatin1String("custom4")) {
+    if (fieldname == QLatin1String("description")
+        || fieldname == QLatin1String("mozillacustom1")
+        || fieldname == QLatin1String("mozillacustom2")
+        || fieldname == QLatin1String("mozillacustom3")
+        || fieldname == QLatin1String("mozillacustom4")
+        || fieldname == QLatin1String("custom1")
+        || fieldname == QLatin1String("custom2")
+        || fieldname == QLatin1String("custom3")
+        || fieldname == QLatin1String("custom4")) {
         if (!a.note().isEmpty()) {
             a.setNote(a.note() + QLatin1Char('\n'));
         }
@@ -429,9 +419,9 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("homeurl") ||
-            fieldname == QLatin1String("workurl") ||
-            fieldname == QLatin1String("mozillahomeurl")) {
+    if (fieldname == QLatin1String("homeurl")
+        || fieldname == QLatin1String("workurl")
+        || fieldname == QLatin1String("mozillahomeurl")) {
         if (a.url().url().isEmpty()) {
             ResourceLocatorUrl url;
             url.setUrl(QUrl(value));
@@ -454,14 +444,14 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Work));
         return;
     }
-    if (fieldname == QLatin1String("mobile") ||    /* mozilla/Netscape 7 */
-            fieldname == QLatin1String("cellphone")) {
+    if (fieldname == QLatin1String("mobile")       /* mozilla/Netscape 7 */
+        || fieldname == QLatin1String("cellphone")) {
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Cell));
         return;
     }
 
-    if (fieldname == QLatin1String("pager")  ||          // mozilla
-            fieldname == QLatin1String("pagerphone")) {     // mozilla
+    if (fieldname == QLatin1String("pager")              // mozilla
+        || fieldname == QLatin1String("pagerphone")) {      // mozilla
         a.insertPhoneNumber(PhoneNumber(value, PhoneNumber::Pager));
         return;
     }
@@ -476,19 +466,19 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("streethomeaddress") ||
-            fieldname == QLatin1String("mozillahomestreet")) {     // thunderbird
+    if (fieldname == QLatin1String("streethomeaddress")
+        || fieldname == QLatin1String("mozillahomestreet")) {      // thunderbird
         homeAddr.setStreet(value);
         return;
     }
 
-    if (fieldname == QLatin1String("street") ||
-            fieldname == QLatin1String("postaladdress")) {     // mozilla
+    if (fieldname == QLatin1String("street")
+        || fieldname == QLatin1String("postaladdress")) {      // mozilla
         workAddr.setStreet(value);
         return;
     }
-    if (fieldname == QLatin1String("mozillapostaladdress2") ||
-            fieldname == QLatin1String("mozillaworkstreet2")) {     // mozilla
+    if (fieldname == QLatin1String("mozillapostaladdress2")
+        || fieldname == QLatin1String("mozillaworkstreet2")) {      // mozilla
         workAddr.setStreet(workAddr.street() + QLatin1Char('\n') + value);
         return;
     }
@@ -546,8 +536,8 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("countryname") ||
-            fieldname == QLatin1String("c")) {     // mozilla
+    if (fieldname == QLatin1String("countryname")
+        || fieldname == QLatin1String("c")) {      // mozilla
         if (value.length() <= 2) {
             value = Address::ISOtoCountry(value);
         }
@@ -644,7 +634,5 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr,
         return;
     }
     qCWarning(KCONTACTS_LOG) << QStringLiteral("LDIFConverter: Unknown field for '%1': '%2=%3'\n").
-                             arg(a.formattedName(), fieldname, value);
-
-    return;
+        arg(a.formattedName(), fieldname, value);
 }

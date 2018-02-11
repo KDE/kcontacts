@@ -29,8 +29,7 @@
 /** @short Class that holds a Language for a contact.
  *  @since 4.14.5
  */
-namespace KContacts
-{
+namespace KContacts {
 class KCONTACTS_EXPORT Lang
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Lang &);
@@ -65,7 +64,6 @@ private:
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Lang &object);
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Lang &object);
-
 }
 Q_DECLARE_TYPEINFO(KContacts::Lang, Q_MOVABLE_TYPE);
 #endif // LANG_H

@@ -27,12 +27,10 @@ Q_DECLARE_METATYPE(KContacts::Impp::ImppType)
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 ImppTest::~ImppTest()
 {
-
 }
 
 void ImppTest::shouldHaveDefaultValue()
@@ -166,9 +164,9 @@ QByteArray createCard(KContacts::Impp::ImppType type)
         expected += "IMPP;X-SERVICE-TYPE=" + baType + ":" + baType + ":address\n";
     }
     expected += QByteArray(
-                    "N:;;;;\n"
-                    "UID:testuid\n"
-                    "END:VCARD\n\n");
+        "N:;;;;\n"
+        "UID:testuid\n"
+        "END:VCARD\n\n");
     return expected;
 }
 

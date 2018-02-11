@@ -25,9 +25,7 @@
 
 #include <QImage>
 
-namespace KContacts
-{
-
+namespace KContacts {
 class PicturePrivate : public QSharedData
 {
 public:
@@ -52,7 +50,6 @@ public:
 
     bool mIntern;
 };
-
 }
 
 Q_GLOBAL_STATIC_WITH_ARGS(QSharedDataPointer<KContacts::PicturePrivate>, s_sharedEmpty, (new KContacts::PicturePrivate))
@@ -113,8 +110,8 @@ bool Picture::operator==(const Picture &p) const
             if (d->mRawData != p.d->mRawData) {
                 return false;
             }
-        } else if ((!d->mData.isNull() || !d->mRawData.isEmpty()) &&
-                   (!p.d->mData.isNull() || !p.d->mRawData.isEmpty())) {
+        } else if ((!d->mData.isNull() || !d->mRawData.isEmpty())
+                   && (!p.d->mData.isNull() || !p.d->mRawData.isEmpty())) {
             if (data() != p.data()) {
                 return false;
             }
@@ -139,8 +136,8 @@ bool Picture::operator!=(const Picture &p) const
 bool Picture::isEmpty() const
 {
     return
-        ((d->mIntern == false && d->mUrl.isEmpty()) ||
-         (d->mIntern == true && d->mData.isNull() && d->mRawData.isEmpty()));
+        (d->mIntern == false && d->mUrl.isEmpty())
+        || (d->mIntern == true && d->mData.isNull() && d->mRawData.isEmpty());
 }
 
 void Picture::setUrl(const QString &url)

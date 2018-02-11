@@ -127,9 +127,9 @@ ContactGroup::ContactReference &ContactGroup::ContactReference::operator=(
 
 bool ContactGroup::ContactReference::operator==(const ContactReference &other) const
 {
-    return d->mUid == other.d->mUid &&
-           d->mPreferredEmail == other.d->mPreferredEmail &&
-           d->mCustoms == other.d->mCustoms;
+    return d->mUid == other.d->mUid
+           && d->mPreferredEmail == other.d->mPreferredEmail
+           && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::ContactGroupReference::ContactGroupReferencePrivate : public QSharedData
@@ -208,8 +208,8 @@ ContactGroup::ContactGroupReference &ContactGroup::ContactGroupReference::operat
 
 bool ContactGroup::ContactGroupReference::operator==(const ContactGroupReference &other) const
 {
-    return d->mUid == other.d->mUid &&
-           d->mCustoms == other.d->mCustoms;
+    return d->mUid == other.d->mUid
+           && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::Data::DataPrivate : public QSharedData
@@ -300,9 +300,9 @@ ContactGroup::Data &ContactGroup::Data::operator=(const ContactGroup::Data &othe
 
 bool ContactGroup::Data::operator==(const Data &other) const
 {
-    return d->mName == other.d->mName &&
-           d->mEmail == other.d->mEmail &&
-           d->mCustoms == other.d->mCustoms;
+    return d->mName == other.d->mName
+           && d->mEmail == other.d->mEmail
+           && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::Private : public QSharedData
@@ -494,11 +494,11 @@ ContactGroup &ContactGroup::operator=(const ContactGroup &other)
 
 bool ContactGroup::operator==(const ContactGroup &other) const
 {
-    return d->mIdentifier == other.d->mIdentifier &&
-           d->mName == other.d->mName &&
-           d->mContactReferences == other.d->mContactReferences &&
-           d->mContactGroupReferences == other.d->mContactGroupReferences &&
-           d->mDataObjects == other.d->mDataObjects;
+    return d->mIdentifier == other.d->mIdentifier
+           && d->mName == other.d->mName
+           && d->mContactReferences == other.d->mContactReferences
+           && d->mContactGroupReferences == other.d->mContactGroupReferences
+           && d->mDataObjects == other.d->mDataObjects;
 }
 
 QString ContactGroup::mimeType()

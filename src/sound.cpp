@@ -127,7 +127,7 @@ bool Sound::isIntern() const
 bool Sound::isEmpty() const
 {
     return
-        ((d->mIntern && d->mData.isEmpty()) || (!d->mIntern && d->mUrl.isEmpty()));
+        (d->mIntern && d->mData.isEmpty()) || (!d->mIntern && d->mUrl.isEmpty());
 }
 
 QString Sound::url() const

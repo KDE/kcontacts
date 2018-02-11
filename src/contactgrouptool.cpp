@@ -318,8 +318,7 @@ bool XmlContactGroupReader::readContactGroupReference(
     return true;
 }
 
-bool ContactGroupTool::convertFromXml(QIODevice *device, ContactGroup &group,
-                                      QString *errorMessage)
+bool ContactGroupTool::convertFromXml(QIODevice *device, ContactGroup &group, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 
@@ -334,8 +333,7 @@ bool ContactGroupTool::convertFromXml(QIODevice *device, ContactGroup &group,
     return ok;
 }
 
-bool ContactGroupTool::convertToXml(const ContactGroup &group, QIODevice *device,
-                                    QString *errorMessage)
+bool ContactGroupTool::convertToXml(const ContactGroup &group, QIODevice *device, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 
@@ -345,8 +343,7 @@ bool ContactGroupTool::convertToXml(const ContactGroup &group, QIODevice *device
     return true;
 }
 
-bool ContactGroupTool::convertFromXml(QIODevice *device, QVector<ContactGroup> &groupList,
-                                      QString *errorMessage)
+bool ContactGroupTool::convertFromXml(QIODevice *device, QVector<ContactGroup> &groupList, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 
@@ -361,8 +358,7 @@ bool ContactGroupTool::convertFromXml(QIODevice *device, QVector<ContactGroup> &
     return ok;
 }
 
-bool ContactGroupTool::convertToXml(const QVector<ContactGroup> &groupList,
-                                    QIODevice *device, QString *errorMessage)
+bool ContactGroupTool::convertToXml(const QVector<ContactGroup> &groupList, QIODevice *device, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 
