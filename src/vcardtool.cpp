@@ -38,8 +38,8 @@ using namespace KContacts;
 
 static bool needsEncoding(const QString &value)
 {
-    uint length = value.length();
-    for (uint i = 0; i < length; ++i) {
+    int length = value.length();
+    for (int i = 0; i < length; ++i) {
         char c = value.at(i).toLatin1();
         if ((c < 33 || c > 126) && c != ' ' && c != '=') {
             return true;
@@ -1556,7 +1556,7 @@ QStringList VCardTool::splitString(QChar sep, const QString &str) const
 
     while (pos != -1) {
         if (pos == 0 || value[ pos - 1 ] != QLatin1Char('\\')) {
-            if (pos > start && pos <= (int)value.length()) {
+            if (pos > start && pos <= value.length()) {
                 list << value.mid(start, pos - start);
             } else {
                 list << QString();

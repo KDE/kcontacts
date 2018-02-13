@@ -157,8 +157,8 @@ class Q_DECL_HIDDEN AddresseeList::Private : public QSharedData
 {
 public:
     Private()
-        : mReverseSorting(false)
-        , mActiveSortingCriterion(FormattedName)
+        : mActiveSortingCriterion(FormattedName)
+        , mReverseSorting(false)
     {
     }
 
@@ -169,8 +169,8 @@ public:
         mActiveSortingCriterion = other.mActiveSortingCriterion;
     }
 
-    bool mReverseSorting;
     SortingCriterion mActiveSortingCriterion;
+    bool mReverseSorting;
 };
 
 AddresseeList::AddresseeList()

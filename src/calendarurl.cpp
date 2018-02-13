@@ -165,7 +165,7 @@ QUrl CalendarUrl::url() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const CalendarUrl &calUrl)
 {
-    return s << calUrl.d->parameters << (uint)calUrl.d->type << calUrl.d->url;
+    return s << calUrl.d->parameters << static_cast<uint>(calUrl.d->type) << calUrl.d->url;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, CalendarUrl &calUrl)
