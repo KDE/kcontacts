@@ -540,9 +540,8 @@ QString Address::typeFlagLabel(TypeFlag type)
         return i18nc("Work Address", "Work");
     case Pref:
         return i18n("Preferred Address");
-    default:
-        return i18nc("another type of address", "Other");
     }
+    return i18nc("another type of address", "Other");
 }
 
 void Address::setGeo(const Geo &geo)
