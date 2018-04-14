@@ -33,7 +33,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS DBus Gui)
+find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 
 ########### Targets ###########

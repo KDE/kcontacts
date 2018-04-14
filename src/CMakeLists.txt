@@ -63,7 +63,6 @@ PUBLIC
     KF5::CoreAddons
 PRIVATE
     Qt5::Gui
-    Qt5::DBus
     KF5::ConfigCore
     KF5::I18n
     KF5::Codecs # for the vcard parser
