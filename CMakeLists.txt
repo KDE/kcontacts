@@ -4,7 +4,7 @@ set(PIM_VERSION "5.8.40")
 project(KContacts VERSION ${PIM_VERSION})
 
 # ECM setup
-set(QT_REQUIRED_VERSION "5.8.0")
+set(QT_REQUIRED_VERSION "5.9.0")
 set(KF5_VERSION "5.44.0")
 
 find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
