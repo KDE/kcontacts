@@ -426,3 +426,13 @@ void AddressTest::shouldExportVcard4()
                         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
+
+void AddressTest::countryToISOTest()
+{
+    using namespace KContacts;
+    QCOMPARE(Address::countryToISO(QStringLiteral("France")), QLatin1String("fr"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Frankreich")), QLatin1String("fr"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Germany")), QLatin1String("de"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Österreich")), QLatin1String("at"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Disneyland")), QString());
+}

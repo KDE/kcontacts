@@ -303,10 +303,10 @@ public:
 
     /**
       Returns ISO code for a localized country name. Only localized country
-      names will be understood. This might be replaced by a KLocale method in
-      the future.
+      names will be understood.
       @param cname  name of the country
-      @return       two digit ISO code
+      @return       two digit ISO code, empty string if the country was not
+                    recognized
     */
     static QString countryToISO(const QString &cname);
 

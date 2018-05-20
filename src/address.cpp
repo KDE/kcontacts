@@ -672,10 +672,7 @@ QString Address::countryToISO(const QString &cname)
         file.close();
     }
 
-    // fall back to system country
-    QString systemCountry = QLocale().bcp47Name();
-    sISOMap->insert(cname, systemCountry);
-    return systemCountry;
+    return {};
 }
 
 QString Address::ISOtoCountry(const QString &ISOname)
