@@ -651,12 +651,7 @@ QString Address::countryToISO(const QString &cname)
         return it.value();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
-    if (mapfile.isEmpty()) {
-        qWarning() << "Installation error, couldn't find the countrytransl.map file";
-    }
-
-    QFile file(mapfile);
+    QFile file(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream s(&file);
         QString strbuf = s.readLine();
@@ -682,9 +677,7 @@ QString Address::ISOtoCountry(const QString &ISOname)
         return QString();
     }
 
-    QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
-
-    QFile file(mapfile);
+    QFile file(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream s(&file);
         QString searchStr = QLatin1Char('\t') + ISOname.simplified().toLower();

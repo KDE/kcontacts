@@ -162,10 +162,7 @@ void AddressTest::formatTest()
 {
     {
         // check availability of country to ISO code mapping data file
-        const QString mapfile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/countrytransl.map"));
-        QVERIFY2(!mapfile.isEmpty(), "Country to ISO code mapping data file does not exist");
-
-        QFileInfo fileInfo(mapfile);
+        QFileInfo fileInfo(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
         QVERIFY2(fileInfo.exists(), "Country to ISO code mapping data file does not exist");
         QVERIFY2(fileInfo.isReadable(), "Country to ISO code mapping data file is not readable");
     }

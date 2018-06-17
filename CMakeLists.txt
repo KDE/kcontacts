@@ -9,6 +9,7 @@ set(KF5_VERSION "5.46.0")
 
 find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
+set(CMAKE_AUTORCC ON)
 
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)

@@ -39,6 +39,7 @@ set(kcontacts_SRCS
   org.cpp
   clientpidmap.cpp
   ${vcardparser_SRCS}
+  kcontacts.qrc
 )
 
 set(kcontacts_converter_SRCS
@@ -125,9 +126,6 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/KContacts
     COMPONENT Devel
 )
-
-
-install(FILES countrytransl.map DESTINATION ${KDE_INSTALL_DATADIR_KF5}/kcontacts)
 
 ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
