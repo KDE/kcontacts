@@ -54,7 +54,7 @@ public:
     /**
      * Returns a list of all identifiers that exists in the vCard.
      */
-    QStringList identifiers() const;
+    Q_REQUIRED_RESULT QStringList identifiers() const;
 
     /**
      * Adds a VCardLine to the VCard
@@ -64,12 +64,12 @@ public:
     /**
      * Returns all lines of the vcard with a special identifier.
      */
-    VCardLine::List lines(const QString &identifier) const;
+    Q_REQUIRED_RESULT VCardLine::List lines(const QString &identifier) const;
 
     /**
      * Returns only the first line of the vcard with a special identifier.
      */
-    VCardLine line(const QString &identifier) const;
+    Q_REQUIRED_RESULT VCardLine line(const QString &identifier) const;
 
     /**
      * Set the version of the vCard.
@@ -79,7 +79,7 @@ public:
     /**
      * Returns the version of this vCard.
      */
-    Version version() const;
+    Q_REQUIRED_RESULT Version version() const;
 
 private:
     LineMap mLineMap;

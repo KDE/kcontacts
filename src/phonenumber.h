@@ -110,12 +110,12 @@ public:
      * @return @c true if number, type and identifier are equal,
      *         otherwise @c false
      */
-    bool operator==(const PhoneNumber &other) const;
+    Q_REQUIRED_RESULT bool operator==(const PhoneNumber &other) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=(const PhoneNumber &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const PhoneNumber &other) const;
 
     /**
      * Assignment operator.
@@ -124,12 +124,12 @@ public:
      *
      * @param other The PhoneNumber object to asssign to @c this
      */
-    PhoneNumber &operator=(const PhoneNumber &other);
+    Q_REQUIRED_RESULT PhoneNumber &operator=(const PhoneNumber &other);
 
     /**
      * Returns true, if the phone number is empty.
      */
-    bool isEmpty() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;
 
     /**
      * Sets the unique @p identifier.
@@ -139,7 +139,7 @@ public:
     /**
      * Returns the unique identifier.
      */
-    QString id() const;
+    Q_REQUIRED_RESULT QString id() const;
 
     /**
      * Sets the phone @p number.
@@ -149,7 +149,7 @@ public:
     /**
      * Returns the phone number.
      */
-    QString number() const;
+    Q_REQUIRED_RESULT QString number() const;
 
     /**
      * Sets the @p type.
@@ -165,17 +165,17 @@ public:
      * @see #TypeFlag
      * @see typeLabel()
      */
-    Type type() const;
+    Q_REQUIRED_RESULT Type type() const;
 
     /**
      * Returns a translated string of the address' type.
      */
-    QString typeLabel() const;
+    Q_REQUIRED_RESULT QString typeLabel() const;
 
     /**
      * Returns a list of all available types
      */
-    static TypeList typeList();
+    Q_REQUIRED_RESULT static TypeList typeList();
 
     /**
      * Returns the translated label for phone number @p type.
@@ -197,7 +197,7 @@ public:
      * @see typeLabel()
      * @since 4.5
      */
-    static QString typeFlagLabel(TypeFlag type);
+    Q_REQUIRED_RESULT static QString typeFlagLabel(TypeFlag type);
 
     /**
      * Returns a string representation of the phone number.
@@ -205,7 +205,7 @@ public:
     QString toString() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
 private:
     class Private;

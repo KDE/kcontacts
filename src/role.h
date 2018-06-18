@@ -44,19 +44,19 @@ public:
     typedef QVector<Role> List;
 
     void setRole(const QString &role);
-    QString role() const;
+    Q_REQUIRED_RESULT QString role() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Role &other) const;
-    bool operator!=(const Role &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Role &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Role &other) const;
 
-    Role &operator=(const Role &other);
+    Q_REQUIRED_RESULT Role &operator=(const Role &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

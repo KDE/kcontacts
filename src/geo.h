@@ -70,7 +70,7 @@ public:
     /**
      * Returns the latitude.
      */
-    float latitude() const;
+    Q_REQUIRED_RESULT float latitude() const;
 
     /**
      * Sets the @p longitude.
@@ -82,19 +82,19 @@ public:
     /**
      * Returns the longitude.
      */
-    float longitude() const;
+    Q_REQUIRED_RESULT float longitude() const;
 
     /**
      * Returns, whether this object contains a valid geographical position.
      */
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     /**
      * Equality operator.
      *
      * @note Two invalid Geo instance will return @c true
      */
-    bool operator==(const Geo &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Geo &other) const;
 
     /**
      * Not-Equal operator.
@@ -111,7 +111,7 @@ public:
     /**
      * Returns string representation of geographical position.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
     /**
      * Clears the class, marking it as invalid.

@@ -69,21 +69,21 @@ public:
     /**
      * Return offset in minutes relative to UTC.
      */
-    int offset() const;
+    Q_REQUIRED_RESULT int offset() const;
 
     /**
      * Return, if this time zone object is valid.
      */
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
-    bool operator==(const TimeZone &other) const;
-    bool operator!=(const TimeZone &other) const;
+    Q_REQUIRED_RESULT bool operator==(const TimeZone &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const TimeZone &other) const;
     TimeZone &operator=(const TimeZone &other);
 
     /**
      * Return string representation of time zone offset.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
 private:
     class Private;

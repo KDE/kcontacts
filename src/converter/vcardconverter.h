@@ -81,7 +81,7 @@ public:
       @param addr The contact object
       @param version The version of the generated vCard format
      */
-    QByteArray createVCard(const Addressee &addr, Version version = v3_0) const;
+    Q_REQUIRED_RESULT QByteArray createVCard(const Addressee &addr, Version version = v3_0) const;
 
     /**
       Creates a string in vCard format which contains the given
@@ -91,28 +91,28 @@ public:
       @param version The version of the generated vCard format
      */
     // FIXME: Add error handling
-    QByteArray createVCards(const Addressee::List &list, Version version = v3_0) const;
+    Q_REQUIRED_RESULT QByteArray createVCards(const Addressee::List &list, Version version = v3_0) const;
 
     /**
      * @since 4.9.1
      */
-    QByteArray exportVCard(const Addressee &addr, Version version) const;
+    Q_REQUIRED_RESULT QByteArray exportVCard(const Addressee &addr, Version version) const;
 
     /**
      * @since 4.9.1
      */
-    QByteArray exportVCards(const Addressee::List &list, Version version) const;
+    Q_REQUIRED_RESULT QByteArray exportVCards(const Addressee::List &list, Version version) const;
 
     /**
       Parses a string in vCard format and returns the first contact.
      */
-    Addressee parseVCard(const QByteArray &vcard) const;
+    Q_REQUIRED_RESULT Addressee parseVCard(const QByteArray &vcard) const;
 
     /**
       Parses a string in vCard format and returns a list of contact objects.
      */
     // FIXME: Add error handling
-    Addressee::List parseVCards(const QByteArray &vcard) const;
+    Q_REQUIRED_RESULT Addressee::List parseVCards(const QByteArray &vcard) const;
 
 private:
     Q_DISABLE_COPY(VCardConverter)
@@ -129,14 +129,14 @@ private:
   * The return value is in the form "yyyyMMddThhmmssZ" (e.g. "20031201T120000Z")
   * @param dateTime date and time to be converted
   */
-KCONTACTS_EXPORT QString dateToVCardString(const QDateTime &dateTime);
+Q_REQUIRED_RESULT KCONTACTS_EXPORT QString dateToVCardString(const QDateTime &dateTime);
 
 /**
   * Converts a QDate to a short date string as it is used in VCard and LDIF files.
   * The return value is in the form "yyyyMMdd" (e.g. "20031201")
   * @param date date to be converted
   */
-KCONTACTS_EXPORT QString dateToVCardString(QDate date);
+Q_REQUIRED_RESULT KCONTACTS_EXPORT QString dateToVCardString(QDate date);
 
 /**
   * Converts a date string as it is used in VCard and LDIF files to a QDateTime value.
@@ -144,7 +144,7 @@ KCONTACTS_EXPORT QString dateToVCardString(QDate date);
   * (e.g. "20031201T120000" will return a QDateTime for 2003-12-01 at 12:00)
   * @param dateString string representing the date and time.
   */
-KCONTACTS_EXPORT QDateTime VCardStringToDate(const QString &dateString);
+Q_REQUIRED_RESULT KCONTACTS_EXPORT QDateTime VCardStringToDate(const QString &dateString);
 
 /**
  * @brief adaptIMAttributes. Convert KAddressBook attribute to VCard IM Attribute

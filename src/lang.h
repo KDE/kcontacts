@@ -44,19 +44,19 @@ public:
     typedef QVector<Lang> List;
 
     void setLanguage(const QString &lang);
-    QString language() const;
+    Q_REQUIRED_RESULT QString language() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Lang &other) const;
-    bool operator!=(const Lang &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Lang &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Lang &other) const;
 
-    Lang &operator=(const Lang &other);
+    Q_REQUIRED_RESULT Lang &operator=(const Lang &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

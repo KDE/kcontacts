@@ -76,19 +76,19 @@ public:
     /**
       Equality operator.
     */
-    bool operator==(const Key &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Key &other) const;
 
     /**
       Not-equal operator.
     */
-    bool operator!=(const Key &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Key &other) const;
 
     /**
       Assignment operator.
 
       @param other The Key instance to assign to @c this
     */
-    Key &operator=(const Key &other);
+    Q_REQUIRED_RESULT Key &operator=(const Key &other);
 
     /**
       Sets the unique @p identifier.
@@ -98,7 +98,7 @@ public:
     /**
       Returns the unique identifier.
     */
-    QString id() const;
+    Q_REQUIRED_RESULT QString id() const;
 
     /**
       Sets binary @p data.
@@ -108,7 +108,7 @@ public:
     /**
       Returns the binary data.
     */
-    QByteArray binaryData() const;
+    Q_REQUIRED_RESULT QByteArray binaryData() const;
 
     /**
       Sets text @p data.
@@ -118,12 +118,12 @@ public:
     /**
       Returns the text data.
     */
-    QString textData() const;
+    Q_REQUIRED_RESULT QString textData() const;
 
     /**
       Returns whether the key contains binary or text data.
     */
-    bool isBinary() const;
+    Q_REQUIRED_RESULT bool isBinary() const;
 
     /**
       Sets the @p type.
@@ -142,27 +142,27 @@ public:
     /**
       Returns the type, see Type.
     */
-    Type type() const;
+    Q_REQUIRED_RESULT Type type() const;
 
     /**
       Returns the custom type string.
     */
-    QString customTypeString() const;
+    Q_REQUIRED_RESULT QString customTypeString() const;
 
     /**
       Returns a string representation of the key.
     */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
     /**
       Returns a list of all available key types.
     */
-    static TypeList typeList();
+    Q_REQUIRED_RESULT static TypeList typeList();
 
     /**
       Returns a translated label for a given key @p type.
     */
-    static QString typeLabel(Type type);
+    Q_REQUIRED_RESULT static QString typeLabel(Type type);
 
 private:
     class Private;

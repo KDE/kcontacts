@@ -92,7 +92,7 @@ public:
       @param addr the address to compare to
       @return @c true if @c this and @p addr are equal, otherwise @c false
     */
-    bool operator==(const Address &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Address &other) const;
 
     /**
       Not-equal operator.
@@ -100,7 +100,7 @@ public:
       @param addr the address to compare to
       @return @c true if @c this and @p addr are not equal, otherwise @c false
     */
-    bool operator!=(const Address &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Address &other) const;
 
     /**
       Assignment operator.
@@ -113,7 +113,7 @@ public:
     /**
       Returns true, if the address is empty.
     */
-    bool isEmpty() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;
 
     /**
       Clears all entries of the address.
@@ -128,7 +128,7 @@ public:
     /**
       Returns the unique identifier.
     */
-    QString id() const;
+    Q_REQUIRED_RESULT QString id() const;
 
     /**
       Sets the type of address. See enum for definiton of types.
@@ -140,12 +140,12 @@ public:
     /**
       Returns the type of address. Can be a bitwise or of multiple types.
     */
-    Type type() const;
+    Q_REQUIRED_RESULT Type type() const;
 
     /**
       Returns a translated string of all types the address has.
     */
-    QString typeLabel() const;
+    Q_REQUIRED_RESULT QString typeLabel() const;
 
     /**
       Sets the post office box.
@@ -155,7 +155,7 @@ public:
     /**
       Returns the post office box.
     */
-    QString postOfficeBox() const;
+    Q_REQUIRED_RESULT QString postOfficeBox() const;
 
     /**
       Returns the translated label for post office box field.
@@ -170,7 +170,7 @@ public:
     /**
       Returns the extended address information.
     */
-    QString extended() const;
+    Q_REQUIRED_RESULT QString extended() const;
 
     /**
       Returns the translated label for extended field.
@@ -185,7 +185,7 @@ public:
     /**
       Returns the street.
     */
-    QString street() const;
+    Q_REQUIRED_RESULT QString street() const;
 
     /**
       Returns the translated label for street field.
@@ -202,7 +202,7 @@ public:
     /**
       Returns the locality.
     */
-    QString locality() const;
+    Q_REQUIRED_RESULT QString locality() const;
 
     /**
       Returns the translated label for locality field.
@@ -219,7 +219,7 @@ public:
     /**
       Returns the region.
     */
-    QString region() const;
+    Q_REQUIRED_RESULT QString region() const;
 
     /**
       Returns the translated label for region field.
@@ -234,7 +234,7 @@ public:
     /**
       Returns the postal code.
     */
-    QString postalCode() const;
+    Q_REQUIRED_RESULT QString postalCode() const;
 
     /**
       Returns the translated label for postal code field.
@@ -249,7 +249,7 @@ public:
     /**
       Returns the country.
     */
-    QString country() const;
+    Q_REQUIRED_RESULT QString country() const;
 
     /**
       Returns the translated label for country field.
@@ -266,7 +266,7 @@ public:
     /**
       Returns the delivery label.
     */
-    QString label() const;
+    Q_REQUIRED_RESULT QString label() const;
 
     /**
       Returns the translated label for delivery label field.
@@ -286,7 +286,7 @@ public:
     /**
       Returns a string representation of the address.
     */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
     /**
       Returns this address formatted according to the country-specific
@@ -299,7 +299,7 @@ public:
       @param orgaName   the name of the organization or company
       @return           the formatted address (containing newline characters)
     */
-    QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
+    Q_REQUIRED_RESULT QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
 
     /**
       Returns ISO code for a localized country name. Only localized country
@@ -328,7 +328,7 @@ public:
     /**
       Return geographic position.
      */
-    Geo geo() const;
+    Q_REQUIRED_RESULT Geo geo() const;
 
 private:
     class Private;

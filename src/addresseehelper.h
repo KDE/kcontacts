@@ -71,7 +71,7 @@ public:
      * @return @c true, if @p title was found in the list,
      *         @c false otherwise
      */
-    bool containsTitle(const QString &title) const;
+    Q_REQUIRED_RESULT bool containsTitle(const QString &title) const;
 
     /**
      * Queries the list of inclusions.
@@ -80,7 +80,7 @@ public:
      * @return @c true, if @p prefix was found in the list,
      *         @c false otherwise
      */
-    bool containsPrefix(const QString &prefix) const;
+    Q_REQUIRED_RESULT bool containsPrefix(const QString &prefix) const;
 
     /**
      * Queries the list of honoric suffixes.
@@ -89,7 +89,7 @@ public:
      * @return @c true, if @p suffix was found in the list,
      *         @c false otherwise
      */
-    bool containsSuffix(const QString &suffix) const;
+    Q_REQUIRED_RESULT bool containsSuffix(const QString &suffix) const;
 
     /**
      * Returns whether or not a single name component should
@@ -98,7 +98,7 @@ public:
      * @return @c true if single name component is a family name,
      *         @c false otherwise.
      */
-    bool tradeAsFamilyName() const;
+    Q_REQUIRED_RESULT bool tradeAsFamilyName() const;
 
     /** @internal */
     AddresseeHelper();

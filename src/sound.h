@@ -105,7 +105,7 @@ public:
      *
      * @return @c true if the two objects are equal, otherwise @c false
      */
-    bool operator==(const Sound &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Sound &other) const;
 
     /**
      * Not-Equal operator.
@@ -114,7 +114,7 @@ public:
      *
      * @return @c true if the two objects are not equal, otherwise @c false
      */
-    bool operator!=(const Sound &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Sound &other) const;
 
     /**
      * Sets a URL for the location of the sound file. When using this
@@ -128,7 +128,7 @@ public:
     /**
      * Returns true, if the sound object is empty.
      */
-    bool isEmpty() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;
 
     /**
      * Sets the raw data of the sound. When using this function,
@@ -145,22 +145,22 @@ public:
      * get the raw data. Otherwise you can request the URL of this
      * sound by url() and load the raw data from that location.
      */
-    bool isIntern() const;
+    Q_REQUIRED_RESULT bool isIntern() const;
 
     /**
      * Returns the location URL of this sound.
      */
-    QString url() const;
+    Q_REQUIRED_RESULT QString url() const;
 
     /**
      * Returns the raw data of this sound.
      */
-    QByteArray data() const;
+    Q_REQUIRED_RESULT QByteArray data() const;
 
     /**
      * Returns string representation of the sound.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
 private:
     class Private;

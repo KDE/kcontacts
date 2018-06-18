@@ -52,23 +52,23 @@ public:
 
     typedef QVector<CalendarUrl> List;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setType(CalendarUrl::CalendarType type);
-    CalendarUrl::CalendarType type() const;
+    Q_REQUIRED_RESULT CalendarUrl::CalendarType type() const;
 
     void setUrl(const QUrl &url);
     QUrl url() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const CalendarUrl &other) const;
-    bool operator!=(const CalendarUrl &other) const;
+    Q_REQUIRED_RESULT bool operator==(const CalendarUrl &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const CalendarUrl &other) const;
 
     CalendarUrl &operator=(const CalendarUrl &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

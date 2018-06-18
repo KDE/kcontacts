@@ -44,19 +44,19 @@ public:
     typedef QVector<Org> List;
 
     void setOrganization(const QString &org);
-    QString organization() const;
+    Q_REQUIRED_RESULT QString organization() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Org &other) const;
-    bool operator!=(const Org &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Org &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Org &other) const;
 
-    Org &operator=(const Org &other);
+    Q_REQUIRED_RESULT Org &operator=(const Org &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

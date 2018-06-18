@@ -89,12 +89,12 @@ public:
     /**
      * Returns the translated label for this field.
      */
-    virtual QString label();
+    Q_REQUIRED_RESULT virtual QString label();
 
     /**
      * Returns the  ored categories the field belongs to.
      */
-    virtual int category();
+    Q_REQUIRED_RESULT virtual int category();
 
     /**
      * Returns the translated label for @p category.
@@ -111,7 +111,7 @@ public:
      * @return the string representation of the value or QString(), if it
      * is not possible to convert the value to a string.
      */
-    virtual QString value(const KContacts::Addressee &addressee);
+    Q_REQUIRED_RESULT virtual QString value(const KContacts::Addressee &addressee);
 
     /**
      * Sets the value of the field in the given Addressee.
@@ -119,19 +119,19 @@ public:
      * @return @c true on success or @c false, if the given string couldn't
      * be converted to a valid value.
      */
-    virtual bool setValue(KContacts::Addressee &addressee, const QString &value);
+    Q_REQUIRED_RESULT virtual bool setValue(KContacts::Addressee &addressee, const QString &value);
 
     /**
      * Returns a string, that can be used for sorting.
      */
-    QString sortKey(const KContacts::Addressee &addressee);
+    Q_REQUIRED_RESULT QString sortKey(const KContacts::Addressee &addressee);
 
     /**
      * Returns, if the field is a user-defined field.
      *
      * @return @c true if this is a custom field, @c false otherwise
      */
-    virtual bool isCustom();
+    Q_REQUIRED_RESULT virtual bool isCustom();
 
     /**
      * Returns, if the field is equal with @p field.
@@ -139,7 +139,7 @@ public:
      * @param field the field to compare this field to
      * @return @c true if the fields are equal, @c false otherwise
      */
-    virtual bool equals(Field *field);
+    Q_REQUIRED_RESULT virtual bool equals(Field *field);
 
     /**
      * Returns a list of all fields.
@@ -149,7 +149,7 @@ public:
     /**
      * Returns a list of the default fields.
      */
-    static Field::List defaultFields();
+    Q_REQUIRED_RESULT static Field::List defaultFields();
 
     /**
      * Creates a custom field.

@@ -45,22 +45,22 @@ public:
     typedef QVector<FieldGroup> List;
 
     void setFieldGroupName(const QString &fieldGroup);
-    QString fieldGroupName() const;
+    Q_REQUIRED_RESULT QString fieldGroupName() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setValue(const QString &value);
-    QString value() const;
+    Q_REQUIRED_RESULT QString value() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const FieldGroup &other) const;
-    bool operator!=(const FieldGroup &other) const;
+    Q_REQUIRED_RESULT bool operator==(const FieldGroup &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const FieldGroup &other) const;
 
     FieldGroup &operator=(const FieldGroup &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

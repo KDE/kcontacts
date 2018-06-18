@@ -70,13 +70,13 @@ public:
 
     Secrecy &operator=(const Secrecy &other);
 
-    bool operator==(const Secrecy &other) const;
-    bool operator!=(const Secrecy &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Secrecy &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Secrecy &other) const;
 
     /**
      * Returns if the Secrecy object has a valid value.
      */
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     /**
      * Sets the @p type.
@@ -88,22 +88,22 @@ public:
     /**
      * Returns the type.
      */
-    Type type() const;
+    Q_REQUIRED_RESULT Type type() const;
 
     /**
      * Returns a list of all available secrecy types.
      */
-    static TypeList typeList();
+    Q_REQUIRED_RESULT static TypeList typeList();
 
     /**
      * Returns a translated label for a given secrecy @p type.
      */
-    static QString typeLabel(Type type);
+    Q_REQUIRED_RESULT static QString typeLabel(Type type);
 
     /**
      * Returns a string representation of the secrecy.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
 private:
     class PrivateData;

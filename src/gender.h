@@ -44,19 +44,19 @@ public:
     ~Gender();
 
     void setGender(const QString &gender);
-    QString gender() const;
+    Q_REQUIRED_RESULT QString gender() const;
 
     void setComment(const QString &comment);
-    QString comment() const;
+    Q_REQUIRED_RESULT QString comment() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
-    bool operator==(const Gender &other) const;
-    bool operator!=(const Gender &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Gender &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Gender &other) const;
 
-    Gender &operator=(const Gender &other);
+    Q_REQUIRED_RESULT Gender &operator=(const Gender &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

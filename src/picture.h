@@ -83,22 +83,22 @@ public:
      *
      * @param other The Picture instance to assign to @c this
      */
-    Picture &operator=(const Picture &other);
+    Q_REQUIRED_RESULT Picture &operator=(const Picture &other);
 
     /**
      * Equality operator.
      */
-    bool operator==(const Picture &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Picture &other) const;
 
     /**
      * Not-Equal operator.
      */
-    bool operator!=(const Picture &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Picture &other) const;
 
     /**
      * Returns true, if the picture is empty.
      */
-    bool isEmpty() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;
 
     /**
      * Sets a URL for the location of the picture file. When using this
@@ -155,34 +155,34 @@ public:
      * get the raw data. Otherwise you can request the URL of this
      * picture by url() and load the raw data from that location.
      */
-    bool isIntern() const;
+    Q_REQUIRED_RESULT bool isIntern() const;
 
     /**
      * Returns the location URL of this picture.
      */
-    QString url() const;
+    Q_REQUIRED_RESULT QString url() const;
 
     /**
      * Returns the image data of this picture.
      */
-    QImage data() const;
+    Q_REQUIRED_RESULT QImage data() const;
 
     /**
      * Returns the raw data of this picture.
      *
      * @since 4.10
      */
-    QByteArray rawData() const;
+    Q_REQUIRED_RESULT QByteArray rawData() const;
 
     /**
      * Returns the type of this picture.
      */
-    QString type() const;
+    Q_REQUIRED_RESULT QString type() const;
 
     /**
      * Returns string representation of the picture.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
 private:
     QSharedDataPointer<PicturePrivate> d;

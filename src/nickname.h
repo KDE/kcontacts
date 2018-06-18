@@ -44,19 +44,19 @@ public:
     typedef QVector<NickName> List;
 
     void setNickName(const QString &nickname);
-    QString nickname() const;
+    Q_REQUIRED_RESULT QString nickname() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const NickName &other) const;
-    bool operator!=(const NickName &other) const;
+    Q_REQUIRED_RESULT bool operator==(const NickName &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const NickName &other) const;
 
-    NickName &operator=(const NickName &other);
+    Q_REQUIRED_RESULT NickName &operator=(const NickName &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

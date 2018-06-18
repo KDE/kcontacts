@@ -44,19 +44,19 @@ public:
     typedef QVector<Note> List;
 
     void setNote(const QString &note);
-    QString note() const;
+    Q_REQUIRED_RESULT QString note() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Note &other) const;
-    bool operator!=(const Note &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Note &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Note &other) const;
 
-    Note &operator=(const Note &other);
+    Q_REQUIRED_RESULT Note &operator=(const Note &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

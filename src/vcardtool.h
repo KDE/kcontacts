@@ -43,16 +43,16 @@ public:
       Creates a string that contains the addressees from the list in
       the vCard format.
      */
-    QByteArray createVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
+    Q_REQUIRED_RESULT QByteArray createVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
 
     /**
      * @since 4.9.1
      */
-    QByteArray exportVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
+    Q_REQUIRED_RESULT QByteArray exportVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
     /**
       Parses the string and returns a list of addressee objects.
      */
-    Addressee::List parseVCards(const QByteArray &vcard) const;
+    Q_REQUIRED_RESULT Addressee::List parseVCards(const QByteArray &vcard) const;
 
     static QDateTime parseDateTime(const QString &str, bool *timeValid = nullptr);
     static QString createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime = true);

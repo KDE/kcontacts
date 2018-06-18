@@ -48,7 +48,7 @@ public:
      * Equality operator.
      *
      */
-    bool operator==(const VCardLine &other) const;
+    Q_REQUIRED_RESULT bool operator==(const VCardLine &other) const;
 
     /**
      * Sets the identifier of this line e.g. UID, FN, CLASS
@@ -60,7 +60,7 @@ public:
     /**
      * Returns the identifier of this line.
      */
-    QString identifier() const;
+    Q_REQUIRED_RESULT QString identifier() const;
 
     /**
      * Sets the value of of this line.
@@ -70,7 +70,7 @@ public:
     /**
      * Returns the value of this line.
      */
-    QVariant value() const;
+    Q_REQUIRED_RESULT QVariant value() const;
 
     /**
      * Sets the group the line belongs to.
@@ -80,17 +80,17 @@ public:
     /**
      * Returns the group the line belongs to.
      */
-    QString group() const;
+    Q_REQUIRED_RESULT QString group() const;
 
     /**
      * Returns whether the line belongs to a group.
      */
-    bool hasGroup() const;
+    Q_REQUIRED_RESULT bool hasGroup() const;
 
     /**
      * Returns all parameters.
      */
-    QStringList parameterList() const;
+    Q_REQUIRED_RESULT QStringList parameterList() const;
 
     /**
      * Add a new parameter to the line.
@@ -106,7 +106,7 @@ public:
      *
      * @param param Name of the parameter to look for
      */
-    QStringList parameters(const QString &param) const;
+    Q_REQUIRED_RESULT QStringList parameters(const QString &param) const;
 
     /**
      * Returns only the first value of a special parameter.
@@ -114,13 +114,13 @@ public:
      *
      * @param param Name of the parameter to look for
      */
-    QString parameter(const QString &param) const;
+    Q_REQUIRED_RESULT QString parameter(const QString &param) const;
 
     /**
      * Returns all parameters
      * @since 4.14.5
     */
-    ParamMap parameterMap() const;
+    Q_REQUIRED_RESULT ParamMap parameterMap() const;
 
 private:
     ParamMap mParamMap;

@@ -41,19 +41,19 @@ public:
     typedef QVector<Related> List;
 
     void setRelated(const QString &relatedTo);
-    QString related() const;
+    Q_REQUIRED_RESULT QString related() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Related &other) const;
-    bool operator!=(const Related &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Related &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Related &other) const;
 
-    Related &operator=(const Related &other);
+    Q_REQUIRED_RESULT Related &operator=(const Related &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -81,7 +81,7 @@ public:
      */
     explicit NameSortMode(NameType type, bool ascending = true);
 
-    virtual ~NameSortMode();
+    ~NameSortMode() override;
 
     /**
       Returns whether the first contact is 'smaller' then the second.

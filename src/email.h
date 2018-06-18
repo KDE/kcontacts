@@ -48,19 +48,19 @@ public:
     typedef QVector<Email> List;
 
     void setEmail(const QString &mail);
-    QString mail() const;
+    Q_REQUIRED_RESULT QString mail() const;
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Email &other) const;
-    bool operator!=(const Email &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Email &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Email &other) const;
 
     Email &operator=(const Email &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -60,25 +60,25 @@ public:
         Facebook = 14,
         EndList
     };
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
-    ImppType type() const;
+    Q_REQUIRED_RESULT ImppType type() const;
     void setType(ImppType type);
 
     void setAddress(const QString &address);
-    QString address() const;
+    Q_REQUIRED_RESULT QString address() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
-    QMap<QString, QStringList> parameters() const;
+    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
-    bool operator==(const Impp &other) const;
-    bool operator!=(const Impp &other) const;
+    Q_REQUIRED_RESULT bool operator==(const Impp &other) const;
+    Q_REQUIRED_RESULT bool operator!=(const Impp &other) const;
 
     Impp &operator=(const Impp &other);
 
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
-    static QString typeToString(ImppType type);
+    Q_REQUIRED_RESULT static QString typeToString(ImppType type);
 
 private:
     class Private;
