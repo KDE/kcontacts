@@ -168,18 +168,6 @@ void AddressTest::formatTest()
     }
 
     {
-        const QString templateFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/locale/countries/de/country.desktop"));
-        QVERIFY(!templateFile.isEmpty());
-        const KConfig templateConfig(templateFile);
-        QVERIFY2(templateConfig.hasGroup("KCM Locale"),
-                 "Address format config for 'de' is missing expected 'KCM Locale' group");
-        const KConfigGroup templateGroup = templateConfig.group("KCM Locale");
-        QVERIFY2(templateGroup.hasKey("AddressFormat"),
-                 "Address format config is missing expected key 'AddressFormat'");
-        const QString addressTemplate = templateGroup.readEntry("AddressFormat");
-        QVERIFY2(!addressTemplate.isEmpty(),
-                 "Address format template for 'de' is empty");
-
         KContacts::Address address;
         address.setStreet(QStringLiteral("Lummerlandstr. 1"));
         address.setPostalCode(QStringLiteral("12345"));

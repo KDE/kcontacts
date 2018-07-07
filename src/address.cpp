@@ -589,9 +589,9 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
         // fall back to our own country
         ciso = QLocale().bcp47Name();
     }
-    KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/") + ciso + QLatin1String("/country.desktop")));
+    KConfig entry(QStringLiteral(":/org.kde.kcontacts/addressformatrc"));
 
-    KConfigGroup group = entry.group("KCM Locale");
+    KConfigGroup group = entry.group(ciso);
     // decide whether this needs special business address formatting
     if (orgaName.isEmpty()) {
         addrTemplate = group.readEntry("AddressFormat");
@@ -617,10 +617,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
-        KConfig entry(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/locale/countries/")
-                                             +QLocale().name()
-                                             +QLatin1String("/country.desktop")));
-        KConfigGroup group = entry.group("KCM Locale");
+        KConfigGroup group = entry.group(QLocale().name());
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
             ret = ret + QLatin1String("\n\n") + country().toUpper();

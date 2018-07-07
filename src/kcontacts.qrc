@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/org.kde.kcontacts/">
+        <file>addressformatrc</file>
         <file>countrytransl.map</file>
     </qresource>
 </RCC>
