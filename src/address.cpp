@@ -576,6 +576,16 @@ QString Address::toString() const
     return str;
 }
 
+static QString countryCodeFromLocale()
+{
+    const auto n = QLocale().name(); // this is in the form <lang>_<COUNTRY>, with the exception of 'C'
+    const auto idx = n.indexOf(QLatin1Char('_'));
+    if (idx > 0) {
+        return n.mid(idx + 1).toLower();
+    }
+    return {};
+}
+
 QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
 {
     QString ciso;
@@ -587,7 +597,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
         ciso = countryToISO(country());
     } else {
         // fall back to our own country
-        ciso = QLocale().bcp47Name();
+        ciso = countryCodeFromLocale();
     }
     KConfig entry(QStringLiteral(":/org.kde.kcontacts/addressformatrc"));
 
@@ -617,7 +627,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
-        KConfigGroup group = entry.group(QLocale().name());
+        KConfigGroup group = entry.group(countryCodeFromLocale());
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
             ret = ret + QLatin1String("\n\n") + country().toUpper();

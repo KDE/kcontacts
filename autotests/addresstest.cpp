@@ -32,7 +32,7 @@ QTEST_MAIN(AddressTest)
 #ifndef Q_OS_WIN
 void initLocale()
 {
-    qputenv("LC_ALL", "en_US.utf-8");
+    qputenv("LC_ALL", "it_CH.utf-8");
 }
 
 Q_CONSTRUCTOR_FUNCTION(initLocale)
@@ -214,9 +214,23 @@ void AddressTest::formatTest()
         address.setLocality(QStringLiteral("Lummerstadt"));
         address.setCountry(QString());
 
-        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\nLummerstadt, 12345"));
+        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
+    }
+
+    {
+        KContacts::Address address;
+        address.setStreet(QStringLiteral("Haus Randa"));
+        address.setPostalCode(QStringLiteral("1234"));
+        address.setLocality(QStringLiteral("Randa"));
+        address.setPostOfficeBox(QStringLiteral("5678"));
+        address.setCountry(QStringLiteral("Schweiz"));
+
+        // we want the Italian variant of the Swiss format for it_CH
+        const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSCHWEIZ"));
+
+        QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
     }
 }
 
