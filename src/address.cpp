@@ -599,7 +599,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
         // fall back to our own country
         ciso = countryCodeFromLocale();
     }
-    KConfig entry(QStringLiteral(":/org.kde.kcontacts/addressformatrc"));
+    static KConfig entry(QStringLiteral(":/org.kde.kcontacts/addressformatrc"));
 
     KConfigGroup group = entry.group(ciso);
     // decide whether this needs special business address formatting
