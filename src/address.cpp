@@ -643,18 +643,20 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     return ret;
 }
 
-typedef QMap<QString, QString> StringMap;
-Q_GLOBAL_STATIC(StringMap, sISOMap)
+struct IsoCache {
+    QHash<QString, QString> countryToIso;
+    QHash<QString, QString> isoToCountry;
+};
+Q_GLOBAL_STATIC(IsoCache, sIsoCache)
 
 QString Address::countryToISO(const QString &cname)
 {
     // we search a map file for translations from country names to
-    // iso codes, storing caching things in a QMap for faster future
+    // iso codes, storing caching things in a QHash for faster future
     // access.
 
-    QMap<QString, QString>::ConstIterator it;
-    it = sISOMap->constFind(cname);
-    if (it != sISOMap->constEnd()) {
+    const auto it = sIsoCache->countryToIso.constFind(cname);
+    if (it != sIsoCache->countryToIso.constEnd()) {
         return it.value();
     }
 
@@ -663,11 +665,12 @@ QString Address::countryToISO(const QString &cname)
         QTextStream s(&file);
         QString strbuf = s.readLine();
         while (!strbuf.isEmpty()) {
-            QStringList countryInfo = strbuf.split(QLatin1Char('\t'), QString::KeepEmptyParts);
+            const auto countryInfo = strbuf.splitRef(QLatin1Char('\t'), QString::KeepEmptyParts);
             if (countryInfo[0] == cname) {
                 file.close();
-                sISOMap->insert(cname, countryInfo[1]);
-                return countryInfo[1];
+                const auto iso = countryInfo[1].toString();
+                sIsoCache->countryToIso.insert(cname, iso);
+                return iso;
             }
             strbuf = s.readLine();
         }
@@ -680,20 +683,29 @@ QString Address::countryToISO(const QString &cname)
 QString Address::ISOtoCountry(const QString &ISOname)
 {
     // get country name from ISO country code (e.g. "no" -> i18n("Norway"))
-    if (ISOname.simplified().isEmpty()) {
+    const auto iso = ISOname.simplified().toLower();
+    if (iso.simplified().isEmpty()) {
         return QString();
+    }
+
+    const auto it = sIsoCache->isoToCountry.constFind(iso);
+    if (it != sIsoCache->isoToCountry.constEnd()) {
+        return it.value();
     }
 
     QFile file(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream s(&file);
-        QString searchStr = QLatin1Char('\t') + ISOname.simplified().toLower();
+        QString searchStr = QLatin1Char('\t') + iso;
         QString strbuf = s.readLine();
         while (!strbuf.isEmpty()) {
             int pos;
             if ((pos = strbuf.indexOf(searchStr)) != -1) {
                 file.close();
-                return i18n(strbuf.left(pos).toUtf8().constData());
+                const auto country = i18n(strbuf.leftRef(pos).toUtf8().constData());
+                sIsoCache->isoToCountry.insert(iso, country);
+                sIsoCache->countryToIso.insert(country, iso);
+                return country;
             }
             strbuf = s.readLine();
         }
