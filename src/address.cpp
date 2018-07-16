@@ -702,7 +702,7 @@ QString Address::ISOtoCountry(const QString &ISOname)
             int pos;
             if ((pos = strbuf.indexOf(searchStr)) != -1) {
                 file.close();
-                const auto country = i18n(strbuf.leftRef(pos).toUtf8().constData());
+                const auto country = i18nd("iso_3166-1", strbuf.leftRef(pos).toUtf8().constData());
                 sIsoCache->isoToCountry.insert(iso, country);
                 sIsoCache->countryToIso.insert(country, iso);
                 return country;

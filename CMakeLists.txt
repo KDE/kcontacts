@@ -36,6 +36,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 ########### Find packages ###########
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+find_package(IsoCodes MODULE)
+set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name translations." TYPE RUNTIME)
 
 ########### Targets ###########
 
