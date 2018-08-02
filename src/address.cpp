@@ -20,6 +20,7 @@
 
 #include "address.h"
 #include "geo.h"
+#include "countrytoisomap_data.cpp"
 
 #include "kcontacts_debug.h"
 #include <krandom.h>
@@ -644,37 +645,31 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
 }
 
 struct IsoCache {
-    QHash<QString, QString> countryToIso;
     QHash<QString, QString> isoToCountry;
 };
 Q_GLOBAL_STATIC(IsoCache, sIsoCache)
 
 QString Address::countryToISO(const QString &cname)
 {
-    // we search a map file for translations from country names to
-    // iso codes, storing caching things in a QHash for faster future
-    // access.
+    const auto lookupKey = cname.toCaseFolded().toUtf8();
 
-    const auto it = sIsoCache->countryToIso.constFind(cname);
-    if (it != sIsoCache->countryToIso.constEnd()) {
-        return it.value();
+    // look for an exact match
+    auto it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
+        return strcmp(country_name_stringtable + lhs.m_offset, rhs.constData()) < 0;
+    });
+    if (it != std::end(country_to_iso_index) && strcmp(country_name_stringtable + (*it).m_offset, lookupKey.constData()) == 0) {
+        return (*it).isoCode();
     }
 
-    QFile file(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
-    if (file.open(QIODevice::ReadOnly)) {
-        QTextStream s(&file);
-        QString strbuf = s.readLine();
-        while (!strbuf.isEmpty()) {
-            const auto countryInfo = strbuf.splitRef(QLatin1Char('\t'), QString::KeepEmptyParts);
-            if (countryInfo[0] == cname) {
-                file.close();
-                const auto iso = countryInfo[1].toString();
-                sIsoCache->countryToIso.insert(cname, iso);
-                return iso;
-            }
-            strbuf = s.readLine();
-        }
-        file.close();
+    // a unique prefix will do too
+    it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
+        return strncmp(country_name_stringtable + lhs.m_offset, rhs.constData(), strlen(country_name_stringtable + lhs.m_offset)) < 0;
+    });
+    const auto endIt = std::upper_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const QByteArray &lhs, const CountryToIsoIndex &rhs) {
+        return strncmp(lhs.constData(), country_name_stringtable + rhs.m_offset, strlen(country_name_stringtable + rhs.m_offset)) < 0;
+    });
+    if (it != std::end(country_to_iso_index) && endIt == (it + 1) && strncmp(country_name_stringtable + (*it).m_offset, lookupKey.constData(), strlen(country_name_stringtable + (*it).m_offset)) == 0) {
+        return (*it).isoCode();
     }
 
     return {};
@@ -704,7 +699,6 @@ QString Address::ISOtoCountry(const QString &ISOname)
                 file.close();
                 const auto country = i18nd("iso_3166-1", strbuf.leftRef(pos).toUtf8().constData());
                 sIsoCache->isoToCountry.insert(iso, country);
-                sIsoCache->countryToIso.insert(country, iso);
                 return country;
             }
             strbuf = s.readLine();

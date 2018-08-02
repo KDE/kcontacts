@@ -113,6 +113,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
 )
 
 add_subdirectory(converter)
+add_subdirectory(generator)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h
