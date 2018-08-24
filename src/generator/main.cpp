@@ -120,8 +120,8 @@ static const char country_name_stringtable[] =
     };
     std::vector<Elem> processedList;
     processedList.reserve(parsedList.size());
-    for(auto it = parsedList.keyValueBegin() ; it != parsedList.keyValueEnd() ; it++) {
-        processedList.push_back(Elem{(*it).first.toCaseFolded().toUtf8(), (*it).second, 0});
+    for(auto it = parsedList.begin() ; it != parsedList.end() ; it++) {
+        processedList.push_back(Elem{it.key().toCaseFolded().toUtf8(), it.value(), 0});
     }
     // we must sort exactly as we do this for lookup
     std::sort(processedList.begin(), processedList.end(), [](const Elem &lhs, const Elem &rhs) {
