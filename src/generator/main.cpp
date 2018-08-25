@@ -156,15 +156,15 @@ static const char country_name_stringtable[] = {
         // MSVC has a limit on strings of 65535 bytes, however arrays can be longer
         // so we have to encode this ~500k string as an char array manually...
         for (const char c : elem.name) {
+            f.write("'");
             if (c >= 32 && c < 127) {
-                f.write("'");
                 f.write(&c, 1);
-                f.write("'");
             } else {
-                f.write(QByteArray::number(c));
+                f.write("\\x");
+                f.write(QByteArray::number(c, 16).right(2));
                 encodedChar = true;
             }
-            f.write(",");
+            f.write("',");
         }
         f.write("0, // ");
         if (encodedChar) {
