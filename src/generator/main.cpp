@@ -108,7 +108,7 @@ int main(int argc, char **argv)
 
 using namespace KContacts;
 
-static const char country_name_stringtable[] =
+static const char country_name_stringtable[] = {
 )");
 
     const QHash<QString,QString> parsedList = TranslatedCountries::parseFilesRecursive(sourceDirPath);
@@ -151,11 +151,26 @@ static const char country_name_stringtable[] =
 
     int offset = 0;
     for(auto& elem : processedList) {
-        f.write("    \"");
-        auto encodedName = elem.name;
-        encodedName.replace('"', "\\x22"); // yes, there is one name containing a single double quote...
-        f.write(encodedName);
-        f.write("\\0\" // ");
+        f.write("    ");
+        bool encodedChar = false;
+        // MSVC has a limit on strings of 65535 bytes, however arrays can be longer
+        // so we have to encode this ~500k string as an char array manually...
+        for (const char c : elem.name) {
+            if (c >= 32 && c < 127) {
+                f.write("'");
+                f.write(&c, 1);
+                f.write("'");
+            } else {
+                f.write(QByteArray::number(c));
+                encodedChar = true;
+            }
+            f.write(",");
+        }
+        f.write("0, // ");
+        if (encodedChar) {
+            f.write(elem.name);
+            f.write(" ");
+        }
         f.write(elem.isoCode.toUtf8());
         f.write("\n");
 
@@ -163,7 +178,7 @@ static const char country_name_stringtable[] =
         offset += elem.name.size() + 1; // +1 for the terminating \0
     }
     f.write(R"(
-;
+};
 
 static const CountryToIsoIndex country_to_iso_index[] = {
 )");
