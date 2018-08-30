@@ -1,6 +1,6 @@
 /*
     This file is part of the KContacts framework.
-    Copyright (c) 2007 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2018 Volker Krause <vkrause@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,32 +18,28 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef ADDRESS_TEST_H
-#define ADDRESS_TEST_H
+#ifndef KCONTACTS_ISOTOCOUNTRYMAP_P_H
+#define KCONTACTS_ISOTOCOUNTRYMAP_P_H
 
-#include <QObject>
+#include <QString>
 
-class AddressTest : public QObject
+namespace KContacts {
+
+/* ISO code to country name string table lookup table entry. */
+struct IsoToCountryIndex
 {
-    Q_OBJECT
+    explicit constexpr inline IsoToCountryIndex(const char isoCode[2], int offset)
+        : m_c1(isoCode[0])
+        , m_c2(isoCode[1])
+        , m_offset(offset)
+    {
+    }
 
-private Q_SLOTS:
-    void initTestCase();
-    void emptyTest();
-    void storeTest();
-    void equalsTest();
-    void differsTest();
-    void assignmentTest();
-    void serializeTest();
-    void formatTest();
-    void shouldExportVcard4();
-    void shouldExportVcard3();
-    void shouldParseAddressVCard3();
-    void shouldParseAddressVCard4();
-    void shouldExportVCard4WithGeoPosition();
-    void shouldParseAddressVCard4WithGeoPosition();
-    void countryToISOTest();
-    void isoToCountryTest();
+    char m_c1;
+    char m_c2;
+    uint16_t m_offset;
 };
+
+}
 
 #endif

@@ -21,6 +21,7 @@
 #include "address.h"
 #include "geo.h"
 #include "countrytoisomap_data.cpp"
+#include "isotocountrymap_data.cpp"
 
 #include "kcontacts_debug.h"
 #include <krandom.h>
@@ -644,11 +645,6 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     return ret;
 }
 
-struct IsoCache {
-    QHash<QString, QString> isoToCountry;
-};
-Q_GLOBAL_STATIC(IsoCache, sIsoCache)
-
 QString Address::countryToISO(const QString &cname)
 {
     const auto lookupKey = cname.toCaseFolded().toUtf8();
@@ -678,32 +674,16 @@ QString Address::countryToISO(const QString &cname)
 QString Address::ISOtoCountry(const QString &ISOname)
 {
     // get country name from ISO country code (e.g. "no" -> i18n("Norway"))
-    const auto iso = ISOname.simplified().toLower();
-    if (iso.simplified().isEmpty()) {
-        return QString();
+    const auto iso = ISOname.simplified().toLower().toUtf8();
+    if (iso.size() != 2) {
+        return ISOname;
     }
 
-    const auto it = sIsoCache->isoToCountry.constFind(iso);
-    if (it != sIsoCache->isoToCountry.constEnd()) {
-        return it.value();
-    }
-
-    QFile file(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
-    if (file.open(QIODevice::ReadOnly)) {
-        QTextStream s(&file);
-        QString searchStr = QLatin1Char('\t') + iso;
-        QString strbuf = s.readLine();
-        while (!strbuf.isEmpty()) {
-            int pos;
-            if ((pos = strbuf.indexOf(searchStr)) != -1) {
-                file.close();
-                const auto country = i18nd("iso_3166-1", strbuf.leftRef(pos).toUtf8().constData());
-                sIsoCache->isoToCountry.insert(iso, country);
-                return country;
-            }
-            strbuf = s.readLine();
-        }
-        file.close();
+    const auto it = std::lower_bound(std::begin(iso_to_country_index), std::end(iso_to_country_index), iso.constData(), [](const IsoToCountryIndex &lhs, const char *rhs) {
+        return strncmp(&lhs.m_c1, rhs, 2) < 0;
+    });
+    if (it != std::end(iso_to_country_index) && strncmp(&(*it).m_c1, iso.constData(), 2) == 0) {
+        return i18nd("iso_3166-1", en_country_name_stringtable + (*it).m_offset);
     }
 
     return ISOname;

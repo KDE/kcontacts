@@ -161,13 +161,6 @@ void AddressTest::serializeTest()
 void AddressTest::formatTest()
 {
     {
-        // check availability of country to ISO code mapping data file
-        QFileInfo fileInfo(QStringLiteral(":/org.kde.kcontacts/countrytransl.map"));
-        QVERIFY2(fileInfo.exists(), "Country to ISO code mapping data file does not exist");
-        QVERIFY2(fileInfo.isReadable(), "Country to ISO code mapping data file is not readable");
-    }
-
-    {
         KContacts::Address address;
         address.setStreet(QStringLiteral("Lummerlandstr. 1"));
         address.setPostalCode(QStringLiteral("12345"));
@@ -441,4 +434,19 @@ void AddressTest::countryToISOTest()
     QCOMPARE(Address::countryToISO(QStringLiteral("United States")), QLatin1String("us"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United States Of America")), QLatin1String("us"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United")), QString());
+}
+
+void AddressTest::isoToCountryTest()
+{
+    qunsetenv("LC_ALL");
+    qputenv("LANGUAGE", "en");
+
+    using namespace KContacts;
+    QCOMPARE(Address::ISOtoCountry(QStringLiteral("FR")), QLatin1String("France"));
+    QCOMPARE(Address::ISOtoCountry(QStringLiteral("de")), QLatin1String("Germany"));
+
+    // invalid
+    QCOMPARE(Address::ISOtoCountry(QStringLiteral("EU")), QLatin1String("EU"));
+    QCOMPARE(Address::ISOtoCountry(QStringLiteral("zz")), QLatin1String("zz"));
+    QCOMPARE(Address::ISOtoCountry(QStringLiteral("0")), QLatin1String("0"));
 }
