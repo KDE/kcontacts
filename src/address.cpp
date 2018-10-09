@@ -588,6 +588,12 @@ static QString countryCodeFromLocale()
     return {};
 }
 
+static QString addressFormatRc()
+{
+    Q_INIT_RESOURCE(kcontacts); // must be called outside of a namespace
+    return QStringLiteral(":/org.kde.kcontacts/addressformatrc");
+}
+
 QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
 {
     QString ciso;
@@ -601,7 +607,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
         // fall back to our own country
         ciso = countryCodeFromLocale();
     }
-    static KConfig entry(QStringLiteral(":/org.kde.kcontacts/addressformatrc"));
+    static const KConfig entry(addressFormatRc());
 
     KConfigGroup group = entry.group(ciso);
     // decide whether this needs special business address formatting
