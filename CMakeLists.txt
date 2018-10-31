@@ -42,7 +42,7 @@ set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name tr
 ########### Targets ###########
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 add_subdirectory(src)
 
