@@ -22,6 +22,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+#ifndef TRANSLATEDCOUNTRYLIST_H
+#define TRANSLATEDCOUNTRYLIST_H
+
 #include <QHash>
 #include <QString>
 class QIODevice;
@@ -44,3 +47,4 @@ namespace TranslatedCountries {
      * \return map of translation name => country id
      */
     TranslationCountryMap parseFilesRecursive(const QString &directoryPath);}
+#endif

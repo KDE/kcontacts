@@ -80,7 +80,7 @@ KCONTACTS_EXPORT bool canDecode(const QMimeData *md);
 KCONTACTS_EXPORT bool fromMimeData(const QMimeData *md, QByteArray &content);
 
 /**
-  Decodes the MIME data @p md and puts the resulting vCard into @p contactss.
+  Decodes the MIME data @p md and puts the resulting vCard into @p contacts.
 
   @param md the object to check for vCard data
   @param contacts where to put the parsed vCards from @p md

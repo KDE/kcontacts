@@ -63,7 +63,7 @@ public:
     Q_REQUIRED_RESULT QString identifier() const;
 
     /**
-     * Sets the value of of this line.
+     * Sets the value of this line.
      */
     void setValue(const QVariant &value);
 

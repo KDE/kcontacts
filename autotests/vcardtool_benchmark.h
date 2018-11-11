@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef PERFORMANCETEST_H
-#define PERFORMANCETEST_H
+#ifndef VCARDTOOL_BENCHMARK_H
+#define VCARDTOOL_BENCHMARK_H
 
 #include <QObject>
 

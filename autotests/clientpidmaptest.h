@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef ROLETEST_H
-#define ROLETEST_H
+#ifndef CLIENTPIDMAPTEST_H
+#define CLIENTPIDMAPTEST_H
 
 #include <QObject>
 
@@ -43,4 +43,4 @@ private Q_SLOTS:
     void shouldGenerateClientPidMapForVCard3();
 };
 
-#endif // ROLETEST_H
+#endif // CLIENTPIDMAPTEST_H
