@@ -5,9 +5,9 @@ project(KContacts VERSION ${PIM_VERSION})
 
 # ECM setup
 set(QT_REQUIRED_VERSION "5.10.0")
-set(KF5_VERSION "5.53.0")
+set(KF5_MIN_VERSION "5.53.0")
 
-find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
 set(CMAKE_AUTORCC ON)
 
@@ -35,7 +35,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 
 ########### Find packages ###########
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
-find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 find_package(IsoCodes MODULE)
 set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name translations." TYPE RUNTIME)
 
