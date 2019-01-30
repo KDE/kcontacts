@@ -371,69 +371,69 @@ QString ContactGroup::id() const
     return d->mIdentifier;
 }
 
-unsigned int ContactGroup::count() const
+int ContactGroup::count() const
 {
     return d->mContactReferences.count() + d->mDataObjects.count();
 }
 
-unsigned int ContactGroup::contactReferenceCount() const
+int ContactGroup::contactReferenceCount() const
 {
     return d->mContactReferences.count();
 }
 
-unsigned int ContactGroup::contactGroupReferenceCount() const
+int ContactGroup::contactGroupReferenceCount() const
 {
     return d->mContactGroupReferences.count();
 }
 
-unsigned int ContactGroup::dataCount() const
+int ContactGroup::dataCount() const
 {
     return d->mDataObjects.count();
 }
 
-ContactGroup::ContactReference &ContactGroup::contactReference(unsigned int index)
+ContactGroup::ContactReference &ContactGroup::contactReference(int index)
 {
-    Q_ASSERT_X(index < (unsigned int)d->mContactReferences.count(),
+    Q_ASSERT_X(index < d->mContactReferences.count(),
                "contactReference()", "index out of range");
 
     return d->mContactReferences[index];
 }
 
-const ContactGroup::ContactReference &ContactGroup::contactReference(unsigned int index) const
+const ContactGroup::ContactReference &ContactGroup::contactReference(int index) const
 {
-    Q_ASSERT_X(index < (unsigned int)d->mContactReferences.count(),
+    Q_ASSERT_X(index < d->mContactReferences.count(),
                "contactReference()", "index out of range");
 
     return d->mContactReferences[index];
 }
 
-ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(unsigned int index)
+ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(int index)
 {
-    Q_ASSERT_X(index < (unsigned int)d->mContactGroupReferences.count(),
+    Q_ASSERT_X(index < d->mContactGroupReferences.count(),
                "contactGroupReference()", "index out of range");
 
     return d->mContactGroupReferences[index];
 }
 
 const ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(
-    unsigned int index) const
+    int index) const
 {
-    Q_ASSERT_X(index < (unsigned int)d->mContactGroupReferences.count(),
+    Q_ASSERT_X(index < d->mContactGroupReferences.count(),
                "contactGroupReference()", "index out of range");
 
     return d->mContactGroupReferences[index];
 }
 
-ContactGroup::Data &ContactGroup::data(unsigned int index)
+ContactGroup::Data &ContactGroup::data(int index)
 {
-    Q_ASSERT_X(index < (unsigned int)d->mDataObjects.count(), "data()", "index out of range");
+    Q_ASSERT_X(index < d->mDataObjects.count(), "data()", "index out of range");
 
     return d->mDataObjects[index];
 }
 
-const ContactGroup::Data &ContactGroup::data(unsigned int index) const
+const ContactGroup::Data &ContactGroup::data(int index) const
 {
-    Q_ASSERT_X(index < (unsigned int)d->mDataObjects.count(), "data()", "index out of range");
+    Q_ASSERT_X(index < d->mDataObjects.count(), "data()", "index out of range");
 
     return d->mDataObjects[index];
 }

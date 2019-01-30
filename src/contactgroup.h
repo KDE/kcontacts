@@ -366,52 +366,52 @@ public:
      * Returns the number of contacts in this group.
      * That includes the contact references and contact data.
      */
-    Q_REQUIRED_RESULT unsigned int count() const;
+    Q_REQUIRED_RESULT int count() const;
 
     /**
      * Returns the number of contact references in this group.
      */
-    Q_REQUIRED_RESULT unsigned int contactReferenceCount() const;
+    Q_REQUIRED_RESULT int contactReferenceCount() const;
 
     /**
      * Returns the number of group references in this group.
      */
-    Q_REQUIRED_RESULT unsigned int contactGroupReferenceCount() const;
+    Q_REQUIRED_RESULT int contactGroupReferenceCount() const;
 
     /**
      * Returns the number of contact data objects in this group.
      */
-    Q_REQUIRED_RESULT unsigned int dataCount() const;
+    Q_REQUIRED_RESULT int dataCount() const;
 
     /**
      * Returns the contact reference at the given @p index.
      */
-    Q_REQUIRED_RESULT ContactReference &contactReference(unsigned int index);
+    Q_REQUIRED_RESULT ContactReference &contactReference(int index);
 
     /**
      * Returns the contact reference at the given @p index.
      */
-    const ContactReference &contactReference(unsigned int index) const;
+    const ContactReference &contactReference(int index) const;
 
     /**
      * Returns the contact group reference at the given @p index.
      */
-    ContactGroupReference &contactGroupReference(unsigned int index);
+    ContactGroupReference &contactGroupReference(int index);
 
     /**
      * Returns the contact group reference at the given @p index.
      */
-    const ContactGroupReference &contactGroupReference(unsigned int index) const;
+    const ContactGroupReference &contactGroupReference(int index) const;
 
     /**
      * Returns the contact data object at the given @p index.
      */
-    Data &data(unsigned int index);
+    Data &data(int index);
 
     /**
      * Returns the contact data object at the given @p index.
      */
-    const Data &data(unsigned int index) const;
+    const Data &data(int index) const;
 
     /**
      * Appends a new contact @p reference to the contact group.
