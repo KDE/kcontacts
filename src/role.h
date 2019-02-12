@@ -54,7 +54,7 @@ public:
     Q_REQUIRED_RESULT bool operator==(const Role &other) const;
     Q_REQUIRED_RESULT bool operator!=(const Role &other) const;
 
-    Q_REQUIRED_RESULT Role &operator=(const Role &other);
+    Role &operator=(const Role &other);
 
     Q_REQUIRED_RESULT QString toString() const;
 private:

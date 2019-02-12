@@ -83,7 +83,7 @@ public:
      *
      * @param other The Picture instance to assign to @c this
      */
-    Q_REQUIRED_RESULT Picture &operator=(const Picture &other);
+    Picture &operator=(const Picture &other);
 
     /**
      * Equality operator.

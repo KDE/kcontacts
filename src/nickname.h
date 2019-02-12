@@ -54,7 +54,7 @@ public:
     Q_REQUIRED_RESULT bool operator==(const NickName &other) const;
     Q_REQUIRED_RESULT bool operator!=(const NickName &other) const;
 
-    Q_REQUIRED_RESULT NickName &operator=(const NickName &other);
+    NickName &operator=(const NickName &other);
 
     Q_REQUIRED_RESULT QString toString() const;
 private:

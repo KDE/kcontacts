@@ -54,7 +54,7 @@ public:
     Q_REQUIRED_RESULT bool operator==(const Lang &other) const;
     Q_REQUIRED_RESULT bool operator!=(const Lang &other) const;
 
-    Q_REQUIRED_RESULT Lang &operator=(const Lang &other);
+    Lang &operator=(const Lang &other);
 
     Q_REQUIRED_RESULT QString toString() const;
 private:

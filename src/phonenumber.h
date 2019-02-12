@@ -124,7 +124,7 @@ public:
      *
      * @param other The PhoneNumber object to asssign to @c this
      */
-    Q_REQUIRED_RESULT PhoneNumber &operator=(const PhoneNumber &other);
+    PhoneNumber &operator=(const PhoneNumber &other);
 
     /**
      * Returns true, if the phone number is empty.

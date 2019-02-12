@@ -88,7 +88,7 @@ public:
 
       @param other The Key instance to assign to @c this
     */
-    Q_REQUIRED_RESULT Key &operator=(const Key &other);
+    Key &operator=(const Key &other);
 
     /**
       Sets the unique @p identifier.
