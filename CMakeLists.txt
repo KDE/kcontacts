@@ -44,6 +44,10 @@ set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name tr
 add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+if (${KF5Config_VERSION} STRGREATER "5.56.0")
+        add_definitions(-DQT_NO_FOREACH)
+        MESSAGE(STATUS "compile without foreach")
+endif()
 add_subdirectory(src)
 
 if(BUILD_TESTING)

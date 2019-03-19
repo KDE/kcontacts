@@ -1,6 +1,5 @@
 include(ECMAddTests)
 
-set(QT_REQUIRED_VERSION "5.9.0")
 find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
 ########### next target ###############
