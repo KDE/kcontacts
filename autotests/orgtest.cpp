@@ -21,7 +21,7 @@
 #include "orgtest.h"
 #include "org.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 OrgTest::OrgTest(QObject *parent)
     : QObject(parent)

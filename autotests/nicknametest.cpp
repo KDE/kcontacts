@@ -21,7 +21,7 @@
 #include "nicknametest.h"
 #include "nickname.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 NickNameTest::NickNameTest(QObject *parent)
     : QObject(parent)

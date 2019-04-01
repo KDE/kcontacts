@@ -21,7 +21,7 @@
 #include "relatedtest.h"
 #include "related.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 RelatedTest::RelatedTest(QObject *parent)
     : QObject(parent)

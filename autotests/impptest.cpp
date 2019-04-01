@@ -20,7 +20,7 @@
 
 #include "impptest.h"
 #include "impp.h"
-#include <qtest.h>
+#include <QTest>
 #include "vcardtool.h"
 Q_DECLARE_METATYPE(KContacts::Impp::ImppType)
 

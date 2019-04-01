@@ -24,7 +24,7 @@
 #include "kcontacts/address.h"
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <qtest.h>
+#include <QTest>
 #include <QStandardPaths>
 #include <QFileInfo>
 

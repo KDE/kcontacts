@@ -22,7 +22,7 @@
 
 #include "calendarurl.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 using namespace KContacts;
 Q_DECLARE_METATYPE(KContacts::CalendarUrl::CalendarType)

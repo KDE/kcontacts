@@ -21,7 +21,7 @@
 #include "secrecytest.h"
 #include "kcontacts/secrecy.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 QTEST_MAIN(SecrecyTest)
 

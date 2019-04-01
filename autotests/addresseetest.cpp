@@ -21,7 +21,7 @@
 
 #include "addresseetest.h"
 #include "kcontacts/addressee.h"
-#include <qtest.h>
+#include <QTest>
 
 QTEST_MAIN(AddresseeTest)
 

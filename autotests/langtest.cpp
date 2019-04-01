@@ -21,7 +21,7 @@
 #include "langtest.h"
 #include "lang.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 LangTest::LangTest(QObject *parent)
     : QObject(parent)

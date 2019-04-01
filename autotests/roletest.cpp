@@ -21,7 +21,7 @@
 #include "roletest.h"
 #include "role.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 RoleTest::RoleTest(QObject *parent)
     : QObject(parent)

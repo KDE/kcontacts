@@ -20,7 +20,7 @@
 
 #include "role.h"
 #include <QMap>
-#include <qstringlist.h>
+#include <QStringList>
 #include <QDataStream>
 
 using namespace KContacts;

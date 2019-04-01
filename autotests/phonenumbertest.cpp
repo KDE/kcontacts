@@ -22,7 +22,7 @@
 #include "kcontacts/phonenumber.h"
 #include <addressee.h>
 #include <addresseelist.h>
-#include <qtest.h>
+#include <QTest>
 #include <vcardtool.h>
 
 QTEST_MAIN(PhoneNumberTest)
