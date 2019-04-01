@@ -22,7 +22,7 @@
 
 #include "converter/vcardconverter.h"
 
-#include <qtest.h>
+#include <QTest>
 #include <QDebug>
 #include <QDir>
 #include <QObject>

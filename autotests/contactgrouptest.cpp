@@ -18,7 +18,7 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <qtest.h>
+#include <QTest>
 
 #include "kcontacts/contactgroup.h"
 #include "kcontacts/contactgrouptool.h"

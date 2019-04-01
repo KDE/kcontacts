@@ -21,7 +21,7 @@
 #include "clientpidmaptest.h"
 #include "clientpidmap.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 ClientPidMapTest::ClientPidMapTest(QObject *parent)
     : QObject(parent)

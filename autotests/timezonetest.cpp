@@ -20,7 +20,7 @@
 
 #include "timezonetest.h"
 #include "kcontacts/timezone.h"
-#include <qtest.h>
+#include <QTest>
 #include "vcardtool.h"
 
 QTEST_MAIN(TimeZoneTest)

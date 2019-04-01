@@ -20,7 +20,7 @@
 
 #include "ldifconvertertest.h"
 #include "converter/ldifconverter.h"
-#include <qtest.h>
+#include <QTest>
 using namespace KContacts;
 
 LDifConverterTest::LDifConverterTest(QObject *parent)

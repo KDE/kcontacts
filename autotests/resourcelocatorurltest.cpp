@@ -22,7 +22,7 @@
 
 #include "resourcelocatorurl.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 using namespace KContacts;
 ResourceLocatorUrlTest::ResourceLocatorUrlTest(QObject *parent)

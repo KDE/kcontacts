@@ -21,7 +21,7 @@
 #include "fieldgrouptest.h"
 #include "fieldgroup.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 FieldGroupTest::FieldGroupTest(QObject *parent)
     : QObject(parent)

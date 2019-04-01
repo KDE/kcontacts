@@ -19,7 +19,7 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <qtest.h>
+#include <QTest>
 
 #include "converter/kcontacts/vcardconverter.h"
 #include "kcontacts/vcarddrag.h"

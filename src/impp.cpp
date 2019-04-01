@@ -21,7 +21,7 @@
 #include "impp.h"
 
 #include <QMap>
-#include <qstringlist.h>
+#include <QStringList>
 #include <QDataStream>
 #include "kcontacts_debug.h"
 

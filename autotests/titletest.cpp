@@ -21,7 +21,7 @@
 #include "titletest.h"
 #include "title.h"
 #include "vcardtool.h"
-#include <qtest.h>
+#include <QTest>
 
 TitleTest::TitleTest(QObject *parent)
     : QObject(parent)

@@ -21,7 +21,7 @@
 #include "gender.h"
 
 #include <QMap>
-#include <qstringlist.h>
+#include <QStringList>
 
 using namespace KContacts;
 

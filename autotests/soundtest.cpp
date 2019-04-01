@@ -21,7 +21,7 @@
 #include "soundtest.h"
 #include "kcontacts/sound.h"
 #include "addressee.h"
-#include <qtest.h>
+#include <QTest>
 #include "vcardtool.h"
 
 QTEST_MAIN(SoundTest)

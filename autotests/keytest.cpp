@@ -21,7 +21,7 @@
 
 #include "keytest.h"
 #include "kcontacts/key.h"
-#include <qtest.h>
+#include <QTest>
 #include "vcardtool.h"
 
 QTEST_MAIN(KeyTest)

@@ -19,7 +19,7 @@
 */
 #include "emailtest.h"
 #include "email.h"
-#include <qtest.h>
+#include <QTest>
 #include "vcardtool.h"
 
 EmailTest::EmailTest(QObject *parent)
