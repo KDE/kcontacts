@@ -265,11 +265,11 @@ typedef enum {
 } SortingCriterion;
 
 /**
- * @short  a QValueList of Addressee, with sorting functionality
+ * @short  a QVector of Addressee, with sorting functionality
  *
- * This class extends the functionality of QValueList with
+ * This class extends the functionality of QVector with
  * sorting methods specific to the Addressee class. It can be used
- * just like any other QValueList but is no template class.
+ * just like any other QVector but is no template class.
  *
  * An AddresseeList does not automatically keep sorted when addressees
  * are added or removed or the sorting order is changed, as this would

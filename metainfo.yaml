@@ -1,6 +1,6 @@
 maintainer: mlaurent
 description: Address book API for KDE 
-tier: 3
+tier: 2
 type: functional
 public_lib: true
 group: kdepim

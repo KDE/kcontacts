@@ -1,3 +1,5 @@
+# Localized Address Formats
+
 Address formats can be a tricky thing. KContacts tries very hard to perfectly fit
 the needs of ~95% of users and to be at least sufficient for the other 5%.
 
@@ -26,8 +28,9 @@ Any comments very very welcome to kde-pim@kde.org or to jost@schenck.de.
 
 -Jost.
 
-Fields AddressFormat and BusinessAddressFormat
-------------------------------------------------
+## Fields AddressFormat and BusinessAddressFormat
+
+```
 %n  = real name
 %N  = REAL NAME
 %cm = company
@@ -49,16 +52,18 @@ Fields AddressFormat and BusinessAddressFormat
       address doesn't have a postbox, the string %0(PO Box %p) will not 
       evaluate to "PO Box " but to an empty string.
 \n  = newline
+```
 
-Field AddressCountryPosition
-------------------------------------------------
+## Field AddressCountryPosition
+```
 below = country name below rest of address
 BELOW = country name below in capital letters
 above = country name above rest of address
 ABOVE = country name above in capital letters
+```
 
-Some Tips
-------------------------------------------------
+## Some Tips
+
 - You sometimes have three fields in a line which can all be empty. If you eg.
 separate them all with conditional whitespace (same goes for cond. comma) like
 in "%z%w%r%w%l" and only the middle value (here: region) is empty, there will
