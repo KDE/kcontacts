@@ -18,7 +18,6 @@ set(kcontacts_SRCS
   impp.cpp
   key.cpp
   lang.cpp
-  ldapdn.cpp
   ldif.cpp
   phonenumber.cpp
   picture.cpp

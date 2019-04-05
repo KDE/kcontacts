@@ -29,7 +29,7 @@ class Q_DECL_HIDDEN Ldif::LdifPrivate
 public:
     int mModType;
     bool mDelOldRdn, mUrl;
-    LdapDN mDn;
+    QByteArray mDn;
     QString mAttr, mNewRdn, mNewSuperior, mOid;
     QByteArray mLdif, mValue;
     EntryType mEntryType;
@@ -215,7 +215,7 @@ Ldif::ParseValue Ldif::processLine()
             }
         } else if (attrLower == QLatin1String("dn")) {
             qCDebug(KCONTACTS_LOG) << "ldapentry dn:" << QString::fromUtf8(d->mValue);
-            d->mDn = LdapDN(QString::fromUtf8(d->mValue));
+            d->mDn = d->mValue;
             d->mModType = Mod_None;
             retval = NewEntry;
         } else if (attrLower == QLatin1String("changetype")) {
@@ -371,7 +371,6 @@ void Ldif::startParsing()
     d->mDelOldRdn = false;
     d->mEntryType = Entry_None;
     d->mModType = Mod_None;
-    d->mDn = LdapDN();
     d->mNewRdn.clear();
     d->mNewSuperior.clear();
     d->mLine = QByteArray();
@@ -394,11 +393,6 @@ Ldif::EntryType Ldif::entryType() const
 int Ldif::modType() const
 {
     return d->mModType;
-}
-
-LdapDN Ldif::dn() const
-{
-    return d->mDn;
 }
 
 QString Ldif::newRdn() const

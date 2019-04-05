@@ -26,8 +26,6 @@
 #include <QString>
 #include <QByteArray>
 
-#include "ldapdn_p.h"
-
 /**
  * Ldif
  *
@@ -131,11 +129,6 @@ public:
      * Returns the LDAP modify request type if entryType() returned Entry_Mod.
      */
     int modType() const;
-
-    /**
-     * Returns the Distinguished Name of the current entry.
-     */
-    LdapDN dn() const;
 
     /**
      * Returns the new Relative Distinguished Name if modType() returned
