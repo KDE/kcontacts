@@ -58,8 +58,9 @@ target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_SOU
 
 target_link_libraries(KF5Contacts
 PUBLIC
-    KF5::CoreAddons
+    Qt5::Core
 PRIVATE
+    KF5::CoreAddons
     Qt5::Gui
     KF5::ConfigCore
     KF5::I18n
