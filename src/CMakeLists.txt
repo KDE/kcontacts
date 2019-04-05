@@ -25,7 +25,6 @@ set(kcontacts_SRCS
   related.cpp
   resourcelocatorurl.cpp
   secrecy.cpp
-  sortmode.cpp
   sound.cpp
   timezone.cpp
   vcarddrag.cpp
@@ -96,7 +95,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Related
   ResourceLocatorUrl
   Secrecy
-  SortMode
   Sound
   TimeZone
   Title

@@ -52,8 +52,6 @@
 #include "clientpidmap.h"
 
 namespace KContacts {
-class SortMode;
-
 /**
   @short address book entry
 
@@ -978,25 +976,6 @@ public:
       Return whether the addressee is changed.
      */
     bool changed() const;
-
-    /**
-      Sets the sort mode implementation.
-
-      Comparing to addressee objects is delegated to an instance
-      of a subclass of KContacts::SortMode.
-
-      @param mode The sort mode implementator to use
-     */
-    static void setSortMode(KContacts::SortMode *mode);
-
-    /**
-      Return whether this addressee is "less-than" a given one
-
-      @param addr The addressee object to compare with
-
-      @see setSortMode()
-     */
-    bool operator<(const Addressee &addr) const;
 
     /**
       Returns the MIME type used for Addressees

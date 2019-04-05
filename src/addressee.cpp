@@ -30,8 +30,6 @@
 
 #include "addresseehelper.h"
 #include "field.h"
-#include "sortmode.h"
-
 #include "addressee.h"
 
 using namespace KContacts;
@@ -157,11 +155,7 @@ public:
     bool mEmpty    : 1;
     bool mChanged  : 1;
     bool mBirthdayWithTime;
-
-    static KContacts::SortMode *mSortMode;
 };
-
-KContacts::SortMode *Addressee::Private::mSortMode = nullptr;
 
 Addressee::Addressee()
     : d(new Private)
@@ -2397,20 +2391,6 @@ void Addressee::setChanged(bool value)
 bool Addressee::changed() const
 {
     return d->mChanged;
-}
-
-void Addressee::setSortMode(KContacts::SortMode *mode)
-{
-    Private::mSortMode = mode;
-}
-
-bool Addressee::operator<(const Addressee &addr) const
-{
-    if (!Private::mSortMode) {
-        return false;
-    } else {
-        return Private::mSortMode->lesser(*this, addr);
-    }
 }
 
 QString Addressee::mimeType()
