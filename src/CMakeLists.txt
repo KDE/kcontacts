@@ -8,7 +8,6 @@ set(kcontacts_SRCS
   address.cpp
   addressee.cpp
   addresseehelper.cpp
-  addresseelist.cpp
   calendarurl.cpp
   contactgroup.cpp
   contactgrouptool.cpp
