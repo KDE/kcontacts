@@ -29,6 +29,7 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 
 int main(int argc, char **argv)
@@ -56,12 +57,17 @@ int main(int argc, char **argv)
 
 
     QString sourceDirPath = p.value(sourceDir);
+    if (!QDir().exists(sourceDirPath)) {
+        qCritical("Specified CLDR source dir does not exist.");
+        return 1;
+    }
     QString outputFilePath = p.value(outputFile);
 
     QFile f(outputFilePath);
     bool success = f.open(QIODevice::WriteOnly | QIODevice::Truncate);
     if (!success) {
-        qFatal("failed to open file: %s", qPrintable(f.errorString()));
+        qCritical("failed to open file: %s", qPrintable(f.errorString()));
+        return 1;
     }
 
     f.write(R"(
@@ -193,4 +199,5 @@ static const CountryToIsoIndex country_to_iso_index[] = {
     f.write("};\n");
 
     f.close();
+    return 0;
 }
