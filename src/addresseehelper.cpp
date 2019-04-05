@@ -33,7 +33,7 @@ public:
     QSet<QString> mTitles;
     QSet<QString> mPrefixes;
     QSet<QString> mSuffixes;
-    bool mTradeAsFamilyName;
+    bool mTreatAsFamilyName;
 };
 
 Q_GLOBAL_STATIC(AddresseeHelper, s_self)
@@ -95,7 +95,7 @@ void AddresseeHelper::initSettings()
     addToSet(config.readEntry("Prefixes", QStringList()), d->mTitles);
     addToSet(config.readEntry("Inclusions", QStringList()), d->mPrefixes);
     addToSet(config.readEntry("Suffixes", QStringList()), d->mSuffixes);
-    d->mTradeAsFamilyName = config.readEntry("TradeAsFamilyName", true);
+    d->mTreatAsFamilyName = config.readEntry("TreatAsFamilyName", true);
 }
 
 bool AddresseeHelper::containsTitle(const QString &title) const
@@ -113,7 +113,7 @@ bool AddresseeHelper::containsSuffix(const QString &suffix) const
     return d->mSuffixes.contains(suffix);
 }
 
-bool AddresseeHelper::tradeAsFamilyName() const
+bool AddresseeHelper::treatAsFamilyName() const
 {
-    return d->mTradeAsFamilyName;
+    return d->mTreatAsFamilyName;
 }

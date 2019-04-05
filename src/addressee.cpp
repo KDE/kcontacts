@@ -1427,7 +1427,7 @@ void Addressee::setNameFromString(const QString &s)
             setFamilyName(parts[rightOffset - 1] + spaceStr + parts[rightOffset]);
             rightOffset--;
         } else {
-            if (helper->tradeAsFamilyName()) {
+            if (helper->treatAsFamilyName()) {
                 setFamilyName(parts[rightOffset]);
             } else {
                 setGivenName(parts[rightOffset]);

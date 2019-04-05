@@ -49,8 +49,8 @@ class AddresseeHelperPrivate;
  * In addition to the above, this class stores one conveniece
  * setting: it stores whether or not a single name component
  * should be interpreted as a family name (see
- * tradeAsFamilyName()). The corresponding configuration
- * field is @c TradeAsFamilyName.
+ * treatAsFamilyName()). The corresponding configuration
+ * field is @c TreatAsFamilyName.
  */
 class KCONTACTS_EXPORT AddresseeHelper : public QObject
 {
@@ -98,7 +98,7 @@ public:
      * @return @c true if single name component is a family name,
      *         @c false otherwise.
      */
-    Q_REQUIRED_RESULT bool tradeAsFamilyName() const;
+    Q_REQUIRED_RESULT bool treatAsFamilyName() const;
 
     /** @internal */
     AddresseeHelper();
