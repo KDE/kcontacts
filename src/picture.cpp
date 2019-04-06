@@ -176,11 +176,6 @@ void Picture::setRawData(const QByteArray &rawData, const QString &type)
     d->mIntern = true;
 }
 
-void Picture::setType(const QString &type)
-{
-    d->mType = type;
-}
-
 bool Picture::isIntern() const
 {
     return d->mIntern;

@@ -142,13 +142,6 @@ public:
     void setRawData(const QByteArray &rawData, const QString &type);
 
     /**
-     * Sets the type of the picture.
-     * @param type the picture's data type
-     * @deprecated type should only be set along with setRawData()
-     */
-    void KCONTACTS_DEPRECATED setType(const QString &type);
-
-    /**
      * Returns whether the picture is described by a URL (extern) or
      * by the raw data (intern).
      * When this method returns 'true' you can use data() to
