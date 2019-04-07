@@ -125,7 +125,6 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QString &value, ui
 bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &value)
 {
     int position;
-    QByteArray tmp;
     int linelen;
 
 //  qCDebug(KCONTACTS_LOG) << "line:" << QString::fromUtf8(line);
