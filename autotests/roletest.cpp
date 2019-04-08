@@ -20,7 +20,7 @@
 
 #include "roletest.h"
 #include "role.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 RoleTest::RoleTest(QObject *parent)

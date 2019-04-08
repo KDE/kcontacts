@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include "key.h"
 #include "picture.h"
 #include "secrecy.h"

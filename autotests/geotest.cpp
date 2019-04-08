@@ -20,7 +20,7 @@
 
 #include "geotest.h"
 #include "kcontacts/geo.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 QTEST_MAIN(GeoTest)

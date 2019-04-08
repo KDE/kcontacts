@@ -20,7 +20,7 @@
 
 #include "fieldgrouptest.h"
 #include "fieldgroup.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 FieldGroupTest::FieldGroupTest(QObject *parent)

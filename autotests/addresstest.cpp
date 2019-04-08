@@ -20,7 +20,7 @@
 
 #include "addresstest.h"
 #include "addresseelist.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include "kcontacts/address.h"
 #include <kconfig.h>
 #include <kconfiggroup.h>

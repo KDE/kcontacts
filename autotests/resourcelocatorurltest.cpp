@@ -21,7 +21,7 @@
 #include "resourcelocatorurltest.h"
 
 #include "resourcelocatorurl.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 using namespace KContacts;

@@ -20,7 +20,7 @@
 
 #include "datetimetest.h"
 #include <QTest>
-#include <vcardtool.h>
+#include <vcardtool_p.h>
 
 DateTimeTest::DateTimeTest(QObject *parent)
     : QObject(parent)

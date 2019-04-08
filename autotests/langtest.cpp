@@ -20,7 +20,7 @@
 
 #include "langtest.h"
 #include "lang.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 LangTest::LangTest(QObject *parent)

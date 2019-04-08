@@ -20,7 +20,7 @@
 
 #include "importexportvcardtest.h"
 #include <QTest>
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QDebug>
 
 ImportExportVCardTest::ImportExportVCardTest(QObject *parent)

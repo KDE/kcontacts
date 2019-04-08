@@ -20,7 +20,7 @@
 
 #include "titletest.h"
 #include "title.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 TitleTest::TitleTest(QObject *parent)

@@ -20,7 +20,7 @@
 
 #include "orgtest.h"
 #include "org.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 OrgTest::OrgTest(QObject *parent)

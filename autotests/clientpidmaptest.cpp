@@ -20,7 +20,7 @@
 
 #include "clientpidmaptest.h"
 #include "clientpidmap.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 ClientPidMapTest::ClientPidMapTest(QObject *parent)

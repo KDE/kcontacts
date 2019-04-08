@@ -23,7 +23,7 @@
 #include <addressee.h>
 #include <addresseelist.h>
 #include <QTest>
-#include <vcardtool.h>
+#include <vcardtool_p.h>
 
 QTEST_MAIN(PhoneNumberTest)
 

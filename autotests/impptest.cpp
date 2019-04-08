@@ -21,7 +21,7 @@
 #include "impptest.h"
 #include "impp.h"
 #include <QTest>
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 Q_DECLARE_METATYPE(KContacts::Impp::ImppType)
 
 ImppTest::ImppTest(QObject *parent)

@@ -20,7 +20,7 @@
 
 #include "gendertest.h"
 #include "gender.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 GenderTest::GenderTest(QObject *parent)

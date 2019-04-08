@@ -19,7 +19,7 @@
 */
 
 #include "vcardconverter.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 
 using namespace KContacts;
 

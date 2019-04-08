@@ -20,7 +20,7 @@
 
 #include "vcardtool_benchmark.h"
 #include "title.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 PerformanceTest::PerformanceTest(QObject *parent)

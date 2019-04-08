@@ -21,7 +21,7 @@
 #include "calendarurltest.h"
 
 #include "calendarurl.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 using namespace KContacts;

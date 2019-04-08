@@ -20,7 +20,7 @@
 
 #include "relatedtest.h"
 #include "related.h"
-#include "vcardtool.h"
+#include "vcardtool_p.h"
 #include <QTest>
 
 RelatedTest::RelatedTest(QObject *parent)
