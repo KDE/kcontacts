@@ -117,17 +117,23 @@ using namespace KContacts;
 static const char country_name_stringtable[] = {
 )");
 
-    const QHash<QString,QString> parsedList = TranslatedCountries::parseFilesRecursive(sourceDirPath);
+    const auto parsedList = TranslatedCountries::parseFilesRecursive(sourceDirPath);
 
     struct Elem {
         QByteArray name;
         QString isoCode;
+        QString language;
         int offset;
     };
     std::vector<Elem> processedList;
     processedList.reserve(parsedList.size());
-    for(auto it = parsedList.begin() ; it != parsedList.end() ; it++) {
-        processedList.push_back(Elem{it.key().toCaseFolded().toUtf8(), it.value(), 0});
+    for(const auto &country : parsedList) {
+        const auto name = country.name.toCaseFolded().toUtf8();
+        if (name.isEmpty()) {
+            qWarning() << "Skipping empty normalized country name:" << country.name << country.isoCode << country.language;
+            continue;
+        }
+        processedList.push_back(Elem{name, country.isoCode, country.language, 0});
     }
     // we must sort exactly as we do this for lookup
     std::sort(processedList.begin(), processedList.end(), [](const Elem &lhs, const Elem &rhs) {
@@ -150,7 +156,9 @@ static const char country_name_stringtable[] = {
             ++it;
             continue;
         }
-        qDebug() << "Removing ambigious string:" << QString::fromUtf8((*it).name) << (*prevIt).isoCode << (*it).isoCode;
+        qDebug() << "Removing ambigious string:" << QString::fromUtf8((*it).name)
+                 << (*prevIt).isoCode.toUpper() << (*prevIt).language
+                 << (*it).isoCode.toUpper() << (*it).language;
         it = processedList.erase(prevIt);
         it = processedList.erase(it);
     }

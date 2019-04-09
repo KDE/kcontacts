@@ -26,13 +26,13 @@
 
 #include "translatedcountrylist.h"
 
-#include <QFile>
+#include <QDebug>
 #include <QDirIterator>
+#include <QFile>
 #include <QXmlStreamReader>
 
-TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFile(QIODevice *device)
+static void parseFile(QIODevice *device, const QString &lang, TranslatedCountries::TranslationCountryMap &map)
 {
-    TranslationCountryMap map;
     QXmlStreamReader reader(device);
     const QStringList blacklist = { QLatin1String("eu"), QLatin1String("un"), QLatin1String("zz") };
     while(!reader.atEnd()) {
@@ -46,7 +46,7 @@ TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFile(QIODev
                     }
                     const auto name = reader.readElementText();
                     if (!name.isEmpty()) {
-                        map.insert(name, territory);
+                        map.push_back({name, territory, lang});
                     }
                 }
                 break;
@@ -54,17 +54,17 @@ TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFile(QIODev
                 break;
         }
     }
-    return map;
 }
 
-TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFilePath(const QString &filePath)
+static void parseFilePath(const QString &filePath, TranslatedCountries::TranslationCountryMap &map)
 {
     QFile f(filePath);
     bool success = f.open(QIODevice::ReadOnly);
     if (!success) {
-        return {};
+        qWarning() << "Failed to open" << f.fileName() << f.errorString();
+        return;
     }
-    return parseFile(&f);
+    return parseFile(&f, QFileInfo(filePath).baseName(), map);
 }
 
 TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFilesRecursive(const QString &directoryPath)
@@ -74,7 +74,7 @@ TranslatedCountries::TranslationCountryMap TranslatedCountries::parseFilesRecurs
     while (it.hasNext()) {
         it.next();
         QString path = it.filePath();
-        map.unite(parseFilePath(path));
+        parseFilePath(path, map);
     }
     return map;
 }

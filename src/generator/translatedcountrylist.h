@@ -25,22 +25,22 @@
 #ifndef TRANSLATEDCOUNTRYLIST_H
 #define TRANSLATEDCOUNTRYLIST_H
 
-#include <QHash>
 #include <QString>
+
+#include <vector>
+
 class QIODevice;
 
 namespace TranslatedCountries {
-    using TranslationCountryMap = QHash<QString,QString>;
-    /**
-     * \param device open QIODevice to read cldr xml data from
-     * \return map of translation name => country id
-     */
-    TranslationCountryMap parseFile(QIODevice *device);
-    /**
-     * \param filePath path to read cldr xml file
-     * \return map of translation name => country id
-     */
-    TranslationCountryMap parseFilePath(const QString &filePath);
+
+    struct CountryNameMapping {
+        QString name;
+        QString isoCode;
+        QString language;
+    };
+
+    using TranslationCountryMap = std::vector<CountryNameMapping>;
+
     /**
      * \param directoryPath directory path to scan recursively for cldr xml files
      * On Debian systems, /usr/share/unicode/cldr/common/main is a good value for this.
