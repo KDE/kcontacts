@@ -11,6 +11,7 @@ set(kcontacts_SRCS
   calendarurl.cpp
   contactgroup.cpp
   contactgrouptool.cpp
+  countrytoisomap_p.cpp
   email.cpp
   field.cpp
   geo.cpp

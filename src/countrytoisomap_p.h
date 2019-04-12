@@ -23,6 +23,8 @@
 
 #include <QString>
 
+class QByteArray;
+
 namespace KContacts {
 
 /* Pack the string table offset and the country ISO code into 32 bit.
@@ -50,6 +52,8 @@ struct CountryToIsoIndex
     uint32_t m_c1: 5;
     uint32_t m_c2: 5;
 };
+
+QByteArray normalizeCountryName(const QString &name);
 
 }
 

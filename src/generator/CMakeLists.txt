@@ -1,5 +1,5 @@
 set(CLDR_DIR "/usr/share/unicode/cldr/common/main" CACHE STRING "Path to the CLDR data files")
-add_executable(generatecountrytoisomap main.cpp translatedcountrylist.cpp)
+add_executable(generatecountrytoisomap main.cpp translatedcountrylist.cpp ../countrytoisomap_p.cpp)
 target_link_libraries(generatecountrytoisomap Qt5::Core)
 add_custom_command(
     OUTPUT countrytoisomap_data.cpp

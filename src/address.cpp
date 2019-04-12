@@ -659,7 +659,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
 
 QString Address::countryToISO(const QString &cname)
 {
-    const auto lookupKey = cname.toCaseFolded().toUtf8();
+    const auto lookupKey = normalizeCountryName(cname);
 
     // look for an exact match
     auto it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {

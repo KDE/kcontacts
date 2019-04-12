@@ -25,6 +25,7 @@
  */
 
 #include "translatedcountrylist.h"
+#include "../countrytoisomap_p.h"
 
 #include <QCoreApplication>
 #include <QCommandLineParser>
@@ -128,7 +129,7 @@ static const char country_name_stringtable[] = {
     std::vector<Elem> processedList;
     processedList.reserve(parsedList.size());
     for(const auto &country : parsedList) {
-        const auto name = country.name.toCaseFolded().toUtf8();
+        const auto name = KContacts::normalizeCountryName(country.name);
         if (name.isEmpty()) {
             qWarning() << "Skipping empty normalized country name:" << country.name << country.isoCode << country.language;
             continue;

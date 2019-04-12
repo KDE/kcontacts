@@ -434,6 +434,10 @@ void AddressTest::countryToISOTest()
     QCOMPARE(Address::countryToISO(QStringLiteral("United States")), QLatin1String("us"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United States Of America")), QLatin1String("us"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United")), QString());
+    QCOMPARE(Address::countryToISO(QStringLiteral("대한민국")), QLatin1String("kr"));
+
+    QCOMPARE(Address::countryToISO(QStringLiteral("Osterreich")), QLatin1String("at"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Ünited  States\nOf America")), QLatin1String("us"));
 }
 
 void AddressTest::isoToCountryTest()
