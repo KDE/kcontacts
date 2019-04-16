@@ -56,6 +56,13 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString country READ country WRITE setCountry)
     Q_PROPERTY(QString label READ label WRITE setLabel)
     Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
+    /**
+     * Country-specific formatted address without an addressee.
+     * This is the same as calling formattedAddress() with empty arguments.
+     * @see formattedAddress()
+     * @since 5.12
+     */
+    Q_PROPERTY(QString formattedAddress READ formattedAddress)
 
 public:
     /**
