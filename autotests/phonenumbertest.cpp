@@ -326,3 +326,23 @@ void PhoneNumberTest::shouldParseVcard4()
     KContacts::Addressee addr = lst.at(0);
     QCOMPARE(addr.phoneNumbers().count(), 3);
 }
+
+void PhoneNumberTest::testNormalizeNumber_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("empty") << QString() << QString();
+    QTest::newRow("normalized") << QStringLiteral("+49123456789") << QStringLiteral("+49123456789");
+    QTest::newRow("formatted") << QStringLiteral("+49(123) 456 - 789") << QStringLiteral("+49123456789");
+}
+
+void PhoneNumberTest::testNormalizeNumber()
+{
+    QFETCH(QString, input);
+    QFETCH(QString, expected);
+
+    KContacts::PhoneNumber num;
+    num.setNumber(input);
+    QCOMPARE(num.normalizedNumber(), expected);
+}

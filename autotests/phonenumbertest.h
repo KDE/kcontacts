@@ -43,6 +43,9 @@ private Q_SLOTS:
 
     void shouldExportVCard21();
     void shouldParseVCard21();
+
+    void testNormalizeNumber_data();
+    void testNormalizeNumber();
 };
 
 #endif

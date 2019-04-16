@@ -136,6 +136,19 @@ QString PhoneNumber::number() const
     return d->mNumber;
 }
 
+QString PhoneNumber::normalizedNumber() const
+{
+    QString result;
+    result.reserve(d->mNumber.size());
+    for (const auto &c : d->mNumber) {
+        if (c.isDigit() || (c == QLatin1Char('+') && result.isEmpty())) {
+            result.push_back(c);
+        }
+    }
+    return result;
+}
+
+
 void PhoneNumber::setType(Type type)
 {
     d->mType = type;

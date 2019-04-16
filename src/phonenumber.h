@@ -148,8 +148,18 @@ public:
 
     /**
      * Returns the phone number.
+     * This is the number as entered/stored with all formatting preserved. Preferred for display.
+     * @see normalizedNumber()
      */
     Q_REQUIRED_RESULT QString number() const;
+
+    /**
+     * Returns the phone number normalized for dialing.
+     * This has all formatting stripped for passing to dialers or tel: URLs.
+     * @see number()
+     * @since 5.12
+     */
+    Q_REQUIRED_RESULT QString normalizedNumber() const;
 
     /**
      * Sets the @p type.
