@@ -1059,6 +1059,97 @@ public:
     void setClientPidMapList(const ClientPidMap::List &clientpidmaplist);
     void insertClientPidMap(const ClientPidMap &clientpidmap);
 
+    /**
+     * Returns the contact's anniversary date.
+     * @note This is a non-standard extension using the @c X-Anniversary field.
+     * @since 5.12
+     */
+    QDate anniversary() const;
+    /**
+     * Sets the contact's anniversary date.
+     * @note This is a non-standard extension using the @c X-Anniversary field.
+     * @since 5.12
+     */
+    void setAnniversary(const QDate &anniversary);
+
+    /**
+     * Returns the contact's assistant's name.
+     * @note This is a non-standard extension using the @c X-AssistantsName field.
+     * @since 5.12
+     */
+    QString assistantsName() const;
+    /**
+     * Set the contact's assistant's name.
+     * @note This is a non-standard extension using the @c X-AssistantsName field.
+     * @since 5.12
+     */
+    void setAssistantsName(const QString &assistantsName);
+
+    /**
+     * Returns the contact's blog feed.
+     * @note This is a non-standard extension using the @c BlogFeed field.
+     * @since 5.12
+     */
+    QString blogFeed() const;
+    /**
+     * Set the contact's blog feed.
+     * @note This is a non-standard extension using the @c BlogFeed field.
+     * @since 5.12
+     */
+    void setBlogFeed(const QString &blogFeed);
+
+    /**
+     * Returns the contact's manager's name.
+     * @note This is a non-standard extension using the @c X-ManagersName field.
+     * @since 5.12
+     */
+    QString managersName() const;
+    /**
+     * Set the contact's manager's name.
+     * @note This is a non-standard extension using the @c X-ManagersName field.
+     * @since 5.12
+     */
+    void setManagersName(const QString &managersName);
+
+    /**
+     * Returns the contact's office.
+     * @note This is a non-standard extension using the @c X-Office field.
+     * @since 5.12
+     */
+    QString office() const;
+    /**
+     * Set the contact's office.
+     * @note This is a non-standard extension using the @c X-Office field.
+     * @since 5.12
+     */
+    void setOffice(const QString &office);
+
+    /**
+     * Returns the contact's profession.
+     * @note This is a non-standard extension using the @c X-Profession field.
+     * @since 5.12
+     */
+    QString profession() const;
+    /**
+     * Set the contact's profession.
+     * @note This is a non-standard extension using the @c X-Profession field.
+     * @since 5.12
+     */
+    void setProfession(const QString &profession);
+
+    /**
+     * Returns the contact's spouse's name.
+     * @note This is a non-standard extension using the @c X-SpousesName field.
+     * @since 5.12
+     */
+    QString spousesName() const;
+    /**
+     * Set the contact's spouse's name.
+     * @note This is a non-standard extension using the @c X-SpousesName field.
+     * @since 5.12
+     */
+    void setSpousesName(const QString &spousesName);
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

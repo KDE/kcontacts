@@ -20,6 +20,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <QDate>
 #include <QList>
 #include <QRegExp>
 #include <QSharedData>
@@ -2145,6 +2146,113 @@ void Addressee::setRelationShips(const Related::List &c)
 Related::List Addressee::relationShips() const
 {
     return d->mRelationShips;
+}
+
+static const auto VENDOR_ID = QStringLiteral("KADDRESSBOOK");
+static const auto X_ANNIVERSARY = QStringLiteral("X-Anniversary");
+static const auto X_ASSISTANTSNAME = QStringLiteral("X-AssistantsName");
+static const auto BLOGFEED = QStringLiteral("BlogFeed");
+static const auto X_MANAGERSNAME = QStringLiteral("X-ManagersName");
+static const auto X_OFFICE = QStringLiteral("X-Office");
+static const auto X_PROFESSION = QStringLiteral("X-Profession");
+static const auto X_SPOUSESNAME = QStringLiteral("X-SpousesName");
+
+QDate Addressee::anniversary() const
+{
+    return QDate::fromString(custom(VENDOR_ID, X_ANNIVERSARY), Qt::ISODate);
+}
+
+void Addressee::setAnniversary(const QDate &anniversary)
+{
+    if (anniversary.isValid()) {
+        insertCustom(VENDOR_ID, X_ANNIVERSARY, anniversary.toString(Qt::ISODate));
+    } else {
+        removeCustom(VENDOR_ID, X_ANNIVERSARY);
+    }
+}
+
+QString Addressee::assistantsName() const
+{
+    return custom(VENDOR_ID, X_ASSISTANTSNAME);
+}
+
+void Addressee::setAssistantsName(const QString &assistantsName)
+{
+    if (!assistantsName.isEmpty()) {
+        insertCustom(VENDOR_ID, X_ASSISTANTSNAME, assistantsName);
+    } else {
+        removeCustom(VENDOR_ID, X_ASSISTANTSNAME);
+    }
+}
+
+QString Addressee::blogFeed() const
+{
+    return custom(VENDOR_ID, BLOGFEED);
+}
+
+void Addressee::setBlogFeed(const QString &blogFeed)
+{
+    if (!blogFeed.isEmpty()) {
+        insertCustom(VENDOR_ID, BLOGFEED, blogFeed);
+    } else {
+        removeCustom(VENDOR_ID, BLOGFEED);
+    }
+}
+
+QString Addressee::managersName() const
+{
+    return custom(VENDOR_ID, X_MANAGERSNAME);
+}
+
+void Addressee::setManagersName(const QString &managersName)
+{
+    if (!managersName.isEmpty()) {
+        insertCustom(VENDOR_ID, X_MANAGERSNAME, managersName);
+    } else {
+        removeCustom(VENDOR_ID, X_MANAGERSNAME);
+    }
+}
+
+QString Addressee::office() const
+{
+    return custom(VENDOR_ID, X_OFFICE);
+}
+
+void Addressee::setOffice(const QString &office)
+{
+    if (!office.isEmpty()) {
+        insertCustom(VENDOR_ID, X_OFFICE, office);
+    } else {
+        removeCustom(VENDOR_ID, X_OFFICE);
+    }
+}
+
+QString Addressee::profession() const
+{
+    return custom(VENDOR_ID, X_PROFESSION);
+}
+
+void Addressee::setProfession(const QString &profession)
+{
+    if (!profession.isEmpty()) {
+        insertCustom(VENDOR_ID, X_PROFESSION, profession);
+    } else {
+        removeCustom(VENDOR_ID, X_PROFESSION);
+    }
+}
+
+QString Addressee::spousesName() const
+{
+    return custom(VENDOR_ID, X_SPOUSESNAME);
+}
+
+void Addressee::setSpousesName(const QString &spousesName)
+{
+    if (!spousesName.isEmpty()) {
+        insertCustom(VENDOR_ID, X_SPOUSESNAME, spousesName);
+    } else {
+        removeCustom(VENDOR_ID, X_SPOUSESNAME);
+    }
 }
 
 void Addressee::insertCustom(const QString &app, const QString &name, const QString &value)
