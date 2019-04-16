@@ -49,6 +49,8 @@ class KCONTACTS_EXPORT PhoneNumber
     Q_PROPERTY(Type type READ type WRITE setType)
     Q_PROPERTY(QString typeLabel READ typeLabel)
     Q_PROPERTY(bool isEmpty READ isEmpty)
+    Q_PROPERTY(bool isPreferred READ isPreferred)
+    Q_PROPERTY(bool supportsSms READ supportsSms)
 
 public:
     /**
@@ -196,6 +198,17 @@ public:
      * Returns a list of all available types
      */
     Q_REQUIRED_RESULT static TypeList typeList();
+
+    /**
+     * Returns whether this phone number is marked as preferred.
+     * @since 5.12
+     */
+    Q_REQUIRED_RESULT bool isPreferred() const;
+    /**
+     * Returns whether this phone number is expected to support receiving SMS messages.
+     * @since 5.12
+     */
+    Q_REQUIRED_RESULT bool supportsSms() const;
 
     /**
      * Returns the translated label for phone number @p type.

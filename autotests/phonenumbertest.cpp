@@ -201,7 +201,9 @@ void PhoneNumberTest::shouldParseVCard21()
     KContacts::Addressee addr = lst.at(0);
     QCOMPARE(addr.phoneNumbers().count(), 1);
     KContacts::PhoneNumber number1 = addr.phoneNumbers().at(0);
-    //QCOMPARE(number1.number(), QString());
+    QCOMPARE(number1.number(), QLatin1String("+1-919-676-9564"));
+    QVERIFY(number1.supportsSms());
+    QVERIFY(!number1.isPreferred());
 }
 
 void PhoneNumberTest::shouldExportVCard21()

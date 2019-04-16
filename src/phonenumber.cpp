@@ -263,6 +263,16 @@ QString PhoneNumber::typeLabel(Type type)
     return label;
 }
 
+bool PhoneNumber::isPreferred() const
+{
+    return type() & Pref;
+}
+
+bool PhoneNumber::supportsSms() const
+{
+    return type() & Cell;
+}
+
 QString PhoneNumber::toString() const
 {
     QString str = QLatin1String("PhoneNumber {\n");
