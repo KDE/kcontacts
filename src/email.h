@@ -41,6 +41,8 @@ class KCONTACTS_EXPORT Email
     Q_GADGET
     Q_PROPERTY(QString email READ mail WRITE setEmail)
     Q_PROPERTY(bool isValid READ isValid)
+    Q_PROPERTY(Type type READ type WRITE setType)
+    Q_PROPERTY(bool isPreferred)
 
 public:
     /**
@@ -54,10 +56,39 @@ public:
 
     typedef QVector<Email> List;
 
+    /** Email types. */
+    enum TypeFlag {
+        Unknown = 0, /**< No or unknown email type is set. */
+        Home = 1,    /**< Personal email. */
+        Work = 2,    /**< Work email. */
+        Other = 4,   /**< Other email. */
+        Preferred = 8     /**< Preferred email address. */
+    };
+
+    Q_DECLARE_FLAGS(Type, TypeFlag)
+    Q_FLAG(Type)
+
     void setEmail(const QString &mail);
     Q_REQUIRED_RESULT QString mail() const;
 
     Q_REQUIRED_RESULT bool isValid() const;
+
+    /**
+     * Returns the type of the email.
+     * @since 5.12
+     */
+    Type type() const;
+    /**
+     * Sets the email type.
+     * @since 5.12
+     */
+    void setType(Type type);
+
+    /**
+     * Returns whether this is the preferred email address.
+     * @since 5.12
+     */
+    bool isPreferred() const;
 
     void setParameters(const QMap<QString, QStringList> &params);
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
@@ -72,6 +103,8 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Email::Type)
 
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &object);
 

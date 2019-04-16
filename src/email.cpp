@@ -126,6 +126,63 @@ bool Email::isValid() const
     return !d->mail.isEmpty();
 }
 
+struct email_type_name
+{
+    const char* name;
+    Email::Type type;
+};
+
+static const email_type_name email_type_names[] = {
+    { "HOME", Email::Home },
+    { "WORK", Email::Work },
+    { "OTHER", Email::Other },
+    { "PREF", Email::Preferred }
+};
+
+Email::Type KContacts::Email::type() const
+{
+    const auto it = d->parameters.constFind(QLatin1String("type"));
+    if (it == d->parameters.end()) {
+        return Unknown;
+    }
+
+    Type type = Unknown;
+    for (const auto &s : it.value()) {
+        const auto it = std::find_if(std::begin(email_type_names), std::end(email_type_names), [s](const email_type_name &t) {
+            return QLatin1String(t.name) == s;
+        });
+        if (it != std::end(email_type_names)) {
+            type |= (*it).type;
+        }
+    }
+    return type;
+}
+
+void Email::setType(Type type)
+{
+    const auto oldType = this->type();
+
+    auto types = d->parameters.value(QLatin1String("type"));
+    for (const auto &t : email_type_names) {
+        if (((type ^ oldType) & t.type) == 0) {
+            continue; // no change
+        }
+
+        if (type & t.type) {
+            types.push_back(QLatin1String(t.name));
+        } else {
+            types.removeAll(QLatin1String(t.name));
+        }
+    }
+
+    d->parameters.insert(QLatin1String("type"), types);
+}
+
+bool Email::isPreferred() const
+{
+    return type() & Preferred;
+}
+
 QDataStream &KContacts::operator<<(QDataStream &s, const Email &email)
 {
     return s << email.d->parameters << email.d->mail;
