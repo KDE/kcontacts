@@ -21,11 +21,13 @@
 #ifndef KCONTACTS_ADDRESS_H
 #define KCONTACTS_ADDRESS_H
 
+#include "kcontacts_export.h"
+#include "geo.h"
+
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QVector>
-
-#include "kcontacts_export.h"
 
 namespace KContacts {
 class Geo;
@@ -39,6 +41,21 @@ class KCONTACTS_EXPORT Address
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &s, const Address &addr);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &s, Address &addr);
+
+    Q_GADGET
+    Q_PROPERTY(QString id READ id WRITE setId)
+    Q_PROPERTY(bool isEmpty READ isEmpty)
+    Q_PROPERTY(Type type READ type WRITE setType)
+    Q_PROPERTY(QString typeLabel READ typeLabel)
+    Q_PROPERTY(QString postOfficeBox READ postOfficeBox WRITE setPostOfficeBox)
+    Q_PROPERTY(QString extended READ extended WRITE setExtended)
+    Q_PROPERTY(QString street READ street WRITE setStreet)
+    Q_PROPERTY(QString locality READ locality WRITE setLocality)
+    Q_PROPERTY(QString region READ region WRITE setRegion)
+    Q_PROPERTY(QString postalCode READ postalCode WRITE setPostalCode)
+    Q_PROPERTY(QString country READ country WRITE setCountry)
+    Q_PROPERTY(QString label READ label WRITE setLabel)
+    Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
 
 public:
     /**
@@ -60,6 +77,7 @@ public:
     };
 
     Q_DECLARE_FLAGS(Type, TypeFlag)
+    Q_FLAG(Type)
 
     /**
       List of address types.
@@ -347,5 +365,7 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Address &add
 */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Address &address);
 }
+
+Q_DECLARE_METATYPE(KContacts::Address)
 
 #endif

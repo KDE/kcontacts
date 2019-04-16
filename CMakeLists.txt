@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(PIM_VERSION "5.11.41")
+set(PIM_VERSION "5.11.42")
 
 project(KContacts VERSION ${PIM_VERSION})
 

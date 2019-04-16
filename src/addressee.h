@@ -83,6 +83,55 @@ class KCONTACTS_EXPORT Addressee
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 
+    Q_GADGET
+    Q_PROPERTY(bool isEmpty READ isEmpty)
+    Q_PROPERTY(QString uid READ uid WRITE setUid)
+    Q_PROPERTY(QString name READ name WRITE setName)
+    Q_PROPERTY(QString formattedName READ formattedName WRITE setFormattedName)
+    Q_PROPERTY(QString familyName READ familyName WRITE setFamilyName)
+    Q_PROPERTY(QString givenName READ givenName WRITE setGivenName)
+    Q_PROPERTY(QString additionalName READ additionalName WRITE setAdditionalName)
+    Q_PROPERTY(QString prefix READ prefix WRITE setPrefix)
+    Q_PROPERTY(QString suffix READ suffix WRITE setSuffix)
+    Q_PROPERTY(QString nickName READ nickName)
+    Q_PROPERTY(QDateTime birthday READ birthday) // ### can't set this due to withTime argument
+    Q_PROPERTY(bool birthdayHasTime READ birthdayHasTime)
+    Q_PROPERTY(QString mailer READ mailer WRITE setMailer)
+    Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
+    Q_PROPERTY(QString title READ title)
+    Q_PROPERTY(QString role READ role)
+    Q_PROPERTY(QString organization READ organization)
+    Q_PROPERTY(QString department READ department WRITE setDepartment)
+    Q_PROPERTY(QString note READ note WRITE setNote)
+    Q_PROPERTY(QString productId READ productId WRITE setProductId)
+    Q_PROPERTY(QDateTime revision READ revision)
+    Q_PROPERTY(QString sortString READ sortString WRITE setSortString)
+    Q_PROPERTY(KContacts::ResourceLocatorUrl url READ url WRITE setUrl)
+    Q_PROPERTY(QString realName READ realName)
+    Q_PROPERTY(QString assembledName READ assembledName)
+    Q_PROPERTY(QString preferredEmail READ preferredEmail)
+    Q_PROPERTY(QStringList categories READ categories WRITE setCategories)
+    Q_PROPERTY(QStringList customs READ customs)
+    Q_PROPERTY(bool changed READ changed WRITE setChanged)
+    Q_PROPERTY(QDate anniversary READ anniversary WRITE setAnniversary)
+    Q_PROPERTY(QString assistantsName READ assistantsName WRITE setAssistantsName)
+    Q_PROPERTY(QString managersName READ managersName WRITE setManagersName)
+    Q_PROPERTY(QString office READ office WRITE setOffice)
+    Q_PROPERTY(QString profession READ profession WRITE setProfession)
+    Q_PROPERTY(QString spousesName READ spousesName WRITE setSpousesName)
+
+    // using variants for QML compatibility, can be changed to proper types once QML supports that
+    Q_PROPERTY(QVariantList emails READ emailsVariant)
+    Q_PROPERTY(QVariantList phoneNumbers READ phoneNumbersVariant)
+    Q_PROPERTY(QVariantList addresses READ addressesVariant)
+
+    // ### the following properties are still missing:
+    // - logos, photos, sounds
+    // - keys
+    // - the list variants for nicks, titles, roles, orgs, urls
+    // - timezone, secrecy, gender, kind, members, relationships, impps, language
+    // - field groups, sourceUrls, calendarUrls
+
 public:
     /**
       A list of addressee objects
@@ -1151,6 +1200,10 @@ public:
     void setSpousesName(const QString &spousesName);
 
 private:
+    QVariantList emailsVariant() const;
+    QVariantList phoneNumbersVariant() const;
+    QVariantList addressesVariant() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };

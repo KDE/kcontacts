@@ -19,7 +19,6 @@
 */
 
 #include "address.h"
-#include "geo.h"
 #include "countrytoisomap_data.cpp"
 #include "isotocountrymap_data.cpp"
 

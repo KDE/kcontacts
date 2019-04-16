@@ -23,10 +23,11 @@
 
 #include "kcontacts_export.h"
 
+#include <QMap>
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QVector>
-#include <QMap>
 
 namespace KContacts {
 /**
@@ -40,6 +41,14 @@ class KCONTACTS_EXPORT PhoneNumber
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const PhoneNumber &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, PhoneNumber &);
+
+    Q_GADGET
+    Q_PROPERTY(QString id READ id WRITE setId)
+    Q_PROPERTY(QString number READ number WRITE setNumber)
+    Q_PROPERTY(QString normalizedNumber READ normalizedNumber)
+    Q_PROPERTY(Type type READ type WRITE setType)
+    Q_PROPERTY(QString typeLabel READ typeLabel)
+    Q_PROPERTY(bool isEmpty READ isEmpty)
 
 public:
     /**
@@ -65,6 +74,7 @@ public:
     };
 
     Q_DECLARE_FLAGS(Type, TypeFlag)
+    Q_FLAG(Type)
 
     /**
      * List of phone number types.
@@ -240,5 +250,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber 
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, PhoneNumber &number);
 }
+Q_DECLARE_METATYPE(KContacts::PhoneNumber)
 Q_DECLARE_TYPEINFO(KContacts::PhoneNumber, Q_MOVABLE_TYPE);
 #endif

@@ -23,10 +23,12 @@
 
 #include "kcontacts_export.h"
 
+#include <QMap>
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
-class QUrl;
+#include <QUrl>
+
 /** @short Class that holds a Resource Locator
  *  @since 5.0
  */
@@ -36,6 +38,11 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ResourceLocatorUrl &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, ResourceLocatorUrl &);
+
+    Q_GADGET
+    Q_PROPERTY(QUrl url READ url WRITE setUrl)
+    Q_PROPERTY(bool isValid READ isValid)
+
 public:
 
     ResourceLocatorUrl();
@@ -68,6 +75,7 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ResourceLoca
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ResourceLocatorUrl &object);
 }
+Q_DECLARE_METATYPE(KContacts::ResourceLocatorUrl)
 Q_DECLARE_TYPEINFO(KContacts::ResourceLocatorUrl, Q_MOVABLE_TYPE);
 
 #endif // RESOURCELOCATORURL_H

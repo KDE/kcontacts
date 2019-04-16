@@ -2661,3 +2661,35 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
 
     return true;
 }
+
+QVariantList Addressee::emailsVariant() const
+{
+    QVariantList l;
+    l.reserve(d->mEmails.size());
+    std::transform(d->mEmails.constBegin(), d->mEmails.constEnd(), std::back_inserter(l), [](const Email &email) {
+        return QVariant::fromValue(email);
+    });
+    return l;
+}
+
+QVariantList Addressee::phoneNumbersVariant() const
+{
+    QVariantList l;
+    l.reserve(d->mPhoneNumbers.size());
+    std::transform(d->mPhoneNumbers.constBegin(), d->mPhoneNumbers.constEnd(), std::back_inserter(l), [](const PhoneNumber &num) {
+        return QVariant::fromValue(num);
+    });
+    return l;
+}
+
+QVariantList Addressee::addressesVariant() const
+{
+    QVariantList l;
+    l.reserve(d->mAddresses.size());
+    std::transform(d->mAddresses.constBegin(), d->mAddresses.constEnd(), std::back_inserter(l), [](const Address &addr) {
+        return QVariant::fromValue(addr);
+    });
+    return l;
+}
+
+#include "moc_addressee.cpp"

@@ -22,6 +22,8 @@
 #define KCONTACTS_GEO_H
 
 #include "kcontacts_export.h"
+
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
 
@@ -35,6 +37,11 @@ class KCONTACTS_EXPORT Geo
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Geo &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Geo &);
+
+    Q_GADGET
+    Q_PROPERTY(float latitude READ latitude WRITE setLatitude)
+    Q_PROPERTY(float longitude READ longitude WRITE setLongitude)
+    Q_PROPERTY(bool isValid READ isValid)
 
 public:
     /**
@@ -135,5 +142,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Geo &object)
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Geo &object);
 }
+Q_DECLARE_METATYPE(KContacts::Geo)
 Q_DECLARE_TYPEINFO(KContacts::Geo, Q_MOVABLE_TYPE);
 #endif

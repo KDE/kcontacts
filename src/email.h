@@ -22,9 +22,11 @@
 #define EMAIL_H
 
 #include "kcontacts_export.h"
+
+#include <QMap>
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
 /** @short Class that holds a Email for a contact.
  *  @since 4.14.5
@@ -35,6 +37,11 @@ class KCONTACTS_EXPORT Email
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Email &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Email &);
+
+    Q_GADGET
+    Q_PROPERTY(QString email READ mail WRITE setEmail)
+    Q_PROPERTY(bool isValid READ isValid)
+
 public:
     /**
      * Creates an empty email object.
@@ -70,5 +77,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &objec
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Email &object);
 }
+Q_DECLARE_METATYPE(KContacts::Email)
 Q_DECLARE_TYPEINFO(KContacts::Email, Q_MOVABLE_TYPE);
 #endif // EMAIL_H

@@ -20,7 +20,6 @@
 
 #include "resourcelocatorurl.h"
 #include <QMap>
-#include <QUrl>
 #include <QDataStream>
 #include <QStringList>
 
