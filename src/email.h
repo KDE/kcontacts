@@ -42,7 +42,7 @@ class KCONTACTS_EXPORT Email
     Q_PROPERTY(QString email READ mail WRITE setEmail)
     Q_PROPERTY(bool isValid READ isValid)
     Q_PROPERTY(Type type READ type WRITE setType)
-    Q_PROPERTY(bool isPreferred)
+    Q_PROPERTY(bool isPreferred READ isPreferred)
 
 public:
     /**
