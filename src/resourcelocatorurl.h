@@ -29,11 +29,11 @@
 #include <QString>
 #include <QUrl>
 
+namespace KContacts {
+
 /** @short Class that holds a Resource Locator
  *  @since 5.0
  */
-
-namespace KContacts {
 class KCONTACTS_EXPORT ResourceLocatorUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ResourceLocatorUrl &);

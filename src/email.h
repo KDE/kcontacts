@@ -28,11 +28,11 @@
 #include <QSharedDataPointer>
 #include <QString>
 
+namespace KContacts {
+
 /** @short Class that holds a Email for a contact.
  *  @since 4.14.5
  */
-
-namespace KContacts {
 class KCONTACTS_EXPORT Email
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Email &);

@@ -24,11 +24,11 @@
 #include <QSharedDataPointer>
 #include <QString>
 
+namespace KContacts {
+
 /** @short Class that holds a Gender for a contact.
  *  @since 4.14.5
  */
-
-namespace KContacts {
 class KCONTACTS_EXPORT Gender
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Gender &);

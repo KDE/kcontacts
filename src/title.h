@@ -26,10 +26,10 @@
 #include <QString>
 #include <QMap>
 
+namespace KContacts {
 /** @short Class that holds a Title for a contact.
  *  @since 5.3
  */
-namespace KContacts {
 class KCONTACTS_EXPORT Title
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Title &);

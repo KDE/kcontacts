@@ -26,11 +26,11 @@
 #include <QString>
 #include <QMap>
 
+namespace KContacts {
+
 /** @short Class that holds a FieldGroup for a contact.
  *  @since 5.3
  */
-
-namespace KContacts {
 class KCONTACTS_EXPORT FieldGroup
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const FieldGroup &);

@@ -26,10 +26,14 @@
 #include <QString>
 #include <QMap>
 
+namespace KContacts {
 /** @short Class that holds a IMPP for a contact.
+ *
+ *  IMPP stands for "Instant Messaging and Presence Protocol". This field is defined
+ *  in the vCard 3.0 extension RFC 4770 and is part of vCard 4.0 (RFC 6350).
+ *
  *  @since 4.14.5
  */
-namespace KContacts {
 class KCONTACTS_EXPORT Impp
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);

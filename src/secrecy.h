@@ -26,6 +26,7 @@
 #include <QSharedDataPointer>
 
 namespace KContacts {
+/** Descripes the confidentiality of an addressee. */
 class KCONTACTS_EXPORT Secrecy
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Secrecy &);

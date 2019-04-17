@@ -26,10 +26,10 @@
 #include <QString>
 #include <QMap>
 
+namespace KContacts {
 /** @short Class that holds a Language for a contact.
  *  @since 4.14.5
  */
-namespace KContacts {
 class KCONTACTS_EXPORT Lang
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Lang &);

@@ -26,10 +26,10 @@
 #include <QString>
 #include <QMap>
 
+namespace KContacts {
 /** @short Class that holds a Note for a contact.
  *  @since 5.3
  */
-namespace KContacts {
 class KCONTACTS_EXPORT Note
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Note &);

@@ -26,11 +26,11 @@
 #include <QString>
 #include <QMap>
 class QUrl;
+
+namespace KContacts {
 /** @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
  *  @since 4.14.6
  */
-
-namespace KContacts {
 class KCONTACTS_EXPORT CalendarUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const CalendarUrl &);

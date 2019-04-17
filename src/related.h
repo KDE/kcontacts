@@ -27,6 +27,7 @@
 #include <QMap>
 
 namespace KContacts {
+/** Descripes a relationship of an Addressee. */
 class KCONTACTS_EXPORT Related
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Related &);
