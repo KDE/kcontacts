@@ -124,11 +124,12 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QVariantList emails READ emailsVariant)
     Q_PROPERTY(QVariantList phoneNumbers READ phoneNumbersVariant)
     Q_PROPERTY(QVariantList addresses READ addressesVariant)
+    Q_PROPERTY(QVariantList urls READ urlsVariant)
 
     // ### the following properties are still missing:
     // - logos, photos, sounds
     // - keys
-    // - the list variants for nicks, titles, roles, orgs, urls
+    // - the list variants for nicks, titles, roles, orgs
     // - timezone, secrecy, gender, kind, members, relationships, impps, language
     // - field groups, sourceUrls, calendarUrls
 
@@ -1203,6 +1204,7 @@ private:
     QVariantList emailsVariant() const;
     QVariantList phoneNumbersVariant() const;
     QVariantList addressesVariant() const;
+    QVariantList urlsVariant() const;
 
     class Private;
     QSharedDataPointer<Private> d;

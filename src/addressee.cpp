@@ -2692,4 +2692,14 @@ QVariantList Addressee::addressesVariant() const
     return l;
 }
 
+QVariantList Addressee::urlsVariant() const
+{
+    QVariantList l;
+    l.reserve(d->mUrlExtraList.size());
+    std::transform(d->mUrlExtraList.constBegin(), d->mUrlExtraList.constEnd(), std::back_inserter(l), [](const ResourceLocatorUrl &url) {
+        return QVariant::fromValue(url);
+    });
+    return l;
+}
+
 #include "moc_addressee.cpp"
