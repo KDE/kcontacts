@@ -2185,15 +2185,15 @@ void Addressee::setAssistantsName(const QString &assistantsName)
     }
 }
 
-QString Addressee::blogFeed() const
+QUrl Addressee::blogFeed() const
 {
-    return custom(VENDOR_ID, BLOGFEED);
+    return QUrl(custom(VENDOR_ID, BLOGFEED));
 }
 
-void Addressee::setBlogFeed(const QString &blogFeed)
+void Addressee::setBlogFeed(const QUrl &blogFeed)
 {
     if (!blogFeed.isEmpty()) {
-        insertCustom(VENDOR_ID, BLOGFEED, blogFeed);
+        insertCustom(VENDOR_ID, BLOGFEED, blogFeed.url());
     } else {
         removeCustom(VENDOR_ID, BLOGFEED);
     }

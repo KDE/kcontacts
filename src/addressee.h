@@ -115,6 +115,7 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(bool changed READ changed WRITE setChanged)
     Q_PROPERTY(QDate anniversary READ anniversary WRITE setAnniversary)
     Q_PROPERTY(QString assistantsName READ assistantsName WRITE setAssistantsName)
+    Q_PROPERTY(QUrl blogFeed READ blogFeed WRITE setBlogFeed)
     Q_PROPERTY(QString managersName READ managersName WRITE setManagersName)
     Q_PROPERTY(QString office READ office WRITE setOffice)
     Q_PROPERTY(QString profession READ profession WRITE setProfession)
@@ -1140,13 +1141,13 @@ public:
      * @note This is a non-standard extension using the @c BlogFeed field.
      * @since 5.12
      */
-    QString blogFeed() const;
+    QUrl blogFeed() const;
     /**
      * Set the contact's blog feed.
      * @note This is a non-standard extension using the @c BlogFeed field.
      * @since 5.12
      */
-    void setBlogFeed(const QString &blogFeed);
+    void setBlogFeed(const QUrl &blogFeed);
 
     /**
      * Returns the contact's manager's name.
