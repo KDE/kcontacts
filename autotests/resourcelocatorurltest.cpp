@@ -104,8 +104,8 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
                          "VERSION:3.0\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "URL;PREF=1:https://firsturl\n"
-                         "URL;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
+                         "URL;PREF=1;TYPE=HOME:https://firsturl\n"
+                         "URL;TYPE=WORK,PREF:https://sherlockholmes.com/calendar/sherlockholmes\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -114,8 +114,15 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).extraUrlList().count(), 2);
-    const ResourceLocatorUrl calurl = lst.at(0).extraUrlList().at(0);
+    auto calurl = lst.at(0).extraUrlList().at(0);
     QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://firsturl")));
+    QVERIFY(calurl.isPreferred());
+    QCOMPARE(calurl.type(), KContacts::ResourceLocatorUrl::Home);
+    QVERIFY(!calurl.parameters().isEmpty());
+    calurl = lst.at(0).extraUrlList().at(1);
+    QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
+    QVERIFY(calurl.isPreferred());
+    QCOMPARE(calurl.type(), KContacts::ResourceLocatorUrl::Work);
     QVERIFY(!calurl.parameters().isEmpty());
 }
 
@@ -204,6 +211,8 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
     url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
     QMap<QString, QStringList> params2;
     url.setParameters(params2);
+    url.setType(ResourceLocatorUrl::Work);
+    url.setPreferred(true);
     addr.insertExtraUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
@@ -216,7 +225,7 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
                           "UID:testuid\r\n"
                           "URL:https://www.kde.org\r\n"
                           "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                          "URL:https://foo.kde.org\r\n"
+                          "URL;TYPE=WORK,PREF:https://foo.kde.org\r\n"
                           "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);

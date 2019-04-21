@@ -57,6 +57,89 @@ ResourceLocatorUrl::~ResourceLocatorUrl()
 {
 }
 
+struct url_type_name
+{
+    const char* name;
+    ResourceLocatorUrl::Type type;
+};
+
+static const url_type_name url_type_names[] = {
+    { "HOME", ResourceLocatorUrl::Home },
+    { "WORK", ResourceLocatorUrl::Work },
+    { "OTHER", ResourceLocatorUrl::Other },
+    { "PROFILE", ResourceLocatorUrl::Profile }
+};
+
+ResourceLocatorUrl::Type ResourceLocatorUrl::type() const
+{
+    const auto it = d->parameters.constFind(QLatin1String("type"));
+    if (it == d->parameters.end()) {
+        return Unknown;
+    }
+
+    Type type = Unknown;
+    for (const auto &s : it.value()) {
+        const auto it = std::find_if(std::begin(url_type_names), std::end(url_type_names), [s](const url_type_name &t) {
+            return QLatin1String(t.name) == s;
+        });
+        if (it != std::end(url_type_names)) {
+            type |= (*it).type;
+        }
+    }
+    return type;
+}
+
+void ResourceLocatorUrl::setType(ResourceLocatorUrl::Type type)
+{
+    const auto oldType = this->type();
+
+    auto types = d->parameters.value(QLatin1String("type"));
+    for (const auto &t : url_type_names) {
+        if (((type ^ oldType) & t.type) == 0) {
+            continue; // no change
+        }
+
+        if (type & t.type) {
+            types.push_back(QLatin1String(t.name));
+        } else {
+            types.removeAll(QLatin1String(t.name));
+        }
+    }
+
+    d->parameters.insert(QLatin1String("type"), types);
+}
+
+bool ResourceLocatorUrl::isPreferred() const
+{
+    auto it = d->parameters.constFind(QLatin1String("pref"));
+    if (it != d->parameters.end() && !it.value().isEmpty()) {
+        return it.value().at(0) == QLatin1String("1");
+    }
+
+    it = d->parameters.constFind(QLatin1String("type"));
+    if (it != d->parameters.end()) {
+        return it.value().contains(QLatin1String("PREF"), Qt::CaseInsensitive);
+    }
+
+    return false;
+}
+
+void ResourceLocatorUrl::setPreferred(bool preferred)
+{
+    if (preferred == isPreferred()) {
+        return;
+    }
+
+    auto types = d->parameters.value(QLatin1String("type"));
+    if (!preferred) {
+        d->parameters.remove(QLatin1String("pref"));
+        types.removeAll(QLatin1String("PREF"));
+    } else {
+        types.push_back(QLatin1String("PREF"));
+    }
+    d->parameters.insert(QLatin1String("type"), types);
+}
+
 QMap<QString, QStringList> ResourceLocatorUrl::parameters() const
 {
     return d->parameters;

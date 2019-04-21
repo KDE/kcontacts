@@ -42,6 +42,8 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
     Q_GADGET
     Q_PROPERTY(QUrl url READ url WRITE setUrl)
     Q_PROPERTY(bool isValid READ isValid)
+    Q_PROPERTY(Type type READ type WRITE setType)
+    Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
 
 public:
 
@@ -52,10 +54,45 @@ public:
 
     typedef QVector<ResourceLocatorUrl> List;
 
+    /** URL types.
+     *  @since 5.12
+     */
+    enum TypeFlag {
+        Unknown = 0, /**< No or unknown URL type is set. */
+        Home = 1,    /**< Personal website. */
+        Work = 2,    /**< Work website. */
+        Profile = 4, /**< Profile website. */
+        Other = 8    /**< Other websie. */
+    };
+    Q_DECLARE_FLAGS(Type, TypeFlag)
+    Q_FLAG(Type)
+
     Q_REQUIRED_RESULT bool isValid() const;
 
     void setUrl(const QUrl &url);
     Q_REQUIRED_RESULT QUrl url() const;
+
+    /**
+     * Returns the type of the URL.
+     * @since 5.12
+     */
+    Type type() const;
+    /**
+     * Sets the URL type.
+     * @since 5.12
+     */
+    void setType(Type type);
+
+    /**
+     * Returns whether this is the preferred website.
+     * @since 5.12
+     */
+    bool isPreferred() const;
+    /**
+     * Sets that this is the preferred website.
+     * @since 5.12
+     */
+    void setPreferred(bool preferred);
 
     void setParameters(const QMap<QString, QStringList> &params);
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
@@ -70,6 +107,8 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(ResourceLocatorUrl::Type)
 
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ResourceLocatorUrl &object);
 
