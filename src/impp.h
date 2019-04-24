@@ -39,43 +39,44 @@ namespace KContacts {
 class KCONTACTS_EXPORT Impp
 {
     Q_GADGET
+    Q_PROPERTY(bool isValid READ isValid)
+    Q_PROPERTY(QUrl address READ address WRITE setAddress)
     Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
+    Q_PROPERTY(QString serviceType READ serviceType)
+    Q_PROPERTY(QString serviceLabel READ serviceLabel)
+    Q_PROPERTY(QString serviceIcon READ serviceIcon)
 
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
 public:
     Impp();
     Impp(const Impp &other);
-    Impp(const QString &address);
+    Impp(const QUrl &address);
 
     ~Impp();
 
     typedef QVector<Impp> List;
-    enum ImppType {
-        Unknown = 0,
-        Skype = 1,
-        Xmpp = 2,
-        Jabber = 3,
-        Sip = 4,
-        Aim = 5,
-        Msn = 6,
-        Twitter = 7,
-        GoogleTalk = 8,
-        Yahoo = 9,
-        Qq = 10,
-        GaduGadu = 11,
-        Ownclound = 12,
-        Icq = 13,
-        Facebook = 14,
-        EndList
-    };
     Q_REQUIRED_RESULT bool isValid() const;
 
-    Q_REQUIRED_RESULT ImppType type() const;
-    void setType(ImppType type);
+    void setAddress(const QUrl &address);
+    Q_REQUIRED_RESULT QUrl address() const;
 
-    void setAddress(const QString &address);
-    Q_REQUIRED_RESULT QString address() const;
+    /**
+     * Returns the messaging service this address is for.
+     * This is equivalent to address().scheme().
+     * @since 5.12
+     */
+    QString serviceType() const;
+    /**
+     * Returns a translated label for the service type.
+     * @since 5.12
+     */
+    QString serviceLabel() const;
+    /**
+     * Returns the name of an icon representing the service type.
+     * @since 5.12
+     */
+    QString serviceIcon() const;
 
     /**
      * Returns whether this is the preferred messaging address.
@@ -97,8 +98,6 @@ public:
     Impp &operator=(const Impp &other);
 
     Q_REQUIRED_RESULT QString toString() const;
-
-    Q_REQUIRED_RESULT static QString typeToString(ImppType type);
 
     /**
      * Returns a translated name of the given IM service.

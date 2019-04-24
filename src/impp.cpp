@@ -28,27 +28,22 @@
 #include <QMap>
 #include <QStandardPaths>
 #include <QStringList>
+#include <QUrl>
 
 using namespace KContacts;
 
 class Q_DECL_HIDDEN Impp::Private : public QSharedData
 {
 public:
-    Private()
-        : type(KContacts::Impp::Unknown)
-    {
-    }
-
+    Private() = default;
     Private(const Private &other)
         : QSharedData(other)
     {
         parameters = other.parameters;
-        type = other.type;
     }
 
     QMap<QString, QStringList> parameters;
-    QString address;
-    ImppType type;
+    QUrl address;
 };
 
 Impp::Impp()
@@ -61,7 +56,7 @@ Impp::Impp(const Impp &other)
 {
 }
 
-Impp::Impp(const QString &address)
+Impp::Impp(const QUrl &address)
     : d(new Private)
 {
     d->address = address;
@@ -73,27 +68,32 @@ Impp::~Impp()
 
 bool Impp::isValid() const
 {
-    return !d->address.isEmpty() && (d->type != Unknown);
+    return !d->address.isEmpty() && !d->address.scheme().isEmpty();
 }
 
-Impp::ImppType Impp::type() const
-{
-    return d->type;
-}
-
-void Impp::setType(Impp::ImppType type)
-{
-    d->type = type;
-}
-
-void Impp::setAddress(const QString &address)
+void Impp::setAddress(const QUrl &address)
 {
     d->address = address;
 }
 
-QString Impp::address() const
+QUrl Impp::address() const
 {
     return d->address;
+}
+
+QString Impp::serviceType() const
+{
+    return d->address.scheme();
+}
+
+QString Impp::serviceLabel() const
+{
+    return serviceLabel(serviceType());
+}
+
+QString Impp::serviceIcon() const
+{
+    return serviceIcon(serviceType());
 }
 
 bool Impp::isPreferred() const
@@ -126,7 +126,7 @@ QMap<QString, QStringList> Impp::parameters() const
 
 bool Impp::operator==(const Impp &other) const
 {
-    return (d->parameters == other.parameters()) && (d->address == other.address()) && (d->type == other.type());
+    return (d->parameters == other.parameters()) && (d->address == other.address());
 }
 
 bool Impp::operator!=(const Impp &other) const
@@ -146,8 +146,8 @@ Impp &Impp::operator=(const Impp &other)
 QString Impp::toString() const
 {
     QString str = QLatin1String("Impp {\n");
-    str += QStringLiteral("    type: %1\n").arg(typeToString(d->type));
-    str += QStringLiteral("    address: %1\n").arg(d->address);
+    str += QStringLiteral("    type: %1\n").arg(serviceType());
+    str += QStringLiteral("    address: %1\n").arg(d->address.url());
     if (!d->parameters.isEmpty()) {
         QString param;
         QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
@@ -162,55 +162,15 @@ QString Impp::toString() const
     return str;
 }
 
-QString Impp::typeToString(ImppType type)
-{
-    switch (type) {
-    case Unknown:
-    case EndList:
-        qCWarning(KCONTACTS_LOG) << "Invalid type requested";
-        break;
-    case Skype:
-        return QStringLiteral("skype");
-    case Xmpp:
-        return QStringLiteral("xmpp");
-    case Jabber:
-        return QStringLiteral("jabber");
-    case Sip:
-        return QStringLiteral("sip");
-    case Aim:
-        return QStringLiteral("aim");
-    case Msn:
-        return QStringLiteral("msn");
-    case Twitter:
-        return QStringLiteral("twitter");
-    case GoogleTalk:
-        return QStringLiteral("googletalk");
-    case Yahoo:
-        return QStringLiteral("yahoo");
-    case Qq:
-        return QStringLiteral("qq");
-    case GaduGadu:
-        return QStringLiteral("gadugadu");
-    case Ownclound:
-        return QStringLiteral("owncloud-handle");
-    case Facebook:
-        return QStringLiteral("facebook");
-    case Icq:
-        return QStringLiteral("icq");
-    }
-    return QString();
-}
-
 QDataStream &KContacts::operator<<(QDataStream &s, const Impp &impp)
 {
-    return s << impp.d->parameters << impp.d->address << impp.d->type;
+    return s << impp.d->parameters << impp.d->address << (uint32_t)(0);
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
 {
     int i;
     s >> impp.d->parameters >> impp.d->address >> i;
-    impp.d->type = static_cast<Impp::ImppType>(i);
     return s;
 }
 
@@ -247,3 +207,5 @@ QVector<QString> Impp::serviceTypes()
     types.erase(std::unique(types.begin(), types.end()), types.end());
     return types;
 }
+
+#include "moc_impp.cpp"

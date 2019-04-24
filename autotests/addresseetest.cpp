@@ -94,8 +94,7 @@ void AddresseeTest::storeTest()
     addressee.setKind(QStringLiteral("foo"));
     addressee.setChanged(false);
     KContacts::Impp imp;
-    imp.setType(KContacts::Impp::GaduGadu);
-    imp.setAddress(QStringLiteral("foo@kde.org"));
+    imp.setAddress(QUrl(QStringLiteral("gg:foo@kde.org")));
     KContacts::Impp::List listImp;
     listImp << imp;
     addressee.setImppList(listImp);

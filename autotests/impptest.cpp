@@ -22,7 +22,6 @@
 #include "impp.h"
 #include <QTest>
 #include "vcardtool_p.h"
-Q_DECLARE_METATYPE(KContacts::Impp::ImppType)
 
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
@@ -38,37 +37,36 @@ void ImppTest::shouldHaveDefaultValue()
     KContacts::Impp impp;
     QVERIFY(!impp.isValid());
     QVERIFY(impp.address().isEmpty());
-    QCOMPARE(impp.type(), KContacts::Impp::Unknown);
+    QVERIFY(impp.serviceType().isEmpty());
     QVERIFY(impp.parameters().isEmpty());
 }
 
 void ImppTest::shouldAssignValue()
 {
-    const QString address(QStringLiteral("address"));
+    const QUrl address(QStringLiteral("icq:address"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
     impp.setParameters(params);
-    impp.setType(KContacts::Impp::Icq);
     impp.setAddress(address);
     QVERIFY(impp.isValid());
     QVERIFY(!impp.address().isEmpty());
     QCOMPARE(impp.address(), address);
-    QCOMPARE(impp.type(), KContacts::Impp::Icq);
+    QCOMPARE(impp.serviceType(), QLatin1String("icq"));
+    QCOMPARE(impp.serviceIcon(), QLatin1String("im-icq"));
     QVERIFY(!impp.parameters().isEmpty());
     QCOMPARE(impp.parameters(), params);
 }
 
 void ImppTest::shouldSerialized()
 {
-    const QString address(QStringLiteral("address"));
+    const QUrl address(QStringLiteral("icq:address"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
     impp.setParameters(params);
-    impp.setType(KContacts::Impp::Icq);
     impp.setAddress(address);
 
     QByteArray data;
@@ -84,13 +82,12 @@ void ImppTest::shouldSerialized()
 
 void ImppTest::shouldEqualImpp()
 {
-    const QString address(QStringLiteral("address"));
+    const QUrl address(QStringLiteral("icq:address"));
     QMap<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
     impp.setParameters(params);
-    impp.setType(KContacts::Impp::Icq);
     impp.setAddress(address);
 
     KContacts::Impp result(impp);
@@ -130,8 +127,8 @@ void ImppTest::shouldParseImpp()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).imppList().count(), 1);
     KContacts::Impp impp = lst.at(0).imppList().at(0);
-    QCOMPARE(impp.address(), QStringLiteral("skype:xxxxxxxx"));
-    QCOMPARE(impp.type(), KContacts::Impp::Skype);
+    QCOMPARE(impp.address(), QUrl(QStringLiteral("skype:xxxxxxxx")));
+    QCOMPARE(impp.serviceType(), QLatin1String("skype"));
 }
 
 void ImppTest::shouldParseImppVcard4()
@@ -151,23 +148,22 @@ void ImppTest::shouldParseImppVcard4()
     QCOMPARE(lst.count(), 1);
     QCOMPARE(lst.at(0).imppList().count(), 2);
     KContacts::Impp impp = lst.at(0).imppList().at(0);
-    QCOMPARE(impp.address(), QStringLiteral("xxxxxxxx"));
-    QCOMPARE(impp.type(), KContacts::Impp::Skype);
+    QCOMPARE(impp.address(), QUrl(QStringLiteral("skype:xxxxxxxx")));
+    QCOMPARE(impp.serviceType(), QLatin1String("skype"));
     QVERIFY(impp.isPreferred());
     impp = lst.at(0).imppList().at(1);
-    QCOMPARE(impp.address(), QStringLiteral("1234567890"));
-    QCOMPARE(impp.type(), KContacts::Impp::Skype);
+    QCOMPARE(impp.address(), QUrl(QStringLiteral("skype:1234567890")));
+    QCOMPARE(impp.serviceType(), QLatin1String("skype"));
     QVERIFY(!impp.isPreferred());
 }
 
-QByteArray createCard(KContacts::Impp::ImppType type)
+QByteArray createCard(const QString &type)
 {
     QByteArray expected("BEGIN:VCARD\n"
                         "VERSION:3.0\n"
                         "EMAIL:foo@kde.org\n");
-    if (type != KContacts::Impp::Unknown) {
-        const QByteArray baType = KContacts::Impp::typeToString(type).toLatin1();
-        expected += "IMPP;X-SERVICE-TYPE=" + baType + ":" + baType + ":address\n";
+    if (!type.isEmpty()) {
+        expected += "IMPP;X-SERVICE-TYPE=" + type.toLatin1() + ":" + type.toLatin1() + ":address\n";
     }
     expected += QByteArray(
         "N:;;;;\n"
@@ -178,19 +174,17 @@ QByteArray createCard(KContacts::Impp::ImppType type)
 
 void ImppTest::shouldParseServiceType_data()
 {
-    QTest::addColumn<KContacts::Impp::ImppType>("type");
+    QTest::addColumn<QString>("type");
     QTest::addColumn<bool>("hasImpp");
-    QTest::newRow("withoutimpp") << KContacts::Impp::Unknown << false;
-    QTest::newRow("skype") << KContacts::Impp::Skype << true;
-    for (int i = KContacts::Impp::Unknown + 1; i < KContacts::Impp::EndList; ++i) {
-        KContacts::Impp::ImppType type = static_cast<KContacts::Impp::ImppType>(i);
-        QTest::newRow(KContacts::Impp::typeToString(type).toLatin1().constData()) << type << true;
+    QTest::newRow("withoutimpp") << QString() << false;
+    for (const auto &type : KContacts::Impp::serviceTypes()) {
+        QTest::newRow(type.toLatin1().constData()) << type << true;
     }
 }
 
 void ImppTest::shouldParseServiceType()
 {
-    QFETCH(KContacts::Impp::ImppType, type);
+    QFETCH(QString, type);
     QFETCH(bool, hasImpp);
 
     QByteArray vcarddata = createCard(type);
@@ -202,19 +196,18 @@ void ImppTest::shouldParseServiceType()
     QCOMPARE(!lst.at(0).imppList().isEmpty(), hasImpp);
     if (hasImpp) {
         KContacts::Impp impp = lst.at(0).imppList().at(0);
-        QCOMPARE(impp.address(), QStringLiteral("%1:address").arg(KContacts::Impp::typeToString(type)));
-        QCOMPARE(impp.type(), type);
+        QCOMPARE(impp.address(), QUrl(QStringLiteral("%1:address").arg(type)));
+        QCOMPARE(impp.serviceType(), type);
     }
 }
 
-QByteArray expectedVcard(KContacts::Impp::ImppType type)
+QByteArray expectedVcard(const QString &type)
 {
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n");
-    if (type != KContacts::Impp::Unknown) {
-        const QByteArray baType = KContacts::Impp::typeToString(type).toLatin1();
-        expected += "IMPP;X-SERVICE-TYPE=" + baType + ":address\r\n";
+    if (!type.isEmpty()) {
+        expected += "IMPP:" + type.toLatin1() + ":address\r\n";
     }
 
     expected += ("N:;;;;\r\n"
@@ -243,16 +236,15 @@ void ImppTest::shouldExportEmptyType()
 
 void ImppTest::shouldExportType_data()
 {
-    QTest::addColumn<KContacts::Impp::ImppType>("type");
-    for (int i = KContacts::Impp::Unknown + 1; i < KContacts::Impp::EndList; ++i) {
-        KContacts::Impp::ImppType type = static_cast<KContacts::Impp::ImppType>(i);
-        QTest::newRow(KContacts::Impp::typeToString(type).toLatin1().constData()) << type;
+    QTest::addColumn<QString>("type");
+    for (const auto &type : KContacts::Impp::serviceTypes()) {
+        QTest::newRow(type.toLatin1().constData()) << type;
     }
 }
 
 void ImppTest::shouldExportType()
 {
-    QFETCH(KContacts::Impp::ImppType, type);
+    QFETCH(QString, type);
 
     QByteArray expected = expectedVcard(type);
     KContacts::AddresseeList lst;
@@ -260,8 +252,7 @@ void ImppTest::shouldExportType()
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Impp impp;
-    impp.setAddress(QStringLiteral("address"));
-    impp.setType(type);
+    impp.setAddress(QUrl(type + QStringLiteral(":address")));
     addr.insertImpp(impp);
     lst << addr;
     KContacts::VCardTool vcard;
@@ -274,7 +265,7 @@ void ImppTest::shouldExportWithParameters()
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype:address\r\n"
+                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2:skype:address\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
@@ -286,8 +277,7 @@ void ImppTest::shouldExportWithParameters()
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
-    impp.setAddress(QStringLiteral("address"));
-    impp.setType(KContacts::Impp::Skype);
+    impp.setAddress(QUrl(QStringLiteral("skype:address")));
     impp.setParameters(params);
     impp.setPreferred(false);
     addr.insertImpp(impp);
@@ -303,7 +293,7 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype;PREF=1:address\r\n"
+                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;PREF=1:skype:address\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
@@ -316,8 +306,7 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     params.insert(QStringLiteral("X-SERVICE-TYPE"), QStringList() << QStringLiteral("aim"));
     KContacts::Impp impp;
-    impp.setAddress(QStringLiteral("address"));
-    impp.setType(KContacts::Impp::Skype);
+    impp.setAddress(QUrl(QStringLiteral("skype:address")));
     impp.setParameters(params);
     impp.setPreferred(true);
     addr.insertImpp(impp);

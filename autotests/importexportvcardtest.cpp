@@ -104,7 +104,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
                              "FN:Sherlock Holmes\r\n"
                              "GENDER:M\r\n"
                              "GEO:geo:51.523701,0.158500\r\n"
-                             "IMPP;X-SERVICE-TYPE=xmpp;PREF=1:detective@sherlockholmes.com\r\n"
+                             "IMPP;PREF=1:xmpp:detective@sherlockholmes.com\r\n"
                              "KEY;MEDIATYPE=application/pgp-keys:https://sherlockholmes.com/sherlock-holm\r\n"
                              " es.pub.asc\r\nKIND:individual\r\n"
                              "LANG;PREF=1;TYPE=work:en\r\n"
