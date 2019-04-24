@@ -140,7 +140,8 @@ void ImppTest::shouldParseImppVcard4()
                          "VERSION:4.0\n"
                          "N:LastName;FirstName;;;\n"
                          "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "IMPP:skype:xxxxxxxx\n"
+                         "IMPP;PREF=1:skype:xxxxxxxx\n"
+                         "IMPP:skype:1234567890\n"
                          "REV:2015-03-14T09:24:45+00:00\n"
                          "FN:FirstName LastName\n"
                          "END:VCARD\n");
@@ -148,10 +149,15 @@ void ImppTest::shouldParseImppVcard4()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).imppList().count(), 1);
+    QCOMPARE(lst.at(0).imppList().count(), 2);
     KContacts::Impp impp = lst.at(0).imppList().at(0);
     QCOMPARE(impp.address(), QStringLiteral("xxxxxxxx"));
     QCOMPARE(impp.type(), KContacts::Impp::Skype);
+    QVERIFY(impp.isPreferred());
+    impp = lst.at(0).imppList().at(1);
+    QCOMPARE(impp.address(), QStringLiteral("1234567890"));
+    QCOMPARE(impp.type(), KContacts::Impp::Skype);
+    QVERIFY(!impp.isPreferred());
 }
 
 QByteArray createCard(KContacts::Impp::ImppType type)
@@ -283,6 +289,7 @@ void ImppTest::shouldExportWithParameters()
     impp.setAddress(QStringLiteral("address"));
     impp.setType(KContacts::Impp::Skype);
     impp.setParameters(params);
+    impp.setPreferred(false);
     addr.insertImpp(impp);
     lst << addr;
 
@@ -296,7 +303,7 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     QByteArray expected("BEGIN:VCARD\r\n"
                         "VERSION:4.0\r\n"
                         "EMAIL:foo@kde.org\r\n"
-                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype:address\r\n"
+                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;X-SERVICE-TYPE=skype;PREF=1:address\r\n"
                         "N:;;;;\r\n"
                         "UID:testuid\r\n"
                         "END:VCARD\r\n\r\n");
@@ -312,6 +319,7 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     impp.setAddress(QStringLiteral("address"));
     impp.setType(KContacts::Impp::Skype);
     impp.setParameters(params);
+    impp.setPreferred(true);
     addr.insertImpp(impp);
     lst << addr;
 

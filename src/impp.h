@@ -22,9 +22,11 @@
 #define IMPP_H
 
 #include "kcontacts_export.h"
+
+#include <QMap>
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
 namespace KContacts {
 /** @short Class that holds a IMPP for a contact.
@@ -36,6 +38,9 @@ namespace KContacts {
  */
 class KCONTACTS_EXPORT Impp
 {
+    Q_GADGET
+    Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
+
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
 public:
@@ -72,6 +77,17 @@ public:
     void setAddress(const QString &address);
     Q_REQUIRED_RESULT QString address() const;
 
+    /**
+     * Returns whether this is the preferred messaging address.
+     * @since 5.12
+     */
+    bool isPreferred() const;
+    /**
+     * Sets that this is the preferred messaging address.
+     * @since 5.12
+     */
+    void setPreferred(bool preferred);
+
     void setParameters(const QMap<QString, QStringList> &params);
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
 
@@ -94,5 +110,6 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Impp &object
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
 }
 
+Q_DECLARE_METATYPE(KContacts::Impp)
 Q_DECLARE_TYPEINFO(KContacts::Impp, Q_MOVABLE_TYPE);
 #endif // IMPP_H

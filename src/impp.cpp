@@ -92,6 +92,24 @@ QString Impp::address() const
     return d->address;
 }
 
+bool Impp::isPreferred() const
+{
+    const auto it = d->parameters.constFind(QLatin1String("pref"));
+    if (it != d->parameters.constEnd() && !it.value().isEmpty()) {
+        return it.value().at(0) == QLatin1String("1");
+    }
+    return false;
+}
+
+void Impp::setPreferred(bool preferred)
+{
+    if (preferred) {
+        d->parameters.insert(QStringLiteral("pref"), {QStringLiteral("1")});
+    } else {
+        d->parameters.remove(QLatin1String("pref"));
+    }
+}
+
 void Impp::setParameters(const QMap<QString, QStringList> &params)
 {
     d->parameters = params;
