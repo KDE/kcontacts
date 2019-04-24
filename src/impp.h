@@ -100,6 +100,23 @@ public:
 
     Q_REQUIRED_RESULT static QString typeToString(ImppType type);
 
+    /**
+     * Returns a translated name of the given IM service.
+     * @since 5.12
+     */
+    static QString serviceLabel(const QString &serviceType);
+    /**
+     * Returns an icon name representing the given IM service.
+     * @since 5.12
+     */
+    static QString serviceIcon(const QString &serviceType);
+    /**
+     * List all known service types.
+     * Don't use these strings directly for display, instead use serviceLabel and serviceIcon.
+     * @since 5.12
+     */
+    static QVector<QString> serviceTypes();
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -47,6 +47,8 @@ private Q_SLOTS:
 
     void shouldExportWithParameters();
     void shouldShouldNotExportTwiceServiceType();
+
+    void testProtocolInformation();
 };
 
 #endif // IMPPTEST_H

@@ -328,4 +328,17 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     QCOMPARE(ba, expected);
 }
 
+void ImppTest::testProtocolInformation()
+{
+    const auto types = KContacts::Impp::serviceTypes();
+    QVERIFY(types.size() > 10);
+    QVERIFY(types.contains(QLatin1String("xmpp")));
+
+    for (const auto &type : types) {
+        QVERIFY(!KContacts::Impp::serviceLabel(type).isEmpty());
+    }
+
+    QCOMPARE(KContacts::Impp::serviceIcon(QStringLiteral("xmpp")), QLatin1String("im-jabber"));
+}
+
 QTEST_MAIN(ImppTest)
