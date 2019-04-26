@@ -93,7 +93,7 @@ public:
         mLogoExtraList = other.mLogoExtraList;
         mUrlExtraList = other.mUrlExtraList;
         mMembers = other.mMembers;
-        mRelationShips = other.mRelationShips;
+        mRelationships = other.mRelationships;
         mSources = other.mSources;
         mEmpty = other.mEmpty;
         mImpps = other.mImpps;
@@ -146,7 +146,7 @@ public:
     ResourceLocatorUrl::List mUrlExtraList;
     QVector<QUrl> mSources;
     QStringList mMembers;
-    Related::List mRelationShips;
+    Related::List mRelationships;
     FieldGroup::List mFieldGroupList;
     Title::List mTitleExtraList;
     Role::List mRoleExtraList;
@@ -363,8 +363,8 @@ bool Addressee::operator==(const Addressee &addressee) const
         qCDebug(KCONTACTS_LOG) << "Extra url differs";
         return false;
     }
-    if (!listEquals(d->mRelationShips, addressee.d->mRelationShips)) {
-        qCDebug(KCONTACTS_LOG) << "RelationShips differs";
+    if (!listEquals(d->mRelationships, addressee.d->mRelationships)) {
+        qCDebug(KCONTACTS_LOG) << "Relationships differs";
         return false;
     }
     if (!listEquals(d->mSources, addressee.d->mSources)) {
@@ -2126,26 +2126,26 @@ QStringList Addressee::members() const
     return d->mMembers;
 }
 
-void Addressee::insertRelationShip(const Related &relation)
+void Addressee::insertRelationship(const Related &relation)
 {
     d->mEmpty = false;
 
-    if (d->mRelationShips.contains(relation)) {
+    if (d->mRelationships.contains(relation)) {
         return;
     }
 
-    d->mRelationShips.append(relation);
+    d->mRelationships.append(relation);
 }
 
-void Addressee::setRelationShips(const Related::List &c)
+void Addressee::setRelationships(const Related::List &c)
 {
     d->mEmpty = false;
-    d->mRelationShips = c;
+    d->mRelationships = c;
 }
 
-Related::List Addressee::relationShips() const
+Related::List Addressee::relationships() const
 {
-    return d->mRelationShips;
+    return d->mRelationships;
 }
 
 static const auto VENDOR_ID = QStringLiteral("KADDRESSBOOK");
@@ -2546,7 +2546,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mLogoExtraList;
     s << a.d->mUrlExtraList;
     s << a.d->mMembers;
-    s << a.d->mRelationShips;
+    s << a.d->mRelationships;
     s << a.d->mSources;
     s << a.d->mImpps;
     s << a.d->mFieldGroupList;
@@ -2601,7 +2601,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mLogoExtraList;
     s >> a.d->mUrlExtraList;
     s >> a.d->mMembers;
-    s >> a.d->mRelationShips;
+    s >> a.d->mRelationships;
     s >> a.d->mSources;
     s >> a.d->mImpps;
     s >> a.d->mFieldGroupList;

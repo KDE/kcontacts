@@ -293,7 +293,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             card.addLine(line);
         }
 
-        const Related::List relatedList = (*addrIt).relationShips();
+        const Related::List relatedList = (*addrIt).relationships();
         Related::List::ConstIterator relatedIt;
         Related::List::ConstIterator relatedEnd(relatedList.end());
         for (relatedIt = relatedList.begin(); relatedIt != relatedEnd; ++relatedIt) {
@@ -1145,7 +1145,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     Related related;
                     related.setRelated((*lineIt).value().toString());
                     related.setParameters((*lineIt).parameterMap());
-                    addr.insertRelationShip(related);
+                    addr.insertRelationship(related);
                 }
                 // CLIENTPIDMAP (vcard 4.0)
                 else if (identifier == QLatin1String("clientpidmap")) {

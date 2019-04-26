@@ -114,8 +114,8 @@ void RelatedTest::shouldParseRelated()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).relationShips().count(), 1);
-    const KContacts::Related related = lst.at(0).relationShips().at(0);
+    QCOMPARE(lst.at(0).relationships().count(), 1);
+    const KContacts::Related related = lst.at(0).relationships().at(0);
     QCOMPARE(related.related(), QStringLiteral("friend"));
 }
 
@@ -133,8 +133,8 @@ void RelatedTest::shouldParseRelatedWithArgument()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).relationShips().count(), 1);
-    const KContacts::Related related = lst.at(0).relationShips().at(0);
+    QCOMPARE(lst.at(0).relationships().count(), 1);
+    const KContacts::Related related = lst.at(0).relationships().at(0);
     QCOMPARE(related.related(), QStringLiteral("friend"));
     QCOMPARE(related.parameters().count(), 2);
 }
@@ -152,7 +152,7 @@ void RelatedTest::shouldParseWithoutRelated()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    QCOMPARE(lst.at(0).relationShips().count(), 0);
+    QCOMPARE(lst.at(0).relationships().count(), 0);
 }
 
 void RelatedTest::shouldCreateVCard4()
@@ -164,7 +164,7 @@ void RelatedTest::shouldCreateVCard4()
     KContacts::Related::List lstRelated;
     KContacts::Related related(QStringLiteral("friend"));
     lstRelated << related;
-    addr.setRelationShips(lstRelated);
+    addr.setRelationships(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -189,7 +189,7 @@ void RelatedTest::shouldCreateVCardWithTwoRelated()
     KContacts::Related related(QStringLiteral("friend"));
     KContacts::Related related2(QStringLiteral("kde"));
     lstRelated << related << related2;
-    addr.setRelationShips(lstRelated);
+    addr.setRelationships(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -218,7 +218,7 @@ void RelatedTest::shouldCreateVCardWithParameters()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);
     lstRelated << related;
-    addr.setRelationShips(lstRelated);
+    addr.setRelationships(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
@@ -245,7 +245,7 @@ void RelatedTest::shouldNotExportInVcard3()
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);
     lstRelated << related;
-    addr.setRelationShips(lstRelated);
+    addr.setRelationships(lstRelated);
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);

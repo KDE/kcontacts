@@ -1087,9 +1087,9 @@ public:
     QStringList members() const;
 
     //Relation
-    void insertRelationShip(const Related &related);
-    void setRelationShips(const Related::List &c);
-    Related::List relationShips() const;
+    void insertRelationship(const Related &related);
+    void setRelationships(const Related::List &c);
+    Related::List relationships() const;
 
     //Source
     void insertSourceUrl(const QUrl &url);
