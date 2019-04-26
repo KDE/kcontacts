@@ -2662,44 +2662,40 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
     return true;
 }
 
-QVariantList Addressee::emailsVariant() const
+template <typename T>
+static QVariantList toVariantList(const QVector<T> &v)
 {
     QVariantList l;
-    l.reserve(d->mEmails.size());
-    std::transform(d->mEmails.constBegin(), d->mEmails.constEnd(), std::back_inserter(l), [](const Email &email) {
-        return QVariant::fromValue(email);
+    l.reserve(v.size());
+    std::transform(v.begin(), v.end(), std::back_inserter(l), [](const T &elem) {
+        return QVariant::fromValue(elem);
     });
     return l;
+}
+
+QVariantList Addressee::emailsVariant() const
+{
+    return toVariantList(d->mEmails);
 }
 
 QVariantList Addressee::phoneNumbersVariant() const
 {
-    QVariantList l;
-    l.reserve(d->mPhoneNumbers.size());
-    std::transform(d->mPhoneNumbers.constBegin(), d->mPhoneNumbers.constEnd(), std::back_inserter(l), [](const PhoneNumber &num) {
-        return QVariant::fromValue(num);
-    });
-    return l;
+    return toVariantList(d->mPhoneNumbers);
 }
 
 QVariantList Addressee::addressesVariant() const
 {
-    QVariantList l;
-    l.reserve(d->mAddresses.size());
-    std::transform(d->mAddresses.constBegin(), d->mAddresses.constEnd(), std::back_inserter(l), [](const Address &addr) {
-        return QVariant::fromValue(addr);
-    });
-    return l;
+    return toVariantList(d->mAddresses);
 }
 
 QVariantList Addressee::urlsVariant() const
 {
-    QVariantList l;
-    l.reserve(d->mUrlExtraList.size());
-    std::transform(d->mUrlExtraList.constBegin(), d->mUrlExtraList.constEnd(), std::back_inserter(l), [](const ResourceLocatorUrl &url) {
-        return QVariant::fromValue(url);
-    });
-    return l;
+    return toVariantList(d->mUrlExtraList);
+}
+
+QVariantList Addressee::imppsVariant() const
+{
+    return toVariantList(d->mImpps);
 }
 
 #include "moc_addressee.cpp"
