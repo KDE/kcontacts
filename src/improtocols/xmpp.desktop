@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-jabber
 Comment=Jabber Protocol
+Comment[ca]=Protocol Jabber
+Comment[nl]=Jabber-protocol
+Comment[pt]=Protocolo Jabber
+Comment[sv]=Jabber-protokoll
+Comment[uk]=Протокол Jabber
+Comment[x-test]=xxJabber Protocolxx
 Name=Jabber
+Name[ca]=Jabber
+Name[nl]=Jabber
+Name[pt]=Jabber
+Name[sv]=Jabber
+Name[uk]=Jabber
+Name[x-test]=xxJabberxx

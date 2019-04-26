@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-irc
 Comment=Internet Relay Chat
+Comment[ca]=Internet Relay Chat
+Comment[nl]=Internet Relay Chat
+Comment[pt]=Internet Relay Chat
+Comment[sv]=Internet Relay Chat
+Comment[uk]=Internet Relay Chat
+Comment[x-test]=xxInternet Relay Chatxx
 Name=IRC
+Name[ca]=IRC
+Name[nl]=IRC
+Name[pt]=IRC
+Name[sv]=IRC
+Name[uk]=IRC
+Name[x-test]=xxIRCxx

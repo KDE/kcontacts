@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-gadugadu
 Comment=Gadu-Gadu Protocol
+Comment[ca]=Protocol Gadu-Gadu
+Comment[nl]=Gadu-Gadu-protocol
+Comment[pt]=Protocolo Gadu-Gadu
+Comment[sv]=Gadu-Gadu protokoll
+Comment[uk]=Протокол Gadu-Gadu
+Comment[x-test]=xxGadu-Gadu Protocolxx
 Name=Gadu-Gadu
+Name[ca]=Gadu-Gadu
+Name[nl]=Gadu-Gadu
+Name[pt]=Gadu-Gadu
+Name[sv]=Gadu-Gadu
+Name[uk]=Gadu-Gadu
+Name[x-test]=xxGadu-Gaduxx

@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-icq
 Comment=ICQ Protocol
+Comment[ca]=Protocol ICQ
+Comment[nl]=ICQ-protocol
+Comment[pt]=Protocolo ICQ
+Comment[sv]=ICQ-protokoll
+Comment[uk]=Протокол ICQ
+Comment[x-test]=xxICQ Protocolxx
 Name=ICQ
+Name[ca]=ICQ
+Name[nl]=ICQ
+Name[pt]=ICQ
+Name[sv]=ICQ
+Name[uk]=ICQ
+Name[x-test]=xxICQxx

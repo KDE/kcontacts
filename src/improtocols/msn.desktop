@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-msn
 Comment=MSN Messenger
+Comment[ca]=MSN Messenger
+Comment[nl]=MSN Messenger
+Comment[pt]=MSN Messenger
+Comment[sv]=MSN Messenger
+Comment[uk]=MSN Messenger
+Comment[x-test]=xxMSN Messengerxx
 Name=MSN Messenger
+Name[ca]=MSN Messenger
+Name[nl]=MSN Messenger
+Name[pt]=MSN Messenger
+Name[sv]=MSN Messenger
+Name[uk]=MSN Messenger
+Name[x-test]=xxMSN Messengerxx

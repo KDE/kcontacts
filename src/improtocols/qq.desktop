@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-qq
 Comment=Tencent QQ Messaging
+Comment[ca]=Missatgeria Tencent QQ
+Comment[nl]=Tencent QQ Messaging
+Comment[pt]=Mensagens do Tencent QQ
+Comment[sv]=Tencent QQ-meddelandeklient
+Comment[uk]=Обмін повідомленнями Tencent QQ
+Comment[x-test]=xxTencent QQ Messagingxx
 Name=QQ
+Name[ca]=QQ
+Name[nl]=QQ
+Name[pt]=QQ
+Name[sv]=QQ
+Name[uk]=QQ
+Name[x-test]=xxQQxx

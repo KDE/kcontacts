@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-meanwhile
 Comment=Meanwhile Protocol
+Comment[ca]=Protocol Meanwhile
+Comment[nl]=Meanwhile-protocol
+Comment[pt]=Protocolo Meanwhile
+Comment[sv]=Meanwhile-protokoll
+Comment[uk]=Протокол Meanwhile
+Comment[x-test]=xxMeanwhile Protocolxx
 Name=Meanwhile
+Name[ca]=Meanwhile
+Name[nl]=Meanwhile
+Name[pt]=Meanwhile
+Name[sv]=Meanwhile
+Name[uk]=Meanwhile
+Name[x-test]=xxMeanwhilexx

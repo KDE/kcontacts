@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-google
 Comment=Google Talk
+Comment[ca]=Google Talk
+Comment[nl]=Google Talk
+Comment[pt]=Google Talk
+Comment[sv]=Google Talk
+Comment[uk]=Google Talk
+Comment[x-test]=xxGoogle Talkxx
 Name=Google Talk
+Name[ca]=Google Talk
+Name[nl]=Google Talk
+Name[pt]=Google Talk
+Name[sv]=Google Talk
+Name[uk]=Google Talk
+Name[x-test]=xxGoogle Talkxx

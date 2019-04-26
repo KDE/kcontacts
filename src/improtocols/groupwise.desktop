@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-groupwise
 Comment=Novell GroupWise Messenger
+Comment[ca]=Novell GroupWise Messenger
+Comment[nl]=Protocol voor Novell GroupWise Messenger
+Comment[pt]=Novell GroupWise Messenger
+Comment[sv]=Novell GroupWise-meddelandeklient
+Comment[uk]=Програма обміну повідомленнями Novell GroupWise
+Comment[x-test]=xxNovell GroupWise Messengerxx
 Name=GroupWise
+Name[ca]=GroupWise
+Name[nl]=GroupWise
+Name[pt]=GroupWise
+Name[sv]=GroupWise
+Name[uk]=GroupWise
+Name[x-test]=xxGroupWisexx

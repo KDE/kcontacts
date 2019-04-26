@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-twitter
 Comment=Twitter Protocol
+Comment[ca]=Protocol Twitter
+Comment[nl]=Twitter-protocol
+Comment[pt]=Protocolo do Twitter
+Comment[sv]=Twitter-protokoll
+Comment[uk]=Протокол Twitter
+Comment[x-test]=xxTwitter Protocolxx
 Name=Twitter
+Name[ca]=Twitter
+Name[nl]=Twitter
+Name[pt]=Twitter
+Name[sv]=Twitter
+Name[uk]=Twitter
+Name[x-test]=xxTwitterxx

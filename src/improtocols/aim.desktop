@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-aim
 Comment=AIM Protocol
+Comment[ca]=Protocol AIM
+Comment[nl]=AIM-protocol
+Comment[pt]=Protocolo AIM
+Comment[sv]=AIM-protokoll
+Comment[uk]=Протокол AIM
+Comment[x-test]=xxAIM Protocolxx
 Name=AIM
+Name[ca]=AIM
+Name[nl]=AIM
+Name[pt]=AIM
+Name[sv]=AIM
+Name[uk]=AIM
+Name[x-test]=xxAIMxx

@@ -2,4 +2,16 @@
 Type=Service
 Icon=im-sms
 Comment=SMS Protocol
+Comment[ca]=Protocol SMS
+Comment[nl]=SMS-protocol
+Comment[pt]=Protocolo SMS
+Comment[sv]=SMS-protokoll
+Comment[uk]=Протокол SMS
+Comment[x-test]=xxSMS Protocolxx
 Name=SMS
+Name[ca]=SMS
+Name[nl]=SMS
+Name[pt]=SMS
+Name[sv]=SMS
+Name[uk]=SMS
+Name[x-test]=xxSMSxx
