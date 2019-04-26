@@ -317,17 +317,15 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 currentVCard.addLine(vCardLine);
             }
 
-            const QByteArray curLower = cur.toLower();
-
             // we do not save the start and end tag as vcardline
-            if (curLower.startsWith("begin:vcard")) {       //krazy:exclude=strings
+            if (qstrnicmp(cur.constData(), "begin:vcard", 11) == 0) {
                 inVCard = true;
                 currentLine.clear();
                 currentVCard.clear(); // flush vcard
                 continue;
             }
 
-            if (curLower.startsWith("end:vcard")) {       //krazy:exclude=strings
+            if (qstrnicmp(cur.constData(), "end:vcard", 9) == 0) {
                 inVCard = false;
                 vCardList.append(currentVCard);
                 currentLine.clear();
