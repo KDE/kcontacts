@@ -1159,20 +1159,30 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier.startsWith(QLatin1String("x-"))) {
                     QString ident = (*lineIt).identifier();
                     //X-Evolution
+                    // also normalize case of our own extensions, some backends "adjust" that
                     if (identifier == QLatin1String("x-evolution-spouse")
                         || identifier == QLatin1String("x-spouse")) {
                         ident = QStringLiteral("X-KADDRESSBOOK-X-SpousesName");
-                    } else if (identifier == QLatin1String("x-evolution-blog-url")) {
+                    } else if (identifier == QLatin1String("x-evolution-blog-url") || identifier.compare(QLatin1String("X-KADDRESSBOOK-BLOGFEED"), Qt::CaseInsensitive) == 0) {
                         ident = QStringLiteral("X-KADDRESSBOOK-BlogFeed");
                     } else if (identifier == QLatin1String("x-evolution-assistant")
-                               || identifier == QLatin1String("x-assistant")) {
+                               || identifier == QLatin1String("x-assistant")
+                               || identifier.compare(QLatin1String("X-KADDRESSBOOK-X-ASSISTANTSNAME"), Qt::CaseInsensitive) == 0) {
                         ident = QStringLiteral("X-KADDRESSBOOK-X-AssistantsName");
                     } else if (identifier == QLatin1String("x-evolution-anniversary")
-                               || identifier == QLatin1String("x-anniversary")) {
+                               || identifier == QLatin1String("x-anniversary")
+                               || identifier.compare(QLatin1String("X-KADDRESSBOOK-X-ANNIVERSARY"), Qt::CaseInsensitive) == 0) {
                         ident = QStringLiteral("X-KADDRESSBOOK-X-Anniversary");
                     } else if (identifier == QLatin1String("x-evolution-manager")
-                               || identifier == QLatin1String("x-manager")) {
+                               || identifier == QLatin1String("x-manager")
+                               || identifier.compare(QLatin1String("X-KADDRESSBOOK-X-MANAGERSNAME"), Qt::CaseInsensitive) == 0) {
                         ident = QStringLiteral("X-KADDRESSBOOK-X-ManagersName");
+                    } else if (identifier.compare(QLatin1String("X-KADDRESSBOOK-X-PROFESSION"), Qt::CaseInsensitive) == 0) {
+                        ident = QStringLiteral("X-KADDRESSBOOK-X-Profession");
+                    } else if (identifier.compare(QLatin1String("X-KADDRESSBOOK-X-OFFICE"), Qt::CaseInsensitive) == 0) {
+                        ident = QStringLiteral("X-KADDRESSBOOK-X-Office");
+                    } else if (identifier.compare(QLatin1String("X-KADDRESSBOOK-X-SPOUSESNAME"), Qt::CaseInsensitive) == 0) {
+                        ident = QStringLiteral("X-KADDRESSBOOK-X-SpousesName");
                     } else if (identifier == QLatin1String("x-aim")) {
                         ident = QStringLiteral("X-messaging/aim-All");
                     } else if (identifier == QLatin1String("x-icq")) {
