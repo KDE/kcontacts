@@ -55,6 +55,7 @@ Any comments very very welcome to kde-pim@kde.org or to jost@schenck.de.
 ```
 
 ## Field AddressCountryPosition
+
 ```
 below = country name below rest of address
 BELOW = country name below in capital letters
