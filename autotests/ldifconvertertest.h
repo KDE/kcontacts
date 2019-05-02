@@ -54,6 +54,9 @@ private Q_SLOTS:
     void shouldExportWorkStreet();
     void shouldExportMultiEmails();
     void shouldExportFullName();
+
+    //Garbage tests
+    void testGarbage();
 };
 
 #endif // LDIFCONVERTERTEST_H

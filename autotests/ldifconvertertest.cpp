@@ -545,4 +545,23 @@ void LDifConverterTest::shouldExportFullName()
     QCOMPARE(str, expected);
 }
 
+void LDifConverterTest::testGarbage()
+{
+    AddresseeList lst;
+    ContactGroup::List contactGroup;
+    QString str;
+    bool result;
+
+    result = LDIFConverter::addresseeAndContactGroupToLDIF(lst, contactGroup, str);
+    QVERIFY(!result);
+    result = LDIFConverter::contactGroupToLDIF(contactGroup, str);
+    QVERIFY(!result);
+    result = LDIFConverter::addresseeToLDIF(lst, str);
+    QVERIFY(!result);
+
+    Addressee addr;
+    result = LDIFConverter::addresseeToLDIF(addr, str);
+    QVERIFY(!result);
+}
+
 QTEST_MAIN(LDifConverterTest)

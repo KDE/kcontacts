@@ -102,10 +102,10 @@ void ContactGroupTest::contactGroupContactReference()
         ref.insertCustom(customKey, customValue);
 
         const ContactGroup::ContactReference constRef(ref);
-        constRef.uid();
-        constRef.preferredEmail();
-        constRef.custom(customKey);
-        constRef.gid();
+        QCOMPARE(constRef.uid(), uid);
+        QCOMPARE(constRef.preferredEmail(), preferredEMail);
+        QCOMPARE(constRef.custom(customKey), customValue);
+        QVERIFY(constRef.gid().isEmpty());
     }
 }
 
@@ -216,9 +216,9 @@ void ContactGroupTest::contactGroupData()
         data.insertCustom(customKey, customValue);
 
         const ContactGroup::Data constData(data);
-        constData.name();
-        constData.email();
-        constData.custom(customKey);
+        QCOMPARE(constData.name(), name);
+        QCOMPARE(constData.email(), email);
+        QCOMPARE(constData.custom(customKey), customValue);
     }
 }
 

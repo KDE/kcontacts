@@ -84,7 +84,7 @@ bool LDIFConverter::addresseeAndContactGroupToLDIF(const AddresseeList &addrList
 {
     bool result = addresseeToLDIF(addrList, str);
     if (!contactGroupList.isEmpty()) {
-        result = contactGroupToLDIF(contactGroupList, str);
+        result = (contactGroupToLDIF(contactGroupList, str) || result); //order matters
     }
     return result;
 }
@@ -111,22 +111,32 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
 
 bool LDIFConverter::contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str)
 {
+    if (contactGroupList.count() <= 0) {
+        return false;
+    }
+
+    bool result = true;
     ContactGroup::List::ConstIterator it;
     const ContactGroup::List::ConstIterator end(contactGroupList.constEnd());
     for (it = contactGroupList.constBegin(); it != end; ++it) {
-        contactGroupToLDIF(*it, str);
+        result = (contactGroupToLDIF(*it, str) || result); //order matters
     }
-    return true;
+    return result;
 }
 
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
 {
+    if (addrList.count() <= 0) {
+        return false;
+    }
+
+    bool result = true;
     AddresseeList::ConstIterator it;
     const AddresseeList::ConstIterator end(addrList.constEnd());
     for (it = addrList.constBegin(); it != end; ++it) {
-        addresseeToLDIF(*it, str);
+        result = (addresseeToLDIF(*it, str) || result); //order matters
     }
-    return true;
+    return result;
 }
 
 bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)

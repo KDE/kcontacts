@@ -121,7 +121,7 @@ void PictureTest::equalsTestInternImage()
     QVERIFY(picture1 == picture2);
 
     // access rawData() so a QByteArray is created
-    picture1.rawData();
+    QVERIFY(!picture1.rawData().isNull());
     QVERIFY(picture1 == picture2);
 }
 
@@ -136,7 +136,7 @@ void PictureTest::equalsTestInternRawData()
     QVERIFY(picture1 == picture2);
 
     // access data() so a QImage is created
-    picture1.data();
+    QVERIFY(!picture1.data().isNull());
     QVERIFY(picture1 == picture2);
 }
 
