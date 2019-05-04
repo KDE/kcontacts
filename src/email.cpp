@@ -135,8 +135,7 @@ struct email_type_name
 static const email_type_name email_type_names[] = {
     { "HOME", Email::Home },
     { "WORK", Email::Work },
-    { "OTHER", Email::Other },
-    { "PREF", Email::Preferred }
+    { "OTHER", Email::Other }
 };
 
 Email::Type KContacts::Email::type() const
@@ -180,7 +179,33 @@ void Email::setType(Type type)
 
 bool Email::isPreferred() const
 {
-    return type() & Preferred;
+    auto it = d->parameters.constFind(QLatin1String("pref"));
+    if (it != d->parameters.end() && !it.value().isEmpty()) {
+        return it.value().at(0) == QLatin1String("1");
+    }
+
+    it = d->parameters.constFind(QLatin1String("type"));
+    if (it != d->parameters.end()) {
+        return it.value().contains(QLatin1String("PREF"), Qt::CaseInsensitive);
+    }
+
+    return false;
+}
+
+void Email::setPreferred(bool preferred)
+{
+    if (preferred == isPreferred()) {
+        return;
+    }
+
+    auto types = d->parameters.value(QLatin1String("type"));
+    if (!preferred) {
+        d->parameters.remove(QLatin1String("pref"));
+        types.removeAll(QLatin1String("PREF"));
+    } else {
+        types.push_back(QLatin1String("PREF"));
+    }
+    d->parameters.insert(QLatin1String("type"), types);
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Email &email)

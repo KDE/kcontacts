@@ -42,7 +42,7 @@ class KCONTACTS_EXPORT Email
     Q_PROPERTY(QString email READ mail WRITE setEmail)
     Q_PROPERTY(bool isValid READ isValid)
     Q_PROPERTY(Type type READ type WRITE setType)
-    Q_PROPERTY(bool isPreferred READ isPreferred)
+    Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
 
 public:
     /**
@@ -62,7 +62,6 @@ public:
         Home = 1,    /**< Personal email. */
         Work = 2,    /**< Work email. */
         Other = 4,   /**< Other email. */
-        Preferred = 8     /**< Preferred email address. */
     };
 
     Q_DECLARE_FLAGS(Type, TypeFlag)
@@ -89,6 +88,11 @@ public:
      * @since 5.12
      */
     bool isPreferred() const;
+    /**
+     * Sets that this is the preferred email address.
+     * @since 5.12
+     */
+    void setPreferred(bool preferred);
 
     void setParameters(const QMap<QString, QStringList> &params);
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;

@@ -140,7 +140,7 @@ void EmailTest::shouldParseEmailVCardWithMultiEmails()
     QCOMPARE(lst.at(0).emailList().count(), 2);
     KContacts::Email email = lst.at(0).emailList().at(0);
     QCOMPARE(email.mail(), QStringLiteral("bla@bla.com"));
-    QCOMPARE(email.type(), KContacts::Email::Home | KContacts::Email::Preferred);
+    QCOMPARE(email.type(), KContacts::Email::Home);
     QVERIFY(email.isPreferred());
     email = lst.at(0).emailList().at(1);
     QCOMPARE(email.mail(), QStringLiteral("foo@foo.com"));
@@ -189,7 +189,8 @@ void EmailTest::shouldExportVcard()
     addr2.setUid(QStringLiteral("testuid"));
     KContacts::Email email1, email2;
     email1.setEmail(QStringLiteral("foo@kde.org"));
-    email1.setType(KContacts::Email::Work | KContacts::Email::Preferred);
+    email1.setType(KContacts::Email::Work);
+    email1.setPreferred(true);
     email2.setEmail(QStringLiteral("bla@kde.org"));
     email2.setType(KContacts::Email::Home);
     addr2.setEmailList({email1, email2});
