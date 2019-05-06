@@ -19,7 +19,6 @@
 */
 
 #include <iostream>
-#include <stdlib.h>
 
 #include <QFile>
 

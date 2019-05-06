@@ -107,8 +107,8 @@ static void compareBuffers(const char *version, const QByteArray &outputData, co
     const QList<QByteArray> outputLines = outputData.split('\n');
     const QList<QByteArray> outputRefLines = outputRefData.split('\n');
     for (int i = 0; i < qMin(outputLines.count(), outputRefLines.count()); ++i) {
-        const QByteArray actual = outputLines.at(i);
-        const QByteArray expect = outputRefLines.at(i);
+        const QByteArray &actual = outputLines.at(i);
+        const QByteArray &expect = outputRefLines.at(i);
         if (actual != expect) {
             qCritical() << "Mismatch in" << version << "output line" << (i + 1);
             QCOMPARE(actual, expect);

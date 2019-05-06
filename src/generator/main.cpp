@@ -139,8 +139,9 @@ static const char country_name_stringtable[] = {
     // we must sort exactly as we do this for lookup
     std::sort(processedList.begin(), processedList.end(), [](const Elem &lhs, const Elem &rhs) {
         const auto c = strcmp(lhs.name.constData(), rhs.name.constData());
-        if (c == 0)
+        if (c == 0) {
             return lhs.isoCode < rhs.isoCode;
+        }
         return  c < 0;
     });
 

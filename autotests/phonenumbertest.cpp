@@ -198,7 +198,7 @@ void PhoneNumberTest::shouldParseVCard21()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    KContacts::Addressee addr = lst.at(0);
+    const KContacts::Addressee &addr = lst.at(0);
     QCOMPARE(addr.phoneNumbers().count(), 1);
     KContacts::PhoneNumber number1 = addr.phoneNumbers().at(0);
     QCOMPARE(number1.number(), QLatin1String("+1-919-676-9564"));
@@ -304,7 +304,7 @@ void PhoneNumberTest::shouldParseVcard3()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    KContacts::Addressee addr = lst.at(0);
+    const KContacts::Addressee &addr = lst.at(0);
     QCOMPARE(addr.phoneNumbers().count(), 3);
 }
 
@@ -325,7 +325,7 @@ void PhoneNumberTest::shouldParseVcard4()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-    KContacts::Addressee addr = lst.at(0);
+    const KContacts::Addressee &addr = lst.at(0);
     QCOMPARE(addr.phoneNumbers().count(), 3);
 }
 

@@ -100,7 +100,7 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
     t << "objectclass: groupOfNames\n";
 
     for (int i = 0; i < contactGroup.dataCount(); ++i) {
-        ContactGroup::Data data = contactGroup.data(i);
+        const ContactGroup::Data &data = contactGroup.data(i);
         const QString value = QStringLiteral("cn=%1,mail=%2").arg(data.name(), data.email());
         ldif_out(t, QStringLiteral("member"), value);
     }
