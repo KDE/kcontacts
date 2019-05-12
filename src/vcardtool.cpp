@@ -243,8 +243,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             if (version == VCard::v4_0) {
                 Geo geo = (*it).geo();
                 if (geo.isValid()) {
-                    QString str;
-                    str.sprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
+                    QString str = QString::asprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
                     adrLine.addParameter(QStringLiteral("GEO"), str);
                 }
             }
@@ -373,9 +372,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         if (geo.isValid()) {
             QString str;
             if (version == VCard::v4_0) {
-                str.sprintf("geo:%.6f,%.6f", geo.latitude(), geo.longitude());
+                str = QString::asprintf("geo:%.6f,%.6f", geo.latitude(), geo.longitude());
             } else {
-                str.sprintf("%.6f;%.6f", geo.latitude(), geo.longitude());
+                str = QString::asprintf("%.6f;%.6f", geo.latitude(), geo.longitude());
             }
             card.addLine(VCardLine(QStringLiteral("GEO"), str));
         }
@@ -569,14 +568,13 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         // TODO Add vcard4.0 support
         const TimeZone timeZone = (*addrIt).timeZone();
         if (timeZone.isValid()) {
-            QString str;
 
             int neg = 1;
             if (timeZone.offset() < 0) {
                 neg = -1;
             }
 
-            str.sprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'),
+            QString str = QString::asprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'),
                         (timeZone.offset() / 60) * neg,
                         (timeZone.offset() % 60) * neg);
 

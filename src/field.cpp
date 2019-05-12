@@ -468,9 +468,7 @@ QString Field::sortKey(const KContacts::Addressee &a)
     case Private::Birthday:
         if (a.birthday().isValid()) {
             QDate date = a.birthday().date();
-            QString key;
-            key.sprintf("%02d-%02d", date.month(), date.day());
-            return key;
+            return QString::asprintf("%02d-%02d", date.month(), date.day());
         } else {
             return QStringLiteral("00-00");
         }
