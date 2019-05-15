@@ -38,6 +38,7 @@ set(kcontacts_SRCS
   clientpidmap.cpp
   ${vcardparser_SRCS}
   kcontacts.qrc
+  improtocols/improtocols.qrc
 )
 
 set(kcontacts_converter_SRCS
@@ -112,7 +113,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
 
 add_subdirectory(converter)
 add_subdirectory(generator)
-add_subdirectory(improtocols)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h

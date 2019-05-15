@@ -174,16 +174,25 @@ QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
     return s;
 }
 
-QString Impp::serviceLabel(const QString &serviceType)
+static QString improtcolFile(const QString &serviceType)
 {
     const auto path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols/") + serviceType + QStringLiteral(".desktop"));
+    if (!path.isEmpty()) {
+        return path;
+    }
+    return QStringLiteral(":/org.kde.kcontacts/improtocols/") + serviceType + QStringLiteral(".desktop");
+}
+
+QString Impp::serviceLabel(const QString &serviceType)
+{
+    const auto path = improtcolFile(serviceType);
     KDesktopFile df(path);
     return df.readName();
 }
 
 QString Impp::serviceIcon(const QString &serviceType)
 {
-    const auto path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols/") + serviceType + QStringLiteral(".desktop"));
+    const auto path = improtcolFile(serviceType);
     KDesktopFile df(path);
     return df.readIcon();
 }
@@ -191,7 +200,8 @@ QString Impp::serviceIcon(const QString &serviceType)
 QVector<QString> Impp::serviceTypes()
 {
     QVector<QString> types;
-    const auto paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols"), QStandardPaths::LocateDirectory);
+    auto paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols"), QStandardPaths::LocateDirectory);
+    paths.push_back(QStringLiteral(":/org.kde.kcontacts/improtocols/"));
     for (const auto &path : paths) {
         QDirIterator it(path, QDir::Files);
         while (it.hasNext()) {
