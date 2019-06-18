@@ -23,7 +23,7 @@
 
 #include <QMap>
 #include <QStringList>
-
+#include <QVector>
 #include "vcardline.h"
 
 namespace KContacts {
