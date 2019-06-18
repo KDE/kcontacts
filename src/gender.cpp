@@ -20,8 +20,6 @@
 
 #include "gender.h"
 
-#include <QMap>
-#include <QStringList>
 
 using namespace KContacts;
 

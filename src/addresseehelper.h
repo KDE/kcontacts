@@ -23,8 +23,6 @@
 #include "kcontacts_export.h"
 
 #include <QObject>
-#include <QStringList>
-#include <QSet>
 
 namespace KContacts {
 class AddresseeHelperPrivate;

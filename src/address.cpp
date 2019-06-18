@@ -29,9 +29,6 @@
 
 #include <kconfiggroup.h>
 
-#include <QFile>
-#include <QMap>
-#include <QTextStream>
 #include <QSharedData>
 #include <QStandardPaths>
 #include <QLocale>

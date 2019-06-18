@@ -19,7 +19,6 @@
 */
 
 #include "vcard.h"
-#include <QVector>
 
 using namespace KContacts;
 

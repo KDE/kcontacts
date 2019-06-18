@@ -24,7 +24,6 @@
 
 #include <QIODevice>
 #include <QString>
-#include <QDebug>
 
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>

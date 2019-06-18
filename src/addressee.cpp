@@ -21,7 +21,6 @@
 */
 
 #include <QDate>
-#include <QList>
 #include <QRegExp>
 #include <QSharedData>
 #include <QUuid>

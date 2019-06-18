@@ -23,7 +23,6 @@
 #include <klocalizedstring.h>
 #include <kconfiggroup.h>
 
-#include <QCoreApplication>
 
 using namespace KContacts;
 

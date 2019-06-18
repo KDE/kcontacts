@@ -26,7 +26,6 @@
 #include <kconfiggroup.h>
 #include <QTest>
 #include <QStandardPaths>
-#include <QFileInfo>
 
 QTEST_MAIN(AddressTest)
 #ifndef Q_OS_WIN

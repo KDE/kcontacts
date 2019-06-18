@@ -30,9 +30,6 @@
 #include "fieldgroup.h"
 #include "kcontacts_debug.h"
 #include <QString>
-#include <QBuffer>
-#include <QDebug>
-#include <QRegularExpression>
 
 using namespace KContacts;
 
