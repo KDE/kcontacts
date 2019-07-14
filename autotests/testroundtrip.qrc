@@ -17,6 +17,7 @@
     <file>data/vcard14.vcf</file>
     <file>data/vcard15.vcf</file>
     <file>data/vcard_extension_case_normalization.vcf</file>
+    <file>data/vcard_legacy_messaging_fields.vcf</file>
     <!-- <file>data/testfullvcard.vcf</file> -->
   </qresource>
   
@@ -49,6 +50,7 @@
     <file>data/vcard14.vcf.ref</file>
     <file>data/vcard15.vcf.ref</file>
     <file>data/vcard_extension_case_normalization.vcf.ref</file>
+    <file>data/vcard_legacy_messaging_fields.vcf.ref</file>
     <!-- <file>data/testfullvcard.vcf.ref</file> -->
   </qresource>
 

@@ -1210,8 +1210,22 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                     const QString key = ident.mid(2);
                     const int dash = key.indexOf(QLatin1Char('-'));
-                    addr.insertCustom(key.left(dash), key.mid(dash + 1),
-                                      (*lineIt).value().toString());
+
+                    // convert legacy messaging fields into IMPP ones
+                    if (key.startsWith(QLatin1String("messaging/"))) {
+                        QUrl url;
+                        url.setScheme(normalizeImppServiceType(key.mid(10, dash - 10)));
+                        const auto values = (*lineIt).value().toString().split(QChar(0xE000), QString::SkipEmptyParts);
+                        for (const auto &value : values) {
+                            url.setPath(value);
+                            Impp impp;
+                            impp.setParameters((*lineIt).parameterMap());
+                            impp.setAddress(url);
+                            addr.insertImpp(impp);
+                        }
+                    } else {
+                        addr.insertCustom(key.left(dash), key.mid(dash + 1), (*lineIt).value().toString());
+                    }
                 }
             }
         }
