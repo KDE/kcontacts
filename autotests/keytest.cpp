@@ -35,10 +35,10 @@ void KeyTest::storeTest()
     key.setCustomTypeString(QStringLiteral("GnuPG"));
     key.setTextData(QStringLiteral("That's my super secret key"));
 
-    QVERIFY(key.id() == QStringLiteral("My Id"));
+    QVERIFY(key.id() == QLatin1String("My Id"));
     QVERIFY(key.type() == KContacts::Key::Custom);
-    QVERIFY(key.customTypeString() == QStringLiteral("GnuPG"));
-    QVERIFY(key.textData() == QStringLiteral("That's my super secret key"));
+    QVERIFY(key.customTypeString() == QLatin1String("GnuPG"));
+    QVERIFY(key.textData() == QLatin1String("That's my super secret key"));
     QVERIFY(key.isBinary() == false);
 }
 

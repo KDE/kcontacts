@@ -651,7 +651,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             QMapIterator<QString, QStringList> i(impp.parameters());
             while (i.hasNext()) {
                 i.next();
-                if (i.key().toLower() != QStringLiteral("x-service-type")) {
+                if (i.key().toLower() != QLatin1String("x-service-type")) {
                     line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
                 }
             }
