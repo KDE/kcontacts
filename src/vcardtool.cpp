@@ -1339,8 +1339,8 @@ QString VCardTool::createDate(const QDate &date, VCard::Version version)
         format = QStringLiteral("--MMdd");
     }
     if (version != VCard::v4_0) {
-        format = format.replace(QStringLiteral("yyyy"), QStringLiteral("yyyy-"));
-        format = format.replace(QStringLiteral("MM"), QStringLiteral("MM-"));
+        format.replace(QStringLiteral("yyyy"), QStringLiteral("yyyy-"));
+        format.replace(QStringLiteral("MM"), QStringLiteral("MM-"));
     }
     return date.toString(format);
 }

@@ -370,7 +370,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
         idents = (*cardIt).identifiers();
         //VERSION must be first
         if (idents.contains(QLatin1String("VERSION"))) {
-            const QString str = idents.takeAt(idents.indexOf(QStringLiteral("VERSION")));
+            const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
             idents.prepend(str);
         }
 
