@@ -1241,7 +1241,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     const int posT = str.indexOf(QLatin1Char('T'));
     QString dateString = posT >= 0 ? str.left(posT) : str;
     const bool noYear = dateString.startsWith(QLatin1String("--"));
-    dateString = dateString.remove(QLatin1Char('-'));
+    dateString.remove(QLatin1Char('-'));
     QDate date;
     if (noYear) {
         date = QDate::fromString(dateString, QStringLiteral("MMdd"));
@@ -1255,7 +1255,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     int offsetSecs = 0;
     if (posT >= 0) {
         QString timeString = str.mid(posT + 1);
-        timeString = timeString.remove(QLatin1Char(':'));
+        timeString.remove(QLatin1Char(':'));
         const int zPos = timeString.indexOf(QLatin1Char('Z'));
         const int plusPos = timeString.indexOf(QLatin1Char('+'));
         const int minusPos = timeString.indexOf(QLatin1Char('-'));
