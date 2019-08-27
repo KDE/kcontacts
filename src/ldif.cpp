@@ -182,10 +182,10 @@ bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical, QB
     }
     if (tmp.endsWith(QLatin1String("true"))) {
         critical = true;
-        tmp.truncate(tmp.length() - 5);
+        tmp.chop(5);
     } else if (tmp.endsWith(QLatin1String("false"))) {
         critical = false;
-        tmp.truncate(tmp.length() - 6);
+        tmp.chop(6);
     }
     oid = tmp;
     return url;
