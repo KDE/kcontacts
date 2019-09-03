@@ -181,7 +181,7 @@ bool Email::isPreferred() const
 {
     auto it = d->parameters.constFind(QLatin1String("pref"));
     if (it != d->parameters.end() && !it.value().isEmpty()) {
-        return it.value().at(0) == QLatin1String("1");
+        return it.value().at(0) == QLatin1Char('1');
     }
 
     it = d->parameters.constFind(QLatin1String("type"));

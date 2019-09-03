@@ -430,7 +430,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
 
                     // handle encoding
                     if (hasEncoding) {   // have to encode the data
-                        if (encodingType == QLatin1String("b")) {
+                        if (encodingType == QLatin1Char('b')) {
                             checkMultibyte = false;
                             output = input.toBase64();
                         } else if (encodingType == QLatin1String("quoted-printable")) {

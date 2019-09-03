@@ -406,7 +406,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("o")
+    if (fieldname == QLatin1Char('o')
         || fieldname == QLatin1String("organization")            // Exchange
         || fieldname == QLatin1String("organizationname")) {     // Exchange
         a.setOrganization(value);
@@ -547,7 +547,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
     }
 
     if (fieldname == QLatin1String("countryname")
-        || fieldname == QLatin1String("c")) {      // mozilla
+        || fieldname == QLatin1Char('c')) {      // mozilla
         if (value.length() <= 2) {
             value = Address::ISOtoCountry(value);
         }
@@ -555,7 +555,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("l")) {      // mozilla
+    if (fieldname == QLatin1Char('l')) {      // mozilla
         workAddr.setLocality(value);
         return;
     }

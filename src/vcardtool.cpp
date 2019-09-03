@@ -986,7 +986,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.setMailer((*lineIt).value().toString());
                 }
                 // N
-                else if (identifier == QLatin1String("n")) {
+                else if (identifier == QLatin1Char('n')) {
                     const QStringList nameParts = splitString(semicolonSep, (*lineIt).value().toString());
                     const int numberOfParts(nameParts.count());
                     if (numberOfParts > 0) {
