@@ -45,7 +45,10 @@ set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name tr
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
+   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+endif()
+
 add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
 
