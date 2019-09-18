@@ -7,7 +7,6 @@ platforms:
     - name: All
 portingAid: false
 deprecated: false
-release: false
 libraries:
  - qmake: KContacts
    cmake: "KF5::Contacts"
