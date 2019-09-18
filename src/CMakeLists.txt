@@ -74,7 +74,7 @@ PRIVATE
 )
 
 set_target_properties(KF5Contacts PROPERTIES
-    VERSION ${KContacts_VERSION_STRING}
+    VERSION ${KContacts_VERSION}
     SOVERSION ${KContacts_SOVERSION}
     EXPORT_NAME Contacts
 )
@@ -139,7 +139,7 @@ if(BUILD_QCH)
         KF5Contacts_QCH
         NAME KContacts
         BASE_NAME KF5Contacts
-        VERSION ${KContacts_VERSION_STRING}
+        VERSION ${KContacts_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
             ${KContacts_HEADERS}
