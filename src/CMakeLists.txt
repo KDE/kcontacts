@@ -55,8 +55,12 @@ generate_export_header(KF5Contacts BASE_NAME kcontacts)
 add_library(KF5::Contacts ALIAS KF5Contacts)
 
 target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts>")
-target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_SOURCE_DIR}/src;${KContacts_BINARY_DIR}/src>")
-target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_SOURCE_DIR}/src/vcardparser>")
+set(KContacts_BUILD_INCLUDE_DIRS
+    ${KContacts_SOURCE_DIR}/src
+    ${KContacts_BINARY_DIR}/src
+    ${KContacts_SOURCE_DIR}/src/vcardparser
+)
+target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUILD_INCLUDE_DIRS}>")
 
 target_link_libraries(KF5Contacts
 PUBLIC
@@ -143,6 +147,8 @@ if(BUILD_QCH)
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
             Qt5Core_QCH
+        INCLUDE_DIRS
+            ${KContacts_BUILD_INCLUDE_DIRS}
         BLANK_MACROS
             KCONTACTS_EXPORT
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
