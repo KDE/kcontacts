@@ -257,7 +257,6 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
 ////
 
 VCardParser::VCardParser()
-    : d(nullptr)
 {
 }
 
