@@ -19,6 +19,7 @@
     <file>data/vcard_extension_case_normalization.vcf</file>
     <file>data/vcard_legacy_messaging_fields.vcf</file>
     <!-- <file>data/testfullvcard.vcf</file> -->
+    <file>data/vcardwithitemasapplesupport.vcf</file>
   </qresource>
   
   <!-- output files formatted for vcard version 2.1 -->
@@ -52,6 +53,7 @@
     <file>data/vcard_extension_case_normalization.vcf.ref</file>
     <file>data/vcard_legacy_messaging_fields.vcf.ref</file>
     <!-- <file>data/testfullvcard.vcf.ref</file> -->
+    <file>data/vcardwithitemasapplesupport.vcf.ref</file>
   </qresource>
 
   <!-- output files formatted for vcard version 4.0 -->
