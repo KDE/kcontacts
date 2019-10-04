@@ -736,7 +736,6 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
     static const QLatin1Char commaSep(',');
     QString identifier;
     QString group;
-
     Addressee::List addrList;
     const VCard::List vCardList = VCardParser::parseVCards(vcard);
 
@@ -756,7 +755,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
             for (lineIt = lines.begin(); lineIt != lines.end(); ++lineIt) {
                 identifier = (*lineIt).identifier().toLower();
                 group = (*lineIt).group();
-                if (!group.isEmpty()) {
+                if (!group.isEmpty() && identifier != QLatin1String("adr")) {
                     KContacts::FieldGroup groupField(group + QLatin1Char('.') + (*lineIt).identifier());
                     groupField.setParameters((*lineIt).parameterMap());
                     groupField.setValue((*lineIt).value().toString());
