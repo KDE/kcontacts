@@ -1,0 +1,584 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2015, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-06-19 03:19+0200\n"
+"PO-Revision-Date: 2016-12-11 22:23+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: address.cpp:398
+#, kde-format
+msgid "Post Office Box"
+msgstr "우편 사서함"
+
+#: address.cpp:414
+#, kde-format
+msgid "Extended Address Information"
+msgstr "확장 주소 정보"
+
+#: address.cpp:430
+#, kde-format
+msgid "Street"
+msgstr "도로명"
+
+#: address.cpp:446
+#, kde-format
+msgid "Locality"
+msgstr "자치구"
+
+#: address.cpp:462
+#, kde-format
+msgid "Region"
+msgstr "지역"
+
+#: address.cpp:478
+#, kde-format
+msgid "Postal Code"
+msgstr "우편 번호"
+
+#: address.cpp:494
+#, kde-format
+msgid "Country"
+msgstr "국가"
+
+#: address.cpp:510
+#, kde-format
+msgid "Delivery Label"
+msgstr "배달 정보"
+
+#: address.cpp:528
+#, kde-format
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "국내"
+
+#: address.cpp:530
+#, kde-format
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "국제"
+
+#: address.cpp:532
+#, kde-format
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "우편"
+
+#: address.cpp:534
+#, kde-format
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "소포"
+
+#: address.cpp:536
+#, kde-format
+msgctxt "Home Address"
+msgid "Home"
+msgstr "집"
+
+#: address.cpp:538
+#, kde-format
+msgctxt "Work Address"
+msgid "Work"
+msgstr "직장"
+
+#: address.cpp:540
+#, kde-format
+msgid "Preferred Address"
+msgstr "선호 주소"
+
+#: address.cpp:542
+#, kde-format
+msgctxt "another type of address"
+msgid "Other"
+msgstr "기타"
+
+#: addressee.cpp:433
+#, kde-format
+msgid "Unique Identifier"
+msgstr "고유 식별자"
+
+#: addressee.cpp:453
+#, kde-format
+msgid "Name"
+msgstr "이름"
+
+#: addressee.cpp:649
+#, kde-format
+msgid "Formatted Name"
+msgstr "형식 있는 이름"
+
+#: addressee.cpp:669
+#, kde-format
+msgid "Family Name"
+msgstr "성"
+
+#: addressee.cpp:689
+#, kde-format
+msgid "Given Name"
+msgstr "성 제외 이름"
+
+#: addressee.cpp:709
+#, kde-format
+msgid "Additional Names"
+msgstr "추가 이름"
+
+#: addressee.cpp:729
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr "존칭 접두사"
+
+#: addressee.cpp:749
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr "존칭 접미사"
+
+#: addressee.cpp:800
+#, kde-format
+msgid "Nick Name"
+msgstr "별명"
+
+#: addressee.cpp:840
+#, kde-format
+msgid "Birthday"
+msgstr "생일"
+
+#: addressee.cpp:845
+#, kde-format
+msgid "Home Address Street"
+msgstr "집 주소 도로명"
+
+#: addressee.cpp:850
+#, kde-format
+msgid "Home Address Post Office Box"
+msgstr "집 주소 사서함"
+
+#: addressee.cpp:855
+#, kde-format
+msgid "Home Address City"
+msgstr "집 주소 도시"
+
+#: addressee.cpp:860
+#, kde-format
+msgid "Home Address State"
+msgstr "집 주소 도/광역시"
+
+#: addressee.cpp:865
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr "집 주소 우편 번호"
+
+#: addressee.cpp:870
+#, kde-format
+msgid "Home Address Country"
+msgstr "집 주소 국가"
+
+#: addressee.cpp:875
+#, kde-format
+msgid "Home Address Label"
+msgstr "집 주소 레이블"
+
+#: addressee.cpp:880
+#, kde-format
+msgid "Business Address Street"
+msgstr "직장 주소 도로명"
+
+#: addressee.cpp:885
+#, kde-format
+msgid "Business Address Post Office Box"
+msgstr "직장 주소 사서함"
+
+#: addressee.cpp:890
+#, kde-format
+msgid "Business Address City"
+msgstr "직장 주소 도시"
+
+#: addressee.cpp:895
+#, kde-format
+msgid "Business Address State"
+msgstr "직장 주소 도/광역시"
+
+#: addressee.cpp:900
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr "직장 주소 우편 번호"
+
+#: addressee.cpp:905
+#, kde-format
+msgid "Business Address Country"
+msgstr "직장 주소 국가"
+
+#: addressee.cpp:910
+#, kde-format
+msgid "Business Address Label"
+msgstr "직장 주소 레이블"
+
+#: addressee.cpp:915
+#, kde-format
+msgid "Home Phone"
+msgstr "집 전화"
+
+#: addressee.cpp:920
+#, kde-format
+msgid "Business Phone"
+msgstr "직장 전화"
+
+#: addressee.cpp:925
+#, kde-format
+msgid "Mobile Phone"
+msgstr "휴대 전화"
+
+#: addressee.cpp:930 phonenumber.cpp:231
+#, kde-format
+msgid "Home Fax"
+msgstr "집 팩스"
+
+#: addressee.cpp:935
+#, kde-format
+msgid "Business Fax"
+msgstr "직장 팩스"
+
+#: addressee.cpp:940
+#, kde-format
+msgid "Car Phone"
+msgstr "카폰"
+
+#: addressee.cpp:945 phonenumber.cpp:207
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: addressee.cpp:950 phonenumber.cpp:211
+#, kde-format
+msgid "Pager"
+msgstr "호출기"
+
+#: addressee.cpp:955
+#, kde-format
+msgid "Email Address"
+msgstr "이메일 주소"
+
+#: addressee.cpp:975
+#, kde-format
+msgid "Mail Client"
+msgstr "메일 클라이언트"
+
+#: addressee.cpp:995
+#, kde-format
+msgid "Time Zone"
+msgstr "시간대"
+
+#: addressee.cpp:1015
+#, kde-format
+msgid "Geographic Position"
+msgstr "지리적 위치"
+
+#: addressee.cpp:1066
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr "직위"
+
+#: addressee.cpp:1117
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr "직급"
+
+#: addressee.cpp:1168 field.cpp:241
+#, kde-format
+msgid "Organization"
+msgstr "조직"
+
+#: addressee.cpp:1188
+#, kde-format
+msgid "Department"
+msgstr "부서"
+
+#: addressee.cpp:1208
+#, kde-format
+msgid "Note"
+msgstr "메모"
+
+#: addressee.cpp:1228
+#, kde-format
+msgid "Product Identifier"
+msgstr "제품 식별자"
+
+#: addressee.cpp:1248
+#, kde-format
+msgid "Revision Date"
+msgstr "리비전 날짜"
+
+#: addressee.cpp:1268
+#, kde-format
+msgid "Sort String"
+msgstr "정렬 문자열"
+
+#: addressee.cpp:1294
+#, kde-format
+msgid "Homepage"
+msgstr "홈페이지"
+
+#: addressee.cpp:1314
+#, kde-format
+msgid "Security Class"
+msgstr "보안 등급"
+
+#: addressee.cpp:1334
+#, kde-format
+msgid "Logo"
+msgstr "로고"
+
+#: addressee.cpp:1354
+#, kde-format
+msgid "Photo"
+msgstr "사진"
+
+#: addressee.cpp:1374
+#, kde-format
+msgid "Sound"
+msgstr "소리"
+
+#: addresseehelper.cpp:74
+#, kde-format
+msgid "Dr."
+msgstr "박사"
+
+#: addresseehelper.cpp:75
+#, kde-format
+msgid "Miss"
+msgstr ""
+
+#: addresseehelper.cpp:76
+#, kde-format
+msgid "Mr."
+msgstr ""
+
+#: addresseehelper.cpp:77
+#, kde-format
+msgid "Mrs."
+msgstr ""
+
+#: addresseehelper.cpp:78
+#, kde-format
+msgid "Ms."
+msgstr ""
+
+#: addresseehelper.cpp:79
+#, kde-format
+msgid "Prof."
+msgstr "교수"
+
+#: addresseehelper.cpp:81
+#, kde-format
+msgid "I"
+msgstr "1세"
+
+#: addresseehelper.cpp:82
+#, kde-format
+msgid "II"
+msgstr "2세"
+
+#: addresseehelper.cpp:83
+#, kde-format
+msgid "III"
+msgstr "3세"
+
+#: addresseehelper.cpp:84
+#, kde-format
+msgid "Jr."
+msgstr ""
+
+#: addresseehelper.cpp:85
+#, kde-format
+msgid "Sr."
+msgstr ""
+
+#: field.cpp:218
+#, kde-format
+msgid "Unknown Field"
+msgstr "알 수 없는 필드"
+
+#: field.cpp:231
+#, kde-format
+msgid "All"
+msgstr "모두"
+
+#: field.cpp:233
+#, kde-format
+msgid "Frequent"
+msgstr "자주"
+
+#: field.cpp:235
+#, kde-format
+msgctxt "street/postal"
+msgid "Address"
+msgstr "주소"
+
+#: field.cpp:237
+#, kde-format
+msgid "Email"
+msgstr "이메일"
+
+#: field.cpp:239
+#, kde-format
+msgid "Personal"
+msgstr "개인"
+
+#: field.cpp:243
+#, kde-format
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: field.cpp:245
+#, kde-format
+msgid "Undefined"
+msgstr "정의되지 않음"
+
+#: key.cpp:214
+#, kde-format
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "X509"
+
+#: key.cpp:217
+#, kde-format
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "PGP"
+
+#: key.cpp:220
+#, kde-format
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: key.cpp:223
+#, kde-format
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "알 수 없는 형식"
+
+#: phonenumber.cpp:183
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr "전화 번호"
+
+#: phonenumber.cpp:185
+#, kde-format
+msgctxt "Home phone"
+msgid "Home"
+msgstr "홈"
+
+#: phonenumber.cpp:187
+#, kde-format
+msgctxt "Work phone"
+msgid "Work"
+msgstr "직장"
+
+#: phonenumber.cpp:189
+#, kde-format
+msgid "Messenger"
+msgstr "메신저"
+
+#: phonenumber.cpp:191
+#, kde-format
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "선호함"
+
+#: phonenumber.cpp:193
+#, kde-format
+msgid "Voice"
+msgstr "음성"
+
+#: phonenumber.cpp:195
+#, kde-format
+msgid "Fax"
+msgstr "팩스"
+
+#: phonenumber.cpp:197
+#, kde-format
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "휴대폰"
+
+#: phonenumber.cpp:199
+#, kde-format
+msgctxt "Video phone"
+msgid "Video"
+msgstr "동영상"
+
+#: phonenumber.cpp:201
+#, kde-format
+msgid "Mailbox"
+msgstr "사서함"
+
+#: phonenumber.cpp:203
+#, kde-format
+msgid "Modem"
+msgstr "모뎀"
+
+#: phonenumber.cpp:205
+#, kde-format
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "카폰"
+
+#: phonenumber.cpp:209
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: phonenumber.cpp:213
+#, kde-format
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "기타"
+
+#: phonenumber.cpp:226
+#, kde-format
+msgid "Preferred Number"
+msgstr "선호하는 번호"
+
+#: phonenumber.cpp:236
+#, kde-format
+msgid "Work Fax"
+msgstr "직장 팩스"
+
+#: secrecy.cpp:111
+#, kde-format
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "공공"
+
+#: secrecy.cpp:114
+#, kde-format
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "개인"
+
+#: secrecy.cpp:117
+#, kde-format
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "통제됨"
+
+#: secrecy.cpp:120
+#, kde-format
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "알 수 없는 형식"
