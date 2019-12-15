@@ -1,6 +1,6 @@
 include(ECMAddTests)
 
-find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
+find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
 
 ########### next target ###############
 

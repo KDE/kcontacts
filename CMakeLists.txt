@@ -6,11 +6,15 @@ set(KF5_DEP_VERSION "5.65.0") # handled by release scripts
 project(KContacts VERSION ${KF5_VERSION})
 
 # ECM setup
-set(QT_REQUIRED_VERSION "5.11.0")
-
+include(FeatureSummary)
 find_package(ECM 5.65.0 NO_MODULE)
+set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
+feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
 set(CMAKE_AUTORCC ON)
+
+set(REQUIRED_QT_VERSION "5.11.0")
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -21,7 +25,6 @@ include(ECMGenerateHeaders)
 include(ECMGeneratePriFile)
 
 include(ECMSetupVersion)
-include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 
@@ -37,7 +40,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
+find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 find_package(IsoCodes MODULE)
 set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name translations." TYPE RUNTIME)
