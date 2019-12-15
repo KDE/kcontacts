@@ -8,7 +8,7 @@ project(KContacts VERSION ${KF5_VERSION})
 # ECM setup
 set(QT_REQUIRED_VERSION "5.11.0")
 
-find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
+find_package(ECM 5.65.0 NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${KContacts_SOURCE_DIR}/cmake)
 set(CMAKE_AUTORCC ON)
 
