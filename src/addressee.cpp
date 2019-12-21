@@ -21,7 +21,7 @@
 */
 
 #include <QDate>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSharedData>
 #include <QUuid>
 
@@ -1580,7 +1580,7 @@ QString Addressee::fullEmail(const QString &email) const
     if (realName().isEmpty()) {
         text = e;
     } else {
-        QRegExp needQuotes(QStringLiteral("[^ 0-9A-Za-z\\x0080-\\xFFFF]"));
+        QRegularExpression needQuotes(QStringLiteral("[^ 0-9A-Za-z\\x{0080}-\\x{FFFF}]"));
         if (realName().indexOf(needQuotes) != -1) {
             QString name = realName();
             name.replace(QLatin1String("\""), QLatin1String("\\\""));
