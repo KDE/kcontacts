@@ -1,0 +1,587 @@
+# Translation of kcontacts5 to Norwegian Bokmål
+#
+# Nils Kristian Tomren <slx@nilsk.net>, 2007.
+# Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2008, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kabc\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-12-03 02:53+0100\n"
+"PO-Revision-Date: 2009-11-22 10:26+0100\n"
+"Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
+"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: address.cpp:397
+#, kde-format
+msgid "Post Office Box"
+msgstr "Postboks"
+
+#: address.cpp:413
+#, kde-format
+msgid "Extended Address Information"
+msgstr "Utvidet adresseinformasjon"
+
+#: address.cpp:429
+#, kde-format
+msgid "Street"
+msgstr "Gate"
+
+#: address.cpp:445
+#, kde-format
+msgid "Locality"
+msgstr "Sted"
+
+#: address.cpp:461
+#, kde-format
+msgid "Region"
+msgstr "Område"
+
+#: address.cpp:477
+#, kde-format
+msgid "Postal Code"
+msgstr "Postnummer"
+
+#: address.cpp:493
+#, kde-format
+msgid "Country"
+msgstr "Land"
+
+#: address.cpp:509
+#, kde-format
+msgid "Delivery Label"
+msgstr "Leveringsetikett"
+
+#: address.cpp:527
+#, kde-format
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "Innenlands"
+
+#: address.cpp:529
+#, kde-format
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "Internasjonalt"
+
+#: address.cpp:531
+#, kde-format
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "Post"
+
+#: address.cpp:533
+#, kde-format
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "Pakke"
+
+#: address.cpp:535
+#, kde-format
+msgctxt "Home Address"
+msgid "Home"
+msgstr "Hjem"
+
+#: address.cpp:537
+#, kde-format
+msgctxt "Work Address"
+msgid "Work"
+msgstr "Arbeid"
+
+#: address.cpp:539
+#, kde-format
+msgid "Preferred Address"
+msgstr "Foretrukket adresse"
+
+#: address.cpp:541
+#, kde-format
+msgctxt "another type of address"
+msgid "Other"
+msgstr "Andre"
+
+#: addressee.cpp:433
+#, kde-format
+msgid "Unique Identifier"
+msgstr "Entydig identifikasjon"
+
+#: addressee.cpp:453
+#, kde-format
+msgid "Name"
+msgstr "Navn"
+
+#: addressee.cpp:649
+#, kde-format
+msgid "Formatted Name"
+msgstr "Formattert navn"
+
+#: addressee.cpp:669
+#, kde-format
+msgid "Family Name"
+msgstr "Etternavn"
+
+#: addressee.cpp:689
+#, kde-format
+msgid "Given Name"
+msgstr "Fornavn"
+
+#: addressee.cpp:709
+#, kde-format
+msgid "Additional Names"
+msgstr "Flere navn"
+
+#: addressee.cpp:729
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr "Høflige prefikser"
+
+#: addressee.cpp:749
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr "Høflige suffikser"
+
+#: addressee.cpp:800
+#, kde-format
+msgid "Nick Name"
+msgstr "Kallenavn"
+
+#: addressee.cpp:840
+#, kde-format
+msgid "Birthday"
+msgstr "Fødselsdag"
+
+#: addressee.cpp:845
+#, kde-format
+msgid "Home Address Street"
+msgstr "Hjemmeadresse,gate"
+
+#: addressee.cpp:850
+#, kde-format
+msgid "Home Address Post Office Box"
+msgstr "Hjemmeadresse, postboks"
+
+#: addressee.cpp:855
+#, kde-format
+msgid "Home Address City"
+msgstr "Hjemmeadresse, by"
+
+#: addressee.cpp:860
+#, kde-format
+msgid "Home Address State"
+msgstr "Hjemmeadresse, stat"
+
+#: addressee.cpp:865
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr "Hjemmeadresse, postnummer"
+
+#: addressee.cpp:870
+#, kde-format
+msgid "Home Address Country"
+msgstr "Hjemmeadresse, land"
+
+#: addressee.cpp:875
+#, kde-format
+msgid "Home Address Label"
+msgstr "Hjemmeadresse, merkelapp"
+
+#: addressee.cpp:880
+#, kde-format
+msgid "Business Address Street"
+msgstr "Firmaadresse, gate"
+
+#: addressee.cpp:885
+#, kde-format
+msgid "Business Address Post Office Box"
+msgstr "Firmaadresse, postboks"
+
+#: addressee.cpp:890
+#, kde-format
+msgid "Business Address City"
+msgstr "Firmaadresse, by"
+
+#: addressee.cpp:895
+#, kde-format
+msgid "Business Address State"
+msgstr "Firmaadresse, stat"
+
+#: addressee.cpp:900
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr "Firmaadresse, postnummer"
+
+#: addressee.cpp:905
+#, kde-format
+msgid "Business Address Country"
+msgstr "Firmaadresse, land"
+
+#: addressee.cpp:910
+#, kde-format
+msgid "Business Address Label"
+msgstr "Firmaadresse, merkelapp"
+
+#: addressee.cpp:915
+#, kde-format
+msgid "Home Phone"
+msgstr "Hjemmetelefon"
+
+#: addressee.cpp:920
+#, kde-format
+msgid "Business Phone"
+msgstr "Telefon arbeid"
+
+#: addressee.cpp:925
+#, kde-format
+msgid "Mobile Phone"
+msgstr "Mobiltelefon"
+
+#: addressee.cpp:930 phonenumber.cpp:231
+#, kde-format
+msgid "Home Fax"
+msgstr "Hjemmefaks"
+
+#: addressee.cpp:935
+#, kde-format
+msgid "Business Fax"
+msgstr "Faks arbeid"
+
+#: addressee.cpp:940
+#, kde-format
+msgid "Car Phone"
+msgstr "Telefon i bil"
+
+#: addressee.cpp:945 phonenumber.cpp:207
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: addressee.cpp:950 phonenumber.cpp:211
+#, kde-format
+msgid "Pager"
+msgstr "Personsøker"
+
+#: addressee.cpp:955
+#, kde-format
+msgid "Email Address"
+msgstr "E-postadresse"
+
+#: addressee.cpp:975
+#, kde-format
+msgid "Mail Client"
+msgstr "E-postklient"
+
+#: addressee.cpp:995
+#, kde-format
+msgid "Time Zone"
+msgstr "Tidssone"
+
+#: addressee.cpp:1015
+#, kde-format
+msgid "Geographic Position"
+msgstr "Geografisk plassering"
+
+#: addressee.cpp:1066
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr "Tittel"
+
+#: addressee.cpp:1117
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr "Rolle"
+
+#: addressee.cpp:1168 field.cpp:241
+#, kde-format
+msgid "Organization"
+msgstr "Organisasjon"
+
+#: addressee.cpp:1188
+#, kde-format
+msgid "Department"
+msgstr "Avdeling"
+
+#: addressee.cpp:1208
+#, kde-format
+msgid "Note"
+msgstr "Merknad"
+
+#: addressee.cpp:1228
+#, kde-format
+msgid "Product Identifier"
+msgstr "Produkt-identifikator"
+
+#: addressee.cpp:1248
+#, kde-format
+msgid "Revision Date"
+msgstr "Revidert dato"
+
+#: addressee.cpp:1268
+#, kde-format
+msgid "Sort String"
+msgstr "Sorteringsstreng"
+
+#: addressee.cpp:1294
+#, kde-format
+msgid "Homepage"
+msgstr "Hjemmeside"
+
+#: addressee.cpp:1314
+#, kde-format
+msgid "Security Class"
+msgstr "Sikkerhetsklasse"
+
+#: addressee.cpp:1334
+#, kde-format
+msgid "Logo"
+msgstr "Logo"
+
+#: addressee.cpp:1354
+#, kde-format
+msgid "Photo"
+msgstr "Foto"
+
+#: addressee.cpp:1374
+#, kde-format
+msgid "Sound"
+msgstr "Lyd"
+
+#: addresseehelper.cpp:74
+#, kde-format
+msgid "Dr."
+msgstr "Dr."
+
+#: addresseehelper.cpp:75
+#, kde-format
+msgid "Miss"
+msgstr "Frøken"
+
+#: addresseehelper.cpp:76
+#, kde-format
+msgid "Mr."
+msgstr "Herr"
+
+#: addresseehelper.cpp:77
+#, kde-format
+msgid "Mrs."
+msgstr "Fru"
+
+#: addresseehelper.cpp:78
+#, kde-format
+msgid "Ms."
+msgstr "Fr."
+
+#: addresseehelper.cpp:79
+#, kde-format
+msgid "Prof."
+msgstr "Prof."
+
+#: addresseehelper.cpp:81
+#, kde-format
+msgid "I"
+msgstr "I"
+
+#: addresseehelper.cpp:82
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: addresseehelper.cpp:83
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: addresseehelper.cpp:84
+#, kde-format
+msgid "Jr."
+msgstr "Jr."
+
+#: addresseehelper.cpp:85
+#, kde-format
+msgid "Sr."
+msgstr "Sr."
+
+#: field.cpp:218
+#, kde-format
+msgid "Unknown Field"
+msgstr "Ukjent felt"
+
+#: field.cpp:231
+#, kde-format
+msgid "All"
+msgstr "Alle"
+
+#: field.cpp:233
+#, kde-format
+msgid "Frequent"
+msgstr "Ofte"
+
+#: field.cpp:235
+#, kde-format
+msgctxt "street/postal"
+msgid "Address"
+msgstr "Adresse"
+
+#: field.cpp:237
+#, kde-format
+msgid "Email"
+msgstr "E-post"
+
+#: field.cpp:239
+#, kde-format
+msgid "Personal"
+msgstr "Privat"
+
+#: field.cpp:243
+#, kde-format
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: field.cpp:245
+#, kde-format
+msgid "Undefined"
+msgstr "Udefinert"
+
+#: key.cpp:214
+#, kde-format
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "X509"
+
+#: key.cpp:217
+#, kde-format
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "PGP"
+
+#: key.cpp:220
+#, kde-format
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: key.cpp:223
+#, kde-format
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "Ukjent type"
+
+#: phonenumber.cpp:183
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr ""
+
+#: phonenumber.cpp:185
+#, kde-format
+msgctxt "Home phone"
+msgid "Home"
+msgstr "Hjem"
+
+#: phonenumber.cpp:187
+#, kde-format
+msgctxt "Work phone"
+msgid "Work"
+msgstr "Arbeid"
+
+#: phonenumber.cpp:189
+#, kde-format
+msgid "Messenger"
+msgstr "Meldingstjeneste"
+
+#: phonenumber.cpp:191
+#, kde-format
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "Foretrukket"
+
+#: phonenumber.cpp:193
+#, kde-format
+msgid "Voice"
+msgstr "Stemme"
+
+#: phonenumber.cpp:195
+#, kde-format
+msgid "Fax"
+msgstr "Faks"
+
+#: phonenumber.cpp:197
+#, kde-format
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "Mobil"
+
+#: phonenumber.cpp:199
+#, kde-format
+msgctxt "Video phone"
+msgid "Video"
+msgstr "Video"
+
+#: phonenumber.cpp:201
+#, kde-format
+msgid "Mailbox"
+msgstr "Postkasse"
+
+#: phonenumber.cpp:203
+#, kde-format
+msgid "Modem"
+msgstr "Modem"
+
+#: phonenumber.cpp:205
+#, kde-format
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "Bil"
+
+#: phonenumber.cpp:209
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: phonenumber.cpp:213
+#, kde-format
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "Andre"
+
+#: phonenumber.cpp:226
+#, kde-format
+msgid "Preferred Number"
+msgstr "Foretrukket nummer"
+
+#: phonenumber.cpp:236
+#, kde-format
+msgid "Work Fax"
+msgstr "Arbeidsfaks"
+
+#: secrecy.cpp:111
+#, kde-format
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "Offentlig"
+
+#: secrecy.cpp:114
+#, kde-format
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "Privat"
+
+#: secrecy.cpp:117
+#, kde-format
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "Konfidensiell"
+
+#: secrecy.cpp:120
+#, kde-format
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "Ukjent type"
