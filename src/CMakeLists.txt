@@ -46,7 +46,14 @@ set(kcontacts_converter_SRCS
   converter/ldifconverter.cpp
 )
 
-ecm_qt_declare_logging_category(kcontacts_converter_SRCS HEADER kcontacts_debug.h IDENTIFIER KCONTACTS_LOG CATEGORY_NAME org.kde.pim.kcontacts)
+ecm_qt_declare_logging_category(kcontacts_converter_SRCS
+    HEADER kcontacts_debug.h
+    IDENTIFIER KCONTACTS_LOG
+    CATEGORY_NAME org.kde.pim.kcontacts
+    OLD_CATEGORY_NAMES log_kcontacts
+    DESCRIPTION "kcontacts (pim lib)"
+    EXPORT KCONTACTS
+)
 
 add_library(KF5Contacts ${kcontacts_SRCS} ${kcontacts_converter_SRCS})
 
@@ -129,6 +136,12 @@ install(FILES
     ${KContacts_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/KContacts
     COMPONENT Devel
+)
+
+ecm_qt_install_logging_categories(
+    EXPORT KCONTACTS
+    FILE kcontacts.categories
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
 )
 
 ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts)
