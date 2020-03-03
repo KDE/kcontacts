@@ -923,7 +923,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (lineStr.startsWith(QLatin1String("geo:"))) { //VCard 4.0
                         lineStr.remove(QStringLiteral("geo:"));
                         const QStringList geoParts
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
                             = lineStr.split(QLatin1Char(','), QString::KeepEmptyParts);
+#else
+                            = lineStr.split(QLatin1Char(','), Qt::KeepEmptyParts);
+#endif
                         if (geoParts.size() >= 2) {
                             geo.setLatitude(geoParts.at(0).toFloat());
                             geo.setLongitude(geoParts.at(1).toFloat());
@@ -931,7 +935,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         }
                     } else {
                         const QStringList geoParts
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
                             = lineStr.split(QLatin1Char(';'), QString::KeepEmptyParts);
+#else
+                            = lineStr.split(QLatin1Char(';'), Qt::KeepEmptyParts);
+#endif
                         if (geoParts.size() >= 2) {
                             geo.setLatitude(geoParts.at(0).toFloat());
                             geo.setLongitude(geoParts.at(1).toFloat());
@@ -1214,7 +1222,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (key.startsWith(QLatin1String("messaging/"))) {
                         QUrl url;
                         url.setScheme(normalizeImppServiceType(key.mid(10, dash - 10)));
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
                         const auto values = (*lineIt).value().toString().split(QChar(0xE000), QString::SkipEmptyParts);
+#else
+                        const auto values = (*lineIt).value().toString().split(QChar(0xE000), Qt::SkipEmptyParts);
+#endif
                         for (const auto &value : values) {
                             url.setPath(value);
                             Impp impp;
