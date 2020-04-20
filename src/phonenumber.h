@@ -55,6 +55,7 @@ class KCONTACTS_EXPORT PhoneNumber
 public:
     /**
       Phone number types.
+      @see Type
     */
     enum TypeFlag {
         Home = 1,     /**< Home number */
@@ -75,6 +76,9 @@ public:
         Undefined = 16384 /** Undefined number type */
     };
 
+    /**
+     * Stores a combination of #TypeFlag values.
+     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 

@@ -56,7 +56,10 @@ public:
 
     typedef QVector<Email> List;
 
-    /** Email types. */
+    /**
+     * Email types.
+     * @see Type
+     */
     enum TypeFlag {
         Unknown = 0, /**< No or unknown email type is set. */
         Home = 1,    /**< Personal email. */
@@ -64,6 +67,9 @@ public:
         Other = 4,   /**< Other email. */
     };
 
+    /**
+     * Stores a combination of #TypeFlag values.
+     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 

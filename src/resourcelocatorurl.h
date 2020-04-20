@@ -56,6 +56,7 @@ public:
 
     /** URL types.
      *  @since 5.12
+     *  @see Type
      */
     enum TypeFlag {
         Unknown = 0, /**< No or unknown URL type is set. */
@@ -64,6 +65,10 @@ public:
         Profile = 4, /**< Profile website. */
         Other = 8    /**< Other websie. */
     };
+
+    /**
+     * Stores a combination of #TypeFlag values.
+     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 

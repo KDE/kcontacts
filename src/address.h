@@ -72,6 +72,7 @@ public:
 
     /**
       Address types:
+      @see Type
     */
     enum TypeFlag {
         Dom = 1,     /**< domestic */
@@ -83,6 +84,9 @@ public:
         Pref = 64    /**< preferred address */
     };
 
+    /**
+     * Stores a combination of #TypeFlag values.
+     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 
