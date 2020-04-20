@@ -1,5 +1,5 @@
 maintainer: mlaurent
-description: Address book API for KDE 
+description: Support for vCard contacts
 tier: 2
 type: functional
 public_lib: true
