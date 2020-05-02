@@ -1,0 +1,592 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Чуплыгин Сергей <neochapay@gmail.com>, 2007.
+# Nick Shaforostoff <shaforostoff@kde.ru>, 2007, 2008.
+# Andrey Cherepanov <skull@kde.ru>, 2009.
+# Alexander Potashev <aspotashev@gmail.com>, 2010, 2011, 2016.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: kabc\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-12-03 02:53+0100\n"
+"PO-Revision-Date: 2019-01-19 15:09+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 18.12.1\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: address.cpp:397
+#, kde-format
+msgid "Post Office Box"
+msgstr "Абонентский ящик"
+
+#: address.cpp:413
+#, kde-format
+msgid "Extended Address Information"
+msgstr "Расширенная информация об адресе"
+
+#: address.cpp:429
+#, kde-format
+msgid "Street"
+msgstr "Улица"
+
+#: address.cpp:445
+#, kde-format
+msgid "Locality"
+msgstr "Населённый пункт"
+
+#: address.cpp:461
+#, kde-format
+msgid "Region"
+msgstr "Область"
+
+#: address.cpp:477
+#, kde-format
+msgid "Postal Code"
+msgstr "Почтовый индекс"
+
+#: address.cpp:493
+#, kde-format
+msgid "Country"
+msgstr "Страна"
+
+#: address.cpp:509
+#, kde-format
+msgid "Delivery Label"
+msgstr "Наклейка на конверт"
+
+#: address.cpp:527
+#, kde-format
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "Адрес внутри страны"
+
+#: address.cpp:529
+#, kde-format
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "Международный адрес"
+
+#: address.cpp:531
+#, kde-format
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "Адрес для корреспонденции"
+
+#: address.cpp:533
+#, kde-format
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "Адрес для посылок"
+
+#: address.cpp:535
+#, kde-format
+msgctxt "Home Address"
+msgid "Home"
+msgstr "Домашний адрес"
+
+#: address.cpp:537
+#, kde-format
+msgctxt "Work Address"
+msgid "Work"
+msgstr "Служебный адрес"
+
+#: address.cpp:539
+#, kde-format
+msgid "Preferred Address"
+msgstr "Основной адрес"
+
+#: address.cpp:541
+#, kde-format
+msgctxt "another type of address"
+msgid "Other"
+msgstr "Другой адрес"
+
+#: addressee.cpp:433
+#, kde-format
+msgid "Unique Identifier"
+msgstr "Уникальный идентификатор"
+
+#: addressee.cpp:453
+#, kde-format
+msgid "Name"
+msgstr "Имя"
+
+#: addressee.cpp:649
+#, kde-format
+msgid "Formatted Name"
+msgstr "Полное имя"
+
+#: addressee.cpp:669
+#, kde-format
+msgid "Family Name"
+msgstr "Фамилия"
+
+#: addressee.cpp:689
+#, kde-format
+msgid "Given Name"
+msgstr "Имя"
+
+#: addressee.cpp:709
+#, kde-format
+msgid "Additional Names"
+msgstr "Дополнительные имена"
+
+#: addressee.cpp:729
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr "Почтительное обращение (в начале)"
+
+#: addressee.cpp:749
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr "Почтительное обращение (в конце)"
+
+#: addressee.cpp:800
+#, kde-format
+msgid "Nick Name"
+msgstr "Ник"
+
+#: addressee.cpp:840
+#, kde-format
+msgid "Birthday"
+msgstr "День рождения"
+
+#: addressee.cpp:845
+#, kde-format
+msgid "Home Address Street"
+msgstr "Домашний адрес: улица"
+
+#: addressee.cpp:850
+#, kde-format
+msgid "Home Address Post Office Box"
+msgstr "Домашний адрес: а/я"
+
+#: addressee.cpp:855
+#, kde-format
+msgid "Home Address City"
+msgstr "Домашний адрес: город"
+
+#: addressee.cpp:860
+#, kde-format
+msgid "Home Address State"
+msgstr "Домашний адрес: область/край"
+
+#: addressee.cpp:865
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr "Домашний адрес: индекс"
+
+#: addressee.cpp:870
+#, kde-format
+msgid "Home Address Country"
+msgstr "Домашний адрес: страна"
+
+#: addressee.cpp:875
+#, kde-format
+msgid "Home Address Label"
+msgstr "Домашний адрес: наклейка"
+
+#: addressee.cpp:880
+#, kde-format
+msgid "Business Address Street"
+msgstr "Служебный адрес: улица"
+
+#: addressee.cpp:885
+#, kde-format
+msgid "Business Address Post Office Box"
+msgstr "Служебный адрес: а/я"
+
+#: addressee.cpp:890
+#, kde-format
+msgid "Business Address City"
+msgstr "Служебный адрес: город"
+
+#: addressee.cpp:895
+#, kde-format
+msgid "Business Address State"
+msgstr "Служебный адрес: область/край"
+
+#: addressee.cpp:900
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr "Служебный адрес: индекс"
+
+#: addressee.cpp:905
+#, kde-format
+msgid "Business Address Country"
+msgstr "Служебный адрес: страна"
+
+#: addressee.cpp:910
+#, kde-format
+msgid "Business Address Label"
+msgstr "Служебный адрес: наклейка"
+
+#: addressee.cpp:915
+#, kde-format
+msgid "Home Phone"
+msgstr "Домашний телефон"
+
+#: addressee.cpp:920
+#, kde-format
+msgid "Business Phone"
+msgstr "Служебный телефон"
+
+#: addressee.cpp:925
+#, kde-format
+msgid "Mobile Phone"
+msgstr "Мобильный телефон"
+
+#: addressee.cpp:930 phonenumber.cpp:231
+#, kde-format
+msgid "Home Fax"
+msgstr "Домашний факс"
+
+#: addressee.cpp:935
+#, kde-format
+msgid "Business Fax"
+msgstr "Служебный факс"
+
+#: addressee.cpp:940
+#, kde-format
+msgid "Car Phone"
+msgstr "Телефон в автомобиле"
+
+#: addressee.cpp:945 phonenumber.cpp:207
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: addressee.cpp:950 phonenumber.cpp:211
+#, kde-format
+msgid "Pager"
+msgstr "Пейджер"
+
+#: addressee.cpp:955
+#, kde-format
+msgid "Email Address"
+msgstr "Адрес электронной почты"
+
+#: addressee.cpp:975
+#, kde-format
+msgid "Mail Client"
+msgstr "Почтовый клиент"
+
+#: addressee.cpp:995
+#, kde-format
+msgid "Time Zone"
+msgstr "Часовой пояс"
+
+#: addressee.cpp:1015
+#, kde-format
+msgid "Geographic Position"
+msgstr "Географическое местоположение"
+
+#: addressee.cpp:1066
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr "Обращение"
+
+#: addressee.cpp:1117
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr "Должность"
+
+#: addressee.cpp:1168 field.cpp:241
+#, kde-format
+msgid "Organization"
+msgstr "Организация"
+
+#: addressee.cpp:1188
+#, kde-format
+msgid "Department"
+msgstr "Отдел"
+
+#: addressee.cpp:1208
+#, kde-format
+msgid "Note"
+msgstr "Заметка"
+
+#: addressee.cpp:1228
+#, kde-format
+msgid "Product Identifier"
+msgstr "Идентификатор продукта"
+
+#: addressee.cpp:1248
+#, kde-format
+msgid "Revision Date"
+msgstr "Дата изменения"
+
+#: addressee.cpp:1268
+#, kde-format
+msgid "Sort String"
+msgstr "Сортировка"
+
+#: addressee.cpp:1294
+#, kde-format
+msgid "Homepage"
+msgstr "Веб-сайт"
+
+#: addressee.cpp:1314
+#, kde-format
+msgid "Security Class"
+msgstr "Класс безопасности"
+
+#: addressee.cpp:1334
+#, kde-format
+msgid "Logo"
+msgstr "Логотип"
+
+#: addressee.cpp:1354
+#, kde-format
+msgid "Photo"
+msgstr "Фотография"
+
+#: addressee.cpp:1374
+#, kde-format
+msgid "Sound"
+msgstr "Звуковой файл"
+
+#: addresseehelper.cpp:74
+#, kde-format
+msgid "Dr."
+msgstr "Д-р"
+
+#: addresseehelper.cpp:75
+#, kde-format
+msgid "Miss"
+msgstr "Г-жа"
+
+#: addresseehelper.cpp:76
+#, kde-format
+msgid "Mr."
+msgstr "Г-н"
+
+#: addresseehelper.cpp:77
+#, kde-format
+msgid "Mrs."
+msgstr "Г-жа"
+
+#: addresseehelper.cpp:78
+#, kde-format
+msgid "Ms."
+msgstr "Г-жа"
+
+#: addresseehelper.cpp:79
+#, kde-format
+msgid "Prof."
+msgstr "Проф."
+
+#: addresseehelper.cpp:81
+#, kde-format
+msgid "I"
+msgstr "I"
+
+#: addresseehelper.cpp:82
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: addresseehelper.cpp:83
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: addresseehelper.cpp:84
+#, kde-format
+msgid "Jr."
+msgstr "мл."
+
+#: addresseehelper.cpp:85
+#, kde-format
+msgid "Sr."
+msgstr "ст."
+
+#: field.cpp:218
+#, kde-format
+msgid "Unknown Field"
+msgstr "Неизвестное поле"
+
+#: field.cpp:231
+#, kde-format
+msgid "All"
+msgstr "Все"
+
+#: field.cpp:233
+#, kde-format
+msgid "Frequent"
+msgstr "Часто используемые"
+
+#: field.cpp:235
+#, kde-format
+msgctxt "street/postal"
+msgid "Address"
+msgstr "Адрес"
+
+#: field.cpp:237
+#, kde-format
+msgid "Email"
+msgstr "Адрес электронной почты"
+
+#: field.cpp:239
+#, kde-format
+msgid "Personal"
+msgstr "Персональный"
+
+#: field.cpp:243
+#, kde-format
+msgid "Custom"
+msgstr "Другой"
+
+#: field.cpp:245
+#, kde-format
+msgid "Undefined"
+msgstr "Не определён"
+
+#: key.cpp:214
+#, kde-format
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "X509"
+
+#: key.cpp:217
+#, kde-format
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "PGP"
+
+#: key.cpp:220
+#, kde-format
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "Другой"
+
+#: key.cpp:223
+#, kde-format
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "Неизвестный тип"
+
+#: phonenumber.cpp:183
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr "Номер телефона"
+
+#: phonenumber.cpp:185
+#, kde-format
+msgctxt "Home phone"
+msgid "Home"
+msgstr "Домашний телефон"
+
+#: phonenumber.cpp:187
+#, kde-format
+msgctxt "Work phone"
+msgid "Work"
+msgstr "Служебный телефон"
+
+#: phonenumber.cpp:189
+#, kde-format
+msgid "Messenger"
+msgstr "Мгновенные сообщения"
+
+#: phonenumber.cpp:191
+#, kde-format
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "Основной телефон"
+
+#: phonenumber.cpp:193
+#, kde-format
+msgid "Voice"
+msgstr "Обычный"
+
+#: phonenumber.cpp:195
+#, kde-format
+msgid "Fax"
+msgstr "Факс"
+
+#: phonenumber.cpp:197
+#, kde-format
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "Мобильный"
+
+#: phonenumber.cpp:199
+#, kde-format
+msgctxt "Video phone"
+msgid "Video"
+msgstr "Видеофон"
+
+#: phonenumber.cpp:201
+#, kde-format
+msgid "Mailbox"
+msgstr "Голосовая почта"
+
+#: phonenumber.cpp:203
+#, kde-format
+msgid "Modem"
+msgstr "Модем"
+
+#: phonenumber.cpp:205
+#, kde-format
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "Телефон в автомобиле"
+
+#: phonenumber.cpp:209
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: phonenumber.cpp:213
+#, kde-format
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "Другой тип"
+
+#: phonenumber.cpp:226
+#, kde-format
+msgid "Preferred Number"
+msgstr "Основной номер"
+
+#: phonenumber.cpp:236
+#, kde-format
+msgid "Work Fax"
+msgstr "Служебный факс"
+
+#: secrecy.cpp:111
+#, kde-format
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "Доступен всем"
+
+#: secrecy.cpp:114
+#, kde-format
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "Приватный доступ"
+
+#: secrecy.cpp:117
+#, kde-format
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "Конфиденциальный доступ"
+
+#: secrecy.cpp:120
+#, kde-format
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "Неизвестный доступ"
