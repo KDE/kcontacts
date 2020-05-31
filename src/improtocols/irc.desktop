@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-irc
 Comment=Internet Relay Chat
+Comment[az]=Internet Relay Chat (IRC)
 Comment[ca]=Internet Relay Chat
 Comment[ca@valencia]=Internet Relay Chat
 Comment[cs]=Internet Relay Chat
@@ -39,6 +40,7 @@ Comment[zh_CN]=互联网中继聊天
 Comment[zh_TW]=網際網路中繼聊天 (IRC)
 Name=IRC
 Name[ast]=IRC
+Name[az]=IRC
 Name[ca]=IRC
 Name[ca@valencia]=IRC
 Name[cs]=IRC
