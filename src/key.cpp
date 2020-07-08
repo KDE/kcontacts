@@ -7,7 +7,7 @@
 
 #include "key.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <krandom.h>
 
 #include <QDataStream>

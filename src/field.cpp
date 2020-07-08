@@ -5,10 +5,10 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <klocalizedstring.h>
-#include <kconfig.h>
+#include <KLocalizedString>
+#include <KConfig>
 
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 #include <KSharedConfig>
 #include "field.h"
 

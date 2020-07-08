@@ -7,7 +7,7 @@
 
 #include "secrecy.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <QDataStream>
 #include <QSharedData>

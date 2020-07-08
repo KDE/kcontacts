@@ -7,7 +7,7 @@
 
 #include <QFile>
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <QCoreApplication>
 #include <QCommandLineParser>

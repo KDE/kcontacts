@@ -6,7 +6,7 @@
 */
 
 #include "vcardparser.h"
-#include <kcodecs.h>
+#include <KCodecs>
 #include "kcontacts_debug.h"
 #include <QTextCodec>
 #include <functional>

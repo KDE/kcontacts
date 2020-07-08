@@ -7,9 +7,9 @@
 
 #include "addresseehelper.h"
 
-#include <kconfig.h>
-#include <klocalizedstring.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KLocalizedString>
+#include <KConfigGroup>
 
 
 using namespace KContacts;

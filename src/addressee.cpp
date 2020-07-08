@@ -13,7 +13,7 @@
 #include <QUuid>
 
 #include "kcontacts_debug.h"
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include "addresseehelper.h"
 #include "field.h"

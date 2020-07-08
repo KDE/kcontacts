@@ -11,10 +11,10 @@
 
 #include "kcontacts_debug.h"
 #include <krandom.h>
-#include <klocalizedstring.h>
-#include <kconfig.h>
+#include <KLocalizedString>
+#include <KConfig>
 
-#include <kconfiggroup.h>
+#include <KConfigGroup>
 
 #include <QSharedData>
 #include <QStandardPaths>

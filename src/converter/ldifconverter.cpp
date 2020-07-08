@@ -27,7 +27,7 @@
 
 #include "ldif_p.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <QStringList>
 #include <QTextCodec>

@@ -9,8 +9,8 @@
 #include "addresseelist.h"
 #include "vcardtool_p.h"
 #include "kcontacts/address.h"
-#include <kconfig.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KConfigGroup>
 #include <QTest>
 #include <QStandardPaths>
 
