@@ -49,9 +49,9 @@ set(kcontacts_converter_SRCS
 ecm_qt_declare_logging_category(kcontacts_converter_SRCS
     HEADER kcontacts_debug.h
     IDENTIFIER KCONTACTS_LOG
-    CATEGORY_NAME org.kde.pim.kcontacts
-    OLD_CATEGORY_NAMES log_kcontacts
-    DESCRIPTION "kcontacts (pim lib)"
+    CATEGORY_NAME kf.contacts
+    OLD_CATEGORY_NAMES log_kcontacts org.kde.pim.kcontacts
+    DESCRIPTION "KContacts"
     EXPORT KCONTACTS
 )
 
