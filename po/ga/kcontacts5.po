@@ -1,0 +1,584 @@
+# Irish translation of kabc
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kabc package.
+# Kevin Scannell <kscanne@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdepimlibs/kabc.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-06-26 02:00+0200\n"
+"PO-Revision-Date: 2007-06-27 10:27-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: address.cpp:384
+#, kde-format
+msgid "Post Office Box"
+msgstr "Bosca Oifig an Phoist"
+
+#: address.cpp:400
+#, kde-format
+msgid "Extended Address Information"
+msgstr "Eolas Seolta Breisithe"
+
+#: address.cpp:416
+#, kde-format
+msgid "Street"
+msgstr "Sráid"
+
+#: address.cpp:432
+#, kde-format
+msgid "Locality"
+msgstr "Ceantar"
+
+#: address.cpp:448
+#, kde-format
+msgid "Region"
+msgstr "Réigiún"
+
+#: address.cpp:464
+#, kde-format
+msgid "Postal Code"
+msgstr "Cód Poist"
+
+#: address.cpp:480
+#, kde-format
+msgid "Country"
+msgstr "Tír"
+
+#: address.cpp:496
+#, kde-format
+msgid "Delivery Label"
+msgstr "Lipéad Seachadta"
+
+#: address.cpp:514
+#, kde-format
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "Intíre"
+
+#: address.cpp:516
+#, kde-format
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "Idirnáisiúnta"
+
+#: address.cpp:518
+#, kde-format
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "Post"
+
+#: address.cpp:520
+#, kde-format
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "Beart"
+
+#: address.cpp:522
+#, kde-format
+msgctxt "Home Address"
+msgid "Home"
+msgstr "Baile"
+
+#: address.cpp:524
+#, kde-format
+msgctxt "Work Address"
+msgid "Work"
+msgstr "Obair"
+
+#: address.cpp:526
+#, kde-format
+msgid "Preferred Address"
+msgstr "Seoladh de Rogha"
+
+#: address.cpp:528
+#, kde-format
+msgctxt "another type of address"
+msgid "Other"
+msgstr "Eile"
+
+#: addressee.cpp:420
+#, kde-format
+msgid "Unique Identifier"
+msgstr "Aitheantóir Sainiúil"
+
+#: addressee.cpp:440
+#, kde-format
+msgid "Name"
+msgstr "Ainm"
+
+#: addressee.cpp:636
+#, kde-format
+msgid "Formatted Name"
+msgstr "Ainm Formáidithe"
+
+#: addressee.cpp:656
+#, kde-format
+msgid "Family Name"
+msgstr "Sloinne"
+
+#: addressee.cpp:676
+#, kde-format
+msgid "Given Name"
+msgstr "Ainm"
+
+#: addressee.cpp:696
+#, kde-format
+msgid "Additional Names"
+msgstr "Ainmneacha Eile"
+
+#: addressee.cpp:716
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr "Réimíreanna Ómóis"
+
+#: addressee.cpp:736
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr "Iarmhíreanna Ómóis"
+
+#: addressee.cpp:787
+#, kde-format
+msgid "Nick Name"
+msgstr "Leasainm"
+
+#: addressee.cpp:827
+#, kde-format
+msgid "Birthday"
+msgstr "Lá Breithe"
+
+#: addressee.cpp:832
+#, kde-format
+msgid "Home Address Street"
+msgstr "Seoladh Baile - Sráid"
+
+#: addressee.cpp:837
+#, kde-format
+msgid "Home Address Post Office Box"
+msgstr "Bosca Oifig an Phoist - Baile"
+
+#: addressee.cpp:842
+#, kde-format
+msgid "Home Address City"
+msgstr "Seoladh Baile - Cathair"
+
+#: addressee.cpp:847
+#, kde-format
+msgid "Home Address State"
+msgstr "Seoladh Baile - Stát"
+
+#: addressee.cpp:852
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr "Seoladh Baile - Cód Poist"
+
+#: addressee.cpp:857
+#, kde-format
+msgid "Home Address Country"
+msgstr "Seoladh Baile - Tír"
+
+#: addressee.cpp:862
+#, kde-format
+msgid "Home Address Label"
+msgstr "Seoladh Baile - Lipéad"
+
+#: addressee.cpp:867
+#, kde-format
+msgid "Business Address Street"
+msgstr "Seoladh Gnó - Sráid"
+
+#: addressee.cpp:872
+#, kde-format
+msgid "Business Address Post Office Box"
+msgstr "Bosca Oifig an Phoist - Gnó"
+
+#: addressee.cpp:877
+#, kde-format
+msgid "Business Address City"
+msgstr "Seoladh Gnó - Cathair"
+
+#: addressee.cpp:882
+#, kde-format
+msgid "Business Address State"
+msgstr "Seoladh Gnó - Stát"
+
+#: addressee.cpp:887
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr "Seoladh Gnó - Cód Poist"
+
+#: addressee.cpp:892
+#, kde-format
+msgid "Business Address Country"
+msgstr "Seoladh Gnó - Tír"
+
+#: addressee.cpp:897
+#, kde-format
+msgid "Business Address Label"
+msgstr "Seoladh Gnó - Lipéad"
+
+#: addressee.cpp:902
+#, kde-format
+msgid "Home Phone"
+msgstr "Fón Baile"
+
+#: addressee.cpp:907
+#, kde-format
+msgid "Business Phone"
+msgstr "Fón Gnó"
+
+#: addressee.cpp:912
+#, kde-format
+msgid "Mobile Phone"
+msgstr "Fón Póca"
+
+#: addressee.cpp:917 phonenumber.cpp:218
+#, kde-format
+msgid "Home Fax"
+msgstr "Facs Baile"
+
+#: addressee.cpp:922
+#, kde-format
+msgid "Business Fax"
+msgstr "Facs Gnó"
+
+#: addressee.cpp:927
+#, kde-format
+msgid "Car Phone"
+msgstr "Fón Cairr"
+
+#: addressee.cpp:932 phonenumber.cpp:194
+#, kde-format
+msgid "ISDN"
+msgstr "LDSC"
+
+#: addressee.cpp:937 phonenumber.cpp:198
+#, kde-format
+msgid "Pager"
+msgstr "Glaoire"
+
+#: addressee.cpp:942
+#, kde-format
+msgid "Email Address"
+msgstr "Seoladh Ríomhphoist"
+
+#: addressee.cpp:962
+#, kde-format
+msgid "Mail Client"
+msgstr "Cliant Ríomhphoist"
+
+#: addressee.cpp:982
+#, kde-format
+msgid "Time Zone"
+msgstr "Crios Ama"
+
+#: addressee.cpp:1002
+#, kde-format
+msgid "Geographic Position"
+msgstr "Suíomh Geografach"
+
+#: addressee.cpp:1053
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr "Teideal"
+
+#: addressee.cpp:1104
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr "Ról"
+
+#: addressee.cpp:1155 field.cpp:228
+#, kde-format
+msgid "Organization"
+msgstr "Eagras"
+
+#: addressee.cpp:1175
+#, kde-format
+msgid "Department"
+msgstr "Roinn"
+
+#: addressee.cpp:1195
+#, kde-format
+msgid "Note"
+msgstr "Nóta"
+
+#: addressee.cpp:1215
+#, kde-format
+msgid "Product Identifier"
+msgstr "Aitheantóir Táirge"
+
+#: addressee.cpp:1235
+#, kde-format
+msgid "Revision Date"
+msgstr "Dáta Leasaithe"
+
+#: addressee.cpp:1255
+#, kde-format
+msgid "Sort String"
+msgstr "Teaghrán Sórtála"
+
+#: addressee.cpp:1281
+#, kde-format
+msgid "Homepage"
+msgstr "Leathanach Baile"
+
+#: addressee.cpp:1301
+#, kde-format
+msgid "Security Class"
+msgstr "Aicme Slándála"
+
+#: addressee.cpp:1321
+#, kde-format
+msgid "Logo"
+msgstr "Lógó"
+
+#: addressee.cpp:1341
+#, kde-format
+msgid "Photo"
+msgstr "Grianghraf"
+
+#: addressee.cpp:1361
+#, kde-format
+msgid "Sound"
+msgstr "Fuaim"
+
+#: addresseehelper.cpp:62
+#, kde-format
+msgid "Dr."
+msgstr "An Dr."
+
+#: addresseehelper.cpp:63
+#, kde-format
+msgid "Miss"
+msgstr "Iníon"
+
+#: addresseehelper.cpp:64
+#, kde-format
+msgid "Mr."
+msgstr "An tUas."
+
+#: addresseehelper.cpp:65
+#, kde-format
+msgid "Mrs."
+msgstr "Bean"
+
+#: addresseehelper.cpp:66
+#, kde-format
+msgid "Ms."
+msgstr "Ms."
+
+#: addresseehelper.cpp:67
+#, kde-format
+msgid "Prof."
+msgstr "An tOll."
+
+#: addresseehelper.cpp:69
+#, kde-format
+msgid "I"
+msgstr "I"
+
+#: addresseehelper.cpp:70
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: addresseehelper.cpp:71
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: addresseehelper.cpp:72
+#, kde-format
+msgid "Jr."
+msgstr "Óg"
+
+#: addresseehelper.cpp:73
+#, kde-format
+msgid "Sr."
+msgstr "Mór"
+
+#: field.cpp:205
+#, kde-format
+msgid "Unknown Field"
+msgstr "Réimse Anaithnid"
+
+#: field.cpp:218
+#, kde-format
+msgid "All"
+msgstr "Uile"
+
+#: field.cpp:220
+#, kde-format
+msgid "Frequent"
+msgstr "Go Minic"
+
+#: field.cpp:222
+#, kde-format
+msgctxt "street/postal"
+msgid "Address"
+msgstr "Seoladh"
+
+#: field.cpp:224
+#, kde-format
+msgid "Email"
+msgstr "Ríomhphost"
+
+#: field.cpp:226
+#, kde-format
+msgid "Personal"
+msgstr "Pearsanta"
+
+#: field.cpp:230
+#, kde-format
+msgid "Custom"
+msgstr "Saincheaptha"
+
+#: field.cpp:232
+#, kde-format
+msgid "Undefined"
+msgstr "Neamhshainithe"
+
+#: key.cpp:201
+#, kde-format
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "X.509"
+
+#: key.cpp:204
+#, kde-format
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "PGP"
+
+#: key.cpp:207
+#, kde-format
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "Saincheaptha"
+
+#: key.cpp:210
+#, kde-format
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "Cineál anaithnid"
+
+#: phonenumber.cpp:170
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr ""
+
+#: phonenumber.cpp:172
+#, kde-format
+msgctxt "Home phone"
+msgid "Home"
+msgstr "Baile"
+
+#: phonenumber.cpp:174
+#, kde-format
+msgctxt "Work phone"
+msgid "Work"
+msgstr "Obair"
+
+#: phonenumber.cpp:176
+#, kde-format
+msgid "Messenger"
+msgstr "Teachtaire"
+
+#: phonenumber.cpp:178
+#, kde-format
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "Molta"
+
+#: phonenumber.cpp:180
+#, kde-format
+msgid "Voice"
+msgstr "Guth"
+
+#: phonenumber.cpp:182
+#, kde-format
+msgid "Fax"
+msgstr "Facs"
+
+#: phonenumber.cpp:184
+#, kde-format
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "Fón Póca"
+
+#: phonenumber.cpp:186
+#, kde-format
+msgctxt "Video phone"
+msgid "Video"
+msgstr "Fón Físe"
+
+#: phonenumber.cpp:188
+#, kde-format
+msgid "Mailbox"
+msgstr "Bosca Poist"
+
+#: phonenumber.cpp:190
+#, kde-format
+msgid "Modem"
+msgstr "Móideim"
+
+#: phonenumber.cpp:192
+#, kde-format
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "Carr"
+
+#: phonenumber.cpp:196
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: phonenumber.cpp:200
+#, kde-format
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "Eile"
+
+#: phonenumber.cpp:213
+#, kde-format
+msgid "Preferred Number"
+msgstr "Uimhir de Rogha"
+
+#: phonenumber.cpp:223
+#, kde-format
+msgid "Work Fax"
+msgstr "Facs oibre"
+
+#: secrecy.cpp:98
+#, kde-format
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "Poiblí"
+
+#: secrecy.cpp:101
+#, kde-format
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "Príobháideach"
+
+#: secrecy.cpp:104
+#, kde-format
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "Faoi Rún"
+
+#: secrecy.cpp:107
+#, kde-format
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "Cineál anaithnid"
