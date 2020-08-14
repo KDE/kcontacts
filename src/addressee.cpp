@@ -2469,10 +2469,14 @@ ABORT_PARSING:
     }
 
     email = email.toLower();
-    // Check that we do not have any extra characters on the end of the
-    // strings
-    unsigned int len = fullName.length();
-    if (fullName[0] == QLatin1Char('"') && fullName[len - 1] == QLatin1Char('"')) {
+
+    // Check that the full name is not enclosed in balanced double quotes.
+    // If it is then remove them.
+    const unsigned int len = fullName.length();
+    if (len<3) {					// not long enough to be
+        return;
+    }
+    if (fullName.startsWith(QLatin1Char('"')) && fullName.endsWith(QLatin1Char('"'))) {
         fullName = fullName.mid(1, len - 2);
     }
 }
