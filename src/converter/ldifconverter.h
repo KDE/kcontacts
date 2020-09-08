@@ -2,7 +2,7 @@
     This file is part of the KContacts framework.
     SPDX-FileCopyrightText: 2003 Helge Deller <deller@kde.org>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #ifndef KCONTACTS_LDIFCONVERTER_H
