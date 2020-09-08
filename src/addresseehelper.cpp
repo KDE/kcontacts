@@ -2,7 +2,7 @@
     This file is part of the KDE libraries
     SPDX-FileCopyrightText: 2003 Carsten Pfeiffer <pfeiffer@kde.org>
 
-    This SPDX-License-Identifier: LGPL-2.0-only
+    This SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #include "addresseehelper.h"
