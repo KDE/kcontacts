@@ -65,7 +65,11 @@ void AddresseeTest::storeTest()
     addressee.setOrganization(QStringLiteral("Scottland Yard"));
     addressee.setNote(QStringLiteral("Don't cross black deads way..."));
     addressee.setProductId(QStringLiteral("ProductId45"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee.setRevision(QDateTime(QDate(1982, 9, 15)));
+#else
+    addressee.setRevision(QDateTime(QDate(1982, 9, 15).startOfDay()));
+#endif
     addressee.setSortString(QStringLiteral("Name"));
     KContacts::ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
@@ -109,7 +113,11 @@ void AddresseeTest::storeTest()
     QVERIFY(addressee.organization() == QLatin1String("Scottland Yard"));
     QVERIFY(addressee.note() == QLatin1String("Don't cross black deads way..."));
     QVERIFY(addressee.productId() == QLatin1String("ProductId45"));
-    QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15)));
+    #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15)));
+    #else
+        QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15).startOfDay()));
+    #endif
     QVERIFY(addressee.sortString() == QLatin1String("Name"));
     QVERIFY(addressee.url() == url);
     QVERIFY(addressee.secrecy() == KContacts::Secrecy(KContacts::Secrecy::Public));
@@ -153,7 +161,11 @@ void AddresseeTest::equalsTest()
     addressee1.setPrefix(QStringLiteral("Sir"));
     addressee1.setSuffix(QStringLiteral("II"));
     addressee1.setNickName(QStringLiteral("ghosthunter"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
+#else
+    addressee1.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
+#endif
     addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
@@ -162,7 +174,11 @@ void AddresseeTest::equalsTest()
     addressee1.setOrganization(QStringLiteral("Scottland Yard"));
     addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
     addressee1.setProductId(QStringLiteral("ProductId45"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
+#else
+    addressee1.setRevision(QDateTime(QDate(1982, 9, 15).startOfDay()));
+#endif
     addressee1.setSortString(QStringLiteral("Name"));
     KContacts::ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
@@ -186,7 +202,11 @@ void AddresseeTest::equalsTest()
     addressee2.setPrefix(QStringLiteral("Sir"));
     addressee2.setSuffix(QStringLiteral("II"));
     addressee2.setNickName(QStringLiteral("ghosthunter"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee2.setBirthday(QDateTime(QDate(1982, 7, 19)));
+#else
+    addressee2.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
+#endif
     addressee2.setMailer(QStringLiteral("mutt"));
     addressee2.setTimeZone(KContacts::TimeZone(2));
     addressee2.setGeo(KContacts::Geo(42, 23));
@@ -195,7 +215,11 @@ void AddresseeTest::equalsTest()
     addressee2.setOrganization(QStringLiteral("Scottland Yard"));
     addressee2.setNote(QStringLiteral("Don't cross black deads way..."));
     addressee2.setProductId(QStringLiteral("ProductId45"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee2.setRevision(QDateTime(QDate(1982, 9, 15)));
+#else
+    addressee2.setRevision(QDateTime(QDate(1982, 9, 15).startOfDay()));
+#endif
     addressee2.setSortString(QStringLiteral("Name"));
     addressee2.setUrl(url);
     addressee2.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Public));
@@ -250,7 +274,11 @@ void AddresseeTest::assignmentTest()
     addressee1.setPrefix(QStringLiteral("Sir"));
     addressee1.setSuffix(QStringLiteral("II"));
     addressee1.setNickName(QStringLiteral("ghosthunter"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
+#else
+    addressee1.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
+#endif
     addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
@@ -259,7 +287,11 @@ void AddresseeTest::assignmentTest()
     addressee1.setOrganization(QStringLiteral("Scottland Yard"));
     addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
     addressee1.setProductId(QStringLiteral("ProductId45"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
+#else
+    addressee1.setRevision(QDateTime(QDate(1982, 9, 15).startOfDay()));
+#endif
     addressee1.setSortString(QStringLiteral("Name"));
     KContacts::ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
@@ -310,7 +342,11 @@ void AddresseeTest::serializeTest()
     addressee1.setPrefix(QStringLiteral("Sir"));
     addressee1.setSuffix(QStringLiteral("II"));
     addressee1.setNickName(QStringLiteral("ghosthunter"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19)));
+#else
+    addressee1.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
+#endif
     addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
     addressee1.setGeo(KContacts::Geo(42, 23));
@@ -319,7 +355,11 @@ void AddresseeTest::serializeTest()
     addressee1.setOrganization(QStringLiteral("Scottland Yard"));
     addressee1.setNote(QStringLiteral("Don't cross black deads way..."));
     addressee1.setProductId(QStringLiteral("ProductId45"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     addressee1.setRevision(QDateTime(QDate(1982, 9, 15)));
+#else
+    addressee1.setRevision(QDateTime(QDate(1982, 9, 15).startOfDay()));
+#endif
     addressee1.setSortString(QStringLiteral("Name"));
     KContacts::ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("www.scottlandyard.info")));
