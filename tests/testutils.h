@@ -17,7 +17,6 @@ KContacts::Addressee vcard1();
 KContacts::Addressee vcard2();
 KContacts::Addressee vcard3();
 KContacts::Addressee::List vCardsAsAddresseeList();
-QByteArray vCardAsText(const QString &location);
 QByteArray vCardsAsText();
 
 #endif
