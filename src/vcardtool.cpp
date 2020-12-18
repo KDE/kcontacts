@@ -689,11 +689,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 // ANNIVERSARY
                 if (!value.isEmpty()) {
                     const QDate date = QDate::fromString(value, Qt::ISODate);
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-                    QDateTime dt = QDateTime(date);
-#else
                     QDateTime dt = QDateTime(date.startOfDay());
-#endif
                     dt.setTime(QTime());
                     VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version, false));
                     card.addLine(line);

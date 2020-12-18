@@ -67,20 +67,12 @@ void DateTimeTest::shouldParseDateTime()
     QCOMPARE(dt.time(), QTime(12, 33));
 
     dt = VCardTool::parseDateTime(QStringLiteral("--0120"));
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    expected = QDateTime(QDate(-1, 1, 20));
-#else
     expected = QDateTime(QDate(-1, 1, 20).startOfDay());
-#endif
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
 
     dt = VCardTool::parseDateTime(QStringLiteral("--01-20"));
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    expected = QDateTime(QDate(-1, 1, 20));
-#else
     expected = QDateTime(QDate(-1, 1, 20).startOfDay());
-#endif
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
 }

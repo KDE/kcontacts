@@ -53,11 +53,7 @@ void BirthDayTest::shouldParseBirthDayWithoutTime()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    QDateTime dt(QDate(1976, 5, 5));
-#else
     QDateTime dt(QDate(1976, 5, 5).startOfDay());
-#endif
 
     QCOMPARE(lst.at(0).birthday(), dt);
     QCOMPARE(lst.at(0).birthdayHasTime(), false);
@@ -77,11 +73,7 @@ void BirthDayTest::shouldParseBirthDayWithoutTimeAndYear()
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    QDateTime dt(QDate(-1, 5, 5));
-#else
     QDateTime dt(QDate(-1, 5, 5).startOfDay());
-#endif
     QCOMPARE(lst.at(0).birthday(), dt);
     QCOMPARE(lst.at(0).birthdayHasTime(), false);
 }

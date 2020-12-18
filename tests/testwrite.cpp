@@ -33,11 +33,7 @@ int main(int argc, char **argv)
 
     addressee.setNameFromString(QLatin1String("Mr. Tobias Koenig Jr."));
     addressee.setNickName(QLatin1String("tokoe"));
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    addressee.setBirthday(QDateTime(QDate(1982, 7, 19)));
-#else
     addressee.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
-#endif
     addressee.setMailer(QLatin1String("mutt1.2"));
     addressee.setTimeZone(KContacts::TimeZone(+2));
 
