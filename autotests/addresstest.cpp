@@ -15,14 +15,12 @@
 #include <QStandardPaths>
 
 QTEST_MAIN(AddressTest)
-#ifndef Q_OS_WIN
 void initLocale()
 {
-    qputenv("LC_ALL", "it_CH.utf-8");
+    QLocale::setDefault(QLocale(QLocale::Italian, QLocale::Switzerland));
 }
 
 Q_CONSTRUCTOR_FUNCTION(initLocale)
-#endif
 
 void AddressTest::initTestCase()
 {
