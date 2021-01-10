@@ -38,9 +38,11 @@ ecm_add_tests(birthdaytest.cpp
     orgtest.cpp
     datetimetest.cpp
     clientpidmaptest.cpp
-    vcardtool_benchmark.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore)
 
 ecm_add_tests(picturetest.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt5::Test KF5::ConfigCore Qt5::Gui)
 
+# Benchmark, compiled, but not run automatically with ctest
+add_executable(vcardtool_benchmark vcardtool_benchmark.cpp)
+target_link_libraries(vcardtool_benchmark KF5Contacts Qt5::Test KF5::ConfigCore)
