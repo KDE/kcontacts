@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(KF5_VERSION "5.79.0") # handled by release scripts
-set(KF5_DEP_VERSION "5.79.0") # handled by release scripts
+set(KF_VERSION "5.79.0") # handled by release scripts
+set(KF_DEP_VERSION "5.79.0") # handled by release scripts
 
-project(KContacts VERSION ${KF5_VERSION})
+project(KContacts VERSION ${KF_VERSION})
 
 # ECM setup
 include(FeatureSummary)
@@ -31,7 +31,7 @@ include(ECMAddQch)
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
-set(KCONTACTS_LIB_VERSION ${KF5_VERSION})
+set(KCONTACTS_LIB_VERSION ${KF_VERSION})
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
@@ -41,7 +41,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 
 ########### Find packages ###########
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui)
-find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+find_package(KF5 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 find_package(IsoCodes MODULE)
 set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name translations." TYPE RUNTIME)
 
