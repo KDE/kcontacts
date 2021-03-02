@@ -146,6 +146,7 @@ void Geo::clear()
     d->mValidLongitude = false;
 }
 
+// clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Geo &geo)
 {
     return s << geo.d->mLatitude << geo.d->mValidLatitude
@@ -159,3 +160,4 @@ QDataStream &KContacts::operator>>(QDataStream &s, Geo &geo)
 
     return s;
 }
+// clang-format on

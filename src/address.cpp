@@ -91,9 +91,11 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
             if (-1 != bpos2) {
                 // we have balanced brackets, recursively parse:
                 QString rplstr;
-                bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1,
-                                                                     bpos2 - bpos1 - 1), rplstr,
-                                                          realName, orgaName, address);
+                bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1, bpos2 - bpos1 - 1), //
+                                                          rplstr,
+                                                          realName,
+                                                          orgaName,
+                                                          address);
                 if (purge) {
                     // purge -> remove all
                     // replace with !_P_!, so conditional tags work later
@@ -118,6 +120,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
     // keeping track of whether at least one tag evaluates to something.
     // The following macro needs QString for R_FIELD
     // It substitutes !_P_! for empty fields so conditional tags work later
+    // clang-format off
 #define REPLTAG(R_TAG, R_FIELD) \
     if (result.contains(R_TAG)) { \
         QString rpl = R_FIELD.isEmpty() ? QStringLiteral("!_P_!") : R_FIELD; \
@@ -126,6 +129,7 @@ static bool parseAddressTemplateSection(const QString &tsection, QString &result
             ret = true; \
         } \
     }
+    // clang-format on
     REPLTAG(KCONTACTS_FMTTAG_realname, realName);
     REPLTAG(KCONTACTS_FMTTAG_REALNAME, realName.toUpper());
     REPLTAG(KCONTACTS_FMTTAG_company, orgaName);
@@ -683,6 +687,7 @@ QString Address::ISOtoCountry(const QString &ISOname)
     return ISOname;
 }
 
+// clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)
 {
     return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox
@@ -703,3 +708,4 @@ QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
 
     return s;
 }
+// clang-format on

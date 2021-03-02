@@ -212,6 +212,7 @@ QString Key::typeLabel(Type type)
     }
 }
 
+// clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Key &key)
 {
     return s << key.d->mId << key.d->mType << key.d->mIsBinary << key.d->mBinaryData
@@ -228,3 +229,4 @@ QDataStream &KContacts::operator>>(QDataStream &s, Key &key)
 
     return s;
 }
+// clang-format on

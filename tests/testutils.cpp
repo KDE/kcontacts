@@ -45,9 +45,9 @@ Addressee vcard2()
     addr.setName(QStringLiteral("Tim Howes"));
     addr.setOrganization(QStringLiteral("Netscape Communications Corp."));
     addr.insertEmail(QStringLiteral("howes@netscape.com"));
-    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-937-3419"),
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-937-3419"), //
                                        PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
-    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-528-4164"),
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-528-4164"), //
                                        PhoneNumber::Fax | PhoneNumber::Work));
     Address a(Address::Work);
     a.setStreet(QStringLiteral("501 E. Middlefield Rd."));

@@ -97,7 +97,7 @@ bool Picture::operator==(const Picture &p) const
             if (d->mRawData != p.d->mRawData) {
                 return false;
             }
-        } else if ((!d->mData.isNull() || !d->mRawData.isEmpty())
+        } else if ((!d->mData.isNull() || !d->mRawData.isEmpty()) //
                    && (!p.d->mData.isNull() || !p.d->mRawData.isEmpty())) {
             if (data() != p.data()) {
                 return false;
@@ -122,9 +122,8 @@ bool Picture::operator!=(const Picture &p) const
 
 bool Picture::isEmpty() const
 {
-    return
-        (!d->mIntern && d->mUrl.isEmpty()) ||
-        (d->mIntern && d->mData.isNull() && d->mRawData.isEmpty());
+    return (!d->mIntern && d->mUrl.isEmpty()) //
+        || (d->mIntern && d->mData.isNull() && d->mRawData.isEmpty());
 }
 
 void Picture::setUrl(const QString &url)

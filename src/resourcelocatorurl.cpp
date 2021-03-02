@@ -54,7 +54,7 @@ static const url_type_name url_type_names[] = {
     { "HOME", ResourceLocatorUrl::Home },
     { "WORK", ResourceLocatorUrl::Work },
     { "OTHER", ResourceLocatorUrl::Other },
-    { "PROFILE", ResourceLocatorUrl::Profile }
+    { "PROFILE", ResourceLocatorUrl::Profile },
 };
 
 ResourceLocatorUrl::Type ResourceLocatorUrl::type() const

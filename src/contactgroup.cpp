@@ -286,9 +286,9 @@ ContactGroup::Data &ContactGroup::Data::operator=(const ContactGroup::Data &othe
 
 bool ContactGroup::Data::operator==(const Data &other) const
 {
-    return d->mName == other.d->mName
-           && d->mEmail == other.d->mEmail
-           && d->mCustoms == other.d->mCustoms;
+    return d->mName == other.d->mName //
+        && d->mEmail == other.d->mEmail //
+        && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::Private : public QSharedData
@@ -480,11 +480,11 @@ ContactGroup &ContactGroup::operator=(const ContactGroup &other)
 
 bool ContactGroup::operator==(const ContactGroup &other) const
 {
-    return d->mIdentifier == other.d->mIdentifier
-           && d->mName == other.d->mName
-           && d->mContactReferences == other.d->mContactReferences
-           && d->mContactGroupReferences == other.d->mContactGroupReferences
-           && d->mDataObjects == other.d->mDataObjects;
+    return d->mIdentifier == other.d->mIdentifier //
+        && d->mName == other.d->mName //
+        && d->mContactReferences == other.d->mContactReferences //
+        && d->mContactGroupReferences == other.d->mContactGroupReferences //
+        && d->mDataObjects == other.d->mDataObjects;
 }
 
 QString ContactGroup::mimeType()

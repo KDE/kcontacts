@@ -270,8 +270,8 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
             cur.chop(1);
         }
 
-        if (cur.startsWith(' ')
-            || cur.startsWith('\t')) {   //folded line => append to previous
+        if (cur.startsWith(' ') //
+            || cur.startsWith('\t')) { // folded line => append to previous
             currentLine.append(cur.mid(1));
             continue;
         } else {

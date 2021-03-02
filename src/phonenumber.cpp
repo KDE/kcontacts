@@ -156,7 +156,7 @@ PhoneNumber::TypeList PhoneNumber::typeList()
     static TypeList list;
 
     if (list.isEmpty()) {
-        list << Home << Work << Msg << Pref << Voice << Fax << Cell << Video
+        list << Home << Work << Msg << Pref << Voice << Fax << Cell << Video //
              << Bbs << Modem << Car << Isdn << Pcs << Pager << Undefined;
     }
 

@@ -120,9 +120,9 @@ struct email_type_name
 };
 
 static const email_type_name email_type_names[] = {
-    { "HOME", Email::Home },
-    { "WORK", Email::Work },
-    { "OTHER", Email::Other }
+    {"HOME", Email::Home},
+    {"WORK", Email::Work},
+    {"OTHER", Email::Other},
 };
 
 Email::Type KContacts::Email::type() const

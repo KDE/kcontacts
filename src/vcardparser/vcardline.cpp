@@ -52,10 +52,12 @@ VCardLine &VCardLine::operator=(const VCardLine &line)
 
 bool VCardLine::operator==(const VCardLine &other) const
 {
+    // clang-format off
     return (mParamMap == other.parameterMap())
            && (mValue == other.value())
            && (mIdentifier == other.identifier())
            && (mGroup == other.group());
+    // clang-format on
 }
 
 void VCardLine::setIdentifier(const QString &identifier)

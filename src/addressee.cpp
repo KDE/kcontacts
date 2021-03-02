@@ -174,54 +174,55 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mName != addressee.d->mName
+    if (d->mName != addressee.d->mName //
         && !(d->mName.isEmpty() && addressee.d->mName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "name differs";
         return false;
     }
 
-    if (d->mFormattedName != addressee.d->mFormattedName
+    if (d->mFormattedName != addressee.d->mFormattedName //
         && !(d->mFormattedName.isEmpty() && addressee.d->mFormattedName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "formattedName differs";
         return false;
     }
 
-    if (d->mFamilyName != addressee.d->mFamilyName
+    if (d->mFamilyName != addressee.d->mFamilyName //
         && !(d->mFamilyName.isEmpty() && addressee.d->mFamilyName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "familyName differs";
         return false;
     }
 
-    if (d->mGivenName != addressee.d->mGivenName
+    if (d->mGivenName != addressee.d->mGivenName //
         && !(d->mGivenName.isEmpty() && addressee.d->mGivenName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "givenName differs";
         return false;
     }
 
-    if (d->mAdditionalName != addressee.d->mAdditionalName
+    if (d->mAdditionalName != addressee.d->mAdditionalName //
         && !(d->mAdditionalName.isEmpty() && addressee.d->mAdditionalName.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "additionalName differs";
         return false;
     }
 
-    if (d->mPrefix != addressee.d->mPrefix
+    if (d->mPrefix != addressee.d->mPrefix //
         && !(d->mPrefix.isEmpty() && addressee.d->mPrefix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "prefix differs";
         return false;
     }
 
-    if (d->mSuffix != addressee.d->mSuffix
+    if (d->mSuffix != addressee.d->mSuffix //
         && !(d->mSuffix.isEmpty() && addressee.d->mSuffix.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "suffix differs";
         return false;
     }
 
-    if (d->mBirthday != addressee.d->mBirthday || d->mBirthdayWithTime != addressee.d->mBirthdayWithTime) {
+    if (d->mBirthday != addressee.d->mBirthday //
+        || d->mBirthdayWithTime != addressee.d->mBirthdayWithTime) {
         qCDebug(KCONTACTS_LOG) << "birthday differs";
         return false;
     }
 
-    if (d->mMailer != addressee.d->mMailer
+    if (d->mMailer != addressee.d->mMailer //
         && !(d->mMailer.isEmpty() && addressee.d->mMailer.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "mailer differs";
         return false;
@@ -237,25 +238,25 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
-    if (d->mDepartment != addressee.d->mDepartment
+    if (d->mDepartment != addressee.d->mDepartment //
         && !(d->mDepartment.isEmpty() && addressee.d->mDepartment.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "department differs";
         return false;
     }
 
-    if (d->mNote != addressee.d->mNote
+    if (d->mNote != addressee.d->mNote //
         && !(d->mNote.isEmpty() && addressee.d->mNote.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "note differs";
         return false;
     }
 
-    if (d->mProductId != addressee.d->mProductId
+    if (d->mProductId != addressee.d->mProductId //
         && !(d->mProductId.isEmpty() && addressee.d->mProductId.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "productId differs";
         return false;
     }
 
-    if (d->mSortString != addressee.d->mSortString
+    if (d->mSortString != addressee.d->mSortString //
         && !(d->mSortString.isEmpty() && addressee.d->mSortString.isEmpty())) {
         qCDebug(KCONTACTS_LOG) << "sortString differs";
         return false;
@@ -1542,11 +1543,13 @@ QString Addressee::realName() const
 
 QString Addressee::assembledName() const
 {
+    // clang-format off
     const QString name = prefix() + QLatin1Char(' ')
-                         +givenName() + QLatin1Char(' ')
-                         +additionalName() + QLatin1Char(' ')
-                         +familyName() + QLatin1Char(' ')
-                         +suffix();
+                         + givenName() + QLatin1Char(' ')
+                         + additionalName() + QLatin1Char(' ')
+                         + familyName() + QLatin1Char(' ')
+                         + suffix();
+    // clang-format on
 
     return name.simplified();
 }

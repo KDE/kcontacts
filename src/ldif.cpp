@@ -65,7 +65,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
         bool safe = false;
         bool isDn = fieldname.toLower() == QLatin1String("dn");
         //SAFE-INIT-CHAR
-        if (value.size() > 0 && value[0] > 0 && value[0] != '\n'
+        if (value.size() > 0 && value[0] > 0 && value[0] != '\n' //
             && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;
         }
@@ -74,8 +74,8 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
         if (safe) {
             for (int i = 1; i < value.size(); ++i) {
                 //allow utf-8 in Distinguished Names
-                if ((isDn && value[i] == 0)
-                    || (!isDn && value[i] <= 0)
+                if ((isDn && value[i] == 0) //
+                    || (!isDn && value[i] <= 0) //
                     || value[i] == '\r' || value[i] == '\n') {
                     safe = false;
                     break;

@@ -353,8 +353,8 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("xmozillanickname")
-        || fieldname == QLatin1String("nickname")
+    if (fieldname == QLatin1String("xmozillanickname") //
+        || fieldname == QLatin1String("nickname") //
         || fieldname == QLatin1String("mozillanickname")) {
         a.setNickName(value);
         return;
@@ -369,8 +369,8 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         a.setUid(value);
         return;
     }
-    if (fieldname == QLatin1String("mail")
-        || fieldname == QLatin1String("mozillasecondemail")  /* mozilla */
+    if (fieldname == QLatin1String("mail") //
+        || fieldname == QLatin1String("mozillasecondemail") /* mozilla */
         || fieldname == QLatin1String("othermailbox") /*TheBat!*/) {
         if (a.emails().indexOf(value) == -1) {
             a.insertEmail(value);
@@ -400,6 +400,7 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
+    // clang-format off
     if (fieldname == QLatin1String("description")
         || fieldname == QLatin1String("mozillacustom1")
         || fieldname == QLatin1String("mozillacustom2")
@@ -415,9 +416,10 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         a.setNote(a.note() + value);
         return;
     }
+    // clang-format on
 
-    if (fieldname == QLatin1String("homeurl")
-        || fieldname == QLatin1String("workurl")
+    if (fieldname == QLatin1String("homeurl") //
+        || fieldname == QLatin1String("workurl") //
         || fieldname == QLatin1String("mozillahomeurl")) {
         if (a.url().url().isEmpty()) {
             ResourceLocatorUrl url;
@@ -463,19 +465,19 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("streethomeaddress")
-        || fieldname == QLatin1String("mozillahomestreet")) {      // thunderbird
+    if (fieldname == QLatin1String("streethomeaddress") //
+        || fieldname == QLatin1String("mozillahomestreet")) { // thunderbird
         homeAddr.setStreet(value);
         return;
     }
 
-    if (fieldname == QLatin1String("street")
-        || fieldname == QLatin1String("postaladdress")) {      // mozilla
+    if (fieldname == QLatin1String("street") //
+        || fieldname == QLatin1String("postaladdress")) { // mozilla
         workAddr.setStreet(value);
         return;
     }
-    if (fieldname == QLatin1String("mozillapostaladdress2")
-        || fieldname == QLatin1String("mozillaworkstreet2")) {      // mozilla
+    if (fieldname == QLatin1String("mozillapostaladdress2") //
+        || fieldname == QLatin1String("mozillaworkstreet2")) { // mozilla
         workAddr.setStreet(workAddr.street() + QLatin1Char('\n') + value);
         return;
     }
@@ -533,8 +535,8 @@ void KContacts::evaluatePair(Addressee &a, Address &homeAddr, Address &workAddr,
         return;
     }
 
-    if (fieldname == QLatin1String("countryname")
-        || fieldname == QLatin1Char('c')) {      // mozilla
+    if (fieldname == QLatin1String("countryname") //
+        || fieldname == QLatin1Char('c')) { // mozilla
         if (value.length() <= 2) {
             value = Address::ISOtoCountry(value);
         }

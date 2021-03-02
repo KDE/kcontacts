@@ -160,6 +160,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         for (Address::List::ConstIterator it = addresses.begin(); it != end; ++it) {
             QStringList address;
 
+            // clang-format off
             const bool isEmpty = ((*it).postOfficeBox().isEmpty()
                                   && (*it).extended().isEmpty()
                                   && (*it).street().isEmpty()
@@ -188,6 +189,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
             address.append((*it).country().replace(QLatin1Char(';'),
                                                    QStringLiteral("\\;")));
+            // clang-format on
 
             const QString addressJoined(address.join(QLatin1Char(';')));
             VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
@@ -388,6 +390,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             card.addLine(mailerLine);
         }
 
+        // clang-format off
         // N required for only version < 4.0
         QStringList name;
         name.append((*addrIt).familyName().replace(QLatin1Char(';'),
@@ -404,6 +407,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         name.append((*addrIt).suffix().replace(QLatin1Char(';'),
                                                QStringLiteral("\\;")));
+        // clang-format on
 
         VCardLine nLine(QStringLiteral("N"), name.join(QLatin1Char(';')));
         if (version == VCard::v2_1 && needsEncoding(name.join(QLatin1Char(';')))) {
@@ -1139,6 +1143,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 //TODO import X-GENDER
                 else if (identifier.startsWith(QLatin1String("x-"))) {
                     QString ident = (*lineIt).identifier();
+                    // clang-format off
                     //X-Evolution
                     // also normalize case of our own extensions, some backends "adjust" that
                     if (identifier == QLatin1String("x-evolution-spouse")
@@ -1157,6 +1162,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     } else if (identifier == QLatin1String("x-evolution-manager")
                                || identifier == QLatin1String("x-manager")
                                || identifier.compare(QLatin1String("X-KADDRESSBOOK-X-MANAGERSNAME"), Qt::CaseInsensitive) == 0) {
+                        // clang-format on
                         ident = QStringLiteral("X-KADDRESSBOOK-X-ManagersName");
                     } else if (identifier.compare(QLatin1String("X-KADDRESSBOOK-X-PROFESSION"), Qt::CaseInsensitive) == 0) {
                         ident = QStringLiteral("X-KADDRESSBOOK-X-Profession");

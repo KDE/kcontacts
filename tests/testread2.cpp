@@ -29,6 +29,7 @@ int main()
 
     Addressee::List::iterator itr1;
     Addressee::List::iterator itr2;
+    // clang-format off
     for (itr1 = l.begin(), itr2 = parsed.begin();
          itr1 != l.end() && itr2 != parsed.end(); ++itr1, ++itr2) {
         if ((*itr1).fullEmail() == (*itr2).fullEmail()
@@ -38,6 +39,7 @@ int main()
             && (*itr1).role() == (*itr2).role()) {
             qDebug() << "\tAddressee  - PASSED";
             qDebug() << "\t\t" << (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
+            // clang-format on
         } else {
             qDebug() << "\tAddressee  - FAILED";
             qDebug() << (*itr1).toString();

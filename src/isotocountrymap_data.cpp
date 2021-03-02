@@ -263,6 +263,7 @@ static const char en_country_name_stringtable[] = {
 
 };
 
+// clang-format off
 static const IsoToCountryIndex iso_to_country_index[] = {
     IsoToCountryIndex{"ad", 0},
     IsoToCountryIndex{"ae", 8},
