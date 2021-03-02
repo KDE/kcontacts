@@ -60,7 +60,7 @@ public:
         Pcs = 4096,   /**< Personal Communication Service*/
         Pager = 8192,  /**< Pager */
         //TODO add Text and textphone support vcard4
-        Undefined = 16384 /** Undefined number type */
+        Undefined = 16384, /** Undefined number type */
     };
 
     /**

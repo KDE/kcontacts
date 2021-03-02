@@ -102,7 +102,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
     // EXAMPLE: ADR;GEO="geo:22.500000,45.099998";LABEL="My Label";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
     // Therefore we need a small state machine, just the way I like it.
     enum State {
-        StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue
+        StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue,
     };
     State state = StateInitial;
     const int lineLength = currentLine.length();

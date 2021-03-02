@@ -31,7 +31,7 @@ public:
         Public,
         Private,
         Confidential,
-        Invalid
+        Invalid,
     };
 
     /**

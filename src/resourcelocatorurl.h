@@ -50,7 +50,7 @@ public:
         Home = 1,    /**< Personal website. */
         Work = 2,    /**< Work website. */
         Profile = 4, /**< Profile website. */
-        Other = 8    /**< Other websie. */
+        Other = 8,   /**< Other websie. */
     };
 
     /**

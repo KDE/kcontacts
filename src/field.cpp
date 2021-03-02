@@ -65,7 +65,7 @@ public:
         Organization,
         Department,
         Note,
-        Url
+        Url,
     };
 
     int fieldId() const

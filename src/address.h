@@ -68,7 +68,7 @@ public:
         Parcel = 8,  /**< parcel */
         Home = 16,   /**< home address */
         Work = 32,   /**< address at work */
-        Pref = 64    /**< preferred address */
+        Pref = 64,   /**< preferred address */
     };
 
     /**

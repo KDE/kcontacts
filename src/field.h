@@ -70,7 +70,7 @@ public:
         /**
          * Custom (user-defined) fields
          */
-        CustomCategory = 0x20
+        CustomCategory = 0x20,
     };
 
     /**

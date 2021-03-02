@@ -28,7 +28,7 @@ public:
         FBUrl,
         CALUri,
         CALADRUri,
-        EndCalendarType
+        EndCalendarType,
     };
 
     CalendarUrl();

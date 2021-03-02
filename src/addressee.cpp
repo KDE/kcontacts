@@ -2326,7 +2326,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QS
     enum sourceLevel {
         TopLevel,
         InComment,
-        InAngleAddress
+        InAngleAddress,
     };
     sourceLevel context = TopLevel;
     bool inQuotedString = false;

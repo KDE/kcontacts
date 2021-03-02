@@ -34,7 +34,7 @@ public:
     enum Type {
         X509,   /**< X509 key */
         PGP,    /**< Pretty Good Privacy key */
-        Custom  /**< Custom or IANA conform key */
+        Custom, /**< Custom or IANA conform key */
     };
 
     /**

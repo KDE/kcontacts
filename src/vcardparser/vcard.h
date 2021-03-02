@@ -23,7 +23,7 @@ public:
     enum Version {
         v2_1,
         v3_0,
-        v4_0
+        v4_0,
     };
 
     VCard();
