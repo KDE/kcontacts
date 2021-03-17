@@ -89,14 +89,15 @@ void RelatedTest::shouldEqualRelated()
 
 void RelatedTest::shouldParseRelated()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:4.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "RELATED:friend\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:4.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "RELATED:friend\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -108,14 +109,15 @@ void RelatedTest::shouldParseRelated()
 
 void RelatedTest::shouldParseRelatedWithArgument()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:4.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:4.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -128,13 +130,14 @@ void RelatedTest::shouldParseRelatedWithArgument()
 
 void RelatedTest::shouldParseWithoutRelated()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -155,13 +158,14 @@ void RelatedTest::shouldCreateVCard4()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "RELATED:friend\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED:friend\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -180,14 +184,15 @@ void RelatedTest::shouldCreateVCardWithTwoRelated()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "RELATED:friend\r\n"
-                        "RELATED:kde\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED:friend\r\n"
+        "RELATED:kde\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -209,13 +214,14 @@ void RelatedTest::shouldCreateVCardWithParameters()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -236,13 +242,14 @@ void RelatedTest::shouldNotExportInVcard3()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED;FOO1=bla1,blo1;FOO2=bla2,blo2:friend\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 

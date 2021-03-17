@@ -13,20 +13,21 @@
 
 class QIODevice;
 
-namespace TranslatedCountries {
+namespace TranslatedCountries
+{
+struct CountryNameMapping {
+    QString name;
+    QString isoCode;
+    QString language;
+};
 
-    struct CountryNameMapping {
-        QString name;
-        QString isoCode;
-        QString language;
-    };
+using TranslationCountryMap = std::vector<CountryNameMapping>;
 
-    using TranslationCountryMap = std::vector<CountryNameMapping>;
-
-    /**
-     * \param directoryPath directory path to scan recursively for cldr xml files
-     * On Debian systems, /usr/share/unicode/cldr/common/main is a good value for this.
-     * \return map of translation name => country id
-     */
-    TranslationCountryMap parseFilesRecursive(const QString &directoryPath);}
+/**
+ * \param directoryPath directory path to scan recursively for cldr xml files
+ * On Debian systems, /usr/share/unicode/cldr/common/main is a good value for this.
+ * \return map of translation name => country id
+ */
+TranslationCountryMap parseFilesRecursive(const QString &directoryPath);
+}
 #endif

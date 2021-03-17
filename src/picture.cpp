@@ -12,7 +12,8 @@
 
 #include <QImage>
 
-namespace KContacts {
+namespace KContacts
+{
 class PicturePrivate : public QSharedData
 {
 public:
@@ -146,7 +147,7 @@ void Picture::setData(const QImage &data)
     d->mData = data;
     d->mIntern = true;
 
-// set the type, the raw data will have when accessed through Picture::rawData()
+    // set the type, the raw data will have when accessed through Picture::rawData()
     if (!d->mData.hasAlphaChannel()) {
         d->mType = QStringLiteral("jpeg");
     } else {
@@ -203,8 +204,7 @@ QString Picture::toString() const
 {
     QString str = QLatin1String("Picture {\n");
     str += QStringLiteral("  Type: %1\n").arg(d->mType);
-    str += QStringLiteral("  IsIntern: %1\n").
-           arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
+    str += QStringLiteral("  IsIntern: %1\n").arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIntern) {
         str += QStringLiteral("  Data: %1\n").arg(QString::fromLatin1(rawData().toBase64()));
     } else {

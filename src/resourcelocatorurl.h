@@ -16,8 +16,8 @@
 #include <QString>
 #include <QUrl>
 
-namespace KContacts {
-
+namespace KContacts
+{
 /** @short Class that holds a Resource Locator
  *  @since 5.0
  */
@@ -33,7 +33,6 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
     Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
 
 public:
-
     ResourceLocatorUrl();
     ResourceLocatorUrl(const ResourceLocatorUrl &other);
 
@@ -47,10 +46,10 @@ public:
      */
     enum TypeFlag {
         Unknown = 0, /**< No or unknown URL type is set. */
-        Home = 1,    /**< Personal website. */
-        Work = 2,    /**< Work website. */
+        Home = 1, /**< Personal website. */
+        Work = 2, /**< Work website. */
         Profile = 4, /**< Profile website. */
-        Other = 8,   /**< Other websie. */
+        Other = 8, /**< Other websie. */
     };
 
     /**
@@ -95,6 +94,7 @@ public:
     ResourceLocatorUrl &operator=(const ResourceLocatorUrl &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

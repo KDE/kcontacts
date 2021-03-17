@@ -14,7 +14,8 @@
 #include <QSharedDataPointer>
 #include <QString>
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short Geographic position
  *

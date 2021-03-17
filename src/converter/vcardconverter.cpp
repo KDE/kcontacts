@@ -77,7 +77,7 @@ Addressee VCardConverter::parseVCard(const QByteArray &vcard) const
 {
     Addressee::List list = parseVCards(vcard);
 
-    return list.isEmpty() ? Addressee() : list[ 0 ];
+    return list.isEmpty() ? Addressee() : list[0];
 }
 
 Addressee::List VCardConverter::parseVCards(const QByteArray &vcard) const
@@ -111,7 +111,7 @@ QDateTime KContacts::VCardStringToDate(const QString &dateString)
         date = QDate(d.midRef(0, 4).toUInt(), d.midRef(4, 2).toUInt(), d.midRef(6, 2).toUInt());
     }
 
-    if (d.length() > 9 && d[ 8 ].toUpper() == QLatin1Char('T')) {
+    if (d.length() > 9 && d[8].toUpper() == QLatin1Char('T')) {
         time = QTime(d.midRef(9, 2).toUInt(), d.midRef(11, 2).toUInt(), d.midRef(13, 2).toUInt());
     }
 

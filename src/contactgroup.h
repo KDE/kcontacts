@@ -8,15 +8,16 @@
 #ifndef KCONTACTS_CONTACTGROUP_H
 #define KCONTACTS_CONTACTGROUP_H
 
-#include <QVector>
-#include <QSharedDataPointer>
 #include <QMetaType>
+#include <QSharedDataPointer>
+#include <QVector>
 
 #include "kcontacts_export.h"
 
 class QString;
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short This class represents a group of contacts.
  *
@@ -32,7 +33,6 @@ namespace KContacts {
 class KCONTACTS_EXPORT ContactGroup
 {
 public:
-
     /**
      * This class represents a contact reference
      */

@@ -15,8 +15,8 @@
 #include <QSharedDataPointer>
 #include <QString>
 
-namespace KContacts {
-
+namespace KContacts
+{
 /** @short Class that holds a Email for a contact.
  *  @since 4.14.5
  */
@@ -49,9 +49,9 @@ public:
      */
     enum TypeFlag {
         Unknown = 0, /**< No or unknown email type is set. */
-        Home = 1,    /**< Personal email. */
-        Work = 2,    /**< Work email. */
-        Other = 4,   /**< Other email. */
+        Home = 1, /**< Personal email. */
+        Work = 2, /**< Work email. */
+        Other = 4, /**< Other email. */
     };
 
     /**
@@ -96,6 +96,7 @@ public:
     Email &operator=(const Email &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -9,16 +9,18 @@
 #define RELATED_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** Descripes a relationship of an Addressee. */
 class KCONTACTS_EXPORT Related
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Related &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Related &);
+
 public:
     Related();
     Related(const Related &other);
@@ -42,6 +44,7 @@ public:
     Related &operator=(const Related &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

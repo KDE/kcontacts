@@ -9,11 +9,12 @@
 #define NOTE_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Note for a contact.
  *  @since 5.3
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT Note
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Note &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Note &);
+
 public:
     Note();
     Note(const Note &other);
@@ -44,6 +46,7 @@ public:
     Note &operator=(const Note &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

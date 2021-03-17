@@ -9,10 +9,10 @@
 
 #include <QFile>
 
-#include <QDebug>
-#include <QCoreApplication>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QCoreApplication>
+#include <QDebug>
 
 #include "converter/kcontacts/vcardconverter.h"
 #include "vcard.h"
@@ -48,9 +48,9 @@ int main(int argc, char **argv)
     KContacts::Addressee::List list = converter.parseVCards(text);
 
     if (parser.isSet(QStringLiteral("vcard21"))) {
-        text = converter.createVCards(list, KContacts::VCardConverter::v2_1);   // uses version 2.1
+        text = converter.createVCards(list, KContacts::VCardConverter::v2_1); // uses version 2.1
     } else {
-        text = converter.createVCards(list);   // uses version 3.0
+        text = converter.createVCards(list); // uses version 3.0
     }
 
     std::cout << text.data();

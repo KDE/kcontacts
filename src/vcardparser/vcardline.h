@@ -15,7 +15,8 @@
 
 #include "kcontacts_export.h"
 
-namespace KContacts {
+namespace KContacts
+{
 class KCONTACTS_EXPORT VCardLine
 {
 public:
@@ -106,7 +107,7 @@ public:
     /**
      * Returns all parameters
      * @since 4.14.5
-    */
+     */
     Q_REQUIRED_RESULT ParamMap parameterMap() const;
 
 private:

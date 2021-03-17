@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <QCoreApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -15,7 +15,10 @@ int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
     QCommandLineParser p;
-    QCommandLineOption inputFile({QStringLiteral("i")}, QStringLiteral("Location of iso_3166-1.json"), QStringLiteral("iso-codes"), QStringLiteral("/usr/share/iso-codes/json/iso_3166-1.json"));
+    QCommandLineOption inputFile({QStringLiteral("i")},
+                                 QStringLiteral("Location of iso_3166-1.json"),
+                                 QStringLiteral("iso-codes"),
+                                 QStringLiteral("/usr/share/iso-codes/json/iso_3166-1.json"));
     p.addOption(inputFile);
     QCommandLineOption outputFile({QStringLiteral("outputFile"), QStringLiteral("o")}, QStringLiteral("Output file"), QStringLiteral("output file"), {});
     p.addOption(outputFile);
@@ -79,7 +82,7 @@ static const char en_country_name_stringtable[] = {
 static const IsoToCountryIndex iso_to_country_index[] = {
 )");
 
-    for (const auto &c: countries) {
+    for (const auto &c : countries) {
         out.write("    IsoToCountryIndex{\"");
         out.write(c.isoCode.toUtf8());
         out.write("\", ");

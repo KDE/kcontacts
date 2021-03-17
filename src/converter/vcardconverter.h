@@ -8,11 +8,12 @@
 #ifndef KCONTACTS_VCARDCONVERTER_H
 #define KCONTACTS_VCARDCONVERTER_H
 
-#include "kcontacts_export.h"
 #include "kcontacts/addressee.h"
+#include "kcontacts_export.h"
 #include <QString>
 
-namespace KContacts {
+namespace KContacts
+{
 /**
   @short Class to converting contact objects into vCard format and vice versa.
 
@@ -39,7 +40,6 @@ namespace KContacts {
 class KCONTACTS_EXPORT VCardConverter
 {
 public:
-
     /**
       @li v2_1 - VCard format version 2.1
       @li v3_0 - VCard format version 3.0
@@ -112,25 +112,25 @@ private:
   */
 
 /**
-  * Converts a QDateTime to a date string as it is used in VCard and LDIF files.
-  * The return value is in the form "yyyyMMddThhmmssZ" (e.g. "20031201T120000Z")
-  * @param dateTime date and time to be converted
-  */
+ * Converts a QDateTime to a date string as it is used in VCard and LDIF files.
+ * The return value is in the form "yyyyMMddThhmmssZ" (e.g. "20031201T120000Z")
+ * @param dateTime date and time to be converted
+ */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT QString dateToVCardString(const QDateTime &dateTime);
 
 /**
-  * Converts a QDate to a short date string as it is used in VCard and LDIF files.
-  * The return value is in the form "yyyyMMdd" (e.g. "20031201")
-  * @param date date to be converted
-  */
+ * Converts a QDate to a short date string as it is used in VCard and LDIF files.
+ * The return value is in the form "yyyyMMdd" (e.g. "20031201")
+ * @param date date to be converted
+ */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT QString dateToVCardString(QDate date);
 
 /**
-  * Converts a date string as it is used in VCard and LDIF files to a QDateTime value.
-  * If the date string does not contain a time value, it will be returned as 00:00:00.
-  * (e.g. "20031201T120000" will return a QDateTime for 2003-12-01 at 12:00)
-  * @param dateString string representing the date and time.
-  */
+ * Converts a date string as it is used in VCard and LDIF files to a QDateTime value.
+ * If the date string does not contain a time value, it will be returned as 00:00:00.
+ * (e.g. "20031201T120000" will return a QDateTime for 2003-12-01 at 12:00)
+ * @param dateString string representing the date and time.
+ */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT QDateTime VCardStringToDate(const QString &dateString);
 
 /**

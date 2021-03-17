@@ -5,11 +5,11 @@
     SPDX-License-Identifier: MIT
 */
 
-#include "translatedcountrylist.h"
 #include "../countrytoisomap_p.h"
+#include "translatedcountrylist.h"
 
-#include <QCoreApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -21,9 +21,15 @@ int main(int argc, char **argv)
     app.setApplicationVersion(QStringLiteral("0.1"));
 
     QCommandLineParser p;
-    QCommandLineOption sourceDir({QStringLiteral("sourceDir"), QStringLiteral("s")}, QStringLiteral("Location of CLDR data"), QStringLiteral("cldrdata"), QStringLiteral("/usr/share/unicode/cldr/common/main/"));
+    QCommandLineOption sourceDir({QStringLiteral("sourceDir"), QStringLiteral("s")},
+                                 QStringLiteral("Location of CLDR data"),
+                                 QStringLiteral("cldrdata"),
+                                 QStringLiteral("/usr/share/unicode/cldr/common/main/"));
     p.addOption(sourceDir);
-    QCommandLineOption outputFile({QStringLiteral("outputFile"), QStringLiteral("o")}, QStringLiteral("Output file"), QStringLiteral("output file"), QStringLiteral("countrytransl.map"));
+    QCommandLineOption outputFile({QStringLiteral("outputFile"), QStringLiteral("o")},
+                                  QStringLiteral("Output file"),
+                                  QStringLiteral("output file"),
+                                  QStringLiteral("countrytransl.map"));
     p.addOption(outputFile);
     p.addHelpOption();
     p.addVersionOption();
@@ -36,7 +42,6 @@ int main(int argc, char **argv)
     if (!p.isSet(outputFile)) {
         p.showHelp(0);
     }
-
 
     QString sourceDirPath = p.value(sourceDir);
     if (!QDir().exists(sourceDirPath)) {
@@ -78,7 +83,7 @@ static const char country_name_stringtable[] = {
     };
     std::vector<Elem> processedList;
     processedList.reserve(parsedList.size());
-    for(const auto &country : parsedList) {
+    for (const auto &country : parsedList) {
         const auto name = KContacts::normalizeCountryName(country.name);
         if (name.isEmpty()) {
             qWarning() << "Skipping empty normalized country name:" << country.name << country.isoCode << country.language;
@@ -92,7 +97,7 @@ static const char country_name_stringtable[] = {
         if (c == 0) {
             return lhs.isoCode < rhs.isoCode;
         }
-        return  c < 0;
+        return c < 0;
     });
 
     // remove all duplicates referring to the same ISO code
@@ -108,15 +113,14 @@ static const char country_name_stringtable[] = {
             ++it;
             continue;
         }
-        qDebug() << "Removing ambigious string:" << QString::fromUtf8((*it).name)
-                 << (*prevIt).isoCode.toUpper() << (*prevIt).language
+        qDebug() << "Removing ambigious string:" << QString::fromUtf8((*it).name) << (*prevIt).isoCode.toUpper() << (*prevIt).language
                  << (*it).isoCode.toUpper() << (*it).language;
         it = processedList.erase(prevIt);
         it = processedList.erase(it);
     }
 
     int offset = 0;
-    for(auto& elem : processedList) {
+    for (auto &elem : processedList) {
         f.write("    ");
         bool encodedChar = false;
         // MSVC has a limit on strings of 65535 bytes, however arrays can be longer
@@ -149,7 +153,7 @@ static const char country_name_stringtable[] = {
 static const CountryToIsoIndex country_to_iso_index[] = {
 )");
 
-    for (const auto &elem: processedList) {
+    for (const auto &elem : processedList) {
         f.write("    CountryToIsoIndex{");
         f.write(QByteArray::number(elem.offset));
         f.write(", \"");

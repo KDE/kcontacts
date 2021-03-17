@@ -7,12 +7,12 @@
 
 #include "addresstest.h"
 #include "addresseelist.h"
-#include "vcardtool_p.h"
 #include "kcontacts/address.h"
+#include "vcardtool_p.h"
 #include <KConfig>
 #include <KConfigGroup>
-#include <QTest>
 #include <QStandardPaths>
+#include <QTest>
 
 QTEST_MAIN(AddressTest)
 void initLocale()
@@ -151,8 +151,9 @@ void AddressTest::formatTest()
         address.setLocality(QStringLiteral("Lummerstadt"));
         address.setCountry(QStringLiteral("Germany"));
 
-        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                                            "12345 Lummerstadt\n\nGERMANY"));
+        const QString result(
+            QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
+                           "12345 Lummerstadt\n\nGERMANY"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
@@ -178,8 +179,9 @@ void AddressTest::formatTest()
         address.setLocality(QStringLiteral("Lummerstadt"));
         address.setCountry(QStringLiteral("Deutschland"));
 
-        const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                                            "12345 Lummerstadt\n\nDEUTSCHLAND"));
+        const QString result(
+            QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
+                           "12345 Lummerstadt\n\nDEUTSCHLAND"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
@@ -235,30 +237,32 @@ void AddressTest::shouldExportVcard3()
 
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
-                        " talcode;My country\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "LABEL;TYPE=home:My Label\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
+        " talcode;My country\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "LABEL;TYPE=home:My Label\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
 void AddressTest::shouldParseAddressVCard3()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
-                         " talcode;My country\r\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LABEL;TYPE=home:My Label\r\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
+        " talcode;My country\r\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "LABEL;TYPE=home:My Label\r\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -277,13 +281,14 @@ void AddressTest::shouldParseAddressVCard3()
 
 void AddressTest::shouldParseAddressVCard4()
 {
-    QByteArray vcarddata("BEGIN:VCARD\r\n"
-                         "VERSION:4.0\r\n"
-                         "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
-                         " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
-                         "N:;;;;\r\n"
-                         "UID:testuid\r\n"
-                         "END:VCARD\r\n\r\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
+        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
@@ -301,14 +306,15 @@ void AddressTest::shouldParseAddressVCard4()
 
 void AddressTest::shouldParseAddressVCard4WithGeoPosition()
 {
-    QByteArray vcarddata("BEGIN:VCARD\r\n"
-                         "VERSION:4.0\r\n"
-                         "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
-                         " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
-                         "EMAIL:foo@kde.org\r\n"
-                         "N:;;;;\r\n"
-                         "UID:testuid\r\n"
-                         "END:VCARD\r\n\r\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
+        " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
     QCOMPARE(lst.count(), 1);
@@ -358,14 +364,15 @@ void AddressTest::shouldExportVCard4WithGeoPosition()
 
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
-                        " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
+        " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -393,13 +400,14 @@ void AddressTest::shouldExportVcard4()
 
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
-                        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
+        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 

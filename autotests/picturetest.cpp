@@ -7,9 +7,9 @@
 
 #include "picturetest.h"
 #include "kcontacts/picture.h"
+#include <QBuffer>
 #include <QPainter>
 #include <QTest>
-#include <QBuffer>
 
 QTEST_MAIN(PictureTest)
 

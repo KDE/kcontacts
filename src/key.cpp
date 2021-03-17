@@ -170,11 +170,9 @@ QString Key::toString() const
     if (d->mType == Custom) {
         str += QStringLiteral("  CustomType: %1\n").arg(d->mCustomTypeString);
     }
-    str += QStringLiteral("  IsBinary: %1\n").
-           arg(d->mIsBinary ? QStringLiteral("true") : QStringLiteral("false"));
+    str += QStringLiteral("  IsBinary: %1\n").arg(d->mIsBinary ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIsBinary) {
-        str += QStringLiteral("  Binary: %1\n").
-               arg(QString::fromLatin1(d->mBinaryData.toBase64()));
+        str += QStringLiteral("  Binary: %1\n").arg(QString::fromLatin1(d->mBinaryData.toBase64()));
     } else {
         str += QStringLiteral("  Text: %1\n").arg(d->mTextData);
     }

@@ -89,14 +89,15 @@ void NickNameTest::shouldEqualNickName()
 
 void NickNameTest::shouldParseNickName()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "NickName:boo\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "NickName:boo\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -108,13 +109,14 @@ void NickNameTest::shouldParseNickName()
 
 void NickNameTest::shouldParseWithoutNickName()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -136,13 +138,14 @@ void NickNameTest::shouldCreateVCard()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "NICKNAME:blo\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "NICKNAME:blo\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -161,14 +164,15 @@ void NickNameTest::shouldCreateVCardWithTwoNickName()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "NICKNAME:fr\r\n"
-                        "NICKNAME:fr2\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "NICKNAME:fr\r\n"
+        "NICKNAME:fr2\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -190,13 +194,14 @@ void NickNameTest::shouldCreateVCardWithParameters()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -217,13 +222,14 @@ void NickNameTest::shouldGenerateNickNameForVCard3()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "NICKNAME;FOO1=bla1,blo1;FOO2=bla2,blo2:fr\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 

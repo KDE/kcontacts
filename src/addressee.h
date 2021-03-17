@@ -10,35 +10,36 @@
 #define KCONTACTS_ADDRESSEE_H
 
 #include <QDateTime>
-#include <QStringList>
-#include <QSharedDataPointer>
-#include <QUrl>
 #include <QMap>
+#include <QSharedDataPointer>
+#include <QStringList>
+#include <QUrl>
 
 #include "address.h"
-#include "geo.h"
-#include "key.h"
+#include "addresseelist.h"
+#include "calendarurl.h"
+#include "clientpidmap.h"
 #include "email.h"
-#include "lang.h"
+#include "fieldgroup.h"
 #include "gender.h"
+#include "geo.h"
+#include "impp.h"
+#include "key.h"
+#include "lang.h"
+#include "nickname.h"
+#include "org.h"
 #include "phonenumber.h"
 #include "picture.h"
+#include "related.h"
+#include "resourcelocatorurl.h"
+#include "role.h"
 #include "secrecy.h"
 #include "sound.h"
-#include "impp.h"
 #include "timezone.h"
-#include "calendarurl.h"
-#include "related.h"
-#include "addresseelist.h"
-#include "resourcelocatorurl.h"
-#include "fieldgroup.h"
 #include "title.h"
-#include "nickname.h"
-#include "role.h"
-#include "org.h"
-#include "clientpidmap.h"
 
-namespace KContacts {
+namespace KContacts
+{
 /**
   @short address book entry
 
@@ -509,7 +510,7 @@ public:
     /**
       Set title.
      */
-    //Remove in kf6
+    // Remove in kf6
     void setTitle(const QString &title);
     void setTitle(const Title &title);
     void insertExtraTitle(const Title &title);
@@ -547,7 +548,7 @@ public:
     /**
       Set organization.
      */
-    //Remove in kf6
+    // Remove in kf6
     void setOrganization(const QString &organization);
     void setOrganization(const Org &organization);
     void insertExtraOrganization(const Org &organization);
@@ -643,7 +644,7 @@ public:
       Set homepage.
      */
     void setUrl(const ResourceLocatorUrl &url);
-    //kf6: remove it
+    // kf6: remove it
     void setUrl(const QUrl &url);
 
     /**
@@ -1068,32 +1069,32 @@ public:
     void setExtraUrlList(const ResourceLocatorUrl::List &urlList);
     void insertExtraUrl(const ResourceLocatorUrl &url);
 
-    //Member
+    // Member
     void insertMember(const QString &member);
     void setMembers(const QStringList &c);
     QStringList members() const;
 
-    //Relation
+    // Relation
     void insertRelationship(const Related &related);
     void setRelationships(const Related::List &c);
     Related::List relationships() const;
 
-    //Source
+    // Source
     void insertSourceUrl(const QUrl &url);
     void setSourcesUrlList(const QVector<QUrl> &urlList);
     QVector<QUrl> sourcesUrlList() const;
 
-    //Impp
+    // Impp
     Impp::List imppList() const;
     void setImppList(const Impp::List &imppList);
     void insertImpp(const Impp &impp);
 
-    //FieldGroup
+    // FieldGroup
     FieldGroup::List fieldGroupList() const;
     void setFieldGroupList(const FieldGroup::List &fieldGroupList);
     void insertFieldGroup(const FieldGroup &fieldGroup);
 
-    //ClientPidMap
+    // ClientPidMap
     ClientPidMap::List clientPidMapList() const;
     void setClientPidMapList(const ClientPidMap::List &clientpidmaplist);
     void insertClientPidMap(const ClientPidMap &clientpidmap);

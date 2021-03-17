@@ -9,17 +9,17 @@
 
 #include <KLocalizedString>
 
-#include <QCoreApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 
-#include "kcontacts/addressee.h"
-#include "kcontacts/phonenumber.h"
-#include "kcontacts/address.h"
-#include "kcontacts/key.h"
-#include "kcontacts/picture.h"
-#include "kcontacts/sound.h"
-#include "kcontacts/secrecy.h"
 #include "converter/kcontacts/vcardconverter.h"
+#include "kcontacts/address.h"
+#include "kcontacts/addressee.h"
+#include "kcontacts/key.h"
+#include "kcontacts/phonenumber.h"
+#include "kcontacts/picture.h"
+#include "kcontacts/secrecy.h"
+#include "kcontacts/sound.h"
 
 int main(int argc, char **argv)
 {
@@ -57,10 +57,8 @@ int main(int argc, char **argv)
     addressee.insertEmail(QLatin1String("tokoe@kde.org"), true);
     addressee.insertEmail(QLatin1String("tokoe82@yahoo.de"), true);
 
-    KContacts::PhoneNumber phone1(QLatin1String("3541523475"),
-                                  KContacts::PhoneNumber::Pref | KContacts::PhoneNumber::Home);
-    KContacts::PhoneNumber phone2(QLatin1String("+46745673475"),
-                                  KContacts::PhoneNumber::Work);
+    KContacts::PhoneNumber phone1(QLatin1String("3541523475"), KContacts::PhoneNumber::Pref | KContacts::PhoneNumber::Home);
+    KContacts::PhoneNumber phone2(QLatin1String("+46745673475"), KContacts::PhoneNumber::Work);
     addressee.insertPhoneNumber(phone1);
     addressee.insertPhoneNumber(phone2);
 
@@ -79,12 +77,9 @@ int main(int argc, char **argv)
     a.setCountry(QLatin1String("U.S.A."));
     addressee.insertAddress(a);
 
-    addressee.insertCustom(QLatin1String("1hsdf"), QLatin1String("ertuer"),
-                           QLatin1String("iurt"));
-    addressee.insertCustom(QLatin1String("2hsdf"), QLatin1String("ertuer"),
-                           QLatin1String("iurt"));
-    addressee.insertCustom(QLatin1String("3hsdf"), QLatin1String("ertuer"),
-                           QLatin1String("iurt"));
+    addressee.insertCustom(QLatin1String("1hsdf"), QLatin1String("ertuer"), QLatin1String("iurt"));
+    addressee.insertCustom(QLatin1String("2hsdf"), QLatin1String("ertuer"), QLatin1String("iurt"));
+    addressee.insertCustom(QLatin1String("3hsdf"), QLatin1String("ertuer"), QLatin1String("iurt"));
 
     KContacts::Addressee::List list;
     for (int i = 0; i < 1000; ++i) {

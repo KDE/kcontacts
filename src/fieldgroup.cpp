@@ -7,9 +7,9 @@
 
 #include "fieldgroup.h"
 
+#include <QDataStream>
 #include <QMap>
 #include <QStringList>
-#include <QDataStream>
 
 using namespace KContacts;
 

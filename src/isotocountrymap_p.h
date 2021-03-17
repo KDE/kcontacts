@@ -10,11 +10,10 @@
 
 #include <QString>
 
-namespace KContacts {
-
-/* ISO code to country name string table lookup table entry. */
-struct IsoToCountryIndex
+namespace KContacts
 {
+/* ISO code to country name string table lookup table entry. */
+struct IsoToCountryIndex {
     explicit constexpr inline IsoToCountryIndex(const char isoCode[2], int offset)
         : m_c1(isoCode[0])
         , m_c2(isoCode[1])
@@ -26,7 +25,6 @@ struct IsoToCountryIndex
     char m_c2;
     uint16_t m_offset;
 };
-
 }
 
 #endif

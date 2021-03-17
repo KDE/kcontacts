@@ -7,9 +7,9 @@
 
 #include "email.h"
 
+#include <QDataStream>
 #include <QMap>
 #include <QStringList>
-#include <QDataStream>
 
 using namespace KContacts;
 
@@ -113,9 +113,8 @@ bool Email::isValid() const
     return !d->mail.isEmpty();
 }
 
-struct email_type_name
-{
-    const char* name;
+struct email_type_name {
+    const char *name;
     Email::Type type;
 };
 

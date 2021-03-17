@@ -24,10 +24,8 @@ Addressee vcard1()
     addr.setUrl(url);
     addr.insertEmail(QStringLiteral("fdawson@earthlink.net"));
     addr.insertEmail(QStringLiteral("Frank_Dawson@Lotus.com"), true);
-    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9515"),
-                                       PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
-    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9564"),
-                                       PhoneNumber::Fax | PhoneNumber::Work));
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9515"), PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
+    addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9564"), PhoneNumber::Fax | PhoneNumber::Work));
     Address a(Address::Work | Address::Postal | Address::Parcel);
     a.setStreet(QStringLiteral("6544 Battleford Drive"));
     a.setLocality(QStringLiteral("Raleigh"));

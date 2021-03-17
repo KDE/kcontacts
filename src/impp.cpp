@@ -163,7 +163,8 @@ QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
 
 static QString improtcolFile(const QString &serviceType)
 {
-    const auto path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols/") + serviceType + QStringLiteral(".desktop"));
+    const auto path =
+        QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols/") + serviceType + QStringLiteral(".desktop"));
     if (!path.isEmpty()) {
         return path;
     }

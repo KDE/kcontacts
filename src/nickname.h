@@ -9,11 +9,12 @@
 #define NICKNAME_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a NickName for a contact.
  *  @since 5.3
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT NickName
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const NickName &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, NickName &);
+
 public:
     NickName();
     NickName(const NickName &other);
@@ -44,6 +46,7 @@ public:
     NickName &operator=(const NickName &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

@@ -135,7 +135,6 @@ QString PhoneNumber::normalizedNumber() const
     return result;
 }
 
-
 void PhoneNumber::setType(Type type)
 {
     d->mType = type;

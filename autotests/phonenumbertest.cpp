@@ -7,9 +7,9 @@
 
 #include "phonenumbertest.h"
 #include "kcontacts/phonenumber.h"
+#include <QTest>
 #include <addressee.h>
 #include <addresseelist.h>
-#include <QTest>
 #include <vcardtool_p.h>
 
 QTEST_MAIN(PhoneNumberTest)
@@ -141,8 +141,7 @@ void PhoneNumberTest::labelTest()
         QCOMPARE(phone.type(), combinedType);
         QCOMPARE(KContacts::PhoneNumber::typeLabel(combinedType), phone.typeLabel());
 
-        if (type == KContacts::PhoneNumber::Home
-            || type == KContacts::PhoneNumber::Work) {
+        if (type == KContacts::PhoneNumber::Home || type == KContacts::PhoneNumber::Work) {
             // special cased
         } else if (type < KContacts::PhoneNumber::Fax) {
             const QString expectedCombinedString = QStringLiteral("%1/%2").arg(labels[type]).arg(labels[KContacts::PhoneNumber::Fax]);
@@ -173,14 +172,15 @@ void PhoneNumberTest::labelTest()
 
 void PhoneNumberTest::shouldParseVCard21()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:2.1\n"
-                         "EMAIL:foo@kde.org\n"
-                         "N:;;;;\n"
-                         "TEL;CELL;WORK:+1-919-676-9564\n"
-                         "UID:testuid\n"
-                         "END:VCARD\n"
-                         "\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:2.1\n"
+        "EMAIL:foo@kde.org\n"
+        "N:;;;;\n"
+        "TEL;CELL;WORK:+1-919-676-9564\n"
+        "UID:testuid\n"
+        "END:VCARD\n"
+        "\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -209,14 +209,15 @@ void PhoneNumberTest::shouldExportVCard21()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v2_1);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:2.1\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "TEL;CELL;WORK:+1-919-676-9564\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n"
-                        "\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:2.1\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TEL;CELL;WORK:+1-919-676-9564\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n"
+        "\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -236,14 +237,15 @@ void PhoneNumberTest::shouldExportVCard3()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "TEL;TYPE=CELL,WORK:+1-919-676-9564\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n"
-                        "\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TEL;TYPE=CELL,WORK:+1-919-676-9564\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n"
+        "\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -263,30 +265,32 @@ void PhoneNumberTest::shouldExportVCard4()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "TEL;TYPE=\"cell,work\":+1-919-676-9564\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n"
-                        "\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TEL;TYPE=\"cell,work\":+1-919-676-9564\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n"
+        "\r\n");
     QCOMPARE(ba, expected);
 }
 
 void PhoneNumberTest::shouldParseVcard3()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
-                         "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
-                         "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
+        "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
+        "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "LANG:fr\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -297,17 +301,18 @@ void PhoneNumberTest::shouldParseVcard3()
 
 void PhoneNumberTest::shouldParseVcard4()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:4.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
-                         "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
-                         "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:4.0\n"
+        "N:LastName;FirstName;;;\n"
+        "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
+        "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
+        "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "LANG:fr\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);

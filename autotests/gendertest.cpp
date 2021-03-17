@@ -87,43 +87,47 @@ void GenderTest::shouldParseGender_data()
     QTest::addColumn<QString>("comment");
     QTest::addColumn<bool>("hasGender");
 
-    QByteArray str("BEGIN:VCARD\n"
-                   "VERSION:3.0\n"
-                   "N:LastName;FirstName;;;\n"
-                   "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                   "REV:2015-03-14T09:24:45+00:00\n"
-                   "FN:FirstName LastName\n"
-                   "END:VCARD\n");
+    QByteArray str(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
     QTest::newRow("nogender") << str << QString() << QString() << false;
 
-    str = QByteArray("BEGIN:VCARD\n"
-                     "VERSION:3.0\n"
-                     "N:LastName;FirstName;;;\n"
-                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                     "REV:2015-03-14T09:24:45+00:00\n"
-                     "FN:FirstName LastName\n"
-                     "GENDER:H\n"
-                     "END:VCARD\n");
+    str = QByteArray(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "GENDER:H\n"
+        "END:VCARD\n");
     QTest::newRow("hasgenderbutnocomment") << str << QStringLiteral("H") << QString() << true;
 
-    str = QByteArray("BEGIN:VCARD\n"
-                     "VERSION:3.0\n"
-                     "N:LastName;FirstName;;;\n"
-                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                     "REV:2015-03-14T09:24:45+00:00\n"
-                     "FN:FirstName LastName\n"
-                     "GENDER:;foo\n"
-                     "END:VCARD\n");
+    str = QByteArray(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "GENDER:;foo\n"
+        "END:VCARD\n");
     QTest::newRow("hasgenderbutnotypebutcomment") << str << QString() << QStringLiteral("foo") << true;
 
-    str = QByteArray("BEGIN:VCARD\n"
-                     "VERSION:3.0\n"
-                     "N:LastName;FirstName;;;\n"
-                     "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                     "REV:2015-03-14T09:24:45+00:00\n"
-                     "FN:FirstName LastName\n"
-                     "GENDER:H;foo\n"
-                     "END:VCARD\n");
+    str = QByteArray(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "GENDER:H;foo\n"
+        "END:VCARD\n");
     QTest::newRow("hasgendertypeandcomment") << str << QStringLiteral("H") << QStringLiteral("foo") << true;
 }
 
@@ -144,9 +148,10 @@ void GenderTest::shouldParseGender()
 
 QByteArray GenderTest::createCard(const QByteArray &gender)
 {
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n");
     if (!gender.isEmpty()) {
         expected += gender + "\r\n";
     }
@@ -231,12 +236,13 @@ void GenderTest::shouldNotExportInVcard3()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 

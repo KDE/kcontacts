@@ -7,10 +7,10 @@
 
 #include "calendarurl.h"
 
-#include <QMap>
-#include <QUrl>
 #include <QDataStream>
+#include <QMap>
 #include <QStringList>
+#include <QUrl>
 
 using namespace KContacts;
 

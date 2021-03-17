@@ -5,12 +5,12 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <KLocalizedString>
 #include <KConfig>
+#include <KLocalizedString>
 
+#include "field.h"
 #include <KConfigGroup>
 #include <KSharedConfig>
-#include "field.h"
 
 using namespace KContacts;
 
@@ -272,8 +272,7 @@ QString Field::value(const KContacts::Addressee &a)
         }
     case Private::Url:
         return a.url().url().toDisplayString();
-    case Private::HomePhone:
-    {
+    case Private::HomePhone: {
         PhoneNumber::List::ConstIterator it;
 
         {
@@ -300,8 +299,7 @@ QString Field::value(const KContacts::Addressee &a)
 
         return QString();
     }
-    case Private::BusinessPhone:
-    {
+    case Private::BusinessPhone: {
         PhoneNumber::List::ConstIterator it;
 
         {
@@ -540,17 +538,17 @@ void Field::deleteFields()
     Field::List::ConstIterator it;
 
     for (it = Private::mAllFields.constBegin(); it != Private::mAllFields.constEnd(); ++it) {
-        delete(*it);
+        delete (*it);
     }
     Private::mAllFields.clear();
 
     for (it = Private::mDefaultFields.constBegin(); it != Private::mDefaultFields.constEnd(); ++it) {
-        delete(*it);
+        delete (*it);
     }
     Private::mDefaultFields.clear();
 
     for (it = Private::mCustomFields.constBegin(); it != Private::mCustomFields.constEnd(); ++it) {
-        delete(*it);
+        delete (*it);
     }
     Private::mCustomFields.clear();
 }
@@ -576,8 +574,7 @@ void Field::saveFields(KConfigGroup &cfg, const QString &identifier, const Field
             customEntry << (*it)->d->label();
             customEntry << (*it)->d->key();
             customEntry << (*it)->d->app();
-            cfg.writeEntry(QLatin1String("KCONTACTS_CustomEntry_") + identifier + QLatin1Char('_')
-                           +QString::number(custom++), customEntry);
+            cfg.writeEntry(QLatin1String("KCONTACTS_CustomEntry_") + identifier + QLatin1Char('_') + QString::number(custom++), customEntry);
         }
     }
 
@@ -603,11 +600,9 @@ Field::List Field::restoreFields(const KConfigGroup &cfg, const QString &identif
     for (it = fieldIds.begin(); it != fieldIds.end(); ++it) {
         Private *f = nullptr;
         if ((*it) == Private::CustomField) {
-            QStringList customEntry = cfg.readEntry(QLatin1String("KCONTACTS_CustomEntry_")
-                                                    +identifier + QLatin1Char('_')
-                                                    +QString::number(custom++), QStringList());
-            f = new Private(*it, CustomCategory, customEntry[ 0 ],
-                            customEntry[ 1 ], customEntry[ 2 ]);
+            QStringList customEntry =
+                cfg.readEntry(QLatin1String("KCONTACTS_CustomEntry_") + identifier + QLatin1Char('_') + QString::number(custom++), QStringList());
+            f = new Private(*it, CustomCategory, customEntry[0], customEntry[1], customEntry[2]);
         } else {
             f = new Private(*it);
         }
@@ -634,9 +629,7 @@ bool Field::equals(Field *field)
 
 Field *Field::createCustomField(const QString &label, int category, const QString &key, const QString &app)
 {
-    Field *field = new Field(new Private(Private::CustomField,
-                                         category | CustomCategory,
-                                         label, key, app));
+    Field *field = new Field(new Private(Private::CustomField, category | CustomCategory, label, key, app));
     Private::mCustomFields.append(field);
 
     return field;

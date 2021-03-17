@@ -14,24 +14,24 @@
 static void parseFile(QIODevice *device, const QString &lang, TranslatedCountries::TranslationCountryMap &map)
 {
     QXmlStreamReader reader(device);
-    const QStringList blacklist = { QLatin1String("eu"), QLatin1String("un"), QLatin1String("zz") };
-    while(!reader.atEnd()) {
+    const QStringList blacklist = {QLatin1String("eu"), QLatin1String("un"), QLatin1String("zz")};
+    while (!reader.atEnd()) {
         QXmlStreamReader::TokenType type = reader.readNext();
-        switch(type) {
-            case QXmlStreamReader::StartElement:
-                if (reader.name() == QLatin1String("territory")) {
-                    const auto territory = reader.attributes().value(QLatin1String("type")).toString().toLower();
-                    if (territory.size() != 2 || !territory.at(0).isLetter() || !territory.at(1).isLetter() || blacklist.contains(territory)) {
-                        break;
-                    }
-                    const auto name = reader.readElementText();
-                    if (!name.isEmpty()) {
-                        map.push_back({name, territory, lang});
-                    }
+        switch (type) {
+        case QXmlStreamReader::StartElement:
+            if (reader.name() == QLatin1String("territory")) {
+                const auto territory = reader.attributes().value(QLatin1String("type")).toString().toLower();
+                if (territory.size() != 2 || !territory.at(0).isLetter() || !territory.at(1).isLetter() || blacklist.contains(territory)) {
+                    break;
                 }
-                break;
-            default:
-                break;
+                const auto name = reader.readElementText();
+                if (!name.isEmpty()) {
+                    map.push_back({name, territory, lang});
+                }
+            }
+            break;
+        default:
+            break;
         }
     }
 }

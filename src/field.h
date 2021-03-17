@@ -13,7 +13,8 @@
 
 class KConfigGroup;
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short Represents a field in the Addressbook
  *

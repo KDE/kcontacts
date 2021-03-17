@@ -45,7 +45,7 @@ QStringList VCard::identifiers() const
 
 void VCard::addLine(const VCardLine &line)
 {
-    mLineMap[ line.identifier() ].append(line);
+    mLineMap[line.identifier()].append(line);
 }
 
 VCardLine::List VCard::lines(const QString &identifier) const
@@ -86,7 +86,7 @@ void VCard::setVersion(Version version)
         line.setIdentifier(QStringLiteral("4.0"));
     }
 
-    mLineMap[ QStringLiteral("VERSION") ].append(line);
+    mLineMap[QStringLiteral("VERSION")].append(line);
 }
 
 VCard::Version VCard::version() const
@@ -96,7 +96,7 @@ VCard::Version VCard::version() const
         return v3_0;
     }
 
-    VCardLine line = (*versionEntry)[ 0 ];
+    VCardLine line = (*versionEntry)[0];
     if (line.value() == QLatin1String("2.1")) {
         return v2_1;
     } else if (line.value() == QLatin1String("3.0")) {

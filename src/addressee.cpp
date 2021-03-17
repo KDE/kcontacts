@@ -15,9 +15,9 @@
 #include "kcontacts_debug.h"
 #include <KLocalizedString>
 
+#include "addressee.h"
 #include "addresseehelper.h"
 #include "field.h"
-#include "addressee.h"
 
 using namespace KContacts;
 
@@ -36,7 +36,7 @@ public:
         , mChanged(false)
         , mBirthdayWithTime(false)
     {
-        //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
+        // We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     }
 
     Private(const Private &other)
@@ -139,8 +139,8 @@ public:
     Org::List mOrgExtraList;
     NickName::List mNickNameExtraList;
     ClientPidMap::List mClientPidMapList;
-    bool mEmpty    : 1;
-    bool mChanged  : 1;
+    bool mEmpty : 1;
+    bool mChanged : 1;
     bool mBirthdayWithTime;
 };
 
@@ -558,7 +558,7 @@ void Addressee::insertFieldGroup(const FieldGroup &fieldGroup)
 {
     if (fieldGroup.isValid()) {
         d->mEmpty = false;
-        //TODO don't duplicate ?
+        // TODO don't duplicate ?
         d->mFieldGroupList.append(fieldGroup);
     }
 }
@@ -578,7 +578,7 @@ void Addressee::insertClientPidMap(const ClientPidMap &clientpidmap)
 {
     if (clientpidmap.isValid()) {
         d->mEmpty = false;
-        //TODO don't duplicate ?
+        // TODO don't duplicate ?
         d->mClientPidMapList.append(clientpidmap);
     }
 }
@@ -587,7 +587,7 @@ void Addressee::insertImpp(const Impp &impp)
 {
     if (impp.isValid()) {
         d->mEmpty = false;
-        //Don't duplicate ?
+        // Don't duplicate ?
         d->mImpps.append(impp);
     }
 }
@@ -606,7 +606,7 @@ Impp::List Addressee::imppList() const
 void Addressee::insertCalendarUrl(const CalendarUrl &calendarUrl)
 {
     d->mEmpty = false;
-    //TODO verify that there is not same calendarurl
+    // TODO verify that there is not same calendarurl
     if (calendarUrl.isValid()) {
         d->mCalendarUrl.append(calendarUrl);
     }
@@ -1365,10 +1365,8 @@ QString Addressee::soundLabel()
 void Addressee::setNameFromString(const QString &s)
 {
     QString str = s;
-    //remove enclosing quotes from string
-    if (str.length() > 1
-        && s[0] == QLatin1Char('"')
-        && s[s.length() - 1] == QLatin1Char('"')) {
+    // remove enclosing quotes from string
+    if (str.length() > 1 && s[0] == QLatin1Char('"') && s[s.length() - 1] == QLatin1Char('"')) {
         str = s.mid(1, s.length() - 2);
     }
 
@@ -2312,7 +2310,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QS
     fullName.clear();
     email.clear();
     if (rawEmail.isEmpty()) {
-        return;    // KPIM::AddressEmpty;
+        return; // KPIM::AddressEmpty;
     }
 
     // The code works on 8-bit strings, so convert the input to UTF-8.
@@ -2365,15 +2363,15 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QS
                 if (*p) {
                     displayName += *p;
                 } else {
-                    //return KPIM::UnexpectedEnd;
+                    // return KPIM::UnexpectedEnd;
                     goto ABORT_PARSING;
                 }
                 break;
             case ',':
                 if (!inQuotedString) {
-                    //if ( allowMultipleAddresses )
+                    // if ( allowMultipleAddresses )
                     //  stop = true;
-                    //else
+                    // else
                     //  return KPIM::UnexpectedComma;
                     goto ABORT_PARSING;
                 } else {
@@ -2405,7 +2403,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QS
                 if (*p) {
                     comment += *p;
                 } else {
-                    //return KPIM::UnexpectedEnd;
+                    // return KPIM::UnexpectedEnd;
                     goto ABORT_PARSING;
                 }
                 break;
@@ -2432,7 +2430,7 @@ void Addressee::parseEmailAddress(const QString &rawEmail, QString &fullName, QS
                 if (*p) {
                     addrSpec += *p;
                 } else {
-                    //return KPIM::UnexpectedEnd;
+                    // return KPIM::UnexpectedEnd;
                     goto ABORT_PARSING;
                 }
                 break;
@@ -2448,23 +2446,23 @@ ABORT_PARSING:
     comment = comment.trimmed();
     addrSpec = addrSpec.trimmed();
     fullName = QString::fromUtf8(displayName);
-    email = QString::fromUtf8(addrSpec);  // check for errors
+    email = QString::fromUtf8(addrSpec); // check for errors
     if (inQuotedString) {
-        return;    // KPIM::UnbalancedQuote;
+        return; // KPIM::UnbalancedQuote;
     }
     if (context == InComment) {
-        return;    // KPIM::UnbalancedParens;
+        return; // KPIM::UnbalancedParens;
     }
     if (context == InAngleAddress) {
-        return;    // KPIM::UnclosedAngleAddr;
+        return; // KPIM::UnclosedAngleAddr;
     }
 
     if (addrSpec.isEmpty()) {
         if (displayName.isEmpty()) {
-            return;    // KPIM::NoAddressSpec;
+            return; // KPIM::NoAddressSpec;
         } else {
-            //addrSpec = displayName;
-            //displayName.truncate( 0 );
+            // addrSpec = displayName;
+            // displayName.truncate( 0 );
             // Address of the form "foo@bar" or "foo@bar (Name)".
             email = fullName;
             fullName = QString::fromUtf8(comment);
@@ -2476,7 +2474,7 @@ ABORT_PARSING:
     // Check that the full name is not enclosed in balanced double quotes.
     // If it is then remove them.
     const unsigned int len = fullName.length();
-    if (len<3) {					// not long enough to be
+    if (len < 3) { // not long enough to be
         return;
     }
     if (fullName.startsWith(QLatin1Char('"')) && fullName.endsWith(QLatin1Char('"'))) {
@@ -2655,7 +2653,7 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
     return true;
 }
 
-template <typename T>
+template<typename T>
 static QVariantList toVariantList(const QVector<T> &v)
 {
     QVariantList l;

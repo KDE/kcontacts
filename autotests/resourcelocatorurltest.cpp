@@ -87,15 +87,16 @@ void ResourceLocatorUrlTest::shouldEqualResourceLocatorUrl()
 
 void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "URL;PREF=1;TYPE=HOME:https://firsturl\n"
-                         "URL;TYPE=WORK,PREF:https://sherlockholmes.com/calendar/sherlockholmes\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "URL;PREF=1;TYPE=HOME:https://firsturl\n"
+        "URL;TYPE=WORK,PREF:https://sherlockholmes.com/calendar/sherlockholmes\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -131,15 +132,16 @@ void ResourceLocatorUrlTest::shouldGenerateVCard4()
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected;
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:4.0\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "UID:testuid\r\n"
-                          "URL:https://www.kde.org\r\n"
-                          "URL:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                          "URL:https://foo.kde.org\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "URL:https://www.kde.org\r\n"
+        "URL:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "URL:https://foo.kde.org\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -167,15 +169,16 @@ void ResourceLocatorUrlTest::shouldGenerateVCardWithParameter()
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
     QByteArray expected;
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:4.0\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "UID:testuid\r\n"
-                          "URL:https://www.kde.org\r\n"
-                          "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                          "URL:https://foo.kde.org\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "URL:https://www.kde.org\r\n"
+        "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "URL:https://foo.kde.org\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
@@ -205,15 +208,16 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
     QByteArray expected;
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:3.0\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "UID:testuid\r\n"
-                          "URL:https://www.kde.org\r\n"
-                          "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                          "URL;TYPE=WORK,PREF:https://foo.kde.org\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "URL:https://www.kde.org\r\n"
+        "URL;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "URL;TYPE=WORK,PREF:https://foo.kde.org\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }

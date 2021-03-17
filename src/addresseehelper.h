@@ -12,7 +12,8 @@
 
 #include <QObject>
 
-namespace KContacts {
+namespace KContacts
+{
 class AddresseeHelperPrivate;
 
 /**

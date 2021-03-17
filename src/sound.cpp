@@ -113,8 +113,7 @@ bool Sound::isIntern() const
 
 bool Sound::isEmpty() const
 {
-    return
-        (d->mIntern && d->mData.isEmpty()) || (!d->mIntern && d->mUrl.isEmpty());
+    return (d->mIntern && d->mData.isEmpty()) || (!d->mIntern && d->mUrl.isEmpty());
 }
 
 QString Sound::url() const
@@ -130,11 +129,9 @@ QByteArray Sound::data() const
 QString Sound::toString() const
 {
     QString str = QLatin1String("Sound {\n");
-    str += QStringLiteral("  IsIntern: %1\n").
-           arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
+    str += QStringLiteral("  IsIntern: %1\n").arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIntern) {
-        str += QStringLiteral("  Data: %1\n").
-               arg(QString::fromLatin1(d->mData.toBase64()));
+        str += QStringLiteral("  Data: %1\n").arg(QString::fromLatin1(d->mData.toBase64()));
     } else {
         str += QStringLiteral("  Url: %1\n").arg(d->mUrl);
     }

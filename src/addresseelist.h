@@ -11,7 +11,8 @@
 
 #include <QVector>
 
-namespace KContacts {
+namespace KContacts
+{
 class Addressee;
 
 /**

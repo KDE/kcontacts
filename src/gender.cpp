@@ -7,7 +7,6 @@
 
 #include "gender.h"
 
-
 using namespace KContacts;
 
 class Q_DECL_HIDDEN Gender::Private : public QSharedData

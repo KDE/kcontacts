@@ -15,7 +15,8 @@
 #include <QSharedDataPointer>
 #include <QString>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a IMPP for a contact.
  *
  *  IMPP stands for "Instant Messaging and Presence Protocol". This field is defined
@@ -35,6 +36,7 @@ class KCONTACTS_EXPORT Impp
 
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
+
 public:
     Impp();
     Impp(const Impp &other);

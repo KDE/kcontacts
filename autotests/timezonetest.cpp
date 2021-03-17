@@ -7,8 +7,8 @@
 
 #include "timezonetest.h"
 #include "kcontacts/timezone.h"
-#include <QTest>
 #include "vcardtool_p.h"
+#include <QTest>
 
 QTEST_MAIN(TimeZoneTest)
 
@@ -88,19 +88,20 @@ void TimeZoneTest::shouldGenerateVCard3()
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
     QByteArray expected;
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:3.0\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "TZ:+00:02\r\n"
-                          "UID:testuid\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TZ:+00:02\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
 void TimeZoneTest::shouldGenerateVCard4()
 {
-    //TODO fixme.
+    // TODO fixme.
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -113,12 +114,13 @@ void TimeZoneTest::shouldGenerateVCard4()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    const QByteArray expected("BEGIN:VCARD\r\n"
-                              "VERSION:4.0\r\n"
-                              "EMAIL:foo@kde.org\r\n"
-                              "N:;;;;\r\n"
-                              "TZ:+00:02\r\n"
-                              "UID:testuid\r\n"
-                              "END:VCARD\r\n\r\n");
+    const QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TZ:+00:02\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }

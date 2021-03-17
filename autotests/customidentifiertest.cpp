@@ -6,9 +6,9 @@
 */
 
 #include "customidentifiertest.h"
-#include <QTest>
-#include "vcardtool_p.h"
 #include "addressee.h"
+#include "vcardtool_p.h"
+#include <QTest>
 
 CustomIdentifierTest::CustomIdentifierTest(QObject *parent)
     : QObject(parent)
@@ -37,14 +37,15 @@ void CustomIdentifierTest::shouldExportVcard3()
     lst << addr;
     KContacts::VCardTool vcard;
     QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:3.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "EMAIL:bla@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "X-KADDRESSBOOK-X-SpousesName:foo\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "EMAIL:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "X-KADDRESSBOOK-X-SpousesName:foo\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 
@@ -52,22 +53,23 @@ void CustomIdentifierTest::shouldExportVcard3()
     lst.clear();
     lst << addr;
     ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:3.0\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "EMAIL:bla@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "UID:testuid\r\n"
-                          "X-KADDRESSBOOK-X-ANNIVERSARY:19960415\r\n"
-                          "X-KADDRESSBOOK-X-SpousesName:foo\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "EMAIL:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "X-KADDRESSBOOK-X-ANNIVERSARY:19960415\r\n"
+        "X-KADDRESSBOOK-X-SpousesName:foo\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }
 
 void CustomIdentifierTest::shouldExportVcard4()
 {
-    //TODO don't work to export custom!
+    // TODO don't work to export custom!
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org") << QStringLiteral("bla@kde.org"));
@@ -76,14 +78,15 @@ void CustomIdentifierTest::shouldExportVcard4()
     lst << addr;
     KContacts::VCardTool vcard;
     QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "EMAIL:bla@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "RELATED;TYPE=spouse;VALUE=foo:;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "EMAIL:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED;TYPE=spouse;VALUE=foo:;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 
@@ -92,15 +95,16 @@ void CustomIdentifierTest::shouldExportVcard4()
     lst.clear();
     lst << addr;
     ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    expected = QByteArray("BEGIN:VCARD\r\n"
-                          "VERSION:4.0\r\n"
-                          "ANNIVERSARY:00120903\r\n"
-                          "EMAIL:foo@kde.org\r\n"
-                          "EMAIL:bla@kde.org\r\n"
-                          "N:;;;;\r\n"
-                          "RELATED;TYPE=spouse;VALUE=foo:;\r\n"
-                          "UID:testuid\r\n"
-                          "END:VCARD\r\n\r\n");
+    expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "ANNIVERSARY:00120903\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "EMAIL:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "RELATED;TYPE=spouse;VALUE=foo:;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 }

@@ -12,14 +12,13 @@
 
 class QByteArray;
 
-namespace KContacts {
-
+namespace KContacts
+{
 /* Pack the string table offset and the country ISO code into 32 bit.
  * The ISO code needs 2x 5bit, leaving 22 bit for the offset, which is plenty
  * considering the string is only about 500k chars long.
  */
-struct CountryToIsoIndex
-{
+struct CountryToIsoIndex {
     explicit constexpr inline CountryToIsoIndex(int offset, const char isoCode[2])
         : m_offset(offset)
         , m_c1(isoCode[0] - 'a')
@@ -35,9 +34,9 @@ struct CountryToIsoIndex
         return QLatin1String(s, 2);
     }
 
-    uint32_t m_offset: 22;
-    uint32_t m_c1: 5;
-    uint32_t m_c2: 5;
+    uint32_t m_offset : 22;
+    uint32_t m_c1 : 5;
+    uint32_t m_c2 : 5;
 };
 
 QByteArray normalizeCountryName(const QString &name);

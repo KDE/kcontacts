@@ -9,11 +9,12 @@
 #define ROLE_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Role for a contact.
  *  @since 5.3
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT Role
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Role &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Role &);
+
 public:
     Role();
     Role(const Role &other);
@@ -44,6 +46,7 @@ public:
     Role &operator=(const Role &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

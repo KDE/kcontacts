@@ -101,8 +101,7 @@ QString ContactGroup::ContactReference::custom(const QString &key) const
     return d->mCustoms.value(key);
 }
 
-ContactGroup::ContactReference &ContactGroup::ContactReference::operator=(
-    const ContactGroup::ContactReference &other)
+ContactGroup::ContactReference &ContactGroup::ContactReference::operator=(const ContactGroup::ContactReference &other)
 {
     if (this != &other) {
         d = other.d;
@@ -113,9 +112,7 @@ ContactGroup::ContactReference &ContactGroup::ContactReference::operator=(
 
 bool ContactGroup::ContactReference::operator==(const ContactReference &other) const
 {
-    return d->mUid == other.d->mUid
-           && d->mPreferredEmail == other.d->mPreferredEmail
-           && d->mCustoms == other.d->mCustoms;
+    return d->mUid == other.d->mUid && d->mPreferredEmail == other.d->mPreferredEmail && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::ContactGroupReference::ContactGroupReferencePrivate : public QSharedData
@@ -182,8 +179,7 @@ QString ContactGroup::ContactGroupReference::custom(const QString &key) const
     return d->mCustoms.value(key);
 }
 
-ContactGroup::ContactGroupReference &ContactGroup::ContactGroupReference::operator=(
-    const ContactGroup::ContactGroupReference &other)
+ContactGroup::ContactGroupReference &ContactGroup::ContactGroupReference::operator=(const ContactGroup::ContactGroupReference &other)
 {
     if (this != &other) {
         d = other.d;
@@ -194,8 +190,7 @@ ContactGroup::ContactGroupReference &ContactGroup::ContactGroupReference::operat
 
 bool ContactGroup::ContactGroupReference::operator==(const ContactGroupReference &other) const
 {
-    return d->mUid == other.d->mUid
-           && d->mCustoms == other.d->mCustoms;
+    return d->mUid == other.d->mUid && d->mCustoms == other.d->mCustoms;
 }
 
 class Q_DECL_HIDDEN ContactGroup::Data::DataPrivate : public QSharedData
@@ -296,7 +291,7 @@ class Q_DECL_HIDDEN ContactGroup::Private : public QSharedData
 public:
     Private()
         : QSharedData()
-        , mIdentifier(QUuid::createUuid().toString().mid(1, 36))  //We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
+        , mIdentifier(QUuid::createUuid().toString().mid(1, 36)) // We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     {
     }
 
@@ -379,33 +374,28 @@ int ContactGroup::dataCount() const
 
 ContactGroup::ContactReference &ContactGroup::contactReference(int index)
 {
-    Q_ASSERT_X(index < d->mContactReferences.count(),
-               "contactReference()", "index out of range");
+    Q_ASSERT_X(index < d->mContactReferences.count(), "contactReference()", "index out of range");
 
     return d->mContactReferences[index];
 }
 
 const ContactGroup::ContactReference &ContactGroup::contactReference(int index) const
 {
-    Q_ASSERT_X(index < d->mContactReferences.count(),
-               "contactReference()", "index out of range");
+    Q_ASSERT_X(index < d->mContactReferences.count(), "contactReference()", "index out of range");
 
     return d->mContactReferences[index];
 }
 
 ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(int index)
 {
-    Q_ASSERT_X(index < d->mContactGroupReferences.count(),
-               "contactGroupReference()", "index out of range");
+    Q_ASSERT_X(index < d->mContactGroupReferences.count(), "contactGroupReference()", "index out of range");
 
     return d->mContactGroupReferences[index];
 }
 
-const ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(
-    int index) const
+const ContactGroup::ContactGroupReference &ContactGroup::contactGroupReference(int index) const
 {
-    Q_ASSERT_X(index < d->mContactGroupReferences.count(),
-               "contactGroupReference()", "index out of range");
+    Q_ASSERT_X(index < d->mContactGroupReferences.count(), "contactGroupReference()", "index out of range");
 
     return d->mContactGroupReferences[index];
 }

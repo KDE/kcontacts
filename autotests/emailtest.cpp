@@ -6,8 +6,8 @@
 */
 #include "emailtest.h"
 #include "email.h"
-#include <QTest>
 #include "vcardtool_p.h"
+#include <QTest>
 
 EmailTest::EmailTest(QObject *parent)
     : QObject(parent)
@@ -89,14 +89,15 @@ void EmailTest::shouldEqualEmail()
 
 void EmailTest::shouldParseEmailVCard()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -110,15 +111,16 @@ void EmailTest::shouldParseEmailVCard()
 
 void EmailTest::shouldParseEmailVCardWithMultiEmails()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "EMAIL;TYPE=WORK;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
-                         "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:bla@bla.com\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "EMAIL;TYPE=WORK;X-EVOLUTION-UI-SLOT=2:foo@foo.com\n"
+        "EMAIL;TYPE=HOME,PREF;X-EVOLUTION-UI-SLOT=2:bla@bla.com\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -139,13 +141,14 @@ void EmailTest::shouldParseEmailVCardWithMultiEmails()
 
 void EmailTest::shouldParseEmailVCardWithoutEmail()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -162,13 +165,14 @@ void EmailTest::shouldExportVcard()
     lst << addr;
     KContacts::VCardTool vcard;
     QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "EMAIL:bla@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "EMAIL:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
 
@@ -182,13 +186,14 @@ void EmailTest::shouldExportVcard()
     email2.setType(KContacts::Email::Home);
     addr2.setEmailList({email1, email2});
     ba = vcard.exportVCards({addr2}, KContacts::VCard::v4_0);
-    QByteArray expected2("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL;TYPE=WORK,PREF:foo@kde.org\r\n"
-                        "EMAIL;TYPE=HOME:bla@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected2(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL;TYPE=WORK,PREF:foo@kde.org\r\n"
+        "EMAIL;TYPE=HOME:bla@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected2);
 }

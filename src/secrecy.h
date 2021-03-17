@@ -9,10 +9,11 @@
 #define KCONTACTS_SECRECY_H
 
 #include "kcontacts_export.h"
-#include <QVector>
 #include <QSharedDataPointer>
+#include <QVector>
 
-namespace KContacts {
+namespace KContacts
+{
 /** Descripes the confidentiality of an addressee. */
 class KCONTACTS_EXPORT Secrecy
 {

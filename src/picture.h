@@ -11,12 +11,13 @@
 #include "kcontacts_export.h"
 
 #include <QDataStream>
-#include <QString>
 #include <QSharedDataPointer>
+#include <QString>
 
 class QImage;
 
-namespace KContacts {
+namespace KContacts
+{
 class PicturePrivate;
 
 /**

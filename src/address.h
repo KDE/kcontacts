@@ -8,15 +8,16 @@
 #ifndef KCONTACTS_ADDRESS_H
 #define KCONTACTS_ADDRESS_H
 
-#include "kcontacts_export.h"
 #include "geo.h"
+#include "kcontacts_export.h"
 
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QVector>
 
-namespace KContacts {
+namespace KContacts
+{
 class Geo;
 /**
   @brief
@@ -62,13 +63,13 @@ public:
       @see Type
     */
     enum TypeFlag {
-        Dom = 1,     /**< domestic */
-        Intl = 2,    /**< international */
-        Postal = 4,  /**< postal */
-        Parcel = 8,  /**< parcel */
-        Home = 16,   /**< home address */
-        Work = 32,   /**< address at work */
-        Pref = 64,   /**< preferred address */
+        Dom = 1, /**< domestic */
+        Intl = 2, /**< international */
+        Postal = 4, /**< postal */
+        Parcel = 8, /**< parcel */
+        Home = 16, /**< home address */
+        Work = 32, /**< address at work */
+        Pref = 64, /**< preferred address */
     };
 
     /**

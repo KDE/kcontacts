@@ -9,11 +9,12 @@
 #define TITLE_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Title for a contact.
  *  @since 5.3
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT Title
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Title &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Title &);
+
 public:
     Title();
     Title(const Title &other);
@@ -44,6 +46,7 @@ public:
     Title &operator=(const Title &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

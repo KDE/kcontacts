@@ -12,7 +12,8 @@
 #include <QSharedDataPointer>
 #include <QString>
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short Time zone information.
  *

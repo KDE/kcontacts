@@ -6,8 +6,8 @@
 */
 
 #include "vcardparser.h"
-#include <KCodecs>
 #include "kcontacts_debug.h"
+#include <KCodecs>
 #include <QTextCodec>
 #include <functional>
 
@@ -90,19 +90,24 @@ void VCardLineParser::addParameter(const QByteArray &paramKey, const QByteArray 
     } else if (paramKey == "charset") {
         m_charset = paramValue.toLower();
     }
-    //qDebug() << "  add parameter" << paramKey << "    =    " << paramValue;
+    // qDebug() << "  add parameter" << paramKey << "    =    " << paramValue;
     m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), m_cache.fromLatin1(paramValue));
 }
 
 void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardLine *vCardLine)
 {
-    //qDebug() << currentLine;
+    // qDebug() << currentLine;
     m_vCardLine = vCardLine;
     // The syntax is key:value, but the key can contain semicolon-separated parameters, which can contain a ':', so indexOf(':') is wrong.
     // EXAMPLE: ADR;GEO="geo:22.500000,45.099998";LABEL="My Label";TYPE=home:P.O. Box 101;;;Any Town;CA;91921-1234;
     // Therefore we need a small state machine, just the way I like it.
     enum State {
-        StateInitial, StateParamKey, StateParamValue, StateQuotedValue, StateAfterParamValue, StateValue,
+        StateInitial,
+        StateParamKey,
+        StateParamValue,
+        StateQuotedValue,
+        StateAfterParamValue,
+        StateValue,
     };
     State state = StateInitial;
     const int lineLength = currentLine.length();
@@ -118,7 +123,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
         case StateInitial:
             if (colonOrSemicolon) {
                 const QByteArray identifier = currentLine.mid(start, pos - start);
-                //qDebug() << " identifier" << identifier;
+                // qDebug() << " identifier" << identifier;
                 vCardLine->setIdentifier(m_cache.fromLatin1(identifier));
                 start = pos + 1;
             }
@@ -195,7 +200,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
         }
     }
 
-    if (state != StateValue) {   // invalid line, no ':'
+    if (state != StateValue) { // invalid line, no ':'
         return;
     }
 
@@ -213,7 +218,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
         } else if (m_encoding == "quoted-printable") {
             // join any qp-folded lines
             while (value.endsWith('=')) {
-                value.chop(1);   // remove the '='
+                value.chop(1); // remove the '='
                 value.append(m_fetchAnotherLine());
             }
             KCodecs::quotedPrintableDecode(value, output);
@@ -263,7 +268,8 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
     bool inVCard = false;
 
     StringCache cache;
-    for (; lineStart != text.size() + 1; lineStart = lineEnd + 1, lineEnd = (text.indexOf('\n', lineStart) == -1) ? text.size() : text.indexOf('\n', lineStart)) {
+    for (; lineStart != text.size() + 1;
+         lineStart = lineEnd + 1, lineEnd = (text.indexOf('\n', lineStart) == -1) ? text.size() : text.indexOf('\n', lineStart)) {
         QByteArray cur = text.mid(lineStart, lineEnd - lineStart);
         // remove the trailing \r, left from \r\n
         if (cur.endsWith('\r')) {
@@ -275,26 +281,26 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
             currentLine.append(cur.mid(1));
             continue;
         } else {
-            if (cur.trimmed().isEmpty()) {     // empty line
+            if (cur.trimmed().isEmpty()) { // empty line
                 continue;
             }
-            if (inVCard && !currentLine.isEmpty()) {   // now parse the line
+            if (inVCard && !currentLine.isEmpty()) { // now parse the line
                 VCardLine vCardLine;
 
                 // Provide a way for the parseVCardLine function to read more lines (for quoted-printable support)
                 auto fetchAnotherLine = [&text, &lineStart, &lineEnd, &cur]() -> QByteArray {
-                                            const QByteArray ret = cur;
-                                            lineStart = lineEnd + 1;
-                                            lineEnd = text.indexOf('\n', lineStart);
-                                            if (lineEnd != -1) {
-                                                cur = text.mid(lineStart, lineEnd - lineStart);
-                                                // remove the trailing \r, left from \r\n
-                                                if (cur.endsWith('\r')) {
-                                                    cur.chop(1);
-                                                }
-                                            }
-                                            return ret;
-                                        };
+                    const QByteArray ret = cur;
+                    lineStart = lineEnd + 1;
+                    lineEnd = text.indexOf('\n', lineStart);
+                    if (lineEnd != -1) {
+                        cur = text.mid(lineStart, lineEnd - lineStart);
+                        // remove the trailing \r, left from \r\n
+                        if (cur.endsWith('\r')) {
+                            cur.chop(1);
+                        }
+                    }
+                    return ret;
+                };
 
                 VCardLineParser lineParser(cache, fetchAnotherLine);
 
@@ -346,7 +352,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
 
     bool hasEncoding;
 
-    text.reserve(list.size() * 300);   // reserve memory to be more efficient
+    text.reserve(list.size() * 300); // reserve memory to be more efficient
 
     // iterate over the cards
     const VCard::List::ConstIterator listEnd(list.end());
@@ -354,7 +360,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
         text.append("BEGIN:VCARD\r\n");
 
         idents = (*cardIt).identifiers();
-        //VERSION must be first
+        // VERSION must be first
         if (idents.contains(QLatin1String("VERSION"))) {
             const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
             idents.prepend(str);
@@ -375,7 +381,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
 
                     params = (*lineIt).parameterList();
                     hasEncoding = false;
-                    if (!params.isEmpty()) {   // we have parameters
+                    if (!params.isEmpty()) { // we have parameters
                         for (paramIt = params.begin(); paramIt != params.end(); ++paramIt) {
                             if ((*paramIt) == QLatin1String("encoding")) {
                                 hasEncoding = true;
@@ -393,7 +399,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     }
 
                     QByteArray input, output;
-                    bool checkMultibyte = false;  // avoid splitting a multibyte character
+                    bool checkMultibyte = false; // avoid splitting a multibyte character
 
                     // handle charset
                     const QString charset = (*lineIt).parameter(QStringLiteral("charset"));
@@ -415,7 +421,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     }
 
                     // handle encoding
-                    if (hasEncoding) {   // have to encode the data
+                    if (hasEncoding) { // have to encode the data
                         if (encodingType == QLatin1Char('b')) {
                             checkMultibyte = false;
                             output = input.toBase64();
@@ -431,13 +437,13 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     if (!output.isEmpty()) {
                         textLine.append(':' + output);
 
-                        if (textLine.length() > FOLD_WIDTH) {   // we have to fold the line
+                        if (textLine.length() > FOLD_WIDTH) { // we have to fold the line
                             if (checkMultibyte) {
                                 // RFC 6350: Multi-octet characters MUST remain contiguous.
                                 // we know that textLine contains UTF-8 encoded characters
                                 int lineLength = 0;
                                 for (int i = 0; i < textLine.length(); ++i) {
-                                    if ((textLine[i] & 0xC0) == 0xC0) {    // a multibyte sequence follows
+                                    if ((textLine[i] & 0xC0) == 0xC0) { // a multibyte sequence follows
                                         int sequenceLength = 2;
                                         if ((textLine[i] & 0xE0) == 0xE0) {
                                             sequenceLength = 3;
@@ -447,7 +453,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                                         if ((lineLength + sequenceLength) > FOLD_WIDTH) {
                                             // the current line would be too long. fold it
                                             text += "\r\n " + textLine.mid(i, sequenceLength);
-                                            lineLength = 1 + sequenceLength;  // incl. leading space
+                                            lineLength = 1 + sequenceLength; // incl. leading space
                                         } else {
                                             text += textLine.mid(i, sequenceLength);
                                             lineLength += sequenceLength;
@@ -459,14 +465,13 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                                     }
                                     if ((lineLength == FOLD_WIDTH) && (i < (textLine.length() - 1))) {
                                         text += "\r\n ";
-                                        lineLength = 1;  // leading space
+                                        lineLength = 1; // leading space
                                     }
                                 }
                                 text += "\r\n";
                             } else {
                                 for (int i = 0; i <= (textLine.length() / FOLD_WIDTH); ++i) {
-                                    text.append(
-                                        (i == 0 ? "" : " ") + textLine.mid(i * FOLD_WIDTH, FOLD_WIDTH) + "\r\n");
+                                    text.append((i == 0 ? "" : " ") + textLine.mid(i * FOLD_WIDTH, FOLD_WIDTH) + "\r\n");
                                 }
                             }
                         } else {

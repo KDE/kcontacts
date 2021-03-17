@@ -102,8 +102,8 @@ QStringList VCardLine::parameterList() const
 
 void VCardLine::addParameter(const QString &param, const QString &value)
 {
-    QStringList &list = mParamMap[ param ];
-    if (!list.contains(value)) {     // not included yet
+    QStringList &list = mParamMap[param];
+    if (!list.contains(value)) { // not included yet
         list.append(value);
     }
 }

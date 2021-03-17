@@ -131,8 +131,7 @@ Geo &Geo::operator=(const Geo &other)
 QString Geo::toString() const
 {
     QString str = QLatin1String("Geo {\n");
-    str += QStringLiteral("  Valid: %1\n").
-           arg(isValid() ? QStringLiteral("true") : QStringLiteral("false"));
+    str += QStringLiteral("  Valid: %1\n").arg(isValid() ? QStringLiteral("true") : QStringLiteral("false"));
     str += QStringLiteral("  Latitude: %1\n").arg(d->mLatitude);
     str += QStringLiteral("  Longitude: %1\n").arg(d->mLongitude);
     str += QLatin1String("}\n");

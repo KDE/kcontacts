@@ -10,35 +10,35 @@
 #include "isotocountrymap_data.cpp"
 
 #include "kcontacts_debug.h"
-#include <krandom.h>
-#include <KLocalizedString>
 #include <KConfig>
+#include <KLocalizedString>
+#include <krandom.h>
 
 #include <KConfigGroup>
 
+#include <QDataStream>
+#include <QLocale>
 #include <QSharedData>
 #include <QStandardPaths>
-#include <QLocale>
-#include <QDataStream>
 
 using namespace KContacts;
 
 // template tags for address formatting localization
-#define KCONTACTS_FMTTAG_realname   QStringLiteral("%n")
-#define KCONTACTS_FMTTAG_REALNAME   QStringLiteral("%N")
-#define KCONTACTS_FMTTAG_company    QStringLiteral("%cm")
-#define KCONTACTS_FMTTAG_COMPANY    QStringLiteral("%CM")
-#define KCONTACTS_FMTTAG_pobox      QStringLiteral("%p")
-#define KCONTACTS_FMTTAG_street     QStringLiteral("%s")
-#define KCONTACTS_FMTTAG_STREET     QStringLiteral("%S")
-#define KCONTACTS_FMTTAG_zipcode    QStringLiteral("%z")
-#define KCONTACTS_FMTTAG_location   QStringLiteral("%l")
-#define KCONTACTS_FMTTAG_LOCATION   QStringLiteral("%L")
-#define KCONTACTS_FMTTAG_region     QStringLiteral("%r")
-#define KCONTACTS_FMTTAG_REGION     QStringLiteral("%R")
-#define KCONTACTS_FMTTAG_newline    QStringLiteral("\\n")
-#define KCONTACTS_FMTTAG_condcomma  QStringLiteral("%,")
-#define KCONTACTS_FMTTAG_condwhite  QStringLiteral("%w")
+#define KCONTACTS_FMTTAG_realname QStringLiteral("%n")
+#define KCONTACTS_FMTTAG_REALNAME QStringLiteral("%N")
+#define KCONTACTS_FMTTAG_company QStringLiteral("%cm")
+#define KCONTACTS_FMTTAG_COMPANY QStringLiteral("%CM")
+#define KCONTACTS_FMTTAG_pobox QStringLiteral("%p")
+#define KCONTACTS_FMTTAG_street QStringLiteral("%s")
+#define KCONTACTS_FMTTAG_STREET QStringLiteral("%S")
+#define KCONTACTS_FMTTAG_zipcode QStringLiteral("%z")
+#define KCONTACTS_FMTTAG_location QStringLiteral("%l")
+#define KCONTACTS_FMTTAG_LOCATION QStringLiteral("%L")
+#define KCONTACTS_FMTTAG_region QStringLiteral("%r")
+#define KCONTACTS_FMTTAG_REGION QStringLiteral("%R")
+#define KCONTACTS_FMTTAG_newline QStringLiteral("\\n")
+#define KCONTACTS_FMTTAG_condcomma QStringLiteral("%,")
+#define KCONTACTS_FMTTAG_condwhite QStringLiteral("%w")
 #define KCONTACTS_FMTTAG_purgeempty QStringLiteral("%0")
 
 /**
@@ -69,7 +69,8 @@ static int findBalancedBracket(const QString &tsection, int pos)
   @param result     QString reference in which the result will be stored
   @return           true if at least one tag evaluated positively, else false
 */
-static bool parseAddressTemplateSection(const QString &tsection, QString &result, const QString &realName, const QString &orgaName, const KContacts::Address &address)
+static bool
+parseAddressTemplateSection(const QString &tsection, QString &result, const QString &realName, const QString &orgaName, const KContacts::Address &address)
 {
     // This method first parses and substitutes any bracketed sections and
     // after that replaces any tags with their values. If a bracketed section
@@ -546,8 +547,7 @@ Geo Address::geo() const
 QString Address::toString() const
 {
     QString str = QLatin1String("Address {\n");
-    str += QStringLiteral("  IsEmpty: %1\n").
-           arg(d->mEmpty ? QStringLiteral("true") : QStringLiteral("false"));
+    str += QStringLiteral("  IsEmpty: %1\n").arg(d->mEmpty ? QStringLiteral("true") : QStringLiteral("false"));
     str += QStringLiteral("  Id: %1\n").arg(d->mId);
     str += QStringLiteral("  Type: %1\n").arg(typeLabel(d->mType));
     str += QStringLiteral("  Post office box: %1\n").arg(d->mPostOfficeBox);
@@ -610,8 +610,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // used:
     if (addrTemplate.isEmpty()) {
         qCWarning(KCONTACTS_LOG) << "address format database incomplete"
-                                 << "(no format for locale" << ciso
-                                 << "found). Using default address formatting.";
+                                 << "(no format for locale" << ciso << "found). Using default address formatting.";
         addrTemplate = QStringLiteral("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
     }
 
@@ -621,7 +620,6 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
-
         // Don't include line breaks if country is the only text
         if (ret.isEmpty()) {
             return country().toUpper();
@@ -648,9 +646,10 @@ QString Address::countryToISO(const QString &cname)
     const auto lookupKey = normalizeCountryName(cname);
 
     // look for an exact match
-    auto it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
-        return strcmp(country_name_stringtable + lhs.m_offset, rhs.constData()) < 0;
-    });
+    auto it =
+        std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
+            return strcmp(country_name_stringtable + lhs.m_offset, rhs.constData()) < 0;
+        });
     if (it != std::end(country_to_iso_index) && strcmp(country_name_stringtable + (*it).m_offset, lookupKey.constData()) == 0) {
         return (*it).isoCode();
     }
@@ -659,10 +658,12 @@ QString Address::countryToISO(const QString &cname)
     it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
         return strncmp(country_name_stringtable + lhs.m_offset, rhs.constData(), strlen(country_name_stringtable + lhs.m_offset)) < 0;
     });
-    const auto endIt = std::upper_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const QByteArray &lhs, const CountryToIsoIndex &rhs) {
-        return strncmp(lhs.constData(), country_name_stringtable + rhs.m_offset, strlen(country_name_stringtable + rhs.m_offset)) < 0;
-    });
-    if (it != std::end(country_to_iso_index) && endIt == (it + 1) && strncmp(country_name_stringtable + (*it).m_offset, lookupKey.constData(), strlen(country_name_stringtable + (*it).m_offset)) == 0) {
+    const auto endIt =
+        std::upper_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const QByteArray &lhs, const CountryToIsoIndex &rhs) {
+            return strncmp(lhs.constData(), country_name_stringtable + rhs.m_offset, strlen(country_name_stringtable + rhs.m_offset)) < 0;
+        });
+    if (it != std::end(country_to_iso_index) && endIt == (it + 1)
+        && strncmp(country_name_stringtable + (*it).m_offset, lookupKey.constData(), strlen(country_name_stringtable + (*it).m_offset)) == 0) {
         return (*it).isoCode();
     }
 
@@ -677,9 +678,10 @@ QString Address::ISOtoCountry(const QString &ISOname)
         return ISOname;
     }
 
-    const auto it = std::lower_bound(std::begin(iso_to_country_index), std::end(iso_to_country_index), iso.constData(), [](const IsoToCountryIndex &lhs, const char *rhs) {
-        return strncmp(&lhs.m_c1, rhs, 2) < 0;
-    });
+    const auto it =
+        std::lower_bound(std::begin(iso_to_country_index), std::end(iso_to_country_index), iso.constData(), [](const IsoToCountryIndex &lhs, const char *rhs) {
+            return strncmp(&lhs.m_c1, rhs, 2) < 0;
+        });
     if (it != std::end(iso_to_country_index) && strncmp(&(*it).m_c1, iso.constData(), 2) == 0) {
         return i18nd("iso_3166-1", en_country_name_stringtable + (*it).m_offset);
     }

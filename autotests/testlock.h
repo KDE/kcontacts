@@ -8,8 +8,8 @@
 #ifndef KCONTACTS_TESTLOCK_H
 #define KCONTACTS_TESTLOCK_H
 
-#include <QWidget>
 #include <QLabel>
+#include <QWidget>
 
 #include "kcontacts/lock.h"
 

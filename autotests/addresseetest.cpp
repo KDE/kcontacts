@@ -4,7 +4,7 @@
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
-//krazy:excludeall=contractions
+// krazy:excludeall=contractions
 
 #include "addresseetest.h"
 #include "kcontacts/addressee.h"
@@ -297,8 +297,7 @@ void AddresseeTest::serializeTest()
     categories << QStringLiteral("Helper") << QStringLiteral("Friend");
 
     QStringList customs;
-    customs << QStringLiteral("FirstApp-FirstKey:FirstValue")
-            << QStringLiteral("SecondApp-SecondKey:SecondValue")
+    customs << QStringLiteral("FirstApp-FirstKey:FirstValue") << QStringLiteral("SecondApp-SecondKey:SecondValue")
             << QStringLiteral("ThirdApp-ThirdKey:ThirdValue");
 
     addressee1.setUid(QStringLiteral("My uid"));
@@ -352,8 +351,7 @@ void AddresseeTest::fullEmailTest()
     emails << QStringLiteral("foo@bar.com");
     a.setEmails(emails);
     a.setFormattedName(QStringLiteral("firstname \"nickname\" lastname"));
-    QCOMPARE(a.fullEmail(),
-             QStringLiteral("\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>"));
+    QCOMPARE(a.fullEmail(), QStringLiteral("\"firstname \\\"nickname\\\" lastname\" <foo@bar.com>"));
 }
 
 void AddresseeTest::nameFromStringTest()
@@ -378,7 +376,7 @@ void AddresseeTest::customFieldsTest()
     QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("MyValue"));
 
     a.insertCustom(QStringLiteral("MyApp"), QStringLiteral("MyKey"), QStringLiteral("YourValue"));
-    QCOMPARE(a.customs().count(), 1);   // still one, we overwrite...
+    QCOMPARE(a.customs().count(), 1); // still one, we overwrite...
     QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("YourValue"));
 
     // test query non-existing app/key
@@ -398,7 +396,7 @@ void AddresseeTest::customFieldsTest()
     QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("AnotherKey")), QStringLiteral("OtherValue"));
     QCOMPARE(a.custom(QStringLiteral("MyApp"), QStringLiteral("MyKey")), QStringLiteral("YourValue"));
 
-#if 0 //Order is not defined now as we use a QHash
+#if 0 // Order is not defined now as we use a QHash
     // test customs
     QCOMPARE(a.customs().at(0), QStringLiteral("MyApp-MyKey:YourValue"));
     QCOMPARE(a.customs().at(1), QStringLiteral("MyApp-AnotherKey:OtherValue"));

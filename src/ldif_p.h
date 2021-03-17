@@ -10,8 +10,8 @@
 #ifndef LDIF_P_H
 #define LDIF_P_H
 
-#include <QString>
 #include <QByteArray>
+#include <QString>
 
 /**
  * Ldif
@@ -23,18 +23,11 @@
 class Ldif
 {
 public:
+    typedef enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData } ParseValue;
 
-    typedef enum {
-        None, NewEntry, EndEntry, Item, Control, Err, MoreData
-    } ParseValue;
+    typedef enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn } EntryType;
 
-    typedef enum {
-        Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn
-    } EntryType;
-
-    typedef enum {
-        Mod_None, Mod_Add, Mod_Replace, Mod_Del
-    } ModType;
+    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
 
     Ldif();
 

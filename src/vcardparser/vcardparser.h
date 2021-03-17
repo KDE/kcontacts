@@ -11,7 +11,8 @@
 #include "vcard.h"
 #include <QByteArray>
 
-namespace KContacts {
+namespace KContacts
+{
 class VCardParser
 {
 public:

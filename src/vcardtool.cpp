@@ -6,16 +6,16 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "vcardtool_p.h"
+#include "fieldgroup.h"
+#include "gender.h"
+#include "kcontacts_debug.h"
 #include "key.h"
+#include "lang.h"
 #include "picture.h"
+#include "related.h"
 #include "secrecy.h"
 #include "sound.h"
-#include "lang.h"
-#include "gender.h"
-#include "related.h"
-#include "fieldgroup.h"
-#include "kcontacts_debug.h"
+#include "vcardtool_p.h"
 #include <QString>
 
 using namespace KContacts;
@@ -37,17 +37,16 @@ static const struct {
     const char *addressType;
     Address::TypeFlag flag;
 } s_addressTypes[] = {
-    { "dom", Address::Dom },
-    { "home", Address::Home },
-    { "intl", Address::Intl },
-    { "parcel", Address::Parcel },
-    { "postal", Address::Postal },
-    { "pref", Address::Pref },
-    { "work", Address::Work },
+    {"dom", Address::Dom},
+    {"home", Address::Home},
+    {"intl", Address::Intl},
+    {"parcel", Address::Parcel},
+    {"postal", Address::Postal},
+    {"pref", Address::Pref},
+    {"work", Address::Work},
 };
 
-static const unsigned int s_numAddressTypes
-    = sizeof s_addressTypes / sizeof *s_addressTypes;
+static const unsigned int s_numAddressTypes = sizeof s_addressTypes / sizeof *s_addressTypes;
 
 static Address::TypeFlag stringToAddressType(const QString &str)
 {
@@ -63,24 +62,23 @@ static const struct {
     const char *phoneType;
     PhoneNumber::TypeFlag flag;
 } s_phoneTypes[] = {
-    { "BBS", PhoneNumber::Bbs },
-    { "CAR", PhoneNumber::Car },
-    { "CELL", PhoneNumber::Cell },
-    { "FAX", PhoneNumber::Fax },
-    { "HOME", PhoneNumber::Home },
-    { "ISDN", PhoneNumber::Isdn },
-    { "MODEM", PhoneNumber::Modem },
-    { "MSG", PhoneNumber::Msg },
-    { "PAGER", PhoneNumber::Pager },
-    { "PCS", PhoneNumber::Pcs },
-    { "PREF", PhoneNumber::Pref },
-    { "VIDEO", PhoneNumber::Video },
-    { "VOICE", PhoneNumber::Voice },
-    { "WORK", PhoneNumber::Work },
+    {"BBS", PhoneNumber::Bbs},
+    {"CAR", PhoneNumber::Car},
+    {"CELL", PhoneNumber::Cell},
+    {"FAX", PhoneNumber::Fax},
+    {"HOME", PhoneNumber::Home},
+    {"ISDN", PhoneNumber::Isdn},
+    {"MODEM", PhoneNumber::Modem},
+    {"MSG", PhoneNumber::Msg},
+    {"PAGER", PhoneNumber::Pager},
+    {"PCS", PhoneNumber::Pcs},
+    {"PREF", PhoneNumber::Pref},
+    {"VIDEO", PhoneNumber::Video},
+    {"VOICE", PhoneNumber::Voice},
+    {"WORK", PhoneNumber::Work},
 };
 
-static const unsigned int s_numPhoneTypes
-    = sizeof s_phoneTypes / sizeof *s_phoneTypes;
+static const unsigned int s_numPhoneTypes = sizeof s_phoneTypes / sizeof *s_phoneTypes;
 
 static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
 {
@@ -244,7 +242,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         const QString birthdayString = createDateTime((*addrIt).birthday(), version, withTime);
         card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
 
-        //Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
+        // Laurent: 31 Jan 2015. Not necessary to export it. When Categories were changes as AkonadiTag nobody thought that it was break categorie support...
         //=> not necessary to export just tag...
         // CATEGORIES only > 2.1
         if (!exportVcard) {
@@ -453,11 +451,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         const QVector<Org> lstOrg = (*addrIt).extraOrganizationList();
         for (const Org &org : lstOrg) {
             QStringList organization;
-            organization.append(org.organization().replace(QLatin1Char(';'),
-                                                           QStringLiteral("\\;")));
+            organization.append(org.organization().replace(QLatin1Char(';'), QStringLiteral("\\;")));
             if (!(*addrIt).department().isEmpty()) {
-                organization.append((*addrIt).department().replace(QLatin1Char(';'),
-                                                                   QStringLiteral("\\;")));
+                organization.append((*addrIt).department().replace(QLatin1Char(';'), QStringLiteral("\\;")));
             }
             const QString orgStr = organization.join(QLatin1Char(';'));
             VCardLine orgLine(QStringLiteral("ORG"), orgStr);
@@ -556,15 +552,13 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         // TODO Add vcard4.0 support
         const TimeZone timeZone = (*addrIt).timeZone();
         if (timeZone.isValid()) {
-
             int neg = 1;
             if (timeZone.offset() < 0) {
                 neg = -1;
             }
 
-            QString str = QString::asprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'),
-                        (timeZone.offset() / 60) * neg,
-                        (timeZone.offset() % 60) * neg);
+            QString str =
+                QString::asprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'), (timeZone.offset() / 60) * neg, (timeZone.offset() % 60) * neg);
 
             card.addLine(VCardLine(QStringLiteral("TZ"), str));
         }
@@ -627,7 +621,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 }
             }
         }
-        //FieldGroup
+        // FieldGroup
         const QVector<FieldGroup> lstGroup = (*addrIt).fieldGroupList();
         for (const FieldGroup &group : lstGroup) {
             VCardLine line(group.fieldGroupName(), group.value());
@@ -652,13 +646,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         // X-
         const QStringList customs = (*addrIt).customs();
         for (strIt = customs.begin(); strIt != customs.end(); ++strIt) {
-            QString identifier = QLatin1String("X-")
-                                 +(*strIt).left((*strIt).indexOf(QLatin1Char(':')));
+            QString identifier = QLatin1String("X-") + (*strIt).left((*strIt).indexOf(QLatin1Char(':')));
             const QString value = (*strIt).mid((*strIt).indexOf(QLatin1Char(':')) + 1);
             if (value.isEmpty()) {
                 continue;
             }
-            //Convert to standard identifier
+            // Convert to standard identifier
             if (exportVcard) {
                 if (identifier == QLatin1String("X-messaging/aim-All")) {
                     identifier = QStringLiteral("X-AIM");
@@ -681,9 +674,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 } else if (identifier == QLatin1String("X-messaging/meanwhile-All")) {
                     identifier = QStringLiteral("X-MEANWHILE");
                 } else if (identifier == QLatin1String("X-messaging/irc-All")) {
-                    identifier = QStringLiteral("X-IRC");   //Not defined by rfc but need for fixing #300869
+                    identifier = QStringLiteral("X-IRC"); // Not defined by rfc but need for fixing #300869
                 } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
-                    //Not defined by rfc but need for fixing #300869
+                    // Not defined by rfc but need for fixing #300869
                     identifier = QStringLiteral("X-GTALK");
                 } else if (identifier == QLatin1String("X-messaging/twitter-All")) {
                     identifier = QStringLiteral("X-TWITTER");
@@ -855,7 +848,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     calurl.setParameters((*lineIt).parameterMap());
                     addr.insertCalendarUrl(calurl);
                 }
-                //IMPP
+                // IMPP
                 else if (identifier == QLatin1String("impp")) {
                     QUrl imppUrl((*lineIt).value().toString());
                     Impp impp;
@@ -896,8 +889,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 // EMAIL
                 else if (identifier == QLatin1String("email")) {
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
-                    addr.insertEmail((*lineIt).value().toString(),
-                                     types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
+                    addr.insertEmail((*lineIt).value().toString(), types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
                 }
                 // KIND
                 else if (identifier == QLatin1String("kind")) {
@@ -911,18 +903,16 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 else if (identifier == QLatin1String("geo")) {
                     Geo geo;
                     QString lineStr = (*lineIt).value().toString();
-                    if (lineStr.startsWith(QLatin1String("geo:"))) { //VCard 4.0
+                    if (lineStr.startsWith(QLatin1String("geo:"))) { // VCard 4.0
                         lineStr.remove(QStringLiteral("geo:"));
-                        const QStringList geoParts
-                            = lineStr.split(QLatin1Char(','), Qt::KeepEmptyParts);
+                        const QStringList geoParts = lineStr.split(QLatin1Char(','), Qt::KeepEmptyParts);
                         if (geoParts.size() >= 2) {
                             geo.setLatitude(geoParts.at(0).toFloat());
                             geo.setLongitude(geoParts.at(1).toFloat());
                             addr.setGeo(geo);
                         }
                     } else {
-                        const QStringList geoParts
-                            = lineStr.split(QLatin1Char(';'), Qt::KeepEmptyParts);
+                        const QStringList geoParts = lineStr.split(QLatin1Char(';'), Qt::KeepEmptyParts);
                         if (geoParts.size() >= 2) {
                             geo.setLatitude(geoParts.at(0).toFloat());
                             geo.setLongitude(geoParts.at(1).toFloat());
@@ -946,8 +936,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
                     bool available = false;
                     KContacts::Address::List addressList = addr.addresses();
-                    for (KContacts::Address::List::Iterator it = addressList.begin();
-                         it != addressList.end(); ++it) {
+                    for (KContacts::Address::List::Iterator it = addressList.begin(); it != addressList.end(); ++it) {
                         if ((*it).type() == type) {
                             (*it).setLabel((*lineIt).value().toString());
                             addr.insertAddress(*it);
@@ -956,7 +945,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         }
                     }
 
-                    if (!available) {   // a standalone LABEL tag
+                    if (!available) { // a standalone LABEL tag
                         KContacts::Address address(type);
                         address.setLabel((*lineIt).value().toString());
                         addr.insertAddress(address);
@@ -1090,7 +1079,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // TZ
                 else if (identifier == QLatin1String("tz")) {
-                    //TODO add vcard4 support
+                    // TODO add vcard4 support
                     TimeZone tz;
                     const QString date = (*lineIt).value().toString();
 
@@ -1098,7 +1087,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         int hours = date.midRef(1, 2).toInt();
                         int minutes = date.midRef(4, 2).toInt();
                         int offset = (hours * 60) + minutes;
-                        offset = offset * (date[ 0 ] == QLatin1Char('+') ? 1 : -1);
+                        offset = offset * (date[0] == QLatin1Char('+') ? 1 : -1);
 
                         tz.setOffset(offset);
                         addr.setTimeZone(tz);
@@ -1140,7 +1129,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     addr.insertClientPidMap(clientpidmap);
                 }
                 // X-
-                //TODO import X-GENDER
+                // TODO import X-GENDER
                 else if (identifier.startsWith(QLatin1String("x-"))) {
                     QString ident = (*lineIt).identifier();
                     // clang-format off
@@ -1556,7 +1545,7 @@ QStringList VCardTool::splitString(QChar sep, const QString &str) const
     int pos = value.indexOf(sep, start);
 
     while (pos != -1) {
-        if (pos == 0 || value[ pos - 1 ] != QLatin1Char('\\')) {
+        if (pos == 0 || value[pos - 1] != QLatin1Char('\\')) {
             if (pos > start && pos <= value.length()) {
                 list << value.mid(start, pos - start);
             } else {

@@ -8,12 +8,13 @@
 #ifndef VCARDPARSER_VCARD_H
 #define VCARDPARSER_VCARD_H
 
+#include "vcardline.h"
 #include <QMap>
 #include <QStringList>
 #include <QVector>
-#include "vcardline.h"
 
-namespace KContacts {
+namespace KContacts
+{
 class VCard
 {
 public:

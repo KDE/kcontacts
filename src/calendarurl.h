@@ -9,12 +9,13 @@
 #define CALENDARURL_H
 #include "kcontacts_export.h"
 
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 class QUrl;
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
  *  @since 4.14.6
  */
@@ -22,6 +23,7 @@ class KCONTACTS_EXPORT CalendarUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const CalendarUrl &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, CalendarUrl &);
+
 public:
     enum CalendarType {
         Unknown = 0,
@@ -56,6 +58,7 @@ public:
     CalendarUrl &operator=(const CalendarUrl &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

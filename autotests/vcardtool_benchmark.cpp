@@ -21,14 +21,15 @@ PerformanceTest::~PerformanceTest()
 
 void PerformanceTest::testParserPerformance()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "Title:boo\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "Title:boo\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     QBENCHMARK {
         KContacts::VCardTool vcard;
@@ -48,13 +49,14 @@ void PerformanceTest::testExportPerformance()
     lstTitle << title;
     addr.setExtraTitleList(lstTitle);
     lst << addr;
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "TITLE:fr\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "TITLE:fr\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QBENCHMARK {
         KContacts::VCardTool vcard;
         const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);

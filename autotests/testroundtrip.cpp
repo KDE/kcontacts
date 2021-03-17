@@ -9,10 +9,10 @@
 
 #include "converter/vcardconverter.h"
 
-#include <QTest>
 #include <QDebug>
 #include <QDir>
 #include <QObject>
+#include <QTest>
 
 using namespace KContacts;
 
@@ -21,7 +21,6 @@ class RoundtripTest : public QObject
     Q_OBJECT
 
 private:
-
     QDir mInputDir;
     QDir mOutput2_1Dir;
     QDir mOutput3_0Dir;
@@ -78,9 +77,7 @@ void RoundtripTest::testVCardRoundtrip_data()
         const QString outFileV2_1 = outFile21Pattern.arg(inputFile);
         const QString outFileV4 = outFile4Pattern.arg(inputFile);
         QTest::newRow(QFile::encodeName(inputFile).constData())
-            << inputFile
-            << (mOutput2_1Dir.exists(outFileV2_1) ? outFileV2_1 : QString())
-            << (mOutput3_0Dir.exists(outFile) ? outFile : QString())
+            << inputFile << (mOutput2_1Dir.exists(outFileV2_1) ? outFileV2_1 : QString()) << (mOutput3_0Dir.exists(outFile) ? outFile : QString())
             << (mOutput4_0Dir.exists(outFileV4) ? outFileV4 : QString());
     }
 }
@@ -113,10 +110,7 @@ void RoundtripTest::testVCardRoundtrip()
     QFETCH(QString, output3_0File);
     QFETCH(QString, output4_0File);
 
-    QVERIFY2(!output2_1File.isEmpty()
-             || !output3_0File.isEmpty()
-             || !output4_0File.isEmpty(),
-             "No reference output file for either format version");
+    QVERIFY2(!output2_1File.isEmpty() || !output3_0File.isEmpty() || !output4_0File.isEmpty(), "No reference output file for either format version");
 
     QFile input(QFileInfo(mInputDir, inputFile).absoluteFilePath());
     QVERIFY(input.open(QIODevice::ReadOnly));

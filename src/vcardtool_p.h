@@ -8,13 +8,14 @@
 #ifndef KCONTACTS_VCARDTOOL_H
 #define KCONTACTS_VCARDTOOL_H
 
-#include "kcontacts_export.h"
 #include "addressee.h"
+#include "kcontacts_export.h"
 #include "vcardparser/vcardparser.h"
 
 class QDateTime;
 
-namespace KContacts {
+namespace KContacts
+{
 class Key;
 class Picture;
 class Secrecy;
@@ -47,7 +48,6 @@ public:
     static QString createTime(const QTime &time, VCard::Version version);
 
 private:
-
     QByteArray createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const;
 
     /**

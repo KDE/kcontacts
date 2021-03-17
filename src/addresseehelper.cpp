@@ -8,9 +8,8 @@
 #include "addresseehelper.h"
 
 #include <KConfig>
-#include <KLocalizedString>
 #include <KConfigGroup>
-
+#include <KLocalizedString>
 
 using namespace KContacts;
 

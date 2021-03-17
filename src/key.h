@@ -13,7 +13,8 @@
 #include <QDataStream>
 #include <QSharedDataPointer>
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short A class to store an encryption key.
  */
@@ -32,8 +33,8 @@ public:
       Key types
     */
     enum Type {
-        X509,   /**< X509 key */
-        PGP,    /**< Pretty Good Privacy key */
+        X509, /**< X509 key */
+        PGP, /**< Pretty Good Privacy key */
         Custom, /**< Custom or IANA conform key */
     };
 

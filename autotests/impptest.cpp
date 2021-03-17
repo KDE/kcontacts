@@ -7,8 +7,8 @@
 
 #include "impptest.h"
 #include "impp.h"
-#include <QTest>
 #include "vcardtool_p.h"
+#include <QTest>
 
 ImppTest::ImppTest(QObject *parent)
     : QObject(parent)
@@ -83,14 +83,15 @@ void ImppTest::shouldEqualImpp()
 
 void ImppTest::shouldParseWithoutImpp()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "LANG:fr"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "LANG:fr"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -100,14 +101,15 @@ void ImppTest::shouldParseWithoutImpp()
 
 void ImppTest::shouldParseImpp()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:3.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "IMPP;X-SERVICE-TYPE=skype:skype:xxxxxxxx\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "IMPP;X-SERVICE-TYPE=skype:skype:xxxxxxxx\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -120,15 +122,16 @@ void ImppTest::shouldParseImpp()
 
 void ImppTest::shouldParseImppVcard4()
 {
-    QByteArray vcarddata("BEGIN:VCARD\n"
-                         "VERSION:4.0\n"
-                         "N:LastName;FirstName;;;\n"
-                         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
-                         "IMPP;PREF=1:skype:xxxxxxxx\n"
-                         "IMPP:skype:1234567890\n"
-                         "REV:2015-03-14T09:24:45+00:00\n"
-                         "FN:FirstName LastName\n"
-                         "END:VCARD\n");
+    QByteArray vcarddata(
+        "BEGIN:VCARD\n"
+        "VERSION:4.0\n"
+        "N:LastName;FirstName;;;\n"
+        "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
+        "IMPP;PREF=1:skype:xxxxxxxx\n"
+        "IMPP:skype:1234567890\n"
+        "REV:2015-03-14T09:24:45+00:00\n"
+        "FN:FirstName LastName\n"
+        "END:VCARD\n");
 
     KContacts::VCardTool vcard;
     const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
@@ -146,9 +149,10 @@ void ImppTest::shouldParseImppVcard4()
 
 QByteArray createCard(const QString &type)
 {
-    QByteArray expected("BEGIN:VCARD\n"
-                        "VERSION:3.0\n"
-                        "EMAIL:foo@kde.org\n");
+    QByteArray expected(
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        "EMAIL:foo@kde.org\n");
     if (!type.isEmpty()) {
         expected += "IMPP;X-SERVICE-TYPE=" + type.toLatin1() + ":" + type.toLatin1() + ":address\n";
     }
@@ -190,27 +194,30 @@ void ImppTest::shouldParseServiceType()
 
 QByteArray expectedVcard(const QString &type)
 {
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n");
     if (!type.isEmpty()) {
         expected += "IMPP:" + type.toLatin1() + ":address\r\n";
     }
 
-    expected += ("N:;;;;\r\n"
-                 "UID:testuid\r\n"
-                 "END:VCARD\r\n\r\n");
+    expected +=
+        ("N:;;;;\r\n"
+         "UID:testuid\r\n"
+         "END:VCARD\r\n\r\n");
     return expected;
 }
 
 void ImppTest::shouldExportEmptyType()
 {
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -249,13 +256,14 @@ void ImppTest::shouldExportType()
 
 void ImppTest::shouldExportWithParameters()
 {
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2:skype:address\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2:skype:address\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -277,13 +285,14 @@ void ImppTest::shouldExportWithParameters()
 
 void ImppTest::shouldShouldNotExportTwiceServiceType()
 {
-    QByteArray expected("BEGIN:VCARD\r\n"
-                        "VERSION:4.0\r\n"
-                        "EMAIL:foo@kde.org\r\n"
-                        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;PREF=1:skype:address\r\n"
-                        "N:;;;;\r\n"
-                        "UID:testuid\r\n"
-                        "END:VCARD\r\n\r\n");
+    QByteArray expected(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "IMPP;FOO1=bla1,blo1;FOO2=bla2,blo2;PREF=1:skype:address\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     KContacts::AddresseeList lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));

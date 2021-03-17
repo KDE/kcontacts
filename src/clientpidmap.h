@@ -9,11 +9,12 @@
 #define CLIENTPIDMAP_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a ClientPidMap for a contact.
  *  @since 5.4
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT ClientPidMap
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ClientPidMap &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, ClientPidMap &);
+
 public:
     ClientPidMap();
     ClientPidMap(const ClientPidMap &other);
@@ -44,6 +46,7 @@ public:
     ClientPidMap &operator=(const ClientPidMap &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

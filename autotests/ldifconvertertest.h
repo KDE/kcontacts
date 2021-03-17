@@ -18,7 +18,7 @@ public:
     ~LDifConverterTest();
 
 private Q_SLOTS:
-    //Import
+    // Import
     void shouldImportEmail();
     void shouldImportMultiEmails();
     void shouldImportStandardBirthday();
@@ -31,7 +31,7 @@ private Q_SLOTS:
     void shouldImportMultiEntries();
     void shouldImportGroupAndAddress();
 
-    //Export
+    // Export
     void shouldExportEmail();
     void shouldExportBirthday();
     void shouldExportBirthdayWithoutYear();
@@ -42,7 +42,7 @@ private Q_SLOTS:
     void shouldExportMultiEmails();
     void shouldExportFullName();
 
-    //Garbage tests
+    // Garbage tests
     void testGarbage();
 };
 

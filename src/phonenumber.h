@@ -16,14 +16,15 @@
 #include <QString>
 #include <QVector>
 
-namespace KContacts {
+namespace KContacts
+{
 /**
  * @short Phonenumber information.
  *
  * This class provides phone number information. A phone number is classified by
  * a type. The following types are available, it's possible to use multiple types
  * Types for a number by combining them through a logical or.
-*/
+ */
 class KCONTACTS_EXPORT PhoneNumber
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const PhoneNumber &);
@@ -45,21 +46,21 @@ public:
       @see Type
     */
     enum TypeFlag {
-        Home = 1,     /**< Home number */
-        Work = 2,     /**< Office number */
-        Msg = 4,      /**< Messaging */
-        Pref = 8,     /**< Preferred number */
-        Voice = 16,   /**< Voice */
-        Fax = 32,     /**< Fax machine */
-        Cell = 64,    /**< Cell phone */
-        Video = 128,  /**< Video phone */
-        Bbs = 256,    /**< Mailbox */
-        Modem = 512,  /**< Modem */
-        Car = 1024,   /**< Car phone */
-        Isdn = 2048,  /**< ISDN connection */
-        Pcs = 4096,   /**< Personal Communication Service*/
-        Pager = 8192,  /**< Pager */
-        //TODO add Text and textphone support vcard4
+        Home = 1, /**< Home number */
+        Work = 2, /**< Office number */
+        Msg = 4, /**< Messaging */
+        Pref = 8, /**< Preferred number */
+        Voice = 16, /**< Voice */
+        Fax = 32, /**< Fax machine */
+        Cell = 64, /**< Cell phone */
+        Video = 128, /**< Video phone */
+        Bbs = 256, /**< Mailbox */
+        Modem = 512, /**< Modem */
+        Car = 1024, /**< Car phone */
+        Isdn = 2048, /**< ISDN connection */
+        Pcs = 4096, /**< Personal Communication Service*/
+        Pager = 8192, /**< Pager */
+        // TODO add Text and textphone support vcard4
         Undefined = 16384, /** Undefined number type */
     };
 
@@ -91,7 +92,7 @@ public:
      * @param type   Type as defined in enum. Multiple types can be
      *               specified by combining them by a logical or.
      */
-    PhoneNumber(const QString &number, Type type = Home);   //krazy:exclude=explicit
+    PhoneNumber(const QString &number, Type type = Home); // krazy:exclude=explicit
 
     /**
      * Copy constructor.

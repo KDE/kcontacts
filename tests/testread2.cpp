@@ -6,9 +6,9 @@
 */
 
 #include "testutils.h"
-#include <kcontacts/addressee.h>
-#include <converter/kcontacts/vcardconverter.h>
 #include <QDebug>
+#include <converter/kcontacts/vcardconverter.h>
+#include <kcontacts/addressee.h>
 
 using namespace KContacts;
 
@@ -44,7 +44,7 @@ int main()
             qDebug() << "\tAddressee  - FAILED";
             qDebug() << (*itr1).toString();
             qDebug() << (*itr2).toString();
-            //qDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
+            // qDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
         }
     }
 }

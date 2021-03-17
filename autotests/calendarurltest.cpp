@@ -115,10 +115,11 @@ void CalendarUrlTest::shouldParseCalendarUrl()
             break;
         }
 
-        QByteArray vcarddata("BEGIN:VCARD\n"
-                             "VERSION:3.0\n"
-                             "N:LastName;FirstName;;;\n"
-                             "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n");
+        QByteArray vcarddata(
+            "BEGIN:VCARD\n"
+            "VERSION:3.0\n"
+            "N:LastName;FirstName;;;\n"
+            "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n");
         vcarddata += baType;
         vcarddata += QByteArray(
             ";PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\n"
@@ -181,21 +182,27 @@ void CalendarUrlTest::shouldGenerateVCard()
     QByteArray expected;
     // Different order
     if (type == KContacts::CalendarUrl::FBUrl) {
-        expected = QByteArray("BEGIN:VCARD\r\n"
-                              "VERSION:4.0\r\n"
-                              "EMAIL:foo@kde.org\r\n");
-        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                       "N:;;;;\r\n"
-                                       "UID:testuid\r\n"
-                                       "END:VCARD\r\n\r\n");
+        expected = QByteArray(
+            "BEGIN:VCARD\r\n"
+            "VERSION:4.0\r\n"
+            "EMAIL:foo@kde.org\r\n");
+        expected += value
+            + QByteArray(
+                        ":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
     } else {
-        expected = QByteArray("BEGIN:VCARD\r\n"
-                              "VERSION:4.0\r\n");
-        expected += value + QByteArray(":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                       "EMAIL:foo@kde.org\r\n"
-                                       "N:;;;;\r\n"
-                                       "UID:testuid\r\n"
-                                       "END:VCARD\r\n\r\n");
+        expected = QByteArray(
+            "BEGIN:VCARD\r\n"
+            "VERSION:4.0\r\n");
+        expected += value
+            + QByteArray(
+                        ":https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+                        "EMAIL:foo@kde.org\r\n"
+                        "N:;;;;\r\n"
+                        "UID:testuid\r\n"
+                        "END:VCARD\r\n\r\n");
     }
 
     QCOMPARE(ba, expected);
@@ -217,13 +224,14 @@ void CalendarUrlTest::shouldGenerateVCardWithParameter()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:4.0\r\n"
-                                     "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
+    QByteArray expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -243,12 +251,13 @@ void CalendarUrlTest::shouldNotGeneratedAttributeForVcard3()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v3_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:3.0\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
+    QByteArray expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:3.0\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 
@@ -277,14 +286,15 @@ void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
     lst << addr;
     KContacts::VCardTool vcard;
     const QByteArray ba = vcard.exportVCards(lst, KContacts::VCard::v4_0);
-    QByteArray expected = QByteArray("BEGIN:VCARD\r\n"
-                                     "VERSION:4.0\r\n"
-                                     "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
-                                     "EMAIL:foo@kde.org\r\n"
-                                     "FBURL;FOO1=bla1,blo1:https://sherlockholmes.com/calendar/sherlockholmes2\r\n"
-                                     "N:;;;;\r\n"
-                                     "UID:testuid\r\n"
-                                     "END:VCARD\r\n\r\n");
+    QByteArray expected = QByteArray(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "CALURI;FOO2=bla2,blo2:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "EMAIL:foo@kde.org\r\n"
+        "FBURL;FOO1=bla1,blo1:https://sherlockholmes.com/calendar/sherlockholmes2\r\n"
+        "N:;;;;\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
 

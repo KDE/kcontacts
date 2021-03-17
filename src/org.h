@@ -9,11 +9,12 @@
 #define ORG_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Organization for a contact.
  *  @since 5.3
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT Org
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Org &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Org &);
+
 public:
     Org();
     Org(const Org &other);
@@ -44,6 +46,7 @@ public:
     Org &operator=(const Org &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

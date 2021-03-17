@@ -9,10 +9,11 @@
 #define KCONTACTS_SOUND_H
 
 #include "kcontacts_export.h"
-#include <QString>
 #include <QSharedDataPointer>
+#include <QString>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Sound clip for a contact.
  *
  *  The sound can be played doing something like this:
@@ -47,7 +48,6 @@ class KCONTACTS_EXPORT Sound
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Sound &);
 
 public:
-
     /**
      * Creates an empty sound object.
      */

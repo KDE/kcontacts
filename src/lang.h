@@ -9,11 +9,12 @@
 #define LANG_H
 
 #include "kcontacts_export.h"
+#include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QMap>
 
-namespace KContacts {
+namespace KContacts
+{
 /** @short Class that holds a Language for a contact.
  *  @since 4.14.5
  */
@@ -21,6 +22,7 @@ class KCONTACTS_EXPORT Lang
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Lang &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Lang &);
+
 public:
     Lang();
     Lang(const Lang &other);
@@ -44,6 +46,7 @@ public:
     Lang &operator=(const Lang &other);
 
     Q_REQUIRED_RESULT QString toString() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;
