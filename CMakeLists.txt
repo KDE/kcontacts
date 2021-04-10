@@ -49,9 +49,7 @@ set_package_properties("IsoCodes" PROPERTIES PURPOSE "Needed for country name tr
 ########### Targets ###########
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
-if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-    ki18n_install(po)
-endif()
+ki18n_install(po)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055000)
