@@ -1084,8 +1084,14 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QString date = (*lineIt).value().toString();
 
                     if (!date.isEmpty()) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                        const QStringView dateView(date);
+                        int hours = dateView.mid(1, 2).toInt();
+                        int minutes = dateView.mid(4, 2).toInt();
+#else
                         int hours = date.midRef(1, 2).toInt();
                         int minutes = date.midRef(4, 2).toInt();
+#endif
                         int offset = (hours * 60) + minutes;
                         offset = offset * (date[0] == QLatin1Char('+') ? 1 : -1);
 

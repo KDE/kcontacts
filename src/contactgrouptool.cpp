@@ -201,13 +201,13 @@ bool XmlContactGroupReader::read(QIODevice *device, QVector<ContactGroup> &group
 bool XmlContactGroupReader::readGroup(ContactGroup &group)
 {
     const QXmlStreamAttributes elementAttributes = attributes();
-    const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
+    const auto uid = elementAttributes.value(QLatin1String("uid"));
     if (uid.isEmpty()) {
         raiseError(QStringLiteral("ContactGroup is missing a uid"));
         return false;
     }
 
-    const QStringRef groupName = elementAttributes.value(QLatin1String("name"));
+    const auto groupName = elementAttributes.value(QLatin1String("name"));
     if (groupName.isEmpty()) {
         raiseError(QStringLiteral("ContactGroup is missing a name"));
         return false;
@@ -255,13 +255,13 @@ bool XmlContactGroupReader::readGroup(ContactGroup &group)
 bool XmlContactGroupReader::readData(ContactGroup::Data &data)
 {
     const QXmlStreamAttributes elementAttributes = attributes();
-    const QStringRef email = elementAttributes.value(QLatin1String("email"));
+    const auto email = elementAttributes.value(QLatin1String("email"));
     if (email.isEmpty()) {
         raiseError(QStringLiteral("ContactData is missing an email address"));
         return false;
     }
 
-    const QStringRef name = elementAttributes.value(QLatin1String("name"));
+    const auto name = elementAttributes.value(QLatin1String("name"));
 
     data.setName(name.toString());
     data.setEmail(email.toString());
@@ -272,13 +272,13 @@ bool XmlContactGroupReader::readData(ContactGroup::Data &data)
 bool XmlContactGroupReader::readContactReference(ContactGroup::ContactReference &reference)
 {
     const QXmlStreamAttributes elementAttributes = attributes();
-    const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
-    const QStringRef gid = elementAttributes.value(QLatin1String("gid"));
+    const auto uid = elementAttributes.value(QLatin1String("uid"));
+    const auto gid = elementAttributes.value(QLatin1String("gid"));
     if (uid.isEmpty() && gid.isEmpty()) {
         raiseError(QStringLiteral("ContactReference is missing both uid and gid"));
         return false;
     }
-    const QStringRef preferredEmail = elementAttributes.value(QLatin1String("preferredEmail"));
+    const auto preferredEmail = elementAttributes.value(QLatin1String("preferredEmail"));
 
     reference.setUid(uid.toString());
     reference.setGid(gid.toString());
@@ -290,7 +290,7 @@ bool XmlContactGroupReader::readContactReference(ContactGroup::ContactReference 
 bool XmlContactGroupReader::readContactGroupReference(ContactGroup::ContactGroupReference &reference)
 {
     const QXmlStreamAttributes elementAttributes = attributes();
-    const QStringRef uid = elementAttributes.value(QLatin1String("uid"));
+    const auto uid = elementAttributes.value(QLatin1String("uid"));
     if (uid.isEmpty()) {
         raiseError(QStringLiteral("ContactGroupReference is missing a uid"));
         return false;
