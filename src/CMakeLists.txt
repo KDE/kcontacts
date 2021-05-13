@@ -72,9 +72,9 @@ target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUI
 target_link_libraries(KF5Contacts
 PUBLIC
     Qt5::Core
+    Qt5::Gui
 PRIVATE
     KF5::CoreAddons
-    Qt5::Gui
     KF5::ConfigCore
     KF5::I18n
     KF5::Codecs # for the vcard parser

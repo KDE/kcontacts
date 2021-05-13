@@ -11,10 +11,9 @@
 #include "kcontacts_export.h"
 
 #include <QDataStream>
+#include <QImage>
 #include <QSharedDataPointer>
 #include <QString>
-
-class QImage;
 
 namespace KContacts
 {
@@ -28,6 +27,12 @@ class KCONTACTS_EXPORT Picture
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Picture &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Picture &);
+
+    Q_GADGET
+    Q_PROPERTY(QImage data READ data WRITE setData)
+    Q_PROPERTY(QString url READ url WRITE setUrl)
+    Q_PROPERTY(bool isIntern READ isIntern)
+    Q_PROPERTY(bool isEmpty READ isEmpty)
 
 public:
     /**
