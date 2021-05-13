@@ -108,6 +108,7 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QString office READ office WRITE setOffice)
     Q_PROPERTY(QString profession READ profession WRITE setProfession)
     Q_PROPERTY(QString spousesName READ spousesName WRITE setSpousesName)
+    Q_PROPERTY(KContacts::Picture photo READ photo WRITE setPhoto)
 
     // using variants for QML compatibility, can be changed to proper types once QML supports that
     Q_PROPERTY(QVariantList emails READ emailsVariant)
