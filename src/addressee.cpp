@@ -2664,9 +2664,30 @@ static QVariantList toVariantList(const QVector<T> &v)
     return l;
 }
 
+template<typename T>
+static QVector<T> fromVariantList(const QVariantList &v)
+{
+    QVector<T> l;
+    l.reserve(v.size());
+    std::transform(v.begin(), v.end(), std::back_inserter(l), [](const QVariant &elem) {
+        return elem.value<T>();
+    });
+    return l;
+}
+
 QVariantList Addressee::emailsVariant() const
 {
     return toVariantList(d->mEmails);
+}
+
+void Addressee::setEmailsVariant(const QVariantList &emails)
+{
+    setEmailList(fromVariantList<Email>(emails));
+}
+
+void Addressee::setPhoneNumbersVariant(const QVariantList &emails)
+{
+    setPhoneNumbers(fromVariantList<PhoneNumber>(emails));
 }
 
 QVariantList Addressee::phoneNumbersVariant() const
@@ -2687,6 +2708,11 @@ QVariantList Addressee::urlsVariant() const
 QVariantList Addressee::imppsVariant() const
 {
     return toVariantList(d->mImpps);
+}
+
+void Addressee::setImppsVariant(const QVariantList &impps)
+{
+    setImppList(fromVariantList<Impp>(impps));
 }
 
 #include "moc_addressee.cpp"

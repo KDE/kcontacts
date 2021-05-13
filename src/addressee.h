@@ -111,11 +111,11 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(KContacts::Picture photo READ photo WRITE setPhoto)
 
     // using variants for QML compatibility, can be changed to proper types once QML supports that
-    Q_PROPERTY(QVariantList emails READ emailsVariant)
-    Q_PROPERTY(QVariantList phoneNumbers READ phoneNumbersVariant)
+    Q_PROPERTY(QVariantList emails READ emailsVariant WRITE setEmailsVariant)
+    Q_PROPERTY(QVariantList phoneNumbers READ phoneNumbersVariant WRITE setPhoneNumbersVariant)
     Q_PROPERTY(QVariantList addresses READ addressesVariant)
     Q_PROPERTY(QVariantList urls READ urlsVariant)
-    Q_PROPERTY(QVariantList impps READ imppsVariant)
+    Q_PROPERTY(QVariantList impps READ imppsVariant WRITE setImppsVariant)
 
     // ### the following properties are still missing:
     // - logos, photos, sounds
@@ -1193,10 +1193,13 @@ public:
 
 private:
     QVariantList emailsVariant() const;
+    void setEmailsVariant(const QVariantList &emails);
     QVariantList phoneNumbersVariant() const;
+    void setPhoneNumbersVariant(const QVariantList &emails);
     QVariantList addressesVariant() const;
     QVariantList urlsVariant() const;
     QVariantList imppsVariant() const;
+    void setImppsVariant(const QVariantList &impps);
 
     class Private;
     QSharedDataPointer<Private> d;
