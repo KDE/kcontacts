@@ -1,10 +1,11 @@
-set(vcardparser_SRCS
+add_library(KF5Contacts)
+add_library(KF5::Contacts ALIAS KF5Contacts)
+
+target_sources(KF5Contacts PRIVATE
   vcardparser/vcard.cpp
   vcardparser/vcardline.cpp
   vcardparser/vcardparser.cpp
-)
 
-set(kcontacts_SRCS
   address.cpp
   addressee.cpp
   addresseehelper.cpp
@@ -36,17 +37,15 @@ set(kcontacts_SRCS
   note.cpp
   org.cpp
   clientpidmap.cpp
-  ${vcardparser_SRCS}
+
   kcontacts.qrc
   improtocols/improtocols.qrc
-)
 
-set(kcontacts_converter_SRCS
   converter/vcardconverter.cpp
   converter/ldifconverter.cpp
 )
 
-ecm_qt_declare_logging_category(kcontacts_converter_SRCS
+ecm_qt_declare_logging_category(KF5Contacts
     HEADER kcontacts_debug.h
     IDENTIFIER KCONTACTS_LOG
     CATEGORY_NAME kf.contacts
@@ -55,11 +54,7 @@ ecm_qt_declare_logging_category(kcontacts_converter_SRCS
     EXPORT KCONTACTS
 )
 
-add_library(KF5Contacts ${kcontacts_SRCS} ${kcontacts_converter_SRCS})
-
 generate_export_header(KF5Contacts BASE_NAME kcontacts)
-
-add_library(KF5::Contacts ALIAS KF5Contacts)
 
 target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts>")
 set(KContacts_BUILD_INCLUDE_DIRS

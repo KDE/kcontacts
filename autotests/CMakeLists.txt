@@ -4,9 +4,8 @@ find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
 
 ########### next target ###############
 
-set(testroundtrip_srcs testroundtrip.cpp)
-qt5_add_resources(testroundtrip_srcs testroundtrip.qrc)
-add_executable(testroundtrip ${testroundtrip_srcs})
+add_executable(testroundtrip)
+target_sources(testroundtrip PRIVATE testroundtrip.cpp testroundtrip.qrc)
 add_test(NAME kcontacts-testroundtrip COMMAND testroundtrip)
 target_link_libraries(testroundtrip KF5Contacts Qt5::Test)
 
