@@ -1,0 +1,622 @@
+# translation of kabc.po to Hindi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Ravishankar Shrivastava <raviratlami@yahoo.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kabc\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-03-18 02:23+0100\n"
+"PO-Revision-Date: 2008-01-28 11:36+0530\n"
+"Last-Translator: Ravishankar Shrivastava <aviratlami@aol.in>\n"
+"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: address.cpp:389
+#, kde-format
+msgid "Post Office Box"
+msgstr "पोस्ट बॉक्स नं."
+
+#: address.cpp:405
+#, kde-format
+msgid "Extended Address Information"
+msgstr "पता की विस्तारित जानकारी"
+
+#: address.cpp:421
+#, kde-format
+msgid "Street"
+msgstr "सड़क"
+
+#: address.cpp:437
+#, kde-format
+msgid "Locality"
+msgstr "जगह"
+
+#: address.cpp:453
+#, kde-format
+msgid "Region"
+msgstr "क्षेत्र"
+
+#: address.cpp:469
+#, kde-format
+msgid "Postal Code"
+msgstr "पिन कोड"
+
+#: address.cpp:485
+#, kde-format
+msgid "Country"
+msgstr "देश"
+
+#: address.cpp:501
+#, kde-format
+msgid "Delivery Label"
+msgstr "डिलेवरी लेबल"
+
+#: address.cpp:519
+#, fuzzy, kde-format
+#| msgid "Domestic"
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "घरेलू"
+
+#: address.cpp:521
+#, fuzzy, kde-format
+#| msgid "International"
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "अंतर्राष्ट्रीय"
+
+#: address.cpp:523
+#, fuzzy, kde-format
+#| msgid "Postal"
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "पोस्टल"
+
+#: address.cpp:525
+#, fuzzy, kde-format
+#| msgid "Parcel"
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "पार्सल"
+
+#: address.cpp:527
+#, fuzzy, kde-format
+#| msgid "Home"
+msgctxt "Home Address"
+msgid "Home"
+msgstr "घर"
+
+#: address.cpp:529
+#, fuzzy, kde-format
+#| msgid "Work"
+msgctxt "Work Address"
+msgid "Work"
+msgstr "कार्यस्थल"
+
+#: address.cpp:531
+#, kde-format
+msgid "Preferred Address"
+msgstr "पसंदीदा पता"
+
+#: address.cpp:533
+#, fuzzy, kde-format
+#| msgid "Other"
+msgctxt "another type of address"
+msgid "Other"
+msgstr "अन्य"
+
+#: addressee.cpp:421
+#, kde-format
+msgid "Unique Identifier"
+msgstr ""
+
+#: addressee.cpp:441
+#, fuzzy, kde-format
+#| msgid "Name"
+msgid "Name"
+msgstr "नाम"
+
+#: addressee.cpp:637
+#, kde-format
+msgid "Formatted Name"
+msgstr ""
+
+#: addressee.cpp:657
+#, kde-format
+msgid "Family Name"
+msgstr ""
+
+#: addressee.cpp:677
+#, kde-format
+msgid "Given Name"
+msgstr ""
+
+#: addressee.cpp:697
+#, kde-format
+msgid "Additional Names"
+msgstr ""
+
+#: addressee.cpp:717
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr ""
+
+#: addressee.cpp:737
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr ""
+
+#: addressee.cpp:788
+#, fuzzy, kde-format
+#| msgid "Name"
+msgid "Nick Name"
+msgstr "नाम"
+
+#: addressee.cpp:828
+#, kde-format
+msgid "Birthday"
+msgstr ""
+
+#: addressee.cpp:833
+#, fuzzy, kde-format
+#| msgid "Select Addressee"
+msgid "Home Address Street"
+msgstr "पाने वाला चुनें"
+
+#: addressee.cpp:838
+#, fuzzy, kde-format
+#| msgid "Post Office Box"
+msgid "Home Address Post Office Box"
+msgstr "पोस्ट बॉक्स नं."
+
+#: addressee.cpp:843
+#, kde-format
+msgid "Home Address City"
+msgstr ""
+
+#: addressee.cpp:848
+#, fuzzy, kde-format
+#| msgid "Email Addresses"
+msgid "Home Address State"
+msgstr "ईमेल पता"
+
+#: addressee.cpp:853
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr ""
+
+#: addressee.cpp:858
+#, kde-format
+msgid "Home Address Country"
+msgstr ""
+
+#: addressee.cpp:863
+#, fuzzy, kde-format
+#| msgid "Email Addresses"
+msgid "Home Address Label"
+msgstr "ईमेल पता"
+
+#: addressee.cpp:868
+#, kde-format
+msgid "Business Address Street"
+msgstr ""
+
+#: addressee.cpp:873
+#, fuzzy, kde-format
+#| msgid "Post Office Box"
+msgid "Business Address Post Office Box"
+msgstr "पोस्ट बॉक्स नं."
+
+#: addressee.cpp:878
+#, kde-format
+msgid "Business Address City"
+msgstr ""
+
+#: addressee.cpp:883
+#, kde-format
+msgid "Business Address State"
+msgstr ""
+
+#: addressee.cpp:888
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr ""
+
+#: addressee.cpp:893
+#, kde-format
+msgid "Business Address Country"
+msgstr ""
+
+#: addressee.cpp:898
+#, kde-format
+msgid "Business Address Label"
+msgstr ""
+
+#: addressee.cpp:903
+#, kde-format
+msgid "Home Phone"
+msgstr ""
+
+#: addressee.cpp:908
+#, kde-format
+msgid "Business Phone"
+msgstr ""
+
+#: addressee.cpp:913
+#, fuzzy, kde-format
+#| msgid "Mobile"
+msgid "Mobile Phone"
+msgstr "मोबिल"
+
+#: addressee.cpp:918 phonenumber.cpp:217
+#, kde-format
+msgid "Home Fax"
+msgstr "घर का फ़ैक्स"
+
+#: addressee.cpp:923
+#, kde-format
+msgid "Business Fax"
+msgstr ""
+
+#: addressee.cpp:928
+#, kde-format
+msgid "Car Phone"
+msgstr ""
+
+#: addressee.cpp:933 phonenumber.cpp:193
+#, kde-format
+msgid "ISDN"
+msgstr "आईएसडीएन"
+
+#: addressee.cpp:938 phonenumber.cpp:197
+#, kde-format
+msgid "Pager"
+msgstr "पेजर"
+
+#: addressee.cpp:943
+#, fuzzy, kde-format
+#| msgid "Email Addresses"
+msgid "Email Address"
+msgstr "ईमेल पता"
+
+#: addressee.cpp:963
+#, kde-format
+msgid "Mail Client"
+msgstr ""
+
+#: addressee.cpp:983
+#, kde-format
+msgid "Time Zone"
+msgstr ""
+
+#: addressee.cpp:1003
+#, kde-format
+msgid "Geographic Position"
+msgstr ""
+
+#: addressee.cpp:1054
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr ""
+
+#: addressee.cpp:1105
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr ""
+
+#: addressee.cpp:1156 field.cpp:228
+#, kde-format
+msgid "Organization"
+msgstr ""
+
+#: addressee.cpp:1176
+#, kde-format
+msgid "Department"
+msgstr ""
+
+#: addressee.cpp:1196
+#, fuzzy, kde-format
+#| msgid "No"
+msgid "Note"
+msgstr "नहीं"
+
+#: addressee.cpp:1216
+#, kde-format
+msgid "Product Identifier"
+msgstr ""
+
+#: addressee.cpp:1236
+#, kde-format
+msgid "Revision Date"
+msgstr ""
+
+#: addressee.cpp:1256
+#, kde-format
+msgid "Sort String"
+msgstr ""
+
+#: addressee.cpp:1282
+#, fuzzy, kde-format
+#| msgid "Home"
+msgid "Homepage"
+msgstr "घर"
+
+#: addressee.cpp:1302
+#, kde-format
+msgid "Security Class"
+msgstr ""
+
+#: addressee.cpp:1322
+#, kde-format
+msgid "Logo"
+msgstr ""
+
+#: addressee.cpp:1342
+#, kde-format
+msgid "Photo"
+msgstr ""
+
+#: addressee.cpp:1362
+#, kde-format
+msgid "Sound"
+msgstr ""
+
+#: addresseehelper.cpp:61
+#, kde-format
+msgid "Dr."
+msgstr "डॉ."
+
+#: addresseehelper.cpp:62
+#, kde-format
+msgid "Miss"
+msgstr "कुमारी"
+
+#: addresseehelper.cpp:63
+#, kde-format
+msgid "Mr."
+msgstr "श्रीमान्"
+
+#: addresseehelper.cpp:64
+#, kde-format
+msgid "Mrs."
+msgstr "श्रीमती"
+
+#: addresseehelper.cpp:65
+#, kde-format
+msgid "Ms."
+msgstr "सुश्री"
+
+#: addresseehelper.cpp:66
+#, kde-format
+msgid "Prof."
+msgstr "प्रा."
+
+#: addresseehelper.cpp:68
+#, kde-format
+msgid "I"
+msgstr "I"
+
+#: addresseehelper.cpp:69
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: addresseehelper.cpp:70
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: addresseehelper.cpp:71
+#, kde-format
+msgid "Jr."
+msgstr "कनिष्ठ"
+
+#: addresseehelper.cpp:72
+#, kde-format
+msgid "Sr."
+msgstr "वरिष्ठ"
+
+#: field.cpp:205
+#, fuzzy, kde-format
+#| msgid "Unknown type"
+msgid "Unknown Field"
+msgstr "अज्ञात क़िस्म"
+
+#: field.cpp:218
+#, kde-format
+msgid "All"
+msgstr ""
+
+#: field.cpp:220
+#, kde-format
+msgid "Frequent"
+msgstr ""
+
+#: field.cpp:222
+#, fuzzy, kde-format
+#| msgid "Email Addresses"
+msgctxt "street/postal"
+msgid "Address"
+msgstr "ईमेल पता"
+
+#: field.cpp:224
+#, fuzzy, kde-format
+#| msgid "Email"
+msgid "Email"
+msgstr "ईमेल"
+
+#: field.cpp:226
+#, kde-format
+msgid "Personal"
+msgstr ""
+
+#: field.cpp:230
+#, fuzzy, kde-format
+#| msgid "Custom"
+msgid "Custom"
+msgstr "मनपसंद"
+
+#: field.cpp:232
+#, kde-format
+msgid "Undefined"
+msgstr ""
+
+#: key.cpp:199
+#, fuzzy, kde-format
+#| msgid "X509"
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "एक्स509"
+
+#: key.cpp:202
+#, fuzzy, kde-format
+#| msgid "PGP"
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "पीजीपी"
+
+#: key.cpp:205
+#, fuzzy, kde-format
+#| msgid "Custom"
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "मनपसंद"
+
+#: key.cpp:208
+#, fuzzy, kde-format
+#| msgid "Unknown type"
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "अज्ञात क़िस्म"
+
+#: phonenumber.cpp:169
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr ""
+
+#: phonenumber.cpp:171
+#, fuzzy, kde-format
+#| msgid "Home"
+msgctxt "Home phone"
+msgid "Home"
+msgstr "घर"
+
+#: phonenumber.cpp:173
+#, fuzzy, kde-format
+#| msgid "Work"
+msgctxt "Work phone"
+msgid "Work"
+msgstr "कार्यस्थल"
+
+#: phonenumber.cpp:175
+#, kde-format
+msgid "Messenger"
+msgstr "मेसेंजर "
+
+#: phonenumber.cpp:177
+#, fuzzy, kde-format
+#| msgid "Preferred"
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "पसंदीदा"
+
+#: phonenumber.cpp:179
+#, kde-format
+msgid "Voice"
+msgstr "आवाज़"
+
+#: phonenumber.cpp:181
+#, kde-format
+msgid "Fax"
+msgstr "फ़ैक्स"
+
+#: phonenumber.cpp:183
+#, fuzzy, kde-format
+#| msgid "Mobile"
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "मोबिल"
+
+#: phonenumber.cpp:185
+#, fuzzy, kde-format
+#| msgid "Video"
+msgctxt "Video phone"
+msgid "Video"
+msgstr "वीडियो"
+
+#: phonenumber.cpp:187
+#, kde-format
+msgid "Mailbox"
+msgstr "डाक डिब्बा"
+
+#: phonenumber.cpp:189
+#, kde-format
+msgid "Modem"
+msgstr "मॉडेम"
+
+#: phonenumber.cpp:191
+#, fuzzy, kde-format
+#| msgid "Car"
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "कार"
+
+#: phonenumber.cpp:195
+#, kde-format
+msgid "PCS"
+msgstr "पीसीएस"
+
+#: phonenumber.cpp:199
+#, fuzzy, kde-format
+#| msgid "Other"
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "अन्य"
+
+#: phonenumber.cpp:212
+#, kde-format
+msgid "Preferred Number"
+msgstr "पसंदीदा संख्या"
+
+#: phonenumber.cpp:222
+#, kde-format
+msgid "Work Fax"
+msgstr "ऑफिस का फ़ैक्स"
+
+#: secrecy.cpp:98
+#, fuzzy, kde-format
+#| msgid "Public"
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "सार्वजनिक"
+
+#: secrecy.cpp:101
+#, fuzzy, kde-format
+#| msgid "Private"
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "निजी"
+
+#: secrecy.cpp:104
+#, fuzzy, kde-format
+#| msgid "Confidential"
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "गोपनीय"
+
+#: secrecy.cpp:107
+#, fuzzy, kde-format
+#| msgid "Unknown type"
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "अज्ञात क़िस्म"
