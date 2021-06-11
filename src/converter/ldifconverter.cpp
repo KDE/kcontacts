@@ -21,7 +21,6 @@
 
 #include "ldifconverter.h"
 #include "address.h"
-#include "addressee.h"
 #include "kcontacts_debug.h"
 #include "vcardconverter.h"
 

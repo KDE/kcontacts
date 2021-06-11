@@ -10,7 +10,6 @@
 #include <KLocalizedString>
 #include <krandom.h>
 
-#include <QDataStream>
 #include <QSharedData>
 
 using namespace KContacts;

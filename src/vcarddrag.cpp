@@ -10,7 +10,6 @@
 
 #include "converter/vcardconverter.h"
 
-#include <QMimeData>
 #include <QMimeDatabase>
 
 using namespace KContacts;

@@ -12,7 +12,6 @@
 
 #include <QDataStream>
 #include <QDirIterator>
-#include <QMap>
 #include <QStandardPaths>
 #include <QStringList>
 #include <QUrl>

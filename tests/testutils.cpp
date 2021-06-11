@@ -5,9 +5,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+#include "testutils.h"
 #include <QFile>
-
-#include <kcontacts/addressee.h>
 
 #include "vcardparser.h"
 

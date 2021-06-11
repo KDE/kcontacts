@@ -8,7 +8,6 @@
 #include "calendarurl.h"
 
 #include <QDataStream>
-#include <QMap>
 #include <QStringList>
 #include <QUrl>
 

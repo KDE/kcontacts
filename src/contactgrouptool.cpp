@@ -10,7 +10,6 @@
 #include "contactgroup.h"
 
 #include <QIODevice>
-#include <QString>
 
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>

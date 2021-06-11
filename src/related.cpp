@@ -7,7 +7,6 @@
 
 #include "related.h"
 #include <QDataStream>
-#include <QMap>
 #include <QStringList>
 
 using namespace KContacts;

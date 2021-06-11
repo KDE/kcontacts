@@ -10,7 +10,6 @@
 #include <QBuffer>
 #include <QSharedData>
 
-#include <QImage>
 
 namespace KContacts
 {
