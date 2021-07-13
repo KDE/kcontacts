@@ -113,7 +113,7 @@ static const char country_name_stringtable[] = {
             ++it;
             continue;
         }
-        qDebug() << "Removing ambigious string:" << QString::fromUtf8((*it).name) << (*prevIt).isoCode.toUpper() << (*prevIt).language
+        qDebug() << "Removing ambiguous string:" << QString::fromUtf8((*it).name) << (*prevIt).isoCode.toUpper() << (*prevIt).language
                  << (*it).isoCode.toUpper() << (*it).language;
         it = processedList.erase(prevIt);
         it = processedList.erase(it);

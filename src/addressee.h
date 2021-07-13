@@ -60,11 +60,11 @@ namespace KContacts
   from the other name fields automatically.
 
   realName() returns a fully formatted name(). It uses formattedName, if set,
-  otherwise it constucts the name from the name fields. As fallback, if
+  otherwise it constructs the name from the name fields. As fallback, if
   nothing else is set it uses name().
 
   name() is the NAME type of RFC2426. It can be used as internal name for the
-  data enty, but shouldn't be used for displaying the data to the user.
+  data entry, but shouldn't be used for displaying the data to the user.
  */
 class KCONTACTS_EXPORT Addressee
 {
@@ -789,7 +789,7 @@ public:
 
     /**
       Remove phone number. If no phone number with the given id exists for this
-      addresse nothing happens.
+      addressee, nothing happens.
 
       @param phoneNumber The telephone number to remove from the addressee
      */
@@ -834,7 +834,7 @@ public:
 
     /**
       Remove a key. If no key with the given id exists for this
-      addresse nothing happens.
+      addressee, nothing happens.
 
       @param key The key to remove
      */
@@ -892,7 +892,7 @@ public:
 
     /**
       Remove address. If no address with the given id exists for this
-      addresse nothing happens.
+      addressee, nothing happens.
 
       @param address The address to remove
      */

@@ -348,7 +348,7 @@ void KContacts::evaluatePair(Addressee &a,
     }
 
     if (fieldname.isEmpty() && !a.note().isEmpty()) {
-        // some LDIF export filters are borken and add additional
+        // some LDIF export filters are broken and add additional
         // comments on stand-alone lines. Just add them to the notes for now.
         a.setNote(a.note() + QLatin1Char('\n') + value);
         return;

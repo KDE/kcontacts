@@ -148,7 +148,7 @@ public:
     Q_REQUIRED_RESULT QString id() const;
 
     /**
-      Sets the type of address. See enum for definiton of types.
+      Sets the type of address. See enum for definition of types.
 
       @param type type, can be a bitwise or of multiple types.
     */

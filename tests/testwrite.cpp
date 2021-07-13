@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     addressee.setTitle(QLatin1String("nerd"));
     addressee.setRole(QLatin1String("Maintainer"));
     addressee.setOrganization(QLatin1String("KDE"));
-    addressee.setNote(QLatin1String("nerver\ntouch a running system"));
+    addressee.setNote(QLatin1String("never\ntouch a running system"));
     addressee.setProductId(QLatin1String("testId"));
     addressee.setRevision(QDateTime::currentDateTime());
     addressee.setSortString(QLatin1String("koenig"));
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 
     QFile file(QLatin1String("out.vcf"));
     if (!file.open(QIODevice::WriteOnly)) {
-        qDebug("Can't open file '%s' fro writing", qPrintable(file.fileName()));
+        qDebug("Can't open file '%s' for writing", qPrintable(file.fileName()));
         return 1;
     }
 
