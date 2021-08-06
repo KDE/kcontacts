@@ -1,0 +1,588 @@
+# translation of kabc.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2008, 2009, 2010.
+# Morn Met, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kabc\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-12 00:14+0000\n"
+"PO-Revision-Date: 2010-01-25 15:44+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"\n"
+"\n"
+
+#: address.cpp:389
+#, kde-format
+msgid "Post Office Box"
+msgstr "ប្រអប់​សំបុត្រ"
+
+#: address.cpp:405
+#, kde-format
+msgid "Extended Address Information"
+msgstr "ព័ត៌មាន​អាសយដ្ឋាន​បន្ថែម"
+
+#: address.cpp:421
+#, kde-format
+msgid "Street"
+msgstr "ផ្លូវ"
+
+#: address.cpp:437
+#, kde-format
+msgid "Locality"
+msgstr "មូលដ្ឋាន"
+
+#: address.cpp:453
+#, kde-format
+msgid "Region"
+msgstr "តំបន់"
+
+#: address.cpp:469
+#, kde-format
+msgid "Postal Code"
+msgstr "កូដ​​ប្រៃសណីយ៍"
+
+#: address.cpp:485
+#, kde-format
+msgid "Country"
+msgstr "ប្រទេស"
+
+#: address.cpp:501
+#, kde-format
+msgid "Delivery Label"
+msgstr "ស្លាក​បញ្ចូន"
+
+#: address.cpp:519
+#, kde-format
+msgctxt "Address is in home country"
+msgid "Domestic"
+msgstr "ក្នុង​ប្រទេស"
+
+#: address.cpp:521
+#, kde-format
+msgctxt "Address is not in home country"
+msgid "International"
+msgstr "អន្តរជាតិ"
+
+#: address.cpp:523
+#, kde-format
+msgctxt "Address for delivering letters"
+msgid "Postal"
+msgstr "ប្រៃសណីយ៍"
+
+#: address.cpp:525
+#, kde-format
+msgctxt "Address for delivering packages"
+msgid "Parcel"
+msgstr "កញ្ចប់"
+
+#: address.cpp:527
+#, kde-format
+msgctxt "Home Address"
+msgid "Home"
+msgstr "ផ្ទះ"
+
+#: address.cpp:529
+#, kde-format
+msgctxt "Work Address"
+msgid "Work"
+msgstr "ការងារ"
+
+#: address.cpp:531
+#, kde-format
+msgid "Preferred Address"
+msgstr "អាសយដ្ឋាន​ដែល​ពេញចិត្ត"
+
+#: address.cpp:533
+#, kde-format
+msgctxt "another type of address"
+msgid "Other"
+msgstr "ផ្សេងៗ"
+
+#: addressee.cpp:421
+#, kde-format
+msgid "Unique Identifier"
+msgstr "ឧបករណ៍​កំណត់​អត្តសញ្ញាណ​តែ​មួយ​គត់"
+
+#: addressee.cpp:441
+#, kde-format
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: addressee.cpp:637
+#, kde-format
+msgid "Formatted Name"
+msgstr "ឈ្មោះ​មានទ្រង់ទ្រាយ"
+
+#: addressee.cpp:657
+#, kde-format
+msgid "Family Name"
+msgstr "នាម​ត្រកូល"
+
+#: addressee.cpp:677
+#, kde-format
+msgid "Given Name"
+msgstr "នាម​ខ្លួន"
+
+#: addressee.cpp:697
+#, kde-format
+msgid "Additional Names"
+msgstr "ឈ្មោះ​បន្ថែម"
+
+#: addressee.cpp:717
+#, kde-format
+msgid "Honorific Prefixes"
+msgstr "បុព្វបទ​កិត្តិយស"
+
+#: addressee.cpp:737
+#, kde-format
+msgid "Honorific Suffixes"
+msgstr "បច្ច័យ​កិត្តិយស"
+
+#: addressee.cpp:788
+#, kde-format
+msgid "Nick Name"
+msgstr "សម្មតិនាម"
+
+#: addressee.cpp:828
+#, kde-format
+msgid "Birthday"
+msgstr "ថ្ងៃ​កំណើត"
+
+#: addressee.cpp:833
+#, kde-format
+msgid "Home Address Street"
+msgstr "ផ្លូវ​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:838
+#, kde-format
+msgid "Home Address Post Office Box"
+msgstr "ប្រអប់​សំបុត្រ​នៃ​អាយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:843
+#, kde-format
+msgid "Home Address City"
+msgstr "ទីក្រុង​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:848
+#, kde-format
+msgid "Home Address State"
+msgstr "រដ្ឋ​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:853
+#, kde-format
+msgid "Home Address Zip Code"
+msgstr "កូដ​តំបន់​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:858
+#, kde-format
+msgid "Home Address Country"
+msgstr "ប្រទេស​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:863
+#, kde-format
+msgid "Home Address Label"
+msgstr "ស្លាក​អាសយដ្ឋាន​ផ្ទះ"
+
+#: addressee.cpp:868
+#, kde-format
+msgid "Business Address Street"
+msgstr "ផ្លូវ​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:873
+#, kde-format
+msgid "Business Address Post Office Box"
+msgstr "ប្រអប់​សំបុត្រ​នៃ​អាសយដ្ឋាន​កន្លែង​ធ្វើការ"
+
+#: addressee.cpp:878
+#, kde-format
+msgid "Business Address City"
+msgstr "ទីក្រុង​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:883
+#, kde-format
+msgid "Business Address State"
+msgstr "រដ្ឋ​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:888
+#, kde-format
+msgid "Business Address Zip Code"
+msgstr "កូដ​តំបន់​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:893
+#, kde-format
+msgid "Business Address Country"
+msgstr "ប្រភេទ​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:898
+#, kde-format
+msgid "Business Address Label"
+msgstr "ស្លាក​អាសយដ្ឋាន​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:903
+#, kde-format
+msgid "Home Phone"
+msgstr "ទូរស័ព្ទ​ផ្ទះ"
+
+#: addressee.cpp:908
+#, kde-format
+msgid "Business Phone"
+msgstr "ទូរស័ព្ទ​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:913
+#, kde-format
+msgid "Mobile Phone"
+msgstr "ទូរស័ព្ទ​ចល័ត"
+
+#: addressee.cpp:918 phonenumber.cpp:217
+#, kde-format
+msgid "Home Fax"
+msgstr "ទូរសារ​នៅ​ផ្ទះ"
+
+#: addressee.cpp:923
+#, kde-format
+msgid "Business Fax"
+msgstr "ទូរសារ​ពាណិជ្ជកម្ម"
+
+#: addressee.cpp:928
+#, kde-format
+msgid "Car Phone"
+msgstr "ទូរស័ព្ទ​រថយន្ត"
+
+#: addressee.cpp:933 phonenumber.cpp:193
+#, kde-format
+msgid "ISDN"
+msgstr "ISDN"
+
+#: addressee.cpp:938 phonenumber.cpp:197
+#, kde-format
+msgid "Pager"
+msgstr "ភេកយ័រ"
+
+#: addressee.cpp:943
+#, kde-format
+msgid "Email Address"
+msgstr "អាសយដ្ឋាន​អ៊ីមែល"
+
+#: addressee.cpp:963
+#, kde-format
+msgid "Mail Client"
+msgstr "កម្មវិធី​អ៊ីមែល"
+
+#: addressee.cpp:983
+#, kde-format
+msgid "Time Zone"
+msgstr "តំបន់​ពេលវេលា"
+
+#: addressee.cpp:1003
+#, kde-format
+msgid "Geographic Position"
+msgstr "ទីតាំង​ភូមិសាស្ត្រ"
+
+#: addressee.cpp:1054
+#, kde-format
+msgctxt "a person's title"
+msgid "Title"
+msgstr "មុខងារ"
+
+#: addressee.cpp:1105
+#, kde-format
+msgctxt "of a person in an organization"
+msgid "Role"
+msgstr "តួនាទី"
+
+#: addressee.cpp:1156 field.cpp:228
+#, kde-format
+msgid "Organization"
+msgstr "អង្គភាព"
+
+#: addressee.cpp:1176
+#, kde-format
+msgid "Department"
+msgstr "នាយកដ្ឋាន"
+
+#: addressee.cpp:1196
+#, kde-format
+msgid "Note"
+msgstr "ចំណាំ"
+
+#: addressee.cpp:1216
+#, kde-format
+msgid "Product Identifier"
+msgstr "ឧបករណ៍​កំណត់​អត្តសញ្ញាណ​ផលិតផល"
+
+#: addressee.cpp:1236
+#, kde-format
+msgid "Revision Date"
+msgstr "កាលបរិច្ឆេទ​ពិនិត្យ​ឡើង​វិញ"
+
+#: addressee.cpp:1256
+#, kde-format
+msgid "Sort String"
+msgstr "តម្រៀប​ខ្សែអក្សរ"
+
+#: addressee.cpp:1282
+#, kde-format
+msgid "Homepage"
+msgstr "គេហទំព័រ"
+
+#: addressee.cpp:1302
+#, kde-format
+msgid "Security Class"
+msgstr "ថ្នាក់​សុវត្ថិភាព"
+
+#: addressee.cpp:1322
+#, kde-format
+msgid "Logo"
+msgstr "រូបសញ្ញា"
+
+#: addressee.cpp:1342
+#, kde-format
+msgid "Photo"
+msgstr "រូបថត"
+
+#: addressee.cpp:1362
+#, kde-format
+msgid "Sound"
+msgstr "សំឡេង"
+
+#: addresseehelper.cpp:61
+#, kde-format
+msgid "Dr."
+msgstr "វេជ្ជបណ្ឌិត"
+
+#: addresseehelper.cpp:62
+#, kde-format
+msgid "Miss"
+msgstr "កញ្ញា"
+
+#: addresseehelper.cpp:63
+#, kde-format
+msgid "Mr."
+msgstr "លោក"
+
+#: addresseehelper.cpp:64
+#, kde-format
+msgid "Mrs."
+msgstr "អ្នក​ស្រី"
+
+#: addresseehelper.cpp:65
+#, kde-format
+msgid "Ms."
+msgstr "អ្នកនាង"
+
+#: addresseehelper.cpp:66
+#, kde-format
+msgid "Prof."
+msgstr "សាស្ត្រាចារ្យ"
+
+#: addresseehelper.cpp:68
+#, kde-format
+msgid "I"
+msgstr "I"
+
+#: addresseehelper.cpp:69
+#, kde-format
+msgid "II"
+msgstr "II"
+
+#: addresseehelper.cpp:70
+#, kde-format
+msgid "III"
+msgstr "III"
+
+#: addresseehelper.cpp:71
+#, kde-format
+msgid "Jr."
+msgstr "Jr."
+
+#: addresseehelper.cpp:72
+#, kde-format
+msgid "Sr."
+msgstr "Sr."
+
+#: field.cpp:205
+#, kde-format
+msgid "Unknown Field"
+msgstr "មិនស្គាល់​វាល"
+
+#: field.cpp:218
+#, kde-format
+msgid "All"
+msgstr "ទាំងអស់"
+
+#: field.cpp:220
+#, kde-format
+msgid "Frequent"
+msgstr "ញឹកញាប់"
+
+#: field.cpp:222
+#, kde-format
+msgctxt "street/postal"
+msgid "Address"
+msgstr "អាសយដ្ឋាន"
+
+#: field.cpp:224
+#, kde-format
+msgid "Email"
+msgstr "អ៊ីមែល"
+
+#: field.cpp:226
+#, kde-format
+msgid "Personal"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: field.cpp:230
+#, kde-format
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: field.cpp:232
+#, kde-format
+msgid "Undefined"
+msgstr "មិន​បាន​កំណត់"
+
+#: key.cpp:198
+#, kde-format
+msgctxt "X.509 public key"
+msgid "X509"
+msgstr "X509"
+
+#: key.cpp:201
+#, kde-format
+msgctxt "Pretty Good Privacy key"
+msgid "PGP"
+msgstr "PGP"
+
+#: key.cpp:204
+#, kde-format
+msgctxt "A custom key"
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: key.cpp:207
+#, kde-format
+msgctxt "another type of encryption key"
+msgid "Unknown type"
+msgstr "ប្រភេទ​មិន​ស្គាល់"
+
+#: phonenumber.cpp:169
+#, kde-format
+msgctxt "Undefined phone type"
+msgid "Telephone number"
+msgstr ""
+
+#: phonenumber.cpp:171
+#, kde-format
+msgctxt "Home phone"
+msgid "Home"
+msgstr "ផ្ទះ"
+
+#: phonenumber.cpp:173
+#, kde-format
+msgctxt "Work phone"
+msgid "Work"
+msgstr "ការងារ"
+
+#: phonenumber.cpp:175
+#, kde-format
+msgid "Messenger"
+msgstr "កម្មវិធី​ផ្ញើ​សំបុត្រ"
+
+#: phonenumber.cpp:177
+#, kde-format
+msgctxt "Preferred phone"
+msgid "Preferred"
+msgstr "បាន​ពេញចិត្ត"
+
+#: phonenumber.cpp:179
+#, kde-format
+msgid "Voice"
+msgstr "សំឡេង"
+
+#: phonenumber.cpp:181
+#, kde-format
+msgid "Fax"
+msgstr "ទូរសារ"
+
+#: phonenumber.cpp:183
+#, kde-format
+msgctxt "Mobile Phone"
+msgid "Mobile"
+msgstr "ចល័ត"
+
+#: phonenumber.cpp:185
+#, kde-format
+msgctxt "Video phone"
+msgid "Video"
+msgstr "វីដេអូ"
+
+#: phonenumber.cpp:187
+#, kde-format
+msgid "Mailbox"
+msgstr "ប្រអប់​សំបុត្រ"
+
+#: phonenumber.cpp:189
+#, kde-format
+msgid "Modem"
+msgstr "ម៉ូដឹម"
+
+#: phonenumber.cpp:191
+#, kde-format
+msgctxt "Car Phone"
+msgid "Car"
+msgstr "រថយន្ត"
+
+#: phonenumber.cpp:195
+#, kde-format
+msgid "PCS"
+msgstr "PCS"
+
+#: phonenumber.cpp:199
+#, kde-format
+msgctxt "another type of phone"
+msgid "Other"
+msgstr "ផ្សេងៗ"
+
+#: phonenumber.cpp:212
+#, kde-format
+msgid "Preferred Number"
+msgstr "លេខ​ពេញ​ចិត្ត"
+
+#: phonenumber.cpp:222
+#, kde-format
+msgid "Work Fax"
+msgstr "ទូរសារ​កន្លែង​ធ្វើការ"
+
+#: secrecy.cpp:98
+#, kde-format
+msgctxt "access is for everyone"
+msgid "Public"
+msgstr "សាធារណៈ"
+
+#: secrecy.cpp:101
+#, kde-format
+msgctxt "access is by owner only"
+msgid "Private"
+msgstr "ឯកជន"
+
+#: secrecy.cpp:104
+#, kde-format
+msgctxt "access is by owner and a controlled group"
+msgid "Confidential"
+msgstr "សម្ងាត់"
+
+#: secrecy.cpp:107
+#, kde-format
+msgctxt "unknown secrecy type"
+msgid "Unknown type"
+msgstr "ប្រភេទ​មិន​ស្គាល់"
