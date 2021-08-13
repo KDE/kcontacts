@@ -178,7 +178,8 @@ void EmailTest::shouldExportVcard()
 
     KContacts::Addressee addr2;
     addr2.setUid(QStringLiteral("testuid"));
-    KContacts::Email email1, email2;
+    KContacts::Email email1;
+    KContacts::Email email2;
     email1.setEmail(QStringLiteral("foo@kde.org"));
     email1.setType(KContacts::Email::Work);
     email1.setPreferred(true);

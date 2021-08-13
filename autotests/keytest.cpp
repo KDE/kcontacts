@@ -31,7 +31,8 @@ void KeyTest::storeTest()
 
 void KeyTest::equalsTest()
 {
-    KContacts::Key key1, key2;
+    KContacts::Key key1;
+    KContacts::Key key2;
 
     key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);
@@ -56,7 +57,8 @@ void KeyTest::differsTest()
 
 void KeyTest::assignmentTest()
 {
-    KContacts::Key key1, key2;
+    KContacts::Key key1;
+    KContacts::Key key2;
 
     key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);
@@ -70,7 +72,8 @@ void KeyTest::assignmentTest()
 
 void KeyTest::serializeTest()
 {
-    KContacts::Key key1, key2;
+    KContacts::Key key1;
+    KContacts::Key key2;
 
     key1.setId(QStringLiteral("My Id"));
     key1.setType(KContacts::Key::Custom);

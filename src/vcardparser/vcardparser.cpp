@@ -398,7 +398,8 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                         }
                     }
 
-                    QByteArray input, output;
+                    QByteArray input;
+                    QByteArray output;
                     bool checkMultibyte = false; // avoid splitting a multibyte character
 
                     // handle charset

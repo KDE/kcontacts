@@ -30,7 +30,8 @@ void SecrecyTest::storeTest()
 
 void SecrecyTest::equalsTest()
 {
-    KContacts::Secrecy secrecy1, secrecy2;
+    KContacts::Secrecy secrecy1;
+    KContacts::Secrecy secrecy2;
 
     secrecy1.setType(KContacts::Secrecy::Confidential);
     secrecy2.setType(KContacts::Secrecy::Confidential);
@@ -48,7 +49,8 @@ void SecrecyTest::differsTest()
 
 void SecrecyTest::assignmentTest()
 {
-    KContacts::Secrecy secrecy1, secrecy2;
+    KContacts::Secrecy secrecy1;
+    KContacts::Secrecy secrecy2;
 
     secrecy1.setType(KContacts::Secrecy::Confidential);
     secrecy1 = secrecy2;
@@ -58,7 +60,8 @@ void SecrecyTest::assignmentTest()
 
 void SecrecyTest::serializeTest()
 {
-    KContacts::Secrecy secrecy1, secrecy2;
+    KContacts::Secrecy secrecy1;
+    KContacts::Secrecy secrecy2;
 
     secrecy1.setType(KContacts::Secrecy::Confidential);
 

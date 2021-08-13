@@ -126,7 +126,8 @@ void AddresseeTest::storeTest()
 
 void AddresseeTest::equalsTest()
 {
-    KContacts::Addressee addressee1, addressee2;
+    KContacts::Addressee addressee1;
+    KContacts::Addressee addressee2;
 
     KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
     KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
@@ -213,7 +214,8 @@ void AddresseeTest::equalsTest()
 
 void AddresseeTest::differsTest()
 {
-    KContacts::Addressee addressee1, addressee2;
+    KContacts::Addressee addressee1;
+    KContacts::Addressee addressee2;
 
     addressee1.setNameFromString(QStringLiteral("John Sinclair"));
     addressee2.setNameFromString(QStringLiteral("Suko"));
@@ -223,7 +225,8 @@ void AddresseeTest::differsTest()
 
 void AddresseeTest::assignmentTest()
 {
-    KContacts::Addressee addressee1, addressee2;
+    KContacts::Addressee addressee1;
+    KContacts::Addressee addressee2;
 
     KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
     KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));
@@ -281,7 +284,8 @@ void AddresseeTest::assignmentTest()
 
 void AddresseeTest::serializeTest()
 {
-    KContacts::Addressee addressee1, addressee2;
+    KContacts::Addressee addressee1;
+    KContacts::Addressee addressee2;
 
     KContacts::Picture logo(QStringLiteral("http://scottlandyard.info/pics/logo.png"));
     KContacts::Picture photo(QStringLiteral("http://scottlandyard.info/~sinclair/photo.png"));

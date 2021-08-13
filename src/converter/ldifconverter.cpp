@@ -260,11 +260,13 @@ bool LDIFConverter::LDIFToAddressee(const QString &str, AddresseeList &addrList,
         return true;
     }
 
-    bool endldif = false, end = false;
+    bool endldif = false;
+    bool end = false;
     Ldif ldif;
     Ldif::ParseValue ret;
     Addressee a;
-    Address homeAddr, workAddr;
+    Address homeAddr;
+    Address workAddr;
     int birthday = -1;
     int birthmonth = -1;
     int birthyear = -1;
@@ -572,7 +574,8 @@ void KContacts::evaluatePair(Addressee &a,
     if (fieldname == QLatin1String("member")) {
         // this is a mozilla list member (cn=xxx, mail=yyy)
         const QStringList list = value.split(QLatin1Char(','));
-        QString name, email;
+        QString name;
+        QString email;
 
         QStringList::ConstIterator it;
         const QStringList::ConstIterator end(list.constEnd());

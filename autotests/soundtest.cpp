@@ -55,7 +55,8 @@ void SoundTest::storeTestExtern()
 
 void SoundTest::equalsTestIntern()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setData(testData());
     sound2.setData(testData());
@@ -65,7 +66,8 @@ void SoundTest::equalsTestIntern()
 
 void SoundTest::equalsTestExtern()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
     sound2.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
@@ -75,7 +77,8 @@ void SoundTest::equalsTestExtern()
 
 void SoundTest::differsTest()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
     sound2.setData(testData());
@@ -85,7 +88,8 @@ void SoundTest::differsTest()
 
 void SoundTest::assignmentTestIntern()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setData(testData());
 
@@ -96,7 +100,8 @@ void SoundTest::assignmentTestIntern()
 
 void SoundTest::assignmentTestExtern()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
 
@@ -107,7 +112,8 @@ void SoundTest::assignmentTestExtern()
 
 void SoundTest::serializeTest()
 {
-    KContacts::Sound sound1, sound2;
+    KContacts::Sound sound1;
+    KContacts::Sound sound2;
 
     sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
     sound1.setData(testData());

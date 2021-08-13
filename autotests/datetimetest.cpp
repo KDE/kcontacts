@@ -22,7 +22,8 @@ void DateTimeTest::shouldParseDateTime()
 {
     using namespace KContacts;
 
-    QDateTime expected, dt;
+    QDateTime expected;
+    QDateTime dt;
     bool timeIsValid;
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20T12:33:30+0200"));
@@ -82,7 +83,8 @@ void DateTimeTest::shouldCreateDateTime()
     using namespace KContacts;
 
     QDateTime dt;
-    QString str, expected;
+    QString str;
+    QString expected;
 
     dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::UTC);
     str = VCardTool::createDateTime(dt, VCard::v4_0);
@@ -135,7 +137,8 @@ void DateTimeTest::shouldCreateDate()
     using namespace KContacts;
 
     QDate d;
-    QString str, expected;
+    QString str;
+    QString expected;
 
     d = QDate(2016, 1, 20);
     str = VCardTool::createDate(d, VCard::v3_0);

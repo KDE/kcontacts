@@ -45,7 +45,8 @@ void PhoneNumberTest::storeTest()
 
 void PhoneNumberTest::equalsTest()
 {
-    KContacts::PhoneNumber number1, number2;
+    KContacts::PhoneNumber number1;
+    KContacts::PhoneNumber number2;
 
     number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
@@ -68,7 +69,8 @@ void PhoneNumberTest::differsTest()
 
 void PhoneNumberTest::assignmentTest()
 {
-    KContacts::PhoneNumber number1, number2;
+    KContacts::PhoneNumber number1;
+    KContacts::PhoneNumber number2;
 
     number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
@@ -81,7 +83,8 @@ void PhoneNumberTest::assignmentTest()
 
 void PhoneNumberTest::serializeTest()
 {
-    KContacts::PhoneNumber number1, number2;
+    KContacts::PhoneNumber number1;
+    KContacts::PhoneNumber number2;
 
     number1.setId(QStringLiteral("My Id"));
     number1.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);

@@ -63,7 +63,8 @@ void AddressTest::storeTest()
 
 void AddressTest::equalsTest()
 {
-    KContacts::Address address1, address2;
+    KContacts::Address address1;
+    KContacts::Address address2;
 
     address1.setId(QStringLiteral("My Id"));
     address1.setType(KContacts::Address::Home);
@@ -100,7 +101,8 @@ void AddressTest::differsTest()
 
 void AddressTest::assignmentTest()
 {
-    KContacts::Address address1, address2;
+    KContacts::Address address1;
+    KContacts::Address address2;
 
     address1.setId(QStringLiteral("My Id"));
     address1.setType(KContacts::Address::Home);
@@ -120,7 +122,8 @@ void AddressTest::assignmentTest()
 
 void AddressTest::serializeTest()
 {
-    KContacts::Address address1, address2;
+    KContacts::Address address1;
+    KContacts::Address address2;
 
     address1.setType(KContacts::Address::Work);
     address1.setPostOfficeBox(QStringLiteral("1234"));

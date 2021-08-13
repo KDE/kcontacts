@@ -30,7 +30,8 @@ void TimeZoneTest::storeTest()
 
 void TimeZoneTest::equalsTest()
 {
-    KContacts::TimeZone timezone1, timezone2;
+    KContacts::TimeZone timezone1;
+    KContacts::TimeZone timezone2;
 
     timezone1.setOffset(2);
     timezone2.setOffset(2);
@@ -49,7 +50,8 @@ void TimeZoneTest::differsTest()
 
 void TimeZoneTest::assignmentTest()
 {
-    KContacts::TimeZone timezone1, timezone2;
+    KContacts::TimeZone timezone1;
+    KContacts::TimeZone timezone2;
 
     timezone1.setOffset(2);
     timezone1 = timezone2;
@@ -59,7 +61,8 @@ void TimeZoneTest::assignmentTest()
 
 void TimeZoneTest::serializeTest()
 {
-    KContacts::TimeZone timezone1, timezone2;
+    KContacts::TimeZone timezone1;
+    KContacts::TimeZone timezone2;
 
     timezone1.setOffset(2);
 

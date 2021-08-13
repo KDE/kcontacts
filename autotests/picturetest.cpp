@@ -99,7 +99,8 @@ void PictureTest::storeTestExtern()
 
 void PictureTest::equalsTestInternImage()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setData(testImage());
 
@@ -114,7 +115,8 @@ void PictureTest::equalsTestInternImage()
 
 void PictureTest::equalsTestInternRawData()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
@@ -129,7 +131,8 @@ void PictureTest::equalsTestInternRawData()
 
 void PictureTest::equalsTestInternImageAndRawData()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setData(testImage());
 
@@ -140,7 +143,8 @@ void PictureTest::equalsTestInternImageAndRawData()
 
 void PictureTest::equalsTestExtern()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
@@ -151,7 +155,8 @@ void PictureTest::equalsTestExtern()
 
 void PictureTest::differsTest()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
@@ -162,7 +167,8 @@ void PictureTest::differsTest()
 
 void PictureTest::differsTestInternRawData()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setRawData(testImageRawJPEG(), QStringLiteral("jpeg"));
 
@@ -174,7 +180,8 @@ void PictureTest::differsTestInternRawData()
 
 void PictureTest::differsTestExtern()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
@@ -185,7 +192,8 @@ void PictureTest::differsTestExtern()
 
 void PictureTest::assignmentTestIntern()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setData(testImage());
 
@@ -196,7 +204,8 @@ void PictureTest::assignmentTestIntern()
 
 void PictureTest::assignmentTestExtern()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
@@ -207,7 +216,8 @@ void PictureTest::assignmentTestExtern()
 
 void PictureTest::serializeTestInternImage()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setData(testImage());
 
@@ -223,7 +233,8 @@ void PictureTest::serializeTestInternImage()
 
 void PictureTest::serializeTestInternRawData()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
@@ -239,7 +250,8 @@ void PictureTest::serializeTestInternRawData()
 
 void PictureTest::serializeTestExtern()
 {
-    KContacts::Picture picture1, picture2;
+    KContacts::Picture picture1;
+    KContacts::Picture picture2;
 
     picture1.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
