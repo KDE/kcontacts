@@ -122,7 +122,7 @@ void PhoneNumberTest::labelTest()
     }
 
     // combine all with Pref
-    for (KContacts::PhoneNumber::Type type : qAsConst(types)) {
+    for (KContacts::PhoneNumber::Type type : std::as_const(types)) {
         KContacts::PhoneNumber::Type combinedType = type | KContacts::PhoneNumber::Pref;
         const KContacts::PhoneNumber phone(QLatin1String("1"), combinedType);
         QCOMPARE(phone.type(), combinedType);
@@ -138,7 +138,7 @@ void PhoneNumberTest::labelTest()
     }
 
     // combine all with Fax
-    for (KContacts::PhoneNumber::Type type : qAsConst(types)) {
+    for (KContacts::PhoneNumber::Type type : std::as_const(types)) {
         KContacts::PhoneNumber::Type combinedType = type | KContacts::PhoneNumber::Fax;
         const KContacts::PhoneNumber phone(QLatin1String("1"), combinedType);
         QCOMPARE(phone.type(), combinedType);
