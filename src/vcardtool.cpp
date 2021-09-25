@@ -290,6 +290,73 @@ void VCardTool::processPhoneNumbers(const PhoneNumber::List &phoneNumbers, VCard
     }
 }
 
+void VCardTool::processCustoms(const QStringList &customs, VCard::Version version, VCard *card, bool exportVcard) const
+{
+    for (const auto &str : customs) {
+        QString identifier = QLatin1String("X-") + QStringView(str).left(str.indexOf(QLatin1Char(':')));
+        const QString value = str.mid(str.indexOf(QLatin1Char(':')) + 1);
+        if (value.isEmpty()) {
+            continue;
+        }
+        // Convert to standard identifier
+        if (exportVcard) {
+            if (identifier == QLatin1String("X-messaging/aim-All")) {
+                identifier = QStringLiteral("X-AIM");
+            } else if (identifier == QLatin1String("X-messaging/icq-All")) {
+                identifier = QStringLiteral("X-ICQ");
+            } else if (identifier == QLatin1String("X-messaging/xmpp-All")) {
+                identifier = QStringLiteral("X-JABBER");
+            } else if (identifier == QLatin1String("X-messaging/msn-All")) {
+                identifier = QStringLiteral("X-MSN");
+            } else if (identifier == QLatin1String("X-messaging/yahoo-All")) {
+                identifier = QStringLiteral("X-YAHOO");
+            } else if (identifier == QLatin1String("X-messaging/gadu-All")) {
+                identifier = QStringLiteral("X-GADUGADU");
+            } else if (identifier == QLatin1String("X-messaging/skype-All")) {
+                identifier = QStringLiteral("X-SKYPE");
+            } else if (identifier == QLatin1String("X-messaging/groupwise-All")) {
+                identifier = QStringLiteral("X-GROUPWISE");
+            } else if (identifier == QLatin1String("X-messaging/sms-All")) {
+                identifier = QStringLiteral("X-SMS");
+            } else if (identifier == QLatin1String("X-messaging/meanwhile-All")) {
+                identifier = QStringLiteral("X-MEANWHILE");
+            } else if (identifier == QLatin1String("X-messaging/irc-All")) {
+                identifier = QStringLiteral("X-IRC"); // Not defined by rfc but need for fixing #300869
+            } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
+                // Not defined by rfc but need for fixing #300869
+                identifier = QStringLiteral("X-GTALK");
+            } else if (identifier == QLatin1String("X-messaging/twitter-All")) {
+                identifier = QStringLiteral("X-TWITTER");
+            }
+        }
+
+        if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
+            // ANNIVERSARY
+            if (!value.isEmpty()) {
+                const QDate date = QDate::fromString(value, Qt::ISODate);
+                QDateTime dt = QDateTime(date.startOfDay());
+                dt.setTime(QTime());
+                VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version, false));
+                card->addLine(line);
+            }
+        } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
+            if (!value.isEmpty()) {
+                VCardLine line(QStringLiteral("RELATED"), QStringLiteral(";"));
+                line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
+                line.addParameter(QStringLiteral("VALUE"), value);
+                card->addLine(line);
+            }
+        } else {
+            VCardLine line(identifier, value);
+            if (version == VCard::v2_1 && needsEncoding(value)) {
+                line.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                line.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+            }
+            card->addLine(line);
+        }
+    }
+}
+
 QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const
 {
     VCard::List vCardList;
@@ -625,6 +692,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 }
             }
         }
+
         // FieldGroup
         const QVector<FieldGroup> lstGroup = (*addrIt).fieldGroupList();
         for (const FieldGroup &group : lstGroup) {
@@ -649,68 +717,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // X-
         const QStringList customs = (*addrIt).customs();
-        for (strIt = customs.begin(); strIt != customs.end(); ++strIt) {
-            QString identifier = QLatin1String("X-") + (*strIt).left((*strIt).indexOf(QLatin1Char(':')));
-            const QString value = (*strIt).mid((*strIt).indexOf(QLatin1Char(':')) + 1);
-            if (value.isEmpty()) {
-                continue;
-            }
-            // Convert to standard identifier
-            if (exportVcard) {
-                if (identifier == QLatin1String("X-messaging/aim-All")) {
-                    identifier = QStringLiteral("X-AIM");
-                } else if (identifier == QLatin1String("X-messaging/icq-All")) {
-                    identifier = QStringLiteral("X-ICQ");
-                } else if (identifier == QLatin1String("X-messaging/xmpp-All")) {
-                    identifier = QStringLiteral("X-JABBER");
-                } else if (identifier == QLatin1String("X-messaging/msn-All")) {
-                    identifier = QStringLiteral("X-MSN");
-                } else if (identifier == QLatin1String("X-messaging/yahoo-All")) {
-                    identifier = QStringLiteral("X-YAHOO");
-                } else if (identifier == QLatin1String("X-messaging/gadu-All")) {
-                    identifier = QStringLiteral("X-GADUGADU");
-                } else if (identifier == QLatin1String("X-messaging/skype-All")) {
-                    identifier = QStringLiteral("X-SKYPE");
-                } else if (identifier == QLatin1String("X-messaging/groupwise-All")) {
-                    identifier = QStringLiteral("X-GROUPWISE");
-                } else if (identifier == QLatin1String("X-messaging/sms-All")) {
-                    identifier = QStringLiteral("X-SMS");
-                } else if (identifier == QLatin1String("X-messaging/meanwhile-All")) {
-                    identifier = QStringLiteral("X-MEANWHILE");
-                } else if (identifier == QLatin1String("X-messaging/irc-All")) {
-                    identifier = QStringLiteral("X-IRC"); // Not defined by rfc but need for fixing #300869
-                } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
-                    // Not defined by rfc but need for fixing #300869
-                    identifier = QStringLiteral("X-GTALK");
-                } else if (identifier == QLatin1String("X-messaging/twitter-All")) {
-                    identifier = QStringLiteral("X-TWITTER");
-                }
-            }
-            if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
-                // ANNIVERSARY
-                if (!value.isEmpty()) {
-                    const QDate date = QDate::fromString(value, Qt::ISODate);
-                    QDateTime dt = QDateTime(date.startOfDay());
-                    dt.setTime(QTime());
-                    VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version, false));
-                    card.addLine(line);
-                }
-            } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
-                if (!value.isEmpty()) {
-                    VCardLine line(QStringLiteral("RELATED"), QStringLiteral(";"));
-                    line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
-                    line.addParameter(QStringLiteral("VALUE"), value);
-                    card.addLine(line);
-                }
-            } else {
-                VCardLine line(identifier, value);
-                if (version == VCard::v2_1 && needsEncoding(value)) {
-                    line.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-                    line.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-                }
-                card.addLine(line);
-            }
-        }
+        processCustoms(customs, version, &card, exportVcard);
 
         vCardList.append(card);
     }
