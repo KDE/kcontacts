@@ -110,26 +110,19 @@ void VCardLine::addParameter(const QString &param, const QString &value)
 
 QStringList VCardLine::parameters(const QString &param) const
 {
-    ParamMap::ConstIterator it = mParamMap.find(param);
-    if (it == mParamMap.end()) {
-        return QStringList();
-    } else {
-        return *it;
-    }
+    auto it = mParamMap.constFind(param);
+    return it != mParamMap.cend() ? it.value() : QStringList();
 }
 
 QString VCardLine::parameter(const QString &param) const
 {
-    ParamMap::ConstIterator it = mParamMap.find(param);
-    if (it == mParamMap.end()) {
-        return QString();
-    } else {
-        if ((*it).isEmpty()) {
-            return QString();
-        } else {
-            return (*it).first();
-        }
+    auto it = mParamMap.constFind(param);
+    if (it != mParamMap.cend()) {
+        const QStringList lst = it.value();
+        return !lst.isEmpty() ? lst.first() : QString{};
     }
+
+    return QString();
 }
 
 VCardLine::ParamMap VCardLine::parameterMap() const

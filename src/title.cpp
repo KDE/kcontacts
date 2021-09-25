@@ -99,11 +99,8 @@ QString Title::toString() const
     str += QStringLiteral("    title: %1\n").arg(d->title);
     if (!d->parameters.isEmpty()) {
         QString param;
-        QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
-        const QMap<QString, QStringList>::const_iterator end = d->parameters.constEnd();
-        while (it != end) {
+        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

@@ -235,6 +235,14 @@ QString Field::categoryLabel(int category)
 
 QString Field::value(const KContacts::Addressee &a)
 {
+
+    auto findPhone = [](const PhoneNumber::List &list, PhoneNumber::TypeFlag compareFlag) {
+        auto it = std::find_if(list.cbegin(), list.cend(), [=](const PhoneNumber &phone) {
+            return (phone.type() & ~(PhoneNumber::Pref)) == compareFlag;
+        });
+        return it;
+    };
+
     switch (d->fieldId()) {
     case Private::FormattedName:
         return a.formattedName();
@@ -278,22 +286,18 @@ QString Field::value(const KContacts::Addressee &a)
         {
             // check for preferred number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Home | PhoneNumber::Pref);
-            PhoneNumber::List::ConstIterator end(list.end());
-            for (it = list.begin(); it != end; ++it) {
-                if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home) {
-                    return (*it).number();
-                }
+            auto it = findPhone(list, PhoneNumber::Home);
+            if (it != list.cend()) {
+                return it->number();
             }
         }
 
         {
             // check for normal home number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Home);
-            PhoneNumber::List::ConstIterator end(list.end());
-            for (it = list.begin(); it != end; ++it) {
-                if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Home) {
-                    return (*it).number();
-                }
+            auto it = findPhone(list, PhoneNumber::Home);
+            if (it != list.cend()) {
+                return it->number();
             }
         }
 
@@ -305,21 +309,18 @@ QString Field::value(const KContacts::Addressee &a)
         {
             // check for preferred number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Work | PhoneNumber::Pref);
-            PhoneNumber::List::ConstIterator end(list.end());
-            for (it = list.begin(); it != end; ++it) {
-                if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Work) {
-                    return (*it).number();
-                }
+            auto it = findPhone(list, PhoneNumber::Work);
+            if (it != list.cend()) {
+                return it->number();
             }
         }
 
         {
             // check for normal work number
             const PhoneNumber::List list = a.phoneNumbers(PhoneNumber::Work);
-            for (it = list.begin(); it != list.end(); ++it) {
-                if (((*it).type() & ~(PhoneNumber::Pref)) == PhoneNumber::Work) {
-                    return (*it).number();
-                }
+            auto it = findPhone(list, PhoneNumber::Work);
+            if (it != list.cend()) {
+                return it->number();
             }
         }
 

@@ -43,11 +43,9 @@ AddresseeHelper::~AddresseeHelper()
 
 static void addToSet(const QStringList &list, QSet<QString> &container)
 {
-    QStringList::ConstIterator it;
-    QStringList::ConstIterator end(list.end());
-    for (it = list.begin(); it != end; ++it) {
-        if (!(*it).isEmpty()) {
-            container.insert(*it);
+    for (const auto &str : list) {
+        if (!str.isEmpty()) {
+            container.insert(str);
         }
     }
 }

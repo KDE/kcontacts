@@ -21,7 +21,7 @@ public:
             return QString();
         }
 
-        QHash<QByteArray, QString>::const_iterator it = m_values.constFind(value);
+        auto it = m_values.constFind(value);
         if (it != m_values.constEnd()) {
             return it.value();
         }
@@ -339,60 +339,53 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
     QByteArray text;
     QByteArray textLine;
     QString encodingType;
-    QStringList idents;
     QStringList params;
     QStringList values;
-    QStringList::ConstIterator identIt;
-    QStringList::Iterator paramIt;
-    QStringList::ConstIterator valueIt;
 
     VCardLine::List lines;
-    VCardLine::List::ConstIterator lineIt;
-    VCard::List::ConstIterator cardIt;
 
     bool hasEncoding;
 
     text.reserve(list.size() * 300); // reserve memory to be more efficient
 
     // iterate over the cards
-    const VCard::List::ConstIterator listEnd(list.end());
-    for (cardIt = list.begin(); cardIt != listEnd; ++cardIt) {
+    for (const VCard &card : list) {
         text.append("BEGIN:VCARD\r\n");
 
-        idents = (*cardIt).identifiers();
+        QStringList idents = card.identifiers();
         // VERSION must be first
         if (idents.contains(QLatin1String("VERSION"))) {
             const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
             idents.prepend(str);
         }
 
-        for (identIt = idents.constBegin(); identIt != idents.constEnd(); ++identIt) {
-            lines = (*cardIt).lines((*identIt));
+        for (const auto &id : std::as_const(idents)) {
+            lines = card.lines(id);
 
             // iterate over the lines
-            for (lineIt = lines.constBegin(); lineIt != lines.constEnd(); ++lineIt) {
-                QVariant val = (*lineIt).value();
+            for (const VCardLine &vline : std::as_const(lines)) {
+                QVariant val = vline.value();
                 if (val.isValid()) {
-                    if ((*lineIt).hasGroup()) {
-                        textLine = (*lineIt).group().toLatin1() + '.' + (*lineIt).identifier().toLatin1();
+                    if (vline.hasGroup()) {
+                        textLine = vline.group().toLatin1() + '.' + vline.identifier().toLatin1();
                     } else {
-                        textLine = (*lineIt).identifier().toLatin1();
+                        textLine = vline.identifier().toLatin1();
                     }
 
-                    params = (*lineIt).parameterList();
+                    params = vline.parameterList();
                     hasEncoding = false;
                     if (!params.isEmpty()) { // we have parameters
-                        for (paramIt = params.begin(); paramIt != params.end(); ++paramIt) {
-                            if ((*paramIt) == QLatin1String("encoding")) {
+                        for (const QString &param : std::as_const(params)) {
+                            if (param == QLatin1String("encoding")) {
                                 hasEncoding = true;
-                                encodingType = (*lineIt).parameter(QStringLiteral("encoding")).toLower();
+                                encodingType = vline.parameter(QStringLiteral("encoding")).toLower();
                             }
 
-                            values = (*lineIt).parameters(*paramIt);
-                            for (valueIt = values.constBegin(); valueIt != values.constEnd(); ++valueIt) {
-                                textLine.append(';' + (*paramIt).toLatin1().toUpper());
-                                if (!(*valueIt).isEmpty()) {
-                                    textLine.append('=' + (*valueIt).toLatin1());
+                            values = vline.parameters(param);
+                            for (const QString &str : std::as_const(values)) {
+                                textLine.append(';' + param.toLatin1().toUpper());
+                                if (!str.isEmpty()) {
+                                    textLine.append('=' + str.toLatin1());
                                 }
                             }
                         }
@@ -403,10 +396,10 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     bool checkMultibyte = false; // avoid splitting a multibyte character
 
                     // handle charset
-                    const QString charset = (*lineIt).parameter(QStringLiteral("charset"));
+                    const QString charset = vline.parameter(QStringLiteral("charset"));
                     if (!charset.isEmpty()) {
                         // have to convert the data
-                        const QString value = (*lineIt).value().toString();
+                        const QString value = vline.value().toString();
                         QTextCodec *codec = QTextCodec::codecForName(charset.toLatin1());
                         if (codec) {
                             input = codec->fromUnicode(value);
@@ -414,11 +407,11 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                             checkMultibyte = true;
                             input = value.toUtf8();
                         }
-                    } else if ((*lineIt).value().type() == QVariant::ByteArray) {
-                        input = (*lineIt).value().toByteArray();
+                    } else if (vline.value().type() == QVariant::ByteArray) {
+                        input = vline.value().toByteArray();
                     } else {
                         checkMultibyte = true;
-                        input = (*lineIt).value().toString().toUtf8();
+                        input = vline.value().toString().toUtf8();
                     }
 
                     // handle encoding
@@ -433,7 +426,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     } else {
                         output = input;
                     }
-                    addEscapes(output, ((*lineIt).identifier() == QLatin1String("CATEGORIES") || (*lineIt).identifier() == QLatin1String("GEO")));
+                    addEscapes(output, (vline.identifier() == QLatin1String("CATEGORIES") || vline.identifier() == QLatin1String("GEO")));
 
                     if (!output.isEmpty()) {
                         textLine.append(':' + output);

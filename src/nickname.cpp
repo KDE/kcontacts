@@ -98,12 +98,9 @@ QString NickName::toString() const
     QString str = QLatin1String("NickName {\n");
     str += QStringLiteral("    nickname: %1\n").arg(d->nickname);
     if (!d->parameters.isEmpty()) {
-        QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
-        const QMap<QString, QStringList>::const_iterator end = d->parameters.constEnd();
         QString param;
-        while (it != end) {
+        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

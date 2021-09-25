@@ -227,12 +227,9 @@ QString PhoneNumber::typeLabel(Type type)
     }
 
     const TypeList list = typeList();
-
-    TypeList::ConstIterator it;
-    TypeList::ConstIterator end(list.constEnd());
-    for (it = list.constBegin(); it != end; ++it) {
+    for (const auto f : list) {
         // these are actually flags
-        const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(*it));
+        const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(f));
         if (type & flag) {
             if (!first) {
                 label.append(QLatin1Char('/'));
@@ -266,11 +263,8 @@ QString PhoneNumber::toString() const
     str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
     if (!d->mParameters.isEmpty()) {
         QString param;
-        QMap<QString, QStringList>::const_iterator it = d->mParameters.constBegin();
-        const QMap<QString, QStringList>::const_iterator end = d->mParameters.constEnd();
-        while (it != end) {
+        for (auto it = d->mParameters.cbegin(); it != d->mParameters.cend(); ++it) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

@@ -106,30 +106,26 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
 
 bool LDIFConverter::contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str)
 {
-    if (contactGroupList.count() <= 0) {
+    if (contactGroupList.isEmpty()) {
         return false;
     }
 
     bool result = true;
-    ContactGroup::List::ConstIterator it;
-    const ContactGroup::List::ConstIterator end(contactGroupList.constEnd());
-    for (it = contactGroupList.constBegin(); it != end; ++it) {
-        result = (contactGroupToLDIF(*it, str) || result); // order matters
+    for (const ContactGroup &group : contactGroupList) {
+        result = (contactGroupToLDIF(group, str) || result); // order matters
     }
     return result;
 }
 
 bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
 {
-    if (addrList.count() <= 0) {
+    if (addrList.isEmpty()) {
         return false;
     }
 
     bool result = true;
-    AddresseeList::ConstIterator it;
-    const AddresseeList::ConstIterator end(addrList.constEnd());
-    for (it = addrList.constBegin(); it != end; ++it) {
-        result = (addresseeToLDIF(*it, str) || result); // order matters
+    for (const Addressee &addr : addrList) {
+        result = (addresseeToLDIF(addr, str) || result); // order matters
     }
     return result;
 }
@@ -577,16 +573,16 @@ void KContacts::evaluatePair(Addressee &a,
         QString name;
         QString email;
 
-        QStringList::ConstIterator it;
-        const QStringList::ConstIterator end(list.constEnd());
-        for (it = list.constBegin(); it != end; ++it) {
-            if ((*it).startsWith(QLatin1String("cn="))) {
-                name = (*it).mid(3).trimmed();
-            }
-            if ((*it).startsWith(QLatin1String("mail="))) {
-                email = (*it).mid(5).trimmed();
+        const QLatin1String cnTag("cn=");
+        const QLatin1String mailTag("mail=");
+        for (const auto &str : list) {
+            if (str.startsWith(cnTag)) {
+                name = QStringView(str).mid(cnTag.size()).trimmed().toString();
+            } else if (str.startsWith(mailTag)) {
+                email = QStringView(str).mid(mailTag.size()).trimmed().toString();
             }
         }
+
         if (!name.isEmpty() && !email.isEmpty()) {
             email = QLatin1String(" <") + email + QLatin1Char('>');
         }

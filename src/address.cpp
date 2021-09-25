@@ -327,49 +327,38 @@ Address::Type Address::type() const
 QString Address::typeLabel(Type type)
 {
     QString label;
-    bool first = true;
     const TypeList list = typeList();
 
-    TypeList::ConstIterator it;
-    TypeList::ConstIterator end(list.end());
-    for (it = list.begin(); it != end; ++it) {
+    for (const auto typeFlag : list) {
         // these are actually flags
-        const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(*it));
+        const TypeFlag flag = static_cast<TypeFlag>(static_cast<int>(typeFlag));
         if (type & flag) {
-            if (!first) {
-                label.append(QLatin1Char('/'));
-            }
-
-            label.append(typeFlagLabel(flag));
-
-            if (first) {
-                first = false;
-            }
+            label.append(QLatin1Char('/') + typeFlagLabel(flag));
         }
     }
+
+    // Remove the first '/'
+    if (!label.isEmpty()) {
+        label.remove(0, 1);
+    }
+
     return label;
 }
 
 QString Address::typeLabel() const
 {
     QString label;
-    bool first = true;
-
     const TypeList list = typeList();
 
-    TypeList::ConstIterator it;
-    for (it = list.begin(); it != list.end(); ++it) {
-        if ((type() & (*it)) && ((*it) != Pref)) {
-            if (!first) {
-                label.append(QLatin1Char('/'));
-            }
-            label.append(typeLabel(*it));
-            if (first) {
-                first = false;
-            }
+    for (const auto f : list) {
+        if ((type() & f) && (f != Pref)) {
+            label.append(QLatin1Char('/') + typeLabel(f));
         }
     }
-
+    // Remove the first '/'
+    if (!label.isEmpty()) {
+        label.remove(0, 1);
+    }
     return label;
 }
 

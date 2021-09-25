@@ -136,11 +136,8 @@ QString Impp::toString() const
     str += QStringLiteral("    address: %1\n").arg(d->address.url());
     if (!d->parameters.isEmpty()) {
         QString param;
-        QMap<QString, QStringList>::const_iterator it = d->parameters.constBegin();
-        const QMap<QString, QStringList>::const_iterator end = d->parameters.constEnd();
-        while (it != end) {
+        for (auto it = d->parameters.cbegin(), itEnd = d->parameters.cend(); it != itEnd; ++it) {
             param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-            ++it;
         }
         str += QStringLiteral("    parameters: %1\n").arg(param);
     }

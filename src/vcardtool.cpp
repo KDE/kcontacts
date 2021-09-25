@@ -106,7 +106,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
 void VCardTool::addParameters(VCardLine &line, const QMap<QString, QStringList> &params) const
 {
-    QMapIterator<QString, QStringList> i(params);
+    QMapIterator i(params);
     while (i.hasNext()) {
         i.next();
         line.addParameter(i.key(), i.value().join(QLatin1Char(',')));

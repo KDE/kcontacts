@@ -1683,14 +1683,14 @@ void Addressee::insertLang(const Lang &language)
     }
     d->mEmpty = false;
 
-    Lang::List::Iterator it;
-    Lang::List::Iterator end(d->mLangs.end());
-    for (it = d->mLangs.begin(); it != end; ++it) {
-        if ((*it).language() == languageStr) {
-            (*it).setParameters(language.parameters());
-            return;
-        }
+    auto it = std::find_if(d->mLangs.begin(), d->mLangs.end(), [&languageStr](const Lang &lang) {
+        return lang.language() == languageStr;
+    });
+    if (it != d->mLangs.end()) {
+        (*it).setParameters(language.parameters());
+        return;
     }
+
     d->mLangs.append(language);
 }
 
@@ -1718,14 +1718,14 @@ void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
     d->mEmpty = false;
 
-    PhoneNumber::List::Iterator it;
-    PhoneNumber::List::Iterator end(d->mPhoneNumbers.end());
-    for (it = d->mPhoneNumbers.begin(); it != end; ++it) {
-        if ((*it).id() == phoneNumber.id()) {
-            *it = phoneNumber;
-            return;
-        }
+    auto it = std::find_if(d->mPhoneNumbers.begin(), d->mPhoneNumbers.end(), [&phoneNumber](const PhoneNumber &pNumber) {
+        return pNumber.id() == phoneNumber.id();
+    });
+    if (it != d->mPhoneNumbers.end()) {
+        *it = phoneNumber;
+        return;
     }
+
     if (!phoneNumber.number().simplified().isEmpty()) {
         d->mPhoneNumbers.append(phoneNumber);
     }
@@ -1733,25 +1733,25 @@ void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 
 void Addressee::removePhoneNumber(const PhoneNumber &phoneNumber)
 {
-    PhoneNumber::List::Iterator it;
-    for (it = d->mPhoneNumbers.begin(); it != d->mPhoneNumbers.end(); ++it) {
-        if ((*it).id() == phoneNumber.id()) {
-            d->mPhoneNumbers.erase(it);
-            return;
-        }
+    auto it = std::find_if(d->mPhoneNumbers.begin(), d->mPhoneNumbers.end(), [&phoneNumber](const PhoneNumber &p) {
+        return p.id() == phoneNumber.id();
+    });
+
+    if (it != d->mPhoneNumbers.end()) {
+        d->mPhoneNumbers.erase(it);
     }
 }
 
 PhoneNumber Addressee::phoneNumber(PhoneNumber::Type type) const
 {
     PhoneNumber phoneNumber(QString(), type);
-    PhoneNumber::List::ConstIterator it;
-    for (it = d->mPhoneNumbers.constBegin(); it != d->mPhoneNumbers.constEnd(); ++it) {
-        if (matchBinaryPattern((*it).type(), type)) {
-            if ((*it).type() & PhoneNumber::Pref) {
-                return *it;
+
+    for (const PhoneNumber &phone : d->mPhoneNumbers) {
+        if (matchBinaryPattern(phone.type(), type)) {
+            if (phone.type() & PhoneNumber::Pref) {
+                return phone;
             } else if (phoneNumber.number().isEmpty()) {
-                phoneNumber = (*it);
+                phoneNumber = phone;
             }
         }
     }
@@ -1775,75 +1775,57 @@ PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
 {
     PhoneNumber::List list;
 
-    PhoneNumber::List::ConstIterator it;
-    const PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
-    for (it = d->mPhoneNumbers.constBegin(); it != end; ++it) {
-        if (matchBinaryPattern((*it).type(), type)) {
-            list.append(*it);
-        }
-    }
+    std::copy_if(d->mPhoneNumbers.cbegin(), d->mPhoneNumbers.cend(), std::back_inserter(list), [type](const auto &phone) {
+        return matchBinaryPattern(phone.type(), type);
+    });
     return list;
 }
 
 PhoneNumber Addressee::findPhoneNumber(const QString &id) const
 {
-    PhoneNumber::List::ConstIterator it;
-    const PhoneNumber::List::ConstIterator end(d->mPhoneNumbers.constEnd());
-    for (it = d->mPhoneNumbers.constBegin(); it != end; ++it) {
-        if ((*it).id() == id) {
-            return *it;
-        }
-    }
-    return PhoneNumber();
+    auto it = std::find_if(d->mPhoneNumbers.cbegin(), d->mPhoneNumbers.cend(), [&id](const PhoneNumber &phone) {
+        return phone.id() == id;
+    });
+
+    return it != d->mPhoneNumbers.cend() ? *it : PhoneNumber{};
 }
 
 void Addressee::insertKey(const Key &key)
 {
     d->mEmpty = false;
 
-    Key::List::Iterator it;
-    Key::List::Iterator end(d->mKeys.end());
-    for (it = d->mKeys.begin(); it != end; ++it) {
-        if ((*it).id() == key.id()) {
-            *it = key;
-            return;
-        }
+    auto it = std::find_if(d->mKeys.begin(), d->mKeys.end(), [&key](Key &existing) {
+        return existing.id() == key.id();
+    });
+    if (it != d->mKeys.end()) {
+        *it = key;
+    } else {
+        d->mKeys.append(key);
     }
-    d->mKeys.append(key);
-}
-
-void vectorRemoveAll(Key::List &t, const Key &key)
-{
-    t.removeAll(key);
 }
 
 void Addressee::removeKey(const Key &key)
 {
-    Key::List::Iterator it;
-    for (it = d->mKeys.begin(); it != d->mKeys.end(); ++it) {
-        if ((*it).id() == key.id()) {
-            d->mKeys.removeAll(key);
-            return;
-        }
-    }
+    auto it = std::remove_if(d->mKeys.begin(), d->mKeys.end(), [&key](const Key &k) {
+        return k.id() == key.id();
+    });
+    d->mKeys.erase(it, d->mKeys.end());
 }
 
 Key Addressee::key(Key::Type type, const QString &customTypeString) const
 {
-    Key::List::ConstIterator it;
-    Key::List::ConstIterator end(d->mKeys.constEnd());
-    for (it = d->mKeys.constBegin(); it != end; ++it) {
-        if ((*it).type() == type) {
+    for (const auto &key : d->mKeys) {
+        if (key.type() == type) {
             if (type == Key::Custom) {
                 if (customTypeString.isEmpty()) {
-                    return *it;
+                    return key;
                 } else {
-                    if ((*it).customTypeString() == customTypeString) {
-                        return *it;
+                    if (key.customTypeString() == customTypeString) {
+                        return key;
                     }
                 }
             } else {
-                return *it;
+                return key;
             }
         }
     }
@@ -1864,37 +1846,35 @@ Key::List Addressee::keys() const
 Key::List Addressee::keys(Key::Type type, const QString &customTypeString) const
 {
     Key::List list;
-
-    Key::List::ConstIterator it;
-    Key::List::ConstIterator end(d->mKeys.constEnd());
-    for (it = d->mKeys.constBegin(); it != end; ++it) {
-        if ((*it).type() == type) {
+    auto matchFunc = [type, &customTypeString](const Key &key) {
+        if (key.type() == type) {
             if (type == Key::Custom) {
                 if (customTypeString.isEmpty()) {
-                    list.append(*it);
+                    return true;
                 } else {
-                    if ((*it).customTypeString() == customTypeString) {
-                        list.append(*it);
+                    if (key.customTypeString() == customTypeString) {
+                        return true;
                     }
                 }
             } else {
-                list.append(*it);
+                return true;
             }
         }
-    }
+        return false;
+    };
+
+    std::copy_if(d->mKeys.cbegin(), d->mKeys.cend(), std::back_inserter(list), matchFunc);
+
     return list;
 }
 
 Key Addressee::findKey(const QString &id) const
 {
-    Key::List::ConstIterator it;
-    Key::List::ConstIterator end(d->mKeys.constEnd());
-    for (it = d->mKeys.constBegin(); it != end; ++it) {
-        if ((*it).id() == id) {
-            return *it;
-        }
-    }
-    return Key();
+    auto it = std::find_if(d->mKeys.cbegin(), d->mKeys.cend(), [&id](const Key &key) {
+        return key.id() == id;
+    });
+
+    return it != d->mKeys.cend() ? *it : Key{};
 }
 
 QString Addressee::toString() const
@@ -1932,41 +1912,36 @@ QString Addressee::toString() const
 
     str += QLatin1String("  Emails {\n");
     const Email::List listEmail = d->mEmails;
-    Email::List::ConstIterator it5;
-    for (it5 = listEmail.begin(); it5 != listEmail.end(); ++it5) {
-        str += (*it5).toString();
+    for (const Email &email : listEmail) {
+        str += email.toString();
     }
     str += QLatin1String("  }\n");
 
     str += QLatin1String("  Langs {\n");
     const Lang::List listLang = d->mLangs;
-    Lang::List::ConstIterator it6;
-    for (it6 = listLang.begin(); it6 != listLang.end(); ++it6) {
-        str += (*it6).toString();
+    for (const Lang &lang : listLang) {
+        str += lang.toString();
     }
     str += QLatin1String("  }\n");
 
     str += QLatin1String("  PhoneNumbers {\n");
-    const PhoneNumber::List p = phoneNumbers();
-    PhoneNumber::List::ConstIterator it2;
-    for (it2 = p.begin(); it2 != p.end(); ++it2) {
-        str += (*it2).toString();
+    const PhoneNumber::List phones = phoneNumbers();
+    for (const auto &p : phones) {
+        str += p.toString();
     }
     str += QLatin1String("  }\n");
 
     str += QLatin1String("  Addresses {\n");
-    const Address::List a = addresses();
-    Address::List::ConstIterator it3;
-    for (it3 = a.begin(); it3 != a.end(); ++it3) {
-        str += (*it3).toString();
+    const Address::List addrList = addresses();
+    for (const auto &addr : addrList) {
+        str += addr.toString();
     }
     str += QLatin1String("  }\n");
 
     str += QLatin1String("  Keys {\n");
-    const Key::List k = keys();
-    Key::List::ConstIterator it4;
-    for (it4 = k.begin(); it4 != k.end(); ++it4) {
-        str += (*it4).toString();
+    const Key::List keyList = keys();
+    for (const auto &k : keyList) {
+        str += k.toString();
     }
     str += QLatin1String("  }\n");
 
@@ -1983,13 +1958,12 @@ void Addressee::insertAddress(const Address &address)
 
     d->mEmpty = false;
 
-    Address::List::Iterator it;
-    Address::List::Iterator end(d->mAddresses.end());
-    for (it = d->mAddresses.begin(); it != end; ++it) {
-        if ((*it).id() == address.id()) {
-            *it = address;
-            return;
-        }
+    auto it = std::find_if(d->mAddresses.begin(), d->mAddresses.end(), [&address](const Address &addr) {
+        return addr.id() == address.id();
+    });
+    if (it != d->mAddresses.end()) {
+        *it = address;
+        return;
     }
 
     d->mAddresses.append(address);
@@ -1997,26 +1971,23 @@ void Addressee::insertAddress(const Address &address)
 
 void Addressee::removeAddress(const Address &address)
 {
-    Address::List::Iterator it;
-    for (it = d->mAddresses.begin(); it != d->mAddresses.end(); ++it) {
-        if ((*it).id() == address.id()) {
-            d->mAddresses.erase(it);
-            return;
-        }
+    auto it = std::find_if(d->mAddresses.begin(), d->mAddresses.end(), [&address](const Address &addr) {
+        return addr.id() == address.id();
+    });
+    if (it != d->mAddresses.end()) {
+        d->mAddresses.erase(it);
     }
 }
 
 Address Addressee::address(Address::Type type) const
 {
     Address address(type);
-    Address::List::ConstIterator it;
-    Address::List::ConstIterator end(d->mAddresses.constEnd());
-    for (it = d->mAddresses.constBegin(); it != end; ++it) {
-        if (matchBinaryPattern((*it).type(), type)) {
-            if ((*it).type() & Address::Pref) {
-                return *it;
+    for (const Address &addr : d->mAddresses) {
+        if (matchBinaryPattern(addr.type(), type)) {
+            if (addr.type() & Address::Pref) {
+                return addr;
             } else if (address.isEmpty()) {
-                address = (*it);
+                address = addr;
             }
         }
     }
@@ -2033,27 +2004,19 @@ Address::List Addressee::addresses(Address::Type type) const
 {
     Address::List list;
 
-    Address::List::ConstIterator it;
-    Address::List::ConstIterator end(d->mAddresses.constEnd());
-    for (it = d->mAddresses.constBegin(); it != end; ++it) {
-        if (matchBinaryPattern((*it).type(), type)) {
-            list.append(*it);
-        }
-    }
+    std::copy_if(d->mAddresses.cbegin(), d->mAddresses.cend(), std::back_inserter(list), [type](const Address &addr) {
+        return matchBinaryPattern(addr.type(), type);
+    });
 
     return list;
 }
 
 Address Addressee::findAddress(const QString &id) const
 {
-    Address::List::ConstIterator it;
-    Address::List::ConstIterator end(d->mAddresses.constEnd());
-    for (it = d->mAddresses.constBegin(); it != end; ++it) {
-        if ((*it).id() == id) {
-            return *it;
-        }
-    }
-    return Address();
+    auto it = std::find_if(d->mAddresses.cbegin(), d->mAddresses.cend(), [&id](const Address &addr) {
+        return addr.id() == id;
+    });
+    return it != d->mAddresses.cend() ? *it : Address{};
 }
 
 void Addressee::insertCategory(const QString &c)
@@ -2291,13 +2254,10 @@ void Addressee::setCustoms(const QStringList &customs)
 QStringList Addressee::customs() const
 {
     QStringList result;
-
-    QHash<QString, QString>::const_iterator it = d->mCustomFields.constBegin();
-    const QHash<QString, QString>::const_iterator end = d->mCustomFields.constEnd();
     result.reserve(d->mCustomFields.count());
-    while (it != end) {
+
+    for (auto it = d->mCustomFields.cbegin(); it != d->mCustomFields.cend(); ++it) {
         result << it.key() + QLatin1Char(':') + it.value();
-        ++it;
     }
 
     return result;
