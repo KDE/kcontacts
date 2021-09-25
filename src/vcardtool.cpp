@@ -58,10 +58,12 @@ static Address::TypeFlag stringToAddressType(const QString &str)
     return {};
 }
 
-static const struct {
+struct PhoneTypeInfo {
     const char *phoneType;
     PhoneNumber::TypeFlag flag;
-} s_phoneTypes[] = {
+};
+
+static const PhoneTypeInfo s_phoneTypes[] = {
     {"BBS", PhoneNumber::Bbs},
     {"CAR", PhoneNumber::Car},
     {"CELL", PhoneNumber::Cell},
@@ -255,6 +257,36 @@ void VCardTool::processOrganizations(const Addressee &addressee, VCard::Version 
         }
         addParameters(orgLine, org.parameters());
         card->addLine(orgLine);
+    }
+}
+
+void VCardTool::processPhoneNumbers(const PhoneNumber::List &phoneNumbers, VCard::Version version, VCard *card) const
+{
+    for (const auto &phone : phoneNumbers) {
+        VCardLine line(QStringLiteral("TEL"), phone.number());
+        const auto paramsMap = phone.parameters();
+        for (auto it = paramsMap.cbegin(), endIt = paramsMap.cend(); it != endIt; ++it) {
+            if (it.key().toUpper() != QLatin1String("TYPE")) {
+                line.addParameter(it.key(), it.value().join(QLatin1Char(',')));
+            }
+        }
+
+        const PhoneNumber::Type type = phone.type();
+        QStringList lst;
+        for (const auto &pType : s_phoneTypes) {
+            if (pType.flag & type) {
+                const QString str = QString::fromLatin1(pType.phoneType);
+                if (version == VCard::v4_0) {
+                    lst << str.toLower();
+                } else {
+                    lst << str;
+                }
+            }
+        }
+        if (!lst.isEmpty()) {
+            addParameter(line, version, QStringLiteral("TYPE"), lst);
+        }
+        card->addLine(line);
     }
 }
 
@@ -505,34 +537,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // TEL
         const PhoneNumber::List phoneNumbers = (*addrIt).phoneNumbers();
-        PhoneNumber::List::ConstIterator phoneIt;
-        PhoneNumber::List::ConstIterator phoneEnd(phoneNumbers.end());
-        for (phoneIt = phoneNumbers.begin(); phoneIt != phoneEnd; ++phoneIt) {
-            VCardLine line(QStringLiteral("TEL"), (*phoneIt).number());
-            QMapIterator<QString, QStringList> i((*phoneIt).parameters());
-            while (i.hasNext()) {
-                i.next();
-                if (i.key().toUpper() != QLatin1String("TYPE")) {
-                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
-                }
-            }
-
-            QStringList lst;
-            for (unsigned int i = 0; i < s_numPhoneTypes; ++i) {
-                if (s_phoneTypes[i].flag & (*phoneIt).type()) {
-                    const QString str = QString::fromLatin1(s_phoneTypes[i].phoneType);
-                    if (version == VCard::v4_0) {
-                        lst << str.toLower();
-                    } else {
-                        lst << str;
-                    }
-                }
-            }
-            if (!lst.isEmpty()) {
-                addParameter(line, version, QStringLiteral("TYPE"), lst);
-            }
-            card.addLine(line);
-        }
+        processPhoneNumbers(phoneNumbers, version, &card);
 
         // TITLE
         const QVector<Title> lstTitle = (*addrIt).extraTitleList();

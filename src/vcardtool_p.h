@@ -77,6 +77,7 @@ private:
     void processAddresses(const Address::List &addresses, VCard::Version version, VCard *card) const;
     void processEmailList(const Email::List &emailList, VCard::Version version, VCard *card) const;
     void processOrganizations(const Addressee &addressee, VCard::Version version, VCard *card) const;
+    void processPhoneNumbers(const PhoneNumber::List &phoneNumbers, VCard::Version version, VCard *card) const;
 
     Q_DISABLE_COPY(VCardTool)
 };
