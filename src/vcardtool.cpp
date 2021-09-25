@@ -134,6 +134,78 @@ void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QStr
     }
 }
 
+void VCardTool::processAddresses(const Address::List &addresses, VCard::Version version, VCard *card) const
+{
+    for (const auto &addr : addresses) {
+        QStringList address;
+
+        // clang-format off
+        const bool isEmpty = addr.postOfficeBox().isEmpty()
+                             && addr.extended().isEmpty()
+                             && addr.street().isEmpty()
+                             && addr.locality().isEmpty()
+                             && addr.region().isEmpty()
+                             && addr.postalCode().isEmpty()
+                             && addr.country().isEmpty();
+        // clang-format on
+
+        address.append(addr.postOfficeBox().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.extended().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.street().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.locality().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.region().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.postalCode().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        address.append(addr.country().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+
+        const QString addressJoined(address.join(QLatin1Char(';')));
+        VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
+        if (version == VCard::v2_1 && needsEncoding(addressJoined)) {
+            adrLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+            adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+        }
+
+        const bool hasLabel = !addr.label().isEmpty();
+        QStringList addreLineType;
+        QStringList labelLineType;
+        for (unsigned int i = 0; i < s_numAddressTypes; ++i) {
+            if (s_addressTypes[i].flag & addr.type()) {
+                const QString str = QString::fromLatin1(s_addressTypes[i].addressType);
+                addreLineType << str;
+                if (hasLabel) {
+                    labelLineType << str;
+                }
+            }
+        }
+
+        if (hasLabel) {
+            if (version == VCard::v4_0) {
+                if (!addr.label().isEmpty()) {
+                    adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg(addr.label()));
+                }
+            } else {
+                VCardLine labelLine(QStringLiteral("LABEL"), addr.label());
+                if (version == VCard::v2_1 && needsEncoding(addr.label())) {
+                    labelLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+                    labelLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+                }
+                addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
+                card->addLine(labelLine);
+            }
+        }
+        if (version == VCard::v4_0) {
+            Geo geo = addr.geo();
+            if (geo.isValid()) {
+                QString str = QString::asprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
+                adrLine.addParameter(QStringLiteral("GEO"), str);
+            }
+        }
+        if (!isEmpty) {
+            addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
+            card->addLine(adrLine);
+        }
+    }
+}
+
 QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const
 {
     VCard::List vCardList;
@@ -154,88 +226,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // ADR + LABEL
         const Address::List addresses = (*addrIt).addresses();
-        Address::List::ConstIterator end(addresses.end());
-        for (Address::List::ConstIterator it = addresses.begin(); it != end; ++it) {
-            QStringList address;
-
-            // clang-format off
-            const bool isEmpty = ((*it).postOfficeBox().isEmpty()
-                                  && (*it).extended().isEmpty()
-                                  && (*it).street().isEmpty()
-                                  && (*it).locality().isEmpty()
-                                  && (*it).region().isEmpty()
-                                  && (*it).postalCode().isEmpty()
-                                  && (*it).country().isEmpty());
-
-            address.append((*it).postOfficeBox().replace(QLatin1Char(';'),
-                                                         QStringLiteral("\\;")));
-
-            address.append((*it).extended().replace(QLatin1Char(';'),
-                                                    QStringLiteral("\\;")));
-
-            address.append((*it).street().replace(QLatin1Char(';'),
-                                                  QStringLiteral("\\;")));
-
-            address.append((*it).locality().replace(QLatin1Char(';'),
-                                                    QStringLiteral("\\;")));
-
-            address.append((*it).region().replace(QLatin1Char(';'),
-                                                  QStringLiteral("\\;")));
-
-            address.append((*it).postalCode().replace(QLatin1Char(';'),
-                                                      QStringLiteral("\\;")));
-
-            address.append((*it).country().replace(QLatin1Char(';'),
-                                                   QStringLiteral("\\;")));
-            // clang-format on
-
-            const QString addressJoined(address.join(QLatin1Char(';')));
-            VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
-            if (version == VCard::v2_1 && needsEncoding(addressJoined)) {
-                adrLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-                adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-            }
-
-            const bool hasLabel = !(*it).label().isEmpty();
-            QStringList addreLineType;
-            QStringList labelLineType;
-            for (unsigned int i = 0; i < s_numAddressTypes; ++i) {
-                if (s_addressTypes[i].flag & (*it).type()) {
-                    const QString str = QString::fromLatin1(s_addressTypes[i].addressType);
-                    addreLineType << str;
-                    if (hasLabel) {
-                        labelLineType << str;
-                    }
-                }
-            }
-
-            if (hasLabel) {
-                if (version == VCard::v4_0) {
-                    if (!(*it).label().isEmpty()) {
-                        adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg((*it).label()));
-                    }
-                } else {
-                    VCardLine labelLine(QStringLiteral("LABEL"), (*it).label());
-                    if (version == VCard::v2_1 && needsEncoding((*it).label())) {
-                        labelLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-                        labelLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-                    }
-                    addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
-                    card.addLine(labelLine);
-                }
-            }
-            if (version == VCard::v4_0) {
-                Geo geo = (*it).geo();
-                if (geo.isValid()) {
-                    QString str = QString::asprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
-                    adrLine.addParameter(QStringLiteral("GEO"), str);
-                }
-            }
-            if (!isEmpty) {
-                addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
-                card.addLine(adrLine);
-            }
-        }
+        processAddresses(addresses, version, &card);
 
         // BDAY
         const bool withTime = (*addrIt).birthdayHasTime();

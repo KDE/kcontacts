@@ -74,6 +74,8 @@ private:
     /** Translate alternative or legacy IMPP service types. */
     QString normalizeImppServiceType(const QString &serviceType) const;
 
+    void processAddresses(const Address::List &addresses, VCard::Version version, VCard *card) const;
+
     Q_DISABLE_COPY(VCardTool)
 };
 }
