@@ -239,6 +239,25 @@ void VCardTool::processEmailList(const Email::List &emailList, VCard::Version ve
     }
 }
 
+void VCardTool::processOrganizations(const Addressee &addressee, VCard::Version version, VCard *card) const
+{
+    const QVector<Org> lstOrg = addressee.extraOrganizationList();
+    for (const Org &org : lstOrg) {
+        QStringList organization{org.organization().replace(QLatin1Char(';'), QLatin1String("\\;"))};
+        if (!addressee.department().isEmpty()) {
+            organization.append(addressee.department().replace(QLatin1Char(';'), QLatin1String("\\;")));
+        }
+        const QString orgStr = organization.join(QLatin1Char(';'));
+        VCardLine orgLine(QStringLiteral("ORG"), orgStr);
+        if (version == VCard::v2_1 && needsEncoding(orgStr)) {
+            orgLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
+            orgLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
+        }
+        addParameters(orgLine, org.parameters());
+        card->addLine(orgLine);
+    }
+}
+
 QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const
 {
     VCard::List vCardList;
@@ -443,22 +462,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         card.addLine(noteLine);
 
         // ORG
-        const QVector<Org> lstOrg = (*addrIt).extraOrganizationList();
-        for (const Org &org : lstOrg) {
-            QStringList organization;
-            organization.append(org.organization().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-            if (!(*addrIt).department().isEmpty()) {
-                organization.append((*addrIt).department().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-            }
-            const QString orgStr = organization.join(QLatin1Char(';'));
-            VCardLine orgLine(QStringLiteral("ORG"), orgStr);
-            if (version == VCard::v2_1 && needsEncoding(orgStr)) {
-                orgLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
-                orgLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
-            }
-            addParameters(orgLine, org.parameters());
-            card.addLine(orgLine);
-        }
+        processOrganizations(*addrIt, version, &card);
 
         // PHOTO
         card.addLine(createPicture(QStringLiteral("PHOTO"), (*addrIt).photo(), version));
