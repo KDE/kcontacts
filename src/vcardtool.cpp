@@ -206,6 +206,39 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
     }
 }
 
+void VCardTool::processEmailList(const Email::List &emailList, VCard::Version version, VCard *card) const
+{
+    for (const auto &email : emailList) {
+        VCardLine line(QStringLiteral("EMAIL"), email.mail());
+        const QMap paramMap = email.parameters();
+        for (auto it = paramMap.cbegin(), endIt = paramMap.cend(); it != endIt; ++it) {
+            const QString &key = it.key();
+            QStringList params = it.value();
+
+            if (version == VCard::v2_1) {
+                if (key.toLower() == QLatin1String("type")) {
+                    bool hasPreferred = false;
+                    const int removeItems = params.removeAll(QStringLiteral("PREF"));
+                    if (removeItems > 0) {
+                        hasPreferred = true;
+                    }
+                    if (!params.isEmpty()) {
+                        addParameter(line, version, key, params);
+                    }
+                    if (hasPreferred) {
+                        line.addParameter(QStringLiteral("PREF"), QString());
+                    }
+                } else {
+                    line.addParameter(key, params.join(QLatin1Char(',')));
+                }
+            } else {
+                line.addParameter(key, params.join(QLatin1Char(',')));
+            }
+        }
+        card->addLine(line);
+    }
+}
+
 QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version version, bool exportVcard) const
 {
     VCard::List vCardList;
@@ -303,36 +336,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
         // EMAIL
         const Email::List emailList = (*addrIt).emailList();
-        Email::List::ConstIterator emailIt;
-        Email::List::ConstIterator emailEnd(emailList.end());
-        for (emailIt = emailList.begin(); emailIt != emailEnd; ++emailIt) {
-            VCardLine line(QStringLiteral("EMAIL"), (*emailIt).mail());
-            QMapIterator<QString, QStringList> i((*emailIt).parameters());
-            while (i.hasNext()) {
-                i.next();
-                if (version == VCard::v2_1) {
-                    if (i.key().toLower() == QLatin1String("type")) {
-                        QStringList valueStringList = i.value();
-                        bool hasPreferred = false;
-                        const int removeItems = valueStringList.removeAll(QStringLiteral("PREF"));
-                        if (removeItems > 0) {
-                            hasPreferred = true;
-                        }
-                        if (!valueStringList.isEmpty()) {
-                            addParameter(line, version, i.key(), valueStringList);
-                        }
-                        if (hasPreferred) {
-                            line.addParameter(QStringLiteral("PREF"), QString());
-                        }
-                    } else {
-                        line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
-                    }
-                } else {
-                    line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
-                }
-            }
-            card.addLine(line);
-        }
+        processEmailList(emailList, version, &card);
 
         // FN required for only version > 2.1
         VCardLine fnLine(QStringLiteral("FN"), (*addrIt).formattedName());
