@@ -8,7 +8,7 @@
 #ifndef VCARDLINE_H
 #define VCARDLINE_H
 
-#include <QMap>
+#include <QHash>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
@@ -21,7 +21,7 @@ class KCONTACTS_EXPORT VCardLine
 {
 public:
     typedef QVector<VCardLine> List;
-    typedef QMap<QString, QStringList> ParamMap;
+    typedef QHash<QString, QStringList> ParamMap;
 
     VCardLine();
     VCardLine(const QString &identifier);

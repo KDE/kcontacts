@@ -25,7 +25,7 @@ public:
         note = other.note;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString note;
 };
 
@@ -64,12 +64,12 @@ bool Note::isValid() const
     return !d->note.isEmpty();
 }
 
-void Note::setParameters(const QMap<QString, QStringList> &params)
+void Note::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Note::parameters() const
+QHash<QString, QStringList> Note::parameters() const
 {
     return d->parameters;
 }

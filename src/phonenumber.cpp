@@ -40,7 +40,7 @@ public:
     QString mId;
     QString mNumber;
     Type mType;
-    QMap<QString, QStringList> mParameters;
+    QHash<QString, QStringList> mParameters;
 };
 
 PhoneNumber::PhoneNumber()
@@ -274,12 +274,12 @@ QString PhoneNumber::toString() const
     return str;
 }
 
-void PhoneNumber::setParameters(const QMap<QString, QStringList> &params)
+void PhoneNumber::setParameters(const QHash<QString, QStringList> &params)
 {
     d->mParameters = params;
 }
 
-QMap<QString, QStringList> PhoneNumber::parameters() const
+QHash<QString, QStringList> PhoneNumber::parameters() const
 {
     return d->mParameters;
 }

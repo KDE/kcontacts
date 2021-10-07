@@ -32,7 +32,7 @@ void FieldGroupTest::shouldAssignValue()
 {
     const QString fielgroundname(QStringLiteral("fr"));
     const QString value(QStringLiteral("bla"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::FieldGroup fieldGroup(fielgroundname);
@@ -67,7 +67,7 @@ void FieldGroupTest::shouldSerialized()
     const QString value(QStringLiteral("bla"));
     fieldGroup.setValue(value);
 
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     fieldGroup.setParameters(params);
@@ -90,7 +90,7 @@ void FieldGroupTest::shouldEqualFieldGroup()
     const QString value(QStringLiteral("bla"));
     fieldGroup.setValue(value);
     fieldGroup.setFieldGroupName(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     fieldGroup.setParameters(params);
@@ -202,7 +202,7 @@ void FieldGroupTest::shouldCreateVCardWithParameters()
     const QString value(QStringLiteral("bla"));
     KContacts::FieldGroup::List lstFieldGroup;
     KContacts::FieldGroup fieldGroup(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     fieldGroup.setParameters(params);
@@ -231,7 +231,7 @@ void FieldGroupTest::shouldNotGenerateFieldGroupForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::FieldGroup::List lstFieldGroup;
     KContacts::FieldGroup fieldGroup(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     fieldGroup.setParameters(params);

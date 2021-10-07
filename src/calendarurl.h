@@ -9,7 +9,7 @@
 #define CALENDARURL_H
 #include "kcontacts_export.h"
 
-#include <QMap>
+#include <QHash>
 #include <QSharedDataPointer>
 #include <QString>
 class QUrl;
@@ -49,8 +49,8 @@ public:
     void setUrl(const QUrl &url);
     QUrl url() const;
 
-    void setParameters(const QMap<QString, QStringList> &params);
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    void setParameters(const QHash<QString, QStringList> &params);
+    Q_REQUIRED_RESULT QHash<QString, QStringList> parameters() const;
 
     Q_REQUIRED_RESULT bool operator==(const CalendarUrl &other) const;
     Q_REQUIRED_RESULT bool operator!=(const CalendarUrl &other) const;

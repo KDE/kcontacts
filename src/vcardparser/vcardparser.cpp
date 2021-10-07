@@ -339,7 +339,6 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
     QByteArray text;
     QByteArray textLine;
     QString encodingType;
-    QStringList params;
     QStringList values;
 
     VCardLine::List lines;
@@ -353,6 +352,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
         text.append("BEGIN:VCARD\r\n");
 
         QStringList idents = card.identifiers();
+        std::sort(idents.begin(), idents.end());
         // VERSION must be first
         if (idents.contains(QLatin1String("VERSION"))) {
             const QString str = idents.takeAt(idents.indexOf(QLatin1String("VERSION")));
@@ -372,7 +372,8 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                         textLine = vline.identifier().toLatin1();
                     }
 
-                    params = vline.parameterList();
+                    QStringList params = vline.parameterList();
+                    std::sort(params.begin(), params.end());
                     hasEncoding = false;
                     if (!params.isEmpty()) { // we have parameters
                         for (const QString &param : std::as_const(params)) {

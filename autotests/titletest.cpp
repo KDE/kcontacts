@@ -30,7 +30,7 @@ void TitleTest::shouldHaveDefaultValue()
 void TitleTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Title title(lang);
@@ -57,7 +57,7 @@ void TitleTest::shouldSerialized()
     KContacts::Title result;
     const QString lang(QStringLiteral("fr"));
     title.setTitle(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     title.setParameters(params);
@@ -78,7 +78,7 @@ void TitleTest::shouldEqualTitle()
     KContacts::Title result;
     const QString lang(QStringLiteral("fr"));
     title.setTitle(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     title.setParameters(params);
@@ -207,7 +207,7 @@ void TitleTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Title::List lstTitle;
     KContacts::Title title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     title.setParameters(params);
@@ -235,7 +235,7 @@ void TitleTest::shouldGenerateTitleForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Title::List lstTitle;
     KContacts::Title title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     title.setParameters(params);

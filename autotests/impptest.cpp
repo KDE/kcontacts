@@ -31,7 +31,7 @@ void ImppTest::shouldHaveDefaultValue()
 void ImppTest::shouldAssignValue()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
@@ -49,7 +49,7 @@ void ImppTest::shouldAssignValue()
 void ImppTest::shouldSerialized()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
@@ -70,7 +70,7 @@ void ImppTest::shouldSerialized()
 void ImppTest::shouldEqualImpp()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
@@ -268,7 +268,7 @@ void ImppTest::shouldExportWithParameters()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Impp impp;
@@ -297,7 +297,7 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     params.insert(QStringLiteral("X-SERVICE-TYPE"), QStringList() << QStringLiteral("aim"));

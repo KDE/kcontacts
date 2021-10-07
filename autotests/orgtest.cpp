@@ -30,7 +30,7 @@ void OrgTest::shouldHaveDefaultValue()
 void OrgTest::shouldAssignValue()
 {
     const QString organization(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Org org(organization);
@@ -57,7 +57,7 @@ void OrgTest::shouldSerialized()
     KContacts::Org result;
     const QString organization(QStringLiteral("fr"));
     org.setOrganization(organization);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);
@@ -78,7 +78,7 @@ void OrgTest::shouldEqualOrg()
     KContacts::Org result;
     const QString organization(QStringLiteral("fr"));
     org.setOrganization(organization);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);
@@ -230,7 +230,7 @@ void OrgTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Org::List lstOrg;
     KContacts::Org org(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);
@@ -258,7 +258,7 @@ void OrgTest::shouldGenerateOrgForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Org::List lstOrg;
     KContacts::Org org(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     org.setParameters(params);

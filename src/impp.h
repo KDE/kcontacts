@@ -10,7 +10,7 @@
 
 #include "kcontacts_export.h"
 
-#include <QMap>
+#include <QHash>
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
@@ -78,8 +78,8 @@ public:
      */
     void setPreferred(bool preferred);
 
-    void setParameters(const QMap<QString, QStringList> &params);
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    void setParameters(const QHash<QString, QStringList> &params);
+    Q_REQUIRED_RESULT QHash<QString, QStringList> parameters() const;
 
     Q_REQUIRED_RESULT bool operator==(const Impp &other) const;
     Q_REQUIRED_RESULT bool operator!=(const Impp &other) const;

@@ -25,7 +25,7 @@ public:
         title = other.title;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString title;
 };
 
@@ -64,12 +64,12 @@ bool Title::isValid() const
     return !d->title.isEmpty();
 }
 
-void Title::setParameters(const QMap<QString, QStringList> &params)
+void Title::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Title::parameters() const
+QHash<QString, QStringList> Title::parameters() const
 {
     return d->parameters;
 }

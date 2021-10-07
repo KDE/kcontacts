@@ -25,7 +25,7 @@ public:
         role = other.role;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString role;
 };
 
@@ -64,12 +64,12 @@ bool Role::isValid() const
     return !d->role.isEmpty();
 }
 
-void Role::setParameters(const QMap<QString, QStringList> &params)
+void Role::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Role::parameters() const
+QHash<QString, QStringList> Role::parameters() const
 {
     return d->parameters;
 }

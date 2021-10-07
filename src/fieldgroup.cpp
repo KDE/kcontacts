@@ -8,6 +8,7 @@
 #include "fieldgroup.h"
 
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -27,7 +28,7 @@ public:
         value = other.value;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString fieldGroupName;
     QString value;
 };
@@ -77,12 +78,12 @@ QString FieldGroup::value() const
     return d->value;
 }
 
-void FieldGroup::setParameters(const QMap<QString, QStringList> &params)
+void FieldGroup::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> FieldGroup::parameters() const
+QHash<QString, QStringList> FieldGroup::parameters() const
 {
     return d->parameters;
 }

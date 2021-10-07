@@ -32,7 +32,7 @@ void CalendarUrlTest::shouldHaveDefaultValue()
 
 void CalendarUrlTest::shouldAssignValue()
 {
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     CalendarUrl calendarUrl(CalendarUrl::FBUrl);
@@ -60,7 +60,7 @@ void CalendarUrlTest::shouldSerialized()
         CalendarUrl result;
         CalendarUrl::CalendarType type = static_cast<CalendarUrl::CalendarType>(i);
         calendarUrl.setType(type);
-        QMap<QString, QStringList> params;
+        QHash<QString, QStringList> params;
         params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
         params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
         calendarUrl.setParameters(params);
@@ -84,7 +84,7 @@ void CalendarUrlTest::shouldEqualCalendarUrl()
         CalendarUrl result;
         CalendarUrl::CalendarType type = static_cast<CalendarUrl::CalendarType>(i);
         calendarUrl.setType(type);
-        QMap<QString, QStringList> params;
+        QHash<QString, QStringList> params;
         params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
         params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
         calendarUrl.setUrl(QUrl(QStringLiteral("mailto:foo@kde.org")));
@@ -217,7 +217,7 @@ void CalendarUrlTest::shouldGenerateVCardWithParameter()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
     addr.insertCalendarUrl(url);
@@ -244,7 +244,7 @@ void CalendarUrlTest::shouldNotGeneratedAttributeForVcard3()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
     addr.insertCalendarUrl(url);
@@ -270,7 +270,7 @@ void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
     addr.insertCalendarUrl(url);

@@ -25,7 +25,7 @@ public:
         nickname = other.nickname;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString nickname;
 };
 
@@ -64,12 +64,12 @@ bool NickName::isValid() const
     return !d->nickname.isEmpty();
 }
 
-void NickName::setParameters(const QMap<QString, QStringList> &params)
+void NickName::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> NickName::parameters() const
+QHash<QString, QStringList> NickName::parameters() const
 {
     return d->parameters;
 }

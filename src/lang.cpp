@@ -7,6 +7,7 @@
 
 #include "lang.h"
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -25,7 +26,7 @@ public:
         language = other.language;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString language;
 };
 
@@ -64,12 +65,12 @@ bool Lang::isValid() const
     return !d->language.isEmpty();
 }
 
-void Lang::setParameters(const QMap<QString, QStringList> &params)
+void Lang::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Lang::parameters() const
+QHash<QString, QStringList> Lang::parameters() const
 {
     return d->parameters;
 }

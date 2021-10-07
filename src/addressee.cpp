@@ -1581,7 +1581,7 @@ QString Addressee::fullEmail(const QString &email) const
     return text;
 }
 
-void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param)
+void Addressee::insertEmail(const QString &email, bool preferred, const QHash<QString, QStringList> &param)
 {
     if (email.simplified().isEmpty()) {
         return;

@@ -8,6 +8,7 @@
 #include "email.h"
 
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -26,7 +27,7 @@ public:
         mail = other.mail;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString mail;
 };
 
@@ -50,7 +51,7 @@ Email::~Email()
 {
 }
 
-QMap<QString, QStringList> Email::parameters() const
+QHash<QString, QStringList> Email::parameters() const
 {
     return d->parameters;
 }
@@ -89,7 +90,7 @@ QString Email::toString() const
     return str;
 }
 
-void Email::setParameters(const QMap<QString, QStringList> &params)
+void Email::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }

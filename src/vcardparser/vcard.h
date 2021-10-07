@@ -9,7 +9,7 @@
 #define VCARDPARSER_VCARD_H
 
 #include "vcardline.h"
-#include <QMap>
+#include <QHash>
 #include <QStringList>
 #include <QVector>
 
@@ -19,7 +19,7 @@ class VCard
 {
 public:
     typedef QVector<VCard> List;
-    typedef QMap<QString, VCardLine::List> LineMap;
+    typedef QHash<QString, VCardLine::List> LineMap;
 
     enum Version {
         v2_1,
@@ -40,7 +40,7 @@ public:
     void clear();
 
     /**
-     * Returns a list of all identifiers that exists in the vCard.
+     * Returns a list of all identifiers that exists in the vCard, in an arbitrary order.
      */
     Q_REQUIRED_RESULT QStringList identifiers() const;
 

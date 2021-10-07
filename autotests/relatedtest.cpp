@@ -30,7 +30,7 @@ void RelatedTest::shouldHaveDefaultValue()
 void RelatedTest::shouldAssignValue()
 {
     const QString relatedTo(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Related related(relatedTo);
@@ -57,7 +57,7 @@ void RelatedTest::shouldSerialized()
     KContacts::Related result;
     const QString relatedTo(QStringLiteral("friend"));
     related.setRelated(relatedTo);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);
@@ -78,7 +78,7 @@ void RelatedTest::shouldEqualRelated()
     KContacts::Related result;
     const QString relatedTo(QStringLiteral("friend"));
     related.setRelated(relatedTo);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);
@@ -205,7 +205,7 @@ void RelatedTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Related::List lstRelated;
     KContacts::Related related(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);
@@ -233,7 +233,7 @@ void RelatedTest::shouldNotExportInVcard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Related::List lstRelated;
     KContacts::Related related(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     related.setParameters(params);

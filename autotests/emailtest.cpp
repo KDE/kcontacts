@@ -29,7 +29,7 @@ void EmailTest::shouldHaveDefaultValue()
 void EmailTest::shouldAssignValue()
 {
     const QString mail(QStringLiteral("foo@kde.org"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Email email(mail);
@@ -57,7 +57,7 @@ void EmailTest::shouldSerialized()
     KContacts::Email result;
     const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     email.setParameters(params);
@@ -78,7 +78,7 @@ void EmailTest::shouldEqualEmail()
     KContacts::Email result;
     const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     email.setParameters(params);

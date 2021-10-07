@@ -7,6 +7,7 @@
 
 #include "resourcelocatorurl.h"
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -25,7 +26,7 @@ public:
         url = other.url;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QUrl url;
 };
 
@@ -125,7 +126,7 @@ void ResourceLocatorUrl::setPreferred(bool preferred)
     d->parameters.insert(QLatin1String("type"), types);
 }
 
-QMap<QString, QStringList> ResourceLocatorUrl::parameters() const
+QHash<QString, QStringList> ResourceLocatorUrl::parameters() const
 {
     return d->parameters;
 }
@@ -164,7 +165,7 @@ QString ResourceLocatorUrl::toString() const
     return str;
 }
 
-void ResourceLocatorUrl::setParameters(const QMap<QString, QStringList> &params)
+void ResourceLocatorUrl::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }

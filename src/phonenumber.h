@@ -10,7 +10,7 @@
 
 #include "kcontacts_export.h"
 
-#include <QMap>
+#include <QHash>
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
@@ -229,8 +229,8 @@ public:
      */
     QString toString() const;
 
-    void setParameters(const QMap<QString, QStringList> &params);
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    void setParameters(const QHash<QString, QStringList> &params);
+    Q_REQUIRED_RESULT QHash<QString, QStringList> parameters() const;
 
 private:
     class Private;

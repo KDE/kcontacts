@@ -9,7 +9,7 @@
 #define RELATED_H
 
 #include "kcontacts_export.h"
-#include <QMap>
+#include <QHash>
 #include <QSharedDataPointer>
 #include <QString>
 
@@ -35,8 +35,8 @@ public:
 
     Q_REQUIRED_RESULT bool isValid() const;
 
-    void setParameters(const QMap<QString, QStringList> &params);
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    void setParameters(const QHash<QString, QStringList> &params);
+    Q_REQUIRED_RESULT QHash<QString, QStringList> parameters() const;
 
     Q_REQUIRED_RESULT bool operator==(const Related &other) const;
     Q_REQUIRED_RESULT bool operator!=(const Related &other) const;

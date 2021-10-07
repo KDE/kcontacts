@@ -28,7 +28,7 @@ public:
         parameters = other.parameters;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QUrl address;
 };
 
@@ -100,12 +100,12 @@ void Impp::setPreferred(bool preferred)
     }
 }
 
-void Impp::setParameters(const QMap<QString, QStringList> &params)
+void Impp::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Impp::parameters() const
+QHash<QString, QStringList> Impp::parameters() const
 {
     return d->parameters;
 }

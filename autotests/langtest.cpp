@@ -30,7 +30,7 @@ void LangTest::shouldHaveDefaultValue()
 void LangTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::Lang language(lang);
@@ -57,7 +57,7 @@ void LangTest::shouldSerialized()
     KContacts::Lang result;
     const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     language.setParameters(params);
@@ -78,7 +78,7 @@ void LangTest::shouldEqualLanguage()
     KContacts::Lang result;
     const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     language.setParameters(params);
@@ -183,7 +183,7 @@ void LangTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Lang::List lstLang;
     KContacts::Lang lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     lang.setParameters(params);
@@ -211,7 +211,7 @@ void LangTest::shouldNotGenerateLangForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Lang::List lstLang;
     KContacts::Lang lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     lang.setParameters(params);

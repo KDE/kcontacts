@@ -7,6 +7,7 @@
 
 #include "clientpidmap.h"
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -25,7 +26,7 @@ public:
         clientpidmap = other.clientpidmap;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString clientpidmap;
 };
 
@@ -64,12 +65,12 @@ bool ClientPidMap::isValid() const
     return !d->clientpidmap.isEmpty();
 }
 
-void ClientPidMap::setParameters(const QMap<QString, QStringList> &params)
+void ClientPidMap::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> ClientPidMap::parameters() const
+QHash<QString, QStringList> ClientPidMap::parameters() const
 {
     return d->parameters;
 }

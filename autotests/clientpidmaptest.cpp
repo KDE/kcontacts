@@ -30,7 +30,7 @@ void ClientPidMapTest::shouldHaveDefaultValue()
 void ClientPidMapTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     KContacts::ClientPidMap role(lang);
@@ -57,7 +57,7 @@ void ClientPidMapTest::shouldSerialized()
     KContacts::ClientPidMap result;
     const QString lang(QStringLiteral("fr"));
     role.setClientPidMap(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     role.setParameters(params);
@@ -78,7 +78,7 @@ void ClientPidMapTest::shouldEqualClientPidMap()
     KContacts::ClientPidMap result;
     const QString lang(QStringLiteral("fr"));
     role.setClientPidMap(lang);
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     role.setParameters(params);
@@ -183,7 +183,7 @@ void ClientPidMapTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::ClientPidMap::List lstClientPidMap;
     KContacts::ClientPidMap clientpidmap(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     clientpidmap.setParameters(params);
@@ -211,7 +211,7 @@ void ClientPidMapTest::shouldGenerateClientPidMapForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::ClientPidMap::List lstClientPidMap;
     KContacts::ClientPidMap clientpidmap(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     clientpidmap.setParameters(params);

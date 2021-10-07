@@ -9,7 +9,7 @@
 #define FIELDGROUP_H
 
 #include "kcontacts_export.h"
-#include <QMap>
+#include <QHash>
 #include <QSharedDataPointer>
 #include <QString>
 
@@ -40,8 +40,8 @@ public:
     void setValue(const QString &value);
     Q_REQUIRED_RESULT QString value() const;
 
-    void setParameters(const QMap<QString, QStringList> &params);
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    void setParameters(const QHash<QString, QStringList> &params);
+    Q_REQUIRED_RESULT QHash<QString, QStringList> parameters() const;
 
     Q_REQUIRED_RESULT bool operator==(const FieldGroup &other) const;
     Q_REQUIRED_RESULT bool operator!=(const FieldGroup &other) const;

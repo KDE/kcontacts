@@ -7,6 +7,7 @@
 
 #include "related.h"
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 
 using namespace KContacts;
@@ -25,7 +26,7 @@ public:
         relatedTo = other.relatedTo;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString relatedTo;
 };
 
@@ -64,12 +65,12 @@ bool Related::isValid() const
     return !d->relatedTo.isEmpty();
 }
 
-void Related::setParameters(const QMap<QString, QStringList> &params)
+void Related::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Related::parameters() const
+QHash<QString, QStringList> Related::parameters() const
 {
     return d->parameters;
 }

@@ -25,7 +25,7 @@ public:
         organization = other.organization;
     }
 
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QString organization;
 };
 
@@ -64,12 +64,12 @@ bool Org::isValid() const
     return !d->organization.isEmpty();
 }
 
-void Org::setParameters(const QMap<QString, QStringList> &params)
+void Org::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }
 
-QMap<QString, QStringList> Org::parameters() const
+QHash<QString, QStringList> Org::parameters() const
 {
     return d->parameters;
 }

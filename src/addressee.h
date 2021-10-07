@@ -10,7 +10,7 @@
 #define KCONTACTS_ADDRESSEE_H
 
 #include <QDateTime>
-#include <QMap>
+#include <QHash>
 #include <QSharedDataPointer>
 #include <QStringList>
 #include <QUrl>
@@ -752,7 +752,7 @@ public:
       @param preferred Set to true, if this is the preferred email address of
                        the addressee.
      */
-    void insertEmail(const QString &email, bool preferred = false, const QMap<QString, QStringList> &param = QMap<QString, QStringList>());
+    void insertEmail(const QString &email, bool preferred = false, const QHash<QString, QStringList> &param = {});
 
     /**
       Remove email address. If the email address doesn't exist, nothing happens.

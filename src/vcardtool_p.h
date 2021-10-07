@@ -69,7 +69,7 @@ private:
     VCardLine createSecrecy(const Secrecy &secrecy) const;
 
     void addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const;
-    void addParameters(VCardLine &line, const QMap<QString, QStringList> &params) const;
+    void addParameters(VCardLine &line, const QHash<QString, QStringList> &params) const;
 
     /** Translate alternative or legacy IMPP service types. */
     QString normalizeImppServiceType(const QString &serviceType) const;

@@ -8,6 +8,7 @@
 #include "calendarurl.h"
 
 #include <QDataStream>
+#include <QHash>
 #include <QStringList>
 #include <QUrl>
 
@@ -29,7 +30,7 @@ public:
     }
 
     static QString typeToString(CalendarUrl::CalendarType type);
-    QMap<QString, QStringList> parameters;
+    QHash<QString, QStringList> parameters;
     QUrl url;
     CalendarUrl::CalendarType type;
 };
@@ -76,7 +77,7 @@ CalendarUrl::~CalendarUrl()
 {
 }
 
-QMap<QString, QStringList> CalendarUrl::parameters() const
+QHash<QString, QStringList> CalendarUrl::parameters() const
 {
     return d->parameters;
 }
@@ -116,7 +117,7 @@ QString CalendarUrl::toString() const
     return str;
 }
 
-void CalendarUrl::setParameters(const QMap<QString, QStringList> &params)
+void CalendarUrl::setParameters(const QHash<QString, QStringList> &params)
 {
     d->parameters = params;
 }

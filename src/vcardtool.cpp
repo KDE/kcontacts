@@ -104,9 +104,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
     return createVCards(list, version, false /*don't export*/);
 }
 
-void VCardTool::addParameters(VCardLine &line, const QMap<QString, QStringList> &params) const
+void VCardTool::addParameters(VCardLine &line, const QHash<QString, QStringList> &params) const
 {
-    QMapIterator i(params);
+    QHashIterator i(params);
     while (i.hasNext()) {
         i.next();
         line.addParameter(i.key(), i.value().join(QLatin1Char(',')));
@@ -207,7 +207,7 @@ void VCardTool::processEmailList(const Email::List &emailList, VCard::Version ve
 {
     for (const auto &email : emailList) {
         VCardLine line(QStringLiteral("EMAIL"), email.mail());
-        const QMap paramMap = email.parameters();
+        const auto paramMap = email.parameters();
         for (auto it = paramMap.cbegin(), endIt = paramMap.cend(); it != endIt; ++it) {
             const QString &key = it.key();
             QStringList params = it.value();
@@ -675,7 +675,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         const QVector<Impp> lstImpp = addressee.imppList();
         for (const Impp &impp : lstImpp) {
             VCardLine line(QStringLiteral("IMPP"), impp.address().url());
-            QMapIterator<QString, QStringList> i(impp.parameters());
+            QHashIterator<QString, QStringList> i(impp.parameters());
             while (i.hasNext()) {
                 i.next();
                 if (i.key().toLower() != QLatin1String("x-service-type")) {
@@ -703,6 +703,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
     QString group;
     Addressee::List addrList;
     const VCard::List vCardList = VCardParser::parseVCards(vcard);
+
+    QList<KContacts::Impp> convertedImpps;
+    QHash<Address::Type, QString> typeLabelsMap;
 
     VCard::List::ConstIterator cardIt;
     VCard::List::ConstIterator listEnd(vCardList.end());
@@ -915,22 +918,8 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         type |= stringToAddressType((*it).toLower());
                     }
 
-                    bool available = false;
-                    KContacts::Address::List addressList = addr.addresses();
-                    for (KContacts::Address::List::Iterator it = addressList.begin(); it != addressList.end(); ++it) {
-                        if ((*it).type() == type) {
-                            (*it).setLabel((*lineIt).value().toString());
-                            addr.insertAddress(*it);
-                            available = true;
-                            break;
-                        }
-                    }
-
-                    if (!available) { // a standalone LABEL tag
-                        KContacts::Address address(type);
-                        address.setLabel((*lineIt).value().toString());
-                        addr.insertAddress(address);
-                    }
+                    // defer assigning labels, as we need to know all existing addresses for it
+                    typeLabelsMap.insert(type, (*lineIt).value().toString());
                 }
                 // LOGO
                 else if (identifier == QLatin1String("logo")) {
@@ -1189,7 +1178,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                             Impp impp;
                             impp.setParameters((*lineIt).parameterMap());
                             impp.setAddress(url);
-                            addr.insertImpp(impp);
+                            convertedImpps.append(impp);
                         }
                     } else {
                         addr.insertCustom(key.left(dash), key.mid(dash + 1), (*lineIt).value().toString());
@@ -1197,6 +1186,43 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
             }
         }
+
+        // BEGIN: Post-processing
+
+        // Special routine for converted legacy messaging fields
+        // Fixes 'vcard_legacy_messaging_fields.vcf' test. Need to stabilize the order of the newly generated IMPP fields
+        //   to get deterministic output and be able to compare actual and expected output
+        // TODO: Is there a better solution?
+        std::sort(convertedImpps.begin(), convertedImpps.end(), [](const KContacts::Impp &lhs, const KContacts::Impp &rhs) {
+            return lhs.address() < rhs.address();
+        });
+        for (const auto &i : convertedImpps) {
+            addr.insertImpp(i);
+        }
+
+        // Special routine for assigning labels
+        for (auto it = typeLabelsMap.constBegin(); it != typeLabelsMap.constEnd(); ++it) {
+            const KContacts::Address::Type type = it.key();
+            const QString label = it.value();
+
+            bool available = false;
+            KContacts::Address::List addressList = addr.addresses();
+            for (auto it = addressList.begin(); it != addressList.end(); ++it) {
+                if ((*it).type() == type) {
+                    (*it).setLabel(label);
+                    addr.insertAddress(*it);
+                    available = true;
+                    break;
+                }
+            }
+
+            if (!available) { // a standalone LABEL tag
+                KContacts::Address address(type);
+                address.setLabel(label);
+                addr.insertAddress(address);
+            }
+        }
+        // END: Post-processing
 
         addrList.append(addr);
     }

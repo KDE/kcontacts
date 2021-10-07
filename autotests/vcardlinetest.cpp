@@ -18,6 +18,23 @@ VCardLineTest::~VCardLineTest()
 {
 }
 
+static void compareBuffers(const KContacts::VCardLine &line,
+                           const QString &identifier,
+                           const QString &group,
+                           const QMap<QString, QString> &parametersMap,
+                           const QVariant &valueVariant)
+{
+    QStringList parameterList = line.parameterList();
+    QVERIFY(!parameterList.isEmpty());
+    std::sort(parameterList.begin(), parameterList.end());
+    QCOMPARE(parameterList, parametersMap.keys());
+
+    QCOMPARE(line.identifier(), identifier);
+
+    QCOMPARE(line.group(), group);
+    QCOMPARE(line.value(), valueVariant);
+}
+
 void VCardLineTest::shouldHaveDefaultValue()
 {
     KContacts::VCardLine line;
@@ -42,13 +59,7 @@ void VCardLineTest::shouldAssignValues()
     const QVariant valueVariant = QVariant(QStringLiteral("a"));
     line.setValue(valueVariant);
 
-    QVERIFY(!line.parameterList().isEmpty());
-    QCOMPARE(line.parameterList(), QStringList() << map.keys());
-
-    QCOMPARE(line.identifier(), identifier);
-
-    QCOMPARE(line.group(), group);
-    QCOMPARE(line.value(), valueVariant);
+    compareBuffers(line, identifier, group, map, valueVariant);
 }
 
 void VCardLineTest::shouldCopyValue()
@@ -66,22 +77,10 @@ void VCardLineTest::shouldCopyValue()
     const QVariant valueVariant = QVariant(QStringLiteral("a"));
     line.setValue(valueVariant);
 
-    QVERIFY(!line.parameterList().isEmpty());
-    QCOMPARE(line.parameterList(), QStringList() << map.keys());
-
-    QCOMPARE(line.identifier(), identifier);
-
-    QCOMPARE(line.group(), group);
-    QCOMPARE(line.value(), valueVariant);
+    compareBuffers(line, identifier, group, map, valueVariant);
 
     KContacts::VCardLine copyLine(line);
-    QVERIFY(!copyLine.parameterList().isEmpty());
-    QCOMPARE(copyLine.parameterList(), QStringList() << map.keys());
-
-    QCOMPARE(copyLine.identifier(), identifier);
-
-    QCOMPARE(copyLine.group(), group);
-    QCOMPARE(copyLine.value(), valueVariant);
+    compareBuffers(copyLine, identifier, group, map, valueVariant);
 }
 
 void VCardLineTest::shouldEqualValue()
@@ -99,16 +98,10 @@ void VCardLineTest::shouldEqualValue()
     const QVariant valueVariant = QVariant(QStringLiteral("a"));
     line.setValue(valueVariant);
 
-    QVERIFY(!line.parameterList().isEmpty());
-    QCOMPARE(line.parameterList(), QStringList() << map.keys());
-
-    QCOMPARE(line.identifier(), identifier);
-
-    QCOMPARE(line.group(), group);
-    QCOMPARE(line.value(), valueVariant);
+    compareBuffers(line, identifier, group, map, valueVariant);
 
     KContacts::VCardLine copyLine(line);
-    QVERIFY(line == copyLine);
+    QCOMPARE(line, copyLine);
 }
 
 QTEST_MAIN(VCardLineTest)

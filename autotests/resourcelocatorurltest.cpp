@@ -31,7 +31,7 @@ void ResourceLocatorUrlTest::shouldHaveDefaultValue()
 
 void ResourceLocatorUrlTest::shouldAssignValue()
 {
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     ResourceLocatorUrl ResourceLocatorUrl;
@@ -55,7 +55,7 @@ void ResourceLocatorUrlTest::shouldSerialized()
 {
     ResourceLocatorUrl resourcelocatorurl;
     ResourceLocatorUrl result;
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     resourcelocatorurl.setParameters(params);
@@ -75,7 +75,7 @@ void ResourceLocatorUrlTest::shouldEqualResourceLocatorUrl()
 {
     ResourceLocatorUrl resourcelocatorurl;
     ResourceLocatorUrl result;
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     resourcelocatorurl.setUrl(QUrl(QStringLiteral("mailto:foo@kde.org")));
@@ -157,12 +157,12 @@ void ResourceLocatorUrlTest::shouldGenerateVCardWithParameter()
     addr.setUrl(webpage);
     ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
     addr.insertExtraUrl(url);
     url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
-    QMap<QString, QStringList> params2;
+    QHash<QString, QStringList> params2;
     url.setParameters(params2);
     addr.insertExtraUrl(url);
     lst << addr;
@@ -194,12 +194,12 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
     addr.setUrl(webpage);
     ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
+    QHash<QString, QStringList> params;
     params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
     url.setParameters(params);
     addr.insertExtraUrl(url);
     url.setUrl(QUrl(QStringLiteral("https://foo.kde.org")));
-    QMap<QString, QStringList> params2;
+    QHash<QString, QStringList> params2;
     url.setParameters(params2);
     url.setType(ResourceLocatorUrl::Work);
     url.setPreferred(true);
