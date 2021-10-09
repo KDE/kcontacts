@@ -17,6 +17,7 @@
 QTEST_MAIN(AddressTest)
 void initLocale()
 {
+    qputenv("LANG", "it_CH");
     QLocale::setDefault(QLocale(QLocale::Italian, QLocale::Switzerland));
 }
 
@@ -423,8 +424,7 @@ void AddressTest::countryToISOTest()
     QCOMPARE(Address::countryToISO(QStringLiteral("Österreich")), QLatin1String("at"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Disneyland")), QString());
     QCOMPARE(Address::countryToISO(QStringLiteral("Østrig")), QLatin1String("at"));
-    QCOMPARE(Address::countryToISO(QStringLiteral("Den Demokratiske Republik Congo (DRC)")), QLatin1String("cd"));
-    QCOMPARE(Address::countryToISO(QStringLiteral("Congo-Kinshasa")), QLatin1String("cd"));
+    QCOMPARE(Address::countryToISO(QStringLiteral("Den Demokratiske Republik Congo")), QLatin1String("cd"));
     QCOMPARE(Address::countryToISO(QStringLiteral("South Sudan")), QLatin1String("ss"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United States")), QLatin1String("us"));
     QCOMPARE(Address::countryToISO(QStringLiteral("United States Of America")), QLatin1String("us"));

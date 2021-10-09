@@ -12,7 +12,6 @@ target_sources(KF5Contacts PRIVATE
   calendarurl.cpp
   contactgroup.cpp
   contactgrouptool.cpp
-  countrytoisomap_p.cpp
   email.cpp
   field.cpp
   geo.cpp
@@ -72,6 +71,7 @@ PRIVATE
     KF5::CoreAddons
     KF5::ConfigCore
     KF5::I18n
+    KF5::I18nLocaleData
     KF5::Codecs # for the vcard parser
 )
 
@@ -118,7 +118,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
 )
 
 add_subdirectory(converter)
-add_subdirectory(generator)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h

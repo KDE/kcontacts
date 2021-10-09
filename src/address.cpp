@@ -6,11 +6,10 @@
 */
 
 #include "address.h"
-#include "countrytoisomap_data.cpp"
-#include "isotocountrymap_data.cpp"
 
 #include "kcontacts_debug.h"
 #include <KConfig>
+#include <KCountry>
 #include <KLocalizedString>
 #include <krandom.h>
 
@@ -632,50 +631,13 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
 
 QString Address::countryToISO(const QString &cname)
 {
-    const auto lookupKey = normalizeCountryName(cname);
-
-    // look for an exact match
-    auto it =
-        std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
-            return strcmp(country_name_stringtable + lhs.m_offset, rhs.constData()) < 0;
-        });
-    if (it != std::end(country_to_iso_index) && strcmp(country_name_stringtable + (*it).m_offset, lookupKey.constData()) == 0) {
-        return (*it).isoCode();
-    }
-
-    // a unique prefix will do too
-    it = std::lower_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const CountryToIsoIndex &lhs, const QByteArray &rhs) {
-        return strncmp(country_name_stringtable + lhs.m_offset, rhs.constData(), strlen(country_name_stringtable + lhs.m_offset)) < 0;
-    });
-    const auto endIt =
-        std::upper_bound(std::begin(country_to_iso_index), std::end(country_to_iso_index), lookupKey, [](const QByteArray &lhs, const CountryToIsoIndex &rhs) {
-            return strncmp(lhs.constData(), country_name_stringtable + rhs.m_offset, strlen(country_name_stringtable + rhs.m_offset)) < 0;
-        });
-    if (it != std::end(country_to_iso_index) && endIt == (it + 1)
-        && strncmp(country_name_stringtable + (*it).m_offset, lookupKey.constData(), strlen(country_name_stringtable + (*it).m_offset)) == 0) {
-        return (*it).isoCode();
-    }
-
-    return {};
+    return KCountry::fromName(cname).alpha2().toLower();
 }
 
 QString Address::ISOtoCountry(const QString &ISOname)
 {
-    // get country name from ISO country code (e.g. "no" -> i18n("Norway"))
-    const auto iso = ISOname.simplified().toLower().toUtf8();
-    if (iso.size() != 2) {
-        return ISOname;
-    }
-
-    const auto it =
-        std::lower_bound(std::begin(iso_to_country_index), std::end(iso_to_country_index), iso.constData(), [](const IsoToCountryIndex &lhs, const char *rhs) {
-            return strncmp(&lhs.m_c1, rhs, 2) < 0;
-        });
-    if (it != std::end(iso_to_country_index) && strncmp(&(*it).m_c1, iso.constData(), 2) == 0) {
-        return i18nd("iso_3166-1", en_country_name_stringtable + (*it).m_offset);
-    }
-
-    return ISOname;
+    const auto c = KCountry::fromAlpha2(ISOname);
+    return c.isValid() ? c.name() : ISOname;
 }
 
 // clang-format off
