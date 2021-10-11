@@ -1245,17 +1245,20 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                 spec = Qt::UTC;
             } else {
                 spec = Qt::OffsetFromUTC;
-                QTime offsetTime;
-                const QString offsetString = timeString.mid(tzPos + 1);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                const auto offsetString = QStringView(timeString).mid(tzPos + 1);
+#else
+                const QStringRef offsetString = timeString.midRef(tzPos + 1);
+#endif
                 switch (offsetString.size()) {
-                case 2:
-                    offsetTime = QTime::fromString(offsetString, QStringLiteral("hh"));
+                case 2: // format: "hh"
+                    offsetSecs = offsetString.left(2).toInt() * 3600;
                     break;
-                case 4:
-                    offsetTime = QTime::fromString(offsetString, QStringLiteral("hhmm"));
+                case 4: // format: "hhmm"
+                    offsetSecs = offsetString.left(2).toInt() * 3600 + offsetString.mid(2, 2).toInt() * 60;
                     break;
                 }
-                offsetSecs = offsetTime.hour() * 3600 + offsetTime.minute() * 60;
             }
             if (minusPos >= 0) {
                 offsetSecs *= -1;
