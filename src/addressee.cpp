@@ -28,6 +28,26 @@ template<class L>
 static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
 static bool listEquals(const QStringList &list, const QStringList &pattern);
 
+struct CustomData {
+    QString name;
+    QString value;
+};
+
+inline bool operator==(const CustomData &a, const CustomData &b)
+{
+    return std::tie(a.name, a.value) == std::tie(b.name, b.value);
+}
+
+inline bool operator!=(const CustomData &a, const CustomData &b)
+{
+    return std::tie(a.name, a.value) != std::tie(b.name, b.value);
+}
+
+inline bool operator<(const CustomData &a, const CustomData &b)
+{
+    return a.name < b.name;
+}
+
 class Q_DECL_HIDDEN Addressee::Private : public QSharedData
 {
 public:
@@ -94,6 +114,20 @@ public:
     {
     }
 
+    std::vector<CustomData>::iterator findByName(const QString &qualifiedName)
+    {
+        return std::find_if(mCustomFields.begin(), mCustomFields.end(), [&qualifiedName](const CustomData &info) {
+            return info.name == qualifiedName;
+        });
+    }
+
+    std::vector<CustomData>::const_iterator findByName(const QString &qualifiedName) const
+    {
+        return std::find_if(mCustomFields.cbegin(), mCustomFields.cend(), [&qualifiedName](const CustomData &info) {
+            return info.name == qualifiedName;
+        });
+    }
+
     QString mUid;
     QString mName;
     QString mFormattedName;
@@ -125,7 +159,7 @@ public:
     Gender mGender;
     QString mKind;
     QStringList mCategories;
-    QHash<QString, QString> mCustomFields;
+    std::vector<CustomData> mCustomFields;
     CalendarUrl::List mCalendarUrl;
     Sound::List mSoundListExtra;
     Picture::List mPhotoExtraList;
@@ -2242,21 +2276,30 @@ void Addressee::insertCustom(const QString &app, const QString &name, const QStr
 
     const QString qualifiedName = app + QLatin1Char('-') + name;
 
-    d->mCustomFields.insert(qualifiedName, value);
+    auto it = d->findByName(qualifiedName);
+    if (it != d->mCustomFields.end()) {
+        it->value = value;
+    } else {
+        const CustomData newdata{qualifiedName, value};
+        auto beforeIt = std::lower_bound(d->mCustomFields.begin(), d->mCustomFields.end(), newdata);
+        d->mCustomFields.insert(beforeIt, newdata);
+    }
 }
 
 void Addressee::removeCustom(const QString &app, const QString &name)
 {
     const QString qualifiedName = app + QLatin1Char('-') + name;
-
-    d->mCustomFields.remove(qualifiedName);
+    auto it = d->findByName(qualifiedName);
+    if (it != d->mCustomFields.end()) {
+        d->mCustomFields.erase(it);
+    }
 }
 
 QString Addressee::custom(const QString &app, const QString &name) const
 {
     const QString qualifiedName = app + QLatin1Char('-') + name;
-
-    return d->mCustomFields.value(qualifiedName);
+    auto it = d->findByName(qualifiedName);
+    return it != d->mCustomFields.cend() ? it->value : QString{};
 }
 
 void Addressee::setCustoms(const QStringList &customs)
@@ -2265,6 +2308,8 @@ void Addressee::setCustoms(const QStringList &customs)
 
     d->mCustomFields.clear();
 
+    // Less than 10 elements in "customs", we needn't use a set
+    QStringList seen;
     for (const QString &custom : customs) {
         const int index = custom.indexOf(QLatin1Char(':'));
         if (index == -1) {
@@ -2274,17 +2319,22 @@ void Addressee::setCustoms(const QStringList &customs)
         const QString qualifiedName = custom.left(index);
         const QString value = custom.mid(index + 1);
 
-        d->mCustomFields.insert(qualifiedName, value);
+        if (!seen.contains(qualifiedName)) {
+            d->mCustomFields.push_back({qualifiedName, value});
+            seen.push_back(qualifiedName);
+        }
     }
+    std::sort(d->mCustomFields.begin(), d->mCustomFields.end());
 }
 
 QStringList Addressee::customs() const
 {
     QStringList result;
-    result.reserve(d->mCustomFields.count());
+    result.reserve(d->mCustomFields.size());
 
-    for (auto it = d->mCustomFields.cbegin(); it != d->mCustomFields.cend(); ++it) {
-        result << it.key() + QLatin1Char(':') + it.value();
+    static const QLatin1Char sep(':');
+    for (const auto &[name, value] : d->mCustomFields) {
+        result << name + sep + value;
     }
 
     return result;
