@@ -129,12 +129,18 @@ public:
       A list of addressee objects
      */
     typedef AddresseeList List;
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
     /**
       A map from unique identifier to addressee.
 
+      @deprecated Since 5.88, as it's not used anywhere.
+
       @see uid()
      */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "Deprecated, not used anywhere.")
     typedef QHash<QString, Addressee> Map;
+#endif
 
     /**
       Construct an empty address book entry.
