@@ -13,13 +13,34 @@
 #include <QStringList>
 #include <QVector>
 
+#include <vector>
+
 namespace KContacts
 {
 class VCard
 {
 public:
     typedef QVector<VCard> List;
-    typedef QMap<QString, VCardLine::List> LineMap;
+
+    struct LineData {
+        QString identifier;
+        VCardLine::List list;
+    };
+    using LineMap = std::vector<LineData>;
+
+    inline LineMap::iterator findByLineId(const QString &identifier)
+    {
+        return std::find_if(mLineMap.begin(), mLineMap.end(), [&identifier](const LineData &data) {
+            return data.identifier == identifier;
+        });
+    }
+
+    inline LineMap::const_iterator findByLineId(const QString &identifier) const
+    {
+        return std::find_if(mLineMap.cbegin(), mLineMap.cend(), [&identifier](const LineData &data) {
+            return data.identifier == identifier;
+        });
+    }
 
     enum Version {
         v2_1,
@@ -70,8 +91,16 @@ public:
     Q_REQUIRED_RESULT Version version() const;
 
 private:
+    /**
+     * A container of LineData, sorted by identifier.
+     */
     LineMap mLineMap;
 };
+
+inline bool operator<(const VCard::LineData &a, const VCard::LineData &b)
+{
+    return a.identifier < b.identifier;
+}
 }
 
 #endif
