@@ -54,8 +54,13 @@ int main(int argc, char **argv)
     addressee.setUrl(url);
     addressee.setSecrecy(KContacts::Secrecy(KContacts::Secrecy::Confidential));
 
-    addressee.insertEmail(QLatin1String("tokoe@kde.org"), true);
-    addressee.insertEmail(QLatin1String("tokoe82@yahoo.de"), true);
+    KContacts::Email kdemail(QLatin1String("tokoe@kde.org"));
+    kdemail.setPreferred(true);
+    addressee.addEmail(kdemail);
+
+    KContacts::Email yahoomail(QLatin1String("tokoe82@yahoo.de"));
+    yahoomail.setPreferred(true);
+    addressee.addEmail(yahoomail);
 
     KContacts::PhoneNumber phone1(QLatin1String("3541523475"), KContacts::PhoneNumber::Pref | KContacts::PhoneNumber::Home);
     KContacts::PhoneNumber phone2(QLatin1String("+46745673475"), KContacts::PhoneNumber::Work);

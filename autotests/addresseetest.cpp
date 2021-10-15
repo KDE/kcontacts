@@ -18,7 +18,7 @@ void AddresseeTest::emptyTest()
     QVERIFY(addressee.isEmpty());
 
     KContacts::Addressee addresseeWithMail;
-    addresseeWithMail.insertEmail(QStringLiteral("foo@bar.org"));
+    addresseeWithMail.addEmail(QStringLiteral("foo@bar.org"));
     QVERIFY(!addresseeWithMail.isEmpty());
 }
 

@@ -38,11 +38,11 @@ VCardDragTest::VCardDragTest()
 {
     mAddressee1.setGivenName(QStringLiteral("Kevin"));
     mAddressee1.setFamilyName(QStringLiteral("Krammer"));
-    mAddressee1.insertEmail(QStringLiteral("kevin.krammer@gmx.at"));
+    mAddressee1.addEmail(QStringLiteral("kevin.krammer@gmx.at"));
 
     mAddressee2.setGivenName(QStringLiteral("Tobias"));
     mAddressee2.setFamilyName(QStringLiteral("König"));
-    mAddressee2.insertEmail(QStringLiteral("tokoe@kde.org"));
+    mAddressee2.addEmail(QStringLiteral("tokoe@kde.org"));
 }
 
 void VCardDragTest::testPopulate()

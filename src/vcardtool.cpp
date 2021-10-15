@@ -861,7 +861,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     Email mail((*lineIt).value().toString());
                     mail.setParams((*lineIt).parameterMap());
-                    addr.insertEmail((*lineIt).value().toString(), types.contains(QLatin1String("PREF")), (*lineIt).parameterMap());
+                    addr.addEmail(mail);
                 }
                 // KIND
                 else if (identifier == QLatin1String("kind")) {

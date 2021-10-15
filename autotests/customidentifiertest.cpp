@@ -22,7 +22,7 @@ CustomIdentifierTest::~CustomIdentifierTest()
 void CustomIdentifierTest::shouldHaveEmptyCustoms()
 {
     KContacts::Addressee addresseeWithMail;
-    addresseeWithMail.insertEmail(QStringLiteral("foo@bar.org"));
+    addresseeWithMail.addEmail(QStringLiteral("foo@bar.org"));
     QVERIFY(!addresseeWithMail.isEmpty());
     QVERIFY(addresseeWithMail.customs().isEmpty());
 }

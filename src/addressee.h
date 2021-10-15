@@ -744,6 +744,7 @@ public:
      */
     QString fullEmail(const QString &email = QString()) const;
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
     /**
       Insert an email address. If the email address already exists in this
       addressee it is not duplicated.
@@ -751,8 +752,22 @@ public:
       @param email Email address
       @param preferred Set to true, if this is the preferred email address of
                        the addressee.
+
+      @deprecated Since 5.88, use addEmail(const Email &) instead; you can use the Email
+      methods to set any parameters, e.g. Email::setPreferred(), Email::setType() ...etc
      */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "Use addEmail(const Email &), and the Email class setter methods instead.")
     void insertEmail(const QString &email, bool preferred = false, const QMap<QString, QStringList> &param = QMap<QString, QStringList>());
+#endif
+
+    /**
+      Adds an email address. If the email address (i.e. @p email.mail()) already
+      exists in this addressee it won't be duplicated, instead @p email is assigned
+      to it.
+
+      @since 5.88
+     */
+    void addEmail(const Email &email);
 
     /**
       Remove email address. If the email address doesn't exist, nothing happens.
@@ -762,8 +777,8 @@ public:
     void removeEmail(const QString &email);
 
     /**
-      Return preferred email address. This is the first email address or the
-      last one added with insertEmail() with a set preferred parameter.
+      Return preferred email address. This is the first email address or the last
+      one added with insertEmail() or addEmail() with a set preferred parameter.
      */
     QString preferredEmail() const;
 

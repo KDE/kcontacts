@@ -21,8 +21,11 @@ Addressee vcard1()
     KContacts::ResourceLocatorUrl url;
     url.setUrl(QUrl(QStringLiteral("http://home.earthlink.net/~fdawson")));
     addr.setUrl(url);
-    addr.insertEmail(QStringLiteral("fdawson@earthlink.net"));
-    addr.insertEmail(QStringLiteral("Frank_Dawson@Lotus.com"), true);
+    addr.addEmail(Email(QStringLiteral("fdawson@earthlink.net")));
+
+    Email mail(QStringLiteral("Frank_Dawson@Lotus.com"));
+    mail.setPreferred(true);
+    addr.addEmail(mail);
     addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9515"), PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
     addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-919-676-9564"), PhoneNumber::Fax | PhoneNumber::Work));
     Address a(Address::Work | Address::Postal | Address::Parcel);
@@ -41,7 +44,7 @@ Addressee vcard2()
 
     addr.setName(QStringLiteral("Tim Howes"));
     addr.setOrganization(QStringLiteral("Netscape Communications Corp."));
-    addr.insertEmail(QStringLiteral("howes@netscape.com"));
+    addr.addEmail(Email(QStringLiteral("howes@netscape.com")));
     addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-937-3419"), //
                                        PhoneNumber::Voice | PhoneNumber::Msg | PhoneNumber::Work));
     addr.insertPhoneNumber(PhoneNumber(QStringLiteral("+1-415-528-4164"), //
@@ -62,7 +65,7 @@ Addressee vcard3()
 
     addr.setName(QStringLiteral("ian geiser"));
     addr.setOrganization(QStringLiteral("Source eXtreme"));
-    addr.insertEmail(QStringLiteral("geiseri@yahoo.com"));
+    addr.addEmail(QStringLiteral("geiseri@yahoo.com"));
     addr.setTitle(QStringLiteral("VP of Engineering"));
     return addr;
 }

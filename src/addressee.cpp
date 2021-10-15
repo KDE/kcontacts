@@ -1582,6 +1582,31 @@ QString Addressee::fullEmail(const QString &email) const
     return text;
 }
 
+void Addressee::addEmail(const Email &email)
+{
+    const QString mailAddr = email.mail();
+    auto it = std::find_if(d->mEmails.begin(), d->mEmails.end(), [&mailAddr](const Email &e) {
+        return e.mail() == mailAddr;
+    });
+    if (it != d->mEmails.end()) { // Already exists, modify it
+        *it = email;
+        if (email.isPreferred()) {
+            // Move it to the beginning of mEmails
+            std::rotate(d->mEmails.begin(), it, it + 1);
+        }
+        return;
+    }
+
+    // Add it to the list
+    d->mEmpty = false;
+    if (email.isPreferred()) {
+        d->mEmails.prepend(email);
+    } else {
+        d->mEmails.append(email);
+    }
+}
+
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param)
 {
     if (email.simplified().isEmpty()) {
@@ -1608,6 +1633,7 @@ void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QSt
         d->mEmails.append(mail);
     }
 }
+#endif
 
 void Addressee::removeEmail(const QString &email)
 {

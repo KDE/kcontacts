@@ -377,7 +377,7 @@ void KContacts::evaluatePair(Addressee &a,
         || fieldname == QLatin1String("mozillasecondemail") /* mozilla */
         || fieldname == QLatin1String("othermailbox") /*TheBat!*/) {
         if (a.emails().indexOf(value) == -1) {
-            a.insertEmail(value);
+            a.addEmail(value);
         }
         return;
     }
