@@ -6,6 +6,7 @@
 */
 
 #include "fieldgroup.h"
+#include "parametermap_p.h"
 
 #include <QDataStream>
 #include <QStringList>
@@ -22,12 +23,12 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         fieldGroupName = other.fieldGroupName;
         value = other.value;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString fieldGroupName;
     QString value;
 };
@@ -77,19 +78,33 @@ QString FieldGroup::value() const
     return d->value;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void FieldGroup::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> FieldGroup::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void FieldGroup::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap FieldGroup::params() const
+{
+    return d->mParamMap;
 }
 
 bool FieldGroup::operator==(const FieldGroup &other) const
 {
-    return (d->parameters == other.parameters()) && (d->fieldGroupName == other.fieldGroupName()) && (d->value == other.value());
+    return (d->mParamMap == other.d->mParamMap) && (d->fieldGroupName == other.fieldGroupName()) && (d->value == other.value());
 }
 
 bool FieldGroup::operator!=(const FieldGroup &other) const
@@ -110,24 +125,18 @@ QString FieldGroup::toString() const
 {
     QString str = QLatin1String("FieldGroup {\n");
     str += QStringLiteral("    FieldGroupName: %1 Value %2\n").arg(d->fieldGroupName).arg(d->value);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(), itEnd = d->parameters.cend(); it != itEnd; ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const FieldGroup &fieldGroup)
 {
-    return s << fieldGroup.d->parameters << fieldGroup.d->fieldGroupName << fieldGroup.d->value;
+    return s << fieldGroup.d->mParamMap << fieldGroup.d->fieldGroupName << fieldGroup.d->value;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, FieldGroup &fieldGroup)
 {
-    s >> fieldGroup.d->parameters >> fieldGroup.d->fieldGroupName >> fieldGroup.d->value;
+    s >> fieldGroup.d->mParamMap >> fieldGroup.d->fieldGroupName >> fieldGroup.d->value;
     return s;
 }

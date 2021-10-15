@@ -6,6 +6,7 @@
 */
 
 #include "phonenumber.h"
+#include "parametermap_p.h"
 
 #include <KLocalizedString>
 #include <krandom.h>
@@ -40,7 +41,7 @@ public:
     QString mId;
     QString mNumber;
     Type mType;
-    QMap<QString, QStringList> mParameters;
+    ParameterMap mParamMap;
 };
 
 PhoneNumber::PhoneNumber()
@@ -77,7 +78,7 @@ bool PhoneNumber::operator==(const PhoneNumber &other) const
         return false;
     }
 
-    if (d->mParameters != other.d->mParameters) {
+    if (d->mParamMap != other.d->mParamMap) {
         return false;
     }
 
@@ -261,38 +262,46 @@ QString PhoneNumber::toString() const
     QString str = QLatin1String("PhoneNumber {\n");
     str += QStringLiteral("    Id: %1\n").arg(d->mId);
     str += QStringLiteral("    Type: %1\n").arg(typeLabel(d->mType));
-    if (!d->mParameters.isEmpty()) {
-        QString param;
-        for (auto it = d->mParameters.cbegin(); it != d->mParameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str = d->mParamMap.toString();
     str += QStringLiteral("    Number: %1\n").arg(d->mNumber);
     str += QLatin1String("}\n");
 
     return str;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void PhoneNumber::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->mParameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> PhoneNumber::parameters() const
 {
-    return d->mParameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void PhoneNumber::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap PhoneNumber::params() const
+{
+    return d->mParamMap;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const PhoneNumber &phone)
 {
-    return s << phone.d->mId << (uint)phone.d->mType << phone.d->mNumber << phone.d->mParameters;
+    return s << phone.d->mId << static_cast<uint>(phone.d->mType) << phone.d->mNumber << phone.d->mParamMap;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, PhoneNumber &phone)
 {
     uint type;
-    s >> phone.d->mId >> type >> phone.d->mNumber >> phone.d->mParameters;
+    s >> phone.d->mId >> type >> phone.d->mNumber >> phone.d->mParamMap;
     phone.d->mType = PhoneNumber::Type(type);
 
     return s;

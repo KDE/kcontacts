@@ -7,6 +7,7 @@
 
 #include "impp.h"
 #include "kcontacts_debug.h"
+#include "parametermap_p.h"
 
 #include <KDesktopFile>
 
@@ -25,10 +26,10 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QUrl address;
 };
 
@@ -84,35 +85,57 @@ QString Impp::serviceIcon() const
 
 bool Impp::isPreferred() const
 {
-    const auto it = d->parameters.constFind(QLatin1String("pref"));
-    if (it != d->parameters.constEnd() && !it.value().isEmpty()) {
-        return it.value().at(0) == QLatin1Char('1');
+    const auto it = d->mParamMap.findParam(QLatin1String("pref"));
+    if (it != d->mParamMap.cend()) {
+        return !it->paramValues.isEmpty() && it->paramValues.at(0) == QLatin1Char('1');
     }
     return false;
 }
 
 void Impp::setPreferred(bool preferred)
 {
-    if (preferred) {
-        d->parameters.insert(QStringLiteral("pref"), {QStringLiteral("1")});
+    if (!preferred) {
+        auto paramIt = d->mParamMap.findParam(QStringLiteral("pref"));
+        if (paramIt != d->mParamMap.end()) {
+            d->mParamMap.erase(paramIt);
+        }
     } else {
-        d->parameters.remove(QLatin1String("pref"));
+        auto paramIt = d->mParamMap.findParam(QStringLiteral("pref"));
+        if (paramIt != d->mParamMap.end()) {
+            paramIt->paramValues = QStringList{QStringLiteral("1")};
+        } else {
+            d->mParamMap.insertParam({QStringLiteral("pref"), {QStringLiteral("1")}});
+        }
     }
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Impp::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Impp::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Impp::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Impp::params() const
+{
+    return d->mParamMap;
 }
 
 bool Impp::operator==(const Impp &other) const
 {
-    return (d->parameters == other.parameters()) && (d->address == other.address());
+    return (d->mParamMap == other.d->mParamMap) && (d->address == other.address());
 }
 
 bool Impp::operator!=(const Impp &other) const
@@ -134,26 +157,20 @@ QString Impp::toString() const
     QString str = QLatin1String("Impp {\n");
     str += QStringLiteral("    type: %1\n").arg(serviceType());
     str += QStringLiteral("    address: %1\n").arg(d->address.url());
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(), itEnd = d->parameters.cend(); it != itEnd; ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Impp &impp)
 {
-    return s << impp.d->parameters << impp.d->address << (uint32_t)(0);
+    return s << impp.d->mParamMap << impp.d->address << (uint32_t)(0);
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Impp &impp)
 {
     int i;
-    s >> impp.d->parameters >> impp.d->address >> i;
+    s >> impp.d->mParamMap >> impp.d->address >> i;
     return s;
 }
 

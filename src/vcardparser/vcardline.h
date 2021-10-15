@@ -8,12 +8,13 @@
 #ifndef VCARDLINE_H
 #define VCARDLINE_H
 
-#include <QMap>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
 
 #include "kcontacts_export.h"
+
+#include "../parametermap_p.h"
 
 namespace KContacts
 {
@@ -21,7 +22,6 @@ class KCONTACTS_EXPORT VCardLine
 {
 public:
     typedef QVector<VCardLine> List;
-    typedef QMap<QString, QStringList> ParamMap;
 
     VCardLine();
     VCardLine(const QString &identifier);
@@ -88,6 +88,8 @@ public:
      */
     void addParameter(const QString &param, const QString &value);
 
+    void addParameters(const ParameterMap &params);
+
     /**
      * Returns the values of a special parameter.
      * You can get a list of all parameters with paramList().
@@ -106,12 +108,11 @@ public:
 
     /**
      * Returns all parameters
-     * @since 4.14.5
      */
-    Q_REQUIRED_RESULT ParamMap parameterMap() const;
+    Q_REQUIRED_RESULT ParameterMap parameterMap() const;
 
 private:
-    ParamMap mParamMap;
+    ParameterMap mParamMap;
     QString mIdentifier;
     QString mGroup;
     QVariant mValue;

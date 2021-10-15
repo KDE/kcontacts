@@ -6,6 +6,7 @@
 */
 
 #include "calendarurl.h"
+#include "parametermap_p.h"
 
 #include <QDataStream>
 #include <QStringList>
@@ -23,13 +24,14 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         type = other.type;
         url = other.url;
     }
 
     static QString typeToString(CalendarUrl::CalendarType type);
-    QMap<QString, QStringList> parameters;
+
+    ParameterMap mParamMap;
     QUrl url;
     CalendarUrl::CalendarType type;
 };
@@ -76,14 +78,9 @@ CalendarUrl::~CalendarUrl()
 {
 }
 
-QMap<QString, QStringList> CalendarUrl::parameters() const
-{
-    return d->parameters;
-}
-
 bool CalendarUrl::operator==(const CalendarUrl &other) const
 {
-    return (d->parameters == other.parameters()) && (d->type == other.type()) && (d->url == other.url());
+    return (d->mParamMap == other.d->mParamMap) && (d->type == other.type()) && (d->url == other.url());
 }
 
 bool CalendarUrl::operator!=(const CalendarUrl &other) const
@@ -105,20 +102,33 @@ QString CalendarUrl::toString() const
     QString str = QLatin1String("CalendarUrl {\n");
     str += QStringLiteral("    url: %1\n").arg(d->url.toString());
     str += QStringLiteral("    type: %1\n").arg(CalendarUrl::Private::typeToString(d->type));
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void CalendarUrl::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
+}
+#endif
+
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
+QMap<QString, QStringList> CalendarUrl::parameters() const
+{
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void CalendarUrl::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap CalendarUrl::params() const
+{
+    return d->mParamMap;
 }
 
 bool CalendarUrl::isValid() const
@@ -148,13 +158,13 @@ QUrl CalendarUrl::url() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const CalendarUrl &calUrl)
 {
-    return s << calUrl.d->parameters << static_cast<uint>(calUrl.d->type) << calUrl.d->url;
+    return s << calUrl.d->mParamMap << static_cast<uint>(calUrl.d->type) << calUrl.d->url;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, CalendarUrl &calUrl)
 {
     uint type;
-    s >> calUrl.d->parameters >> type >> calUrl.d->url;
+    s >> calUrl.d->mParamMap >> type >> calUrl.d->url;
     calUrl.d->type = static_cast<CalendarUrl::CalendarType>(type);
     return s;
 }

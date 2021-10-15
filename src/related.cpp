@@ -6,6 +6,8 @@
 */
 
 #include "related.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         relatedTo = other.relatedTo;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString relatedTo;
 };
 
@@ -64,19 +66,33 @@ bool Related::isValid() const
     return !d->relatedTo.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Related::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Related::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Related::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Related::params() const
+{
+    return d->mParamMap;
 }
 
 bool Related::operator==(const Related &other) const
 {
-    return (d->parameters == other.parameters()) && (d->relatedTo == other.related());
+    return (d->mParamMap == other.d->mParamMap) && (d->relatedTo == other.related());
 }
 
 bool Related::operator!=(const Related &other) const
@@ -97,24 +113,18 @@ QString Related::toString() const
 {
     QString str = QLatin1String("Related {\n");
     str += QStringLiteral("    relatedTo: %1\n").arg(d->relatedTo);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Related &related)
 {
-    return s << related.d->parameters << related.d->relatedTo;
+    return s << related.d->mParamMap << related.d->relatedTo;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Related &related)
 {
-    s >> related.d->parameters >> related.d->relatedTo;
+    s >> related.d->mParamMap >> related.d->relatedTo;
     return s;
 }

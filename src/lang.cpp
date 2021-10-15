@@ -6,6 +6,8 @@
 */
 
 #include "lang.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         language = other.language;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString language;
 };
 
@@ -64,19 +66,33 @@ bool Lang::isValid() const
     return !d->language.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Lang::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Lang::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Lang::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Lang::params() const
+{
+    return d->mParamMap;
 }
 
 bool Lang::operator==(const Lang &other) const
 {
-    return (d->parameters == other.parameters()) && (d->language == other.language());
+    return (d->mParamMap == other.d->mParamMap) && (d->language == other.language());
 }
 
 bool Lang::operator!=(const Lang &other) const
@@ -97,24 +113,18 @@ QString Lang::toString() const
 {
     QString str = QLatin1String("Lang {\n");
     str += QStringLiteral("    language: %1\n").arg(d->language);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(), itEnd = d->parameters.cend(); it != itEnd; ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Lang &lang)
 {
-    return s << lang.d->parameters << lang.d->language;
+    return s << lang.d->mParamMap << lang.d->language;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Lang &lang)
 {
-    s >> lang.d->parameters >> lang.d->language;
+    s >> lang.d->mParamMap >> lang.d->language;
     return s;
 }

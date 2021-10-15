@@ -17,6 +17,8 @@
 
 #include "addressee.h"
 #include "addresseehelper.h"
+#include "field.h"
+#include "parametermap_p.h"
 
 using namespace KContacts;
 
@@ -1686,7 +1688,7 @@ void Addressee::insertLang(const Lang &language)
         return lang.language() == languageStr;
     });
     if (it != d->mLangs.end()) {
-        (*it).setParameters(language.parameters());
+        (*it).setParams(language.params());
         return;
     }
 

@@ -9,12 +9,17 @@
 #define CLIENTPIDMAP_H
 
 #include "kcontacts_export.h"
+
 #include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
 
+class ClientPidMapTest;
+
 namespace KContacts
 {
+class ParameterMap;
+
 /** @short Class that holds a ClientPidMap for a contact.
  *  @since 5.4
  */
@@ -22,6 +27,8 @@ class KCONTACTS_EXPORT ClientPidMap
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ClientPidMap &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, ClientPidMap &);
+    friend class VCardTool;
+    friend class ::ClientPidMapTest;
 
 public:
     ClientPidMap();
@@ -37,8 +44,21 @@ public:
 
     Q_REQUIRED_RESULT bool isValid() const;
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     void setParameters(const QMap<QString, QStringList> &params);
+#endif
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+#endif
 
     Q_REQUIRED_RESULT bool operator==(const ClientPidMap &other) const;
     Q_REQUIRED_RESULT bool operator!=(const ClientPidMap &other) const;
@@ -48,6 +68,9 @@ public:
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
+    void setParams(const ParameterMap &params);
+    Q_REQUIRED_RESULT ParameterMap params() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };

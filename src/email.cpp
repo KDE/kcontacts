@@ -6,6 +6,7 @@
 */
 
 #include "email.h"
+#include "parametermap_p.h"
 
 #include <QDataStream>
 #include <QStringList>
@@ -22,11 +23,12 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         mail = other.mail;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
+
     QString mail;
 };
 
@@ -50,14 +52,9 @@ Email::~Email()
 {
 }
 
-QMap<QString, QStringList> Email::parameters() const
-{
-    return d->parameters;
-}
-
 bool Email::operator==(const Email &other) const
 {
-    return (d->parameters == other.parameters()) && (d->mail == other.mail());
+    return (d->mParamMap == other.d->mParamMap) && (d->mail == other.mail());
 }
 
 bool Email::operator!=(const Email &other) const
@@ -78,20 +75,33 @@ QString Email::toString() const
 {
     QString str = QLatin1String("Email {\n");
     str += QStringLiteral("    mail: %1\n").arg(d->mail);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Email::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
+}
+#endif
+
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
+QMap<QString, QStringList> Email::parameters() const
+{
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Email::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Email::params() const
+{
+    return d->mParamMap;
 }
 
 void Email::setEmail(const QString &mail)
@@ -122,14 +132,14 @@ static const email_type_name email_type_names[] = {
 
 Email::Type KContacts::Email::type() const
 {
-    const auto it = d->parameters.constFind(QLatin1String("type"));
-    if (it == d->parameters.end()) {
+    const auto it = d->mParamMap.findParam(QLatin1String("type"));
+    if (it == d->mParamMap.end()) {
         return Unknown;
     }
 
     Type type = Unknown;
-    for (const auto &s : it.value()) {
-        const auto it = std::find_if(std::begin(email_type_names), std::end(email_type_names), [s](const email_type_name &t) {
+    for (const auto &s : it->paramValues) {
+        const auto it = std::find_if(std::begin(email_type_names), std::end(email_type_names), [&s](const email_type_name &t) {
             return QLatin1String(t.name) == s;
         });
         if (it != std::end(email_type_names)) {
@@ -143,32 +153,40 @@ void Email::setType(Type type)
 {
     const auto oldType = this->type();
 
-    auto types = d->parameters.value(QLatin1String("type"));
+    const QString paramName(QStringLiteral("type"));
+
+    ParameterMap::iterator theIt;
+
+    auto it = d->mParamMap.findParam(paramName);
+    if (it != d->mParamMap.end()) {
+        theIt = it;
+    } else {
+        theIt = d->mParamMap.insertParam({paramName, {}});
+    }
+
     for (const auto &t : email_type_names) {
         if (((type ^ oldType) & t.type) == 0) {
             continue; // no change
         }
 
         if (type & t.type) {
-            types.push_back(QLatin1String(t.name));
+            theIt->paramValues.push_back(QLatin1String(t.name));
         } else {
-            types.removeAll(QLatin1String(t.name));
+            theIt->paramValues.removeAll(QLatin1String(t.name));
         }
     }
-
-    d->parameters.insert(QLatin1String("type"), types);
 }
 
 bool Email::isPreferred() const
 {
-    auto it = d->parameters.constFind(QLatin1String("pref"));
-    if (it != d->parameters.end() && !it.value().isEmpty()) {
-        return it.value().at(0) == QLatin1Char('1');
+    auto it = d->mParamMap.findParam(QLatin1String("pref"));
+    if (it != d->mParamMap.end()) {
+        return !it->paramValues.isEmpty() && it->paramValues.at(0) == QLatin1Char('1');
     }
 
-    it = d->parameters.constFind(QLatin1String("type"));
-    if (it != d->parameters.end()) {
-        return it.value().contains(QLatin1String("PREF"), Qt::CaseInsensitive);
+    it = d->mParamMap.findParam(QLatin1String("type"));
+    if (it != d->mParamMap.end()) {
+        return it->paramValues.contains(QLatin1String("PREF"), Qt::CaseInsensitive);
     }
 
     return false;
@@ -180,23 +198,37 @@ void Email::setPreferred(bool preferred)
         return;
     }
 
-    auto types = d->parameters.value(QLatin1String("type"));
+    const QString paramName(QStringLiteral("type"));
+
+    auto typeIt = d->mParamMap.findParam(paramName);
+    QStringList types = typeIt != d->mParamMap.end() ? typeIt->paramValues : QStringList{};
+
     if (!preferred) {
-        d->parameters.remove(QLatin1String("pref"));
+        auto prefIt = d->mParamMap.findParam(QLatin1String("pref"));
+        if (prefIt != d->mParamMap.end()) {
+            d->mParamMap.erase(prefIt);
+        }
+
         types.removeAll(QLatin1String("PREF"));
     } else {
-        types.push_back(QLatin1String("PREF"));
+        types.push_back(QStringLiteral("PREF"));
     }
-    d->parameters.insert(QLatin1String("type"), types);
+
+    typeIt = d->mParamMap.findParam(paramName);
+    if (typeIt != d->mParamMap.end()) {
+        typeIt->paramValues = types;
+    } else {
+        d->mParamMap.insertParam({paramName, types});
+    }
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Email &email)
 {
-    return s << email.d->parameters << email.d->mail;
+    return s << email.d->mParamMap << email.d->mail;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Email &email)
 {
-    s >> email.d->parameters >> email.d->mail;
+    s >> email.d->mParamMap >> email.d->mail;
     return s;
 }

@@ -6,6 +6,8 @@
 */
 
 #include "clientpidmap.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         clientpidmap = other.clientpidmap;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString clientpidmap;
 };
 
@@ -64,19 +66,33 @@ bool ClientPidMap::isValid() const
     return !d->clientpidmap.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void ClientPidMap::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> ClientPidMap::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void ClientPidMap::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap ClientPidMap::params() const
+{
+    return d->mParamMap;
 }
 
 bool ClientPidMap::operator==(const ClientPidMap &other) const
 {
-    return (d->parameters == other.parameters()) && (d->clientpidmap == other.clientPidMap());
+    return (d->mParamMap == other.d->mParamMap) && (d->clientpidmap == other.clientPidMap());
 }
 
 bool ClientPidMap::operator!=(const ClientPidMap &other) const
@@ -97,24 +113,18 @@ QString ClientPidMap::toString() const
 {
     QString str = QLatin1String("ClientPidMap {\n");
     str += QStringLiteral("    clientpidmap: %1\n").arg(d->clientpidmap);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const ClientPidMap &clientpidmap)
 {
-    return s << clientpidmap.d->parameters << clientpidmap.d->clientpidmap;
+    return s << clientpidmap.d->mParamMap << clientpidmap.d->clientpidmap;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, ClientPidMap &clientpidmap)
 {
-    s >> clientpidmap.d->parameters >> clientpidmap.d->clientpidmap;
+    s >> clientpidmap.d->mParamMap >> clientpidmap.d->clientpidmap;
     return s;
 }

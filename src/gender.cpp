@@ -6,6 +6,7 @@
 */
 
 #include "gender.h"
+#include "parametermap_p.h"
 
 using namespace KContacts;
 

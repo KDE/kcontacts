@@ -15,8 +15,12 @@
 #include <QSharedDataPointer>
 #include <QString>
 
+class EmailTest;
+
 namespace KContacts
 {
+class ParameterMap;
+
 /** @short Class that holds a Email for a contact.
  *  @since 4.14.5
  */
@@ -24,6 +28,8 @@ class KCONTACTS_EXPORT Email
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Email &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Email &);
+    friend class VCardTool;
+    friend class ::EmailTest;
 
     Q_GADGET
     Q_PROPERTY(QString email READ mail WRITE setEmail)
@@ -87,8 +93,21 @@ public:
      */
     void setPreferred(bool preferred);
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     void setParameters(const QMap<QString, QStringList> &params);
+#endif
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+#endif
 
     Q_REQUIRED_RESULT bool operator==(const Email &other) const;
     Q_REQUIRED_RESULT bool operator!=(const Email &other) const;
@@ -98,6 +117,9 @@ public:
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
+    void setParams(const ParameterMap &params);
+    Q_REQUIRED_RESULT ParameterMap params() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };

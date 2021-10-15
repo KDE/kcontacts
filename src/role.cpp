@@ -6,6 +6,8 @@
 */
 
 #include "role.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         role = other.role;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString role;
 };
 
@@ -64,19 +66,33 @@ bool Role::isValid() const
     return !d->role.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Role::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Role::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Role::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Role::params() const
+{
+    return d->mParamMap;
 }
 
 bool Role::operator==(const Role &other) const
 {
-    return (d->parameters == other.parameters()) && (d->role == other.role());
+    return (d->mParamMap == other.d->mParamMap) && (d->role == other.role());
 }
 
 bool Role::operator!=(const Role &other) const
@@ -97,24 +113,18 @@ QString Role::toString() const
 {
     QString str = QLatin1String("Role {\n");
     str += QStringLiteral("    role: %1\n").arg(d->role);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Role &role)
 {
-    return s << role.d->parameters << role.d->role;
+    return s << role.d->mParamMap << role.d->role;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Role &role)
 {
-    s >> role.d->parameters >> role.d->role;
+    s >> role.d->mParamMap >> role.d->role;
     return s;
 }

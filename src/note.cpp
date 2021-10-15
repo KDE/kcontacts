@@ -6,6 +6,8 @@
 */
 
 #include "note.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         note = other.note;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString note;
 };
 
@@ -64,19 +66,33 @@ bool Note::isValid() const
     return !d->note.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Note::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Note::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Note::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Note::params() const
+{
+    return d->mParamMap;
 }
 
 bool Note::operator==(const Note &other) const
 {
-    return (d->parameters == other.parameters()) && (d->note == other.note());
+    return (d->mParamMap == other.d->mParamMap) && (d->note == other.note());
 }
 
 bool Note::operator!=(const Note &other) const
@@ -97,24 +113,18 @@ QString Note::toString() const
 {
     QString str = QLatin1String("Note {\n");
     str += QStringLiteral("    note: %1\n").arg(d->note);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Note &note)
 {
-    return s << note.d->parameters << note.d->note;
+    return s << note.d->mParamMap << note.d->note;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Note &note)
 {
-    s >> note.d->parameters >> note.d->note;
+    s >> note.d->mParamMap >> note.d->note;
     return s;
 }

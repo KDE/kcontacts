@@ -6,6 +6,9 @@
 */
 
 #include "resourcelocatorurl.h"
+
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +24,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         url = other.url;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QUrl url;
 };
 
@@ -57,18 +60,18 @@ static const url_type_name url_type_names[] = {
 
 ResourceLocatorUrl::Type ResourceLocatorUrl::type() const
 {
-    const auto it = d->parameters.constFind(QLatin1String("type"));
-    if (it == d->parameters.end()) {
+    const auto it = d->mParamMap.findParam(QLatin1String("type"));
+    if (it == d->mParamMap.cend()) {
         return Unknown;
     }
 
     Type type = Unknown;
-    for (const auto &s : it.value()) {
-        const auto it = std::find_if(std::begin(url_type_names), std::end(url_type_names), [s](const url_type_name &t) {
+    for (const QString &s : it->paramValues) {
+        const auto typeIt = std::find_if(std::begin(url_type_names), std::end(url_type_names), [&s](const url_type_name &t) {
             return QLatin1String(t.name) == s;
         });
-        if (it != std::end(url_type_names)) {
-            type |= (*it).type;
+        if (typeIt != std::end(url_type_names)) {
+            type |= (*typeIt).type;
         }
     }
     return type;
@@ -78,32 +81,37 @@ void ResourceLocatorUrl::setType(ResourceLocatorUrl::Type type)
 {
     const auto oldType = this->type();
 
-    auto types = d->parameters.value(QLatin1String("type"));
+    const QString paramName(QStringLiteral("type"));
+
+    auto it = d->mParamMap.findParam(paramName);
+    if (it == d->mParamMap.end()) {
+        it = d->mParamMap.insertParam({QLatin1String("type"), {}});
+    }
+
     for (const auto &t : url_type_names) {
         if (((type ^ oldType) & t.type) == 0) {
             continue; // no change
         }
 
+        const QLatin1String str(t.name);
         if (type & t.type) {
-            types.push_back(QLatin1String(t.name));
+            it->paramValues.push_back(str);
         } else {
-            types.removeAll(QLatin1String(t.name));
+            it->paramValues.removeAll(str);
         }
     }
-
-    d->parameters.insert(QLatin1String("type"), types);
 }
 
 bool ResourceLocatorUrl::isPreferred() const
 {
-    auto it = d->parameters.constFind(QLatin1String("pref"));
-    if (it != d->parameters.end() && !it.value().isEmpty()) {
-        return it.value().at(0) == QLatin1Char('1');
+    auto it = d->mParamMap.findParam(QLatin1String("pref"));
+    if (it != d->mParamMap.cend()) {
+        return !it->paramValues.isEmpty() && it->paramValues.at(0) == QLatin1Char('1');
     }
 
-    it = d->parameters.constFind(QLatin1String("type"));
-    if (it != d->parameters.end()) {
-        return it.value().contains(QLatin1String("PREF"), Qt::CaseInsensitive);
+    it = d->mParamMap.findParam(QLatin1String("type"));
+    if (it != d->mParamMap.cend()) {
+        return it->paramValues.contains(QLatin1String("PREF"), Qt::CaseInsensitive);
     }
 
     return false;
@@ -115,24 +123,35 @@ void ResourceLocatorUrl::setPreferred(bool preferred)
         return;
     }
 
-    auto types = d->parameters.value(QLatin1String("type"));
-    if (!preferred) {
-        d->parameters.remove(QLatin1String("pref"));
-        types.removeAll(QLatin1String("PREF"));
-    } else {
-        types.push_back(QLatin1String("PREF"));
-    }
-    d->parameters.insert(QLatin1String("type"), types);
-}
+    const QString paramName(QStringLiteral("type"));
 
-QMap<QString, QStringList> ResourceLocatorUrl::parameters() const
-{
-    return d->parameters;
+    auto it = d->mParamMap.findParam(paramName);
+    QStringList types = it != d->mParamMap.end() ? it->paramValues : QStringList{};
+
+    const QLatin1String PREF_Str("PREF");
+    if (!preferred) {
+        auto prefIt = d->mParamMap.findParam(QLatin1String("pref"));
+        if (prefIt != d->mParamMap.end()) {
+            d->mParamMap.erase(prefIt);
+        }
+
+        types.removeAll(PREF_Str);
+    } else {
+        types.push_back(PREF_Str);
+    }
+
+    // The above erase() call could have invalidated "it"
+    it = d->mParamMap.findParam(paramName);
+    if (it != d->mParamMap.end()) {
+        it->paramValues = types;
+    } else {
+        d->mParamMap.insertParam({QLatin1String("type"), types});
+    }
 }
 
 bool ResourceLocatorUrl::operator==(const ResourceLocatorUrl &other) const
 {
-    return (d->parameters == other.parameters()) && (d->url == other.url());
+    return (d->mParamMap == other.d->mParamMap) && (d->url == other.url());
 }
 
 bool ResourceLocatorUrl::operator!=(const ResourceLocatorUrl &other) const
@@ -153,20 +172,33 @@ QString ResourceLocatorUrl::toString() const
 {
     QString str = QLatin1String("ResourceLocatorUrl {\n");
     str += QStringLiteral("    url: %1\n").arg(d->url.toString());
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void ResourceLocatorUrl::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
+}
+#endif
+
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
+QMap<QString, QStringList> ResourceLocatorUrl::parameters() const
+{
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void ResourceLocatorUrl::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap ResourceLocatorUrl::params() const
+{
+    return d->mParamMap;
 }
 
 bool ResourceLocatorUrl::isValid() const
@@ -186,11 +218,11 @@ QUrl ResourceLocatorUrl::url() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const ResourceLocatorUrl &calUrl)
 {
-    return s << calUrl.d->parameters << calUrl.d->url;
+    return s << calUrl.d->mParamMap << calUrl.d->url;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, ResourceLocatorUrl &calUrl)
 {
-    s >> calUrl.d->parameters >> calUrl.d->url;
+    s >> calUrl.d->mParamMap >> calUrl.d->url;
     return s;
 }

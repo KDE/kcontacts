@@ -7,6 +7,8 @@
 
 #include "vcardline.h"
 
+#include "parametermap_p.h"
+
 using namespace KContacts;
 
 VCardLine::VCardLine()
@@ -97,35 +99,47 @@ bool VCardLine::hasGroup() const
 
 QStringList VCardLine::parameterList() const
 {
-    return mParamMap.keys();
+    QStringList list;
+    list.reserve(mParamMap.size());
+    for (const auto &[param, values] : mParamMap) {
+        list.append(param);
+    }
+
+    return list;
+}
+
+void VCardLine::addParameters(const ParameterMap &params)
+{
+    for (const auto &[param, list] : params) {
+        addParameter(param, list.join(QLatin1Char(',')));
+    }
 }
 
 void VCardLine::addParameter(const QString &param, const QString &value)
 {
-    QStringList &list = mParamMap[param];
-    if (!list.contains(value)) { // not included yet
-        list.append(value);
+    auto it = mParamMap.findParam(param);
+    if (it != mParamMap.end()) {
+        if (!it->paramValues.contains(value)) { // not included yet
+            it->paramValues.push_back(value);
+        }
+    } else {
+        mParamMap.insertParam({param, QStringList{value}});
     }
 }
 
 QStringList VCardLine::parameters(const QString &param) const
 {
-    auto it = mParamMap.constFind(param);
-    return it != mParamMap.cend() ? it.value() : QStringList();
+    auto it = mParamMap.findParam(param);
+    return it != mParamMap.cend() ? it->paramValues : QStringList{};
 }
 
 QString VCardLine::parameter(const QString &param) const
 {
-    auto it = mParamMap.constFind(param);
-    if (it != mParamMap.cend()) {
-        const QStringList lst = it.value();
-        return !lst.isEmpty() ? lst.first() : QString{};
-    }
-
-    return QString();
+    auto it = mParamMap.findParam(param);
+    return it != mParamMap.cend() && !it->paramValues.isEmpty() ? it->paramValues.at(0) : QString{};
 }
 
-VCardLine::ParamMap VCardLine::parameterMap() const
+ParameterMap VCardLine::parameterMap() const
 {
     return mParamMap;
 }

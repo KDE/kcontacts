@@ -6,6 +6,8 @@
 */
 
 #include "title.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         title = other.title;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString title;
 };
 
@@ -64,19 +66,33 @@ bool Title::isValid() const
     return !d->title.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Title::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Title::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Title::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Title::params() const
+{
+    return d->mParamMap;
 }
 
 bool Title::operator==(const Title &other) const
 {
-    return (d->parameters == other.parameters()) && (d->title == other.title());
+    return (d->mParamMap == other.d->mParamMap) && (d->title == other.title());
 }
 
 bool Title::operator!=(const Title &other) const
@@ -97,24 +113,18 @@ QString Title::toString() const
 {
     QString str = QLatin1String("Title {\n");
     str += QStringLiteral("    title: %1\n").arg(d->title);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Title &title)
 {
-    return s << title.d->parameters << title.d->title;
+    return s << title.d->mParamMap << title.d->title;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Title &title)
 {
-    s >> title.d->parameters >> title.d->title;
+    s >> title.d->mParamMap >> title.d->title;
     return s;
 }

@@ -6,6 +6,8 @@
 */
 
 #include "nickname.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         nickname = other.nickname;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString nickname;
 };
 
@@ -64,19 +66,33 @@ bool NickName::isValid() const
     return !d->nickname.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void NickName::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> NickName::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void NickName::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap NickName::params() const
+{
+    return d->mParamMap;
 }
 
 bool NickName::operator==(const NickName &other) const
 {
-    return (d->parameters == other.parameters()) && (d->nickname == other.nickname());
+    return (d->mParamMap == other.d->mParamMap) && (d->nickname == other.nickname());
 }
 
 bool NickName::operator!=(const NickName &other) const
@@ -97,24 +113,18 @@ QString NickName::toString() const
 {
     QString str = QLatin1String("NickName {\n");
     str += QStringLiteral("    nickname: %1\n").arg(d->nickname);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const NickName &nickname)
 {
-    return s << nickname.d->parameters << nickname.d->nickname;
+    return s << nickname.d->mParamMap << nickname.d->nickname;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, NickName &nickname)
 {
-    s >> nickname.d->parameters >> nickname.d->nickname;
+    s >> nickname.d->mParamMap >> nickname.d->nickname;
     return s;
 }

@@ -6,6 +6,8 @@
 */
 
 #include "org.h"
+#include "parametermap_p.h"
+
 #include <QDataStream>
 #include <QStringList>
 
@@ -21,11 +23,11 @@ public:
     Private(const Private &other)
         : QSharedData(other)
     {
-        parameters = other.parameters;
+        mParamMap = other.mParamMap;
         organization = other.organization;
     }
 
-    QMap<QString, QStringList> parameters;
+    ParameterMap mParamMap;
     QString organization;
 };
 
@@ -64,19 +66,33 @@ bool Org::isValid() const
     return !d->organization.isEmpty();
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 void Org::setParameters(const QMap<QString, QStringList> &params)
 {
-    d->parameters = params;
+    d->mParamMap = ParameterMap::fromQMap(params);
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 QMap<QString, QStringList> Org::parameters() const
 {
-    return d->parameters;
+    return d->mParamMap.toQMap();
+}
+#endif
+
+void Org::setParams(const ParameterMap &params)
+{
+    d->mParamMap = params;
+}
+
+ParameterMap Org::params() const
+{
+    return d->mParamMap;
 }
 
 bool Org::operator==(const Org &other) const
 {
-    return (d->parameters == other.parameters()) && (d->organization == other.organization());
+    return (d->mParamMap == other.d->mParamMap) && (d->organization == other.organization());
 }
 
 bool Org::operator!=(const Org &other) const
@@ -97,24 +113,18 @@ QString Org::toString() const
 {
     QString str = QLatin1String("Org {\n");
     str += QStringLiteral("    organization: %1\n").arg(d->organization);
-    if (!d->parameters.isEmpty()) {
-        QString param;
-        for (auto it = d->parameters.cbegin(); it != d->parameters.cend(); ++it) {
-            param += QStringLiteral("%1 %2").arg(it.key(), it.value().join(QLatin1Char(',')));
-        }
-        str += QStringLiteral("    parameters: %1\n").arg(param);
-    }
+    str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
 }
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Org &org)
 {
-    return s << org.d->parameters << org.d->organization;
+    return s << org.d->mParamMap << org.d->organization;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Org &org)
 {
-    s >> org.d->parameters >> org.d->organization;
+    s >> org.d->mParamMap >> org.d->organization;
     return s;
 }

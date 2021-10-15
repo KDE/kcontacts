@@ -14,8 +14,12 @@
 #include <QString>
 class QUrl;
 
+class CalendarUrlTest;
+
 namespace KContacts
 {
+class ParameterMap;
+
 /** @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
  *  @since 4.14.6
  */
@@ -23,6 +27,8 @@ class KCONTACTS_EXPORT CalendarUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const CalendarUrl &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, CalendarUrl &);
+    friend class VCardTool;
+    friend class ::CalendarUrlTest;
 
 public:
     enum CalendarType {
@@ -49,8 +55,21 @@ public:
     void setUrl(const QUrl &url);
     QUrl url() const;
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     void setParameters(const QMap<QString, QStringList> &params);
+#endif
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+#endif
 
     Q_REQUIRED_RESULT bool operator==(const CalendarUrl &other) const;
     Q_REQUIRED_RESULT bool operator!=(const CalendarUrl &other) const;
@@ -60,6 +79,9 @@ public:
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
+    void setParams(const ParameterMap &params);
+    Q_REQUIRED_RESULT ParameterMap params() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };

@@ -16,8 +16,12 @@
 #include <QString>
 #include <QUrl>
 
+class ResourceLocatorUrlTest;
+
 namespace KContacts
 {
+class ParameterMap;
+
 /** @short Class that holds a Resource Locator
  *  @since 5.0
  */
@@ -25,6 +29,8 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const ResourceLocatorUrl &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, ResourceLocatorUrl &);
+    friend class VCardTool;
+    friend class ::ResourceLocatorUrlTest;
 
     Q_GADGET
     Q_PROPERTY(QUrl url READ url WRITE setUrl)
@@ -85,8 +91,21 @@ public:
      */
     void setPreferred(bool preferred);
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     void setParameters(const QMap<QString, QStringList> &params);
+#endif
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * @deprecated Since 5.88 for lack of usage
+     */
+    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
     Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+#endif
 
     Q_REQUIRED_RESULT bool operator==(const ResourceLocatorUrl &other) const;
     Q_REQUIRED_RESULT bool operator!=(const ResourceLocatorUrl &other) const;
@@ -96,6 +115,9 @@ public:
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
+    void setParams(const ParameterMap &params);
+    Q_REQUIRED_RESULT ParameterMap params() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };
