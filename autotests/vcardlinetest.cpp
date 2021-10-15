@@ -6,7 +6,7 @@
 */
 
 #include "vcardlinetest.h"
-#include "vcardline.h"
+#include "vcardline_p.h"
 #include <QTest>
 
 VCardLineTest::VCardLineTest(QObject *parent)

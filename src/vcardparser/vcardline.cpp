@@ -5,7 +5,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "vcardline.h"
+#include "vcardline_p.h"
 
 #include "parametermap_p.h"
 

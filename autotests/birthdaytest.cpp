@@ -7,7 +7,7 @@
 
 #include "birthdaytest.h"
 #include "addressee.h"
-#include "vcard.h"
+#include "vcard_p.h"
 #include <QTest>
 #include <vcardtool_p.h>
 

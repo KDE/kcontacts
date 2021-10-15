@@ -5,7 +5,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "vcard.h"
+#include "vcard_p.h"
 
 using namespace KContacts;
 

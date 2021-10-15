@@ -8,7 +8,7 @@
 #ifndef VCARDPARSER_H
 #define VCARDPARSER_H
 
-#include "vcard.h"
+#include "vcard_p.h"
 #include <QByteArray>
 
 namespace KContacts

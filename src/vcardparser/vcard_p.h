@@ -8,7 +8,7 @@
 #ifndef VCARDPARSER_VCARD_H
 #define VCARDPARSER_VCARD_H
 
-#include "vcardline.h"
+#include "vcardline_p.h"
 #include <QMap>
 #include <QStringList>
 #include <QVector>

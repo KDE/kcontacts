@@ -10,7 +10,7 @@
 
 #include "addressee.h"
 #include "kcontacts_export.h"
-#include "vcardparser/vcardparser.h"
+#include "vcardparser/vcardparser_p.h"
 
 class QDateTime;
 

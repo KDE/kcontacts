@@ -8,7 +8,7 @@
 #include "testutils.h"
 #include <QFile>
 
-#include "vcardparser.h"
+#include "vcardparser_p.h"
 
 using namespace KContacts;
 
