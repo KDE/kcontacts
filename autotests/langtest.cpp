@@ -7,6 +7,7 @@
 
 #include "langtest.h"
 #include "lang.h"
+#include "parametermap_p.h"
 #include "vcardtool_p.h"
 #include <QTest>
 
@@ -24,22 +25,22 @@ void LangTest::shouldHaveDefaultValue()
     KContacts::Lang language;
     QVERIFY(!language.isValid());
     QVERIFY(language.language().isEmpty());
-    QVERIFY(language.parameters().isEmpty());
+    QVERIFY(language.params().empty());
 }
 
 void LangTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Lang language(lang);
-    language.setParameters(params);
+    language.setParams(params);
     QVERIFY(language.isValid());
     QVERIFY(!language.language().isEmpty());
     QCOMPARE(language.language(), lang);
-    QVERIFY(!language.parameters().isEmpty());
-    QCOMPARE(language.parameters(), params);
+    QVERIFY(!language.params().empty());
+    QCOMPARE(language.params(), params);
 }
 
 void LangTest::shouldAssignExternal()
@@ -57,10 +58,10 @@ void LangTest::shouldSerialized()
     KContacts::Lang result;
     const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    language.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    language.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +79,10 @@ void LangTest::shouldEqualLanguage()
     KContacts::Lang result;
     const QString lang(QStringLiteral("fr"));
     language.setLanguage(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    language.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    language.setParams(params);
 
     result = language;
     QVERIFY(language == result);
@@ -183,10 +184,10 @@ void LangTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Lang::List lstLang;
     KContacts::Lang lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    lang.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    lang.setParams(params);
     lstLang << lang;
     addr.setLangs(lstLang);
     lst << addr;
@@ -211,10 +212,10 @@ void LangTest::shouldNotGenerateLangForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Lang::List lstLang;
     KContacts::Lang lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    lang.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    lang.setParams(params);
     lstLang << lang;
     addr.setLangs(lstLang);
     lst << addr;

@@ -7,6 +7,7 @@
 
 #include "nicknametest.h"
 #include "nickname.h"
+#include "parametermap_p.h"
 #include "vcardtool_p.h"
 #include <QTest>
 
@@ -24,22 +25,22 @@ void NickNameTest::shouldHaveDefaultValue()
     KContacts::NickName nickname;
     QVERIFY(!nickname.isValid());
     QVERIFY(nickname.nickname().isEmpty());
-    QVERIFY(nickname.parameters().isEmpty());
+    QVERIFY(nickname.params().empty());
 }
 
 void NickNameTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::NickName nickname(lang);
-    nickname.setParameters(params);
+    nickname.setParams(params);
     QVERIFY(nickname.isValid());
     QVERIFY(!nickname.nickname().isEmpty());
     QCOMPARE(nickname.nickname(), lang);
-    QVERIFY(!nickname.parameters().isEmpty());
-    QCOMPARE(nickname.parameters(), params);
+    QVERIFY(!nickname.params().empty());
+    QCOMPARE(nickname.params(), params);
 }
 
 void NickNameTest::shouldAssignExternal()
@@ -57,10 +58,10 @@ void NickNameTest::shouldSerialized()
     KContacts::NickName result;
     const QString lang(QStringLiteral("fr"));
     nickname.setNickName(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    nickname.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    nickname.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +79,10 @@ void NickNameTest::shouldEqualNickName()
     KContacts::NickName result;
     const QString lang(QStringLiteral("fr"));
     nickname.setNickName(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    nickname.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    nickname.setParams(params);
 
     result = nickname;
     QVERIFY(nickname == result);
@@ -185,10 +186,10 @@ void NickNameTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::NickName::List lstNickName;
     KContacts::NickName title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
     lstNickName << title;
     addr.setExtraNickNameList(lstNickName);
     lst << addr;
@@ -213,10 +214,10 @@ void NickNameTest::shouldGenerateNickNameForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::NickName::List lstNickName;
     KContacts::NickName title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
     lstNickName << title;
     addr.setExtraNickNameList(lstNickName);
     lst << addr;

@@ -6,6 +6,7 @@
 */
 
 #include "roletest.h"
+#include "parametermap_p.h"
 #include "role.h"
 #include "vcardtool_p.h"
 #include <QTest>
@@ -24,22 +25,22 @@ void RoleTest::shouldHaveDefaultValue()
     KContacts::Role role;
     QVERIFY(!role.isValid());
     QVERIFY(role.role().isEmpty());
-    QVERIFY(role.parameters().isEmpty());
+    QVERIFY(role.params().empty());
 }
 
 void RoleTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Role role(lang);
-    role.setParameters(params);
+    role.setParams(params);
     QVERIFY(role.isValid());
     QVERIFY(!role.role().isEmpty());
     QCOMPARE(role.role(), lang);
-    QVERIFY(!role.parameters().isEmpty());
-    QCOMPARE(role.parameters(), params);
+    QVERIFY(!role.params().empty());
+    QCOMPARE(role.params(), params);
 }
 
 void RoleTest::shouldAssignExternal()
@@ -57,10 +58,10 @@ void RoleTest::shouldSerialized()
     KContacts::Role result;
     const QString lang(QStringLiteral("fr"));
     role.setRole(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    role.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    role.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +79,10 @@ void RoleTest::shouldEqualRole()
     KContacts::Role result;
     const QString lang(QStringLiteral("fr"));
     role.setRole(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    role.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    role.setParams(params);
 
     result = role;
     QVERIFY(role == result);
@@ -185,10 +186,10 @@ void RoleTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Role::List lstRole;
     KContacts::Role role(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    role.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    role.setParams(params);
     lstRole << role;
     addr.setExtraRoleList(lstRole);
     lst << addr;
@@ -213,10 +214,10 @@ void RoleTest::shouldGenerateRoleForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Role::List lstRole;
     KContacts::Role role(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    role.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    role.setParams(params);
     lstRole << role;
     addr.setExtraRoleList(lstRole);
     lst << addr;

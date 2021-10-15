@@ -6,8 +6,11 @@
 */
 
 #include "relatedtest.h"
+
+#include "parametermap_p.h"
 #include "related.h"
 #include "vcardtool_p.h"
+
 #include <QTest>
 
 RelatedTest::RelatedTest(QObject *parent)
@@ -24,22 +27,22 @@ void RelatedTest::shouldHaveDefaultValue()
     KContacts::Related related;
     QVERIFY(!related.isValid());
     QVERIFY(related.related().isEmpty());
-    QVERIFY(related.parameters().isEmpty());
+    QVERIFY(related.params().empty());
 }
 
 void RelatedTest::shouldAssignValue()
 {
     const QString relatedTo(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Related related(relatedTo);
-    related.setParameters(params);
+    related.setParams(params);
     QVERIFY(related.isValid());
     QVERIFY(!related.related().isEmpty());
     QCOMPARE(related.related(), relatedTo);
-    QVERIFY(!related.parameters().isEmpty());
-    QCOMPARE(related.parameters(), params);
+    QVERIFY(!related.params().empty());
+    QCOMPARE(related.params(), params);
 }
 
 void RelatedTest::shouldAssignExternal()
@@ -57,10 +60,10 @@ void RelatedTest::shouldSerialized()
     KContacts::Related result;
     const QString relatedTo(QStringLiteral("friend"));
     related.setRelated(relatedTo);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    related.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    related.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +81,10 @@ void RelatedTest::shouldEqualRelated()
     KContacts::Related result;
     const QString relatedTo(QStringLiteral("friend"));
     related.setRelated(relatedTo);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    related.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    related.setParams(params);
 
     result = related;
     QVERIFY(related == result);
@@ -125,7 +128,7 @@ void RelatedTest::shouldParseRelatedWithArgument()
     QCOMPARE(lst.at(0).relationships().count(), 1);
     const KContacts::Related related = lst.at(0).relationships().at(0);
     QCOMPARE(related.related(), QStringLiteral("friend"));
-    QCOMPARE(related.parameters().count(), 2);
+    QCOMPARE(related.params().size(), 2);
 }
 
 void RelatedTest::shouldParseWithoutRelated()
@@ -205,10 +208,10 @@ void RelatedTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Related::List lstRelated;
     KContacts::Related related(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    related.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    related.setParams(params);
     lstRelated << related;
     addr.setRelationships(lstRelated);
     lst << addr;
@@ -233,10 +236,10 @@ void RelatedTest::shouldNotExportInVcard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Related::List lstRelated;
     KContacts::Related related(QStringLiteral("friend"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    related.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    related.setParams(params);
     lstRelated << related;
     addr.setRelationships(lstRelated);
     lst << addr;

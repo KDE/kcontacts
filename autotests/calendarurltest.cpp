@@ -6,6 +6,7 @@
 */
 
 #include "calendarurltest.h"
+#include "parametermap_p.h"
 
 #include "calendarurl.h"
 #include "vcardtool_p.h"
@@ -27,21 +28,21 @@ void CalendarUrlTest::shouldHaveDefaultValue()
     CalendarUrl calendarUrl(CalendarUrl::FBUrl);
     QVERIFY(!calendarUrl.isValid());
     QVERIFY(calendarUrl.url().isEmpty());
-    QVERIFY(calendarUrl.parameters().isEmpty());
+    QVERIFY(calendarUrl.params().empty());
 }
 
 void CalendarUrlTest::shouldAssignValue()
 {
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     CalendarUrl calendarUrl(CalendarUrl::FBUrl);
-    calendarUrl.setParameters(params);
+    calendarUrl.setParams(params);
     QVERIFY(!calendarUrl.isValid());
     QCOMPARE(calendarUrl.type(), CalendarUrl::FBUrl);
     QVERIFY(calendarUrl.url().isEmpty());
-    QVERIFY(!calendarUrl.parameters().isEmpty());
-    QCOMPARE(calendarUrl.parameters(), params);
+    QVERIFY(!calendarUrl.params().empty());
+    QCOMPARE(calendarUrl.params(), params);
 }
 
 void CalendarUrlTest::shouldAssignExternal()
@@ -60,10 +61,10 @@ void CalendarUrlTest::shouldSerialized()
         CalendarUrl result;
         CalendarUrl::CalendarType type = static_cast<CalendarUrl::CalendarType>(i);
         calendarUrl.setType(type);
-        QMap<QString, QStringList> params;
-        params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-        params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-        calendarUrl.setParameters(params);
+        KContacts::ParameterMap params;
+        params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+        params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+        calendarUrl.setParams(params);
         calendarUrl.setUrl(QUrl(QStringLiteral("mailto:foo@kde.org")));
 
         QByteArray data;
@@ -84,11 +85,11 @@ void CalendarUrlTest::shouldEqualCalendarUrl()
         CalendarUrl result;
         CalendarUrl::CalendarType type = static_cast<CalendarUrl::CalendarType>(i);
         calendarUrl.setType(type);
-        QMap<QString, QStringList> params;
-        params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-        params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+        KContacts::ParameterMap params;
+        params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+        params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
         calendarUrl.setUrl(QUrl(QStringLiteral("mailto:foo@kde.org")));
-        calendarUrl.setParameters(params);
+        calendarUrl.setParams(params);
 
         result = calendarUrl;
         QVERIFY(calendarUrl == result);
@@ -134,7 +135,7 @@ void CalendarUrlTest::shouldParseCalendarUrl()
         const CalendarUrl calurl = lst.at(0).calendarUrlList().at(0);
         QCOMPARE(calurl.type(), type);
         QCOMPARE(calurl.url(), QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-        QVERIFY(!calurl.parameters().isEmpty());
+        QVERIFY(!calurl.params().empty());
     }
 }
 
@@ -217,9 +218,9 @@ void CalendarUrlTest::shouldGenerateVCardWithParameter()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    url.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    url.setParams(params);
     addr.insertCalendarUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
@@ -244,9 +245,9 @@ void CalendarUrlTest::shouldNotGeneratedAttributeForVcard3()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    url.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    url.setParams(params);
     addr.insertCalendarUrl(url);
     lst << addr;
     KContacts::VCardTool vcard;
@@ -270,17 +271,17 @@ void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
     CalendarUrl url;
     url.setType(CalendarUrl::CALUri);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes")));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    url.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    url.setParams(params);
     addr.insertCalendarUrl(url);
 
     url.setType(CalendarUrl::FBUrl);
     url.setUrl(QUrl(QStringLiteral("https://sherlockholmes.com/calendar/sherlockholmes2")));
     params.clear();
 
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    url.setParameters(params);
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    url.setParams(params);
     addr.insertCalendarUrl(url);
 
     lst << addr;

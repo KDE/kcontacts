@@ -7,6 +7,7 @@
 
 #include "impptest.h"
 #include "impp.h"
+#include "parametermap_p.h"
 #include "vcardtool_p.h"
 #include <QTest>
 
@@ -25,35 +26,35 @@ void ImppTest::shouldHaveDefaultValue()
     QVERIFY(!impp.isValid());
     QVERIFY(impp.address().isEmpty());
     QVERIFY(impp.serviceType().isEmpty());
-    QVERIFY(impp.parameters().isEmpty());
+    QVERIFY(impp.params().empty());
 }
 
 void ImppTest::shouldAssignValue()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Impp impp;
-    impp.setParameters(params);
+    impp.setParams(params);
     impp.setAddress(address);
     QVERIFY(impp.isValid());
     QVERIFY(!impp.address().isEmpty());
     QCOMPARE(impp.address(), address);
     QCOMPARE(impp.serviceType(), QLatin1String("icq"));
     QCOMPARE(impp.serviceIcon(), QLatin1String("im-icq"));
-    QVERIFY(!impp.parameters().isEmpty());
-    QCOMPARE(impp.parameters(), params);
+    QVERIFY(!impp.params().empty());
+    QCOMPARE(impp.params(), params);
 }
 
 void ImppTest::shouldSerialized()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Impp impp;
-    impp.setParameters(params);
+    impp.setParams(params);
     impp.setAddress(address);
 
     QByteArray data;
@@ -70,11 +71,11 @@ void ImppTest::shouldSerialized()
 void ImppTest::shouldEqualImpp()
 {
     const QUrl address(QStringLiteral("icq:address"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Impp impp;
-    impp.setParameters(params);
+    impp.setParams(params);
     impp.setAddress(address);
 
     KContacts::Impp result(impp);
@@ -268,12 +269,12 @@ void ImppTest::shouldExportWithParameters()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Impp impp;
     impp.setAddress(QUrl(QStringLiteral("skype:address")));
-    impp.setParameters(params);
+    impp.setParams(params);
     impp.setPreferred(false);
     addr.insertImpp(impp);
     lst << addr;
@@ -297,13 +298,13 @@ void ImppTest::shouldShouldNotExportTwiceServiceType()
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
     addr.setUid(QStringLiteral("testuid"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    params.insert(QStringLiteral("X-SERVICE-TYPE"), QStringList() << QStringLiteral("aim"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    params.push_back({QStringLiteral("X-SERVICE-TYPE"), QStringList() << QStringLiteral("aim")});
     KContacts::Impp impp;
     impp.setAddress(QUrl(QStringLiteral("skype:address")));
-    impp.setParameters(params);
+    impp.setParams(params);
     impp.setPreferred(true);
     addr.insertImpp(impp);
     lst << addr;

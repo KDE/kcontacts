@@ -6,6 +6,7 @@
 */
 #include "emailtest.h"
 #include "email.h"
+#include "parametermap_p.h"
 #include "vcardtool_p.h"
 #include <QTest>
 
@@ -23,22 +24,22 @@ void EmailTest::shouldHaveDefaultValue()
     KContacts::Email email;
     QVERIFY(!email.isValid());
     QVERIFY(email.mail().isEmpty());
-    QVERIFY(email.parameters().isEmpty());
+    QVERIFY(email.params().empty());
 }
 
 void EmailTest::shouldAssignValue()
 {
     const QString mail(QStringLiteral("foo@kde.org"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Email email(mail);
-    email.setParameters(params);
+    email.setParams(params);
     QVERIFY(email.isValid());
     QVERIFY(!email.mail().isEmpty());
     QCOMPARE(email.mail(), mail);
-    QVERIFY(!email.parameters().isEmpty());
-    QCOMPARE(email.parameters(), params);
+    QVERIFY(!email.params().empty());
+    QCOMPARE(email.params(), params);
 }
 
 void EmailTest::shouldAssignExternal()
@@ -57,10 +58,10 @@ void EmailTest::shouldSerialized()
     KContacts::Email result;
     const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    email.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    email.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +79,10 @@ void EmailTest::shouldEqualEmail()
     KContacts::Email result;
     const QString mail(QStringLiteral("foo@kde.org"));
     email.setEmail(mail);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    email.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    email.setParams(params);
 
     result = email;
     QVERIFY(email == result);
@@ -106,7 +107,7 @@ void EmailTest::shouldParseEmailVCard()
     QCOMPARE(lst.at(0).emailList().count(), 1);
     KContacts::Email email = lst.at(0).emailList().at(0);
     QCOMPARE(email.mail(), QStringLiteral("foo@foo.com"));
-    QCOMPARE(email.parameters().count(), 2);
+    QCOMPARE(email.params().size(), 2);
 }
 
 void EmailTest::shouldParseEmailVCardWithMultiEmails()
@@ -136,7 +137,7 @@ void EmailTest::shouldParseEmailVCardWithMultiEmails()
     QCOMPARE(email.type(), KContacts::Email::Work);
     QVERIFY(!email.isPreferred());
 
-    QCOMPARE(email.parameters().count(), 2);
+    QCOMPARE(email.params().size(), 2);
 }
 
 void EmailTest::shouldParseEmailVCardWithoutEmail()

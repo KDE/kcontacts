@@ -6,6 +6,7 @@
 */
 
 #include "titletest.h"
+#include "parametermap_p.h"
 #include "title.h"
 #include "vcardtool_p.h"
 #include <QTest>
@@ -24,22 +25,22 @@ void TitleTest::shouldHaveDefaultValue()
     KContacts::Title title;
     QVERIFY(!title.isValid());
     QVERIFY(title.title().isEmpty());
-    QVERIFY(title.parameters().isEmpty());
+    QVERIFY(title.params().empty());
 }
 
 void TitleTest::shouldAssignValue()
 {
     const QString lang(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
     KContacts::Title title(lang);
-    title.setParameters(params);
+    title.setParams(params);
     QVERIFY(title.isValid());
     QVERIFY(!title.title().isEmpty());
     QCOMPARE(title.title(), lang);
-    QVERIFY(!title.parameters().isEmpty());
-    QCOMPARE(title.parameters(), params);
+    QVERIFY(!title.params().empty());
+    QCOMPARE(title.params(), params);
 }
 
 void TitleTest::shouldAssignExternal()
@@ -57,10 +58,10 @@ void TitleTest::shouldSerialized()
     KContacts::Title result;
     const QString lang(QStringLiteral("fr"));
     title.setTitle(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
 
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
@@ -78,10 +79,10 @@ void TitleTest::shouldEqualTitle()
     KContacts::Title result;
     const QString lang(QStringLiteral("fr"));
     title.setTitle(lang);
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
 
     result = title;
     QVERIFY(title == result);
@@ -207,10 +208,10 @@ void TitleTest::shouldCreateVCardWithParameters()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Title::List lstTitle;
     KContacts::Title title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
     lstTitle << title;
     addr.setExtraTitleList(lstTitle);
     lst << addr;
@@ -235,10 +236,10 @@ void TitleTest::shouldGenerateTitleForVCard3()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::Title::List lstTitle;
     KContacts::Title title(QStringLiteral("fr"));
-    QMap<QString, QStringList> params;
-    params.insert(QStringLiteral("Foo1"), QStringList() << QStringLiteral("bla1") << QStringLiteral("blo1"));
-    params.insert(QStringLiteral("Foo2"), QStringList() << QStringLiteral("bla2") << QStringLiteral("blo2"));
-    title.setParameters(params);
+    KContacts::ParameterMap params;
+    params.push_back({QStringLiteral("Foo1"), {QStringLiteral("bla1"), QStringLiteral("blo1")}});
+    params.push_back({QStringLiteral("Foo2"), {QStringLiteral("bla2"), QStringLiteral("blo2")}});
+    title.setParams(params);
     lstTitle << title;
     addr.setExtraTitleList(lstTitle);
     lst << addr;
