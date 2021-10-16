@@ -105,19 +105,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
     return createVCards(list, version, false /*don't export*/);
 }
 
-void VCardTool::addParameter(VCardLine &line, VCard::Version version, const QString &key, const QStringList &valueStringList) const
+void VCardTool::addParameter(VCardLine *line, VCard::Version version, const QString &key, const QStringList &valueStringList) const
 {
     if (version == VCard::v2_1) {
         for (const QString &valueStr : valueStringList) {
-            line.addParameter(valueStr, QString());
+            line->addParameter(valueStr, QString());
         }
     } else if (version == VCard::v3_0) {
-        line.addParameter(key, valueStringList.join(QLatin1Char(',')));
+        line->addParameter(key, valueStringList.join(QLatin1Char(',')));
     } else {
         if (valueStringList.count() < 2) {
-            line.addParameter(key, valueStringList.join(QLatin1Char(',')));
+            line->addParameter(key, valueStringList.join(QLatin1Char(',')));
         } else {
-            line.addParameter(key, QLatin1Char('"') + valueStringList.join(QLatin1Char(',')) + QLatin1Char('"'));
+            line->addParameter(key, QLatin1Char('"') + valueStringList.join(QLatin1Char(',')) + QLatin1Char('"'));
         }
     }
 }
@@ -177,7 +177,7 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
                     labelLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
                     labelLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
                 }
-                addParameter(labelLine, version, QStringLiteral("TYPE"), labelLineType);
+                addParameter(&labelLine, version, QStringLiteral("TYPE"), labelLineType);
                 card->addLine(labelLine);
             }
         }
@@ -189,7 +189,7 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
             }
         }
         if (!isEmpty) {
-            addParameter(adrLine, version, QStringLiteral("TYPE"), addreLineType);
+            addParameter(&adrLine, version, QStringLiteral("TYPE"), addreLineType);
             card->addLine(adrLine);
         }
     }
@@ -210,7 +210,7 @@ void VCardTool::processEmailList(const Email::List &emailList, VCard::Version ve
                         hasPreferred = true;
                     }
                     if (!list.isEmpty()) {
-                        addParameter(line, version, param, list);
+                        addParameter(&line, version, param, list);
                     }
                     if (hasPreferred) {
                         line.addParameter(QStringLiteral("PREF"), QString());
@@ -269,7 +269,7 @@ void VCardTool::processPhoneNumbers(const PhoneNumber::List &phoneNumbers, VCard
             }
         }
         if (!lst.isEmpty()) {
-            addParameter(line, version, QStringLiteral("TYPE"), lst);
+            addParameter(&line, version, QStringLiteral("TYPE"), lst);
         }
         card->addLine(line);
     }
