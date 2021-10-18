@@ -630,7 +630,12 @@ void KContacts::evaluatePair(Addressee &a,
         return;
     }
     if (fieldname == QLatin1String("xbatbirthday")) {
-        QDate dt = QDate::fromString(value, QStringLiteral("yyyyMMdd"));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const QStringView str{value};
+#else
+        const QStringRef str{&value};
+#endif
+        QDate dt(str.mid(0, 4).toInt(), str.mid(4, 2).toInt(), str.mid(6, 2).toInt());
         if (dt.isValid()) {
             a.setBirthday(dt);
         }
