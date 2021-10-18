@@ -1206,16 +1206,24 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
 
 QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
 {
+    static const QLatin1Char sep('-');
+
     const int posT = str.indexOf(QLatin1Char('T'));
     QString dateString = posT >= 0 ? str.left(posT) : str;
     const bool noYear = dateString.startsWith(QLatin1String("--"));
     dateString.remove(QLatin1Char('-'));
     QDate date;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QStringView dstr{dateString};
+#else
+    const QStringRef dstr(&dateString);
+#endif
     if (noYear) {
-        date = QDate::fromString(dateString, QStringLiteral("MMdd"));
-        date = date.addYears(-1900);
+        date.setDate(-1, dstr.mid(0, 2).toInt(), dstr.mid(2, 2).toInt());
     } else {
-        date = QDate::fromString(dateString, QStringLiteral("yyyyMMdd"));
+        // E.g. 20160120
+        date.setDate(dstr.mid(0, 4).toInt(), dstr.mid(4, 2).toInt(), dstr.mid(6, 2).toInt());
     }
 
     QTime time;
@@ -1226,20 +1234,32 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
         timeString.remove(QLatin1Char(':'));
         const int zPos = timeString.indexOf(QLatin1Char('Z'));
         const int plusPos = timeString.indexOf(QLatin1Char('+'));
-        const int minusPos = timeString.indexOf(QLatin1Char('-'));
+        const int minusPos = timeString.indexOf(sep);
         const int tzPos = qMax(qMax(zPos, plusPos), minusPos);
-        const QString hhmmssString = tzPos >= 0 ? timeString.left(tzPos) : timeString;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const QStringView hhmmssString = tzPos >= 0 ? QStringView(timeString).left(tzPos) : QStringView(timeString);
+#else
+        const QStringRef hhmmssString = tzPos >= 0 ? timeString.leftRef(tzPos) : QStringRef(&timeString);
+#endif
+        int hour = 0;
+        int minutes = 0;
+        int seconds = 0;
         switch (hhmmssString.size()) {
         case 2:
-            time = QTime::fromString(hhmmssString, QStringLiteral("hh"));
+            hour = hhmmssString.toInt();
             break;
         case 4:
-            time = QTime::fromString(hhmmssString, QStringLiteral("hhmm"));
+            hour = hhmmssString.mid(0, 2).toInt();
+            minutes = hhmmssString.mid(2, 2).toInt();
             break;
         case 6:
-            time = QTime::fromString(hhmmssString, QStringLiteral("hhmmss"));
+            hour = hhmmssString.mid(0, 2).toInt();
+            minutes = hhmmssString.mid(2, 2).toInt();
+            seconds = hhmmssString.mid(4, 2).toInt();
             break;
         }
+        time.setHMS(hour, minutes, seconds);
+
         if (tzPos >= 0) {
             if (zPos >= 0) {
                 spec = Qt::UTC;
