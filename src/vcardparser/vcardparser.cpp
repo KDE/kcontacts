@@ -469,7 +469,8 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                                 }
                             }
                         } else {
-                            text.append(textLine + "\r\n");
+                            text.append(textLine);
+                            text.append("\r\n");
                         }
                     }
                 }
