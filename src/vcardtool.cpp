@@ -1217,16 +1217,19 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     Qt::TimeSpec spec = Qt::LocalTime;
     int offsetSecs = 0;
     if (posT >= 0) {
-        QString timeString = str.mid(posT + 1);
-        timeString.remove(QLatin1Char(':'));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const QStringView timeString = QStringView(str).mid(posT + 1);
+#else
+        const QStringRef timeString = str.midRef(posT + 1);
+#endif
         const int zPos = timeString.indexOf(QLatin1Char('Z'));
         const int plusPos = timeString.indexOf(QLatin1Char('+'));
         const int minusPos = timeString.indexOf(sep);
         const int tzPos = qMax(qMax(zPos, plusPos), minusPos);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        const QStringView hhmmssString = tzPos >= 0 ? QStringView(timeString).left(tzPos) : QStringView(timeString);
+        const QStringView hhmmssString = tzPos >= 0 ? timeString.left(tzPos) : timeString;
 #else
-        const QStringRef hhmmssString = tzPos >= 0 ? timeString.leftRef(tzPos) : QStringRef(&timeString);
+        const QStringRef hhmmssString = tzPos >= 0 ? timeString.left(tzPos) : timeString;
 #endif
         int hour = 0;
         int minutes = 0;
@@ -1235,14 +1238,26 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
         case 2:
             hour = hhmmssString.toInt();
             break;
-        case 4:
+        case 4: // 0904
             hour = hhmmssString.mid(0, 2).toInt();
             minutes = hhmmssString.mid(2, 2).toInt();
             break;
-        case 6:
+        case 5: // 09:04
+            hour = hhmmssString.mid(0, 2).toInt();
+            minutes = hhmmssString.mid(3, 2).toInt();
+            break;
+        case 6: // 090410
             hour = hhmmssString.mid(0, 2).toInt();
             minutes = hhmmssString.mid(2, 2).toInt();
             seconds = hhmmssString.mid(4, 2).toInt();
+            break;
+        case 8: // 09:04:10
+            hour = hhmmssString.mid(0, 2).toInt();
+            minutes = hhmmssString.mid(3, 2).toInt();
+            seconds = hhmmssString.mid(6, 2).toInt();
+            break;
+        default:
+            qCWarning(KCONTACTS_LOG) << "Could not parse time string:" << hhmmssString;
             break;
         }
         time.setHMS(hour, minutes, seconds);
@@ -1254,9 +1269,9 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                 spec = Qt::OffsetFromUTC;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                const auto offsetString = QStringView(timeString).mid(tzPos + 1);
+                const QStringView offsetString = timeString.mid(tzPos + 1);
 #else
-                const QStringRef offsetString = timeString.midRef(tzPos + 1);
+                const QStringRef offsetString = timeString.mid(tzPos + 1);
 #endif
                 switch (offsetString.size()) {
                 case 2: // format: "hh"
@@ -1264,6 +1279,9 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                     break;
                 case 4: // format: "hhmm"
                     offsetSecs = offsetString.left(2).toInt() * 3600 + offsetString.mid(2, 2).toInt() * 60;
+                    break;
+                case 5: // format: "hh:mm"
+                    offsetSecs = offsetString.mid(0, 2).toInt() * 3600 + offsetString.mid(3, 2).toInt() * 60;
                     break;
                 }
             }
