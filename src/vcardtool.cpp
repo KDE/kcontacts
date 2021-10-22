@@ -1196,21 +1196,39 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     static const QLatin1Char sep('-');
 
     const int posT = str.indexOf(QLatin1Char('T'));
-    QString dateString = posT >= 0 ? str.left(posT) : str;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QStringView dateString = posT>= 0 ? QStringView(str).left(posT) : str;
+#else
+    const QStringRef dateString = posT >= 0 ? str.leftRef(posT) : &str;
+#endif
     const bool noYear = dateString.startsWith(QLatin1String("--"));
-    dateString.remove(QLatin1Char('-'));
     QDate date;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QStringView dstr{dateString};
-#else
-    const QStringRef dstr(&dateString);
-#endif
+    const int dateSize = dateString.size();
     if (noYear) {
-        date.setDate(-1, dstr.mid(0, 2).toInt(), dstr.mid(2, 2).toInt());
+        switch (dateSize) {
+        case 6: // --0125
+            date.setDate(-1, dateString.mid(2, 2).toInt(), dateString.mid(4, 2).toInt());
+            break;
+        case 7: // --01-25
+            date.setDate(-1, dateString.mid(2, 2).toInt(), dateString.mid(5, 2).toInt());
+            break;
+        default:
+            qCWarning(KCONTACTS_LOG) << "Could not parse date string:" << dateString;
+            break;
+        }
     } else {
-        // E.g. 20160120
-        date.setDate(dstr.mid(0, 4).toInt(), dstr.mid(4, 2).toInt(), dstr.mid(6, 2).toInt());
+        switch (dateSize) {
+        case 8: // 20160120
+            date.setDate(dateString.mid(0, 4).toInt(), dateString.mid(4, 2).toInt(), dateString.mid(6, 2).toInt());
+            break;
+        case 10:// 2016-01-20
+            date.setDate(dateString.mid(0, 4).toInt(), dateString.mid(5, 2).toInt(), dateString.mid(8, 2).toInt());
+            break;
+        default:
+            qCWarning(KCONTACTS_LOG) << "Could not parse date string:" << dateString;
+            break;
+        }
     }
 
     QTime time;
