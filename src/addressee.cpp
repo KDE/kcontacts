@@ -17,7 +17,6 @@
 
 #include "addressee.h"
 #include "addresseehelper.h"
-#include "field.h"
 
 using namespace KContacts;
 

@@ -5,10 +5,11 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+#include "field.h"
+
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
 #include <KConfig>
 #include <KLocalizedString>
-
-#include "field.h"
 #include <KConfigGroup>
 #include <KSharedConfig>
 
@@ -635,3 +636,4 @@ Field *Field::createCustomField(const QString &label, int category, const QStrin
 
     return field;
 }
+#endif

@@ -8,6 +8,9 @@
 #ifndef KCONTACTS_FIELD_H
 #define KCONTACTS_FIELD_H
 
+#include "kcontacts_export.h"
+
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
 #include "addressee.h"
 #include <QString>
 
@@ -29,8 +32,10 @@ namespace KContacts
  * creating new fields (createCustomField()) and for saving
  * or loading fields to/from a config file (saveFields(),
  * restoreFields()).
+ *
+ * @deprecated since 5.88, class is unused
  */
-class KCONTACTS_EXPORT Field
+class KCONTACTS_DEPRECATED_EXPORT Field
 {
 public:
     /**
@@ -219,4 +224,5 @@ private:
     Private *const d;
 };
 }
+#endif
 #endif

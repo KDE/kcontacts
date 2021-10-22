@@ -53,7 +53,16 @@ ecm_qt_declare_logging_category(KF5Contacts
     EXPORT KCONTACTS
 )
 
-generate_export_header(KF5Contacts BASE_NAME kcontacts)
+#generate_export_header(KF5Contacts BASE_NAME kcontacts)
+ecm_generate_export_header(KF5Contacts
+    EXPORT_FILE_NAME kcontacts_export.h
+    BASE_NAME kcontacts
+    GROUP_BASE_NAME KF
+    VERSION ${KF_VERSION}
+    DEPRECATED_BASE_VERSION 0
+    DEPRECATION_VERSIONS 5.88
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
 
 target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts>")
 set(KContacts_BUILD_INCLUDE_DIRS
