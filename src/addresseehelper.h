@@ -16,6 +16,11 @@ namespace KContacts
 {
 class AddresseeHelperPrivate;
 
+// TODO KF6: unexport and turn into an implementation detail
+// this is unused externally, both as code as well as via the config file
+// so we only need this internally and can probably also drop the config
+// file access
+
 /**
  * This singleton class stores static data, which is shared
  * by all Addressee objects. It maintains three lists of
@@ -38,8 +43,10 @@ class AddresseeHelperPrivate;
  * should be interpreted as a family name (see
  * treatAsFamilyName()). The corresponding configuration
  * field is @c TreatAsFamilyName.
+ *
+ * @warning Do not use, to be removed from the public interface in KF6.
  */
-class KCONTACTS_EXPORT AddresseeHelper : public QObject
+class KCONTACTS_EXPORT KCONTACTS_DEPRECATED_VERSION(5, 89, "unused externally") AddresseeHelper : public QObject
 {
     Q_OBJECT
 
