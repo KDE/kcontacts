@@ -26,6 +26,7 @@
 
 #include "ldif_p.h"
 
+#include <KCountry>
 #include <KLocalizedString>
 
 #include <QStringList>
@@ -130,6 +131,12 @@ bool LDIFConverter::addresseeToLDIF(const AddresseeList &addrList, QString &str)
     return result;
 }
 
+static QString countryName(const QString &isoCodeOrName)
+{
+    const auto c = KCountry::fromAlpha2(isoCodeOrName);
+    return c.isValid() ? c.name() : isoCodeOrName;
+}
+
 bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
 {
     if (addr.isEmpty()) {
@@ -194,7 +201,7 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     ldif_out(t, QStringLiteral("mozillahomelocalityname"), homeAddr.locality()); // Netscape 7
     ldif_out(t, QStringLiteral("mozillahomestate"), homeAddr.region());
     ldif_out(t, QStringLiteral("mozillahomepostalcode"), homeAddr.postalCode());
-    ldif_out(t, QStringLiteral("mozillahomecountryname"), Address::ISOtoCountry(homeAddr.country()));
+    ldif_out(t, QStringLiteral("mozillahomecountryname"), countryName(homeAddr.country()));
     ldif_out(t, QStringLiteral("locality"), workAddr.locality());
     ldif_out(t, QStringLiteral("streetaddress"), workAddr.street()); // Netscape 4.x
 
@@ -206,9 +213,9 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     if (streetsCount > 1) {
         ldif_out(t, QStringLiteral("mozillaworkstreet2"), streets.at(1));
     }
-    ldif_out(t, QStringLiteral("countryname"), Address::ISOtoCountry(workAddr.country()));
+    ldif_out(t, QStringLiteral("countryname"), countryName(workAddr.country()));
     ldif_out(t, QStringLiteral("l"), workAddr.locality());
-    ldif_out(t, QStringLiteral("c"), Address::ISOtoCountry(workAddr.country()));
+    ldif_out(t, QStringLiteral("c"), countryName(workAddr.country()));
     ldif_out(t, QStringLiteral("st"), workAddr.region());
 
     ldif_out(t, QStringLiteral("title"), addr.title());
@@ -522,7 +529,7 @@ void KContacts::evaluatePair(Addressee &a,
 
     if (fieldname == QLatin1String("mozillahomecountryname")) { // mozilla
         if (value.length() <= 2) {
-            value = Address::ISOtoCountry(value);
+            value = countryName(value);
         }
         homeAddr.setCountry(value);
         return;
@@ -541,7 +548,7 @@ void KContacts::evaluatePair(Addressee &a,
     if (fieldname == QLatin1String("countryname") //
         || fieldname == QLatin1Char('c')) { // mozilla
         if (value.length() <= 2) {
-            value = Address::ISOtoCountry(value);
+            value = countryName(value);
         }
         workAddr.setCountry(value);
         return;

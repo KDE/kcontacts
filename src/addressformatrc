@@ -1,149 +1,149 @@
-[ar]
+[AR]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(Casilla de Correo %p\n)%0(%s\n)%z%w%l
 AddressCountryPosition=below
 
-[at]
+[AT]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(Postfach %p\n)%0(%s\n)%0(%z)%w%l
 BusinessAddressFormat=%0(%cm\n)%0(z.Hd. %n\n)%0(Postfach %p\n)%0(%s\n)%0(%z)%w%l
 AddressCountryPosition=below
 
-[au]
+[AU]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%s\n)%0(PO BOX %p\n)%0(%L%w%w%R%w%w)%z
 AddressCountryPosition=BELOW
 
-[ax]
+[AX]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(PB %p\n)%0(%s\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[be]
+[BE]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(PO Box %p\n)%z%w%L
 AddressFormat[fr]=%0(%cm\n)%0(%n\n)%0(%s\n)%0(BP %p\n)%z%w%L
 AddressFormat[de]=%0(%cm\n)%0(%n\n)%0(%s\n)%0(Postfach %p\n)%z%w%L
 AddressFormat[nl]=%0(%cm\n)%0(%n\n)%0(%s\n)%0(Postbus %p\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[bl]
+[BL]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(BP %p\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[br]
+[BR]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(Caixa Postal %p\n)%0(%s\n)%l%0( - %r)%0(\n%z)
 
-[ca]
+[CA]
 AddressFormat=%0(%N\n)%0(%CM\n)%0(%S\n)%0(PO BOX %p\n)%0(%L%w%R)%,%z
 AddressCountryPosition=BELOW
 
-[ch]
+[CH]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(P.O. Box %p\n)%0(%s\n)%z%w%l
 AddressFormat[de]=%0(%cm\n)%0(%n\n)%0(Postfach %p\n)%0(%s\n)%z%w%l
 AddressFormat[fr]=%0(%cm\n)%0(%n\n)%0(Case postale %p\n)%0(%s\n)%z%w%l
 AddressFormat[it]=%0(%cm\n)%0(%n\n)%0(Casella postale %p\n)%0(%s\n)%z%w%l
 AddressCountryPosition=BELOW
 
-[cz]
+[CZ]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(p. p. %p\n)%0(%s\n)%z%w%w%l
 AddressCountryPosition=BELOW
 
-[de]
+[DE]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(Postfach %p\n)%0(%s\n)%z%w%l
 AddressFormat[nds]=%0(%n\n)%0(- %cm -\n)%0(Postfach %p\n)%0(%s\n)%z%w%l
 AddressCountryPosition=BELOW
 
-[dk]
+[DK]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%s\n)%0(Postboks %p\n)%z%w%l
 AddressCountryPosition=below
 
-[es]
+[ES]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(Apartado Postal %p\n)%0(%s\n)%z%w%l%0(\n%r)
 
-[fi]
+[FI]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(PB %p\n)%0(%s\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[fr]
+[FR]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(BP %p\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[gb]
+[GB]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(PO Box %p\n)%0(%s\n)%0(%L\n)%0(%r\n)%0(%z\n)
 AddressCountryPosition=BELOW
 
-[gl]
+[GL]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%s\n)%0(Postboks %p\n)%z%w%l
 AddressCountryPosition=below
 
-[gr]
+[GR]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%S\n)%0(P.O. BOX %p\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[hu]
+[HU]
 AddressFormat=%0(%n\n)%0(\n%l)%0(\n%s)%0(\nPF. %p)%0(\n%z)%0(\n%r)
 BusinessAddressFormat=%0(%n\n)%cm\n%z%w%l%0(\n%s)%0(\nPF. %p)%0(\n%r)
 AddressCountryPosition=below
 
-[il]
+[IL]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(ת.ד. %p\n)%0(%s\n)%0(%l%w%z)
 AddressCountryPosition=BELOW
 
-[it]
+[IT]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%S\n)%0(CASELLA POSTALE %p\n)%0(%z%w%L)%w%R
 AddressCountryPosition=BELOW
 
-[jp]
+[JP]
 AddressFormat=%0(%z%w%r)%w%l%0(\n%s)%0(\n%cm)%0(\n%n)
 AddressCountryPosition=ABOVE
 
-[kh]
+[KH]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(P.O. Box %p\n)%z%w%L%0(\n%r)
 AddressCountryPosition=BELOW
 
-[lu]
+[LU]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(PO Box %p\n)%0(%s\n)%z%w%L
 AddressFormat[fr]=%0(%n\n)%0(%cm\n)%0(BP %p\n)%0(%s\n)%z%w%L
 AddressFormat[de]=%0(%n\n)%0(%cm\n)%0(Postfach %p\n)%0(%s\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[me]
+[ME]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(poštanski fah %p\n)%z%w%l
 AddressFormat[sr]=%0(%cm\n)%0(%n\n)%0(%s\n)%0(поштански фах %p\n)%z%w%l
 AddressCountryPosition=BELOW
 
-[mf]
+[MF]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(BP %p\n)%z%w%L
 AddressCountryPosition=BELOW
 
-[mp]
+[MP]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%s\n)%0(PO BOX %p\n)%0(%l%,%w%r)%w%z
 AddressCountryPosition=BELOW
 
-[na]
+[NA]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(P.O. Box %p\n)%l
 AddressCountrzPosition=below
 
-[nl]
+[NL]
 AddressFormat=%n\n%0(%cm\n)%0(Postbus %p\n)%0(%s\n)%z%w%l
 AddressCountryPosition=below
 
-[no]
+[NO]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(Postboks %p\n)%0(%s\n)%z%w%w%L
 AddressCountryPosition=BELOW
 
-[nz]
+[NZ]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(PO Box %p\n)%0(%s\n)%L%w%z
 AddressCountryPosition=BELOW
 
-[rs]
+[RS]
 AddressFormat=%0(%cm\n)%0(%n\n)%0(%s\n)%0(поштански фах %p\n)%z%w%l
 AddressFormat[sr@latin]=%0(%cm\n)%0(%n\n)%0(%s\n)%0(poštanski fah %p\n)%z%w%l
 AddressCountryPosition=BELOW
 
-[se]
+[SE]
 AddressFormat=%n\n%0(%cm\n)%0(Box %p\n)%0(%s\n)%z%w%w%L
 AddressCountryPosition=below
 
-[si]
+[SI]
 AddressFormat=%n\n%s\n%0(p.p. %p\n)%z %l
 
-[us]
+[US]
 AddressFormat=%0(%n\n)%0(%cm\n)%0(%s\n)%0(PO BOX %p\n)%0(%l%,%w%r)%w%z
 AddressCountryPosition=BELOW

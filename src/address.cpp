@@ -554,12 +554,7 @@ QString Address::toString() const
 
 static QString countryCodeFromLocale()
 {
-    const auto n = QLocale().name(); // this is in the form <lang>_<COUNTRY>, with the exception of 'C'
-    const auto idx = n.indexOf(QLatin1Char('_'));
-    if (idx > 0) {
-        return n.mid(idx + 1).toLower();
-    }
-    return {};
+    return KCountry::fromQLocale(QLocale().country()).alpha2();
 }
 
 static QString addressFormatRc()
@@ -574,11 +569,14 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     QString addrTemplate;
     QString ret;
 
-    // FIXME: first check for iso-country-field and prefer that one
-    if (!country().isEmpty()) {
-        ciso = countryToISO(country());
-    } else {
-        // fall back to our own country
+    if (country().size() == 2) {
+        ciso = KCountry::fromAlpha2(country()).alpha2();
+    }
+    if (ciso.isEmpty()) {
+        ciso = KCountry::fromName(country()).alpha2();
+    }
+    // fall back to our own country
+    if (ciso.isEmpty()) {
         ciso = countryCodeFromLocale();
     }
     static const KConfig entry(addressFormatRc());
