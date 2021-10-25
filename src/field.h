@@ -35,7 +35,7 @@ namespace KContacts
  *
  * @deprecated since 5.88, class is unused
  */
-class KCONTACTS_DEPRECATED_EXPORT Field
+class KCONTACTS_EXPORT KCONTACTS_DEPRECATED_VERSION(5, 88, "class is unused") Field
 {
 public:
     /**
