@@ -623,16 +623,20 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     return ret;
 }
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
 QString Address::countryToISO(const QString &cname)
 {
     return KCountry::fromName(cname).alpha2().toLower();
 }
+#endif
 
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
 QString Address::ISOtoCountry(const QString &ISOname)
 {
     const auto c = KCountry::fromAlpha2(ISOname);
     return c.isValid() ? c.name() : ISOname;
 }
+#endif
 
 // clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)

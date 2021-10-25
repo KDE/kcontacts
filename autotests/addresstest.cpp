@@ -431,6 +431,7 @@ void AddressTest::shouldExportVcard4()
 void AddressTest::countryToISOTest()
 {
     using namespace KContacts;
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
     QCOMPARE(Address::countryToISO(QStringLiteral("France")), QLatin1String("fr"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Frankreich")), QLatin1String("fr"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Germany")), QLatin1String("de"));
@@ -446,6 +447,7 @@ void AddressTest::countryToISOTest()
 
     QCOMPARE(Address::countryToISO(QStringLiteral("Osterreich")), QLatin1String("at"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Ünited  States\nOf America")), QLatin1String("us"));
+#endif
 }
 
 void AddressTest::isoToCountryTest()
@@ -454,6 +456,7 @@ void AddressTest::isoToCountryTest()
     qputenv("LANGUAGE", "en");
 
     using namespace KContacts;
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
     QCOMPARE(Address::ISOtoCountry(QStringLiteral("FR")), QLatin1String("France"));
     QCOMPARE(Address::ISOtoCountry(QStringLiteral("de")), QLatin1String("Germany"));
 
@@ -461,4 +464,5 @@ void AddressTest::isoToCountryTest()
     QCOMPARE(Address::ISOtoCountry(QStringLiteral("EU")), QLatin1String("EU"));
     QCOMPARE(Address::ISOtoCountry(QStringLiteral("zz")), QLatin1String("zz"));
     QCOMPARE(Address::ISOtoCountry(QStringLiteral("0")), QLatin1String("0"));
+#endif
 }
