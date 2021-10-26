@@ -15,25 +15,42 @@
 class StringCache
 {
 public:
+    struct CacheData {
+        QByteArray value;
+        QString string;
+    };
+
     QString fromLatin1(const QByteArray &value)
     {
         if (value.isEmpty()) {
             return QString();
         }
 
-        auto it = m_values.constFind(value);
-        if (it != m_values.constEnd()) {
-            return it.value();
+        auto vIt = std::find(m_values.begin(), m_values.end(), value);
+        if (vIt != m_values.end()) {
+            return vIt->string;
         }
 
-        QString string = QString::fromLatin1(value);
-        m_values.insert(value, string);
-        return string;
+        const CacheData newData{value, QString::fromLatin1(value)};
+        auto it = std::lower_bound(m_values.begin(), m_values.end(), newData);
+        m_values.insert(it, newData);
+
+        return newData.string;
     }
 
 private:
-    QHash<QByteArray, QString> m_values;
+    std::vector<CacheData> m_values;
 };
+
+bool operator==(const StringCache::CacheData &a, const QByteArray &value)
+{
+    return a.value == value;
+}
+
+bool operator<(const StringCache::CacheData &a, const StringCache::CacheData &b)
+{
+    return a.value < b.value;
+}
 
 using namespace KContacts;
 
