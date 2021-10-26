@@ -1571,35 +1571,28 @@ VCardLine VCardTool::createSecrecy(const Secrecy &secrecy) const
 
 QStringList VCardTool::splitString(QChar sep, const QString &str) const
 {
+    const int strLength = str.size();
     QStringList list;
-    QString value(str);
+    // From the unit tests, list's size ranges from 1 to 7
+    list.reserve(7);
 
     int start = 0;
-    int pos = value.indexOf(sep, start);
+    int pos = str.indexOf(sep, start);
 
     while (pos != -1) {
-        if (pos == 0 || value[pos - 1] != QLatin1Char('\\')) {
-            if (pos > start && pos <= value.length()) {
-                list << value.mid(start, pos - start);
-            } else {
-                list << QString();
-            }
-
-            start = pos + 1;
-            pos = value.indexOf(sep, start);
+        if (pos > start && pos <= strLength) {
+            // Don't include '\' in the string added to "list"
+            const int len = str.at(pos - 1) != QLatin1Char('\\') ? pos : pos - 1;
+            list << str.mid(start, len - start);
         } else {
-            value.replace(pos - 1, 2, sep);
-            pos = value.indexOf(sep, pos);
+            list << QString();
         }
+
+        start = pos + 1;
+        pos = str.indexOf(sep, start);
     }
 
-    int l = value.length() - 1;
-    const QString mid = value.mid(start, l - start + 1);
-    if (!mid.isEmpty()) {
-        list << mid;
-    } else {
-        list << QString();
-    }
+    list << str.mid(start, strLength - start);
 
     return list;
 }
