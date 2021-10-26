@@ -125,29 +125,36 @@ void VCardTool::addParameter(VCardLine *line, VCard::Version version, const QStr
 void VCardTool::processAddresses(const Address::List &addresses, VCard::Version version, VCard *card) const
 {
     for (const auto &addr : addresses) {
-        QStringList address;
-
         // clang-format off
-        const bool isEmpty = addr.postOfficeBox().isEmpty()
-                             && addr.extended().isEmpty()
-                             && addr.street().isEmpty()
-                             && addr.locality().isEmpty()
-                             && addr.region().isEmpty()
-                             && addr.postalCode().isEmpty()
-                             && addr.country().isEmpty();
+       QString postOfficeBox = addr.postOfficeBox();
+       QString extended = addr.extended();
+       QString street = addr.street();
+       QString locality = addr.locality();
+       QString region = addr.region();
+       QString postalCode = addr.postalCode();
+       QString country = addr.country();
+
+        const bool isEmpty = postOfficeBox.isEmpty()
+                             && extended.isEmpty()
+                             && street.isEmpty()
+                             && locality.isEmpty()
+                             && region.isEmpty()
+                             && postalCode.isEmpty()
+                             && country.isEmpty();
+
+        static const QLatin1Char sep(';');
+        static const QLatin1String escaped("\\;");
+        const QString address = postOfficeBox.replace(sep, escaped) + sep
+            + extended.replace(sep, escaped) + sep
+            + street.replace(sep, escaped) + sep
+            + locality.replace(sep, escaped) + sep
+            + region.replace(sep, escaped) + sep
+            + postalCode.replace(sep, escaped) + sep
+            + country.replace(sep, escaped);
         // clang-format on
 
-        address.append(addr.postOfficeBox().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.extended().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.street().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.locality().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.region().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.postalCode().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        address.append(addr.country().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-
-        const QString addressJoined(address.join(QLatin1Char(';')));
-        VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
-        if (version == VCard::v2_1 && needsEncoding(addressJoined)) {
+        VCardLine adrLine(QStringLiteral("ADR"), address);
+        if (version == VCard::v2_1 && needsEncoding(address)) {
             adrLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
             adrLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
         }
@@ -468,16 +475,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             card.addLine(mailerLine);
         }
 
+        static const QLatin1Char sep(';');
+        static const QLatin1String escaped("\\;");
+        // clang-format off
         // N required for only version < 4.0
-        QStringList name;
-        name.append(addressee.familyName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        name.append(addressee.givenName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        name.append(addressee.additionalName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        name.append(addressee.prefix().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        name.append(addressee.suffix().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        const QString name = addressee.familyName().replace(sep, escaped) + sep
+            + addressee.givenName().replace(sep, escaped) + sep
+            + addressee.additionalName().replace(sep, escaped) + sep
+            + addressee.prefix().replace(sep, escaped) + sep
+            + addressee.suffix().replace(sep, escaped);
+        // clang-format on
 
-        VCardLine nLine(QStringLiteral("N"), name.join(QLatin1Char(';')));
-        if (version == VCard::v2_1 && needsEncoding(name.join(QLatin1Char(';')))) {
+        VCardLine nLine(QStringLiteral("N"), name);
+        if (version == VCard::v2_1 && needsEncoding(name)) {
             nLine.addParameter(QStringLiteral("charset"), QStringLiteral("UTF-8"));
             nLine.addParameter(QStringLiteral("encoding"), QStringLiteral("QUOTED-PRINTABLE"));
         }
