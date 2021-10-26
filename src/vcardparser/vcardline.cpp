@@ -11,19 +11,10 @@
 
 using namespace KContacts;
 
-VCardLine::VCardLine()
-{
-}
-
-VCardLine::VCardLine(const QString &identifier)
-{
-    mIdentifier = identifier;
-}
-
 VCardLine::VCardLine(const QString &identifier, const QVariant &value)
+    : mIdentifier(identifier)
+    , mValue(value)
 {
-    mIdentifier = identifier;
-    mValue = value;
 }
 
 VCardLine::VCardLine(const VCardLine &line)

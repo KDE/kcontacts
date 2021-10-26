@@ -23,9 +23,8 @@ class KCONTACTS_EXPORT VCardLine
 public:
     typedef QVector<VCardLine> List;
 
-    VCardLine();
-    VCardLine(const QString &identifier);
-    VCardLine(const QString &identifier, const QVariant &value);
+    VCardLine(const QString &identifier = {}, const QVariant &value = {});
+
     VCardLine(const VCardLine &line);
 
     ~VCardLine();
