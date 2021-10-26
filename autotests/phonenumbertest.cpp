@@ -285,7 +285,7 @@ void PhoneNumberTest::shouldParseVcard3()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
         "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
         "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"
@@ -307,7 +307,7 @@ void PhoneNumberTest::shouldParseVcard4()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:4.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "TEL;VALUE=uri;PREF=1;TYPE=\"voice,home\":tel:+44-555-555-5555;ext=5555\r\n"
         "TEL;VALUE=uri;TYPE=\"voice,cell,text\":tel:+44-555-555-6666\r\n"
         "TEL;VALUE=uri;TYPE=\"voice,work\":tel:+44-555-555-7777\r\n"

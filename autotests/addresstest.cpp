@@ -311,7 +311,7 @@ void AddressTest::shouldParseAddressVCard3()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "ADR;TYPE=home:1234;My Extended Label;My Street;My Locality;My Region;My Pos\r\n"
         " talcode;My country\r\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"

@@ -91,7 +91,7 @@ void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "URL;PREF=1;TYPE=HOME:https://firsturl\n"
         "URL;TYPE=WORK,PREF:https://sherlockholmes.com/calendar/sherlockholmes\n"

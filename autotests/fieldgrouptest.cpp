@@ -105,7 +105,7 @@ void FieldGroupTest::shouldParseFieldGroup()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "REV:2015-03-14T09:24:45+00:00\n"
         "FN:FirstName LastName\n"
@@ -124,7 +124,7 @@ void FieldGroupTest::shouldParseWithoutFieldGroup()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "REV:2015-03-14T09:24:45+00:00\n"
         "FN:FirstName LastName\n"

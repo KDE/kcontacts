@@ -93,7 +93,7 @@ void OrgTest::shouldParseOrg()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "Org:boo\n"
         "REV:2015-03-14T09:24:45+00:00\n"
@@ -113,7 +113,7 @@ void OrgTest::shouldParseVcardWithTwoOrg()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "Org:boo\n"
         "Org:bla\n"
@@ -159,7 +159,7 @@ void OrgTest::shouldParseWithoutOrg()
     QByteArray vcarddata(
         "BEGIN:VCARD\n"
         "VERSION:3.0\n"
-        "N:LastName;FirstName;;;\n"
+        "N:LastName;FirstName;\\;;\n"
         "UID:c80cf296-0825-4eb0-ab16-1fac1d522a33@xxxxxx.xx\n"
         "REV:2015-03-14T09:24:45+00:00\n"
         "FN:FirstName LastName\n"
