@@ -261,6 +261,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
     VCard currentVCard;
     VCard::List vCardList;
     QByteArray currentLine;
+    QByteArray cur;
 
     int lineStart = 0;
     int lineEnd = text.indexOf('\n');
@@ -270,7 +271,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
     StringCache cache;
     for (; lineStart != text.size() + 1;
          lineStart = lineEnd + 1, lineEnd = (text.indexOf('\n', lineStart) == -1) ? text.size() : text.indexOf('\n', lineStart)) {
-        QByteArray cur = text.mid(lineStart, lineEnd - lineStart);
+        cur = text.mid(lineStart, lineEnd - lineStart);
         // remove the trailing \r, left from \r\n
         if (cur.endsWith('\r')) {
             cur.chop(1);
