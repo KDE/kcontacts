@@ -15,7 +15,7 @@ class FieldGroupTest : public QObject
     Q_OBJECT
 public:
     explicit FieldGroupTest(QObject *parent = nullptr);
-    ~FieldGroupTest();
+    ~FieldGroupTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

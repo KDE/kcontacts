@@ -15,7 +15,7 @@ class DateTimeTest : public QObject
     Q_OBJECT
 public:
     explicit DateTimeTest(QObject *parent = nullptr);
-    ~DateTimeTest();
+    ~DateTimeTest() override;
 
 private Q_SLOTS:
     void shouldParseDateTime();

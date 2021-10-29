@@ -15,7 +15,7 @@ class VCardLineTest : public QObject
     Q_OBJECT
 public:
     explicit VCardLineTest(QObject *parent = nullptr);
-    ~VCardLineTest();
+    ~VCardLineTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValues();

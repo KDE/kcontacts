@@ -15,7 +15,7 @@ class PerformanceTest : public QObject
     Q_OBJECT
 public:
     explicit PerformanceTest(QObject *parent = nullptr);
-    ~PerformanceTest();
+    ~PerformanceTest() override;
 private Q_SLOTS:
     void testParserPerformance();
     void testExportPerformance();

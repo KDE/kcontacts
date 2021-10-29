@@ -15,7 +15,7 @@ class CustomIdentifierTest : public QObject
     Q_OBJECT
 public:
     explicit CustomIdentifierTest(QObject *parent = nullptr);
-    ~CustomIdentifierTest();
+    ~CustomIdentifierTest() override;
 
 private Q_SLOTS:
     void shouldExportVcard4();

@@ -15,7 +15,7 @@ class CalendarUrlTest : public QObject
     Q_OBJECT
 public:
     explicit CalendarUrlTest(QObject *parent = nullptr);
-    ~CalendarUrlTest();
+    ~CalendarUrlTest() override;
 
 private Q_SLOTS:
     void shouldHaveDefaultValue();

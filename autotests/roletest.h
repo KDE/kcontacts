@@ -15,7 +15,7 @@ class RoleTest : public QObject
     Q_OBJECT
 public:
     explicit RoleTest(QObject *parent = nullptr);
-    ~RoleTest();
+    ~RoleTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

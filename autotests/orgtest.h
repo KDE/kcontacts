@@ -15,7 +15,7 @@ class OrgTest : public QObject
     Q_OBJECT
 public:
     explicit OrgTest(QObject *parent = nullptr);
-    ~OrgTest();
+    ~OrgTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

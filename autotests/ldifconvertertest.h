@@ -15,7 +15,7 @@ class LDifConverterTest : public QObject
     Q_OBJECT
 public:
     explicit LDifConverterTest(QObject *parent = nullptr);
-    ~LDifConverterTest();
+    ~LDifConverterTest() override;
 
 private Q_SLOTS:
     // Import

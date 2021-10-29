@@ -15,7 +15,7 @@ class LangTest : public QObject
     Q_OBJECT
 public:
     explicit LangTest(QObject *parent = nullptr);
-    ~LangTest();
+    ~LangTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

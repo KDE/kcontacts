@@ -15,7 +15,7 @@ class BirthDayTest : public QObject
     Q_OBJECT
 public:
     explicit BirthDayTest(QObject *parent = nullptr);
-    ~BirthDayTest();
+    ~BirthDayTest() override;
 
 private Q_SLOTS:
     void shouldExportVcard4();

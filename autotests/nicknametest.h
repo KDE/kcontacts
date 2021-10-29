@@ -15,7 +15,7 @@ class NickNameTest : public QObject
     Q_OBJECT
 public:
     explicit NickNameTest(QObject *parent = nullptr);
-    ~NickNameTest();
+    ~NickNameTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

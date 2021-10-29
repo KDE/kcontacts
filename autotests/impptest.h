@@ -15,7 +15,7 @@ class ImppTest : public QObject
     Q_OBJECT
 public:
     explicit ImppTest(QObject *parent = nullptr);
-    ~ImppTest();
+    ~ImppTest() override;
 
 private Q_SLOTS:
     void shouldParseImppVcard4();

@@ -15,7 +15,7 @@ class GenderTest : public QObject
     Q_OBJECT
 public:
     explicit GenderTest(QObject *parent = nullptr);
-    ~GenderTest();
+    ~GenderTest() override;
 
 private:
     QByteArray createCard(const QByteArray &gender);

@@ -15,7 +15,7 @@ class ResourceLocatorUrlTest : public QObject
     Q_OBJECT
 public:
     explicit ResourceLocatorUrlTest(QObject *parent = nullptr);
-    ~ResourceLocatorUrlTest();
+    ~ResourceLocatorUrlTest() override;
 
 private Q_SLOTS:
     void shouldHaveDefaultValue();

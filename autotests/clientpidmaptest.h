@@ -15,7 +15,7 @@ class ClientPidMapTest : public QObject
     Q_OBJECT
 public:
     explicit ClientPidMapTest(QObject *parent = nullptr);
-    ~ClientPidMapTest();
+    ~ClientPidMapTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldAssignValue();

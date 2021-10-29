@@ -15,7 +15,7 @@ class EmailTest : public QObject
     Q_OBJECT
 public:
     explicit EmailTest(QObject *parent = nullptr);
-    ~EmailTest();
+    ~EmailTest() override;
 
 private Q_SLOTS:
     void shouldHaveDefaultValue();

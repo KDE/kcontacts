@@ -90,7 +90,7 @@ public:
     /** @internal */
     AddresseeHelper();
 
-    ~AddresseeHelper();
+    ~AddresseeHelper() override;
 
 public Q_SLOTS:
     /**
