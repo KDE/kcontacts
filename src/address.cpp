@@ -552,11 +552,6 @@ QString Address::toString() const
     return str;
 }
 
-static QString countryCodeFromLocale()
-{
-    return KCountry::fromQLocale(QLocale().country()).alpha2();
-}
-
 static QString addressFormatRc()
 {
     Q_INIT_RESOURCE(kcontacts); // must be called outside of a namespace
@@ -565,23 +560,23 @@ static QString addressFormatRc()
 
 QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
 {
-    QString ciso;
+    KCountry countryCode;
     QString addrTemplate;
     QString ret;
 
     if (country().size() == 2) {
-        ciso = KCountry::fromAlpha2(country()).alpha2();
+        countryCode = KCountry::fromAlpha2(country());
     }
-    if (ciso.isEmpty()) {
-        ciso = KCountry::fromName(country()).alpha2();
+    if (!countryCode.isValid()) {
+        countryCode = KCountry::fromName(country());
     }
     // fall back to our own country
-    if (ciso.isEmpty()) {
-        ciso = countryCodeFromLocale();
+    if (!countryCode.isValid()) {
+        countryCode = KCountry::fromQLocale(QLocale().country());
     }
     static const KConfig entry(addressFormatRc());
 
-    KConfigGroup group = entry.group(ciso);
+    KConfigGroup group = entry.group(countryCode.alpha2());
     // decide whether this needs special business address formatting
     if (orgaName.isEmpty()) {
         addrTemplate = group.readEntry("AddressFormat");
@@ -596,7 +591,7 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // used:
     if (addrTemplate.isEmpty()) {
         qCWarning(KCONTACTS_LOG) << "address format database incomplete"
-                                 << "(no format for locale" << ciso << "found). Using default address formatting.";
+                                 << "(no format for locale" << countryCode.alpha2() << "found). Using default address formatting.";
         addrTemplate = QStringLiteral("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
     }
 
@@ -611,16 +606,17 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
             return country().toUpper();
         }
 
-        KConfigGroup group = entry.group(countryCodeFromLocale());
+        KConfigGroup group = entry.group(KCountry::fromQLocale(QLocale().country()).alpha2());
+        QString countryName = countryCode.isValid() ? countryCode.name() : country();
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
-            ret = ret + QLatin1String("\n\n") + country().toUpper();
+            ret = ret + QLatin1String("\n\n") + countryName.toUpper();
         } else if (QLatin1String("below") == cpos) {
-            ret = ret + QLatin1String("\n\n") + country();
+            ret = ret + QLatin1String("\n\n") + countryName;
         } else if (QLatin1String("ABOVE") == cpos) {
-            ret = country().toUpper() + QLatin1String("\n\n") + ret;
+            ret = countryName.toUpper() + QLatin1String("\n\n") + ret;
         } else if (QLatin1String("above") == cpos) {
-            ret = country() + QLatin1String("\n\n") + ret;
+            ret = countryName + QLatin1String("\n\n") + ret;
         }
     }
 

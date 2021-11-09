@@ -157,7 +157,7 @@ void AddressTest::formatTest()
 
         const QString result(
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                           "12345 Lummerstadt\n\nGERMANY"));
+                           "12345 Lummerstadt\n\nGERMANIA"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
@@ -172,7 +172,7 @@ void AddressTest::formatTest()
 
         const QString result(
             QStringLiteral("Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
-                           "  DC 1A2B3C\n\nUNITED STATES OF AMERICA"));
+                           "  DC 1A2B3C\n\nSTATI UNITI"));
         QCOMPARE(address.formattedAddress(QStringLiteral("Huck Finn")), result);
     }
 
@@ -185,7 +185,7 @@ void AddressTest::formatTest()
 
         const QString result(
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
-                           "12345 Lummerstadt\n\nDEUTSCHLAND"));
+                           "12345 Lummerstadt\n\nGERMANIA"));
 
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
     }
@@ -211,8 +211,21 @@ void AddressTest::formatTest()
         address.setCountry(QStringLiteral("Schweiz"));
 
         // we want the Italian variant of the Swiss format for it_CH
-        const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSCHWEIZ"));
+        const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSVIZZERA"));
 
+        QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
+    }
+
+    {
+        KContacts::Address address;
+        address.setStreet(QStringLiteral("Haus Randa"));
+        address.setPostalCode(QStringLiteral("1234"));
+        address.setLocality(QStringLiteral("Randa"));
+        address.setPostOfficeBox(QStringLiteral("5678"));
+        address.setCountry(QStringLiteral("CH"));
+
+        // we want the Italian variant of the Swiss format for it_CH
+        const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSVIZZERA"));
         QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
     }
 }
