@@ -228,6 +228,12 @@ void AddressTest::formatTest()
         const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSVIZZERA"));
         QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
     }
+
+    {
+        KContacts::Address address;
+        address.setCountry(QStringLiteral("CH"));
+        QCOMPARE(address.formattedAddress(QString()), QLatin1String("Svizzera"));
+    }
 }
 
 void AddressTest::shouldExportVcard3()

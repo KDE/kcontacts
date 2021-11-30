@@ -601,13 +601,14 @@ QString Address::formattedAddress(const QString &realName, const QString &orgaNa
     // now add the country line if needed (formatting this time according to
     // the rules of our own system country )
     if (!country().isEmpty()) {
+        const QString countryName = countryCode.isValid() ? countryCode.name() : country();
+
         // Don't include line breaks if country is the only text
         if (ret.isEmpty()) {
-            return country().toUpper();
+            return countryName;
         }
 
         KConfigGroup group = entry.group(KCountry::fromQLocale(QLocale().country()).alpha2());
-        QString countryName = countryCode.isValid() ? countryCode.name() : country();
         QString cpos = group.readEntry("AddressCountryPosition");
         if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
             ret = ret + QLatin1String("\n\n") + countryName.toUpper();
