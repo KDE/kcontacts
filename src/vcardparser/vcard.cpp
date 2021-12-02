@@ -14,8 +14,8 @@ VCard::VCard()
 }
 
 VCard::VCard(const VCard &vcard)
+    : mLineMap(vcard.mLineMap)
 {
-    mLineMap = vcard.mLineMap;
 }
 
 VCard::~VCard()

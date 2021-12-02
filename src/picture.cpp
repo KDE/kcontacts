@@ -23,11 +23,11 @@ public:
 
     PicturePrivate(const PicturePrivate &other)
         : QSharedData(other)
+        , mUrl(other.mUrl)
+        , mType(other.mType)
+        , mData(other.mData)
+        , mIntern(other.mIntern)
     {
-        mUrl = other.mUrl;
-        mType = other.mType;
-        mData = other.mData;
-        mIntern = other.mIntern;
     }
 
     QString mUrl;

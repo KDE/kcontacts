@@ -16,22 +16,22 @@ VCardLine::VCardLine()
 }
 
 VCardLine::VCardLine(const QString &identifier)
+    : VCardLine(identifier, {})
 {
-    mIdentifier = identifier;
 }
 
 VCardLine::VCardLine(const QString &identifier, const QVariant &value)
+    : mIdentifier(identifier)
+    , mValue(value)
 {
-    mIdentifier = identifier;
-    mValue = value;
 }
 
 VCardLine::VCardLine(const VCardLine &line)
+    : mParamMap(line.mParamMap)
+    , mIdentifier(line.mIdentifier)
+    , mGroup(line.mGroup)
+    , mValue(line.mValue)
 {
-    mParamMap = line.mParamMap;
-    mValue = line.mValue;
-    mIdentifier = line.mIdentifier;
-    mGroup = line.mGroup;
 }
 
 VCardLine::~VCardLine()
