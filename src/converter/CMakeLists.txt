@@ -8,14 +8,14 @@ ecm_generate_headers(KContacts_CamelCase_Converter_HEADERS
 
 install(FILES
     ${KContacts_CamelCase_Converter_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/KContacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts/KContacts
     COMPONENT Devel
 )
 
 
 install(FILES
     ${KContacts_Converter_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/kcontacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts/kcontacts
     COMPONENT Devel
 )
 

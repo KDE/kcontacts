@@ -99,7 +99,7 @@ ecm_generate_export_header(KF5Contacts
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts>")
+target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KContacts>")
 set(KContacts_BUILD_INCLUDE_DIRS
     ${KContacts_SOURCE_DIR}/src
     ${KContacts_BINARY_DIR}/src
@@ -109,8 +109,8 @@ target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUI
 
 target_link_libraries(KF5Contacts
 PUBLIC
-    Qt5::Core
-    Qt5::Gui
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Gui
 PRIVATE
     KF5::CoreAddons
     KF5::ConfigCore
@@ -118,6 +118,10 @@ PRIVATE
     KF5::I18nLocaleData
     KF5::Codecs # for the vcard parser
 )
+
+if (TARGET Qt6::Core5Compat)
+    target_link_libraries(KF5Contacts PRIVATE Qt6::Core5Compat) # QTextCodec
+endif()
 
 set_target_properties(KF5Contacts PROPERTIES
     VERSION ${KContacts_VERSION}
@@ -166,13 +170,13 @@ add_subdirectory(converter)
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_export.h
     ${KContacts_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/kcontacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts/kcontacts
     COMPONENT Devel
 )
 
 install(FILES
     ${KContacts_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts/KContacts
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts/KContacts
     COMPONENT Devel
 )
 
@@ -182,7 +186,7 @@ ecm_qt_install_logging_categories(
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
 )
 
-ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KContacts)
+ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
 if(BUILD_QCH)

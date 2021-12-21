@@ -44,8 +44,11 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui)
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat)
+endif()
 
 ########### Targets ###########
 
@@ -92,7 +95,7 @@ install(EXPORT KF5ContactsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE 
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h
-  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel
 )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
