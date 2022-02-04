@@ -159,7 +159,10 @@ void AddressTest::formatTest()
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                            "12345 Lummerstadt\n\nGERMANIA"));
 
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Jim Knopf")), result);
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 92)
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
+#endif
     }
 
     {
@@ -171,9 +174,9 @@ void AddressTest::formatTest()
         address.setCountry(QStringLiteral("United States of America"));
 
         const QString result(
-            QStringLiteral("Huck Finn\n457 Foobar Ave\nNervousbreaktown,"
-                           "  DC 1A2B3C\n\nSTATI UNITI"));
-        QCOMPARE(address.formattedAddress(QStringLiteral("Huck Finn")), result);
+            QStringLiteral("Huck Finn\n457 Foobar Ave\nNERVOUSBREAKTOWN,"
+                           " DC 1A2B3C\n\nSTATI UNITI"));
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Huck Finn")), result);
     }
 
     {
@@ -187,7 +190,7 @@ void AddressTest::formatTest()
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                            "12345 Lummerstadt\n\nGERMANIA"));
 
-        QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Jim Knopf")), result);
     }
 
     {
@@ -199,7 +202,7 @@ void AddressTest::formatTest()
 
         const QString result(QStringLiteral("Jim Knopf\nLummerlandstr. 1\n12345 Lummerstadt"));
 
-        QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Jim Knopf")), result);
     }
 
     {
@@ -213,7 +216,7 @@ void AddressTest::formatTest()
         // we want the Italian variant of the Swiss format for it_CH
         const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSVIZZERA"));
 
-        QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Dr. Konqui")), result);
     }
 
     {
@@ -226,13 +229,43 @@ void AddressTest::formatTest()
 
         // we want the Italian variant of the Swiss format for it_CH
         const QString result(QStringLiteral("Dr. Konqui\nCasella postale 5678\nHaus Randa\n1234 Randa\n\nSVIZZERA"));
-        QCOMPARE(address.formattedAddress(QStringLiteral("Dr. Konqui")), result);
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Dr. Konqui")), result);
     }
 
     {
         KContacts::Address address;
         address.setCountry(QStringLiteral("CH"));
-        QCOMPARE(address.formattedAddress(QString()), QLatin1String("Svizzera"));
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QString()), QLatin1String("SVIZZERA"));
+    }
+
+    {
+        // business format for postal style
+        KContacts::Address address;
+        address.setCountry(QStringLiteral("AT"));
+        address.setLocality(QStringLiteral("Berlin"));
+        address.setPostalCode(QStringLiteral("10969"));
+        address.setStreet(QStringLiteral("Prinzenstraße 85 F"));
+        const auto result = QString::fromUtf8("KDE e.V.\nz.Hd. Dr. Konqi\nPrinzenstraße 85 F\n10969 Berlin\n\nAUSTRIA");
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Dr. Konqi"), QStringLiteral("KDE e.V.")), result);
+    }
+
+    {
+        // local vs latin script formats
+        KContacts::Address address;
+        address.setCountry(QStringLiteral("JP"));
+        address.setRegion(QStringLiteral("Tokyo"));
+        address.setLocality(QStringLiteral("Minato-ku"));
+        address.setPostalCode(QStringLiteral("106-0047"));
+        address.setStreet(QStringLiteral("4-6-28 Minami-Azabu"));
+        auto result = QString::fromUtf8("4-6-28 Minami-Azabu, Minato-ku\nTOKYO 106-0047\n\nGIAPPONE");
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal), result);
+
+        address.setRegion(QStringLiteral("東京"));
+        address.setLocality(QStringLiteral("都港区"));
+        address.setPostalCode(QStringLiteral("106-0047"));
+        address.setStreet(QStringLiteral("南麻布 4-6-28"));
+        result = QString::fromUtf8("〒106-0047\n東京都港区南麻布 4-6-28\n\nGIAPPONE");
+        QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal), result);
     }
 }
 

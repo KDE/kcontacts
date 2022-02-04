@@ -39,6 +39,10 @@ ecm_add_tests(birthdaytest.cpp
     clientpidmaptest.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt${QT_MAJOR_VERSION}::Test KF5::ConfigCore)
 
+ecm_add_test(addressformattest.cpp ../src/kcontacts.qrc
+    TEST_NAME addressformattest
+    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts KF5::I18nLocaleData KF5::ConfigCore Qt${QT_MAJOR_VERSION}::Test)
+
 ecm_add_tests(picturetest.cpp
     NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt${QT_MAJOR_VERSION}::Test KF5::ConfigCore Qt${QT_MAJOR_VERSION}::Gui)
 

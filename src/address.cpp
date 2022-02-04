@@ -6,6 +6,8 @@
 */
 
 #include "address.h"
+#include "addressformat.h"
+#include "addressformatter_p.h"
 
 #include "kcontacts_debug.h"
 #include <KConfig>
@@ -16,165 +18,9 @@
 #include <KConfigGroup>
 
 #include <QDataStream>
-#include <QLocale>
 #include <QSharedData>
-#include <QStandardPaths>
 
 using namespace KContacts;
-
-// template tags for address formatting localization
-#define KCONTACTS_FMTTAG_realname QStringLiteral("%n")
-#define KCONTACTS_FMTTAG_REALNAME QStringLiteral("%N")
-#define KCONTACTS_FMTTAG_company QStringLiteral("%cm")
-#define KCONTACTS_FMTTAG_COMPANY QStringLiteral("%CM")
-#define KCONTACTS_FMTTAG_pobox QStringLiteral("%p")
-#define KCONTACTS_FMTTAG_street QStringLiteral("%s")
-#define KCONTACTS_FMTTAG_STREET QStringLiteral("%S")
-#define KCONTACTS_FMTTAG_zipcode QStringLiteral("%z")
-#define KCONTACTS_FMTTAG_location QStringLiteral("%l")
-#define KCONTACTS_FMTTAG_LOCATION QStringLiteral("%L")
-#define KCONTACTS_FMTTAG_region QStringLiteral("%r")
-#define KCONTACTS_FMTTAG_REGION QStringLiteral("%R")
-#define KCONTACTS_FMTTAG_newline QStringLiteral("\\n")
-#define KCONTACTS_FMTTAG_condcomma QStringLiteral("%,")
-#define KCONTACTS_FMTTAG_condwhite QStringLiteral("%w")
-#define KCONTACTS_FMTTAG_purgeempty QStringLiteral("%0")
-
-/**
-  Finds the balanced closing bracket starting from the opening bracket at
-  pos in tsection.
-  @return  position of closing bracket, -1 for unbalanced brackets
-*/
-static int findBalancedBracket(const QString &tsection, int pos)
-{
-    int balancecounter = 0;
-    for (int i = pos + 1; i < tsection.length(); ++i) {
-        if (QLatin1Char(')') == tsection[i] && 0 == balancecounter) {
-            // found end of brackets
-            return i;
-        } else {
-            if (QLatin1Char('(') == tsection[i]) {
-                // nested brackets
-                balancecounter++;
-            }
-        }
-    }
-    return -1;
-}
-
-/**
-  Parses a snippet of an address template
-  @param tsection   the template string to be parsed
-  @param result     QString reference in which the result will be stored
-  @return           true if at least one tag evaluated positively, else false
-*/
-static bool
-parseAddressTemplateSection(const QString &tsection, QString &result, const QString &realName, const QString &orgaName, const KContacts::Address &address)
-{
-    // This method first parses and substitutes any bracketed sections and
-    // after that replaces any tags with their values. If a bracketed section
-    // or a tag evaluate to zero, they are not just removed but replaced
-    // with a placeholder. This is because in the last step conditionals are
-    // resolved which depend on information about zero-evaluations.
-    result = tsection;
-    int stpos = 0;
-    bool ret = false;
-
-    // first check for brackets that have to be evaluated first
-    int fpos = result.indexOf(KCONTACTS_FMTTAG_purgeempty, stpos);
-    while (-1 != fpos) {
-        int bpos1 = fpos + KCONTACTS_FMTTAG_purgeempty.length();
-        // expect opening bracket and find next balanced closing bracket. If
-        // next char is no opening bracket, continue parsing (no valid tag)
-        if (QLatin1Char('(') == result[bpos1]) {
-            int bpos2 = findBalancedBracket(result, bpos1);
-            if (-1 != bpos2) {
-                // we have balanced brackets, recursively parse:
-                QString rplstr;
-                bool purge = !parseAddressTemplateSection(result.mid(bpos1 + 1, bpos2 - bpos1 - 1), //
-                                                          rplstr,
-                                                          realName,
-                                                          orgaName,
-                                                          address);
-                if (purge) {
-                    // purge -> remove all
-                    // replace with !_P_!, so conditional tags work later
-                    result.replace(fpos, bpos2 - fpos + 1, QStringLiteral("!_P_!"));
-                    // leave stpos as it is
-                } else {
-                    // no purge -> replace with recursively parsed string
-                    result.replace(fpos, bpos2 - fpos + 1, rplstr);
-                    ret = true;
-                    stpos = fpos + rplstr.length();
-                }
-            } else {
-                // unbalanced brackets:  keep on parsing (should not happen
-                // and will result in bad formatting)
-                stpos = bpos1;
-            }
-        }
-        fpos = result.indexOf(KCONTACTS_FMTTAG_purgeempty, stpos);
-    }
-
-    // after sorting out all purge tags, we just search'n'replace the rest,
-    // keeping track of whether at least one tag evaluates to something.
-    // The following macro needs QString for R_FIELD
-    // It substitutes !_P_! for empty fields so conditional tags work later
-    // clang-format off
-#define REPLTAG(R_TAG, R_FIELD) \
-    if (result.contains(R_TAG)) { \
-        QString rpl = R_FIELD.isEmpty() ? QStringLiteral("!_P_!") : R_FIELD; \
-        result.replace(R_TAG, rpl); \
-        if (!R_FIELD.isEmpty()) { \
-            ret = true; \
-        } \
-    }
-    // clang-format on
-    REPLTAG(KCONTACTS_FMTTAG_realname, realName);
-    REPLTAG(KCONTACTS_FMTTAG_REALNAME, realName.toUpper());
-    REPLTAG(KCONTACTS_FMTTAG_company, orgaName);
-    REPLTAG(KCONTACTS_FMTTAG_COMPANY, orgaName.toUpper());
-    REPLTAG(KCONTACTS_FMTTAG_pobox, address.postOfficeBox());
-    REPLTAG(KCONTACTS_FMTTAG_street, address.street());
-    REPLTAG(KCONTACTS_FMTTAG_STREET, address.street().toUpper());
-    REPLTAG(KCONTACTS_FMTTAG_zipcode, address.postalCode());
-    REPLTAG(KCONTACTS_FMTTAG_location, address.locality());
-    REPLTAG(KCONTACTS_FMTTAG_LOCATION, address.locality().toUpper());
-    REPLTAG(KCONTACTS_FMTTAG_region, address.region());
-    REPLTAG(KCONTACTS_FMTTAG_REGION, address.region().toUpper());
-    result.replace(KCONTACTS_FMTTAG_newline, QLatin1String("\n"));
-#undef REPLTAG
-
-    // conditional comma
-    fpos = result.indexOf(KCONTACTS_FMTTAG_condcomma, 0);
-    while (-1 != fpos) {
-        const QString str1 = result.mid(fpos - 5, 5);
-        const QString str2 = result.mid(fpos + 2, 5);
-        if (str1 != QLatin1String("!_P_!") && str2 != QLatin1String("!_P_!")) {
-            result.replace(fpos, 2, QStringLiteral(", "));
-        } else {
-            result.remove(fpos, 2);
-        }
-        fpos = result.indexOf(KCONTACTS_FMTTAG_condcomma, fpos);
-    }
-    // conditional whitespace
-    fpos = result.indexOf(KCONTACTS_FMTTAG_condwhite, 0);
-    while (-1 != fpos) {
-        const QString str1 = result.mid(fpos - 5, 5);
-        const QString str2 = result.mid(fpos + 2, 5);
-        if (str1 != QLatin1String("!_P_!") && str2 != QLatin1String("!_P_!")) {
-            result.replace(fpos, 2, QLatin1Char(' '));
-        } else {
-            result.remove(fpos, 2);
-        }
-        fpos = result.indexOf(KCONTACTS_FMTTAG_condwhite, fpos);
-    }
-
-    // remove purged:
-    result.remove(QStringLiteral("!_P_!"));
-
-    return ret;
-}
 
 class Q_DECL_HIDDEN Address::Private : public QSharedData
 {
@@ -552,76 +398,23 @@ QString Address::toString() const
     return str;
 }
 
-static QString addressFormatRc()
-{
-    Q_INIT_RESOURCE(kcontacts); // must be called outside of a namespace
-    return QStringLiteral(":/org.kde.kcontacts/addressformatrc");
-}
-
+#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 92)
 QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
 {
-    KCountry countryCode;
-    QString addrTemplate;
-    QString ret;
+    return formatted(AddressFormatStyle::Postal, realName, orgaName);
+}
+#endif
 
-    if (country().size() == 2) {
-        countryCode = KCountry::fromAlpha2(country());
-    }
-    if (!countryCode.isValid()) {
-        countryCode = KCountry::fromName(country());
-    }
-    // fall back to our own country
-    if (!countryCode.isValid()) {
-        countryCode = KCountry::fromQLocale(QLocale().country());
-    }
-    static const KConfig entry(addressFormatRc());
+QString Address::formatted(AddressFormatStyle style, const QString &realName, const QString &orgaName) const
+{
+    const auto formatPref = (orgaName.isEmpty() || style != AddressFormatStyle::Postal) ? AddressFormatPreference::Generic : AddressFormatPreference::Business;
+    const auto format = AddressFormatRepository::formatForAddress(*this, formatPref);
+    return AddressFormatter::format(*this, realName, orgaName, format, style);
+}
 
-    KConfigGroup group = entry.group(countryCode.alpha2());
-    // decide whether this needs special business address formatting
-    if (orgaName.isEmpty()) {
-        addrTemplate = group.readEntry("AddressFormat");
-    } else {
-        addrTemplate = group.readEntry("BusinessAddressFormat");
-        if (addrTemplate.isEmpty()) {
-            addrTemplate = group.readEntry("AddressFormat");
-        }
-    }
-
-    // in the case there's no format found at all, default to what we've always
-    // used:
-    if (addrTemplate.isEmpty()) {
-        qCWarning(KCONTACTS_LOG) << "address format database incomplete"
-                                 << "(no format for locale" << countryCode.alpha2() << "found). Using default address formatting.";
-        addrTemplate = QStringLiteral("%0(%n\\n)%0(%cm\\n)%0(%s\\n)%0(PO BOX %p\\n)%0(%l%w%r)%,%z");
-    }
-
-    // scan
-    parseAddressTemplateSection(addrTemplate, ret, realName, orgaName, *this);
-
-    // now add the country line if needed (formatting this time according to
-    // the rules of our own system country )
-    if (!country().isEmpty()) {
-        const QString countryName = countryCode.isValid() ? countryCode.name() : country();
-
-        // Don't include line breaks if country is the only text
-        if (ret.isEmpty()) {
-            return countryName;
-        }
-
-        KConfigGroup group = entry.group(KCountry::fromQLocale(QLocale().country()).alpha2());
-        QString cpos = group.readEntry("AddressCountryPosition");
-        if (QLatin1String("BELOW") == cpos || cpos.isEmpty()) {
-            ret = ret + QLatin1String("\n\n") + countryName.toUpper();
-        } else if (QLatin1String("below") == cpos) {
-            ret = ret + QLatin1String("\n\n") + countryName;
-        } else if (QLatin1String("ABOVE") == cpos) {
-            ret = countryName.toUpper() + QLatin1String("\n\n") + ret;
-        } else if (QLatin1String("above") == cpos) {
-            ret = countryName + QLatin1String("\n\n") + ret;
-        }
-    }
-
-    return ret;
+QString Address::formattedPostalAddress() const
+{
+    return formatted(AddressFormatStyle::Postal);
 }
 
 #if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)

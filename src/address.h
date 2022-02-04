@@ -10,6 +10,7 @@
 
 #include "geo.h"
 #include "kcontacts_export.h"
+#include "namespace.h"
 
 #include <QMetaType>
 #include <QSharedDataPointer>
@@ -44,13 +45,18 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString country READ country WRITE setCountry)
     Q_PROPERTY(QString label READ label WRITE setLabel)
     Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
+
+    // TODO KF6: ideally this would be deprecated as it doesn't specify the formatting style
+    // we cannot do that yet though due to Grantlee themes needing this (which cannot call
+    // the invokable methods instead). The KF6::TextTemplate port might bring new options there,
+    // otherwise we can at least switch this from postal to the multi-line style for KF6
     /**
-     * Country-specific formatted address without an addressee.
-     * This is the same as calling formattedAddress() with empty arguments.
-     * @see formattedAddress()
+     * Country-specific formatted address without an addressee using postal address style.
+     * This is the same as calling formatted(AddressFormatStyle::Postal) with empty arguments.
+     * @see formatted()
      * @since 5.12
      */
-    Q_PROPERTY(QString formattedAddress READ formattedAddress)
+    Q_PROPERTY(QString formattedAddress READ formattedPostalAddress)
 
 public:
     /**
@@ -305,9 +311,10 @@ public:
     */
     Q_REQUIRED_RESULT QString toString() const;
 
+#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 92)
     /**
       Returns this address formatted according to the country-specific
-      address formatting rules. The formatting rules applied depend on
+      postal address formatting rules. The formatting rules applied depend on
       either the addresses {@link #country country} field, or (if the
       latter is empty) on the system country setting. If companyName is
       provided, an available business address format will be preferred.
@@ -315,8 +322,30 @@ public:
       @param realName   the formatted name of the contact
       @param orgaName   the name of the organization or company
       @return           the formatted address (containing newline characters)
+      @deprecated since 5.92, use formatted() instead, using AddressFormatStyle::Postal
+                  to obtain the identical result.
     */
+    KCONTACTS_DEPRECATED_VERSION(5, 92, "Use KContacts::Address::formatted() instead")
     Q_REQUIRED_RESULT QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
+#endif
+
+    // note: cannot be called "formattedAddress" due to a collision
+    // with the property of that name in QML
+    /**
+      Returns this address formatted according to the country-specific
+      address formatting rules. The formatting rules applied depend on
+      either the addresses {@link #country country} field, or (if the
+      latter is empty) on the system country setting.
+
+      @param style      the formatting style variant to use
+      @param realName   the formatted name of the contact
+      @param orgaName   the name of the organization or company
+      @return           the formatted address
+      @since 5.92
+    */
+    Q_REQUIRED_RESULT Q_INVOKABLE QString formatted(KContacts::AddressFormatStyle style,
+                                                    const QString &realName = QString(),
+                                                    const QString &orgaName = QString()) const;
 
 #if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
@@ -360,6 +389,8 @@ public:
     Q_REQUIRED_RESULT Geo geo() const;
 
 private:
+    QString formattedPostalAddress() const;
+
     class Private;
     QSharedDataPointer<Private> d;
 };

@@ -8,6 +8,8 @@ target_sources(KF5Contacts PRIVATE
     addresseehelper.cpp
     addresseehelper.h
     addresseelist.h
+    addressformat.cpp
+    addressformatter.cpp
     address.h
     calendarurl.cpp
     calendarurl.h
@@ -39,6 +41,7 @@ target_sources(KF5Contacts PRIVATE
     lang.h
     ldif.cpp
     ldif_p.h
+    namespace.cpp
     nickname.cpp
     nickname.h
     note.cpp
@@ -95,7 +98,7 @@ ecm_generate_export_header(KF5Contacts
     GROUP_BASE_NAME KF
     VERSION ${KF_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 5.88 5.89
+    DEPRECATION_VERSIONS 5.88 5.89 5.92
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
@@ -145,6 +148,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Gender
   Key
   Lang
+  Namespace
   Impp
   PhoneNumber
   Picture

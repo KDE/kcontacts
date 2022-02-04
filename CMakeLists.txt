@@ -45,7 +45,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui)
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Gui OPTIONAL_COMPONENTS Quick)
 find_package(KF5 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(Qt6Core5Compat)

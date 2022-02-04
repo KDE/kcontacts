@@ -1,72 +1,64 @@
 # Localized Address Formats
 
-Address formats can be a tricky thing. KContacts tries very hard to perfectly fit
-the needs of ~95% of users and to be at least sufficient for the other 5%.
+KContact's address formatting largely follows the approach taken by
+[libaddressinput](https://github.com/google/libaddressinput), with adding
+a few additional fields and formatting styles.
 
-The formatting of an address depends on the destination country as well as on
-the origin country of a letter. Basically, the part indicating the destination
-country follows the rules of the country of origin, all the rest follows the
-rules of the destination country. So we need to store for every country a) the
-country positioning and b) the address formatting.
+Address formatting rules are specified in the `addressformatrc` file in the `src`
+directory, grouped by country. The formatting rules format is compatible
+with [that of libaddressinput](https://github.com/google/libaddressinput/wiki/AddressValidationMetadata).
 
-Address formats should usually be stored in a country's entry.desktop. There we
-store the country position in field "AddressCountryPosition" and the address
-format in a field "AddressFormat". Note that for most countries one field
-"AddressFormat" is sufficient for personal as well as company addresses
-(because personal addresses look just like business addresses without company);
-however, in some countries (eg. Hungary) business addresses differ in their
-structure. In this case you have the possibility of adding another field
-"BusinessAddressFormat" which will be preferred for formatting of business
-addresses; if KContacts can't find such a field, it will fall back to
-"AddressFormat". (Please use BusinessAddressFormat ONLY if you really need to)
+## Address Format Information
 
-The format consists mainly of tags that will be replaced by address fields.
-The list of tags may grow in the future, the format *might* change in the near
-future, but I hope not.
+* AddressFormat: the default address format using native script, using the placeholders
+  specified below (mandatory).
+* LatinAddressFormat: for countries using a non-latin script this can provide
+  an alternative format for addresses transliterated to a latin script (optional).
+* BusinessAddressFormat: used for formatting postal addresses of an organization.
+  This only needs to be specified if the format differs from the generic case.
+* LatinBusinessAddressFormat: see LatinAddressFormat.
 
-Any comments very very welcome to kde-pim@kde.org or to jost@schenck.de.
+All of the above values may be specified in multiple variants for multi-lingual countries.
+This is typically only needed when the format rule contains literal strings, e.g.
+for specifying a post office box.
 
--Jost.
+* Required: The address fields that are minimally required to form a valid address
+  in this country.
+* Upper: The address fields to be formatted in upper case regardless of the input
+  for postal addresses.
 
-## Fields AddressFormat and BusinessAddressFormat
+The above values are specified as a string containing the single letter address field
+identifiers listed below. E.g. "AZC" would indicate that a street address, postal code
+and locality (city) are required.
 
-```
-%n  = real name
-%N  = REAL NAME
-%cm = company
-%CM = COMPANY
-%s  = street
-%S  = STREET
-%z  = zip code
-%l  = location
-%L  = LOCATION
-%r  = region
-%R  = REGION
-%p  = post office box
-%,  = conditional comma+whitespace, 
-      will be left out if the value left or right of it is purged
-%w  = conditional whitespace,
-      will be left out if the value left or right of it is purged
-%0(...) = the text inside the brackets will be completely purged if not
-      at least one tag inside it evaluates to something. Example: when the
-      address doesn't have a postbox, the string %0(PO Box %p) will not 
-      evaluate to "PO Box " but to an empty string.
-\n  = newline
-```
+* PostalCodeFormat: A regular expression matching all valid postal codes in
+  this country.
 
-## Field AddressCountryPosition
+## Address Field Identifiers
 
-```
-below = country name below rest of address
-BELOW = country name below in capital letters
-above = country name above rest of address
-ABOVE = country name above in capital letters
-```
+The following identifiers are used in the formatting rules to refer to specific
+parts of an address:
 
-## Some Tips
+* N - Name of a person/Recipient of a letter
+* O - Organization
+* A – Street address
+* C – Locality (city)
+* S – Region (country subdivision/administrative area/state/etc)
+* Z – Postal code/zip code
+* R - Country
 
-- You sometimes have three fields in a line which can all be empty. If you eg.
-separate them all with conditional whitespace (same goes for cond. comma) like
-in "%z%w%r%w%l" and only the middle value (here: region) is empty, there will
-be no whitespace at all between the outer values (here: zipcode and location).
-To avoid this, combine two of these values with purge brackets: %0(%z%w%r)%w%l. 
+Identifiers used by libaddressinput but not by KContacts:
+
+* D – Dependent locality (may be an inner-city district or a suburb)
+* X – Sorting code
+
+## Address Formatting Rules
+
+Address formatting rules consist of a sequence of elements of the following
+three types:
+* Fields - Insert the value of the corresponding address field, specified as a `%` sign
+  followed by a field identifier (see above).
+* Separators - Represented as `%n`. Depending on the formatting style those are replaced
+  e.g. a line break or a script-dependent separator string.
+* Literals - Any other string. Inserted as-is in the output, given it is neither preceded nor
+  followed by an empty field.
