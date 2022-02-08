@@ -175,6 +175,17 @@ private Q_SLOTS:
         QCOMPARE(s, QStringLiteral("서울특별시 중구\n한강대로 416\n서울스퀘어 11층\n04637"));
     }
 
+    void testIncompleteAddress()
+    {
+        KContacts::Address address;
+        address.setLocality(QStringLiteral("City"));
+        address.setPostalCode(QStringLiteral("XX 12345")); // region wrongly part of postal code field
+
+        auto fmt = parseFormat(u"%C, %S %Z", u"", u"US");
+        auto s = AddressFormatter::format(address, QString(), QString(), fmt, AddressFormatStyle::MultiLineDomestic);
+        QCOMPARE(s, QLatin1String("City XX 12345"));
+    }
+
     void validateRepository()
     {
         KConfig config(QStringLiteral(":/org.kde.kcontacts/addressformatrc"), KConfig::SimpleConfig);

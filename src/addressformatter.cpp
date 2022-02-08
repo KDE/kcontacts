@@ -108,9 +108,21 @@ AddressFormatter::format(const Address &address, const QString &name, const QStr
         }
 
         // literals are only added if they not follow an empty field and are not preceding an empty field
-        const auto precedingFieldEmpty = (it != format.elements().begin() && (*std::prev(it)).isField() && isFieldEmpty((*std::prev(it)).field()));
+        // to support incomplete addresses we deviate from the libaddressinput algorithm here and also add
+        // the separator if any preceding field in the same line is non-empty, not just the immediate one.
+        // this is to produce useful output e.g. for "%C %S %Z" if %S is empty.
+        bool precedingFieldHasContent = (it == format.elements().begin() || (*std::prev(it)).isSeparator());
+        for (auto it2 = it; !(*it2).isSeparator(); --it2) {
+            if ((*it2).isField() && !isFieldEmpty((*it2).field())) {
+                precedingFieldHasContent = true;
+                break;
+            }
+            if (it2 == format.elements().begin()) {
+                break;
+            }
+        }
         const auto followingFieldEmpty = (std::next(it) != format.elements().end() && (*std::next(it)).isField() && isFieldEmpty((*std::next(it)).field()));
-        if ((*it).isLiteral() && !precedingFieldEmpty && !followingFieldEmpty) {
+        if ((*it).isLiteral() && precedingFieldHasContent && !followingFieldEmpty) {
             line += (*it).literal();
             continue;
         }
