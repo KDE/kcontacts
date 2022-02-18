@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-twitter
 Comment=Twitter Protocol
+Comment[ar]=ميفاق تويتر
 Comment[ast]=Protoclu de Twitter
 Comment[az]=Twitter Protokolu
 Comment[ca]=Protocol Twitter
@@ -40,6 +41,7 @@ Comment[x-test]=xxTwitter Protocolxx
 Comment[zh_CN]=Twitter 协议
 Comment[zh_TW]=Twitter 通訊協定
 Name=Twitter
+Name[ar]=تويتر
 Name[ast]=Twitter
 Name[az]=Twitter
 Name[ca]=Twitter

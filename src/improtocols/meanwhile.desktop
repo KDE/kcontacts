@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-meanwhile
 Comment=Meanwhile Protocol
+Comment[ar]=ميفاق Meanwhile
 Comment[ast]=Protocolu Meanwhile
 Comment[az]=Meanwhile Protokolu
 Comment[ca]=Protocol Meanwhile
@@ -42,6 +43,7 @@ Comment[x-test]=xxMeanwhile Protocolxx
 Comment[zh_CN]=Meanwhile 协议
 Comment[zh_TW]=Meanwhile 通訊協定
 Name=Meanwhile
+Name[ar]=Meanwhile
 Name[ast]=Meanwhile
 Name[az]=Meanwhile
 Name[ca]=Meanwhile

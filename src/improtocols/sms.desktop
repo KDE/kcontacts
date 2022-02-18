@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-sms
 Comment=SMS Protocol
+Comment[ar]=ميفاق خدمة الرسائل القصيرة
 Comment[ast]=Protocolu SMS
 Comment[az]=SMS Protokolu
 Comment[ca]=Protocol SMS
@@ -42,6 +43,7 @@ Comment[x-test]=xxSMS Protocolxx
 Comment[zh_CN]=短信协议
 Comment[zh_TW]=SMS 通訊協定
 Name=SMS
+Name[ar]=اس ام اس
 Name[ast]=SMS
 Name[az]=SMS
 Name[ca]=SMS

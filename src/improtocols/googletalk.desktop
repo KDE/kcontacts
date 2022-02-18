@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-google
 Comment=Google Talk
+Comment[ar]=جوجل توك
 Comment[ast]=Google Talk
 Comment[az]=Google Talk
 Comment[ca]=Google Talk
@@ -41,6 +42,7 @@ Comment[x-test]=xxGoogle Talkxx
 Comment[zh_CN]=Google Talk
 Comment[zh_TW]=Google Talk
 Name=Google Talk
+Name[ar]=جوجل توك
 Name[ast]=Google Talk
 Name[az]=Google Talk
 Name[ca]=Google Talk

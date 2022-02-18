@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-irc
 Comment=Internet Relay Chat
+Comment[ar]=بروتوكول الدردشة عبر الإنترنت
 Comment[ast]=Charra que s'enconta n'internet
 Comment[az]=Internet Relay Chat (IRC)
 Comment[ca]=Internet Relay Chat
@@ -42,6 +43,7 @@ Comment[x-test]=xxInternet Relay Chatxx
 Comment[zh_CN]=互联网中继聊天
 Comment[zh_TW]=網際網路中繼聊天 (IRC)
 Name=IRC
+Name[ar]=آي أر سي
 Name[ast]=IRC
 Name[az]=IRC
 Name[ca]=IRC

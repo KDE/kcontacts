@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-qq
 Comment=Tencent QQ Messaging
+Comment[ar]=رسائل ترانسنت QQ
 Comment[ast]=Mensaxería QQ de Tencent
 Comment[az]=Tencent QQ Mesajlaşma
 Comment[ca]=Missatgeria Tencent QQ
@@ -40,6 +41,7 @@ Comment[x-test]=xxTencent QQ Messagingxx
 Comment[zh_CN]=腾讯 QQ 聊天
 Comment[zh_TW]=Tencent QQ 通訊
 Name=QQ
+Name[ar]=QQ
 Name[ast]=QQ
 Name[az]=QQ
 Name[ca]=QQ

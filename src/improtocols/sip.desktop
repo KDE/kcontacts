@@ -2,6 +2,7 @@
 Type=Service
 Icon=internet-telephone
 Comment=Session Initiation Protocol
+Comment[ar]=بروتوكول بدء جلسة
 Comment[ast]=Protocolu d'aniciu de sesiones
 Comment[az]=Session İnitial Protocol (SİP)
 Comment[ca]=Protocol per a la iniciació de la sessió
@@ -40,6 +41,7 @@ Comment[x-test]=xxSession Initiation Protocolxx
 Comment[zh_CN]=会话初始化协议
 Comment[zh_TW]=對話啟動協定 (SIP)
 Name=SIP
+Name[ar]=SIP
 Name[ast]=SIP
 Name[az]=SİP
 Name[ca]=SIP

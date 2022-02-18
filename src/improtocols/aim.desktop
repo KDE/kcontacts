@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-aim
 Comment=AIM Protocol
+Comment[ar]=ميفاق AIM
 Comment[ast]=Protocolu d'AIM
 Comment[az]=AIM Protokolu
 Comment[ca]=Protocol AIM
@@ -42,6 +43,7 @@ Comment[x-test]=xxAIM Protocolxx
 Comment[zh_CN]=AIM 协议
 Comment[zh_TW]=AIM 通訊協定
 Name=AIM
+Name[ar]=AIM
 Name[ast]=AIM
 Name[az]=AIM
 Name[ca]=AIM

@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-msn
 Comment=MSN Messenger
+Comment[ar]=مرسال ام اس ان
 Comment[ast]=Mensaxeru de MSN
 Comment[az]=MSN Mesencer
 Comment[ca]=MSN Messenger
@@ -42,6 +43,7 @@ Comment[x-test]=xxMSN Messengerxx
 Comment[zh_CN]=MSN Messenger
 Comment[zh_TW]=MSN Messenger
 Name=MSN Messenger
+Name[ar]=مرسال ام اس ان
 Name[ast]=MSN Messenger
 Name[az]=MSN Mesencer
 Name[ca]=MSN Messenger

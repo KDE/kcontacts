@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-groupwise
 Comment=Novell GroupWise Messenger
+Comment[ar]=نوفل مرسال GroupWise
 Comment[ast]=Mensaxeru GroupWise de Novel
 Comment[az]=Novell GroupWise Mesenceri
 Comment[ca]=Novell GroupWise Messenger
@@ -41,6 +42,7 @@ Comment[x-test]=xxNovell GroupWise Messengerxx
 Comment[zh_CN]=Novell GroupWise Messenger
 Comment[zh_TW]=Novell GroupWise Messenger
 Name=GroupWise
+Name[ar]=GroupWise
 Name[ast]=GroupWise
 Name[az]=GroupWise
 Name[ca]=GroupWise
