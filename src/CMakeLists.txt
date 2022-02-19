@@ -137,6 +137,7 @@ install(TARGETS KF5Contacts EXPORT KF5ContactsTargets ${KF5_INSTALL_TARGETS_DEFA
 ecm_generate_headers(KContacts_CamelCase_HEADERS
   HEADER_NAMES
   Address
+  AddressFormat
   Addressee
   AddresseeList
   CalendarUrl
