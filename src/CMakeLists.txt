@@ -9,6 +9,8 @@ target_sources(KF5Contacts PRIVATE
     addresseehelper.h
     addresseelist.h
     addressformat.cpp
+    addressformatparser.cpp
+    addressformatscript.cpp
     addressformatter.cpp
     address.h
     calendarurl.cpp

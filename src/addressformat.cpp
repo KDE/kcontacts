@@ -6,6 +6,8 @@
 #include "addressformat.h"
 #include "address.h"
 #include "addressformat_p.h"
+#include "addressformatparser_p.h"
+#include "addressformatscript_p.h"
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -99,104 +101,6 @@ QList<AddressFormatElement> AddressFormat::elementsForQml() const
     return l;
 }
 
-struct {
-    char c;
-    AddressFormatField f;
-} static constexpr const field_map[] = {
-    {'A', AddressFormatField::StreetAddress},
-    {'C', AddressFormatField::Locality},
-    {'D', AddressFormatField::DependentLocality},
-    {'N', AddressFormatField::Name},
-    {'O', AddressFormatField::Organization},
-    {'P', AddressFormatField::PostOfficeBox},
-    {'R', AddressFormatField::Country},
-    {'S', AddressFormatField::Region},
-    {'X', AddressFormatField::SortingCode},
-    {'Z', AddressFormatField::PostalCode},
-};
-
-static AddressFormatField parseField(QChar c)
-{
-    const auto it = std::lower_bound(std::begin(field_map), std::end(field_map), c.cell(), [](auto lhs, auto rhs) {
-        return lhs.c < rhs;
-    });
-    if (it == std::end(field_map) || (*it).c != c.cell() || c.row() != 0) {
-        return AddressFormatField::NoField;
-    }
-    return (*it).f;
-}
-
-static AddressFormatFields parseFields(QStringView s)
-{
-    AddressFormatFields fields;
-    for (auto c : s) {
-        fields |= parseField(c);
-    }
-    return fields;
-}
-
-static std::vector<AddressFormatElement> parseElements(QStringView s)
-{
-    std::vector<AddressFormatElement> elements;
-    QString literal;
-    for (auto it = s.begin(); it != s.end(); ++it) {
-        if ((*it) == QLatin1Char('%') && std::next(it) != s.end()) {
-            if (!literal.isEmpty()) {
-                AddressFormatElement elem;
-                auto e = AddressFormatElementPrivate::get(elem);
-                e->literal = std::move(literal);
-                elements.push_back(elem);
-            }
-            ++it;
-            if ((*it) == QLatin1Char('n')) {
-                elements.push_back(AddressFormatElement{});
-            } else {
-                const auto f = parseField(*it);
-                if (f == AddressFormatField::NoField) {
-                    qWarning() << "invalid format field element: %" << *it << "in" << s;
-                } else {
-                    AddressFormatElement elem;
-                    auto e = AddressFormatElementPrivate::get(elem);
-                    e->field = f;
-                    elements.push_back(elem);
-                }
-            }
-        } else {
-            literal.push_back(*it);
-        }
-    }
-    if (!literal.isEmpty()) {
-        AddressFormatElement elem;
-        auto e = AddressFormatElementPrivate::get(elem);
-        e->literal = std::move(literal);
-        elements.push_back(elem);
-    }
-    return elements;
-}
-
-AddressFormatScript::ScriptType AddressFormatScript::detect(const QString &s)
-{
-    for (auto c : s) {
-        switch (c.script()) {
-        case QChar::Script_Arabic:
-            return AddressFormatScript::ArabicLikeScript;
-        case QChar::Script_Han:
-            return AddressFormatScript::HanLikeScript;
-        case QChar::Script_Hangul:
-        case QChar::Script_Thai:
-            return AddressFormatScript::HangulLikeScript;
-        default:
-            break;
-        }
-    }
-    return AddressFormatScript::LatinLikeScript;
-}
-
-AddressFormatScript::ScriptType AddressFormatScript::detect(const Address &addr)
-{
-    return std::max(detect(addr.street()), detect(addr.locality()));
-}
-
 static QString addressFormatRc()
 {
     Q_INIT_RESOURCE(kcontacts); // must be called outside of a namespace
@@ -211,8 +115,8 @@ AddressFormatRepository::formatForCountry(const QString &countryCode, AddressFor
 
     AddressFormat format;
     auto fmt = AddressFormatPrivate::get(format);
-    fmt->required = parseFields(group.readEntry("Required", QString()));
-    fmt->upper = parseFields(group.readEntry("Upper", QString()));
+    fmt->required = AddressFormatParser::parseFields(group.readEntry("Required", QString()));
+    fmt->upper = AddressFormatParser::parseFields(group.readEntry("Upper", QString()));
 
     QString formatString;
     if (scriptPref == AddressFormatScriptPreference::Latin && formatPref == AddressFormatPreference::Business) {
@@ -227,7 +131,7 @@ AddressFormatRepository::formatForCountry(const QString &countryCode, AddressFor
     if (formatString.isEmpty()) {
         formatString = group.readEntry("AddressFormat", QStringLiteral("%N%n%O%n%A%nPO BOX %P%n%C %S %Z"));
     }
-    fmt->elements = parseElements(formatString);
+    fmt->elements = AddressFormatParser::parseElements(formatString);
     fmt->postalCodeFormat = group.readEntry("PostalCodeFormat", QString());
     fmt->country = countryCode;
     return format;

@@ -3,7 +3,9 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "addressformat.cpp"
+#include "addressformat.h"
+#include "addressformatparser.cpp"
+#include "addressformatscript.cpp"
 #include "addressformatter.cpp"
 
 #include <KConfig>
@@ -31,8 +33,8 @@ private:
     {
         AddressFormat format;
         auto fmt = AddressFormatPrivate::get(format);
-        fmt->upper = parseFields(u);
-        fmt->elements = parseElements(f);
+        fmt->upper = AddressFormatParser::parseFields(u);
+        fmt->elements = AddressFormatParser::parseElements(f);
         fmt->country = country.toString();
         return format;
     }
@@ -197,15 +199,15 @@ private Q_SLOTS:
             const auto group = config.group(countryCode);
 
             QVERIFY(group.hasKey("AddressFormat"));
-            const auto upper = parseFields(group.readEntry("Upper"));
-            const auto required = parseFields(group.readEntry("Required"));
+            const auto upper = AddressFormatParser::parseFields(group.readEntry("Upper"));
+            const auto required = AddressFormatParser::parseFields(group.readEntry("Required"));
 
             // TODO can we check all language variants as well?
             for (const auto &key : {"AddressFormat", "BusinessAddressFormat", "LatinAddressFormat", "LatinBusinessAddressFormat"}) {
                 if (!group.hasKey(key)) {
                     continue;
                 }
-                const auto elems = parseElements(group.readEntry(key, QString()));
+                const auto elems = AddressFormatParser::parseElements(group.readEntry(key, QString()));
 
                 AddressFormatFields seen = AddressFormatField::NoField;
                 for (const auto &elem : elems) {
