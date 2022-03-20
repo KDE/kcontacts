@@ -2712,6 +2712,11 @@ static QVector<T> fromVariantList(const QVariantList &v)
     return l;
 }
 
+void Addressee::setBirthdayProperty(const QDateTime &birthday) {
+    // The property setter cannot pass withTime, so we have to guess.
+    setBirthday(birthday, birthday.time().msecsSinceStartOfDay() != 0);
+}
+
 QVariantList Addressee::emailsVariant() const
 {
     return toVariantList(d->mEmails);

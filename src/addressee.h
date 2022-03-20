@@ -82,7 +82,7 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QString prefix READ prefix WRITE setPrefix)
     Q_PROPERTY(QString suffix READ suffix WRITE setSuffix)
     Q_PROPERTY(QString nickName READ nickName)
-    Q_PROPERTY(QDateTime birthday READ birthday) // ### can't set this due to withTime argument
+    Q_PROPERTY(QDateTime birthday READ birthday WRITE setBirthdayProperty) // special write method due to withTime argument
     Q_PROPERTY(bool birthdayHasTime READ birthdayHasTime)
     Q_PROPERTY(QString mailer READ mailer WRITE setMailer)
     Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
@@ -1213,6 +1213,7 @@ public:
     void setSpousesName(const QString &spousesName);
 
 private:
+    void setBirthdayProperty(const QDateTime &birthday);
     QVariantList emailsVariant() const;
     void setEmailsVariant(const QVariantList &emails);
     QVariantList phoneNumbersVariant() const;
