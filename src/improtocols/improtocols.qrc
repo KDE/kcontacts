@@ -16,5 +16,7 @@
         <file>twitter.desktop</file>
         <file>xmpp.desktop</file>
         <file>ymsgr.desktop</file>
+        <file>matrix.desktop</file>
+        <file>telegram.desktop</file>
     </qresource>
 </RCC>
