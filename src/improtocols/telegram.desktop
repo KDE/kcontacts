@@ -1,11 +1,13 @@
 [Desktop Entry]
 Type=Service
 Comment=Telegram
+Comment[az]=Teleqram
 Comment[ca]=Telegram
 Comment[ca@valencia]=Telegram
 Comment[es]=Telegram
 Comment[fr]=Telegram
 Comment[ia]=Telegram
+Comment[it]=Telegram
 Comment[nl]=Telegram
 Comment[sl]=Telegram
 Comment[sv]=Telegram
@@ -13,11 +15,13 @@ Comment[tr]=Telegram
 Comment[uk]=Telegram
 Comment[x-test]=xxTelegramxx
 Name=Telegram
+Name[az]=Teleqram
 Name[ca]=Telegram
 Name[ca@valencia]=Telegram
 Name[es]=Telegram
 Name[fr]=Telegram
 Name[ia]=Telegram
+Name[it]=Telegram
 Name[nl]=Telegram
 Name[sl]=Telegram
 Name[sv]=Telegram

@@ -1,11 +1,13 @@
 [Desktop Entry]
 Type=Service
 Comment=Matrix
+Comment[az]=Matrix
 Comment[ca]=Matrix
 Comment[ca@valencia]=Matrix
 Comment[es]=Matrix
 Comment[fr]=Matrix
 Comment[ia]=Matrix
+Comment[it]=Matrix
 Comment[nl]=Matrix
 Comment[sl]=Matrix
 Comment[sv]=Matrix
@@ -13,11 +15,13 @@ Comment[tr]=Matrix
 Comment[uk]=Matrix
 Comment[x-test]=xxMatrixxx
 Name=Matrix
+Name[az]=Matrix
 Name[ca]=Matrix
 Name[ca@valencia]=Matrix
 Name[es]=Matrix
 Name[fr]=Matrix
 Name[ia]=Matrix
+Name[it]=Matrix
 Name[nl]=Matrix
 Name[sl]=Matrix
 Name[sv]=Matrix
