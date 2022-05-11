@@ -88,6 +88,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
         "BDAY:19531015T231000Z\r\n"
         "CALADRURI;PREF=1:mailto:detective@sherlockholmes.com\r\n"
         "CALURI;PREF=1:https://sherlockholmes.com/calendar/sherlockholmes\r\n"
+        "CATEGORIES:FICTION,LITERATURE\r\n"
         "EMAIL;PREF=1;TYPE=work:detective@sherlockholmes.com\r\n"
         "EMAIL;TYPE=home:sherlock.holmes@gmail.com\r\n"
         "FBURL;PREF=1:https://sherlockholmes.com/busy/detective\r\n"
