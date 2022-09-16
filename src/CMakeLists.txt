@@ -134,7 +134,7 @@ set_target_properties(KF5Contacts PROPERTIES
     EXPORT_NAME Contacts
 )
 
-install(TARGETS KF5Contacts EXPORT KF5ContactsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5Contacts EXPORT KF5ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ecm_generate_headers(KContacts_CamelCase_HEADERS
   HEADER_NAMES
