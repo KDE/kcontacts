@@ -56,8 +56,9 @@ public:
     /**
      * @deprecated Since 5.88 for lack of usage
      */
+    Q_REQUIRED_RESULT
     KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
-    Q_REQUIRED_RESULT QMap<QString, QStringList> parameters() const;
+    QMap<QString, QStringList> parameters() const;
 #endif
 
     Q_REQUIRED_RESULT bool operator==(const Title &other) const;

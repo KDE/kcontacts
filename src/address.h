@@ -325,8 +325,9 @@ public:
       @deprecated since 5.92, use formatted() instead, using AddressFormatStyle::Postal
                   to obtain the identical result.
     */
+    Q_REQUIRED_RESULT
     KCONTACTS_DEPRECATED_VERSION(5, 92, "Use KContacts::Address::formatted() instead")
-    Q_REQUIRED_RESULT QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
+    QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
 #endif
 
     // note: cannot be called "formattedAddress" due to a collision
