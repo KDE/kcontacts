@@ -2040,6 +2040,12 @@ void Addressee::removeAddress(const Address &address)
     }
 }
 
+void Addressee::setAddresses(const Address::List &addresses)
+{
+    d->mEmpty = false;
+    d->mAddresses = addresses;
+}
+
 Address Addressee::address(Address::Type type) const
 {
     Address address(type);
