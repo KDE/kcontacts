@@ -1,4 +1,20 @@
 [Desktop Entry]
 Type=Service
 Comment=Signal
+Comment[bg]=Signal
+Comment[ca]=Signal
+Comment[es]=Signal
+Comment[eu]=Signal
+Comment[nl]=Signaal
+Comment[tr]=Signal
+Comment[uk]=Сигнал
+Comment[x-test]=xxSignalxx
 Name=Signal
+Name[bg]=Signal
+Name[ca]=Signal
+Name[es]=Signal
+Name[eu]=Signal
+Name[nl]=Signaal
+Name[tr]=Signal
+Name[uk]=Сигнал
+Name[x-test]=xxSignalxx
