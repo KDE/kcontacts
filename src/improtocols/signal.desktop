@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Comment=Signal
+Comment[ar]=سيجنال
 Comment[bg]=Signal
 Comment[ca]=Signal
 Comment[ca@valencia]=Signal
@@ -18,6 +19,7 @@ Comment[tr]=Signal
 Comment[uk]=Сигнал
 Comment[x-test]=xxSignalxx
 Name=Signal
+Name[ar]=سيجنال
 Name[bg]=Signal
 Name[ca]=Signal
 Name[ca@valencia]=Signal

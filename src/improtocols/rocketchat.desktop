@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Comment=RocketChat
+Comment[ar]=روكيت تشات
 Comment[bg]=RocketChat
 Comment[ca]=RocketChat
 Comment[ca@valencia]=RocketChat
@@ -18,6 +19,7 @@ Comment[tr]=RocketChat
 Comment[uk]=RocketChat
 Comment[x-test]=xxRocketChatxx
 Name=RocketChat
+Name[ar]=روكيت تشات
 Name[bg]=RocketChat
 Name[ca]=RocketChat
 Name[ca@valencia]=RocketChat

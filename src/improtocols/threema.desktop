@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Comment=Threema
+Comment[ar]=ثریما
 Comment[bg]=Threema
 Comment[ca]=Threema
 Comment[ca@valencia]=Threema
@@ -18,6 +19,7 @@ Comment[tr]=Threema
 Comment[uk]=Threema
 Comment[x-test]=xxThreemaxx
 Name=Threema
+Name[ar]=ثریما
 Name[bg]=Threema
 Name[ca]=Threema
 Name[ca@valencia]=Threema
