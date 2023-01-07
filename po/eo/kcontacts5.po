@@ -1,13 +1,16 @@
-# Translation of kabc into esperanto.
+# Translation of kcontacts5.pot to esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the "kcontacts" package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-02-27 00:41+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-01-07 01:00+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +22,12 @@ msgstr ""
 #: address.cpp:223
 #, kde-format
 msgid "Post Office Box"
-msgstr ""
+msgstr "Poŝtofica Kesto"
 
 #: address.cpp:239
 #, kde-format
 msgid "Extended Address Information"
-msgstr ""
+msgstr "Etenditaj Adres-Informoj"
 
 #: address.cpp:255
 #, kde-format
@@ -34,7 +37,7 @@ msgstr "Strato"
 #: address.cpp:271
 #, kde-format
 msgid "Locality"
-msgstr ""
+msgstr "Loko"
 
 #: address.cpp:287
 #, kde-format
@@ -44,7 +47,7 @@ msgstr "Regiono"
 #: address.cpp:303
 #, kde-format
 msgid "Postal Code"
-msgstr ""
+msgstr "Poŝtkodo"
 
 #: address.cpp:319
 #, kde-format
@@ -54,43 +57,43 @@ msgstr "Lando"
 #: address.cpp:335
 #, kde-format
 msgid "Delivery Label"
-msgstr ""
+msgstr "Liveretikedo"
 
 #: address.cpp:353
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
-msgstr ""
+msgstr "Enlanda"
 
 #: address.cpp:355
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
-msgstr ""
+msgstr "Internacia"
 
 #: address.cpp:357
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
-msgstr ""
+msgstr "Poŝta"
 
 #: address.cpp:359
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
-msgstr ""
+msgstr "Pakaĵo"
 
 #: address.cpp:361
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
-msgstr ""
+msgstr "Hejmo"
 
 #: address.cpp:363
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
-msgstr ""
+msgstr "Laboro"
 
 #: address.cpp:365
 #, kde-format
@@ -101,12 +104,12 @@ msgstr "Preferata adreso"
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
-msgstr ""
+msgstr "Alia"
 
 #: addressee.cpp:456
 #, kde-format
 msgid "Unique Identifier"
-msgstr ""
+msgstr "Unika Identigilo"
 
 #: addressee.cpp:476
 #, kde-format
@@ -116,37 +119,37 @@ msgstr "Nomo"
 #: addressee.cpp:672
 #, kde-format
 msgid "Formatted Name"
-msgstr ""
+msgstr "Formatita Nomo"
 
 #: addressee.cpp:692
 #, kde-format
 msgid "Family Name"
-msgstr ""
+msgstr "Familinomo"
 
 #: addressee.cpp:712
 #, kde-format
 msgid "Given Name"
-msgstr ""
+msgstr "Donita Nomo"
 
 #: addressee.cpp:732
 #, kde-format
 msgid "Additional Names"
-msgstr ""
+msgstr "Pluaj Nomoj"
 
 #: addressee.cpp:752
 #, kde-format
 msgid "Honorific Prefixes"
-msgstr ""
+msgstr "Honorindaj Prefiksoj"
 
 #: addressee.cpp:772
 #, kde-format
 msgid "Honorific Suffixes"
-msgstr ""
+msgstr "Honorindaj Sufiksoj"
 
 #: addressee.cpp:823
 #, kde-format
 msgid "Nick Name"
-msgstr ""
+msgstr "Kromnomo"
 
 #: addressee.cpp:863
 #, kde-format
@@ -156,37 +159,37 @@ msgstr "Naskiĝdato"
 #: addressee.cpp:868
 #, kde-format
 msgid "Home Address Street"
-msgstr ""
+msgstr "Hejmadresa Strato"
 
 #: addressee.cpp:873
 #, kde-format
 msgid "Home Address Post Office Box"
-msgstr ""
+msgstr "Hejmadresa Poŝtkesto"
 
 #: addressee.cpp:878
 #, kde-format
 msgid "Home Address City"
-msgstr ""
+msgstr "Hejmadresa Urbo"
 
 #: addressee.cpp:883
 #, kde-format
 msgid "Home Address State"
-msgstr ""
+msgstr "Hejmadresa Ŝtato"
 
 #: addressee.cpp:888
 #, kde-format
 msgid "Home Address Zip Code"
-msgstr ""
+msgstr "Hejmadresa Poŝtkodo"
 
 #: addressee.cpp:893
 #, kde-format
 msgid "Home Address Country"
-msgstr ""
+msgstr "Hejmadresa Lando"
 
 #: addressee.cpp:898
 #, kde-format
 msgid "Home Address Label"
-msgstr ""
+msgstr "Hejmadresa Etikedo"
 
 #: addressee.cpp:903
 #, kde-format
@@ -334,7 +337,7 @@ msgstr "TTT-hejmpaĝo"
 #: addressee.cpp:1337
 #, kde-format
 msgid "Security Class"
-msgstr ""
+msgstr "Sekureca Kategorio"
 
 #: addressee.cpp:1357
 #, kde-format
@@ -347,11 +350,9 @@ msgid "Photo"
 msgstr "Foto"
 
 #: addressee.cpp:1397
-#, fuzzy, kde-format
-#| msgctxt "Describing the sound of the character"
-#| msgid "Sound: "
+#, kde-format
 msgid "Sound"
-msgstr "Sono:"
+msgstr "Sono"
 
 #: addresseehelper.cpp:59
 #, kde-format
@@ -421,13 +422,13 @@ msgstr "Ĉiuj"
 #: field.cpp:221
 #, kde-format
 msgid "Frequent"
-msgstr ""
+msgstr "Ofta"
 
 #: field.cpp:223
 #, kde-format
 msgctxt "street/postal"
 msgid "Address"
-msgstr ""
+msgstr "Adreso"
 
 #: field.cpp:225
 #, kde-format
@@ -465,31 +466,31 @@ msgstr "PGP"
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
-msgstr ""
+msgstr "Propra"
 
 #: key.cpp:207
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
-msgstr ""
+msgstr "Nekonata tipo"
 
 #: phonenumber.cpp:170
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
-msgstr ""
+msgstr "Telefonnumero"
 
 #: phonenumber.cpp:172
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
-msgstr ""
+msgstr "Hejm"
 
 #: phonenumber.cpp:174
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
-msgstr ""
+msgstr "Labpra"
 
 #: phonenumber.cpp:176
 #, kde-format
@@ -500,12 +501,12 @@ msgstr ""
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
-msgstr ""
+msgstr "Preferata"
 
 #: phonenumber.cpp:180
 #, kde-format
 msgid "Voice"
-msgstr ""
+msgstr "Voĉa"
 
 #: phonenumber.cpp:182
 #, kde-format
@@ -516,13 +517,13 @@ msgstr "Fax"
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
-msgstr ""
+msgstr "Mobila"
 
 #: phonenumber.cpp:186
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: phonenumber.cpp:188
 #, kde-format
@@ -538,7 +539,7 @@ msgstr "Modem"
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
-msgstr ""
+msgstr "Aŭtomobila"
 
 #: phonenumber.cpp:196
 #, kde-format
@@ -549,79 +550,38 @@ msgstr "PCS"
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
-msgstr ""
+msgstr "Alia"
 
 #: phonenumber.cpp:213
 #, kde-format
 msgid "Preferred Number"
-msgstr ""
+msgstr "Preferata Numero"
 
 #: phonenumber.cpp:223
 #, kde-format
 msgid "Work Fax"
-msgstr ""
+msgstr "Laboreja Fakso"
 
 #: secrecy.cpp:98
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
-msgstr ""
+msgstr "Publika"
 
 #: secrecy.cpp:101
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
-msgstr ""
+msgstr "Privata"
 
 #: secrecy.cpp:104
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
-msgstr ""
+msgstr "Konfidenca"
 
 #: secrecy.cpp:107
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
-msgstr ""
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Axel Rousseau"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "axel@esperanto-jeunes.org"
-
-#~ msgid "Select Email Address"
-#~ msgstr "Elekti retpoŝtadreson"
-
-#~ msgid "Email Addresses"
-#~ msgstr "Retpoŝtaj adresoj"
-
-#~ msgid "New List..."
-#~ msgstr "Nova listo..."
-
-#~ msgid "Rename List..."
-#~ msgstr "Alinomi liston..."
-
-#~ msgid "Remove List"
-#~ msgstr "Forigi liston"
-
-#~ msgid "Add Entry"
-#~ msgstr "Aldoni eron"
-
-#~ msgid "Remove Entry"
-#~ msgstr "Forigi eron"
-
-#~ msgid "New Distribution List"
-#~ msgstr "Nova dissendolisto"
-
-#~ msgid "vCard"
-#~ msgstr "vCard"
-
-#~ msgid "No description available."
-#~ msgstr "Neniu priskribo havebla."
-
-#~ msgid "Error"
-#~ msgstr "Eraro"
+msgstr "Nekonata tipo"
