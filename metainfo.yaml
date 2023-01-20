@@ -9,8 +9,8 @@ portingAid: false
 deprecated: false
 libraries:
  - qmake: KContacts
-   cmake: "KF5::Contacts"
-cmakename: KF5Contacts
+   cmake: "KF6::Contacts"
+cmakename: KF6Contacts
 
 group: Frameworks
 subgroup: Tier 2

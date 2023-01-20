@@ -40,8 +40,8 @@ set(KCONTACTS_LIB_VERSION ${KF_VERSION})
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5ContactsConfigVersion.cmake"
-                        SOVERSION 5
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6ContactsConfigVersion.cmake"
+                        SOVERSION 6
 )
 
 ########### Find packages ###########
@@ -54,7 +54,7 @@ set_package_properties(Qt${QT_MAJOR_VERSION}Quick PROPERTIES
     TYPE OPTIONAL
     PURPOSE "QtQuick plugin"
 )
-find_package(KF5 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(Qt6Core5Compat)
 endif()
@@ -77,32 +77,32 @@ if(BUILD_TESTING)
 endif()
 
 ########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Contacts")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Contacts")
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KF5Contacts_QCH
-        FILE KF5ContactsQchTargets.cmake
+        TARGETS KF6Contacts_QCH
+        FILE KF6ContactsQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5ContactsQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF6ContactsQchTargets.cmake\")")
 endif()
 
 configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KF5ContactsConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5ContactsConfig.cmake"
+  "${CMAKE_CURRENT_SOURCE_DIR}/KF6ContactsConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF6ContactsConfig.cmake"
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5ContactsConfig.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5ContactsConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF6ContactsConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF6ContactsConfigVersion.cmake"
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
   COMPONENT Devel
 )
 
-install(EXPORT KF5ContactsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5ContactsTargets.cmake NAMESPACE KF5::)
+install(EXPORT KF6ContactsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6ContactsTargets.cmake NAMESPACE KF6::)
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kcontacts_version.h

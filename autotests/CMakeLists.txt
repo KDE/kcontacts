@@ -7,7 +7,7 @@ find_package(Qt${QT_MAJOR_VERSION}Test ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
 add_executable(testroundtrip)
 target_sources(testroundtrip PRIVATE testroundtrip.cpp testroundtrip.qrc)
 add_test(NAME kcontacts-testroundtrip COMMAND testroundtrip)
-target_link_libraries(testroundtrip KF5Contacts Qt${QT_MAJOR_VERSION}::Test)
+target_link_libraries(testroundtrip KF6Contacts Qt${QT_MAJOR_VERSION}::Test)
 
 ecm_add_tests(birthdaytest.cpp
     addresseetest.cpp
@@ -37,15 +37,15 @@ ecm_add_tests(birthdaytest.cpp
     orgtest.cpp
     datetimetest.cpp
     clientpidmaptest.cpp
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt${QT_MAJOR_VERSION}::Test KF5::ConfigCore)
+    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts Qt${QT_MAJOR_VERSION}::Test KF6::ConfigCore)
 
 ecm_add_test(addressformattest.cpp ../src/kcontacts.qrc
     TEST_NAME addressformattest
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts KF5::I18nLocaleData KF5::ConfigCore Qt${QT_MAJOR_VERSION}::Test)
+    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts KF6::I18nLocaleData KF6::ConfigCore Qt${QT_MAJOR_VERSION}::Test)
 
 ecm_add_tests(picturetest.cpp
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF5Contacts Qt${QT_MAJOR_VERSION}::Test KF5::ConfigCore Qt${QT_MAJOR_VERSION}::Gui)
+    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts Qt${QT_MAJOR_VERSION}::Test KF6::ConfigCore Qt${QT_MAJOR_VERSION}::Gui)
 
 # Benchmark, compiled, but not run automatically with ctest
 add_executable(vcardtool_benchmark vcardtool_benchmark.cpp)
-target_link_libraries(vcardtool_benchmark KF5Contacts Qt${QT_MAJOR_VERSION}::Test KF5::ConfigCore)
+target_link_libraries(vcardtool_benchmark KF6Contacts Qt${QT_MAJOR_VERSION}::Test KF6::ConfigCore)

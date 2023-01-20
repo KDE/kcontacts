@@ -1,7 +1,7 @@
-add_library(KF5Contacts)
-add_library(KF5::Contacts ALIAS KF5Contacts)
+add_library(KF6Contacts)
+add_library(KF6::Contacts ALIAS KF6Contacts)
 
-target_sources(KF5Contacts PRIVATE
+target_sources(KF6Contacts PRIVATE
     address.cpp
     addressee.cpp
     addressee.h
@@ -85,7 +85,7 @@ target_sources(KF5Contacts PRIVATE
   improtocols/improtocols.qrc
 )
 
-ecm_qt_declare_logging_category(KF5Contacts
+ecm_qt_declare_logging_category(KF6Contacts
     HEADER kcontacts_debug.h
     IDENTIFIER KCONTACTS_LOG
     CATEGORY_NAME kf.contacts
@@ -94,7 +94,7 @@ ecm_qt_declare_logging_category(KF5Contacts
     EXPORT KCONTACTS
 )
 
-ecm_generate_export_header(KF5Contacts
+ecm_generate_export_header(KF6Contacts
     EXPORT_FILE_NAME kcontacts_export.h
     BASE_NAME kcontacts
     GROUP_BASE_NAME KF
@@ -104,37 +104,37 @@ ecm_generate_export_header(KF5Contacts
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-target_include_directories(KF5Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KContacts>")
+target_include_directories(KF6Contacts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KContacts>")
 set(KContacts_BUILD_INCLUDE_DIRS
     ${KContacts_SOURCE_DIR}/src
     ${KContacts_BINARY_DIR}/src
     ${KContacts_SOURCE_DIR}/src/vcardparser
 )
-target_include_directories(KF5Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUILD_INCLUDE_DIRS}>")
+target_include_directories(KF6Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUILD_INCLUDE_DIRS}>")
 
-target_link_libraries(KF5Contacts
+target_link_libraries(KF6Contacts
 PUBLIC
     Qt${QT_MAJOR_VERSION}::Core
     Qt${QT_MAJOR_VERSION}::Gui
 PRIVATE
-    KF5::CoreAddons
-    KF5::ConfigCore
-    KF5::I18n
-    KF5::I18nLocaleData
-    KF5::Codecs # for the vcard parser
+    KF6::CoreAddons
+    KF6::ConfigCore
+    KF6::I18n
+    KF6::I18nLocaleData
+    KF6::Codecs # for the vcard parser
 )
 
 if (TARGET Qt6::Core5Compat)
-    target_link_libraries(KF5Contacts PRIVATE Qt6::Core5Compat) # QTextCodec
+    target_link_libraries(KF6Contacts PRIVATE Qt6::Core5Compat) # QTextCodec
 endif()
 
-set_target_properties(KF5Contacts PROPERTIES
+set_target_properties(KF6Contacts PROPERTIES
     VERSION ${KContacts_VERSION}
     SOVERSION ${KContacts_SOVERSION}
     EXPORT_NAME Contacts
 )
 
-install(TARGETS KF5Contacts EXPORT KF5ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF6Contacts EXPORT KF6ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ecm_generate_headers(KContacts_CamelCase_HEADERS
   HEADER_NAMES
@@ -193,14 +193,14 @@ ecm_qt_install_logging_categories(
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
 )
 
-ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF5Contacts DEPS "KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts)
+ecm_generate_pri_file(BASE_NAME KContacts LIB_NAME KF6Contacts DEPS "KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KContacts)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
 if(BUILD_QCH)
     ecm_add_qch(
-        KF5Contacts_QCH
+        KF6Contacts_QCH
         NAME KContacts
-        BASE_NAME KF5Contacts
+        BASE_NAME KF6Contacts
         VERSION ${KContacts_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
