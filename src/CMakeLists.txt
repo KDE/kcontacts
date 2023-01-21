@@ -114,8 +114,8 @@ target_include_directories(KF6Contacts PUBLIC "$<BUILD_INTERFACE:${KContacts_BUI
 
 target_link_libraries(KF6Contacts
 PUBLIC
-    Qt${QT_MAJOR_VERSION}::Core
-    Qt${QT_MAJOR_VERSION}::Gui
+    Qt6::Core
+    Qt6::Gui
 PRIVATE
     KF6::CoreAddons
     KF6::ConfigCore

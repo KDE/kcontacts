@@ -31,9 +31,6 @@
 
 #include <QIODevice>
 #include <QStringList>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QTextCodec>
-#endif
 #include <QTextStream>
 
 using namespace KContacts;
@@ -94,9 +91,6 @@ bool LDIFConverter::contactGroupToLDIF(const ContactGroup &contactGroup, QString
         return false;
     }
     QTextStream t(&str, QIODevice::WriteOnly | QIODevice::Append);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
-#endif
 
     t << "objectclass: top\n";
     t << "objectclass: groupOfNames\n";
@@ -150,9 +144,6 @@ bool LDIFConverter::addresseeToLDIF(const Addressee &addr, QString &str)
     }
 
     QTextStream t(&str, QIODevice::WriteOnly | QIODevice::Append);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
-#endif
 
     const Address homeAddr = addr.address(Address::Home);
     const Address workAddr = addr.address(Address::Work);
@@ -645,11 +636,7 @@ void KContacts::evaluatePair(Addressee &a,
         return;
     }
     if (fieldname == QLatin1String("xbatbirthday")) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const QStringView str{value};
-#else
-        const QStringRef str{&value};
-#endif
         QDate dt(str.mid(0, 4).toInt(), str.mid(4, 2).toInt(), str.mid(6, 2).toInt());
         if (dt.isValid()) {
             a.setBirthday(dt);

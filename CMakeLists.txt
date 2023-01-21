@@ -45,12 +45,12 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
 )
 
 ########### Find packages ###########
-find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Gui Quick)
-set_package_properties(Qt${QT_MAJOR_VERSION}Gui PROPERTIES
+find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Gui Quick)
+set_package_properties(Qt6Gui PROPERTIES
     TYPE REQUIRED
     PURPOSE "Basic library component"
 )
-set_package_properties(Qt${QT_MAJOR_VERSION}Quick PROPERTIES
+set_package_properties(Qt6Quick PROPERTIES
     TYPE OPTIONAL
     PURPOSE "QtQuick plugin"
 )

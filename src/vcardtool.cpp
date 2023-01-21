@@ -1052,14 +1052,9 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QString date = (*lineIt).value().toString();
 
                     if (!date.isEmpty()) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                         const QStringView dateView(date);
                         int hours = dateView.mid(1, 2).toInt();
                         int minutes = dateView.mid(4, 2).toInt();
-#else
-                        int hours = date.midRef(1, 2).toInt();
-                        int minutes = date.midRef(4, 2).toInt();
-#endif
                         int offset = (hours * 60) + minutes;
                         offset = offset * (date[0] == QLatin1Char('+') ? 1 : -1);
 
@@ -1201,11 +1196,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     dateString.remove(QLatin1Char('-'));
     QDate date;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QStringView dstr{dateString};
-#else
-    const QStringRef dstr(&dateString);
-#endif
     if (noYear) {
         date.setDate(-1, dstr.mid(0, 2).toInt(), dstr.mid(2, 2).toInt());
     } else {
@@ -1223,11 +1214,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
         const int plusPos = timeString.indexOf(QLatin1Char('+'));
         const int minusPos = timeString.indexOf(sep);
         const int tzPos = qMax(qMax(zPos, plusPos), minusPos);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const QStringView hhmmssString = tzPos >= 0 ? QStringView(timeString).left(tzPos) : QStringView(timeString);
-#else
-        const QStringRef hhmmssString = tzPos >= 0 ? timeString.leftRef(tzPos) : QStringRef(&timeString);
-#endif
         int hour = 0;
         int minutes = 0;
         int seconds = 0;
@@ -1253,11 +1240,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
             } else {
                 spec = Qt::OffsetFromUTC;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 const auto offsetString = QStringView(timeString).mid(tzPos + 1);
-#else
-                const QStringRef offsetString = timeString.midRef(tzPos + 1);
-#endif
                 switch (offsetString.size()) {
                 case 2: // format: "hh"
                     offsetSecs = offsetString.left(2).toInt() * 3600;
