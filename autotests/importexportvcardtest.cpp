@@ -33,7 +33,7 @@ static void compareBuffers(const QByteArray &outputData, const QByteArray &expec
         if (actual != expect) {
             qCritical() << "Mismatch at output line" << (i + 1);
             QCOMPARE(actual, expect);
-            QCOMPARE(actual.count(), expect.count());
+            QCOMPARE(actual.size(), expect.size());
         }
     }
     QCOMPARE(outputLines.count(), outputRefLines.count());

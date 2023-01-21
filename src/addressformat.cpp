@@ -148,7 +148,7 @@ AddressFormat AddressFormatRepository::formatForAddress(const Address &address, 
     }
     // fall back to our own country
     if (!c.isValid()) {
-        c = KCountry::fromQLocale(QLocale().country());
+        c = KCountry::fromQLocale(QLocale().territory());
     }
 
     const auto scriptPref = AddressFormatScript::detect(address) == AddressFormatScript::LatinLikeScript ? AddressFormatScriptPreference::Latin

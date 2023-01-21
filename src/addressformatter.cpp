@@ -185,7 +185,7 @@ AddressFormatter::format(const Address &address, const QString &name, const QStr
         auto c = countryName();
         if (style == AddressFormatStyle::Postal) {
             // the format of the country for postal addresses depends on the sending country, not the destination
-            const auto sourceCountry = KCountry::fromQLocale(QLocale().country());
+            const auto sourceCountry = KCountry::fromQLocale(QLocale().territory());
             const auto sourceFmt = AddressFormatRepository::formatForCountry(sourceCountry.alpha2(), AddressFormatScriptPreference::Local);
             const auto shouldPrepend = isReverseOrder(sourceFmt);
             if (!lines.isEmpty()) {

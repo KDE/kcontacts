@@ -407,7 +407,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                             checkMultibyte = true;
                             input = value.toUtf8();
                         }
-                    } else if (vline.value().type() == QVariant::ByteArray) {
+                    } else if (vline.value().userType() == QMetaType::QByteArray) {
                         input = vline.value().toByteArray();
                     } else {
                         checkMultibyte = true;
