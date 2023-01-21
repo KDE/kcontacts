@@ -107,20 +107,6 @@ QString CalendarUrl::toString() const
     return str;
 }
 
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-void CalendarUrl::setParameters(const QMap<QString, QStringList> &params)
-{
-    d->mParamMap = ParameterMap::fromQMap(params);
-}
-#endif
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-QMap<QString, QStringList> CalendarUrl::parameters() const
-{
-    return d->mParamMap.toQMap();
-}
-#endif
-
 void CalendarUrl::setParams(const ParameterMap &params)
 {
     d->mParamMap = params;

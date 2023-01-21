@@ -398,13 +398,6 @@ QString Address::toString() const
     return str;
 }
 
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 92)
-QString Address::formattedAddress(const QString &realName, const QString &orgaName) const
-{
-    return formatted(AddressFormatStyle::Postal, realName, orgaName);
-}
-#endif
-
 QString Address::formatted(AddressFormatStyle style, const QString &realName, const QString &orgaName) const
 {
     const auto formatPref = (orgaName.isEmpty() || style != AddressFormatStyle::Postal) ? AddressFormatPreference::Generic : AddressFormatPreference::Business;
@@ -416,21 +409,6 @@ QString Address::formattedPostalAddress() const
 {
     return formatted(AddressFormatStyle::Postal);
 }
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
-QString Address::countryToISO(const QString &cname)
-{
-    return KCountry::fromName(cname).alpha2().toLower();
-}
-#endif
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
-QString Address::ISOtoCountry(const QString &ISOname)
-{
-    const auto c = KCountry::fromAlpha2(ISOname);
-    return c.isValid() ? c.name() : ISOname;
-}
-#endif
 
 // clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)

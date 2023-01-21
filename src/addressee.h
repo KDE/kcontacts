@@ -130,18 +130,6 @@ public:
      */
     typedef AddresseeList List;
 
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-      A map from unique identifier to addressee.
-
-      @deprecated Since 5.88, as it's not used anywhere.
-
-      @see uid()
-     */
-    KCONTACTS_DEPRECATED_VERSION(5, 88, "Deprecated, not used anywhere.")
-    typedef QHash<QString, Addressee> Map;
-#endif
-
     /**
       Construct an empty address book entry.
      */
@@ -749,22 +737,6 @@ public:
                    If this is QString() the preferred email address is used.
      */
     QString fullEmail(const QString &email = QString()) const;
-
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-      Insert an email address. If the email address already exists in this
-      addressee it is not duplicated.
-
-      @param email Email address
-      @param preferred Set to true, if this is the preferred email address of
-                       the addressee.
-
-      @deprecated Since 5.88, use addEmail(const Email &) instead; you can use the Email
-      methods to set any parameters, e.g. Email::setPreferred(), Email::setType() ...etc
-     */
-    KCONTACTS_DEPRECATED_VERSION(5, 88, "Use addEmail(const Email &), and the Email class setter methods instead.")
-    void insertEmail(const QString &email, bool preferred = false, const QMap<QString, QStringList> &param = QMap<QString, QStringList>());
-#endif
 
     /**
       Adds an email address. If the email address (i.e. @p email.mail()) already

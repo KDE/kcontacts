@@ -47,23 +47,6 @@ public:
     void setValue(const QString &value);
     Q_REQUIRED_RESULT QString value() const;
 
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-     * @deprecated Since 5.88 for lack of usage
-     */
-    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
-    void setParameters(const QMap<QString, QStringList> &params);
-#endif
-
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-     * @deprecated Since 5.88 for lack of usage
-     */
-    Q_REQUIRED_RESULT
-    KCONTACTS_DEPRECATED_VERSION(5, 88, "For lack of usage.")
-    QMap<QString, QStringList> parameters() const;
-#endif
-
     Q_REQUIRED_RESULT bool operator==(const FieldGroup &other) const;
     Q_REQUIRED_RESULT bool operator!=(const FieldGroup &other) const;
 

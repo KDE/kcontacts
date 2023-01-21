@@ -17,7 +17,6 @@
 
 #include "addressee.h"
 #include "addresseehelper.h"
-#include "field.h"
 #include "parametermap_p.h"
 
 using namespace KContacts;
@@ -1639,35 +1638,6 @@ void Addressee::addEmail(const Email &email)
         d->mEmails.append(email);
     }
 }
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-void Addressee::insertEmail(const QString &email, bool preferred, const QMap<QString, QStringList> &param)
-{
-    if (email.simplified().isEmpty()) {
-        return;
-    }
-
-    for (int i = 0; i < d->mEmails.size(); ++i) {
-        if (d->mEmails.at(i).mail() == email) {
-            if (!preferred || i == 0) {
-                return;
-            }
-            Email tempMail = d->mEmails.takeAt(i);
-            d->mEmails.prepend(tempMail);
-            return;
-        }
-    }
-
-    Email mail(email);
-    mail.setParameters(param);
-    d->mEmpty = false;
-    if (preferred) {
-        d->mEmails.prepend(mail);
-    } else {
-        d->mEmails.append(mail);
-    }
-}
-#endif
 
 void Addressee::removeEmail(const QString &email)
 {

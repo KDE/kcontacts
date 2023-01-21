@@ -46,7 +46,7 @@ class AddresseeHelperPrivate;
  *
  * @warning Do not use, to be removed from the public interface in KF6.
  */
-class KCONTACTS_EXPORT KCONTACTS_DEPRECATED_VERSION(5, 89, "unused externally") AddresseeHelper : public QObject
+class AddresseeHelper : public QObject
 {
     Q_OBJECT
 

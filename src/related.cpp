@@ -66,20 +66,6 @@ bool Related::isValid() const
     return !d->relatedTo.isEmpty();
 }
 
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-void Related::setParameters(const QMap<QString, QStringList> &params)
-{
-    d->mParamMap = ParameterMap::fromQMap(params);
-}
-#endif
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-QMap<QString, QStringList> Related::parameters() const
-{
-    return d->mParamMap.toQMap();
-}
-#endif
-
 void Related::setParams(const ParameterMap &params)
 {
     d->mParamMap = params;

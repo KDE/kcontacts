@@ -29,8 +29,6 @@ private Q_SLOTS:
     void shouldParseAddressVCard4();
     void shouldExportVCard4WithGeoPosition();
     void shouldParseAddressVCard4WithGeoPosition();
-    void countryToISOTest();
-    void isoToCountryTest();
 };
 
 #endif

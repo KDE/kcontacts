@@ -66,20 +66,6 @@ bool Role::isValid() const
     return !d->role.isEmpty();
 }
 
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-void Role::setParameters(const QMap<QString, QStringList> &params)
-{
-    d->mParamMap = ParameterMap::fromQMap(params);
-}
-#endif
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-QMap<QString, QStringList> Role::parameters() const
-{
-    return d->mParamMap.toQMap();
-}
-#endif
-
 void Role::setParams(const ParameterMap &params)
 {
     d->mParamMap = params;

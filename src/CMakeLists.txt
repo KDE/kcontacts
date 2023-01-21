@@ -27,10 +27,8 @@ target_sources(KF6Contacts PRIVATE
     converter/vcardconverter.h
     email.cpp
     email.h
-    field.cpp
     fieldgroup.cpp
     fieldgroup.h
-    field.h
     gender.cpp
     gender.h
     geo.cpp
@@ -100,7 +98,7 @@ ecm_generate_export_header(KF6Contacts
     GROUP_BASE_NAME KF
     VERSION ${KF_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 5.88 5.89 5.92
+    DEPRECATION_VERSIONS
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
@@ -146,7 +144,6 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   ContactGroup
   ContactGroupTool
   Email
-  Field
   Geo
   Gender
   Key

@@ -109,20 +109,6 @@ void Impp::setPreferred(bool preferred)
     }
 }
 
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-void Impp::setParameters(const QMap<QString, QStringList> &params)
-{
-    d->mParamMap = ParameterMap::fromQMap(params);
-}
-#endif
-
-#if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 88)
-QMap<QString, QStringList> Impp::parameters() const
-{
-    return d->mParamMap.toQMap();
-}
-#endif
-
 void Impp::setParams(const ParameterMap &params)
 {
     d->mParamMap = params;
