@@ -311,25 +311,6 @@ public:
     */
     Q_REQUIRED_RESULT QString toString() const;
 
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 92)
-    /**
-      Returns this address formatted according to the country-specific
-      postal address formatting rules. The formatting rules applied depend on
-      either the addresses {@link #country country} field, or (if the
-      latter is empty) on the system country setting. If companyName is
-      provided, an available business address format will be preferred.
-
-      @param realName   the formatted name of the contact
-      @param orgaName   the name of the organization or company
-      @return           the formatted address (containing newline characters)
-      @deprecated since 5.92, use formatted() instead, using AddressFormatStyle::Postal
-                  to obtain the identical result.
-    */
-    Q_REQUIRED_RESULT
-    KCONTACTS_DEPRECATED_VERSION(5, 92, "Use KContacts::Address::formatted() instead")
-    QString formattedAddress(const QString &realName = QString(), const QString &orgaName = QString()) const;
-#endif
-
     // note: cannot be called "formattedAddress" due to a collision
     // with the property of that name in QML
     /**
@@ -347,35 +328,6 @@ public:
     Q_REQUIRED_RESULT Q_INVOKABLE QString formatted(KContacts::AddressFormatStyle style,
                                                     const QString &realName = QString(),
                                                     const QString &orgaName = QString()) const;
-
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-      Returns ISO code for a localized country name. Only localized country
-      names will be understood.
-      @param cname  name of the country
-      @return       two digit ISO code, empty string if the country was not
-                    recognized
-      @deprecated since 5.88, use KCountry::fromName() instead.
-                  Note that this function returned the ISO code incorrectly in lower case,
-                  while KCountry does not do that.
-    */
-    KCONTACTS_DEPRECATED_VERSION(5, 89, "Use KCountry::fromName()")
-    static QString countryToISO(const QString &cname);
-#endif
-
-#if KCONTACTS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-      Returns a localized country name for a ISO code.
-      This might be replaced by a KLocale method in the future.
-      @param ISOname two digit ISO code
-      @return        localized name of the country
-      @deprecated since 5.88, use KCountry::fromAlpha2() instead.
-                  Note that this function returns @p ISOname if that is not a valid country code,
-                  while KCountry will need an explicit check for that case.
-    */
-    KCONTACTS_DEPRECATED_VERSION(5, 89, "Use KCountry::fromAlpha2()")
-    static QString ISOtoCountry(const QString &ISOname);
-#endif
 
     static QString typeFlagLabel(TypeFlag type);
 
