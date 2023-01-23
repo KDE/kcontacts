@@ -55,9 +55,6 @@ set_package_properties(Qt6Quick PROPERTIES
     PURPOSE "QtQuick plugin"
 )
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat)
-endif()
 
 ########### Targets ###########
 

@@ -122,10 +122,6 @@ PRIVATE
     KF6::Codecs # for the vcard parser
 )
 
-if (TARGET Qt6::Core5Compat)
-    target_link_libraries(KF6Contacts PRIVATE Qt6::Core5Compat) # QTextCodec
-endif()
-
 set_target_properties(KF6Contacts PROPERTIES
     VERSION ${KContacts_VERSION}
     SOVERSION ${KContacts_SOVERSION}
@@ -205,7 +201,7 @@ if(BUILD_QCH)
             "${CMAKE_SOURCE_DIR}/docs/AddressFormat.md"
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
-            Qt5Core_QCH
+            Qt6Core_QCH
         INCLUDE_DIRS
             ${KContacts_BUILD_INCLUDE_DIRS}
         BLANK_MACROS

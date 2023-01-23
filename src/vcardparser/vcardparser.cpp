@@ -8,7 +8,8 @@
 #include "kcontacts_debug.h"
 #include "vcardparser_p.h"
 #include <KCodecs>
-#include <QTextCodec>
+#include <QStringDecoder>
+#include <QStringEncoder>
 #include <functional>
 
 // This cache for QString::fromLatin1() isn't about improving speed, but about reducing memory usage by sharing common strings
@@ -233,9 +234,9 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
 
     if (!m_charset.isEmpty()) {
         // have to convert the data
-        QTextCodec *codec = QTextCodec::codecForName(m_charset);
-        if (codec) {
-            vCardLine->setValue(codec->toUnicode(output));
+        auto codec = QStringDecoder(m_charset.constData());
+        if (codec.isValid()) {
+            vCardLine->setValue(QVariant::fromValue<QString>(codec.decode(output)));
         } else {
             vCardLine->setValue(QString::fromUtf8(output));
         }
@@ -400,9 +401,9 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     if (!charset.isEmpty()) {
                         // have to convert the data
                         const QString value = vline.value().toString();
-                        QTextCodec *codec = QTextCodec::codecForName(charset.toLatin1());
-                        if (codec) {
-                            input = codec->fromUnicode(value);
+                        auto codec = QStringEncoder(charset.toLatin1().constData());
+                        if (codec.isValid()) {
+                            input = codec.encode(value);
                         } else {
                             checkMultibyte = true;
                             input = value.toUtf8();
