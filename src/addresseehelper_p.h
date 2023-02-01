@@ -5,16 +5,15 @@
     This SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KCONTACTS_ADDRESSEEHELPER_H
-#define KCONTACTS_ADDRESSEEHELPER_H
+#ifndef KCONTACTS_ADDRESSEEHELPER_P_H
+#define KCONTACTS_ADDRESSEEHELPER_P_H
 
 #include "kcontacts_export.h"
 
-#include <QObject>
+#include <QSet>
 
 namespace KContacts
 {
-class AddresseeHelperPrivate;
 
 // TODO KF6: unexport and turn into an implementation detail
 // this is unused externally, both as code as well as via the config file
@@ -43,13 +42,9 @@ class AddresseeHelperPrivate;
  * should be interpreted as a family name (see
  * treatAsFamilyName()). The corresponding configuration
  * field is @c TreatAsFamilyName.
- *
- * @warning Do not use, to be removed from the public interface in KF6.
  */
-class AddresseeHelper : public QObject
+class AddresseeHelper
 {
-    Q_OBJECT
-
 public:
     /**
      * Singleton interface to this class
@@ -97,16 +92,18 @@ public:
     /** @internal */
     AddresseeHelper();
 
-    ~AddresseeHelper() override;
+    ~AddresseeHelper();
 
-public Q_SLOTS:
+private:
     /**
      * Recreates the static data and reparses the configuration.
      */
     void initSettings();
 
-private:
-    QScopedPointer<AddresseeHelperPrivate> d;
+    QSet<QString> mTitles;
+    QSet<QString> mPrefixes;
+    QSet<QString> mSuffixes;
+    bool mTreatAsFamilyName;
 };
 }
 

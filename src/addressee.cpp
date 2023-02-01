@@ -16,7 +16,7 @@
 #include <KLocalizedString>
 
 #include "addressee.h"
-#include "addresseehelper.h"
+#include "addresseehelper_p.h"
 #include "parametermap_p.h"
 
 using namespace KContacts;

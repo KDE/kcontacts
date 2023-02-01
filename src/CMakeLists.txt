@@ -6,7 +6,7 @@ target_sources(KF6Contacts PRIVATE
     addressee.cpp
     addressee.h
     addresseehelper.cpp
-    addresseehelper.h
+    addresseehelper_p.h
     addresseelist.h
     addressformat.cpp
     addressformatparser.cpp
