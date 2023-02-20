@@ -2,6 +2,7 @@
 Type=Service
 Comment=Signal
 Comment[ar]=سيجنال
+Comment[az]=Signal
 Comment[bg]=Signal
 Comment[ca]=Signal
 Comment[ca@valencia]=Signal
@@ -27,6 +28,7 @@ Comment[uk]=Сигнал
 Comment[x-test]=xxSignalxx
 Name=Signal
 Name[ar]=سيجنال
+Name[az]=Signal
 Name[bg]=Signal
 Name[ca]=Signal
 Name[ca@valencia]=Signal

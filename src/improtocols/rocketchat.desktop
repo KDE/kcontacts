@@ -2,6 +2,7 @@
 Type=Service
 Comment=RocketChat
 Comment[ar]=روكيت تشات
+Comment[az]=RocketChat
 Comment[bg]=RocketChat
 Comment[ca]=RocketChat
 Comment[ca@valencia]=RocketChat
@@ -28,6 +29,7 @@ Comment[x-test]=xxRocketChatxx
 Comment[zh_CN]=RocketChat
 Name=RocketChat
 Name[ar]=روكيت تشات
+Name[az]=RocketChat
 Name[bg]=RocketChat
 Name[ca]=RocketChat
 Name[ca@valencia]=RocketChat
