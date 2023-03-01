@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-12-03 02:53+0100\n"
+"POT-Creation-Date: 2023-03-01 21:29+0000\n"
 "PO-Revision-Date: 2015-12-26 22:15+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,588 +19,572 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: address.cpp:397
+#: address.cpp:223
 #, kde-format
 msgid "Post Office Box"
 msgstr "Поштански фах"
 
-#: address.cpp:413
+#: address.cpp:239
 #, kde-format
 msgid "Extended Address Information"
 msgstr "Додатни адресни подаци"
 
-#: address.cpp:429
+#: address.cpp:255
 #, kde-format
 msgid "Street"
 msgstr "Улица"
 
-#: address.cpp:445
+#: address.cpp:271
 #, kde-format
 msgid "Locality"
 msgstr "Локалитет"
 
-#: address.cpp:461
+#: address.cpp:287
 #, kde-format
 msgid "Region"
 msgstr "Регија"
 
-#: address.cpp:477
+#: address.cpp:303
 #, kde-format
 msgid "Postal Code"
 msgstr "Поштански број"
 
-#: address.cpp:493
+#: address.cpp:319
 #, kde-format
 msgid "Country"
 msgstr "Држава"
 
-#: address.cpp:509
+#: address.cpp:335
 #, kde-format
 msgid "Delivery Label"
 msgstr "Етикета испоруке"
 
-#: address.cpp:527
+#: address.cpp:353
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "Домаћа"
 
-#: address.cpp:529
+#: address.cpp:355
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "Међународна"
 
-#: address.cpp:531
+#: address.cpp:357
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "Поштанска"
 
-#: address.cpp:533
+#: address.cpp:359
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "Пакетна"
 
 # >> @label Address type
-#: address.cpp:535
+#: address.cpp:361
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "Кућна"
 
 # >> @label Address type
-#: address.cpp:537
+#: address.cpp:363
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "Пословна"
 
 # >> @label Address type
-#: address.cpp:539
+#: address.cpp:365
 #, kde-format
 msgid "Preferred Address"
 msgstr "Пожељна адреса"
 
-#: address.cpp:541
+#: address.cpp:367
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
 msgstr "Друга"
 
-#: addressee.cpp:433
+#: addressee.cpp:455
 #, kde-format
 msgid "Unique Identifier"
 msgstr "јединствени идентификатор"
 
-#: addressee.cpp:453
+#: addressee.cpp:475
 #, kde-format
 msgid "Name"
 msgstr "име и презиме"
 
-#: addressee.cpp:649
+#: addressee.cpp:671
 #, kde-format
 msgid "Formatted Name"
 msgstr "форматирано име"
 
-#: addressee.cpp:669
+#: addressee.cpp:691
 #, kde-format
 msgid "Family Name"
 msgstr "презиме"
 
-#: addressee.cpp:689
+#: addressee.cpp:711
 #, kde-format
 msgid "Given Name"
 msgstr "име"
 
-#: addressee.cpp:709
+#: addressee.cpp:731
 #, kde-format
 msgid "Additional Names"
 msgstr "додатна имена"
 
-#: addressee.cpp:729
+#: addressee.cpp:751
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "титуларни префикси"
 
-#: addressee.cpp:749
+#: addressee.cpp:771
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "титуларни суфикси"
 
-#: addressee.cpp:800
+#: addressee.cpp:822
 #, kde-format
 msgid "Nick Name"
 msgstr "надимак"
 
-#: addressee.cpp:840
+#: addressee.cpp:862
 #, kde-format
 msgid "Birthday"
 msgstr "рођендан"
 
-#: addressee.cpp:845
+#: addressee.cpp:867
 #, kde-format
 msgid "Home Address Street"
 msgstr "кућна адреса, улица"
 
-#: addressee.cpp:850
+#: addressee.cpp:872
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "кућна адреса, поштански фах"
 
-#: addressee.cpp:855
+#: addressee.cpp:877
 #, kde-format
 msgid "Home Address City"
 msgstr "кућна адреса, град"
 
-#: addressee.cpp:860
+#: addressee.cpp:882
 #, kde-format
 msgid "Home Address State"
 msgstr "кућна адреса, република"
 
-#: addressee.cpp:865
+#: addressee.cpp:887
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "кућна адреса, поштански број"
 
-#: addressee.cpp:870
+#: addressee.cpp:892
 #, kde-format
 msgid "Home Address Country"
 msgstr "кућна адреса, држава"
 
-#: addressee.cpp:875
+#: addressee.cpp:897
 #, kde-format
 msgid "Home Address Label"
 msgstr "кућна адреса, етикета"
 
-#: addressee.cpp:880
+#: addressee.cpp:902
 #, kde-format
 msgid "Business Address Street"
 msgstr "пословна адреса, улица"
 
-#: addressee.cpp:885
+#: addressee.cpp:907
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "пословна адреса, поштански фах"
 
-#: addressee.cpp:890
+#: addressee.cpp:912
 #, kde-format
 msgid "Business Address City"
 msgstr "пословна адреса, град"
 
-#: addressee.cpp:895
+#: addressee.cpp:917
 #, kde-format
 msgid "Business Address State"
 msgstr "пословна адреса, република"
 
-#: addressee.cpp:900
+#: addressee.cpp:922
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "пословна адреса, поштански број"
 
-#: addressee.cpp:905
+#: addressee.cpp:927
 #, kde-format
 msgid "Business Address Country"
 msgstr "пословна адреса, држава"
 
-#: addressee.cpp:910
+#: addressee.cpp:932
 #, kde-format
 msgid "Business Address Label"
 msgstr "пословна адреса, етикета"
 
-#: addressee.cpp:915
+#: addressee.cpp:937
 #, kde-format
 msgid "Home Phone"
 msgstr "кућни телефон"
 
-#: addressee.cpp:920
+#: addressee.cpp:942
 #, kde-format
 msgid "Business Phone"
 msgstr "пословни телефон"
 
-#: addressee.cpp:925
+#: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
 msgstr "мобилни телефон"
 
-#: addressee.cpp:930 phonenumber.cpp:231
+#: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
 msgid "Home Fax"
 msgstr "Кућни факс"
 
-#: addressee.cpp:935
+#: addressee.cpp:957
 #, kde-format
 msgid "Business Fax"
 msgstr "пословни факс"
 
-#: addressee.cpp:940
+#: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
 msgstr "телефон у колима"
 
-#: addressee.cpp:945 phonenumber.cpp:207
+#: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
 msgid "ISDN"
 msgstr "ИСДН"
 
-#: addressee.cpp:950 phonenumber.cpp:211
+#: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
 msgid "Pager"
 msgstr "Пејџер"
 
-#: addressee.cpp:955
+#: addressee.cpp:977
 #, kde-format
 msgid "Email Address"
 msgstr "адреса е‑поште"
 
-#: addressee.cpp:975
+#: addressee.cpp:997
 #, kde-format
 msgid "Mail Client"
 msgstr "поштански клијент"
 
-#: addressee.cpp:995
+#: addressee.cpp:1017
 #, kde-format
 msgid "Time Zone"
 msgstr "временска зона"
 
-#: addressee.cpp:1015
+#: addressee.cpp:1037
 #, kde-format
 msgid "Geographic Position"
 msgstr "географски положај"
 
-#: addressee.cpp:1066
+#: addressee.cpp:1088
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "титула"
 
-#: addressee.cpp:1117
+#: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "положај"
 
-#: addressee.cpp:1168 field.cpp:241
+#: addressee.cpp:1190
 #, kde-format
 msgid "Organization"
 msgstr "организација"
 
-#: addressee.cpp:1188
+#: addressee.cpp:1210
 #, kde-format
 msgid "Department"
 msgstr "одељење"
 
-#: addressee.cpp:1208
+#: addressee.cpp:1230
 #, kde-format
 msgid "Note"
 msgstr "напомена"
 
-#: addressee.cpp:1228
+#: addressee.cpp:1250
 #, kde-format
 msgid "Product Identifier"
 msgstr "идентификатор производа"
 
-#: addressee.cpp:1248
+#: addressee.cpp:1270
 #, kde-format
 msgid "Revision Date"
 msgstr "датум ревизије"
 
-#: addressee.cpp:1268
+#: addressee.cpp:1290
 #, kde-format
 msgid "Sort String"
 msgstr "ниска за ређање"
 
-#: addressee.cpp:1294
+#: addressee.cpp:1316
 #, kde-format
 msgid "Homepage"
 msgstr "домаћа страница"
 
-#: addressee.cpp:1314
+#: addressee.cpp:1336
 #, kde-format
 msgid "Security Class"
 msgstr "безбедносна класа"
 
-#: addressee.cpp:1334
+#: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
 msgstr "логотип"
 
-#: addressee.cpp:1354
+#: addressee.cpp:1376
 #, kde-format
 msgid "Photo"
 msgstr "фотографија"
 
-#: addressee.cpp:1374
+#: addressee.cpp:1396
 #, kde-format
 msgid "Sound"
 msgstr "звук"
 
-#: addresseehelper.cpp:74
+#: addresseehelper.cpp:46
 #, kde-format
 msgid "Dr."
 msgstr "др"
 
-#: addresseehelper.cpp:75
+#: addresseehelper.cpp:47
 #, kde-format
 msgid "Miss"
 msgstr "гђица"
 
-#: addresseehelper.cpp:76
+#: addresseehelper.cpp:48
 #, kde-format
 msgid "Mr."
 msgstr "гдин"
 
-#: addresseehelper.cpp:77
+#: addresseehelper.cpp:49
 #, kde-format
 msgid "Mrs."
 msgstr "гђа"
 
-#: addresseehelper.cpp:78
+#: addresseehelper.cpp:50
 #, kde-format
 msgid "Ms."
 msgstr "гђица"
 
-#: addresseehelper.cpp:79
+#: addresseehelper.cpp:51
 #, kde-format
 msgid "Prof."
 msgstr "проф."
 
-#: addresseehelper.cpp:81
+#: addresseehelper.cpp:53
 #, kde-format
 msgid "I"
 msgstr "I"
 
-#: addresseehelper.cpp:82
+#: addresseehelper.cpp:54
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: addresseehelper.cpp:83
+#: addresseehelper.cpp:55
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: addresseehelper.cpp:84
+#: addresseehelper.cpp:56
 #, kde-format
 msgid "Jr."
 msgstr "млађи"
 
-#: addresseehelper.cpp:85
+#: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
 msgstr "старији"
 
-#: field.cpp:218
-#, kde-format
-msgid "Unknown Field"
-msgstr "непознато поље"
-
-# >> @item category of fields
-#: field.cpp:231
-#, kde-format
-msgid "All"
-msgstr "сва"
-
-# >> @item category of fields
-#: field.cpp:233
-#, kde-format
-msgid "Frequent"
-msgstr "честа"
-
-# >> @item category of fields
-#: field.cpp:235
-#, kde-format
-msgctxt "street/postal"
-msgid "Address"
-msgstr "адреса"
-
-# >> @item category of fields
-#: field.cpp:237
-#, kde-format
-msgid "Email"
-msgstr "е‑пошта"
-
-# >> @item category of fields
-#: field.cpp:239
-#, kde-format
-msgid "Personal"
-msgstr "лична"
-
-# >> @item category of fields
-#: field.cpp:243
-#, kde-format
-msgid "Custom"
-msgstr "посебна"
-
-# >> @item category of fields
-#: field.cpp:245
-#, kde-format
-msgid "Undefined"
-msgstr "недефинисана"
-
-#: key.cpp:214
+#: key.cpp:198
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr "Икс.509"
 
-#: key.cpp:217
+#: key.cpp:201
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "ПГП"
 
-#: key.cpp:220
+#: key.cpp:204
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "посебан"
 
-#: key.cpp:223
+#: key.cpp:207
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "непознат"
 
-#: phonenumber.cpp:183
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr "Број телефона"
 
 # >> @label Communication resource: home phone
-#: phonenumber.cpp:185
+#: phonenumber.cpp:172
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "Кућни"
 
 # >> @label Communication resource: work phone
-#: phonenumber.cpp:187
+#: phonenumber.cpp:174
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "Пословни"
 
 # >> @label Communication resource
-#: phonenumber.cpp:189
+#: phonenumber.cpp:176
 #, kde-format
 msgid "Messenger"
 msgstr "Гласник"
 
 # >> @label Communication resource: preferred phone
-#: phonenumber.cpp:191
+#: phonenumber.cpp:178
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr "Пожељни"
 
 # >> @label Communication resource
-#: phonenumber.cpp:193
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Voice"
 msgstr "Гласовни"
 
 # >> @label Communication resource
-#: phonenumber.cpp:195
+#: phonenumber.cpp:182
 #, kde-format
 msgid "Fax"
 msgstr "Факс"
 
-#: phonenumber.cpp:197
+#: phonenumber.cpp:184
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr "Мобилни"
 
-#: phonenumber.cpp:199
+#: phonenumber.cpp:186
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
 msgstr "Видео"
 
 # >> @label Communication resource
-#: phonenumber.cpp:201
+#: phonenumber.cpp:188
 #, kde-format
 msgid "Mailbox"
 msgstr "Сандуче"
 
 # >> @label Communication resource
-#: phonenumber.cpp:203
+#: phonenumber.cpp:190
 #, kde-format
 msgid "Modem"
 msgstr "Модем"
 
 # >> @label Communication resource
-#: phonenumber.cpp:205
+#: phonenumber.cpp:192
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr "У колима"
 
-#: phonenumber.cpp:209
+#: phonenumber.cpp:196
 #, kde-format
 msgid "PCS"
 msgstr "ПЦС"
 
-#: phonenumber.cpp:213
+#: phonenumber.cpp:200
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "Други"
 
 # >> @label Communication resource
-#: phonenumber.cpp:226
+#: phonenumber.cpp:213
 #, kde-format
 msgid "Preferred Number"
 msgstr "Пожељни број"
 
-#: phonenumber.cpp:236
+#: phonenumber.cpp:223
 #, kde-format
 msgid "Work Fax"
 msgstr "Пословни факс"
 
-#: secrecy.cpp:111
+#: secrecy.cpp:98
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "јавно"
 
-#: secrecy.cpp:114
+#: secrecy.cpp:101
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "приватно"
 
-#: secrecy.cpp:117
+#: secrecy.cpp:104
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "поверљиво"
 
-#: secrecy.cpp:120
+#: secrecy.cpp:107
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "непознато"
+
+#~ msgid "Unknown Field"
+#~ msgstr "непознато поље"
+
+# >> @item category of fields
+#~ msgid "All"
+#~ msgstr "сва"
+
+# >> @item category of fields
+#~ msgid "Frequent"
+#~ msgstr "честа"
+
+# >> @item category of fields
+#~ msgctxt "street/postal"
+#~ msgid "Address"
+#~ msgstr "адреса"
+
+# >> @item category of fields
+#~ msgid "Email"
+#~ msgstr "е‑пошта"
+
+# >> @item category of fields
+#~ msgid "Personal"
+#~ msgstr "лична"
+
+# >> @item category of fields
+#~ msgid "Custom"
+#~ msgstr "посебна"
+
+# >> @item category of fields
+#~ msgid "Undefined"
+#~ msgstr "недефинисана"

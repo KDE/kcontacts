@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-27 00:41+0000\n"
+"POT-Creation-Date: 2023-03-01 21:29+0000\n"
 "PO-Revision-Date: 2010-02-01 08:16+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: ਪੰਜਾਬੀ <punjabi-users@lists.sf.net>\n"
@@ -106,348 +106,307 @@ msgctxt "another type of address"
 msgid "Other"
 msgstr "ਹੋਰ"
 
-#: addressee.cpp:456
+#: addressee.cpp:455
 #, kde-format
 msgid "Unique Identifier"
 msgstr "ਵਿਲੱਖਣ ਪਛਾਣਕਰਤਾ"
 
-#: addressee.cpp:476
+#: addressee.cpp:475
 #, kde-format
 msgid "Name"
 msgstr "ਨਾਂ"
 
-#: addressee.cpp:672
+#: addressee.cpp:671
 #, kde-format
 msgid "Formatted Name"
 msgstr "ਫਾਰਮੈਟ ਕੀਤਾ ਨਾਂ"
 
-#: addressee.cpp:692
+#: addressee.cpp:691
 #, kde-format
 msgid "Family Name"
 msgstr "ਪਰਵਾਰਿਕ ਨਾਂ"
 
-#: addressee.cpp:712
+#: addressee.cpp:711
 #, kde-format
 msgid "Given Name"
 msgstr "ਦਿੱਤਾ ਨਾਂ"
 
-#: addressee.cpp:732
+#: addressee.cpp:731
 #, kde-format
 msgid "Additional Names"
 msgstr "ਹੋਰ ਨਾਂ"
 
-#: addressee.cpp:752
+#: addressee.cpp:751
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr ""
 
-#: addressee.cpp:772
+#: addressee.cpp:771
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr ""
 
-#: addressee.cpp:823
+#: addressee.cpp:822
 #, kde-format
 msgid "Nick Name"
 msgstr "ਛੋਟਾ ਨਾਂ"
 
-#: addressee.cpp:863
+#: addressee.cpp:862
 #, kde-format
 msgid "Birthday"
 msgstr "ਜਨਮਦਿਨ"
 
-#: addressee.cpp:868
+#: addressee.cpp:867
 #, kde-format
 msgid "Home Address Street"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਗਲੀ"
 
-#: addressee.cpp:873
+#: addressee.cpp:872
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਪੋਸਟ ਆਫਿਸ ਬਾਕਸ"
 
-#: addressee.cpp:878
+#: addressee.cpp:877
 #, kde-format
 msgid "Home Address City"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਸ਼ਹਿਰ"
 
-#: addressee.cpp:883
+#: addressee.cpp:882
 #, kde-format
 msgid "Home Address State"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਸੂਬਾ"
 
-#: addressee.cpp:888
+#: addressee.cpp:887
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਜ਼ਿਪਕੋਡ"
 
-#: addressee.cpp:893
+#: addressee.cpp:892
 #, kde-format
 msgid "Home Address Country"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਦੇਸ਼"
 
-#: addressee.cpp:898
+#: addressee.cpp:897
 #, kde-format
 msgid "Home Address Label"
 msgstr "ਘਰ ਐਡਰੈੱਸ ਲੇਬਲ"
 
-#: addressee.cpp:903
+#: addressee.cpp:902
 #, kde-format
 msgid "Business Address Street"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਗਲੀ"
 
-#: addressee.cpp:908
+#: addressee.cpp:907
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਪੋਸਟ ਆਫਿਸ ਬਾਕਸ"
 
-#: addressee.cpp:913
+#: addressee.cpp:912
 #, kde-format
 msgid "Business Address City"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਸ਼ਹਿਰ"
 
-#: addressee.cpp:918
+#: addressee.cpp:917
 #, kde-format
 msgid "Business Address State"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਸੂਬਾ"
 
-#: addressee.cpp:923
+#: addressee.cpp:922
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਜ਼ਿੱਪਕੋਡ"
 
-#: addressee.cpp:928
+#: addressee.cpp:927
 #, kde-format
 msgid "Business Address Country"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਦੇਸ਼"
 
-#: addressee.cpp:933
+#: addressee.cpp:932
 #, kde-format
 msgid "Business Address Label"
 msgstr "ਵਪਾਰਕ ਐਡਰੈਸ ਲੇਬਲ"
 
-#: addressee.cpp:938
+#: addressee.cpp:937
 #, kde-format
 msgid "Home Phone"
 msgstr "ਘਰ ਫੋਨ"
 
-#: addressee.cpp:943
+#: addressee.cpp:942
 #, kde-format
 msgid "Business Phone"
 msgstr "ਵਪਾਰਕ ਫੋਨ"
 
-#: addressee.cpp:948
+#: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
 msgstr "ਮੋਬਾਇਲ ਫੋਨ"
 
-#: addressee.cpp:953 phonenumber.cpp:218
+#: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
 msgid "Home Fax"
 msgstr "ਫੈਕਸ ਘਰ"
 
-#: addressee.cpp:958
+#: addressee.cpp:957
 #, kde-format
 msgid "Business Fax"
 msgstr "ਵਪਾਰਕ ਫੈਕਸ"
 
-#: addressee.cpp:963
+#: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
 msgstr "ਕਾਰ ਫੋਨ"
 
-#: addressee.cpp:968 phonenumber.cpp:194
+#: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:973 phonenumber.cpp:198
+#: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
 msgid "Pager"
 msgstr "ਪੇਜ਼ਰ"
 
-#: addressee.cpp:978
+#: addressee.cpp:977
 #, kde-format
 msgid "Email Address"
 msgstr "ਈਮੇਲ ਐਡਰੈਸ"
 
-#: addressee.cpp:998
+#: addressee.cpp:997
 #, kde-format
 msgid "Mail Client"
 msgstr "ਮੇਲ ਕਲਾਇਟ"
 
-#: addressee.cpp:1018
+#: addressee.cpp:1017
 #, kde-format
 msgid "Time Zone"
 msgstr "ਟਾਈਮ ਜ਼ੋਨ"
 
-#: addressee.cpp:1038
+#: addressee.cpp:1037
 #, kde-format
 msgid "Geographic Position"
 msgstr "ਭੂਗੋਲਿਕ ਸਥਿਤੀ"
 
-#: addressee.cpp:1089
+#: addressee.cpp:1088
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "ਟਾਈਟਲ"
 
-#: addressee.cpp:1140
+#: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "ਰੋਲ"
 
-#: addressee.cpp:1191 field.cpp:229
+#: addressee.cpp:1190
 #, kde-format
 msgid "Organization"
 msgstr "ਸੰਗਠਨ"
 
-#: addressee.cpp:1211
+#: addressee.cpp:1210
 #, kde-format
 msgid "Department"
 msgstr "ਵਿਭਾਗ"
 
-#: addressee.cpp:1231
+#: addressee.cpp:1230
 #, kde-format
 msgid "Note"
 msgstr "ਨੋਟ"
 
-#: addressee.cpp:1251
+#: addressee.cpp:1250
 #, kde-format
 msgid "Product Identifier"
 msgstr "ਪਰੋਡੱਕਟ ਪਛਾਣਕਰਤਾ"
 
-#: addressee.cpp:1271
+#: addressee.cpp:1270
 #, kde-format
 msgid "Revision Date"
 msgstr "ਰੀਵਿਜ਼ਨ ਮਿਤੀ"
 
-#: addressee.cpp:1291
+#: addressee.cpp:1290
 #, kde-format
 msgid "Sort String"
 msgstr "ਲੜੀਬੱਧ ਲਾਈਨ"
 
-#: addressee.cpp:1317
+#: addressee.cpp:1316
 #, kde-format
 msgid "Homepage"
 msgstr "ਮੁੱਖ ਪੇਜ਼"
 
-#: addressee.cpp:1337
+#: addressee.cpp:1336
 #, kde-format
 msgid "Security Class"
 msgstr "ਸੁਰੱਖਿਆ ਕਲਾਸ"
 
-#: addressee.cpp:1357
+#: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
 msgstr "ਲੋਗੋ"
 
-#: addressee.cpp:1377
+#: addressee.cpp:1376
 #, kde-format
 msgid "Photo"
 msgstr "ਫੋਟੋ"
 
-#: addressee.cpp:1397
+#: addressee.cpp:1396
 #, kde-format
 msgid "Sound"
 msgstr "ਸਾਊਂਡ"
 
-#: addresseehelper.cpp:59
+#: addresseehelper.cpp:46
 #, kde-format
 msgid "Dr."
 msgstr "ਡਾ."
 
-#: addresseehelper.cpp:60
+#: addresseehelper.cpp:47
 #, kde-format
 msgid "Miss"
 msgstr "ਕੁਮਾਰੀ"
 
-#: addresseehelper.cpp:61
+#: addresseehelper.cpp:48
 #, kde-format
 msgid "Mr."
 msgstr "ਸ੍ਰੀਮਾਨ"
 
-#: addresseehelper.cpp:62
+#: addresseehelper.cpp:49
 #, kde-format
 msgid "Mrs."
 msgstr "ਸ੍ਰੀਮਤੀ"
 
-#: addresseehelper.cpp:63
+#: addresseehelper.cpp:50
 #, kde-format
 msgid "Ms."
 msgstr "ਸ੍ਰੀਮਤੀ"
 
-#: addresseehelper.cpp:64
+#: addresseehelper.cpp:51
 #, kde-format
 msgid "Prof."
 msgstr "ਪ੍ਰੋ:"
 
-#: addresseehelper.cpp:66
+#: addresseehelper.cpp:53
 #, kde-format
 msgid "I"
 msgstr "I"
 
-#: addresseehelper.cpp:67
+#: addresseehelper.cpp:54
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: addresseehelper.cpp:68
+#: addresseehelper.cpp:55
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: addresseehelper.cpp:69
+#: addresseehelper.cpp:56
 #, kde-format
 msgid "Jr."
 msgstr "ਜੂਨੀ"
 
-#: addresseehelper.cpp:70
+#: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
 msgstr "ਸੀਨੀ"
-
-#: field.cpp:206
-#, kde-format
-msgid "Unknown Field"
-msgstr "ਅਣਜਾਣ ਖੇਤਰ"
-
-#: field.cpp:219
-#, kde-format
-msgid "All"
-msgstr "ਸਭ"
-
-#: field.cpp:221
-#, kde-format
-msgid "Frequent"
-msgstr "ਅਕਸਰ"
-
-#: field.cpp:223
-#, kde-format
-msgctxt "street/postal"
-msgid "Address"
-msgstr "ਐਡਰੈੱਸ"
-
-#: field.cpp:225
-#, kde-format
-msgid "Email"
-msgstr "ਈਮੇਲ"
-
-#: field.cpp:227
-#, kde-format
-msgid "Personal"
-msgstr "ਨਿੱਜੀ"
-
-#: field.cpp:231
-#, kde-format
-msgid "Custom"
-msgstr "ਕਸਟਮ"
-
-#: field.cpp:233
-#, kde-format
-msgid "Undefined"
-msgstr "ਅਣ-ਪਰਭਾਸ਼ਿਤ"
 
 #: key.cpp:198
 #, kde-format
@@ -584,6 +543,31 @@ msgstr "ਗੁਪਤ"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "ਅਣਜਾਣ ਕਿਸਮ"
+
+#~ msgid "Unknown Field"
+#~ msgstr "ਅਣਜਾਣ ਖੇਤਰ"
+
+#~ msgid "All"
+#~ msgstr "ਸਭ"
+
+#~ msgid "Frequent"
+#~ msgstr "ਅਕਸਰ"
+
+#~ msgctxt "street/postal"
+#~ msgid "Address"
+#~ msgstr "ਐਡਰੈੱਸ"
+
+#~ msgid "Email"
+#~ msgstr "ਈਮੇਲ"
+
+#~ msgid "Personal"
+#~ msgstr "ਨਿੱਜੀ"
+
+#~ msgid "Custom"
+#~ msgstr "ਕਸਟਮ"
+
+#~ msgid "Undefined"
+#~ msgstr "ਅਣ-ਪਰਭਾਸ਼ਿਤ"
 
 #~ msgctxt "Preferred address"
 #~ msgid "Preferred"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-27 00:41+0000\n"
+"POT-Creation-Date: 2023-03-01 21:29+0000\n"
 "PO-Revision-Date: 2016-01-14 17:41+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@linux.ee>\n"
@@ -104,348 +104,307 @@ msgctxt "another type of address"
 msgid "Other"
 msgstr "Muu"
 
-#: addressee.cpp:456
+#: addressee.cpp:455
 #, kde-format
 msgid "Unique Identifier"
 msgstr "Unikaalne identifikaator"
 
-#: addressee.cpp:476
+#: addressee.cpp:475
 #, kde-format
 msgid "Name"
 msgstr "Nimi"
 
-#: addressee.cpp:672
+#: addressee.cpp:671
 #, kde-format
 msgid "Formatted Name"
 msgstr "Vormindatud nimi"
 
-#: addressee.cpp:692
+#: addressee.cpp:691
 #, kde-format
 msgid "Family Name"
 msgstr "Perekonnanimi"
 
-#: addressee.cpp:712
+#: addressee.cpp:711
 #, kde-format
 msgid "Given Name"
 msgstr "Eesnimi"
 
-#: addressee.cpp:732
+#: addressee.cpp:731
 #, kde-format
 msgid "Additional Names"
 msgstr "Lisanimed"
 
-#: addressee.cpp:752
+#: addressee.cpp:751
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "Austavad eesliited"
 
-#: addressee.cpp:772
+#: addressee.cpp:771
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "Austavad järelliited"
 
-#: addressee.cpp:823
+#: addressee.cpp:822
 #, kde-format
 msgid "Nick Name"
 msgstr "Hüüdnimi"
 
-#: addressee.cpp:863
+#: addressee.cpp:862
 #, kde-format
 msgid "Birthday"
 msgstr "Sünnipäev"
 
-#: addressee.cpp:868
+#: addressee.cpp:867
 #, kde-format
 msgid "Home Address Street"
 msgstr "Koduse aadressi tänav"
 
-#: addressee.cpp:873
+#: addressee.cpp:872
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "Koduse aadressi postkast"
 
-#: addressee.cpp:878
+#: addressee.cpp:877
 #, kde-format
 msgid "Home Address City"
 msgstr "Koduse aadressi linn"
 
-#: addressee.cpp:883
+#: addressee.cpp:882
 #, kde-format
 msgid "Home Address State"
 msgstr "Koduse aadressi maakond/provints"
 
-#: addressee.cpp:888
+#: addressee.cpp:887
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "Koduse aadressi postiindeks"
 
-#: addressee.cpp:893
+#: addressee.cpp:892
 #, kde-format
 msgid "Home Address Country"
 msgstr "Koduse aadressi riik"
 
-#: addressee.cpp:898
+#: addressee.cpp:897
 #, kde-format
 msgid "Home Address Label"
 msgstr "Koduse aadressi etikett"
 
-#: addressee.cpp:903
+#: addressee.cpp:902
 #, kde-format
 msgid "Business Address Street"
 msgstr "Tööaadressi tänav"
 
-#: addressee.cpp:908
+#: addressee.cpp:907
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "Tööaadressi postkast"
 
-#: addressee.cpp:913
+#: addressee.cpp:912
 #, kde-format
 msgid "Business Address City"
 msgstr "Tööaadressi linn"
 
-#: addressee.cpp:918
+#: addressee.cpp:917
 #, kde-format
 msgid "Business Address State"
 msgstr "Tööaadressi maakond/provints"
 
-#: addressee.cpp:923
+#: addressee.cpp:922
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "Tööaadressi postiindeks"
 
-#: addressee.cpp:928
+#: addressee.cpp:927
 #, kde-format
 msgid "Business Address Country"
 msgstr "Tööaadressi riik"
 
-#: addressee.cpp:933
+#: addressee.cpp:932
 #, kde-format
 msgid "Business Address Label"
 msgstr "Tööaadressi etikett"
 
-#: addressee.cpp:938
+#: addressee.cpp:937
 #, kde-format
 msgid "Home Phone"
 msgstr "Kodune telefon"
 
-#: addressee.cpp:943
+#: addressee.cpp:942
 #, kde-format
 msgid "Business Phone"
 msgstr "Töötelefon"
 
-#: addressee.cpp:948
+#: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
 msgstr "Mobiiltelefon"
 
-#: addressee.cpp:953 phonenumber.cpp:218
+#: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
 msgid "Home Fax"
 msgstr "Kodune faks"
 
-#: addressee.cpp:958
+#: addressee.cpp:957
 #, kde-format
 msgid "Business Fax"
 msgstr "Tööfaks"
 
-#: addressee.cpp:963
+#: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
 msgstr "Autotelefon"
 
-#: addressee.cpp:968 phonenumber.cpp:194
+#: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:973 phonenumber.cpp:198
+#: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
 msgid "Pager"
 msgstr "Peiler"
 
-#: addressee.cpp:978
+#: addressee.cpp:977
 #, kde-format
 msgid "Email Address"
 msgstr "E-posti aadress"
 
-#: addressee.cpp:998
+#: addressee.cpp:997
 #, kde-format
 msgid "Mail Client"
 msgstr "E-posti klient"
 
-#: addressee.cpp:1018
+#: addressee.cpp:1017
 #, kde-format
 msgid "Time Zone"
 msgstr "Ajavöönd"
 
-#: addressee.cpp:1038
+#: addressee.cpp:1037
 #, kde-format
 msgid "Geographic Position"
 msgstr "Geograafiline asukoht"
 
-#: addressee.cpp:1089
+#: addressee.cpp:1088
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "Tiitel"
 
-#: addressee.cpp:1140
+#: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "Amet"
 
-#: addressee.cpp:1191 field.cpp:229
+#: addressee.cpp:1190
 #, kde-format
 msgid "Organization"
 msgstr "Organisatsioon"
 
-#: addressee.cpp:1211
+#: addressee.cpp:1210
 #, kde-format
 msgid "Department"
 msgstr "Osakond"
 
-#: addressee.cpp:1231
+#: addressee.cpp:1230
 #, kde-format
 msgid "Note"
 msgstr "Märkus"
 
-#: addressee.cpp:1251
+#: addressee.cpp:1250
 #, kde-format
 msgid "Product Identifier"
 msgstr "Toote identifikaator"
 
-#: addressee.cpp:1271
+#: addressee.cpp:1270
 #, kde-format
 msgid "Revision Date"
 msgstr "Versiooni kuupäev"
 
-#: addressee.cpp:1291
+#: addressee.cpp:1290
 #, kde-format
 msgid "Sort String"
 msgstr "Sorteerimisalus"
 
-#: addressee.cpp:1317
+#: addressee.cpp:1316
 #, kde-format
 msgid "Homepage"
 msgstr "Kodulehekülg"
 
-#: addressee.cpp:1337
+#: addressee.cpp:1336
 #, kde-format
 msgid "Security Class"
 msgstr "Turbeklass"
 
-#: addressee.cpp:1357
+#: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
 msgstr "Logo"
 
-#: addressee.cpp:1377
+#: addressee.cpp:1376
 #, kde-format
 msgid "Photo"
 msgstr "Foto"
 
-#: addressee.cpp:1397
+#: addressee.cpp:1396
 #, kde-format
 msgid "Sound"
 msgstr "Heli"
 
-#: addresseehelper.cpp:59
+#: addresseehelper.cpp:46
 #, kde-format
 msgid "Dr."
 msgstr "Dr."
 
-#: addresseehelper.cpp:60
+#: addresseehelper.cpp:47
 #, kde-format
 msgid "Miss"
 msgstr "Preili"
 
-#: addresseehelper.cpp:61
+#: addresseehelper.cpp:48
 #, kde-format
 msgid "Mr."
 msgstr "Hr."
 
-#: addresseehelper.cpp:62
+#: addresseehelper.cpp:49
 #, kde-format
 msgid "Mrs."
 msgstr "Pr."
 
-#: addresseehelper.cpp:63
+#: addresseehelper.cpp:50
 #, kde-format
 msgid "Ms."
 msgstr "Pr."
 
-#: addresseehelper.cpp:64
+#: addresseehelper.cpp:51
 #, kde-format
 msgid "Prof."
 msgstr "Prof."
 
-#: addresseehelper.cpp:66
+#: addresseehelper.cpp:53
 #, kde-format
 msgid "I"
 msgstr "I"
 
-#: addresseehelper.cpp:67
+#: addresseehelper.cpp:54
 #, kde-format
 msgid "II"
 msgstr "II"
 
-#: addresseehelper.cpp:68
+#: addresseehelper.cpp:55
 #, kde-format
 msgid "III"
 msgstr "III"
 
-#: addresseehelper.cpp:69
+#: addresseehelper.cpp:56
 #, kde-format
 msgid "Jr."
 msgstr "Jr."
 
-#: addresseehelper.cpp:70
+#: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
 msgstr "Sr."
-
-#: field.cpp:206
-#, kde-format
-msgid "Unknown Field"
-msgstr "Tundmatu väli"
-
-#: field.cpp:219
-#, kde-format
-msgid "All"
-msgstr "Kõik"
-
-#: field.cpp:221
-#, kde-format
-msgid "Frequent"
-msgstr "Sagedased"
-
-#: field.cpp:223
-#, kde-format
-msgctxt "street/postal"
-msgid "Address"
-msgstr "Aadress"
-
-#: field.cpp:225
-#, kde-format
-msgid "Email"
-msgstr "E-post"
-
-#: field.cpp:227
-#, kde-format
-msgid "Personal"
-msgstr "Isiklik"
-
-#: field.cpp:231
-#, kde-format
-msgid "Custom"
-msgstr "Kohandatud"
-
-#: field.cpp:233
-#, kde-format
-msgid "Undefined"
-msgstr "Määramata"
 
 #: key.cpp:198
 #, kde-format
@@ -582,6 +541,31 @@ msgstr "Konfidentsiaalne"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Tundmatu tüüp"
+
+#~ msgid "Unknown Field"
+#~ msgstr "Tundmatu väli"
+
+#~ msgid "All"
+#~ msgstr "Kõik"
+
+#~ msgid "Frequent"
+#~ msgstr "Sagedased"
+
+#~ msgctxt "street/postal"
+#~ msgid "Address"
+#~ msgstr "Aadress"
+
+#~ msgid "Email"
+#~ msgstr "E-post"
+
+#~ msgid "Personal"
+#~ msgstr "Isiklik"
+
+#~ msgid "Custom"
+#~ msgstr "Kohandatud"
+
+#~ msgid "Undefined"
+#~ msgstr "Määramata"
 
 #~ msgctxt "Preferred address"
 #~ msgid "Preferred"

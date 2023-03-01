@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-27 00:41+0000\n"
+"POT-Creation-Date: 2023-03-01 21:29+0000\n"
 "PO-Revision-Date: 2021-12-22 18:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -108,348 +108,307 @@ msgctxt "another type of address"
 msgid "Other"
 msgstr "آخر"
 
-#: addressee.cpp:456
+#: addressee.cpp:455
 #, kde-format
 msgid "Unique Identifier"
 msgstr "المعرّف الفريد"
 
-#: addressee.cpp:476
+#: addressee.cpp:475
 #, kde-format
 msgid "Name"
 msgstr "الاسم"
 
-#: addressee.cpp:672
+#: addressee.cpp:671
 #, kde-format
 msgid "Formatted Name"
 msgstr "الاسم المنسّق"
 
-#: addressee.cpp:692
+#: addressee.cpp:691
 #, kde-format
 msgid "Family Name"
 msgstr "اسم العائلة"
 
-#: addressee.cpp:712
+#: addressee.cpp:711
 #, kde-format
 msgid "Given Name"
 msgstr "الاسم المُعطى"
 
-#: addressee.cpp:732
+#: addressee.cpp:731
 #, kde-format
 msgid "Additional Names"
 msgstr "أسماء إضافيّة"
 
-#: addressee.cpp:752
+#: addressee.cpp:751
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "السّوابق التّشريفيّة"
 
-#: addressee.cpp:772
+#: addressee.cpp:771
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "اللواحق التّشريفيّة"
 
-#: addressee.cpp:823
+#: addressee.cpp:822
 #, kde-format
 msgid "Nick Name"
 msgstr "الاسم المستعار"
 
-#: addressee.cpp:863
+#: addressee.cpp:862
 #, kde-format
 msgid "Birthday"
 msgstr "عيد الميلاد"
 
-#: addressee.cpp:868
+#: addressee.cpp:867
 #, kde-format
 msgid "Home Address Street"
 msgstr "عنوان المنزل، الشّارع"
 
-#: addressee.cpp:873
+#: addressee.cpp:872
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "عنوان المنزل، صندوق البريد"
 
-#: addressee.cpp:878
+#: addressee.cpp:877
 #, kde-format
 msgid "Home Address City"
 msgstr "عنوان المنزل، المدينة"
 
-#: addressee.cpp:883
+#: addressee.cpp:882
 #, kde-format
 msgid "Home Address State"
 msgstr "عنوان المنزل، المقاطعة"
 
-#: addressee.cpp:888
+#: addressee.cpp:887
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "عنوان المنزل، الرّمز البريديّ"
 
-#: addressee.cpp:893
+#: addressee.cpp:892
 #, kde-format
 msgid "Home Address Country"
 msgstr "عنوان المنزل، الدّولة"
 
-#: addressee.cpp:898
+#: addressee.cpp:897
 #, kde-format
 msgid "Home Address Label"
 msgstr "ملصق عنوان المنزل"
 
-#: addressee.cpp:903
+#: addressee.cpp:902
 #, kde-format
 msgid "Business Address Street"
 msgstr "عنوان العمل، الشّارع"
 
-#: addressee.cpp:908
+#: addressee.cpp:907
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "عنوان العمل، صندوق البريد"
 
-#: addressee.cpp:913
+#: addressee.cpp:912
 #, kde-format
 msgid "Business Address City"
 msgstr "عنوان العمل، المدينة"
 
-#: addressee.cpp:918
+#: addressee.cpp:917
 #, kde-format
 msgid "Business Address State"
 msgstr "عنوان العمل، المقاطعة"
 
-#: addressee.cpp:923
+#: addressee.cpp:922
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "عنوان العمل، الرّمز البريديّ"
 
-#: addressee.cpp:928
+#: addressee.cpp:927
 #, kde-format
 msgid "Business Address Country"
 msgstr "عنوان العمل، الدّولة"
 
-#: addressee.cpp:933
+#: addressee.cpp:932
 #, kde-format
 msgid "Business Address Label"
 msgstr "ملصق عنوان العمل"
 
-#: addressee.cpp:938
+#: addressee.cpp:937
 #, kde-format
 msgid "Home Phone"
 msgstr "هاتف المنزل"
 
-#: addressee.cpp:943
+#: addressee.cpp:942
 #, kde-format
 msgid "Business Phone"
 msgstr "هاتف العمل"
 
-#: addressee.cpp:948
+#: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
 msgstr "الهاتف المحمول"
 
-#: addressee.cpp:953 phonenumber.cpp:218
+#: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
 msgid "Home Fax"
 msgstr "فاكس المنزل"
 
-#: addressee.cpp:958
+#: addressee.cpp:957
 #, kde-format
 msgid "Business Fax"
 msgstr "فاكس العمل"
 
-#: addressee.cpp:963
+#: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
 msgstr "هاتف السّيارة"
 
-#: addressee.cpp:968 phonenumber.cpp:194
+#: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:973 phonenumber.cpp:198
+#: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
 msgid "Pager"
 msgstr "المنادي"
 
-#: addressee.cpp:978
+#: addressee.cpp:977
 #, kde-format
 msgid "Email Address"
 msgstr "عنوان البريد الإلكترونيّ"
 
-#: addressee.cpp:998
+#: addressee.cpp:997
 #, kde-format
 msgid "Mail Client"
 msgstr "عميل البريد"
 
-#: addressee.cpp:1018
+#: addressee.cpp:1017
 #, kde-format
 msgid "Time Zone"
 msgstr "المنطقة الزمنيّة"
 
-#: addressee.cpp:1038
+#: addressee.cpp:1037
 #, kde-format
 msgid "Geographic Position"
 msgstr "الموقع الجغرافيّ"
 
-#: addressee.cpp:1089
+#: addressee.cpp:1088
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "اللقب"
 
-#: addressee.cpp:1140
+#: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "الدّور"
 
-#: addressee.cpp:1191 field.cpp:229
+#: addressee.cpp:1190
 #, kde-format
 msgid "Organization"
 msgstr "المنظّمة"
 
-#: addressee.cpp:1211
+#: addressee.cpp:1210
 #, kde-format
 msgid "Department"
 msgstr "القِسم"
 
-#: addressee.cpp:1231
+#: addressee.cpp:1230
 #, kde-format
 msgid "Note"
 msgstr "الملاحظة"
 
-#: addressee.cpp:1251
+#: addressee.cpp:1250
 #, kde-format
 msgid "Product Identifier"
 msgstr "معرف المنتج"
 
-#: addressee.cpp:1271
+#: addressee.cpp:1270
 #, kde-format
 msgid "Revision Date"
 msgstr "تاريخ المراجعة"
 
-#: addressee.cpp:1291
+#: addressee.cpp:1290
 #, kde-format
 msgid "Sort String"
 msgstr "سلسلة الفرز"
 
-#: addressee.cpp:1317
+#: addressee.cpp:1316
 #, kde-format
 msgid "Homepage"
 msgstr "الصّفحة الرّئيسيّة"
 
-#: addressee.cpp:1337
+#: addressee.cpp:1336
 #, kde-format
 msgid "Security Class"
 msgstr "التصنيف الأمني"
 
-#: addressee.cpp:1357
+#: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
 msgstr "الشّعار"
 
-#: addressee.cpp:1377
+#: addressee.cpp:1376
 #, kde-format
 msgid "Photo"
 msgstr "الصّورة"
 
-#: addressee.cpp:1397
+#: addressee.cpp:1396
 #, kde-format
 msgid "Sound"
 msgstr "الصّوت"
 
-#: addresseehelper.cpp:59
+#: addresseehelper.cpp:46
 #, kde-format
 msgid "Dr."
 msgstr "د."
 
-#: addresseehelper.cpp:60
+#: addresseehelper.cpp:47
 #, kde-format
 msgid "Miss"
 msgstr "الآنسة"
 
-#: addresseehelper.cpp:61
+#: addresseehelper.cpp:48
 #, kde-format
 msgid "Mr."
 msgstr "السّيّد"
 
-#: addresseehelper.cpp:62
+#: addresseehelper.cpp:49
 #, kde-format
 msgid "Mrs."
 msgstr "السّيّدة"
 
-#: addresseehelper.cpp:63
+#: addresseehelper.cpp:50
 #, kde-format
 msgid "Ms."
 msgstr "الفاضلة"
 
-#: addresseehelper.cpp:64
+#: addresseehelper.cpp:51
 #, kde-format
 msgid "Prof."
 msgstr "البروفيسور"
 
-#: addresseehelper.cpp:66
+#: addresseehelper.cpp:53
 #, kde-format
 msgid "I"
 msgstr "الأوّل"
 
-#: addresseehelper.cpp:67
+#: addresseehelper.cpp:54
 #, kde-format
 msgid "II"
 msgstr "الثّاني"
 
-#: addresseehelper.cpp:68
+#: addresseehelper.cpp:55
 #, kde-format
 msgid "III"
 msgstr "الثّالث"
 
-#: addresseehelper.cpp:69
+#: addresseehelper.cpp:56
 #, kde-format
 msgid "Jr."
 msgstr "الابن"
 
-#: addresseehelper.cpp:70
+#: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
 msgstr "الأبّ"
-
-#: field.cpp:206
-#, kde-format
-msgid "Unknown Field"
-msgstr "حقل مجهول"
-
-#: field.cpp:219
-#, kde-format
-msgid "All"
-msgstr "الكلّ"
-
-#: field.cpp:221
-#, kde-format
-msgid "Frequent"
-msgstr "متكرّر"
-
-#: field.cpp:223
-#, kde-format
-msgctxt "street/postal"
-msgid "Address"
-msgstr "العنوان"
-
-#: field.cpp:225
-#, kde-format
-msgid "Email"
-msgstr "البريد الإلكترونيّ"
-
-#: field.cpp:227
-#, kde-format
-msgid "Personal"
-msgstr "شخصيّ"
-
-#: field.cpp:231
-#, kde-format
-msgid "Custom"
-msgstr "مخصّص"
-
-#: field.cpp:233
-#, kde-format
-msgid "Undefined"
-msgstr "غير معرّف"
 
 #: key.cpp:198
 #, kde-format
@@ -586,6 +545,31 @@ msgstr "سرّيّ"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "نوع مجهول"
+
+#~ msgid "Unknown Field"
+#~ msgstr "حقل مجهول"
+
+#~ msgid "All"
+#~ msgstr "الكلّ"
+
+#~ msgid "Frequent"
+#~ msgstr "متكرّر"
+
+#~ msgctxt "street/postal"
+#~ msgid "Address"
+#~ msgstr "العنوان"
+
+#~ msgid "Email"
+#~ msgstr "البريد الإلكترونيّ"
+
+#~ msgid "Personal"
+#~ msgstr "شخصيّ"
+
+#~ msgid "Custom"
+#~ msgstr "مخصّص"
+
+#~ msgid "Undefined"
+#~ msgstr "غير معرّف"
 
 #~ msgctxt "Preferred address"
 #~ msgid "Preferred"
