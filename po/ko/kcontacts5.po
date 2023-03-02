@@ -475,7 +475,7 @@ msgstr "알 수 없는 형식"
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
-msgstr "전화 번호"
+msgstr "전화번호"
 
 #: phonenumber.cpp:172
 #, kde-format
