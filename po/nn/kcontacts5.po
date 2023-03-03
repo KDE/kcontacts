@@ -544,28 +544,3 @@ msgstr "Konfidensiell"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Ukjend type"
-
-#~ msgid "Unknown Field"
-#~ msgstr "Ukjent felt"
-
-#~ msgid "All"
-#~ msgstr "Alle"
-
-#~ msgid "Frequent"
-#~ msgstr "Vanleg"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "Adresse"
-
-#~ msgid "Email"
-#~ msgstr "E-post"
-
-#~ msgid "Personal"
-#~ msgstr "Personleg"
-
-#~ msgid "Custom"
-#~ msgstr "Tilpassa"
-
-#~ msgid "Undefined"
-#~ msgstr "Udefinert"
