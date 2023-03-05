@@ -524,7 +524,7 @@ msgstr "المحمول"
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
-msgstr "الڤديو"
+msgstr "الفديو"
 
 #: phonenumber.cpp:188
 #, kde-format
