@@ -184,9 +184,9 @@ QString Impp::serviceIcon(const QString &serviceType)
     return df.readIcon();
 }
 
-QVector<QString> Impp::serviceTypes()
+QList<QString> Impp::serviceTypes()
 {
-    QVector<QString> types;
+    QList<QString> types;
     auto paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("kf5/kcontacts/improtocols"), QStandardPaths::LocateDirectory);
     paths.push_back(QStringLiteral(":/org.kde.kcontacts/improtocols/"));
     for (const auto &path : paths) {

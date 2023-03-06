@@ -228,7 +228,7 @@ void VCardTool::processEmailList(const Email::List &emailList, VCard::Version ve
 
 void VCardTool::processOrganizations(const Addressee &addressee, VCard::Version version, VCard *card) const
 {
-    const QVector<Org> lstOrg = addressee.extraOrganizationList();
+    const QList<Org> lstOrg = addressee.extraOrganizationList();
     for (const Org &org : lstOrg) {
         QStringList organization{org.organization().replace(QLatin1Char(';'), QLatin1String("\\;"))};
         if (!addressee.department().isEmpty()) {
@@ -387,7 +387,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             }
         }
         // SOURCE
-        const QVector<QUrl> lstUrl = addressee.sourcesUrlList();
+        const QList<QUrl> lstUrl = addressee.sourcesUrlList();
         for (const QUrl &url : lstUrl) {
             VCardLine line = VCardLine(QStringLiteral("SOURCE"), url.url());
             card.addLine(line);
@@ -453,7 +453,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // LOGO
         card.addLine(createPicture(QStringLiteral("LOGO"), addressee.logo(), version));
-        const QVector<Picture> lstLogo = addressee.extraLogoList();
+        const QList<Picture> lstLogo = addressee.extraLogoList();
         for (const Picture &logo : lstLogo) {
             card.addLine(createPicture(QStringLiteral("LOGO"), logo, version));
         }
@@ -499,7 +499,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // NICKNAME only for version > 2.1
         if (version != VCard::v2_1) {
-            const QVector<NickName> lstNickName = addressee.extraNickNameList();
+            const QList<NickName> lstNickName = addressee.extraNickNameList();
             for (const NickName &nickName : lstNickName) {
                 VCardLine nickNameLine(QStringLiteral("NICKNAME"), nickName.nickname());
                 nickNameLine.addParameters(nickName.params());
@@ -521,7 +521,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // PHOTO
         card.addLine(createPicture(QStringLiteral("PHOTO"), addressee.photo(), version));
-        const QVector<Picture> lstExtraPhoto = addressee.extraPhotoList();
+        const QList<Picture> lstExtraPhoto = addressee.extraPhotoList();
         for (const Picture &photo : lstExtraPhoto) {
             card.addLine(createPicture(QStringLiteral("PHOTO"), photo, version));
         }
@@ -535,7 +535,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         card.addLine(VCardLine(QStringLiteral("REV"), createDateTime(addressee.revision(), version)));
 
         // ROLE
-        const QVector<Role> lstExtraRole = addressee.extraRoleList();
+        const QList<Role> lstExtraRole = addressee.extraRoleList();
         for (const Role &role : lstExtraRole) {
             VCardLine roleLine(QStringLiteral("ROLE"), role.role());
             if (version == VCard::v2_1 && needsEncoding(role.role())) {
@@ -553,7 +553,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // SOUND
         card.addLine(createSound(addressee.sound(), version));
-        const QVector<Sound> lstSound = addressee.extraSoundList();
+        const QList<Sound> lstSound = addressee.extraSoundList();
         for (const Sound &sound : lstSound) {
             card.addLine(createSound(sound, version));
         }
@@ -563,7 +563,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         processPhoneNumbers(phoneNumbers, version, &card);
 
         // TITLE
-        const QVector<Title> lstTitle = addressee.extraTitleList();
+        const QList<Title> lstTitle = addressee.extraTitleList();
         for (const Title &title : lstTitle) {
             VCardLine titleLine(QStringLiteral("TITLE"), title.title());
             if (version == VCard::v2_1 && needsEncoding(title.title())) {
@@ -594,7 +594,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         card.addLine(VCardLine(QStringLiteral("UID"), addressee.uid()));
 
         // URL
-        const QVector<ResourceLocatorUrl> lstExtraUrl = addressee.extraUrlList();
+        const QList<ResourceLocatorUrl> lstExtraUrl = addressee.extraUrlList();
         for (const ResourceLocatorUrl &url : lstExtraUrl) {
             VCardLine line(QStringLiteral("URL"), url.url());
             line.addParameters(url.params());
@@ -622,7 +622,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
         // From vcard4.
         if (version == VCard::v4_0) {
-            const QVector<CalendarUrl> lstCalendarUrl = addressee.calendarUrlList();
+            const QList<CalendarUrl> lstCalendarUrl = addressee.calendarUrlList();
             for (const CalendarUrl &url : lstCalendarUrl) {
                 if (url.isValid()) {
                     QString type;
@@ -650,7 +650,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
 
         // FieldGroup
-        const QVector<FieldGroup> lstGroup = addressee.fieldGroupList();
+        const QList<FieldGroup> lstGroup = addressee.fieldGroupList();
         for (const FieldGroup &group : lstGroup) {
             VCardLine line(group.fieldGroupName(), group.value());
             line.addParameters(group.params());
@@ -658,7 +658,7 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
 
         // IMPP (supported in vcard 3 too)
-        const QVector<Impp> lstImpp = addressee.imppList();
+        const QList<Impp> lstImpp = addressee.imppList();
         for (const Impp &impp : lstImpp) {
             VCardLine line(QStringLiteral("IMPP"), impp.address().url());
             const ParameterMap pMap = impp.params();

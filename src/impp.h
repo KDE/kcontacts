@@ -50,7 +50,7 @@ public:
 
     ~Impp();
 
-    typedef QVector<Impp> List;
+    typedef QList<Impp> List;
     Q_REQUIRED_RESULT bool isValid() const;
 
     void setAddress(const QUrl &address);
@@ -106,7 +106,7 @@ public:
      * Don't use these strings directly for display, instead use serviceLabel and serviceIcon.
      * @since 5.12
      */
-    static QVector<QString> serviceTypes();
+    static QList<QString> serviceTypes();
 
 private:
     void setParams(const ParameterMap &params);

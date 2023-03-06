@@ -37,7 +37,7 @@ public:
 
     ~Role();
 
-    typedef QVector<Role> List;
+    typedef QList<Role> List;
 
     void setRole(const QString &role);
     Q_REQUIRED_RESULT QString role() const;

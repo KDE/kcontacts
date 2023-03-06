@@ -77,7 +77,7 @@ public:
      */
     ~Sound();
 
-    typedef QVector<Sound> List;
+    typedef QList<Sound> List;
     /**
      * Assignment operator.
      *

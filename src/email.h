@@ -47,7 +47,7 @@ public:
 
     ~Email();
 
-    typedef QVector<Email> List;
+    typedef QList<Email> List;
 
     /**
      * Email types.

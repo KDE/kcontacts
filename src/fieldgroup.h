@@ -37,7 +37,7 @@ public:
 
     ~FieldGroup();
 
-    typedef QVector<FieldGroup> List;
+    typedef QList<FieldGroup> List;
 
     void setFieldGroupName(const QString &fieldGroup);
     Q_REQUIRED_RESULT QString fieldGroupName() const;

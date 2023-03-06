@@ -9,9 +9,9 @@
 #define VCARDPARSER_VCARD_H
 
 #include "vcardline_p.h"
+#include <QList>
 #include <QMap>
 #include <QStringList>
-#include <QVector>
 
 #include <vector>
 
@@ -20,7 +20,7 @@ namespace KContacts
 class VCard
 {
 public:
-    typedef QVector<VCard> List;
+    typedef QList<VCard> List;
 
     struct LineData {
         QString identifier;

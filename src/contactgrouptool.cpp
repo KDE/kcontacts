@@ -22,7 +22,7 @@ public:
     XmlContactGroupWriter();
 
     void write(const ContactGroup &group, QIODevice *device);
-    void write(const QVector<ContactGroup> &groupLis, QIODevice *device);
+    void write(const QList<ContactGroup> &groupLis, QIODevice *device);
 
 private:
     void writeGroup(const ContactGroup &group);
@@ -47,7 +47,7 @@ void XmlContactGroupWriter::write(const ContactGroup &group, QIODevice *device)
     writeEndDocument();
 }
 
-void XmlContactGroupWriter::write(const QVector<ContactGroup> &groupList, QIODevice *device)
+void XmlContactGroupWriter::write(const QList<ContactGroup> &groupList, QIODevice *device)
 {
     setDevice(device);
 
@@ -129,7 +129,7 @@ public:
     XmlContactGroupReader();
 
     bool read(QIODevice *device, ContactGroup &group);
-    bool read(QIODevice *device, QVector<ContactGroup> &groupList);
+    bool read(QIODevice *device, QList<ContactGroup> &groupList);
 
 private:
     bool readGroup(ContactGroup &group);
@@ -160,7 +160,7 @@ bool XmlContactGroupReader::read(QIODevice *device, ContactGroup &group)
     return error() == NoError;
 }
 
-bool XmlContactGroupReader::read(QIODevice *device, QVector<ContactGroup> &groupList)
+bool XmlContactGroupReader::read(QIODevice *device, QList<ContactGroup> &groupList)
 {
     setDevice(device);
 
@@ -326,7 +326,7 @@ bool ContactGroupTool::convertToXml(const ContactGroup &group, QIODevice *device
     return true;
 }
 
-bool ContactGroupTool::convertFromXml(QIODevice *device, QVector<ContactGroup> &groupList, QString *errorMessage)
+bool ContactGroupTool::convertFromXml(QIODevice *device, QList<ContactGroup> &groupList, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 
@@ -341,7 +341,7 @@ bool ContactGroupTool::convertFromXml(QIODevice *device, QVector<ContactGroup> &
     return ok;
 }
 
-bool ContactGroupTool::convertToXml(const QVector<ContactGroup> &groupList, QIODevice *device, QString *errorMessage)
+bool ContactGroupTool::convertToXml(const QList<ContactGroup> &groupList, QIODevice *device, QString *errorMessage)
 {
     Q_UNUSED(errorMessage);
 

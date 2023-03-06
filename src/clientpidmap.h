@@ -37,7 +37,7 @@ public:
 
     ~ClientPidMap();
 
-    typedef QVector<ClientPidMap> List;
+    typedef QList<ClientPidMap> List;
 
     void setClientPidMap(const QString &clientpidmap);
     Q_REQUIRED_RESULT QString clientPidMap() const;

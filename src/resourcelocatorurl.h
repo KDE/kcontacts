@@ -44,7 +44,7 @@ public:
 
     ~ResourceLocatorUrl();
 
-    typedef QVector<ResourceLocatorUrl> List;
+    typedef QList<ResourceLocatorUrl> List;
 
     /** URL types.
      *  @since 5.12

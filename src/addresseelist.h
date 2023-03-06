@@ -9,17 +9,16 @@
 #ifndef KCONTACTS_ADDRESSEELIST_H
 #define KCONTACTS_ADDRESSEELIST_H
 
-#include <QVector>
+#include <QList>
 
 namespace KContacts
 {
 class Addressee;
 
 /**
- * @short  a QVector of Addressee.
+ * @short  a QList of Addressee.
  */
-typedef QVector<Addressee> AddresseeList;
-
+typedef QList<Addressee> AddresseeList;
 }
 
 #endif

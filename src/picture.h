@@ -68,7 +68,7 @@ public:
      */
     ~Picture();
 
-    typedef QVector<Picture> List;
+    typedef QList<Picture> List;
     /**
      * Assignment operator
      *

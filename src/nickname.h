@@ -37,7 +37,7 @@ public:
 
     ~NickName();
 
-    typedef QVector<NickName> List;
+    typedef QList<NickName> List;
 
     void setNickName(const QString &nickname);
     Q_REQUIRED_RESULT QString nickname() const;

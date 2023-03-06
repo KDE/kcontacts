@@ -38,7 +38,7 @@ public:
 
     ~Lang();
 
-    typedef QVector<Lang> List;
+    typedef QList<Lang> List;
 
     void setLanguage(const QString &lang);
     Q_REQUIRED_RESULT QString language() const;

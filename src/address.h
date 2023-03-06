@@ -12,10 +12,10 @@
 #include "kcontacts_export.h"
 #include "namespace.h"
 
+#include <QList>
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QVector>
 
 namespace KContacts
 {
@@ -62,7 +62,7 @@ public:
     /**
       List of addresses.
     */
-    typedef QVector<Address> List;
+    typedef QList<Address> List;
 
     /**
       Address types:

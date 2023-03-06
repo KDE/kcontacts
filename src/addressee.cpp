@@ -24,7 +24,7 @@ using namespace KContacts;
 static bool matchBinaryPattern(int value, int pattern);
 
 template<class L>
-static bool listEquals(const QVector<L> &list, const QVector<L> &pattern);
+static bool listEquals(const QList<L> &list, const QList<L> &pattern);
 static bool listEquals(const QStringList &list, const QStringList &pattern);
 
 struct CustomData {
@@ -164,7 +164,7 @@ public:
     Picture::List mPhotoExtraList;
     Picture::List mLogoExtraList;
     ResourceLocatorUrl::List mUrlExtraList;
-    QVector<QUrl> mSources;
+    QList<QUrl> mSources;
     QStringList mMembers;
     Related::List mRelationships;
     FieldGroup::List mFieldGroupList;
@@ -566,13 +566,13 @@ void Addressee::insertSourceUrl(const QUrl &url)
     d->mSources.append(url);
 }
 
-void Addressee::setSourcesUrlList(const QVector<QUrl> &urlList)
+void Addressee::setSourcesUrlList(const QList<QUrl> &urlList)
 {
     d->mEmpty = false;
     d->mSources = urlList;
 }
 
-QVector<QUrl> Addressee::sourcesUrlList() const
+QList<QUrl> Addressee::sourcesUrlList() const
 {
     return d->mSources;
 }
@@ -2635,7 +2635,7 @@ bool matchBinaryPattern(int value, int pattern)
 }
 
 template<class L>
-bool listEquals(const QVector<L> &list, const QVector<L> &pattern)
+bool listEquals(const QList<L> &list, const QList<L> &pattern)
 {
     if (list.count() != pattern.count()) {
         return false;
@@ -2667,7 +2667,7 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
 }
 
 template<typename T>
-static QVariantList toVariantList(const QVector<T> &v)
+static QVariantList toVariantList(const QList<T> &v)
 {
     QVariantList l;
     l.reserve(v.size());
@@ -2678,9 +2678,9 @@ static QVariantList toVariantList(const QVector<T> &v)
 }
 
 template<typename T>
-static QVector<T> fromVariantList(const QVariantList &v)
+static QList<T> fromVariantList(const QVariantList &v)
 {
-    QVector<T> l;
+    QList<T> l;
     l.reserve(v.size());
     std::transform(v.begin(), v.end(), std::back_inserter(l), [](const QVariant &elem) {
         return elem.value<T>();

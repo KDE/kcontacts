@@ -1083,8 +1083,8 @@ public:
 
     // Source
     void insertSourceUrl(const QUrl &url);
-    void setSourcesUrlList(const QVector<QUrl> &urlList);
-    QVector<QUrl> sourcesUrlList() const;
+    void setSourcesUrlList(const QList<QUrl> &urlList);
+    QList<QUrl> sourcesUrlList() const;
 
     // Impp
     Impp::List imppList() const;

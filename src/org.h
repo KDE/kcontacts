@@ -37,7 +37,7 @@ public:
 
     ~Org();
 
-    typedef QVector<Org> List;
+    typedef QList<Org> List;
 
     void setOrganization(const QString &org);
     Q_REQUIRED_RESULT QString organization() const;

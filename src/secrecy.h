@@ -9,8 +9,8 @@
 #define KCONTACTS_SECRECY_H
 
 #include "kcontacts_export.h"
+#include <QList>
 #include <QSharedDataPointer>
-#include <QVector>
 
 namespace KContacts
 {
@@ -38,7 +38,7 @@ public:
     /**
      * List of secrecy types.
      */
-    typedef QVector<Type> TypeList;
+    typedef QList<Type> TypeList;
 
     /**
      * Creates a new secrecy of the given type.

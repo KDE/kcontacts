@@ -37,7 +37,7 @@ public:
 
     ~Title();
 
-    typedef QVector<Title> List;
+    typedef QList<Title> List;
 
     void setTitle(const QString &title);
     Q_REQUIRED_RESULT QString title() const;

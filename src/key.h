@@ -27,7 +27,7 @@ public:
     /**
       List of keys.
     */
-    typedef QVector<Key> List;
+    typedef QList<Key> List;
 
     /**
       Key types

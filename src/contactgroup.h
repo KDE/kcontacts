@@ -8,9 +8,9 @@
 #ifndef KCONTACTS_CONTACTGROUP_H
 #define KCONTACTS_CONTACTGROUP_H
 
+#include <QList>
 #include <QMetaType>
 #include <QSharedDataPointer>
-#include <QVector>
 
 #include "kcontacts_export.h"
 
@@ -42,7 +42,7 @@ public:
         /**
          * A list of contact references.
          */
-        typedef QVector<ContactReference> List;
+        typedef QList<ContactReference> List;
 
         /**
          * Creates an empty contact reference.
@@ -149,7 +149,7 @@ public:
         /**
          * A list of contact group references.
          */
-        typedef QVector<ContactGroupReference> List;
+        typedef QList<ContactGroupReference> List;
 
         /**
          * Creates an empty contact group reference.
@@ -226,7 +226,7 @@ public:
         /**
          * A list of contact data.
          */
-        typedef QVector<Data> List;
+        typedef QList<Data> List;
 
         /**
          * Creates an empty contact data object.
@@ -307,7 +307,7 @@ public:
     /**
      * A list of contact groups.
      */
-    typedef QVector<ContactGroup> List;
+    typedef QList<ContactGroup> List;
 
     /**
      * Creates an empty contact group.

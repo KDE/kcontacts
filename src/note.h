@@ -34,7 +34,7 @@ public:
 
     ~Note();
 
-    typedef QVector<Note> List;
+    typedef QList<Note> List;
 
     void setNote(const QString &note);
     Q_REQUIRED_RESULT QString note() const;

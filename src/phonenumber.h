@@ -10,11 +10,11 @@
 
 #include "kcontacts_export.h"
 
+#include <QList>
 #include <QMap>
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QVector>
 
 namespace KContacts
 {
@@ -76,12 +76,12 @@ public:
     /**
      * List of phone number types.
      */
-    typedef QVector<TypeFlag> TypeList;
+    typedef QList<TypeFlag> TypeList;
 
     /**
      * List of phone numbers.
      */
-    typedef QVector<PhoneNumber> List;
+    typedef QList<PhoneNumber> List;
 
     /**
      * Creates an empty phone number object.

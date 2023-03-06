@@ -44,13 +44,13 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, 
  * Converts XML data coming from a @p device into a @p list of contact groups.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QVector<ContactGroup> &list, QString *errorMessage = nullptr);
+Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QList<ContactGroup> &list, QString *errorMessage = nullptr);
 
 /**
  * Converts a @p list of contact groups into XML data and writes them to a @p device.
  * If an error occurs, @c false is returned and @p errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const QVector<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
+Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
 }
 }
 

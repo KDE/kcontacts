@@ -35,7 +35,7 @@ public:
 
     ~Related();
 
-    typedef QVector<Related> List;
+    typedef QList<Related> List;
 
     void setRelated(const QString &relatedTo);
     Q_REQUIRED_RESULT QString related() const;

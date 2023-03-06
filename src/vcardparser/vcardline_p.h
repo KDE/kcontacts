@@ -21,7 +21,7 @@ namespace KContacts
 class KCONTACTS_EXPORT VCardLine
 {
 public:
-    typedef QVector<VCardLine> List;
+    typedef QList<VCardLine> List;
 
     VCardLine();
     VCardLine(const QString &identifier);
