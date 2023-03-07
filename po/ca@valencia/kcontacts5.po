@@ -547,28 +547,3 @@ msgstr "Confidencial"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Tipus desconegut"
-
-#~ msgid "Unknown Field"
-#~ msgstr "Camp desconegut"
-
-#~ msgid "All"
-#~ msgstr "Tot"
-
-#~ msgid "Frequent"
-#~ msgstr "Freqüent"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "Adreça"
-
-#~ msgid "Email"
-#~ msgstr "Correu electrònic"
-
-#~ msgid "Personal"
-#~ msgstr "Personal"
-
-#~ msgid "Custom"
-#~ msgstr "Personalitzada"
-
-#~ msgid "Undefined"
-#~ msgstr "Sense definir"
