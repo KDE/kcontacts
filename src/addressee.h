@@ -95,12 +95,17 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QDateTime revision READ revision)
     Q_PROPERTY(QString sortString READ sortString WRITE setSortString)
     Q_PROPERTY(KContacts::ResourceLocatorUrl url READ url WRITE setUrl)
+    Q_PROPERTY(QList<KContacts::ResourceLocatorUrl> extraUrls READ extraUrlList WRITE setExtraUrlList)
     Q_PROPERTY(QString realName READ realName)
     Q_PROPERTY(QString assembledName READ assembledName)
     Q_PROPERTY(QString preferredEmail READ preferredEmail)
+    Q_PROPERTY(QList<KContacts::Email> emails READ emailList WRITE setEmailList)
+    Q_PROPERTY(QList<KContacts::PhoneNumber> phoneNumbers READ phoneNumbers WRITE setPhoneNumbers)
+    Q_PROPERTY(QList<KContacts::Address> addresses READ addresses)
     Q_PROPERTY(QStringList categories READ categories WRITE setCategories)
     Q_PROPERTY(QStringList customs READ customs)
     Q_PROPERTY(bool changed READ changed WRITE setChanged)
+    Q_PROPERTY(QList<KContacts::Impp> impps READ imppList WRITE setImppList)
     Q_PROPERTY(QDate anniversary READ anniversary WRITE setAnniversary)
     Q_PROPERTY(QString assistantsName READ assistantsName WRITE setAssistantsName)
     Q_PROPERTY(QUrl blogFeed READ blogFeed WRITE setBlogFeed)
@@ -109,13 +114,6 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QString profession READ profession WRITE setProfession)
     Q_PROPERTY(QString spousesName READ spousesName WRITE setSpousesName)
     Q_PROPERTY(KContacts::Picture photo READ photo WRITE setPhoto)
-
-    // using variants for QML compatibility, can be changed to proper types once QML supports that
-    Q_PROPERTY(QVariantList emails READ emailsVariant WRITE setEmailsVariant)
-    Q_PROPERTY(QVariantList phoneNumbers READ phoneNumbersVariant WRITE setPhoneNumbersVariant)
-    Q_PROPERTY(QVariantList addresses READ addressesVariant)
-    Q_PROPERTY(QVariantList urls READ urlsVariant)
-    Q_PROPERTY(QVariantList impps READ imppsVariant WRITE setImppsVariant)
 
     // ### the following properties are still missing:
     // - logos, photos, sounds
@@ -1194,14 +1192,6 @@ public:
 
 private:
     void setBirthdayProperty(const QDateTime &birthday);
-    QVariantList emailsVariant() const;
-    void setEmailsVariant(const QVariantList &emails);
-    QVariantList phoneNumbersVariant() const;
-    void setPhoneNumbersVariant(const QVariantList &emails);
-    QVariantList addressesVariant() const;
-    QVariantList urlsVariant() const;
-    QVariantList imppsVariant() const;
-    void setImppsVariant(const QVariantList &impps);
 
     class Private;
     QSharedDataPointer<Private> d;

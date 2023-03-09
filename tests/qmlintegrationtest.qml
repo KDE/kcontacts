@@ -76,5 +76,12 @@ ApplicationWindow {
                 font.bold: AddressFormatRepository.formatForCountry(countryCombo.currentValue, KContacts.AddressFormatScriptPreference.LatinScript).requiredFields & modelData.field
             }
         }
+
+        Label {
+            text: "Emails: " + TestData.addressee.emails.map(x => x.email).join(", ")
+        }
+        Label {
+            text: "Address 1: " + TestData.addressee.addresses[0].formattedAddress
+        }
     }
 }

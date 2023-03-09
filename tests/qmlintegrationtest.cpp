@@ -8,6 +8,7 @@
 
 #include "../src/addressformat.h"
 #include <KContacts/Address>
+#include <KContacts/Addressee>
 
 using namespace KContacts;
 
@@ -39,8 +40,13 @@ int main(int argc, char **argv)
         address.setPostalCode(QStringLiteral("10969"));
         address.setStreet(QStringLiteral("Prinzenstraße 85 F"));
 
+        Addressee addressee;
+        addressee.insertAddress(address);
+        addressee.setEmails({QStringLiteral("one@test.local"), QStringLiteral("two@test.local")});
+
         auto obj = jsEngine->newObject();
         obj.setProperty(QStringLiteral("address"), jsEngine->toScriptValue(address));
+        obj.setProperty(QStringLiteral("addressee"), jsEngine->toScriptValue(addressee));
         return obj;
     });
 

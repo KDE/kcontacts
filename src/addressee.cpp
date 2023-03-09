@@ -2666,71 +2666,9 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
     return true;
 }
 
-template<typename T>
-static QVariantList toVariantList(const QList<T> &v)
-{
-    QVariantList l;
-    l.reserve(v.size());
-    std::transform(v.begin(), v.end(), std::back_inserter(l), [](const T &elem) {
-        return QVariant::fromValue(elem);
-    });
-    return l;
-}
-
-template<typename T>
-static QList<T> fromVariantList(const QVariantList &v)
-{
-    QList<T> l;
-    l.reserve(v.size());
-    std::transform(v.begin(), v.end(), std::back_inserter(l), [](const QVariant &elem) {
-        return elem.value<T>();
-    });
-    return l;
-}
-
 void Addressee::setBirthdayProperty(const QDateTime &birthday) {
     // The property setter cannot pass withTime, so we have to guess.
     setBirthday(birthday, birthday.time().msecsSinceStartOfDay() != 0);
-}
-
-QVariantList Addressee::emailsVariant() const
-{
-    return toVariantList(d->mEmails);
-}
-
-void Addressee::setEmailsVariant(const QVariantList &emails)
-{
-    setEmailList(fromVariantList<Email>(emails));
-}
-
-void Addressee::setPhoneNumbersVariant(const QVariantList &emails)
-{
-    setPhoneNumbers(fromVariantList<PhoneNumber>(emails));
-}
-
-QVariantList Addressee::phoneNumbersVariant() const
-{
-    return toVariantList(d->mPhoneNumbers);
-}
-
-QVariantList Addressee::addressesVariant() const
-{
-    return toVariantList(d->mAddresses);
-}
-
-QVariantList Addressee::urlsVariant() const
-{
-    return toVariantList(d->mUrlExtraList);
-}
-
-QVariantList Addressee::imppsVariant() const
-{
-    return toVariantList(d->mImpps);
-}
-
-void Addressee::setImppsVariant(const QVariantList &impps)
-{
-    setImppList(fromVariantList<Impp>(impps));
 }
 
 #include "moc_addressee.cpp"
