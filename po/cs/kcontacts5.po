@@ -542,28 +542,3 @@ msgstr "Důvěrný"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Neznámý typ"
-
-#~ msgid "Unknown Field"
-#~ msgstr "Neznámé pole"
-
-#~ msgid "All"
-#~ msgstr "Vše"
-
-#~ msgid "Frequent"
-#~ msgstr "Časté"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "Adresa"
-
-#~ msgid "Email"
-#~ msgstr "E-mail"
-
-#~ msgid "Personal"
-#~ msgstr "Osobní"
-
-#~ msgid "Custom"
-#~ msgstr "Vlastní"
-
-#~ msgid "Undefined"
-#~ msgstr "Nedefinovaný"
