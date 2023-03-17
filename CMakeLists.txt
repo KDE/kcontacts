@@ -58,7 +58,7 @@ find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Co
 
 ########### Targets ###########
 
-add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts5\")
+add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts6\")
 ki18n_install(po)
 
 ecm_set_disabled_deprecation_versions(
