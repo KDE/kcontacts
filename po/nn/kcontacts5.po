@@ -1,4 +1,4 @@
-# Translation of kcontacts5 to Norwegian Nynorsk
+# Translation of kcontacts6 to Norwegian Nynorsk
 #
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2009.
 # Karl Ove Hufthammer <karl@huftis.org>, 2008, 2010, 2019.
