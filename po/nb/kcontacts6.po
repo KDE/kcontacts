@@ -1,4 +1,4 @@
-# Translation of kcontacts5 to Norwegian Bokmål
+# Translation of kcontacts6 to Norwegian Bokmål
 #
 # Nils Kristian Tomren <slx@nilsk.net>, 2007.
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2008, 2009.
@@ -544,28 +544,3 @@ msgstr "Konfidensiell"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Ukjent type"
-
-#~ msgid "Unknown Field"
-#~ msgstr "Ukjent felt"
-
-#~ msgid "All"
-#~ msgstr "Alle"
-
-#~ msgid "Frequent"
-#~ msgstr "Ofte"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "Adresse"
-
-#~ msgid "Email"
-#~ msgstr "E-post"
-
-#~ msgid "Personal"
-#~ msgstr "Privat"
-
-#~ msgid "Custom"
-#~ msgstr "Tilpasset"
-
-#~ msgid "Undefined"
-#~ msgstr "Udefinert"
