@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-02-27 00:41+0000\n"
-"PO-Revision-Date: 2023-01-07 01:00+0100\n"
+"PO-Revision-Date: 2023-03-20 22:31+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -277,10 +277,9 @@ msgid "Mail Client"
 msgstr ""
 
 #: addressee.cpp:1018
-#, fuzzy, kde-format
-#| msgid "Timezone Error"
+#, kde-format
 msgid "Time Zone"
-msgstr "Tempzona eraro"
+msgstr ""
 
 #: addressee.cpp:1038
 #, kde-format
