@@ -1191,7 +1191,7 @@ public:
     void setSpousesName(const QString &spousesName);
 
 private:
-    void setBirthdayProperty(const QDateTime &birthday);
+    KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);
 
     class Private;
     QSharedDataPointer<Private> d;

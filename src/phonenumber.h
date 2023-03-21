@@ -233,8 +233,8 @@ public:
     QString toString() const;
 
 private:
-    void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    KCONTACTS_NO_EXPORT void setParams(const ParameterMap &params);
+    Q_REQUIRED_RESULT KCONTACTS_NO_EXPORT ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

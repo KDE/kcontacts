@@ -357,7 +357,7 @@ public:
     Q_REQUIRED_RESULT QUrl geoUri() const;
 
 private:
-    QString formattedPostalAddress() const;
+    KCONTACTS_NO_EXPORT QString formattedPostalAddress() const;
 
     class Private;
     QSharedDataPointer<Private> d;

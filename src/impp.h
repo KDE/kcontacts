@@ -109,6 +109,7 @@ public:
     static QList<QString> serviceTypes();
 
 private:
+    // exported for ImppTest
     void setParams(const ParameterMap &params);
     Q_REQUIRED_RESULT ParameterMap params() const;
 
