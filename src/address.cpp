@@ -19,6 +19,7 @@
 
 #include <QDataStream>
 #include <QSharedData>
+#include <QUrlQuery>
 
 using namespace KContacts;
 
@@ -431,6 +432,27 @@ QString Address::ISOtoCountry(const QString &ISOname)
     return c.isValid() ? c.name() : ISOname;
 }
 #endif
+
+QUrl Address::geoUri() const
+{
+    QUrl url;
+    url.setScheme(QStringLiteral("geo"));
+
+    if (geo().isValid()) {
+        url.setPath(QString::number(geo().latitude()) + QLatin1Char(',') + QString::number(geo().longitude()));
+        return url;
+    }
+
+    if (!isEmpty()) {
+        url.setPath(QStringLiteral("0,0"));
+        QUrlQuery query;
+        query.addQueryItem(QStringLiteral("q"), formatted(KContacts::AddressFormatStyle::GeoUriQuery));
+        url.setQuery(query);
+        return url;
+    }
+
+    return {};
+}
 
 // clang-format off
 QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)

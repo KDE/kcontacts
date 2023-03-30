@@ -31,6 +31,7 @@ private Q_SLOTS:
     void shouldParseAddressVCard4WithGeoPosition();
     void countryToISOTest();
     void isoToCountryTest();
+    void testGeoUri();
 };
 
 #endif
