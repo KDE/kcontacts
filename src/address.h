@@ -16,6 +16,7 @@
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
+#include <QUrl>
 
 namespace KContacts
 {
@@ -57,6 +58,12 @@ class KCONTACTS_EXPORT Address
      * @since 5.12
      */
     Q_PROPERTY(QString formattedAddress READ formattedPostalAddress)
+
+    /** geo: URI for this address.
+     *  @see Address::geoUri()
+     *  @since 5.106
+     */
+    Q_PROPERTY(QUrl geoUri READ geoUri)
 
 public:
     /**
@@ -340,6 +347,14 @@ public:
       Return geographic position.
      */
     Q_REQUIRED_RESULT Geo geo() const;
+
+    /**
+     * Returns a geo: URI representing this address.
+     * This contains either the geographic coordinate if set, or the address as query term.
+     * This can be used to show the address in the default map view.
+     * @since 5.106
+     */
+    Q_REQUIRED_RESULT QUrl geoUri() const;
 
 private:
     QString formattedPostalAddress() const;

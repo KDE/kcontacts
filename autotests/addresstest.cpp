@@ -463,3 +463,19 @@ void AddressTest::shouldExportVcard4()
         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
+
+void AddressTest::testGeoUri()
+{
+    KContacts::Address addr;
+    addr.setCountry(QStringLiteral("DE"));
+    addr.setRegion(QStringLiteral("BE"));
+    addr.setLocality(QStringLiteral("Berlin"));
+    addr.setPostalCode(QStringLiteral("10969"));
+    addr.setStreet(QStringLiteral("Prinzenstraße 85 F"));
+    addr.setExtended(QStringLiteral("East wing"));
+
+    QCOMPARE(addr.geoUri(), QUrl(QStringLiteral("geo:0,0?q=Prinzenstraße 85 F,10969 Berlin,DE")));
+
+    addr.setGeo({52.503, 13.41});
+    QCOMPARE(addr.geoUri(), QUrl(QStringLiteral("geo:52.503,13.41")));
+}
