@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-27 00:41+0000\n"
+"POT-Creation-Date: 2023-03-31 00:43+0000\n"
 "PO-Revision-Date: 2020-09-07 00:06+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -20,88 +20,88 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#: address.cpp:223
+#: address.cpp:224
 #, kde-format
 msgid "Post Office Box"
 msgstr "Căsuță poștală"
 
-#: address.cpp:239
+#: address.cpp:240
 #, kde-format
 msgid "Extended Address Information"
 msgstr "Informații adresă extinse"
 
-#: address.cpp:255
+#: address.cpp:256
 #, kde-format
 msgid "Street"
 msgstr "Strada"
 
-#: address.cpp:271
+#: address.cpp:272
 #, kde-format
 msgid "Locality"
 msgstr "Localitate"
 
-#: address.cpp:287
+#: address.cpp:288
 #, kde-format
 msgid "Region"
 msgstr "Regiune"
 
-#: address.cpp:303
+#: address.cpp:304
 #, kde-format
 msgid "Postal Code"
 msgstr "Cod poștal"
 
-#: address.cpp:319
+#: address.cpp:320
 #, kde-format
 msgid "Country"
 msgstr "Țară"
 
-#: address.cpp:335
+#: address.cpp:336
 #, kde-format
 msgid "Delivery Label"
 msgstr "Etichetă livrare"
 
-#: address.cpp:353
+#: address.cpp:354
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "Domiciliu"
 
-#: address.cpp:355
+#: address.cpp:356
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "Internațională"
 
-#: address.cpp:357
+#: address.cpp:358
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "Poștală"
 
-#: address.cpp:359
+#: address.cpp:360
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "Colet"
 
-#: address.cpp:361
+#: address.cpp:362
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "Acasă"
 
-#: address.cpp:363
+#: address.cpp:364
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "Serviciu"
 
-#: address.cpp:365
+#: address.cpp:366
 #, kde-format
 msgid "Preferred Address"
 msgstr "Adresa preferată"
 
-#: address.cpp:367
+#: address.cpp:368
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
