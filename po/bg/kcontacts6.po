@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-01 21:29+0000\n"
+"POT-Creation-Date: 2023-03-31 02:16+0000\n"
 "PO-Revision-Date: 2022-05-20 18:57+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -14,88 +14,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.0\n"
 
-#: address.cpp:223
+#: address.cpp:224
 #, kde-format
 msgid "Post Office Box"
 msgstr "Пощенска кутия"
 
-#: address.cpp:239
+#: address.cpp:240
 #, kde-format
 msgid "Extended Address Information"
 msgstr "Информация за разширен адрес"
 
-#: address.cpp:255
+#: address.cpp:256
 #, kde-format
 msgid "Street"
 msgstr "Улица"
 
-#: address.cpp:271
+#: address.cpp:272
 #, kde-format
 msgid "Locality"
 msgstr "Местност"
 
-#: address.cpp:287
+#: address.cpp:288
 #, kde-format
 msgid "Region"
 msgstr "Регион"
 
-#: address.cpp:303
+#: address.cpp:304
 #, kde-format
 msgid "Postal Code"
 msgstr "Пощенски код"
 
-#: address.cpp:319
+#: address.cpp:320
 #, kde-format
 msgid "Country"
 msgstr "Държава"
 
-#: address.cpp:335
+#: address.cpp:336
 #, kde-format
 msgid "Delivery Label"
 msgstr "Етикет за доставка"
 
-#: address.cpp:353
+#: address.cpp:354
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "Вътрешни"
 
-#: address.cpp:355
+#: address.cpp:356
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "Международен"
 
-#: address.cpp:357
+#: address.cpp:358
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "Пощенски"
 
-#: address.cpp:359
+#: address.cpp:360
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "Парцел"
 
-#: address.cpp:361
+#: address.cpp:362
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "Домашен адрес"
 
-#: address.cpp:363
+#: address.cpp:364
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "Служебен адрес"
 
-#: address.cpp:365
+#: address.cpp:366
 #, kde-format
 msgid "Preferred Address"
 msgstr "Предпочитан адрес"
 
-#: address.cpp:367
+#: address.cpp:368
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
