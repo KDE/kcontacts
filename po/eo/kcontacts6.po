@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-31 02:16+0000\n"
-"PO-Revision-Date: 2023-01-07 01:00+0100\n"
+"PO-Revision-Date: 2023-04-01 15:23+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -194,72 +194,72 @@ msgstr "Hejmadresa Etikedo"
 #: addressee.cpp:902
 #, kde-format
 msgid "Business Address Street"
-msgstr ""
+msgstr "Laboradresa Strato"
 
 #: addressee.cpp:907
 #, kde-format
 msgid "Business Address Post Office Box"
-msgstr ""
+msgstr "Laboradresa Poŝtkesto"
 
 #: addressee.cpp:912
 #, kde-format
 msgid "Business Address City"
-msgstr ""
+msgstr "Laboradresa Urbo"
 
 #: addressee.cpp:917
 #, kde-format
 msgid "Business Address State"
-msgstr ""
+msgstr "Laboradresa Ŝtato"
 
 #: addressee.cpp:922
 #, kde-format
 msgid "Business Address Zip Code"
-msgstr ""
+msgstr "Laboradresa Poŝtkodo"
 
 #: addressee.cpp:927
 #, kde-format
 msgid "Business Address Country"
-msgstr ""
+msgstr "Laboradresa Lando"
 
 #: addressee.cpp:932
 #, kde-format
 msgid "Business Address Label"
-msgstr ""
+msgstr "Laboradresa Etikedo"
 
 #: addressee.cpp:937
 #, kde-format
 msgid "Home Phone"
-msgstr ""
+msgstr "Hejma Telefono"
 
 #: addressee.cpp:942
 #, kde-format
 msgid "Business Phone"
-msgstr ""
+msgstr "Labora Telefono"
 
 #: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
-msgstr ""
+msgstr "Poŝtelefono"
 
 #: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
 msgid "Home Fax"
-msgstr ""
+msgstr "Hejma Fakso"
 
 #: addressee.cpp:957
 #, kde-format
 msgid "Business Fax"
-msgstr ""
+msgstr "Labora Fakso"
 
 #: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
-msgstr ""
+msgstr "Aŭtomobiltelefono"
 
 #: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
 msgid "ISDN"
-msgstr ""
+msgstr "ISDN"
 
 #: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
@@ -274,30 +274,29 @@ msgstr "Retpoŝta adreso"
 #: addressee.cpp:997
 #, kde-format
 msgid "Mail Client"
-msgstr ""
+msgstr "Poŝtkliento"
 
 #: addressee.cpp:1017
-#, fuzzy, kde-format
-#| msgid "Timezone Error"
+#, kde-format
 msgid "Time Zone"
-msgstr "Tempzona eraro"
+msgstr "Tempzono"
 
 #: addressee.cpp:1037
 #, kde-format
 msgid "Geographic Position"
-msgstr ""
+msgstr "Geografia Loko"
 
 #: addressee.cpp:1088
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
-msgstr ""
+msgstr "Rolo"
 
 #: addressee.cpp:1190
 #, kde-format
@@ -317,17 +316,17 @@ msgstr "Noto"
 #: addressee.cpp:1250
 #, kde-format
 msgid "Product Identifier"
-msgstr ""
+msgstr "Produkta Identigilo"
 
 #: addressee.cpp:1270
 #, kde-format
 msgid "Revision Date"
-msgstr ""
+msgstr "Dato de Revizio"
 
 #: addressee.cpp:1290
 #, kde-format
 msgid "Sort String"
-msgstr ""
+msgstr "Ordiga Ĉeno"
 
 #: addressee.cpp:1316
 #, kde-format
@@ -342,7 +341,7 @@ msgstr "Sekureca Kategorio"
 #: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
-msgstr ""
+msgstr "Emblemo"
 
 #: addressee.cpp:1376
 #, kde-format
@@ -454,7 +453,7 @@ msgstr "Labpra"
 #: phonenumber.cpp:176
 #, kde-format
 msgid "Messenger"
-msgstr ""
+msgstr "Mesaĝisto"
 
 #: phonenumber.cpp:178
 #, kde-format
