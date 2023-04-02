@@ -1221,15 +1221,15 @@ public:
     void setSpousesName(const QString &spousesName);
 
 private:
-    void setBirthdayProperty(const QDateTime &birthday);
-    QVariantList emailsVariant() const;
-    void setEmailsVariant(const QVariantList &emails);
-    QVariantList phoneNumbersVariant() const;
-    void setPhoneNumbersVariant(const QVariantList &emails);
-    QVariantList addressesVariant() const;
-    QVariantList urlsVariant() const;
-    QVariantList imppsVariant() const;
-    void setImppsVariant(const QVariantList &impps);
+    KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);
+    KCONTACTS_NO_EXPORT QVariantList emailsVariant() const;
+    KCONTACTS_NO_EXPORT void setEmailsVariant(const QVariantList &emails);
+    KCONTACTS_NO_EXPORT QVariantList phoneNumbersVariant() const;
+    KCONTACTS_NO_EXPORT void setPhoneNumbersVariant(const QVariantList &emails);
+    KCONTACTS_NO_EXPORT QVariantList addressesVariant() const;
+    KCONTACTS_NO_EXPORT QVariantList urlsVariant() const;
+    KCONTACTS_NO_EXPORT QVariantList imppsVariant() const;
+    KCONTACTS_NO_EXPORT void setImppsVariant(const QVariantList &impps);
 
     class Private;
     QSharedDataPointer<Private> d;

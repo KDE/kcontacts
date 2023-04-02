@@ -69,6 +69,7 @@ public:
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
+    // exported for TitleTest
     void setParams(const ParameterMap &params);
     Q_REQUIRED_RESULT ParameterMap params() const;
 

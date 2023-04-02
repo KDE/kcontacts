@@ -107,7 +107,8 @@ public:
     QString postalCodeRegularExpression() const;
 
 private:
-    QList<AddressFormatElement> elementsForQml() const;
+    KCONTACTS_NO_EXPORT QList<AddressFormatElement> elementsForQml() const;
+
     friend class AddressFormatPrivate;
     QExplicitlySharedDataPointer<AddressFormatPrivate> d;
 };
