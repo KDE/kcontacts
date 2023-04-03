@@ -1,6 +1,12 @@
 add_library(KF6Contacts)
 add_library(KF6::Contacts ALIAS KF6Contacts)
 
+set_target_properties(KF6Contacts PROPERTIES
+    VERSION     ${KContacts_VERSION}
+    SOVERSION   ${KContacts_SOVERSION}
+    EXPORT_NAME Contacts
+)
+
 target_sources(KF6Contacts PRIVATE
     address.cpp
     addressee.cpp
@@ -120,12 +126,6 @@ PRIVATE
     KF6::I18n
     KF6::I18nLocaleData
     KF6::Codecs # for the vcard parser
-)
-
-set_target_properties(KF6Contacts PROPERTIES
-    VERSION ${KContacts_VERSION}
-    SOVERSION ${KContacts_SOVERSION}
-    EXPORT_NAME Contacts
 )
 
 install(TARGETS KF6Contacts EXPORT KF6ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
