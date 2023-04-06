@@ -39,7 +39,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 set(KCONTACTS_LIB_VERSION ${KF_VERSION})
 
 set(kcontacts_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/kcontacts_version.h")
-ecm_setup_version(PROJECT VARIABLE_PREFIX KContacts
+ecm_setup_version(PROJECT VARIABLE_PREFIX KCONTACTS
                         VERSION_HEADER "${kcontacts_version_header}"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6ContactsConfigVersion.cmake"
                         SOVERSION 6
