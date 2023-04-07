@@ -538,28 +538,3 @@ msgstr "Поверителен"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "Неизвестен тип"
-
-#~ msgid "Unknown Field"
-#~ msgstr "Поле непознати"
-
-#~ msgid "All"
-#~ msgstr "Всички"
-
-#~ msgid "Frequent"
-#~ msgstr "Често срещан"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "Адрес"
-
-#~ msgid "Email"
-#~ msgstr "Електронна поща"
-
-#~ msgid "Personal"
-#~ msgstr "Лични"
-
-#~ msgid "Custom"
-#~ msgstr "Персонализиран"
-
-#~ msgid "Undefined"
-#~ msgstr "Неопределен"
