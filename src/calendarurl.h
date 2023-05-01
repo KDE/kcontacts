@@ -20,8 +20,11 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
- *  @since 4.14.6
+/**
+ * @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
+ *
+ * @see RFC 6350 Section 6.9 (https://datatracker.ietf.org/doc/html/rfc6350#section-6.9)
+ * @since 4.14.6
  */
 class KCONTACTS_EXPORT CalendarUrl
 {
@@ -32,10 +35,10 @@ class KCONTACTS_EXPORT CalendarUrl
 
 public:
     enum CalendarType {
-        Unknown = 0,
-        FBUrl,
-        CALUri,
-        CALADRUri,
+        Unknown = 0, ///< Unknow calendar type
+        FBUrl, ///< Specify the calendar containing the FreeBusy time information
+        CALUri, ///< Specify the calendar associated with the contact
+        CALADRUri, ///< Specify the calendar which should received the sheduling requests
         EndCalendarType,
     };
 
