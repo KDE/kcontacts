@@ -55,7 +55,10 @@ public:
         Home = 1, /**< Personal website. */
         Work = 2, /**< Work website. */
         Profile = 4, /**< Profile website. */
-        Other = 8, /**< Other websie. */
+        Ftp = 8, /**< Ftp website. @since 6.0 */
+        Reservation = 16, /**< Reservation website. @since 6.0 */
+        AppInstallPage = 32, /**< Application installation website. @sine 6.0 */
+        Other = 64, /**< Other websie. */
     };
 
     /**
