@@ -1,4 +1,4 @@
-# Translation of kcontacts5 to Northern Sami
+# Translation of kcontacts6 to Northern Sami
 #
 msgid ""
 msgstr ""
