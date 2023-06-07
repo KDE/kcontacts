@@ -13,7 +13,8 @@
 #include <KCountry>
 
 #include <QObject>
-#include <QtTest>
+#include <QRegularExpression>
+#include <QTest>
 
 using namespace KContacts;
 
