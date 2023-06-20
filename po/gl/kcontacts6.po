@@ -340,7 +340,7 @@ msgstr "Páxina web"
 #: addressee.cpp:1336
 #, kde-format
 msgid "Security Class"
-msgstr "Clase de seguranza"
+msgstr "Clase de seguridade"
 
 #: addressee.cpp:1356
 #, kde-format
