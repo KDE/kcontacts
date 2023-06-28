@@ -195,3 +195,5 @@ void GeoTest::shouldGenerateWithoutGeo()
         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
+
+#include "moc_geotest.cpp"

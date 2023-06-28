@@ -300,3 +300,5 @@ void CalendarUrlTest::shouldGenerateMultiCalendarUrl()
 }
 
 QTEST_MAIN(CalendarUrlTest)
+
+#include "moc_calendarurltest.cpp"

@@ -162,3 +162,5 @@ void DateTimeTest::shouldCreateDate()
 }
 
 QTEST_MAIN(DateTimeTest)
+
+#include "moc_datetimetest.cpp"

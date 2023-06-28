@@ -224,3 +224,5 @@ void ResourceLocatorUrlTest::shouldGenerateVCard3()
 }
 
 QTEST_MAIN(ResourceLocatorUrlTest)
+
+#include "moc_resourcelocatorurltest.cpp"

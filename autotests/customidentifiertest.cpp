@@ -110,3 +110,5 @@ void CustomIdentifierTest::shouldExportVcard4()
 }
 
 QTEST_MAIN(CustomIdentifierTest)
+
+#include "moc_customidentifiertest.cpp"

@@ -218,3 +218,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, Email &email)
     s >> email.d->mParamMap >> email.d->mail;
     return s;
 }
+
+#include "moc_email.cpp"

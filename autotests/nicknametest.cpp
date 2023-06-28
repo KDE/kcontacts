@@ -235,3 +235,5 @@ void NickNameTest::shouldGenerateNickNameForVCard3()
 }
 
 QTEST_MAIN(NickNameTest)
+
+#include "moc_nicknametest.cpp"

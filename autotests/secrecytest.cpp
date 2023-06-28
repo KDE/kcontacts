@@ -74,3 +74,5 @@ void SecrecyTest::serializeTest()
 
     QVERIFY(secrecy1 == secrecy2);
 }
+
+#include "moc_secrecytest.cpp"

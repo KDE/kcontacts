@@ -247,3 +247,5 @@ void GenderTest::shouldNotExportInVcard3()
 }
 
 QTEST_MAIN(GenderTest)
+
+#include "moc_gendertest.cpp"

@@ -264,3 +264,5 @@ void PictureTest::serializeTestExtern()
 
     QVERIFY(picture1 == picture2);
 }
+
+#include "moc_picturetest.cpp"

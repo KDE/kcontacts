@@ -257,3 +257,5 @@ void RelatedTest::shouldNotExportInVcard3()
 }
 
 QTEST_MAIN(RelatedTest)
+
+#include "moc_relatedtest.cpp"

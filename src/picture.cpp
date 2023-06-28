@@ -225,3 +225,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, Picture &picture)
 
     return s;
 }
+
+#include "moc_picture.cpp"

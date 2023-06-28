@@ -257,3 +257,5 @@ void TitleTest::shouldGenerateTitleForVCard3()
 }
 
 QTEST_MAIN(TitleTest)
+
+#include "moc_titletest.cpp"

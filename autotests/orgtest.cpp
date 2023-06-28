@@ -280,3 +280,5 @@ void OrgTest::shouldGenerateOrgForVCard3()
 }
 
 QTEST_MAIN(OrgTest)
+
+#include "moc_orgtest.cpp"

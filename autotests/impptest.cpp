@@ -328,3 +328,5 @@ void ImppTest::testProtocolInformation()
 }
 
 QTEST_MAIN(ImppTest)
+
+#include "moc_impptest.cpp"

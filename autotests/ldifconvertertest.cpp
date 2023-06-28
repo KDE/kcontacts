@@ -572,3 +572,5 @@ void LDifConverterTest::testGarbage()
 }
 
 QTEST_MAIN(LDifConverterTest)
+
+#include "moc_ldifconvertertest.cpp"

@@ -454,3 +454,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
     return s;
 }
 // clang-format on
+
+#include "moc_address.cpp"
