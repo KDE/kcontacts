@@ -258,3 +258,5 @@ void SoundTest::shouldGenerateVCard3WithUrl()
 
     QCOMPARE(ba, expected);
 }
+
+#include "moc_soundtest.cpp"

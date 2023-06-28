@@ -219,3 +219,5 @@ void ImportExportVCardTest::shouldExportMissingNewlineVcard4()
 // TODO please make this data driven before copy/pasting more methods here...
 
 QTEST_MAIN(ImportExportVCardTest)
+
+#include "moc_importexportvcardtest.cpp"

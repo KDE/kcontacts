@@ -178,3 +178,5 @@ void KeyTest::shouldParseVcard4()
     QCOMPARE(key.type(), KContacts::Key::PGP);
     QCOMPARE(key.textData(), QStringLiteral("https://foo.org/sherlock-holmes.pub.asc"));
 }
+
+#include "moc_keytest.cpp"

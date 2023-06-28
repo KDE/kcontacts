@@ -226,3 +226,5 @@ void BirthDayTest::shouldExportVcard3WithoutTime()
 }
 
 QTEST_MAIN(BirthDayTest)
+
+#include "moc_birthdaytest.cpp"

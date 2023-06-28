@@ -160,3 +160,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, Geo &geo)
     return s;
 }
 // clang-format on
+
+#include "moc_geo.cpp"

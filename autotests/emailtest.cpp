@@ -201,3 +201,5 @@ void EmailTest::shouldExportVcard()
 }
 
 QTEST_MAIN(EmailTest)
+
+#include "moc_emailtest.cpp"

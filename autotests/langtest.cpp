@@ -232,3 +232,5 @@ void LangTest::shouldNotGenerateLangForVCard3()
 }
 
 QTEST_MAIN(LangTest)
+
+#include "moc_langtest.cpp"

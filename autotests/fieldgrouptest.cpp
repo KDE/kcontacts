@@ -255,3 +255,5 @@ void FieldGroupTest::shouldNotGenerateFieldGroupForVCard3()
 }
 
 QTEST_MAIN(FieldGroupTest)
+
+#include "moc_fieldgrouptest.cpp"

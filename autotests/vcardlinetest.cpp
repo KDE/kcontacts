@@ -112,3 +112,5 @@ void VCardLineTest::shouldEqualValue()
 }
 
 QTEST_MAIN(VCardLineTest)
+
+#include "moc_vcardlinetest.cpp"

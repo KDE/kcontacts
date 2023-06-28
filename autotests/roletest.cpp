@@ -235,3 +235,5 @@ void RoleTest::shouldGenerateRoleForVCard3()
 }
 
 QTEST_MAIN(RoleTest)
+
+#include "moc_roletest.cpp"

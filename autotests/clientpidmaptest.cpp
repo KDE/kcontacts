@@ -232,3 +232,5 @@ void ClientPidMapTest::shouldGenerateClientPidMapForVCard3()
 }
 
 QTEST_MAIN(ClientPidMapTest)
+
+#include "moc_clientpidmaptest.cpp"

@@ -101,3 +101,5 @@ bool AddresseeHelper::treatAsFamilyName() const
 {
     return d->mTreatAsFamilyName;
 }
+
+#include "moc_addresseehelper.cpp"

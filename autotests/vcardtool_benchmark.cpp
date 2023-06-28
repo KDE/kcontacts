@@ -65,3 +65,5 @@ void PerformanceTest::testExportPerformance()
 }
 
 QTEST_GUILESS_MAIN(PerformanceTest)
+
+#include "moc_vcardtool_benchmark.cpp"

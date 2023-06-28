@@ -306,3 +306,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, PhoneNumber &phone)
 
     return s;
 }
+
+#include "moc_phonenumber.cpp"

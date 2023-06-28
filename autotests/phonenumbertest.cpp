@@ -343,3 +343,5 @@ void PhoneNumberTest::testNormalizeNumber()
     num.setNumber(input);
     QCOMPARE(num.normalizedNumber(), expected);
 }
+
+#include "moc_phonenumbertest.cpp"

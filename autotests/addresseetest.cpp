@@ -466,3 +466,5 @@ void AddresseeTest::parseEmailAddress()
     QCOMPARE(parsedEmail, email);
     QCOMPARE(parsedName, name);
 }
+
+#include "moc_addresseetest.cpp"

@@ -155,3 +155,5 @@ AddressFormat AddressFormatRepository::formatForAddress(const Address &address, 
                                                                                                          : AddressFormatScriptPreference::Local;
     return formatForCountry(c.alpha2(), scriptPref, formatPref);
 }
+
+#include "moc_addressformat.cpp"

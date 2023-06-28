@@ -226,3 +226,5 @@ QDataStream &KContacts::operator>>(QDataStream &s, ResourceLocatorUrl &calUrl)
     s >> calUrl.d->mParamMap >> calUrl.d->url;
     return s;
 }
+
+#include "moc_resourcelocatorurl.cpp"

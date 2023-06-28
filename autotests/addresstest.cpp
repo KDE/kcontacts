@@ -521,3 +521,5 @@ void AddressTest::testGeoUri()
     addr.setGeo({52.503, 13.41});
     QCOMPARE(addr.geoUri(), QUrl(QStringLiteral("geo:52.503,13.41")));
 }
+
+#include "moc_addresstest.cpp"

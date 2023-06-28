@@ -127,3 +127,5 @@ void TimeZoneTest::shouldGenerateVCard4()
         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
 }
+
+#include "moc_timezonetest.cpp"
