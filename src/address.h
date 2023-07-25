@@ -376,6 +376,4 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Address &add
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Address &address);
 }
 
-Q_DECLARE_METATYPE(KContacts::Address)
-
 #endif

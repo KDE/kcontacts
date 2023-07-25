@@ -137,8 +137,4 @@ public:
 
 }
 
-Q_DECLARE_METATYPE(KContacts::AddressFormat)
-Q_DECLARE_METATYPE(KContacts::AddressFormatElement)
-Q_DECLARE_METATYPE(KContacts::AddressFormatRepository)
-
 #endif // KCONTACTS_ADDRESSFORMAT_H

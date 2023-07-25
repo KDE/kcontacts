@@ -258,6 +258,7 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber 
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, PhoneNumber &number);
 }
-Q_DECLARE_METATYPE(KContacts::PhoneNumber)
+
 Q_DECLARE_TYPEINFO(KContacts::PhoneNumber, Q_RELOCATABLE_TYPE);
+
 #endif

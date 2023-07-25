@@ -1201,7 +1201,4 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 }
 
-#define KCONTACTS_ADDRESSEE_METATYPE_DEFINED 1
-Q_DECLARE_METATYPE(KContacts::Addressee)
-
 #endif
