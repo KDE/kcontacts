@@ -63,5 +63,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Title &objec
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Title &object);
 }
-Q_DECLARE_TYPEINFO(KContacts::Title, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::Title, Q_RELOCATABLE_TYPE);
 #endif // TITLE_H

@@ -63,5 +63,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Role &object
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Role &object);
 }
-Q_DECLARE_TYPEINFO(KContacts::Role, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::Role, Q_RELOCATABLE_TYPE);
 #endif // ROLE_H

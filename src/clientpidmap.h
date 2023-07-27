@@ -63,5 +63,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ClientPidMap
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ClientPidMap &object);
 }
-Q_DECLARE_TYPEINFO(KContacts::ClientPidMap, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::ClientPidMap, Q_RELOCATABLE_TYPE);
 #endif // CLIENTPIDMAP_H

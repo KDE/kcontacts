@@ -123,5 +123,5 @@ KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Impp &object);
 }
 
 Q_DECLARE_METATYPE(KContacts::Impp)
-Q_DECLARE_TYPEINFO(KContacts::Impp, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::Impp, Q_RELOCATABLE_TYPE);
 #endif // IMPP_H

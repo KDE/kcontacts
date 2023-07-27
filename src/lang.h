@@ -64,5 +64,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Lang &object
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Lang &object);
 }
-Q_DECLARE_TYPEINFO(KContacts::Lang, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::Lang, Q_RELOCATABLE_TYPE);
 #endif // LANG_H

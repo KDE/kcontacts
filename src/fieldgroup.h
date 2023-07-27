@@ -65,5 +65,5 @@ KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const FieldGroup &
 
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, FieldGroup &object);
 }
-Q_DECLARE_TYPEINFO(KContacts::FieldGroup, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KContacts::FieldGroup, Q_RELOCATABLE_TYPE);
 #endif // FIELDGROUP_H
