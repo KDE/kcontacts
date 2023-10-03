@@ -8,8 +8,7 @@ platforms:
 portingAid: false
 deprecated: false
 libraries:
- - qmake: KContacts
-   cmake: "KF6::Contacts"
+ - cmake: "KF6::Contacts"
 cmakename: KF6Contacts
 
 group: Frameworks
