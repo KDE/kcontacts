@@ -45,14 +45,10 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KCONTACTS
 )
 
 ########### Find packages ###########
-find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Gui Quick)
+find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Gui)
 set_package_properties(Qt6Gui PROPERTIES
     TYPE REQUIRED
     PURPOSE "Basic library component"
-)
-set_package_properties(Qt6Quick PROPERTIES
-    TYPE OPTIONAL
-    PURPOSE "QtQuick plugin"
 )
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 
@@ -69,6 +65,11 @@ ecm_set_disabled_deprecation_versions(
 add_subdirectory(src)
 
 if(BUILD_TESTING)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Quick)
+    set_package_properties(Qt6Quick PROPERTIES
+        TYPE OPTIONAL
+        PURPOSE "QML integration test"
+    )
     add_subdirectory(autotests)
     add_subdirectory(tests)
 endif()
