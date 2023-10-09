@@ -542,28 +542,3 @@ msgstr "内密"
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
 msgstr "未知のタイプ"
-
-#~ msgid "Unknown Field"
-#~ msgstr "未知のフィールド"
-
-#~ msgid "All"
-#~ msgstr "すべて"
-
-#~ msgid "Frequent"
-#~ msgstr "よく使う"
-
-#~ msgctxt "street/postal"
-#~ msgid "Address"
-#~ msgstr "住所"
-
-#~ msgid "Email"
-#~ msgstr "メール"
-
-#~ msgid "Personal"
-#~ msgstr "個人的"
-
-#~ msgid "Custom"
-#~ msgstr "カスタム"
-
-#~ msgid "Undefined"
-#~ msgstr "未定義"
