@@ -111,7 +111,7 @@ AddressFormat
 AddressFormatRepository::formatForCountry(const QString &countryCode, AddressFormatScriptPreference scriptPref, AddressFormatPreference formatPref)
 {
     static const KConfig entry(addressFormatRc(), KConfig::SimpleConfig);
-    KConfigGroup group = entry.group(countryCode.toUtf8());
+    KConfigGroup group = entry.group(countryCode);
 
     AddressFormat format;
     auto fmt = AddressFormatPrivate::get(format);

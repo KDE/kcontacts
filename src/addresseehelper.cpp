@@ -61,7 +61,7 @@ void AddresseeHelper::initSettings()
     mPrefixes.insert(QStringLiteral("de"));
 
     KConfig _config(QStringLiteral("kabcrc"), KConfig::NoGlobals);
-    KConfigGroup config(&_config, "General");
+    KConfigGroup config(&_config, QStringLiteral("General"));
 
     addToSet(config.readEntry("Prefixes", QStringList()), mTitles);
     addToSet(config.readEntry("Inclusions", QStringList()), mPrefixes);
