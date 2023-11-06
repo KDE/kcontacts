@@ -20,6 +20,11 @@ namespace KContacts
 struct ParameterData {
     QString param;
     QStringList paramValues;
+
+    bool operator<(const ParameterData &other) const
+    {
+        return param < other.param;
+    }
 };
 
 class ParameterMap : public std::vector<ParameterData>
@@ -82,11 +87,6 @@ public:
         return map;
     }
 };
-
-inline bool operator<(const ParameterData &a, const ParameterData &b)
-{
-    return a.param < b.param;
-}
 
 inline bool operator==(const ParameterData &a, const ParameterData &b)
 {
