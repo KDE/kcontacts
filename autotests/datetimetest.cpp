@@ -7,6 +7,7 @@
 
 #include "datetimetest.h"
 #include <QTest>
+#include <QTimeZone>
 #include <vcardtool_p.h>
 
 DateTimeTest::DateTimeTest(QObject *parent)
@@ -27,7 +28,7 @@ void DateTimeTest::shouldParseDateTime()
     bool timeIsValid;
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20T12:33:30+0200"));
-    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::OffsetFromUTC, 2 * 3600);
+    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::fromSecondsAheadOfUtc(2 * 3600));
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
 
@@ -40,23 +41,23 @@ void DateTimeTest::shouldParseDateTime()
     QVERIFY(dt.isValid());
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20T12:33Z"));
-    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), Qt::UTC);
+    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), QTimeZone::UTC);
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20T12:33-0300"));
-    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), Qt::OffsetFromUTC, -3 * 3600);
+    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), QTimeZone::fromSecondsAheadOfUtc(-3 * 3600));
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20T12:33"), &timeIsValid);
-    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), Qt::LocalTime);
+    expected = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 0), QTimeZone::LocalTime);
     QCOMPARE(dt, expected);
     QVERIFY(timeIsValid);
     QVERIFY(dt.isValid());
 
     dt = VCardTool::parseDateTime(QStringLiteral("2016-01-20"), &timeIsValid);
-    expected = QDateTime(QDate(2016, 1, 20), QTime(), Qt::LocalTime);
+    expected = QDateTime(QDate(2016, 1, 20), QTime(), QTimeZone::LocalTime);
     QCOMPARE(dt, expected);
     QVERIFY(dt.isValid());
     QVERIFY(!timeIsValid);
@@ -86,37 +87,37 @@ void DateTimeTest::shouldCreateDateTime()
     QString str;
     QString expected;
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::UTC);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::UTC);
     str = VCardTool::createDateTime(dt, VCard::v4_0);
     expected = QStringLiteral("20160120T123330Z");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(), Qt::UTC);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(), QTimeZone::UTC);
     str = VCardTool::createDateTime(dt, VCard::v4_0);
     expected = QStringLiteral("20160120T000000Z");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::LocalTime);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::LocalTime);
     str = VCardTool::createDateTime(dt, VCard::v4_0);
     expected = QStringLiteral("20160120T123330");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::OffsetFromUTC, -2 * 3600);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::fromSecondsAheadOfUtc(-2 * 3600));
     str = VCardTool::createDateTime(dt, VCard::v4_0);
     expected = QStringLiteral("20160120T123330-0200");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::OffsetFromUTC, +2.5 * 3600);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::fromSecondsAheadOfUtc(+2.5 * 3600));
     str = VCardTool::createDateTime(dt, VCard::v4_0);
     expected = QStringLiteral("20160120T123330+0230");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), Qt::OffsetFromUTC, -2 * 3600);
+    dt = QDateTime(QDate(2016, 1, 20), QTime(12, 33, 30), QTimeZone::fromSecondsAheadOfUtc(-2 * 3600));
     str = VCardTool::createDateTime(dt, VCard::v3_0);
     expected = QStringLiteral("2016-01-20T12:33:30-02:00");
     QCOMPARE(str, expected);
 
-    dt = QDateTime(QDate(), QTime(12, 33, 30), Qt::OffsetFromUTC, -2 * 3600);
+    dt = QDateTime(QDate(), QTime(12, 33, 30), QTimeZone::fromSecondsAheadOfUtc(-2 * 3600));
     str = VCardTool::createDateTime(dt, VCard::v3_0);
     expected = QString();
     QCOMPARE(str, expected);

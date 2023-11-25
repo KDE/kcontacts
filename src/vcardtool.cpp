@@ -18,6 +18,7 @@
 #include "vcardtool_p.h"
 
 #include <QString>
+#include <QTimeZone>
 
 using namespace KContacts;
 
@@ -1205,8 +1206,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
     }
 
     QTime time;
-    Qt::TimeSpec spec = Qt::LocalTime;
-    int offsetSecs = 0;
+    QTimeZone tz = QTimeZone::LocalTime;
     if (posT >= 0) {
         QString timeString = str.mid(posT + 1);
         timeString.remove(QLatin1Char(':'));
@@ -1236,10 +1236,9 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
 
         if (tzPos >= 0) {
             if (zPos >= 0) {
-                spec = Qt::UTC;
+                tz = QTimeZone::UTC;
             } else {
-                spec = Qt::OffsetFromUTC;
-
+                int offsetSecs = 0;
                 const auto offsetString = QStringView(timeString).mid(tzPos + 1);
                 switch (offsetString.size()) {
                 case 2: // format: "hh"
@@ -1249,9 +1248,10 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
                     offsetSecs = offsetString.left(2).toInt() * 3600 + offsetString.mid(2, 2).toInt() * 60;
                     break;
                 }
-            }
-            if (minusPos >= 0) {
-                offsetSecs *= -1;
+                if (minusPos >= 0) {
+                    offsetSecs *= -1;
+                }
+                tz = QTimeZone::fromSecondsAheadOfUtc(offsetSecs);
             }
         }
     }
@@ -1259,7 +1259,7 @@ QDateTime VCardTool::parseDateTime(const QString &str, bool *timeValid)
         *timeValid = time.isValid();
     }
 
-    return QDateTime(date, time, spec, offsetSecs);
+    return QDateTime(date, time, tz);
 }
 
 QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime)
