@@ -18,6 +18,12 @@ target_sources(KF6Contacts PRIVATE
     addressformatparser.cpp
     addressformatscript.cpp
     addressformatter.cpp
+    addressbook.cpp
+    addressbook.h
+    addressbookplugin.cpp
+    addressbookplugin.h
+    addressbookpluginloader.cpp
+    addressbookpluginloader.h
     address.h
     calendarurl.cpp
     calendarurl.h
@@ -136,6 +142,9 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Address
   AddressFormat
   Addressee
+  AddressBook
+  AddressBookPlugin
+  AddressBookPluginLoader
   AddresseeList
   CalendarUrl
   ContactGroup

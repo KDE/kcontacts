@@ -16,20 +16,20 @@
 
 namespace KContacts
 {
-KCONTACTS_EXPORT Q_NAMESPACE
+Q_NAMESPACE_EXPORT(KCONTACTS_EXPORT)
 
-    /** Address formatting styles.
-     *  @see KContacts::Address::formatted
-     *  @since 5.92
-     */
-    enum class AddressFormatStyle {
-        Postal, ///< Format used for addressing postal mail
-        MultiLineDomestic, ///< Multi-line format without country, for displaying
-        MultiLineInternational, ///< Multi-line format including the country, for displaying
-        SingleLineDomestic, ///< Single-line format without country, for displaying
-        SingleLineInternational, ///< Single-line format including the country, for displaying
-        GeoUriQuery, ///< Format used in geo: URI query expressions
-    };
+/** Address formatting styles.
+ *  @see KContacts::Address::formatted
+ *  @since 5.92
+ */
+enum class AddressFormatStyle {
+    Postal, ///< Format used for addressing postal mail
+    MultiLineDomestic, ///< Multi-line format without country, for displaying
+    MultiLineInternational, ///< Multi-line format including the country, for displaying
+    SingleLineDomestic, ///< Single-line format without country, for displaying
+    SingleLineInternational, ///< Single-line format including the country, for displaying
+    GeoUriQuery, ///< Format used in geo: URI query expressions
+};
 
 Q_ENUM_NS(AddressFormatStyle)
 
@@ -81,6 +81,16 @@ Q_ENUM_NS(AddressFormatScriptPreference)
  */
 enum class AddressFormatPreference { Generic, Business };
 Q_ENUM_NS(AddressFormatPreference)
+
+/**
+ * The address book's access mode, i.e. whether it can be written to or is read only.
+ * @since 6.0
+ */
+enum AccessMode {
+    ReadOnly,
+    ReadWrite,
+};
+Q_ENUM_NS(AccessMode)
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KContacts::AddressFormatFields)
