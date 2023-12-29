@@ -18,7 +18,7 @@
  */
 namespace KContacts
 {
-KCONTACTS_EXPORT Q_NAMESPACE
+Q_NAMESPACE_EXPORT(KCONTACTS_EXPORT)
 
     /*!
      * Address formatting styles.
@@ -111,6 +111,16 @@ Q_ENUM_NS(AddressFormatScriptPreference)
  */
 enum class AddressFormatPreference { Generic, Business };
 Q_ENUM_NS(AddressFormatPreference)
+
+/**
+ * The address book's access mode, i.e. whether it can be written to or is read only.
+ * @since 6.0
+ */
+enum AccessMode {
+    ReadOnly,
+    ReadWrite,
+};
+Q_ENUM_NS(AccessMode)
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KContacts::AddressFormatFields)
