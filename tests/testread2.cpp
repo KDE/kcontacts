@@ -10,6 +10,8 @@
 #include <converter/kcontacts/vcardconverter.h>
 #include <kcontacts/addressee.h>
 
+#include <stdlib.h>
+
 using namespace KContacts;
 
 int main()
@@ -47,4 +49,5 @@ int main()
             // qDebug()<<"\t\t"<< (*itr1).fullEmail() << "VS." << (*itr2).fullEmail();
         }
     }
+    return EXIT_SUCCESS;
 }
