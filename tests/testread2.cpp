@@ -14,7 +14,7 @@
 
 using namespace KContacts;
 
-int main()
+int main(int, char**)
 {
     Addressee::List l = vCardsAsAddresseeList();
     QByteArray vcards = vCardsAsText();
