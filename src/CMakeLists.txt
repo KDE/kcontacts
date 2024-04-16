@@ -1,6 +1,8 @@
 add_library(KF6Contacts)
 add_library(KF6::Contacts ALIAS KF6Contacts)
 
+qt_extract_metatypes(KF6Contacts)
+
 set_target_properties(KF6Contacts PROPERTIES
     VERSION     ${KCONTACTS_VERSION}
     SOVERSION   ${KCONTACTS_SOVERSION}
@@ -166,6 +168,7 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   REQUIRED_HEADERS KContacts_HEADERS
 )
 
+add_subdirectory(qml)
 add_subdirectory(converter)
 
 install(FILES
