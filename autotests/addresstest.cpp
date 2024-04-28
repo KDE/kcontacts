@@ -17,7 +17,7 @@
 QTEST_MAIN(AddressTest)
 void initLocale()
 {
-    qputenv("LANG", "it_CH");
+    qputenv("LANG", "it_CH.UTF-8");
     QLocale::setDefault(QLocale(QLocale::Italian, QLocale::Switzerland));
 }
 
@@ -159,9 +159,6 @@ void AddressTest::formatTest()
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                            "12345 Lummerstadt\n\nGERMANIA"));
 
-#ifdef Q_OS_FREEBSD
-        QEXPECT_FAIL("", "broken country detection on KDE FreeBSD CI since 2024-03-30", Abort);
-#endif
         QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Jim Knopf")), result);
     }
 
