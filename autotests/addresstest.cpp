@@ -17,7 +17,7 @@
 QTEST_MAIN(AddressTest)
 void initLocale()
 {
-    qputenv("LANG", "it_CH");
+    qputenv("LANG", "it_CH.UTF-8");
     QLocale::setDefault(QLocale(QLocale::Italian, QLocale::Switzerland));
 }
 
@@ -159,9 +159,6 @@ void AddressTest::formatTest()
             QStringLiteral("Jim Knopf\nLummerlandstr. 1\n"
                            "12345 Lummerstadt\n\nGERMANIA"));
 
-#ifdef Q_OS_FREEBSD
-        QEXPECT_FAIL("", "broken country detection on KDE FreeBSD CI since 2024-03-30", Abort);
-#endif
         QCOMPARE(address.formatted(KContacts::AddressFormatStyle::Postal, QStringLiteral("Jim Knopf")), result);
 #if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 92)
         QCOMPARE(address.formattedAddress(QStringLiteral("Jim Knopf")), result);
@@ -475,9 +472,6 @@ void AddressTest::countryToISOTest()
     using namespace KContacts;
 #if KCONTACTS_BUILD_DEPRECATED_SINCE(5, 89)
     QCOMPARE(Address::countryToISO(QStringLiteral("France")), QLatin1String("fr"));
-#ifdef Q_OS_FREEBSD
-    QEXPECT_FAIL("", "broken country detection on KDE FreeBSD CI since 2024-03-30", Abort);
-#endif
     QCOMPARE(Address::countryToISO(QStringLiteral("Frankreich")), QLatin1String("fr"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Germany")), QLatin1String("de"));
     QCOMPARE(Address::countryToISO(QStringLiteral("Österreich")), QLatin1String("at"));
