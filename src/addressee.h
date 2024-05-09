@@ -101,7 +101,7 @@ class KCONTACTS_EXPORT Addressee
     Q_PROPERTY(QString preferredEmail READ preferredEmail)
     Q_PROPERTY(QList<KContacts::Email> emails READ emailList WRITE setEmailList)
     Q_PROPERTY(QList<KContacts::PhoneNumber> phoneNumbers READ phoneNumbers WRITE setPhoneNumbers)
-    Q_PROPERTY(QList<KContacts::Address> addresses READ addresses)
+    Q_PROPERTY(QList<KContacts::Address> addresses READ addresses WRITE setAddresses)
     Q_PROPERTY(QStringList categories READ categories WRITE setCategories)
     Q_PROPERTY(QStringList customs READ customs)
     Q_PROPERTY(bool changed READ changed WRITE setChanged)

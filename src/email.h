@@ -43,7 +43,7 @@ public:
      */
     Email();
     Email(const Email &other);
-    Email(const QString &mail);
+    Q_INVOKABLE Email(const QString &mail);
 
     ~Email();
 

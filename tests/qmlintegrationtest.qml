@@ -7,13 +7,27 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import org.kde.i18n.localeData 1.0
-import org.kde.contacts 1.0
-import org.kde.contacts.test 1.0
+import org.kde.contacts
 
 ApplicationWindow {
+    id: root
+
     visible: true
     width: 480
     height: 720
+
+    property address testAddress: ({
+        country: "DE",
+        region: "BE",
+        locality: "Berlin",
+        postalCode: "10969",
+        street: "Prinzenstraße 85 F"
+    })
+
+    property addressee testAddressee: ({
+        addresses: [ root.testAddress ],
+        emails: ["one@test.local", "two@test.local"]
+    })
 
     ColumnLayout {
         ComboBox {
@@ -30,7 +44,7 @@ ApplicationWindow {
         }
 
         Label {
-            text: TestData.address.formatted(styleCombo.currentValue, "Dr. Konqi", "KDE e.V.")
+            text: root.testAddress.formatted(styleCombo.currentValue, "Dr. Konqi", "KDE e.V.")
         }
 
         ComboBox {
@@ -78,10 +92,10 @@ ApplicationWindow {
         }
 
         Label {
-            text: "Emails: " + TestData.addressee.emails.map(x => x.email).join(", ")
+            text: "Emails: " + root.testAddressee.emails.map(x => x.email).join(", ")
         }
         Label {
-            text: "Address 1: " + TestData.addressee.addresses[0].formattedAddress
+            text: "Address 1: " + root.testAddressee.addresses[0].formattedAddress
         }
     }
 }
