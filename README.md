@@ -12,4 +12,4 @@ vCard standard (RFC 2425 / RFC 2426).
 - vCard input/output (see KContacts::VCardConverter).
 - Contact group management (see KContacts::ContactGroup).
 - Locale-aware address formatting (see KContacts::Address).
-- Localized country name to ISO 3166-1 alpha 2 code mapping and vice verca (see KContacts::Address).
+- Address formatting metadata for 190+ countries (see KContacts::AddressFormat).
