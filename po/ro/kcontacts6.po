@@ -583,7 +583,7 @@ msgstr "Tip necunoscut"
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "sergiu@ase.md"
+#~ msgstr "sergiu@cip.md"
 
 #~ msgid "Unable to load resource '%1'"
 #~ msgstr "Imposibil de încărcat resursa „%1”"
