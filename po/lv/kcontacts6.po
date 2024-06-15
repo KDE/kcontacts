@@ -5,19 +5,20 @@
 # Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2007, 2008, 2010.
 # Maris Nartiss <maris.kde@gmail.com>, 2008.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-31 02:16+0000\n"
-"PO-Revision-Date: 2010-01-01 14:26+0200\n"
-"Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-05-28 15:42+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -59,7 +60,7 @@ msgstr "Valsts"
 #: address.cpp:336
 #, kde-format
 msgid "Delivery Label"
-msgstr "Piegādes uzlīme"
+msgstr "Piegādes etiķete"
 
 #: address.cpp:354
 #, kde-format
@@ -136,7 +137,7 @@ msgstr "Vārds"
 #: addressee.cpp:731
 #, kde-format
 msgid "Additional Names"
-msgstr "Papildus vārdi"
+msgstr "Papildu vārdi"
 
 #: addressee.cpp:751
 #, kde-format
@@ -241,7 +242,7 @@ msgstr "Darba tālrunis"
 #: addressee.cpp:947
 #, kde-format
 msgid "Mobile Phone"
-msgstr "Mobīlais tālrunis"
+msgstr "Mobilais tālrunis"
 
 #: addressee.cpp:952 phonenumber.cpp:218
 #, kde-format
@@ -256,7 +257,7 @@ msgstr "Darba fakss"
 #: addressee.cpp:962
 #, kde-format
 msgid "Car Phone"
-msgstr "Automašīnas tālrunis"
+msgstr "Automobiļa tālrunis"
 
 #: addressee.cpp:967 phonenumber.cpp:194
 #, kde-format
@@ -266,7 +267,7 @@ msgstr "ISDN"
 #: addressee.cpp:972 phonenumber.cpp:198
 #, kde-format
 msgid "Pager"
-msgstr "Peidžers"
+msgstr "Peidžeris"
 
 #: addressee.cpp:977
 #, kde-format
@@ -343,7 +344,7 @@ msgstr "Drošības klase"
 #: addressee.cpp:1356
 #, kde-format
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logotips"
 
 #: addressee.cpp:1376
 #, kde-format
@@ -378,7 +379,7 @@ msgstr "Kundze"
 #: addresseehelper.cpp:50
 #, kde-format
 msgid "Ms."
-msgstr "Misiz"
+msgstr "Misis"
 
 #: addresseehelper.cpp:51
 #, kde-format
@@ -408,7 +409,7 @@ msgstr "Jun."
 #: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
-msgstr "Sers"
+msgstr "Vec."
 
 #: key.cpp:198
 #, kde-format
@@ -438,7 +439,7 @@ msgstr "Nezināma tipa"
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
-msgstr ""
+msgstr "Tālruņa numurs"
 
 #: phonenumber.cpp:172
 #, kde-format
@@ -477,7 +478,7 @@ msgstr "Fakss"
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
-msgstr "Mobīlais"
+msgstr "Mobilais"
 
 #: phonenumber.cpp:186
 #, kde-format
@@ -493,13 +494,13 @@ msgstr "Pastkastīte"
 #: phonenumber.cpp:190
 #, kde-format
 msgid "Modem"
-msgstr "Modēms"
+msgstr "Modems"
 
 #: phonenumber.cpp:192
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
-msgstr "Mašīna"
+msgstr "Automobilis"
 
 #: phonenumber.cpp:196
 #, kde-format
@@ -515,12 +516,12 @@ msgstr "Cits"
 #: phonenumber.cpp:213
 #, kde-format
 msgid "Preferred Number"
-msgstr "Vēlamais numurs"
+msgstr "Priekšrokas numurs"
 
 #: phonenumber.cpp:223
 #, kde-format
 msgid "Work Fax"
-msgstr "Fakss darbā"
+msgstr "Darba fakss"
 
 #: secrecy.cpp:98
 #, kde-format
