@@ -36,6 +36,8 @@ set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprec
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
+option(USE_QML "Build the QML plugin" ON)
+
 set(KCONTACTS_LIB_VERSION ${KF_VERSION})
 
 set(kcontacts_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/kcontacts_version.h")
@@ -51,6 +53,9 @@ set_package_properties(Qt6Gui PROPERTIES
     TYPE REQUIRED
     PURPOSE "Basic library component"
 )
+if (USE_QML)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml)
+endif()
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
 
 ########### Targets ###########

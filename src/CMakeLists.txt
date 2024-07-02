@@ -168,7 +168,9 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   REQUIRED_HEADERS KContacts_HEADERS
 )
 
-add_subdirectory(qml)
+if (USE_QML)
+  add_subdirectory(qml)
+endif ()
 add_subdirectory(converter)
 
 install(FILES
