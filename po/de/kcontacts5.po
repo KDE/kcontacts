@@ -4,7 +4,7 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2010, 2013, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: kabc\n"
+"Project-Id-Version: kcontacts6\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
 "PO-Revision-Date: 2021-05-14 13:24+0200\n"
