@@ -86,9 +86,35 @@ target_sources(KF6Contacts PRIVATE
     vcardtool.cpp
     vcardtool_p.h
 
+    kcontacts.qrc
+)
 
-  kcontacts.qrc
-  improtocols/improtocols.qrc
+qt6_add_resources(KF6Contacts "improtocols"
+    PREFIX "/org.kde.kcontacts/improtocols/"
+    BASE "improtocols"
+    OUTPUT_TARGETS _out_targets
+    FILES
+        improtocols/aim.desktop
+        improtocols/facebook.desktop
+        improtocols/gg.desktop
+        improtocols/googletalk.desktop
+        improtocols/groupwise.desktop
+        improtocols/icq.desktop
+        improtocols/irc.desktop
+        improtocols/meanwhile.desktop
+        improtocols/msn.desktop
+        improtocols/qq.desktop
+        improtocols/sip.desktop
+        improtocols/skype.desktop
+        improtocols/sms.desktop
+        improtocols/twitter.desktop
+        improtocols/xmpp.desktop
+        improtocols/ymsgr.desktop
+        improtocols/matrix.desktop
+        improtocols/telegram.desktop
+        improtocols/rocketchat.desktop
+        improtocols/signal.desktop
+        improtocols/threema.desktop
 )
 
 ecm_qt_declare_logging_category(KF6Contacts
@@ -131,7 +157,7 @@ PRIVATE
     KF6::Codecs # for the vcard parser
 )
 
-install(TARGETS KF6Contacts EXPORT KF6ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF6Contacts ${_out_targets} EXPORT KF6ContactsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ecm_generate_headers(KContacts_CamelCase_HEADERS
   HEADER_NAMES
