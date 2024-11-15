@@ -64,8 +64,8 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kcontacts6\")
 ki18n_install(po)
 
 ecm_set_disabled_deprecation_versions(
-    QT 6.5
-    KF 5.240
+    QT 6.8.0
+    KF 6.8.0
 )
 
 add_subdirectory(src)
