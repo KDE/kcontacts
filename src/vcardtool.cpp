@@ -308,9 +308,6 @@ void VCardTool::processCustoms(const QStringList &customs, VCard::Version versio
                 identifier = QStringLiteral("X-MEANWHILE");
             } else if (identifier == QLatin1String("X-messaging/irc-All")) {
                 identifier = QStringLiteral("X-IRC"); // Not defined by rfc but need for fixing #300869
-            } else if (identifier == QLatin1String("X-messaging/googletalk-All")) {
-                // Not defined by rfc but need for fixing #300869
-                identifier = QStringLiteral("X-GTALK");
             } else if (identifier == QLatin1String("X-messaging/twitter-All")) {
                 identifier = QStringLiteral("X-TWITTER");
             }
@@ -1153,8 +1150,6 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                         ident = QStringLiteral("X-messaging/meanwhile-All");
                     } else if (identifier == QLatin1String("x-irc")) {
                         ident = QStringLiteral("X-messaging/irc-All");
-                    } else if (identifier == QLatin1String("x-gtalk")) {
-                        ident = QStringLiteral("X-messaging/googletalk-All");
                     } else if (identifier == QLatin1String("x-twitter")) {
                         ident = QStringLiteral("X-messaging/twitter-All");
                     }
