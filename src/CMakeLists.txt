@@ -97,7 +97,6 @@ qt6_add_resources(KF6Contacts "improtocols"
         improtocols/aim.desktop
         improtocols/facebook.desktop
         improtocols/gg.desktop
-        improtocols/googletalk.desktop
         improtocols/groupwise.desktop
         improtocols/icq.desktop
         improtocols/irc.desktop

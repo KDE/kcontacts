@@ -133,5 +133,4 @@ void KContacts::adaptIMAttributes(QByteArray &data)
     data.replace("X-messaging/sms-All", ("X-SMS"));
     data.replace("X-messaging/meanwhile-All", ("X-MEANWHILE"));
     data.replace("X-messaging/irc-All", ("X-IRC"));
-    data.replace("X-messaging/googletalk-All", ("X-GTALK"));
 }
