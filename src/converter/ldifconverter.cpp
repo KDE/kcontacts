@@ -39,17 +39,21 @@ using namespace KContacts;
 
 namespace KContacts
 {
-/**
-  @internal
+/*!
+  \internal
 
-  Evaluates @p fieldname and sets the @p value at the addressee or the address
+  Evaluates \a fieldname and sets the \a value at the addressee or the address
   objects when appropriate.
 
-  @param a The addressee to store information into
-  @param homeAddr The home address to store respective information into
-  @param workAddr The work address to store respective information into
-  @param fieldname LDIF field name to evaluate
-  @param value The value of the field addressed by @p fieldname
+  \a a The addressee to store information into
+
+  \a homeAddr The home address to store respective information into
+
+  \a workAddr The work address to store respective information into
+
+  \a fieldname LDIF field name to evaluate
+
+  \a value The value of the field addressed by \a fieldname
 */
 void evaluatePair(Addressee &a,
                   Address &homeAddr,
