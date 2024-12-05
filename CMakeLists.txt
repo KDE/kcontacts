@@ -25,6 +25,7 @@ include(ECMGenerateExportHeader)
 include(ECMGenerateHeaders)
 include(ECMGenerateExportHeader)
 include(ECMDeprecationSettings)
+include(ECMGenerateQDoc)
 
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)

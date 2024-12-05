@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Role for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::Role
+ * \inheaderfile KContacts/Role
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Role for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT Role
 {
@@ -31,24 +36,46 @@ class KCONTACTS_EXPORT Role
     friend class ::RoleTest;
 
 public:
+    /*!
+     */
     Role();
+
     Role(const Role &other);
+
+    /*!
+     */
     Role(const QString &role);
 
     ~Role();
 
+    /*!
+     */
     typedef QList<Role> List;
 
+    /*!
+     */
     void setRole(const QString &role);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString role() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Role &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Role &other) const;
 
     Role &operator=(const Role &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -59,8 +86,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::Role
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Role &object);
 
+/*!
+ * \relates KContacts::Role
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Role &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::Role, Q_RELOCATABLE_TYPE);
