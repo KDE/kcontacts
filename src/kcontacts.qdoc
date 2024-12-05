@@ -1,0 +1,16 @@
+/*!
+    \module KContacts
+    \title KContacts C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent Contacts
+
+    \brief Support for vCard contacts.
+*/
+
+/*!
+    \qmlmodule org.kde.contacts
+    \title KContacts QML Types
+    \ingroup qmlmodules
+    \brief Support for vCard contacts.
+*/

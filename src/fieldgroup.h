@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a FieldGroup for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::FieldGroup
+ * \inheaderfile KContacts/FieldGroup
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a FieldGroup for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT FieldGroup
 {
@@ -31,27 +36,52 @@ class KCONTACTS_EXPORT FieldGroup
     friend class ::FieldGroupTest;
 
 public:
+    /*!
+     */
     FieldGroup();
+
     FieldGroup(const FieldGroup &other);
+
+    /*!
+     */
     FieldGroup(const QString &fieldGroupName);
 
     ~FieldGroup();
 
     typedef QList<FieldGroup> List;
 
+    /*!
+     */
     void setFieldGroupName(const QString &fieldGroup);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString fieldGroupName() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     void setValue(const QString &value);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString value() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const FieldGroup &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const FieldGroup &other) const;
 
     FieldGroup &operator=(const FieldGroup &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -61,8 +91,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::FieldGroup
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const FieldGroup &object);
 
+/*!
+ * \relates KContacts::FieldGroup
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, FieldGroup &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::FieldGroup, Q_RELOCATABLE_TYPE);

@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a ClientPidMap for a contact.
- *  @since 5.4
+/*!
+ * \class KContacts::ClientPidMap
+ * \inheaderfile KContacts/ClientPidMap
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a ClientPidMap for a contact.
+ * \since 5.4
  */
 class KCONTACTS_EXPORT ClientPidMap
 {
@@ -31,24 +36,46 @@ class KCONTACTS_EXPORT ClientPidMap
     friend class ::ClientPidMapTest;
 
 public:
+    /*!
+     */
     ClientPidMap();
+
     ClientPidMap(const ClientPidMap &other);
+
+    /*!
+     */
     ClientPidMap(const QString &clientpidmap);
 
     ~ClientPidMap();
 
+    /*!
+     */
     typedef QList<ClientPidMap> List;
 
+    /*!
+     */
     void setClientPidMap(const QString &clientpidmap);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString clientPidMap() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const ClientPidMap &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const ClientPidMap &other) const;
 
     ClientPidMap &operator=(const ClientPidMap &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -59,8 +86,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::ClientPidMap
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ClientPidMap &object);
 
+/*!
+ * \relates KContacts::ClientPidMap
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ClientPidMap &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::ClientPidMap, Q_RELOCATABLE_TYPE);

@@ -16,68 +16,76 @@
 
 namespace KContacts
 {
-/**
-  @brief Utility function for implementing drag&drop for vCards
+/*!
+  \namespace KContacts::VCardDrag
+  \inheaderfile KContacts/VCardDrag
+  \inmodule KContacts
+
+  \brief Utility function for implementing drag&drop for vCards.
 
   See the Qt drag'n'drop documentation.
 
-  @since 4.5
+  \since 4.5
 */
 namespace VCardDrag
 {
-/**
+/*!
   Adds the vCard representation as data of the drag object.
 
-  @param md the object to set the data on
-  @param content the vCard data to set
+  \a md the object to set the data on
 
-  @return Always @c true
+  \a content the vCard data to set
+
+  Always returns true
 */
 KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const QByteArray &content);
 
-/**
+/*!
   Adds the vCard representation as data of the drag object.
 
-  @param md the object to set the data on
-  @param contacts list of Addressee objects to serialize to vCard
+  \a md the object to set the data on
 
-  @return @c true if serializing of the given list worked, otherwise @c false
+  \a contacts list of Addressee objects to serialize to vCard
 
-  @see VCardConverter::createVCards()
+  Returns \c true if serializing of the given list worked, otherwise \c false
+
+  \sa VCardConverter::createVCards()
 */
 KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const KContacts::Addressee::List &contacts);
 
-/**
+/*!
   Returns if drag&drop object can be decoded to vCard.
 
-  @param md the object to check for vCard data
+  \a md the object to check for vCard data
 
-  @return @c true if the given data object contains a vCard MIME type, otherwise @c false
+  Returns \c true if the given data object contains a vCard MIME type, otherwise \c false
 */
 KCONTACTS_EXPORT bool canDecode(const QMimeData *md);
 
-/**
-  Decodes the drag&drop object to vCard component @p content.
+/*!
+  Decodes the drag&drop object to vCard component \a content.
 
-  @param md the object to check for vCard data
-  @param content where to put the vCard data from @p md
+  \a md the object to check for vCard data
 
-  @return @c true if there was data for the vCard MIME type, otherwise @c false
+  \a content where to put the vCard data from \a md
 
-  @see canDecode()
+  Returns \c true if there was data for the vCard MIME type, otherwise \c false
+
+  \sa canDecode()
 */
 KCONTACTS_EXPORT bool fromMimeData(const QMimeData *md, QByteArray &content);
 
-/**
-  Decodes the MIME data @p md and puts the resulting vCard into @p contacts.
+/*!
+  Decodes the MIME data \a md and puts the resulting vCard into \a contacts.
 
-  @param md the object to check for vCard data
-  @param contacts where to put the parsed vCards from @p md
+  \a md the object to check for vCard data
 
-  @return @c true if there was data for the vCard MIME type and it could be parsed successfully,
-          otherwise @c false
+  \a contacts where to put the parsed vCards from @p md
 
-  @see canDecode()
+  Returns \c true if there was data for the vCard MIME type and it could be parsed successfully,
+          otherwise \c false
+
+  \sa canDecode()
 */
 KCONTACTS_EXPORT bool fromMimeData(const QMimeData *md, KContacts::Addressee::List &contacts);
 }

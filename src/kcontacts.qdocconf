@@ -1,0 +1,29 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KContacts
+description = Support for vCard contacts
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+outputformats = HTML
+
+depends += \
+    kde \
+    qtcore
+
+qhp.projects            = KContacts
+
+qhp.KContacts.file                = kcontacts.qhp
+qhp.KContacts.namespace           = org.kde.kcontacts.$QT_VERSION_TAG
+qhp.KContacts.virtualFolder       = kcontacts
+qhp.KContacts.indexTitle          = KContacts
+qhp.KContacts.indexRoot           =
+
+qhp.KContacts.subprojects         = classes
+qhp.KContacts.subprojects.classes.title = C++ Classes
+qhp.KContacts.subprojects.classes.indexTitle = KContacts C++ Classes
+qhp.KContacts.subprojects.classes.selectors = class fake:headerfile
+qhp.KContacts.subprojects.classes.sortPages = true

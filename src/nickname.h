@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a NickName for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::NickName
+ * \inheaderfile KContacts/NickName
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a NickName for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT NickName
 {
@@ -31,24 +36,46 @@ class KCONTACTS_EXPORT NickName
     friend class ::NickNameTest;
 
 public:
+    /*!
+     */
     NickName();
+
     NickName(const NickName &other);
+
+    /*!
+     */
     NickName(const QString &nickname);
 
     ~NickName();
 
+    /*!
+     */
     typedef QList<NickName> List;
 
+    /*!
+     */
     void setNickName(const QString &nickname);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString nickname() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const NickName &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const NickName &other) const;
 
     NickName &operator=(const NickName &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -59,8 +86,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::NickName
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const NickName &object);
 
+/*!
+ * \relates KContacts::NickName
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, NickName &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::NickName, Q_RELOCATABLE_TYPE);
