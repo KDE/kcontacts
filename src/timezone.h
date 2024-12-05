@@ -14,8 +14,12 @@
 
 namespace KContacts
 {
-/**
- * @short Time zone information.
+/*!
+ * \class KContacts::TimeZone
+ * \inheaderfile KContacts/TimeZone
+ * \inmodule KContacts
+ *
+ * \brief Time zone information.
  *
  * This class stores information about a time zone.
  */
@@ -25,50 +29,49 @@ class KCONTACTS_EXPORT TimeZone
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, TimeZone &);
 
 public:
-    /**
+    /*!
      * Construct invalid time zone.
      */
     TimeZone();
 
-    /**
+    /*!
      * Construct time zone.
      *
-     * @param offset Offset in minutes relative to UTC.
+     * \a offset Offset in minutes relative to UTC.
      */
     TimeZone(int offset);
 
-    /**
-     * Copy constructor.
-     */
     TimeZone(const TimeZone &other);
 
-    /**
-     * Destroys the time zone.
-     */
     ~TimeZone();
 
-    /**
+    /*!
      * Set time zone offset relative to UTC.
      *
-     * @param offset Offset in minutes.
+     * \a offset Offset in minutes.
      */
     void setOffset(int offset);
 
-    /**
+    /*!
      * Return offset in minutes relative to UTC.
      */
     Q_REQUIRED_RESULT int offset() const;
 
-    /**
+    /*!
      * Return, if this time zone object is valid.
      */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const TimeZone &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const TimeZone &other) const;
     TimeZone &operator=(const TimeZone &other);
 
-    /**
+    /*!
      * Return string representation of time zone offset.
      */
     Q_REQUIRED_RESULT QString toString() const;
@@ -78,13 +81,17 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-/**
- * Serializes the @p timezone object into the @p stream.
+/*!
+ * \relates KContacts::TimeZone
+ *
+ * Serializes the \a timeZone object into the \a stream.
  */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const TimeZone &timeZone);
 
-/**
- * Initializes the @p timezone object from the @p stream.
+/*!
+ * \relates KContacts::TimeZone
+ *
+ * Initializes the \a timeZone object from the \a stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, TimeZone &timeZone);
 }

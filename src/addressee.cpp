@@ -2621,7 +2621,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
 
 bool matchBinaryPattern(int value, int pattern)
 {
-    /**
+    /*
       We want to match all telephonnumbers/addresses which have the bits in the
       pattern set. More are allowed.
       if pattern == 0 we have a special handling, then we want only those with

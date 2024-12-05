@@ -44,7 +44,7 @@ public:
         });
     }
 
-    /**
+    /*!
      * Inserts @p newdata and keeps the vector sorted, the latter needs to
      * be sorted for comparisons.
      */

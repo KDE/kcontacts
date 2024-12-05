@@ -16,7 +16,10 @@ namespace KContacts
 class Address;
 class AddressFormat;
 
-/** Apply address formatting rules for a given address. */
+/*!
+ * Apply address formatting rules for a given address.
+ * \internal
+ */
 namespace AddressFormatter
 {
 QString format(const Address &address, const QString &name, const QString &organization, const AddressFormat &format, AddressFormatStyle style);

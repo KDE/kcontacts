@@ -13,9 +13,6 @@
 namespace KContacts
 {
 
-/** Parsing functions for address format data.
- *  @internal
- */
 namespace AddressFormatParser
 {
 AddressFormatField parseField(QChar c);

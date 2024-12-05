@@ -22,8 +22,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Resource Locator
- *  @since 5.0
+/*!
+ * \class KContacts::ResourceLocatorUrl
+ * \inheaderfile KContacts/ResourceLocatorUrl
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Resource Locator.
+ * \since 5.0
  */
 class KCONTACTS_EXPORT ResourceLocatorUrl
 {
@@ -33,72 +38,115 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
     friend class ::ResourceLocatorUrlTest;
 
     Q_GADGET
+
+    /*!
+     * \property KContacts::ResourceLocatorUrl::url
+     */
     Q_PROPERTY(QUrl url READ url WRITE setUrl)
+
+    /*!
+     * \property KContacts::ResourceLocatorUrl::isValid
+     */
     Q_PROPERTY(bool isValid READ isValid)
+
+    /*!
+     * \property KContacts::ResourceLocatorUrl::type
+     */
     Q_PROPERTY(Type type READ type WRITE setType)
+
+    /*!
+     * \property KContacts::ResourceLocatorUrl::isPreferred
+     */
     Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
 
 public:
+    /*!
+     */
     ResourceLocatorUrl();
+
     ResourceLocatorUrl(const ResourceLocatorUrl &other);
 
     ~ResourceLocatorUrl();
 
+    /*!
+     */
     typedef QList<ResourceLocatorUrl> List;
 
-    /** URL types.
-     *  @since 5.12
-     *  @see Type
+    /*!
+     * URL types.
+     * \since 5.12
+     *
+     * \value Unknown No or unknown URL type is set
+     * \value Home Personal website
+     * \value Work Work website
+     * \value Profile Profile website
+     * \value[since 6.0] Ftp Ftp website
+     * \value[since 6.0] Reservation Reservation website
+     * \value[since 6.0] AppInstallPage Application installation website
+     * \value Other Other website
      */
     enum TypeFlag {
-        Unknown = 0, /**< No or unknown URL type is set. */
-        Home = 1, /**< Personal website. */
-        Work = 2, /**< Work website. */
-        Profile = 4, /**< Profile website. */
-        Ftp = 8, /**< Ftp website. @since 6.0 */
-        Reservation = 16, /**< Reservation website. @since 6.0 */
-        AppInstallPage = 32, /**< Application installation website. @sine 6.0 */
-        Other = 64, /**< Other websie. */
+        Unknown = 0,
+        Home = 1,
+        Work = 2,
+        Profile = 4,
+        Ftp = 8,
+        Reservation = 16,
+        AppInstallPage = 32,
+        Other = 64,
     };
 
-    /**
-     * Stores a combination of #TypeFlag values.
-     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     void setUrl(const QUrl &url);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QUrl url() const;
 
-    /**
+    /*!
      * Returns the type of the URL.
-     * @since 5.12
+     * \since 5.12
      */
     Type type() const;
-    /**
+
+    /*!
      * Sets the URL type.
-     * @since 5.12
+     * \since 5.12
      */
     void setType(Type type);
 
-    /**
+    /*!
      * Returns whether this is the preferred website.
-     * @since 5.12
+     * \since 5.12
      */
     bool isPreferred() const;
-    /**
+
+    /*!
      * Sets that this is the preferred website.
-     * @since 5.12
+     * \since 5.12
      */
     void setPreferred(bool preferred);
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const ResourceLocatorUrl &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const ResourceLocatorUrl &other) const;
 
     ResourceLocatorUrl &operator=(const ResourceLocatorUrl &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -112,8 +160,14 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(ResourceLocatorUrl::Type)
 
+/*!
+ * \relates KContacts::ResourceLocatorUrl
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const ResourceLocatorUrl &object);
 
+/*!
+ * \relates KContacts::ResourceLocatorUrl
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, ResourceLocatorUrl &object);
 }
 

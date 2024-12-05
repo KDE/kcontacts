@@ -18,8 +18,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Note for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::Note
+ * \inheaderfile KContacts/Note
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Note for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT Note
 {
@@ -28,24 +33,46 @@ class KCONTACTS_EXPORT Note
     friend class VCardTool;
 
 public:
+    /*!
+     */
     Note();
+
     Note(const Note &other);
+
+    /*!
+     */
     Note(const QString &note);
 
     ~Note();
 
+    /*!
+     */
     typedef QList<Note> List;
 
+    /*!
+     */
     void setNote(const QString &note);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString note() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Note &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Note &other) const;
 
     Note &operator=(const Note &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -55,8 +82,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::Note
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Note &object);
 
+/*!
+ * \relates KContacts::Note
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Note &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::Note, Q_RELOCATABLE_TYPE);

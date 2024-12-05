@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Title for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::Title
+ * \inheaderfile KContacts/Title
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Title for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT Title
 {
@@ -31,24 +36,46 @@ class KCONTACTS_EXPORT Title
     friend class ::TitleTest;
 
 public:
+    /*!
+     */
     Title();
+
     Title(const Title &other);
+
+    /*!
+     */
     Title(const QString &title);
 
     ~Title();
 
+    /*!
+     */
     typedef QList<Title> List;
 
+    /*!
+     */
     void setTitle(const QString &title);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString title() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Title &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Title &other) const;
 
     Title &operator=(const Title &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -59,8 +86,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::Title
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Title &object);
 
+/*!
+ * \relates KContacts::Title
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Title &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::Title, Q_RELOCATABLE_TYPE);

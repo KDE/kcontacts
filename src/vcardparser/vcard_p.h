@@ -55,43 +55,43 @@ public:
 
     VCard &operator=(const VCard &card);
 
-    /**
+    /*!
      * Removes all lines from the vCard.
      */
     void clear();
 
-    /**
+    /*!
      * Returns a list of all identifiers that exists in the vCard.
      */
     Q_REQUIRED_RESULT QStringList identifiers() const;
 
-    /**
+    /*!
      * Adds a VCardLine to the VCard
      */
     void addLine(const VCardLine &line);
 
-    /**
+    /*!
      * Returns all lines of the vcard with a special identifier.
      */
     Q_REQUIRED_RESULT VCardLine::List lines(const QString &identifier) const;
 
-    /**
+    /*!
      * Returns only the first line of the vcard with a special identifier.
      */
     Q_REQUIRED_RESULT VCardLine line(const QString &identifier) const;
 
-    /**
+    /*!
      * Set the version of the vCard.
      */
     void setVersion(Version version);
 
-    /**
+    /*!
      * Returns the version of this vCard.
      */
     Q_REQUIRED_RESULT Version version() const;
 
 private:
-    /**
+    /*!
      * A container of LineData, sorted by identifier.
      */
     LineMap mLineMap;

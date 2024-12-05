@@ -20,35 +20,38 @@ namespace KContacts
 {
 class ContactGroup;
 
-/**
- * Static methods for converting ContactGroup to XML format and vice versa.
+/*!
+ * \namespace KContacts::ContactGroupTool
+ * \inheaderfile KContacts/ContactGroupTool
+ * \inmodule KContacts
  *
- * @author Kevin Krammer <kevin.krammer@gmx.at>
- * @since 4.3
+ * \brief Static methods for converting ContactGroup to XML format and vice versa.
+ *
+ * \since 4.3
  */
 namespace ContactGroupTool
 {
-/**
- * Converts XML data coming from a @p device into a contact @p group.
- * If an error occurs, @c false is returned and @p errorMessage is set.
+/*!
+ * Converts XML data coming from a \a device into a contact \a group.
+ * If an error occurs, \c false is returned and \a errorMessage is set.
  */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group, QString *errorMessage = nullptr);
 
-/**
- * Converts a contact @p group into XML data and writes them to a @p device.
- * If an error occurs, @c false is returned and @p errorMessage is set.
+/*!
+ * Converts a contact \a group into XML data and writes them to a \a device.
+ * If an error occurs, \c false is returned and \a errorMessage is set.
  */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device, QString *errorMessage = nullptr);
 
-/**
- * Converts XML data coming from a @p device into a @p list of contact groups.
- * If an error occurs, @c false is returned and @p errorMessage is set.
+/*!
+ * Converts XML data coming from a \a device into a \a list of contact groups.
+ * If an error occurs, \c false is returned and \a errorMessage is set.
  */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QList<ContactGroup> &list, QString *errorMessage = nullptr);
 
-/**
- * Converts a @p list of contact groups into XML data and writes them to a @p device.
- * If an error occurs, @c false is returned and @p errorMessage is set.
+/*!
+ * Converts a \a list of contact groups into XML data and writes them to a \a device.
+ * If an error occurs, \c false is returned and \a errorMessage is set.
  */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
 }
