@@ -194,6 +194,8 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   REQUIRED_HEADERS KContacts_HEADERS
 )
 
+ecm_generate_qdoc(KF6Contacts kcontacts.qdocconf)
+
 if (USE_QML)
   add_subdirectory(qml)
 endif ()
