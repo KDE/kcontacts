@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Organization for a contact.
- *  @since 5.3
+/*!
+ * \class KContacts::Org
+ * \inheaderfile KContacts/Org
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Organization for a contact.
+ * \since 5.3
  */
 class KCONTACTS_EXPORT Org
 {
@@ -31,24 +36,46 @@ class KCONTACTS_EXPORT Org
     friend class ::OrgTest;
 
 public:
+    /*!
+     */
     Org();
+
     Org(const Org &other);
+
+    /*!
+     */
     Org(const QString &org);
 
     ~Org();
 
+    /*!
+     */
     typedef QList<Org> List;
 
+    /*!
+     */
     void setOrganization(const QString &org);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString organization() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Org &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Org &other) const;
 
     Org &operator=(const Org &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -59,8 +86,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::Org
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Org &object);
 
+/*!
+ * \relates KContacts::Org
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Org &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::Org, Q_RELOCATABLE_TYPE);

@@ -15,8 +15,9 @@ namespace KContacts
 {
 class Addressee;
 
-/**
- * @short  a QList of Addressee.
+/*!
+ * \typedef KContacts::AddresseeList
+ * A QList of Addressee.
  */
 typedef QList<Addressee> AddresseeList;
 }

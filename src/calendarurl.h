@@ -20,11 +20,15 @@ namespace KContacts
 {
 class ParameterMap;
 
-/**
- * @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
+/*!
+ * \class KContacts::CalendarUrl
+ * \inheaderfile KContacts/CalendarUrl
+ * \inmodule KContacts
  *
- * @see RFC 6350 Section 6.9 (https://datatracker.ietf.org/doc/html/rfc6350#section-6.9)
- * @since 4.14.6
+ * \brief Class that holds a Calendar Url (FBURL/CALADRURI/CALURI).
+ *
+ * \sa https://datatracker.ietf.org/doc/html/rfc6350#section-6.9
+ * \since 4.14.6
  */
 class KCONTACTS_EXPORT CalendarUrl
 {
@@ -34,35 +38,80 @@ class KCONTACTS_EXPORT CalendarUrl
     friend class ::CalendarUrlTest;
 
 public:
+    /*!
+     * \value Unknown Unknow calendar type
+     * \value FBUrl Specify the calendar containing the FreeBusy time information
+     * \value CALUri Specify the calendar associated with the contact
+     * \value CALADRUri Specify the calendar which should received the sheduling requests
+     * \omitvalue EndCalendarType
+     */
     enum CalendarType {
-        Unknown = 0, ///< Unknow calendar type
-        FBUrl, ///< Specify the calendar containing the FreeBusy time information
-        CALUri, ///< Specify the calendar associated with the contact
-        CALADRUri, ///< Specify the calendar which should received the sheduling requests
+        Unknown = 0,
+        FBUrl,
+        CALUri,
+        CALADRUri,
         EndCalendarType,
     };
 
+    /*!
+     *
+     */
     CalendarUrl();
+
+    /*!
+     *
+     */
     CalendarUrl(CalendarUrl::CalendarType type);
+
     CalendarUrl(const CalendarUrl &other);
 
     ~CalendarUrl();
 
+    /*!
+     * \typedef KContacts::CalendarUrl::List
+     */
     typedef QList<CalendarUrl> List;
 
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     *
+     */
     void setType(CalendarUrl::CalendarType type);
+
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT CalendarUrl::CalendarType type() const;
 
+    /*!
+     *
+     */
     void setUrl(const QUrl &url);
+
+    /*!
+     *
+     */
     QUrl url() const;
 
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT bool operator==(const CalendarUrl &other) const;
+
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT bool operator!=(const CalendarUrl &other) const;
 
     CalendarUrl &operator=(const CalendarUrl &other);
 
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -74,8 +123,14 @@ private:
     QSharedDataPointer<Private> d;
 };
 
+/*!
+ * \relates KContacts::CalendarUrl
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const CalendarUrl &object);
 
+/*!
+ * \relates KContacts::CalendarUrl
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, CalendarUrl &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::CalendarUrl, Q_RELOCATABLE_TYPE);

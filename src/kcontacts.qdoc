@@ -1,0 +1,20 @@
+/*!
+    \module KContacts
+    \title KContacts C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent Contacts
+
+    \brief Provides Stuff.
+
+    Stuff
+*/
+
+/*!
+    \qmlmodule org.kde.contacts
+    \title KContacts QML Types
+    \ingroup qmlmodules
+    \brief Stuff.
+
+    lalala
+*/

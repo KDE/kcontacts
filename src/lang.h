@@ -20,8 +20,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Language for a contact.
- *  @since 4.14.5
+/*!
+ * \class KContacts::Lang
+ * \inheaderfile KContacts/Lang
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Language for a contact.
+ * \since 4.14.5
  */
 class KCONTACTS_EXPORT Lang
 {
@@ -32,24 +37,46 @@ class KCONTACTS_EXPORT Lang
     friend class ::LangTest;
 
 public:
+    /*!
+     */
     Lang();
+
     Lang(const Lang &other);
+
+    /*!
+     */
     Lang(const QString &language);
 
     ~Lang();
 
+    /*!
+     */
     typedef QList<Lang> List;
 
+    /*!
+     */
     void setLanguage(const QString &lang);
+
+    /*!
+     */
     Q_REQUIRED_RESULT QString language() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Lang &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Lang &other) const;
 
     Lang &operator=(const Lang &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -60,8 +87,15 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+/*!
+ * \relates KContacts::Lang
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Lang &object);
 
+/*!
+ * \relates KContacts::Lang
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Lang &object);
 }
 Q_DECLARE_TYPEINFO(KContacts::Lang, Q_RELOCATABLE_TYPE);
