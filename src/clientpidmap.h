@@ -20,7 +20,7 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a ClientPidMap for a contact.
+/*! @short Class that holds a ClientPidMap for a contact.
  *  @since 5.4
  */
 class KCONTACTS_EXPORT ClientPidMap

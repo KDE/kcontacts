@@ -13,7 +13,7 @@
 
 namespace KContacts
 {
-/** @short Class that holds a Gender for a contact.
+/*! @short Class that holds a Gender for a contact.
  *  @since 4.14.5
  */
 class KCONTACTS_EXPORT Gender
@@ -22,7 +22,7 @@ class KCONTACTS_EXPORT Gender
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Gender &);
 
 public:
-    /**
+    /*!
      * Creates an empty Gender object.
      */
     Gender();

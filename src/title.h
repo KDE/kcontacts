@@ -20,7 +20,7 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a Title for a contact.
+/*! @short Class that holds a Title for a contact.
  *  @since 5.3
  */
 class KCONTACTS_EXPORT Title

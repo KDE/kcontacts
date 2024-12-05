@@ -16,7 +16,7 @@
 
 namespace KContacts
 {
-/**
+/*!
   @brief Utility function for implementing drag&drop for vCards
 
   See the Qt drag'n'drop documentation.
@@ -25,7 +25,7 @@ namespace KContacts
 */
 namespace VCardDrag
 {
-/**
+/*!
   Adds the vCard representation as data of the drag object.
 
   @param md the object to set the data on
@@ -35,7 +35,7 @@ namespace VCardDrag
 */
 KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const QByteArray &content);
 
-/**
+/*!
   Adds the vCard representation as data of the drag object.
 
   @param md the object to set the data on
@@ -47,7 +47,7 @@ KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const QByteArray &content)
 */
 KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const KContacts::Addressee::List &contacts);
 
-/**
+/*!
   Returns if drag&drop object can be decoded to vCard.
 
   @param md the object to check for vCard data
@@ -56,7 +56,7 @@ KCONTACTS_EXPORT bool populateMimeData(QMimeData *md, const KContacts::Addressee
 */
 KCONTACTS_EXPORT bool canDecode(const QMimeData *md);
 
-/**
+/*!
   Decodes the drag&drop object to vCard component @p content.
 
   @param md the object to check for vCard data
@@ -68,7 +68,7 @@ KCONTACTS_EXPORT bool canDecode(const QMimeData *md);
 */
 KCONTACTS_EXPORT bool fromMimeData(const QMimeData *md, QByteArray &content);
 
-/**
+/*!
   Decodes the MIME data @p md and puts the resulting vCard into @p contacts.
 
   @param md the object to check for vCard data

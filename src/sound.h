@@ -14,7 +14,7 @@
 
 namespace KContacts
 {
-/** @short Class that holds a Sound clip for a contact.
+/*! @short Class that holds a Sound clip for a contact.
  *
  *  The sound can be played doing something like this:
  *
@@ -48,44 +48,44 @@ class KCONTACTS_EXPORT Sound
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Sound &);
 
 public:
-    /**
+    /*!
      * Creates an empty sound object.
      */
     Sound();
 
-    /**
+    /*!
      * Creates a sound object for the given url.
      *
      * @param url A url that describes the position of the sound file.
      */
     Sound(const QString &url);
 
-    /**
+    /*!
      * Creates a sound object for the given data.
      *
      * @param data The raw data of the sound.
      */
     Sound(const QByteArray &data);
 
-    /**
+    /*!
      * Copy constructor.
      */
     Sound(const Sound &other);
 
-    /**
+    /*!
      * Destroys the sound object.
      */
     ~Sound();
 
     typedef QList<Sound> List;
-    /**
+    /*!
      * Assignment operator.
      *
      * @param other The sound object to assign to @c this
      */
     Sound &operator=(const Sound &other);
 
-    /**
+    /*!
      * Equality operator.
      *
      * @param other The object to compare with
@@ -94,7 +94,7 @@ public:
      */
     Q_REQUIRED_RESULT bool operator==(const Sound &other) const;
 
-    /**
+    /*!
      * Not-Equal operator.
      *
      * @param other The object to compare with
@@ -103,7 +103,7 @@ public:
      */
     Q_REQUIRED_RESULT bool operator!=(const Sound &other) const;
 
-    /**
+    /*!
      * Sets a URL for the location of the sound file. When using this
      * function, isIntern() will return 'false' until you use
      * setData().
@@ -112,12 +112,12 @@ public:
      */
     void setUrl(const QString &url);
 
-    /**
+    /*!
      * Returns true, if the sound object is empty.
      */
     Q_REQUIRED_RESULT bool isEmpty() const;
 
-    /**
+    /*!
      * Sets the raw data of the sound. When using this function,
      * isIntern() will return 'true' until you use setUrl().
      *
@@ -125,7 +125,7 @@ public:
      */
     void setData(const QByteArray &data);
 
-    /**
+    /*!
      * Returns whether the sound is described by a URL (extern) or
      * by the raw data (intern).
      * When this method returns 'true' you can use data() to
@@ -134,17 +134,17 @@ public:
      */
     Q_REQUIRED_RESULT bool isIntern() const;
 
-    /**
+    /*!
      * Returns the location URL of this sound.
      */
     Q_REQUIRED_RESULT QString url() const;
 
-    /**
+    /*!
      * Returns the raw data of this sound.
      */
     Q_REQUIRED_RESULT QByteArray data() const;
 
-    /**
+    /*!
      * Returns string representation of the sound.
      */
     Q_REQUIRED_RESULT QString toString() const;
@@ -154,12 +154,12 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-/**
+/*!
  * Serializes the @p sound object into the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Sound &sound);
 
-/**
+/*!
  * Initializes the @p sound object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Sound &sound);

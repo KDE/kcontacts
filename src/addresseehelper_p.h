@@ -20,7 +20,7 @@ namespace KContacts
 // so we only need this internally and can probably also drop the config
 // file access
 
-/**
+/*!
  * This singleton class stores static data, which is shared
  * by all Addressee objects. It maintains three lists of
  * strings, which can be queried using this class:
@@ -46,14 +46,14 @@ namespace KContacts
 class AddresseeHelper
 {
 public:
-    /**
+    /*!
      * Singleton interface to this class
      *
      * @return a pointer to the unique instance of this class.
      */
     static AddresseeHelper *self();
 
-    /**
+    /*!
      * Queries the list of honoric prefixes.
      *
      * @param title the honoric prefix to search for
@@ -62,7 +62,7 @@ public:
      */
     Q_REQUIRED_RESULT bool containsTitle(const QString &title) const;
 
-    /**
+    /*!
      * Queries the list of inclusions.
      *
      * @param prefix the inclusion to search for
@@ -71,7 +71,7 @@ public:
      */
     Q_REQUIRED_RESULT bool containsPrefix(const QString &prefix) const;
 
-    /**
+    /*!
      * Queries the list of honoric suffixes.
      *
      * @param suffix the honoric suffix to search for
@@ -80,7 +80,7 @@ public:
      */
     Q_REQUIRED_RESULT bool containsSuffix(const QString &suffix) const;
 
-    /**
+    /*!
      * Returns whether or not a single name component should
      * be interpreted as a family name.
      *
@@ -89,13 +89,13 @@ public:
      */
     Q_REQUIRED_RESULT bool treatAsFamilyName() const;
 
-    /** @internal */
+    /*! @internal */
     AddresseeHelper();
 
     ~AddresseeHelper();
 
 private:
-    /**
+    /*!
      * Recreates the static data and reparses the configuration.
      */
     void initSettings();

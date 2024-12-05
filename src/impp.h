@@ -21,7 +21,7 @@ namespace KContacts
 {
 class ParameterMap;
 
-/** @short Class that holds a IMPP for a contact.
+/*! @short Class that holds a IMPP for a contact.
  *
  *  IMPP stands for "Instant Messaging and Presence Protocol". This field is defined
  *  in the vCard 3.0 extension RFC 4770 and is part of vCard 4.0 (RFC 6350).
@@ -56,29 +56,29 @@ public:
     void setAddress(const QUrl &address);
     Q_REQUIRED_RESULT QUrl address() const;
 
-    /**
+    /*!
      * Returns the messaging service this address is for.
      * This is equivalent to address().scheme().
      * @since 5.12
      */
     QString serviceType() const;
-    /**
+    /*!
      * Returns a translated label for the service type.
      * @since 5.12
      */
     QString serviceLabel() const;
-    /**
+    /*!
      * Returns the name of an icon representing the service type.
      * @since 5.12
      */
     QString serviceIcon() const;
 
-    /**
+    /*!
      * Returns whether this is the preferred messaging address.
      * @since 5.12
      */
     bool isPreferred() const;
-    /**
+    /*!
      * Sets that this is the preferred messaging address.
      * @since 5.12
      */
@@ -91,17 +91,17 @@ public:
 
     Q_REQUIRED_RESULT QString toString() const;
 
-    /**
+    /*!
      * Returns a translated name of the given IM service.
      * @since 5.12
      */
     static QString serviceLabel(const QString &serviceType);
-    /**
+    /*!
      * Returns an icon name representing the given IM service.
      * @since 5.12
      */
     static QString serviceIcon(const QString &serviceType);
-    /**
+    /*!
      * List all known service types.
      * Don't use these strings directly for display, instead use serviceLabel and serviceIcon.
      * @since 5.12

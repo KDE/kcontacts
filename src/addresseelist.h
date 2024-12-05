@@ -15,7 +15,7 @@ namespace KContacts
 {
 class Addressee;
 
-/**
+/*!
  * @short  a QList of Addressee.
  */
 typedef QList<Addressee> AddresseeList;

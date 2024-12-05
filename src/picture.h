@@ -19,7 +19,7 @@ namespace KContacts
 {
 class PicturePrivate;
 
-/**
+/*!
   A class to store a picture of an addressee. It can store the data directly or
   an url reference to a picture.
 */
@@ -35,26 +35,26 @@ class KCONTACTS_EXPORT Picture
     Q_PROPERTY(bool isEmpty READ isEmpty)
 
 public:
-    /**
+    /*!
      * Creates an empty picture.
      */
     Picture();
 
-    /**
+    /*!
      * Creates a picture which points to the given url.
      *
      * @param url A URL that describes the location of the picture file.
      */
     Picture(const QString &url);
 
-    /**
+    /*!
      * Creates a picture with the given data.
      *
      * @param data The raw data of the picture.
      */
     Picture(const QImage &data);
 
-    /**
+    /*!
      * Copy constructor.
      *
      * Fast operation, Picture's data is implicitly shared.
@@ -63,13 +63,13 @@ public:
      */
     Picture(const Picture &picture);
 
-    /**
+    /*!
      * Destructor.
      */
     ~Picture();
 
     typedef QList<Picture> List;
-    /**
+    /*!
      * Assignment operator
      *
      * Fast operation, Picture's data is implicitly shared.
@@ -78,22 +78,22 @@ public:
      */
     Picture &operator=(const Picture &other);
 
-    /**
+    /*!
      * Equality operator.
      */
     Q_REQUIRED_RESULT bool operator==(const Picture &other) const;
 
-    /**
+    /*!
      * Not-Equal operator.
      */
     Q_REQUIRED_RESULT bool operator!=(const Picture &other) const;
 
-    /**
+    /*!
      * Returns true, if the picture is empty.
      */
     Q_REQUIRED_RESULT bool isEmpty() const;
 
-    /**
+    /*!
      * Sets a URL for the location of the picture file. When using this
      * function, isIntern() will return 'false' until you use
      * setData().
@@ -103,7 +103,7 @@ public:
      */
     void setUrl(const QString &url);
 
-    /**
+    /*!
      * Sets a URL for the location of the picture file. When using this
      * function, isIntern() will return 'false' until you use
      * setData().
@@ -114,7 +114,7 @@ public:
      */
     void setUrl(const QString &url, const QString &type);
 
-    /**
+    /*!
      * Sets the image data of the picture. When using this function,
      * isIntern() will return 'true' until you use setUrl().
      * This also sets type to "png" or "jpeg" depending
@@ -124,7 +124,7 @@ public:
      */
     void setData(const QImage &data);
 
-    /**
+    /*!
      * Sets the raw data of the picture. When using this function,
      * isIntern() will return 'true' until you use setUrl().
      *
@@ -134,7 +134,7 @@ public:
      */
     void setRawData(const QByteArray &rawData, const QString &type);
 
-    /**
+    /*!
      * Returns whether the picture is described by a URL (extern) or
      * by the raw data (intern).
      * When this method returns 'true' you can use data() to
@@ -143,29 +143,29 @@ public:
      */
     Q_REQUIRED_RESULT bool isIntern() const;
 
-    /**
+    /*!
      * Returns the location URL of this picture.
      */
     Q_REQUIRED_RESULT QString url() const;
 
-    /**
+    /*!
      * Returns the image data of this picture.
      */
     Q_REQUIRED_RESULT QImage data() const;
 
-    /**
+    /*!
      * Returns the raw data of this picture.
      *
      * @since 4.10
      */
     Q_REQUIRED_RESULT QByteArray rawData() const;
 
-    /**
+    /*!
      * Returns the type of this picture.
      */
     Q_REQUIRED_RESULT QString type() const;
 
-    /**
+    /*!
      * Returns string representation of the picture.
      */
     Q_REQUIRED_RESULT QString toString() const;
@@ -174,12 +174,12 @@ private:
     QSharedDataPointer<PicturePrivate> d;
 };
 
-/**
+/*!
  * Serializes the @p picture object into the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Picture &picture);
 
-/**
+/*!
  * Initializes the @p picture object from the @p stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Picture &picture);

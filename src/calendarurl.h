@@ -20,7 +20,7 @@ namespace KContacts
 {
 class ParameterMap;
 
-/**
+/*!
  * @short Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
  *
  * @see RFC 6350 Section 6.9 (https://datatracker.ietf.org/doc/html/rfc6350#section-6.9)

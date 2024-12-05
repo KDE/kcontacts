@@ -39,7 +39,7 @@ using namespace KContacts;
 
 namespace KContacts
 {
-/**
+/*!
   @internal
 
   Evaluates @p fieldname and sets the @p value at the addressee or the address

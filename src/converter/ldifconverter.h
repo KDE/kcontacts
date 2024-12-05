@@ -16,7 +16,7 @@
 
 namespace KContacts
 {
-/**
+/*!
   A set of functions to convert a string with LDIF information to addressees
   and vice versa. It is useful for addressbook import- and exportfilters
   and might be used to read and write Mozilla and Netscape addresssbooks.
@@ -24,7 +24,7 @@ namespace KContacts
 
 namespace LDIFConverter
 {
-/**
+/*!
   Converts a LDIF string to a list of addressees.
 
   @param str         The vcard string.
@@ -37,7 +37,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str,
                                                         QList<KContacts::ContactGroup> &contactGroupList,
                                                         const QDateTime &dt = QDateTime::currentDateTime());
 
-/**
+/*!
   Converts a list of addressees to a LDIF string.
 
   @param addrList    The addresseelist.
@@ -45,7 +45,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str,
 */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &str);
 
-/**
+/*!
   Converts a list of addressees and contactgrouplist to a LDIF string.
 
   @param addrList    The addresseelist.
@@ -55,7 +55,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &add
 */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool
 addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const QList<KContacts::ContactGroup> &contactGroupList, QString &str);
-/**
+/*!
   Converts an addressee to a LDIF string.
 
   @param addr    The addressee.
@@ -63,7 +63,7 @@ addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const QList<KConta
 */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
 
-/**
+/*!
   Converts a list of contact group to a LDIF string.
 
   @param contactGroupList    The contact group list
@@ -71,7 +71,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, Q
 */
 Q_REQUIRED_RESULT KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str);
 
-/**
+/*!
   Converts a contact group to a LDIF string.
 
   @param contactGroup    The contact group

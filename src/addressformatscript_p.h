@@ -11,7 +11,7 @@
 namespace KContacts
 {
 
-/**
+/*!
  * Classify the script used in an address.
  * This is used for two things:
  * - determining the line style separator

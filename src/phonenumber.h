@@ -20,7 +20,7 @@ namespace KContacts
 {
 class ParameterMap;
 
-/**
+/*!
  * @short Phonenumber information.
  *
  * This class provides phone number information. A phone number is classified by
@@ -44,51 +44,51 @@ class KCONTACTS_EXPORT PhoneNumber
     Q_PROPERTY(bool supportsSms READ supportsSms)
 
 public:
-    /**
+    /*!
       Phone number types.
       @see Type
     */
     enum TypeFlag {
-        Home = 1, /**< Home number */
-        Work = 2, /**< Office number */
-        Msg = 4, /**< Messaging */
-        Pref = 8, /**< Preferred number */
-        Voice = 16, /**< Voice */
-        Fax = 32, /**< Fax machine */
-        Cell = 64, /**< Cell phone */
-        Video = 128, /**< Video phone */
-        Bbs = 256, /**< Mailbox */
-        Modem = 512, /**< Modem */
-        Car = 1024, /**< Car phone */
-        Isdn = 2048, /**< ISDN connection */
-        Pcs = 4096, /**< Personal Communication Service*/
-        Pager = 8192, /**< Pager */
+        Home = 1, /*!< Home number */
+        Work = 2, /*!< Office number */
+        Msg = 4, /*!< Messaging */
+        Pref = 8, /*!< Preferred number */
+        Voice = 16, /*!< Voice */
+        Fax = 32, /*!< Fax machine */
+        Cell = 64, /*!< Cell phone */
+        Video = 128, /*!< Video phone */
+        Bbs = 256, /*!< Mailbox */
+        Modem = 512, /*!< Modem */
+        Car = 1024, /*!< Car phone */
+        Isdn = 2048, /*!< ISDN connection */
+        Pcs = 4096, /*!< Personal Communication Service*/
+        Pager = 8192, /*!< Pager */
         // TODO add Text and textphone support vcard4
-        Undefined = 16384, /** Undefined number type */
+        Undefined = 16384, /*! Undefined number type */
     };
 
-    /**
+    /*!
      * Stores a combination of #TypeFlag values.
      */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 
-    /**
+    /*!
      * List of phone number types.
      */
     typedef QList<TypeFlag> TypeList;
 
-    /**
+    /*!
      * List of phone numbers.
      */
     typedef QList<PhoneNumber> List;
 
-    /**
+    /*!
      * Creates an empty phone number object.
      */
     PhoneNumber();
 
-    /**
+    /*!
      * Creates a phone number object.
      *
      * @param number Number
@@ -97,7 +97,7 @@ public:
      */
     PhoneNumber(const QString &number, Type type = Home); // krazy:exclude=explicit
 
-    /**
+    /*!
      * Copy constructor.
      *
      * Fast operation, PhoneNumber's data is implicitly shared.
@@ -106,12 +106,12 @@ public:
      */
     PhoneNumber(const PhoneNumber &other);
 
-    /**
+    /*!
      * Destroys the phone number.
      */
     ~PhoneNumber();
 
-    /**
+    /*!
      * Equality operator.
      *
      * @return @c true if number, type and identifier are equal,
@@ -119,12 +119,12 @@ public:
      */
     Q_REQUIRED_RESULT bool operator==(const PhoneNumber &other) const;
 
-    /**
+    /*!
      * Not-Equal operator.
      */
     Q_REQUIRED_RESULT bool operator!=(const PhoneNumber &other) const;
 
-    /**
+    /*!
      * Assignment operator.
      *
      * Fast operation, PhoneNumber's data is implicitly shared.
@@ -133,34 +133,34 @@ public:
      */
     PhoneNumber &operator=(const PhoneNumber &other);
 
-    /**
+    /*!
      * Returns true, if the phone number is empty.
      */
     Q_REQUIRED_RESULT bool isEmpty() const;
 
-    /**
+    /*!
      * Sets the unique @p identifier.
      */
     void setId(const QString &identifier);
 
-    /**
+    /*!
      * Returns the unique identifier.
      */
     Q_REQUIRED_RESULT QString id() const;
 
-    /**
+    /*!
      * Sets the phone @p number.
      */
     void setNumber(const QString &number);
 
-    /**
+    /*!
      * Returns the phone number.
      * This is the number as entered/stored with all formatting preserved. Preferred for display.
      * @see normalizedNumber()
      */
     Q_REQUIRED_RESULT QString number() const;
 
-    /**
+    /*!
      * Returns the phone number normalized for dialing.
      * This has all formatting stripped for passing to dialers or tel: URLs.
      * @see number()
@@ -168,7 +168,7 @@ public:
      */
     Q_REQUIRED_RESULT QString normalizedNumber() const;
 
-    /**
+    /*!
      * Sets the @p type.
      * Multiple types can be specified by combining them by a logical or.
      *
@@ -176,7 +176,7 @@ public:
      */
     void setType(Type type);
 
-    /**
+    /*!
      * Returns the type. Can be a multiple types combined by a logical or.
      *
      * @see #TypeFlag
@@ -184,28 +184,28 @@ public:
      */
     Q_REQUIRED_RESULT Type type() const;
 
-    /**
+    /*!
      * Returns a translated string of the address' type.
      */
     Q_REQUIRED_RESULT QString typeLabel() const;
 
-    /**
+    /*!
      * Returns a list of all available types
      */
     Q_REQUIRED_RESULT static TypeList typeList();
 
-    /**
+    /*!
      * Returns whether this phone number is marked as preferred.
      * @since 5.12
      */
     Q_REQUIRED_RESULT bool isPreferred() const;
-    /**
+    /*!
      * Returns whether this phone number is expected to support receiving SMS messages.
      * @since 5.12
      */
     Q_REQUIRED_RESULT bool supportsSms() const;
 
-    /**
+    /*!
      * Returns the translated label for phone number @p type.
      *
      * In opposite to typeFlagLabel( TypeFlag type ), it returns all types
@@ -217,7 +217,7 @@ public:
      */
     static QString typeLabel(Type type);
 
-    /**
+    /*!
      * Returns the translated label for phone number @p type.
      *
      * @param type An OR'ed combination of #TypeFlag
@@ -227,7 +227,7 @@ public:
      */
     Q_REQUIRED_RESULT static QString typeFlagLabel(TypeFlag type);
 
-    /**
+    /*!
      * Returns a string representation of the phone number.
      */
     QString toString() const;
@@ -242,7 +242,7 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PhoneNumber::Type)
 
-/**
+/*!
  * Serializes the phone @p number object into the @p stream.
  *
  * @param stream The stream to write into
@@ -250,7 +250,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(PhoneNumber::Type)
  */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const PhoneNumber &number);
 
-/**
+/*!
  * Initializes the phone @p number object from the @p stream.
  *
  * @param stream The stream to read from

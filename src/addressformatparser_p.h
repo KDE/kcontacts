@@ -13,7 +13,7 @@
 namespace KContacts
 {
 
-/** Parsing functions for address format data.
+/*! Parsing functions for address format data.
  *  @internal
  */
 namespace AddressFormatParser
