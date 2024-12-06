@@ -17,26 +17,56 @@ namespace KContacts
 class Address;
 class AddressFormatElementPrivate;
 
-/*! A single element in an address format.
+/*!
+ * \class KContacts::AddressFormatElement
+ * \inheaderfile KContacts/AddressFormat
+ * \inmodule KContacts
  *
- *  A format element can be one of three types:
- *  - a field from the address data
- *  - a literal string
- *  - a separator
+ * A single element in an address format.
  *
- *  @since 5.92
- *  @see KContacts::AddressFormat
+ * A format element can be one of three types:
+ * \list
+ * \li a field from the address data
+ * \li a literal string
+ * \li a separator
+ * \endlist
+ *
+ * \since 5.92
+ * \sa KContacts::AddressFormat
  */
 class KCONTACTS_EXPORT AddressFormatElement
 {
     Q_GADGET
+
+    /*!
+     * \property KContacts::AddressFormatElement::isField
+     */
     Q_PROPERTY(bool isField READ isField)
+
+    /*!
+     * \property KContacts::AddressFormatElement::field
+     */
     Q_PROPERTY(KContacts::AddressFormatField field READ field)
+
+    /*!
+     * \property KContacts::AddressFormatElement::isLiteral
+     */
     Q_PROPERTY(bool isLiteral READ isLiteral)
+
+    /*!
+     * \property KContacts::AddressFormatElement::literal
+     */
     Q_PROPERTY(QString literal READ literal)
+
+    /*!
+     * \property KContacts::AddressFormatElement::isSeparator
+     */
     Q_PROPERTY(bool isSeparator READ isSeparator)
 
 public:
+    /*!
+     *
+     */
     explicit AddressFormatElement();
     AddressFormatElement(const AddressFormatElement &);
     ~AddressFormatElement();
@@ -57,25 +87,57 @@ private:
 
 class AddressFormatPrivate;
 
-/*! Information on how addresses are formatted in a specific country/language.
- *  This is primarily used for displaying or printing addresses, but is also
- *  useful for country specific adjustment in address edit forms, or for parsing
- *  textual addresses.
+/*!
+ * \class KContacts::AddressFormat
+ * \inheaderfile KContacts/AddressFormat
+ * \inmodule KContacts
  *
- *  @since 5.92
- *  @see AddressFormatRepository
+ * Information on how addresses are formatted in a specific country/language.
+ * This is primarily used for displaying or printing addresses, but is also
+ * useful for country specific adjustment in address edit forms, or for parsing
+ * textual addresses.
+ *
+ * \since 5.92
+ * \sa AddressFormatRepository
  */
 class KCONTACTS_EXPORT AddressFormat
 {
     Q_GADGET
+
+    /*!
+     * \property KContacts::AddressFormatElement::country
+     */
     Q_PROPERTY(QString country READ country)
+
+    /*!
+     * \property KContacts::AddressFormatElement::elements
+     */
     Q_PROPERTY(QList<KContacts::AddressFormatElement> elements READ elementsForQml)
+
+    /*!
+     * \property KContacts::AddressFormatElement::requiredFields
+     */
     Q_PROPERTY(KContacts::AddressFormatFields requiredFields READ requiredFields)
+
+    /*!
+     * \property KContacts::AddressFormatElement::usedFields
+     */
     Q_PROPERTY(KContacts::AddressFormatFields usedFields READ usedFields)
+
+    /*!
+     * \property KContacts::AddressFormatElement::upperCaseFields
+     */
     Q_PROPERTY(KContacts::AddressFormatFields upperCaseFields READ upperCaseFields)
+
+    /*!
+     * \property KContacts::AddressFormatElement::postalCodeRegularExpression
+     */
     Q_PROPERTY(QString postalCodeRegularExpression READ postalCodeRegularExpression)
 
 public:
+    /*!
+     *
+     */
     AddressFormat();
     AddressFormat(const AddressFormat &);
     ~AddressFormat();
@@ -88,7 +150,7 @@ public:
     const std::vector<AddressFormatElement> &elements() const;
 
     /*! The address fields that are required by this format for a valid address.
-     *  @note This information is not available for all formats.
+     *  \note This information is not available for all formats.
      */
     AddressFormatFields requiredFields() const;
 
@@ -113,24 +175,31 @@ private:
     QExplicitlySharedDataPointer<AddressFormatPrivate> d;
 };
 
-/*! Provides address format information for a given country.
+/*!
+ * \class KContacts::AddressFormatRepository
+ * \inheaderfile KContacts/AddressFormat
+ * \inmodule KContacts
  *
- *  @since 5.92
+ * \brief Provides address format information for a given country.
+ *
+ * \since 5.92
  */
 class KCONTACTS_EXPORT AddressFormatRepository
 {
     Q_GADGET
 public:
-    /*! Look up format data for a country.
-     *  @param countryCode ISO 3166-1 alpha 2 country code.
+    /*!
+     * Look up format data for a country.
+     * \a countryCode ISO 3166-1 alpha 2 country code.
      */
     static Q_INVOKABLE KContacts::AddressFormat formatForCountry(const QString &countryCode,
                                                                  KContacts::AddressFormatScriptPreference scriptPref,
                                                                  KContacts::AddressFormatPreference formatPref = AddressFormatPreference::Generic);
 
-    /*! Look up format data for a given address.
-     *  The preferred script is determined from the script used in the address object.
-     *  If the address object has no country information set, the local country is assumed.
+    /*!
+     * Look up format data for a given address.
+     * The preferred script is determined from the script used in the address object.
+     * If the address object has no country information set, the local country is assumed.
      */
     static KContacts::AddressFormat formatForAddress(const Address &address, AddressFormatPreference formatPref = AddressFormatPreference::Generic);
 };

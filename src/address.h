@@ -22,8 +22,11 @@ namespace KContacts
 {
 class Geo;
 /*!
-  @brief
-  Postal address information.
+  \class KContacts::Address
+  \inheaderfile KContacts/Address
+  \inmodule KContacts
+
+  \brief Postal address information.
 
   This class represents information about a postal address.
 */
@@ -33,18 +36,70 @@ class KCONTACTS_EXPORT Address
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &s, Address &addr);
 
     Q_GADGET
+
+    /*!
+     * \property KContacts::Address::id
+     */
     Q_PROPERTY(QString id READ id WRITE setId)
+
+    /*!
+     * \property KContacts::Address::isEmpty
+     */
     Q_PROPERTY(bool isEmpty READ isEmpty)
+
+    /*!
+     * \property KContacts::Address::type
+     */
     Q_PROPERTY(Type type READ type WRITE setType)
+
+    /*!
+     * \property KContacts::Address::typeLabel
+     */
     Q_PROPERTY(QString typeLabel READ typeLabel)
+
+    /*!
+     * \property KContacts::Address::postOfficeBox
+     */
     Q_PROPERTY(QString postOfficeBox READ postOfficeBox WRITE setPostOfficeBox)
+
+    /*!
+     * \property KContacts::Address::extended
+     */
     Q_PROPERTY(QString extended READ extended WRITE setExtended)
+
+    /*!
+     * \property KContacts::Address::street
+     */
     Q_PROPERTY(QString street READ street WRITE setStreet)
+
+    /*!
+     * \property KContacts::Address::locality
+     */
     Q_PROPERTY(QString locality READ locality WRITE setLocality)
+
+    /*!
+     * \property KContacts::Address::region
+     */
     Q_PROPERTY(QString region READ region WRITE setRegion)
+
+    /*!
+     * \property KContacts::Address::postalCode
+     */
     Q_PROPERTY(QString postalCode READ postalCode WRITE setPostalCode)
+
+    /*!
+     * \property KContacts::Address::country
+     */
     Q_PROPERTY(QString country READ country WRITE setCountry)
+
+    /*!
+     * \property KContacts::Address::label
+     */
     Q_PROPERTY(QString label READ label WRITE setLabel)
+
+    /*!
+     * \property KContacts::Address::geo
+     */
     Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
 
     // TODO KF6: ideally this would be deprecated as it doesn't specify the formatting style
@@ -52,48 +107,59 @@ class KCONTACTS_EXPORT Address
     // the invokable methods instead). The KF6::TextTemplate port might bring new options there,
     // otherwise we can at least switch this from postal to the multi-line style for KF6
     /*!
+     * \property KContacts::Address::formattedAddress
+     *
      * Country-specific formatted address without an addressee using postal address style.
      * This is the same as calling formatted(AddressFormatStyle::Postal) with empty arguments.
-     * @see formatted()
-     * @since 5.12
+     * \sa formatted()
+     * \since 5.12
      */
     Q_PROPERTY(QString formattedAddress READ formattedPostalAddress)
 
-    /*! geo: URI for this address.
-     *  @see Address::geoUri()
-     *  @since 5.106
+    /*!
+     * \property KContacts::Address::geo
+     * geo: URI for this address.
+     * \sa Address::geoUri()
+     * \since 5.106
      */
     Q_PROPERTY(QUrl geoUri READ geoUri)
 
 public:
     /*!
-      List of addresses.
-    */
+     * \typedef KContacts::Address::List
+     * List of addresses.
+     */
     typedef QList<Address> List;
 
     /*!
       Address types:
-      @see Type
+      \sa Type
+
+      \value Dom domestic
+      \value Intl international
+      \value Postal postal
+      \value Parcel parcel
+      \value Home home address
+      \value Work address at work
+      \value Pref preferred address
     */
     enum TypeFlag {
-        Dom = 1, /*!< domestic */
-        Intl = 2, /*!< international */
-        Postal = 4, /*!< postal */
-        Parcel = 8, /*!< parcel */
-        Home = 16, /*!< home address */
-        Work = 32, /*!< address at work */
-        Pref = 64, /*!< preferred address */
+        Dom = 1,
+        Intl = 2,
+        Postal = 4,
+        Parcel = 8,
+        Home = 16,
+        Work = 32,
+        Pref = 64,
     };
 
-    /*!
-     * Stores a combination of #TypeFlag values.
-     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 
     /*!
-      List of address types.
-    */
+     * \typedef KContacts::Address::TypeList
+     * List of address types.
+     */
     typedef QList<TypeFlag> TypeList;
 
     /*!
@@ -102,7 +168,7 @@ public:
     Address();
 
     /*!
-      Creates an address of the given @p type.
+      Creates an address of the given \a type.
     */
     Address(Type type);
 
@@ -119,29 +185,31 @@ public:
     /*!
       Equality operator.
 
-      @param addr the address to compare to
-      @return @c true if @c this and @p addr are equal, otherwise @c false
+      \a addr the address to compare to
+
+      Returns \c true if \c this and \a addr are equal, otherwise \c false
     */
     Q_REQUIRED_RESULT bool operator==(const Address &other) const;
 
     /*!
       Not-equal operator.
 
-      @param addr the address to compare to
-      @return @c true if @c this and @p addr are not equal, otherwise @c false
+      \a addr the address to compare to
+
+      Returns \c true if \c this and \a addr are not equal, otherwise \c false
     */
     Q_REQUIRED_RESULT bool operator!=(const Address &other) const;
 
     /*!
       Assignment operator.
 
-      @param addr the address data to assign to @c this
-      @return a reference to @c this
+      \a addr the address data to assign to \c this
+      Returns a reference to \c this
     */
     Address &operator=(const Address &other);
 
     /*!
-      Returns true, if the address is empty.
+      Returns \c true, if the address is empty.
     */
     Q_REQUIRED_RESULT bool isEmpty() const;
 
@@ -151,7 +219,7 @@ public:
     void clear();
 
     /*!
-      Sets the unique @p identifier.
+      Sets the unique \a identifier.
     */
     void setId(const QString &identifier);
 
@@ -163,7 +231,7 @@ public:
     /*!
       Sets the type of address. See enum for definition of types.
 
-      @param type type, can be a bitwise or of multiple types.
+      \a type type, can be a bitwise or of multiple types.
     */
     void setType(Type type);
 
@@ -193,7 +261,7 @@ public:
     static QString postOfficeBoxLabel();
 
     /*!
-      Sets the @p extended address information.
+      Sets the \a extended address information.
     */
     void setExtended(const QString &extended);
 
@@ -208,7 +276,7 @@ public:
     static QString extendedLabel();
 
     /*!
-      Sets the @p street (including house number).
+      Sets the \a street (including house number).
     */
     void setStreet(const QString &street);
 
@@ -223,9 +291,9 @@ public:
     static QString streetLabel();
 
     /*!
-      Sets the @p locality, e.g. city.
+      Sets the \a locality, e.g. city.
 
-      @param locality the locality of the address, e.g. city
+      \a locality the locality of the address, e.g. city
     */
     void setLocality(const QString &locality);
 
@@ -240,9 +308,9 @@ public:
     static QString localityLabel();
 
     /*!
-      Sets the @p region, e.g. state.
+      Sets the \a region, e.g. state.
 
-      @param region the region the address falls into, e.g. state
+      \a region the region the address falls into, e.g. state
     */
     void setRegion(const QString &region);
 
@@ -257,7 +325,7 @@ public:
     static QString regionLabel();
 
     /*!
-      Sets the postal @p code.
+      Sets the postal \a code.
     */
     void setPostalCode(const QString &code);
 
@@ -272,7 +340,7 @@ public:
     static QString postalCodeLabel();
 
     /*!
-      Sets the @p country.
+      Sets the \a country.
     */
     void setCountry(const QString &country);
 
@@ -287,9 +355,9 @@ public:
     static QString countryLabel();
 
     /*!
-      Sets the delivery @p label. This is the literal text to be used as label.
+      Sets the delivery \a label. This is the literal text to be used as label.
 
-      @param label the string to use for delivery labels
+      \a label the string to use for delivery labels
     */
     void setLabel(const QString &label);
 
@@ -309,7 +377,7 @@ public:
     static TypeList typeList();
 
     /*!
-      Returns the translated label for the given @p type.
+      Returns the translated label for the given \a type.
     */
     static QString typeLabel(Type type);
 
@@ -323,19 +391,24 @@ public:
     /*!
       Returns this address formatted according to the country-specific
       address formatting rules. The formatting rules applied depend on
-      either the addresses {@link #country country} field, or (if the
+      either the addresses country field, or (if the
       latter is empty) on the system country setting.
 
-      @param style      the formatting style variant to use
-      @param realName   the formatted name of the contact
-      @param orgaName   the name of the organization or company
-      @return           the formatted address
-      @since 5.92
+      \a style the formatting style variant to use
+
+      \a realName the formatted name of the contact
+
+      \a orgaName the name of the organization or company
+
+      Returns the formatted address
+      \since 5.92
     */
     Q_REQUIRED_RESULT Q_INVOKABLE QString formatted(KContacts::AddressFormatStyle style,
                                                     const QString &realName = QString(),
                                                     const QString &orgaName = QString()) const;
 
+    /*!
+     */
     static QString typeFlagLabel(TypeFlag type);
 
     /*!
@@ -350,9 +423,10 @@ public:
 
     /*!
      * Returns a geo: URI representing this address.
+     *
      * This contains either the geographic coordinate if set, or the address as query term.
      * This can be used to show the address in the default map view.
-     * @since 5.106
+     * \since 5.106
      */
     Q_REQUIRED_RESULT QUrl geoUri() const;
 
@@ -366,12 +440,14 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(Address::Type)
 
 /*!
-  Serializes the @p address object into the @p stream.
+  Serializes the \a address object into the \a stream.
+  \relates KContacts::Address
 */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Address &address);
 
 /*!
-  Initializes the @p address object from the @p stream.
+  Initializes the \a address object from the \a stream.
+  \relates KContacts::Address
 */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Address &address);
 }

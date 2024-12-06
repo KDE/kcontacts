@@ -33,15 +33,17 @@ namespace KContacts
  *   containsSuffix()
  *
  * All of these lists have a hardcoded and a configurable
- * part. The configurable part is found in @c kabcrc, group
- * @c General, fields @c Prefixes, @c Inclusions, and
- * @c Suffixes.
+ * part. The configurable part is found in \c kabcrc, group
+ * \c General, fields \c Prefixes, \c Inclusions, and
+ * \c Suffixes.
  *
  * In addition to the above, this class stores one conveniece
  * setting: it stores whether or not a single name component
  * should be interpreted as a family name (see
  * treatAsFamilyName()). The corresponding configuration
- * field is @c TreatAsFamilyName.
+ * field is \c TreatAsFamilyName.
+ *
+ * \internal
  */
 class AddresseeHelper
 {
@@ -49,34 +51,37 @@ public:
     /*!
      * Singleton interface to this class
      *
-     * @return a pointer to the unique instance of this class.
+     * Returns a pointer to the unique instance of this class.
      */
     static AddresseeHelper *self();
 
     /*!
      * Queries the list of honoric prefixes.
      *
-     * @param title the honoric prefix to search for
-     * @return @c true, if @p title was found in the list,
-     *         @c false otherwise
+     * \a title the honoric prefix to search for
+     *
+     * Returns \c true, if \a title was found in the list,
+     *         \c false otherwise
      */
     Q_REQUIRED_RESULT bool containsTitle(const QString &title) const;
 
     /*!
      * Queries the list of inclusions.
      *
-     * @param prefix the inclusion to search for
-     * @return @c true, if @p prefix was found in the list,
-     *         @c false otherwise
+     * \a prefix the inclusion to search for
+     *
+     * Returns \c true, if \a prefix was found in the list,
+     *         \c false otherwise
      */
     Q_REQUIRED_RESULT bool containsPrefix(const QString &prefix) const;
 
     /*!
      * Queries the list of honoric suffixes.
      *
-     * @param suffix the honoric suffix to search for
-     * @return @c true, if @p suffix was found in the list,
-     *         @c false otherwise
+     * \a suffix the honoric suffix to search for
+     *
+     * Returns \c true, if \a suffix was found in the list,
+     *         \c false otherwise
      */
     Q_REQUIRED_RESULT bool containsSuffix(const QString &suffix) const;
 
@@ -84,12 +89,11 @@ public:
      * Returns whether or not a single name component should
      * be interpreted as a family name.
      *
-     * @return @c true if single name component is a family name,
-     *         @c false otherwise.
+     * Returns \c true if single name component is a family name,
+     *         \c false otherwise.
      */
     Q_REQUIRED_RESULT bool treatAsFamilyName() const;
 
-    /*! @internal */
     AddresseeHelper();
 
     ~AddresseeHelper();

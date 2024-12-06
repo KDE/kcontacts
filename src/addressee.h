@@ -41,7 +41,11 @@
 namespace KContacts
 {
 /*!
-  @short address book entry
+  \class KContacts::Addressee
+  \inheaderfile KContacts/Addressee
+  \inmodule KContacts
+
+  \brief Address book entry.
 
   This class represents an entry in the address book.
 
@@ -72,47 +76,215 @@ class KCONTACTS_EXPORT Addressee
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 
     Q_GADGET
+
+    /*!
+     * \property KContacts::Addressee::isEmpty
+     */
     Q_PROPERTY(bool isEmpty READ isEmpty)
+
+    /*!
+     * \property KContacts::Addressee::uid
+     */
     Q_PROPERTY(QString uid READ uid WRITE setUid)
+
+    /*!
+     * \property KContacts::Addressee::name
+     */
     Q_PROPERTY(QString name READ name WRITE setName)
+
+    /*!
+     * \property KContacts::Addressee::formattedName
+     */
     Q_PROPERTY(QString formattedName READ formattedName WRITE setFormattedName)
+
+    /*!
+     * \property KContacts::Addressee::familyName
+     */
     Q_PROPERTY(QString familyName READ familyName WRITE setFamilyName)
+
+    /*!
+     * \property KContacts::Addressee::givenName
+     */
     Q_PROPERTY(QString givenName READ givenName WRITE setGivenName)
+
+    /*!
+     * \property KContacts::Addressee::additionalName
+     */
     Q_PROPERTY(QString additionalName READ additionalName WRITE setAdditionalName)
+
+    /*!
+     * \property KContacts::Addressee::prefix
+     */
     Q_PROPERTY(QString prefix READ prefix WRITE setPrefix)
+
+    /*!
+     * \property KContacts::Addressee::suffix
+     */
     Q_PROPERTY(QString suffix READ suffix WRITE setSuffix)
+
+    /*!
+     * \property KContacts::Addressee::nickName
+     */
     Q_PROPERTY(QString nickName READ nickName)
+
+    /*!
+     * \property KContacts::Addressee::birthday
+     */
     Q_PROPERTY(QDateTime birthday READ birthday WRITE setBirthdayProperty) // special write method due to withTime argument
+
+    /*!
+     * \property KContacts::Addressee::birthdayHasTime
+     */
     Q_PROPERTY(bool birthdayHasTime READ birthdayHasTime)
+
+    /*!
+     * \property KContacts::Addressee::mailer
+     */
     Q_PROPERTY(QString mailer READ mailer WRITE setMailer)
+
+    /*!
+     * \property KContacts::Addressee::geo
+     */
     Q_PROPERTY(KContacts::Geo geo READ geo WRITE setGeo)
+
+    /*!
+     * \property KContacts::Addressee::title
+     */
     Q_PROPERTY(QString title READ title)
+
+    /*!
+     * \property KContacts::Addressee::role
+     */
     Q_PROPERTY(QString role READ role)
+
+    /*!
+     * \property KContacts::Addressee::organization
+     */
     Q_PROPERTY(QString organization READ organization)
+
+    /*!
+     * \property KContacts::Addressee::department
+     */
     Q_PROPERTY(QString department READ department WRITE setDepartment)
+
+    /*!
+     * \property KContacts::Addressee::note
+     */
     Q_PROPERTY(QString note READ note WRITE setNote)
+
+    /*!
+     * \property KContacts::Addressee::productId
+     */
     Q_PROPERTY(QString productId READ productId WRITE setProductId)
+
+    /*!
+     * \property KContacts::Addressee::revision
+     */
     Q_PROPERTY(QDateTime revision READ revision)
+
+    /*!
+     * \property KContacts::Addressee::sortString
+     */
     Q_PROPERTY(QString sortString READ sortString WRITE setSortString)
+
+    /*!
+     * \property KContacts::Addressee::url
+     */
     Q_PROPERTY(KContacts::ResourceLocatorUrl url READ url WRITE setUrl)
+
+    /*!
+     * \property KContacts::Addressee::extraUrls
+     */
     Q_PROPERTY(QList<KContacts::ResourceLocatorUrl> extraUrls READ extraUrlList WRITE setExtraUrlList)
+
+    /*!
+     * \property KContacts::Addressee::realName
+     */
     Q_PROPERTY(QString realName READ realName)
+
+    /*!
+     * \property KContacts::Addressee::assembledName
+     */
     Q_PROPERTY(QString assembledName READ assembledName)
+
+    /*!
+     * \property KContacts::Addressee::preferredEmail
+     */
     Q_PROPERTY(QString preferredEmail READ preferredEmail)
+
+    /*!
+     * \property KContacts::Addressee::emails
+     */
     Q_PROPERTY(QList<KContacts::Email> emails READ emailList WRITE setEmailList)
+
+    /*!
+     * \property KContacts::Addressee::phoneNumbers
+     */
     Q_PROPERTY(QList<KContacts::PhoneNumber> phoneNumbers READ phoneNumbers WRITE setPhoneNumbers)
+
+    /*!
+     * \property KContacts::Addressee::addresses
+     */
     Q_PROPERTY(QList<KContacts::Address> addresses READ addresses WRITE setAddresses)
+
+    /*!
+     * \property KContacts::Addressee::categories
+     */
     Q_PROPERTY(QStringList categories READ categories WRITE setCategories)
+
+    /*!
+     * \property KContacts::Addressee::customs
+     */
     Q_PROPERTY(QStringList customs READ customs)
+
+    /*!
+     * \property KContacts::Addressee::changed
+     */
     Q_PROPERTY(bool changed READ changed WRITE setChanged)
+
+    /*!
+     * \property KContacts::Addressee::impps
+     */
     Q_PROPERTY(QList<KContacts::Impp> impps READ imppList WRITE setImppList)
+
+    /*!
+     * \property KContacts::Addressee::anniversary
+     */
     Q_PROPERTY(QDate anniversary READ anniversary WRITE setAnniversary)
+
+    /*!
+     * \property KContacts::Addressee::assistantsName
+     */
     Q_PROPERTY(QString assistantsName READ assistantsName WRITE setAssistantsName)
+
+    /*!
+     * \property KContacts::Addressee::blogFeed
+     */
     Q_PROPERTY(QUrl blogFeed READ blogFeed WRITE setBlogFeed)
+
+    /*!
+     * \property KContacts::Addressee::managersName
+     */
     Q_PROPERTY(QString managersName READ managersName WRITE setManagersName)
+
+    /*!
+     * \property KContacts::Addressee::office
+     */
     Q_PROPERTY(QString office READ office WRITE setOffice)
+
+    /*!
+     * \property KContacts::Addressee::profession
+     */
     Q_PROPERTY(QString profession READ profession WRITE setProfession)
+
+    /*!
+     * \property KContacts::Addressee::spousesName
+     */
     Q_PROPERTY(QString spousesName READ spousesName WRITE setSpousesName)
+
+    /*!
+     * \property KContacts::Addressee::photo
+     */
     Q_PROPERTY(KContacts::Picture photo READ photo WRITE setPhoto)
 
     // ### the following properties are still missing:
@@ -146,23 +318,23 @@ public:
     /*!
       Assignment operator.
 
-      @return a reference to @c this
+      Returns a reference to \c this
     */
     Addressee &operator=(const Addressee &other);
 
     /*!
       Equality operator.
 
-      @return @c true if @c this and the given addressee are equal,
-              otherwise @c false
+      Returns \c true if \c this and the given addressee are equal,
+              otherwise \c false
     */
     bool operator==(const Addressee &other) const;
 
     /*!
       Not-equal operator.
 
-      @return @c true if @c this and the given addressee are not equal,
-              otherwise @c false
+      Returns \c true if \c this and the given addressee are not equal,
+              otherwise \c false
     */
     bool operator!=(const Addressee &other) const;
 
@@ -174,7 +346,7 @@ public:
     /*!
       Set unique identifier.
 
-      @param uid the KABC unique identifier
+      \a uid the KABC unique identifier
      */
     void setUid(const QString &uid);
 
@@ -297,9 +469,21 @@ public:
       Set nick name.
      */
     void setNickName(const QString &nickName);
+
+    /*!
+     */
     void setNickName(const NickName &nickName);
+
+    /*!
+     */
     void insertExtraNickName(const NickName &nickName);
+
+    /*!
+     */
     void setExtraNickNameList(const NickName::List &nickNameList);
+
+    /*!
+     */
     NickName::List extraNickNameList() const;
 
     /*!
@@ -315,7 +499,7 @@ public:
     /*!
       Set birthday (date and time). If withTime is false the time will be set
       to midnight and birthdayHasTime() will return false afterwards.
-      @since 5.4
+      \since 5.4
      */
     void setBirthday(const QDateTime &birthday, bool withTime = true);
 
@@ -500,15 +684,28 @@ public:
      */
     static QString geoLabel();
 
+    // Remove in kf6
     /*!
       Set title.
      */
-    // Remove in kf6
     void setTitle(const QString &title);
+
+    /*!
+     */
     void setTitle(const Title &title);
+
+    /*!
+     */
     void insertExtraTitle(const Title &title);
+
+    /*!
+     */
     void setExtraTitleList(const Title::List &urltitle);
+
+    /*!
+     */
     Title::List extraTitleList() const;
+
     /*!
       Return title.
      */
@@ -523,9 +720,21 @@ public:
       Set role.
      */
     void setRole(const QString &role);
+
+    /*!
+     */
     void setRole(const Role &role);
+
+    /*!
+     */
     void insertExtraRole(const Role &role);
+
+    /*!
+     */
     void setExtraRoleList(const Role::List &roleList);
+
+    /*!
+     */
     Role::List extraRoleList() const;
 
     /*!
@@ -538,14 +747,26 @@ public:
      */
     static QString roleLabel();
 
+    // Remove in kf6
     /*!
       Set organization.
      */
-    // Remove in kf6
     void setOrganization(const QString &organization);
+
+    /*!
+     */
     void setOrganization(const Org &organization);
+
+    /*!
+     */
     void insertExtraOrganization(const Org &organization);
+
+    /*!
+     */
     void setExtraOrganizationList(const Org::List &orgList);
+
+    /*!
+     */
     Org::List extraOrganizationList() const;
 
     /*!
@@ -731,24 +952,24 @@ public:
     /*!
       Return email address including real name.
 
-      @param email Email address to be used to construct the full email string.
+      \a email Email address to be used to construct the full email string.
                    If this is QString() the preferred email address is used.
      */
     QString fullEmail(const QString &email = QString()) const;
 
     /*!
-      Adds an email address. If the email address (i.e. @p email.mail()) already
-      exists in this addressee it won't be duplicated, instead @p email is assigned
+      Adds an email address. If the email address (i.e. email.mail()) already
+      exists in this addressee it won't be duplicated, instead  email is assigned
       to it.
 
-      @since 5.88
+      \since 5.88
      */
     void addEmail(const Email &email);
 
     /*!
       Remove email address. If the email address doesn't exist, nothing happens.
 
-      @param email Email address to remove
+      \a email Email address to remove
      */
     void removeEmail(const QString &email);
 
@@ -764,9 +985,8 @@ public:
     QStringList emails() const;
 
     /*!
-       Set the emails to @p list.
+       Set the emails to \a list.
        The first email address gets the preferred one!
-       @param list The list of email addresses.
      */
     void setEmails(const QStringList &list);
 
@@ -774,7 +994,7 @@ public:
       Insert a phone number. If a phone number with the same id already exists
       in this addressee it is not duplicated.
 
-      @param phoneNumber The telephone number to insert to the addressee
+      \a phoneNumber The telephone number to insert to the addressee
      */
     void insertPhoneNumber(const PhoneNumber &phoneNumber);
 
@@ -782,14 +1002,14 @@ public:
       Remove phone number. If no phone number with the given id exists for this
       addressee, nothing happens.
 
-      @param phoneNumber The telephone number to remove from the addressee
+      \a phoneNumber The telephone number to remove from the addressee
      */
     void removePhoneNumber(const PhoneNumber &phoneNumber);
 
     /*!
       Return phone number, which matches the given type.
 
-      @param type The type of phone number to get
+      \a type The type of phone number to get
      */
     PhoneNumber phoneNumber(PhoneNumber::Type type) const;
 
@@ -803,14 +1023,14 @@ public:
     /*!
       Return list of phone numbers with a special type.
 
-      @param type The type of phone number to get
+      \a type The type of phone number to get
      */
     PhoneNumber::List phoneNumbers(PhoneNumber::Type type) const;
 
     /*!
       Return phone number with the given id.
 
-      @param id The identifier of the phone number to look for.
+      \a id The identifier of the phone number to look for.
                 See PhoneNumber::id()
      */
     PhoneNumber findPhoneNumber(const QString &id) const;
@@ -819,7 +1039,7 @@ public:
       Insert a key. If a key with the same id already exists
       in this addressee it is not duplicated.
 
-      @param key The key to insert
+      \a key The key to insert
      */
     void insertKey(const Key &key);
 
@@ -827,19 +1047,20 @@ public:
       Remove a key. If no key with the given id exists for this
       addressee, nothing happens.
 
-      @param key The key to remove
+      \a key The key to remove
      */
     void removeKey(const Key &key);
 
     /*!
       Return key, which matches the given type.
-      If @p type == Key::Custom you can specify a string
+      If \a type == Key::Custom you can specify a string
       that should match. If you leave the string empty, the first
       key with a custom value is returned.
 
-      @param type The type of key to look for
-      @param customTypeString A string to match custom keys against when
-             @p type is @c Key::Custom
+      \a type The type of key to look for
+
+      \a customTypeString A string to match custom keys against when
+             \a type is \c Key::Custom
      */
     Key key(Key::Type type, const QString &customTypeString = QString()) const;
 
@@ -850,26 +1071,27 @@ public:
 
     /*!
        Set the list of keys
-       @param keys The keys to be set.
+       \a keys The keys to be set.
      */
     void setKeys(const Key::List &keys);
 
     /*!
       Return list of keys with a special type.
-      If @p type == Key::Custom you can specify a string
+      If \a type == Key::Custom you can specify a string
       that should match. If you leave the string empty, all custom
       keys will be returned.
 
-      @param type The type of key to look for
-      @param customTypeString A string to match custom keys against when
-             @p type is @c Key::Custom
+      \a type The type of key to look for
+
+      \a customTypeString A string to match custom keys against when
+             \a type is \c Key::Custom
      */
     Key::List keys(Key::Type type, const QString &customTypeString = QString()) const;
 
     /*!
       Return key with the given id.
 
-      @param id The identifier of the key to look for. See Key::id()
+      \a id The identifier of the key to look for. See Key::id()
      */
     Key findKey(const QString &id) const;
 
@@ -877,7 +1099,7 @@ public:
       Insert an address. If an address with the same id already exists
       in this addressee it is not duplicated.
 
-      @param address The address to insert
+      \a address The address to insert
      */
     void insertAddress(const Address &address);
 
@@ -885,22 +1107,22 @@ public:
       Remove address. If no address with the given id exists for this
       addressee, nothing happens.
 
-      @param address The address to remove
+      \a address The address to remove
      */
     void removeAddress(const Address &address);
 
     /*!
       Set the addressee
 
-      @param addresses The new addresses
-      @since 5.100
+      \a addresses The new addresses
+      \since 5.100
      */
     void setAddresses(const Address::List &addresses);
 
     /*!
       Return address, which matches the given type.
 
-      @param type The type of address to look for
+      \a type The type of address to look for
      */
     Address address(Address::Type type) const;
 
@@ -912,14 +1134,14 @@ public:
     /*!
       Return list of addresses with a special type.
 
-      @param type The type of addresses to look for
+      \a type The type of addresses to look for
      */
     Address::List addresses(Address::Type type) const;
 
     /*!
       Return address with the given id.
 
-      @param id The identifier of the address to look for. See Address::id()
+      \a id The identifier of the address to look for. See Address::id()
      */
     Address findAddress(const QString &id) const;
 
@@ -956,25 +1178,29 @@ public:
       An empty value isn't allowed (nothing happens if this is called with
       any of the three arguments being empty)
 
-      @param app Name of the application inserting this custom entry
-      @param name Name of this application specific custom entry
-      @param value Value of this application specific custom entry
+      \a app Name of the application inserting this custom entry
+
+      \a name Name of this application specific custom entry
+
+      \a value Value of this application specific custom entry
      */
     void insertCustom(const QString &app, const QString &name, const QString &value);
 
     /*!
       Remove custom entry.
 
-      @param app Name of the application which has inserted this custom entry
-      @param name Name of this application specific custom entry
+      \a app Name of the application which has inserted this custom entry
+
+      \a name Name of this application specific custom entry
      */
     void removeCustom(const QString &app, const QString &name);
 
     /*!
       Return value of custom entry, identified by app and entry name.
 
-      @param app Name of the application which has inserted this custom entry
-      @param name Name of this application specific custom entry
+      \a app Name of the application which has inserted this custom entry
+
+      \a name Name of this application specific custom entry
      */
     QString custom(const QString &app, const QString &name) const;
 
@@ -994,9 +1220,11 @@ public:
     /*!
       Parse full email address. The result is given back in fullName and email.
 
-      @param rawEmail The input string to parse for name and email
-      @param fullName The name part of the @p rawEmail input, if it contained one
-      @param email The email part of the @p rawEmail input, if it contained one
+      \a rawEmail The input string to parse for name and email
+
+      \a fullName The name part of the \a rawEmail input, if it contained one
+
+      \a email The email part of the \a rawEmail input, if it contained one
      */
     static void parseEmailAddress(const QString &rawEmail, QString &fullName, QString &email);
 
@@ -1008,7 +1236,7 @@ public:
     /*!
       Mark addressee as changed.
 
-      @param value Sets the status indicating changed data
+      \a value Sets the status indicating changed data
      */
     void setChanged(bool value);
 
@@ -1027,166 +1255,284 @@ public:
 
     /*!
      * Remove Language
-     * @brief removeLang
-     * @param language
      */
     void removeLang(const QString &language);
     /*!
      * Insert Language
-     * @brief insertLang
-     * @param language
      */
     void insertLang(const Lang &language);
     /*!
-     * @brief langs
-     * @return List of lang
+     * Returns List of lang
      */
     Lang::List langs() const;
+    /*!
+     */
     void setLangs(const Lang::List &langs);
 
+    /*!
+     */
     void setGender(const Gender &gender);
+
+    /*!
+     */
     Gender gender() const;
 
+    /*!
+     */
     QString kind() const;
+
+    /*!
+     */
     void setKind(const QString &kind);
 
+    /*!
+     */
     void insertCalendarUrl(const CalendarUrl &calendarUrl);
+
+    /*!
+     */
     CalendarUrl::List calendarUrlList() const;
 
+    /*!
+     */
     void insertExtraSound(const Sound &sound);
+
+    /*!
+     */
     void setExtraSoundList(const Sound::List &soundList);
+
+    /*!
+     */
     Sound::List extraSoundList() const;
 
+    /*!
+     */
     void insertExtraPhoto(const Picture &picture);
+
+    /*!
+     */
     void setExtraPhotoList(const Picture::List &pictureList);
+
+    /*!
+     */
     Picture::List extraPhotoList() const;
 
+    /*!
+     */
     void insertExtraLogo(const Picture &logo);
+
+    /*!
+     */
     void setExtraLogoList(const Picture::List &logoList);
+
+    /*!
+     */
     Picture::List extraLogoList() const;
 
+    /*!
+     */
     ResourceLocatorUrl::List extraUrlList() const;
+
+    /*!
+     */
     void setExtraUrlList(const ResourceLocatorUrl::List &urlList);
+
+    /*!
+     */
     void insertExtraUrl(const ResourceLocatorUrl &url);
 
     // Member
+    /*!
+     */
     void insertMember(const QString &member);
+
+    /*!
+     */
     void setMembers(const QStringList &c);
+
+    /*!
+     */
     QStringList members() const;
 
     // Relation
+    /*!
+     */
     void insertRelationship(const Related &related);
+
+    /*!
+     */
     void setRelationships(const Related::List &c);
+
+    /*!
+     */
     Related::List relationships() const;
 
     // Source
+    /*!
+     */
     void insertSourceUrl(const QUrl &url);
+
+    /*!
+     */
     void setSourcesUrlList(const QList<QUrl> &urlList);
+
+    /*!
+     */
     QList<QUrl> sourcesUrlList() const;
 
     // Impp
+    /*!
+     */
     Impp::List imppList() const;
+
+    /*!
+     */
     void setImppList(const Impp::List &imppList);
+
+    /*!
+     */
     void insertImpp(const Impp &impp);
 
     // FieldGroup
+    /*!
+     */
     FieldGroup::List fieldGroupList() const;
+
+    /*!
+     */
     void setFieldGroupList(const FieldGroup::List &fieldGroupList);
+
+    /*!
+     */
     void insertFieldGroup(const FieldGroup &fieldGroup);
 
     // ClientPidMap
+    /*!
+     */
     ClientPidMap::List clientPidMapList() const;
+
+    /*!
+     */
     void setClientPidMapList(const ClientPidMap::List &clientpidmaplist);
+
+    /*!
+     */
     void insertClientPidMap(const ClientPidMap &clientpidmap);
 
     /*!
      * Returns the contact's anniversary date.
-     * @note This is a non-standard extension using the @c X-Anniversary field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-Anniversary field.
+     *
+     * \since 5.12
      */
     QDate anniversary() const;
     /*!
      * Sets the contact's anniversary date.
-     * @note This is a non-standard extension using the @c X-Anniversary field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-Anniversary field.
+     *
+     * \since 5.12
      */
     void setAnniversary(const QDate &anniversary);
 
     /*!
      * Returns the contact's assistant's name.
-     * @note This is a non-standard extension using the @c X-AssistantsName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-AssistantsName field.
+     *
+     * \since 5.12
      */
     QString assistantsName() const;
     /*!
      * Set the contact's assistant's name.
-     * @note This is a non-standard extension using the @c X-AssistantsName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-AssistantsName field.
+     *
+     * \since 5.12
      */
     void setAssistantsName(const QString &assistantsName);
 
     /*!
      * Returns the contact's blog feed.
-     * @note This is a non-standard extension using the @c BlogFeed field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c BlogFeed field.
+     *
+     * \since 5.12
      */
     QUrl blogFeed() const;
     /*!
      * Set the contact's blog feed.
-     * @note This is a non-standard extension using the @c BlogFeed field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c BlogFeed field.
+     *
+     * \since 5.12
      */
     void setBlogFeed(const QUrl &blogFeed);
 
     /*!
      * Returns the contact's manager's name.
-     * @note This is a non-standard extension using the @c X-ManagersName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-ManagersName field.
+     *
+     * \since 5.12
      */
     QString managersName() const;
     /*!
      * Set the contact's manager's name.
-     * @note This is a non-standard extension using the @c X-ManagersName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-ManagersName field.
+     *
+     * \since 5.12
      */
     void setManagersName(const QString &managersName);
 
     /*!
      * Returns the contact's office.
-     * @note This is a non-standard extension using the @c X-Office field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-Office field.
+     *
+     * \since 5.12
      */
     QString office() const;
     /*!
      * Set the contact's office.
-     * @note This is a non-standard extension using the @c X-Office field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-Office field.
+     *
+     * \since 5.12
      */
     void setOffice(const QString &office);
 
     /*!
      * Returns the contact's profession.
-     * @note This is a non-standard extension using the @c X-Profession field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-Profession field.
+     *
+     * \since 5.12
      */
     QString profession() const;
     /*!
      * Set the contact's profession.
-     * @note This is a non-standard extension using the @c X-Profession field.
-     * @since 5.12
+     * @note This is a non-standard extension using the \c X-Profession field.
+     * \since 5.12
      */
     void setProfession(const QString &profession);
 
     /*!
      * Returns the contact's spouse's name.
-     * @note This is a non-standard extension using the @c X-SpousesName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-SpousesName field.
+     *
+     * \since 5.12
      */
     QString spousesName() const;
     /*!
      * Set the contact's spouse's name.
-     * @note This is a non-standard extension using the @c X-SpousesName field.
-     * @since 5.12
+     *
+     * \note This is a non-standard extension using the \c X-SpousesName field.
+     *
+     * \since 5.12
      */
     void setSpousesName(const QString &spousesName);
 
@@ -1197,7 +1543,14 @@ private:
     QSharedDataPointer<Private> d;
 };
 
+/*!
+ * \relates KContacts::Addressee
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
+
+/*!
+ * \relates KContacts::Addressee
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 }
 

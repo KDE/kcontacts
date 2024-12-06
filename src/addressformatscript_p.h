@@ -17,8 +17,8 @@ namespace KContacts
  * - determining the line style separator
  * - decide whether to use local or latin script format alternatives when available
  *
- * @see address_formatter.cc in libaddressinput
- * @internal
+ * \sa address_formatter.cc in libaddressinput
+ * \internal
  */
 namespace AddressFormatScript
 {
