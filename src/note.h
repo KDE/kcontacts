@@ -19,7 +19,7 @@ namespace KContacts
 class ParameterMap;
 
 /*! @short Class that holds a Note for a contact.
- *  @since 5.3
+ *  \since 5.3
  */
 class KCONTACTS_EXPORT Note
 {

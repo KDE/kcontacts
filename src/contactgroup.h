@@ -19,7 +19,11 @@ class QString;
 namespace KContacts
 {
 /*!
- * @short This class represents a group of contacts.
+ * \class KContacts::ContactGroup
+ * \inheaderfile KContacts/ContactGroup
+ * \inmodule KContacts
+ *
+ * \brief This class represents a group of contacts.
  *
  * It can contain two types of contacts, either a reference
  * or data.
@@ -27,13 +31,16 @@ namespace KContacts
  * identifies the real contact in the system.
  * The data entry contains a name and an email address.
  *
- * @author Tobias Koenig <tokoe@kde.org>
- * @since 4.3
+ * \since 4.3
  */
 class KCONTACTS_EXPORT ContactGroup
 {
 public:
     /*!
+     * \class KContacts::ContactGroup::ContactReference
+     * \inheaderfile KContacts/ContactGroup
+     * \inmodule KContacts
+     *
      * This class represents a contact reference
      */
     class KCONTACTS_EXPORT ContactReference
@@ -50,12 +57,12 @@ public:
         ContactReference();
 
         /*!
-         * Creates a contact reference from an @p other reference.
+         * Creates a contact reference from an \a other reference.
          */
         ContactReference(const ContactReference &other);
 
         /*!
-         * Creates a contact reference for the given contact @p uid.
+         * Creates a contact reference for the given contact \a uid.
          */
         ContactReference(const QString &uid);
 
@@ -66,8 +73,10 @@ public:
 
         /*!
          * Sets the contact uid of the contact reference.
-         * @param uid identifier of the contact to reference
-         * @note That is the Akonadi Item ID of the contact that
+         *
+         * \a uid identifier of the contact to reference
+         *
+         * \note That is the Akonadi Item ID of the contact that
          *       is referenced here.
          */
         void setUid(const QString &uid);
@@ -75,21 +84,22 @@ public:
         /*!
          * Returns the contact uid of the contact reference.
          *
-         * @note That is the Akonadi Item ID of the contact that
+         * \note That is the Akonadi Item ID of the contact that
          *       is referenced here.
          */
         Q_REQUIRED_RESULT QString uid() const;
 
         /*!
          * Sets the contact gid of the contact reference.
-         * @param gid globally unique identifier of the contact to reference
-         * @since 4.12
+         *
+         * \a gid globally unique identifier of the contact to reference
+         * \since 4.12
          */
         void setGid(const QString &gid);
 
         /*!
          * Returns the contact GID of the contact reference.
-         * @since 4.12
+         * \since 4.12
          */
         Q_REQUIRED_RESULT QString gid() const;
 
@@ -106,32 +116,33 @@ public:
 
         /*!
          * Inserts a custom entry.
-         * If an entry with the same @p key already exists, it is
+         * If an entry with the same \a key already exists, it is
          * overwritten.
          *
-         * @param key The unique key.
-         * @param value The value.
+         * \a key The unique key.
+         *
+         * \a value The value.
          */
         void insertCustom(const QString &key, const QString &value);
 
         /*!
-         * Removes the custom entry with the given @p key.
+         * Removes the custom entry with the given \a key.
          */
         void removeCustom(const QString &key);
 
         /*!
-         * Returns the value for the given @p key, or an empty string
+         * Returns the value for the given \a key, or an empty string
          * if the entry for that key does not exists.
          */
         Q_REQUIRED_RESULT QString custom(const QString &key) const;
 
         /*!
-         * @internal
+         * \internal
          */
         ContactReference &operator=(const ContactReference &other);
 
         /*!
-         * @internal
+         * \internal
          */
         Q_REQUIRED_RESULT bool operator==(const ContactReference &other) const;
 
@@ -141,7 +152,11 @@ public:
     };
 
     /*!
-     * This class represents a contact group reference
+     * \class KContacts::ContactGroup::ContactGroupReference
+     * \inheaderfile KContacts/ContactGroup
+     * \inmodule KContacts
+     *
+     * \brief This class represents a contact group reference.
      */
     class KCONTACTS_EXPORT ContactGroupReference
     {
@@ -157,12 +172,12 @@ public:
         ContactGroupReference();
 
         /*!
-         * Creates a contact group reference from an @p other reference.
+         * Creates a contact group reference from an \a other reference.
          */
         ContactGroupReference(const ContactGroupReference &other);
 
         /*!
-         * Creates a contact group reference for the given contact group @p uid.
+         * Creates a contact group reference for the given contact group \a uid.
          */
         ContactGroupReference(const QString &uid);
 
@@ -183,32 +198,33 @@ public:
 
         /*!
          * Inserts a custom entry.
-         * If an entry with the same @p key already exists, it is
+         * If an entry with the same \a key already exists, it is
          * overwritten.
          *
-         * @param key The unique key.
-         * @param value The value.
+         * \a key The unique key.
+         *
+         * \a value The value.
          */
         void insertCustom(const QString &key, const QString &value);
 
         /*!
-         * Removes the custom entry with the given @p key.
+         * Removes the custom entry with the given \a key.
          */
         void removeCustom(const QString &key);
 
         /*!
-         * Returns the value for the given @p key, or an empty string
+         * Returns the value for the given \a key, or an empty string
          * if the entry for that key does not exists.
          */
         QString custom(const QString &key) const;
 
         /*!
-         * @internal
+         * \internal
          */
         ContactGroupReference &operator=(const ContactGroupReference &other);
 
         /*!
-         * @internal
+         * \internal
          */
         bool operator==(const ContactGroupReference &other) const;
 
@@ -218,6 +234,10 @@ public:
     };
 
     /*!
+     * \class KContacts::ContactGroup::Data
+     * \inheaderfile KContacts/ContactGroup
+     * \inmodule KContacts
+     *
      * This class represents a contact data object
      */
     class KCONTACTS_EXPORT Data
@@ -234,12 +254,12 @@ public:
         Data();
 
         /*!
-         * Creates a contact data object from an @p other data object.
+         * Creates a contact data object from an \a other data object.
          */
         Data(const Data &other);
 
         /*!
-         * Creates a contact data object with the given @p name and @p email address.
+         * Creates a contact data object with the given \a name and \a email address.
          */
         Data(const QString &name, const QString &email);
 
@@ -249,7 +269,7 @@ public:
         ~Data();
 
         /*!
-         * Sets the @p name of the contact data object.
+         * Sets the \a name of the contact data object.
          */
         void setName(const QString &name);
 
@@ -259,7 +279,7 @@ public:
         Q_REQUIRED_RESULT QString name() const;
 
         /*!
-         * Sets the @p email address of the contact data object.
+         * Sets the \a email address of the contact data object.
          */
         void setEmail(const QString &email);
 
@@ -270,32 +290,33 @@ public:
 
         /*!
          * Inserts a custom entry.
-         * If an entry with the same @p key already exists, it is
+         * If an entry with the same \a key already exists, it is
          * overwritten.
          *
-         * @param key The unique key.
-         * @param value The value.
+         * \a key The unique key.
+         *
+         * \a value The value.
          */
         void insertCustom(const QString &key, const QString &value);
 
         /*!
-         * Removes the custom entry with the given @p key.
+         * Removes the custom entry with the given \a key.
          */
         void removeCustom(const QString &key);
 
         /*!
-         * Returns the value for the given @p key, or an empty string
+         * Returns the value for the given \a key, or an empty string
          * if the entry for that key does not exists.
          */
         Q_REQUIRED_RESULT QString custom(const QString &key) const;
 
         /*!
-         * @internal
+         * \internal
          */
         Data &operator=(const Data &other);
 
         /*!
-         * @internal
+         * \internal
          */
         Q_REQUIRED_RESULT bool operator==(const Data &other) const;
 
@@ -315,7 +336,7 @@ public:
     ContactGroup();
 
     /*!
-     * Creates a contact group from an @p other group.
+     * Creates a contact group from an \a other group.
      */
     ContactGroup(const ContactGroup &other);
 
@@ -330,7 +351,7 @@ public:
     ~ContactGroup();
 
     /*!
-     * Sets the unique @p id of the contact group.
+     * Sets the unique \a id of the contact group.
      */
     void setId(const QString &id);
 
@@ -340,7 +361,7 @@ public:
     Q_REQUIRED_RESULT QString id() const;
 
     /*!
-     * Sets the i18n'd @p name of the contact group.
+     * Sets the i18n'd \a name of the contact group.
      */
     void setName(const QString &name);
 
@@ -371,62 +392,62 @@ public:
     Q_REQUIRED_RESULT int dataCount() const;
 
     /*!
-     * Returns the contact reference at the given @p index.
+     * Returns the contact reference at the given \a index.
      */
     Q_REQUIRED_RESULT ContactReference &contactReference(int index);
 
     /*!
-     * Returns the contact reference at the given @p index.
+     * Returns the contact reference at the given \a index.
      */
     const ContactReference &contactReference(int index) const;
 
     /*!
-     * Returns the contact group reference at the given @p index.
+     * Returns the contact group reference at the given \a index.
      */
     ContactGroupReference &contactGroupReference(int index);
 
     /*!
-     * Returns the contact group reference at the given @p index.
+     * Returns the contact group reference at the given \a index.
      */
     const ContactGroupReference &contactGroupReference(int index) const;
 
     /*!
-     * Returns the contact data object at the given @p index.
+     * Returns the contact data object at the given \a index.
      */
     Data &data(int index);
 
     /*!
-     * Returns the contact data object at the given @p index.
+     * Returns the contact data object at the given \a index.
      */
     const Data &data(int index) const;
 
     /*!
-     * Appends a new contact @p reference to the contact group.
+     * Appends a new contact \a reference to the contact group.
      */
     void append(const ContactReference &reference);
 
     /*!
-     * Appends a new contact group @p reference to the contact group.
+     * Appends a new contact group \a reference to the contact group.
      */
     void append(const ContactGroupReference &reference);
 
     /*!
-     * Appends a new contact @p data object to the contact group.
+     * Appends a new contact \a data object to the contact group.
      */
     void append(const Data &data);
 
     /*!
-     * Removes the given contact @p reference from the contact group.
+     * Removes the given contact \a reference from the contact group.
      */
     void remove(const ContactReference &reference);
 
     /*!
-     * Removes the given contact group @p reference from the contact group.
+     * Removes the given contact group \a reference from the contact group.
      */
     void remove(const ContactGroupReference &reference);
 
     /*!
-     * Removes the given contact @p data object from the contact group.
+     * Removes the given contact \a data object from the contact group.
      */
     void remove(const Data &data);
 
@@ -446,12 +467,12 @@ public:
     void removeAllContactData();
 
     /*!
-     * @internal
+     * \internal
      */
     ContactGroup &operator=(const ContactGroup &other);
 
     /*!
-     * @internal
+     * \internal
      */
     Q_REQUIRED_RESULT bool operator==(const ContactGroup &other) const;
 

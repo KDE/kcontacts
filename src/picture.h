@@ -110,7 +110,7 @@ public:
      *
      * @param url  The location URL of the picture file.
      * @param type  The encoding format of the image, e.g. jpeg or png
-     * @since 4.10
+     * \since 4.10
      */
     void setUrl(const QString &url, const QString &type);
 
@@ -130,7 +130,7 @@ public:
      *
      * @param rawData  The raw data of the picture.
      * @param type  The encoding format of the image, e.g. jpeg or png
-     * @since 4.10
+     * \since 4.10
      */
     void setRawData(const QByteArray &rawData, const QString &type);
 
@@ -156,7 +156,7 @@ public:
     /*!
      * Returns the raw data of this picture.
      *
-     * @since 4.10
+     * \since 4.10
      */
     Q_REQUIRED_RESULT QByteArray rawData() const;
 

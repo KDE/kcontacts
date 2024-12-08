@@ -19,6 +19,8 @@
  * Ldif implements an RFC 2849 compliant Ldif parser. Ldif files are used to
  * represent directory information on LDAP-based servers, or to describe a set
  * of changes which are to be applied to a directory.
+ *
+ * \internal
  */
 class Ldif
 {
@@ -39,10 +41,14 @@ public:
     /*!
      * Assembles fieldname and value into a valid Ldif line, BASE64 encodes the
      * value if necessary and optionally splits into more lines.
-     * @param fieldname The name of the entry.
-     * @param value The value of the entry.
-     * @param linelen Maximum length of the lines in the result.
-     * @param url If true, encode value as url ( use :< ).
+     *
+     * \a fieldname The name of the entry.
+     *
+     * \a value The value of the entry.
+     *
+     * \a linelen Maximum length of the lines in the result.
+     *
+     * \a url If true, encode value as url ( use :< ).
      */
     static QByteArray assembleLine(const QString &fieldname, const QByteArray &value, uint linelen = 0, bool url = false);
     /*!
@@ -53,16 +59,20 @@ public:
 
     /*!
      * Splits one line from an Ldif file to attribute and value components.
-     * @return true if value is an URL, false otherwise
+     * Returns true if value is an URL, false otherwise
      */
     static bool splitLine(const QByteArray &line, QString &fieldname, QByteArray &value);
 
     /*!
      * Splits a control specification (without the "control:" directive)
-     * @param line is the control directive
-     * @param oid will contain the OID
-     * @param critical will contain the criticality of control
-     * @param value is the control value
+     *
+     * \a line is the control directive
+     *
+     * \a oid will contain the OID
+     *
+     * \a critical will contain the criticality of control
+     *
+     * \a value is the control value
      */
     static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
 
@@ -78,7 +88,7 @@ public:
 
     /*!
      * Process the Ldif until a complete item can be returned
-     * @return NewEntry if a new DN encountered, Item if a new item returned,
+     * Returns NewEntry if a new DN encountered, Item if a new item returned,
      * Err if the Ldif contains error, EndEntry if the parser reached the end
      * of the current entry and MoreData if the parser encountered the end of
      * the current chunk of the Ldif.

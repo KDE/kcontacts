@@ -23,7 +23,7 @@ namespace KContacts
 class ParameterMap;
 
 /*! @short Class that holds a Resource Locator
- *  @since 5.0
+ *  \since 5.0
  */
 class KCONTACTS_EXPORT ResourceLocatorUrl
 {
@@ -47,7 +47,7 @@ public:
     typedef QList<ResourceLocatorUrl> List;
 
     /*! URL types.
-     *  @since 5.12
+     *  \since 5.12
      *  @see Type
      */
     enum TypeFlag {
@@ -55,8 +55,8 @@ public:
         Home = 1, /*!< Personal website. */
         Work = 2, /*!< Work website. */
         Profile = 4, /*!< Profile website. */
-        Ftp = 8, /*!< Ftp website. @since 6.0 */
-        Reservation = 16, /*!< Reservation website. @since 6.0 */
+        Ftp = 8, /*!< Ftp website. \since 6.0 */
+        Reservation = 16, /*!< Reservation website. \since 6.0 */
         AppInstallPage = 32, /*!< Application installation website. @sine 6.0 */
         Other = 64, /*!< Other websie. */
     };
@@ -74,23 +74,23 @@ public:
 
     /*!
      * Returns the type of the URL.
-     * @since 5.12
+     * \since 5.12
      */
     Type type() const;
     /*!
      * Sets the URL type.
-     * @since 5.12
+     * \since 5.12
      */
     void setType(Type type);
 
     /*!
      * Returns whether this is the preferred website.
-     * @since 5.12
+     * \since 5.12
      */
     bool isPreferred() const;
     /*!
      * Sets that this is the preferred website.
-     * @since 5.12
+     * \since 5.12
      */
     void setPreferred(bool preferred);
 

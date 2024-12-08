@@ -16,7 +16,11 @@
 namespace KContacts
 {
 /*!
- * @short A class to store an encryption key.
+ * \class KContacts::Key
+ * \inheaderfile KContacts::Key
+ * \inmodule KContacts
+ *
+ * \brief A class to store an encryption key.
  */
 class KCONTACTS_EXPORT Key
 {
@@ -31,11 +35,15 @@ public:
 
     /*!
       Key types
+
+      \value X509 X509 key
+      \value PGP Pretty Good Privacy key
+      \value Custom Custom or IANA conform key
     */
     enum Type {
-        X509, /*!< X509 key */
-        PGP, /*!< Pretty Good Privacy key */
-        Custom, /*!< Custom or IANA conform key */
+        X509,
+        PGP,
+        Custom,
     };
 
     /*!
@@ -46,19 +54,14 @@ public:
     /*!
       Creates a new key.
 
-      @param text  The text data.
-      @param type  The key type, see Types.
+      \a text The text data.
+
+      \a type The key type, see Types.
     */
     explicit Key(const QString &text = QString(), Type type = PGP);
 
-    /*!
-      Copy constructor.
-    */
     Key(const Key &other);
 
-    /*!
-      Destroys the key.
-    */
     ~Key();
 
     /*!
@@ -74,12 +77,12 @@ public:
     /*!
       Assignment operator.
 
-      @param other The Key instance to assign to @c this
+      \a other The Key instance to assign to \c this
     */
     Key &operator=(const Key &other);
 
     /*!
-      Sets the unique @p identifier.
+      Sets the unique \a identifier.
     */
     void setId(const QString &identifier);
 
@@ -89,7 +92,7 @@ public:
     Q_REQUIRED_RESULT QString id() const;
 
     /*!
-      Sets binary @p data.
+      Sets binary \a data.
     */
     void setBinaryData(const QByteArray &data);
 
@@ -99,7 +102,7 @@ public:
     Q_REQUIRED_RESULT QByteArray binaryData() const;
 
     /*!
-      Sets text @p data.
+      Sets text \a data.
     */
     void setTextData(const QString &data);
 
@@ -114,16 +117,16 @@ public:
     Q_REQUIRED_RESULT bool isBinary() const;
 
     /*!
-      Sets the @p type.
+      Sets the \a type.
 
-      @param type The type of the key
+      \a type The type of the key
 
-      @see Type
+      \sa Type
     */
     void setType(Type type);
 
     /*!
-      Sets custom @p type string.
+      Sets custom \a type string.
     */
     void setCustomTypeString(const QString &type);
 
@@ -148,7 +151,7 @@ public:
     Q_REQUIRED_RESULT static TypeList typeList();
 
     /*!
-      Returns a translated label for a given key @p type.
+      Returns a translated label for a given key \a type.
     */
     Q_REQUIRED_RESULT static QString typeLabel(Type type);
 
@@ -158,13 +161,17 @@ private:
 };
 
 /*!
-  Serializes the @p key object into the @p stream.
-*/
+ * \relates KContacts::Key
+ *
+ * Serializes the \a key object into the \a stream.
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Key &key);
 
 /*!
-  Initializes the @p key object from the @p stream.
-*/
+ * \relates KContacts::Key
+ *
+ * Initializes the \a key object from the \a stream.
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Key &key);
 }
 Q_DECLARE_TYPEINFO(KContacts::Key, Q_RELOCATABLE_TYPE);

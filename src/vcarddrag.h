@@ -21,7 +21,7 @@ namespace KContacts
 
   See the Qt drag'n'drop documentation.
 
-  @since 4.5
+  \since 4.5
 */
 namespace VCardDrag
 {

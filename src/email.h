@@ -21,8 +21,13 @@ namespace KContacts
 {
 class ParameterMap;
 
-/*! @short Class that holds a Email for a contact.
- *  @since 4.14.5
+/*!
+ * \class KContacts::Email
+ * \inheaderfile KContacts/Email
+ * \inmodule KContacts
+ *
+ * \brief Class that holds a Email for a contact.
+ * \since 4.14.5
  */
 class KCONTACTS_EXPORT Email
 {
@@ -32,9 +37,25 @@ class KCONTACTS_EXPORT Email
     friend class ::EmailTest;
 
     Q_GADGET
+
+    /*!
+     * \property KContacts::Email::email
+     */
     Q_PROPERTY(QString email READ mail WRITE setEmail)
+
+    /*!
+     * \property KContacts::Email::isValid
+     */
     Q_PROPERTY(bool isValid READ isValid)
+
+    /*!
+     * \property KContacts::Email::type
+     */
     Q_PROPERTY(Type type READ type WRITE setType)
+
+    /*!
+     * \property KContacts::Email::isPreferred
+     */
     Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
 
 public:
@@ -42,62 +63,87 @@ public:
      * Creates an empty email object.
      */
     Email();
+
     Email(const Email &other);
+
+    /*!
+     */
     Q_INVOKABLE Email(const QString &mail);
 
     ~Email();
 
+    /*!
+     */
     typedef QList<Email> List;
 
     /*!
      * Email types.
-     * @see Type
+     * \sa Type
+     *
+     * \value Unknown No or unknown email type is set
+     * \value Home Personal email
+     * \value Work Work email
+     * \value Other Other email
      */
     enum TypeFlag {
-        Unknown = 0, /*!< No or unknown email type is set. */
-        Home = 1, /*!< Personal email. */
-        Work = 2, /*!< Work email. */
-        Other = 4, /*!< Other email. */
+        Unknown = 0,
+        Home = 1,
+        Work = 2,
+        Other = 4,
     };
 
-    /*!
-     * Stores a combination of #TypeFlag values.
-     */
     Q_DECLARE_FLAGS(Type, TypeFlag)
     Q_FLAG(Type)
 
+    /*!
+     *
+     */
     void setEmail(const QString &mail);
+
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT QString mail() const;
 
+    /*!
+     *
+     */
     Q_REQUIRED_RESULT bool isValid() const;
 
     /*!
      * Returns the type of the email.
-     * @since 5.12
+     * \since 5.12
      */
     Type type() const;
     /*!
      * Sets the email type.
-     * @since 5.12
+     * \since 5.12
      */
     void setType(Type type);
 
     /*!
      * Returns whether this is the preferred email address.
-     * @since 5.12
+     * \since 5.12
      */
     bool isPreferred() const;
     /*!
      * Sets that this is the preferred email address.
-     * @since 5.12
+     * \since 5.12
      */
     void setPreferred(bool preferred);
 
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator==(const Email &other) const;
+
+    /*!
+     */
     Q_REQUIRED_RESULT bool operator!=(const Email &other) const;
 
     Email &operator=(const Email &other);
 
+    /*!
+     */
     Q_REQUIRED_RESULT QString toString() const;
 
 private:
@@ -110,8 +156,14 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Email::Type)
 
+/*!
+ * \relates KContacts::Email
+ */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Email &object);
 
+/*!
+ * \relates KContacts::Email
+ */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Email &object);
 }
 

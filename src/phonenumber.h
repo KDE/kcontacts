@@ -164,7 +164,7 @@ public:
      * Returns the phone number normalized for dialing.
      * This has all formatting stripped for passing to dialers or tel: URLs.
      * @see number()
-     * @since 5.12
+     * \since 5.12
      */
     Q_REQUIRED_RESULT QString normalizedNumber() const;
 
@@ -196,12 +196,12 @@ public:
 
     /*!
      * Returns whether this phone number is marked as preferred.
-     * @since 5.12
+     * \since 5.12
      */
     Q_REQUIRED_RESULT bool isPreferred() const;
     /*!
      * Returns whether this phone number is expected to support receiving SMS messages.
-     * @since 5.12
+     * \since 5.12
      */
     Q_REQUIRED_RESULT bool supportsSms() const;
 
@@ -223,7 +223,7 @@ public:
      * @param type An OR'ed combination of #TypeFlag
      *
      * @see typeLabel()
-     * @since 4.5
+     * \since 4.5
      */
     Q_REQUIRED_RESULT static QString typeFlagLabel(TypeFlag type);
 

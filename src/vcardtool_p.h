@@ -34,7 +34,7 @@ public:
     Q_REQUIRED_RESULT QByteArray createVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
 
     /*!
-     * @since 4.9.1
+     * \since 4.9.1
      */
     Q_REQUIRED_RESULT QByteArray exportVCards(const Addressee::List &list, VCard::Version version = VCard::v3_0) const;
     /*!

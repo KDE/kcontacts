@@ -21,7 +21,7 @@ namespace KContacts
 class ParameterMap;
 
 /*! @short Class that holds a Organization for a contact.
- *  @since 5.3
+ *  \since 5.3
  */
 class KCONTACTS_EXPORT Org
 {
