@@ -22,7 +22,7 @@ class ParameterMap;
 
 /*!
  * \class KContacts::NickName
- * \inheaderfile KContacts::NickName
+ * \inheaderfile KContacts/NickName
  * \inmodule KContacts
  *
  * \brief Class that holds a NickName for a contact.

@@ -22,7 +22,7 @@ class ParameterMap;
 
 /*!
  * \class KContacts::Lang
- * \inheaderfile KContacts::Lang
+ * \inheaderfile KContacts/Lang
  * \inmodule KContacts
  *
  * \brief Class that holds a Language for a contact.

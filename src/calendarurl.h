@@ -25,9 +25,9 @@ class ParameterMap;
  * \inheaderfile KContacts/CalendarUrl
  * \inmodule KContacts
  *
- * \brief Class that holds a Calendar Url (FBURL/CALADRURI/CALURI)
+ * \brief Class that holds a Calendar Url (FBURL/CALADRURI/CALURI).
  *
- * \sa RFC 6350 Section 6.9 (https://datatracker.ietf.org/doc/html/rfc6350#section-6.9)
+ * \sa https://datatracker.ietf.org/doc/html/rfc6350#section-6.9
  * \since 4.14.6
  */
 class KCONTACTS_EXPORT CalendarUrl

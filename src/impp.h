@@ -23,7 +23,7 @@ class ParameterMap;
 
 /*!
  * \class KContacts::Impp
- * \inheaderfile KContacts::Impp
+ * \inheaderfile KContacts/Impp
  * \inmodule KContacts
  *
  * \brief Class that holds a IMPP for a contact.

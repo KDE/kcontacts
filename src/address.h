@@ -21,6 +21,16 @@
 namespace KContacts
 {
 class Geo;
+
+/*!
+ * \qmlvaluetype address
+ * \inqmlmodule org.kde.contacts
+ * \nativetype KContacts::Address
+ * \brief Postal address information.
+ *
+ * This class represents information about a postal address.
+ */
+
 /*!
   \class KContacts::Address
   \inheaderfile KContacts/Address
@@ -38,9 +48,17 @@ class KCONTACTS_EXPORT Address
     Q_GADGET
 
     /*!
+     * \qmlproperty string address::id
+     */
+
+    /*!
      * \property KContacts::Address::id
      */
     Q_PROPERTY(QString id READ id WRITE setId)
+
+    /*!
+     * \qmlproperty bool address::isEmpty
+     */
 
     /*!
      * \property KContacts::Address::isEmpty
@@ -48,9 +66,18 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(bool isEmpty READ isEmpty)
 
     /*!
+     * \qmlproperty enumeration address::type
+     * \qmlenumeratorsfrom KContacts::Address::TypeFlag
+     */
+
+    /*!
      * \property KContacts::Address::type
      */
     Q_PROPERTY(Type type READ type WRITE setType)
+
+    /*!
+     * \qmlproperty string address::typeLabel
+     */
 
     /*!
      * \property KContacts::Address::typeLabel
@@ -58,9 +85,17 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString typeLabel READ typeLabel)
 
     /*!
+     * \qmlproperty string address::postOfficeBox
+     */
+
+    /*!
      * \property KContacts::Address::postOfficeBox
      */
     Q_PROPERTY(QString postOfficeBox READ postOfficeBox WRITE setPostOfficeBox)
+
+    /*!
+     * \qmlproperty string address::extended
+     */
 
     /*!
      * \property KContacts::Address::extended
@@ -68,9 +103,17 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString extended READ extended WRITE setExtended)
 
     /*!
+     * \qmlproperty string address::street
+     */
+
+    /*!
      * \property KContacts::Address::street
      */
     Q_PROPERTY(QString street READ street WRITE setStreet)
+
+    /*!
+     * \qmlproperty string address::locality
+     */
 
     /*!
      * \property KContacts::Address::locality
@@ -78,9 +121,17 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString locality READ locality WRITE setLocality)
 
     /*!
+     * \qmlproperty string address::region
+     */
+
+    /*!
      * \property KContacts::Address::region
      */
     Q_PROPERTY(QString region READ region WRITE setRegion)
+
+    /*!
+     * \qmlproperty string address::postalCode
+     */
 
     /*!
      * \property KContacts::Address::postalCode
@@ -88,14 +139,26 @@ class KCONTACTS_EXPORT Address
     Q_PROPERTY(QString postalCode READ postalCode WRITE setPostalCode)
 
     /*!
+     * \qmlproperty string address::country
+     */
+
+    /*!
      * \property KContacts::Address::country
      */
     Q_PROPERTY(QString country READ country WRITE setCountry)
 
     /*!
+     * \qmlproperty string address::label
+     */
+
+    /*!
      * \property KContacts::Address::label
      */
     Q_PROPERTY(QString label READ label WRITE setLabel)
+
+    /*!
+     * \qmlproperty geo address::geo
+     */
 
     /*!
      * \property KContacts::Address::geo
@@ -106,6 +169,11 @@ class KCONTACTS_EXPORT Address
     // we cannot do that yet though due to Grantlee themes needing this (which cannot call
     // the invokable methods instead). The KF6::TextTemplate port might bring new options there,
     // otherwise we can at least switch this from postal to the multi-line style for KF6
+
+    /*!
+     * \qmlproperty string address::formattedAddress
+     */
+
     /*!
      * \property KContacts::Address::formattedAddress
      *
@@ -115,6 +183,10 @@ class KCONTACTS_EXPORT Address
      * \since 5.12
      */
     Q_PROPERTY(QString formattedAddress READ formattedPostalAddress)
+
+    /*!
+     * \qmlproperty url address::geoUri
+     */
 
     /*!
      * \property KContacts::Address::geo
@@ -133,8 +205,6 @@ public:
 
     /*!
       Address types:
-      \sa Type
-
       \value Dom domestic
       \value Intl international
       \value Postal postal

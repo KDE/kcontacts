@@ -17,7 +17,7 @@ namespace KContacts
 {
 /*!
  * \class KContacts::Key
- * \inheaderfile KContacts::Key
+ * \inheaderfile KContacts/Key
  * \inmodule KContacts
  *
  * \brief A class to store an encryption key.

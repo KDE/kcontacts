@@ -22,7 +22,7 @@ class AddressFormatElementPrivate;
  * \inheaderfile KContacts/AddressFormat
  * \inmodule KContacts
  *
- * A single element in an address format.
+ * \brief A single element in an address format.
  *
  * A format element can be one of three types:
  * \list
@@ -92,7 +92,8 @@ class AddressFormatPrivate;
  * \inheaderfile KContacts/AddressFormat
  * \inmodule KContacts
  *
- * Information on how addresses are formatted in a specific country/language.
+ * \brief Information on how addresses are formatted in a specific country/language.
+ *
  * This is primarily used for displaying or printing addresses, but is also
  * useful for country specific adjustment in address edit forms, or for parsing
  * textual addresses.
@@ -105,32 +106,32 @@ class KCONTACTS_EXPORT AddressFormat
     Q_GADGET
 
     /*!
-     * \property KContacts::AddressFormatElement::country
+     * \property KContacts::AddressFormat::country
      */
     Q_PROPERTY(QString country READ country)
 
     /*!
-     * \property KContacts::AddressFormatElement::elements
+     * \property KContacts::AddressFormat::elements
      */
     Q_PROPERTY(QList<KContacts::AddressFormatElement> elements READ elementsForQml)
 
     /*!
-     * \property KContacts::AddressFormatElement::requiredFields
+     * \property KContacts::AddressFormat::requiredFields
      */
     Q_PROPERTY(KContacts::AddressFormatFields requiredFields READ requiredFields)
 
     /*!
-     * \property KContacts::AddressFormatElement::usedFields
+     * \property KContacts::AddressFormat::usedFields
      */
     Q_PROPERTY(KContacts::AddressFormatFields usedFields READ usedFields)
 
     /*!
-     * \property KContacts::AddressFormatElement::upperCaseFields
+     * \property KContacts::AddressFormat::upperCaseFields
      */
     Q_PROPERTY(KContacts::AddressFormatFields upperCaseFields READ upperCaseFields)
 
     /*!
-     * \property KContacts::AddressFormatElement::postalCodeRegularExpression
+     * \property KContacts::AddressFormat::postalCodeRegularExpression
      */
     Q_PROPERTY(QString postalCodeRegularExpression READ postalCodeRegularExpression)
 

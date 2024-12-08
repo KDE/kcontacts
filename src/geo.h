@@ -17,8 +17,18 @@
 namespace KContacts
 {
 /*!
+ * \qmlvaluetype geo
+ * \inqmlmodule org.kde.contacts
+ * \nativetype KContacts::Geo
+ *
+ * \brief Geographic position.
+ *
+ * This class represents a geographic position.
+ */
+
+/*!
  * \class KContacts::Geo
- * \inheaderfile KContacts::Geo
+ * \inheaderfile KContacts/Geo
  * \inmodule KContacts
  *
  * \brief Geographic position.
@@ -33,14 +43,26 @@ class KCONTACTS_EXPORT Geo
     Q_GADGET
 
     /*!
+     * \qmlproperty real geo::latitude
+     */
+
+    /*!
      * \property KContacts::Geo::latitude
      */
     Q_PROPERTY(float latitude READ latitude WRITE setLatitude)
 
     /*!
+     * \qmlproperty real geo::longitude
+     */
+
+    /*!
      * \property KContacts::Geo::longitude
      */
     Q_PROPERTY(float longitude READ longitude WRITE setLongitude)
+
+    /*!
+     * \qmlproperty real geo::isValid
+     */
 
     /*!
      * \property KContacts::Geo::isValid

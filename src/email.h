@@ -22,6 +22,14 @@ namespace KContacts
 class ParameterMap;
 
 /*!
+ * \qmlvaluetype email
+ * \inqmlmodule org.kde.contacts
+ * \nativetype KContacts::Email
+ *
+ * \brief Class that holds a Email for a contact.
+ */
+
+/*!
  * \class KContacts::Email
  * \inheaderfile KContacts/Email
  * \inmodule KContacts
@@ -39,9 +47,17 @@ class KCONTACTS_EXPORT Email
     Q_GADGET
 
     /*!
+     * \qmlproperty string email::email
+     */
+
+    /*!
      * \property KContacts::Email::email
      */
     Q_PROPERTY(QString email READ mail WRITE setEmail)
+
+    /*!
+     * \qmlproperty booling email::isValid
+     */
 
     /*!
      * \property KContacts::Email::isValid
@@ -49,9 +65,18 @@ class KCONTACTS_EXPORT Email
     Q_PROPERTY(bool isValid READ isValid)
 
     /*!
+     * \qmlproperty enumeration email::type
+     * \qmlenumeratorsfrom KContacts::Email::TypeFlag
+     */
+
+    /*!
      * \property KContacts::Email::type
      */
     Q_PROPERTY(Type type READ type WRITE setType)
+
+    /*!
+     * \qmlproperty bool email::isPreferred
+     */
 
     /*!
      * \property KContacts::Email::isPreferred

@@ -5,7 +5,7 @@
     \cmakepackage KF6
     \cmakecomponent Contacts
 
-    \brief Provides Stuff
+    \brief Provides Stuff.
 
     Stuff
 */
@@ -14,7 +14,7 @@
     \qmlmodule org.kde.contacts
     \title KContacts QML Types
     \ingroup qmlmodules
-    \brief Stuff
+    \brief Stuff.
 
     lalala
 */

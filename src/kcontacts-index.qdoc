@@ -1,8 +1,8 @@
 /*!
-    \page kguiaddons-index.html
-    \title KGuiAddons
+    \page kcontacts-index.html
+    \title KContacts
 
-    KGuiAddons are addons to QtCore
+    Contacts
 
     \section1 Using the Module
 
@@ -15,8 +15,8 @@
     \section1 API Reference
 
     \list
-        \li \l{KGuiAddons C++ Classes}
-        \li \l{KGuiAddons QML Types}
+        \li \l{KContacts C++ Classes}
+        \li \l{KContacts QML Types}
     \endlist
 
     \section1 Licenses

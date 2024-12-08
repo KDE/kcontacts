@@ -18,14 +18,13 @@ namespace KContacts
 {
 /*!
  * \namespace LDIFConverter
- * \inheaderfile KContacts::LDIFConverter
+ * \inheaderfile KContacts/LDIFConverter
  * \inmodule KContacts
  *
  * A set of functions to convert a string with LDIF information to addressees
  * and vice versa. It is useful for addressbook import- and exportfilters
  * and might be used to read and write Mozilla and Netscape addresssbooks.
  */
-
 namespace LDIFConverter
 {
 /*!

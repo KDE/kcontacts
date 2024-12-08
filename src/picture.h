@@ -20,18 +20,40 @@ namespace KContacts
 class PicturePrivate;
 
 /*!
-  A class to store a picture of an addressee. It can store the data directly or
-  an url reference to a picture.
-*/
+ * \class KContacts::Picture
+ * \inheaderfile KContacts/Picture
+ * \inmodule KContacts
+ *
+ * \brief A class to store a picture of an addressee.
+ *
+ * It can store the data directly or
+ * an url reference to a picture.
+ */
 class KCONTACTS_EXPORT Picture
 {
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Picture &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Picture &);
 
     Q_GADGET
+
+    /*!
+     * \property KContacts::Picture::data
+     */
     Q_PROPERTY(QImage data READ data WRITE setData)
+
+    /*!
+     * \property KContacts::Picture::url
+     */
     Q_PROPERTY(QString url READ url WRITE setUrl)
+
+    /*!
+     * \property KContacts::Picture::isIntern
+     */
     Q_PROPERTY(bool isIntern READ isIntern)
+
+    /*!
+     * \property KContacts::Picture::isEmpty
+     */
     Q_PROPERTY(bool isEmpty READ isEmpty)
 
 public:
@@ -43,14 +65,14 @@ public:
     /*!
      * Creates a picture which points to the given url.
      *
-     * @param url A URL that describes the location of the picture file.
+     * \a url A URL that describes the location of the picture file.
      */
     Picture(const QString &url);
 
     /*!
      * Creates a picture with the given data.
      *
-     * @param data The raw data of the picture.
+     * \a data The raw data of the picture.
      */
     Picture(const QImage &data);
 
@@ -59,22 +81,22 @@ public:
      *
      * Fast operation, Picture's data is implicitly shared.
      *
-     * @param picture The Picture instance to copy from
+     * \a picture The Picture instance to copy from
      */
     Picture(const Picture &picture);
 
-    /*!
-     * Destructor.
-     */
     ~Picture();
 
+    /*!
+     */
     typedef QList<Picture> List;
+
     /*!
      * Assignment operator
      *
      * Fast operation, Picture's data is implicitly shared.
      *
-     * @param other The Picture instance to assign to @c this
+     * \a other The Picture instance to assign to \c this
      */
     Picture &operator=(const Picture &other);
 
@@ -99,7 +121,7 @@ public:
      * setData().
      * This also clears the type, as it is unknown.
      *
-     * @param url  The location URL of the picture file.
+     * \a url  The location URL of the picture file.
      */
     void setUrl(const QString &url);
 
@@ -108,8 +130,10 @@ public:
      * function, isIntern() will return 'false' until you use
      * setData().
      *
-     * @param url  The location URL of the picture file.
-     * @param type  The encoding format of the image, e.g. jpeg or png
+     * \a url The location URL of the picture file.
+     *
+     * \a type The encoding format of the image, e.g. jpeg or png
+     *
      * \since 4.10
      */
     void setUrl(const QString &url, const QString &type);
@@ -120,7 +144,7 @@ public:
      * This also sets type to "png" or "jpeg" depending
      * on whether the image has an alpha channel or not.
      *
-     * @param data  The image data of the picture.
+     * \a data  The image data of the picture.
      */
     void setData(const QImage &data);
 
@@ -128,8 +152,10 @@ public:
      * Sets the raw data of the picture. When using this function,
      * isIntern() will return 'true' until you use setUrl().
      *
-     * @param rawData  The raw data of the picture.
-     * @param type  The encoding format of the image, e.g. jpeg or png
+     * \a rawData  The raw data of the picture.
+     *
+     * \a type  The encoding format of the image, e.g. jpeg or png
+     *
      * \since 4.10
      */
     void setRawData(const QByteArray &rawData, const QString &type);
@@ -137,6 +163,7 @@ public:
     /*!
      * Returns whether the picture is described by a URL (extern) or
      * by the raw data (intern).
+     *
      * When this method returns 'true' you can use data() to
      * get the raw data. Otherwise you can request the URL of this
      * picture by url() and load the raw data from that location.
@@ -175,12 +202,16 @@ private:
 };
 
 /*!
- * Serializes the @p picture object into the @p stream.
+ * \relates KContacts::Picture
+ *
+ * Serializes the \a picture object into the \a stream.
  */
 KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &stream, const Picture &picture);
 
 /*!
- * Initializes the @p picture object from the @p stream.
+ * \relates KContacts::Picture
+ *
+ * Initializes the \a picture object from the \a stream.
  */
 KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &stream, Picture &picture);
 }
