@@ -60,37 +60,37 @@ msgstr "वितरण लेबल"
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
-msgstr ""
+msgstr "गृहज"
 
 #: address.cpp:356
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
-msgstr ""
+msgstr "अन्तराष्ट्रिय"
 
 #: address.cpp:358
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
-msgstr ""
+msgstr "डाक"
 
 #: address.cpp:360
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
-msgstr ""
+msgstr "परिवेष्ट"
 
 #: address.cpp:362
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
-msgstr ""
+msgstr "गृहम्‌"
 
 #: address.cpp:364
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
-msgstr ""
+msgstr "कार्यम्‌"
 
 #: address.cpp:366
 #, kde-format
@@ -101,7 +101,7 @@ msgstr "प्राधान्य पता"
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
-msgstr ""
+msgstr "इतर"
 
 #: addressee.cpp:455
 #, kde-format
@@ -287,13 +287,13 @@ msgstr "भौगोलिक स्थिति"
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
-msgstr ""
+msgstr "शीर्षक"
 
 #: addressee.cpp:1139
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
-msgstr ""
+msgstr "भूमिका"
 
 #: addressee.cpp:1190
 #, kde-format
@@ -409,43 +409,43 @@ msgstr "स."
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
-msgstr ""
+msgstr "X509"
 
 #: key.cpp:201
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
-msgstr ""
+msgstr "पीजीपी"
 
 #: key.cpp:204
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
-msgstr ""
+msgstr "आचारः"
 
 #: key.cpp:207
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
-msgstr ""
+msgstr "अज्ञातप्रकारः"
 
 #: phonenumber.cpp:170
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
-msgstr ""
+msgstr "दूरभाषसङ्ख्या"
 
 #: phonenumber.cpp:172
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
-msgstr ""
+msgstr "गृहम्‌"
 
 #: phonenumber.cpp:174
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
-msgstr ""
+msgstr "कार्यम्‌"
 
 #: phonenumber.cpp:176
 #, kde-format
@@ -456,7 +456,7 @@ msgstr "दूत"
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
-msgstr ""
+msgstr "प्राधान्यम्"
 
 #: phonenumber.cpp:180
 #, kde-format
@@ -472,13 +472,13 @@ msgstr "फैक्स"
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
-msgstr ""
+msgstr "निष्तन्त्री"
 
 #: phonenumber.cpp:186
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
-msgstr ""
+msgstr "विडिओ"
 
 #: phonenumber.cpp:188
 #, kde-format
@@ -494,7 +494,7 @@ msgstr "मोडेम"
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
-msgstr ""
+msgstr "कारयानम्‌"
 
 #: phonenumber.cpp:196
 #, kde-format
@@ -505,7 +505,7 @@ msgstr "पीसीएस"
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
-msgstr ""
+msgstr "इतर"
 
 #: phonenumber.cpp:213
 #, kde-format
@@ -521,22 +521,22 @@ msgstr "कार्य फैक्स"
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
-msgstr ""
+msgstr "सार्वजनिक"
 
 #: secrecy.cpp:101
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
-msgstr ""
+msgstr "वैयक्तिक"
 
 #: secrecy.cpp:104
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
-msgstr ""
+msgstr "गोपनीय"
 
 #: secrecy.cpp:107
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
-msgstr ""
+msgstr "अज्ञातप्रकारः"
