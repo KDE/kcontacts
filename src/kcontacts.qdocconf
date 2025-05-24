@@ -29,3 +29,5 @@ qhp.KContacts.subprojects.classes.title = C++ Classes
 qhp.KContacts.subprojects.classes.indexTitle = KContacts C++ Classes
 qhp.KContacts.subprojects.classes.selectors = class fake:headerfile
 qhp.KContacts.subprojects.classes.sortPages = true
+
+tagfile = kcontacts.tags
