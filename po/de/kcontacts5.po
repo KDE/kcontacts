@@ -1,7 +1,7 @@
-# Stephan Johach <hunsum@gmx.de>, 2007.
-# Burkhard Lück <lueck@hube-lueck.de>, 2008, 2009, 2021.
-# Thomas Reitelbach <tr@erdfunkstelle.de>, 2009.
-# Frederik Schwarzer <schwarzer@kde.org>, 2010, 2013, 2016.
+# SPDX-FileCopyrightText: 2007 Stephan Johach <hunsum@gmx.de>
+# SPDX-FileCopyrightText: 2008, 2009, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2009 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2010, 2013, 2016 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts6\n"
