@@ -1353,6 +1353,10 @@ VCardLine VCardTool::createPicturev4(const QString &identifier, const Picture &p
         line.addParameter(QStringLiteral("type"), pic.type());
         line.setBase64Value(pic.rawData().toBase64());
         return line;
+    } else {
+        VCardLine line(identifier);
+        line.setValue(pic.url());
+        return line;
     }
     return {};
 }
