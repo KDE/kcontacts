@@ -414,7 +414,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
 
             // iterate over the lines
             for (const VCardLine &vline : std::as_const(lines)) {
-                QVariant val = vline.value();
+                const QVariant val = vline.value();
                 if (val.isValid()) {
                     if (vline.hasGroup()) {
                         textLine = vline.group().toLatin1() + '.' + vline.identifier().toLatin1();
