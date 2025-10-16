@@ -141,23 +141,23 @@ public:
      * This is equivalent to address().scheme().
      * \since 5.12
      */
-    QString serviceType() const;
+    Q_REQUIRED_RESULT QString serviceType() const;
     /*!
      * Returns a translated label for the service type.
      * \since 5.12
      */
-    QString serviceLabel() const;
+    Q_REQUIRED_RESULT QString serviceLabel() const;
     /*!
      * Returns the name of an icon representing the service type.
      * \since 5.12
      */
-    QString serviceIcon() const;
+    Q_REQUIRED_RESULT QString serviceIcon() const;
 
     /*!
      * Returns whether this is the preferred messaging address.
      * \since 5.12
      */
-    bool isPreferred() const;
+    Q_REQUIRED_RESULT bool isPreferred() const;
     /*!
      * Sets that this is the preferred messaging address.
      * \since 5.12
