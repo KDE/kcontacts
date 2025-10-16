@@ -1004,7 +1004,7 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // PHOTO
                 else if (identifier == QLatin1String("photo")) {
-                    Picture picture = parsePicture(*lineIt);
+                    const Picture picture = parsePicture(*lineIt);
                     if (addr.photo().isEmpty()) {
                         addr.setPhoto(picture);
                     } else {
