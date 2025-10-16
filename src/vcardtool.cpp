@@ -1340,7 +1340,18 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     const QStringList params = line.parameterList();
     if (params.isEmpty()) { // Vcard4
         if (line.value().isValid()) { // Load picture url
-            pic.setUrl(line.value().toString());
+            const QByteArray value = line.value().toByteArray();
+            if (const int dataPos = value.indexOf("data:"); dataPos > -1) { // Data element
+                // data:image/png;base64,
+                const int indexOfBase64 = value.indexOf(";base64,");
+                if (indexOfBase64 > -1) {
+                    const QByteArray type = value.mid(5, indexOfBase64 - 4);
+                    const QByteArray f = value.fromBase64(value.last(value.length() - 22));
+                    pic.setRawData(f, QString::fromLatin1(type));
+                }
+            } else {
+                pic.setUrl(line.value().toString());
+            }
         }
     } else {
         QString type;
