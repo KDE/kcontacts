@@ -126,7 +126,8 @@ Email::Type Email::type() const
     Type type = Unknown;
     for (const auto &s : it->paramValues) {
         const auto it = std::find_if(std::begin(email_type_names), std::end(email_type_names), [&s](const email_type_name &t) {
-            return QLatin1String(t.name) == s;
+            const QString tName = QLatin1String(t.name);
+            return tName == s.toUpper();
         });
         if (it != std::end(email_type_names)) {
             type |= (*it).type;
