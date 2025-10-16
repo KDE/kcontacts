@@ -25,6 +25,7 @@ void VCardLineTest::shouldHaveDefaultValue()
     QVERIFY(line.group().isEmpty());
     QVERIFY(line.parameterList().isEmpty());
     QVERIFY(line.value().isNull());
+    QVERIFY(line.base64Value().isEmpty());
 }
 
 void VCardLineTest::shouldAssignValues()
@@ -106,6 +107,8 @@ void VCardLineTest::shouldEqualValue()
 
     QCOMPARE(line.group(), group);
     QCOMPARE(line.value(), valueVariant);
+    const QByteArray base64Value = QByteArray("foo");
+    line.setBase64Value(base64Value);
 
     KContacts::VCardLine copyLine(line);
     QVERIFY(line == copyLine);

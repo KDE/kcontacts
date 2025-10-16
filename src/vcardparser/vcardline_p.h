@@ -111,7 +111,14 @@ public:
      */
     Q_REQUIRED_RESULT ParameterMap parameterMap() const;
 
+    /*!
+     * Add base64 value
+     */
+    Q_REQUIRED_RESULT QByteArray base64Value() const;
+    void setBase64Value(const QByteArray &newBase64Value);
+
 private:
+    QByteArray mBase64Value;
     ParameterMap mParamMap;
     QString mIdentifier;
     QString mGroup;

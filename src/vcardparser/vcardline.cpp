@@ -27,7 +27,8 @@ VCardLine::VCardLine(const QString &identifier, const QVariant &value)
 }
 
 VCardLine::VCardLine(const VCardLine &line)
-    : mParamMap(line.mParamMap)
+    : mBase64Value(line.mBase64Value)
+    , mParamMap(line.mParamMap)
     , mIdentifier(line.mIdentifier)
     , mGroup(line.mGroup)
     , mValue(line.mValue)
@@ -48,6 +49,7 @@ VCardLine &VCardLine::operator=(const VCardLine &line)
     mValue = line.mValue;
     mIdentifier = line.mIdentifier;
     mGroup = line.mGroup;
+    mBase64Value = line.mBase64Value;
 
     return *this;
 }
@@ -58,7 +60,8 @@ bool VCardLine::operator==(const VCardLine &other) const
     return (mParamMap == other.parameterMap())
            && (mValue == other.value())
            && (mIdentifier == other.identifier())
-           && (mGroup == other.group());
+           && (mGroup == other.group())
+           && (mBase64Value == other.base64Value());
     // clang-format on
 }
 
@@ -142,4 +145,14 @@ QString VCardLine::parameter(const QString &param) const
 ParameterMap VCardLine::parameterMap() const
 {
     return mParamMap;
+}
+
+QByteArray VCardLine::base64Value() const
+{
+    return mBase64Value;
+}
+
+void VCardLine::setBase64Value(const QByteArray &newBase64Value)
+{
+    mBase64Value = newBase64Value;
 }
