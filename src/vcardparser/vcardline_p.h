@@ -8,6 +8,7 @@
 #ifndef VCARDLINE_H
 #define VCARDLINE_H
 
+#include <QDebug>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
@@ -125,5 +126,5 @@ private:
     QVariant mValue;
 };
 }
-
+KCONTACTS_EXPORT QDebug operator<<(QDebug d, const KContacts::VCardLine &t);
 #endif

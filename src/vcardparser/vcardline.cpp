@@ -156,3 +156,13 @@ void VCardLine::setBase64Value(const QByteArray &newBase64Value)
 {
     mBase64Value = newBase64Value;
 }
+
+QDebug operator<<(QDebug d, const KContacts::VCardLine &t)
+{
+    d.space() << "Identifier" << t.identifier();
+    d.space() << "Group" << t.group();
+    d.space() << "Value" << t.value();
+    d.space() << "Base64Value" << t.base64Value();
+    d.space() << "ParamMap" << t.parameterMap().toString();
+    return d;
+}
