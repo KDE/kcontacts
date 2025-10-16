@@ -1338,15 +1338,21 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     Picture pic;
 
     const QStringList params = line.parameterList();
-    QString type;
-    if (params.contains(QLatin1String("type"))) {
-        type = line.parameter(QStringLiteral("type"));
-    }
-    if (params.contains(QLatin1String("encoding"))) {
-        pic.setRawData(line.value().toByteArray(), type);
-    } else if (params.contains(QLatin1String("value"))) {
-        if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
+    if (params.isEmpty()) { // Vcard4
+        if (line.value().isValid()) { // Load picture url
             pic.setUrl(line.value().toString());
+        }
+    } else {
+        QString type;
+        if (params.contains(QLatin1String("type"))) {
+            type = line.parameter(QStringLiteral("type"));
+        }
+        if (params.contains(QLatin1String("encoding"))) {
+            pic.setRawData(line.value().toByteArray(), type);
+        } else if (params.contains(QLatin1String("value"))) {
+            if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
+                pic.setUrl(line.value().toString());
+            }
         }
     }
 
