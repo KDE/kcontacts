@@ -116,7 +116,7 @@ static const email_type_name email_type_names[] = {
     {"OTHER", Email::Other},
 };
 
-Email::Type KContacts::Email::type() const
+Email::Type Email::type() const
 {
     const auto it = d->mParamMap.findParam(QLatin1String("type"));
     if (it == d->mParamMap.end()) {
