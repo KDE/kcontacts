@@ -62,6 +62,8 @@ private:
     Picture parsePicture(const VCardLine &line) const;
     KCONTACTS_NO_EXPORT
     VCardLine createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const;
+    KCONTACTS_NO_EXPORT
+    VCardLine createPicturev4(const QString &identifier, const Picture &pic) const;
 
     KCONTACTS_NO_EXPORT
     Sound parseSound(const VCardLine &line) const;

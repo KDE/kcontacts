@@ -521,10 +521,18 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         processOrganizations(addressee, version, &card);
 
         // PHOTO
-        card.addLine(createPicture(QStringLiteral("PHOTO"), addressee.photo(), version));
-        const QList<Picture> lstExtraPhoto = addressee.extraPhotoList();
-        for (const Picture &photo : lstExtraPhoto) {
-            card.addLine(createPicture(QStringLiteral("PHOTO"), photo, version));
+        if (version == VCard::v4_0) {
+            card.addLine(createPicturev4(QStringLiteral("PHOTO"), addressee.photo()));
+            const QList<Picture> lstExtraPhoto = addressee.extraPhotoList();
+            for (const Picture &photo : lstExtraPhoto) {
+                card.addLine(createPicturev4(QStringLiteral("PHOTO"), photo));
+            }
+        } else {
+            card.addLine(createPicture(QStringLiteral("PHOTO"), addressee.photo(), version));
+            const QList<Picture> lstExtraPhoto = addressee.extraPhotoList();
+            for (const Picture &photo : lstExtraPhoto) {
+                card.addLine(createPicture(QStringLiteral("PHOTO"), photo, version));
+            }
         }
 
         // PROID only for version > 2.1
@@ -1337,6 +1345,18 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     return pic;
 }
 
+VCardLine VCardTool::createPicturev4(const QString &identifier, const Picture &pic) const
+{
+    if (pic.isIntern()) {
+        const QString pictureIdentifier = identifier + QStringLiteral(":data") + QStringLiteral(":image/") + pic.type();
+        VCardLine line(pictureIdentifier);
+        line.addParameter(QStringLiteral("type"), pic.type());
+        line.setBase64Value(pic.rawData().toBase64());
+        return line;
+    }
+    return {};
+}
+
 VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic, VCard::Version version) const
 {
     VCardLine line(identifier);
@@ -1347,16 +1367,18 @@ VCardLine VCardTool::createPicture(const QString &identifier, const Picture &pic
 
     if (pic.isIntern()) {
         line.setValue(pic.rawData());
-        if (version == VCard::v2_1) {
+        switch (version) {
+        case VCard::v2_1:
             line.addParameter(QStringLiteral("ENCODING"), QStringLiteral("BASE64"));
             line.addParameter(pic.type(), QString());
-        } else { /*if (version == VCard::v3_0) */
+            break;
+        case VCard::v3_0:
             line.addParameter(QStringLiteral("encoding"), QStringLiteral("b"));
             line.addParameter(QStringLiteral("type"), pic.type());
-#if 0
-        } else { //version 4.0
-            line.addParameter(QStringLiteral("data") + QStringLiteral(":image/") + pic.type(), QStringLiteral("base64"));
-#endif
+            break;
+        case VCard::v4_0:
+            // Nothing use createPicturev4
+            break;
         }
     } else {
         line.setValue(pic.url());
