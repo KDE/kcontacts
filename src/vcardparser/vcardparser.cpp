@@ -481,48 +481,11 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     if (!output.isEmpty()) {
                         textLine.append(':' + output);
 
-                        if (textLine.length() > FOLD_WIDTH) { // we have to fold the line
-                            if (checkMultibyte) {
-                                // RFC 6350: Multi-octet characters MUST remain contiguous.
-                                // we know that textLine contains UTF-8 encoded characters
-                                int lineLength = 0;
-                                for (int i = 0; i < textLine.length(); ++i) {
-                                    if ((textLine[i] & 0xC0) == 0xC0) { // a multibyte sequence follows
-                                        int sequenceLength = 2;
-                                        if ((textLine[i] & 0xE0) == 0xE0) {
-                                            sequenceLength = 3;
-                                        } else if ((textLine[i] & 0xF0) == 0xF0) {
-                                            sequenceLength = 4;
-                                        }
-                                        if ((lineLength + sequenceLength) > FOLD_WIDTH) {
-                                            // the current line would be too long. fold it
-                                            text += "\r\n " + textLine.mid(i, sequenceLength);
-                                            lineLength = 1 + sequenceLength; // incl. leading space
-                                        } else {
-                                            text += textLine.mid(i, sequenceLength);
-                                            lineLength += sequenceLength;
-                                        }
-                                        i += sequenceLength - 1;
-                                    } else {
-                                        text += textLine[i];
-                                        ++lineLength;
-                                    }
-                                    if ((lineLength == FOLD_WIDTH) && (i < (textLine.length() - 1))) {
-                                        text += "\r\n ";
-                                        lineLength = 1; // leading space
-                                    }
-                                }
-                                text += "\r\n";
-                            } else {
-                                for (int i = 0; i <= (textLine.length() / FOLD_WIDTH); ++i) {
-                                    text.append((i == 0 ? "" : " ") + textLine.mid(i * FOLD_WIDTH, FOLD_WIDTH) + "\r\n");
-                                }
-                            }
-                        } else {
-                            text.append(textLine);
-                            text.append("\r\n");
-                        }
+                        text.append(fixLineSize(textLine, checkMultibyte));
                     }
+                } else if (!vline.base64Value().isEmpty()) {
+                    text += vline.identifier().toLatin1();
+                    text.append(fixLineSize(";base64," + vline.base64Value(), false));
                 }
             }
         }
