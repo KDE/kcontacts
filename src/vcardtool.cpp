@@ -318,22 +318,18 @@ void VCardTool::processCustoms(const QStringList &customs, VCard::Version versio
 
         if (identifier.toLower() == QLatin1String("x-kaddressbook-x-anniversary") && version == VCard::v4_0) {
             // ANNIVERSARY
-            if (!value.isEmpty()) {
-                const QDate date = QDate::fromString(value, Qt::ISODate);
-                QDateTime dt = QDateTime(date.startOfDay());
-                dt.setTime(QTime());
-                VCardLine line(QStringLiteral("ANNIVERSARY"));
-                line.addParameter(QStringLiteral("VALUE"), QStringLiteral("DATE"));
-                line.setValue(createDateTime(dt, version, true));
-                card->addLine(line);
-            }
+            const QDate date = QDate::fromString(value, Qt::ISODate);
+            QDateTime dt = QDateTime(date.startOfDay());
+            dt.setTime(QTime());
+            VCardLine line(QStringLiteral("ANNIVERSARY"));
+            line.addParameter(QStringLiteral("VALUE"), QStringLiteral("DATE"));
+            line.setValue(createDateTime(dt, version, true));
+            card->addLine(line);
         } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
-            if (!value.isEmpty()) {
-                VCardLine line(QStringLiteral("RELATED"), QStringLiteral(";"));
-                line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
-                line.addParameter(QStringLiteral("VALUE"), value);
-                card->addLine(line);
-            }
+            VCardLine line(QStringLiteral("RELATED"), QStringLiteral(";"));
+            line.addParameter(QStringLiteral("TYPE"), QStringLiteral("spouse"));
+            line.addParameter(QStringLiteral("VALUE"), value);
+            card->addLine(line);
         } else {
             VCardLine line(identifier, value);
             if (version == VCard::v2_1 && needsEncoding(value)) {
@@ -422,14 +418,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 line.addParameters(lang.params());
                 card.addLine(line);
             }
-        }
-        // CLIENTPIDMAP
-        if (version == VCard::v4_0) {
-            const ClientPidMap::List clientpidmapList = addressee.clientPidMapList();
-            for (const auto &pMap : clientpidmapList) {
-                VCardLine line(QStringLiteral("CLIENTPIDMAP"), pMap.clientPidMap());
-                line.addParameters(pMap.params());
-                card.addLine(line);
+            // CLIENTPIDMAP
+            if (version == VCard::v4_0) {
+                const ClientPidMap::List clientpidmapList = addressee.clientPidMapList();
+                for (const auto &pMap : clientpidmapList) {
+                    VCardLine line(QStringLiteral("CLIENTPIDMAP"), pMap.clientPidMap());
+                    line.addParameters(pMap.params());
+                    card.addLine(line);
+                }
             }
         }
         // EMAIL
@@ -646,9 +642,6 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
                 VCardLine line(QStringLiteral("KIND"), addressee.kind());
                 card.addLine(line);
             }
-        }
-        // From vcard4.
-        if (version == VCard::v4_0) {
             const QList<CalendarUrl> lstCalendarUrl = addressee.calendarUrlList();
             for (const CalendarUrl &url : lstCalendarUrl) {
                 if (url.isValid()) {
@@ -881,7 +874,6 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // EMAIL
                 else if (identifier == QLatin1String("email")) {
-                    const QStringList types = (*lineIt).parameters(QStringLiteral("type"));
                     Email mail((*lineIt).value().toString());
                     mail.setParams((*lineIt).parameterMap());
                     addr.addEmail(mail);
