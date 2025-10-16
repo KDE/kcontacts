@@ -453,10 +453,18 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
 
         // LOGO
-        card.addLine(createPicture(QStringLiteral("LOGO"), addressee.logo(), version));
-        const QList<Picture> lstLogo = addressee.extraLogoList();
-        for (const Picture &logo : lstLogo) {
-            card.addLine(createPicture(QStringLiteral("LOGO"), logo, version));
+        if (version == VCard::v4_0) {
+            card.addLine(createPicturev4(QStringLiteral("LOGO"), addressee.logo()));
+            const QList<Picture> lstLogo = addressee.extraLogoList();
+            for (const Picture &logo : lstLogo) {
+                card.addLine(createPicturev4(QStringLiteral("LOGO"), logo));
+            }
+        } else {
+            card.addLine(createPicture(QStringLiteral("LOGO"), addressee.logo(), version));
+            const QList<Picture> lstLogo = addressee.extraLogoList();
+            for (const Picture &logo : lstLogo) {
+                card.addLine(createPicture(QStringLiteral("LOGO"), logo, version));
+            }
         }
 
         // MAILER only for version < 4.0
