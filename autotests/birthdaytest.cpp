@@ -95,7 +95,7 @@ void BirthDayTest::shouldExportVcard4()
     QByteArray expected(
         "BEGIN:VCARD\r\n"
         "VERSION:4.0\r\n"
-        "BDAY:19760505T120505\r\n"
+        "BDAY;VALUE=DATE:19760505T120505\r\n"
         "EMAIL:foo@kde.org\r\n"
         "EMAIL:bla@kde.org\r\n"
         "N:;;;;\r\n"
@@ -119,7 +119,7 @@ void BirthDayTest::shouldExportVcard4WithoutTime()
     QByteArray expected(
         "BEGIN:VCARD\r\n"
         "VERSION:4.0\r\n"
-        "BDAY:19760505\r\n"
+        "BDAY;VALUE=DATE:19760505\r\n"
         "EMAIL:foo@kde.org\r\n"
         "EMAIL:bla@kde.org\r\n"
         "N:;;;;\r\n"
@@ -143,7 +143,7 @@ void BirthDayTest::shouldExportVcard4WithoutTimeAndWithoutYear()
     QByteArray expected(
         "BEGIN:VCARD\r\n"
         "VERSION:4.0\r\n"
-        "BDAY:--0505\r\n"
+        "BDAY;VALUE=DATE:--0505\r\n"
         "EMAIL:foo@kde.org\r\n"
         "EMAIL:bla@kde.org\r\n"
         "N:;;;;\r\n"
