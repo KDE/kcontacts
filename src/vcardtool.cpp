@@ -322,7 +322,9 @@ void VCardTool::processCustoms(const QStringList &customs, VCard::Version versio
                 const QDate date = QDate::fromString(value, Qt::ISODate);
                 QDateTime dt = QDateTime(date.startOfDay());
                 dt.setTime(QTime());
-                VCardLine line(QStringLiteral("ANNIVERSARY"), createDateTime(dt, version, false));
+                VCardLine line(QStringLiteral("ANNIVERSARY"));
+                line.addParameter(QStringLiteral("VALUE"), QStringLiteral("DATE"));
+                line.setValue(createDateTime(dt, version, true));
                 card->addLine(line);
             }
         } else if (identifier.toLower() == QLatin1String("x-kaddressbook-x-spousesname") && version == VCard::v4_0) {
@@ -363,9 +365,17 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         processAddresses(addresses, version, &card);
 
         // BDAY
-        const bool withTime = addressee.birthdayHasTime();
-        const QString birthdayString = createDateTime(addressee.birthday(), version, withTime);
-        card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
+        if (version == VCard::v4_0) {
+            VCardLine line(QStringLiteral("BDAY"));
+            line.addParameter(QStringLiteral("VALUE"), QStringLiteral("DATE"));
+            const bool withTime = addressee.birthdayHasTime();
+            line.setValue(createDateTime(addressee.birthday(), version, withTime));
+            card.addLine(line);
+        } else {
+            const bool withTime = addressee.birthdayHasTime();
+            const QString birthdayString = createDateTime(addressee.birthday(), version, withTime);
+            card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
+        }
 
         // CATEGORIES only > 2.1
         if (version != VCard::v2_1) {
@@ -1297,7 +1307,7 @@ QString VCardTool::createDateTime(const QDateTime &dateTime, VCard::Version vers
         } else {
             str += QLatin1Char('-');
         }
-        QTime offsetTime = QTime(0, 0).addSecs(abs(offsetSecs));
+        const QTime offsetTime = QTime(0, 0).addSecs(abs(offsetSecs));
         if (version == VCard::v4_0) {
             str += offsetTime.toString(QStringLiteral("HHmm"));
         } else {

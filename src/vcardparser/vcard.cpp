@@ -76,22 +76,21 @@ static const char s_verStr[] = "VERSION";
 
 void VCard::setVersion(Version version)
 {
-
-    VCardLine line;
-    line.setIdentifier(QLatin1String(s_verStr));
+    VCardLine vcardLine;
+    vcardLine.setIdentifier(QLatin1String(s_verStr));
     if (version == v2_1) {
-        line.setIdentifier(QStringLiteral("2.1"));
+        vcardLine.setIdentifier(QStringLiteral("2.1"));
     } else if (version == v3_0) {
-        line.setIdentifier(QStringLiteral("3.0"));
+        vcardLine.setIdentifier(QStringLiteral("3.0"));
     } else if (version == v4_0) {
-        line.setIdentifier(QStringLiteral("4.0"));
+        vcardLine.setIdentifier(QStringLiteral("4.0"));
     }
 
     auto it = findByLineId(QLatin1String(s_verStr));
     if (it != mLineMap.end()) {
-        it->list.append(line);
+        it->list.append(vcardLine);
     } else {
-        const LineData newData{QLatin1String(s_verStr), {line}};
+        const LineData newData{QLatin1String(s_verStr), {vcardLine}};
         auto beforeIt = std::lower_bound(mLineMap.begin(), mLineMap.end(), newData);
         mLineMap.insert(beforeIt, newData);
     }
@@ -104,11 +103,11 @@ VCard::Version VCard::version() const
         return v3_0;
     }
 
-    const VCardLine line = versionEntryIt->list.at(0);
-    if (line.value() == QLatin1String("2.1")) {
+    const VCardLine vcardLine = versionEntryIt->list.at(0);
+    if (vcardLine.value() == QLatin1String("2.1")) {
         return v2_1;
     }
-    if (line.value() == QLatin1String("3.0")) {
+    if (vcardLine.value() == QLatin1String("3.0")) {
         return v3_0;
     }
 
