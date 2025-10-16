@@ -5,7 +5,6 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "kcontacts_debug.h"
 #include "vcardparser_p.h"
 #include <KCodecs>
 #include <QStringDecoder>
