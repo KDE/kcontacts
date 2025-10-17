@@ -111,7 +111,7 @@ void TimeZoneTest::shouldGenerateVCard4()
     addr.setUid(QStringLiteral("testuid"));
     KContacts::TimeZone timezone;
 
-    timezone.setOffset(2);
+    timezone.setTimeZoneName("Europe/Paris");
     addr.setTimeZone(timezone);
 
     lst << addr;
@@ -122,7 +122,7 @@ void TimeZoneTest::shouldGenerateVCard4()
         "VERSION:4.0\r\n"
         "EMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
-        "TZ:+00:02\r\n"
+        "TZ:Europe/Paris\r\n"
         "UID:testuid\r\n"
         "END:VCARD\r\n\r\n");
     QCOMPARE(ba, expected);
