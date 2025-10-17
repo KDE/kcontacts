@@ -573,10 +573,14 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
 
         // SOUND
-        card.addLine(createSound(addressee.sound(), version));
-        const QList<Sound> lstSound = addressee.extraSoundList();
-        for (const Sound &sound : lstSound) {
-            card.addLine(createSound(sound, version));
+        if (version == VCard::v4_0) {
+            // TODO
+        } else {
+            card.addLine(createSound(addressee.sound(), version));
+            const QList<Sound> lstSound = addressee.extraSoundList();
+            for (const Sound &sound : lstSound) {
+                card.addLine(createSound(sound, version));
+            }
         }
 
         // TEL

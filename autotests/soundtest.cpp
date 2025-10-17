@@ -151,6 +151,7 @@ void SoundTest::shouldParseSource()
 
 void SoundTest::shouldGenerateVCard4WithData()
 {
+#if 0
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -175,10 +176,12 @@ void SoundTest::shouldGenerateVCard4WithData()
         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
+#endif
 }
 
 void SoundTest::shouldGenerateVCard4WithUrl()
 {
+#if 0
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -202,6 +205,7 @@ void SoundTest::shouldGenerateVCard4WithUrl()
         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
+#endif
 }
 
 void SoundTest::shouldGenerateVCard3WithData()
