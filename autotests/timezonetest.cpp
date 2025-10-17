@@ -16,7 +16,7 @@ void TimeZoneTest::emptyTest()
 {
     KContacts::TimeZone timezone;
 
-    QVERIFY(timezone.isValid() == false);
+    QVERIFY(!timezone.isValid());
 }
 
 void TimeZoneTest::storeTest()
@@ -26,17 +26,29 @@ void TimeZoneTest::storeTest()
     timezone.setOffset(2);
 
     QVERIFY(timezone.offset() == 2);
+    QVERIFY(timezone.isValid());
 }
 
 void TimeZoneTest::equalsTest()
 {
-    KContacts::TimeZone timezone1;
-    KContacts::TimeZone timezone2;
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
 
-    timezone1.setOffset(2);
-    timezone2.setOffset(2);
+        timezone1.setOffset(2);
+        timezone2.setOffset(2);
 
-    QVERIFY(timezone1 == timezone2);
+        QVERIFY(timezone1 == timezone2);
+    }
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
+
+        timezone1.setTimeZoneName("Europe/Berlin");
+        timezone2.setTimeZoneName("Europe/Berlin");
+
+        QVERIFY(timezone1 == timezone2);
+    }
 }
 
 void TimeZoneTest::differsTest()
@@ -50,30 +62,58 @@ void TimeZoneTest::differsTest()
 
 void TimeZoneTest::assignmentTest()
 {
-    KContacts::TimeZone timezone1;
-    KContacts::TimeZone timezone2;
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
 
-    timezone1.setOffset(2);
-    timezone1 = timezone2;
+        timezone1.setOffset(2);
+        timezone1 = timezone2;
 
-    QVERIFY(timezone1 == timezone2);
+        QVERIFY(timezone1 == timezone2);
+    }
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
+
+        timezone1.setTimeZoneName("Europe/Berlin");
+        timezone1 = timezone2;
+
+        QVERIFY(timezone1 == timezone2);
+    }
 }
 
 void TimeZoneTest::serializeTest()
 {
-    KContacts::TimeZone timezone1;
-    KContacts::TimeZone timezone2;
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
 
-    timezone1.setOffset(2);
+        timezone1.setOffset(2);
 
-    QByteArray data;
-    QDataStream s(&data, QIODevice::WriteOnly);
-    s << timezone1;
+        QByteArray data;
+        QDataStream s(&data, QIODevice::WriteOnly);
+        s << timezone1;
 
-    QDataStream t(&data, QIODevice::ReadOnly);
-    t >> timezone2;
+        QDataStream t(&data, QIODevice::ReadOnly);
+        t >> timezone2;
 
-    QVERIFY(timezone1 == timezone2);
+        QVERIFY(timezone1 == timezone2);
+    }
+    {
+        KContacts::TimeZone timezone1;
+        KContacts::TimeZone timezone2;
+
+        timezone1.setTimeZoneName("Europe/Berlin");
+
+        QByteArray data;
+        QDataStream s(&data, QIODevice::WriteOnly);
+        s << timezone1;
+
+        QDataStream t(&data, QIODevice::ReadOnly);
+        t >> timezone2;
+
+        QVERIFY(timezone1 == timezone2);
+    }
 }
 
 void TimeZoneTest::shouldGenerateVCard3()
