@@ -169,9 +169,7 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
 
         if (hasLabel) {
             if (version == VCard::v4_0) {
-                if (!addr.label().isEmpty()) {
-                    adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg(addr.label()));
-                }
+                adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg(addr.label()));
             } else {
                 VCardLine labelLine(QStringLiteral("LABEL"), addr.label());
                 if (version == VCard::v2_1 && needsEncoding(addr.label())) {
