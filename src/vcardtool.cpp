@@ -1463,7 +1463,6 @@ Sound VCardTool::parseSound(const VCardLine &line) const
 
 VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
 {
-    Q_UNUSED(version);
     VCardLine line(QStringLiteral("SOUND"));
 
     if (snd.isIntern()) {
