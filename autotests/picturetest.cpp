@@ -65,8 +65,8 @@ void PictureTest::storeTestInternImage()
 
     picture.setData(testImage());
 
-    QVERIFY(picture.isEmpty() == false);
-    QVERIFY(picture.isIntern() == true);
+    QVERIFY(!picture.isEmpty());
+    QVERIFY(picture.isIntern());
     QVERIFY(picture.type() == QLatin1String("jpeg"));
     QVERIFY(picture.data() == testImage());
     QVERIFY(picture.rawData() == testImageRawJPEG());
@@ -78,8 +78,8 @@ void PictureTest::storeTestInternRawData()
 
     picture.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
-    QVERIFY(picture.isEmpty() == false);
-    QVERIFY(picture.isIntern() == true);
+    QVERIFY(!picture.isEmpty());
+    QVERIFY(picture.isIntern());
     QVERIFY(picture.type() == QLatin1String("png"));
     QVERIFY(picture.rawData() == testImageRawPNG());
     QVERIFY(picture.data() == testImage());
@@ -126,7 +126,7 @@ void PictureTest::equalsTestInternRawData()
 
     // access data() so a QImage is created
     QVERIFY(!picture1.data().isNull());
-    QVERIFY(picture1 == picture2);
+    QCOMPARE(picture1, picture2);
 }
 
 void PictureTest::equalsTestInternImageAndRawData()
