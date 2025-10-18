@@ -151,6 +151,11 @@ public:
      */
     Q_REQUIRED_RESULT QString toString() const;
 
+    /*!
+     * Returns string sound type.
+     */
+    Q_REQUIRED_RESULT QString type() const;
+
 private:
     class Private;
     QSharedDataPointer<Private> d;

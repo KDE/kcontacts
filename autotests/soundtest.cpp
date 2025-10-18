@@ -31,6 +31,7 @@ void SoundTest::emptyTest()
     KContacts::Sound sound;
 
     QVERIFY(sound.isEmpty());
+    QVERIFY(sound.type().isEmpty());
 }
 
 void SoundTest::storeTestIntern()

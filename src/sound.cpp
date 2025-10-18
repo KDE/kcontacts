@@ -22,13 +22,15 @@ public:
 
     Private(const Private &other)
         : QSharedData(other)
+        , mUrl(other.mUrl)
+        , mType(other.mType)
+        , mData(other.mData)
+        , mIntern(other.mIntern)
     {
-        mUrl = other.mUrl;
-        mData = other.mData;
-        mIntern = other.mIntern;
     }
 
     QString mUrl;
+    QString mType;
     QByteArray mData;
 
     bool mIntern;
@@ -73,6 +75,10 @@ Sound &Sound::operator=(const Sound &other)
 bool Sound::operator==(const Sound &other) const
 {
     if (d->mIntern != other.d->mIntern) {
+        return false;
+    }
+
+    if (d->mType != other.d->mType) {
         return false;
     }
 
@@ -126,9 +132,15 @@ QByteArray Sound::data() const
     return d->mData;
 }
 
+QString Sound::type() const
+{
+    return d->mType;
+}
+
 QString Sound::toString() const
 {
     QString str = QLatin1String("Sound {\n");
+    str += QStringLiteral("  Type: %1\n").arg(d->mType);
     str += QStringLiteral("  IsIntern: %1\n").arg(d->mIntern ? QStringLiteral("true") : QStringLiteral("false"));
     if (d->mIntern) {
         str += QStringLiteral("  Data: %1\n").arg(QString::fromLatin1(d->mData.toBase64()));
@@ -142,12 +154,12 @@ QString Sound::toString() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const Sound &sound)
 {
-    return s << sound.d->mIntern << sound.d->mUrl << sound.d->mData;
+    return s << sound.d->mIntern << sound.d->mUrl << sound.d->mData << sound.d->mType;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Sound &sound)
 {
-    s >> sound.d->mIntern >> sound.d->mUrl >> sound.d->mData;
+    s >> sound.d->mIntern >> sound.d->mUrl >> sound.d->mData >> sound.d->mType;
 
     return s;
 }
