@@ -38,9 +38,9 @@ void PhoneNumberTest::storeTest()
     number.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
     number.setNumber(QStringLiteral("2734826345"));
 
-    QVERIFY(number.id() == QLatin1String("My Id"));
-    QVERIFY(number.type() == (KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell));
-    QVERIFY(number.number() == QLatin1String("2734826345"));
+    QCOMPARE(number.id(), QLatin1String("My Id"));
+    QCOMPARE(number.type(), (KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell));
+    QCOMPARE(number.number(), QLatin1String("2734826345"));
 }
 
 void PhoneNumberTest::equalsTest()
@@ -56,7 +56,7 @@ void PhoneNumberTest::equalsTest()
     number2.setType(KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Cell);
     number2.setNumber(QStringLiteral("2734826345"));
 
-    QVERIFY(number1 == number2);
+    QCOMPARE(number1, number2);
 }
 
 void PhoneNumberTest::differsTest()
@@ -78,7 +78,7 @@ void PhoneNumberTest::assignmentTest()
 
     number1 = number2;
 
-    QVERIFY(number1 == number2);
+    QCOMPARE(number1, number2);
 }
 
 void PhoneNumberTest::serializeTest()
@@ -97,7 +97,7 @@ void PhoneNumberTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> number2;
 
-    QVERIFY(number1 == number2);
+    QCOMPARE(number1, number2);
 }
 
 void PhoneNumberTest::labelTest()

@@ -70,7 +70,7 @@ void LangTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(language == result);
+    QCOMPARE(language, result);
 }
 
 void LangTest::shouldEqualLanguage()
@@ -85,7 +85,7 @@ void LangTest::shouldEqualLanguage()
     language.setParams(params);
 
     result = language;
-    QVERIFY(language == result);
+    QCOMPARE(language, result);
 }
 
 void LangTest::shouldParseLanguage()

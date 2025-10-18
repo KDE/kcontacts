@@ -70,7 +70,7 @@ void ClientPidMapTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(role == result);
+    QCOMPARE(role, result);
 }
 
 void ClientPidMapTest::shouldEqualClientPidMap()
@@ -85,7 +85,7 @@ void ClientPidMapTest::shouldEqualClientPidMap()
     role.setParams(params);
 
     result = role;
-    QVERIFY(role == result);
+    QCOMPARE(role, result);
 }
 
 void ClientPidMapTest::shouldParseClientPidMap()

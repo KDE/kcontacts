@@ -70,7 +70,7 @@ void RoleTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(role == result);
+    QCOMPARE(role, result);
 }
 
 void RoleTest::shouldEqualRole()
@@ -85,7 +85,7 @@ void RoleTest::shouldEqualRole()
     role.setParams(params);
 
     result = role;
-    QVERIFY(role == result);
+    QCOMPARE(role, result);
 }
 
 void RoleTest::shouldParseRole()

@@ -79,7 +79,7 @@ void ContactGroupTest::contactGroupContactReference()
         QCOMPARE(ref.preferredEmail(), ref2.preferredEmail());
         QCOMPARE(ref.custom(customKey), ref2.custom(customKey));
 
-        QVERIFY(ref == ref2);
+        QCOMPARE(ref, ref2);
     }
 
     // const test
@@ -133,7 +133,7 @@ void ContactGroupTest::contactGroupContactGroupReference()
         QCOMPARE(ref.uid(), ref2.uid());
         QCOMPARE(ref.custom(customKey), ref2.custom(customKey));
 
-        QVERIFY(ref == ref2);
+        QCOMPARE(ref, ref2);
     }
 
     // const test
@@ -194,7 +194,7 @@ void ContactGroupTest::contactGroupData()
         QCOMPARE(data.email(), data2.email());
         QCOMPARE(data.custom(customKey), data2.custom(customKey));
 
-        QVERIFY(data == data2);
+        QCOMPARE(data, data2);
     }
 
     // const test
@@ -358,7 +358,7 @@ void ContactGroupTest::testGroupListRoundTrip()
     result = ContactGroupTool::convertFromXml(&buffer, list2, &errorMessage);
     QVERIFY(result);
     QVERIFY(errorMessage.isEmpty());
-    QVERIFY(list2.size() == 2);
+    QCOMPARE(list2.size(), 2);
     QCOMPARE(list2[0], group1);
     QCOMPARE(list2[1], group2);
 }

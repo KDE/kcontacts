@@ -80,7 +80,7 @@ void FieldGroupTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(fieldGroup == result);
+    QCOMPARE(fieldGroup, result);
 }
 
 void FieldGroupTest::shouldEqualFieldGroup()
@@ -97,7 +97,7 @@ void FieldGroupTest::shouldEqualFieldGroup()
     fieldGroup.setParams(params);
 
     result = fieldGroup;
-    QVERIFY(fieldGroup == result);
+    QCOMPARE(fieldGroup, result);
 }
 
 void FieldGroupTest::shouldParseFieldGroup()

@@ -89,7 +89,7 @@ void AddressTest::equalsTest()
     address2.setCountry(QStringLiteral("My country"));
     address2.setLabel(QStringLiteral("My Label"));
 
-    QVERIFY(address1 == address2);
+    QCOMPARE(address1, address2);
 }
 
 void AddressTest::differsTest()
@@ -118,7 +118,7 @@ void AddressTest::assignmentTest()
 
     address2 = address1;
 
-    QVERIFY(address1 == address2);
+    QCOMPARE(address1, address2);
 }
 
 void AddressTest::serializeTest()
@@ -143,7 +143,7 @@ void AddressTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> address2;
 
-    QVERIFY(address1 == address2);
+    QCOMPARE(address1, address2);
 }
 
 void AddressTest::formatTest()

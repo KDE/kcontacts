@@ -111,7 +111,7 @@ void VCardLineTest::shouldEqualValue()
     line.setBase64Value(base64Value);
 
     KContacts::VCardLine copyLine(line);
-    QVERIFY(line == copyLine);
+    QCOMPARE(line, copyLine);
 }
 
 QTEST_MAIN(VCardLineTest)

@@ -70,7 +70,7 @@ void TitleTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(title == result);
+    QCOMPARE(title, result);
 }
 
 void TitleTest::shouldEqualTitle()
@@ -85,7 +85,7 @@ void TitleTest::shouldEqualTitle()
     title.setParams(params);
 
     result = title;
-    QVERIFY(title == result);
+    QCOMPARE(title, result);
 }
 
 void TitleTest::shouldParseTwoTitles()

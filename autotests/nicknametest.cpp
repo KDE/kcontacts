@@ -70,7 +70,7 @@ void NickNameTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(nickname == result);
+    QCOMPARE(nickname, result);
 }
 
 void NickNameTest::shouldEqualNickName()
@@ -85,7 +85,7 @@ void NickNameTest::shouldEqualNickName()
     nickname.setParams(params);
 
     result = nickname;
-    QVERIFY(nickname == result);
+    QCOMPARE(nickname, result);
 }
 
 void NickNameTest::shouldParseNickName()

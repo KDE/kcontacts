@@ -40,8 +40,8 @@ void SoundTest::storeTestIntern()
 
     sound.setData(testData());
 
-    QVERIFY(sound.isIntern() == true);
-    QVERIFY(sound.data() == testData());
+    QCOMPARE(sound.isIntern(), true);
+    QCOMPARE(sound.data(), testData());
 }
 
 void SoundTest::storeTestExtern()
@@ -50,8 +50,8 @@ void SoundTest::storeTestExtern()
 
     sound.setUrl(QLatin1String("http://myhomepage.com/sound.wav"));
 
-    QVERIFY(sound.isIntern() == false);
-    QVERIFY(sound.url() == QLatin1String("http://myhomepage.com/sound.wav"));
+    QCOMPARE(sound.isIntern(), false);
+    QCOMPARE(sound.url(), QLatin1String("http://myhomepage.com/sound.wav"));
 }
 
 void SoundTest::equalsTestIntern()
@@ -62,7 +62,7 @@ void SoundTest::equalsTestIntern()
     sound1.setData(testData());
     sound2.setData(testData());
 
-    QVERIFY(sound1 == sound2);
+    QCOMPARE(sound1, sound2);
 }
 
 void SoundTest::equalsTestExtern()
@@ -73,7 +73,7 @@ void SoundTest::equalsTestExtern()
     sound1.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
     sound2.setUrl(QStringLiteral("http://myhomepage.com/sound.wav"));
 
-    QVERIFY(sound1 == sound2);
+    QCOMPARE(sound1, sound2);
 }
 
 void SoundTest::differsTest()
@@ -96,7 +96,7 @@ void SoundTest::assignmentTestIntern()
 
     sound2 = sound1;
 
-    QVERIFY(sound1 == sound2);
+    QCOMPARE(sound1, sound2);
 }
 
 void SoundTest::assignmentTestExtern()
@@ -108,7 +108,7 @@ void SoundTest::assignmentTestExtern()
 
     sound2 = sound1;
 
-    QVERIFY(sound1 == sound2);
+    QCOMPARE(sound1, sound2);
 }
 
 void SoundTest::serializeTest()
@@ -126,7 +126,7 @@ void SoundTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> sound2;
 
-    QVERIFY(sound1 == sound2);
+    QCOMPARE(sound1, sound2);
 }
 
 void SoundTest::shouldParseSource()

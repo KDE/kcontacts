@@ -65,7 +65,7 @@ void ImppTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QVERIFY(impp == result);
+    QCOMPARE(impp, result);
 }
 
 void ImppTest::shouldEqualImpp()
@@ -79,7 +79,7 @@ void ImppTest::shouldEqualImpp()
     impp.setAddress(address);
 
     KContacts::Impp result(impp);
-    QVERIFY(impp == result);
+    QCOMPARE(impp, result);
 }
 
 void ImppTest::shouldParseWithoutImpp()
