@@ -57,28 +57,28 @@ public:
     /*!
      * Return offset in minutes relative to UTC.
      */
-    Q_REQUIRED_RESULT int offset() const;
+    [[nodiscard]] int offset() const;
 
     /*!
      * Return, if this time zone object is valid.
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const TimeZone &other) const;
+    [[nodiscard]] bool operator==(const TimeZone &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const TimeZone &other) const;
+    [[nodiscard]] bool operator!=(const TimeZone &other) const;
     TimeZone &operator=(const TimeZone &other);
 
     /*!
      * Return string representation of time zone offset.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
-    Q_REQUIRED_RESULT QByteArray timeZoneName() const;
+    [[nodiscard]] QByteArray timeZoneName() const;
     void setTimeZoneName(const QByteArray &name);
 
 private:

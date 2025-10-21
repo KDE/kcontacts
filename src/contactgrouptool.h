@@ -35,25 +35,25 @@ namespace ContactGroupTool
  * Converts XML data coming from a \a device into a contact \a group.
  * If an error occurs, \c false is returned and \a errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group, QString *errorMessage = nullptr);
+[[nodiscard]] KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, ContactGroup &group, QString *errorMessage = nullptr);
 
 /*!
  * Converts a contact \a group into XML data and writes them to a \a device.
  * If an error occurs, \c false is returned and \a errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device, QString *errorMessage = nullptr);
+[[nodiscard]] KCONTACTS_EXPORT bool convertToXml(const ContactGroup &group, QIODevice *device, QString *errorMessage = nullptr);
 
 /*!
  * Converts XML data coming from a \a device into a \a list of contact groups.
  * If an error occurs, \c false is returned and \a errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QList<ContactGroup> &list, QString *errorMessage = nullptr);
+[[nodiscard]] KCONTACTS_EXPORT bool convertFromXml(QIODevice *device, QList<ContactGroup> &list, QString *errorMessage = nullptr);
 
 /*!
  * Converts a \a list of contact groups into XML data and writes them to a \a device.
  * If an error occurs, \c false is returned and \a errorMessage is set.
  */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
+[[nodiscard]] KCONTACTS_EXPORT bool convertToXml(const QList<ContactGroup> &list, QIODevice *device, QString *errorMessage = nullptr);
 }
 }
 

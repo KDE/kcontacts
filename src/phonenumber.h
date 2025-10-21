@@ -208,12 +208,12 @@ public:
      * Returns \c true if number, type and identifier are equal,
      *         otherwise \c false
      */
-    Q_REQUIRED_RESULT bool operator==(const PhoneNumber &other) const;
+    [[nodiscard]] bool operator==(const PhoneNumber &other) const;
 
     /*!
      * Not-Equal operator.
      */
-    Q_REQUIRED_RESULT bool operator!=(const PhoneNumber &other) const;
+    [[nodiscard]] bool operator!=(const PhoneNumber &other) const;
 
     /*!
      * Assignment operator.
@@ -227,7 +227,7 @@ public:
     /*!
      * Returns true, if the phone number is empty.
      */
-    Q_REQUIRED_RESULT bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /*!
      * Sets the unique \a identifier.
@@ -237,7 +237,7 @@ public:
     /*!
      * Returns the unique identifier.
      */
-    Q_REQUIRED_RESULT QString id() const;
+    [[nodiscard]] QString id() const;
 
     /*!
      * Sets the phone \a number.
@@ -249,7 +249,7 @@ public:
      * This is the number as entered/stored with all formatting preserved. Preferred for display.
      * \sa normalizedNumber()
      */
-    Q_REQUIRED_RESULT QString number() const;
+    [[nodiscard]] QString number() const;
 
     /*!
      * Returns the phone number normalized for dialing.
@@ -257,7 +257,7 @@ public:
      * \sa number()
      * \since 5.12
      */
-    Q_REQUIRED_RESULT QString normalizedNumber() const;
+    [[nodiscard]] QString normalizedNumber() const;
 
     /*!
      * Sets the \a type.
@@ -273,28 +273,28 @@ public:
      * \sa TypeFlag
      * \sa typeLabel()
      */
-    Q_REQUIRED_RESULT Type type() const;
+    [[nodiscard]] Type type() const;
 
     /*!
      * Returns a translated string of the address' type.
      */
-    Q_REQUIRED_RESULT QString typeLabel() const;
+    [[nodiscard]] QString typeLabel() const;
 
     /*!
      * Returns a list of all available types
      */
-    Q_REQUIRED_RESULT static TypeList typeList();
+    [[nodiscard]] static TypeList typeList();
 
     /*!
      * Returns whether this phone number is marked as preferred.
      * \since 5.12
      */
-    Q_REQUIRED_RESULT bool isPreferred() const;
+    [[nodiscard]] bool isPreferred() const;
     /*!
      * Returns whether this phone number is expected to support receiving SMS messages.
      * \since 5.12
      */
-    Q_REQUIRED_RESULT bool supportsSms() const;
+    [[nodiscard]] bool supportsSms() const;
 
     /*!
      * Returns the translated label for phone number \a type.
@@ -316,7 +316,7 @@ public:
      * \sa typeLabel()
      * \since 4.5
      */
-    Q_REQUIRED_RESULT static QString typeFlagLabel(TypeFlag type);
+    [[nodiscard]] static QString typeFlagLabel(TypeFlag type);
 
     /*!
      * Returns a string representation of the phone number.
@@ -325,7 +325,7 @@ public:
 
 private:
     KCONTACTS_NO_EXPORT void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT KCONTACTS_NO_EXPORT ParameterMap params() const;
+    [[nodiscard]] KCONTACTS_NO_EXPORT ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

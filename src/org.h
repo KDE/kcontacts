@@ -58,30 +58,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString organization() const;
+    [[nodiscard]] QString organization() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Org &other) const;
+    [[nodiscard]] bool operator==(const Org &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Org &other) const;
+    [[nodiscard]] bool operator!=(const Org &other) const;
 
     Org &operator=(const Org &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for OrgTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

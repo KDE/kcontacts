@@ -55,29 +55,29 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString note() const;
+    [[nodiscard]] QString note() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Note &other) const;
+    [[nodiscard]] bool operator==(const Note &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Note &other) const;
+    [[nodiscard]] bool operator!=(const Note &other) const;
 
     Note &operator=(const Note &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     KCONTACTS_NO_EXPORT void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT KCONTACTS_NO_EXPORT ParameterMap params() const;
+    [[nodiscard]] KCONTACTS_NO_EXPORT ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

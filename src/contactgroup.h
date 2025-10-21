@@ -87,7 +87,7 @@ public:
          * \note That is the Akonadi Item ID of the contact that
          *       is referenced here.
          */
-        Q_REQUIRED_RESULT QString uid() const;
+        [[nodiscard]] QString uid() const;
 
         /*!
          * Sets the contact gid of the contact reference.
@@ -101,7 +101,7 @@ public:
          * Returns the contact GID of the contact reference.
          * \since 4.12
          */
-        Q_REQUIRED_RESULT QString gid() const;
+        [[nodiscard]] QString gid() const;
 
         /*!
          * Sets the preferred email address.
@@ -112,7 +112,7 @@ public:
          * Returns the preferred email address, or an empty string
          * if no preferred email address is set.
          */
-        Q_REQUIRED_RESULT QString preferredEmail() const;
+        [[nodiscard]] QString preferredEmail() const;
 
         /*!
          * Inserts a custom entry.
@@ -134,7 +134,7 @@ public:
          * Returns the value for the given \a key, or an empty string
          * if the entry for that key does not exists.
          */
-        Q_REQUIRED_RESULT QString custom(const QString &key) const;
+        [[nodiscard]] QString custom(const QString &key) const;
 
         /*!
          * \internal
@@ -144,7 +144,7 @@ public:
         /*!
          * \internal
          */
-        Q_REQUIRED_RESULT bool operator==(const ContactReference &other) const;
+        [[nodiscard]] bool operator==(const ContactReference &other) const;
 
     private:
         class ContactReferencePrivate;
@@ -276,7 +276,7 @@ public:
         /*!
          * Returns the name of the contact data object.
          */
-        Q_REQUIRED_RESULT QString name() const;
+        [[nodiscard]] QString name() const;
 
         /*!
          * Sets the \a email address of the contact data object.
@@ -286,7 +286,7 @@ public:
         /*!
          * Returns the email address of the contact data object.
          */
-        Q_REQUIRED_RESULT QString email() const;
+        [[nodiscard]] QString email() const;
 
         /*!
          * Inserts a custom entry.
@@ -308,7 +308,7 @@ public:
          * Returns the value for the given \a key, or an empty string
          * if the entry for that key does not exists.
          */
-        Q_REQUIRED_RESULT QString custom(const QString &key) const;
+        [[nodiscard]] QString custom(const QString &key) const;
 
         /*!
          * \internal
@@ -318,7 +318,7 @@ public:
         /*!
          * \internal
          */
-        Q_REQUIRED_RESULT bool operator==(const Data &other) const;
+        [[nodiscard]] bool operator==(const Data &other) const;
 
     private:
         class DataPrivate;
@@ -358,7 +358,7 @@ public:
     /*!
      * Returns the unique id of the contact group.
      */
-    Q_REQUIRED_RESULT QString id() const;
+    [[nodiscard]] QString id() const;
 
     /*!
      * Sets the i18n'd \a name of the contact group.
@@ -368,33 +368,33 @@ public:
     /*!
      * Returns the i18n'd name of the contact group.
      */
-    Q_REQUIRED_RESULT QString name() const;
+    [[nodiscard]] QString name() const;
 
     /*!
      * Returns the number of contacts in this group.
      * That includes the contact references and contact data.
      */
-    Q_REQUIRED_RESULT int count() const;
+    [[nodiscard]] int count() const;
 
     /*!
      * Returns the number of contact references in this group.
      */
-    Q_REQUIRED_RESULT int contactReferenceCount() const;
+    [[nodiscard]] int contactReferenceCount() const;
 
     /*!
      * Returns the number of group references in this group.
      */
-    Q_REQUIRED_RESULT int contactGroupReferenceCount() const;
+    [[nodiscard]] int contactGroupReferenceCount() const;
 
     /*!
      * Returns the number of contact data objects in this group.
      */
-    Q_REQUIRED_RESULT int dataCount() const;
+    [[nodiscard]] int dataCount() const;
 
     /*!
      * Returns the contact reference at the given \a index.
      */
-    Q_REQUIRED_RESULT ContactReference &contactReference(int index);
+    [[nodiscard]] ContactReference &contactReference(int index);
 
     /*!
      * Returns the contact reference at the given \a index.
@@ -474,7 +474,7 @@ public:
     /*!
      * \internal
      */
-    Q_REQUIRED_RESULT bool operator==(const ContactGroup &other) const;
+    [[nodiscard]] bool operator==(const ContactGroup &other) const;
 
     /*!
      * Returns the MIME type used for Contact Groups

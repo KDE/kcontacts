@@ -106,7 +106,7 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
@@ -114,7 +114,7 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QUrl url() const;
+    [[nodiscard]] QUrl url() const;
 
     /*!
      * Returns the type of the URL.
@@ -142,28 +142,28 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const ResourceLocatorUrl &other) const;
+    [[nodiscard]] bool operator==(const ResourceLocatorUrl &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const ResourceLocatorUrl &other) const;
+    [[nodiscard]] bool operator!=(const ResourceLocatorUrl &other) const;
 
     ResourceLocatorUrl &operator=(const ResourceLocatorUrl &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /*!
      * Returns a translated label for the type.
      * \since 6.20
      */
-    Q_REQUIRED_RESULT QString resourceLabel() const;
+    [[nodiscard]] QString resourceLabel() const;
 
 private:
     // exported for ResourceLocatorUrlTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

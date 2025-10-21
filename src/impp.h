@@ -126,7 +126,7 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
@@ -134,30 +134,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QUrl address() const;
+    [[nodiscard]] QUrl address() const;
 
     /*!
      * Returns the messaging service this address is for.
      * This is equivalent to address().scheme().
      * \since 5.12
      */
-    Q_REQUIRED_RESULT QString serviceType() const;
+    [[nodiscard]] QString serviceType() const;
     /*!
      * Returns a translated label for the service type.
      * \since 5.12
      */
-    Q_REQUIRED_RESULT QString serviceLabel() const;
+    [[nodiscard]] QString serviceLabel() const;
     /*!
      * Returns the name of an icon representing the service type.
      * \since 5.12
      */
-    Q_REQUIRED_RESULT QString serviceIcon() const;
+    [[nodiscard]] QString serviceIcon() const;
 
     /*!
      * Returns whether this is the preferred messaging address.
      * \since 5.12
      */
-    Q_REQUIRED_RESULT bool isPreferred() const;
+    [[nodiscard]] bool isPreferred() const;
     /*!
      * Sets that this is the preferred messaging address.
      * \since 5.12
@@ -166,17 +166,17 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Impp &other) const;
+    [[nodiscard]] bool operator==(const Impp &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Impp &other) const;
+    [[nodiscard]] bool operator!=(const Impp &other) const;
 
     Impp &operator=(const Impp &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /*!
      * Returns a translated name of the given IM service.
@@ -199,7 +199,7 @@ public:
 private:
     // exported for ImppTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

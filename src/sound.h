@@ -93,7 +93,7 @@ public:
      *
      * Returns \c true if the two objects are equal, otherwise \c false
      */
-    Q_REQUIRED_RESULT bool operator==(const Sound &other) const;
+    [[nodiscard]] bool operator==(const Sound &other) const;
 
     /*!
      * Not-Equal operator.
@@ -102,7 +102,7 @@ public:
      *
      * Returns \c true if the two objects are not equal, otherwise \c false
      */
-    Q_REQUIRED_RESULT bool operator!=(const Sound &other) const;
+    [[nodiscard]] bool operator!=(const Sound &other) const;
 
     /*!
      * Sets a URL for the location of the sound file. When using this
@@ -116,7 +116,7 @@ public:
     /*!
      * Returns true, if the sound object is empty.
      */
-    Q_REQUIRED_RESULT bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /*!
      * Sets the raw data of the sound. When using this function,
@@ -134,27 +134,27 @@ public:
      * get the raw data. Otherwise you can request the URL of this
      * sound by url() and load the raw data from that location.
      */
-    Q_REQUIRED_RESULT bool isIntern() const;
+    [[nodiscard]] bool isIntern() const;
 
     /*!
      * Returns the location URL of this sound.
      */
-    Q_REQUIRED_RESULT QString url() const;
+    [[nodiscard]] QString url() const;
 
     /*!
      * Returns the raw data of this sound.
      */
-    Q_REQUIRED_RESULT QByteArray data() const;
+    [[nodiscard]] QByteArray data() const;
 
     /*!
      * Returns string representation of the sound.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /*!
      * Returns string sound type.
      */
-    Q_REQUIRED_RESULT QString type() const;
+    [[nodiscard]] QString type() const;
 
 private:
     class Private;

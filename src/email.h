@@ -127,12 +127,12 @@ public:
     /*!
      *
      */
-    Q_REQUIRED_RESULT QString mail() const;
+    [[nodiscard]] QString mail() const;
 
     /*!
      *
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      * Returns the type of the email.
@@ -158,21 +158,21 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Email &other) const;
+    [[nodiscard]] bool operator==(const Email &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Email &other) const;
+    [[nodiscard]] bool operator!=(const Email &other) const;
 
     Email &operator=(const Email &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

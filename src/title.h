@@ -58,30 +58,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString title() const;
+    [[nodiscard]] QString title() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Title &other) const;
+    [[nodiscard]] bool operator==(const Title &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Title &other) const;
+    [[nodiscard]] bool operator!=(const Title &other) const;
 
     Title &operator=(const Title &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for TitleTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

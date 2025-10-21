@@ -46,7 +46,7 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString gender() const;
+    [[nodiscard]] QString gender() const;
 
     /*!
      */
@@ -54,25 +54,25 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString comment() const;
+    [[nodiscard]] QString comment() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Gender &other) const;
+    [[nodiscard]] bool operator==(const Gender &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Gender &other) const;
+    [[nodiscard]] bool operator!=(const Gender &other) const;
 
     Gender &operator=(const Gender &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     class Private;

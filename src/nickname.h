@@ -58,30 +58,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString nickname() const;
+    [[nodiscard]] QString nickname() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const NickName &other) const;
+    [[nodiscard]] bool operator==(const NickName &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const NickName &other) const;
+    [[nodiscard]] bool operator!=(const NickName &other) const;
 
     NickName &operator=(const NickName &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for NickNameTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

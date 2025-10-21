@@ -37,7 +37,7 @@ public:
      * Equality operator.
      *
      */
-    Q_REQUIRED_RESULT bool operator==(const VCardLine &other) const;
+    [[nodiscard]] bool operator==(const VCardLine &other) const;
 
     /*!
      * Sets the identifier of this line e.g. UID, FN, CLASS
@@ -49,7 +49,7 @@ public:
     /*!
      * Returns the identifier of this line.
      */
-    Q_REQUIRED_RESULT QString identifier() const;
+    [[nodiscard]] QString identifier() const;
 
     /*!
      * Sets the value of this line.
@@ -59,7 +59,7 @@ public:
     /*!
      * Returns the value of this line.
      */
-    Q_REQUIRED_RESULT QVariant value() const;
+    [[nodiscard]] QVariant value() const;
 
     /*!
      * Sets the group the line belongs to.
@@ -69,17 +69,17 @@ public:
     /*!
      * Returns the group the line belongs to.
      */
-    Q_REQUIRED_RESULT QString group() const;
+    [[nodiscard]] QString group() const;
 
     /*!
      * Returns whether the line belongs to a group.
      */
-    Q_REQUIRED_RESULT bool hasGroup() const;
+    [[nodiscard]] bool hasGroup() const;
 
     /*!
      * Returns all parameters.
      */
-    Q_REQUIRED_RESULT QStringList parameterList() const;
+    [[nodiscard]] QStringList parameterList() const;
 
     /*!
      * Add a new parameter to the line.
@@ -97,7 +97,7 @@ public:
      *
      * @param param Name of the parameter to look for
      */
-    Q_REQUIRED_RESULT QStringList parameters(const QString &param) const;
+    [[nodiscard]] QStringList parameters(const QString &param) const;
 
     /*!
      * Returns only the first value of a special parameter.
@@ -105,17 +105,17 @@ public:
      *
      * @param param Name of the parameter to look for
      */
-    Q_REQUIRED_RESULT QString parameter(const QString &param) const;
+    [[nodiscard]] QString parameter(const QString &param) const;
 
     /*!
      * Returns all parameters
      */
-    Q_REQUIRED_RESULT ParameterMap parameterMap() const;
+    [[nodiscard]] ParameterMap parameterMap() const;
 
     /*!
      * Add base64 value
      */
-    Q_REQUIRED_RESULT QByteArray base64Value() const;
+    [[nodiscard]] QByteArray base64Value() const;
     void setBase64Value(const QByteArray &newBase64Value);
 
 private:

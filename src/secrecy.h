@@ -62,16 +62,16 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Secrecy &other) const;
+    [[nodiscard]] bool operator==(const Secrecy &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Secrecy &other) const;
+    [[nodiscard]] bool operator!=(const Secrecy &other) const;
 
     /*!
      * Returns if the Secrecy object has a valid value.
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      * Sets the \a type.
@@ -83,22 +83,22 @@ public:
     /*!
      * Returns the type.
      */
-    Q_REQUIRED_RESULT Type type() const;
+    [[nodiscard]] Type type() const;
 
     /*!
      * Returns a list of all available secrecy types.
      */
-    Q_REQUIRED_RESULT static TypeList typeList();
+    [[nodiscard]] static TypeList typeList();
 
     /*!
      * Returns a translated label for a given secrecy \a type.
      */
-    Q_REQUIRED_RESULT static QString typeLabel(Type type);
+    [[nodiscard]] static QString typeLabel(Type type);
 
     /*!
      * Returns a string representation of the secrecy.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     class PrivateData;

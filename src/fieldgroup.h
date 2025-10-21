@@ -56,11 +56,11 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString fieldGroupName() const;
+    [[nodiscard]] QString fieldGroupName() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
@@ -68,25 +68,25 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString value() const;
+    [[nodiscard]] QString value() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const FieldGroup &other) const;
+    [[nodiscard]] bool operator==(const FieldGroup &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const FieldGroup &other) const;
+    [[nodiscard]] bool operator!=(const FieldGroup &other) const;
 
     FieldGroup &operator=(const FieldGroup &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

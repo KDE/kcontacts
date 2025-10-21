@@ -259,7 +259,7 @@ public:
 
       Returns \c true if \c this and \a other are equal, otherwise \c false
     */
-    Q_REQUIRED_RESULT bool operator==(const Address &other) const;
+    [[nodiscard]] bool operator==(const Address &other) const;
 
     /*!
       Not-equal operator.
@@ -268,7 +268,7 @@ public:
 
       Returns \c true if \c this and \a other are not equal, otherwise \c false
     */
-    Q_REQUIRED_RESULT bool operator!=(const Address &other) const;
+    [[nodiscard]] bool operator!=(const Address &other) const;
 
     /*!
       Assignment operator.
@@ -281,7 +281,7 @@ public:
     /*!
       Returns \c true, if the address is empty.
     */
-    Q_REQUIRED_RESULT bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /*!
       Clears all entries of the address.
@@ -296,7 +296,7 @@ public:
     /*!
       Returns the unique identifier.
     */
-    Q_REQUIRED_RESULT QString id() const;
+    [[nodiscard]] QString id() const;
 
     /*!
       Sets the type of address. See enum for definition of types.
@@ -308,12 +308,12 @@ public:
     /*!
       Returns the type of address. Can be a bitwise or of multiple types.
     */
-    Q_REQUIRED_RESULT Type type() const;
+    [[nodiscard]] Type type() const;
 
     /*!
       Returns a translated string of all types the address has.
     */
-    Q_REQUIRED_RESULT QString typeLabel() const;
+    [[nodiscard]] QString typeLabel() const;
 
     /*!
       Sets the post office box.
@@ -323,7 +323,7 @@ public:
     /*!
       Returns the post office box.
     */
-    Q_REQUIRED_RESULT QString postOfficeBox() const;
+    [[nodiscard]] QString postOfficeBox() const;
 
     /*!
       Returns the translated label for post office box field.
@@ -338,7 +338,7 @@ public:
     /*!
       Returns the extended address information.
     */
-    Q_REQUIRED_RESULT QString extended() const;
+    [[nodiscard]] QString extended() const;
 
     /*!
       Returns the translated label for extended field.
@@ -353,7 +353,7 @@ public:
     /*!
       Returns the street.
     */
-    Q_REQUIRED_RESULT QString street() const;
+    [[nodiscard]] QString street() const;
 
     /*!
       Returns the translated label for street field.
@@ -370,7 +370,7 @@ public:
     /*!
       Returns the locality.
     */
-    Q_REQUIRED_RESULT QString locality() const;
+    [[nodiscard]] QString locality() const;
 
     /*!
       Returns the translated label for locality field.
@@ -387,7 +387,7 @@ public:
     /*!
       Returns the region.
     */
-    Q_REQUIRED_RESULT QString region() const;
+    [[nodiscard]] QString region() const;
 
     /*!
       Returns the translated label for region field.
@@ -402,7 +402,7 @@ public:
     /*!
       Returns the postal code.
     */
-    Q_REQUIRED_RESULT QString postalCode() const;
+    [[nodiscard]] QString postalCode() const;
 
     /*!
       Returns the translated label for postal code field.
@@ -417,7 +417,7 @@ public:
     /*!
       Returns the country.
     */
-    Q_REQUIRED_RESULT QString country() const;
+    [[nodiscard]] QString country() const;
 
     /*!
       Returns the translated label for country field.
@@ -434,7 +434,7 @@ public:
     /*!
       Returns the delivery label.
     */
-    Q_REQUIRED_RESULT QString label() const;
+    [[nodiscard]] QString label() const;
 
     /*!
       Returns the translated label for delivery label field.
@@ -454,7 +454,7 @@ public:
     /*!
       Returns a string representation of the address.
     */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     // note: cannot be called "formattedAddress" due to a collision
     // with the property of that name in QML
@@ -478,9 +478,9 @@ public:
       Returns the formatted address
       \since 5.92
     */
-    Q_REQUIRED_RESULT Q_INVOKABLE QString formatted(KContacts::AddressFormatStyle style,
-                                                    const QString &realName = QString(),
-                                                    const QString &orgaName = QString()) const;
+    [[nodiscard]] Q_INVOKABLE QString formatted(KContacts::AddressFormatStyle style,
+                                                const QString &realName = QString(),
+                                                const QString &orgaName = QString()) const;
 
     /*!
      */
@@ -494,7 +494,7 @@ public:
     /*!
       Return geographic position.
      */
-    Q_REQUIRED_RESULT Geo geo() const;
+    [[nodiscard]] Geo geo() const;
 
     /*!
      * Returns a geo: URI representing this address.
@@ -503,7 +503,7 @@ public:
      * This can be used to show the address in the default map view.
      * \since 5.106
      */
-    Q_REQUIRED_RESULT QUrl geoUri() const;
+    [[nodiscard]] QUrl geoUri() const;
 
 private:
     KCONTACTS_NO_EXPORT QString formattedPostalAddress() const;

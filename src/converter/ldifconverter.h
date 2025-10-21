@@ -40,10 +40,10 @@ namespace LDIFConverter
 
   \a dt The date & time value of the last modification (e.g. file modification time).
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str,
-                                                        AddresseeList &addrList,
-                                                        QList<KContacts::ContactGroup> &contactGroupList,
-                                                        const QDateTime &dt = QDateTime::currentDateTime());
+[[nodiscard]] KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str,
+                                                    AddresseeList &addrList,
+                                                    QList<KContacts::ContactGroup> &contactGroupList,
+                                                    const QDateTime &dt = QDateTime::currentDateTime());
 
 /*!
   Converts a list of addressees to a LDIF string.
@@ -52,7 +52,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool LDIFToAddressee(const QString &str,
 
   \a str The LDIF string.
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &str);
+[[nodiscard]] KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &addrList, QString &str);
 
 /*!
   Converts a list of addressees and contactgrouplist to a LDIF string.
@@ -64,7 +64,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const AddresseeList &add
   \a str The LDIF string.
 
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool
+[[nodiscard]] KCONTACTS_EXPORT bool
 addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const QList<KContacts::ContactGroup> &contactGroupList, QString &str);
 /*!
   Converts an addressee to a LDIF string.
@@ -73,7 +73,7 @@ addresseeAndContactGroupToLDIF(const AddresseeList &addrList, const QList<KConta
 
   \a str The LDIF string.
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
+[[nodiscard]] KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, QString &str);
 
 /*!
   Converts a list of contact group to a LDIF string.
@@ -82,7 +82,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool addresseeToLDIF(const Addressee &addr, Q
 
   \a str The LDIF string.
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str);
+[[nodiscard]] KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::List &contactGroupList, QString &str);
 
 /*!
   Converts a contact group to a LDIF string.
@@ -91,7 +91,7 @@ Q_REQUIRED_RESULT KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup::L
 
   \a str The LDIF string.
 */
-Q_REQUIRED_RESULT KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup &contactGroup, QString &str);
+[[nodiscard]] KCONTACTS_EXPORT bool contactGroupToLDIF(const ContactGroup &contactGroup, QString &str);
 }
 }
 #endif

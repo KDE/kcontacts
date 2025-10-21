@@ -57,30 +57,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString related() const;
+    [[nodiscard]] QString related() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Related &other) const;
+    [[nodiscard]] bool operator==(const Related &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Related &other) const;
+    [[nodiscard]] bool operator!=(const Related &other) const;
 
     Related &operator=(const Related &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for RelatedTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

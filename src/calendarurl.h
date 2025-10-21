@@ -75,7 +75,7 @@ public:
     /*!
      *
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      *
@@ -85,7 +85,7 @@ public:
     /*!
      *
      */
-    Q_REQUIRED_RESULT CalendarUrl::CalendarType type() const;
+    [[nodiscard]] CalendarUrl::CalendarType type() const;
 
     /*!
      *
@@ -100,24 +100,24 @@ public:
     /*!
      *
      */
-    Q_REQUIRED_RESULT bool operator==(const CalendarUrl &other) const;
+    [[nodiscard]] bool operator==(const CalendarUrl &other) const;
 
     /*!
      *
      */
-    Q_REQUIRED_RESULT bool operator!=(const CalendarUrl &other) const;
+    [[nodiscard]] bool operator!=(const CalendarUrl &other) const;
 
     CalendarUrl &operator=(const CalendarUrl &other);
 
     /*!
      *
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for CalendarUrlTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

@@ -58,30 +58,30 @@ public:
 
     /*!
      */
-    Q_REQUIRED_RESULT QString role() const;
+    [[nodiscard]] QString role() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator==(const Role &other) const;
+    [[nodiscard]] bool operator==(const Role &other) const;
 
     /*!
      */
-    Q_REQUIRED_RESULT bool operator!=(const Role &other) const;
+    [[nodiscard]] bool operator!=(const Role &other) const;
 
     Role &operator=(const Role &other);
 
     /*!
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     // exported for RoleTest
     void setParams(const ParameterMap &params);
-    Q_REQUIRED_RESULT ParameterMap params() const;
+    [[nodiscard]] ParameterMap params() const;
 
     class Private;
     QSharedDataPointer<Private> d;

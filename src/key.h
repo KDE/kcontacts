@@ -67,12 +67,12 @@ public:
     /*!
       Equality operator.
     */
-    Q_REQUIRED_RESULT bool operator==(const Key &other) const;
+    [[nodiscard]] bool operator==(const Key &other) const;
 
     /*!
       Not-equal operator.
     */
-    Q_REQUIRED_RESULT bool operator!=(const Key &other) const;
+    [[nodiscard]] bool operator!=(const Key &other) const;
 
     /*!
       Assignment operator.
@@ -89,7 +89,7 @@ public:
     /*!
       Returns the unique identifier.
     */
-    Q_REQUIRED_RESULT QString id() const;
+    [[nodiscard]] QString id() const;
 
     /*!
       Sets binary \a data.
@@ -99,7 +99,7 @@ public:
     /*!
       Returns the binary data.
     */
-    Q_REQUIRED_RESULT QByteArray binaryData() const;
+    [[nodiscard]] QByteArray binaryData() const;
 
     /*!
       Sets text \a data.
@@ -109,12 +109,12 @@ public:
     /*!
       Returns the text data.
     */
-    Q_REQUIRED_RESULT QString textData() const;
+    [[nodiscard]] QString textData() const;
 
     /*!
       Returns whether the key contains binary or text data.
     */
-    Q_REQUIRED_RESULT bool isBinary() const;
+    [[nodiscard]] bool isBinary() const;
 
     /*!
       Sets the \a type.
@@ -133,27 +133,27 @@ public:
     /*!
       Returns the type, see Type.
     */
-    Q_REQUIRED_RESULT Type type() const;
+    [[nodiscard]] Type type() const;
 
     /*!
       Returns the custom type string.
     */
-    Q_REQUIRED_RESULT QString customTypeString() const;
+    [[nodiscard]] QString customTypeString() const;
 
     /*!
       Returns a string representation of the key.
     */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /*!
       Returns a list of all available key types.
     */
-    Q_REQUIRED_RESULT static TypeList typeList();
+    [[nodiscard]] static TypeList typeList();
 
     /*!
       Returns a translated label for a given key \a type.
     */
-    Q_REQUIRED_RESULT static QString typeLabel(Type type);
+    [[nodiscard]] static QString typeLabel(Type type);
 
 private:
     class Private;

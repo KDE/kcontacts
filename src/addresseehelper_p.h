@@ -63,7 +63,7 @@ public:
      * Returns \c true, if \a title was found in the list,
      *         \c false otherwise
      */
-    Q_REQUIRED_RESULT bool containsTitle(const QString &title) const;
+    [[nodiscard]] bool containsTitle(const QString &title) const;
 
     /*!
      * Queries the list of inclusions.
@@ -73,7 +73,7 @@ public:
      * Returns \c true, if \a prefix was found in the list,
      *         \c false otherwise
      */
-    Q_REQUIRED_RESULT bool containsPrefix(const QString &prefix) const;
+    [[nodiscard]] bool containsPrefix(const QString &prefix) const;
 
     /*!
      * Queries the list of honoric suffixes.
@@ -83,7 +83,7 @@ public:
      * Returns \c true, if \a suffix was found in the list,
      *         \c false otherwise
      */
-    Q_REQUIRED_RESULT bool containsSuffix(const QString &suffix) const;
+    [[nodiscard]] bool containsSuffix(const QString &suffix) const;
 
     /*!
      * Returns whether or not a single name component should
@@ -92,7 +92,7 @@ public:
      * Returns \c true if single name component is a family name,
      *         \c false otherwise.
      */
-    Q_REQUIRED_RESULT bool treatAsFamilyName() const;
+    [[nodiscard]] bool treatAsFamilyName() const;
 
     AddresseeHelper();
 

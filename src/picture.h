@@ -130,17 +130,17 @@ public:
     /*!
      * Equality operator.
      */
-    Q_REQUIRED_RESULT bool operator==(const Picture &other) const;
+    [[nodiscard]] bool operator==(const Picture &other) const;
 
     /*!
      * Not-Equal operator.
      */
-    Q_REQUIRED_RESULT bool operator!=(const Picture &other) const;
+    [[nodiscard]] bool operator!=(const Picture &other) const;
 
     /*!
      * Returns true, if the picture is empty.
      */
-    Q_REQUIRED_RESULT bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /*!
      * Sets a URL for the location of the picture file. When using this
@@ -195,34 +195,34 @@ public:
      * get the raw data. Otherwise you can request the URL of this
      * picture by url() and load the raw data from that location.
      */
-    Q_REQUIRED_RESULT bool isIntern() const;
+    [[nodiscard]] bool isIntern() const;
 
     /*!
      * Returns the location URL of this picture.
      */
-    Q_REQUIRED_RESULT QString url() const;
+    [[nodiscard]] QString url() const;
 
     /*!
      * Returns the image data of this picture.
      */
-    Q_REQUIRED_RESULT QImage data() const;
+    [[nodiscard]] QImage data() const;
 
     /*!
      * Returns the raw data of this picture.
      *
      * \since 4.10
      */
-    Q_REQUIRED_RESULT QByteArray rawData() const;
+    [[nodiscard]] QByteArray rawData() const;
 
     /*!
      * Returns the type of this picture.
      */
-    Q_REQUIRED_RESULT QString type() const;
+    [[nodiscard]] QString type() const;
 
     /*!
      * Returns string representation of the picture.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     QSharedDataPointer<PicturePrivate> d;
