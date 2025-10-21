@@ -3,3 +3,6 @@
 
 #clang-tidy
 05b61828068dbc7c0d0e7a9e6d640bea7a9c6eca
+
+#convert to [[nodiscard]]
+b23cedb4594ed248fc070521772753f222a309bb
