@@ -521,7 +521,7 @@ public:
     /*!
       Return if the address book entry is empty.
      */
-    bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /*!
       Set unique identifier.
@@ -533,7 +533,7 @@ public:
     /*!
       Return unique identifier.
      */
-    QString uid() const;
+    [[nodiscard]] QString uid() const;
 
     /*!
       Return translated label for uid field.
@@ -548,7 +548,7 @@ public:
     /*!
       Return name.
      */
-    QString name() const;
+    [[nodiscard]] QString name() const;
 
     /*!
       Return translated label for name field.
@@ -563,12 +563,12 @@ public:
     /*!
       Return formatted name.
      */
-    QString formattedName() const;
+    [[nodiscard]] QString formattedName() const;
 
     /*!
       Return translated label for formattedName field.
      */
-    static QString formattedNameLabel();
+    [[nodiscard]] static QString formattedNameLabel();
 
     /*!
       Set family name.
@@ -578,12 +578,12 @@ public:
     /*!
       Return family name.
      */
-    QString familyName() const;
+    [[nodiscard]] QString familyName() const;
 
     /*!
       Return translated label for familyName field.
      */
-    static QString familyNameLabel();
+    [[nodiscard]] static QString familyNameLabel();
 
     /*!
       Set given name.
@@ -593,12 +593,12 @@ public:
     /*!
       Return given name.
      */
-    QString givenName() const;
+    [[nodiscard]] QString givenName() const;
 
     /*!
       Return translated label for givenName field.
      */
-    static QString givenNameLabel();
+    [[nodiscard]] static QString givenNameLabel();
 
     /*!
       Set additional names.
@@ -608,12 +608,12 @@ public:
     /*!
       Return additional names.
      */
-    QString additionalName() const;
+    [[nodiscard]] QString additionalName() const;
 
     /*!
       Return translated label for additionalName field.
      */
-    static QString additionalNameLabel();
+    [[nodiscard]] static QString additionalNameLabel();
 
     /*!
       Set honorific prefixes.
@@ -623,12 +623,12 @@ public:
     /*!
       Return honorific prefixes.
      */
-    QString prefix() const;
+    [[nodiscard]] QString prefix() const;
 
     /*!
       Return translated label for prefix field.
      */
-    static QString prefixLabel();
+    [[nodiscard]] static QString prefixLabel();
 
     /*!
       Set honorific suffixes.
@@ -638,12 +638,12 @@ public:
     /*!
       Return honorific suffixes.
      */
-    QString suffix() const;
+    [[nodiscard]] QString suffix() const;
 
     /*!
       Return translated label for suffix field.
      */
-    static QString suffixLabel();
+    [[nodiscard]] static QString suffixLabel();
 
     /*!
       Set nick name.
@@ -664,17 +664,17 @@ public:
 
     /*!
      */
-    NickName::List extraNickNameList() const;
+    [[nodiscard]] NickName::List extraNickNameList() const;
 
     /*!
       Return nick name.
      */
-    QString nickName() const;
+    [[nodiscard]] QString nickName() const;
 
     /*!
       Return translated label for nickName field.
      */
-    static QString nickNameLabel();
+    [[nodiscard]] static QString nickNameLabel();
 
     /*!
       Set birthday (date and time). If withTime is false the time will be set
@@ -692,132 +692,132 @@ public:
       Return birthday. (If a valid date has been set, birthday().time() will
       always return a valid QTime!)
      */
-    QDateTime birthday() const;
+    [[nodiscard]] QDateTime birthday() const;
 
     /*!
       Returns true if birthday has been set with a time. Returns false otherwise.
      */
-    bool birthdayHasTime() const;
+    [[nodiscard]] bool birthdayHasTime() const;
 
     /*!
       Return translated label for birthday field.
      */
-    static QString birthdayLabel();
+    [[nodiscard]] static QString birthdayLabel();
 
     /*!
       Return translated label for homeAddressStreet field.
      */
-    static QString homeAddressStreetLabel();
+    [[nodiscard]] static QString homeAddressStreetLabel();
 
     /*!
       Return translated label for homeAddressPostOfficeBox field.
      */
-    static QString homeAddressPostOfficeBoxLabel();
+    [[nodiscard]] static QString homeAddressPostOfficeBoxLabel();
 
     /*!
       Return translated label for homeAddressLocality field.
      */
-    static QString homeAddressLocalityLabel();
+    [[nodiscard]] static QString homeAddressLocalityLabel();
 
     /*!
       Return translated label for homeAddressRegion field.
      */
-    static QString homeAddressRegionLabel();
+    [[nodiscard]] static QString homeAddressRegionLabel();
 
     /*!
       Return translated label for homeAddressPostalCode field.
      */
-    static QString homeAddressPostalCodeLabel();
+    [[nodiscard]] static QString homeAddressPostalCodeLabel();
 
     /*!
       Return translated label for homeAddressCountry field.
      */
-    static QString homeAddressCountryLabel();
+    [[nodiscard]] static QString homeAddressCountryLabel();
 
     /*!
       Return translated label for homeAddressLabel field.
      */
-    static QString homeAddressLabelLabel();
+    [[nodiscard]] static QString homeAddressLabelLabel();
 
     /*!
       Return translated label for businessAddressStreet field.
      */
-    static QString businessAddressStreetLabel();
+    [[nodiscard]] static QString businessAddressStreetLabel();
 
     /*!
       Return translated label for businessAddressPostOfficeBox field.
      */
-    static QString businessAddressPostOfficeBoxLabel();
+    [[nodiscard]] static QString businessAddressPostOfficeBoxLabel();
 
     /*!
       Return translated label for businessAddressLocality field.
      */
-    static QString businessAddressLocalityLabel();
+    [[nodiscard]] static QString businessAddressLocalityLabel();
 
     /*!
       Return translated label for businessAddressRegion field.
      */
-    static QString businessAddressRegionLabel();
+    [[nodiscard]] static QString businessAddressRegionLabel();
 
     /*!
       Return translated label for businessAddressPostalCode field.
      */
-    static QString businessAddressPostalCodeLabel();
+    [[nodiscard]] static QString businessAddressPostalCodeLabel();
 
     /*!
       Return translated label for businessAddressCountry field.
      */
-    static QString businessAddressCountryLabel();
+    [[nodiscard]] static QString businessAddressCountryLabel();
 
     /*!
       Return translated label for businessAddressLabel field.
      */
-    static QString businessAddressLabelLabel();
+    [[nodiscard]] static QString businessAddressLabelLabel();
 
     /*!
       Return translated label for homePhone field.
      */
-    static QString homePhoneLabel();
+    [[nodiscard]] static QString homePhoneLabel();
 
     /*!
       Return translated label for businessPhone field.
      */
-    static QString businessPhoneLabel();
+    [[nodiscard]] static QString businessPhoneLabel();
 
     /*!
       Return translated label for mobilePhone field.
      */
-    static QString mobilePhoneLabel();
+    [[nodiscard]] static QString mobilePhoneLabel();
 
     /*!
       Return translated label for homeFax field.
      */
-    static QString homeFaxLabel();
+    [[nodiscard]] static QString homeFaxLabel();
 
     /*!
       Return translated label for businessFax field.
      */
-    static QString businessFaxLabel();
+    [[nodiscard]] static QString businessFaxLabel();
 
     /*!
       Return translated label for carPhone field.
      */
-    static QString carPhoneLabel();
+    [[nodiscard]] static QString carPhoneLabel();
 
     /*!
       Return translated label for isdn field.
      */
-    static QString isdnLabel();
+    [[nodiscard]] static QString isdnLabel();
 
     /*!
       Return translated label for pager field.
      */
-    static QString pagerLabel();
+    [[nodiscard]] static QString pagerLabel();
 
     /*!
       Return translated label for email field.
      */
-    static QString emailLabel();
+    [[nodiscard]] static QString emailLabel();
 
     /*!
       Set mail client.
@@ -827,12 +827,12 @@ public:
     /*!
       Return mail client.
      */
-    QString mailer() const;
+    [[nodiscard]] QString mailer() const;
 
     /*!
       Return translated label for mailer field.
      */
-    static QString mailerLabel();
+    [[nodiscard]] static QString mailerLabel();
 
     /*!
       Set time zone.
@@ -842,12 +842,12 @@ public:
     /*!
       Return time zone.
      */
-    TimeZone timeZone() const;
+    [[nodiscard]] TimeZone timeZone() const;
 
     /*!
       Return translated label for timeZone field.
      */
-    static QString timeZoneLabel();
+    [[nodiscard]] static QString timeZoneLabel();
 
     /*!
       Set geographic position.
@@ -857,12 +857,12 @@ public:
     /*!
       Return geographic position.
      */
-    Geo geo() const;
+    [[nodiscard]] Geo geo() const;
 
     /*!
       Return translated label for geo field.
      */
-    static QString geoLabel();
+    [[nodiscard]] static QString geoLabel();
 
     // Remove in kf6
     /*!
@@ -884,17 +884,17 @@ public:
 
     /*!
      */
-    Title::List extraTitleList() const;
+    [[nodiscard]] Title::List extraTitleList() const;
 
     /*!
       Return title.
      */
-    QString title() const;
+    [[nodiscard]] QString title() const;
 
     /*!
       Return translated label for title field.
      */
-    static QString titleLabel();
+    [[nodiscard]] static QString titleLabel();
 
     /*!
       Set role.
@@ -915,17 +915,17 @@ public:
 
     /*!
      */
-    Role::List extraRoleList() const;
+    [[nodiscard]] Role::List extraRoleList() const;
 
     /*!
       Return role.
      */
-    QString role() const;
+    [[nodiscard]] QString role() const;
 
     /*!
       Return translated label for role field.
      */
-    static QString roleLabel();
+    [[nodiscard]] static QString roleLabel();
 
     // Remove in kf6
     /*!
@@ -947,17 +947,17 @@ public:
 
     /*!
      */
-    Org::List extraOrganizationList() const;
+    [[nodiscard]] Org::List extraOrganizationList() const;
 
     /*!
       Return organization.
      */
-    QString organization() const;
+    [[nodiscard]] QString organization() const;
 
     /*!
       Return translated label for organization field.
      */
-    static QString organizationLabel();
+    [[nodiscard]] static QString organizationLabel();
 
     /*!
       Set department.
@@ -967,12 +967,12 @@ public:
     /*!
       Return department.
      */
-    QString department() const;
+    [[nodiscard]] QString department() const;
 
     /*!
       Return translated label for department field.
      */
-    static QString departmentLabel();
+    [[nodiscard]] static QString departmentLabel();
 
     /*!
       Set note.
@@ -982,12 +982,12 @@ public:
     /*!
       Return note.
      */
-    QString note() const;
+    [[nodiscard]] QString note() const;
 
     /*!
       Return translated label for note field.
      */
-    static QString noteLabel();
+    [[nodiscard]] static QString noteLabel();
 
     /*!
       Set product identifier.
@@ -997,12 +997,12 @@ public:
     /*!
       Return product identifier.
      */
-    QString productId() const;
+    [[nodiscard]] QString productId() const;
 
     /*!
       Return translated label for productId field.
      */
-    static QString productIdLabel();
+    [[nodiscard]] static QString productIdLabel();
 
     /*!
       Set revision date.
@@ -1012,12 +1012,12 @@ public:
     /*!
       Return revision date.
      */
-    QDateTime revision() const;
+    [[nodiscard]] QDateTime revision() const;
 
     /*!
       Return translated label for revision field.
      */
-    static QString revisionLabel();
+    [[nodiscard]] static QString revisionLabel();
 
     /*!
       Set sort string.
@@ -1027,12 +1027,12 @@ public:
     /*!
       Return sort string.
      */
-    QString sortString() const;
+    [[nodiscard]] QString sortString() const;
 
     /*!
       Return translated label for sortString field.
      */
-    static QString sortStringLabel();
+    [[nodiscard]] static QString sortStringLabel();
 
     /*!
       Set homepage.
@@ -1044,12 +1044,12 @@ public:
     /*!
       Return homepage.
      */
-    ResourceLocatorUrl url() const;
+    [[nodiscard]] ResourceLocatorUrl url() const;
 
     /*!
       Return translated label for url field.
      */
-    static QString urlLabel();
+    [[nodiscard]] static QString urlLabel();
 
     /*!
       Set security class.
@@ -1059,12 +1059,12 @@ public:
     /*!
       Return security class.
      */
-    Secrecy secrecy() const;
+    [[nodiscard]] Secrecy secrecy() const;
 
     /*!
       Return translated label for secrecy field.
      */
-    static QString secrecyLabel();
+    [[nodiscard]] static QString secrecyLabel();
 
     /*!
       Set logo.
@@ -1074,12 +1074,12 @@ public:
     /*!
       Return logo.
      */
-    Picture logo() const;
+    [[nodiscard]] Picture logo() const;
 
     /*!
       Return translated label for logo field.
      */
-    static QString logoLabel();
+    [[nodiscard]] static QString logoLabel();
 
     /*!
       Set photo.
@@ -1089,12 +1089,12 @@ public:
     /*!
       Return photo.
      */
-    Picture photo() const;
+    [[nodiscard]] Picture photo() const;
 
     /*!
       Return translated label for photo field.
      */
-    static QString photoLabel();
+    [[nodiscard]] static QString photoLabel();
 
     /*!
       Set sound.
@@ -1104,12 +1104,12 @@ public:
     /*!
       Return sound.
      */
-    Sound sound() const;
+    [[nodiscard]] Sound sound() const;
 
     /*!
       Return translated label for sound field.
      */
-    static QString soundLabel();
+    [[nodiscard]] static QString soundLabel();
 
     /*!
       Set name fields by parsing the given string and trying to associate the
@@ -1122,12 +1122,12 @@ public:
       Return the name of the addressee. This is calculated from all the name
       fields.
      */
-    QString realName() const;
+    [[nodiscard]] QString realName() const;
 
     /*!
       Return the name that consists of all name parts.
      */
-    QString assembledName() const;
+    [[nodiscard]] QString assembledName() const;
 
     /*!
       Return email address including real name.
@@ -1135,7 +1135,7 @@ public:
       \a email Email address to be used to construct the full email string.
                    If this is QString() the preferred email address is used.
      */
-    QString fullEmail(const QString &email = QString()) const;
+    [[nodiscard]] QString fullEmail(const QString &email = QString()) const;
 
     /*!
       Adds an email address. If the email address (i.e. email.mail()) already
@@ -1157,12 +1157,12 @@ public:
       Return preferred email address. This is the first email address or the last
       one added with insertEmail() or addEmail() with a set preferred parameter.
      */
-    QString preferredEmail() const;
+    [[nodiscard]] QString preferredEmail() const;
 
     /*!
       Return list of all email addresses.
      */
-    QStringList emails() const;
+    [[nodiscard]] QStringList emails() const;
 
     /*!
        Set the emails to \a list.
@@ -1191,12 +1191,12 @@ public:
 
       \a type The type of phone number to get
      */
-    PhoneNumber phoneNumber(PhoneNumber::Type type) const;
+    [[nodiscard]] PhoneNumber phoneNumber(PhoneNumber::Type type) const;
 
     /*!
       Return list of all phone numbers.
      */
-    PhoneNumber::List phoneNumbers() const;
+    [[nodiscard]] PhoneNumber::List phoneNumbers() const;
 
     void setPhoneNumbers(const PhoneNumber::List &phoneNumbers);
 
@@ -1205,7 +1205,7 @@ public:
 
       \a type The type of phone number to get
      */
-    PhoneNumber::List phoneNumbers(PhoneNumber::Type type) const;
+    [[nodiscard]] PhoneNumber::List phoneNumbers(PhoneNumber::Type type) const;
 
     /*!
       Return phone number with the given id.
@@ -1213,7 +1213,7 @@ public:
       \a id The identifier of the phone number to look for.
                 See PhoneNumber::id()
      */
-    PhoneNumber findPhoneNumber(const QString &id) const;
+    [[nodiscard]] PhoneNumber findPhoneNumber(const QString &id) const;
 
     /*!
       Insert a key. If a key with the same id already exists
@@ -1242,12 +1242,12 @@ public:
       \a customTypeString A string to match custom keys against when
              \a type is \c Key::Custom
      */
-    Key key(Key::Type type, const QString &customTypeString = QString()) const;
+    [[nodiscard]] Key key(Key::Type type, const QString &customTypeString = QString()) const;
 
     /*!
       Return list of all keys.
      */
-    Key::List keys() const;
+    [[nodiscard]] Key::List keys() const;
 
     /*!
        Set the list of keys
@@ -1266,14 +1266,14 @@ public:
       \a customTypeString A string to match custom keys against when
              \a type is \c Key::Custom
      */
-    Key::List keys(Key::Type type, const QString &customTypeString = QString()) const;
+    [[nodiscard]] Key::List keys(Key::Type type, const QString &customTypeString = QString()) const;
 
     /*!
       Return key with the given id.
 
       \a id The identifier of the key to look for. See Key::id()
      */
-    Key findKey(const QString &id) const;
+    [[nodiscard]] Key findKey(const QString &id) const;
 
     /*!
       Insert an address. If an address with the same id already exists
@@ -1304,26 +1304,26 @@ public:
 
       \a type The type of address to look for
      */
-    Address address(Address::Type type) const;
+    [[nodiscard]] Address address(Address::Type type) const;
 
     /*!
       Return list of all addresses.
      */
-    Address::List addresses() const;
+    [[nodiscard]] Address::List addresses() const;
 
     /*!
       Return list of addresses with a special type.
 
       \a type The type of addresses to look for
      */
-    Address::List addresses(Address::Type type) const;
+    [[nodiscard]] Address::List addresses(Address::Type type) const;
 
     /*!
       Return address with the given id.
 
       \a id The identifier of the address to look for. See Address::id()
      */
-    Address findAddress(const QString &id) const;
+    [[nodiscard]] Address findAddress(const QString &id) const;
 
     /*!
       Insert category. If the category already exists it is not duplicated.
@@ -1338,7 +1338,7 @@ public:
     /*!
       Return, if addressee has the given category.
      */
-    bool hasCategory(const QString &category) const;
+    [[nodiscard]] bool hasCategory(const QString &category) const;
 
     /*!
       Set categories to given value.
@@ -1348,7 +1348,7 @@ public:
     /*!
       Return list of all set categories.
      */
-    QStringList categories() const;
+    [[nodiscard]] QStringList categories() const;
 
     /*!
       Insert custom entry. The entry is identified by the name of the inserting
@@ -1382,7 +1382,7 @@ public:
 
       \a name Name of this application specific custom entry
      */
-    QString custom(const QString &app, const QString &name) const;
+    [[nodiscard]] QString custom(const QString &app, const QString &name) const;
 
     /*!
       Set all custom entries.
@@ -1395,7 +1395,7 @@ public:
       The format of the custom entries is 'app-key:value' and the list is sorted
       alphabetically by 'app-key'.
      */
-    QStringList customs() const;
+    [[nodiscard]] QStringList customs() const;
 
     /*!
       Parse full email address. The result is given back in fullName and email.
@@ -1411,7 +1411,7 @@ public:
     /*!
       Returns string representation of the addressee.
      */
-    QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /*!
       Mark addressee as changed.
@@ -1423,14 +1423,14 @@ public:
     /*!
       Return whether the addressee is changed.
      */
-    bool changed() const;
+    [[nodiscard]] bool changed() const;
 
     /*!
       Returns the MIME type used for Addressees
      */
-    static QString mimeType();
+    [[nodiscard]] static QString mimeType();
 
-    KContacts::Email::List emailList() const;
+    [[nodiscard]] KContacts::Email::List emailList() const;
     void setEmailList(const Email::List &list);
 
     /*!
@@ -1444,7 +1444,7 @@ public:
     /*!
      * Returns List of lang
      */
-    Lang::List langs() const;
+    [[nodiscard]] Lang::List langs() const;
     /*!
      */
     void setLangs(const Lang::List &langs);
@@ -1455,11 +1455,11 @@ public:
 
     /*!
      */
-    Gender gender() const;
+    [[nodiscard]] Gender gender() const;
 
     /*!
      */
-    QString kind() const;
+    [[nodiscard]] QString kind() const;
 
     /*!
      */
@@ -1471,7 +1471,7 @@ public:
 
     /*!
      */
-    CalendarUrl::List calendarUrlList() const;
+    [[nodiscard]] CalendarUrl::List calendarUrlList() const;
 
     /*!
      */
@@ -1483,7 +1483,7 @@ public:
 
     /*!
      */
-    Sound::List extraSoundList() const;
+    [[nodiscard]] Sound::List extraSoundList() const;
 
     /*!
      */
@@ -1495,7 +1495,7 @@ public:
 
     /*!
      */
-    Picture::List extraPhotoList() const;
+    [[nodiscard]] Picture::List extraPhotoList() const;
 
     /*!
      */
@@ -1507,11 +1507,11 @@ public:
 
     /*!
      */
-    Picture::List extraLogoList() const;
+    [[nodiscard]] Picture::List extraLogoList() const;
 
     /*!
      */
-    ResourceLocatorUrl::List extraUrlList() const;
+    [[nodiscard]] ResourceLocatorUrl::List extraUrlList() const;
 
     /*!
      */
@@ -1532,7 +1532,7 @@ public:
 
     /*!
      */
-    QStringList members() const;
+    [[nodiscard]] QStringList members() const;
 
     // Relation
     /*!
@@ -1545,7 +1545,7 @@ public:
 
     /*!
      */
-    Related::List relationships() const;
+    [[nodiscard]] Related::List relationships() const;
 
     // Source
     /*!
@@ -1558,12 +1558,12 @@ public:
 
     /*!
      */
-    QList<QUrl> sourcesUrlList() const;
+    [[nodiscard]] QList<QUrl> sourcesUrlList() const;
 
     // Impp
     /*!
      */
-    Impp::List imppList() const;
+    [[nodiscard]] Impp::List imppList() const;
 
     /*!
      */
@@ -1576,7 +1576,7 @@ public:
     // FieldGroup
     /*!
      */
-    FieldGroup::List fieldGroupList() const;
+    [[nodiscard]] FieldGroup::List fieldGroupList() const;
 
     /*!
      */
@@ -1589,7 +1589,7 @@ public:
     // ClientPidMap
     /*!
      */
-    ClientPidMap::List clientPidMapList() const;
+    [[nodiscard]] ClientPidMap::List clientPidMapList() const;
 
     /*!
      */
@@ -1606,7 +1606,7 @@ public:
      *
      * \since 5.12
      */
-    QDate anniversary() const;
+    [[nodiscard]] QDate anniversary() const;
     /*!
      * Sets the contact's anniversary date.
      *
@@ -1623,7 +1623,7 @@ public:
      *
      * \since 5.12
      */
-    QString assistantsName() const;
+    [[nodiscard]] QString assistantsName() const;
     /*!
      * Set the contact's assistant's name.
      *
@@ -1640,7 +1640,7 @@ public:
      *
      * \since 5.12
      */
-    QUrl blogFeed() const;
+    [[nodiscard]] QUrl blogFeed() const;
     /*!
      * Set the contact's blog feed.
      *
@@ -1657,7 +1657,7 @@ public:
      *
      * \since 5.12
      */
-    QString managersName() const;
+    [[nodiscard]] QString managersName() const;
     /*!
      * Set the contact's manager's name.
      *
@@ -1674,7 +1674,7 @@ public:
      *
      * \since 5.12
      */
-    QString office() const;
+    [[nodiscard]] QString office() const;
     /*!
      * Set the contact's office.
      *
@@ -1691,7 +1691,7 @@ public:
      *
      * \since 5.12
      */
-    QString profession() const;
+    [[nodiscard]] QString profession() const;
     /*!
      * Set the contact's profession.
      * @note This is a non-standard extension using the \c X-Profession field.
@@ -1706,7 +1706,7 @@ public:
      *
      * \since 5.12
      */
-    QString spousesName() const;
+    [[nodiscard]] QString spousesName() const;
     /*!
      * Set the contact's spouse's name.
      *

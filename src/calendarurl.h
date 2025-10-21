@@ -95,7 +95,7 @@ public:
     /*!
      *
      */
-    QUrl url() const;
+    [[nodiscard]] QUrl url() const;
 
     /*!
      *

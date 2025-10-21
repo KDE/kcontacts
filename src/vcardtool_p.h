@@ -42,10 +42,10 @@ public:
      */
     [[nodiscard]] Addressee::List parseVCards(const QByteArray &vcard) const;
 
-    static QDateTime parseDateTime(const QString &str, bool *timeValid = nullptr);
-    static QString createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime = true);
-    static QString createDate(const QDate &date, VCard::Version version);
-    static QString createTime(const QTime &time, VCard::Version version);
+    [[nodiscard]] static QDateTime parseDateTime(const QString &str, bool *timeValid = nullptr);
+    [[nodiscard]] static QString createDateTime(const QDateTime &dateTime, VCard::Version version, bool withTime = true);
+    [[nodiscard]] static QString createDate(const QDate &date, VCard::Version version);
+    [[nodiscard]] static QString createTime(const QTime &time, VCard::Version version);
 
 private:
     KCONTACTS_NO_EXPORT

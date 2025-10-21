@@ -306,7 +306,7 @@ public:
      *
      * \sa type()
      */
-    static QString typeLabel(Type type);
+    [[nodiscard]] static QString typeLabel(Type type);
 
     /*!
      * Returns the translated label for phone number \a type.
@@ -321,7 +321,7 @@ public:
     /*!
      * Returns a string representation of the phone number.
      */
-    QString toString() const;
+    [[nodiscard]] QString toString() const;
 
 private:
     KCONTACTS_NO_EXPORT void setParams(const ParameterMap &params);

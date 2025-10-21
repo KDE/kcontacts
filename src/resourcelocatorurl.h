@@ -120,7 +120,7 @@ public:
      * Returns the type of the URL.
      * \since 5.12
      */
-    Type type() const;
+    [[nodiscard]] Type type() const;
 
     /*!
      * Sets the URL type.
@@ -132,7 +132,7 @@ public:
      * Returns whether this is the preferred website.
      * \since 5.12
      */
-    bool isPreferred() const;
+    [[nodiscard]] bool isPreferred() const;
 
     /*!
      * Sets that this is the preferred website.

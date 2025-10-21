@@ -138,7 +138,7 @@ public:
      * Returns the type of the email.
      * \since 5.12
      */
-    Type type() const;
+    [[nodiscard]] Type type() const;
     /*!
      * Sets the email type.
      * \since 5.12
@@ -149,7 +149,7 @@ public:
      * Returns whether this is the preferred email address.
      * \since 5.12
      */
-    bool isPreferred() const;
+    [[nodiscard]] bool isPreferred() const;
     /*!
      * Sets that this is the preferred email address.
      * \since 5.12
