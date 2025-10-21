@@ -1,6 +1,6 @@
 /*
     This file is part of the KContacts framework.
-    SPDX-FileCopyrightText: 2015-2019 Laurent Montel <montel@kde.org>
+    SPDX-FileCopyrightText: 2015-2025 Laurent Montel <montel@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -58,6 +58,11 @@ class KCONTACTS_EXPORT ResourceLocatorUrl
      * \property KContacts::ResourceLocatorUrl::isPreferred
      */
     Q_PROPERTY(bool isPreferred READ isPreferred WRITE setPreferred)
+
+    /*!
+     * \property KContacts::Impp::resourceLabel
+     */
+    Q_PROPERTY(QString resourceLabel READ resourceLabel)
 
 public:
     /*!
@@ -148,6 +153,12 @@ public:
     /*!
      */
     Q_REQUIRED_RESULT QString toString() const;
+
+    /*!
+     * Returns a translated label for the type.
+     * \since 6.20
+     */
+    Q_REQUIRED_RESULT QString resourceLabel() const;
 
 private:
     // exported for ResourceLocatorUrlTest

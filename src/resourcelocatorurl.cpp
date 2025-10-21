@@ -9,6 +9,7 @@
 
 #include "parametermap_p.h"
 
+#include <KLocalizedString>
 #include <QDataStream>
 #include <QStringList>
 
@@ -178,6 +179,27 @@ QString ResourceLocatorUrl::toString() const
     str += d->mParamMap.toString();
     str += QLatin1String("}\n");
     return str;
+}
+
+QString ResourceLocatorUrl::resourceLabel() const
+{
+    QString typeName;
+    switch (type()) {
+    case KContacts::ResourceLocatorUrl::Home:
+        typeName = i18n("Home");
+        break;
+    case KContacts::ResourceLocatorUrl::Work:
+        typeName = i18n("Work");
+        break;
+    case KContacts::ResourceLocatorUrl::Profile:
+        typeName = i18n("Profile");
+        break;
+    default:
+    case KContacts::ResourceLocatorUrl::Other:
+        typeName = i18n("Other");
+        break;
+    }
+    return typeName;
 }
 
 void ResourceLocatorUrl::setParams(const ParameterMap &params)
