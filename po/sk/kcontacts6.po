@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2015-12-26 14:17+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -515,6 +515,33 @@ msgstr "Uprednostňované číslo"
 #, kde-format
 msgid "Work Fax"
 msgstr "Fax do práce"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "Doma"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "Práca"
+
+#: resourcelocatorurl.cpp:195
+#, fuzzy, kde-format
+#| msgid "Prof."
+msgid "Profile"
+msgstr "Prof."
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "Ostatné"
 
 #: secrecy.cpp:98
 #, kde-format

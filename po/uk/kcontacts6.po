@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2015-12-25 16:12+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -520,6 +520,33 @@ msgstr "Головний номер"
 #, kde-format
 msgid "Work Fax"
 msgstr "Робочий факс"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "Домашня"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "Робоча"
+
+#: resourcelocatorurl.cpp:195
+#, fuzzy, kde-format
+#| msgid "Prof."
+msgid "Profile"
+msgstr "Проф."
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "Інша"
 
 #: secrecy.cpp:98
 #, kde-format

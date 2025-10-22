@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepimlibs-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2025-02-21 09:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -522,6 +522,33 @@ msgstr "Tercih Edilen Numara"
 #, kde-format
 msgid "Work Fax"
 msgstr "İş Faksı"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "Ev"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "İş"
+
+#: resourcelocatorurl.cpp:195
+#, fuzzy, kde-format
+#| msgid "Prof."
+msgid "Profile"
+msgstr "Prof."
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "Diğer"
 
 #: secrecy.cpp:98
 #, kde-format

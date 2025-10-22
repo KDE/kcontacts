@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -517,6 +517,33 @@ msgstr "प्राधान्य संख्या"
 #, kde-format
 msgid "Work Fax"
 msgstr "कार्य फैक्स"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "गृहम्‌"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "कार्यम्‌"
+
+#: resourcelocatorurl.cpp:195
+#, fuzzy, kde-format
+#| msgid "Prof."
+msgid "Profile"
+msgstr "प्रो."
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "इतर"
 
 #: secrecy.cpp:98
 #, kde-format

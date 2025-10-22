@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2018-04-05 20:16+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -520,6 +520,33 @@ msgstr "預設號碼"
 #, kde-format
 msgid "Work Fax"
 msgstr "工作傳真"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "住家"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "工作"
+
+#: resourcelocatorurl.cpp:195
+#, fuzzy, kde-format
+#| msgid "Prof."
+msgid "Profile"
+msgstr "Prof."
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "其他"
 
 #: secrecy.cpp:98
 #, kde-format

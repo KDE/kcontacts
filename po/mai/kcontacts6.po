@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 02:16+0000\n"
+"POT-Creation-Date: 2025-10-22 00:40+0000\n"
 "PO-Revision-Date: 2010-09-24 20:39+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -519,6 +519,32 @@ msgstr ""
 #, kde-format
 msgid "Work Fax"
 msgstr "कार्यालय फ़ैक्स"
+
+#: resourcelocatorurl.cpp:189
+#, fuzzy, kde-format
+#| msgctxt "Home Address"
+#| msgid "Home"
+msgid "Home"
+msgstr "घर"
+
+#: resourcelocatorurl.cpp:192
+#, fuzzy, kde-format
+#| msgctxt "Work Address"
+#| msgid "Work"
+msgid "Work"
+msgstr "कामकाज"
+
+#: resourcelocatorurl.cpp:195
+#, kde-format
+msgid "Profile"
+msgstr ""
+
+#: resourcelocatorurl.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "another type of address"
+#| msgid "Other"
+msgid "Other"
+msgstr "आन"
 
 #: secrecy.cpp:98
 #, kde-format
