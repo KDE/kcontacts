@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kcontacts package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-22 00:40+0000\n"
-"PO-Revision-Date: 2024-04-21 09:38+0300\n"
+"PO-Revision-Date: 2025-10-22 08:51+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: address.cpp:224
 #, kde-format
@@ -520,29 +520,22 @@ msgid "Work Fax"
 msgstr "פקס בעבודה"
 
 #: resourcelocatorurl.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "בית"
 
 #: resourcelocatorurl.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "עבודה"
 
 #: resourcelocatorurl.cpp:195
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "פרופ׳"
+msgstr "פרופיל"
 
 #: resourcelocatorurl.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "אחר"
 

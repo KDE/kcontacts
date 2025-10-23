@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-22 00:40+0000\n"
-"PO-Revision-Date: 2022-09-18 11:56+0200\n"
+"PO-Revision-Date: 2025-10-22 03:35+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #: address.cpp:224
 #, kde-format
@@ -520,29 +520,22 @@ msgid "Work Fax"
 msgstr "სამსახურის ფაქსი"
 
 #: resourcelocatorurl.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "სახლი"
 
 #: resourcelocatorurl.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "სამუშაო"
 
 #: resourcelocatorurl.cpp:195
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "პროფ."
+msgstr "პროფილი"
 
 #: resourcelocatorurl.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "სხვა"
 

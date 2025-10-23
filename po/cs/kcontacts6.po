@@ -520,29 +520,22 @@ msgid "Work Fax"
 msgstr "Fax do práce"
 
 #: resourcelocatorurl.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "Domů"
 
 #: resourcelocatorurl.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
-msgstr "Pracovní"
+msgstr "Práce"
 
 #: resourcelocatorurl.cpp:195
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "Prof."
+msgstr "Profil"
 
 #: resourcelocatorurl.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "Jiné"
 

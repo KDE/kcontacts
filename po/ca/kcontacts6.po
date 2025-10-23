@@ -1,9 +1,9 @@
 # Translation of kcontacts6.po to Catalan
-# Copyright (C) 2007-2023 This_file_is_part_of_KDE
+# Copyright (C) 2007-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2015, 2017, 2023 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2015, 2017, 2023, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2009 Albert Astals Cid <aacid@kde.org>
 # SPDX-FileCopyrightText: 2009 Manuel Tortosa Moreno <manutortosa@gmail.com>
 # SPDX-FileCopyrightText: 2014, 2015 Antoni Bella Pérez <antonibella5@yahoo.com>
@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-22 00:40+0000\n"
-"PO-Revision-Date: 2023-07-31 13:02+0200\n"
+"PO-Revision-Date: 2025-10-22 11:27+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -526,31 +526,24 @@ msgid "Work Fax"
 msgstr "Fax de la feina"
 
 #: resourcelocatorurl.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "Llar"
 
 #: resourcelocatorurl.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "Feina"
 
 #: resourcelocatorurl.cpp:195
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "Prof."
+msgstr "Perfil"
 
 #: resourcelocatorurl.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
-msgstr "Altra"
+msgstr "Altres"
 
 #: secrecy.cpp:98
 #, kde-format
