@@ -1,10 +1,10 @@
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-22 00:40+0000\n"
-"PO-Revision-Date: 2022-05-20 18:57+0200\n"
+"PO-Revision-Date: 2025-10-24 21:20+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.0\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: address.cpp:224
 #, kde-format
@@ -516,29 +516,22 @@ msgid "Work Fax"
 msgstr "Служебен факс"
 
 #: resourcelocatorurl.cpp:189
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "Домашен адрес"
 
 #: resourcelocatorurl.cpp:192
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "Служебен адрес"
 
 #: resourcelocatorurl.cpp:195
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "Проф."
+msgstr "Профил"
 
 #: resourcelocatorurl.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "Други"
 
