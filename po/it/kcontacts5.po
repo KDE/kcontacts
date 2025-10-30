@@ -4,7 +4,7 @@
 # Federico Zenith <federico.zenith@member.fsf.org>, 2007.
 # Pino Toscano <toscano.pino@tiscali.it>, 2009.
 # Luigi Toscano <luigi.toscano@tiscali.it>, 2015.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: address.cpp:224
 #, kde-format
