@@ -106,13 +106,13 @@ QDateTime KContacts::VCardStringToDate(const QString &dateString)
     QString d(dateString);
 
     d = d.remove(QLatin1Char('-')).remove(QLatin1Char(':'));
-
-    if (d.length() >= 8) {
+    const auto length = d.length();
+    if (length >= 8) {
         const QStringView strView(d);
         date = QDate(strView.mid(0, 4).toUInt(), strView.mid(4, 2).toUInt(), strView.mid(6, 2).toUInt());
     }
 
-    if (d.length() > 9 && d[8].toUpper() == QLatin1Char('T')) {
+    if (length > 9 && d[8].toUpper() == QLatin1Char('T')) {
         const QStringView strView(d);
         time = QTime(strView.mid(9, 2).toUInt(), strView.mid(11, 2).toUInt(), strView.mid(13, 2).toUInt());
     }
