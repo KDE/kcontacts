@@ -370,7 +370,12 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             const QString birthdayString = createDateTime(addressee.birthday(), version, withTime);
             card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
         }
-
+        // DEATHDATE
+        if (version == VCard::v4_0) {
+            VCardLine line(QStringLiteral("DEATHDATE"));
+            line.setValue(createDateTime(addressee.deathDate(), version));
+            card.addLine(line);
+        }
         // CATEGORIES only > 2.1
         if (version != VCard::v2_1) {
             QStringList categories = addressee.categories();
@@ -819,6 +824,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     bool withTime;
                     const QDateTime bday = parseDateTime((*lineIt).value().toString(), &withTime);
                     addr.setBirthday(bday, withTime);
+                }
+                // DEATHDATE
+                else if (identifier == QLatin1String("deathdate")) {
+                    const QDateTime deathDate = parseDateTime((*lineIt).value().toString());
+                    addr.setDeathDate(deathDate);
                 }
                 // CATEGORIES
                 else if (identifier == QLatin1String("categories")) {
