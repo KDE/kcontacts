@@ -467,6 +467,11 @@ class KCONTACTS_EXPORT Addressee
      */
     Q_PROPERTY(KContacts::Picture photo READ photo WRITE setPhoto)
 
+    /*!
+     * \property KContacts::Addressee::deathDate
+     */
+    Q_PROPERTY(QDateTime deathDate READ deathDate WRITE setDeathDate)
+
     // ### the following properties are still missing:
     // - logos, photos, sounds
     // - keys
@@ -1731,7 +1736,7 @@ public:
      *
      * \since 6.20
      */
-    void setDeathDate(const QDate &deathDate);
+    void setDeathDate(const QDateTime &deathDate);
 
 private:
     KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);

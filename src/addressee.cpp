@@ -859,14 +859,14 @@ QDateTime Addressee::birthday() const
     return d->mBirthday;
 }
 
-void Addressee::setDeathDate(const QDate &deathDate)
+void Addressee::setDeathDate(const QDateTime &deathDate)
 {
-    if (deathDate == d->mDeathDate.date()) {
+    if (deathDate == d->mDeathDate) {
         return;
     }
 
     d->mEmpty = false;
-    d->mDeathDate = QDateTime(deathDate, QTime());
+    d->mDeathDate = deathDate;
 }
 
 QDateTime Addressee::deathDate() const
