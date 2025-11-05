@@ -85,6 +85,7 @@ void AddresseeTest::storeTest()
     KContacts::Impp::List listImp;
     listImp << imp;
     addressee.setImppList(listImp);
+    addressee.setDeathDate(QDate(2020, 7, 19));
 
     QCOMPARE(addressee.imppList(), listImp);
     QCOMPARE(addressee.langs(), (KContacts::Lang::List() << lang));
@@ -122,6 +123,8 @@ void AddresseeTest::storeTest()
     QCOMPARE(addressee.customs(), customs);
     QCOMPARE(addressee.changed(), false);
     QCOMPARE(addressee.kind(), QStringLiteral("foo"));
+    QCOMPARE(addressee.deathDate().date(), QDate(2020, 7, 19));
+    QCOMPARE(addressee.deathDate().time(), QTime(0, 0));
 }
 
 void AddresseeTest::equalsTest()

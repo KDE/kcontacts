@@ -1716,6 +1716,23 @@ public:
      */
     void setSpousesName(const QString &spousesName);
 
+    /*!
+     * Returns the death's date.
+     *
+     * \note This is a non-standard extension using the \c X-SpousesName field.
+     *
+     * \since 6.20
+     */
+    [[nodiscard]] QDateTime deathDate() const;
+    /*!
+     * Set the death's date
+     *
+     * \note This is a vcard4 extension
+     *
+     * \since 6.20
+     */
+    void setDeathDate(const QDate &deathDate);
+
 private:
     KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);
 

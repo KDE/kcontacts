@@ -107,6 +107,7 @@ public:
         mTitleExtraList = other.mTitleExtraList;
         mRoleExtraList = other.mRoleExtraList;
         mOrgExtraList = other.mOrgExtraList;
+        mDeathDate = other.mDeathDate;
     }
 
     ~Private()
@@ -148,6 +149,7 @@ public:
     Picture mLogo;
     Picture mPhoto;
     Sound mSound;
+    QDateTime mDeathDate;
 
     PhoneNumber::List mPhoneNumbers;
     Address::List mAddresses;
@@ -420,6 +422,11 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (!listEquals(d->mClientPidMapList, addressee.d->mClientPidMapList)) {
         qCDebug(KCONTACTS_LOG) << "ClientPidMap List differs";
+        return false;
+    }
+
+    if (d->mDeathDate != addressee.d->mDeathDate) {
+        qCDebug(KCONTACTS_LOG) << "death date differs";
         return false;
     }
     return true;
@@ -850,6 +857,21 @@ void Addressee::setBirthday(const QDate &birthday)
 QDateTime Addressee::birthday() const
 {
     return d->mBirthday;
+}
+
+void Addressee::setDeathDate(const QDate &deathDate)
+{
+    if (deathDate == d->mDeathDate.date()) {
+        return;
+    }
+
+    d->mEmpty = false;
+    d->mDeathDate = QDateTime(deathDate, QTime());
+}
+
+QDateTime Addressee::deathDate() const
+{
+    return d->mDeathDate;
 }
 
 bool Addressee::birthdayHasTime() const
@@ -2559,6 +2581,7 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mOrgExtraList;
     s << a.d->mNickNameExtraList;
     s << a.d->mClientPidMapList;
+    s << a.d->mDeathDate;
 
     return s;
 }
@@ -2614,6 +2637,7 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mOrgExtraList;
     s >> a.d->mNickNameExtraList;
     s >> a.d->mClientPidMapList;
+    s >> a.d->mDeathDate;
     a.d->mEmpty = false;
 
     return s;
