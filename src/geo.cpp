@@ -56,9 +56,7 @@ Geo::Geo(const Geo &other)
 {
 }
 
-Geo::~Geo()
-{
-}
+Geo::~Geo() = default;
 
 void Geo::setLatitude(float latitude)
 {

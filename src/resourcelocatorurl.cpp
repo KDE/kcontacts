@@ -43,9 +43,7 @@ ResourceLocatorUrl::ResourceLocatorUrl(const ResourceLocatorUrl &other)
 {
 }
 
-ResourceLocatorUrl::~ResourceLocatorUrl()
-{
-}
+ResourceLocatorUrl::~ResourceLocatorUrl() = default;
 
 struct url_type_name {
     const char *name;

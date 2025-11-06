@@ -55,9 +55,7 @@ Key::Key(const Key &other)
 {
 }
 
-Key::~Key()
-{
-}
+Key::~Key() = default;
 
 bool Key::operator==(const Key &other) const
 {

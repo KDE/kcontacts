@@ -47,9 +47,7 @@ Role::Role(const QString &role)
     d->role = role;
 }
 
-Role::~Role()
-{
-}
+Role::~Role() = default;
 
 void Role::setRole(const QString &role)
 {

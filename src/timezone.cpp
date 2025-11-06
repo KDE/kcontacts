@@ -60,9 +60,7 @@ TimeZone::TimeZone(const TimeZone &other)
 {
 }
 
-TimeZone::~TimeZone()
-{
-}
+TimeZone::~TimeZone() = default;
 
 void TimeZone::setOffset(int offset)
 {

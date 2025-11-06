@@ -47,9 +47,7 @@ Related::Related(const QString &relatedTo)
     d->relatedTo = relatedTo;
 }
 
-Related::~Related()
-{
-}
+Related::~Related() = default;
 
 void Related::setRelated(const QString &relatedTo)
 {

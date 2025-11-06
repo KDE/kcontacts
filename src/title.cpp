@@ -47,9 +47,7 @@ Title::Title(const QString &title)
     d->title = title;
 }
 
-Title::~Title()
-{
-}
+Title::~Title() = default;
 
 void Title::setTitle(const QString &title)
 {

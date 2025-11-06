@@ -60,9 +60,7 @@ PhoneNumber::PhoneNumber(const PhoneNumber &other)
 {
 }
 
-PhoneNumber::~PhoneNumber()
-{
-}
+PhoneNumber::~PhoneNumber() = default;
 
 bool PhoneNumber::operator==(const PhoneNumber &other) const
 {

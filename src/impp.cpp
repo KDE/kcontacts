@@ -49,9 +49,7 @@ Impp::Impp(const QUrl &address)
     d->address = address;
 }
 
-Impp::~Impp()
-{
-}
+Impp::~Impp() = default;
 
 bool Impp::isValid() const
 {

@@ -47,9 +47,7 @@ Lang::Lang(const QString &language)
     d->language = language;
 }
 
-Lang::~Lang()
-{
-}
+Lang::~Lang() = default;
 
 void Lang::setLanguage(const QString &lang)
 {

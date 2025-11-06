@@ -88,13 +88,9 @@ static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
     return it != std::end(s_phoneTypes) ? it->flag : PhoneNumber::TypeFlag{};
 }
 
-VCardTool::VCardTool()
-{
-}
+VCardTool::VCardTool() = default;
 
-VCardTool::~VCardTool()
-{
-}
+VCardTool::~VCardTool() = default;
 
 QByteArray VCardTool::exportVCards(const Addressee::List &list, VCard::Version version) const
 {

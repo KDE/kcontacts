@@ -59,9 +59,7 @@ Sound::Sound(const Sound &other)
 {
 }
 
-Sound::~Sound()
-{
-}
+Sound::~Sound() = default;
 
 Sound &Sound::operator=(const Sound &other)
 {

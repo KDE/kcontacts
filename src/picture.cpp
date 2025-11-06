@@ -65,9 +65,7 @@ Picture::Picture(const Picture &other)
 {
 }
 
-Picture::~Picture()
-{
-}
+Picture::~Picture() = default;
 
 Picture &Picture::operator=(const Picture &other)
 {

@@ -42,9 +42,7 @@ Secrecy::Secrecy(const Secrecy &other)
 {
 }
 
-Secrecy::~Secrecy()
-{
-}
+Secrecy::~Secrecy() = default;
 
 Secrecy &Secrecy::operator=(const Secrecy &other)
 {

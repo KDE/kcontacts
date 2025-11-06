@@ -47,9 +47,7 @@ Org::Org(const QString &org)
     d->organization = org;
 }
 
-Org::~Org()
-{
-}
+Org::~Org() = default;
 
 void Org::setOrganization(const QString &org)
 {

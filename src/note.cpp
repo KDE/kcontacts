@@ -47,9 +47,7 @@ Note::Note(const QString &note)
     d->note = note;
 }
 
-Note::~Note()
-{
-}
+Note::~Note() = default;
 
 void Note::setNote(const QString &note)
 {

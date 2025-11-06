@@ -47,9 +47,7 @@ NickName::NickName(const QString &nickname)
     d->nickname = nickname;
 }
 
-NickName::~NickName()
-{
-}
+NickName::~NickName() = default;
 
 void NickName::setNickName(const QString &nickname)
 {
