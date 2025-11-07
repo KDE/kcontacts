@@ -21,21 +21,13 @@ public:
     {
     }
 
-    Private(const QByteArray &name, bool valid = false)
-        : mTimeZoneName(name)
-        , mValid(valid)
-    {
-    }
-
     Private(const Private &other)
         : QSharedData(other)
     {
         mOffset = other.mOffset;
         mValid = other.mValid;
-        mTimeZoneName = other.mTimeZoneName;
     }
 
-    QByteArray mTimeZoneName;
     int mOffset;
     bool mValid;
 };
@@ -47,11 +39,6 @@ TimeZone::TimeZone()
 
 TimeZone::TimeZone(int offset)
     : d(new Private(offset, true))
-{
-}
-
-TimeZone::TimeZone(const QByteArray &name)
-    : d(new Private(name, true))
 {
 }
 
@@ -73,17 +60,6 @@ int TimeZone::offset() const
     return d->mOffset;
 }
 
-void TimeZone::setTimeZoneName(const QByteArray &name)
-{
-    d->mTimeZoneName = name;
-    d->mValid = true;
-}
-
-QByteArray TimeZone::timeZoneName() const
-{
-    return d->mTimeZoneName;
-}
-
 bool TimeZone::isValid() const
 {
     return d->mValid;
@@ -99,7 +75,7 @@ bool TimeZone::operator==(const TimeZone &t) const
         return false;
     }
 
-    if ((t.d->mOffset == d->mOffset) && (t.d->mTimeZoneName == d->mTimeZoneName)) {
+    if (t.d->mOffset == d->mOffset) {
         return true;
     }
 
@@ -123,11 +99,7 @@ TimeZone &TimeZone::operator=(const TimeZone &other)
 QString TimeZone::toString() const
 {
     QString str = QLatin1String("TimeZone {\n");
-    if (d->mTimeZoneName.isEmpty()) {
-        str += QStringLiteral("  Offset: %1\n").arg(d->mOffset);
-    } else {
-        str += QStringLiteral("  TimeZone: %1\n").arg(d->mTimeZoneName);
-    }
+    str += QStringLiteral("  Offset: %1\n").arg(d->mOffset);
     str += QLatin1String("}\n");
 
     return str;
@@ -135,12 +107,12 @@ QString TimeZone::toString() const
 
 QDataStream &KContacts::operator<<(QDataStream &s, const TimeZone &zone)
 {
-    return s << zone.d->mOffset << zone.d->mValid << zone.d->mTimeZoneName;
+    return s << zone.d->mOffset << zone.d->mValid;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, TimeZone &zone)
 {
-    s >> zone.d->mOffset >> zone.d->mValid >> zone.d->mTimeZoneName;
+    s >> zone.d->mOffset >> zone.d->mValid;
 
     return s;
 }

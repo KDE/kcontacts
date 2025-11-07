@@ -43,8 +43,6 @@ public:
 
     TimeZone(const TimeZone &other);
 
-    TimeZone(const QByteArray &name);
-
     ~TimeZone();
 
     /*!
@@ -77,9 +75,6 @@ public:
      * Return string representation of time zone offset.
      */
     [[nodiscard]] QString toString() const;
-
-    [[nodiscard]] QByteArray timeZoneName() const;
-    void setTimeZoneName(const QByteArray &name);
 
 private:
     class Private;
