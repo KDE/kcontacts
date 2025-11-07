@@ -110,7 +110,7 @@ void ImportExportVCardTest::shouldExportFullTestVcard4()
         "TEL;TYPE=\"voice,work\";VALUE=uri:tel:+44-555-555-7777\r\n"
         "TITLE;ALTID=1;LANGUAGE=fr:Patron\r\n"
         "TITLE;ALTID=2;LANGUAGE=en:Boss\r\n"
-        "TZ:London/Europe\r\n"
+        "TZ:+00:00\r\n"
         "UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519\r\n"
         "URL;TYPE=home:https://sherlockholmes.com\r\n"
         "END:VCARD\r\n\r\n");

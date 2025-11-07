@@ -601,35 +601,19 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             card.addLine(titleLine);
         }
 
+        // TZ
+        // TODO Add vcard4.0 support
         const TimeZone timeZone = addressee.timeZone();
         if (timeZone.isValid()) {
-            if (version == VCard::v4_0) {
-                if (!timeZone.timeZoneName().isEmpty()) {
-                    card.addLine(VCardLine(QStringLiteral("TZ"), timeZone.timeZoneName()));
-                } else {
-                    const QList<QByteArray> availableTimeZones = QTimeZone::availableTimeZoneIds();
-                    const QDateTime now = QDateTime::currentDateTime();
-
-                    for (const QByteArray &tzId : availableTimeZones) {
-                        const QTimeZone tZone(tzId);
-                        if (tZone.offsetFromUtc(now) == timeZone.offset() * 3600) {
-                            card.addLine(VCardLine(QStringLiteral("TZ"), tzId));
-                            break;
-                        }
-                    }
-                }
-            } else {
-                // TZ
-                int neg = 1;
-                if (timeZone.offset() < 0) {
-                    neg = -1;
-                }
-
-                const QString str =
-                    QString::asprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'), (timeZone.offset() / 60) * neg, (timeZone.offset() % 60) * neg);
-
-                card.addLine(VCardLine(QStringLiteral("TZ"), str));
+            int neg = 1;
+            if (timeZone.offset() < 0) {
+                neg = -1;
             }
+
+            QString str =
+                QString::asprintf("%c%02d:%02d", (timeZone.offset() >= 0 ? '+' : '-'), (timeZone.offset() / 60) * neg, (timeZone.offset() % 60) * neg);
+
+            card.addLine(VCardLine(QStringLiteral("TZ"), str));
         }
 
         // UID
@@ -1090,21 +1074,18 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 }
                 // TZ
                 else if (identifier == QLatin1String("tz")) {
+                    // TODO add vcard4 support
                     TimeZone tz;
                     const QString date = (*lineIt).value().toString();
+
                     if (!date.isEmpty()) {
                         const QStringView dateView(date);
-                        bool isInteger = false;
-                        const int hours = dateView.mid(1, 2).toInt(&isInteger);
-                        if (isInteger) {
-                            const int minutes = dateView.mid(4, 2).toInt();
-                            int offset = (hours * 60) + minutes;
-                            offset = offset * (date[0] == QLatin1Char('+') ? 1 : -1);
+                        int hours = dateView.mid(1, 2).toInt();
+                        int minutes = dateView.mid(4, 2).toInt();
+                        int offset = (hours * 60) + minutes;
+                        offset = offset * (date[0] == QLatin1Char('+') ? 1 : -1);
 
-                            tz.setOffset(offset);
-                        } else {
-                            tz.setTimeZoneName(date.toUtf8());
-                        }
+                        tz.setOffset(offset);
                         addr.setTimeZone(tz);
                     }
                 }
