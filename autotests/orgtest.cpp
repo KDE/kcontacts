@@ -70,7 +70,7 @@ void OrgTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QCOMPARE(org, result);
+    QVERIFY(org == result);
 }
 
 void OrgTest::shouldEqualOrg()
@@ -85,7 +85,7 @@ void OrgTest::shouldEqualOrg()
     org.setParams(params);
 
     result = org;
-    QCOMPARE(org, result);
+    QVERIFY(org == result);
 }
 
 void OrgTest::shouldParseOrg()

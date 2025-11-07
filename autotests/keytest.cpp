@@ -22,11 +22,11 @@ void KeyTest::storeTest()
     key.setCustomTypeString(QStringLiteral("GnuPG"));
     key.setTextData(QStringLiteral("That's my super secret key"));
 
-    QCOMPARE(key.id(), QLatin1String("My Id"));
-    QCOMPARE(key.type(), KContacts::Key::Custom);
-    QCOMPARE(key.customTypeString(), QLatin1String("GnuPG"));
-    QCOMPARE(key.textData(), QLatin1String("That's my super secret key"));
-    QCOMPARE(key.isBinary(), false);
+    QVERIFY(key.id() == QLatin1String("My Id"));
+    QVERIFY(key.type() == KContacts::Key::Custom);
+    QVERIFY(key.customTypeString() == QLatin1String("GnuPG"));
+    QVERIFY(key.textData() == QLatin1String("That's my super secret key"));
+    QVERIFY(key.isBinary() == false);
 }
 
 void KeyTest::equalsTest()
@@ -44,7 +44,7 @@ void KeyTest::equalsTest()
     key2.setCustomTypeString(QStringLiteral("GnuPG"));
     key2.setTextData(QStringLiteral("That's my super secret key"));
 
-    QCOMPARE(key1, key2);
+    QVERIFY(key1 == key2);
 }
 
 void KeyTest::differsTest()
@@ -67,7 +67,7 @@ void KeyTest::assignmentTest()
 
     key2 = key1;
 
-    QCOMPARE(key1, key2);
+    QVERIFY(key1 == key2);
 }
 
 void KeyTest::serializeTest()
@@ -87,7 +87,7 @@ void KeyTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> key2;
 
-    QCOMPARE(key1, key2);
+    QVERIFY(key1 == key2);
 }
 
 void KeyTest::shouldExportVCard3()

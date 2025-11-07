@@ -16,8 +16,8 @@ void GeoTest::constructor()
 {
     KContacts::Geo geo(1.2f, 3.4f);
 
-    QCOMPARE((float)geo.latitude(), (float)1.2);
-    QCOMPARE((float)geo.longitude(), (float)3.4);
+    QVERIFY((float)geo.latitude() == (float)1.2);
+    QVERIFY((float)geo.longitude() == (float)3.4);
 }
 
 void GeoTest::isValid()
@@ -37,7 +37,7 @@ void GeoTest::isValid()
     geo.clear();
 
     QVERIFY(!geo.isValid());
-    QCOMPARE(geo, KContacts::Geo());
+    QVERIFY(geo == KContacts::Geo());
 }
 
 void GeoTest::setData()
@@ -47,8 +47,8 @@ void GeoTest::setData()
     geo.setLatitude(22.5f);
     geo.setLongitude(45.1f);
 
-    QCOMPARE((float)geo.latitude(), (float)22.5);
-    QCOMPARE((float)geo.longitude(), (float)45.1);
+    QVERIFY((float)geo.latitude() == (float)22.5);
+    QVERIFY((float)geo.longitude() == (float)45.1);
 }
 
 void GeoTest::equals()
@@ -56,7 +56,7 @@ void GeoTest::equals()
     KContacts::Geo geo1(22.5f, 33.7f);
     KContacts::Geo geo2(22.5f, 33.7f);
 
-    QCOMPARE(geo1, geo2);
+    QVERIFY(geo1 == geo2);
 }
 
 void GeoTest::differs()
@@ -79,7 +79,7 @@ void GeoTest::serialization()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> geo2;
 
-    QCOMPARE(geo1, geo2);
+    QVERIFY(geo1 == geo2);
 }
 
 void GeoTest::shouldParseGeoVCard3()

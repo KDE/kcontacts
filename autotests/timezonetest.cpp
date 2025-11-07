@@ -25,7 +25,7 @@ void TimeZoneTest::storeTest()
 
     timezone.setOffset(2);
 
-    QCOMPARE(timezone.offset(), 2);
+    QVERIFY(timezone.offset() == 2);
     QVERIFY(timezone.isValid());
 }
 
@@ -38,7 +38,7 @@ void TimeZoneTest::equalsTest()
         timezone1.setOffset(2);
         timezone2.setOffset(2);
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
     {
         KContacts::TimeZone timezone1;
@@ -47,7 +47,7 @@ void TimeZoneTest::equalsTest()
         timezone1.setTimeZoneName("Europe/Berlin");
         timezone2.setTimeZoneName("Europe/Berlin");
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
 }
 
@@ -69,7 +69,7 @@ void TimeZoneTest::assignmentTest()
         timezone1.setOffset(2);
         timezone1 = timezone2;
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
     {
         KContacts::TimeZone timezone1;
@@ -78,7 +78,7 @@ void TimeZoneTest::assignmentTest()
         timezone1.setTimeZoneName("Europe/Berlin");
         timezone1 = timezone2;
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
 }
 
@@ -97,7 +97,7 @@ void TimeZoneTest::serializeTest()
         QDataStream t(&data, QIODevice::ReadOnly);
         t >> timezone2;
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
     {
         KContacts::TimeZone timezone1;
@@ -112,7 +112,7 @@ void TimeZoneTest::serializeTest()
         QDataStream t(&data, QIODevice::ReadOnly);
         t >> timezone2;
 
-        QCOMPARE(timezone1, timezone2);
+        QVERIFY(timezone1 == timezone2);
     }
 }
 

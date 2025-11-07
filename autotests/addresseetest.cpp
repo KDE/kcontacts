@@ -55,7 +55,7 @@ void AddresseeTest::storeTest()
     addressee.setAdditionalName(QStringLiteral("Bob"));
     addressee.setPrefix(QStringLiteral("Sir"));
     addressee.setSuffix(QStringLiteral("II"));
-    addressee.setNickName(QStringLiteral("ghost hunter"));
+    addressee.setNickName(QStringLiteral("ghosthunter"));
     addressee.setBirthday(QDate(1982, 7, 19));
     addressee.setMailer(QStringLiteral("mutt"));
     addressee.setTimeZone(KContacts::TimeZone(2));
@@ -87,41 +87,41 @@ void AddresseeTest::storeTest()
     addressee.setImppList(listImp);
     addressee.setDeathDate(QDateTime(QDate(2020, 9, 15).startOfDay()));
 
-    QCOMPARE(addressee.imppList(), listImp);
-    QCOMPARE(addressee.langs(), (KContacts::Lang::List() << lang));
-    QCOMPARE(addressee.gender(), gender);
-    QCOMPARE(addressee.uid(), QLatin1String("My uid"));
-    QCOMPARE(addressee.name(), QLatin1String("John Sinclair"));
-    QCOMPARE(addressee.formattedName(), QLatin1String("Sinclair, John"));
-    QCOMPARE(addressee.familyName(), QLatin1String("Sinclair"));
-    QCOMPARE(addressee.givenName(), QLatin1String("John"));
-    QCOMPARE(addressee.additionalName(), QLatin1String("Bob"));
-    QCOMPARE(addressee.prefix(), QLatin1String("Sir"));
-    QCOMPARE(addressee.suffix(), QLatin1String("II"));
-    QCOMPARE(addressee.nickName(), QLatin1String("ghost hunter"));
-    QCOMPARE(addressee.birthday().date(), QDate(1982, 7, 19));
-    QCOMPARE(addressee.birthday().time(), QTime(0, 0));
+    QVERIFY(addressee.imppList() == listImp);
+    QVERIFY(addressee.langs() == (KContacts::Lang::List() << lang));
+    QVERIFY(addressee.gender() == gender);
+    QVERIFY(addressee.uid() == QLatin1String("My uid"));
+    QVERIFY(addressee.name() == QLatin1String("John Sinclair"));
+    QVERIFY(addressee.formattedName() == QLatin1String("Sinclair, John"));
+    QVERIFY(addressee.familyName() == QLatin1String("Sinclair"));
+    QVERIFY(addressee.givenName() == QLatin1String("John"));
+    QVERIFY(addressee.additionalName() == QLatin1String("Bob"));
+    QVERIFY(addressee.prefix() == QLatin1String("Sir"));
+    QVERIFY(addressee.suffix() == QLatin1String("II"));
+    QVERIFY(addressee.nickName() == QLatin1String("ghosthunter"));
+    QVERIFY(addressee.birthday().date() == QDate(1982, 7, 19));
+    QVERIFY(addressee.birthday().time() == QTime(0, 0));
     QVERIFY(!addressee.birthdayHasTime());
-    QCOMPARE(addressee.mailer(), QLatin1String("mutt"));
-    QCOMPARE(addressee.timeZone(), KContacts::TimeZone(2));
-    QCOMPARE(addressee.geo(), KContacts::Geo(42, 23));
-    QCOMPARE(addressee.title(), QLatin1String("Ghost Hunter"));
-    QCOMPARE(addressee.role(), QLatin1String("Leader"));
-    QCOMPARE(addressee.organization(), QLatin1String("Scottland Yard"));
-    QCOMPARE(addressee.note(), QLatin1String("Don't cross black deads way..."));
-    QCOMPARE(addressee.productId(), QLatin1String("ProductId45"));
-    QCOMPARE(addressee.revision(), QDateTime(QDate(1982, 9, 15).startOfDay()));
-    QCOMPARE(addressee.sortString(), QLatin1String("Name"));
-    QCOMPARE(addressee.url(), url);
-    QCOMPARE(addressee.secrecy(), KContacts::Secrecy(KContacts::Secrecy::Public));
-    QCOMPARE(addressee.logo(), logo);
-    QCOMPARE(addressee.photo(), photo);
-    QCOMPARE(addressee.sound(), sound);
-    QCOMPARE(addressee.emails(), emails);
-    QCOMPARE(addressee.keys(), keys);
-    QCOMPARE(addressee.categories(), categories);
-    QCOMPARE(addressee.customs(), customs);
-    QCOMPARE(addressee.changed(), false);
+    QVERIFY(addressee.mailer() == QLatin1String("mutt"));
+    QVERIFY(addressee.timeZone() == KContacts::TimeZone(2));
+    QVERIFY(addressee.geo() == KContacts::Geo(42, 23));
+    QVERIFY(addressee.title() == QLatin1String("Ghost Hunter"));
+    QVERIFY(addressee.role() == QLatin1String("Leader"));
+    QVERIFY(addressee.organization() == QLatin1String("Scottland Yard"));
+    QVERIFY(addressee.note() == QLatin1String("Don't cross black deads way..."));
+    QVERIFY(addressee.productId() == QLatin1String("ProductId45"));
+    QVERIFY(addressee.revision() == QDateTime(QDate(1982, 9, 15).startOfDay()));
+    QVERIFY(addressee.sortString() == QLatin1String("Name"));
+    QVERIFY(addressee.url() == url);
+    QVERIFY(addressee.secrecy() == KContacts::Secrecy(KContacts::Secrecy::Public));
+    QVERIFY(addressee.logo() == logo);
+    QVERIFY(addressee.photo() == photo);
+    QVERIFY(addressee.sound() == sound);
+    QVERIFY(addressee.emails() == emails);
+    QVERIFY(addressee.keys() == keys);
+    QVERIFY(addressee.categories() == categories);
+    QVERIFY(addressee.customs() == customs);
+    QVERIFY(addressee.changed() == false);
     QCOMPARE(addressee.kind(), QStringLiteral("foo"));
     QCOMPARE(addressee.deathDate().date(), QDate(2020, 9, 15));
     QCOMPARE(addressee.deathDate().time(), QTime(0, 0));
@@ -156,7 +156,7 @@ void AddresseeTest::equalsTest()
     addressee1.setAdditionalName(QStringLiteral("Bob"));
     addressee1.setPrefix(QStringLiteral("Sir"));
     addressee1.setSuffix(QStringLiteral("II"));
-    addressee1.setNickName(QStringLiteral("ghost hunter"));
+    addressee1.setNickName(QStringLiteral("ghosthunter"));
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
     addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
@@ -189,7 +189,7 @@ void AddresseeTest::equalsTest()
     addressee2.setAdditionalName(QStringLiteral("Bob"));
     addressee2.setPrefix(QStringLiteral("Sir"));
     addressee2.setSuffix(QStringLiteral("II"));
-    addressee2.setNickName(QStringLiteral("ghost hunter"));
+    addressee2.setNickName(QStringLiteral("ghosthunter"));
     addressee2.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
     addressee2.setMailer(QStringLiteral("mutt"));
     addressee2.setTimeZone(KContacts::TimeZone(2));
@@ -212,7 +212,7 @@ void AddresseeTest::equalsTest()
     addressee2.setCustoms(customs);
     addressee2.setChanged(false);
 
-    QCOMPARE(addressee1, addressee2);
+    QVERIFY(addressee1 == addressee2);
 }
 
 void AddresseeTest::differsTest()
@@ -255,7 +255,7 @@ void AddresseeTest::assignmentTest()
     addressee1.setAdditionalName(QStringLiteral("Bob"));
     addressee1.setPrefix(QStringLiteral("Sir"));
     addressee1.setSuffix(QStringLiteral("II"));
-    addressee1.setNickName(QStringLiteral("ghost hunter"));
+    addressee1.setNickName(QStringLiteral("ghosthunter"));
     addressee1.setBirthday(QDateTime(QDate(1982, 7, 19).startOfDay()));
     addressee1.setMailer(QStringLiteral("mutt"));
     addressee1.setTimeZone(KContacts::TimeZone(2));
@@ -282,7 +282,7 @@ void AddresseeTest::assignmentTest()
 
     addressee2 = addressee1;
 
-    QCOMPARE(addressee1, addressee2);
+    QVERIFY(addressee1 == addressee2);
 }
 
 void AddresseeTest::serializeTest()
@@ -348,7 +348,7 @@ void AddresseeTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> addressee2;
 
-    QCOMPARE(addressee1, addressee2);
+    QVERIFY(addressee1 == addressee2);
 }
 
 void AddresseeTest::fullEmailTest()

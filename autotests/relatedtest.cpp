@@ -72,7 +72,7 @@ void RelatedTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QCOMPARE(related, result);
+    QVERIFY(related == result);
 }
 
 void RelatedTest::shouldEqualRelated()
@@ -87,7 +87,7 @@ void RelatedTest::shouldEqualRelated()
     related.setParams(params);
 
     result = related;
-    QCOMPARE(related, result);
+    QVERIFY(related == result);
 }
 
 void RelatedTest::shouldParseRelated()

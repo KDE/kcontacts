@@ -69,7 +69,7 @@ void ResourceLocatorUrlTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QCOMPARE(resourcelocatorurl, result);
+    QVERIFY(resourcelocatorurl == result);
 }
 
 void ResourceLocatorUrlTest::shouldEqualResourceLocatorUrl()
@@ -83,7 +83,7 @@ void ResourceLocatorUrlTest::shouldEqualResourceLocatorUrl()
     resourcelocatorurl.setParams(params);
 
     result = resourcelocatorurl;
-    QCOMPARE(resourcelocatorurl, result);
+    QVERIFY(resourcelocatorurl == result);
 }
 
 void ResourceLocatorUrlTest::shouldParseResourceLocatorUrl()

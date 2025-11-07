@@ -70,7 +70,7 @@ void EmailTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QCOMPARE(email, result);
+    QVERIFY(email == result);
 }
 
 void EmailTest::shouldEqualEmail()
@@ -85,7 +85,7 @@ void EmailTest::shouldEqualEmail()
     email.setParams(params);
 
     result = email;
-    QCOMPARE(email, result);
+    QVERIFY(email == result);
 }
 
 void EmailTest::shouldParseEmailVCard()

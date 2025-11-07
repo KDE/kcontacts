@@ -16,7 +16,7 @@ void SecrecyTest::emptyTest()
 {
     KContacts::Secrecy secrecy;
 
-    QCOMPARE(secrecy.type(), KContacts::Secrecy::Invalid);
+    QVERIFY(secrecy.type() == KContacts::Secrecy::Invalid);
 }
 
 void SecrecyTest::storeTest()
@@ -25,7 +25,7 @@ void SecrecyTest::storeTest()
 
     secrecy.setType(KContacts::Secrecy::Private);
 
-    QCOMPARE(secrecy.type(), KContacts::Secrecy::Private);
+    QVERIFY(secrecy.type() == KContacts::Secrecy::Private);
 }
 
 void SecrecyTest::equalsTest()
@@ -36,7 +36,7 @@ void SecrecyTest::equalsTest()
     secrecy1.setType(KContacts::Secrecy::Confidential);
     secrecy2.setType(KContacts::Secrecy::Confidential);
 
-    QCOMPARE(secrecy1, secrecy2);
+    QVERIFY(secrecy1 == secrecy2);
 }
 
 void SecrecyTest::differsTest()
@@ -55,7 +55,7 @@ void SecrecyTest::assignmentTest()
     secrecy1.setType(KContacts::Secrecy::Confidential);
     secrecy1 = secrecy2;
 
-    QCOMPARE(secrecy1, secrecy2);
+    QVERIFY(secrecy1 == secrecy2);
 }
 
 void SecrecyTest::serializeTest()
@@ -72,7 +72,7 @@ void SecrecyTest::serializeTest()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> secrecy2;
 
-    QCOMPARE(secrecy1, secrecy2);
+    QVERIFY(secrecy1 == secrecy2);
 }
 
 #include "moc_secrecytest.cpp"

@@ -74,7 +74,7 @@ void CalendarUrlTest::shouldSerialized()
         QDataStream t(&data, QIODevice::ReadOnly);
         t >> result;
 
-        QCOMPARE(calendarUrl, result);
+        QVERIFY(calendarUrl == result);
     }
 }
 
@@ -92,7 +92,7 @@ void CalendarUrlTest::shouldEqualCalendarUrl()
         calendarUrl.setParams(params);
 
         result = calendarUrl;
-        QCOMPARE(calendarUrl, result);
+        QVERIFY(calendarUrl == result);
     }
 }
 

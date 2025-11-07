@@ -67,9 +67,9 @@ void PictureTest::storeTestInternImage()
 
     QVERIFY(!picture.isEmpty());
     QVERIFY(picture.isIntern());
-    QCOMPARE(picture.type(), QLatin1String("jpeg"));
-    QCOMPARE(picture.data(), testImage());
-    QCOMPARE(picture.rawData(), testImageRawJPEG());
+    QVERIFY(picture.type() == QLatin1String("jpeg"));
+    QVERIFY(picture.data() == testImage());
+    QVERIFY(picture.rawData() == testImageRawJPEG());
 }
 
 void PictureTest::storeTestInternRawData()
@@ -80,9 +80,9 @@ void PictureTest::storeTestInternRawData()
 
     QVERIFY(!picture.isEmpty());
     QVERIFY(picture.isIntern());
-    QCOMPARE(picture.type(), QLatin1String("png"));
-    QCOMPARE(picture.rawData(), testImageRawPNG());
-    QCOMPARE(picture.data(), testImage());
+    QVERIFY(picture.type() == QLatin1String("png"));
+    QVERIFY(picture.rawData() == testImageRawPNG());
+    QVERIFY(picture.data() == testImage());
 }
 
 void PictureTest::storeTestExtern()
@@ -91,10 +91,10 @@ void PictureTest::storeTestExtern()
 
     picture.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
-    QCOMPARE(picture.isEmpty(), false);
-    QCOMPARE(picture.isIntern(), false);
-    QCOMPARE(picture.type(), QLatin1String("png"));
-    QCOMPARE(picture.url(), QLatin1String("http://myhomepage.com/foto.png"));
+    QVERIFY(picture.isEmpty() == false);
+    QVERIFY(picture.isIntern() == false);
+    QVERIFY(picture.type() == QLatin1String("png"));
+    QVERIFY(picture.url() == QLatin1String("http://myhomepage.com/foto.png"));
 }
 
 void PictureTest::equalsTestInternImage()
@@ -106,11 +106,11 @@ void PictureTest::equalsTestInternImage()
 
     picture2.setData(testImage());
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 
     // access rawData() so a QByteArray is created
     QVERIFY(!picture1.rawData().isNull());
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::equalsTestInternRawData()
@@ -122,7 +122,7 @@ void PictureTest::equalsTestInternRawData()
 
     picture2.setRawData(testImageRawPNG(), QStringLiteral("png"));
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 
     // access data() so a QImage is created
     QVERIFY(!picture1.data().isNull());
@@ -138,7 +138,7 @@ void PictureTest::equalsTestInternImageAndRawData()
 
     picture2.setRawData(testImageRawJPEG(), QStringLiteral("jpeg"));
 
-    QCOMPARE(picture1.rawData(), picture2.rawData());
+    QVERIFY(picture1.rawData() == picture2.rawData());
 }
 
 void PictureTest::equalsTestExtern()
@@ -150,7 +150,7 @@ void PictureTest::equalsTestExtern()
 
     picture2.setUrl(QStringLiteral("http://myhomepage.com/foto.png"), QStringLiteral("png"));
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::differsTest()
@@ -199,7 +199,7 @@ void PictureTest::assignmentTestIntern()
 
     picture2 = picture1;
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::assignmentTestExtern()
@@ -211,7 +211,7 @@ void PictureTest::assignmentTestExtern()
 
     picture2 = picture1;
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::serializeTestInternImage()
@@ -228,7 +228,7 @@ void PictureTest::serializeTestInternImage()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> picture2;
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::serializeTestInternRawData()
@@ -245,7 +245,7 @@ void PictureTest::serializeTestInternRawData()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> picture2;
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 void PictureTest::serializeTestExtern()
@@ -262,7 +262,7 @@ void PictureTest::serializeTestExtern()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> picture2;
 
-    QCOMPARE(picture1, picture2);
+    QVERIFY(picture1 == picture2);
 }
 
 #include "moc_picturetest.cpp"

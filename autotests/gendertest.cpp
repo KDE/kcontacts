@@ -65,7 +65,7 @@ void GenderTest::shouldSerialized()
     QDataStream t(&data, QIODevice::ReadOnly);
     t >> result;
 
-    QCOMPARE(gender, result);
+    QVERIFY(gender == result);
 }
 
 void GenderTest::shouldEqualGender()
@@ -77,7 +77,7 @@ void GenderTest::shouldEqualGender()
     gender.setComment(QStringLiteral("foo"));
 
     result = gender;
-    QCOMPARE(gender, result);
+    QVERIFY(gender == result);
 }
 
 void GenderTest::shouldParseGender_data()
