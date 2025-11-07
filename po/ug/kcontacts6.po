@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-06 08:03+0000\n"
+"POT-Creation-Date: 2025-11-07 00:39+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -239,7 +239,7 @@ msgstr "شىركەت تېلېفون"
 msgid "Mobile Phone"
 msgstr "يانفون"
 
-#: addressee.cpp:974 phonenumber.cpp:218
+#: addressee.cpp:974 phonenumber.cpp:216
 #, kde-format
 msgid "Home Fax"
 msgstr "ئوي فاكىسى"
@@ -254,12 +254,12 @@ msgstr "خىزمەت فاكىس"
 msgid "Car Phone"
 msgstr "ماشىنا تېلېفونى"
 
-#: addressee.cpp:989 phonenumber.cpp:194
+#: addressee.cpp:989 phonenumber.cpp:192
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:994 phonenumber.cpp:198
+#: addressee.cpp:994 phonenumber.cpp:196
 #, kde-format
 msgid "Pager"
 msgstr "چاقىرغۇ"
@@ -406,164 +406,164 @@ msgstr "ئەۋلاد"
 msgid "Sr."
 msgstr "ئەجداد"
 
-#: key.cpp:198
+#: key.cpp:196
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr ""
 
-#: key.cpp:201
+#: key.cpp:199
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "PGP"
 
-#: key.cpp:204
+#: key.cpp:202
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "ئىختىيارى"
 
-#: key.cpp:207
+#: key.cpp:205
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "نامەلۇم تىپ"
 
-#: phonenumber.cpp:170
+#: phonenumber.cpp:168
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr ""
 
-#: phonenumber.cpp:172
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "ماكان"
 
-#: phonenumber.cpp:174
+#: phonenumber.cpp:172
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "ئىش"
 
-#: phonenumber.cpp:176
+#: phonenumber.cpp:174
 #, kde-format
 msgid "Messenger"
 msgstr "مۇڭداشقۇ"
 
-#: phonenumber.cpp:178
+#: phonenumber.cpp:176
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr "1-تاللاش تۈرى"
 
-#: phonenumber.cpp:180
+#: phonenumber.cpp:178
 #, kde-format
 msgid "Voice"
 msgstr "ئاۋاز"
 
-#: phonenumber.cpp:182
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Fax"
 msgstr "فاكىس"
 
-#: phonenumber.cpp:184
+#: phonenumber.cpp:182
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr "يانفون"
 
-#: phonenumber.cpp:186
+#: phonenumber.cpp:184
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
 msgstr "سىن"
 
-#: phonenumber.cpp:188
+#: phonenumber.cpp:186
 #, kde-format
 msgid "Mailbox"
 msgstr "خەت ساندۇقى"
 
-#: phonenumber.cpp:190
+#: phonenumber.cpp:188
 #, kde-format
 msgid "Modem"
 msgstr "مودېم"
 
-#: phonenumber.cpp:192
+#: phonenumber.cpp:190
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr "ماشىنا"
 
-#: phonenumber.cpp:196
+#: phonenumber.cpp:194
 #, kde-format
 msgid "PCS"
 msgstr ""
 
-#: phonenumber.cpp:200
+#: phonenumber.cpp:198
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "باشقا"
 
-#: phonenumber.cpp:213
+#: phonenumber.cpp:211
 #, kde-format
 msgid "Preferred Number"
 msgstr ""
 
-#: phonenumber.cpp:223
+#: phonenumber.cpp:221
 #, kde-format
 msgid "Work Fax"
 msgstr "خىزمەتتىكى فاكىس"
 
-#: resourcelocatorurl.cpp:189
+#: resourcelocatorurl.cpp:187
 #, fuzzy, kde-format
 #| msgctxt "Home Address"
 #| msgid "Home"
 msgid "Home"
 msgstr "ماكان"
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:190
 #, fuzzy, kde-format
 #| msgctxt "Work Address"
 #| msgid "Work"
 msgid "Work"
 msgstr "ئىش"
 
-#: resourcelocatorurl.cpp:195
+#: resourcelocatorurl.cpp:193
 #, fuzzy, kde-format
 #| msgid "Prof."
 msgid "Profile"
 msgstr "Prof."
 
-#: resourcelocatorurl.cpp:199
+#: resourcelocatorurl.cpp:197
 #, fuzzy, kde-format
 #| msgctxt "another type of address"
 #| msgid "Other"
 msgid "Other"
 msgstr "باشقا"
 
-#: secrecy.cpp:98
+#: secrecy.cpp:96
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "ئاممىۋى"
 
-#: secrecy.cpp:101
+#: secrecy.cpp:99
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "شەخسىي"
 
-#: secrecy.cpp:104
+#: secrecy.cpp:102
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "مەخپىي"
 
-#: secrecy.cpp:107
+#: secrecy.cpp:105
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"

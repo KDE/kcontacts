@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-06 08:03+0000\n"
+"POT-Creation-Date: 2025-11-07 00:39+0000\n"
 "PO-Revision-Date: 2025-10-22 03:35+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -240,7 +240,7 @@ msgstr "სამსახურის ტელეფონი"
 msgid "Mobile Phone"
 msgstr "მობილური ტელეფონი"
 
-#: addressee.cpp:974 phonenumber.cpp:218
+#: addressee.cpp:974 phonenumber.cpp:216
 #, kde-format
 msgid "Home Fax"
 msgstr "სახლის ფაქსი"
@@ -255,12 +255,12 @@ msgstr "სამსახურის ფაქსი"
 msgid "Car Phone"
 msgstr "მანქანის ტელეფონი"
 
-#: addressee.cpp:989 phonenumber.cpp:194
+#: addressee.cpp:989 phonenumber.cpp:192
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:994 phonenumber.cpp:198
+#: addressee.cpp:994 phonenumber.cpp:196
 #, kde-format
 msgid "Pager"
 msgstr "პეიჯერი"
@@ -407,157 +407,157 @@ msgstr "უმც."
 msgid "Sr."
 msgstr "უფრ."
 
-#: key.cpp:198
+#: key.cpp:196
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr "X509"
 
-#: key.cpp:201
+#: key.cpp:199
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "PGP"
 
-#: key.cpp:204
+#: key.cpp:202
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "ხელით მითითება"
 
-#: key.cpp:207
+#: key.cpp:205
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "უცნობი ტიპი"
 
-#: phonenumber.cpp:170
+#: phonenumber.cpp:168
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr "ტელეფონის ნომერი"
 
-#: phonenumber.cpp:172
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "სახლი"
 
-#: phonenumber.cpp:174
+#: phonenumber.cpp:172
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "სამუშაო"
 
-#: phonenumber.cpp:176
+#: phonenumber.cpp:174
 #, kde-format
 msgid "Messenger"
 msgstr "მესინჯერი"
 
-#: phonenumber.cpp:178
+#: phonenumber.cpp:176
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr "მირჩევნია"
 
-#: phonenumber.cpp:180
+#: phonenumber.cpp:178
 #, kde-format
 msgid "Voice"
 msgstr "ხმა"
 
-#: phonenumber.cpp:182
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Fax"
 msgstr "ფაქსი"
 
-#: phonenumber.cpp:184
+#: phonenumber.cpp:182
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr "მობაილი"
 
-#: phonenumber.cpp:186
+#: phonenumber.cpp:184
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
 msgstr "ვიდეო"
 
-#: phonenumber.cpp:188
+#: phonenumber.cpp:186
 #, kde-format
 msgid "Mailbox"
 msgstr "საფოსტო ყუთი"
 
-#: phonenumber.cpp:190
+#: phonenumber.cpp:188
 #, kde-format
 msgid "Modem"
 msgstr "მოდემი"
 
-#: phonenumber.cpp:192
+#: phonenumber.cpp:190
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr "მანქანა"
 
-#: phonenumber.cpp:196
+#: phonenumber.cpp:194
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: phonenumber.cpp:200
+#: phonenumber.cpp:198
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "სხვა"
 
-#: phonenumber.cpp:213
+#: phonenumber.cpp:211
 #, kde-format
 msgid "Preferred Number"
 msgstr "სასურველი ნომერი"
 
-#: phonenumber.cpp:223
+#: phonenumber.cpp:221
 #, kde-format
 msgid "Work Fax"
 msgstr "სამსახურის ფაქსი"
 
-#: resourcelocatorurl.cpp:189
+#: resourcelocatorurl.cpp:187
 #, kde-format
 msgid "Home"
 msgstr "სახლი"
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:190
 #, kde-format
 msgid "Work"
 msgstr "სამუშაო"
 
-#: resourcelocatorurl.cpp:195
+#: resourcelocatorurl.cpp:193
 #, kde-format
 msgid "Profile"
 msgstr "პროფილი"
 
-#: resourcelocatorurl.cpp:199
+#: resourcelocatorurl.cpp:197
 #, kde-format
 msgid "Other"
 msgstr "სხვა"
 
-#: secrecy.cpp:98
+#: secrecy.cpp:96
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "საჯარო"
 
-#: secrecy.cpp:101
+#: secrecy.cpp:99
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "პირადი"
 
-#: secrecy.cpp:104
+#: secrecy.cpp:102
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "კონფიდენციალური"
 
-#: secrecy.cpp:107
+#: secrecy.cpp:105
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"

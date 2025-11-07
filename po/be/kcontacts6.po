@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-06 08:03+0000\n"
+"POT-Creation-Date: 2025-11-07 00:39+0000\n"
 "PO-Revision-Date: 2007-05-30 17:58+0300\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -253,7 +253,7 @@ msgstr ""
 msgid "Mobile Phone"
 msgstr ""
 
-#: addressee.cpp:974 phonenumber.cpp:218
+#: addressee.cpp:974 phonenumber.cpp:216
 #, kde-format
 msgid "Home Fax"
 msgstr "Хатні факс"
@@ -268,12 +268,12 @@ msgstr ""
 msgid "Car Phone"
 msgstr ""
 
-#: addressee.cpp:989 phonenumber.cpp:194
+#: addressee.cpp:989 phonenumber.cpp:192
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:994 phonenumber.cpp:198
+#: addressee.cpp:994 phonenumber.cpp:196
 #, kde-format
 msgid "Pager"
 msgstr "Пэйджэр"
@@ -424,172 +424,172 @@ msgstr "мал."
 msgid "Sr."
 msgstr "Сп."
 
-#: key.cpp:198
+#: key.cpp:196
 #, fuzzy, kde-format
 #| msgid "X509"
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr "X509"
 
-#: key.cpp:201
+#: key.cpp:199
 #, fuzzy, kde-format
 #| msgid "PGP"
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "PGP"
 
-#: key.cpp:204
+#: key.cpp:202
 #, fuzzy, kde-format
 #| msgid "Custom"
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "Асаблівы"
 
-#: key.cpp:207
+#: key.cpp:205
 #, fuzzy, kde-format
 #| msgid "Unknown type"
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "Невядомы тып"
 
-#: phonenumber.cpp:170
+#: phonenumber.cpp:168
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr ""
 
-#: phonenumber.cpp:172
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "Хатні"
 
-#: phonenumber.cpp:174
+#: phonenumber.cpp:172
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "Працоўны"
 
-#: phonenumber.cpp:176
+#: phonenumber.cpp:174
 #, kde-format
 msgid "Messenger"
 msgstr "Для паведамленняў"
 
-#: phonenumber.cpp:178
+#: phonenumber.cpp:176
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr ""
 
-#: phonenumber.cpp:180
+#: phonenumber.cpp:178
 #, kde-format
 msgid "Voice"
 msgstr "Голас"
 
-#: phonenumber.cpp:182
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Fax"
 msgstr "Факс"
 
-#: phonenumber.cpp:184
+#: phonenumber.cpp:182
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr ""
 
-#: phonenumber.cpp:186
+#: phonenumber.cpp:184
 #, fuzzy, kde-format
 #| msgid "Video"
 msgctxt "Video phone"
 msgid "Video"
 msgstr "Відэа"
 
-#: phonenumber.cpp:188
+#: phonenumber.cpp:186
 #, kde-format
 msgid "Mailbox"
 msgstr "Паштовая скрыня"
 
-#: phonenumber.cpp:190
+#: phonenumber.cpp:188
 #, kde-format
 msgid "Modem"
 msgstr "Мадэм"
 
-#: phonenumber.cpp:192
+#: phonenumber.cpp:190
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr ""
 
-#: phonenumber.cpp:196
+#: phonenumber.cpp:194
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: phonenumber.cpp:200
+#: phonenumber.cpp:198
 #, fuzzy, kde-format
 #| msgid "Other"
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "Іншы"
 
-#: phonenumber.cpp:213
+#: phonenumber.cpp:211
 #, kde-format
 msgid "Preferred Number"
 msgstr "Асноўны нумар"
 
-#: phonenumber.cpp:223
+#: phonenumber.cpp:221
 #, kde-format
 msgid "Work Fax"
 msgstr "Працоўны факс"
 
-#: resourcelocatorurl.cpp:189
+#: resourcelocatorurl.cpp:187
 #, fuzzy, kde-format
 #| msgctxt "Home Address"
 #| msgid "Home"
 msgid "Home"
 msgstr "Хатні"
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:190
 #, fuzzy, kde-format
 #| msgctxt "Work phone"
 #| msgid "Work"
 msgid "Work"
 msgstr "Працоўны"
 
-#: resourcelocatorurl.cpp:195
+#: resourcelocatorurl.cpp:193
 #, fuzzy, kde-format
 #| msgid "Prof."
 msgid "Profile"
 msgstr "Праф."
 
-#: resourcelocatorurl.cpp:199
+#: resourcelocatorurl.cpp:197
 #, fuzzy, kde-format
 #| msgid "Other"
 msgid "Other"
 msgstr "Іншы"
 
-#: secrecy.cpp:98
+#: secrecy.cpp:96
 #, fuzzy, kde-format
 #| msgid "Public"
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "Публічны"
 
-#: secrecy.cpp:101
+#: secrecy.cpp:99
 #, fuzzy, kde-format
 #| msgid "Private"
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "Прыватны"
 
-#: secrecy.cpp:104
+#: secrecy.cpp:102
 #, fuzzy, kde-format
 #| msgid "Confidential"
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "Канфідэнцыйны"
 
-#: secrecy.cpp:107
+#: secrecy.cpp:105
 #, fuzzy, kde-format
 #| msgid "Unknown type"
 msgctxt "unknown secrecy type"

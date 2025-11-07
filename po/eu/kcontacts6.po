@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-06 08:03+0000\n"
+"POT-Creation-Date: 2025-11-07 00:39+0000\n"
 "PO-Revision-Date: 2025-10-23 00:52+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -242,7 +242,7 @@ msgstr "Laneko telefonoa"
 msgid "Mobile Phone"
 msgstr "Telefono mugikorra"
 
-#: addressee.cpp:974 phonenumber.cpp:218
+#: addressee.cpp:974 phonenumber.cpp:216
 #, kde-format
 msgid "Home Fax"
 msgstr "Etxeko faxa"
@@ -257,12 +257,12 @@ msgstr "Laneko faxa"
 msgid "Car Phone"
 msgstr "Beribileko telefonoa"
 
-#: addressee.cpp:989 phonenumber.cpp:194
+#: addressee.cpp:989 phonenumber.cpp:192
 #, kde-format
 msgid "ISDN"
 msgstr "RDSI (ISDN)"
 
-#: addressee.cpp:994 phonenumber.cpp:198
+#: addressee.cpp:994 phonenumber.cpp:196
 #, kde-format
 msgid "Pager"
 msgstr "Bilagailua"
@@ -410,158 +410,158 @@ msgstr "jr."
 msgid "Sr."
 msgstr "sr."
 
-#: key.cpp:198
+#: key.cpp:196
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr "X509"
 
-#: key.cpp:201
+#: key.cpp:199
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "PGP"
 
-#: key.cpp:204
+#: key.cpp:202
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "Norberak finkatua"
 
-#: key.cpp:207
+#: key.cpp:205
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "Mota ezezagunekoa"
 
-#: phonenumber.cpp:170
+#: phonenumber.cpp:168
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr "Telefono zenbakia"
 
-#: phonenumber.cpp:172
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "Etxekoa"
 
-#: phonenumber.cpp:174
+#: phonenumber.cpp:172
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "Lanekoa"
 
-#: phonenumber.cpp:176
+#: phonenumber.cpp:174
 #, kde-format
 msgid "Messenger"
 msgstr "Mezularia"
 
-#: phonenumber.cpp:178
+#: phonenumber.cpp:176
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr "Hobetsia"
 
-#: phonenumber.cpp:180
+#: phonenumber.cpp:178
 #, kde-format
 msgid "Voice"
 msgstr "Ahotsa"
 
-#: phonenumber.cpp:182
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Fax"
 msgstr "Faxa"
 
-#: phonenumber.cpp:184
+#: phonenumber.cpp:182
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr "Mugikorra"
 
-#: phonenumber.cpp:186
+#: phonenumber.cpp:184
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
 msgstr "Bideoa"
 
-#: phonenumber.cpp:188
+#: phonenumber.cpp:186
 #, kde-format
 msgid "Mailbox"
 msgstr "Postontzia"
 
-#: phonenumber.cpp:190
+#: phonenumber.cpp:188
 #, kde-format
 msgid "Modem"
 msgstr "Modema"
 
-#: phonenumber.cpp:192
+#: phonenumber.cpp:190
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr "Beribila"
 
 # Personal Communications Service
-#: phonenumber.cpp:196
+#: phonenumber.cpp:194
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: phonenumber.cpp:200
+#: phonenumber.cpp:198
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "Bestelakoak"
 
-#: phonenumber.cpp:213
+#: phonenumber.cpp:211
 #, kde-format
 msgid "Preferred Number"
 msgstr "Hobetsitako zenbakia"
 
-#: phonenumber.cpp:223
+#: phonenumber.cpp:221
 #, kde-format
 msgid "Work Fax"
 msgstr "Laneko faxa"
 
-#: resourcelocatorurl.cpp:189
+#: resourcelocatorurl.cpp:187
 #, kde-format
 msgid "Home"
 msgstr "Etxea"
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:190
 #, kde-format
 msgid "Work"
 msgstr "Lana"
 
-#: resourcelocatorurl.cpp:195
+#: resourcelocatorurl.cpp:193
 #, kde-format
 msgid "Profile"
 msgstr "Profila"
 
-#: resourcelocatorurl.cpp:199
+#: resourcelocatorurl.cpp:197
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoa"
 
-#: secrecy.cpp:98
+#: secrecy.cpp:96
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "Publikoa"
 
-#: secrecy.cpp:101
+#: secrecy.cpp:99
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "Pribatua"
 
-#: secrecy.cpp:104
+#: secrecy.cpp:102
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "Isilpekoa"
 
-#: secrecy.cpp:107
+#: secrecy.cpp:105
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
