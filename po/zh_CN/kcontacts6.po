@@ -519,29 +519,22 @@ msgid "Work Fax"
 msgstr "办公传真"
 
 #: resourcelocatorurl.cpp:187
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
-msgstr "家庭"
+msgstr "住址"
 
 #: resourcelocatorurl.cpp:190
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
-msgstr "办公"
+msgstr "工作"
 
 #: resourcelocatorurl.cpp:193
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "Prof."
+msgstr "个人资料"
 
 #: resourcelocatorurl.cpp:197
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "其他"
 
