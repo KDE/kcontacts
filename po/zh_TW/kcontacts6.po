@@ -5,19 +5,20 @@
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009.
 # pan93412 <pan93412@gmail.com>, 2018.
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-07 00:39+0000\n"
-"PO-Revision-Date: 2018-04-05 20:16+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2025-11-13 22:35+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: address.cpp:224
@@ -522,29 +523,22 @@ msgid "Work Fax"
 msgstr "工作傳真"
 
 #: resourcelocatorurl.cpp:187
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "住家"
 
 #: resourcelocatorurl.cpp:190
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "工作"
 
 #: resourcelocatorurl.cpp:193
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "Prof."
+msgstr "個人資料"
 
 #: resourcelocatorurl.cpp:197
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "其他"
 
