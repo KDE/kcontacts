@@ -2,6 +2,8 @@ include(ECMAddTests)
 
 find_package(Qt6Test ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
 
+set(ECM_TEST_NAME_PREFIX "kcontacts-")
+
 ########### next target ###############
 
 add_executable(testroundtrip)
@@ -37,14 +39,14 @@ ecm_add_tests(birthdaytest.cpp
     orgtest.cpp
     datetimetest.cpp
     clientpidmaptest.cpp
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts Qt6::Test KF6::ConfigCore)
+    LINK_LIBRARIES KF6Contacts Qt6::Test KF6::ConfigCore)
 
 ecm_add_test(addressformattest.cpp ../src/kcontacts.qrc
     TEST_NAME addressformattest
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts KF6::I18nLocaleData KF6::ConfigCore Qt6::Test)
+    LINK_LIBRARIES KF6Contacts KF6::I18nLocaleData KF6::ConfigCore Qt6::Test)
 
 ecm_add_tests(picturetest.cpp
-    NAME_PREFIX "kcontacts-" LINK_LIBRARIES KF6Contacts Qt6::Test KF6::ConfigCore Qt6::Gui)
+    LINK_LIBRARIES KF6Contacts Qt6::Test KF6::ConfigCore Qt6::Gui)
 
 # Benchmark, compiled, but not run automatically with ctest
 add_executable(vcardtool_benchmark vcardtool_benchmark.cpp)
