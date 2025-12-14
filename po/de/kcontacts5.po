@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2008, 2009, 2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2009 Thomas Reitelbach <tr@erdfunkstelle.de>
 # SPDX-FileCopyrightText: 2010, 2013, 2016 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2025 Oliver Schramm <oliver.schramm97@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts6\n"
@@ -15,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: address.cpp:224
 #, kde-format
