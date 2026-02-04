@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2016.
+# SPDX-FileCopyrightText: 2015, 2016, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2016-12-11 22:23+0100\n"
+"PO-Revision-Date: 2026-02-04 00:32+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: address.cpp:224
 #, kde-format
@@ -399,12 +399,12 @@ msgstr "3세"
 #: addresseehelper.cpp:56
 #, kde-format
 msgid "Jr."
-msgstr ""
+msgstr "주니어"
 
 #: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
-msgstr ""
+msgstr "시니어"
 
 #: key.cpp:196
 #, kde-format
@@ -519,29 +519,22 @@ msgid "Work Fax"
 msgstr "직장 팩스"
 
 #: resourcelocatorurl.cpp:187
-#, fuzzy, kde-format
-#| msgctxt "Home Address"
-#| msgid "Home"
+#, kde-format
 msgid "Home"
 msgstr "집"
 
 #: resourcelocatorurl.cpp:190
-#, fuzzy, kde-format
-#| msgctxt "Work Address"
-#| msgid "Work"
+#, kde-format
 msgid "Work"
 msgstr "직장"
 
 #: resourcelocatorurl.cpp:193
-#, fuzzy, kde-format
-#| msgid "Prof."
+#, kde-format
 msgid "Profile"
-msgstr "교수"
+msgstr "프로필"
 
 #: resourcelocatorurl.cpp:197
-#, fuzzy, kde-format
-#| msgctxt "another type of address"
-#| msgid "Other"
+#, kde-format
 msgid "Other"
 msgstr "기타"
 
