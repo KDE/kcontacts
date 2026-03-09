@@ -408,7 +408,7 @@ msgstr "الابن"
 #: addresseehelper.cpp:57
 #, kde-format
 msgid "Sr."
-msgstr "الأبّ"
+msgstr "الأب"
 
 #: key.cpp:196
 #, kde-format
