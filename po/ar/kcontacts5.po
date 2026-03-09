@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
-"PO-Revision-Date: 2021-12-22 18:17+0400\n"
+"PO-Revision-Date: 2025-10-23 09:05+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -408,7 +408,7 @@ msgstr "الابن"
 #: addresseehelper.cpp:70
 #, kde-format
 msgid "Sr."
-msgstr "الأبّ"
+msgstr "الأب"
 
 #: field.cpp:206
 #, kde-format
