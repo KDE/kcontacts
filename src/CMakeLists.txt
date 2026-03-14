@@ -95,26 +95,33 @@ qt6_add_resources(KF6Contacts "improtocols"
     OUTPUT_TARGETS _out_targets
     FILES
         improtocols/aim.desktop
+        improtocols/delta.desktop
+        improtocols/discord.desktop
         improtocols/facebook.desktop
+        improtocols/fluxer.desktop
         improtocols/gg.desktop
         improtocols/googletalk.desktop
         improtocols/groupwise.desktop
         improtocols/icq.desktop
         improtocols/irc.desktop
+        improtocols/matrix.desktop
         improtocols/meanwhile.desktop
         improtocols/msn.desktop
+        improtocols/mumble.desktop
         improtocols/qq.desktop
-        improtocols/sip.desktop
-        improtocols/skype.desktop
-        improtocols/sms.desktop
-        improtocols/twitter.desktop
-        improtocols/xmpp.desktop
-        improtocols/ymsgr.desktop
-        improtocols/matrix.desktop
-        improtocols/telegram.desktop
         improtocols/rocketchat.desktop
         improtocols/signal.desktop
+        improtocols/sip.desktop
+        improtocols/skype.desktop
+        improtocols/slack.desktop
+        improtocols/sms.desktop
+        improtocols/teams.desktop
+        improtocols/telegram.desktop
         improtocols/threema.desktop
+        improtocols/twitter.desktop
+        improtocols/whatsapp.desktop
+        improtocols/xmpp.desktop
+        improtocols/ymsgr.desktop
 )
 
 ecm_qt_declare_logging_category(KF6Contacts
