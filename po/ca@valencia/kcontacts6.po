@@ -1,9 +1,9 @@
 # Translation of kcontacts6.po to Catalan (Valencian)
-# Copyright (C) 2007-2025 This_file_is_part_of_KDE
+# Copyright (C) 2007-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2015, 2017, 2023, 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2015, 2017, 2023, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2009 Albert Astals Cid <aacid@kde.org>
 # SPDX-FileCopyrightText: 2009 Manuel Tortosa Moreno <manutortosa@gmail.com>
 # SPDX-FileCopyrightText: 2014, 2015 Antoni Bella Pérez <antonibella5@yahoo.com>
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2025-10-22 11:27+0200\n"
+"PO-Revision-Date: 2026-03-29 12:51+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -283,7 +283,7 @@ msgstr "Client de correu"
 #: addressee.cpp:1039
 #, kde-format
 msgid "Time Zone"
-msgstr "Zona horària"
+msgstr "Fus horari"
 
 #: addressee.cpp:1059
 #, kde-format
