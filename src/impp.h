@@ -137,6 +137,12 @@ public:
     [[nodiscard]] QUrl address() const;
 
     /*!
+     * Returns the "username" portion of the address (i.e. everything but the protocol).
+     * \since 6.27
+     */
+    [[nodiscard]] QString username() const;
+
+    /*!
      * Returns the messaging service this address is for.
      * This is equivalent to address().scheme().
      * \since 5.12

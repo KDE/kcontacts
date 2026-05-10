@@ -66,6 +66,11 @@ QUrl Impp::address() const
     return d->address;
 }
 
+QString Impp::username() const
+{
+    return d->address.toDisplayString(QUrl::RemoveScheme);
+}
+
 QString Impp::serviceType() const
 {
     return d->address.scheme();
