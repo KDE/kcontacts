@@ -175,9 +175,20 @@ static QString improtcolFile(const QString &serviceType)
 
 QString Impp::serviceLabel(const QString &serviceType)
 {
+    if (serviceType.isEmpty()) {
+        qWarning() << "Impp::serviceLabel: Trying to get the label for an empty service.";
+        return QString();
+    }
     const auto path = improtcolFile(serviceType);
     KDesktopFile df(path);
-    return df.readName();
+    const auto name = df.readName();
+    if (name.isEmpty()) {
+        qInfo() << "Fixing up label for " << serviceType;
+        auto serviceTypeAsLabel = serviceType;
+        serviceTypeAsLabel[0] = serviceTypeAsLabel[0].toUpper();
+        return serviceTypeAsLabel;
+    }
+    return name;
 }
 
 QString Impp::serviceIcon(const QString &serviceType)
