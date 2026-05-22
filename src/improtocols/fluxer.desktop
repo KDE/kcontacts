@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-fluxer
 Comment=Fluxer Protocol
+Comment[ar]=ميفاق Fluxer
 Comment[ca]=Protocol Fluxer
 Comment[ca@valencia]=Protocol Fluxer
 Comment[es]=Protocolo Fluxer
@@ -21,6 +22,7 @@ Comment[tr]=Fluxer Protokolü
 Comment[uk]=Протокол Fluxer
 Comment[zh_TW]=Fluxer 通訊協定
 Name=Fluxer
+Name[ar]=Fluxer
 Name[ca]=Fluxer
 Name[ca@valencia]=Fluxer
 Name[es]=Fluxer

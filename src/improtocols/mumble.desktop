@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-mumble
 Comment=Mumble Protocol
+Comment[ar]=ميفاق Mumble
 Comment[ca]=Protocol Mumble
 Comment[ca@valencia]=Protocol Mumble
 Comment[es]=Protocolo Mumble
@@ -21,6 +22,7 @@ Comment[tr]=Mumble Protokolü
 Comment[uk]=Протокол Mumble
 Comment[zh_TW]=Mumble 通訊協定
 Name=Mumble
+Name[ar]=Mumble
 Name[ca]=Mumble
 Name[ca@valencia]=Mumble
 Name[es]=Mumble

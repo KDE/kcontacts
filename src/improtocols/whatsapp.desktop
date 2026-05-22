@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-whatsapp
 Comment=WhatsApp Protocol
+Comment[ar]=ميفاق واتساب
 Comment[ca]=Protocol WhatsApp
 Comment[ca@valencia]=Protocol WhatsApp
 Comment[es]=Protocolo WhatsApp
@@ -21,6 +22,7 @@ Comment[tr]=WhatsApp Protokolü
 Comment[uk]=Протокол WhatsApp
 Comment[zh_TW]=WhatsApp 通訊協定
 Name=WhatsApp
+Name[ar]=واتساب
 Name[ca]=WhatsApp
 Name[ca@valencia]=WhatsApp
 Name[es]=WhatsApp

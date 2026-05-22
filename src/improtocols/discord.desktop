@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-discord
 Comment=Discord Protocol
+Comment[ar]=ميفاق ديسكور
 Comment[ca]=Protocol Discord
 Comment[ca@valencia]=Protocol Discord
 Comment[es]=Protocolo Discord
@@ -21,6 +22,7 @@ Comment[tr]=Discord Protokolü
 Comment[uk]=Протокол Discord
 Comment[zh_TW]=Discord 通訊協定
 Name=Discord
+Name[ar]=ديسكورد
 Name[ca]=Discord
 Name[ca@valencia]=Discord
 Name[es]=Discord

@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-teams
 Comment=Microsoft Teams Protocol
+Comment[ar]=ميفاق مايكروسوفت تيمز
 Comment[ca]=Protocol Microsoft Teams
 Comment[ca@valencia]=Protocol Microsoft Teams
 Comment[es]=Protocolo Microsoft Teams
@@ -21,6 +22,7 @@ Comment[tr]=Microsoft Teams Protokolü
 Comment[uk]=Протокол Microsoft Teams
 Comment[zh_TW]=Microsoft Teams 通訊協定
 Name=Microsoft Teams
+Name[ar]=مايكروسوفت تيمز
 Name[ca]=Microsoft Teams
 Name[ca@valencia]=Microsoft Teams
 Name[es]=Microsoft Teams

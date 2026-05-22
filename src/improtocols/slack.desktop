@@ -2,6 +2,7 @@
 Type=Service
 Icon=im-slack
 Comment=Slack Protocol
+Comment[ar]=ميفاق سلاك
 Comment[ca]=Protocol Slack
 Comment[ca@valencia]=Protocol Slack
 Comment[es]=Protocolo Slack
@@ -21,6 +22,7 @@ Comment[tr]=Slack Protokolü
 Comment[uk]=Протокол Slack
 Comment[zh_TW]=Slack 通訊協定
 Name=Slack
+Name[ar]=سلاك
 Name[ca]=Slack
 Name[ca@valencia]=Slack
 Name[es]=Slack
