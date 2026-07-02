@@ -9,6 +9,11 @@
 #ifndef KCONTACTS_ADDRESSEELIST_H
 #define KCONTACTS_ADDRESSEELIST_H
 
+// All KF6 public headers should provide the version macros.
+// Include version header explicitly because the export header
+// (which usually takes care of that) isn't used here
+#include <kcontacts_version.h> // IWYU pragma: export
+
 #include <QList>
 
 namespace KContacts
