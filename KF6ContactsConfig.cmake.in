@@ -2,7 +2,6 @@
 include(CMakeFindDependencyMacro)
 find_dependency(Qt6Gui "@REQUIRED_QT_VERSION@")
 if (NOT @BUILD_SHARED_LIBS@)
-    find_dependency(KF6CoreAddons "@KF_DEP_VERSION@")
     find_dependency(KF6Config "@KF_DEP_VERSION@")
     find_dependency(KF6I18n "@KF_DEP_VERSION@")
     find_dependency(KF6Codecs "@KF_DEP_VERSION@")

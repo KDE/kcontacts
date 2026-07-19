@@ -53,7 +53,7 @@ set_package_properties(Qt6Gui PROPERTIES
 if (USE_QML)
     find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml)
 endif()
-find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons I18n Config Codecs)
+find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS I18n Config Codecs)
 
 ########### Targets ###########
 

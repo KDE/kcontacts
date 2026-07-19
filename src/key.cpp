@@ -8,9 +8,9 @@
 #include "key.h"
 
 #include <KLocalizedString>
-#include <krandom.h>
 
 #include <QSharedData>
+#include <QUuid>
 
 using namespace KContacts;
 
@@ -18,7 +18,7 @@ class Q_DECL_HIDDEN Key::Private : public QSharedData
 {
 public:
     Private()
-        : mId(KRandom::randomString(8))
+        : mId(QUuid::createUuid().toString(QUuid::Id128))
     {
     }
 

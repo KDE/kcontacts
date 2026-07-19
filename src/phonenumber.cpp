@@ -9,10 +9,10 @@
 #include "parametermap_p.h"
 
 #include <KLocalizedString>
-#include <krandom.h>
 
 #include <QDataStream>
 #include <QSharedData>
+#include <QUuid>
 
 using namespace KContacts;
 
@@ -25,7 +25,7 @@ class Q_DECL_HIDDEN PhoneNumber::Private : public QSharedData
 {
 public:
     Private(Type type)
-        : mId(KRandom::randomString(8))
+        : mId(QUuid::createUuid().toString(QUuid::Id128))
         , mType(type)
     {
     }

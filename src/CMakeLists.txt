@@ -157,7 +157,6 @@ PUBLIC
     Qt6::Core
     Qt6::Gui
 PRIVATE
-    KF6::CoreAddons
     KF6::ConfigCore
     KF6::I18n
     KF6::I18nLocaleData

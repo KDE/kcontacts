@@ -13,13 +13,13 @@
 #include <KConfig>
 #include <KCountry>
 #include <KLocalizedString>
-#include <krandom.h>
 
 #include <KConfigGroup>
 
 #include <QDataStream>
 #include <QSharedData>
 #include <QUrlQuery>
+#include <QUuid>
 
 using namespace KContacts;
 
@@ -29,7 +29,7 @@ public:
     Private()
         : mEmpty(true)
     {
-        mId = KRandom::randomString(10);
+        mId = QUuid::createUuid().toString(QUuid::Id128);
     }
 
     Private(const Private &other)
