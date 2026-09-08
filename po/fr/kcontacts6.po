@@ -31,7 +31,7 @@ msgstr ""
 #: address.cpp:224
 #, kde-format
 msgid "Post Office Box"
-msgstr "Boîte postale"
+msgstr "Boite postale"
 
 #: address.cpp:240
 #, kde-format
@@ -473,7 +473,7 @@ msgstr "Préféré"
 #: phonenumber.cpp:178
 #, kde-format
 msgid "Voice"
-msgstr "Boîte vocale"
+msgstr "Boite vocale"
 
 #: phonenumber.cpp:180
 #, kde-format
@@ -495,7 +495,7 @@ msgstr "Vidéo"
 #: phonenumber.cpp:186
 #, kde-format
 msgid "Mailbox"
-msgstr "Boîte aux lettres"
+msgstr "Boite aux lettres"
 
 #: phonenumber.cpp:188
 #, kde-format
