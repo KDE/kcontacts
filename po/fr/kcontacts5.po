@@ -335,7 +335,7 @@ msgstr "Date de révision"
 #: addressee.cpp:1291
 #, kde-format
 msgid "Sort String"
-msgstr "Chaîne de tri"
+msgstr "Chaine de tri"
 
 #: addressee.cpp:1317
 #, kde-format
