@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2026-05-30 17:11-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -258,7 +258,7 @@ msgstr "ماشىنا تېلېفونى"
 #: addressee.cpp:989 phonenumber.cpp:192
 #, kde-format
 msgid "ISDN"
-msgstr "ISDN"
+msgstr ""
 
 #: addressee.cpp:994 phonenumber.cpp:196
 #, kde-format
@@ -385,17 +385,17 @@ msgstr "دوكتور"
 #: addresseehelper.cpp:53
 #, kde-format
 msgid "I"
-msgstr "I"
+msgstr ""
 
 #: addresseehelper.cpp:54
 #, kde-format
 msgid "II"
-msgstr "II"
+msgstr ""
 
 #: addresseehelper.cpp:55
 #, kde-format
 msgid "III"
-msgstr "III"
+msgstr ""
 
 #: addresseehelper.cpp:56
 #, kde-format
@@ -411,13 +411,13 @@ msgstr "ئەجداد"
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
-msgstr "X509"
+msgstr ""
 
 #: key.cpp:199
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
-msgstr "PGP"
+msgstr ""
 
 #: key.cpp:202
 #, kde-format
@@ -501,7 +501,7 @@ msgstr "ماشىنا"
 #: phonenumber.cpp:194
 #, kde-format
 msgid "PCS"
-msgstr "PCS"
+msgstr ""
 
 #: phonenumber.cpp:198
 #, kde-format
