@@ -42,6 +42,8 @@ struct AddressTypeInfo {
 };
 
 static const AddressTypeInfo s_addressTypes[] = {
+    {"billing", Address::Billing},
+    {"delivery", Address::Delivery},
     {"dom", Address::Dom},
     {"home", Address::Home},
     {"intl", Address::Intl},

@@ -341,7 +341,7 @@ Address::TypeList Address::typeList()
     static TypeList list;
 
     if (list.isEmpty()) {
-        list << Dom << Intl << Postal << Parcel << Home << Work << Pref;
+        list << Dom << Intl << Postal << Parcel << Home << Work << Pref << Billing << Delivery;
     }
 
     return list;
@@ -364,6 +364,10 @@ QString Address::typeFlagLabel(TypeFlag type)
         return i18nc("Work Address", "Work");
     case Pref:
         return i18n("Preferred Address");
+    case Billing:
+        return i18nc("Address for billing", "Billing");
+    case Delivery:
+        return i18nc("Address for delivering goods", "Delivery");
     }
     return i18nc("another type of address", "Other");
 }
