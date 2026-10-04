@@ -42,14 +42,26 @@ namespace KContacts
 {
 
 /*!
- * \qmlvaluetype addressee
- * \inqmlmodule org.kde.contacts
- * \nativetype KContacts::Addressee
- * \brief Postal address information.
- *
- * \brief Address book entry.
- *
- * This class represents an entry in the address book.
+  \qmlvaluetype addressee
+  \inqmlmodule org.kde.contacts
+  \nativetype KContacts::Addressee
+  \brief Address book entry.
+
+  This class represents an entry in the address book.
+
+  \qml
+  import QtQml
+  import org.kde.contacts
+
+  QtObject {
+      property addressee contact: ({
+          givenName: "Ada",
+          familyName: "Lovelace",
+          emails: ["ada@example.org"],
+          addresses: [{ street: "12 Main Street", locality: "London" }]
+      })
+  }
+  \endqml
  */
 
 /*!
