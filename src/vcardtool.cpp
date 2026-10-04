@@ -21,6 +21,7 @@
 #include <QTimeZone>
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 static bool needsEncoding(const QString &value)
 {
@@ -411,6 +412,29 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
         // LANG only for version == 4.0
         if (version == VCard::v4_0) {
+            VCardLine createdLine(u"CREATED"_s, createDateTime(addressee.created().toUTC(), version));
+            createdLine.setGroup(addressee.createdGroup());
+            createdLine.addParameters(ParameterMap::fromQMap(addressee.createdParameters()));
+            card.addLine(createdLine);
+            VCardLine languageLine(u"LANGUAGE"_s, addressee.defaultLanguage());
+            languageLine.setGroup(addressee.defaultLanguageGroup());
+            languageLine.addParameters(ParameterMap::fromQMap(addressee.defaultLanguageParameters()));
+            card.addLine(languageLine);
+            for (const auto &property : addressee.grammaticalGenders()) {
+                VCardLine line(u"GRAMGENDER"_s, property.gender());
+                line.addParameters(property.params());
+                card.addLine(line);
+            }
+            for (const auto &property : addressee.pronouns()) {
+                VCardLine line(u"PRONOUNS"_s, property.pronouns());
+                line.addParameters(property.params());
+                card.addLine(line);
+            }
+            for (const auto &property : addressee.socialProfiles()) {
+                VCardLine line(u"SOCIALPROFILE"_s, property.profile());
+                line.addParameters(property.params());
+                card.addLine(line);
+            }
             const Lang::List langList = addressee.langs();
             for (const auto &lang : langList) {
                 VCardLine line(QStringLiteral("LANG"), lang.language());
@@ -484,11 +508,28 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
 
         // N required for only version < 4.0
         QStringList name;
-        name.append(addressee.familyName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        auto compatibleComponent = [](const QString &original, const QString &extra) {
+            if (extra.isEmpty()) {
+                return original;
+            }
+            auto values = original.split(u',', Qt::SkipEmptyParts);
+            const auto extraValues = extra.split(u',', Qt::SkipEmptyParts);
+            for (const auto &value : extraValues) {
+                if (!values.contains(value)) {
+                    values.append(value);
+                }
+            }
+            return values.join(u',');
+        };
+        name.append(compatibleComponent(addressee.familyName(), addressee.secondarySurname()).replace(u';', u"\\;"_s));
         name.append(addressee.givenName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
         name.append(addressee.additionalName().replace(QLatin1Char(';'), QStringLiteral("\\;")));
         name.append(addressee.prefix().replace(QLatin1Char(';'), QStringLiteral("\\;")));
-        name.append(addressee.suffix().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+        name.append(compatibleComponent(addressee.suffix(), addressee.generation()).replace(u';', u"\\;"_s));
+        if (version == VCard::v4_0 && (!addressee.secondarySurname().isEmpty() || !addressee.generation().isEmpty())) {
+            name.append(addressee.secondarySurname().replace(u';', u"\\;"_s));
+            name.append(addressee.generation().replace(u';', u"\\;"_s));
+        }
 
         VCardLine nLine(QStringLiteral("N"), name.join(QLatin1Char(';')));
         if (version == VCard::v2_1 && needsEncoding(name.join(QLatin1Char(';')))) {
@@ -728,7 +769,33 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
             for (lineIt = lines.begin(); lineIt != lines.end(); ++lineIt) {
                 identifier = (*lineIt).identifier().toLower();
                 group = (*lineIt).group();
-                if (!group.isEmpty() && identifier != QLatin1String("adr")) {
+                if (identifier == "created"_L1) {
+                    addr.setCreated(parseDateTime((*lineIt).value().toString()));
+                    addr.setCreatedGroup(group);
+                    addr.setCreatedParameters((*lineIt).parameterMap().toQMap());
+                } else if (identifier == "language"_L1) {
+                    addr.setDefaultLanguage((*lineIt).value().toString());
+                    addr.setDefaultLanguageGroup(group);
+                    addr.setDefaultLanguageParameters((*lineIt).parameterMap().toQMap());
+                } else if (group.isEmpty() && identifier == "gramgender"_L1) {
+                    GrammaticalGender property((*lineIt).value().toString());
+                    property.setParams((*lineIt).parameterMap());
+                    auto properties = addr.grammaticalGenders();
+                    properties.append(property);
+                    addr.setGrammaticalGenders(properties);
+                } else if (group.isEmpty() && identifier == "pronouns"_L1) {
+                    Pronouns property((*lineIt).value().toString());
+                    property.setParams((*lineIt).parameterMap());
+                    auto properties = addr.pronouns();
+                    properties.append(property);
+                    addr.setPronouns(properties);
+                } else if (group.isEmpty() && identifier == "socialprofile"_L1) {
+                    SocialProfile property((*lineIt).value().toString());
+                    property.setParams((*lineIt).parameterMap());
+                    auto properties = addr.socialProfiles();
+                    properties.append(property);
+                    addr.setSocialProfiles(properties);
+                } else if (!group.isEmpty() && identifier != "adr"_L1) {
                     KContacts::FieldGroup groupField(group + QLatin1Char('.') + (*lineIt).identifier());
                     groupField.setParams((*lineIt).parameterMap());
                     groupField.setValue((*lineIt).value().toString());
@@ -977,6 +1044,22 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
                     if (numberOfParts > 4) {
                         addr.setSuffix(nameParts.at(4));
+                    }
+                    auto removeCompatibilityValues = [](const QString &original, const QString &extra) {
+                        auto values = original.split(u',', Qt::KeepEmptyParts);
+                        const auto extraValues = extra.split(u',', Qt::SkipEmptyParts);
+                        for (const auto &value : extraValues) {
+                            values.removeAll(value);
+                        }
+                        return values.join(u',');
+                    };
+                    if (numberOfParts > 5) {
+                        addr.setSecondarySurname(nameParts.at(5));
+                        addr.setFamilyName(removeCompatibilityValues(addr.familyName(), addr.secondarySurname()));
+                    }
+                    if (numberOfParts > 6) {
+                        addr.setGeneration(nameParts.at(6));
+                        addr.setSuffix(removeCompatibilityValues(addr.suffix(), addr.generation()));
                     }
                     if (!(*lineIt).parameter(QStringLiteral("sort-as")).isEmpty()) {
                         addr.setSortString((*lineIt).parameter(QStringLiteral("sort-as")));

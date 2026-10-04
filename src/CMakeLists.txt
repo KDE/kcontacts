@@ -83,6 +83,12 @@ target_sources(KF6Contacts PRIVATE
     vcardparser/vcardparser.cpp
     vcardparser/vcardparser_p.h
     vcardparser/vcard_p.h
+    grammaticalgender.cpp
+    grammaticalgender.h
+    pronouns.cpp
+    pronouns.h
+    socialprofile.cpp
+    socialprofile.h
     vcardtool.cpp
     vcardtool_p.h
 
@@ -193,6 +199,9 @@ ecm_generate_headers(KContacts_CamelCase_HEADERS
   Note
   Org
   NickName
+  GrammaticalGender
+  Pronouns
+  SocialProfile
   VCardDrag
   FieldGroup
   ClientPidMap

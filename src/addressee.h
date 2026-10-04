@@ -23,6 +23,7 @@
 #include "fieldgroup.h"
 #include "gender.h"
 #include "geo.h"
+#include "grammaticalgender.h"
 #include "impp.h"
 #include "key.h"
 #include "lang.h"
@@ -30,10 +31,12 @@
 #include "org.h"
 #include "phonenumber.h"
 #include "picture.h"
+#include "pronouns.h"
 #include "related.h"
 #include "resourcelocatorurl.h"
 #include "role.h"
 #include "secrecy.h"
+#include "socialprofile.h"
 #include "sound.h"
 #include "timezone.h"
 #include "title.h"
@@ -181,6 +184,28 @@ class KCONTACTS_EXPORT Addressee
      * \property KContacts::Addressee::suffix
      */
     Q_PROPERTY(QString suffix READ suffix WRITE setSuffix)
+
+    /*!
+      \qmlproperty string addressee::secondarySurname
+      \since 6.31
+    */
+    /*!
+      \property KContacts::Addressee::secondarySurname
+      The RFC 9554 secondary surname.
+      \since 6.31
+    */
+    Q_PROPERTY(QString secondarySurname READ secondarySurname WRITE setSecondarySurname)
+
+    /*!
+      \qmlproperty string addressee::generation
+      \since 6.31
+    */
+    /*!
+      \property KContacts::Addressee::generation
+      The RFC 9554 generation marker.
+      \since 6.31
+    */
+    Q_PROPERTY(QString generation READ generation WRITE setGeneration)
 
     /*!
      * \qmlproperty string addressee::nickName
@@ -484,6 +509,17 @@ class KCONTACTS_EXPORT Addressee
      */
     Q_PROPERTY(QDateTime deathDate READ deathDate WRITE setDeathDate)
 
+    /*! The creation timestamp of the vCard. */
+    Q_PROPERTY(QDateTime created READ created WRITE setCreated)
+    /*! The default language of human-readable text. */
+    Q_PROPERTY(QString defaultLanguage READ defaultLanguage WRITE setDefaultLanguage)
+    /*! Grammatical genders, optionally qualified by language. */
+    Q_PROPERTY(QList<KContacts::GrammaticalGender> grammaticalGenders READ grammaticalGenders WRITE setGrammaticalGenders)
+    /*! Preferred pronouns for the contact. */
+    Q_PROPERTY(QList<KContacts::Pronouns> pronouns READ pronouns WRITE setPronouns)
+    /*! Social media profiles for the contact. */
+    Q_PROPERTY(QList<KContacts::SocialProfile> socialProfiles READ socialProfiles WRITE setSocialProfiles)
+
     // ### the following properties are still missing:
     // - logos, photos, sounds
     // - keys
@@ -661,6 +697,42 @@ public:
       Return translated label for suffix field.
      */
     [[nodiscard]] static QString suffixLabel();
+
+    /*!
+      Sets the secondary surname to \a secondarySurname.
+      \since 6.31
+    */
+    void setSecondarySurname(const QString &secondarySurname);
+
+    /*!
+      Returns the secondary surname.
+      \since 6.31
+    */
+    [[nodiscard]] QString secondarySurname() const;
+
+    /*!
+      Returns the translated label for the secondary surname field.
+      \since 6.31
+    */
+    [[nodiscard]] static QString secondarySurnameLabel();
+
+    /*!
+      Sets the generation marker to \a generation.
+      \since 6.31
+    */
+    void setGeneration(const QString &generation);
+
+    /*!
+      Returns the generation marker.
+      \since 6.31
+    */
+    [[nodiscard]] QString generation() const;
+
+    /*!
+      Returns the translated label for the generation marker field.
+      \since 6.31
+    */
+    [[nodiscard]] static QString generationLabel();
 
     /*!
       Set nick name.
@@ -1451,6 +1523,39 @@ public:
     void setEmailList(const Email::List &list);
 
     /*!
+     * The date and time the vCard was created, distinct from its revision.
+     * \since 6.31
+     */
+    [[nodiscard]] QDateTime created() const;
+    /*! Sets RFC 9554 CREATED. \since 6.31 */
+    void setCreated(const QDateTime &value);
+
+    /*!
+     * The default language of human-readable text (RFC 9554 LANGUAGE).
+     * An explicit LANGUAGE parameter on a property takes precedence.
+     * This is distinct from langs(), which describes languages used by the contact.
+     * \since 6.31
+     */
+    [[nodiscard]] QString defaultLanguage() const;
+    /*! Sets RFC 9554 LANGUAGE. \since 6.31 */
+    void setDefaultLanguage(const QString &value);
+
+    /*! RFC 9554 GRAMGENDER properties. \since 6.31 */
+    [[nodiscard]] QList<GrammaticalGender> grammaticalGenders() const;
+    /*! Sets RFC 9554 GRAMGENDER. \since 6.31 */
+    void setGrammaticalGenders(const QList<GrammaticalGender> &value);
+
+    /*! RFC 9554 PRONOUNS properties. \since 6.31 */
+    [[nodiscard]] QList<Pronouns> pronouns() const;
+    /*! Sets RFC 9554 PRONOUNS. \since 6.31 */
+    void setPronouns(const QList<Pronouns> &value);
+
+    /*! RFC 9554 SOCIALPROFILE properties. \since 6.31 */
+    [[nodiscard]] QList<SocialProfile> socialProfiles() const;
+    /*! Sets RFC 9554 SOCIALPROFILE. \since 6.31 */
+    void setSocialProfiles(const QList<SocialProfile> &value);
+
+    /*!
      * Remove Language
      */
     void removeLang(const QString &language);
@@ -1751,6 +1856,15 @@ public:
     void setDeathDate(const QDateTime &deathDate);
 
 private:
+    friend class VCardTool;
+    KCONTACTS_NO_EXPORT QMap<QString, QStringList> createdParameters() const;
+    KCONTACTS_NO_EXPORT void setCreatedParameters(const QMap<QString, QStringList> &parameters);
+    KCONTACTS_NO_EXPORT QMap<QString, QStringList> defaultLanguageParameters() const;
+    KCONTACTS_NO_EXPORT void setDefaultLanguageParameters(const QMap<QString, QStringList> &parameters);
+    KCONTACTS_NO_EXPORT QString createdGroup() const;
+    KCONTACTS_NO_EXPORT void setCreatedGroup(const QString &group);
+    KCONTACTS_NO_EXPORT QString defaultLanguageGroup() const;
+    KCONTACTS_NO_EXPORT void setDefaultLanguageGroup(const QString &group);
     KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);
 
     class Private;
