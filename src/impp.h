@@ -102,6 +102,17 @@ class KCONTACTS_EXPORT Impp
      */
     Q_PROPERTY(QString serviceIcon READ serviceIcon)
 
+    /*!
+     * \qmlproperty string impp::username
+     * \since 6.31
+     */
+
+    /*!
+     * \property KContacts::Impp::username
+     * \since 6.31
+     */
+    Q_PROPERTY(QString username READ username WRITE setUsername)
+
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Impp &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Impp &);
     friend class VCardTool;
@@ -137,10 +148,19 @@ public:
     [[nodiscard]] QUrl address() const;
 
     /*!
-     * Returns the "username" portion of the address (i.e. everything but the protocol).
+     * Returns the USERNAME parameter when set, otherwise the "username" portion
+     * of the address (i.e. everything but the protocol).
+     * The USERNAME parameter is supported since 6.31.
      * \since 6.27
      */
     [[nodiscard]] QString username() const;
+
+    /*!
+     * Sets the case-sensitive USERNAME parameter defined by RFC 9554.
+     * An empty value removes the parameter, restoring the address-based username.
+     * \since 6.31
+     */
+    void setUsername(const QString &username);
 
     /*!
      * Returns the messaging service this address is for.
