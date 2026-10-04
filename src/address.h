@@ -212,6 +212,8 @@ public:
       \value Home home address
       \value Work address at work
       \value Pref preferred address
+      \value Billing address for billing, such as sending invoices (since 6.31)
+      \value Delivery address for delivering goods (since 6.31)
     */
     enum TypeFlag {
         Dom = 1,
@@ -221,6 +223,8 @@ public:
         Home = 16,
         Work = 32,
         Pref = 64,
+        Billing = 128,
+        Delivery = 256,
     };
 
     Q_DECLARE_FLAGS(Type, TypeFlag)
