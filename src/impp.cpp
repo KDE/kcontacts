@@ -18,6 +18,7 @@
 #include <QUrl>
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 class Q_DECL_HIDDEN Impp::Private : public QSharedData
 {
@@ -27,6 +28,7 @@ public:
         : QSharedData(other)
     {
         mParamMap = other.mParamMap;
+        address = other.address;
     }
 
     ParameterMap mParamMap;
@@ -68,7 +70,25 @@ QUrl Impp::address() const
 
 QString Impp::username() const
 {
+    const auto it = d->mParamMap.findParam(u"username"_s);
+    if (it != d->mParamMap.cend() && !it->paramValues.isEmpty()) {
+        return it->paramValues.first();
+    }
     return d->address.toDisplayString(QUrl::RemoveScheme);
+}
+
+void Impp::setUsername(const QString &username)
+{
+    auto it = d->mParamMap.findParam(u"username"_s);
+    if (username.isEmpty()) {
+        if (it != d->mParamMap.end()) {
+            d->mParamMap.erase(it);
+        }
+    } else if (it != d->mParamMap.end()) {
+        it->paramValues = {username};
+    } else {
+        d->mParamMap.insertParam({u"username"_s, {username}});
+    }
 }
 
 QString Impp::serviceType() const
