@@ -18,10 +18,12 @@
 
 #include <QDataStream>
 #include <QSharedData>
+#include <QStringList>
 #include <QUrlQuery>
 #include <QUuid>
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 class Q_DECL_HIDDEN Address::Private : public QSharedData
 {
@@ -47,6 +49,18 @@ public:
         mPostalCode = other.mPostalCode;
         mCountry = other.mCountry;
         mLabel = other.mLabel;
+        mGeo = other.mGeo;
+        mRoom = other.mRoom;
+        mApartment = other.mApartment;
+        mFloor = other.mFloor;
+        mStreetNumber = other.mStreetNumber;
+        mStreetName = other.mStreetName;
+        mBuilding = other.mBuilding;
+        mBlock = other.mBlock;
+        mSubdistrict = other.mSubdistrict;
+        mDistrict = other.mDistrict;
+        mLandmark = other.mLandmark;
+        mDirection = other.mDirection;
     }
 
     bool mEmpty;
@@ -62,6 +76,17 @@ public:
     QString mPostalCode;
     QString mCountry;
     QString mLabel;
+    QString mRoom;
+    QString mApartment;
+    QString mFloor;
+    QString mStreetNumber;
+    QString mStreetName;
+    QString mBuilding;
+    QString mBlock;
+    QString mSubdistrict;
+    QString mDistrict;
+    QString mLandmark;
+    QString mDirection;
 };
 
 Address::Address()
@@ -123,6 +148,40 @@ bool Address::operator==(const Address &other) const
         return false;
     }
     if (d->mLabel != other.d->mLabel) {
+        return false;
+    }
+
+    if (d->mRoom != other.d->mRoom) {
+        return false;
+    }
+    if (d->mApartment != other.d->mApartment) {
+        return false;
+    }
+    if (d->mFloor != other.d->mFloor) {
+        return false;
+    }
+    if (d->mStreetNumber != other.d->mStreetNumber) {
+        return false;
+    }
+    if (d->mStreetName != other.d->mStreetName) {
+        return false;
+    }
+    if (d->mBuilding != other.d->mBuilding) {
+        return false;
+    }
+    if (d->mBlock != other.d->mBlock) {
+        return false;
+    }
+    if (d->mSubdistrict != other.d->mSubdistrict) {
+        return false;
+    }
+    if (d->mDistrict != other.d->mDistrict) {
+        return false;
+    }
+    if (d->mLandmark != other.d->mLandmark) {
+        return false;
+    }
+    if (d->mDirection != other.d->mDirection) {
         return false;
     }
 
@@ -248,7 +307,19 @@ void Address::setStreet(const QString &street)
 
 QString Address::street() const
 {
-    return d->mStreet;
+    QStringList components{d->mStreetNumber,
+                           d->mStreetName,
+                           d->mRoom,
+                           d->mApartment,
+                           d->mFloor,
+                           d->mBuilding,
+                           d->mBlock,
+                           d->mSubdistrict,
+                           d->mDistrict,
+                           d->mLandmark,
+                           d->mDirection};
+    components.removeAll(QString());
+    return components.isEmpty() ? d->mStreet : components.join(u' ');
 }
 
 QString Address::streetLabel()
@@ -336,6 +407,182 @@ QString Address::labelLabel()
     return i18n("Delivery Label");
 }
 
+void Address::setRoom(const QString &room)
+{
+    d->mEmpty = false;
+    d->mRoom = room;
+}
+
+QString Address::room() const
+{
+    return d->mRoom;
+}
+
+QString Address::roomLabel()
+{
+    return i18nc("Address component", "Room");
+}
+
+void Address::setApartment(const QString &apartment)
+{
+    d->mEmpty = false;
+    d->mApartment = apartment;
+}
+
+QString Address::apartment() const
+{
+    return d->mApartment;
+}
+
+QString Address::apartmentLabel()
+{
+    return i18nc("Address component", "Apartment");
+}
+
+void Address::setFloor(const QString &floor)
+{
+    d->mEmpty = false;
+    d->mFloor = floor;
+}
+
+QString Address::floor() const
+{
+    return d->mFloor;
+}
+
+QString Address::floorLabel()
+{
+    return i18nc("Address component", "Floor");
+}
+
+void Address::setStreetNumber(const QString &streetNumber)
+{
+    d->mEmpty = false;
+    d->mStreetNumber = streetNumber;
+}
+
+QString Address::streetNumber() const
+{
+    return d->mStreetNumber;
+}
+
+QString Address::streetNumberLabel()
+{
+    return i18nc("Address component", "Street number");
+}
+
+void Address::setStreetName(const QString &streetName)
+{
+    d->mEmpty = false;
+    d->mStreetName = streetName;
+}
+
+QString Address::streetName() const
+{
+    return d->mStreetName;
+}
+
+QString Address::streetNameLabel()
+{
+    return i18nc("Address component", "Street name");
+}
+
+void Address::setBuilding(const QString &building)
+{
+    d->mEmpty = false;
+    d->mBuilding = building;
+}
+
+QString Address::building() const
+{
+    return d->mBuilding;
+}
+
+QString Address::buildingLabel()
+{
+    return i18nc("Address component", "Building");
+}
+
+void Address::setBlock(const QString &block)
+{
+    d->mEmpty = false;
+    d->mBlock = block;
+}
+
+QString Address::block() const
+{
+    return d->mBlock;
+}
+
+QString Address::blockLabel()
+{
+    return i18nc("Address component", "Block");
+}
+
+void Address::setSubdistrict(const QString &subdistrict)
+{
+    d->mEmpty = false;
+    d->mSubdistrict = subdistrict;
+}
+
+QString Address::subdistrict() const
+{
+    return d->mSubdistrict;
+}
+
+QString Address::subdistrictLabel()
+{
+    return i18nc("Address component", "Subdistrict");
+}
+
+void Address::setDistrict(const QString &district)
+{
+    d->mEmpty = false;
+    d->mDistrict = district;
+}
+
+QString Address::district() const
+{
+    return d->mDistrict;
+}
+
+QString Address::districtLabel()
+{
+    return i18nc("Address component", "District");
+}
+
+void Address::setLandmark(const QString &landmark)
+{
+    d->mEmpty = false;
+    d->mLandmark = landmark;
+}
+
+QString Address::landmark() const
+{
+    return d->mLandmark;
+}
+
+QString Address::landmarkLabel()
+{
+    return i18nc("Address component", "Landmark");
+}
+
+void Address::setDirection(const QString &direction)
+{
+    d->mEmpty = false;
+    d->mDirection = direction;
+}
+
+QString Address::direction() const
+{
+    return d->mDirection;
+}
+
+QString Address::directionLabel()
+{
+    return i18nc("Address component", "Direction");
+}
+
 Address::TypeList Address::typeList()
 {
     static TypeList list;
@@ -396,6 +643,17 @@ QString Address::toString() const
     str += QStringLiteral("  Region: %1\n").arg(d->mRegion);
     str += QStringLiteral("  Postal code: %1\n").arg(d->mPostalCode);
     str += QStringLiteral("  Country: %1\n").arg(d->mCountry);
+    str += u"  Room: %1\n"_s.arg(d->mRoom);
+    str += u"  Apartment: %1\n"_s.arg(d->mApartment);
+    str += u"  Floor: %1\n"_s.arg(d->mFloor);
+    str += u"  StreetNumber: %1\n"_s.arg(d->mStreetNumber);
+    str += u"  StreetName: %1\n"_s.arg(d->mStreetName);
+    str += u"  Building: %1\n"_s.arg(d->mBuilding);
+    str += u"  Block: %1\n"_s.arg(d->mBlock);
+    str += u"  Subdistrict: %1\n"_s.arg(d->mSubdistrict);
+    str += u"  District: %1\n"_s.arg(d->mDistrict);
+    str += u"  Landmark: %1\n"_s.arg(d->mLandmark);
+    str += u"  Direction: %1\n"_s.arg(d->mDirection);
     str += QStringLiteral("  Label: %1\n").arg(d->mLabel);
     str += QStringLiteral("  Geo: %1\n").arg(d->mGeo.toString());
     str += QLatin1String("}\n");
@@ -442,7 +700,11 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Address &addr)
     return s << addr.d->mId << (uint)addr.d->mType << addr.d->mPostOfficeBox
              << addr.d->mExtended << addr.d->mStreet << addr.d->mLocality
              << addr.d->mRegion << addr.d->mPostalCode << addr.d->mCountry
-             << addr.d->mLabel << addr.d->mEmpty << addr.d->mGeo;
+             << addr.d->mLabel << addr.d->mEmpty << addr.d->mGeo
+             << addr.d->mRoom << addr.d->mApartment << addr.d->mFloor
+             << addr.d->mStreetNumber << addr.d->mStreetName << addr.d->mBuilding
+             << addr.d->mBlock << addr.d->mSubdistrict << addr.d->mDistrict
+             << addr.d->mLandmark << addr.d->mDirection;
 }
 
 QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
@@ -451,7 +713,11 @@ QDataStream &KContacts::operator>>(QDataStream &s, Address &addr)
     s >> addr.d->mId >> type >> addr.d->mPostOfficeBox >> addr.d->mExtended
     >> addr.d->mStreet >> addr.d->mLocality >> addr.d->mRegion
     >> addr.d->mPostalCode >> addr.d->mCountry >> addr.d->mLabel
-    >> addr.d->mEmpty >> addr.d->mGeo;
+    >> addr.d->mEmpty >> addr.d->mGeo
+    >> addr.d->mRoom >> addr.d->mApartment >> addr.d->mFloor
+    >> addr.d->mStreetNumber >> addr.d->mStreetName >> addr.d->mBuilding
+    >> addr.d->mBlock >> addr.d->mSubdistrict >> addr.d->mDistrict
+    >> addr.d->mLandmark >> addr.d->mDirection;
 
     addr.d->mType = Address::Type(type);
 

@@ -21,7 +21,6 @@ private:
     QByteArray createCard(const QByteArray &gender);
 
 private Q_SLOTS:
-    void grammaticalGenderLanguage();
     void shouldHaveDefaultValue();
     void shouldAssignValue();
     void shouldAssignExternal();

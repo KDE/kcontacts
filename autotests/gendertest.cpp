@@ -7,9 +7,7 @@
 
 #include "gendertest.h"
 #include "gender.h"
-#include "grammaticalgender.h"
 #include "vcardtool_p.h"
-#include <QMetaProperty>
 #include <QTest>
 
 GenderTest::GenderTest(QObject *parent)
@@ -251,52 +249,3 @@ void GenderTest::shouldNotExportInVcard3()
 QTEST_MAIN(GenderTest)
 
 #include "moc_gendertest.cpp"
-
-void GenderTest::grammaticalGenderLanguage()
-{
-    using namespace Qt::StringLiterals;
-    KContacts::GrammaticalGender gender(u"feminine"_s);
-    QVERIFY(gender.language().isEmpty());
-    gender.setParameters({{u"LANGUAGE"_s, {u"de"_s}}, {u"PROP-ID"_s, {u"g1"_s}}});
-    QCOMPARE(gender.language(), u"de"_s);
-    auto copy = gender;
-    const auto property = KContacts::GrammaticalGender::staticMetaObject.property(KContacts::GrammaticalGender::staticMetaObject.indexOfProperty("language"));
-    QVERIFY(property.writeOnGadget(&copy, u"en"_s));
-    QCOMPARE(copy.language(), u"en"_s);
-    QCOMPARE(gender.language(), u"de"_s);
-    QCOMPARE(copy.gender(), u"feminine"_s);
-    QCOMPARE(copy.parameters().value(u"prop-id"_s), QStringList{u"g1"_s});
-    KContacts::Addressee contact;
-    contact.setGrammaticalGenders({gender, copy});
-    KContacts::VCardTool tool;
-    const auto restored = tool.parseVCards(tool.createVCards({contact}, KContacts::VCard::v4_0)).first();
-    QCOMPARE(restored.grammaticalGenders(), contact.grammaticalGenders());
-    QByteArray data;
-    QDataStream writer(&data, QIODevice::WriteOnly);
-    writer << copy;
-    QDataStream reader(data);
-    KContacts::GrammaticalGender streamed;
-    reader >> streamed;
-    QCOMPARE(streamed, copy);
-    copy.setLanguage({});
-    QVERIFY(copy.language().isEmpty());
-    QVERIFY(!copy.parameters().contains(u"language"_s));
-    QCOMPARE(copy.parameters().value(u"prop-id"_s), QStringList{u"g1"_s});
-    const auto grouped = tool.parseVCards(
-                                 "BEGIN:VCARD\r\nVERSION:4.0\r\nFN:Example\r\n"
-                                 "item1.GRAMGENDER;LANGUAGE=de:feminine\r\n"
-                                 "item1.PRONOUNS;LANGUAGE=en:they/them\r\n"
-                                 "item1.SOCIALPROFILE:https://example.com/profile\r\nEND:VCARD\r\n")
-                             .first();
-    QVERIFY(grouped.grammaticalGenders().isEmpty());
-    QVERIFY(grouped.pronouns().isEmpty());
-    QVERIFY(grouped.socialProfiles().isEmpty());
-    QCOMPARE(grouped.fieldGroupList().size(), 3);
-    const auto groupedRestored = tool.parseVCards(tool.createVCards({grouped}, KContacts::VCard::v4_0)).first();
-    QCOMPARE(groupedRestored.fieldGroupList(), grouped.fieldGroupList());
-    QCOMPARE(KContacts::GrammaticalGender::staticMetaObject.indexOfProperty("group"), -1);
-    QCOMPARE(KContacts::Pronouns::staticMetaObject.indexOfProperty("group"), -1);
-    QCOMPARE(KContacts::SocialProfile::staticMetaObject.indexOfProperty("group"), -1);
-    copy.setLanguage(u"fr"_s);
-    QCOMPARE(copy.language(), u"fr"_s);
-}

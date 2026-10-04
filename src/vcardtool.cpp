@@ -126,6 +126,20 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
 {
     for (const auto &addr : addresses) {
         QStringList address;
+        const QStringList extraComponents{addr.room(),
+                                          addr.apartment(),
+                                          addr.floor(),
+                                          addr.streetNumber(),
+                                          addr.streetName(),
+                                          addr.building(),
+                                          addr.block(),
+                                          addr.subdistrict(),
+                                          addr.district(),
+                                          addr.landmark(),
+                                          addr.direction()};
+        const bool hasExtraComponents = std::any_of(extraComponents.cbegin(), extraComponents.cend(), [](const QString &component) {
+            return !component.isEmpty();
+        });
 
         // clang-format off
         const bool isEmpty = addr.postOfficeBox().isEmpty()
@@ -134,7 +148,8 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
                              && addr.locality().isEmpty()
                              && addr.region().isEmpty()
                              && addr.postalCode().isEmpty()
-                             && addr.country().isEmpty();
+                             && addr.country().isEmpty()
+                             && !hasExtraComponents;
         // clang-format on
 
         address.append(addr.postOfficeBox().replace(QLatin1Char(';'), QStringLiteral("\\;")));
@@ -144,6 +159,12 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
         address.append(addr.region().replace(QLatin1Char(';'), QStringLiteral("\\;")));
         address.append(addr.postalCode().replace(QLatin1Char(';'), QStringLiteral("\\;")));
         address.append(addr.country().replace(QLatin1Char(';'), QStringLiteral("\\;")));
+
+        if (version == VCard::v4_0 && hasExtraComponents) {
+            for (const auto &component : extraComponents) {
+                address.append(QString(component).replace(u';', u"\\;"_s));
+            }
+        }
 
         const QString addressJoined(address.join(QLatin1Char(';')));
         VCardLine adrLine(QStringLiteral("ADR"), addressJoined);
@@ -814,7 +835,11 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     if (addrPartsCount > 1) {
                         address.setExtended(addrParts.at(1));
                     }
-                    if (addrPartsCount > 2) {
+                    const bool hasExtraComponents =
+                        addrPartsCount > 7 && std::any_of(addrParts.cbegin() + 7, addrParts.cbegin() + qMin(addrPartsCount, 18), [](const QString &component) {
+                            return !component.isEmpty();
+                        });
+                    if (addrPartsCount > 2 && !hasExtraComponents) {
                         address.setStreet(addrParts.at(2));
                     }
                     if (addrPartsCount > 3) {
@@ -828,6 +853,40 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     }
                     if (addrPartsCount > 6) {
                         address.setCountry(addrParts.at(6));
+                    }
+
+                    if (addrPartsCount > 7) {
+                        address.setRoom(addrParts.at(7));
+                    }
+                    if (addrPartsCount > 8) {
+                        address.setApartment(addrParts.at(8));
+                    }
+                    if (addrPartsCount > 9) {
+                        address.setFloor(addrParts.at(9));
+                    }
+                    if (addrPartsCount > 10) {
+                        address.setStreetNumber(addrParts.at(10));
+                    }
+                    if (addrPartsCount > 11) {
+                        address.setStreetName(addrParts.at(11));
+                    }
+                    if (addrPartsCount > 12) {
+                        address.setBuilding(addrParts.at(12));
+                    }
+                    if (addrPartsCount > 13) {
+                        address.setBlock(addrParts.at(13));
+                    }
+                    if (addrPartsCount > 14) {
+                        address.setSubdistrict(addrParts.at(14));
+                    }
+                    if (addrPartsCount > 15) {
+                        address.setDistrict(addrParts.at(15));
+                    }
+                    if (addrPartsCount > 16) {
+                        address.setLandmark(addrParts.at(16));
+                    }
+                    if (addrPartsCount > 17) {
+                        address.setDirection(addrParts.at(17));
                     }
 
                     Address::Type type;
