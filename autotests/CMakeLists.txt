@@ -51,3 +51,12 @@ ecm_add_tests(picturetest.cpp
 # Benchmark, compiled, but not run automatically with ctest
 add_executable(vcardtool_benchmark vcardtool_benchmark.cpp)
 target_link_libraries(vcardtool_benchmark KF6Contacts Qt6::Test KF6::ConfigCore)
+
+if (USE_QML AND BUILD_SHARED_LIBS)
+    add_test(NAME kcontacts-qmltypestest
+        COMMAND Qt6::qmltestrunner
+            -input ${CMAKE_CURRENT_SOURCE_DIR}/qml/tst_types.qml
+            -import ${CMAKE_BINARY_DIR}/bin
+    )
+    set_tests_properties(kcontacts-qmltypestest PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+endif()

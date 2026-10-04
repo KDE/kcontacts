@@ -39,24 +39,28 @@ struct PhoneNumberForeign {
     Q_GADGET
     QML_FOREIGN(KContacts::PhoneNumber)
     QML_VALUE_TYPE(phoneNumber)
+    QML_STRUCTURED_VALUE
 };
 
 struct ImppForeign {
     Q_GADGET
     QML_FOREIGN(KContacts::Impp)
     QML_VALUE_TYPE(impp)
+    QML_STRUCTURED_VALUE
 };
 
 struct PictureForeign {
     Q_GADGET
     QML_FOREIGN(KContacts::Picture)
     QML_VALUE_TYPE(picture)
+    QML_STRUCTURED_VALUE
 };
 
 struct GeoForeign {
     Q_GADGET
     QML_FOREIGN(KContacts::Geo)
     QML_VALUE_TYPE(geo)
+    QML_STRUCTURED_VALUE
 };
 
 namespace KContactForeign
