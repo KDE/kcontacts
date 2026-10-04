@@ -11,6 +11,9 @@
 #include <KContacts/Address>
 #include <KContacts/AddressFormat>
 #include <KContacts/Addressee>
+#include <KContacts/GrammaticalGender>
+#include <KContacts/Pronouns>
+#include <KContacts/SocialProfile>
 
 #include <QQmlEngine>
 
@@ -60,6 +63,27 @@ struct GeoForeign {
     Q_GADGET
     QML_FOREIGN(KContacts::Geo)
     QML_VALUE_TYPE(geo)
+    QML_STRUCTURED_VALUE
+};
+
+struct GrammaticalGenderForeign {
+    Q_GADGET
+    QML_FOREIGN(KContacts::GrammaticalGender)
+    QML_VALUE_TYPE(grammaticalGender)
+    QML_STRUCTURED_VALUE
+};
+
+struct PronounsForeign {
+    Q_GADGET
+    QML_FOREIGN(KContacts::Pronouns)
+    QML_VALUE_TYPE(pronouns)
+    QML_STRUCTURED_VALUE
+};
+
+struct SocialProfileForeign {
+    Q_GADGET
+    QML_FOREIGN(KContacts::SocialProfile)
+    QML_VALUE_TYPE(socialProfile)
     QML_STRUCTURED_VALUE
 };
 

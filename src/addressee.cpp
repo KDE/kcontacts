@@ -20,6 +20,7 @@
 #include "parametermap_p.h"
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 static bool matchBinaryPattern(int value, int pattern);
 
@@ -70,6 +71,8 @@ public:
         mAdditionalName = other.mAdditionalName;
         mPrefix = other.mPrefix;
         mSuffix = other.mSuffix;
+        mSecondarySurname = other.mSecondarySurname;
+        mGeneration = other.mGeneration;
         mBirthday = other.mBirthday;
         mBirthdayWithTime = other.mBirthdayWithTime;
         mMailer = other.mMailer;
@@ -88,6 +91,15 @@ public:
         mPhoneNumbers = other.mPhoneNumbers;
         mAddresses = other.mAddresses;
         mKeys = other.mKeys;
+        mCreatedParameters = other.mCreatedParameters;
+        mDefaultLanguageParameters = other.mDefaultLanguageParameters;
+        mCreatedGroup = other.mCreatedGroup;
+        mDefaultLanguageGroup = other.mDefaultLanguageGroup;
+        mCreated = other.mCreated;
+        mDefaultLanguage = other.mDefaultLanguage;
+        mGrammaticalGenders = other.mGrammaticalGenders;
+        mPronouns = other.mPronouns;
+        mSocialProfiles = other.mSocialProfiles;
         mLangs = other.mLangs;
         mGender = other.mGender;
         mEmails = other.mEmails;
@@ -136,6 +148,8 @@ public:
     QString mAdditionalName;
     QString mPrefix;
     QString mSuffix;
+    QString mSecondarySurname;
+    QString mGeneration;
     QDateTime mBirthday;
     QString mMailer;
     TimeZone mTimeZone;
@@ -155,6 +169,15 @@ public:
     Address::List mAddresses;
     Key::List mKeys;
     Email::List mEmails;
+    QMap<QString, QStringList> mCreatedParameters;
+    QMap<QString, QStringList> mDefaultLanguageParameters;
+    QString mCreatedGroup;
+    QString mDefaultLanguageGroup;
+    QDateTime mCreated;
+    QString mDefaultLanguage;
+    QList<GrammaticalGender> mGrammaticalGenders;
+    QList<Pronouns> mPronouns;
+    QList<SocialProfile> mSocialProfiles;
     Lang::List mLangs;
     Impp::List mImpps;
     Gender mGender;
@@ -252,6 +275,14 @@ bool Addressee::operator==(const Addressee &addressee) const
         return false;
     }
 
+    if (d->mSecondarySurname != addressee.d->mSecondarySurname) {
+        return false;
+    }
+
+    if (d->mGeneration != addressee.d->mGeneration) {
+        return false;
+    }
+
     if (d->mBirthday != addressee.d->mBirthday //
         || d->mBirthdayWithTime != addressee.d->mBirthdayWithTime) {
         qCDebug(KCONTACTS_LOG) << "birthday differs";
@@ -344,6 +375,33 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (d->mCustomFields != addressee.d->mCustomFields) {
         qCDebug(KCONTACTS_LOG) << "custom differs";
+        return false;
+    }
+    if (d->mCreatedParameters != addressee.d->mCreatedParameters) {
+        return false;
+    }
+    if (d->mDefaultLanguageParameters != addressee.d->mDefaultLanguageParameters) {
+        return false;
+    }
+    if (d->mCreatedGroup != addressee.d->mCreatedGroup) {
+        return false;
+    }
+    if (d->mDefaultLanguageGroup != addressee.d->mDefaultLanguageGroup) {
+        return false;
+    }
+    if (d->mCreated != addressee.d->mCreated) {
+        return false;
+    }
+    if (d->mDefaultLanguage != addressee.d->mDefaultLanguage) {
+        return false;
+    }
+    if (d->mGrammaticalGenders != addressee.d->mGrammaticalGenders) {
+        return false;
+    }
+    if (d->mPronouns != addressee.d->mPronouns) {
+        return false;
+    }
+    if (d->mSocialProfiles != addressee.d->mSocialProfiles) {
         return false;
     }
     if (d->mLangs != addressee.d->mLangs) {
@@ -1595,13 +1653,53 @@ QString Addressee::realName() const
     return organization();
 }
 
+void Addressee::setSecondarySurname(const QString &secondarySurname)
+{
+    if (secondarySurname == d->mSecondarySurname) {
+        return;
+    }
+    d->mEmpty = false;
+    d->mSecondarySurname = secondarySurname;
+}
+
+QString Addressee::secondarySurname() const
+{
+    return d->mSecondarySurname;
+}
+
+QString Addressee::secondarySurnameLabel()
+{
+    return i18nc("Name component", "Secondary Surname");
+}
+
+void Addressee::setGeneration(const QString &generation)
+{
+    if (generation == d->mGeneration) {
+        return;
+    }
+    d->mEmpty = false;
+    d->mGeneration = generation;
+}
+
+QString Addressee::generation() const
+{
+    return d->mGeneration;
+}
+
+QString Addressee::generationLabel()
+{
+    return i18nc("Name component", "Generation");
+}
+
 QString Addressee::assembledName() const
 {
     // clang-format off
     const QString name = prefix() + QLatin1Char(' ')
                          + givenName() + QLatin1Char(' ')
                          + additionalName() + QLatin1Char(' ')
-                         + familyName() + QLatin1Char(' ')
+                         + familyName() + u' '
+                         + secondarySurname() + u' '
+                         + generation() + u' '
                          + suffix();
     // clang-format on
 
@@ -1942,6 +2040,8 @@ QString Addressee::toString() const
     str += QStringLiteral("  AdditionalName: %1\n").arg(additionalName());
     str += QStringLiteral("  Prefix: %1\n").arg(prefix());
     str += QStringLiteral("  Suffix: %1\n").arg(suffix());
+    str += u"  SecondarySurname: %1\n"_s.arg(secondarySurname());
+    str += u"  Generation: %1\n"_s.arg(generation());
     str += QStringLiteral("  NickName: %1\n").arg(nickName());
     str += QStringLiteral("  Birthday: %1\n").arg(birthday().toString());
     str += QStringLiteral("  Mailer: %1\n").arg(mailer());
@@ -2583,6 +2683,17 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mClientPidMapList;
     s << a.d->mDeathDate;
 
+    s << a.d->mCreatedParameters;
+    s << a.d->mDefaultLanguageParameters;
+    s << a.d->mCreatedGroup;
+    s << a.d->mDefaultLanguageGroup;
+    s << a.d->mCreated;
+    s << a.d->mDefaultLanguage;
+    s << a.d->mGrammaticalGenders;
+    s << a.d->mPronouns;
+    s << a.d->mSocialProfiles;
+    s << a.d->mSecondarySurname;
+    s << a.d->mGeneration;
     return s;
 }
 
@@ -2640,6 +2751,17 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mDeathDate;
     a.d->mEmpty = false;
 
+    s >> a.d->mCreatedParameters;
+    s >> a.d->mDefaultLanguageParameters;
+    s >> a.d->mCreatedGroup;
+    s >> a.d->mDefaultLanguageGroup;
+    s >> a.d->mCreated;
+    s >> a.d->mDefaultLanguage;
+    s >> a.d->mGrammaticalGenders;
+    s >> a.d->mPronouns;
+    s >> a.d->mSocialProfiles;
+    s >> a.d->mSecondarySurname;
+    s >> a.d->mGeneration;
     return s;
 }
 
@@ -2693,6 +2815,101 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
 void Addressee::setBirthdayProperty(const QDateTime &birthday) {
     // The property setter cannot pass withTime, so we have to guess.
     setBirthday(birthday, birthday.time().msecsSinceStartOfDay() != 0);
+}
+
+QDateTime Addressee::created() const
+{
+    return d->mCreated;
+}
+
+void Addressee::setCreated(const QDateTime &value)
+{
+    d->mCreated = value;
+    d->mEmpty = false;
+}
+
+QString Addressee::defaultLanguage() const
+{
+    return d->mDefaultLanguage;
+}
+
+void Addressee::setDefaultLanguage(const QString &value)
+{
+    d->mDefaultLanguage = value;
+    d->mEmpty = false;
+}
+
+QList<GrammaticalGender> Addressee::grammaticalGenders() const
+{
+    return d->mGrammaticalGenders;
+}
+
+void Addressee::setGrammaticalGenders(const QList<GrammaticalGender> &value)
+{
+    d->mGrammaticalGenders = value;
+    d->mEmpty = false;
+}
+
+QList<Pronouns> Addressee::pronouns() const
+{
+    return d->mPronouns;
+}
+
+void Addressee::setPronouns(const QList<Pronouns> &value)
+{
+    d->mPronouns = value;
+    d->mEmpty = false;
+}
+
+QList<SocialProfile> Addressee::socialProfiles() const
+{
+    return d->mSocialProfiles;
+}
+
+void Addressee::setSocialProfiles(const QList<SocialProfile> &value)
+{
+    d->mSocialProfiles = value;
+    d->mEmpty = false;
+}
+
+QMap<QString, QStringList> Addressee::createdParameters() const
+{
+    return d->mCreatedParameters;
+}
+
+void Addressee::setCreatedParameters(const QMap<QString, QStringList> &value)
+{
+    d->mCreatedParameters = value;
+}
+
+QMap<QString, QStringList> Addressee::defaultLanguageParameters() const
+{
+    return d->mDefaultLanguageParameters;
+}
+
+void Addressee::setDefaultLanguageParameters(const QMap<QString, QStringList> &value)
+{
+    d->mDefaultLanguageParameters = value;
+}
+
+QString Addressee::createdGroup() const
+{
+    return d->mCreatedGroup;
+}
+
+void Addressee::setCreatedGroup(const QString &value)
+{
+    d->mCreatedGroup = value;
+}
+
+QString Addressee::defaultLanguageGroup() const
+{
+    return d->mDefaultLanguageGroup;
+}
+
+void Addressee::setDefaultLanguageGroup(const QString &value)
+{
+    d->mDefaultLanguageGroup = value;
 }
 
 #include "moc_addressee.cpp"
