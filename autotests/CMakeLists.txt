@@ -41,6 +41,12 @@ ecm_add_tests(birthdaytest.cpp
     clientpidmaptest.cpp
     LINK_LIBRARIES KF6Contacts Qt6::Test KF6::ConfigCore)
 
+ecm_add_test(vcardparsertest.cpp
+    ../src/vcardparser/vcard.cpp
+    ../src/vcardparser/vcardparser.cpp
+    TEST_NAME vcardparsertest
+    LINK_LIBRARIES KF6Contacts Qt6::Test KF6::Codecs)
+
 ecm_add_test(addressformattest.cpp ../src/kcontacts.qrc
     TEST_NAME addressformattest
     LINK_LIBRARIES KF6Contacts KF6::I18nLocaleData KF6::ConfigCore Qt6::Test)
