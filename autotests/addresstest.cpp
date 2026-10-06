@@ -424,8 +424,8 @@ void AddressTest::shouldExportVCard4WithGeoPosition()
     QByteArray expected(
         "BEGIN:VCARD\r\n"
         "VERSION:4.0\r\n"
-        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=\"My Label\";TYPE=home:1234;My Extend\r\n"
-        " ed Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
+        "ADR;GEO=\"geo:22.500000,45.099998\";LABEL=My Label;TYPE=home:1234;My Extended\r\n"
+        "  Label;My Street;My Locality;My Region;My Postalcode;My country\r\n"
         "EMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
         "UID:testuid\r\n"
@@ -460,8 +460,8 @@ void AddressTest::shouldExportVcard4()
     QByteArray expected(
         "BEGIN:VCARD\r\n"
         "VERSION:4.0\r\n"
-        "ADR;LABEL=\"My Label\";TYPE=home:1234;My Extended Label;My Street;My Locality\r\n"
-        " ;My Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
+        "ADR;LABEL=My Label;TYPE=home:1234;My Extended Label;My Street;My Locality;M\r\n"
+        " y Region;My Postalcode;My country\r\nEMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
         "UID:testuid\r\n"
         "END:VCARD\r\n\r\n");
