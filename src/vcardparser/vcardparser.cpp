@@ -78,9 +78,9 @@ static QString decodeParameterValue(const QString &text, bool vcard4)
     return decoded;
 }
 
-static QByteArray encodeParameterValue(QString value, bool vcard4)
+static QByteArray encodeParameterValue(QString value, bool vcard4, bool forceQuotes)
 {
-    const bool quoted = value.isEmpty() || value.contains(u':') || value.contains(u';') || value.contains(u',');
+    const bool quoted = forceQuotes || value.isEmpty() || value.contains(u':') || value.contains(u';') || value.contains(u',');
     if (vcard4) {
         value.replace(u'^', u"^^"_s);
         value.replace(u'"', u"^'"_s);
@@ -501,7 +501,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                                 QList<QByteArray> encodedValues;
                                 for (const auto &value : std::as_const(values)) {
                                     const auto encodedValue =
-                                        encodeParameterValue(value, card.version() == VCard::v4_0);
+                                        encodeParameterValue(value, card.version() == VCard::v4_0, param.compare("author"_L1, Qt::CaseInsensitive) == 0);
                                     encodedValues.append(encodedValue);
                                 }
                                 textLine.append('=' + encodedValues.join(','));
