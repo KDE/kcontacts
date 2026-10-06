@@ -273,7 +273,7 @@ void PhoneNumberTest::shouldExportVCard4()
         "VERSION:4.0\r\n"
         "EMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
-        "TEL;TYPE=\"cell,work\":+1-919-676-9564\r\n"
+        "TEL;TYPE=cell,work:+1-919-676-9564\r\n"
         "UID:testuid\r\n"
         "END:VCARD\r\n"
         "\r\n");

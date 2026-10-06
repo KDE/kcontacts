@@ -8,11 +8,14 @@
 
 #include "vcardparser_p.h"
 #include <KCodecs>
+#include <QByteArrayList>
 #include <QStringDecoder>
 #include <QStringEncoder>
+#include <algorithm>
 #include <functional>
 
-// This cache for QString::fromLatin1() isn't about improving speed, but about reducing memory usage by sharing common strings
+// Share common strings to reduce memory usage. Keep Latin-1 and UTF-8
+// conversions separate so mixed vCard versions cannot reuse a wrong decoding.
 class StringCache
 {
 public:
@@ -32,8 +35,23 @@ public:
         return string;
     }
 
+    QString fromUtf8(const QByteArray &value)
+    {
+        if (value.isEmpty()) {
+            return {};
+        }
+        const auto it = m_utf8Values.constFind(value);
+        if (it != m_utf8Values.cend()) {
+            return it.value();
+        }
+        const QString string = QString::fromUtf8(value);
+        m_utf8Values.insert(value, string);
+        return string;
+    }
+
 private:
     QHash<QByteArray, QString> m_values;
+    QHash<QByteArray, QString> m_utf8Values;
 };
 
 using namespace KContacts;
@@ -62,23 +80,18 @@ static QString decodeParameterValue(const QString &text, bool vcard4)
 
 static QByteArray encodeParameterValue(QString value, bool vcard4)
 {
-    if (!vcard4) {
-        return value.toLatin1();
+    const bool quoted = value.isEmpty() || value.contains(u':') || value.contains(u';') || value.contains(u',');
+    if (vcard4) {
+        value.replace(u'^', u"^^"_s);
+        value.replace(u'"', u"^'"_s);
+        value.replace(u"\r\n"_s, u"\n"_s);
+        value.replace(u'\r', u'\n');
+        value.replace(u'\n', u"^n"_s);
     }
-    // Existing callers supply the surrounding quotes themselves.
-    const bool quoted = value.size() >= 2 && value.startsWith(u'"') && value.endsWith(u'"');
-    if (quoted) {
-        value = value.mid(1, value.size() - 2);
-    }
-    value.replace(u'^', u"^^"_s);
-    value.replace(u'"', u"^'"_s);
-    value.replace(u"\r\n"_s, u"\n"_s);
-    value.replace(u'\r', u'\n');
-    value.replace(u'\n', u"^n"_s);
     if (quoted) {
         value = u'"' + value + u'"';
     }
-    return value.toLatin1();
+    return value.toUtf8();
 }
 
 static void addEscapes(QByteArray &str, bool excludeEscapedComma)
@@ -137,7 +150,8 @@ void VCardLineParser::addParameter(const QByteArray &paramKey, const QByteArray 
         m_charset = paramValue.toLower();
     }
     // qDebug() << "  add parameter" << paramKey << "    =    " << paramValue;
-    const auto decodedValue = decodeParameterValue(m_cache.fromLatin1(paramValue), m_vcard4);
+    const auto decodedValue =
+        decodeParameterValue(!m_vcard4 && !paramValue.isValidUtf8() ? m_cache.fromLatin1(paramValue) : m_cache.fromUtf8(paramValue), m_vcard4);
     m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), decodedValue);
 }
 
@@ -232,6 +246,9 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
                 start = pos + 1;
             } else if (ch == ':') {
                 state = StateValue;
+            } else if (ch == ',') {
+                state = StateParamValue;
+                start = pos + 1;
             } else if (pos == start && ch == '"') { // don't treat foo"bar" as quoted - TODO check the vCard 3.0 spec.
                 state = StateQuotedValue;
                 start = pos + 1;
@@ -394,10 +411,10 @@ static QByteArray fixLineSize(const QByteArray &textLine, bool checkMultibyte)
             for (int i = 0; i < textLine.length(); ++i) {
                 if ((textLine[i] & 0xC0) == 0xC0) { // a multibyte sequence follows
                     int sequenceLength = 2;
-                    if ((textLine[i] & 0xE0) == 0xE0) {
-                        sequenceLength = 3;
-                    } else if ((textLine[i] & 0xF0) == 0xF0) {
+                    if ((textLine[i] & 0xF8) == 0xF0) {
                         sequenceLength = 4;
+                    } else if ((textLine[i] & 0xF0) == 0xE0) {
+                        sequenceLength = 3;
                     }
                     if ((lineLength + sequenceLength) > FOLD_WIDTH) {
                         // the current line would be too long. fold it
@@ -479,16 +496,22 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                             }
 
                             values = vline.parameters(param);
-                            for (const QString &str : std::as_const(values)) {
-                                textLine.append(';' + param.toLatin1().toUpper());
-                                if (!str.isEmpty()) {
-                                    const auto encodedValue = encodeParameterValue(str, card.version() == VCard::v4_0);
-                                    textLine.append('=' + encodedValue);
+                            textLine.append(';' + param.toLatin1().toUpper());
+                            if (!values.isEmpty() && !(values.size() == 1 && values.first().isEmpty() && card.version() == VCard::v2_1)) {
+                                QList<QByteArray> encodedValues;
+                                for (const auto &value : std::as_const(values)) {
+                                    const auto encodedValue =
+                                        encodeParameterValue(value, card.version() == VCard::v4_0);
+                                    encodedValues.append(encodedValue);
                                 }
+                                textLine.append('=' + encodedValues.join(','));
                             }
                         }
                     }
 
+                    const bool hasUnicodeParameters = std::any_of(textLine.cbegin(), textLine.cend(), [](char ch) {
+                        return static_cast<unsigned char>(ch) >= 0x80;
+                    });
                     QByteArray input;
                     QByteArray output;
                     bool checkMultibyte = false; // avoid splitting a multibyte character
@@ -524,12 +547,12 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                     } else {
                         output = input;
                     }
-                    addEscapes(output, (vline.identifier() == QLatin1String("CATEGORIES") || vline.identifier() == QLatin1String("GEO")));
+                    addEscapes(output, (vline.identifier() == "CATEGORIES"_L1 || vline.identifier() == "GEO"_L1 || vline.identifier() == "N"_L1));
 
                     if (!output.isEmpty()) {
                         textLine.append(':' + output);
 
-                        text.append(fixLineSize(textLine, checkMultibyte));
+                        text.append(fixLineSize(textLine, checkMultibyte || hasUnicodeParameters));
                     }
                 } else if (!vline.base64Value().isEmpty()) {
                     text += vline.identifier().toLatin1();

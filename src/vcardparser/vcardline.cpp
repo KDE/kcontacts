@@ -114,7 +114,9 @@ QStringList VCardLine::parameterList() const
 void VCardLine::addParameters(const ParameterMap &params)
 {
     for (const auto &[param, list] : params) {
-        addParameter(param, list.join(QLatin1Char(',')));
+        for (const auto &value : list) {
+            addParameter(param, value);
+        }
     }
 }
 

@@ -21,6 +21,7 @@
 #include <QTimeZone>
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 static bool needsEncoding(const QString &value)
 {
@@ -108,13 +109,9 @@ void VCardTool::addParameter(VCardLine *line, VCard::Version version, const QStr
         for (const QString &valueStr : valueStringList) {
             line->addParameter(valueStr, QString());
         }
-    } else if (version == VCard::v3_0) {
-        line->addParameter(key, valueStringList.join(QLatin1Char(',')));
     } else {
-        if (valueStringList.count() < 2) {
-            line->addParameter(key, valueStringList.join(QLatin1Char(',')));
-        } else {
-            line->addParameter(key, QLatin1Char('"') + valueStringList.join(QLatin1Char(',')) + QLatin1Char('"'));
+        for (const auto &value : valueStringList) {
+            line->addParameter(key, value);
         }
     }
 }
@@ -165,7 +162,7 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
 
         if (hasLabel) {
             if (version == VCard::v4_0) {
-                adrLine.addParameter(QStringLiteral("LABEL"), QStringLiteral("\"%1\"").arg(addr.label()));
+                adrLine.addParameter(u"LABEL"_s, addr.label());
             } else {
                 VCardLine labelLine(QStringLiteral("LABEL"), addr.label());
                 if (version == VCard::v2_1 && needsEncoding(addr.label())) {
@@ -179,7 +176,7 @@ void VCardTool::processAddresses(const Address::List &addresses, VCard::Version 
         if (version == VCard::v4_0) {
             Geo geo = addr.geo();
             if (geo.isValid()) {
-                QString str = QString::asprintf("\"geo:%.6f,%.6f\"", geo.latitude(), geo.longitude());
+                QString str = QString::asprintf("geo:%.6f,%.6f", geo.latitude(), geo.longitude());
                 adrLine.addParameter(QStringLiteral("GEO"), str);
             }
         }
@@ -211,10 +208,14 @@ void VCardTool::processEmailList(const Email::List &emailList, VCard::Version ve
                         line.addParameter(QStringLiteral("PREF"), QString());
                     }
                 } else {
-                    line.addParameter(param, list.join(QLatin1Char(',')));
+                    for (const auto &value : list) {
+                        line.addParameter(param, value);
+                    }
                 }
             } else {
-                line.addParameter(param, list.join(QLatin1Char(',')));
+                for (const auto &value : list) {
+                    line.addParameter(param, value);
+                }
             }
         }
         card->addLine(line);
@@ -247,7 +248,9 @@ void VCardTool::processPhoneNumbers(const PhoneNumber::List &phoneNumbers, VCard
         const ParameterMap paramsMap = phone.params();
         for (const auto &[param, list] : paramsMap) {
             if (param.toUpper() != QLatin1String("TYPE")) {
-                line.addParameter(param, list.join(QLatin1Char(',')));
+                for (const auto &value : list) {
+                    line.addParameter(param, value);
+                }
             }
         }
 
@@ -687,7 +690,9 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             const ParameterMap pMap = impp.params();
             for (const auto &[param, list] : pMap) {
                 if (param.toLower() != QLatin1String("x-service-type")) {
-                    line.addParameter(param, list.join(QLatin1Char(',')));
+                    for (const auto &value : list) {
+                        line.addParameter(param, value);
+                    }
                 }
             }
             card.addLine(line);
@@ -772,11 +777,6 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     address.setType(type);
                     QString label = (*lineIt).parameter(QStringLiteral("label"));
                     if (!label.isEmpty()) {
-                        if (label.length() > 1) {
-                            if (label.at(0) == QLatin1Char('"') && label.at(label.length() - 1) == QLatin1Char('"')) {
-                                label = label.mid(1, label.length() - 2);
-                            }
-                        }
                         address.setLabel(label);
                     }
                     QString geoStr = (*lineIt).parameter(QStringLiteral("geo"));
