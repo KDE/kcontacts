@@ -1,6 +1,7 @@
 /*
     This file is part of the KContacts framework.
     SPDX-FileCopyrightText: 2003 Tobias Koenig <tokoe@kde.org>
+    SPDX-FileCopyrightText: 2026 Carl Schwan <carl@carlschwan.eu>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -36,6 +37,49 @@ private:
 };
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
+
+static QString decodeParameterValue(const QString &text, bool vcard4)
+{
+    if (!vcard4 || !text.contains(u'^')) {
+        return text;
+    }
+    QString decoded;
+    decoded.reserve(text.size());
+    for (qsizetype i = 0; i < text.size(); ++i) {
+        if (text.at(i) == u'^' && i + 1 < text.size()) {
+            const QChar next = text.at(i + 1);
+            if (next == u'^' || next == u'n' || next == u'\'') {
+                decoded += next == u'n' ? u'\n' : next == u'\'' ? u'"' : u'^';
+                ++i;
+                continue;
+            }
+        }
+        decoded += text.at(i);
+    }
+    return decoded;
+}
+
+static QByteArray encodeParameterValue(QString value, bool vcard4)
+{
+    if (!vcard4) {
+        return value.toLatin1();
+    }
+    // Existing callers supply the surrounding quotes themselves.
+    const bool quoted = value.size() >= 2 && value.startsWith(u'"') && value.endsWith(u'"');
+    if (quoted) {
+        value = value.mid(1, value.size() - 2);
+    }
+    value.replace(u'^', u"^^"_s);
+    value.replace(u'"', u"^'"_s);
+    value.replace(u"\r\n"_s, u"\n"_s);
+    value.replace(u'\r', u'\n');
+    value.replace(u'\n', u"^n"_s);
+    if (quoted) {
+        value = u'"' + value + u'"';
+    }
+    return value.toLatin1();
+}
 
 static void addEscapes(QByteArray &str, bool excludeEscapedComma)
 {
@@ -63,9 +107,10 @@ static void removeEscapes(QByteArray &str)
 class VCardLineParser
 {
 public:
-    VCardLineParser(StringCache &cache, std::function<QByteArray()> fetchAnotherLine)
+    VCardLineParser(StringCache &cache, std::function<QByteArray()> fetchAnotherLine, bool vcard4)
         : m_cache(cache)
         , m_fetchAnotherLine(fetchAnotherLine)
+        , m_vcard4(vcard4)
     {
     }
 
@@ -78,6 +123,7 @@ private:
     StringCache &m_cache;
     std::function<QByteArray()> m_fetchAnotherLine;
 
+    bool m_vcard4 = false;
     VCardLine *m_vCardLine = nullptr;
     QByteArray m_encoding;
     QByteArray m_charset;
@@ -91,7 +137,7 @@ void VCardLineParser::addParameter(const QByteArray &paramKey, const QByteArray 
         m_charset = paramValue.toLower();
     }
     // qDebug() << "  add parameter" << paramKey << "    =    " << paramValue;
-    m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), m_cache.fromLatin1(paramValue));
+    m_vCardLine->addParameter(m_cache.fromLatin1(paramKey), decodeParameterValue(m_cache.fromLatin1(paramValue), m_vcard4));
 }
 
 void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardLine *vCardLine)
@@ -302,7 +348,7 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                     return ret;
                 };
 
-                VCardLineParser lineParser(cache, fetchAnotherLine);
+                VCardLineParser lineParser(cache, fetchAnotherLine, currentVCard.version() == VCard::v4_0);
 
                 lineParser.parseLine(currentLine, &vCardLine);
 
@@ -435,7 +481,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                             for (const QString &str : std::as_const(values)) {
                                 textLine.append(';' + param.toLatin1().toUpper());
                                 if (!str.isEmpty()) {
-                                    textLine.append('=' + str.toLatin1());
+                                    textLine.append('=' + encodeParameterValue(str, card.version() == VCard::v4_0));
                                 }
                             }
                         }
