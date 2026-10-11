@@ -187,23 +187,23 @@ class KCONTACTS_EXPORT Addressee
 
     /*!
       \qmlproperty string addressee::secondarySurname
-      \since 6.31
+      \since 6.32
     */
     /*!
       \property KContacts::Addressee::secondarySurname
       The RFC 9554 secondary surname.
-      \since 6.31
+      \since 6.32
     */
     Q_PROPERTY(QString secondarySurname READ secondarySurname WRITE setSecondarySurname)
 
     /*!
       \qmlproperty string addressee::generation
-      \since 6.31
+      \since 6.32
     */
     /*!
       \property KContacts::Addressee::generation
       The RFC 9554 generation marker.
-      \since 6.31
+      \since 6.32
     */
     Q_PROPERTY(QString generation READ generation WRITE setGeneration)
 
@@ -700,37 +700,37 @@ public:
 
     /*!
       Sets the secondary surname to \a secondarySurname.
-      \since 6.31
+      \since 6.32
     */
     void setSecondarySurname(const QString &secondarySurname);
 
     /*!
       Returns the secondary surname.
-      \since 6.31
+      \since 6.32
     */
     [[nodiscard]] QString secondarySurname() const;
 
     /*!
       Returns the translated label for the secondary surname field.
-      \since 6.31
+      \since 6.32
     */
     [[nodiscard]] static QString secondarySurnameLabel();
 
     /*!
       Sets the generation marker to \a generation.
-      \since 6.31
+      \since 6.32
     */
     void setGeneration(const QString &generation);
 
     /*!
       Returns the generation marker.
-      \since 6.31
+      \since 6.32
     */
     [[nodiscard]] QString generation() const;
 
     /*!
       Returns the translated label for the generation marker field.
-      \since 6.31
+      \since 6.32
     */
     [[nodiscard]] static QString generationLabel();
 
@@ -1524,35 +1524,35 @@ public:
 
     /*!
      * The date and time the vCard was created, distinct from its revision.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QDateTime created() const;
-    /*! Sets RFC 9554 CREATED. \since 6.31 */
+    /*! Sets RFC 9554 CREATED. \since 6.32 */
     void setCreated(const QDateTime &value);
 
     /*!
      * The default language of human-readable text (RFC 9554 LANGUAGE).
      * An explicit LANGUAGE parameter on a property takes precedence.
      * This is distinct from langs(), which describes languages used by the contact.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString defaultLanguage() const;
-    /*! Sets RFC 9554 LANGUAGE. \since 6.31 */
+    /*! Sets RFC 9554 LANGUAGE. \since 6.32 */
     void setDefaultLanguage(const QString &value);
 
-    /*! RFC 9554 GRAMGENDER properties. \since 6.31 */
+    /*! RFC 9554 GRAMGENDER properties. \since 6.32 */
     [[nodiscard]] QList<GrammaticalGender> grammaticalGenders() const;
-    /*! Sets RFC 9554 GRAMGENDER. \since 6.31 */
+    /*! Sets RFC 9554 GRAMGENDER. \since 6.32 */
     void setGrammaticalGenders(const QList<GrammaticalGender> &value);
 
-    /*! RFC 9554 PRONOUNS properties. \since 6.31 */
+    /*! RFC 9554 PRONOUNS properties. \since 6.32 */
     [[nodiscard]] QList<Pronouns> pronouns() const;
-    /*! Sets RFC 9554 PRONOUNS. \since 6.31 */
+    /*! Sets RFC 9554 PRONOUNS. \since 6.32 */
     void setPronouns(const QList<Pronouns> &value);
 
-    /*! RFC 9554 SOCIALPROFILE properties. \since 6.31 */
+    /*! RFC 9554 SOCIALPROFILE properties. \since 6.32 */
     [[nodiscard]] QList<SocialProfile> socialProfiles() const;
-    /*! Sets RFC 9554 SOCIALPROFILE. \since 6.31 */
+    /*! Sets RFC 9554 SOCIALPROFILE. \since 6.32 */
     void setSocialProfiles(const QList<SocialProfile> &value);
 
     /*!

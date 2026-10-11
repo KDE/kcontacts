@@ -149,122 +149,122 @@ class KCONTACTS_EXPORT Address
 
     /*!
      * \qmlproperty string address::room
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::room
      * The room or suite identifier (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString room READ room WRITE setRoom)
 
     /*!
      * \qmlproperty string address::apartment
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::apartment
      * The apartment number or extension designation (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString apartment READ apartment WRITE setApartment)
 
     /*!
      * \qmlproperty string address::floor
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::floor
      * The building floor or level (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString floor READ floor WRITE setFloor)
 
     /*!
      * \qmlproperty string address::streetNumber
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::streetNumber
      * The street number (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString streetNumber READ streetNumber WRITE setStreetNumber)
 
     /*!
      * \qmlproperty string address::streetName
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::streetName
      * The street name (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString streetName READ streetName WRITE setStreetName)
 
     /*!
      * \qmlproperty string address::building
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::building
      * The building, tower, or condominium (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString building READ building WRITE setBuilding)
 
     /*!
      * \qmlproperty string address::block
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::block
      * The block name or number (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString block READ block WRITE setBlock)
 
     /*!
      * \qmlproperty string address::subdistrict
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::subdistrict
      * The subdistrict (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString subdistrict READ subdistrict WRITE setSubdistrict)
 
     /*!
      * \qmlproperty string address::district
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::district
      * The district (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString district READ district WRITE setDistrict)
 
     /*!
      * \qmlproperty string address::landmark
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::landmark
      * The landmark (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString landmark READ landmark WRITE setLandmark)
 
     /*!
      * \qmlproperty string address::direction
-     * \since 6.31
+     * \since 6.32
      */
     /*!
      * \property KContacts::Address::direction
      * The cardinal direction or quadrant (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString direction READ direction WRITE setDirection)
 
@@ -333,8 +333,8 @@ public:
       \value Home home address
       \value Work address at work
       \value Pref preferred address
-      \value Billing address for billing, such as sending invoices (since 6.31)
-      \value Delivery address for delivering goods (since 6.31)
+      \value Billing address for billing, such as sending invoices (since 6.32)
+      \value Delivery address for delivering goods (since 6.32)
     */
     enum TypeFlag {
         Dom = 1,
@@ -554,199 +554,199 @@ public:
 
     /*!
      * Sets the room or suite identifier (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setRoom(const QString &room);
 
     /*!
      * Returns the room or suite identifier.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString room() const;
 
     /*!
      * Returns the translated label for the room field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString roomLabel();
 
     /*!
      * Sets the apartment number or extension designation (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setApartment(const QString &apartment);
 
     /*!
      * Returns the apartment number or extension designation.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString apartment() const;
 
     /*!
      * Returns the translated label for the apartment field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString apartmentLabel();
 
     /*!
      * Sets the building floor or level (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setFloor(const QString &floor);
 
     /*!
      * Returns the building floor or level.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString floor() const;
 
     /*!
      * Returns the translated label for the floor field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString floorLabel();
 
     /*!
      * Sets the street number (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setStreetNumber(const QString &streetNumber);
 
     /*!
      * Returns the street number.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString streetNumber() const;
 
     /*!
      * Returns the translated label for the streetNumber field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString streetNumberLabel();
 
     /*!
      * Sets the street name (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setStreetName(const QString &streetName);
 
     /*!
      * Returns the street name.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString streetName() const;
 
     /*!
      * Returns the translated label for the streetName field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString streetNameLabel();
 
     /*!
      * Sets the building, tower, or condominium (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setBuilding(const QString &building);
 
     /*!
      * Returns the building, tower, or condominium.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString building() const;
 
     /*!
      * Returns the translated label for the building field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString buildingLabel();
 
     /*!
      * Sets the block name or number (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setBlock(const QString &block);
 
     /*!
      * Returns the block name or number.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString block() const;
 
     /*!
      * Returns the translated label for the block field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString blockLabel();
 
     /*!
      * Sets the subdistrict (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setSubdistrict(const QString &subdistrict);
 
     /*!
      * Returns the subdistrict.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString subdistrict() const;
 
     /*!
      * Returns the translated label for the subdistrict field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString subdistrictLabel();
 
     /*!
      * Sets the district (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setDistrict(const QString &district);
 
     /*!
      * Returns the district.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString district() const;
 
     /*!
      * Returns the translated label for the district field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString districtLabel();
 
     /*!
      * Sets the landmark (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setLandmark(const QString &landmark);
 
     /*!
      * Returns the landmark.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString landmark() const;
 
     /*!
      * Returns the translated label for the landmark field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString landmarkLabel();
 
     /*!
      * Sets the cardinal direction or quadrant (RFC 9554).
-     * \since 6.31
+     * \since 6.32
      */
     void setDirection(const QString &direction);
 
     /*!
      * Returns the cardinal direction or quadrant.
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString direction() const;
 
     /*!
      * Returns the translated label for the direction field.
-     * \since 6.31
+     * \since 6.32
      */
     static QString directionLabel();
 

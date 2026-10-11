@@ -27,7 +27,7 @@ class ParameterMap;
  * \inmodule KContacts
  *
  * \brief Defines which grammatical gender to use in salutations and other grammatical constructs.
- * \since 6.31
+ * \since 6.32
  */
 class KCONTACTS_EXPORT GrammaticalGender
 {
@@ -37,19 +37,36 @@ class KCONTACTS_EXPORT GrammaticalGender
     friend class VCardTool;
 
     Q_GADGET
+    /*!
+      \qmlproperty string grammaticalGender::gender
+      This property holds the grammatical gender used in salutations and other grammatical constructs.
+    */
+    /*!
+      \property KContacts::GrammaticalGender::gender
+      This property holds the grammatical gender used in salutations and other grammatical constructs.
+    */
     Q_PROPERTY(QString gender READ gender WRITE setGender)
     /*!
       \qmlproperty string grammaticalGender::language
       The language tag of the LANGUAGE parameter.
-      \since 6.31
+      An empty value indicates that no LANGUAGE parameter is set.
+      \since 6.32
     */
     /*!
       \property KContacts::GrammaticalGender::language
       The language tag of the LANGUAGE parameter.
       An empty value indicates that no LANGUAGE parameter is set.
-      \since 6.31
+      \since 6.32
     */
     Q_PROPERTY(QString language READ language WRITE setLanguage)
+    /*!
+      \qmlproperty bool grammaticalGender::isValid
+      This property holds whether the grammatical gender is nonempty.
+    */
+    /*!
+      \property KContacts::GrammaticalGender::isValid
+      This property holds whether the grammatical gender is nonempty.
+    */
     Q_PROPERTY(bool isValid READ isValid)
 
 public:
@@ -74,17 +91,11 @@ public:
     [[nodiscard]] QString gender() const;
 
     /*!
-      Returns the language tag of the LANGUAGE parameter, or an empty string
-      if it is absent.
-      \since 6.31
-    */
+     */
     [[nodiscard]] QString language() const;
 
     /*!
-      Sets the LANGUAGE parameter to \a language.
-      An empty value removes the parameter.
-      \since 6.31
-    */
+     */
     void setLanguage(const QString &language);
 
     /*!
