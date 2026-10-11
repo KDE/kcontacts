@@ -60,6 +60,29 @@ QString SocialProfile::profile() const
     return d->profile;
 }
 
+void SocialProfile::setServiceType(const QString &serviceType)
+{
+    auto it = d->mParamMap.findParam(u"service-type"_s);
+    if (serviceType.isEmpty()) {
+        if (it != d->mParamMap.end()) {
+            d->mParamMap.erase(it);
+        }
+    } else if (it != d->mParamMap.end()) {
+        it->paramValues = {serviceType};
+    } else {
+        d->mParamMap.insertParam({u"service-type"_s, {serviceType}});
+    }
+}
+
+QString SocialProfile::serviceType() const
+{
+    const auto it = d->mParamMap.findParam(u"service-type"_s);
+    if (it != d->mParamMap.cend() && !it->paramValues.isEmpty()) {
+        return it->paramValues.first();
+    }
+    return {};
+}
+
 bool SocialProfile::isValid() const
 {
     return !d->profile.isEmpty();

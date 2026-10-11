@@ -27,7 +27,7 @@ class ParameterMap;
  * \inmodule KContacts
  *
  * \brief An RFC 9554 Pronouns property for a contact.
- * \since 6.31
+ * \since 6.32
  */
 class KCONTACTS_EXPORT Pronouns
 {
@@ -37,7 +37,23 @@ class KCONTACTS_EXPORT Pronouns
     friend class VCardTool;
 
     Q_GADGET
+    /*!
+      \qmlproperty string pronouns::pronouns
+      This property holds the pronouns used to refer to the contact.
+    */
+    /*!
+      \property KContacts::Pronouns::pronouns
+      This property holds the pronouns used to refer to the contact.
+    */
     Q_PROPERTY(QString pronouns READ pronouns WRITE setPronouns)
+    /*!
+      \qmlproperty bool pronouns::isValid
+      This property holds whether the pronouns value is nonempty.
+    */
+    /*!
+      \property KContacts::Pronouns::isValid
+      This property holds whether the pronouns value is nonempty.
+    */
     Q_PROPERTY(bool isValid READ isValid)
 
 public:
@@ -61,8 +77,6 @@ public:
      */
     [[nodiscard]] QString pronouns() const;
 
-    /*!
-     */
     [[nodiscard]] bool isValid() const;
 
     /*!

@@ -104,12 +104,12 @@ class KCONTACTS_EXPORT Impp
 
     /*!
      * \qmlproperty string impp::username
-     * \since 6.31
+     * \since 6.32
      */
 
     /*!
      * \property KContacts::Impp::username
-     * \since 6.31
+     * \since 6.32
      */
     Q_PROPERTY(QString username READ username WRITE setUsername)
 
@@ -150,7 +150,7 @@ public:
     /*!
      * Returns the USERNAME parameter when set, otherwise the "username" portion
      * of the address (i.e. everything but the protocol).
-     * The USERNAME parameter is supported since 6.31.
+     * The USERNAME parameter is supported since 6.32.
      * \since 6.27
      */
     [[nodiscard]] QString username() const;
@@ -158,7 +158,7 @@ public:
     /*!
      * Sets the case-sensitive USERNAME parameter defined by RFC 9554.
      * An empty value removes the parameter, restoring the address-based username.
-     * \since 6.31
+     * \since 6.32
      */
     void setUsername(const QString &username);
 

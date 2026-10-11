@@ -27,7 +27,7 @@ class ParameterMap;
  * \inmodule KContacts
  *
  * \brief An RFC 9554 SocialProfile property for a contact.
- * \since 6.31
+ * \since 6.32
  */
 class KCONTACTS_EXPORT SocialProfile
 {
@@ -37,7 +37,32 @@ class KCONTACTS_EXPORT SocialProfile
     friend class VCardTool;
 
     Q_GADGET
+    /*!
+      \qmlproperty string socialProfile::profile
+      This property holds the social profile URI or username.
+    */
+    /*!
+      \property KContacts::SocialProfile::profile
+      This property holds the social profile URI or username.
+    */
     Q_PROPERTY(QString profile READ profile WRITE setProfile)
+    /*!
+      \qmlproperty string socialProfile::serviceType
+      This property holds the RFC 9554 SERVICE-TYPE parameter, e.g. "Mastodon".
+    */
+    /*!
+      \property KContacts::SocialProfile::serviceType
+      This property holds the RFC 9554 SERVICE-TYPE parameter, e.g. "Mastodon".
+    */
+    Q_PROPERTY(QString serviceType READ serviceType WRITE setServiceType)
+    /*!
+      \qmlproperty bool socialProfile::isValid
+      This property holds whether the profile value is nonempty.
+    */
+    /*!
+      \property KContacts::SocialProfile::isValid
+      This property holds whether the profile value is nonempty.
+    */
     Q_PROPERTY(bool isValid READ isValid)
 
 public:
@@ -60,6 +85,14 @@ public:
     /*!
      */
     [[nodiscard]] QString profile() const;
+
+    /*!
+     */
+    void setServiceType(const QString &serviceType);
+
+    /*!
+     */
+    [[nodiscard]] QString serviceType() const;
 
     /*!
      */
