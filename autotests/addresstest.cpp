@@ -148,6 +148,10 @@ void AddressTest::serializeTest()
 
 void AddressTest::formatTest()
 {
+#ifdef Q_OS_WIN
+    QSKIP("Italian locale is not usable in Windows CI.");
+#endif
+
     {
         KContacts::Address address;
         address.setStreet(QStringLiteral("Lummerlandstr. 1"));
