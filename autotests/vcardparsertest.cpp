@@ -36,6 +36,22 @@ private Q_SLOTS:
         const auto legacy = VCardParser::parseVCards(QByteArray(input).replace("VERSION:4.0", "VERSION:3.0")).first();
         QCOMPARE(legacy.line(u"NOTE"_s).parameter(u"x-text"_s), u"^^n^n^'quoted^'^z^N^"_s);
     }
+
+    void quotedPrintableFoldedAtEndOfInput()
+    {
+        // A quoted-printable soft line break running into the last line, which has no
+        // trailing newline, used to make the parser restart from the beginning forever.
+        const QByteArray input =
+            "BEGIN:VCARD\r\nVERSION:2.1\r\n"
+            "NOTE;ENCODING=QUOTED-PRINTABLE:=41=\r\n"
+            "=42=\r\n"
+            "=43\r\nUID";
+        const auto cards = VCardParser::parseVCards(input);
+        QCOMPARE(cards.size(), 0);
+
+        const auto card = VCardParser::parseVCards(QByteArray(input).replace("UID", "END:VCARD")).first();
+        QCOMPARE(card.line(u"NOTE"_s).value().toString(), u"ABC"_s);
+    }
 };
 
 QTEST_MAIN(VCardParserTest)
