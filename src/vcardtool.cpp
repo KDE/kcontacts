@@ -21,6 +21,7 @@
 #include <QTimeZone>
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 static bool needsEncoding(const QString &value)
 {
@@ -366,11 +367,23 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
             const QString birthdayString = createDateTime(addressee.birthday(), version, withTime);
             card.addLine(VCardLine(QStringLiteral("BDAY"), birthdayString));
         }
-        // DEATHDATE
+        // RFC 6474 identification properties (vCard 4.0 only).
         if (version == VCard::v4_0) {
-            VCardLine line(QStringLiteral("DEATHDATE"));
-            line.setValue(createDateTime(addressee.deathDate(), version));
-            card.addLine(line);
+            const auto addProperty = [&card](const QString &name, const QString &value, const QMap<QString, QStringList> &parameters) {
+                if (value.isEmpty()) {
+                    return;
+                }
+                VCardLine line(name, value);
+                for (auto it = parameters.cbegin(); it != parameters.cend(); ++it) {
+                    for (const auto &parameterValue : it.value()) {
+                        line.addParameter(it.key(), parameterValue);
+                    }
+                }
+                card.addLine(line);
+            };
+            addProperty(u"BIRTHPLACE"_s, addressee.birthPlace(), addressee.birthPlaceParameters());
+            addProperty(u"DEATHPLACE"_s, addressee.deathPlace(), addressee.deathPlaceParameters());
+            addProperty(u"DEATHDATE"_s, createDateTime(addressee.deathDate(), version), addressee.deathDateParameters());
         }
         // CATEGORIES only > 2.1
         if (version != VCard::v2_1) {
@@ -805,10 +818,16 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                     const QDateTime bday = parseDateTime((*lineIt).value().toString(), &withTime);
                     addr.setBirthday(bday, withTime);
                 }
-                // DEATHDATE
-                else if (identifier == QLatin1String("deathdate")) {
-                    const QDateTime deathDate = parseDateTime((*lineIt).value().toString());
-                    addr.setDeathDate(deathDate);
+                // RFC 6474 identification properties.
+                else if (identifier == "birthplace"_L1) {
+                    addr.setBirthPlace((*lineIt).value().toString());
+                    addr.setBirthPlaceParameters((*lineIt).parameterMap().toQMap());
+                } else if (identifier == "deathplace"_L1) {
+                    addr.setDeathPlace((*lineIt).value().toString());
+                    addr.setDeathPlaceParameters((*lineIt).parameterMap().toQMap());
+                } else if (identifier == "deathdate"_L1) {
+                    addr.setDeathDate(parseDateTime((*lineIt).value().toString()));
+                    addr.setDeathDateParameters((*lineIt).parameterMap().toQMap());
                 }
                 // CATEGORIES
                 else if (identifier == QLatin1String("categories")) {

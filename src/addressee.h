@@ -96,6 +96,7 @@ namespace KContacts
  */
 class KCONTACTS_EXPORT Addressee
 {
+    friend class VCardTool;
     friend KCONTACTS_EXPORT QDataStream &operator<<(QDataStream &, const Addressee &);
     friend KCONTACTS_EXPORT QDataStream &operator>>(QDataStream &, Addressee &);
 
@@ -483,6 +484,30 @@ class KCONTACTS_EXPORT Addressee
      * \property KContacts::Addressee::deathDate
      */
     Q_PROPERTY(QDateTime deathDate READ deathDate WRITE setDeathDate)
+
+    /*!
+      \qmlproperty string addressee::birthPlace
+      This property holds the place of birth, as text or a URI.
+      \since 6.32
+    */
+    /*!
+      \property KContacts::Addressee::birthPlace
+      This property holds the place of birth, as text or a URI.
+      \since 6.32
+    */
+    Q_PROPERTY(QString birthPlace READ birthPlace WRITE setBirthPlace)
+
+    /*!
+      \qmlproperty string addressee::deathPlace
+      This property holds the place of death, as text or a URI.
+      \since 6.32
+    */
+    /*!
+      \property KContacts::Addressee::deathPlace
+      This property holds the place of death, as text or a URI.
+      \since 6.32
+    */
+    Q_PROPERTY(QString deathPlace READ deathPlace WRITE setDeathPlace)
 
     // ### the following properties are still missing:
     // - logos, photos, sounds
@@ -1734,9 +1759,8 @@ public:
     void setSpousesName(const QString &spousesName);
 
     /*!
-     * Returns the death's date.
-     *
-     * \note This is a non-standard extension using the \c X-SpousesName field.
+     * Returns the date of death defined by RFC 6474.
+     * Returns an invalid date for text or values that cannot be represented by QDateTime.
      *
      * \since 6.20
      */
@@ -1750,7 +1774,45 @@ public:
      */
     void setDeathDate(const QDateTime &deathDate);
 
+    /*!
+      Returns the place of birth, as text or a URI.
+      \since 6.32
+    */
+    [[nodiscard]] QString birthPlace() const;
+    /*!
+      Sets the place of birth to the text \a place.
+      \since 6.32
+    */
+    void setBirthPlace(const QString &place);
+    /*!
+      Sets the place of birth to \a uri and sets VALUE=uri.
+      \since 6.32
+    */
+    void setBirthPlace(const QUrl &uri);
+
+    /*!
+      Returns the place of death, as text or a URI.
+      \since 6.32
+    */
+    [[nodiscard]] QString deathPlace() const;
+    /*!
+      Sets the place of death to the text \a place.
+      \since 6.32
+    */
+    void setDeathPlace(const QString &place);
+    /*!
+      Sets the place of death to \a uri and sets VALUE=uri.
+      \since 6.32
+    */
+    void setDeathPlace(const QUrl &uri);
+
 private:
+    KCONTACTS_NO_EXPORT QMap<QString, QStringList> deathDateParameters() const;
+    KCONTACTS_NO_EXPORT void setDeathDateParameters(const QMap<QString, QStringList> &parameters);
+    KCONTACTS_NO_EXPORT QMap<QString, QStringList> birthPlaceParameters() const;
+    KCONTACTS_NO_EXPORT void setBirthPlaceParameters(const QMap<QString, QStringList> &parameters);
+    KCONTACTS_NO_EXPORT QMap<QString, QStringList> deathPlaceParameters() const;
+    KCONTACTS_NO_EXPORT void setDeathPlaceParameters(const QMap<QString, QStringList> &parameters);
     KCONTACTS_NO_EXPORT void setBirthdayProperty(const QDateTime &birthday);
 
     class Private;

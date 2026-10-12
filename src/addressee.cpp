@@ -20,6 +20,7 @@
 #include "parametermap_p.h"
 
 using namespace KContacts;
+using namespace Qt::StringLiterals;
 
 static bool matchBinaryPattern(int value, int pattern);
 
@@ -107,7 +108,12 @@ public:
         mTitleExtraList = other.mTitleExtraList;
         mRoleExtraList = other.mRoleExtraList;
         mOrgExtraList = other.mOrgExtraList;
+        mBirthPlace = other.mBirthPlace;
+        mDeathPlace = other.mDeathPlace;
+        mBirthPlaceParameters = other.mBirthPlaceParameters;
+        mDeathPlaceParameters = other.mDeathPlaceParameters;
         mDeathDate = other.mDeathDate;
+        mDeathDateParameters = other.mDeathDateParameters;
     }
 
     ~Private()
@@ -149,7 +155,12 @@ public:
     Picture mLogo;
     Picture mPhoto;
     Sound mSound;
+    QString mBirthPlace;
+    QString mDeathPlace;
+    QMap<QString, QStringList> mBirthPlaceParameters;
+    QMap<QString, QStringList> mDeathPlaceParameters;
     QDateTime mDeathDate;
+    QMap<QString, QStringList> mDeathDateParameters;
 
     PhoneNumber::List mPhoneNumbers;
     Address::List mAddresses;
@@ -422,6 +433,26 @@ bool Addressee::operator==(const Addressee &addressee) const
 
     if (!listEquals(d->mClientPidMapList, addressee.d->mClientPidMapList)) {
         qCDebug(KCONTACTS_LOG) << "ClientPidMap List differs";
+        return false;
+    }
+
+    if (d->mBirthPlace != addressee.d->mBirthPlace) {
+        return false;
+    }
+
+    if (d->mDeathPlace != addressee.d->mDeathPlace) {
+        return false;
+    }
+
+    if (d->mBirthPlaceParameters != addressee.d->mBirthPlaceParameters) {
+        return false;
+    }
+
+    if (d->mDeathPlaceParameters != addressee.d->mDeathPlaceParameters) {
+        return false;
+    }
+
+    if (d->mDeathDateParameters != addressee.d->mDeathDateParameters) {
         return false;
     }
 
@@ -872,6 +903,83 @@ void Addressee::setDeathDate(const QDateTime &deathDate)
 QDateTime Addressee::deathDate() const
 {
     return d->mDeathDate;
+}
+
+QString Addressee::birthPlace() const
+{
+    return d->mBirthPlace;
+}
+
+void Addressee::setBirthPlace(const QString &place)
+{
+    d->mEmpty = false;
+    d->mBirthPlace = place;
+    d->mBirthPlaceParameters.remove(u"value"_s);
+}
+
+void Addressee::setBirthPlace(const QUrl &uri)
+{
+    d->mEmpty = false;
+    d->mBirthPlace = uri.toString(QUrl::FullyEncoded);
+    d->mBirthPlaceParameters.insert(u"value"_s, {u"uri"_s});
+}
+
+QMap<QString, QStringList> Addressee::birthPlaceParameters() const
+{
+    return d->mBirthPlaceParameters;
+}
+
+void Addressee::setBirthPlaceParameters(const QMap<QString, QStringList> &parameters)
+{
+    d->mBirthPlaceParameters.clear();
+    for (auto it = parameters.cbegin(); it != parameters.cend(); ++it) {
+        d->mBirthPlaceParameters[it.key().toLower()] += it.value();
+    }
+}
+
+QString Addressee::deathPlace() const
+{
+    return d->mDeathPlace;
+}
+
+void Addressee::setDeathPlace(const QString &place)
+{
+    d->mEmpty = false;
+    d->mDeathPlace = place;
+    d->mDeathPlaceParameters.remove(u"value"_s);
+}
+
+void Addressee::setDeathPlace(const QUrl &uri)
+{
+    d->mEmpty = false;
+    d->mDeathPlace = uri.toString(QUrl::FullyEncoded);
+    d->mDeathPlaceParameters.insert(u"value"_s, {u"uri"_s});
+}
+
+QMap<QString, QStringList> Addressee::deathPlaceParameters() const
+{
+    return d->mDeathPlaceParameters;
+}
+
+void Addressee::setDeathPlaceParameters(const QMap<QString, QStringList> &parameters)
+{
+    d->mDeathPlaceParameters.clear();
+    for (auto it = parameters.cbegin(); it != parameters.cend(); ++it) {
+        d->mDeathPlaceParameters[it.key().toLower()] += it.value();
+    }
+}
+
+QMap<QString, QStringList> Addressee::deathDateParameters() const
+{
+    return d->mDeathDateParameters;
+}
+
+void Addressee::setDeathDateParameters(const QMap<QString, QStringList> &parameters)
+{
+    d->mDeathDateParameters.clear();
+    for (auto it = parameters.cbegin(); it != parameters.cend(); ++it) {
+        d->mDeathDateParameters[it.key().toLower()] += it.value();
+    }
 }
 
 bool Addressee::birthdayHasTime() const
@@ -2582,6 +2690,11 @@ QDataStream &KContacts::operator<<(QDataStream &s, const Addressee &a)
     s << a.d->mNickNameExtraList;
     s << a.d->mClientPidMapList;
     s << a.d->mDeathDate;
+    s << a.d->mDeathDateParameters;
+    s << a.d->mDeathPlaceParameters;
+    s << a.d->mBirthPlaceParameters;
+    s << a.d->mDeathPlace;
+    s << a.d->mBirthPlace;
 
     return s;
 }
@@ -2638,6 +2751,11 @@ QDataStream &KContacts::operator>>(QDataStream &s, Addressee &a)
     s >> a.d->mNickNameExtraList;
     s >> a.d->mClientPidMapList;
     s >> a.d->mDeathDate;
+    s >> a.d->mDeathDateParameters;
+    s >> a.d->mDeathPlaceParameters;
+    s >> a.d->mBirthPlaceParameters;
+    s >> a.d->mDeathPlace;
+    s >> a.d->mBirthPlace;
     a.d->mEmpty = false;
 
     return s;
@@ -2690,7 +2808,8 @@ bool listEquals(const QStringList &list, const QStringList &pattern)
     return true;
 }
 
-void Addressee::setBirthdayProperty(const QDateTime &birthday) {
+void Addressee::setBirthdayProperty(const QDateTime &birthday)
+{
     // The property setter cannot pass withTime, so we have to guess.
     setBirthday(birthday, birthday.time().msecsSinceStartOfDay() != 0);
 }
