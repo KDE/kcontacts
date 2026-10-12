@@ -59,8 +59,12 @@ add_executable(vcardtool_benchmark vcardtool_benchmark.cpp)
 target_link_libraries(vcardtool_benchmark KF6Contacts Qt6::Test KF6::ConfigCore)
 
 if (USE_QML AND BUILD_SHARED_LIBS)
+    find_package(Qt6QuickTest ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
+    add_executable(qmltypestest qmltypestest.cpp)
+    target_link_libraries(qmltypestest PRIVATE KF6Contacts Qt6::QuickTest)
+    add_dependencies(qmltypestest kcontactsqml)
     add_test(NAME kcontacts-qmltypestest
-        COMMAND Qt6::qmltestrunner
+        COMMAND qmltypestest
             -input ${CMAKE_CURRENT_SOURCE_DIR}/qml/tst_types.qml
             -import ${CMAKE_BINARY_DIR}/bin
     )
