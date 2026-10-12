@@ -4,6 +4,32 @@
 
     Support for vCard contacts
 
+    \section1 Supported Standards
+
+    KContacts reads and writes vCard 2.1, 3.0, and 4.0 through
+    \l KContacts::VCardConverter. It implements the contact properties
+    exposed by its API from the following RFCs:
+
+    \list
+        \li \l{https://www.rfc-editor.org/info/rfc2425/}{RFC 2425} and
+            \l{https://www.rfc-editor.org/info/rfc2426/}{RFC 2426}:
+            the text/directory format and vCard 3.0.
+        \li \l{https://www.rfc-editor.org/info/rfc2739/}{RFC 2739}:
+            calendar and free/busy URI properties (FBURL, CALURI, and CALADRURI).
+        \li \l{https://www.rfc-editor.org/info/rfc4770/}{RFC 4770}:
+            instant messaging addresses (IMPP).
+        \li \l{https://www.rfc-editor.org/info/rfc6350/}{RFC 6350}:
+            vCard 4.0.
+        \li \l{https://www.rfc-editor.org/info/rfc6473/}{RFC 6473}:
+            the application value of KIND.
+        \li \l{https://www.rfc-editor.org/info/rfc6474/}{RFC 6474}:
+	    the DEATHDATE, DEATHPLACE and BIRTHPLACE property.
+        \li \l{https://www.rfc-editor.org/info/rfc6868/}{RFC 6868}:
+            caret encoding of vCard 4.0 parameter values.
+        \li \l{https://www.rfc-editor.org/info/rfc6869/}{RFC 6869}:
+            the device value of KIND.
+    \endlist
+
     \section1 Using the Module
 
     \include {module-use.qdocinc} {using the c++ api}
@@ -18,4 +44,10 @@
         \li \l{KContacts C++ Classes}
         \li \l{KContacts QML Types}
     \endlist
+
+    \section1 Licenses
+
+    KContacts is free software, licensed primarily under the GNU
+    Lesser General Public License, so that it can be used by both free
+    and proprietary software.
 */

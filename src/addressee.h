@@ -1475,11 +1475,17 @@ public:
     [[nodiscard]] Gender gender() const;
 
     /*!
-     */
+      Returns the kind of entity represented by the contact.
+      Standard values are individual, group, org, and location (RFC 6350),
+      application for software applications (RFC 6473), and device for
+      computing devices (RFC 6869). Extension values are also supported.
+    */
     [[nodiscard]] QString kind() const;
 
     /*!
-     */
+      Sets the kind of entity to \a kind. See kind() for the standard values.
+      The KIND property is written only in vCard 4.0.
+    */
     void setKind(const QString &kind);
 
     /*!
