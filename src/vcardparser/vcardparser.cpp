@@ -354,14 +354,19 @@ VCard::List VCardParser::parseVCards(const QByteArray &text)
                 // Provide a way for the parseVCardLine function to read more lines (for quoted-printable support)
                 auto fetchAnotherLine = [&text, &lineStart, &lineEnd, &cur]() -> QByteArray {
                     const QByteArray ret = cur;
+                    if (lineEnd >= text.size()) { // no more lines
+                        cur.clear();
+                        return ret;
+                    }
                     lineStart = lineEnd + 1;
                     lineEnd = text.indexOf('\n', lineStart);
-                    if (lineEnd != -1) {
-                        cur = text.mid(lineStart, lineEnd - lineStart);
-                        // remove the trailing \r, left from \r\n
-                        if (cur.endsWith('\r')) {
-                            cur.chop(1);
-                        }
+                    if (lineEnd == -1) { // last line without trailing newline
+                        lineEnd = text.size();
+                    }
+                    cur = text.mid(lineStart, lineEnd - lineStart);
+                    // remove the trailing \r, left from \r\n
+                    if (cur.endsWith('\r')) {
+                        cur.chop(1);
                     }
                     return ret;
                 };
