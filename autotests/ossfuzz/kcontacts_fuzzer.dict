@@ -1,0 +1,117 @@
+# SPDX-FileCopyrightText: 2026 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: CC0-1.0
+
+# Card structure and versions
+"BEGIN:VCARD"
+"END:VCARD"
+"VERSION:2.1"
+"VERSION:3.0"
+"VERSION:4.0"
+
+# Identification properties
+"FN:"
+"N:"
+"KIND:"
+"UID:"
+"REV:"
+
+# Address properties and parameters
+"ADR:"
+"LABEL="
+"GEO="
+
+# Communication properties
+"TEL:"
+"EMAIL:"
+"IMPP:"
+"URL:"
+
+# Media and security properties
+"PHOTO:"
+"LOGO:"
+"SOUND:"
+"KEY:"
+
+# Birth and death properties
+"BDAY:"
+"BIRTHPLACE:"
+"DEATHDATE:"
+"DEATHPLACE:"
+
+# Organization properties
+"ORG:"
+"TITLE:"
+"ROLE:"
+
+# Notes, categories, and relationships
+"NOTE:"
+"CATEGORIES:"
+"RELATED:"
+"MEMBER:"
+
+# Property parameters
+"TYPE="
+"PREF="
+"VALUE=uri"
+"VALUE=text"
+"LANGUAGE="
+"AUTHOR="
+"AUTHOR-NAME="
+"ALTID="
+
+# Character sets and encodings
+"CHARSET=UTF-8"
+"CHARSET=ISO-8859-1"
+"ENCODING=QUOTED-PRINTABLE"
+"ENCODING=BASE64"
+"ENCODING=b"
+
+# Extensions and groups
+"X-"
+"item1."
+
+# Type values
+"home"
+"work"
+"voice"
+"cell"
+
+# Kind values
+"application"
+"device"
+
+# URI schemes
+"geo:"
+"mailto:"
+"tel:"
+"https://"
+
+# RFC 6868 caret escapes
+"^^"
+"^n"
+"^'"
+
+# Text escapes
+"\\n"
+"\\,"
+"\\;"
+"\\\\"
+
+# Line endings and folding
+"\x0d\x0a"
+"\x0d\x0a "
+"\x0d\x0a\x09"
+
+# Delimiters
+";"
+":"
+","
+"\""
+"="
+
+# Quoted-printable sequences
+"=0D=0A"
+"=C3=B6"
+
+# Base64 padding
+"=="
