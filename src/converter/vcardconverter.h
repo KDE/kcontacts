@@ -22,21 +22,26 @@ namespace KContacts
   \brief Class to converting contact objects into vCard format and vice versa.
 
   This class implements reading and writing of contact using from/to the
-  vCard format. Currently vCard version 2.1 and 3.0 is supported.
+  vCard format. Currently vCard version 2.1, 3.0 and 4.0 are supported.
 
   Example:
 
   \code
-  QFile file( "myfile.vcf" );
-  file.open( QIODevice::ReadOnly );
+  QFile file("myfile.vcf");
+  if (!file.open(QIODevice::ReadOnly)) {
+      qWarning() << "Could not open contact file:" << file.errorString();
+      return;
+  }
 
   QByteArray data = file.readAll();
 
   VCardConverter converter;
-  Addressee::List list = converter.parseVCards( data );
+  Addressee::List list = converter.parseVCards(data);
 
   // print formatted name of first contact
-  qDebug( "name=%s", list[ 0 ].formattedName().toLatin1() );
+  if (!list.isEmpty()) {
+      qDebug() << "name=" << list.first().formattedName();
+  }
   \endcode
 */
 class KCONTACTS_EXPORT VCardConverter
