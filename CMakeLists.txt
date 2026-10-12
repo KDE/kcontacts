@@ -35,6 +35,7 @@ include(ECMInstalledLibraryCheck)
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
 option(USE_QML "Build the QML plugin" ON)
+option(BUILD_FUZZERS "Build KContacts fuzzers" OFF)
 
 set(KCONTACTS_LIB_VERSION ${KF_VERSION})
 
@@ -67,6 +68,10 @@ ecm_set_disabled_deprecation_versions(
 )
 
 add_subdirectory(src)
+
+if(BUILD_FUZZERS)
+    add_subdirectory(autotests/ossfuzz)
+endif()
 
 if(BUILD_TESTING)
     find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE COMPONENTS Quick)
