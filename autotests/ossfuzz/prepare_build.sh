@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: LGPL-2.0-or-later
 
 apt-get update
-apt-get install -y ninja-build gperf gettext iso-codes zip
+apt-get install -y ninja-build gperf gettext iso-codes pkg-config zip
 pip3 install cmake
 
 git clone --depth 1 --branch dev https://code.qt.io/qt/qtbase.git "$SRC/qtbase"

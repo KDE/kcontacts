@@ -16,9 +16,8 @@ ninja install -j$(nproc)
 
 cd $SRC/qtbase
 ./configure -platform linux-clang-libc++ -prefix $WORK -static -opensource -confirm-license -debug \
-    -qt-pcre -qt-zlib \
-    -no-glib -no-icu -no-feature-gui -no-feature-sql -no-feature-network -no-feature-xml \
-    -no-feature-dbus -no-feature-printsupport -no-feature-widgets
+    -qt-pcre -qt-zlib -no-opengl \
+    -no-glib -no-icu -no-feature-sql -no-feature-network -no-feature-dbus -no-feature-printsupport -no-feature-widgets
 ninja install -j$(nproc)
 
 for project in kcodecs kconfig ki18n kcontacts; do
@@ -30,6 +29,7 @@ for project in kcodecs kconfig ki18n kcontacts; do
     esac
     cmake -S "$SRC/$project" -B "$WORK/$project-build" -G Ninja \
         -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$WORK" \
+        -DKF_SKIP_PO_PROCESSING=ON \
         "${project_options[@]}"
     cmake --build "$WORK/$project-build" --target install -j"$(nproc)"
 done
