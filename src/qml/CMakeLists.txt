@@ -10,4 +10,4 @@ target_sources(kcontactsqml PRIVATE
 
 target_link_libraries(kcontactsqml PRIVATE KF6Contacts Qt6::Qml)
 
-ecm_finalize_qml_module(kcontactsqml)
+ecm_finalize_qml_module(kcontactsqml EXPORT KF6ContactsTargets)
