@@ -32,22 +32,7 @@ public:
         mId = QUuid::createUuid().toString(QUuid::Id128);
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mEmpty = other.mEmpty;
-        mId = other.mId;
-        mType = other.mType;
-
-        mPostOfficeBox = other.mPostOfficeBox;
-        mExtended = other.mExtended;
-        mStreet = other.mStreet;
-        mLocality = other.mLocality;
-        mRegion = other.mRegion;
-        mPostalCode = other.mPostalCode;
-        mCountry = other.mCountry;
-        mLabel = other.mLabel;
-    }
+    Private(const Private &other) = default;
 
     bool mEmpty;
     QString mId;
