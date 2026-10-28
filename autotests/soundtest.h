@@ -27,6 +27,7 @@ private Q_SLOTS:
     void shouldParseSource();
     void shouldGenerateVCard4WithData();
     void shouldGenerateVCard4WithUrl();
+    void shouldParseVCard4();
     void shouldGenerateVCard3WithData();
     void shouldGenerateVCard3WithUrl();
 };

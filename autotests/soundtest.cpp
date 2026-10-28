@@ -152,7 +152,6 @@ void SoundTest::shouldParseSource()
 
 void SoundTest::shouldGenerateVCard4WithData()
 {
-#if 0
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -172,17 +171,15 @@ void SoundTest::shouldGenerateVCard4WithData()
         "VERSION:4.0\r\n"
         "EMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
-        "SOUND;ENCODING=b:AAECAwQFBgcICQoLDA0ODxAREhM=\r\n"
+        "SOUND:data:;base64,AAECAwQFBgcICQoLDA0ODxAREhM=\r\n"
         "UID:testuid\r\n"
         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-#endif
 }
 
 void SoundTest::shouldGenerateVCard4WithUrl()
 {
-#if 0
     KContacts::Addressee::List lst;
     KContacts::Addressee addr;
     addr.setEmails(QStringList() << QStringLiteral("foo@kde.org"));
@@ -201,12 +198,34 @@ void SoundTest::shouldGenerateVCard4WithUrl()
         "VERSION:4.0\r\n"
         "EMAIL:foo@kde.org\r\n"
         "N:;;;;\r\n"
-        "SOUND;VALUE=URI:http://myhomepage.com/sound.wav\r\n"
+        "SOUND:http://myhomepage.com/sound.wav\r\n"
         "UID:testuid\r\n"
         "END:VCARD\r\n\r\n");
 
     QCOMPARE(ba, expected);
-#endif
+}
+
+void SoundTest::shouldParseVCard4()
+{
+    QByteArray vcarddata(
+        "BEGIN:VCARD\r\n"
+        "VERSION:4.0\r\n"
+        "N:;;;;\r\n"
+        "SOUND:http://myhomepage.com/sound.wav\r\n"
+        "SOUND:data:audio/basic;base64,AAECAwQFBgcICQoLDA0ODxAREhM=\r\n"
+        "UID:testuid\r\n"
+        "END:VCARD\r\n\r\n");
+
+    KContacts::VCardTool vcard;
+    const KContacts::AddresseeList lst = vcard.parseVCards(vcarddata);
+    QCOMPARE(lst.count(), 1);
+    const KContacts::Sound sound = lst.at(0).sound();
+    QVERIFY(!sound.isIntern());
+    QCOMPARE(sound.url(), QStringLiteral("http://myhomepage.com/sound.wav"));
+    QCOMPARE(lst.at(0).extraSoundList().count(), 1);
+    const KContacts::Sound dataSound = lst.at(0).extraSoundList().at(0);
+    QVERIFY(dataSound.isIntern());
+    QCOMPARE(dataSound.data(), testData());
 }
 
 void SoundTest::shouldGenerateVCard3WithData()
