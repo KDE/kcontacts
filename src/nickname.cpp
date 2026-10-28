@@ -20,12 +20,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        nickname = other.nickname;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
     QString nickname;

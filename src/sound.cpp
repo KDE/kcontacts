@@ -20,14 +20,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-        , mUrl(other.mUrl)
-        , mType(other.mType)
-        , mData(other.mData)
-        , mIntern(other.mIntern)
-    {
-    }
+    Private(const Private &other) = default;
 
     QString mUrl;
     QString mType;

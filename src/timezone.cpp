@@ -21,12 +21,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mOffset = other.mOffset;
-        mValid = other.mValid;
-    }
+    Private(const Private &other) = default;
 
     int mOffset;
     bool mValid;

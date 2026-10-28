@@ -59,56 +59,7 @@ public:
         // We avoid the curly braces so the string is RFC4122 compliant and can be used as urn
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mUid = other.mUid;
-        mName = other.mName;
-        mFormattedName = other.mFormattedName;
-        mFamilyName = other.mFamilyName;
-        mGivenName = other.mGivenName;
-        mAdditionalName = other.mAdditionalName;
-        mPrefix = other.mPrefix;
-        mSuffix = other.mSuffix;
-        mBirthday = other.mBirthday;
-        mBirthdayWithTime = other.mBirthdayWithTime;
-        mMailer = other.mMailer;
-        mTimeZone = other.mTimeZone;
-        mGeo = other.mGeo;
-        mDepartment = other.mDepartment;
-        mNote = other.mNote;
-        mProductId = other.mProductId;
-        mRevision = other.mRevision;
-        mSortString = other.mSortString;
-        mSecrecy = other.mSecrecy;
-        mLogo = other.mLogo;
-        mPhoto = other.mPhoto;
-        mSound = other.mSound;
-
-        mPhoneNumbers = other.mPhoneNumbers;
-        mAddresses = other.mAddresses;
-        mKeys = other.mKeys;
-        mLangs = other.mLangs;
-        mGender = other.mGender;
-        mEmails = other.mEmails;
-        mCategories = other.mCategories;
-        mCustomFields = other.mCustomFields;
-        mCalendarUrl = other.mCalendarUrl;
-        mSoundListExtra = other.mSoundListExtra;
-        mPhotoExtraList = other.mPhotoExtraList;
-        mLogoExtraList = other.mLogoExtraList;
-        mUrlExtraList = other.mUrlExtraList;
-        mMembers = other.mMembers;
-        mRelationships = other.mRelationships;
-        mSources = other.mSources;
-        mEmpty = other.mEmpty;
-        mImpps = other.mImpps;
-        mChanged = other.mChanged;
-        mTitleExtraList = other.mTitleExtraList;
-        mRoleExtraList = other.mRoleExtraList;
-        mOrgExtraList = other.mOrgExtraList;
-        mDeathDate = other.mDeathDate;
-    }
+    Private(const Private &other) = default;
 
     ~Private()
     {

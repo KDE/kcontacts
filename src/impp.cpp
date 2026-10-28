@@ -23,11 +23,7 @@ class Q_DECL_HIDDEN Impp::Private : public QSharedData
 {
 public:
     Private() = default;
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
     QUrl address;

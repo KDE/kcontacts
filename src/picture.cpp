@@ -21,14 +21,7 @@ public:
     {
     }
 
-    PicturePrivate(const PicturePrivate &other)
-        : QSharedData(other)
-        , mUrl(other.mUrl)
-        , mType(other.mType)
-        , mData(other.mData)
-        , mIntern(other.mIntern)
-    {
-    }
+    PicturePrivate(const PicturePrivate &other) = default;
 
     QString mUrl;
     QString mType;

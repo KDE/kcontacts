@@ -22,13 +22,7 @@ public:
     {
     }
 
-    ContactReferencePrivate(const ContactReferencePrivate &other)
-        : QSharedData(other)
-    {
-        mUid = other.mUid;
-        mPreferredEmail = other.mPreferredEmail;
-        mCustoms = other.mCustoms;
-    }
+    ContactReferencePrivate(const ContactReferencePrivate &other) = default;
 
     QString mUid;
     QString mGid;
@@ -123,12 +117,7 @@ public:
     {
     }
 
-    ContactGroupReferencePrivate(const ContactGroupReferencePrivate &other)
-        : QSharedData(other)
-    {
-        mUid = other.mUid;
-        mCustoms = other.mCustoms;
-    }
+    ContactGroupReferencePrivate(const ContactGroupReferencePrivate &other) = default;
 
     QString mUid;
     QMap<QString, QString> mCustoms;
@@ -201,13 +190,7 @@ public:
     {
     }
 
-    DataPrivate(const DataPrivate &other)
-        : QSharedData(other)
-    {
-        mName = other.mName;
-        mEmail = other.mEmail;
-        mCustoms = other.mCustoms;
-    }
+    DataPrivate(const DataPrivate &other) = default;
 
     QString mName;
     QString mEmail;
@@ -295,15 +278,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mIdentifier = other.mIdentifier;
-        mName = other.mName;
-        mContactReferences = other.mContactReferences;
-        mContactGroupReferences = other.mContactGroupReferences;
-        mDataObjects = other.mDataObjects;
-    }
+    Private(const Private &other) = default;
 
     QString mIdentifier;
     QString mName;

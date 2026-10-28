@@ -22,11 +22,7 @@ public:
     {
     }
 
-    PrivateData(const PrivateData &other)
-        : QSharedData(other)
-    {
-        mType = other.mType;
-    }
+    PrivateData(const PrivateData &other) = default;
 
     Type mType;
 };

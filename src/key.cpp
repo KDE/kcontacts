@@ -22,16 +22,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mId = other.mId;
-        mBinaryData = other.mBinaryData;
-        mTextData = other.mTextData;
-        mCustomTypeString = other.mCustomTypeString;
-        mIsBinary = other.mIsBinary;
-        mType = other.mType;
-    }
+    Private(const Private &other) = default;
 
     QString mId;
     QByteArray mBinaryData;

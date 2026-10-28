@@ -30,13 +30,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mId = other.mId;
-        mType = other.mType;
-        mNumber = other.mNumber;
-    }
+    Private(const Private &other) = default;
 
     QString mId;
     QString mNumber;

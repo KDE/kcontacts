@@ -23,14 +23,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mLatitude = other.mLatitude;
-        mLongitude = other.mLongitude;
-        mValidLatitude = other.mValidLatitude;
-        mValidLongitude = other.mValidLongitude;
-    }
+    Private(const Private &other) = default;
 
     float mLatitude;
     float mLongitude;

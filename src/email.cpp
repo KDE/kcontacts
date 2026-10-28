@@ -20,12 +20,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        mail = other.mail;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
 

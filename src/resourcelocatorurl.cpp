@@ -22,12 +22,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        url = other.url;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
     QUrl url;

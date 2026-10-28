@@ -21,13 +21,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        type = other.type;
-        url = other.url;
-    }
+    Private(const Private &other) = default;
 
     static QString typeToString(CalendarUrl::CalendarType type);
 

@@ -20,13 +20,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        fieldGroupName = other.fieldGroupName;
-        value = other.value;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
     QString fieldGroupName;

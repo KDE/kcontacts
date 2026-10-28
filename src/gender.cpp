@@ -17,12 +17,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        comment = other.comment;
-        gender = other.gender;
-    }
+    Private(const Private &other) = default;
 
     QString gender;
     QString comment;

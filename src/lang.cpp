@@ -20,12 +20,7 @@ public:
     {
     }
 
-    Private(const Private &other)
-        : QSharedData(other)
-    {
-        mParamMap = other.mParamMap;
-        language = other.language;
-    }
+    Private(const Private &other) = default;
 
     ParameterMap mParamMap;
     QString language;
