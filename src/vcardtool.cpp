@@ -577,14 +577,10 @@ QByteArray VCardTool::createVCards(const Addressee::List &list, VCard::Version v
         }
 
         // SOUND
-        if (version == VCard::v4_0) {
-            // TODO
-        } else {
-            card.addLine(createSound(addressee.sound(), version));
-            const QList<Sound> lstSound = addressee.extraSoundList();
-            for (const Sound &sound : lstSound) {
-                card.addLine(createSound(sound, version));
-            }
+        card.addLine(createSound(addressee.sound(), version));
+        const QList<Sound> lstSound = addressee.extraSoundList();
+        for (const Sound &sound : lstSound) {
+            card.addLine(createSound(sound, version));
         }
 
         // TEL
@@ -1432,7 +1428,18 @@ Sound VCardTool::parseSound(const VCardLine &line) const
     Sound snd;
 
     const QStringList params = line.parameterList();
-    if (params.contains(QLatin1String("encoding"))) {
+    if (params.isEmpty()) { // vCard 4.0 stores the sound as URI
+        const QByteArray value = line.value().toByteArray();
+        if (value.startsWith("data:")) {
+            constexpr QByteArrayView base64Marker(";base64,");
+            const int indexOfBase64 = value.indexOf(base64Marker);
+            if (indexOfBase64 > -1) {
+                snd.setData(QByteArray::fromBase64(value.sliced(indexOfBase64 + base64Marker.size())));
+            }
+        } else if (!value.isEmpty()) {
+            snd.setUrl(QString::fromUtf8(value));
+        }
+    } else if (params.contains(QLatin1String("encoding"))) {
         snd.setData(line.value().toByteArray());
     } else if (params.contains(QLatin1String("value"))) {
         if (line.parameter(QStringLiteral("value")).toLower() == QLatin1String("uri")) {
@@ -1450,6 +1457,21 @@ Sound VCardTool::parseSound(const VCardLine &line) const
 
 VCardLine VCardTool::createSound(const Sound &snd, VCard::Version version) const
 {
+    if (version == VCard::v4_0) {
+        if (snd.isIntern()) {
+            if (snd.data().isEmpty()) {
+                return VCardLine(QStringLiteral("SOUND"));
+            }
+            // The media type is optional in data: URIs
+            VCardLine line(QStringLiteral("SOUND:data:") + snd.type());
+            line.setBase64Value(snd.data().toBase64());
+            return line;
+        }
+        VCardLine line(QStringLiteral("SOUND"));
+        line.setValue(snd.url());
+        return line;
+    }
+
     VCardLine line(QStringLiteral("SOUND"));
 
     if (snd.isIntern()) {
