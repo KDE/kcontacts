@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:49+0000\n"
+"POT-Creation-Date: 2026-10-29 00:49+0000\n"
 "PO-Revision-Date: 2025-11-13 22:35+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -21,336 +21,336 @@ msgstr ""
 "X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: address.cpp:224
+#: address.cpp:209
 #, kde-format
 msgid "Post Office Box"
 msgstr "郵政信箱"
 
-#: address.cpp:240
+#: address.cpp:225
 #, kde-format
 msgid "Extended Address Information"
 msgstr "延伸位址資訊"
 
-#: address.cpp:256
+#: address.cpp:241
 #, kde-format
 msgid "Street"
 msgstr "街道"
 
-#: address.cpp:272
+#: address.cpp:257
 #, kde-format
 msgid "Locality"
 msgstr "位置"
 
-#: address.cpp:288
+#: address.cpp:273
 #, kde-format
 msgid "Region"
 msgstr "區域"
 
-#: address.cpp:304
+#: address.cpp:289
 #, kde-format
 msgid "Postal Code"
 msgstr "郵遞區號"
 
-#: address.cpp:320
+#: address.cpp:305
 #, kde-format
 msgid "Country"
 msgstr "國家"
 
-#: address.cpp:336
+#: address.cpp:321
 #, kde-format
 msgid "Delivery Label"
 msgstr "傳送標籤"
 
-#: address.cpp:354
+#: address.cpp:339
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "家庭"
 
-#: address.cpp:356
+#: address.cpp:341
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "國際"
 
-#: address.cpp:358
+#: address.cpp:343
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "郵局"
 
-#: address.cpp:360
+#: address.cpp:345
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "包裹"
 
-#: address.cpp:362
+#: address.cpp:347
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "住家"
 
-#: address.cpp:364
+#: address.cpp:349
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "工作"
 
-#: address.cpp:366
+#: address.cpp:351
 #, kde-format
 msgid "Preferred Address"
 msgstr "預設位址"
 
-#: address.cpp:368
+#: address.cpp:353
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
 msgstr "其他"
 
-#: addressee.cpp:462
+#: addressee.cpp:413
 #, kde-format
 msgid "Unique Identifier"
 msgstr "唯一身份"
 
-#: addressee.cpp:482
+#: addressee.cpp:433
 #, kde-format
 msgid "Name"
 msgstr "名稱"
 
-#: addressee.cpp:678
+#: addressee.cpp:629
 #, kde-format
 msgid "Formatted Name"
 msgstr "格式化名稱"
 
-#: addressee.cpp:698
+#: addressee.cpp:649
 #, kde-format
 msgid "Family Name"
 msgstr "姓氏"
 
-#: addressee.cpp:718
+#: addressee.cpp:669
 #, kde-format
 msgid "Given Name"
 msgstr "指定名稱"
 
-#: addressee.cpp:738
+#: addressee.cpp:689
 #, kde-format
 msgid "Additional Names"
 msgstr "額外名稱"
 
-#: addressee.cpp:758
+#: addressee.cpp:709
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "前置敬語"
 
-#: addressee.cpp:778
+#: addressee.cpp:729
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "後置敬語"
 
-#: addressee.cpp:829
+#: addressee.cpp:780
 #, kde-format
 msgid "Nick Name"
 msgstr "暱稱"
 
-#: addressee.cpp:884
+#: addressee.cpp:835
 #, kde-format
 msgid "Birthday"
 msgstr "生日"
 
-#: addressee.cpp:889
+#: addressee.cpp:840
 #, kde-format
 msgid "Home Address Street"
 msgstr "住家地址（街道）"
 
-#: addressee.cpp:894
+#: addressee.cpp:845
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "住家地址郵政信箱"
 
-#: addressee.cpp:899
+#: addressee.cpp:850
 #, kde-format
 msgid "Home Address City"
 msgstr "住家地址（城市）"
 
-#: addressee.cpp:904
+#: addressee.cpp:855
 #, kde-format
 msgid "Home Address State"
 msgstr "住家地址（省、州）"
 
-#: addressee.cpp:909
+#: addressee.cpp:860
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "住家地址(郵遞區號)"
 
-#: addressee.cpp:914
+#: addressee.cpp:865
 #, kde-format
 msgid "Home Address Country"
 msgstr "住家地址（國家）"
 
-#: addressee.cpp:919
+#: addressee.cpp:870
 #, kde-format
 msgid "Home Address Label"
 msgstr "住家地址標籤"
 
-#: addressee.cpp:924
+#: addressee.cpp:875
 #, kde-format
 msgid "Business Address Street"
 msgstr "辦公室地址（街道）"
 
-#: addressee.cpp:929
+#: addressee.cpp:880
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "辦公室地址郵政信箱"
 
-#: addressee.cpp:934
+#: addressee.cpp:885
 #, kde-format
 msgid "Business Address City"
 msgstr "辦公室地址（城市）"
 
-#: addressee.cpp:939
+#: addressee.cpp:890
 #, kde-format
 msgid "Business Address State"
 msgstr "辦公室地址（省、州）"
 
-#: addressee.cpp:944
+#: addressee.cpp:895
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "辦公室地址（郵遞區號）"
 
-#: addressee.cpp:949
+#: addressee.cpp:900
 #, kde-format
 msgid "Business Address Country"
 msgstr "辦公室地址（國家）"
 
-#: addressee.cpp:954
+#: addressee.cpp:905
 #, kde-format
 msgid "Business Address Label"
 msgstr "辦公室地址標籤"
 
-#: addressee.cpp:959
+#: addressee.cpp:910
 #, kde-format
 msgid "Home Phone"
 msgstr "住家電話"
 
-#: addressee.cpp:964
+#: addressee.cpp:915
 #, kde-format
 msgid "Business Phone"
 msgstr "辦公室電話"
 
-#: addressee.cpp:969
+#: addressee.cpp:920
 #, kde-format
 msgid "Mobile Phone"
 msgstr "行動電話"
 
-#: addressee.cpp:974 phonenumber.cpp:216
+#: addressee.cpp:925 phonenumber.cpp:210
 #, kde-format
 msgid "Home Fax"
 msgstr "家用傳真"
 
-#: addressee.cpp:979
+#: addressee.cpp:930
 #, kde-format
 msgid "Business Fax"
 msgstr "辦公室傳真"
 
-#: addressee.cpp:984
+#: addressee.cpp:935
 #, kde-format
 msgid "Car Phone"
 msgstr "車上電話"
 
-#: addressee.cpp:989 phonenumber.cpp:192
+#: addressee.cpp:940 phonenumber.cpp:186
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:994 phonenumber.cpp:196
+#: addressee.cpp:945 phonenumber.cpp:190
 #, kde-format
 msgid "Pager"
 msgstr "呼叫器"
 
-#: addressee.cpp:999
+#: addressee.cpp:950
 #, kde-format
 msgid "Email Address"
 msgstr "電子郵件地址"
 
-#: addressee.cpp:1019
+#: addressee.cpp:970
 #, kde-format
 msgid "Mail Client"
 msgstr "郵件處理程式"
 
-#: addressee.cpp:1039
+#: addressee.cpp:990
 #, kde-format
 msgid "Time Zone"
 msgstr "時區"
 
-#: addressee.cpp:1059
+#: addressee.cpp:1010
 #, kde-format
 msgid "Geographic Position"
 msgstr "地理位置"
 
-#: addressee.cpp:1110
+#: addressee.cpp:1061
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "職稱"
 
-#: addressee.cpp:1161
+#: addressee.cpp:1112
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "角色"
 
-#: addressee.cpp:1212
+#: addressee.cpp:1163
 #, kde-format
 msgid "Organization"
 msgstr "組織"
 
-#: addressee.cpp:1232
+#: addressee.cpp:1183
 #, kde-format
 msgid "Department"
 msgstr "部門"
 
-#: addressee.cpp:1252
+#: addressee.cpp:1203
 #, kde-format
 msgid "Note"
 msgstr "附註"
 
-#: addressee.cpp:1272
+#: addressee.cpp:1223
 #, kde-format
 msgid "Product Identifier"
 msgstr "產品識別"
 
-#: addressee.cpp:1292
+#: addressee.cpp:1243
 #, kde-format
 msgid "Revision Date"
 msgstr "版本日期"
 
-#: addressee.cpp:1312
+#: addressee.cpp:1263
 #, kde-format
 msgid "Sort String"
 msgstr "排序字串"
 
-#: addressee.cpp:1338
+#: addressee.cpp:1289
 #, kde-format
 msgid "Homepage"
 msgstr "首頁"
 
-#: addressee.cpp:1358
+#: addressee.cpp:1309
 #, kde-format
 msgid "Security Class"
 msgstr "安全類別"
 
-#: addressee.cpp:1378
+#: addressee.cpp:1329
 #, kde-format
 msgid "Logo"
 msgstr "圖標"
 
-#: addressee.cpp:1398
+#: addressee.cpp:1349
 #, kde-format
 msgid "Photo"
 msgstr "相片"
 
-#: addressee.cpp:1418
+#: addressee.cpp:1369
 #, kde-format
 msgid "Sound"
 msgstr "音效"
@@ -410,157 +410,157 @@ msgstr "Jr."
 msgid "Sr."
 msgstr "Sr."
 
-#: key.cpp:196
+#: key.cpp:187
 #, kde-format
 msgctxt "X.509 public key"
 msgid "X509"
 msgstr "X509"
 
-#: key.cpp:199
+#: key.cpp:190
 #, kde-format
 msgctxt "Pretty Good Privacy key"
 msgid "PGP"
 msgstr "PGP"
 
-#: key.cpp:202
+#: key.cpp:193
 #, kde-format
 msgctxt "A custom key"
 msgid "Custom"
 msgstr "自訂"
 
-#: key.cpp:205
+#: key.cpp:196
 #, kde-format
 msgctxt "another type of encryption key"
 msgid "Unknown type"
 msgstr "未知的型態"
 
-#: phonenumber.cpp:168
+#: phonenumber.cpp:162
 #, kde-format
 msgctxt "Undefined phone type"
 msgid "Telephone number"
 msgstr "電話號碼"
 
-#: phonenumber.cpp:170
+#: phonenumber.cpp:164
 #, kde-format
 msgctxt "Home phone"
 msgid "Home"
 msgstr "住家"
 
-#: phonenumber.cpp:172
+#: phonenumber.cpp:166
 #, kde-format
 msgctxt "Work phone"
 msgid "Work"
 msgstr "工作"
 
-#: phonenumber.cpp:174
+#: phonenumber.cpp:168
 #, kde-format
 msgid "Messenger"
 msgstr "即時訊息"
 
-#: phonenumber.cpp:176
+#: phonenumber.cpp:170
 #, kde-format
 msgctxt "Preferred phone"
 msgid "Preferred"
 msgstr "預設"
 
-#: phonenumber.cpp:178
+#: phonenumber.cpp:172
 #, kde-format
 msgid "Voice"
 msgstr "語音"
 
-#: phonenumber.cpp:180
+#: phonenumber.cpp:174
 #, kde-format
 msgid "Fax"
 msgstr "傳真"
 
-#: phonenumber.cpp:182
+#: phonenumber.cpp:176
 #, kde-format
 msgctxt "Mobile Phone"
 msgid "Mobile"
 msgstr "行動電話"
 
-#: phonenumber.cpp:184
+#: phonenumber.cpp:178
 #, kde-format
 msgctxt "Video phone"
 msgid "Video"
 msgstr "影像"
 
-#: phonenumber.cpp:186
+#: phonenumber.cpp:180
 #, kde-format
 msgid "Mailbox"
 msgstr "郵政信箱"
 
-#: phonenumber.cpp:188
+#: phonenumber.cpp:182
 #, kde-format
 msgid "Modem"
 msgstr "Modem"
 
-#: phonenumber.cpp:190
+#: phonenumber.cpp:184
 #, kde-format
 msgctxt "Car Phone"
 msgid "Car"
 msgstr "車用電話"
 
-#: phonenumber.cpp:194
+#: phonenumber.cpp:188
 #, kde-format
 msgid "PCS"
 msgstr "PCS"
 
-#: phonenumber.cpp:198
+#: phonenumber.cpp:192
 #, kde-format
 msgctxt "another type of phone"
 msgid "Other"
 msgstr "其他"
 
-#: phonenumber.cpp:211
+#: phonenumber.cpp:205
 #, kde-format
 msgid "Preferred Number"
 msgstr "預設號碼"
 
-#: phonenumber.cpp:221
+#: phonenumber.cpp:215
 #, kde-format
 msgid "Work Fax"
 msgstr "工作傳真"
 
-#: resourcelocatorurl.cpp:187
+#: resourcelocatorurl.cpp:182
 #, kde-format
 msgid "Home"
 msgstr "住家"
 
-#: resourcelocatorurl.cpp:190
+#: resourcelocatorurl.cpp:185
 #, kde-format
 msgid "Work"
 msgstr "工作"
 
-#: resourcelocatorurl.cpp:193
+#: resourcelocatorurl.cpp:188
 #, kde-format
 msgid "Profile"
 msgstr "個人資料"
 
-#: resourcelocatorurl.cpp:197
+#: resourcelocatorurl.cpp:192
 #, kde-format
 msgid "Other"
 msgstr "其他"
 
-#: secrecy.cpp:96
+#: secrecy.cpp:92
 #, kde-format
 msgctxt "access is for everyone"
 msgid "Public"
 msgstr "公開"
 
-#: secrecy.cpp:99
+#: secrecy.cpp:95
 #, kde-format
 msgctxt "access is by owner only"
 msgid "Private"
 msgstr "私人"
 
-#: secrecy.cpp:102
+#: secrecy.cpp:98
 #, kde-format
 msgctxt "access is by owner and a controlled group"
 msgid "Confidential"
 msgstr "機密"
 
-#: secrecy.cpp:105
+#: secrecy.cpp:101
 #, kde-format
 msgctxt "unknown secrecy type"
 msgid "Unknown type"
