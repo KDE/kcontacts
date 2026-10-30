@@ -15,7 +15,6 @@
 #include <QDebug>
 
 #include "converter/kcontacts/vcardconverter.h"
-#include "vcard_p.h"
 
 int main(int argc, char **argv)
 {

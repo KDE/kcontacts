@@ -8,8 +8,6 @@
 #include "testutils.h"
 #include <QFile>
 
-#include "vcardparser_p.h"
-
 using namespace KContacts;
 
 Addressee vcard1()

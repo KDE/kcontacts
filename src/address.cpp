@@ -9,7 +9,6 @@
 #include "addressformat.h"
 #include "addressformatter_p.h"
 
-#include "kcontacts_debug.h"
 #include <KConfig>
 #include <KCountry>
 #include <KLocalizedString>

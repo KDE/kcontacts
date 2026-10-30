@@ -6,7 +6,6 @@
 */
 
 #include "impp.h"
-#include "kcontacts_debug.h"
 #include "parametermap_p.h"
 
 #include <KDesktopFile>

@@ -8,7 +8,6 @@
 
 #include "fieldgroup.h"
 #include "gender.h"
-#include "kcontacts_debug.h"
 #include "key.h"
 #include "lang.h"
 #include "picture.h"

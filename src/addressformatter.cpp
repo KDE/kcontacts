@@ -7,7 +7,6 @@
 
 #include "address.h"
 #include "addressformat.h"
-#include "addressformat_p.h"
 #include "addressformatscript_p.h"
 
 #include <KCountry>
