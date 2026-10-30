@@ -32,10 +32,11 @@ public:
     }
 
     Private(const Private &other) = default;
+    bool operator==(const Private &other) const = default;
 
     bool mEmpty;
     QString mId;
-    Type mType;
+    Type mType = {};
     Geo mGeo;
 
     QString mPostOfficeBox;
@@ -64,9 +65,7 @@ Address::Address(const Address &other)
 {
 }
 
-Address::~Address()
-{
-}
+Address::~Address() = default;
 
 Address &Address::operator=(const Address &other)
 {
@@ -79,42 +78,7 @@ Address &Address::operator=(const Address &other)
 
 bool Address::operator==(const Address &other) const
 {
-    if (d->mId != other.d->mId) {
-        return false;
-    }
-    if (d->mType != other.d->mType) {
-        return false;
-    }
-    if (d->mPostOfficeBox != other.d->mPostOfficeBox) {
-        return false;
-    }
-    if (d->mExtended != other.d->mExtended) {
-        return false;
-    }
-    if (d->mStreet != other.d->mStreet) {
-        return false;
-    }
-    if (d->mLocality != other.d->mLocality) {
-        return false;
-    }
-    if (d->mRegion != other.d->mRegion) {
-        return false;
-    }
-    if (d->mPostalCode != other.d->mPostalCode) {
-        return false;
-    }
-    if (d->mCountry != other.d->mCountry) {
-        return false;
-    }
-    if (d->mLabel != other.d->mLabel) {
-        return false;
-    }
-
-    if (d->mGeo != other.d->mGeo) {
-        return false;
-    }
-
-    return true;
+    return *d == *other.d;
 }
 
 bool Address::operator!=(const Address &a) const
