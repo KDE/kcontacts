@@ -22,11 +22,6 @@ struct ParameterData {
     QStringList paramValues;
 
     bool operator==(const ParameterData &other) const = default;
-
-    bool operator<(const ParameterData &other) const
-    {
-        return param < other.param;
-    }
 };
 
 class ParameterMap : public std::vector<ParameterData>
@@ -48,7 +43,7 @@ public:
      */
     inline iterator insertParam(ParameterData &&newdata)
     {
-        auto dIt = std::lower_bound(begin(), end(), newdata);
+        auto dIt = std::ranges::lower_bound(*this, newdata.param, {}, &ParameterData::param);
         return insert(dIt, newdata);
     }
 

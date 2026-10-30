@@ -93,11 +93,6 @@ private:
      */
     LineMap mLineMap;
 };
-
-inline bool operator<(const VCard::LineData &a, const VCard::LineData &b)
-{
-    return a.identifier < b.identifier;
-}
 }
 
 #endif

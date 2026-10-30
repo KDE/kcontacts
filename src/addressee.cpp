@@ -37,11 +37,6 @@ struct CustomData {
     bool operator==(const CustomData &other) const = default;
 };
 
-inline bool operator<(const CustomData &a, const CustomData &b)
-{
-    return a.name < b.name;
-}
-
 class Q_DECL_HIDDEN Addressee::Private : public QSharedData
 {
 public:
@@ -2201,7 +2196,7 @@ void Addressee::insertCustom(const QString &app, const QString &name, const QStr
         it->value = value;
     } else {
         const CustomData newdata{qualifiedName, value};
-        auto beforeIt = std::lower_bound(d->mCustomFields.begin(), d->mCustomFields.end(), newdata);
+        auto beforeIt = std::ranges::lower_bound(d->mCustomFields, qualifiedName, {}, &CustomData::name);
         d->mCustomFields.insert(beforeIt, newdata);
     }
 }
@@ -2244,7 +2239,7 @@ void Addressee::setCustoms(const QStringList &customs)
             seen.push_back(qualifiedName);
         }
     }
-    std::sort(d->mCustomFields.begin(), d->mCustomFields.end());
+    std::ranges::sort(d->mCustomFields, {}, &CustomData::name);
 }
 
 QStringList Addressee::customs() const

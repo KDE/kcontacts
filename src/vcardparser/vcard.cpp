@@ -55,7 +55,7 @@ void VCard::addLine(const VCardLine &line)
         it->list.append(line);
     } else {
         const LineData newdata{line.identifier(), {line}};
-        auto beforeIt = std::lower_bound(mLineMap.begin(), mLineMap.end(), newdata);
+        auto beforeIt = std::ranges::lower_bound(mLineMap, newdata.identifier, {}, &LineData::identifier);
         mLineMap.insert(beforeIt, newdata);
     }
 }
@@ -91,7 +91,7 @@ void VCard::setVersion(Version version)
         it->list.append(vcardLine);
     } else {
         const LineData newData{QLatin1String(s_verStr), {vcardLine}};
-        auto beforeIt = std::lower_bound(mLineMap.begin(), mLineMap.end(), newData);
+        auto beforeIt = std::ranges::lower_bound(mLineMap, newData.identifier, {}, &LineData::identifier);
         mLineMap.insert(beforeIt, newData);
     }
 }
