@@ -8,6 +8,8 @@
 #include "impp.h"
 #include "parametermap_p.h"
 
+#include <algorithm>
+
 #include <KDesktopFile>
 
 #include <QDataStream>
@@ -209,7 +211,7 @@ QList<QString> Impp::serviceTypes()
         }
     }
 
-    std::sort(types.begin(), types.end());
+    std::ranges::sort(types);
     types.erase(std::unique(types.begin(), types.end()), types.end());
     return types;
 }

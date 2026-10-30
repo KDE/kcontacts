@@ -13,6 +13,7 @@
 #include <QMap>
 #include <QStringList>
 
+#include <algorithm>
 #include <vector>
 
 namespace KContacts
@@ -30,16 +31,12 @@ public:
 
     inline LineMap::iterator findByLineId(const QString &identifier)
     {
-        return std::find_if(mLineMap.begin(), mLineMap.end(), [&identifier](const LineData &data) {
-            return data.identifier == identifier;
-        });
+        return std::ranges::find(mLineMap, identifier, &LineData::identifier);
     }
 
     inline LineMap::const_iterator findByLineId(const QString &identifier) const
     {
-        return std::find_if(mLineMap.cbegin(), mLineMap.cend(), [&identifier](const LineData &data) {
-            return data.identifier == identifier;
-        });
+        return std::ranges::find(mLineMap, identifier, &LineData::identifier);
     }
 
     enum Version {

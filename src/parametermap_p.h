@@ -34,16 +34,12 @@ class ParameterMap : public std::vector<ParameterData>
 public:
     inline const_iterator findParam(const QString &param) const
     {
-        return std::find_if(cbegin(), cend(), [&param](const ParameterData &info) {
-            return info.param == param;
-        });
+        return std::ranges::find(*this, param, &ParameterData::param);
     }
 
     inline iterator findParam(const QString &param)
     {
-        return std::find_if(begin(), end(), [&param](const ParameterData &info) {
-            return info.param == param;
-        });
+        return std::ranges::find(*this, param, &ParameterData::param);
     }
 
     /*!

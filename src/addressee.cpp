@@ -19,6 +19,9 @@
 #include "addresseehelper_p.h"
 #include "parametermap_p.h"
 
+#include <algorithm>
+#include <utility>
+
 using namespace KContacts;
 
 static bool matchBinaryPattern(int value, int pattern);
@@ -59,16 +62,12 @@ public:
 
     std::vector<CustomData>::iterator findByName(const QString &qualifiedName)
     {
-        return std::find_if(mCustomFields.begin(), mCustomFields.end(), [&qualifiedName](const CustomData &info) {
-            return info.name == qualifiedName;
-        });
+        return std::ranges::find(mCustomFields, qualifiedName, &CustomData::name);
     }
 
     std::vector<CustomData>::const_iterator findByName(const QString &qualifiedName) const
     {
-        return std::find_if(mCustomFields.cbegin(), mCustomFields.cend(), [&qualifiedName](const CustomData &info) {
-            return info.name == qualifiedName;
-        });
+        return std::ranges::find(mCustomFields, qualifiedName, &CustomData::name);
     }
 
     QString mUid;
@@ -1583,9 +1582,7 @@ QString Addressee::fullEmail(const QString &email) const
 void Addressee::addEmail(const Email &email)
 {
     const QString mailAddr = email.mail();
-    auto it = std::find_if(d->mEmails.begin(), d->mEmails.end(), [&mailAddr](const Email &e) {
-        return e.mail() == mailAddr;
-    });
+    auto it = std::ranges::find(d->mEmails, mailAddr, &Email::mail);
     if (it != d->mEmails.end()) { // Already exists, modify it
         *it = email;
         if (email.isPreferred()) {
@@ -1679,9 +1676,7 @@ void Addressee::insertLang(const Lang &language)
     }
     d->mEmpty = false;
 
-    auto it = std::find_if(d->mLangs.begin(), d->mLangs.end(), [&languageStr](const Lang &lang) {
-        return lang.language() == languageStr;
-    });
+    auto it = std::ranges::find(d->mLangs, languageStr, &Lang::language);
     if (it != d->mLangs.end()) {
         (*it).setParams(language.params());
         return;
@@ -1714,9 +1709,7 @@ void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 {
     d->mEmpty = false;
 
-    auto it = std::find_if(d->mPhoneNumbers.begin(), d->mPhoneNumbers.end(), [&phoneNumber](const PhoneNumber &pNumber) {
-        return pNumber.id() == phoneNumber.id();
-    });
+    auto it = std::ranges::find(d->mPhoneNumbers, phoneNumber.id(), &PhoneNumber::id);
     if (it != d->mPhoneNumbers.end()) {
         *it = phoneNumber;
         return;
@@ -1729,9 +1722,7 @@ void Addressee::insertPhoneNumber(const PhoneNumber &phoneNumber)
 
 void Addressee::removePhoneNumber(const PhoneNumber &phoneNumber)
 {
-    auto it = std::find_if(d->mPhoneNumbers.begin(), d->mPhoneNumbers.end(), [&phoneNumber](const PhoneNumber &p) {
-        return p.id() == phoneNumber.id();
-    });
+    auto it = std::ranges::find(d->mPhoneNumbers, phoneNumber.id(), &PhoneNumber::id);
 
     if (it != d->mPhoneNumbers.end()) {
         d->mPhoneNumbers.erase(it);
@@ -1779,9 +1770,7 @@ PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
 
 PhoneNumber Addressee::findPhoneNumber(const QString &id) const
 {
-    auto it = std::find_if(d->mPhoneNumbers.cbegin(), d->mPhoneNumbers.cend(), [&id](const PhoneNumber &phone) {
-        return phone.id() == id;
-    });
+    auto it = std::ranges::find(std::as_const(d->mPhoneNumbers), id, &PhoneNumber::id);
 
     return it != d->mPhoneNumbers.cend() ? *it : PhoneNumber{};
 }
@@ -1790,9 +1779,7 @@ void Addressee::insertKey(const Key &key)
 {
     d->mEmpty = false;
 
-    auto it = std::find_if(d->mKeys.begin(), d->mKeys.end(), [&key](Key &existing) {
-        return existing.id() == key.id();
-    });
+    auto it = std::ranges::find(d->mKeys, key.id(), &Key::id);
     if (it != d->mKeys.end()) {
         *it = key;
     } else {
@@ -1866,9 +1853,7 @@ Key::List Addressee::keys(Key::Type type, const QString &customTypeString) const
 
 Key Addressee::findKey(const QString &id) const
 {
-    auto it = std::find_if(d->mKeys.cbegin(), d->mKeys.cend(), [&id](const Key &key) {
-        return key.id() == id;
-    });
+    auto it = std::ranges::find(std::as_const(d->mKeys), id, &Key::id);
 
     return it != d->mKeys.cend() ? *it : Key{};
 }
@@ -1954,9 +1939,7 @@ void Addressee::insertAddress(const Address &address)
 
     d->mEmpty = false;
 
-    auto it = std::find_if(d->mAddresses.begin(), d->mAddresses.end(), [&address](const Address &addr) {
-        return addr.id() == address.id();
-    });
+    auto it = std::ranges::find(d->mAddresses, address.id(), &Address::id);
     if (it != d->mAddresses.end()) {
         *it = address;
         return;
@@ -1967,9 +1950,7 @@ void Addressee::insertAddress(const Address &address)
 
 void Addressee::removeAddress(const Address &address)
 {
-    auto it = std::find_if(d->mAddresses.begin(), d->mAddresses.end(), [&address](const Address &addr) {
-        return addr.id() == address.id();
-    });
+    auto it = std::ranges::find(d->mAddresses, address.id(), &Address::id);
     if (it != d->mAddresses.end()) {
         d->mAddresses.erase(it);
     }
@@ -2015,9 +1996,7 @@ Address::List Addressee::addresses(Address::Type type) const
 
 Address Addressee::findAddress(const QString &id) const
 {
-    auto it = std::find_if(d->mAddresses.cbegin(), d->mAddresses.cend(), [&id](const Address &addr) {
-        return addr.id() == id;
-    });
+    auto it = std::ranges::find(std::as_const(d->mAddresses), id, &Address::id);
     return it != d->mAddresses.cend() ? *it : Address{};
 }
 
@@ -2604,33 +2583,16 @@ bool matchBinaryPattern(int value, int pattern)
 template<class L>
 bool listEquals(const QList<L> &list, const QList<L> &pattern)
 {
-    if (list.count() != pattern.count()) {
-        return false;
-    }
-    const int numberOfElement(list.count());
-    for (int i = 0; i < numberOfElement; ++i) {
-        if (!pattern.contains(list[i])) {
-            return false;
-        }
-    }
-
-    return true;
+    return list.size() == pattern.size() && std::ranges::all_of(list, [&pattern](const auto &item) {
+               return pattern.contains(item);
+           });
 }
 
 bool listEquals(const QStringList &list, const QStringList &pattern)
 {
-    if (list.count() != pattern.count()) {
-        return false;
-    }
-
-    const int numberOfElement(list.count());
-    for (int i = 0; i < numberOfElement; ++i) {
-        if (!pattern.contains(list[i])) {
-            return false;
-        }
-    }
-
-    return true;
+    return list.size() == pattern.size() && std::ranges::all_of(list, [&pattern](const auto &item) {
+               return pattern.contains(item);
+           });
 }
 
 void Addressee::setBirthdayProperty(const QDateTime &birthday) {
