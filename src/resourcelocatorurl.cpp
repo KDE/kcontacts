@@ -13,6 +13,8 @@
 #include <QDataStream>
 #include <QStringList>
 
+#include <algorithm>
+
 using namespace KContacts;
 
 class Q_DECL_HIDDEN ResourceLocatorUrl::Private : public QSharedData
@@ -64,7 +66,7 @@ ResourceLocatorUrl::Type ResourceLocatorUrl::type() const
 
     Type type = Unknown;
     for (const QString &s : it->paramValues) {
-        const auto typeIt = std::find_if(std::begin(url_type_names), std::end(url_type_names), [&s](const url_type_name &t) {
+        const auto typeIt = std::ranges::find_if(url_type_names, [&s](const url_type_name &t) {
             return QLatin1String(t.name) == s;
         });
         if (typeIt != std::end(url_type_names)) {

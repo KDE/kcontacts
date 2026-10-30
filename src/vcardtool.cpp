@@ -19,6 +19,8 @@
 #include <QString>
 #include <QTimeZone>
 
+#include <algorithm>
+
 using namespace KContacts;
 using namespace Qt::StringLiterals;
 
@@ -52,7 +54,7 @@ static const AddressTypeInfo s_addressTypes[] = {
 
 static Address::TypeFlag stringToAddressType(const QString &str)
 {
-    auto it = std::find_if(std::begin(s_addressTypes), std::end(s_addressTypes), [&str](const AddressTypeInfo &info) {
+    auto it = std::ranges::find_if(s_addressTypes, [&str](const AddressTypeInfo &info) {
         return str == QLatin1String(info.addressType);
     });
     return it != std::end(s_addressTypes) ? it->flag : Address::TypeFlag{};
@@ -82,7 +84,7 @@ static const PhoneTypeInfo s_phoneTypes[] = {
 
 static PhoneNumber::TypeFlag stringToPhoneType(const QString &str)
 {
-    auto it = std::find_if(std::begin(s_phoneTypes), std::end(s_phoneTypes), [&str](const PhoneTypeInfo &info) {
+    auto it = std::ranges::find_if(s_phoneTypes, [&str](const PhoneTypeInfo &info) {
         return str == QLatin1String(info.phoneType);
     });
     return it != std::end(s_phoneTypes) ? it->flag : PhoneNumber::TypeFlag{};

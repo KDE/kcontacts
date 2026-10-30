@@ -1757,7 +1757,7 @@ PhoneNumber::List Addressee::phoneNumbers(PhoneNumber::Type type) const
 {
     PhoneNumber::List list;
 
-    std::copy_if(d->mPhoneNumbers.cbegin(), d->mPhoneNumbers.cend(), std::back_inserter(list), [type](const auto &phone) {
+    std::ranges::copy_if(std::as_const(d->mPhoneNumbers), std::back_inserter(list), [type](const auto &phone) {
         return matchBinaryPattern(phone.type(), type);
     });
     return list;
@@ -1784,10 +1784,10 @@ void Addressee::insertKey(const Key &key)
 
 void Addressee::removeKey(const Key &key)
 {
-    auto it = std::remove_if(d->mKeys.begin(), d->mKeys.end(), [&key](const Key &k) {
+    const auto removed = std::ranges::remove_if(d->mKeys, [&key](const Key &k) {
         return k.id() == key.id();
     });
-    d->mKeys.erase(it, d->mKeys.end());
+    d->mKeys.erase(removed.begin(), removed.end());
 }
 
 Key Addressee::key(Key::Type type, const QString &customTypeString) const
@@ -1841,7 +1841,7 @@ Key::List Addressee::keys(Key::Type type, const QString &customTypeString) const
         return false;
     };
 
-    std::copy_if(d->mKeys.cbegin(), d->mKeys.cend(), std::back_inserter(list), matchFunc);
+    std::ranges::copy_if(std::as_const(d->mKeys), std::back_inserter(list), matchFunc);
 
     return list;
 }
@@ -1982,7 +1982,7 @@ Address::List Addressee::addresses(Address::Type type) const
 {
     Address::List list;
 
-    std::copy_if(d->mAddresses.cbegin(), d->mAddresses.cend(), std::back_inserter(list), [type](const Address &addr) {
+    std::ranges::copy_if(std::as_const(d->mAddresses), std::back_inserter(list), [type](const Address &addr) {
         return matchBinaryPattern(addr.type(), type);
     });
 

@@ -8,6 +8,8 @@
 
 #include <QDebug>
 
+#include <algorithm>
+
 using namespace KContacts;
 
 struct {
@@ -28,8 +30,8 @@ struct {
 
 AddressFormatField AddressFormatParser::parseField(QChar c)
 {
-    const auto it = std::lower_bound(std::begin(field_map), std::end(field_map), c.cell(), [](auto lhs, auto rhs) {
-        return lhs.c < rhs;
+    const auto it = std::ranges::lower_bound(field_map, c.cell(), {}, [](const auto &field) {
+        return field.c;
     });
     if (it == std::end(field_map) || (*it).c != c.cell() || c.row() != 0) {
         return AddressFormatField::NoField;

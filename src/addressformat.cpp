@@ -16,6 +16,8 @@
 #include <QDebug>
 #include <QLocale>
 
+#include <algorithm>
+
 using namespace KContacts;
 
 AddressFormatElement::AddressFormatElement()
@@ -97,7 +99,7 @@ QList<AddressFormatElement> AddressFormat::elementsForQml() const
 {
     QList<AddressFormatElement> l;
     l.reserve(d->elements.size());
-    std::copy(d->elements.begin(), d->elements.end(), std::back_inserter(l));
+    std::ranges::copy(d->elements, std::back_inserter(l));
     return l;
 }
 

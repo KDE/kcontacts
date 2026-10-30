@@ -11,6 +11,8 @@
 #include <QDataStream>
 #include <QStringList>
 
+#include <algorithm>
+
 using namespace KContacts;
 
 class Q_DECL_HIDDEN Email::Private : public QSharedData
@@ -120,7 +122,7 @@ Email::Type Email::type() const
 
     Type type = Unknown;
     for (const auto &s : it->paramValues) {
-        const auto it = std::find_if(std::begin(email_type_names), std::end(email_type_names), [&s](const email_type_name &t) {
+        const auto it = std::ranges::find_if(email_type_names, [&s](const email_type_name &t) {
             const QString tName = QLatin1String(t.name);
             return tName == s.toUpper();
         });

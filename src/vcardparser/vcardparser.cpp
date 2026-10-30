@@ -13,6 +13,7 @@
 #include <QStringEncoder>
 #include <algorithm>
 #include <functional>
+#include <utility>
 
 // Share common strings to reduce memory usage. Keep Latin-1 and UTF-8
 // conversions separate so mixed vCard versions cannot reuse a wrong decoding.
@@ -514,7 +515,7 @@ QByteArray VCardParser::createVCards(const VCard::List &list)
                         }
                     }
 
-                    const bool hasUnicodeParameters = std::any_of(textLine.cbegin(), textLine.cend(), [](char ch) {
+                    const bool hasUnicodeParameters = std::ranges::any_of(std::as_const(textLine), [](char ch) {
                         return static_cast<unsigned char>(ch) >= 0x80;
                     });
                     QByteArray input;

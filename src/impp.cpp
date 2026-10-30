@@ -212,7 +212,8 @@ QList<QString> Impp::serviceTypes()
     }
 
     std::ranges::sort(types);
-    types.erase(std::unique(types.begin(), types.end()), types.end());
+    const auto duplicates = std::ranges::unique(types);
+    types.erase(duplicates.begin(), duplicates.end());
     return types;
 }
 
