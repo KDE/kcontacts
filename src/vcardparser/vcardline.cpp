@@ -54,16 +54,7 @@ VCardLine &VCardLine::operator=(const VCardLine &line)
     return *this;
 }
 
-bool VCardLine::operator==(const VCardLine &other) const
-{
-    // clang-format off
-    return (mParamMap == other.parameterMap())
-           && (mValue == other.value())
-           && (mIdentifier == other.identifier())
-           && (mGroup == other.group())
-           && (mBase64Value == other.base64Value());
-    // clang-format on
-}
+bool VCardLine::operator==(const VCardLine &other) const = default;
 
 void VCardLine::setIdentifier(const QString &identifier)
 {

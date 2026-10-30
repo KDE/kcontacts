@@ -30,17 +30,9 @@ static bool listEquals(const QStringList &list, const QStringList &pattern);
 struct CustomData {
     QString name;
     QString value;
+
+    bool operator==(const CustomData &other) const = default;
 };
-
-inline bool operator==(const CustomData &a, const CustomData &b)
-{
-    return std::tie(a.name, a.value) == std::tie(b.name, b.value);
-}
-
-inline bool operator!=(const CustomData &a, const CustomData &b)
-{
-    return std::tie(a.name, a.value) != std::tie(b.name, b.value);
-}
 
 inline bool operator<(const CustomData &a, const CustomData &b)
 {

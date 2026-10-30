@@ -21,6 +21,8 @@ struct ParameterData {
     QString param;
     QStringList paramValues;
 
+    bool operator==(const ParameterData &other) const = default;
+
     bool operator<(const ParameterData &other) const
     {
         return param < other.param;
@@ -87,11 +89,6 @@ public:
         return map;
     }
 };
-
-inline bool operator==(const ParameterData &a, const ParameterData &b)
-{
-    return std::tie(a.param, a.paramValues) == std::tie(b.param, b.paramValues);
-}
 
 inline QDataStream &operator<<(QDataStream &s, const ParameterMap &map)
 {
