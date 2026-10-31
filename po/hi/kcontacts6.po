@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-29 00:49+0000\n"
+"POT-Creation-Date: 2026-10-31 00:47+0000\n"
 "PO-Revision-Date: 2008-01-28 11:36+0530\n"
 "Last-Translator: Ravishankar Shrivastava <aviratlami@aol.in>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -18,94 +18,94 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: address.cpp:209
+#: address.cpp:208
 #, kde-format
 msgid "Post Office Box"
 msgstr "पोस्ट बॉक्स नं."
 
-#: address.cpp:225
+#: address.cpp:224
 #, kde-format
 msgid "Extended Address Information"
 msgstr "पता की विस्तारित जानकारी"
 
-#: address.cpp:241
+#: address.cpp:240
 #, kde-format
 msgid "Street"
 msgstr "सड़क"
 
-#: address.cpp:257
+#: address.cpp:256
 #, kde-format
 msgid "Locality"
 msgstr "जगह"
 
-#: address.cpp:273
+#: address.cpp:272
 #, kde-format
 msgid "Region"
 msgstr "क्षेत्र"
 
-#: address.cpp:289
+#: address.cpp:288
 #, kde-format
 msgid "Postal Code"
 msgstr "पिन कोड"
 
-#: address.cpp:305
+#: address.cpp:304
 #, kde-format
 msgid "Country"
 msgstr "देश"
 
-#: address.cpp:321
+#: address.cpp:320
 #, kde-format
 msgid "Delivery Label"
 msgstr "डिलेवरी लेबल"
 
-#: address.cpp:339
+#: address.cpp:338
 #, fuzzy, kde-format
 #| msgid "Domestic"
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "घरेलू"
 
-#: address.cpp:341
+#: address.cpp:340
 #, fuzzy, kde-format
 #| msgid "International"
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "अंतर्राष्ट्रीय"
 
-#: address.cpp:343
+#: address.cpp:342
 #, fuzzy, kde-format
 #| msgid "Postal"
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "पोस्टल"
 
-#: address.cpp:345
+#: address.cpp:344
 #, fuzzy, kde-format
 #| msgid "Parcel"
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "पार्सल"
 
-#: address.cpp:347
+#: address.cpp:346
 #, fuzzy, kde-format
 #| msgid "Home"
 msgctxt "Home Address"
 msgid "Home"
 msgstr "घर"
 
-#: address.cpp:349
+#: address.cpp:348
 #, fuzzy, kde-format
 #| msgid "Work"
 msgctxt "Work Address"
 msgid "Work"
 msgstr "कार्यस्थल"
 
-#: address.cpp:351
+#: address.cpp:350
 #, kde-format
 msgid "Preferred Address"
 msgstr "पसंदीदा पता"
 
-#: address.cpp:353
+#: address.cpp:352
 #, fuzzy, kde-format
 #| msgid "Other"
 msgctxt "another type of address"

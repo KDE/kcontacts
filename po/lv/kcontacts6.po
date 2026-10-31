@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-29 00:49+0000\n"
+"POT-Creation-Date: 2026-10-31 00:47+0000\n"
 "PO-Revision-Date: 2025-11-07 18:04+0200\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -22,88 +22,88 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#: address.cpp:209
+#: address.cpp:208
 #, kde-format
 msgid "Post Office Box"
 msgstr "Pasta kastīte"
 
-#: address.cpp:225
+#: address.cpp:224
 #, kde-format
 msgid "Extended Address Information"
 msgstr "Paplašināta adreses informācija"
 
-#: address.cpp:241
+#: address.cpp:240
 #, kde-format
 msgid "Street"
 msgstr "Iela"
 
-#: address.cpp:257
+#: address.cpp:256
 #, kde-format
 msgid "Locality"
 msgstr "Apvidus"
 
-#: address.cpp:273
+#: address.cpp:272
 #, kde-format
 msgid "Region"
 msgstr "Reģions"
 
-#: address.cpp:289
+#: address.cpp:288
 #, kde-format
 msgid "Postal Code"
 msgstr "Pasta indekss"
 
-#: address.cpp:305
+#: address.cpp:304
 #, kde-format
 msgid "Country"
 msgstr "Valsts"
 
-#: address.cpp:321
+#: address.cpp:320
 #, kde-format
 msgid "Delivery Label"
 msgstr "Piegādes etiķete"
 
-#: address.cpp:339
+#: address.cpp:338
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "Iekšzemes"
 
-#: address.cpp:341
+#: address.cpp:340
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "Starptautisks"
 
-#: address.cpp:343
+#: address.cpp:342
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "Pastam"
 
-#: address.cpp:345
+#: address.cpp:344
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "Paciņām"
 
-#: address.cpp:347
+#: address.cpp:346
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "Mājas"
 
-#: address.cpp:349
+#: address.cpp:348
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "Darbs"
 
-#: address.cpp:351
+#: address.cpp:350
 #, kde-format
 msgid "Preferred Address"
 msgstr "Vēlamā adrese"
 
-#: address.cpp:353
+#: address.cpp:352
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"

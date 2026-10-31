@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-29 00:49+0000\n"
+"POT-Creation-Date: 2026-10-31 00:47+0000\n"
 "PO-Revision-Date: 2025-11-02 14:00+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -17,88 +17,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.08.1\n"
 
-#: address.cpp:209
+#: address.cpp:208
 #, kde-format
 msgid "Post Office Box"
 msgstr "அஞ்சல் பெட்டி"
 
-#: address.cpp:225
+#: address.cpp:224
 #, kde-format
 msgid "Extended Address Information"
 msgstr "முகவரிகுறித்த மேம்பட்ட விவரங்கள்"
 
-#: address.cpp:241
+#: address.cpp:240
 #, kde-format
 msgid "Street"
 msgstr "சாலை"
 
-#: address.cpp:257
+#: address.cpp:256
 #, kde-format
 msgid "Locality"
 msgstr "பகுதி"
 
-#: address.cpp:273
+#: address.cpp:272
 #, kde-format
 msgid "Region"
 msgstr "வட்டாரம்"
 
-#: address.cpp:289
+#: address.cpp:288
 #, kde-format
 msgid "Postal Code"
 msgstr "அஞ்சல் குறியீடு"
 
-#: address.cpp:305
+#: address.cpp:304
 #, kde-format
 msgid "Country"
 msgstr "நாடு"
 
-#: address.cpp:321
+#: address.cpp:320
 #, kde-format
 msgid "Delivery Label"
 msgstr ""
 
-#: address.cpp:339
+#: address.cpp:338
 #, kde-format
 msgctxt "Address is in home country"
 msgid "Domestic"
 msgstr "உள்நாடு"
 
-#: address.cpp:341
+#: address.cpp:340
 #, kde-format
 msgctxt "Address is not in home country"
 msgid "International"
 msgstr "வெளிநாடு"
 
-#: address.cpp:343
+#: address.cpp:342
 #, kde-format
 msgctxt "Address for delivering letters"
 msgid "Postal"
 msgstr "அஞ்சல்"
 
-#: address.cpp:345
+#: address.cpp:344
 #, kde-format
 msgctxt "Address for delivering packages"
 msgid "Parcel"
 msgstr "பொட்டலம்"
 
-#: address.cpp:347
+#: address.cpp:346
 #, kde-format
 msgctxt "Home Address"
 msgid "Home"
 msgstr "வீடு"
 
-#: address.cpp:349
+#: address.cpp:348
 #, kde-format
 msgctxt "Work Address"
 msgid "Work"
 msgstr "அலுவலகம்"
 
-#: address.cpp:351
+#: address.cpp:350
 #, kde-format
 msgid "Preferred Address"
 msgstr "முதன்மையான முகவரி"
 
-#: address.cpp:353
+#: address.cpp:352
 #, kde-format
 msgctxt "another type of address"
 msgid "Other"
