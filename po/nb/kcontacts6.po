@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kabc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:47+0000\n"
+"POT-Creation-Date: 2026-11-04 00:58+0000\n"
 "PO-Revision-Date: 2009-11-22 10:26+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -107,249 +107,249 @@ msgctxt "another type of address"
 msgid "Other"
 msgstr "Andre"
 
-#: addressee.cpp:413
+#: addressee.cpp:399
 #, kde-format
 msgid "Unique Identifier"
 msgstr "Entydig identifikasjon"
 
-#: addressee.cpp:433
+#: addressee.cpp:419
 #, kde-format
 msgid "Name"
 msgstr "Navn"
 
-#: addressee.cpp:629
+#: addressee.cpp:615
 #, kde-format
 msgid "Formatted Name"
 msgstr "Formattert navn"
 
-#: addressee.cpp:649
+#: addressee.cpp:635
 #, kde-format
 msgid "Family Name"
 msgstr "Etternavn"
 
-#: addressee.cpp:669
+#: addressee.cpp:655
 #, kde-format
 msgid "Given Name"
 msgstr "Fornavn"
 
-#: addressee.cpp:689
+#: addressee.cpp:675
 #, kde-format
 msgid "Additional Names"
 msgstr "Flere navn"
 
-#: addressee.cpp:709
+#: addressee.cpp:695
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "Høflige prefikser"
 
-#: addressee.cpp:729
+#: addressee.cpp:715
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "Høflige suffikser"
 
-#: addressee.cpp:780
+#: addressee.cpp:766
 #, kde-format
 msgid "Nick Name"
 msgstr "Kallenavn"
 
-#: addressee.cpp:835
+#: addressee.cpp:821
 #, kde-format
 msgid "Birthday"
 msgstr "Fødselsdag"
 
-#: addressee.cpp:840
+#: addressee.cpp:826
 #, kde-format
 msgid "Home Address Street"
 msgstr "Hjemmeadresse,gate"
 
-#: addressee.cpp:845
+#: addressee.cpp:831
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "Hjemmeadresse, postboks"
 
-#: addressee.cpp:850
+#: addressee.cpp:836
 #, kde-format
 msgid "Home Address City"
 msgstr "Hjemmeadresse, by"
 
-#: addressee.cpp:855
+#: addressee.cpp:841
 #, kde-format
 msgid "Home Address State"
 msgstr "Hjemmeadresse, stat"
 
-#: addressee.cpp:860
+#: addressee.cpp:846
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "Hjemmeadresse, postnummer"
 
-#: addressee.cpp:865
+#: addressee.cpp:851
 #, kde-format
 msgid "Home Address Country"
 msgstr "Hjemmeadresse, land"
 
-#: addressee.cpp:870
+#: addressee.cpp:856
 #, kde-format
 msgid "Home Address Label"
 msgstr "Hjemmeadresse, merkelapp"
 
-#: addressee.cpp:875
+#: addressee.cpp:861
 #, kde-format
 msgid "Business Address Street"
 msgstr "Firmaadresse, gate"
 
-#: addressee.cpp:880
+#: addressee.cpp:866
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "Firmaadresse, postboks"
 
-#: addressee.cpp:885
+#: addressee.cpp:871
 #, kde-format
 msgid "Business Address City"
 msgstr "Firmaadresse, by"
 
-#: addressee.cpp:890
+#: addressee.cpp:876
 #, kde-format
 msgid "Business Address State"
 msgstr "Firmaadresse, stat"
 
-#: addressee.cpp:895
+#: addressee.cpp:881
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "Firmaadresse, postnummer"
 
-#: addressee.cpp:900
+#: addressee.cpp:886
 #, kde-format
 msgid "Business Address Country"
 msgstr "Firmaadresse, land"
 
-#: addressee.cpp:905
+#: addressee.cpp:891
 #, kde-format
 msgid "Business Address Label"
 msgstr "Firmaadresse, merkelapp"
 
-#: addressee.cpp:910
+#: addressee.cpp:896
 #, kde-format
 msgid "Home Phone"
 msgstr "Hjemmetelefon"
 
-#: addressee.cpp:915
+#: addressee.cpp:901
 #, kde-format
 msgid "Business Phone"
 msgstr "Telefon arbeid"
 
-#: addressee.cpp:920
+#: addressee.cpp:906
 #, kde-format
 msgid "Mobile Phone"
 msgstr "Mobiltelefon"
 
-#: addressee.cpp:925 phonenumber.cpp:210
+#: addressee.cpp:911 phonenumber.cpp:210
 #, kde-format
 msgid "Home Fax"
 msgstr "Hjemmefaks"
 
-#: addressee.cpp:930
+#: addressee.cpp:916
 #, kde-format
 msgid "Business Fax"
 msgstr "Faks arbeid"
 
-#: addressee.cpp:935
+#: addressee.cpp:921
 #, kde-format
 msgid "Car Phone"
 msgstr "Telefon i bil"
 
-#: addressee.cpp:940 phonenumber.cpp:186
+#: addressee.cpp:926 phonenumber.cpp:186
 #, kde-format
 msgid "ISDN"
 msgstr "ISDN"
 
-#: addressee.cpp:945 phonenumber.cpp:190
+#: addressee.cpp:931 phonenumber.cpp:190
 #, kde-format
 msgid "Pager"
 msgstr "Personsøker"
 
-#: addressee.cpp:950
+#: addressee.cpp:936
 #, kde-format
 msgid "Email Address"
 msgstr "E-postadresse"
 
-#: addressee.cpp:970
+#: addressee.cpp:956
 #, kde-format
 msgid "Mail Client"
 msgstr "E-postklient"
 
-#: addressee.cpp:990
+#: addressee.cpp:976
 #, kde-format
 msgid "Time Zone"
 msgstr "Tidssone"
 
-#: addressee.cpp:1010
+#: addressee.cpp:996
 #, kde-format
 msgid "Geographic Position"
 msgstr "Geografisk plassering"
 
-#: addressee.cpp:1061
+#: addressee.cpp:1047
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "Tittel"
 
-#: addressee.cpp:1112
+#: addressee.cpp:1098
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "Rolle"
 
-#: addressee.cpp:1163
+#: addressee.cpp:1149
 #, kde-format
 msgid "Organization"
 msgstr "Organisasjon"
 
-#: addressee.cpp:1183
+#: addressee.cpp:1169
 #, kde-format
 msgid "Department"
 msgstr "Avdeling"
 
-#: addressee.cpp:1203
+#: addressee.cpp:1189
 #, kde-format
 msgid "Note"
 msgstr "Merknad"
 
-#: addressee.cpp:1223
+#: addressee.cpp:1209
 #, kde-format
 msgid "Product Identifier"
 msgstr "Produkt-identifikator"
 
-#: addressee.cpp:1243
+#: addressee.cpp:1229
 #, kde-format
 msgid "Revision Date"
 msgstr "Revidert dato"
 
-#: addressee.cpp:1263
+#: addressee.cpp:1249
 #, kde-format
 msgid "Sort String"
 msgstr "Sorteringsstreng"
 
-#: addressee.cpp:1289
+#: addressee.cpp:1275
 #, kde-format
 msgid "Homepage"
 msgstr "Hjemmeside"
 
-#: addressee.cpp:1309
+#: addressee.cpp:1295
 #, kde-format
 msgid "Security Class"
 msgstr "Sikkerhetsklasse"
 
-#: addressee.cpp:1329
+#: addressee.cpp:1315
 #, kde-format
 msgid "Logo"
 msgstr "Logo"
 
-#: addressee.cpp:1349
+#: addressee.cpp:1335
 #, kde-format
 msgid "Photo"
 msgstr "Foto"
 
-#: addressee.cpp:1369
+#: addressee.cpp:1355
 #, kde-format
 msgid "Sound"
 msgstr "Lyd"
@@ -521,27 +521,27 @@ msgstr "Foretrukket nummer"
 msgid "Work Fax"
 msgstr "Arbeidsfaks"
 
-#: resourcelocatorurl.cpp:182
+#: resourcelocatorurl.cpp:184
 #, fuzzy, kde-format
 #| msgctxt "Home Address"
 #| msgid "Home"
 msgid "Home"
 msgstr "Hjem"
 
-#: resourcelocatorurl.cpp:185
+#: resourcelocatorurl.cpp:187
 #, fuzzy, kde-format
 #| msgctxt "Work Address"
 #| msgid "Work"
 msgid "Work"
 msgstr "Arbeid"
 
-#: resourcelocatorurl.cpp:188
+#: resourcelocatorurl.cpp:190
 #, fuzzy, kde-format
 #| msgid "Prof."
 msgid "Profile"
 msgstr "Prof."
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:194
 #, fuzzy, kde-format
 #| msgctxt "another type of address"
 #| msgid "Other"

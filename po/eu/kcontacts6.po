@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcontacts\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:47+0000\n"
+"POT-Creation-Date: 2026-11-04 00:58+0000\n"
 "PO-Revision-Date: 2025-10-23 00:52+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -107,249 +107,249 @@ msgctxt "another type of address"
 msgid "Other"
 msgstr "Bestelakoak"
 
-#: addressee.cpp:413
+#: addressee.cpp:399
 #, kde-format
 msgid "Unique Identifier"
 msgstr "Identifikatzaile bakuna"
 
-#: addressee.cpp:433
+#: addressee.cpp:419
 #, kde-format
 msgid "Name"
 msgstr "Izena"
 
-#: addressee.cpp:629
+#: addressee.cpp:615
 #, kde-format
 msgid "Formatted Name"
 msgstr "Formatudun izena"
 
-#: addressee.cpp:649
+#: addressee.cpp:635
 #, kde-format
 msgid "Family Name"
 msgstr "Abizenak"
 
-#: addressee.cpp:669
+#: addressee.cpp:655
 #, kde-format
 msgid "Given Name"
 msgstr "Izena"
 
-#: addressee.cpp:689
+#: addressee.cpp:675
 #, kde-format
 msgid "Additional Names"
 msgstr "Gainerako izenak"
 
-#: addressee.cpp:709
+#: addressee.cpp:695
 #, kde-format
 msgid "Honorific Prefixes"
 msgstr "Ohorezko aurrizkiak"
 
-#: addressee.cpp:729
+#: addressee.cpp:715
 #, kde-format
 msgid "Honorific Suffixes"
 msgstr "Ohorezko atzizkiak"
 
-#: addressee.cpp:780
+#: addressee.cpp:766
 #, kde-format
 msgid "Nick Name"
 msgstr "Goitizena"
 
-#: addressee.cpp:835
+#: addressee.cpp:821
 #, kde-format
 msgid "Birthday"
 msgstr "Urtemuga"
 
-#: addressee.cpp:840
+#: addressee.cpp:826
 #, kde-format
 msgid "Home Address Street"
 msgstr "Etxeko helbideko kalea"
 
-#: addressee.cpp:845
+#: addressee.cpp:831
 #, kde-format
 msgid "Home Address Post Office Box"
 msgstr "Etxeko helbideko posta-kutxa"
 
-#: addressee.cpp:850
+#: addressee.cpp:836
 #, kde-format
 msgid "Home Address City"
 msgstr "Etxeko helbideko hiria"
 
-#: addressee.cpp:855
+#: addressee.cpp:841
 #, kde-format
 msgid "Home Address State"
 msgstr "Etxeko helbideko probintzia"
 
-#: addressee.cpp:860
+#: addressee.cpp:846
 #, kde-format
 msgid "Home Address Zip Code"
 msgstr "Etxeko helbideko posta-kodea"
 
-#: addressee.cpp:865
+#: addressee.cpp:851
 #, kde-format
 msgid "Home Address Country"
 msgstr "Etxeko helbideko herrialdea"
 
-#: addressee.cpp:870
+#: addressee.cpp:856
 #, kde-format
 msgid "Home Address Label"
 msgstr "Etxeko helbideko etiketa"
 
-#: addressee.cpp:875
+#: addressee.cpp:861
 #, kde-format
 msgid "Business Address Street"
 msgstr "Laneko helbideko kalea"
 
-#: addressee.cpp:880
+#: addressee.cpp:866
 #, kde-format
 msgid "Business Address Post Office Box"
 msgstr "Laneko helbideko posta-kutxa"
 
-#: addressee.cpp:885
+#: addressee.cpp:871
 #, kde-format
 msgid "Business Address City"
 msgstr "Laneko helbideko hiria"
 
-#: addressee.cpp:890
+#: addressee.cpp:876
 #, kde-format
 msgid "Business Address State"
 msgstr "Laneko helbideko probintzia"
 
-#: addressee.cpp:895
+#: addressee.cpp:881
 #, kde-format
 msgid "Business Address Zip Code"
 msgstr "Laneko helbideko posta-kodea"
 
-#: addressee.cpp:900
+#: addressee.cpp:886
 #, kde-format
 msgid "Business Address Country"
 msgstr "Laneko helbideko herrialdea"
 
-#: addressee.cpp:905
+#: addressee.cpp:891
 #, kde-format
 msgid "Business Address Label"
 msgstr "Laneko helbideko etiketa"
 
-#: addressee.cpp:910
+#: addressee.cpp:896
 #, kde-format
 msgid "Home Phone"
 msgstr "Etxeko telefonoa"
 
-#: addressee.cpp:915
+#: addressee.cpp:901
 #, kde-format
 msgid "Business Phone"
 msgstr "Laneko telefonoa"
 
-#: addressee.cpp:920
+#: addressee.cpp:906
 #, kde-format
 msgid "Mobile Phone"
 msgstr "Telefono mugikorra"
 
-#: addressee.cpp:925 phonenumber.cpp:210
+#: addressee.cpp:911 phonenumber.cpp:210
 #, kde-format
 msgid "Home Fax"
 msgstr "Etxeko faxa"
 
-#: addressee.cpp:930
+#: addressee.cpp:916
 #, kde-format
 msgid "Business Fax"
 msgstr "Laneko faxa"
 
-#: addressee.cpp:935
+#: addressee.cpp:921
 #, kde-format
 msgid "Car Phone"
 msgstr "Beribileko telefonoa"
 
-#: addressee.cpp:940 phonenumber.cpp:186
+#: addressee.cpp:926 phonenumber.cpp:186
 #, kde-format
 msgid "ISDN"
 msgstr "RDSI (ISDN)"
 
-#: addressee.cpp:945 phonenumber.cpp:190
+#: addressee.cpp:931 phonenumber.cpp:190
 #, kde-format
 msgid "Pager"
 msgstr "Bilagailua"
 
-#: addressee.cpp:950
+#: addressee.cpp:936
 #, kde-format
 msgid "Email Address"
 msgstr "Eposta helbidea"
 
-#: addressee.cpp:970
+#: addressee.cpp:956
 #, kde-format
 msgid "Mail Client"
 msgstr "Posta bezeroa"
 
-#: addressee.cpp:990
+#: addressee.cpp:976
 #, kde-format
 msgid "Time Zone"
 msgstr "Ordu eremua"
 
-#: addressee.cpp:1010
+#: addressee.cpp:996
 #, kde-format
 msgid "Geographic Position"
 msgstr "Kokapen geografikoa"
 
-#: addressee.cpp:1061
+#: addressee.cpp:1047
 #, kde-format
 msgctxt "a person's title"
 msgid "Title"
 msgstr "Titulua"
 
-#: addressee.cpp:1112
+#: addressee.cpp:1098
 #, kde-format
 msgctxt "of a person in an organization"
 msgid "Role"
 msgstr "Rola"
 
-#: addressee.cpp:1163
+#: addressee.cpp:1149
 #, kde-format
 msgid "Organization"
 msgstr "Erakundea"
 
-#: addressee.cpp:1183
+#: addressee.cpp:1169
 #, kde-format
 msgid "Department"
 msgstr "Saila"
 
-#: addressee.cpp:1203
+#: addressee.cpp:1189
 #, kde-format
 msgid "Note"
 msgstr "Oharra"
 
-#: addressee.cpp:1223
+#: addressee.cpp:1209
 #, kde-format
 msgid "Product Identifier"
 msgstr "Produktuaren identifikatzailea"
 
-#: addressee.cpp:1243
+#: addressee.cpp:1229
 #, kde-format
 msgid "Revision Date"
 msgstr "Berrikuspen data"
 
-#: addressee.cpp:1263
+#: addressee.cpp:1249
 #, kde-format
 msgid "Sort String"
 msgstr "Sailkatzeko katea"
 
-#: addressee.cpp:1289
+#: addressee.cpp:1275
 #, kde-format
 msgid "Homepage"
 msgstr "Orri nagusia"
 
-#: addressee.cpp:1309
+#: addressee.cpp:1295
 #, kde-format
 msgid "Security Class"
 msgstr "Segurtasun klasea"
 
-#: addressee.cpp:1329
+#: addressee.cpp:1315
 #, kde-format
 msgid "Logo"
 msgstr "Logoa"
 
-#: addressee.cpp:1349
+#: addressee.cpp:1335
 #, kde-format
 msgid "Photo"
 msgstr "Argazkia"
 
-#: addressee.cpp:1369
+#: addressee.cpp:1355
 #, kde-format
 msgid "Sound"
 msgstr "Soinua"
@@ -523,22 +523,22 @@ msgstr "Hobetsitako zenbakia"
 msgid "Work Fax"
 msgstr "Laneko faxa"
 
-#: resourcelocatorurl.cpp:182
+#: resourcelocatorurl.cpp:184
 #, kde-format
 msgid "Home"
 msgstr "Etxea"
 
-#: resourcelocatorurl.cpp:185
+#: resourcelocatorurl.cpp:187
 #, kde-format
 msgid "Work"
 msgstr "Lana"
 
-#: resourcelocatorurl.cpp:188
+#: resourcelocatorurl.cpp:190
 #, kde-format
 msgid "Profile"
 msgstr "Profila"
 
-#: resourcelocatorurl.cpp:192
+#: resourcelocatorurl.cpp:194
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoa"
