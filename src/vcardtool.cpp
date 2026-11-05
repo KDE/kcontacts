@@ -1348,12 +1348,13 @@ Picture VCardTool::parsePicture(const VCardLine &line) const
     if (params.isEmpty()) { // Vcard4
         if (line.value().isValid()) { // Load picture url
             const QByteArray value = line.value().toByteArray();
-            if (const int dataPos = value.indexOf("data:"); dataPos > -1) { // Data element
+            if (value.startsWith("data:")) { // Data element
                 // data:image/png;base64,
-                const int indexOfBase64 = value.indexOf(";base64,");
+                constexpr QByteArrayView base64Marker(";base64,");
+                const int indexOfBase64 = value.indexOf(base64Marker);
                 if (indexOfBase64 > -1) {
                     const QByteArray type = value.mid(5, indexOfBase64 - 4);
-                    const QByteArray f = value.fromBase64(value.last(value.length() - 22));
+                    const QByteArray f = QByteArray::fromBase64(value.sliced(indexOfBase64 + base64Marker.size()));
                     pic.setRawData(f, QString::fromLatin1(type));
                 }
             } else {
