@@ -206,8 +206,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
             if (colonOrSemicolon) {
                 // correct the so-called 2.1 'standard'
                 paramValue = paramKey;
-                const QByteArray lowerKey = paramKey.toLower();
-                if (lowerKey == "quoted-printable" || lowerKey == "base64") {
+                if (paramKey.compare("quoted-printable", Qt::CaseInsensitive) == 0 || paramKey.compare("base64", Qt::CaseInsensitive) == 0) {
                     paramKey = "encoding";
                 } else {
                     paramKey = "type";
@@ -223,7 +222,7 @@ void VCardLineParser::parseLine(const QByteArray &currentLine, KContacts::VCardL
             }
             break;
         case StateQuotedValue:
-            if (ch == '"' || (ch == ',' && paramKey.toLower() == "type")) {
+            if (ch == '"' || (ch == ',' && paramKey.compare("type", Qt::CaseInsensitive) == 0)) {
                 // TODO the hack above is for TEL;TYPE=\"voice,home\":... without breaking GEO.... TODO: check spec
                 paramValue = currentLine.mid(start, pos - start);
                 addParameter(paramKey.toLower(), paramValue);
