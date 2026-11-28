@@ -799,7 +799,12 @@ Addressee::List VCardTool::parseVCards(const QByteArray &vcard) const
                 // BDAY
                 else if (identifier == QLatin1String("bday")) {
                     bool withTime;
-                    const QDateTime bday = parseDateTime((*lineIt).value().toString(), &withTime);
+                    QDateTime bday = parseDateTime((*lineIt).value().toString(), &withTime);
+                    bool validOmittedYear = false;
+                    const auto omittedYear = (*lineIt).parameter(QStringLiteral("x-apple-omit-year")).toInt(&validOmittedYear);
+                    if (bday.isValid() && validOmittedYear && bday.date().year() == omittedYear) {
+                        bday.setDate(QDate(-1, bday.date().month(), bday.date().day()));
+                    }
                     addr.setBirthday(bday, withTime);
                 }
                 // DEATHDATE
